@@ -21,4 +21,6 @@ sudo apt-get install build-essential libopenssl-ruby libfcgi-dev \
 sudo gem install rubygems-update
 sudo gem install rails --include-dependencies
 
-
+# Lamp
+sudo apt-get install tasksel
+sudo tasksel install lamp-server
