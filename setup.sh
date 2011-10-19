@@ -6,7 +6,9 @@ sudo apt-get install vim-gnome mercurial \
   pysdm \
   gnome-shell compizconfig-settings-manager
 
+# Git
 sudo apt-get install git 
+git config --global --add color.ui true
 
 #sudo apt-get install xfce4-xkb-plugin xfce4-cpufreq-plugin \
 #  xubuntu-restricted-extras
@@ -21,6 +23,12 @@ sudo apt-get install build-essential libopenssl-ruby libfcgi-dev \
 sudo gem install rubygems-update
 sudo gem install rails --include-dependencies
 
-# Lamp
+# LAMP
 sudo apt-get install tasksel
 sudo tasksel install lamp-server
+
+# JDownloader
+sudo apt-add-repository ppa:jd-team/jdownloader
+sudo apt-get update
+sudo apt-get install jdownloader
+
