@@ -26,6 +26,7 @@ sudo gem install rails --include-dependencies
 # LAMP
 sudo apt-get install tasksel
 sudo tasksel install lamp-server
+sudo apt-get install php5-sqlite
 
 # JDownloader
 sudo apt-add-repository ppa:jd-team/jdownloader
