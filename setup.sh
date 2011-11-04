@@ -33,3 +33,12 @@ sudo apt-add-repository ppa:jd-team/jdownloader
 sudo apt-get update
 sudo apt-get install jdownloader
 
+# Chrome + Google talk plugin
+
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+sudo apt-get update
+sudo apt-get install google-talkplugin google-chrome-stable
+sudo apt-get -f install
+sudo apt-get install google-talkplugin google-chrome-stable
+
