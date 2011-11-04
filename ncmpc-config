@@ -1,0 +1,4 @@
+enable-colors = yes
+set-xterm-title = yes
+# 4 = artist+title
+search-mode = 4
