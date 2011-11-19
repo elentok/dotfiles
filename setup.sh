@@ -51,4 +51,8 @@ sudo add-apt-repository ppa:stebbins/handbrake-snapshots
 sudo apt-get update
 sudo apt-get install handbrake
 
+# Java
+sudo add-apt-repository ppa:ferramroberto/java
+sudo apt-get update
+sudo apt-get install sun-java6-jdk sun-java6-plugin
 
