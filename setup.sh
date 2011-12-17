@@ -6,7 +6,7 @@ cd temp
 sudo apt-get install vim-gnome mercurial \
   ctags keepass2 gimp htop \
   samba libpam-smbpass \
-  pysdm unrar
+  pysdm unrar regexxer
 
 # Music Player Daemon
 sudo apt-get install mpd mpc ncmpc pms ncmpc-lyrics
