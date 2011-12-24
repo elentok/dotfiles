@@ -1,5 +1,9 @@
-#!/bin/sh
+#!/bin/bash
+
+DIR=$(dirname "${BASH_SOURCE[0]}")
+DIR=$(cd -P $DIR && pwd)
 
 mkdir ~/.i3
-ln -s `pwd`/config ~/.i3/config
+ln -s "$DIR/config" ~/.i3/config
+ln -s "$DIR/i3status.conf" ~/.i3/i3status.conf
 
