@@ -1,0 +1,5 @@
+#!/bin/sh
+
+mkdir ~/.i3
+ln -s `pwd`/config ~/.i3/config
+
