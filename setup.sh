@@ -9,7 +9,7 @@ sudo apt-get install vim-gnome mercurial \
   pysdm unrar regexxer
 
 # Music Player Daemon
-sudo apt-get install mpd mpc ncmpc pms ncmpc-lyrics
+sudo apt-get install mpd mpc ncmpcpp pms ncmpc-lyrics
 
 # KDE Mpd Plasma Client
 hg clone http://bitbucket.org/memnek/mpd-plasma-client/
@@ -80,4 +80,11 @@ mv master coffeescript.zip
 mkdir -p ~/.config/sublime-text-2/Packages/CoffeeScript
 unzip -j coffeescript.zip -d ~/.config/sublime-text-2/Packages/CoffeeScript
 
+# i3
+echo 'deb http://debian.sur5r.net/i3/ oneiric universe' >> /etc/apt/sources.list
+apt-get update
+apt-get --allow-unauthenticated install sur5r-keyring
+apt-get update
+apt-get install i3
 
+apt-get install xfce4-terminal network-manager-gnome lxappearance xscreensaver
