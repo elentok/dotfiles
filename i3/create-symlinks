@@ -7,3 +7,5 @@ mkdir ~/.i3
 ln -s "$DIR/config" ~/.i3/config
 ln -s "$DIR/i3status.conf" ~/.i3/i3status.conf
 
+sudo cp "$DIR/i3-session" /usr/bin/
+sudo cp "$DIR/i3-session.desktop" /usr/share/xsessions/

@@ -1,0 +1,6 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=i3-session
+Comment=improved dynamic tiling window manager
+Exec=/usr/bin/i3-session
+Type=XSession

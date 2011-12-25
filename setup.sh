@@ -87,4 +87,7 @@ apt-get --allow-unauthenticated install sur5r-keyring
 apt-get update
 apt-get install i3
 
-apt-get install xfce4-terminal network-manager-gnome lxappearance xscreensaver
+apt-get install xfce4-terminal network-manager-gnome \
+  lxappearance xscreensaver \
+  thunar-volman thunar
+

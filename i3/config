@@ -180,4 +180,5 @@ workspace_auto_back_and_forth yes
 exec_always "feh --bg-fill ~/.config/wallpaper.jpg"
 exec "xscreensaver &"
 exec "nm-applet &"
+exec "thunar --daemon &"
 
