@@ -6,6 +6,6 @@ DIR=$(cd -P $DIR && pwd)
 mkdir ~/.i3
 ln -s "$DIR/config" ~/.i3/config
 ln -s "$DIR/i3status.conf" ~/.i3/i3status.conf
+ln -s "$DIR/i3-session" ~/.i3/i3-session
 
-sudo cp "$DIR/i3-session" /usr/bin/
 sudo cp "$DIR/i3-session.desktop" /usr/share/xsessions/

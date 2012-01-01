@@ -1,8 +1,9 @@
 #!/bin/bash
 
-feh --bg-fill ~/.config/wallpaper.jpg &
-xscreensaver -no-splash &
+gnome-settings-daemon &
+#feh --bg-fill ~/.config/wallpaper.jpg &
+mpd &
+#xscreensaver -no-splash &
 nm-applet &
-thunar --daemon &
 
 i3
