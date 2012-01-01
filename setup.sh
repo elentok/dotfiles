@@ -18,7 +18,7 @@ echo 'deb http://debian.sur5r.net/i3/ oneiric universe' >> /etc/apt/sources.list
 apt-get update
 apt-get --allow-unauthenticated install sur5r-keyring
 apt-get update
-apt-get install i3
+apt-get install i3 feh
 
 
 # Music Player Daemon
