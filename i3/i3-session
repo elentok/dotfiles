@@ -1,9 +1,14 @@
 #!/bin/bash
 
-gnome-settings-daemon &
+setxkbmap -option 'grp:alt_shift_toggle' -option 'ctrl:nocaps'
 feh --bg-fill ~/.config/wallpaper.jpg &
 mpd &
-#xscreensaver -no-splash &
-nm-applet &
+
+if [ -f /usr/bin/gnome-settings-daemon ]; then
+  gnome-settings-daemon &
+else
+  xscreensaver -no-splash &
+  nm-applet &
+fi
 
 i3
