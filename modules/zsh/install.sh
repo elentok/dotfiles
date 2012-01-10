@@ -15,4 +15,4 @@ usermod -s /bin/zsh david
 DIR=$(dirname "${BASH_SOURCE[0]}")
 DIR=$(cd -P $DIR && pwd)
 
-ln -s "$DIR/zshrc" ~/.zshrc
+ln -sf "$DIR/zshrc" ~/.zshrc
