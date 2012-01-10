@@ -34,7 +34,7 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 export PATH=/home/david/.rvm/bin:/home/david/.rvm/gems/ruby-1.9.3-p0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/david/bin
 #export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/david/bin
-n
+
 . "$HOME/.rvm/scripts/rvm"  # Load RVM into a shell session *as a function*
 
 export MPD_HOST=bob@localhost
