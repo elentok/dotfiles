@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
+bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
 
 sudo apt-get install libreadline-dev
 
