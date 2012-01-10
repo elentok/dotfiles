@@ -7,13 +7,30 @@
 # sudo apt-get install mercurial curl
 
 (
-  cd ~
-  mkdir projects
-  cd projects
+  mkdir -p ~/projects
+  cd ~/projects
 
-  git clone https://hg@bitbucket.org/3david/linux-config
-  git clone https://hg@bitbucket.org/3david/vimconfig
+  echo ""
+  echo "========================================"
+  echo "Cloning linux-config"
+  hg clone ssh://hg@bitbucket.org/3david/linux-config
 
-  ./vimconfig/create-symlink.sh
-  ./linux-config/setup.sh
+  echo ""
+  echo "========================================"
+  echo "Cloning vimconfig"
+  hg clone ssh://hg@bitbucket.org/3david/vimconfig
+
+  echo "========================================"
+  echo "setting up vim"
+  (
+    cd vimconfig
+    ./create-symlinks.sh
+  )
+
+  echo "========================================"
+  echo "setting up linux"
+  (
+    cd linux-config
+    ./install.sh
+  )
 )
