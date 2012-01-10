@@ -1,7 +1,10 @@
 #!/bin/bash
 
-# ========================================
-# Java
-add-apt-repository ppa:ferramroberto/java
+echo ""
+echo "========================================"
+echo "Installing Java"
+echo "========================================"
+
+add-apt-repository -y ppa:ferramroberto/java
 apt-get update
-apt-get install sun-java6-jdk sun-java6-plugin
+apt-get install -y sun-java6-jdk sun-java6-plugin

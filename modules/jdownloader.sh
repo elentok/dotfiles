@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# ========================================
-# JDownloader
-apt-add-repository ppa:jd-team/jdownloader
+echo ""
+echo "========================================"
+echo "Installing JDownloader"
+echo "========================================"
+apt-add-repository -y ppa:jd-team/jdownloader
 apt-get update
-apt-get install jdownloader
+apt-get install -y jdownloader

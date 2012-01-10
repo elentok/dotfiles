@@ -1,8 +1,9 @@
 #!/bin/bash
 
-# ========================================
-# Handbrake (Video converter)
-
-add-apt-repository ppa:stebbins/handbrake-snapshots 
+echo ""
+echo "========================================"
+echo "Installing Handbrake (Video Converter)"
+echo "========================================"
+add-apt-repository -y ppa:stebbins/handbrake-snapshots 
 apt-get update
-apt-get install handbrake
+apt-get install -y handbrake
