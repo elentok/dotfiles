@@ -1,3 +1,11 @@
+Elentok's Linux-Config
+======================
+
+To install run:
+
+  $ curl -L https://bitbucket.org/3david/linux-config/raw/1b4675df052a/online_install.sh | sh
+
+
 Touchpad
 ========
 
