@@ -1,8 +1,0 @@
-#!/bin/sh
-
-mkdir ~/.mpd
-mkdir ~/.mpd/playlists/
-mkdir ~/.mpd/var/
-mkdir ~/.mpd/var/tag_cache
-ln -s `pwd`/mpd.conf ~/.mpd/mpd.conf
-
