@@ -11,6 +11,7 @@ sudo apt-get install vim-gnome mercurial \
 
 # ========================================
 # Modules
+./modules/git/install.sh
 ./modules/mc/install.sh
 ./modules/i3/install.sh
 ./modules/zsh/install.sh
@@ -24,9 +25,3 @@ sudo apt-get install vim-gnome mercurial \
 ./modules/java.sh
 
 #./modules/sublimetext.sh
-
-# ========================================
-# Git
-sudo apt-get install git 
-git config --global --add color.ui true
-
