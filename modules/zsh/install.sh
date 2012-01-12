@@ -5,7 +5,7 @@ echo "========================================"
 echo "Installing Zsh"
 echo "========================================"
 
-apt-get install -y zsh
+sudo apt-get install -y zsh
 
 echo ""
 echo "========================================"
