@@ -32,10 +32,9 @@ plugins=(git gem rails3 python mercurial rvm)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/home/david/.rvm/bin:/home/david/.rvm/gems/ruby-1.9.3-p0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/david/bin
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/david/bin
+#export PATH=/home/david/.rvm/gems/ruby-1.9.3-p0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/david/bin
 #export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/david/bin
-
-. "$HOME/.rvm/scripts/rvm"  # Load RVM into a shell session *as a function*
 
 export MPD_HOST=bob@localhost
 
@@ -45,3 +44,5 @@ alias sr='screen -R'
 alias ak='ssh-add ~/.keys/bitbucket.ssh.private'
 alias cl='xclip -selection clipboard -o'
 alias ft="ruby /home/david/projects/tvutils/filestube.rb -s filesonic" 
+
+rvm default

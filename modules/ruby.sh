@@ -1,27 +1,34 @@
 #!/bin/bash
 
-#echo ""
-#echo "========================================"
-#echo "Installing Ruby"
-#echo "========================================"
+echo ""
+echo "========================================"
+echo "Installing rvm requirements"
+echo "========================================"
+# run "rvm requirements" and you get this list of packages:
+sudo apt-get install -y build-essential openssl libreadline6 libreadline6-dev curl \
+  git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev \
+  sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool \
+  bison subversion
 
-#bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
+sudo apt-get install -y libreadline-gpl2-dev libreadline-dev
 
-#sudo apt-get install -y libreadline-dev
+echo ""
+echo "========================================"
+echo "Installing RVM"
+echo "========================================"
+bash < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
 
-#. "$HOME/.rvm/scripts/rvm"  # Load RVM into a shell session *as a function*
+echo "========================================"
+echo "Installing Ruby 1.9.3"
+echo "========================================"
 
-#echo "rvm_path=$rvm_path/usr"
+rvm install 1.9.3
+rvm use --default 1.9.3
 
-#rvm pkg install zlib
-#rvm pkg install readline
-#rvm install 1.9.3 --with-readline-dir=$rvm_path/usr
-#rvm use --default 1.9.3
-
-#echo "========================================"
-#echo "Installing Rails"
-#echo "========================================"
-#gem install rails
+echo "========================================"
+echo "Installing Rails"
+echo "========================================"
+gem install rails
 
 echo "========================================"
 echo "Installing Nokogiri Gem + prerequisits"

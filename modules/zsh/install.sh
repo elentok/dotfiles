@@ -23,3 +23,4 @@ DIR=$(dirname "${BASH_SOURCE[0]}")
 DIR=$(cd -P $DIR && pwd)
 
 ln -sf "$DIR/zshrc" ~/.zshrc
+ln -sf "$DIR/zshenv" ~/.zshenv
