@@ -13,12 +13,12 @@
   echo ""
   echo "========================================"
   echo "Cloning dotfiles"
-  git clone git@bitbucket.org/3david/dotfiles
+  git clone git@bitbucket.org:3david/dotfiles
 
   echo ""
   echo "========================================"
   echo "Cloning dotvim"
-  git clone git@bitbucket.org/3david/dotvim
+  git clone git@bitbucket.org:3david/dotvim
 
   echo "========================================"
   echo "setting up vim"
