@@ -46,6 +46,7 @@ alias cl='xclip -selection clipboard -o'
 alias ft="ruby /home/david/projects/tvutils/filestube.rb -s filesonic" 
 alias ack='ack-grep'
 alias st='scrot -s'
+alias dotf='cd ~/.config/dotfiles'
+alias rr='source ~/.config/dotfiles/scripts/init-rvm'
 
-rvm default
 

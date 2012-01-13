@@ -1,0 +1,9 @@
+#!/bin/bash
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+rvm default
+
+ruby -v
+echo "ruby:  `which ruby`"
+echo "irb:   `which irb`"
+echo "rails: `which rails`"
