@@ -10,13 +10,16 @@ sudo apt-get install -y build-essential openssl libreadline6 libreadline6-dev cu
   sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool \
   bison subversion
 
-sudo apt-get install -y libreadline-gpl2-dev libreadline-dev
+#sudo apt-get install -y libreadline-gplv2-dev libreadline-dev
+sudo apt-get install -y libreadline-dev
 
 echo ""
 echo "========================================"
 echo "Installing RVM"
 echo "========================================"
 bash < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
+
+. $HOME/.rvm/scripts/rvm
 
 echo "========================================"
 echo "Installing Ruby 1.9.3"
@@ -40,3 +43,4 @@ echo "========================================"
 echo "Installing Extra Gems"
 echo "========================================"
 gem install clipboard
+gem install rspec
