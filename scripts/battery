@@ -1,0 +1,20 @@
+#!/bin/bash
+
+root="/proc/acpi/battery/BAT0"
+info="$root/info"
+state="$root/state"
+
+capacity="`grep 'design capacity:' $info | sed 's/^.*: *//'`"
+remaining_capacity="`grep 'remaining capacity:' $state | sed 's/^.*: *//'`"
+charging_state="`grep 'charging state:' $state | sed 's/^.*: *//'`"
+rate="`grep 'rate:' $state | sed 's/^.*: *//'`"
+
+capacity_value=`echo $capacity | awk '{print $1}'`
+remaining_capacity_value=`echo $remaining_capacity | awk '{print $1}'`
+percentage=$((remaining_capacity_value * 100 / capacity_value))
+
+echo "Battery remaining $percentage% ($remaining_capacity out of $capacity)"
+echo "State: $charging_state"
+echo "Current Rate: $rate"
+
+
