@@ -18,9 +18,8 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-bindsym XF86AudioPlay exec mpc -h bob@localhost toggle
-bindsym XF86Mail exec mpc -h bob@localhost toggle
-bindsym $mod+z exec mpc -h bob@localhost toggle
+# When pressing Mod+2 it will switch back and forth from workspace #2
+#workspace_auto_back_and_forth yes
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
@@ -91,10 +90,10 @@ bindsym $mod+a focus parent
 #bindcode $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
+bindsym $mod+1 workspace 1: main
+bindsym $mod+2 workspace 2: www
 bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
+bindsym $mod+4 workspace 4: gimp
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
@@ -103,10 +102,10 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+exclam move workspace 1
-bindsym $mod+Shift+at move workspace 2
+bindsym $mod+Shift+exclam move workspace 1: main
+bindsym $mod+Shift+at move workspace 2: www
 bindsym $mod+Shift+numbersign move workspace 3
-bindsym $mod+Shift+dollar move workspace 4
+bindsym $mod+Shift+dollar move workspace 4: gimp
 bindsym $mod+Shift+percent move workspace 5
 bindsym $mod+Shift+asciicircum move workspace 6
 bindsym $mod+Shift+ampersand move workspace 7
@@ -123,40 +122,40 @@ bindsym $mod+Shift+E exit
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+  # These bindings trigger as soon as you enter the resize mode
 
-        # They resize the border in the direction you pressed, e.g.
-        # when pressing left, the window is resized so that it has
-        # more space on its left
+  # They resize the border in the direction you pressed, e.g.
+  # when pressing left, the window is resized so that it has
+  # more space on its left
 
-bindsym h resize shrink left 10 px or 10 ppt
-bindsym Shift+H resize grow   left 10 px or 10 ppt
+  bindsym h resize shrink left 10 px or 10 ppt
+  bindsym Shift+H resize grow   left 10 px or 10 ppt
 
-bindsym j resize shrink down 10 px or 10 ppt
-bindsym Shift+J resize grow   down 10 px or 10 ppt
+  bindsym j resize shrink down 10 px or 10 ppt
+  bindsym Shift+J resize grow   down 10 px or 10 ppt
 
-bindsym k resize shrink up 10 px or 10 ppt
-bindsym Shift+K resize grow   up 10 px or 10 ppt
+  bindsym k resize shrink up 10 px or 10 ppt
+  bindsym Shift+K resize grow   up 10 px or 10 ppt
 
-bindsym l resize shrink right 10 px or 10 ppt
-bindsym Shift+L resize grow   right 10 px or 10 ppt
+  bindsym l resize shrink right 10 px or 10 ppt
+  bindsym Shift+L resize grow   right 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-bindsym Left resize shrink left 10 px or 10 ppt
-bindsym Shift+Left resize grow   left 10 px or 10 ppt
+  # same bindings, but for the arrow keys
+  bindsym Left resize shrink left 10 px or 10 ppt
+  bindsym Shift+Left resize grow   left 10 px or 10 ppt
 
-bindsym Down resize shrink down 10 px or 10 ppt
-bindsym Shift+Down resize grow   down 10 px or 10 ppt
+  bindsym Down resize shrink down 10 px or 10 ppt
+  bindsym Shift+Down resize grow   down 10 px or 10 ppt
 
-bindsym Up resize shrink up 10 px or 10 ppt
-bindsym Shift+Up resize grow   up 10 px or 10 ppt
+  bindsym Up resize shrink up 10 px or 10 ppt
+  bindsym Shift+Up resize grow   up 10 px or 10 ppt
 
-bindsym Right resize shrink right 10 px or 10 ppt
-bindsym Shift+Right resize grow   right 10 px or 10 ppt
+  bindsym Right resize shrink right 10 px or 10 ppt
+  bindsym Shift+Right resize grow   right 10 px or 10 ppt
 
-        # back to normal: Enter or Escape
-bindsym Return mode "default"
-bindsym Escape mode "default"
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
@@ -171,13 +170,35 @@ bar {
   #}
 }
 
+# ==============================================
+# Workspaces
+#workspace "1: main"
+#workspace "2: www"
+
+# ==============================================
+# App-specific settings
+#
+# Note: to find the class of a window, run "xprop | grep -i class"
+
 # Gimp: float by default, open in workspace #3
 for_window [class="Gimp"] floating enable
-assign [class="Gimp"] 4
+assign [class="Gimp"] 4: gimp
+
+# Chrome: assign to workspace #1
+assign [class="Google-chrome"] 2: www
 
 for_window [title="Copying.*"] floating enable
 
-# When pressing Mod+2 it will switch back and forth from workspace #2
-#workspace_auto_back_and_forth yes
+for_window [title="Open Database -.*"] floating enable
+for_window [title=".* KeePass Password Safe"] floating enable
+
+# =============================================
+# Launcher keybidings
 
 bindsym $mod+n exec nautilus --no-desktop
+bindsym $mod+c exec google-chrome
+
+bindsym XF86AudioPlay exec mpc -h bob@localhost toggle
+bindsym XF86Mail exec mpc -h bob@localhost toggle
+bindsym $mod+z exec mpc -h bob@localhost toggle
+

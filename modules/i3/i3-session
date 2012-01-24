@@ -6,5 +6,7 @@ mpd &
 gnome-settings-daemon &
 nm-applet &
 dropbox start &
+google-chrome &
+x-terminal-emulator &
 
 i3
