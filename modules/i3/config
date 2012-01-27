@@ -92,7 +92,7 @@ bindsym $mod+a focus parent
 # switch to workspace
 bindsym $mod+1 workspace 1: main
 bindsym $mod+2 workspace 2: www
-bindsym $mod+3 workspace 3
+bindsym $mod+3 workspace 3: chat
 bindsym $mod+4 workspace 4: gimp
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
@@ -104,7 +104,7 @@ bindsym $mod+0 workspace 10
 # move focused container to workspace
 bindsym $mod+Shift+exclam move workspace 1: main
 bindsym $mod+Shift+at move workspace 2: www
-bindsym $mod+Shift+numbersign move workspace 3
+bindsym $mod+Shift+numbersign move workspace 3: chat
 bindsym $mod+Shift+dollar move workspace 4: gimp
 bindsym $mod+Shift+percent move workspace 5
 bindsym $mod+Shift+asciicircum move workspace 6
@@ -191,6 +191,10 @@ for_window [title="Copying.*"] floating enable
 
 for_window [title="Open Database -.*"] floating enable
 for_window [title=".* KeePass Password Safe"] floating enable
+
+# Empathy
+assign [class="empathy"] 3: chat
+assign [class="empathy-chat"] 3: chat
 
 # =============================================
 # Launcher keybidings
