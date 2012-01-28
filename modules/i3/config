@@ -193,6 +193,7 @@ for_window [title="Copying.*"] floating enable
 
 for_window [title="Open Database -.*"] floating enable
 for_window [title=".* KeePass Password Safe"] floating enable
+for_window [title="Unlock Login .*"] floating enable
 
 # Empathy
 assign [class="empathy"] 3: chat
