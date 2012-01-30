@@ -214,3 +214,6 @@ bindsym XF86AudioPlay exec mpc -h bob@localhost toggle
 bindsym XF86Mail exec mpc -h bob@localhost toggle
 bindsym $mod+z exec mpc -h bob@localhost toggle
 
+bindsym $mod+p exec bash ~/.config/dotfiles/scripts/sshot
+bindsym Print exec bash ~/.config/dotfiles/scripts/sshot
+
