@@ -48,6 +48,7 @@ alias sub="ruby /home/david/projects/tvutils/download_subtitles.rb"
 alias ack='ack-grep'
 alias st='scrot -s'
 alias dotf='cd ~/.config/dotfiles'
+alias dotv='cd ~/.config/dotvim'
 alias rr='source ~/.config/dotfiles/scripts/init-rvm'
 
 
