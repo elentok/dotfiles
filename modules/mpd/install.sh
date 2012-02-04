@@ -21,3 +21,6 @@ mkdir -p ~/.mpd/var/
 touch ~/.mpd/var/tag_cache
 ln -sf "$DIR/mpd.conf" ~/.mpd/mpd.conf
 
+
+mkdir -p ~/.ncmpcpp
+ln -sf "$DIR/ncmpcpp-config" ~/.ncmpcpp/config
