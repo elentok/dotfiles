@@ -6,3 +6,4 @@ sudo apt-get update
 sudo apt-get install nodejs nodejs-dev npm
 
 sudo npm install -g coffee-script
+sudo npm install -g supervisor
