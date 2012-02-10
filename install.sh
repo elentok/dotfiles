@@ -19,7 +19,8 @@ sudo apt-get install vim-gnome mercurial \
 ./modules/xfce4-terminal/install.sh
 ./modules/ruby.sh
 ./modules/nodejs.sh
-./modules/google.sh
+sudo ./modules/google.sh
+./modules/movgrab.sh
 ./modules/jdownloader.sh
 ./modules/handbrake.sh
 ./modules/lamp.sh
