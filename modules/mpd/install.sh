@@ -6,6 +6,11 @@ echo "Installing Music Player Daemon + Clients"
 echo "========================================"
 sudo apt-get install -y mpd mpc ncmpcpp ncmpc-lyrics
 
+echo "========================================"
+echo "Disabling system mpd service"
+echo "========================================"
+sudo update-rc.d -f mpd remove
+
 echo ""
 echo "========================================"
 echo "Creating mpd symlinks"
