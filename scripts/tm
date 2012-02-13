@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# if a tmux session already exists, attach to it,
+# otherwise create a new session.
+
+if [ "`tmux list-sessions`" != "" ]; then
+  tmux attach
+else
+  tmux
+fi
