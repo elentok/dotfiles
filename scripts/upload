@@ -23,6 +23,9 @@ echo "  Path: $UPLOAD_PATH"
 echo "  Port: $UPLOAD_SSHPORT"
 echo "==============================================="
 ssh_command="ssh -p $UPLOAD_SSHPORT"
-excludes=" --exclude=.hg --exclude=.git --exclude=upload.sh --exclude=.sass-cache $UPLOAD_EXCLUDES "
+excludes=" --exclude=.hg --exclude=.git --exclude=.upload --exclude=.sass-cache $UPLOAD_EXCLUDES "
 target="$UPLOAD_USER@$UPLOAD_SERVER:$UPLOAD_PATH"
-rsync -vzrptL --delete-after -e "$ssh_command" $excludes $target
+
+echo "rsync -vzrptL --delete-after -e '$ssh_command' $excludes . $target"
+echo "==============================================="
+rsync -vzrptL --delete-after -e "$ssh_command" $excludes . $target
