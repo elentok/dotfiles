@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if [ ! -e ".upload" ]; then
+  echo 'export UPLOAD_USER=""' > .upload
+  echo 'export UPLOAD_SERVER=""' >> .upload
+  echo 'export UPLOAD_SSHPORT="22"' >> .upload
+  echo 'export UPLOAD_PATH="/var/www/..."' >> .upload
+  echo 'export UPLOAD_EXCLUDES="--exclude=.git"' >> .upload
+  vim .upload
+  exit 1
+fi
+
+source .upload
+
+if [ "$UPLOAD_USER" == "" ]; then
+  vim .upload
+  exit 1
+fi
+
+echo "==============================================="
+echo "Uploading to $UPLOAD_USER@$UPLOAD_SERVER"
+echo "  Path: $UPLOAD_PATH"
+echo "  Port: $UPLOAD_SSHPORT"
+echo "==============================================="
+ssh_command="ssh -p $UPLOAD_SSHPORT"
+excludes=" --exclude=.hg --exclude=.git --exclude=upload.sh --exclude=.sass-cache $UPLOAD_EXCLUDES "
+target="$UPLOAD_USER@$UPLOAD_SERVER:$UPLOAD_PATH"
+rsync -vzrptL --delete-after -e "$ssh_command" $excludes $target
