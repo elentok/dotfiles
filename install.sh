@@ -16,7 +16,8 @@ sudo apt-get install vim-gnome mercurial \
 ./modules/i3/install.sh
 ./modules/zsh/install.sh
 ./modules/mpd/install.sh
-./modules/xfce4-terminal/install.sh
+#./modules/xfce4-terminal/install.sh
+./modules/urxvt/install.sh
 ./modules/ruby.sh
 ./modules/nodejs.sh
 sudo ./modules/google.sh
