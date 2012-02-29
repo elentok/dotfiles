@@ -1,0 +1,86 @@
+# transparency - true or false (default)
+URxvt*transparent: true
+
+# tint with any color; i.e., blue, red, tomato4, olivedrab2, etc.
+#   some nice listings are at:
+#     http://www.nisrv.com/drupal/?q=node/11
+#     http://www.htmlgoodies.com/tutorials/colors/article.php/3478921
+URxvt*tintColor: Black
+
+# shading - 0 to 99 darkens, 101 to 200 lightens.
+#   Don't use with tintColor; just use a darker or lighter color instead.
+#URxvt*shading: 40
+
+# scrollback buffer lines - 65535 is max on most machines (64 is default)
+URxvt*saveLines: 12000
+
+# font color (default is black)
+URxvt*foreground: White
+
+# background color (prior to tinting) (default is white)
+URxvt*background: Black
+
+# Xft (X FreeType) with Bitstream, DejaVu, Liberation, or Terminus fonts:
+#  Fedora/debian packages: libXft/libxft2 
+#  An anti-aliased font setup with Xft looks fantastic; it can be a bit choppy 
+#  on older systems. You can always turn off anti-aliasing (antialias=false) if
+#  your terminal is sluggish. Use only ONE of the Xft pairs below:
+#
+# Xft: Bitstream fonts
+#  Fedora/debian packages: bitstream-vera-sans-mono-fonts/ttf-bitstream-vera 
+#URxvt*font: xft:Bitstream Vera Sans Mono:pixelsize=12:antialias=true:hinting=true
+#URxvt*boldFont: xft:Bitstream Vera Sans Mono:bold:pixelsize=12:antialias=true:hinting=true
+#
+# Xft: DejaVu fonts
+#  Fedora/debian packages: dejavu-sans-mono-fonts/ttf-dejavu 
+Xft.lcdfilter:      lcddefault
+Xft.dpi:            100
+Xft.rgba:           rgb
+Xft.hinting:        true
+Xft.hintstyle:      hintfull
+Xft.antialias:      true
+
+URxvt*font: xft:Monaco\ for\ Powerline:pixelsize=14:antialias=true:hinting=true
+URxvt*boldFont: xft:Monaco\ for\ Powerline:bold:pixelsize=14:antialias=true:hinting=true
+URxvt*letterSpace: -1
+#
+# Xft: Liberation fonts
+#  Fedora/debian packages: liberation-mono-fonts/ttf-liberation
+#URxvt*font: xft:Liberation Mono:pixelsize=13:antialias=true:hinting=true
+#URxvt*boldFont: xft:Liberation Mono:bold:pixelsize=13:antialias=true:hinting=true
+#
+# Xft: Terminus fonts
+#  Fedora/debian packages: terminus-fonts/xfonts-terminus
+#URxvt*font: xft:terminus:pixelsize=15
+#URxvt*boldFont: xft:terminus:bold:pixelsize=15
+
+# Traditional fonts - a more traditional font setup in lieu of xft
+#URxvt*font:-*-courier-medium-r-normal-*-14-*-*-*-*-*-iso8859-1
+#URxvt*boldFont:-*-courier-bold-r-normal-*-14-*-*-*-*-*-iso8859-1
+
+# Replace blue folder colors with a lighter shade for clarity. To
+#  set colored folders and files within urxvt, xterm, and aterm, add
+#  the following line to your ~/.bashrc ($HOME/.bashrc) file under
+#  the heading "# User specific aliases and functions":
+#   alias ls="ls -h --color=auto"
+URxvt*color4: RoyalBlue
+URxvt*color12: RoyalBlue
+
+# scrollbar - true (default) or false
+URxvt*scrollBar: true
+
+# scrollbar position - left=false (default) or right=true
+URxvt*scrollBar_right: false
+
+# scrollbar style - rxvt (default), plain, next, or xterm
+URxvt*scrollstyle: plain
+
+URxvt.background:           #ffffff
+URxvt*color0:                 #000000
+URxvt*color1:                 #b21818
+URxvt*color2:                 #18b218
+URxvt*color3:                 #b26818
+URxvt*color4:                 #1818b2
+URxvt*color5:                 #b26818
+URxvt*color6:                 #18b2b2
+URxvt*color7:                 #b2b2b2
