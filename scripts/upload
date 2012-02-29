@@ -26,6 +26,6 @@ ssh_command="ssh -p $UPLOAD_SSHPORT"
 excludes=" --exclude=.hg --exclude=.git --exclude=.upload --exclude=.sass-cache $UPLOAD_EXCLUDES "
 target="$UPLOAD_USER@$UPLOAD_SERVER:$UPLOAD_PATH"
 
-echo "rsync -vzrptL --delete-after -e '$ssh_command' $excludes . $target"
+echo "rsync -vzrptL -e '$ssh_command' $excludes . $target"
 echo "==============================================="
-rsync -vzrptL --delete-after -e "$ssh_command" $excludes . $target
+rsync -vzrptL -e "$ssh_command" $excludes . $target
