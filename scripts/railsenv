@@ -1,0 +1,8 @@
+#!/bin/bash
+
+rr='source ~/.config/dotfiles/scripts/init-rvm'
+
+tmux new-session -d -n "server" "bash -c '$rr && rails server'"
+tmux new-window -n "livereload" "bash -c '$rr && guard'"
+tmux new-window -n "spork" "bash -c '$rr && spork'"
+tmux attach
