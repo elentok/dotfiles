@@ -10,6 +10,8 @@
   mkdir -p ~/.config
   cd ~/.config
 
+  sudo apt-get install git curl
+
   echo ""
   echo "========================================"
   echo "Cloning dotfiles"
