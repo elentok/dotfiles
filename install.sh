@@ -7,11 +7,12 @@ sudo apt-get install vim-gnome mercurial \
   samba libpam-smbpass \
   pysdm unrar regexxer screen \
   xfce4-terminal network-manager-gnome \
-  krusader vlc scrot ack-grep
+  krusader vlc scrot
 
 # ========================================
 # Modules
 ./modules/git/install.sh
+./modules/ack-grep/install.sh
 ./modules/mc/install.sh
 ./modules/i3/install.sh
 ./modules/zsh/install.sh

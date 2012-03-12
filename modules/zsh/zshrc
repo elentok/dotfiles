@@ -46,6 +46,7 @@ alias cl='xclip -selection clipboard -o'
 alias ft="ruby /home/david/projects/tvutils/filestube/filestube.rb -s filesonic" 
 alias sub="ruby /home/david/projects/tvutils/download_subtitles.rb" 
 alias ack='ack-grep'
+alias ackc='ack-grep --coffee'
 alias st='scrot -s'
 alias dotf='cd ~/.config/dotfiles'
 alias dotv='cd ~/.config/dotvim'
