@@ -1,0 +1,5 @@
+#!/bin/bash
+
+tmux new-session -d -n "server" "bash -c 'supervisor app.coffee'"
+tmux new-window -n "livereload" "bash -c 'guard'"
+tmux attach
