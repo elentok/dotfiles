@@ -20,6 +20,7 @@ sudo apt-get install vim-gnome mercurial \
 #./modules/xfce4-terminal/install.sh
 ./modules/urxvt/install.sh
 ./modules/ruby.sh
+./modules/iphone-tether.sh
 ./modules/nodejs.sh
 sudo ./modules/google.sh
 ./modules/movgrab.sh
