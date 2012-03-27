@@ -8,5 +8,12 @@ nm-applet &
 dropbox start &
 google-chrome &
 x-terminal-emulator &
+if [ -e "/lib/udev/ipheth-pair" ]; then
+  /lib/udev/ipheth-pair &
+fi
+
+if [ -e "/usr/bin/jupiter" ]; then
+  jupiter &
+fi
 
 i3
