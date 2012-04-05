@@ -27,9 +27,12 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 #plugins=(git)
-plugins=(git gem rails3 python mercurial rvm)
+plugins=(git rails3 mercurial python)
+# IMPORTANT: the 'gem' and 'rvm' plugins cause a slowdown
+
 
 source $ZSH/oh-my-zsh.sh
+
 
 # Customize to your needs...
 export PATH=$HOME/.rvm/bin:$HOME/.config/dotfiles/scripts:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/david/bin
