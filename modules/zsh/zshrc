@@ -44,7 +44,10 @@ export MPD_HOST=bob@localhost
 # ALIASES
 alias m=ncmpcpp
 alias x=exit
-alias mpf='mpc search filename'
+alias mf='mpc search filename'
+alias ma='mpc add'
+alias mp='mpc play'
+alias mc='mpc clear'
 alias sr='screen -R'
 alias ak='ssh-add ~/.keys/bitbucket.ssh.private'
 alias cl='xclip -selection clipboard -o'
