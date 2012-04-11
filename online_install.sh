@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # This script should be run directly from the online repository like this:
-# curl -L https://bitbucket.org/3david/dotfiles/src/master/online_install.sh | bash
+# curl -L https://bitbucket.org/3david/dotfiles/raw/master/online_install.sh | bash
 #
 # Prerequisits:
 # sudo apt-get install git curl
