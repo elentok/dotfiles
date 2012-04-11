@@ -3,7 +3,7 @@ Elentok's Linux-Config
 
 To install run:
 
-  $ curl -L https://bitbucket.org/3david/dotfiles/src/master/online_install.sh | bash
+  $ curl -L https://bitbucket.org/3david/dotfiles/raw/master/online_install.sh | bash
 
 
 Touchpad
