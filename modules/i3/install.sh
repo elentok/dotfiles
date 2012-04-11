@@ -23,4 +23,4 @@ ln -sf "$DIR/config" ~/.i3/config
 ln -sf "$DIR/i3status.conf" ~/.i3/i3status.conf
 ln -sf "$DIR/i3-session" ~/.i3/i3-session
 
-sudo cp "$DIR/i3-session.desktop" /usr/share/xsessions/
+sudo sh -c "cat $DIR/i3-session.desktop | sed \"s#/home/david#$HOME#\" > /usr/share/xsessions/i3-session.desktop"
