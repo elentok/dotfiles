@@ -2,7 +2,8 @@ First Time=false
 Version=2.4.0-beta1
 
 [Archives]
-Supported Packers=tar,gzip,bzip2,lzma,xz,unzip,zip,cpio,unrar,dpkg
+Supported Packers=tar,gzip,bzip2,lzma,xz,unzip,zip,cpio,unrar,dpkg,7z
+lastUsedPacker=7z
 
 [Colors]
 Alternate Background=0,0,0
@@ -11,11 +12,20 @@ Current Background=128,128,128
 Current Foreground=255,255,255
 Enable Alternate Background=true
 Foreground=255,255,255
-KDE Default=false
+KDE Default=true
 Marked Foreground=
 Show Current Item Always=true
 
+[Custom Selection Mode]
+Immediate Context Menu=true
+Left Selects=true
+Right Preserves=false
+Right Selects=true
+ShiftCtrl Left Selects=true
+Space Moves Down=false
+
 [Dependencies]
+7z=/usr/bin/7z
 bzip2=/bin/bzip2
 checksum utility=/usr/bin/md5sum
 cpio=/bin/cpio
@@ -44,41 +54,17 @@ zip=/usr/bin/zip
 [General]
 Terminal=xfce4-terminal --working-directory %d
 
-[KFileDialog Settings]
-Height 768=450
-Width 1366=720
-
-[Konfigurator]
-Window Height=680
-Window Maximized=false
-Window Width=900
-
-[KrViewerWindow]
-Window Height=729
-Window Maximized=false
-Window Width=1362
-
 [Look&Feel]
 Filelist Font=Ubuntu,10,-1,5,50,0,0,0,0,0
+FlatOriginBar=true
 Mark Dirs=true
+Mouse Selection=3
+Open Button Visible=false
+Panel Toolbar visible=true
 Show splashscreen=false
 
-[MountMan]
-Last State=\x00\x00\x00?\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01?\x00\x00\x00\x06\x01\x01\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00d????\x00\x00\x00?\x00\x00\x00\x00\x00\x00\x00\x05\x00\x00\x00`\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x000\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00`\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00?\x00\x00\x00\x02\x00\x00\x00\x00\x00\x00\x00<\x00\x00\x00\x01\x00\x00\x00\x00
-ShowOnlyRemovable=false
-Window Height=323
-Window Maximized=false
-Window Width=600
-
-[Private]
-Maximized=false
-PopularUrls=file:///media/Stuff
-PopularUrlsRank=7,6,5,5,2,2,0,0,0,0,0,0,0
-Right PanelPopup Splitter Sizes=256,256
-Splitter Sizes=678,678
-Start Position=0,18
-Start Size=1362,729
-cmdline history=
+[PanelLayout]
+Layout=krusader:compact
 
 [Protocols]
 Handled Protocols=tar,krarc,iso
@@ -86,60 +72,9 @@ Mimes For iso=application/x-cd-image
 Mimes For krarc=application/zip,application/x-xz,application/x-rpm,application/x-rar,application/x-lha,application/x-gzip,application/x-deb,application/x-cpio,application/x-arj,application/x-ace,application/x-7z-compressed
 Mimes For tar=application/x-xz-compressed-tar,application/x-tarz,application/x-tar,application/x-compressed-tar,application/x-bzip-compressed-tar
 
-[QueueManager]
-Active=0
-Queues=default
-Window Height=400
-Window Width=300
-Window X=20
-Window Y=20
-
 [Startup]
 Left Side Is Active=false
 Show FN Keys=false
 Show actions tool bar=false
 Vertical Mode=false
 
-[Startup][Left Tab Bar]
-ActiveTab=0
-
-[Startup][Left Tab Bar][Tabs][Tab0]
-Properties=0
-Type=0
-Url=/media/Stuff
-
-[Startup][Left Tab Bar][Tabs][Tab0][History]
-CurrentIndex=0
-CurrentItems=
-Entrys=file:///media/Stuff
-
-[Startup][Left Tab Bar][Tabs][Tab0][View]
-Descending Sort Order=0
-Filter=3
-FilterApplysToDirs=false
-IconSize=22
-Saved State=\x00\x00\x00?\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\t?\x01\x00\x00\x00\x04\x00\x00\x00\x08\x00\x00\x00d\x00\x00\x00\x07\x00\x00\x00d\x00\x00\x00\x05\x00\x00\x00d\x00\x00\x00\x03\x00\x00\x00d\x00\x00\x02?\x00\x00\x00\t\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00d????\x00\x00\x00?\x00\x00\x00\x00\x00\x00\x00\t\x00\x00\x01|\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x002\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00P\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00x\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x1e\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00
-ShowPreviews=false
-Sort Column=0
-
-[Startup][Right Tab Bar]
-ActiveTab=0
-
-[Startup][Right Tab Bar][Tabs][Tab0]
-Properties=0
-Type=0
-Url=/media/Stuff
-
-[Startup][Right Tab Bar][Tabs][Tab0][History]
-CurrentIndex=0
-CurrentItems=
-Entrys=file:///media/Stuff
-
-[Startup][Right Tab Bar][Tabs][Tab0][View]
-Descending Sort Order=0
-Filter=3
-FilterApplysToDirs=false
-IconSize=22
-Saved State=\x00\x00\x00?\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\t?\x01\x00\x00\x00\x04\x00\x00\x00\x08\x00\x00\x00d\x00\x00\x00\x07\x00\x00\x00d\x00\x00\x00\x05\x00\x00\x00d\x00\x00\x00\x03\x00\x00\x00d\x00\x00\x02?\x00\x00\x00\t\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00d????\x00\x00\x00?\x00\x00\x00\x00\x00\x00\x00\t\x00\x00\x01|\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x002\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00P\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00x\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x1e\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00
-ShowPreviews=false
-Sort Column=0
