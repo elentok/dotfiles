@@ -60,6 +60,7 @@ alias st='scrot -s'
 alias dotf='cd ~/.config/dotfiles'
 alias dotv='cd ~/.config/dotvim'
 alias rr='source ~/.config/dotfiles/scripts/init-rvm'
+alias ls='ls --color=always -XFhs'
 
 # so tmux will allow 256 colors:
 export TERM=xterm-256color
