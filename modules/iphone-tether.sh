@@ -17,5 +17,5 @@ cd ../ipheth-driver
 make
 sudo insmod ipheth.ko
 sudo make install
-sudo cp ipheth-modprobe.conf /etc/modprobe.d/
+#sudo cp ipheth-modprobe.conf /etc/modprobe.d/
 sudo depmod
