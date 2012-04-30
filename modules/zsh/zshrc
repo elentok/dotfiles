@@ -63,6 +63,7 @@ alias rr='source ~/.config/dotfiles/scripts/init-rvm'
 alias ls='ls --color=always -XFhs'
 alias mac='ruby ~/projects/macrumors/macrumors.rb'
 alias wp='feh --bg-fill'
+alias pryy='pry -r ./config/environment'
 
 # so tmux will allow 256 colors:
 export TERM=xterm-256color
