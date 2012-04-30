@@ -5,6 +5,6 @@ echo "========================================"
 echo "Installing Java"
 echo "========================================"
 
-add-apt-repository -y ppa:ferramroberto/java
-apt-get update
-apt-get install -y sun-java6-jdk sun-java6-plugin
+sudo add-apt-repository -y ppa:ferramroberto/java
+sudo apt-get update
+sudo apt-get install -y sun-java6-jdk sun-java6-plugin
