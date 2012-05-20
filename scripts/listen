@@ -1,0 +1,66 @@
+#!/usr/bin/env ruby
+
+add = ARGV.include?('add')
+
+BACKSPACE = 127
+ESCAPE = 27
+ENTER = 13
+
+SONGS = `mpc listall`.split("\n")
+
+system('clear')
+
+def getchar
+  begin 
+    system('stty raw -echo')
+    return STDIN.getc
+  ensure
+    system('stty -raw echo')
+  end
+end
+
+
+def query_to_regex(query)
+  regex_text = ""
+  query.split(' ').each do |w|
+    regex_text += w + ".*"
+  end
+  return /#{regex_text}/i
+end
+
+  
+songs = []
+query = ""
+
+STDOUT.print "Play: #{query}"
+loop do
+  c = getchar
+
+  break if c == 'q'
+  break if c.ord == ESCAPE
+  if c.ord == ENTER
+    unless songs.empty?
+      system('mpc clear') unless add
+      IO.popen("mpc add", 'w') do |f|
+        songs.each do |song|
+          f.puts song
+        end
+        f.close
+      end
+      system('mpc play')
+    end
+    break
+  end
+
+  if c.ord == BACKSPACE
+    query = query[0..-2]
+  else
+    query += c
+  end
+
+  system('clear')
+  puts "Play: #{query}"
+  songs = SONGS.grep query_to_regex(query)
+  puts songs.first(20)
+  puts "..." if songs.length > 20
+end
