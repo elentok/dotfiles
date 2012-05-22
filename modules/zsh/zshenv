@@ -2,3 +2,5 @@
 #[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
 
+
+export MPD_HOST=bob@localhost
