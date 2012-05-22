@@ -6,8 +6,8 @@ sudo apt-get install vim-gnome mercurial \
   ctags keepass2 gimp htop \
   samba libpam-smbpass \
   pysdm unrar regexxer screen \
-  xfce4-terminal network-manager-gnome \
-  krusader vlc scrot
+  network-manager-gnome \
+  krusader vlc scrot gpicview
 
 # ========================================
 # Modules
