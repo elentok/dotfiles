@@ -13,7 +13,7 @@ echo "Installing Oh-My-Zsh"
 echo "========================================"
 
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
-usermod -s /bin/zsh david
+usermod -s /bin/zsh $USER
 
 echo ""
 echo "========================================"
