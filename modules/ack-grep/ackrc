@@ -2,3 +2,7 @@
 coffee=.coffee
 --ignore-dir
 node_modules
+--type-add
+html=.haml
+--type-add
+css=.sass,.scss
