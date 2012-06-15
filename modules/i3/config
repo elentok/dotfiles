@@ -208,6 +208,7 @@ assign [class="Pidgin"] 3: chat
 # =============================================
 # Launcher keybidings
 
+bindsym $mod+q exec pcmanfm
 bindsym $mod+n exec nautilus --no-desktop
 bindsym $mod+m exec krusader
 bindsym $mod+c exec google-chrome
