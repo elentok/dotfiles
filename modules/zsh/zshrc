@@ -70,3 +70,4 @@ alias trailer='wget -U QuickTime'
 export TERM=xterm-256color
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+rvm default
