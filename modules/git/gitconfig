@@ -1,6 +1,8 @@
 [user]
     name = David Elentok
     email = 3david@gmail.com
+[github]
+  user = elentok
 [diff]
 [color]
     ui = auto
