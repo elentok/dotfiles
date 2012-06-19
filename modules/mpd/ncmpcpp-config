@@ -273,7 +273,7 @@
 user_interface = "alternative" (classic/alternative)
 #
 #media_library_left_column = "a" (possible values: a,y,g,c,p, legend above)
-media_library_left_column = "A" (possible values: a,y,g,c,p, legend above)
+#media_library_left_column = "A" (possible values: a,y,g,c,p, legend above)
 #
 #default_find_mode = "wrapped" (wrapped/normal)
 #
