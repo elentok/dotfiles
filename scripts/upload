@@ -12,6 +12,11 @@ fi
 
 source .upload
 
+if ["$?" -ne "0" ]; then
+  echo "Error in .upload file"
+  exit 1
+fi
+
 if [ "$UPLOAD_USER" == "" ]; then
   vim .upload
   exit 1
