@@ -15,11 +15,15 @@ ln -sf "$DIR/openbox-environment" ~/.config/openbox/environment
 ln -sf "$DIR/tint2rc" ~/.config/tint2/tint2rc
 
 # Install tint2 volume control
-#cd ~/Downloads
-#wget http://softwarebakery.com/maato/files/volumeicon/volumeicon-0.4.6.tar.gz
-#tar xzvf volumeicon-0.4.6.tar.gz
-#cd volumeicon-0.4.6
-#sudo apt-get install libasound2-dev libgtk2.0-dev
-#./configure
-#make
-#make install
+echo "========================================"
+echo "Installing Volume Control"
+echo "========================================"
+sudo apt-get install -y libasound2-dev libgtk2.0-dev
+
+cd ~/Downloads
+wget http://softwarebakery.com/maato/files/volumeicon/volumeicon-0.4.6.tar.gz
+tar xzvf volumeicon-0.4.6.tar.gz
+cd volumeicon-0.4.6
+./configure
+make
+sudo make install
