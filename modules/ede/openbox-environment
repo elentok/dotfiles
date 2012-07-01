@@ -1,0 +1,22 @@
+#!/bin/bash
+
+setxkbmap -option 'grp:alt_shift_toggle' -option 'ctrl:nocaps'
+gnome-settings-daemon &
+mpd &
+tint2 &
+volumeicon &
+~/.dropbox-dist/dropboxd &
+xcompmgr -c &
+
+google-chrome &
+x-terminal-emulator &
+
+(sleep 1 && pcmanfm --desktop -d) &
+
+if [ -e "/lib/udev/ipheth-pair" ]; then
+  /lib/udev/ipheth-pair &
+fi
+
+if [ -e "/usr/bin/jupiter" ]; then
+  jupiter &
+fi
