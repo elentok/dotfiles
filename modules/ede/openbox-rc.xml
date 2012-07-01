@@ -369,6 +369,11 @@
     <keybind key="C-A-r">
       <action name="Reconfigure" />
     </keybind>
+    <keybind key="C-A-S-r">
+      <action name="Execute">
+        <command>killall -SIGUSR1 tint2</command>
+      </action>
+    </keybind>
     <keybind key="A-F11">
       <action name="ToggleFullscreen" />
     </keybind>
