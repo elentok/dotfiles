@@ -14,6 +14,28 @@ set $mod Mod4
 
 # font for window titles. ISO 10646 = Unicode
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+#font -*-terminus-*-*-*-*-12-*-*-*-*-*-*-*
+#font -*-clean-medium-r-*-*-13-*-*-*-*-*-*-*
+#font -*-anorexia-medium-*-*-*-11-*-*-*-*-*-iso10646-1
+
+
+#class                  border  backgr. text
+client.unfocused        #4c4c4c #000000 #4c4c4c
+client.focused_inactive #aaaaaa #000000 #aaaaaa
+client.focused          #e1aa5d #000000 #ffffff
+client.urgent           #a0cf5d #000000 #eeeeee
+
+#bar.unfocused           #4c4c4c #000000 #aaaaaa
+#bar.focused             #e1aa5d #000000 #ffffff
+#bar.urgent              #a0cf5d #000000 #eeeeee
+
+#class                  border  backgr. text
+#client.focused          #121212 #101010 #9e8a8e
+#client.focused_inactive #101010 #191919 #999999
+#client.unfocused        #101010 #191919 #999999
+#client.urgent           #cd989a #cd989a #2e3436
+
+#client.background       #1d1d1d
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
