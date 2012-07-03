@@ -234,6 +234,8 @@ bindsym $mod+q exec pcmanfm
 bindsym $mod+n exec nautilus --no-desktop
 bindsym $mod+m exec krusader
 bindsym $mod+c exec google-chrome
+bindsym $mod+F12 exec gnome-control-center sound
+bindsym $mod+F8 exec gnome-control-center display
 
 bindsym XF86AudioPlay exec mpc -h bob@localhost toggle
 bindsym XF86Mail exec mpc -h bob@localhost toggle
