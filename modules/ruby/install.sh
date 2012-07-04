@@ -53,7 +53,6 @@ gem install rspec-rails jquery-rails jquery-ui-rails factory_girl_rails turn thi
 gem install compass-rails simple_form simple_enum rb-fsevent bootstrap-sass bourbon jasmine jasminerice guard-jasmine
 gem install uglifier sass-rails coffee-rails modernizer_rails backbone-on-rails
 
-
 echo "========================================"
 echo "Creating symbolic links"
 echo "========================================"
@@ -62,4 +61,16 @@ DIR=$(dirname "${BASH_SOURCE[0]}")
 DIR=$(cd -P $DIR && pwd)
 
 ln -sf "$DIR/irbrc" ~/.irbrc
+
+echo "========================================"
+echo "Installing PhantomJS"
+echo "========================================"
+cd ~/Downloads
+wget http://phantomjs.googlecode.com/files/phantomjs-1.6.0-linux-x86_64-dynamic.tar.bz2
+tar xjvf phantomjs-1.6.0-linux-x86_64-dynamic.tar.bz2
+sudo mv phantomjs-1.6.0-linux-x86_64-dynamic /opt/phantomjs
+sudo ln -s /opt/phantomjs/bin/phantomjs /usr/bin/
+
+#sudo apt-add-repository -y ppa:antono/phantomjs
+#sudo apt-get update
 
