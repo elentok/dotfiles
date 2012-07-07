@@ -366,6 +366,11 @@
         <command>xfce4-terminal</command>
       </action>
     </keybind>
+    <keybind key="W-Return">
+      <action name="Execute">
+        <command>xfce4-terminal</command>
+      </action>
+    </keybind>
     <keybind key="C-A-r">
       <action name="Reconfigure" />
     </keybind>
@@ -393,6 +398,11 @@
     <keybind key="W-m">
       <action name="Execute">
         <command>krusader</command>
+      </action>
+    </keybind>
+    <keybind key="W-p">
+      <action name="Execute">
+        <command>gnome-control-center displays</command>
       </action>
     </keybind>
   </keyboard>
