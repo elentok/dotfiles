@@ -7,7 +7,13 @@ sudo apt-get install vim-gnome mercurial \
   samba libpam-smbpass \
   pysdm unrar regexxer screen \
   network-manager-gnome \
-  krusader vlc scrot gpicview
+  krusader vlc scrot gpicview \
+  pcmanfm leafpad
+
+# set pcmanfm as the default file manager
+xdg-mime default pcmanfm.desktop inode/directory
+# set leafpad as the default text editor
+xdg-mime default leafpad.desktop text/plain
 
 # ========================================
 # Modules
