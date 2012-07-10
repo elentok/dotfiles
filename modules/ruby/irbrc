@@ -1,8 +1,5 @@
 begin
-  require 'wirble'
-
-  Wirble.init
-  Wirble.colorize
-rescue LoadError => err
-  warn "Couldn't load Wirble: #{err}"
+  require 'irbtools'
+rescue LoadError
+  warn "Could not load irbtools, add 'irbtools' to your Gemfile"
 end

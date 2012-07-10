@@ -44,8 +44,7 @@ echo "Installing Extra Gems"
 echo "========================================"
 gem install clipboard
 gem install rspec
-# wirble improves irb (syntax highlighting, autocomplete, ...)
-gem install wirble 
+gem install irbtools 
 gem install cucumber
 gem install capybara
 gem install debugger pry haml-rails guard-livereload guard-spork spork devise cancan paperclip guard
