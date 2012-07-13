@@ -60,6 +60,7 @@ DIR=$(dirname "${BASH_SOURCE[0]}")
 DIR=$(cd -P $DIR && pwd)
 
 ln -sf "$DIR/irbrc" ~/.irbrc
+ln -sf "$DIR/rdebugrc" ~/.rdebugrc
 
 echo "========================================"
 echo "Installing PhantomJS"
