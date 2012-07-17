@@ -12,10 +12,14 @@ make
 sudo cp ipheth-pair /usr/bin
 sudo make install
 
-echo "INSTALLING DRIVER"
-cd ../ipheth-driver
-make
-sudo insmod ipheth.ko
-sudo make install
-#sudo cp ipheth-modprobe.conf /etc/modprobe.d/
-sudo depmod
+if [ "`grep 'LinuxMint' /etc/*-release`" == "" ]; then
+	echo "INSTALLING DRIVER"
+	cd ../ipheth-driver
+	make
+	sudo insmod ipheth.ko
+	sudo make install
+	#sudo cp ipheth-modprobe.conf /etc/modprobe.d/
+	sudo depmod
+else
+	sudo apt-get install ipheth-utils
+fi
