@@ -1,0 +1,9 @@
+#!/bin/bash
+
+file=~/Dropbox/PlainText/unix.txt
+
+if [ "$*" == "" ]; then
+  more $file
+else
+  grep -C 1 "$*" $file
+fi
