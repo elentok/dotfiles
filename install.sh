@@ -25,6 +25,7 @@ sudo apt-get install vim-gnome mercurial \
 ./modules/zsh/install.sh
 ./modules/mpd/install.sh
 ./modules/ruby/install.sh
+./modules/tmux/install.sh
 #./modules/iphone-tether.sh
 ./modules/nodejs.sh
 sudo ./modules/google.sh
