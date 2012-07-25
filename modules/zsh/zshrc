@@ -67,6 +67,9 @@ alias wp='feh --bg-fill'
 alias pryy='pry -r ./config/environment'
 alias trailer='wget -U QuickTime'
 
+alias wip='cucumber --drb --profile wip'
+alias cuc='cucumber --drb'
+
 # so tmux will allow 256 colors:
 export TERM=xterm-256color
 
