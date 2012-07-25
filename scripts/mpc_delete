@@ -1,6 +1,6 @@
 #!/bin/bash
 
-music_root="~/Music"
+music_root="$HOME/Music"
 deleted_songs="/media/Stuff/Music-Deleted/"
 
 mkdir -p $deleted_songs
@@ -13,7 +13,9 @@ echo "Song Filename: $song_filename"
 read -p "Delete? (y/n)?"
 if [ $REPLY == "y" ]; then
   echo "Deleting..."
-  cd $music_root
-  mv $song_filename $deleted_songs
+  cd "$music_root"
+  mv "$song_filename" "$deleted_songs"
   echo "Deleted"
+  mpc next
+  mpc update
 fi
