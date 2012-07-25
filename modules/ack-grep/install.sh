@@ -4,7 +4,7 @@ echo ""
 echo "========================================"
 echo "Installing Ack-grep"
 echo "========================================"
-sudo apt-get install ack-grep
+sudo apt-get install -y ack-grep
 
 DIR=$(dirname "${BASH_SOURCE[0]}")
 DIR=$(cd -P $DIR && pwd)

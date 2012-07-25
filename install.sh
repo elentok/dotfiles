@@ -2,7 +2,7 @@
 #
 # ========================================
 # Base packages
-sudo apt-get install vim-gnome mercurial \
+sudo apt-get install -y vim-gnome mercurial \
   ctags keepassx gimp htop \
   samba libpam-smbpass \
   pysdm unrar regexxer \

@@ -4,7 +4,7 @@ echo ""
 echo "========================================"
 echo "Installing Git"
 echo "========================================"
-sudo apt-get install git giggle
+sudo apt-get install -y git giggle
 
 DIR=$(dirname "${BASH_SOURCE[0]}")
 DIR=$(cd -P $DIR && pwd)
