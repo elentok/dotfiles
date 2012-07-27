@@ -30,8 +30,6 @@ ZSH_THEME="robbyrussell"
 plugins=(git rails3 mercurial python bundler)
 # IMPORTANT: the 'gem' and 'rvm' plugins cause a slowdown
 
-unsetopt correct_all
-
 source $ZSH/oh-my-zsh.sh
 
 
@@ -75,3 +73,5 @@ export TERM=xterm-256color
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 rvm default
+
+unsetopt correctall
