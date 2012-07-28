@@ -1,0 +1,13 @@
+#!/bin/bash
+if [ $# -eq 1 ]
+then
+    coffee -p $1 | cat -n
+elif [ $# -eq 2 ]; then
+    head_count=$(($2+5))
+    tail_count=11
+    coffee -p $1 | cat -n | head -$head_count | tail -$tail_count
+elif [ $# -eq 3 ]; then
+    head_count=$(($2+$3))
+    tail_count=$3
+    coffee -p $1 | cat -n | head -$head_count | tail -$tail_count
+fi
