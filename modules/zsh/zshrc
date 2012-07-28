@@ -56,7 +56,9 @@ alias clean="ruby /home/david/projects/tvutils/bin/clean.rb"
 alias ack='ack-grep'
 alias ackc='ack-grep --coffee'
 alias st='scrot -s'
+export DOTF=~/.config/dotfiles
 alias dotf='cd ~/.config/dotfiles'
+export DOTV=~/.config/dotvim
 alias dotv='cd ~/.config/dotvim'
 alias rr='source ~/.config/dotfiles/scripts/init-rvm'
 alias ls='ls --color=always -XFhs'
