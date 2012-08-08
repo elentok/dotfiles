@@ -32,11 +32,9 @@ plugins=(git rails3 mercurial python bundler)
 
 source $ZSH/oh-my-zsh.sh
 
-
-# Customize to your needs...
-export PATH=$HOME/.rvm/bin:$HOME/.config/dotfiles/scripts:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/david/bin:/home/david/projects/railsnew
-#export PATH=/home/david/.rvm/gems/ruby-1.9.3-p0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/david/bin
-#export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/david/bin
+export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
+PATH=$PATH:$HOME/.rvm/bin:$HOME/.config/dotfiles/scripts
+PATH=$PATH:$HOME/bin:$HOME/projects/railsnew
 
 export MPD_HOST=bob@localhost
 
@@ -50,8 +48,8 @@ alias mcl='mpc clear'
 alias sr='screen -R'
 alias ak='ssh-add ~/.keys/bitbucket.ssh.private'
 alias cl='xclip -selection clipboard -o'
-alias ft="ruby /home/david/projects/tvutils/bin/filestube.rb -s filesonic"
-alias sub="ruby /home/david/projects/tvutils/bin/download_subtitles.rb"
+alias ft="ruby ~/projects/tvutils/bin/filestube.rb -s filesonic"
+alias sub="ruby ~/projects/tvutils/bin/download_subtitles.rb"
 alias clean="ruby /home/david/projects/tvutils/bin/clean.rb"
 alias ack='ack-grep'
 alias ackc='ack-grep --coffee'
