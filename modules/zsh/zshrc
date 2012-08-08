@@ -59,11 +59,16 @@ alias dotf='cd ~/.config/dotfiles'
 export DOTV=~/.config/dotvim
 alias dotv='cd ~/.config/dotvim'
 alias rr='source ~/.config/dotfiles/scripts/init-rvm'
-alias ls='ls --color=always -XFhs'
 alias mac='ruby ~/projects/macrumors/macrumors.rb'
 alias wp='feh --bg-fill'
 alias pryy='pry -r ./config/environment'
 alias trailer='wget -U QuickTime'
+
+if [[ "`uname -s`" == "Darwin" ]]; then
+  alias ls='ls -FG'
+else
+  alias ls='ls --color=always -XFhs'
+fi
 
 alias wip='cucumber --drb --profile wip'
 alias cuc='cucumber --drb'
