@@ -51,8 +51,6 @@ alias cl='xclip -selection clipboard -o'
 alias ft="ruby ~/projects/tvutils/bin/filestube.rb -s filesonic"
 alias sub="ruby ~/projects/tvutils/bin/download_subtitles.rb"
 alias clean="ruby /home/david/projects/tvutils/bin/clean.rb"
-alias ack='ack-grep'
-alias ackc='ack-grep --coffee'
 alias st='scrot -s'
 export DOTF=~/.config/dotfiles
 alias dotf='cd ~/.config/dotfiles'
@@ -67,6 +65,8 @@ alias trailer='wget -U QuickTime'
 if [[ "`uname -s`" == "Darwin" ]]; then
   alias ls='ls -FG'
 else
+  alias ack='ack-grep'
+  alias ackc='ack-grep --coffee'
   alias ls='ls --color=always -XFhs'
 fi
 

@@ -4,7 +4,11 @@ echo ""
 echo "========================================"
 echo "Installing Ack-grep"
 echo "========================================"
-sudo apt-get install -y ack-grep
+if [ "`uname -s`" == "Darwin" ]; then
+  brew install ack
+else
+  sudo apt-get install -y ack-grep
+fi
 
 DIR=$(dirname "${BASH_SOURCE[0]}")
 DIR=$(cd -P $DIR && pwd)
