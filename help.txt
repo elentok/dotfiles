@@ -1,4 +1,3 @@
-
 * delete all files named 'rc.conf':
     find . -name "rc.conf" -exec rm '{}' \;
 
