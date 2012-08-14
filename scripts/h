@@ -1,0 +1,76 @@
+#!/usr/bin/env ruby
+
+HELP_FILENAME = "#{ENV['DOTF']}/help.txt"
+
+class Help
+
+  attr_reader :sections
+
+  def initialize(filename = HELP_FILENAME)
+    @sections = []
+
+    File.open(filename, 'r') do |f|
+      section = ""
+
+      while line = f.gets
+        if line =~ /^\*/
+          add_section(section)
+          section = line
+        else
+          section += line
+        end
+      end
+
+      add_section(section)
+    end
+  end
+  
+  def search(text)
+    regexp = Regexp.new(text)
+    @sections.select { |s| s =~ regexp }
+  end
+
+private
+  def add_section(section)
+    section.strip!
+    @sections << section unless section.empty?
+  end
+
+end
+
+def main
+  if ARGV.length == 0
+    Help.new.sections.each do |section|
+      puts section
+      puts
+    end
+  else
+    arg = ARGV[0]
+    if arg == 'e'
+      system("vim #{HELP_FILENAME} < `tty` > `tty`")
+    else
+      Help.new.search(arg).each do |section|
+        puts SectionRenderer.render(section, arg)
+        puts
+      end
+    end
+  end
+end
+
+module SectionRenderer
+  RED = "\e[31m"
+  GREEN = "\e[32m"
+  DEFAULT = "\e[0m"
+  BOLD_ON = "\033[1m"
+  BOLD_OFF = "\033[22m"
+
+  def self.render(section, highlight)
+    section.gsub Regexp.new(highlight),
+      "#{GREEN}#{BOLD_ON}#{highlight}#{DEFAULT}#{BOLD_OFF}"
+  end
+end
+
+
+if __FILE__ == $0
+  main
+end
