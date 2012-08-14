@@ -1,0 +1,12 @@
+
+* delete all files named 'rc.conf':
+    find . -name "rc.conf" -exec rm '{}' \;
+
+* delete all empty directories:
+    find . -empty -exec rmdir '{}' \;
+
+* run a command on all of the regular files:
+    find . -type f -exec clean '{}' \;
+
+* 7z with password:
+    7z u -p{password} -mhe target.7z files

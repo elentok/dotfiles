@@ -1,0 +1,11 @@
+#!/bin/bash
+
+file=$DOTF/help.txt
+
+if [ "$*" == "e" ]; then
+  vim $file
+elif [ "$*" == "" ]; then
+  more $file
+else
+  grep -C 1 "$*" $file
+fi
