@@ -50,7 +50,7 @@ alias ak='ssh-add ~/.keys/bitbucket.ssh.private'
 alias cl='xclip -selection clipboard -o'
 alias ft="ruby ~/projects/tvutils/bin/filestube.rb -s filesonic"
 alias sub="ruby ~/projects/tvutils/bin/download_subtitles.rb"
-alias clean="ruby /home/david/projects/tvutils/bin/clean.rb"
+alias clean="ruby ~/projects/tvutils/bin/clean.rb"
 alias st='scrot -s'
 export DOTF=~/.config/dotfiles
 alias dotf='cd ~/.config/dotfiles'
@@ -63,7 +63,9 @@ alias pryy='pry -r ./config/environment'
 alias trailer='wget -U QuickTime'
 
 if [[ "`uname -s`" == "Darwin" ]]; then
-  alias ls='ls -FG'
+  alias ls='ls -FGsk'
+  # s = show size
+  # k = show size in kilobytes
   alias ackc='ack --coffee'
 else
   alias ack='ack-grep'

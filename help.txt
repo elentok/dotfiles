@@ -12,3 +12,8 @@
 
 * git undo commit
     git reset --soft HEAD\^
+
+* git revert all changes
+    git checkout -f
+    or
+    git reset --HARD
