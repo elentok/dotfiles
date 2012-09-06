@@ -22,4 +22,5 @@ DIR=$(cd -P $DIR && pwd)
 
 ln -sf "$DIR/irbrc" ~/.irbrc
 ln -sf "$DIR/rdebugrc" ~/.rdebugrc
+ln -sf "$DIR/editrc" ~/.editrc
 
