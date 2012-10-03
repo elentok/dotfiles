@@ -32,7 +32,14 @@ plugins=(git rails3 mercurial python bundler)
 
 source $ZSH/oh-my-zsh.sh
 
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+# required for bundler to work correctly
+# without these it throws "ArgumentError: invalid byte sequence in US-ASCII"
+# whenever it finds a gemspec with non-unicode characters
+# (see http://ruckus.tumblr.com/post/18613786601/bundler-install-error-argumenterror-invalid-byte)
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
 PATH=$PATH:$HOME/.rvm/bin:$HOME/.config/dotfiles/scripts
 PATH=$PATH:$HOME/bin:$HOME/projects/railsnew
 
