@@ -17,3 +17,6 @@
     git checkout -f
     or
     git reset --HARD
+    
+* git point master to origin/master
+    git reset --hard origin/master
