@@ -1,0 +1,7 @@
+#!/bin/bash
+
+for file in *.png; do
+  jpgfile=`echo $file | sed 's/\.png/.jpg/'`
+  echo convert $* $file $jpgfile
+  convert $* $file $jpgfile
+done
