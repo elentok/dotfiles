@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ -e "zeus.json" ]; then
+  echo "Running 'zeus rspec $*'"
+  zeus rspec $*
+else
+  echo "Running 'rspec $*'"
+  rspec $*
+fi
