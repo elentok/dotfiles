@@ -38,3 +38,7 @@
 [merge]
     tool = vimdiff
 
+[push]
+  default = matching
+[core]
+  editor = /usr/bin/vim
