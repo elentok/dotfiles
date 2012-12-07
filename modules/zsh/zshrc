@@ -41,7 +41,7 @@ export LC_ALL=en_US.UTF-8
 
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
 PATH=$PATH:$HOME/.rvm/bin:$HOME/.config/dotfiles/scripts
-PATH=$PATH:$HOME/bin:$HOME/projects/railsnew
+PATH=$PATH:$HOME/bin:$HOME/projects/railsnew:$HOME/scripts
 
 export MPD_HOST=bob@localhost
 
@@ -63,6 +63,8 @@ export DOTF=~/.config/dotfiles
 alias dotf='cd ~/.config/dotfiles'
 export DOTV=~/.config/dotvim
 alias dotv='cd ~/.config/dotvim'
+export DOTS=~/Library/Application\ Support/Sublime\ Text\ 2
+alias dots='cd $DOTS'
 alias rr='source ~/.config/dotfiles/scripts/init-rvm'
 alias mac='ruby ~/projects/macrumors/macrumors.rb'
 alias wp='feh --bg-fill'
