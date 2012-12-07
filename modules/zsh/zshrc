@@ -42,6 +42,7 @@ export LC_ALL=en_US.UTF-8
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
 PATH=$PATH:$HOME/.rvm/bin:$HOME/.config/dotfiles/scripts
 PATH=$PATH:$HOME/bin:$HOME/projects/railsnew:$HOME/scripts
+PATH=$PATH:/usr/local/share/python
 
 export MPD_HOST=bob@localhost
 
@@ -70,6 +71,7 @@ alias mac='ruby ~/projects/macrumors/macrumors.rb'
 alias wp='feh --bg-fill'
 alias pryy='pry -r ./config/environment'
 alias trailer='wget -U QuickTime'
+alias txt='cd ~/Dropbox/PlainText && vim'
 
 if [[ "`uname -s`" == "Darwin" ]]; then
   alias ls='ls -FGsk'
