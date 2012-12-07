@@ -7,6 +7,7 @@ echo "========================================"
 
 if [ "`uname -s`" == "Darwin" ]; then
   brew install zsh
+  chsh -s /bin/zsh
 else
   sudo apt-get install -y zsh
   sudo usermod -s /bin/zsh $USER
