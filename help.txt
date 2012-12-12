@@ -20,3 +20,6 @@
     
 * git point master to origin/master
     git reset --hard origin/master
+
+* ImageMagick resize
+    convert --sample 50% input.png output.jpg
