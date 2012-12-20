@@ -1,9 +1,15 @@
 #!/bin/bash
 
+what=$*
+
+if [ "$what" == "" ]; then
+  what=`find spec -name '*_spec.rb' | xargs`
+fi
+
 if [ -e "zeus.json" ]; then
-  echo "Running 'zeus rspec $*'"
-  zeus rspec $*
+  echo "Running 'zeus rspec $what'"
+  zeus rspec $what
 else
-  echo "Running 'rspec $*'"
-  rspec $*
+  echo "Running 'rspec $what'"
+  rspec $what
 fi
