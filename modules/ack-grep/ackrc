@@ -3,6 +3,6 @@ coffee=.coffee
 --ignore-dir
 node_modules
 --type-add
-html=.haml
+html=.haml,.hamlc
 --type-add
 css=.sass,.scss
