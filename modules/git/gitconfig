@@ -42,3 +42,4 @@
   default = matching
 [core]
   editor = /usr/bin/vim
+  pager = 
