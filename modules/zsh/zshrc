@@ -92,7 +92,9 @@ alias ts='tig status'
 alias z='zeus'
 
 # so tmux will allow 256 colors:
-export TERM=xterm-256color
+if [[ "$TERM" != "screen-256color" ]]; then
+  export TERM=xterm-256color
+fi
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 rvm default
