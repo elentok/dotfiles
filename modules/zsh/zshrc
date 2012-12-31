@@ -90,6 +90,7 @@ alias cuc='cucumber --drb'
 alias tigs='tig status'
 alias ts='tig status'
 alias z='zeus'
+alias t='tmux -u'
 
 # so tmux will allow 256 colors:
 if [[ "$TERM" != "screen-256color" ]]; then

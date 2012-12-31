@@ -5,7 +5,11 @@ echo "========================================"
 echo "Installing tmux"
 echo "========================================"
 
-sudo apt-get install -y tmux
+if [ "`uname -s`" == "Darwin" ]; then
+  brew install tmux
+else
+  sudo apt-get install -y tmux
+fi
 
 echo ""
 echo "========================================"
