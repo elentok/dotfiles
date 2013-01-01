@@ -1,0 +1,19 @@
+#!/bin/bash
+
+MAX_LENGTH=15
+
+HOSTNAME=`hostname | sed 's/\.local//'`
+
+if [[ ${#HOSTNAME} -gt $MAX_LENGTH ]]; then
+  HOSTNAME=`echo $HOSTNAME | sed 's/[-_]//g'`
+fi
+
+if [[ ${#HOSTNAME} -gt $MAX_LENGTH ]]; then
+  HOSTNAME=`echo $HOSTNAME | sed 's/[iau]//g'`
+fi
+
+if [[ ${#HOSTNAME} -gt $MAX_LENGTH ]]; then
+  HOSTNAME=`echo $HOSTNAME | cut -c 1-15`
+fi
+
+echo $HOSTNAME

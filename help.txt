@@ -21,5 +21,11 @@
 * git point master to origin/master
     git reset --hard origin/master
 
+* git show specific version of file
+    git show {branch/tag/commit}:{path/to/file/from/repo/root}   
+
+    example:
+      git show master:dir1/dir2/file.txt
+
 * ImageMagick resize
     convert --sample 50% input.png output.jpg

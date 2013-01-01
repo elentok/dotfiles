@@ -100,4 +100,6 @@ fi
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 rvm default
 
+export SHORT_HOSTNAME=`short-hostname`
+
 unsetopt correctall
