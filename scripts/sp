@@ -3,7 +3,8 @@
 what=$*
 
 if [ "$what" == "" ]; then
-  what=`find spec -name '*_spec.rb' | xargs`
+  #what=`find spec -name '*_spec.rb' | xargs`
+  what='spec'
 fi
 
 if [ -e "zeus.json" ]; then
