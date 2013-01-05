@@ -29,3 +29,7 @@
 
 * ImageMagick resize
     convert --sample 50% input.png output.jpg
+
+* reset terminal
+    ctrl+c reset
+    ctrl+c stty sane
