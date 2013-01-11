@@ -1,0 +1,14 @@
+#!/bin/bash
+
+function spot_command() {
+  echo "tell application \"Spotify\" to $*" | osascript
+}
+
+case "$1" in
+  next)
+    spot_command next track ;;
+  *)
+    spot_command playpause ;;
+esac
+
+
