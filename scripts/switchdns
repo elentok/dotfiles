@@ -1,0 +1,144 @@
+#!/usr/bin/env ruby
+# =================================
+# DNS Switcher
+#
+# Created by David Elentok.
+# =================================
+require 'yaml'
+
+class DNSSwitcher
+  def initialize(profiles_file = ENV['HOME'] + '/.dns.yml',
+                 networkservice = 'Wi-Fi')
+    @networkservice = networkservice
+    if File.exists?(profiles_file)
+      @profiles = YAML.load_file(profiles_file)
+    else
+      create_example_profiles(profiles_file)
+    end
+  end
+
+  def status
+    servers = `networksetup -getdnsservers #{@networkservice}`
+    search_domains = `networksetup -getsearchdomains #{@networkservice}`
+
+    puts "Name servers:"
+    puts "-------------"
+    puts servers
+    puts
+    puts "Search domains:"
+    puts "---------------"
+    puts search_domains
+  end
+
+  def profiles
+    puts "Profiles:"
+    puts "---------"
+    @profiles.each do |name, profile|
+      puts "  #{name}:"
+      print_profile(profile)
+      puts
+    end
+  end
+
+  def clear
+    puts "Resetting nameservers..."
+    `networksetup -setdnsservers #{@networkservice} Empty`
+    puts "Resetting search domains..."
+    `networksetup -setsearchdomains #{@networkservice} Empty`
+  end
+
+  def set(profile_name)
+    profile = @profiles[profile_name]
+    if profile.nil?
+      puts "Error: invalid profile '#{profile_name}'"
+      return
+    end
+    puts "Setting profile to '#{profile_name}'..."
+
+    nameservers = get_joined_values_or_empty(profile['nameservers'])
+    puts "  Settings nameservers to '#{nameservers}'"
+    `networksetup -setdnsservers #{@networkservice} #{nameservers}`
+
+    search_domains = get_joined_values_or_empty(profile['search_domains'])
+    puts "  Settings search_domains to '#{search_domains}'"
+    `networksetup -setsearchdomains #{@networkservice} #{search_domains}`
+  end
+
+private
+
+  def get_joined_values_or_empty(list)
+    if list.nil?
+      'Empty'
+    else
+      list.join(' ')
+    end
+  end
+
+  def print_profile(profile)
+    search_domains = profile['search_domains']
+    unless search_domains.nil?
+      puts "    Search domains: #{search_domains.join(', ')}"
+    end
+
+    nameservers = profile['nameservers']
+    unless nameservers.nil?
+      puts "    Nameservers: #{nameservers.join(', ')}"
+    end
+  end
+
+  def create_example_profiles(profiles_file)
+    puts "WARNING: a ~/.dns.yml was not found, creating an example file"
+
+    @profiles = {
+      'profile1' => {
+        'nameservers' => ['1.2.3.4', '5.6.7.8'],
+        'search_domains' => ['mydomain1', 'mydomain2']
+      }
+    }
+
+    File.open(profiles_file, 'w') do |f|
+      f.write(YAML.dump(@profiles))
+    end
+
+  end
+end
+
+def main
+  if ARGV.length == 0
+    usage
+    exit 1
+  else
+    switcher = DNSSwitcher.new()
+    command = ARGV.shift
+    if switcher.respond_to?(command)
+      switcher.send(command, *ARGV)
+    else
+      puts "ERROR: Invalid command #{command}"
+    end
+  end
+
+end
+
+def usage
+  puts <<-EOF
+
+  DNS Switcher
+  ============
+  Created by David Elentok
+
+  usage:
+    
+    switchdns {command} {options}
+
+  available commands:
+
+    status             - shows the current nameservers and search domains
+    clear              - clears the custom nameservers and search domains
+    profiles           - shows all available profiles
+    set {profile_name} - switches to the given profile
+
+  EOF
+end
+
+main
+
