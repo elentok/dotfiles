@@ -1,0 +1,90 @@
+#!/usr/bin/env ruby
+
+class Dmux
+  def pane_height
+    active_pane_size = `tmux list-panes | grep '(active)' | awk '{print $2}'`
+    /x([0-9]+)\]/.match(active_pane_size)[1].to_i
+  end
+
+  def window_height
+    size = `tmux list-windows | grep '(active)'`
+    /\[([0-9]+)x([0-9]+)\]/.match(size)[2].to_i
+  end
+
+  def pane_height=(new_height)
+    new_height = height_in_lines(new_height)
+
+    diff = new_height.to_i - pane_height
+    if diff > 0
+      `tmux resize-pane -U #{diff}`
+    elsif diff < 0
+      `tmux resize-pane -D #{-diff}`
+    end
+  end
+
+  def toggle_height(height1, height2)
+    height1 = height_in_lines(height1)
+    height2 = height_in_lines(height2)
+    if pane_height == height1
+      self.pane_height = height2
+    else
+      self.pane_height = height1
+    end
+  end
+
+private
+  def height_in_lines(height)
+    if (height.is_a? String) && (height[-1] == '%')
+      height = height.to_i * window_height / 100
+    else
+      height.to_i
+    end
+  end
+end
+
+class DmuxConsole
+  def start
+    @dmux = Dmux.new
+
+    if ARGV.length == 0
+      help
+    else
+      command = ARGV.shift
+      if respond_to? command
+        send(command, *ARGV)
+      else
+        puts "ERROR: Invalid command #{command}"
+      end
+    end
+  end
+
+  def height(new_height = nil)
+    if new_height.nil?
+      puts @dmux.pane_height
+    else
+      @dmux.pane_height = new_height
+    end
+  end
+
+  def toggle_height(height1, height2)
+    @dmux.toggle_height(height1, height2)
+  end
+
+  def help
+    puts <<-EOF
+    Usage: 
+    
+      dmux {option} {arguments}
+    
+    Available options:
+    
+      help                          - shows this message
+      height                        - returns the height of the current pane
+      height {lines}                - sets the height of the current pane
+      height {percentage}%          - sets the height of the current pane as percentage of the entire window 
+      toggle_height height1 height2 - toggles between these two heights (can be percentages)
+    EOF
+  end
+end
+
+DmuxConsole.new.start
