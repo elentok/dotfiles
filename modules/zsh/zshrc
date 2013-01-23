@@ -92,6 +92,9 @@ alias tigs='tig status'
 alias ts='tig status'
 alias z='zeus'
 alias t='tmux -u'
+alias k='less $DOTF/keys.txt'
+alias kk='vim $DOTF/keys.txt'
+alias q='qlmanage -p'
 
 alias tailog='tail -f log/development.log | cat -v'
 
