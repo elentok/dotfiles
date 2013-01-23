@@ -42,9 +42,9 @@ class DNSSwitcher
 
   def clear
     puts "Resetting nameservers..."
-    `networksetup -setdnsservers #{@networkservice} Empty`
+    `sudo networksetup -setdnsservers #{@networkservice} Empty`
     puts "Resetting search domains..."
-    `networksetup -setsearchdomains #{@networkservice} Empty`
+    `sudo networksetup -setsearchdomains #{@networkservice} Empty`
   end
 
   def set(profile_name)
@@ -57,11 +57,11 @@ class DNSSwitcher
 
     nameservers = get_joined_values_or_empty(profile['nameservers'])
     puts "  Settings nameservers to '#{nameservers}'"
-    `networksetup -setdnsservers #{@networkservice} #{nameservers}`
+    `sudo networksetup -setdnsservers #{@networkservice} #{nameservers}`
 
     search_domains = get_joined_values_or_empty(profile['search_domains'])
     puts "  Settings search_domains to '#{search_domains}'"
-    `networksetup -setsearchdomains #{@networkservice} #{search_domains}`
+    `sudo networksetup -setsearchdomains #{@networkservice} #{search_domains}`
   end
 
 private
