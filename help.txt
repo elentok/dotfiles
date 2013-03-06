@@ -27,9 +27,24 @@
     example:
       git show master:dir1/dir2/file.txt
 
+* git show orphaned commites
+    git reflog --all
+    git fsck --lost-found
+
+* git abort merge
+    git reset --merge
+
 * ImageMagick resize
     convert --sample 50% input.png output.jpg
 
 * reset terminal
     ctrl+c reset
     ctrl+c stty sane
+
+* diff directories
+  - show only summary (e.g. "file1 differs"):
+      diff -rq dirA dirB
+
+  - show diff for each file:
+      diff -r dirA dirB
+
