@@ -1,0 +1,12 @@
+#!/bin/bash
+
+for file in "$@"; do
+  if [ "`identify \"$file\" | grep '\<2c\>'`" == "" ]; then
+    echo "Converting $file"
+    original="`echo $file | sed 's/.png/ (original).png/'`"
+    mv "$file" "$original"
+    convert -colors 2 "$original" temp.png
+    convert -depth 1 temp.png "$file"
+    rm temp.png
+  fi
+done
