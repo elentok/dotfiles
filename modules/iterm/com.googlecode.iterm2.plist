@@ -864,9 +864,13 @@
 	<key>MaxVertically</key>
 	<false/>
 	<key>NSColorPanelMode</key>
-	<string>65535</string>
+	<string>3</string>
+	<key>NSColorPickerSlidersDefaults</key>
+	<string>3</string>
 	<key>NSFontPanelAttributes</key>
 	<string>1, 4</string>
+	<key>NSFontPanelPreviewHeight</key>
+	<real>0.0</real>
 	<key>NSNavLastRootDirectory</key>
 	<string>/Volumes/Data HD/Dropbox</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -886,7 +890,7 @@
 		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
 		hAErATGG
 		</data>
-		<string>304</string>
+		<string>319</string>
 	</array>
 	<key>NSTableView Hidden Columns KeyBingingTable</key>
 	<array/>
@@ -903,12 +907,14 @@
 		<key>TB Size Mode</key>
 		<integer>1</integer>
 	</dict>
+	<key>NSWindow Frame NSColorPanel</key>
+	<string>307 274 214 309 0 0 1440 878 </string>
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>2300 37 445 270 1440 -180 1920 1080 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>242 393 924 485 0 0 1440 878 </string>
+	<string>1531 168 924 485 1440 -180 1920 1080 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1440 -170 1913 1070 1440 -180 1920 1080 </string>
+	<string>1440 -180 1920 1080 1440 -180 1920 1080 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1693,7 +1699,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2013-01-01T15:14:20Z</date>
+	<date>2013-03-20T10:16:38Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -1735,6 +1741,10 @@
 	<true/>
 	<key>UseLionStyleFullscreen</key>
 	<false/>
+	<key>WebKitDefaultFontSize</key>
+	<integer>11</integer>
+	<key>WebKitStandardFont</key>
+	<string>Lucida Grande</string>
 	<key>WindowNumber</key>
 	<true/>
 	<key>WindowStyle</key>
@@ -1746,6 +1756,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>1.0.0.20121224</string>
+	<string>1.0.0.20130302</string>
 </dict>
 </plist>
