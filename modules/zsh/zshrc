@@ -99,6 +99,7 @@ alias t='tmux -u'
 alias k='less $DOTF/keys.txt'
 alias kk='vim $DOTF/keys.txt'
 alias q='qlmanage -p'
+alias vimt='vim ~/Dropbox/vim.TODO'
 
 alias tailog='tail -f log/development.log | cat -v'
 
@@ -108,7 +109,10 @@ if [[ "$TERM" != "screen-256color" ]]; then
 fi
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-rvm default
+if [ ! -e '.rvmrc' ]; then
+  rvm default
+fi
+
 
 export SHORT_HOSTNAME=`short-hostname`
 
@@ -121,3 +125,10 @@ fi
 export PATH=/usr/local/share/npm/bin:$PATH
 
 alias cf='/bin/ls -1 | wc -l'
+alias bw='convert -colors 2'
+
+export GOROOT=/usr/local/Cellar/go/1.0.3
+export GOBIN=$GOROOT/bin
+export PATH=$PATH:$GOBIN
+
+[[ -s /Users/3david/.nvm/nvm.sh ]] && . /Users/3david/.nvm/nvm.sh # This loads NVM
