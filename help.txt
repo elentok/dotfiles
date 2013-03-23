@@ -31,11 +31,14 @@
     git reflog --all
     git fsck --lost-found
 
-* git abort merge
+* git abort merge/cherry-pick
     git reset --merge
 
 * ImageMagick resize
     convert --sample 50% input.png output.jpg
+
+* ImageMagick convert to 2 colors (2bit, 2-bit)
+    convert -colors 2 input.png output.png
 
 * reset terminal
     ctrl+c reset
