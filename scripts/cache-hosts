@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ ! -e ~/.hosts ]; then
+  echo "no ~/.hosts file"
+  exit 1
+fi
+
+echo "# Last updated on `date`:" > ~/.hosts.cache
+
+cat ~/.hosts | while read NAME; do
+  ip=`host $NAME | sed -E 's/^.*has address ([0-9.]+)$/\1/'`
+  echo "$NAME $ip"
+  echo "$NAME $ip" >> ~/.hosts.cache
+done
+
+
