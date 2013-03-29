@@ -1,8 +1,12 @@
-[user]
-    name = David Elentok
-    email = 3david@gmail.com
-[github]
-  user = elentok
+# Add these lines (with your details) to ~/.gitconfig.private
+# [user]
+#   name = David Elentok
+#   email = 3david@gmail.com
+# [github]
+#   user = elentok
+
+[include]
+  path = .gitconfig.private
 [diff]
 [color]
     ui = auto
