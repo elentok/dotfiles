@@ -51,3 +51,5 @@
   - show diff for each file:
       diff -r dirA dirB
 
+* awk - get second column
+  awk '{ print $2 }' 
