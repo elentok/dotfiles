@@ -1,4 +1,4 @@
-elentok's Dotfiles
+elentok's dotfiles
 =======================
 
 To install run:
