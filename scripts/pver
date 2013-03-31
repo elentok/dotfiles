@@ -1,0 +1,6 @@
+#!/usr/bin/env coffee
+path = require 'path'
+
+file = path.join(process.cwd(), 'package.json')
+
+console.log require(file).version

@@ -1,0 +1,20 @@
+#!/bin/bash
+# Open current directory in forklift
+
+echo -n $PWD | pbcopy
+
+(cat<<EOF
+
+tell application "Forklift"
+  activate
+  tell application "System Events"
+    keystroke "G" using {command down}
+    keystroke "v" using {command down}
+    keystroke return
+    keystroke return
+  end tell
+end tell
+
+EOF
+) | osascript
+
