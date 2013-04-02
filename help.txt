@@ -53,3 +53,6 @@
 
 * awk - get second column
   awk '{ print $2 }' 
+
+* count number of lines
+  wc -l
