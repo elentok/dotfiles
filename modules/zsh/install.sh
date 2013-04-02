@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/bin/zsh
 
 echo ""
 echo "========================================"
 echo "Installing Zsh"
 echo "========================================"
 
-if [ "`uname -s`" == "Darwin" ]; then
+if [ "`uname -s`" = "Darwin" ]; then
   brew install zsh
   chsh -s /bin/zsh
 else
@@ -15,22 +15,43 @@ fi
 
 echo ""
 echo "========================================"
-echo "Installing Oh-My-Zsh"
+echo "Installing Prezto"
 echo "========================================"
 
-if [ ! -d ~/.oh-my-zsh ]; then
-  curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+if [ ! -d ~/.zprezto ]; then
+  git clone --recursive https://github.com/sorin-ionescu/prezto.git ~/.zprezto
+
+  setopt EXTENDED_GLOB
+  for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+    ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+  done
+
+  echo '# Load my custom modules' >> ~/.zshrc
+  echo 'for config_file in $HOME/.zsh/*.zsh; do' >> ~/.zshrc
+  echo '  source $config_file' >> ~/.zshrc
+  echo 'done' >> ~/.zshrc
 fi
+
+#echo ""
+#echo "========================================"
+#echo "Installing Oh-My-Zsh"
+#echo "========================================"
+
+#if [ ! -d ~/.oh-my-zsh ]; then
+  #curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+#fi
 
 echo ""
 echo "========================================"
-echo "Setting up .zshrc"
-echo "========================================"
+echo "Setting up ~/.zsh"
+echo "======================================="
 DIR=$(dirname "${BASH_SOURCE[0]}")
 DIR=$(cd -P $DIR && pwd)
 
+ln -sf $DIR ~/.zsh
 ln -sf "$DIR/zshrc" ~/.zshrc
+ln -sf "$DIR/zprestorc" ~/.zprestorc
 
-if [ "`uname -s`" == "Linux" ]; then
-  ln -sf "$DIR/zshenv" ~/.zshenv
-fi
+#if [ "`uname -s`" == "Linux" ]; then
+  #ln -sf "$DIR/zshenv" ~/.zshenv
+#fi
