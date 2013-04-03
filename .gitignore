@@ -1,3 +1,4 @@
 *.sublime-workspace
 tags
 .DS_Store
+vim/bundle
