@@ -160,7 +160,13 @@ Bundle 'mileszs/ack.vim'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'rodjek/vim-puppet'
 
-Bundle 'skwp/vim-colors-solarized.git'
+"Bundle 'skwp/vim-colors-solarized.git'
+Bundle 'jtratner/vim-flavored-markdown.git'
+Bundle 'nelstrom/vim-markdown-preview'
+Bundle 'vim-scripts/camelcasemotion'
+Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'skwp/greplace.vim'
+Bundle 'Raimondi/delimitMate'
 
 "Bundle 'jnwhiteh/vim-golang'
 "Bundle 'go-vim'
@@ -296,7 +302,10 @@ command! W :w
 
 " Key Mappings {{{1
 
-map `b :!scripts/build.sh<cr>
+noremap Q :q<cr>
+noremap ,md :Mm<cr>:redraw!<cr>
+
+
 
 vnoremap ,/ "9y/<c-r>9<cr>
 vnoremap ,! "9y:<c-r>9<cr>
@@ -344,7 +353,6 @@ map ,t :CtrlPTag<cr>
 map `` :CtrlPBufTag<cr>
 map ,m :CtrlPMRUFiles<cr>
 map ,c :CtrlPChange<cr>
-map \z :ConqueTermSplit zsh<cr>
 
 nnoremap <silent> <Leader>] :exe "resize " . (&lines * 2/3)<CR>
 nnoremap <silent> <Leader>[ :exe "resize " . (&lines * 1/3)<CR>
@@ -352,9 +360,6 @@ nnoremap <silent> <Leader>[ :exe "resize " . (&lines * 1/3)<CR>
 map <c-f12> :setlocal foldexpr=MyFoldingExpr(v:lnum)<cr>:setlocal foldmethod=expr<cr>
 map <c-s-f12> :setlocal foldmethod=manual<cr>zE
 map <c-f11> :vimgrep /^\*/ %<cr>:copen<cr>
-
-map `f :exec "set guifont=" . $defaultfont<cr>
-map `F :exec "set guifont=" . $alternatefont<cr>
 
 map <m-space> :simalt ~<cr>
 imap <m-space> <c-o>:simalt ~<cr>
@@ -370,13 +375,6 @@ nnoremap \l :silent !tput clear<cr>:redraw!<cr>
 
 " select a link and press "gx"
 vmap gx "xy:call netrw#NetrwBrowseX(@x, 0)<cr>
-
-command! Rspec :!clear; rspec --drb --color --format d spec<cr>
-
-"map \r :RunRspecCurrentFileConque<cr>
-"map \R :RunRspecCurrentLineConque<cr>
-"map \\ :RunLastConqueCommand<cr>
-
  
 " add symbols to the end of the lines:
 map `1 :exec ":normal A <c-v><esc>" . (79 - strlen(getline("."))) . "A#"<cr>
@@ -640,13 +638,9 @@ nnoremap <Leader>gD :call MyCloseDiff()<cr>
   "end
 "endfunc
 
-":command! -nargs=+ Ack :call Ack("<args>")
-nnoremap \a :Ack! <c-r>=expand("<cword>")<cr><cr>
-vnoremap \a "9y:Ack! '<c-r>9'<cr>
-
-"command! -nargs=+ Ag Ack! "<nargs>"
-
-cnoreabbrev Ag Ack!
+noremap ,ff :Ack! <c-r>=expand("<cword>")<cr><cr>
+vnoremap ,ff "9y:Ack! '<c-r>9'<cr>
+noremap ,fa :Ack! 
 
 " Extra: Vimux-RailsTests {{{1
 
