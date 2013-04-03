@@ -1,7 +1,9 @@
 #!/bin/bash
 
-./modules/git/install.sh
-./modules/zsh/install.sh
+./git/install.sh
+./zsh/install.sh
+./tmux/install.sh
+./vim/install.sh
 ./modules/ack-grep/install.sh
 ./modules/ruby/post-install.sh
 ./modules/nodejs.sh

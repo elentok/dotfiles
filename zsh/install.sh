@@ -45,13 +45,11 @@ echo ""
 echo "========================================"
 echo "Setting up ~/.zsh"
 echo "======================================="
-DIR=$(dirname "${BASH_SOURCE[0]}")
+DIR=$(dirname $0)
 DIR=$(cd -P $DIR && pwd)
 
-ln -sf $DIR ~/.zsh
-ln -sf "$DIR/zshrc" ~/.zshrc
-ln -sf "$DIR/zprestorc" ~/.zprestorc
+rm -f ~/.zsh
 
-#if [ "`uname -s`" == "Linux" ]; then
-  #ln -sf "$DIR/zshenv" ~/.zshenv
-#fi
+ln -sf "$DIR" ~/.zsh 
+ln -sf "$DIR/zshrc" ~/.zshrc
+ln -sf "$DIR/zpreztorc" ~/.zpreztorc

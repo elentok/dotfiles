@@ -8,12 +8,15 @@ export LC_CTYPE=en_US.UTF-8
 
 export EDITOR=vim
 
-export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
-PATH=$PATH:$HOME/.rvm/bin:$HOME/.config/dotfiles/scripts
+export DOTF=~/.dotfiles
+
+PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
+PATH=$PATH:$HOME/.rvm/bin:$DOTF/scripts
 PATH=$PATH:$HOME/bin:$HOME/projects/railsnew:$HOME/scripts
 PATH=$PATH:/usr/local/share/python
-export PATH=/usr/local/share/npm/bin:$PATH
-export PATH=$PATH:$GOBIN
+PATH=/usr/local/share/npm/bin:$PATH
+PATH=$PATH:$GOBIN
+export PATH
 
 export MPD_HOST=bob@localhost
 export SHORT_HOSTNAME=`short-hostname`
@@ -32,3 +35,4 @@ fpath=(/usr/local/share/npm/lib/node_modules/dns-switcher/completions $fpath)
 fpath=(/Users/3david/.rvm/gems/ruby-2.0.0-p0/gems/shaft-0.8/completions $fpath)
 
 zstyle ':presto:load' pmodule 'git'
+
