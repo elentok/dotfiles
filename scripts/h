@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-HELP_FILENAME = "#{ENV['DOTF']}/help.txt"
+HELP_FILENAME = "#{ENV['DOTF']}/docs/help.txt"
 
 module HelpReader
 
