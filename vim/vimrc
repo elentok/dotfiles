@@ -167,6 +167,7 @@ Bundle 'vim-scripts/camelcasemotion'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'skwp/greplace.vim'
 Bundle 'Raimondi/delimitMate'
+Bundle 'gregsexton/gitv'
 
 "Bundle 'jnwhiteh/vim-golang'
 "Bundle 'go-vim'
@@ -431,7 +432,7 @@ augroup Elentok_Misc
   autocmd BufRead,BufEnter *.scss setlocal foldmethod=marker
   autocmd BufRead,BufEnter *.applescript set filetype=applescript
   autocmd BufRead,BufEnter *.rxls setlocal filetype=ruby
-  autocmd BufRead,BufEnter *.md setlocal filetype=markdown
+  autocmd BufRead,BufEnter *.md,*.markdown setlocal filetype=ghmarkdown
   autocmd BufRead,BufEnter gitconfig setlocal filetype=gitconfig
   autocmd BufRead,BufEnter .gitconfig* setlocal filetype=gitconfig
 
