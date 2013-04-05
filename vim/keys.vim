@@ -71,12 +71,22 @@ noremap ,e1 :exec ":normal A <c-v><esc>" . (79 - strlen(getline("."))) . "A#"<cr
 noremap ,e2 :exec ":normal A <c-v><esc>" . (69 - strlen(getline("."))) . "A="<cr>
 noremap ,e3 :exec ":normal A <c-v><esc>" . (59 - strlen(getline("."))) . "A-"<cr>
 
-" Run {{{j
+inoremap <c-l> <c-r>=UltiSnips_ListSnippets()<cr>
+
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<tab>"
+"let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" Run {{{1
 noremap ,rr :w<cr>:call RunCurrentFile()<cr>
 noremap ,rm :Mm<cr>:redraw!<cr>
 vnoremap ,rl "xy:call netrw#NetrwBrowseX(@x, 0)<cr>
 vnoremap ,rs "9y:<c-r>9<cr>
 noremap ,rt :SuperTagger<cr>
+
+" UltiSnips {{{1
+
+
 
 " Git {{{1
 noremap ,gs :Gstatus<cr>

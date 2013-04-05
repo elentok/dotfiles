@@ -46,6 +46,10 @@ Vim
 |                       | ,e1          | n    | finish line with "#" chars
 |                       | ,e2          | n    | finish line with "=" chars
 |                       | ,e3          | n    | finish line with "-" chars
+|                       | crs          | n    | convert to snake_case
+|                       | crm          | n    | convert to MixedCase
+|                       | crc          | n    | convert to camelCase
+|                       | :%S/one/two/ | n    | substitute using [abolish](https://github.com/tpope/vim-abolish) 
 | **Git**               | ,ga          | n    | git add
 |                       | ,gd          | n    | git diff
 |                       | ,gr          | n    | revert file changes (git co)

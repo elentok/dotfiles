@@ -30,8 +30,9 @@ Bundle 'mattn/gist-vim'
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "ervandew/supertab"
 Bundle "tomtom/tlib_vim"
-Bundle "snipmate-snippets"
-Bundle "garbas/vim-snipmate"
+Bundle "SirVer/ultisnips"
+"Bundle "snipmate-snippets"
+"Bundle "garbas/vim-snipmate"
 Bundle 'tpope/vim-rails.git'
 Bundle 'tpope/vim-haml'
 Bundle 'elentok/vim-rails-extra'
@@ -54,6 +55,8 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'gregsexton/gitv'
 Bundle 'tpope/vim-dispatch'
 Bundle 'AndrewRadev/splitjoin.vim'
+Bundle 'tpope/vim-abolish'
+Bundle 'tpope/vim-repeat'
 
 
 "Bundle 'airblade/vim-gitgutter'
