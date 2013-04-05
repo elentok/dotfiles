@@ -43,11 +43,13 @@ echo "=============================="
 vim +BundleInstall +qall
 
 echo "=============================="
-echo "Installing Linters"
+echo "Installing Utils (Linters, Silver Searcher, ...)"
 echo "=============================="
 
 npm install -g coffeelint
 npm install -g jshint
 npm install -g jsonlint
-brew install tidy
 sudo easy_install pylint
+brew install tidy
+# the silver searcher
+brew install ag
