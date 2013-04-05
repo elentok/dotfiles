@@ -16,6 +16,10 @@ noremap ,ss :call WebSearch("http://stackoverflow.com/search?q=%query%")<cr>
 vnoremap ,sg "9y:call Browse("https://google.com/search?q=<c-r>9")<cr>
 vnoremap ,ss "9y:call Browse("http://stackoverflow.com/search?q=<c-r>9")<cr>
 
+" Documentation {{{1
+nnoremap ,dm :call Browse("https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet")<cr>
+
+
 " Window management {{{1
 
 nnoremap <C-h> <C-w>h
@@ -23,6 +27,7 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap \l :silent !tput clear<cr>:redraw!<cr>
+nnoremap ,, :silent !tput clear<cr>:redraw!<cr>
 
 noremap Q :q<cr>
 
@@ -44,17 +49,13 @@ noremap ,fv :tabe $vimrc<cr>
 noremap `` :CtrlPBufTag<cr>
 inoremap <c-s> <c-o>:w<cr>
 
-" Folding {{{1
-noremap <backspace> zc
-noremap <c-f12> :setlocal foldexpr=MyFoldingExpr(v:lnum)<cr>:setlocal foldmethod=expr<cr>
-noremap <c-s-f12> :setlocal foldmethod=manual<cr>zE
-
 " Editing {{{1
 noremap <c-_> :call ToggleHebrew()<cr>
 inoremap <c-_> <c-o>:call ToggleHebrew()<cr>
 noremap ,ehs :SplitjoinSplit<cr>
 noremap ,ehj :SplitjoinJoin<cr>
 noremap ,es :set spell!<cr>
+noremap <backspace> zc
 
 " super yank (yank to * and + registers)
 vnoremap ,ey "*ygv"+y
@@ -69,7 +70,7 @@ noremap ,e1 :exec ":normal A <c-v><esc>" . (79 - strlen(getline("."))) . "A#"<cr
 noremap ,e2 :exec ":normal A <c-v><esc>" . (69 - strlen(getline("."))) . "A="<cr>
 noremap ,e3 :exec ":normal A <c-v><esc>" . (59 - strlen(getline("."))) . "A-"<cr>
 
-" Execute {{{j
+" Run {{{j
 noremap ,rr :w<cr>:call RunCurrentFile()<cr>
 noremap ,rm :Mm<cr>:redraw!<cr>
 vnoremap ,rl "xy:call netrw#NetrwBrowseX(@x, 0)<cr>
@@ -79,7 +80,14 @@ noremap ,rt :SuperTagger<cr>
 " Git {{{1
 noremap ,gs :Gstatus<cr>
 noremap ,gr :!git co %<cr>
-noremap ,ga :!git add -p %<cr>
+noremap ,gd :silent !git diff %<cr>:redraw!<cr>
+noremap ,ga :!git add %<cr>
+noremap ,gp :!git add -p %<cr>
+
+" Testing {{{1
+noremap ,tt :VimuxRunLastCommand<cr>
+noremap ,tl :call RunSpecLine()<cr>
+noremap ,tf :call RunSpecFile()<cr>
 
 " MS-Windows {{{1
 if g:os == 'windows'

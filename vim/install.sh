@@ -41,3 +41,13 @@ echo "=============================="
 echo "Installing Vundle Bundles"
 echo "=============================="
 vim +BundleInstall +qall
+
+echo "=============================="
+echo "Installing Linters"
+echo "=============================="
+
+npm install -g coffeelint
+npm install -g jshint
+npm install -g jsonlint
+brew install tidy
+sudo easy_install pylint
