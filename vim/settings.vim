@@ -54,6 +54,9 @@ set mouse=a
 set scrolloff=3
 set iskeyword=@,48-57,_,192-255,$,#,-
 set switchbuf=useopen
+if executable("ag")
+  set grepprg=ag\ --nogroup\ --nocolor
+endif
 
 " makes sure the active window will always be at least 80 characters
 set winwidth=84
