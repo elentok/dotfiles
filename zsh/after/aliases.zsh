@@ -47,3 +47,13 @@ alias bw='convert -colors 2'
 
 alias va='vim $DOTF/zsh/after/aliases.zsh'
 alias ff='find . -iname'
+
+alias c1='awk "{ print \$1 }"'
+alias c2='awk "{ print \$2 }"'
+alias c3='awk "{ print \$3 }"'
+alias c4='awk "{ print \$4 }"'
+alias c5='awk "{ print \$5 }"'
+alias c6='awk "{ print \$6 }"'
+
+alias total='awk "{ s+=\$1 } END { print s }"'
+alias tot='awk "{ s+=\$1 } END { printf(\"%''d\n\", s) }"'

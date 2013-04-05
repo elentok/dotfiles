@@ -54,5 +54,12 @@
 * awk - get second column
   awk '{ print $2 }' 
 
+* awk - sum values of 6th column:
+  awk '{s+=$6} END { print s }'
+
+* awk - format number with thousand commas (1,000,000)
+  awk '{ printf "%''d\n", $1 }' 
+  awk "{ printf \"%'d\n\", $1 }" 
+
 * count number of lines
   wc -l
