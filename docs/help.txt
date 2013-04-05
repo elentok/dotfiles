@@ -34,6 +34,11 @@
 * git abort merge/cherry-pick
     git reset --merge
 
+* git remove file from repo history
+    git filter-branch \ 
+      --index-filter 'git rm --cached --ignore-unmatch path/to/file' \
+      {from}..{to}
+
 * ImageMagick resize
     convert --sample 50% input.png output.jpg
 
