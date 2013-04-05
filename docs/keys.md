@@ -16,8 +16,9 @@ Vim
 |                       | ,sw          | n    | search current word with ack-grep
 |                       | ,sa          | v    | search current selection with ack-grep
 |                       | ,sa          | n    | prompt for search with ack-grep
+|                       | ,ss          | n    | :Gsearch
 |                       | ,sg          | n,v  | search google
-|                       | ,sg          | n,v  | search stack overflow
+|                       | ,so          | n,v  | search stack overflow
 | **Docs**              | ,dm          | n    | markdown cheatsheet
 | **Window Management** | ctrl-h,j,k,l | n    | move to window
 |                       | Q            | n    | quit window

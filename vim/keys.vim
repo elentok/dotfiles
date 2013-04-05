@@ -11,10 +11,11 @@ vnoremap * "9y/<c-r>9<cr>
 noremap ,sw :Ack! <c-r>=expand("<cword>")<cr><cr>
 vnoremap ,sa "9y:Ack! '<c-r>9'<cr>
 noremap ,sa :Ack! 
+noremap ,ss :Gsearch<cr>
 noremap ,sg :call WebSearch("https://google.com/search?q=%query%")<cr>
-noremap ,ss :call WebSearch("http://stackoverflow.com/search?q=%query%")<cr>
+noremap ,so :call WebSearch("http://stackoverflow.com/search?q=%query%")<cr>
 vnoremap ,sg "9y:call Browse("https://google.com/search?q=<c-r>9")<cr>
-vnoremap ,ss "9y:call Browse("http://stackoverflow.com/search?q=<c-r>9")<cr>
+vnoremap ,so "9y:call Browse("http://stackoverflow.com/search?q=<c-r>9")<cr>
 
 " Documentation {{{1
 nnoremap ,dm :call Browse("https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet")<cr>
