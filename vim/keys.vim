@@ -59,7 +59,9 @@ noremap ,es :set spell!<cr>
 noremap <backspace> zc
 
 " super yank (yank to * and + registers)
+noremap ,ey "*Y"+Y
 vnoremap ,ey "*ygv"+y
+noremap ,ep "*p
 
 
 noremap ,e= :Tab /=<cr>
