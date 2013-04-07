@@ -11,30 +11,40 @@ Vim
 |                       | ]q           | n    | next error
 |                       | [n           | n    | previous conflict marker
 |                       | ]n           | n    | next conflict marker
-| **Search**            | enter        | n    | clear search highlight
-| (,s)                  | *            | n,v  | search current word or visual selection
-|                       | ,sw          | n    | search current word with ack-grep
-|                       | ,sa          | v    | search current selection with ack-grep
-|                       | ,sa          | n    | prompt for search with ack-grep
-|                       | ,ss          | n    | :Gsearch
-|                       | ,sg          | n,v  | search google
-|                       | ,so          | n,v  | search stack overflow
+|                       | [b           | n    | previous buffer
+|                       | ]b           | n    | next buffer
+|                       | {            | n    | previous paragraph
+|                       | }            | n    | next paragraph
+| **Find**              | enter        | n    | clear search highlight
+|                       | *            | n,v  | find current word or visual selection
+|                       | ,fw          | n    | find current word with ack-grep
+|                       | ,fa          | v    | find current selection with ack-grep
+|                       | ,fa          | n    | prompt for search with ack-grep
+|                       | ,fr          | n    | :Gsearch (r = replace)
+|                       | ,fg          | n,v  | find in google
+|                       | ,fo          | n,v  | find in stack overflow
 | **Docs**              | ,dm          | n    | markdown cheatsheet
+|                       | ,dj          | n    | jade cheatsheet
 | **Window Management** | ctrl-h,j,k,l | n    | move to window
 |                       | Q            | n    | quit window
-| **File Management**   | ,fb          | n    | go to buffer
-|                       | ,fc          | n    | go to change
-|                       | ,fd          | n    | go to directory
-|                       | ,fe          | n    | edit file
-|                       | ,fE          | n    | edit file in tab
-|                       | ,ff          | n    | find current file in nerd tree
-|                       | ,fg          | n    | toggle nerd tree
-|                       | ,fm          | n    | go to most recently used file
-|                       | ,fr          | n    | read file
-|                       | ,ft          | n    | go to tag
-|                       | ,fv          | n    | edit .vimrc
+| **Go To**             | ,gb          | n    | go to buffer
+|                       | ,gc          | n    | go to change
+|                       | ,gd          | n    | go to directory
+|                       | ,ge          | n    | edit file
+|                       | ,gE          | n    | edit file in tab
+|                       | ,gn          | n    | nerd tree (and focus current file)
+|                       | ,gg          | n    | toggle nerd tree
+|                       | ,gm          | n    | go to most recently used file
+|                       | ,gr          | n    | read file
+|                       | ,gs          | n    | go to snippets file
+|                       | ,gt          | n    | go to tag
+|                       | ,gv          | n    | go to .vimrc
+|                       | ,go          | n    | go to alternate file
 |                       | ``           | n    | go to tag in current file
 | **Editing**           | ctrl-_       | n,i  | toggle hebrew mode
+|                       | tab/C-tab    | v    | indent/deindent (without losing selection)
+|                       | tab          | i    | autocomplete or snippet
+|                       | <c-t>        | i    | show available snippets
 |                       | ,es          | n    | toggle spelling
 |                       | z=           | n    | suggest correct spelling
 |                       | ,ehs         | n    | split hash
@@ -42,25 +52,34 @@ Vim
 |                       | ,ey          | n    | yank to * and + registers
 |                       | ,e=          | n    | tabularize =
 |                       | ,e:          | n    | tabularize :
-|                       | ,e\          | n    | tabularize \                            |
+|                       | ,e\          | n    | tabularize \                                                     |
 |                       | ,e1          | n    | finish line with "#" chars
 |                       | ,e2          | n    | finish line with "=" chars
 |                       | ,e3          | n    | finish line with "-" chars
+|                       | ,cc          | n,v  | comment
+|                       | ,cu          | n,v  | uncomment
 |                       | crs          | n    | convert to snake_case
 |                       | crm          | n    | convert to MixedCase
 |                       | crc          | n    | convert to camelCase
-|                       | :%S/one/two/ | n    | substitute using [abolish](https://github.com/tpope/vim-abolish) 
-| **Git**               | ,ga          | n    | git add
-|                       | ,gd          | n    | git diff
-|                       | ,gr          | n    | revert file changes (git co)
-|                       | ,gs          | n    | git status
-|                       | ,gp          | n    | git add -p
+|                       | :%S/one/two/ | n    | substitute using [abolish](https://github.com/tpope/vim-abolish)
+| **Surround**          | ,#           | n,v  | surround with #{}
+|                       | ,"           | n,v  | surround with ""
+|                       | ,'           | n,v  | surround with ''
+|                       | ,( or ,)     | n,v  | surround with ()
+|                       | ,[ or ,]     | n,v  | surround with []
+|                       | ,{ or ,}     | n,v  | surround with {}
+| **Git (v=version)*    | ,va          | n    | git add
+|                       | ,vd          | n    | git diff
+|                       | ,vr          | n    | revert file changes (git co)
+|                       | ,vs          | n    | git status
+|                       | ,vp          | n    | git add -p
 | **Run**               | ,rr          | n    | run current file
 |                       | ,rm          | n    | markdown preview
 |                       | ,rl          | n    | open selected link
 |                       | ,rs          | n    | run selected vim command
 |                       | ,rt          | n    | generate tags file
 | **Testing**           | ,tf          | n    | test current file
+|                       | ,tl          | n    | test current line
 |                       | ,tt          | n    | run last test
 
 

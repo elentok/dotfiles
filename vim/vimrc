@@ -1,5 +1,7 @@
 " vim: foldmethod=marker
 
+let mapleader = ","
+
 let $root=expand("<sfile>:p:h")
 
 " OS-Specific {{{1
