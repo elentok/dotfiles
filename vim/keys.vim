@@ -46,19 +46,18 @@ nnoremap <silent> <Leader>[ :exe "resize " . (&lines * 1/3)<CR>
 noremap ,gb :CtrlPBuffer<cr>
 noremap ,gc :CtrlPChange<cr>
 noremap ,gd :cd <C-R>=expand("%:p:h")<cr>
-noremap ,ge :e <C-R>=expand("%:p:h") . $delimiter <cr>
-noremap ,gE :tabe <C-R>=expand("%:p:h") . $delimiter <cr>
-noremap ,gn :NERDTreeFind<cr>
-noremap <silent> <C-\> :NERDTreeFind<cr>:vertical res 30<cr>
+noremap ,gf :CtrlP<cr>
 noremap ,gg :NERDTreeToggle<cr>
 noremap ,gm :CtrlPMRUFiles<cr>
-noremap ,gr :read <C-R>=expand("%:p:h") . $delimiter <cr>
+noremap ,gn :NERDTreeFind<cr>
+noremap ,go :call GotoAlternateFile()<cr>
 noremap ,gs :UltiSnipsEdit<cr>
 noremap ,gt :CtrlPTag<cr>
 noremap ,gv :tabe $vimrc<cr>
-noremap ,go :call GotoAlternateFile()<cr>
 noremap `` :CtrlPBufTag<cr>
 inoremap <c-s> <c-o>:w<cr>
+
+noremap <silent> <C-\> :NERDTreeFind<cr>:vertical res 30<cr>
 
 " Editing {{{1
 noremap <c-_> :call ToggleHebrew()<cr>
@@ -73,6 +72,9 @@ noremap ,ey "*Y"+Y
 vnoremap ,ey "*ygv"+y
 noremap ,ep "*p
 
+noremap ,ef :e <C-R>=expand("%:p:h") . $delimiter <cr>
+noremap ,et :tabe <C-R>=expand("%:p:h") . $delimiter <cr>
+noremap ,rf :read <C-R>=expand("%:p:h") . $delimiter <cr>
 
 noremap ,e= :Tab /=<cr>
 noremap ,e: :Tab /:\zs<cr>

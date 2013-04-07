@@ -15,6 +15,7 @@ Vim
 |                       | ]b           | n    | next buffer
 |                       | {            | n    | previous paragraph
 |                       | }            | n    | next paragraph
+|                       | Alt-j,k,l    | i    | move down, up, right
 | **Find**              | enter        | n    | clear search highlight
 |                       | *            | n,v  | find current word or visual selection
 |                       | ,fw          | n    | find current word with ack-grep
@@ -27,19 +28,21 @@ Vim
 |                       | ,dj          | n    | jade cheatsheet
 | **Window Management** | ctrl-h,j,k,l | n    | move to window
 |                       | Q            | n    | quit window
+|                       | ,sp          | n    | split
+|                       | ,sv          | n    | split vertical
 | **Go To**             | ,gb          | n    | go to buffer
 |                       | ,gc          | n    | go to change
 |                       | ,gd          | n    | go to directory
-|                       | ,ge          | n    | edit file
-|                       | ,gE          | n    | edit file in tab
-|                       | ,gn          | n    | nerd tree (and focus current file)
+|                       | ,gf          | n    | go to file (CtrlP)
+|                       | C-p          | n    | go to file (CtrlP)
 |                       | ,gg          | n    | toggle nerd tree
 |                       | ,gm          | n    | go to most recently used file
-|                       | ,gr          | n    | read file
+|                       | ,gn          | n    | nerd tree (and focus current file)
+|                       | C-\          | n    | nerd tree (and focus current file)
+|                       | ,go          | n    | go to alternate file
 |                       | ,gs          | n    | go to snippets file
 |                       | ,gt          | n    | go to tag
 |                       | ,gv          | n    | go to .vimrc
-|                       | ,go          | n    | go to alternate file
 |                       | ``           | n    | go to tag in current file
 | **Editing**           | ctrl-_       | n,i  | toggle hebrew mode
 |                       | tab/C-tab    | v    | indent/deindent (without losing selection)
@@ -47,6 +50,9 @@ Vim
 |                       | <c-t>        | i    | show available snippets
 |                       | ,es          | n    | toggle spelling
 |                       | z=           | n    | suggest correct spelling
+|                       | ,ef          | n    | edit file
+|                       | ,et          | n    | edit file in tab
+|                       | ,rf          | n    | read file
 |                       | ,ehs         | n    | split hash
 |                       | ,ehj         | n    | join hash
 |                       | ,ey          | n    | yank to * and + registers
@@ -63,8 +69,8 @@ Vim
 |                       | crc          | n    | convert to camelCase
 |                       | :%S/one/two/ | n    | substitute using [abolish](https://github.com/tpope/vim-abolish)
 | **Surround**          | ,#           | n,v  | surround with #{}
-|                       | ,"           | n,v  | surround with ""
-|                       | ,'           | n,v  | surround with ''
+|                       | ,"           | n,v  | surround with "
+|                       | ,'           | n,v  | surround with '
 |                       | ,( or ,)     | n,v  | surround with ()
 |                       | ,[ or ,]     | n,v  | surround with []
 |                       | ,{ or ,}     | n,v  | surround with {}
@@ -81,6 +87,7 @@ Vim
 | **Testing**           | ,tf          | n    | test current file
 |                       | ,tl          | n    | test current line
 |                       | ,tt          | n    | run last test
+| **Misc**              | ,,           | n    | redraw
 
 
 Other Apps
