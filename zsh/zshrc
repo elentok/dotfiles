@@ -10,3 +10,7 @@ fi
 for config_file in $HOME/.zsh/after/*.zsh; do
   source $config_file
 done
+
+if [[ -s "$HOME/.zshrc.local" ]]; then
+  source "$HOME/.zshrc.local"
+fi
