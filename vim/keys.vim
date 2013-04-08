@@ -158,6 +158,7 @@ noremap ,tf :call RunSpecFile()<cr>
 
 " Misc {{{1
 noremap ,ti :IndentGuidesToggle<cr>
+noremap ,tn :NumbersToggle<cr>
 
 " MS-Windows {{{1
 if g:os == 'windows'
