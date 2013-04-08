@@ -88,6 +88,7 @@ Vim
 |                       | ,tl          | n    | test current line
 |                       | ,tt          | n    | run last test
 | **Misc**              | ,,           | n    | redraw
+|                       | ,ti          | n    | toggle indent guides
 
 
 Other Apps

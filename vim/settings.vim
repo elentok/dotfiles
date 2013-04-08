@@ -128,3 +128,10 @@ set encoding=utf-8
 setglobal fileencoding=utf-8
 " define the heuristics to recognize file encodings
 setglobal fileencodings=ucs-bom,utf-8,default
+
+" Indent Guides {{{1
+
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
+

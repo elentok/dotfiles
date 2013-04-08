@@ -157,6 +157,9 @@ noremap ,tt :VimuxRunLastCommand<cr>
 noremap ,tl :call RunSpecLine()<cr>
 noremap ,tf :call RunSpecFile()<cr>
 
+" Misc {{{1
+noremap ,ti :IndentGuidesToggle<cr>
+
 " MS-Windows {{{1
 if g:os == 'windows'
   noremap <m-space> :simalt ~<cr>
