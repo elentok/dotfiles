@@ -10,7 +10,6 @@ inoremap <c-j> <down>
 
 " Find {{{1
 noremap <cr> :nohls<cr>
-vnoremap * "9y/<c-r>9<cr>
 noremap ,fw :Ack! <c-r>=expand("<cword>")<cr><cr>
 vnoremap ,fa "9y:Ack! '<c-r>9'<cr>
 noremap ,fa :Ack! 

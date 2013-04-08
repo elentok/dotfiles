@@ -57,6 +57,7 @@ Bundle 'tpope/vim-dispatch'
 Bundle 'AndrewRadev/splitjoin.vim'
 Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-repeat'
+Bundle "nelstrom/vim-visual-star-search"
 
 
 "Bundle 'airblade/vim-gitgutter'
