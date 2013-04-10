@@ -35,6 +35,9 @@
   b = branch
   ds = diff --stat=160,120
   dh1 = diff HEAD~1
+  aliases = config --get-regexp alias
+  unstage = reset HEAD
+  uncommit = reset --soft HEAD^
 
 [format]
   pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset
