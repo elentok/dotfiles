@@ -41,6 +41,20 @@ noremap Q :q<cr>
 nnoremap <silent> <Leader>] :exe "resize " . (&lines * 2/3)<CR>
 nnoremap <silent> <Leader>[ :exe "resize " . (&lines * 1/3)<CR>
 
+" resize windows
+" these are difficult to type, so I use the following iTerm mappings:
+"
+"   Control-Cmd-h => Esc-<
+"   Control-Cmd-j => Esc--
+"   Control-Cmd-k => Esc-+
+"   Control-Cmd-l => Esc->
+
+nnoremap _ <c-w>-
+nnoremap + <c-w>+
+nnoremap > <c-w>>
+nnoremap < <c-w><
+
+
 " Go to {{{1
 noremap ,gb :CtrlPBuffer<cr>
 noremap ,gc :CtrlPChange<cr>
