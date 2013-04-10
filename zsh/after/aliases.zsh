@@ -57,3 +57,9 @@ alias c6='awk "{ print \$6 }"'
 
 alias total='awk "{ s+=\$1 } END { print s }"'
 alias tot='awk "{ s+=\$1 } END { printf(\"%''d\n\", s) }"'
+
+alias n='env NODE_NO_READLINE=1 rlwrap -p Green -S "node >>> " node'
+
+alias gca='git commit --amend'
+alias gs='git status'
+alias gst='git status'
