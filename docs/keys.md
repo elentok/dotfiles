@@ -74,11 +74,12 @@ Vim
 |                       | ,( or ,)     | n,v  | surround with ()
 |                       | ,[ or ,]     | n,v  | surround with []
 |                       | ,{ or ,}     | n,v  | surround with {}
-| **Git (v=version)*    | ,va          | n    | git add
-|                       | ,vd          | n    | git diff
-|                       | ,vr          | n    | revert file changes (git co)
+| **Git (v=version)*    | ,vd          | n    | git diff
+|                       | ,vrf         | n    | revert file changes (git co)
+|                       | ,vrp         | n    | revert file changes (interactive, git co -p)
 |                       | ,vs          | n    | git status
-|                       | ,vp          | n    | git add -p
+|                       | ,vaf         | n    | git add {file}
+|                       | ,vap         | n    | git add -p (interactive)
 | **Run**               | ,rr          | n    | run current file
 |                       | ,rm          | n    | markdown preview
 |                       | ,rl          | n    | open selected link

@@ -146,11 +146,12 @@ noremap ,rt :SuperTagger<cr>
 
 " Git (v = version control) {{{1
 noremap ,vs :Gstatus<cr>
-noremap ,vr :!git co %<cr>
+noremap ,vrf :call Confirm("Revert current file?", "!git co %")<cr>
+noremap ,vrp :!git co -p %<cr>
 noremap ,vd :!git diff %<cr>
 "noremap ,vd :silent !git diff %<cr>:redraw!<cr>
-noremap ,va :!git add %<cr>
-noremap ,vp :!git add -p %<cr>
+noremap ,vaf :!git add %<cr>
+noremap ,vap :!git add -p %<cr>
 
 " Testing {{{1
 noremap ,tt :VimuxRunLastCommand<cr>

@@ -79,3 +79,13 @@ function! FixNERDTreeWidth()
     exec("silent vertical resize " . g:NERDTreeWinSize)
   endif
 endfunc
+
+" confirm hazardus command()
+function! Confirm(message, command)
+  let yesno = confirm(a:message, "&Yes\n&No", 2)
+  if (yesno == 1)
+    exec a:command
+  else
+    echo "User aborted"
+  end
+endfunc
