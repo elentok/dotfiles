@@ -48,6 +48,7 @@ Vim
 |                       | tab/C-tab    | v    | indent/deindent (without losing selection)
 |                       | tab          | i    | autocomplete or snippet
 |                       | <c-t>        | i    | show available snippets
+|                       | C-\          | i    | add ";" to the end of the line
 |                       | ,es          | n    | toggle spelling
 |                       | z=           | n    | suggest correct spelling
 |                       | ,ef          | n    | edit file
