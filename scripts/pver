@@ -3,4 +3,4 @@ path = require 'path'
 
 file = path.join(process.cwd(), 'package.json')
 
-console.log require(file).version
+console.log "v" + require(file).version
