@@ -89,3 +89,10 @@ function! Confirm(message, command)
     echo "User aborted"
   end
 endfunc
+
+" markdown {{{!
+func! MarkdownPreview()
+  w
+  call system('marked ' . expand('%') . ' > /tmp/markdown-preview.html')
+  call system('qlmanage -p /tmp/markdown-preview.html &')
+endfunc

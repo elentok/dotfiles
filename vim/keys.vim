@@ -151,7 +151,7 @@ vmap ,{ c{<C-R>"}<ESC>
 
 " Run {{{1
 noremap ,rr :w<cr>:call RunCurrentFile()<cr>
-noremap ,rm :Mm<cr>:redraw!<cr>
+noremap ,rm :call MarkdownPreview()<cr>
 vnoremap ,rl "xy:call netrw#NetrwBrowseX(@x, 0)<cr>
 vnoremap ,rs "9y:<c-r>9<cr>
 noremap ,rt :SuperTagger<cr>
