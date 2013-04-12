@@ -45,7 +45,7 @@ alias tailog='tail -f log/development.log | cat -v'
 alias cf='/bin/ls -1 | wc -l'
 alias bw='convert -colors 2'
 
-alias va='vim $DOTF/zsh/after/aliases.zsh'
+alias va='vim $DOTF/zsh/after/aliases.zsh; source $DOTF/zsh/after/aliases.zsh'
 alias ff='find . -iname'
 
 alias c1='awk "{ print \$1 }"'
