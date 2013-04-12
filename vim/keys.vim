@@ -175,7 +175,7 @@ xnoremap <silent><space> f oT o
 xnoremap <silent>a<space> f oF o
 xnoremap <silent>i<space> t oT o
 " Testing {{{1
-noremap ,tt :VimuxRunLastCommand<cr>
+noremap ,tt :call RunLastSpec()<cr>
 noremap ,tl :call RunSpecLine()<cr>
 noremap ,tf :call RunSpecFile()<cr>
 
@@ -196,20 +196,3 @@ func! PostStartupKeys()
   vmap <tab> >gv
   vmap <s-tab> <gv
 endfunc
-
-" prefixes:
-" ,a
-" ,b - camelcase back
-" ,c
-" ,d
-" ,e - editing
-" ,f - file management
-" ,g - git
-" ,q
-" ,r - run/exec
-" ,s - search
-" ,t
-" ,v
-" ,w - camelcase forward
-" ,x
-

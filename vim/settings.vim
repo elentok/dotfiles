@@ -7,7 +7,6 @@ let NERDTreeIgnore=['\.zeus\.sock$', '\~$']
 let g:VimuxOrientation = "h"
 let g:VimuxHeight = "40"
 
-let g:spec_runner_use_vimux=1
 let g:user_spec_runners = {
   \ 'ruby': { 'command': 'sp {file}' },
   \ 'java': { 'command': 'make test' }
@@ -16,7 +15,8 @@ let g:user_spec_runners = {
 let g:run_with_vimux=1
 
 let g:ctrlp_dotfiles = 0
-let g:ctrlp_root_markers = ['Gemfile', 'package.json', '.git']
+"let g:ctrlp_root_markers = ['Gemfile', 'package.json', '.git']
+let g:ctrlp_root_markers = ['.git']
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_by_filename = 1
 let g:ctrlp_custom_ignore = {
@@ -37,6 +37,7 @@ else
   hi Folded ctermbg=233
   hi NonText ctermbg=None
   hi Folded cterm=bold
+  hi Special ctermfg=lightblue
 endif
 
 
