@@ -60,6 +60,8 @@ Bundle "nelstrom/vim-visual-star-search"
 Bundle 'myusuf3/numbers.vim.git'
 Bundle 'freitass/todo.txt-vim'
 
+" text objects:
+Bundle 'michaeljsmith/vim-indent-object'
 
 "Bundle 'airblade/vim-gitgutter'
 "Bundle 'skwp/vim-colors-solarized.git'
