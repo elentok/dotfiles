@@ -89,6 +89,8 @@ noremap ,ef :e <C-R>=expand("%:p:h") . $delimiter <cr>
 noremap ,et :tabe <C-R>=expand("%:p:h") . $delimiter <cr>
 noremap ,rf :read <C-R>=expand("%:p:h") . $delimiter <cr>
 noremap ,ew :w<cr>
+noremap ,ww :w<cr>
+noremap ,wq :wq<cr>
 
 noremap ,e= :Tab /=<cr>
 noremap ,e: :Tab /:\zs<cr>
