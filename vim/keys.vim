@@ -170,6 +170,10 @@ noremap ,vd :!git diff %<cr>
 noremap ,vaf :!git add %<cr>
 noremap ,vap :!git add -p %<cr>
 
+" Spaces text object {{{1
+xnoremap <silent><space> f oT o
+xnoremap <silent>a<space> f oF o
+xnoremap <silent>i<space> t oT o
 " Testing {{{1
 noremap ,tt :VimuxRunLastCommand<cr>
 noremap ,tl :call RunSpecLine()<cr>
