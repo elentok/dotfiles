@@ -57,7 +57,6 @@ Bundle 'AndrewRadev/splitjoin.vim'
 Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-repeat'
 Bundle "nelstrom/vim-visual-star-search"
-Bundle 'myusuf3/numbers.vim.git'
 Bundle 'freitass/todo.txt-vim'
 
 " text objects:
