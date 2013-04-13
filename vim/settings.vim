@@ -6,6 +6,7 @@ syntax enable
 let NERDTreeIgnore=['\.zeus\.sock$', '\~$']
 let g:VimuxOrientation = "h"
 let g:VimuxHeight = "40"
+let g:VimuxUseNearestPane = 1
 
 let g:user_spec_runners = {
   \ 'ruby': { 'command': 'sp {file}' },
