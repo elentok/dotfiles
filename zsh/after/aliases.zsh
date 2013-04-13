@@ -1,52 +1,56 @@
-alias m=ncmpcpp
 alias x=exit
-alias mf='mpc search filename'
-alias ma='mpc add'
-alias mp='mpc play'
-alias mcl='mpc clear'
-alias sr='screen -R'
-alias ak='ssh-add ~/.keys/bitbucket.ssh.private'
-alias cl='xclip -selection clipboard -o'
-alias ft="ruby ~/projects/tvutils/bin/filestube.rb -s filesonic"
-alias sub="ruby ~/projects/tvutils/bin/download_subtitles.rb"
-alias clean="ruby ~/projects/tvutils/bin/clean.rb"
-alias st='scrot -s'
-alias dotf='cd $DOTF'
-alias rr='source ~/.config/dotfiles/scripts/init-rvm'
-alias mac='ruby ~/projects/macrumors/macrumors.rb'
-alias wp='feh --bg-fill'
-alias pryy='pry -r ./config/environment'
-alias trailer='wget -U QuickTime'
-alias txt='cd ~/Dropbox/PlainText && vim'
-alias psg='ps aux | grep'
 
+# Tmux {{{1
+alias tm='tmux -u'
+alias tma='tm a'
+
+# Todo.txt {{{1
+alias t='todo.sh -d $HOME/Dropbox/todo/todo.cfg'
+alias tl='t ls'
+alias te='t edit'
+alias ta='t add'
+
+# Git {{{1
+alias gca='git commit --amend'
+alias gs='git status'
+alias gst='git status'
+alias gl='git pull'
+alias ts='tig status'
+
+# Vim {{{1
+alias v=vim
+alias va='vim $DOTF/zsh/after/aliases.zsh; source $DOTF/zsh/after/aliases.zsh'
+alias txt='cd ~/Dropbox/PlainText && vim'
+alias vimt='vim ~/Dropbox/vim.TODO'
+
+# Find {{{1
+alias ff='find . -iname'
+alias ackc='ack --coffee'
+
+# Mac Specific {{{1
 if [[ "`uname -s`" == "Darwin" ]]; then
   alias ls='ls -FGsk'
   # s = show size
   # k = show size in kilobytes
-  alias ackc='ack --coffee'
+
+# Linux Specific {{{1
 else
   alias ack='ack-grep'
-  alias ackc='ack-grep --coffee'
   alias ls='ls --color=always -XFhs'
+  alias cl='xclip -selection clipboard -o'
+  alias st='scrot -s'
+  alias wp='feh --bg-fill'
+
+  # mpc {{{2
+  alias m=ncmpcpp
+  alias mf='mpc search filename'
+  alias ma='mpc add'
+  alias mp='mpc play'
+  alias mcl='mpc clear'
+  # 2}}}
 fi
 
-alias wip='cucumber --drb --profile wip'
-alias cuc='cucumber --drb'
-alias tigs='tig status'
-alias ts='tig status'
-alias z='zeus'
-alias tm='tmux -u'
-alias k='less $DOTF/docs/keys.md'
-alias kk='vim $DOTF/docs/keys.md'
-alias q='qlmanage -p'
-alias vimt='vim ~/Dropbox/vim.TODO'
-alias tailog='tail -f log/development.log | cat -v'
-alias cf='/bin/ls -1 | wc -l'
-alias bw='convert -colors 2'
-
-alias va='vim $DOTF/zsh/after/aliases.zsh; source $DOTF/zsh/after/aliases.zsh'
-alias ff='find . -iname'
+# Helpers {{{1
 
 alias c1='awk "{ print \$1 }"'
 alias c2='awk "{ print \$2 }"'
@@ -58,11 +62,18 @@ alias c6='awk "{ print \$6 }"'
 alias total='awk "{ s+=\$1 } END { print s }"'
 alias tot='awk "{ s+=\$1 } END { printf(\"%''d\n\", s) }"'
 
+# Other {{{1
+alias ak='ssh-add ~/.keys/bitbucket.ssh.private'
+alias bw='convert -colors 2'
+alias cf='/bin/ls -1 | wc -l' # count files
+alias dotf='cd $DOTF'
+alias k='less $DOTF/docs/keys.md'
+alias kk='vim $DOTF/docs/keys.md'
 alias n='env NODE_NO_READLINE=1 rlwrap -p Green -S "node >>> " node'
+alias pryy='pry -r ./config/environment'
+alias psg='ps aux | grep'
+alias q='qlmanage -p'
+alias trailer='wget -U QuickTime'
+alias z='zeus'
 
-alias gca='git commit --amend'
-alias gs='git status'
-alias gst='git status'
-alias t='todo.sh -d $HOME/Dropbox/todo/todo.cfg'
-alias tl='t ls'
-alias te='t edit'
+# vim: foldmethod=marker
