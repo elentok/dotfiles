@@ -52,7 +52,7 @@ Vim
 | **Editing**           | ctrl-_          | n,i  | toggle hebrew mode
 |                       | tab/C-tab       | v    | indent/deindent (without losing selection)
 |                       | tab             | i    | autocomplete or snippet
-|                       | <c-t>           | i    | show available snippets
+|                       | &lt;c-t&gt;     | i    | show available snippets
 |                       | C-\             | i    | add ";" to the end of the line
 |                       | ,es             | n    | toggle spelling
 |                       | z=              | n    | suggest correct spelling
