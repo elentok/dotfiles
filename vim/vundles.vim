@@ -58,6 +58,7 @@ Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-repeat'
 Bundle "nelstrom/vim-visual-star-search"
 Bundle 'freitass/todo.txt-vim'
+Bundle 'terryma/vim-multiple-cursors'
 
 " text objects:
 Bundle 'michaeljsmith/vim-indent-object'
@@ -68,5 +69,9 @@ Bundle 'michaeljsmith/vim-indent-object'
 " Go language
 "Bundle 'jnwhiteh/vim-golang'
 "Bundle 'go-vim'
+
+if file_readable(expand("~/.dotlocal/vundles.vim"))
+  source ~/.dotlocal/vundles.vim
+endif
 
 filetype plugin indent on

@@ -10,7 +10,11 @@ To install run:
 Customization
 --------------
 
-* Add your git information to ~/.dotlocal/gitconfig:
+You can customize the settings by putting the following files in the ~/.dotlocal directory.
+
+### Git
+
+Use `~/.dotlocal/gitconfig`:
 
 ```gitconfig
 [user]
@@ -20,4 +24,11 @@ Customization
   user = your-github-user
 ```
 
-* Add your custom aliases to ~/.dotlocal/zshrc.after
+### Zsh settings & aliases
+
+Use `~/.dotlocal/zshrc.after` or `~/.dotlocal/zshrc.before`.
+
+### Vim
+
+* Add custom vundles to `~/.dotlocal/vundles.vim`
+* Add custom settings to `~/.dotlocal/after.vim`
