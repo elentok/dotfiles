@@ -38,6 +38,9 @@
   aliases = config --get-regexp alias
   unstage = reset HEAD
   uncommit = reset --soft HEAD^
+  # from http://www.codedevelopr.com/articles/export-a-git-branch-to-zip-file-with-alias/
+  zip = "!zipArchive() { git archive --format zip --output $1 $2; }; zipArchive"
+  tgz = "!zipArchive() { git archive --format tgz --output $1 $2; }; zipArchive"
 
 [format]
   pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset
