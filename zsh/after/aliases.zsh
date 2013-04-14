@@ -3,6 +3,7 @@ alias x=exit
 # Tmux {{{1
 alias tm='tmux -u'
 alias tma='tm a'
+alias tmt='tm new-session -A  -s test-output' # create or attach to 'test-output' session
 
 # Todo.txt {{{1
 alias t='todo.sh -d $HOME/Dropbox/todo/todo.cfg'
