@@ -53,3 +53,4 @@ rm -f ~/.zsh
 ln -sf "$DIR" ~/.zsh 
 ln -sf "$DIR/zshrc" ~/.zshrc
 ln -sf "$DIR/zpreztorc" ~/.zpreztorc
+ln -sf "$DIR/prompt_elentok_setup" ~/.zprezto/modules/prompt/functions/prompt_elentok_setup
