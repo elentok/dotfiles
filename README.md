@@ -7,7 +7,10 @@ To install run:
   $ curl -L https://github.org/elentok/dotfiles/raw/master/online_install.sh | bash
 ```
 
-Then create ~/.gitconfig.private:
+Customization
+--------------
+
+* Add your git information to ~/.dotlocal/gitconfig:
 
 ```gitconfig
 [user]
@@ -17,3 +20,4 @@ Then create ~/.gitconfig.private:
   user = your-github-user
 ```
 
+* Add your custom aliases to ~/.dotlocal/zshrc.after

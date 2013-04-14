@@ -1,3 +1,7 @@
+if [[ -s "$HOME/.dotlocal/zshrc.before" ]]; then
+  source "$HOME/.dotlocal/zshrc.before"
+fi
+
 for config_file in $HOME/.zsh/before/*.zsh; do
   source $config_file
 done
@@ -11,6 +15,6 @@ for config_file in $HOME/.zsh/after/*.zsh; do
   source $config_file
 done
 
-if [[ -s "$HOME/.zshrc.local" ]]; then
-  source "$HOME/.zshrc.local"
+if [[ -s "$HOME/.dotlocal/zshrc.after" ]]; then
+  source "$HOME/.dotlocal/zshrc.after"
 fi

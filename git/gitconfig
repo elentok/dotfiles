@@ -1,4 +1,4 @@
-# Add these lines (with your details) to ~/.gitconfig.private
+# Add these lines (with your details) to ~/.dotlocal/gitconfig
 # [user]
 #   name = David Elentok
 #   email = 3david@gmail.com
@@ -6,7 +6,7 @@
 #   user = elentok
 
 [include]
-  path = .gitconfig.private
+  path = ~/.dotlocal/gitconfig
 [diff]
 [color]
   ui = auto
