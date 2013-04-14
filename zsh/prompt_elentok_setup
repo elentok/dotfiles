@@ -42,13 +42,13 @@ function prompt_elentok_setup {
   zstyle ':vcs_info:git*+set-message:*' hooks git-status
 
   # Set ruby-info parameters.
-  zstyle ':prezto:module:ruby:info:version' format ' %F{white}%v%f'
+  zstyle ':prezto:module:ruby:info:version' format ' %F{8}(%v)%f'
 
   # Define prompts.
   PROMPT="
-%F{blue}%~%f\${vcs_info_msg_0_}
+%F{blue}%~%f\${vcs_info_msg_0_}\${ruby_info[version]}
 %(?.%F{green}${1:-☻ }%f.%F{red}${1:-☻ }%f)"
-RPROMPT='${ruby_info[version]}'
+#RPROMPT='${ruby_info[version]}'
 
 }
 
