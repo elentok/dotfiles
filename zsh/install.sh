@@ -3,10 +3,10 @@
 source `dirname $0`/../config.sh
 
 install_zsh() {
-  header "Installing Zsh"
   if [ "$OS" == "mac" ]; then
-    brew install zsh
+    brew_install zsh
     if [ "$SHELL" != "/bin/zsh" ]; then
+      bullet "Changing shell to /bin/zsh... "
       chsh -s /bin/zsh
     fi
   else
@@ -17,11 +17,11 @@ install_zsh() {
 
 
 install_prezto() {
-  header "Installing Prezto"
+  bullet "Installing prezto..."
   if [ ! -d ~/.zprezto ]; then
-    git clone --recursive https://github.com/sorin-ionescu/prezto.git ~/.zprezto
+    git_clone https://github.com/sorin-ionescu/prezto.git ~/.zprezto --recursive 
   else
-    info "skipping, already exists"
+    info " already exists"
   fi
 
 }
@@ -36,7 +36,6 @@ install_prezto_symlinks() {
 }
 
 install_symlinks() {
-  header "Installing symlinks"
   install_prezto_symlinks
 
   symlink "$DOTF/zsh" ~/.zsh 
@@ -44,6 +43,8 @@ install_symlinks() {
   symlink "$DOTF/zsh/zpreztorc" ~/.zpreztorc
   symlink "$DOTF/zsh/prompt_elentok_setup" ~/.zprezto/modules/prompt/functions/prompt_elentok_setup
 }
+
+header "Zsh"
 
 if [ "$1" == "symlinks" ]; then
   install_symlinks

@@ -3,11 +3,9 @@
 source `dirname $0`/../config.sh
 
 install_tmux() {
-  header "Installing tmux"
   if [ "$OS" == "mac" ]; then
-    brew install tmux
-
-    brew install reattach-to-user-namespace
+    brew_install tmux
+    brew_install reattach-to-user-namespace
     # for more info, see:
     #   http://robots.thoughtbot.com/post/19398560514/how-to-copy-and-paste-with-tmux-on-mac-os-x
   else
@@ -16,13 +14,12 @@ install_tmux() {
 }
 
 install_symlinks() {
-  header "Installing ~/.tmux.conf symlink"
   symlink "$DOTF/tmux/tmux.conf" ~/.tmux.conf
 }
 
-if [ "$1" == "symlinks" ]; then
-  install_symlinks
-else
+
+header "tmux"
+if [ "$1" != "symlinks" ]; then
   install_tmux
-  install_symlinks
 fi
+install_symlinks
