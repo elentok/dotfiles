@@ -12,3 +12,5 @@ html=.haml,.hamlc
 css=.sass,.scss,.styl
 --type-set
 jade=.jade
+--type-set
+markdown=.md
