@@ -53,7 +53,7 @@ else
   if [ "`uname -s`" == "Darwin" ]; then
     install_on_mac
   else
-    install_in_linux
+    install_on_linux
   fi
 
   install_symlinks
