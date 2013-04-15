@@ -170,6 +170,7 @@ noremap ,vd :silent !clear; git diff %<cr>:redraw!<cr>
 noremap ,vaf :!git add %<cr>
 noremap ,vap :!git add -p %<cr>
 noremap ,vh :silent !tig %<cr>:redraw!<cr>
+noremap ,vc :Gcommit<cr>
 
 " Spaces text object {{{1
 xnoremap <silent><space> f oT o

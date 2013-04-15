@@ -87,6 +87,7 @@ Vim
 |                       | ,vs             | n    | git status
 |                       | ,vaf            | n    | git add {file}
 |                       | ,vap            | n    | git add -p (interactive)
+|                       | ,vc             | n    | git commit (uses fugitive)
 | **Run**               | ,rr             | n    | run current file
 |                       | ,rm             | n    | markdown preview
 |                       | ,rl             | n    | open selected link
