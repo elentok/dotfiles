@@ -1,5 +1,22 @@
 #!/bin/bash
 
+source $DOTF/config.sh
+
 cd $DOTF
-echo "Pulling changes..."
-git pull && ./install.sh
+header "Updating dotfiles"
+
+bullet "Pulling changes... "
+old_head=`git rev-parse HEAD`
+git pull
+new_head=`git rev-parse HEAD`
+
+if [ "$old_head" != "$new_head" ]; then
+  echo -e "\nPulled the following changes:"
+  git changes ${old_head}..${new_head}
+
+  echo -ne "\nPress any key to run the installer..."
+  read -n 1
+
+  ./install.sh
+fi
+
