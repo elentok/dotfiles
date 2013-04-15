@@ -51,6 +51,7 @@ npm install -g jshint
 npm install -g jsonlint
 npm install -g marked
 sudo easy_install pylint
+ln -sf "$DIR/pylintrc" ~/.pylintrc
 brew install tidy
 # the silver searcher
 brew install ag
