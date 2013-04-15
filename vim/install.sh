@@ -23,12 +23,9 @@ install_on_linux() {
 
 install_symlinks() {
   header "Installing ~/.vim and ~/.vimrc symlinks"
-  mv -f ~/.vimrc ~/.vimrc.backup
-  mv -f ~/.vim ~/.vim.backup
-  mv -f ~/.pylintrc ~/.pylintrc.backup
-  ln -sf "$DOTF/vim/vimrc" ~/.vimrc
-  ln -sf "$DOTF/vim" ~/.vim
-  ln -sf "$DOTF/vim/pylintrc" ~/.pylintrc
+  symlink "$DOTF/vim/vimrc" ~/.vimrc
+  symlink "$DOTF/vim" ~/.vim
+  symlink "$DOTF/vim/pylintrc" ~/.pylintrc
 }
 
 install_vundle() {

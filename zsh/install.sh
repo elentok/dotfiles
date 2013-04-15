@@ -1,56 +1,54 @@
-#!/bin/zsh
+#!/bin/bash
 
-echo ""
-echo "========================================"
-echo "Installing Zsh"
-echo "========================================"
+source `dirname $0`/../config.sh
 
-if [ "`uname -s`" = "Darwin" ]; then
-  brew install zsh
-  chsh -s /bin/zsh
-else
-  sudo apt-get install -y zsh
-  sudo usermod -s /bin/zsh $USER
-fi
+install_zsh() {
+  header "Installing Zsh"
+  if [ "`uname -s`" = "Darwin" ]; then
+    brew install zsh
+    if [ "$SHELL" != "/bin/zsh" ]; then
+      chsh -s /bin/zsh
+    fi
+  else
+    sudo apt-get install -y zsh
+    sudo usermod -s /bin/zsh $USER
+  fi
+}
 
-echo ""
-echo "========================================"
-echo "Installing Prezto"
-echo "========================================"
 
-if [ ! -d ~/.zprezto ]; then
-  git clone --recursive https://github.com/sorin-ionescu/prezto.git ~/.zprezto
+install_prezto() {
+  header "Installing Prezto"
+  if [ ! -d ~/.zprezto ]; then
+    git clone --recursive https://github.com/sorin-ionescu/prezto.git ~/.zprezto
+  else
+    info "skipping, already exists"
+  fi
 
-  setopt EXTENDED_GLOB
-  for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-    ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+}
+
+install_prezto_symlinks() {
+  for rcfile in ~/.zprezto/runcoms/z*; do
+    name=`basename $rcfile`
+    [ "$name" == "zshrc" ] && continue
+    [ "$name" == "zpreztorc" ] && continue
+    symlink $rcfile ~/.$name
   done
+}
 
-  echo '# Load my custom modules' >> ~/.zshrc
-  echo 'for config_file in $HOME/.zsh/*.zsh; do' >> ~/.zshrc
-  echo '  source $config_file' >> ~/.zshrc
-  echo 'done' >> ~/.zshrc
+install_symlinks() {
+  header "Installing symlinks"
+  install_prezto_symlinks
+
+  symlink "$DOTF/zsh" ~/.zsh 
+  symlink "$DOTF/zsh/zshrc" ~/.zshrc
+  symlink "$DOTF/zsh/zpreztorc" ~/.zpreztorc
+  symlink "$DOTF/zsh/prompt_elentok_setup" ~/.zprezto/modules/prompt/functions/prompt_elentok_setup
+}
+
+if [ "$1" == "symlinks" ]; then
+  install_symlinks
+else
+  install_zsh
+  install_prezto
+  install_symlinks
 fi
-
-#echo ""
-#echo "========================================"
-#echo "Installing Oh-My-Zsh"
-#echo "========================================"
-
-#if [ ! -d ~/.oh-my-zsh ]; then
-  #curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
-#fi
-
-echo ""
-echo "========================================"
-echo "Setting up ~/.zsh"
-echo "======================================="
-DIR=$(dirname $0)
-DIR=$(cd -P $DIR && pwd)
-
-rm -f ~/.zsh
-
-ln -sf "$DIR" ~/.zsh 
-ln -sf "$DIR/zshrc" ~/.zshrc
-ln -sf "$DIR/zpreztorc" ~/.zpreztorc
-ln -sf "$DIR/prompt_elentok_setup" ~/.zprezto/modules/prompt/functions/prompt_elentok_setup
