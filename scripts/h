@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-HELP_FILENAME = "#{ENV['DOTF']}/docs/help.txt"
+HELP_FILENAME = "#{ENV['DOTF']}/docs/help.md"
 
 module HelpReader
 
@@ -27,7 +27,7 @@ module HelpReader
   
 private
   def self.starts_section?(line)
-    line =~ /^\*/
+    line =~ /^\#/
   end
 
   def self.add_section!(sections, section, query)
