@@ -23,9 +23,9 @@ Vim
 |                       | vip             | n    | select paragraph
 | **Find**              | enter           | n    | clear search highlight
 |                       | *               | n,v  | find current word or visual selection
-|                       | ,fw             | n    | find current word with ack-grep
-|                       | ,fa             | v    | find current selection with ack-grep
-|                       | ,fa             | n    | prompt for search with ack-grep
+|                       | ,ff             | n    | find current word with ack-grep
+|                       | ,ff             | v    | find current selection with ack-grep
+|                       | ,fp             | n    | prompt for search with ack-grep
 |                       | ,fr             | n    | :Gsearch (r = replace)
 |                       | ,fg             | n,v  | find in google
 |                       | ,fo             | n,v  | find in stack overflow
