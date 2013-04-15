@@ -1,40 +1,30 @@
 #!/bin/bash
 
 # This script should be run directly from the online repository like this:
-# curl -L https://bitbucket.org/3david/dotfiles/raw/master/online_install.sh | bash
+# curl -L https://github.com/elentok/dotfiles/raw/master/online_install.sh | bash
 #
 # Prerequisits:
 # sudo apt-get install curl
 
-(
-  mkdir -p ~/.config
-  cd ~/.config
+cd ~
 
+# mac comes with a built-in git
+if [ "`uname -s`" != "Darwin" ]; then
+  echo "========================================"
+  echo "Installing git"
   sudo apt-get install git
+fi
 
-  bitbucket_root="git@bitbucket.org:3david"
-  if [ "`whoami`" != "david" ]; then
-    bitbucket_root="https://bitbucket.org/3david"
-  fi
+repo_root="https://github.com/elentok/dotfiles"
+if [ "$1" == "use-ssh" ]; then
+  repo_root="git@github.com:elentok/dotfiles"
+fi
 
-  echo ""
-  echo "========================================"
-  echo "Cloning dotfiles"
-  git clone $bitbucket_root/dotfiles
+echo "========================================"
+echo "Cloning dotfiles"
+git clone $repo_root .dotfiles
 
-  echo ""
-  echo "========================================"
-  echo "Cloning dotvim"
-  git clone $bitbucket_root/dotvim
-
-  echo "========================================"
-  echo "setting up vim"
-  ./dotvim/install.sh
-
-  echo "========================================"
-  echo "setting up linux"
-  (
-    cd dotfiles
-    ./install.sh
-  )
-)
+echo "========================================"
+echo "Installing"
+cd ~/.dotfiles
+./install.sh

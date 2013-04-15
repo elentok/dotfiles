@@ -4,7 +4,14 @@ elentok's dotfiles
 To install run:
 
 ```bash
-  $ curl -L https://github.org/elentok/dotfiles/raw/master/online_install.sh | bash
+  $ curl -L https://github.com/elentok/dotfiles/raw/master/online_install.sh | bash
+```
+
+by default it will clone the repository from "https://github.com/elentok/dotfiles",
+to use ssh run this:
+
+```bash
+  $ curl -L https://github.com/elentok/dotfiles/raw/master/online_install.sh | bash -s use-ssh
 ```
 
 Customization
