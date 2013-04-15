@@ -26,7 +26,7 @@ Use `~/.dotlocal/gitconfig`:
 
 ### Zsh settings & aliases
 
-Use `~/.dotlocal/zshrc.after` or `~/.dotlocal/zshrc.before`.
+Use `~/.dotlocal/after.zsh` or `~/.dotlocal/before.zsh`.
 
 ### Vim
 
