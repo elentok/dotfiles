@@ -1,24 +1,27 @@
 #!/bin/bash
 
-echo ""
-echo "========================================"
-echo "Installing Git"
-echo "========================================"
+source `dirname $0`/../config.sh
 
-if [ "`uname -s`" == "Darwin" ]; then
-  brew install git
-  brew install tig
+install_git() {
+  header "Installing Git"
+
+  if [ "$OS" == "mac" ]; then
+    brew install git
+    brew install tig
+  else
+    sudo apt-get install -y git giggle tig
+  fi
+}
+
+install_symlinks() {
+  header "Installing git symlinks"
+  symlink "$DOTF/git/gitconfig" ~/.gitconfig
+  symlink "$DOTF/git/tigrc" ~/.tigrc
+}
+
+if [ "$1" == "symlinks" ]; then
+  install_symlinks
 else
-  sudo apt-get install -y git giggle
+  install_git
+  install_symlinks
 fi
-
-DIR=$(dirname "${BASH_SOURCE[0]}")
-DIR=$(cd -P $DIR && pwd)
-
-ln -sf "$DIR/gitconfig" ~/.gitconfig
-ln -sf "$DIR/tigrc" ~/.tigrc
-
-#cd /tmp
-#git clone https://github.com/apenwarr/git-subtree/
-#cd git-subtree
-#sudo make install

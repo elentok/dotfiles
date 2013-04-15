@@ -1,25 +1,28 @@
 #!/bin/bash
 
-echo ""
-echo "========================================"
-echo "Installing tmux"
-echo "========================================"
+source `dirname $0`/../config.sh
 
-if [ "`uname -s`" == "Darwin" ]; then
-  brew install tmux
+install_tmux() {
+  header "Installing tmux"
+  if [ "$OS" == "mac" ]; then
+    brew install tmux
 
-  brew install reattach-to-user-namespace
-  # for more info, see:
-  #   http://robots.thoughtbot.com/post/19398560514/how-to-copy-and-paste-with-tmux-on-mac-os-x
+    brew install reattach-to-user-namespace
+    # for more info, see:
+    #   http://robots.thoughtbot.com/post/19398560514/how-to-copy-and-paste-with-tmux-on-mac-os-x
+  else
+    sudo apt-get install -y tmux
+  fi
+}
+
+install_symlinks() {
+  header "Installing ~/.tmux.conf symlink"
+  symlink "$DOTF/tmux/tmux.conf" ~/.tmux.conf
+}
+
+if [ "$1" == "symlinks" ]; then
+  install_symlinks
 else
-  sudo apt-get install -y tmux
+  install_tmux
+  install_symlinks
 fi
-
-echo ""
-echo "========================================"
-echo "Setting up .tmux.conf"
-echo "========================================"
-DIR=$(dirname "${BASH_SOURCE[0]}")
-DIR=$(cd -P $DIR && pwd)
-
-ln -sf "$DIR/tmux.conf" ~/.tmux.conf

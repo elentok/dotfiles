@@ -4,7 +4,7 @@ source `dirname $0`/../config.sh
 
 install_zsh() {
   header "Installing Zsh"
-  if [ "`uname -s`" = "Darwin" ]; then
+  if [ "$OS" == "mac" ]; then
     brew install zsh
     if [ "$SHELL" != "/bin/zsh" ]; then
       chsh -s /bin/zsh

@@ -8,6 +8,12 @@ export BLUE="\033[34m"
 export CYAN="\033[36m"
 export RESET="\033[0m"
 
+if [ "`uname -s`" = "Darwin" ]; then
+  export OS=mac
+else
+  export OS=linux
+fi
+
 DOTF=`dirname ${BASH_SOURCE[0]}`
 export DOTF=`cd $DOTF && pwd`
 
