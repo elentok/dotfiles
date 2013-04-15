@@ -21,7 +21,7 @@ let g:ctrlp_root_markers = ['.git']
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_by_filename = 1
 let g:ctrlp_custom_ignore = {
-  \ 'dir': '\v[\/](tmp)$',
+  \ 'dir': '\v[\/](tmp|site-packages|node_modules)$',
   \ }
 
 " Colors {{{1
@@ -71,7 +71,7 @@ set visualbell t_vb=
 " Wild mode {{{1
 set wildmenu
 set wildmode=full
-set wildignore=*.swp,*.bak,*.pyc,*.class,*.o,*.obj,*/node_modules/*,*/tmp/*
+set wildignore=*.swp,*.bak,*.pyc,*.class,*.o,*.obj
 
 " Formatting {{{1
 set formatoptions=qro
