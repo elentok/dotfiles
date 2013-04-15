@@ -5,13 +5,13 @@ source `dirname $0`/config.sh
 
 if [ "$OS" == "mac" ]; then
 
+  ./nodejs/install.sh $*
   ./git/install.sh $*
   ./zsh/install.sh $*
   ./tmux/install.sh $*
   ./vim/install.sh $*
-  #./modules/ack-grep/install.sh $*
-  #./modules/ruby/post-install.sh $*
-  #./modules/nodejs.sh $*
+  ./ack/install.sh $*
+  ./ruby/install.sh $*
   #./modules/mac-smb-performance-fix/install.sh $*
 
 else

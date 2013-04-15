@@ -19,7 +19,7 @@ DOTF=`dirname ${BASH_SOURCE[0]}`
 export DOTF=`cd $DOTF && pwd`
 
 header() {
-  echo -e "${BLUE}${UNDERLINE}☻ $*$RESET"
+  echo -e "\n${BLUE}${UNDERLINE}☻ $*$RESET"
 }
 
 bullet() {
@@ -78,6 +78,15 @@ npm_cache() {
   cat /tmp/npm_cache
 }
 
+rm -f /tmp/gem_cache
+
+gem_cache() {
+  if [ ! -e /tmp/gem_cache ]; then
+    gem list > /tmp/gem_cache
+  fi
+  cat /tmp/gem_cache
+}
+
 brew_install() {
   bullet "Installing ${1}... "
 
@@ -85,6 +94,22 @@ brew_install() {
     info "already installed"
   else
     brew install $*
+  fi
+}
+
+gem_install() {
+  for gem in $*; do
+    gem_install_single $gem
+  done
+}
+
+gem_install_single() {
+  bullet "Installing gem ${1}... "
+  if [ "`gem_cache | grep \"^$1\\b\"`" != "" ]; then
+    info "already installed"
+  else
+    gem install $*
+    rm -f /tmp/gem_cache
   fi
 }
 

@@ -38,6 +38,7 @@ install_vundle() {
 install_utils() {
   brew_install ctags
   brew_install the_silver_searcher # ag
+  npm_install vimspec
   npm_install coffeelint
   npm_install jshint
   npm_install jsonlint

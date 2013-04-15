@@ -2,7 +2,13 @@
 coffee=.coffee
 --ignore-dir
 node_modules
+--ignore-dir
+site-packages
+--ignore-dir
+tmp
 --type-add
 html=.haml,.hamlc
 --type-add
-css=.sass,.scss
+css=.sass,.scss,.styl
+--type-set
+jade=.jade
