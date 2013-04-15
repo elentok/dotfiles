@@ -14,6 +14,13 @@ to use ssh run this:
   $ curl -L https://github.com/elentok/dotfiles/raw/master/online_install.sh | bash -s use-ssh
 ```
 
+## Documentation
+
+* [keys.md](blob/master/docs/keys.md) - a cheatsheet of all of my vim keybindings
+  (can be accessed from the command line using the `k` command)
+* [help.md](blob/master/docs/help.md) - a cheatsheet of useful commands
+  (can be accessed from the command line using the `h` or `h {query}` commands)
+
 Customization
 --------------
 
