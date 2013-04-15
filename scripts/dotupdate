@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd $DOTF
+echo "Pulling changes..."
+git pull && ./install.sh
