@@ -81,6 +81,7 @@ Vim
 |                       | ,[ or ,]        | n,v  | surround with []
 |                       | ,{ or ,}        | n,v  | surround with {}
 | **Git (v=version)*    | ,vd             | n    | git diff
+|                       | ,vh             | n    | show history of current file (using tig)
 |                       | ,vrf            | n    | revert file changes (git co)
 |                       | ,vrp            | n    | revert file changes (interactive, git co -p)
 |                       | ,vs             | n    | git status
