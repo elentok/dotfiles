@@ -58,3 +58,21 @@ symlink() {
   success "done"
 }
 
+npm_install() {
+  bullet "Installing NPM package '$1'"
+
+  if [ "`npm ls -g | grep \"\\b$1\\b\"`" ]; then
+    info "skipping, already installed"
+  else
+    npm install -g 
+  fi
+}
+
+python_install() {
+  bullet "Installing Python Package $1"
+  if [ "`which $1`" != "" ]; then
+    info "skipping, already installed"
+  else
+    sudo easy_install $1
+  fi
+}

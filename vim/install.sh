@@ -38,13 +38,13 @@ install_vundle() {
 install_utils() {
   header "Installing Utils (Linters, Silver Searcher, ...)"
 
-  npm install -g coffeelint
-  npm install -g jshint
-  npm install -g jsonlint
-  npm install -g marked
+  npm_install coffeelint
+  npm_install jshint
+  npm_install jsonlint
+  npm_install marked
+  python_install pylint
   brew install tidy
   brew install ag # the silver searcher
-  sudo easy_install pylint
 }
 
 if [ "$1" == "symlinks" ]; then
