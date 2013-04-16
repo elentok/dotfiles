@@ -21,7 +21,7 @@ let g:ctrlp_root_markers = ['.git']
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_by_filename = 1
 let g:ctrlp_custom_ignore = {
-  \ 'dir': '\v[\/](tmp|site-packages|node_modules)$',
+  \ 'dir': '\v[\/](tmp|site-packages|node_modules|components)$',
   \ }
 
 " Colors {{{1
