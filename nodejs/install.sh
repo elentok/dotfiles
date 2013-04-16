@@ -24,6 +24,6 @@ npm_install bower
 npm_install json
 npm_install mocha
 
-npm_install dns
+npm_install dns-switcher
 npm_install tailr
 npm_install logparty

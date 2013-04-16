@@ -14,6 +14,9 @@ if [ "$OS" == "mac" ]; then
   ./ruby/install.sh $*
   #./modules/mac-smb-performance-fix/install.sh $*
 
+  # required for todo.sh colorSymbols plugin
+  brew_install gawk
+
 else
 
   header "Base packages"
