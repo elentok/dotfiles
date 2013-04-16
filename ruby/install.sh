@@ -30,7 +30,7 @@ install_rvm() {
 install_ruby() {
   bullet "Installing ruby 2.0.0..."
   if [ "`rvm list | grep '2.0.0'`" == "" ]; then
-    rvm install 2.0.0
+    rvm install 2.0.0 --autolibs=4
     rvm use --default 2.0.0
   else
     info "already installed"
