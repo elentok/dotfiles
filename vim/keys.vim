@@ -101,6 +101,8 @@ noremap ,e1 :exec ":normal A <c-v><esc>" . (79 - strlen(getline("."))) . "A#"<cr
 noremap ,e2 :exec ":normal A <c-v><esc>" . (69 - strlen(getline("."))) . "A="<cr>
 noremap ,e3 :exec ":normal A <c-v><esc>" . (59 - strlen(getline("."))) . "A-"<cr>
 
+noremap ,tw :call ToggleWord()<cr>
+
 inoremap <c-t> <c-r>=UltiSnips_ListSnippets()<cr>
 inoremap <C-\> <c-o>ma<c-o>A;<c-o>`a
 

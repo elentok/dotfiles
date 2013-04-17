@@ -90,9 +90,29 @@ function! Confirm(message, command)
   end
 endfunc
 
-" markdown {{{!
+" markdown {{{1
 func! MarkdownPreview()
   w
   call system('marked ' . expand('%') . ' > /tmp/markdown-preview.html')
   call system('qlmanage -p /tmp/markdown-preview.html &')
+endfunc
+
+" toggle values {{{1
+
+
+let g:alternate_words = {
+      \ "true": "false",
+      \ "True": "False",
+      \ "false": "true",
+      \ "False": "True",
+      \ "yes": "no",
+      \ "no": "yes"
+      \}
+
+func! ToggleWord()
+  let word = expand("<cword>")
+  if has_key(g:alternate_words, word)
+    let word = g:alternate_words[word]
+    exec "normal viwc" . word
+  end
 endfunc

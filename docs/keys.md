@@ -70,6 +70,7 @@ Vim
 |                       | ,e3             | n    | finish line with "-" chars
 |                       | ,cc             | n,v  | comment
 |                       | ,cu             | n,v  | uncomment
+|                       | ,tw             | n    | toggle word (true/false, on/off)
 |                       | crs             | n    | convert to snake_case
 |                       | crm             | n    | convert to MixedCase
 |                       | crc             | n    | convert to camelCase
