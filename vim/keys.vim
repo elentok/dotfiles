@@ -167,8 +167,8 @@ noremap ,rt :SuperTagger<cr>
 noremap ,vs :Gstatus<cr>
 noremap ,vrf :call Confirm("Revert current file?", "!git co %")<cr>
 noremap ,vrp :!git co -p %<cr>
-noremap ,vd :silent !clear; git diff %<cr>:redraw!<cr>
-"noremap ,vd :silent !git diff %<cr>:redraw!<cr>
+noremap ,vd :!clear; tmux clear-history; git diff %<cr>
+"noremap ,vd :silent !clear; git diff %<cr>:redraw!<cr>
 noremap ,vaf :!git add %<cr>
 noremap ,vap :!git add -p %<cr>
 noremap ,vh :silent !tig %<cr>:redraw!<cr>
