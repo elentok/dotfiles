@@ -10,6 +10,7 @@ alias t='todo.sh -t -d $HOME/Dropbox/todo/todo.cfg'
 alias tl='t ls'
 alias te='t edit'
 alias ta='t add'
+alias tap='t append'
 
 # Git {{{1
 alias gca='git commit --amend'
