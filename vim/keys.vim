@@ -11,8 +11,8 @@ inoremap <c-j> <down>
 " Find {{{1
 noremap <cr> :nohls<cr>
 noremap ,ff :Ack! <c-r>=expand("<cword>")<cr><cr>
-noremap ,fp :Ack! 
 vnoremap ,ff "9y:Ack! '<c-r>9'<cr>
+noremap ,fp :Ack! 
 noremap ,fr :Gsearch<cr>
 noremap ,fg :call WebSearch("https://google.com/search?q=%query%")<cr>
 noremap ,fo :call WebSearch("http://stackoverflow.com/search?q=%query%")<cr>
@@ -179,9 +179,9 @@ xnoremap <silent><space> f oT o
 xnoremap <silent>a<space> f oF o
 xnoremap <silent>i<space> t oT o
 " Testing {{{1
-noremap ,tt :call RunLastSpec()<cr>
-noremap ,tl :call RunSpecLine()<cr>
-noremap ,tf :call RunSpecFile()<cr>
+"noremap ,tt :call RunLastSpec()<cr>
+"noremap ,tl :call RunSpecLine()<cr>
+"noremap ,tf :call RunSpecFile()<cr>
 
 " Misc {{{1
 noremap ,ti :IndentGuidesToggle<cr>
