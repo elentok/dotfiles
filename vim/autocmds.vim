@@ -29,6 +29,11 @@ augroup Elentok_Misc
   autocmd FileType smarty setlocal autoindent
   autocmd FileType java setlocal foldmethod=syntax noexpandtab
 
+  " Spell checking
+  autocmd FileType gitcommit setlocal spell
+  autocmd FileType ghmarkdown setlocal spell
+  autocmd FileType markdown setlocal spell
+
   " UTF8
   autocmd FileType vim setlocal nobomb
 
