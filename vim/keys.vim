@@ -77,7 +77,6 @@ noremap <c-_> :call ToggleHebrew()<cr>
 inoremap <c-_> <c-o>:call ToggleHebrew()<cr>
 noremap ,ehs :SplitjoinSplit<cr>
 noremap ,ehj :SplitjoinJoin<cr>
-noremap ,es :set spell!<cr>
 noremap <backspace> zc
 
 " super yank (yank to * and + registers)
@@ -100,8 +99,6 @@ noremap ,e\ :Tab /\|<cr>
 noremap ,e1 :exec ":normal A <c-v><esc>" . (79 - strlen(getline("."))) . "A#"<cr>
 noremap ,e2 :exec ":normal A <c-v><esc>" . (69 - strlen(getline("."))) . "A="<cr>
 noremap ,e3 :exec ":normal A <c-v><esc>" . (59 - strlen(getline("."))) . "A-"<cr>
-
-noremap ,tw :call ToggleWord()<cr>
 
 inoremap <c-t> <c-r>=UltiSnips_ListSnippets()<cr>
 inoremap <C-\> <c-o>ma<c-o>A;<c-o>`a
@@ -183,8 +180,10 @@ xnoremap <silent>i<space> t oT o
 "noremap ,tl :call RunSpecLine()<cr>
 "noremap ,tf :call RunSpecFile()<cr>
 
-" Misc {{{1
+" Toggle stuff {{{1
 noremap ,ti :IndentGuidesToggle<cr>
+noremap ,ts :set spell!<cr>
+noremap ,tw :call ToggleWord()<cr>
 
 " MS-Windows {{{1
 if g:os == 'windows'

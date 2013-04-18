@@ -54,8 +54,6 @@ Vim
 |                       | tab             | i    | autocomplete or snippet
 |                       | &lt;c-t&gt;     | i    | show available snippets
 |                       | C-\             | i    | add ";" to the end of the line
-|                       | ,es             | n    | toggle spelling
-|                       | z=              | n    | suggest correct spelling
 |                       | ,ef             | n    | edit file
 |                       | ,et             | n    | edit file in tab
 |                       | ,rf             | n    | read file
@@ -75,6 +73,10 @@ Vim
 |                       | crm             | n    | convert to MixedCase
 |                       | crc             | n    | convert to camelCase
 |                       | :%S/one/two/    | n    | substitute using [abolish](https://github.com/tpope/vim-abolish)
+| **Spelling**          | ,ts             | n    | toggle spelling
+|                       | z=              | n    | suggest correct spelling
+|                       | zg              | n    | define current word as correctly spelled
+|                       | zw              | n    | define current word as wrongly spelled
 | **Surround**          | ,#              | n,v  | surround with #{}
 |                       | ,"              | n,v  | surround with "
 |                       | ,'              | n,v  | surround with '
