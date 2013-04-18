@@ -105,6 +105,8 @@ let g:alternate_words = {
       \ "True": "False",
       \ "false": "true",
       \ "False": "True",
+      \ "be_true": "be_false",
+      \ "be_false": "be_true",
       \ "yes": "no",
       \ "no": "yes"
       \}
