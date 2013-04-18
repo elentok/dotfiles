@@ -31,6 +31,7 @@ augroup Elentok_Misc
 
   " Spell checking
   autocmd FileType gitcommit setlocal spell
+  autocmd FileType gitcommit setlocal spellcapcheck=
   autocmd FileType ghmarkdown setlocal spell
   autocmd FileType markdown setlocal spell
 
