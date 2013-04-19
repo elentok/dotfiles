@@ -4,21 +4,19 @@ source `dirname $0`/../config.sh
 
 install_on_mac() {
   brew_install macvim --with-cscope --override-system-vim --with-lua
-  #create_vim_bin_symlink
+  create_vim_bin_symlink
 }
 
 create_vim_bin_symlink() {
-  cd /usr/bin
-  #sudo mv vim vim-builtin
-  latest_vim=`/bin/ls -1 /usr/local/Cellar/macvim/7.* | sort -n | tail -1`
-  #sudo ln -s $latest_vim/bin/vim vim
+  latest_vim=`/bin/ls -1 -d /usr/local/Cellar/macvim/7.* | sort -n | tail -1`
+  symlink $latest_vim/bin/vim /usr/bin/vim
 }
 
 install_on_linux() {
+  bullet "Installing packages\n"
+  sudo pat-get install vim-gnome ctags
   bullet "Installing Powerline fonts\n"
-  if [ "`uname -s`" == "Linux" ]; then
-    bash "$DOTF/vim/powerline-fonts/install.sh"
-  fi
+  bash "$DOTF/vim/powerline-fonts/install.sh"
 }
 
 install_symlinks() {

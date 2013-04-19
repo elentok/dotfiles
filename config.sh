@@ -39,14 +39,23 @@ error() {
 }
 
 backup() {
+  info "\n  backing up to ${1}.backup"
   mv -f $1 ${1}.backup
+  if [ $? == 0 ]; then return; fi
+
+  info "  trying with sudo:"
+  sudo mv -f $1 ${1}.backup
+  if [ $? != 0 ]; then
+    error "FAILED"
+    exit 1
+  fi
 }
 
 symlink() {
   source=$1
   target=$2
 
-  bullet "Linking $source\n      ==> ${target}..."
+  bullet "Linking $source\n      ==> ${target}... "
   if [ -e $target ]; then
     if [ -h $target ]; then
       if [ "$source" == "`readlink $target`" ]; then
@@ -55,12 +64,21 @@ symlink() {
       fi
     fi
 
-    info "backing up existing target to ${target}.backup"
     backup $target
   fi
 
   ln -sf $source $target
-  success "done"
+  if [ $? != 0 ]; then
+    info "  Can't create link, trying with sudo:"
+    sudo ln -sf $source $target
+    if [ $? != 0 ]; then
+      error "failed"
+      exit 1
+    fi
+  fi
+  if [ $? == 0 ]; then
+    success "done"
+  fi
 }
 
 npm_install() {
