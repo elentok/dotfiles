@@ -60,6 +60,7 @@ Bundle 'tpope/vim-repeat'
 Bundle "nelstrom/vim-visual-star-search"
 Bundle 'freitass/todo.txt-vim'
 Bundle 'terryma/vim-multiple-cursors'
+Bundle 'iandoe/vim-osx-colorpicker'
 
 " text objects:
 Bundle 'michaeljsmith/vim-indent-object'
