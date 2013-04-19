@@ -6,7 +6,7 @@ alias tma='tm a'
 alias tmt='tm new-session -A  -s test-output' # create or attach to 'test-output' session
 
 # Todo.txt {{{1
-alias t='todo.sh -t -d $HOME/Dropbox/todo/todo.cfg'
+alias t='todo.sh -t -d $DOTF/todo/todo.cfg'
 alias tl='t ls'
 alias te='t edit'
 alias ta='t add'

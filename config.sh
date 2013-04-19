@@ -34,6 +34,10 @@ success() {
   echo -e "${GREEN}✔ $*$RESET"
 }
 
+error() {
+  echo -e "${RED}✘ $*$RESET"
+}
+
 backup() {
   mv -f $1 ${1}.backup
 }
