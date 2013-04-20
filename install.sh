@@ -13,7 +13,8 @@ source `dirname $0`/config.sh
 ./todo/install.sh $*
 
 if [ "$OS" == "mac" ]; then
-  echo .
+  header 'Other packages'
+  brew_install imagemagick
   #./modules/mac-smb-performance-fix/install.sh $*
 else
 

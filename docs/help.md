@@ -51,6 +51,8 @@ Command Line Tips
 
 ## ImageMagick convert to 2 colors (2bit, 2-bit)
     convert -colors 2 input.png output.png
+## ImageMagick create pdf
+    convert file1.png file2.png output.pdf
 
 ## reset terminal
     ctrl+c reset
@@ -76,3 +78,9 @@ Command Line Tips
 
 ## count number of lines
     wc -l
+## zsh remove extension
+    name='file.ext'
+    echo ${name:r} # => outputs 'file'
+## zsh regexp
+    name='file-bob.txt'
+    echo ${name:s/bob/joe} # => outputs 'file-joe.txt'
