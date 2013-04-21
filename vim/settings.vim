@@ -137,3 +137,8 @@ let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
 
+
+" Reduce timeout after <ESC> is received. {{{1
+set ttimeout
+set ttimeoutlen=20
+set notimeout
