@@ -53,6 +53,7 @@ Command Line Tips
     convert -colors 2 input.png output.png
 ## ImageMagick create pdf
     convert file1.png file2.png output.pdf
+    convert -page {width}x{height} file1.png file2.png output.pdf
 
 ## reset terminal
     ctrl+c reset
