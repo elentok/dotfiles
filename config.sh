@@ -155,10 +155,13 @@ apt_install() {
 apt_install_single() {
   bullet "Installing ${1}..."
 
-  if [ "`apt_cache | grep \"^$1\\b\"`" ]; then
+  has=`apt_cache | grep "^$1$"`
+
+  if [ "$has" != "" ]; then
     info " already installed"
   else
     sudo apt-get install -y ${1}
+    rm -f /tmp/apt-cache
   fi
 }
 
@@ -166,7 +169,7 @@ rm -f /tmp/apt_cache
 
 apt_cache() {
   if [ ! -e /tmp/apt_cache ]; then
-    dpkg --get-selections | awk '{print $1}' 2>/dev/null > /tmp/apt_cache
+    dpkg --get-selections | grep 'install' | awk '{print $1}' 2>/dev/null > /tmp/apt_cache
   fi
   cat /tmp/apt_cache
 }
@@ -201,20 +204,20 @@ git_get_origin() {
 }
 
 add_ppa() {
-  bullet "adding repository ${2}..."
-  version=`ubuntu_version`
-  file="/etc/apt/sources.list.d/${1}.sources.list"
 
-  if [ ! -e "$file" ]; then
-    sudo bash -c "echo 'deb http://ppa.launchpad.net/$2/ubuntu $version main' > $file"
-    sudo bash -c "echo 'deb-src http://ppa.launchpad.net/$2/ubuntu $version main' >> $file"
-    sudo apt-get update
+  bullet "Adding repository ${1}..."
+  sources="/etc/apt/sources.list /etc/apt/sources.list.d/*.list"
+  if [ "`grep ppa.launchpad.net/$1 $sources`" != "" ]; then
+    info " already installed"
   else
-    info " already exists"
+    # required for add-apt-repository
+    apt_install software-properties-common
+    sudo add-apt-repository -y ppa:${1}
+    sudo apt-get update
   fi
 }
 
 ubuntu_version() {
-  lsb_release -r -s
+  lsb_release -c -s
 }
 
