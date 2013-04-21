@@ -87,7 +87,9 @@ npm_install() {
   if [ "`npm_cache | grep \"\\b$1\\b\"`" ]; then
     info " already installed"
   else
-    npm install -g $*
+    npm="npm"
+    if [ "$OS" == "linux" ]; then npm="sudo npm"; fi
+    $npm install -g $*
   fi
 }
 
