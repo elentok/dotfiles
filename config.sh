@@ -206,8 +206,8 @@ add_ppa() {
   file="/etc/apt/sources.list.d/${1}.sources.list"
 
   if [ ! -e "$file" ]; then
-    echo "deb http://ppa.launchpad.net/$2/ubuntu $version main" > $file
-    echo "deb-src http://ppa.launchpad.net/$2/ubuntu $version main" >> $file
+    sudo bash -c "echo 'deb http://ppa.launchpad.net/$2/ubuntu $version main' > $file"
+    sudo bash -c "echo 'deb-src http://ppa.launchpad.net/$2/ubuntu $version main' >> $file"
     sudo apt-get update
   else
     info " already exists"
