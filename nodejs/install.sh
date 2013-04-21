@@ -9,8 +9,7 @@ if [ "$OS" == "mac" ]; then
   #curl https://npmjs.org/install.sh | sh
 else
   apt_install python-software-properties
-  sudo add-apt-repository ppa:chris-lea/node.js
-  apt_update
+  add_ppa nodejs chris-lea/node.js
   apt_install nodejs nodejs-dev npm
 fi
 
