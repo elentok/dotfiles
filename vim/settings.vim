@@ -24,6 +24,8 @@ let g:ctrlp_custom_ignore = {
   \ 'dir': '\v[\/](tmp|site-packages|node_modules|components)$',
   \ }
 
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
 " Colors {{{1
 set background=dark
 if has('gui_running')
