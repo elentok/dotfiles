@@ -15,6 +15,12 @@ else
   export OS=linux
 fi
 
+if [ "`which X`" = ""]; then
+  export HAS_GUI=no
+else
+  export HAS_GUI=yes
+fi
+
 DOTF=`dirname ${BASH_SOURCE[0]}`
 export DOTF=`cd $DOTF && pwd`
 
