@@ -3,6 +3,10 @@
 
 source `dirname $0`/config.sh
 
+if [ "`which say`" != "" ]; then
+  say -v Zarvox 'Update sequence initialized' &
+fi
+
 ./nodejs/install.sh $*
 ./git/install.sh $*
 ./zsh/install.sh $*
@@ -35,4 +39,8 @@ else
   #./modules/jdownloader.sh $*
   #./modules/handbrake.sh $*
   #./modules/lamp.sh $*
+fi
+
+if [ "`which say`" != "" ]; then
+  say -v Zarvox 'Update sequence complete'
 fi
