@@ -5,6 +5,10 @@ source `dirname $0`/../config.sh
 install_on_mac() {
   brew_install macvim --with-cscope --override-system-vim --with-lua
   create_vim_bin_symlink
+
+  brew_install ctags
+  brew_install the_silver_searcher # ag
+  brew_install tidy
 }
 
 create_vim_bin_symlink() {
@@ -13,9 +17,15 @@ create_vim_bin_symlink() {
 }
 
 install_on_linux() {
-  apt_install vim-gnome ctags
-  bullet "Installing Powerline fonts\n"
-  bash "$DOTF/vim/powerline-fonts/install.sh"
+  apt_install vim-gnome ctags tidy
+
+  if [ "$HAS_GUI" = "yes" ]; then
+    bullet "Installing Powerline fonts\n"
+    bash "$DOTF/vim/powerline-fonts/install.sh"
+  fi
+
+  add_ppa tomaz-muraus/the-silver-searcher
+  apt_install the-silver-searcher
 }
 
 install_symlinks() {
@@ -33,15 +43,12 @@ install_vundle() {
 }
 
 install_utils() {
-  brew_install ctags
-  brew_install the_silver_searcher # ag
   npm_install vimspec
   npm_install coffeelint
   npm_install jshint
   npm_install jsonlint
   npm_install marked
   python_install pylint
-  brew_install tidy
 }
 
 header "Vim"
