@@ -8,10 +8,10 @@ if [ "$OS" == "mac" ]; then
   brew_install node
   #curl https://npmjs.org/install.sh | sh
 else
-  sudo apt-get install -y python-software-properties
+  apt_install python-software-properties
   sudo add-apt-repository ppa:chris-lea/node.js
-  sudo apt-get update
-  sudo apt-get install -y nodejs nodejs-dev npm
+  apt_update
+  apt_install nodejs nodejs-dev npm
 fi
 
 

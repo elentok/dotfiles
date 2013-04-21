@@ -25,11 +25,12 @@ if [ "$OS" == "mac" ]; then
 else
 
   header "Base packages"
-  sudo apt-get install -y mercurial \
-    keepassx gimp htop \
-    samba libpam-smbpass \
-    pysdm unrar regexxer \
-    krusader vlc
+
+  apt_install mercurial htop samba libpam-smbpass unrar
+
+  if [ "`which X`" != "" ]; then
+    ./modules/linux-gui-apps.sh
+  fi
 
   #header "Modules"
   #./modules/mc/install.sh $*

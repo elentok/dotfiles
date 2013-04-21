@@ -10,8 +10,11 @@ install_zsh() {
       chsh -s /bin/zsh
     fi
   else
-    sudo apt-get install -y zsh
-    sudo usermod -s /bin/zsh $USER
+    apt_install zsh
+    if [ "$SHELL" != "/bin/zsh" ]; then
+      bullet "Changing shell to /bin/zsh... "
+      sudo usermod -s /bin/zsh $USER
+    fi
   fi
 }
 

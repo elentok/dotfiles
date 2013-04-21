@@ -144,6 +144,37 @@ python_install() {
   fi
 }
 
+apt_install() {
+  for pkg in $*; do
+    apt_install_single $pkg
+  done
+}
+
+apt_install_single() {
+  bullet "Installing ${1}..."
+
+  if [ "`apt_cache | grep \"^$1\\b\"`" ]; then
+    info " already installed"
+  else
+    sudo apt-get install -y ${1}
+  fi
+}
+
+rm -f /tmp/apt_cache
+
+apt_cache() {
+  if [ ! -e /tmp/apt_cache ]; then
+    dpkg --get-selections | awk '{print $1}' 2>/dev/null > /tmp/apt_cache
+  fi
+  cat /tmp/apt_cache
+}
+
+apt_update() {
+  bullet "Updating apt..."
+  sudo apt-get update
+  rm /tmp/apt_cache
+}
+
 git_clone() {
   origin=$1
   target=$2

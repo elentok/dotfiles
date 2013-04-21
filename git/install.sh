@@ -7,7 +7,7 @@ install_git() {
     brew_install git
     brew_install tig
   else
-    sudo apt-get install -y git giggle tig
+    apt_install git tig
   fi
 }
 

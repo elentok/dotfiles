@@ -13,8 +13,7 @@ create_vim_bin_symlink() {
 }
 
 install_on_linux() {
-  bullet "Installing packages\n"
-  sudo pat-get install vim-gnome ctags
+  apt_install vim-gnome ctags
   bullet "Installing Powerline fonts\n"
   bash "$DOTF/vim/powerline-fonts/install.sh"
 }

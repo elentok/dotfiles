@@ -7,7 +7,7 @@ header "Ack-grep"
 if [ "$OS" == "mac" ]; then
   brew_install ack
 else
-  sudo apt-get install -y ack-grep
+  apt_install ack-grep
 fi
 
 symlink "$DOTF/ack/ackrc" ~/.ackrc
