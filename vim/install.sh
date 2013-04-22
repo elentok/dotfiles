@@ -17,15 +17,16 @@ create_vim_bin_symlink() {
 }
 
 install_on_linux() {
-  apt_install vim-gnome ctags tidy
+  apt_install vim-gnome exuberant-ctags tidy
 
   if [ "$HAS_GUI" = "yes" ]; then
     bullet "Installing Powerline fonts\n"
     bash "$DOTF/vim/powerline-fonts/install.sh"
   fi
 
-  add_ppa tomaz-muraus/the-silver-searcher
-  apt_install the-silver-searcher
+  #add_ppa tomaz-muraus/the-silver-searcher
+  #apt_install the-silver-searcher
+  install_deb the-silver-searcher http://swiftsignal.com/packages/ubuntu/quantal/the-silver-searcher_0.14-1_amd64.deb
 }
 
 install_symlinks() {

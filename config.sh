@@ -15,7 +15,7 @@ else
   export OS=linux
 fi
 
-if [ "`which X`" = ""]; then
+if [ "`which X`" = "" ]; then
   export HAS_GUI=no
 else
   export HAS_GUI=yes
@@ -227,3 +227,16 @@ ubuntu_version() {
   lsb_release -c -s
 }
 
+install_deb() {
+  bullet "Installing ${1}..."
+
+  has=`apt_cache | grep "^$1$"`
+
+  if [ "$has" != "" ]; then
+    info " already installed"
+  else
+    wget $2 -O /tmp/$1.deb
+    sudo dpkg -i /tmp/$1.deb
+    rm -f /tmp/apt-cache
+  fi
+}
