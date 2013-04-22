@@ -1,5 +1,12 @@
 #!/bin/bash
+# vim: foldmethod=marker
 
+# DOTF directory {{{1
+DOTF=`dirname ${BASH_SOURCE[0]}`
+export DOTF=`cd $DOTF && pwd`
+
+
+# Colors {{{1
 export BLACK="\033[30m"
 export RED="\033[31m"
 export GREEN="\033[32m"
@@ -9,6 +16,7 @@ export CYAN="\033[36m"
 export UNDERLINE="\033[4m"
 export RESET="\033[0m"
 
+# Identify OS {{{1
 if [ "`uname -s`" = "Darwin" ]; then
   export OS=mac
 else
@@ -21,9 +29,7 @@ else
   export HAS_GUI=yes
 fi
 
-DOTF=`dirname ${BASH_SOURCE[0]}`
-export DOTF=`cd $DOTF && pwd`
-
+# display methods (header/bullet/info/success/error) {{{1
 header() {
   echo -e "\n${BLUE}${UNDERLINE}☻ $*$RESET"
 }
@@ -44,6 +50,7 @@ error() {
   echo -e "${RED}✘ $*$RESET"
 }
 
+# backup {{{1
 backup() {
   info "\n  backing up to ${1}.backup"
   mv -f $1 ${1}.backup
@@ -57,6 +64,7 @@ backup() {
   fi
 }
 
+# symlink {{{1
 symlink() {
   source=$1
   target=$2
@@ -87,6 +95,7 @@ symlink() {
   fi
 }
 
+# NPM {{{1
 npm_install() {
   bullet "Installing ${1}..."
 
@@ -108,24 +117,7 @@ npm_cache() {
   cat /tmp/npm_cache
 }
 
-rm -f /tmp/gem_cache
-
-gem_cache() {
-  if [ ! -e /tmp/gem_cache ]; then
-    gem list > /tmp/gem_cache
-  fi
-  cat /tmp/gem_cache
-}
-
-brew_install() {
-  bullet "Installing ${1}... "
-
-  if [ "`brew ls -1 | grep \"^$1\$\"`" != "" ]; then
-    info "already installed"
-  else
-    brew install $*
-  fi
-}
+# Gems {{{1
 
 gem_install() {
   for gem in $*; do
@@ -143,6 +135,27 @@ gem_install_single() {
   fi
 }
 
+rm -f /tmp/gem_cache
+
+gem_cache() {
+  if [ ! -e /tmp/gem_cache ]; then
+    gem list > /tmp/gem_cache
+  fi
+  cat /tmp/gem_cache
+}
+
+# Homebrew {{{1
+brew_install() {
+  bullet "Installing ${1}... "
+
+  if [ "`brew ls -1 | grep \"^$1\$\"`" != "" ]; then
+    info "already installed"
+  else
+    brew install $*
+  fi
+}
+
+# Python {{{1
 python_install() {
   bullet "Installing ${1}... "
   if [ "`which $1`" != "" ]; then
@@ -152,6 +165,31 @@ python_install() {
   fi
 }
 
+# Git {{{1
+git_clone() {
+  origin=$1
+  target=$2
+  bullet "Cloning $origin => ${target}..."
+  if [ -d $target ]; then
+    if [ -d $target/.git ]; then
+      current_origin=`cd $target && git_get_origin`
+      if [ "$current_origin" == "$origin" ]; then
+        info " already cloned"
+        # thought: (cd $target && git pull)
+        return
+      fi
+    fi
+    backup $target
+  fi
+
+  git clone $*
+}
+
+git_get_origin() {
+  git remote -v | grep fetch | awk '{print $2}'
+}
+
+# Apt: Install {{{1
 apt_install() {
   for pkg in $*; do
     apt_install_single $pkg
@@ -180,35 +218,14 @@ apt_cache() {
   cat /tmp/apt_cache
 }
 
+# Apt: Update {{{1
 apt_update() {
   bullet "Updating apt..."
   sudo apt-get update
   rm /tmp/apt_cache
 }
 
-git_clone() {
-  origin=$1
-  target=$2
-  bullet "Cloning $origin => ${target}..."
-  if [ -d $target ]; then
-    if [ -d $target/.git ]; then
-      current_origin=`cd $target && git_get_origin`
-      if [ "$current_origin" == "$origin" ]; then
-        info " already cloned"
-        # thought: (cd $target && git pull)
-        return
-      fi
-    fi
-    backup $target
-  fi
-
-  git clone $*
-}
-
-git_get_origin() {
-  git remote -v | grep fetch | awk '{print $2}'
-}
-
+# Apt: Add Repo {{{1
 add_ppa() {
 
   bullet "Adding repository ${1}..."
@@ -223,10 +240,7 @@ add_ppa() {
   fi
 }
 
-ubuntu_version() {
-  lsb_release -c -s
-}
-
+# Deb packages {{{1
 install_deb() {
   bullet "Installing ${1}..."
 
