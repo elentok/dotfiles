@@ -185,6 +185,7 @@ xnoremap <silent>i<space> t oT o
 noremap ,ti :IndentGuidesToggle<cr>
 noremap ,ts :set spell!<cr>
 noremap ,tw :call ToggleWord()<cr>
+noremap ,te :SyntasticToggleMode<cr>:redraw!<cr>
 
 " MS-Windows {{{1
 if g:os == 'windows'
