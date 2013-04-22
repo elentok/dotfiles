@@ -57,6 +57,7 @@ Vim
 |                       | ,ef             | n    | edit file
 |                       | ,et             | n    | edit file in tab
 |                       | ,rf             | n    | read file
+|                       | ,er             | n    | revert unsaved changes (:e!)
 |                       | ,ehs            | n    | split hash
 |                       | ,ehj            | n    | join hash
 |                       | ,ey             | n    | yank to * and + registers
