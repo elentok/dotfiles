@@ -12,7 +12,7 @@ inoremap <c-j> <down>
 noremap <cr> :nohls<cr>
 noremap ,ff :Ack! <c-r>=expand("<cword>")<cr><cr>
 vnoremap ,ff "9y:Ack! '<c-r>9'<cr>
-noremap ,fp :Ack! 
+noremap ,fc :Ack! 
 noremap ,fr :Gsearch<cr>
 noremap ,fg :call WebSearch("https://google.com/search?q=%query%")<cr>
 noremap ,fo :call WebSearch("http://stackoverflow.com/search?q=%query%")<cr>
