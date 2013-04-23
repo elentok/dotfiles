@@ -1,2 +1,7 @@
 color cursor white black
 bind generic P !git add -p %(file)
+set show-author = abbreviated
+set show-date = relative
+set show-id = yes
+set author-width = 2
+set show-refs = yes
