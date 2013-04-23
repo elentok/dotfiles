@@ -1,0 +1,11 @@
+bind 1:cmd shell '~/.dotfiles/scripts/windowmarker goto 1'
+bind 2:cmd shell '~/.dotfiles/scripts/windowmarker goto 2'
+bind 3:cmd shell '~/.dotfiles/scripts/windowmarker goto 3'
+bind 4:cmd shell '~/.dotfiles/scripts/windowmarker goto 4'
+bind 5:cmd shell '~/.dotfiles/scripts/windowmarker goto 5'
+
+bind 1:cmd;ctrl shell '~/.dotfiles/scripts/windowmarker mark 1'
+bind 2:cmd;ctrl shell '~/.dotfiles/scripts/windowmarker mark 2'
+bind 3:cmd;ctrl shell '~/.dotfiles/scripts/windowmarker mark 3'
+bind 4:cmd;ctrl shell '~/.dotfiles/scripts/windowmarker mark 4'
+bind 5:cmd;ctrl shell '~/.dotfiles/scripts/windowmarker mark 5'

@@ -1,0 +1,120 @@
+#!/bin/bash
+# vim: foldmethod=marker
+
+DATAFILE=~/.windowmarks
+
+# main {{{1
+
+main() {
+  cmd=$1
+  shift
+  case "$cmd" in
+    'mark')
+      mark $*
+      ;;
+    'list')
+      list $*
+      ;;
+    'goto')
+      goto $*
+      ;;
+    *)
+      usage
+      ;;
+  esac
+}
+
+# usage {{{1
+
+usage() {
+  echo Window Marker
+  echo ==============
+  echo .
+  echo Usage:
+  echo
+  echo   windowmarker mark {number} - mark active window
+  echo   windowmarker goto {number} - goto window
+  echo   windowmarker list - list marked windows
+}
+
+# list {{{1
+
+list() {
+  if [ -e $DATAFILE ]; then
+    cat $DATAFILE | sed -E "s/export WIN([0-9]+)='(.+)'/\1 \2/" | sort -n
+  else
+    echo "no windows"
+  fi
+}
+
+# mark {{{1
+
+mark() {
+  number=$1
+  active=`get_active_window`
+  set_window $number "$active"
+  echo "Set window #${number} to $active"
+}
+
+set_window() {
+  number=$1
+  params=$2
+  if [ ! -e $DATAFILE ]; then touch $DATAFILE; fi
+  mv $DATAFILE ${DATAFILE}.bak
+  grep -v "^${number}," ${DATAFILE}.bak > $DATAFILE
+  echo "${number}, $params" >> $DATAFILE
+}
+
+get_active_window() {
+  osascript <<EOF
+  #set frontApp to name of (get info for (path to frontmost application))
+  tell application "System Events"
+    set frontApp to name of first process whose frontmost is true
+  end tell
+
+  tell application frontApp
+    set windowId to id of front window
+  end tell
+
+  return {frontApp, windowId}
+EOF
+}
+
+# goto {{{1
+
+goto() {
+  number=$1
+  params=`cat $DATAFILE | grep "^$number,"`
+
+  if [ "$params" == "" ]; then
+    echo "error: no such window"
+  else
+    app_name="`echo $params | awk -F', *' '{print $2}'`"
+    window_id="`echo $params | awk -F', *' '{print $3}'`"
+    focus_window "$app_name" $window_id
+  fi
+}
+
+focus_window() {
+  app_name=$1
+  window_id=$2
+
+  osascript <<EOF
+  tell application "$app_name"
+    activate
+    set theWindow to first window whose id = $window_id
+    set index of theWindow to 1
+  end tell
+
+  tell application "System Events"
+    tell process "$app_name"
+      tell first window to perform action "AXRaise"
+      get first window
+    end tell
+  end tell
+EOF
+}
+
+# }}}1
+
+main $*
