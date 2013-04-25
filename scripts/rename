@@ -1,7 +1,5 @@
 #!/bin/zsh
 
-REAL='no'
-
 export RED="\033[31m"
 export GREEN="\033[32m"
 export YELLOW="\033[33m"
@@ -11,51 +9,65 @@ export RESET="\033[0m"
 usage() {
   echo "Usage:"
   echo
-  echo "  rename [options] {regexp} files"
-  echo
-  echo "  options:"
-  echo "    -r: really rename (otherwise only simulates)"
+  echo "  rename {regexp} files"
   echo
   echo "  example:"
-  echo "    rename -r 's/one/two' *.png"
+  echo "    rename 's/one/two/' *.png"
+}
+
+simulate() {
+  regexp=$1
+  shift
+  has_results='no'
+  for file in $*; do
+    new_file=$(echo $file | sed -E "$regexp")
+    if [ "$file" != "$new_file" ]; then
+      echo "Will rename ${YELLOW}${file}$RESET"
+      echo "         to ${BLUE}${new_file}$RESET"
+      has_results='yes'
+    fi
+  done
+  [ "$has_results" = 'yes' ]
+  return $?
+}
+
+confirm() {
+  read "yesno?Rename (yes/[no])? "
+  [ "$yesno" = "yes" ]
+  return $?
 }
 
 rename() {
-  if [ "$REAL" = "yes" ]; then
-    echo "${RED}Renaming for real!${RESET}"
-  else
-    echo "${GREEN}Relax, just simulating${RESET}"
-  fi
   regexp=$1
   shift
   for file in $*; do
     new_file=$(echo $file | sed -E "$regexp")
     if [ "$file" != "$new_file" ]; then
-      echo "Renaming ${YELLOW}${file}$RESET"
-      echo "      to ${GREEN}${new_file}$RESET"
-      if [ "$REAL" = "yes" ]; then
-        git ls-files --error-unmatch $file > /dev/null 2>&1
-        if [ $? -eq 0 ]; then
-          git mv "$file" "$new_file"
-        else
-          mv "$file" "$new_file"
-        fi
-      fi
+      rename_file "$file" "$new_file"
     fi
   done
+}
+
+rename_file() {
+  echo "Renaming ${YELLOW}${file}$RESET"
+  echo "      to ${GREEN}${new_file}$RESET"
+
+  git ls-files --error-unmatch $file > /dev/null 2>&1
+  if [ $? -eq 0 ]; then
+    git mv "$file" "$new_file"
+  else
+    mv "$file" "$new_file"
+  fi
 }
 
 case "$1" in
   "")
     usage
     ;;
-  "-r")
-    shift 1
-    REAL='yes'
-    rename $*
-    ;;
   *)
-    rename $*
+    if simulate $*; then
+      if confirm; then rename $*; fi
+    fi
     ;;
 esac
 
