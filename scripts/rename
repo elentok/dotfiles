@@ -34,7 +34,12 @@ rename() {
       echo "Renaming ${YELLOW}${file}$RESET"
       echo "      to ${GREEN}${new_file}$RESET"
       if [ "$REAL" = "yes" ]; then
-        mv "$file" "$new_file"
+        git ls-files --error-unmatch $file > /dev/null 2>&1
+        if [ $? -eq 0 ]; then
+          git mv "$file" "$new_file"
+        else
+          mv "$file" "$new_file"
+        fi
       fi
     fi
   done
