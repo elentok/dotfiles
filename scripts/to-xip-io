@@ -1,0 +1,14 @@
+#!/bin/bash
+
+
+to_xip_io() {
+  ip=$(ifconfig | grep 'inet 192.168' | head -1 | awk '{print $2}')
+  sed -E "s/\\.dev/.${ip}.xip.io/"
+}
+
+
+long_url=$(pbpaste | to_xip_io)
+short_url=$(curl -s http://tinyurl.com/api-create.php?url=${long_url})
+
+echo $short_url | pbcopy
+echo $short_url
