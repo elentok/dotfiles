@@ -1,0 +1,59 @@
+#!/bin/zsh
+
+REAL='no'
+
+export RED="\033[31m"
+export GREEN="\033[32m"
+export YELLOW="\033[33m"
+export BLUE="\033[34m"
+export RESET="\033[0m"
+
+usage() {
+  echo "Usage:"
+  echo
+  echo "  rename [options] {regexp} files"
+  echo
+  echo "  options:"
+  echo "    -r: really rename (otherwise only simulates)"
+  echo
+  echo "  example:"
+  echo "    rename -r 's/one/two' *.png"
+}
+
+rename() {
+  if [ "$REAL" = "yes" ]; then
+    echo "${RED}Renaming for real!${RESET}"
+  else
+    echo "${GREEN}Relax, just simulating${RESET}"
+  fi
+  regexp=$1
+  shift
+  for file in $*; do
+    new_file=$(echo $file | sed -E "$regexp")
+    if [ "$file" != "$new_file" ]; then
+      echo "Renaming ${YELLOW}${file}$RESET"
+      echo "      to ${GREEN}${new_file}$RESET"
+      if [ "$REAL" = "yes" ]; then
+        mv "$file" "$new_file"
+      fi
+    fi
+  done
+}
+
+case "$1" in
+  "")
+    usage
+    ;;
+  "-r")
+    shift 1
+    REAL='yes'
+    rename $*
+    ;;
+  *)
+    rename $*
+    ;;
+esac
+
+
+
+
