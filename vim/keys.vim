@@ -162,7 +162,7 @@ noremap ,rt :SuperTagger<cr>
 
 
 " Git (v = version control) {{{1
-noremap ,vs :Gstatus<cr>
+noremap ,vs :silent !tig status<cr>:redraw!<cr>
 noremap ,vrf :call Confirm("Revert current file?", "!git co %")<cr>
 noremap ,vrp :!git co -p %<cr>
 noremap ,vd :!clear; tmux clear-history; git diff %<cr>
