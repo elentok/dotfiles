@@ -6,8 +6,8 @@ augroup Elentok_Misc
   autocmd BufRead,BufEnter *.autoSetup setlocal syntax=xml
   autocmd BufRead,BufEnter *.xaml setlocal syntax=xml
   autocmd BufRead,BufEnter *.py setlocal ts=4 softtabstop=4 shiftwidth=4
-  autocmd BufRead,BufEnter *.css setlocal foldmethod=marker
-  autocmd BufRead,BufEnter *.scss setlocal foldmethod=marker
+  autocmd BufRead,BufEnter *.css setlocal foldmethod=marker foldmarker={,}
+  autocmd BufRead,BufEnter *.scss setlocal foldmethod=marker foldmarker={,}
   autocmd BufRead,BufEnter *.applescript set filetype=applescript
   autocmd BufRead,BufEnter *.rxls setlocal filetype=ruby
   autocmd BufRead,BufEnter *.md,*.markdown setlocal filetype=ghmarkdown
