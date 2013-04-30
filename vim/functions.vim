@@ -105,11 +105,20 @@ let g:alternate_words = {
       \ "True": "False",
       \ "false": "true",
       \ "False": "True",
+      \ "should": "should_not",
+      \ "should_not": "should",
       \ "be_true": "be_false",
       \ "be_false": "be_true",
       \ "yes": "no",
-      \ "no": "yes"
+      \ "no": "yes",
+      \ "left": "right",
+      \ "right": "left",
+      \ "border-left": "border-right",
+      \ "border-right": "border-left",
+      \ "border-top": "border-bottom",
+      \ "border-bottom": "border-top"
       \}
+
 
 func! ToggleWord()
   let word = expand("<cword>")
