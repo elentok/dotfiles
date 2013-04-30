@@ -16,9 +16,9 @@ to use ssh run this:
 
 ## Documentation
 
-* [keys.md](blob/master/docs/keys.md) - a cheatsheet of all of my vim keybindings
+* [keys.md](docs/keys.md) - a cheatsheet of all of my vim keybindings
   (can be accessed from the command line using the `k` command)
-* [help.md](blob/master/docs/help.md) - a cheatsheet of useful commands
+* [help.md](docs/help.md) - a cheatsheet of useful commands
   (can be accessed from the command line using the `h` or `h {query}` commands)
 
 Customization
