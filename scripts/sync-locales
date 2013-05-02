@@ -1,0 +1,63 @@
+#!/bin/zsh
+
+if [ -e ".locales" ]; then
+  source .locales
+else
+  source=$1
+  target=$2
+fi
+
+export BLUE="\033[34m"
+export YELLOW="\033[33m"
+export RESET="\033[0m"
+
+bullet() {
+  echo -e "${YELLOW}➜$RESET $*"
+}
+
+usage() {
+  echo 'Usage:'
+  echo
+  echo 'there are two ways to use sync-locales'
+  echo
+  echo '1. with arguments:'
+  echo '  sync-locales {source} {target}'
+  echo
+  echo '2. create a .locales file:'
+  echo '  export source=...'
+  echo '  export target=...'
+  echo
+}
+
+if [ "$target" = "" ]; then
+  usage
+  exit 1
+fi
+
+confirm() {
+  echo -e -n "${BLUE}$* ${RESET}"
+  read "yesno?(y/[n])? "
+  [ "$yesno" = "y" ]
+  return $?
+}
+
+for file in "$source"/*.yml; do
+  basename="${file:t}"
+  target_file="$target/$basename"
+  if [ ! -e "$target_file" ]; then
+    if confirm "➜ $basename doesn't exist, copy"; then
+      echo "copying..."
+      cp "$file" "$target_file"
+    fi
+  else
+    diff -q "$file" "$target_file" > /dev/null
+    if [ $? -ne 0 ]; then
+      bullet "$basename is different"
+      git diff --color $target_file $file
+      if confirm "overwrite $basename"; then
+        echo "copying..."
+        cp "$file" "$target_file"
+      fi
+    fi
+  fi
+done
