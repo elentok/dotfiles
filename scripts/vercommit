@@ -1,0 +1,18 @@
+#!/bin/bash
+
+source $DOTF/config.sh
+
+ver=$(semver)
+
+header "Committing semver ($ver)"
+git add .semver
+git commit -m "Bumped version to $ver"
+
+header "Creating tag $ver"
+git tag -f $ver
+
+header "Pushing"
+git push
+
+header "Pushing tag"
+git push --tags
