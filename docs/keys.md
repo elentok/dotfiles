@@ -74,6 +74,10 @@ Vim
 |                       | crm             | n    | convert to MixedCase
 |                       | crc             | n    | convert to camelCase
 |                       | :%S/one/two/    | n    | substitute using [abolish](https://github.com/tpope/vim-abolish)
+| **Folding**           | zo              | n    | open fold
+|                       | zc              | n    | close fold
+|                       | zM              | n    | close all folds
+|                       | zR              | n    | open all folds
 | **Spelling**          | ,ts             | n    | toggle spelling
 |                       | z=              | n    | suggest correct spelling
 |                       | zg              | n    | define current word as correctly spelled
