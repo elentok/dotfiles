@@ -32,7 +32,8 @@ Vim
 | **Docs**              | ,dm             | n    | markdown cheatsheet
 |                       | ,dj             | n    | jade cheatsheet
 | **Window Management** | ctrl-h,j,k,l    | n    | move to window
-|                       | Q               | n    | quit window
+|                       | Q               | n    | close or kill window (uses yadr's window killer)
+|                       | ,qq             | n    | closes vim (confirms unsaved changes)
 |                       | ,sp             | n    | split
 |                       | ,sv             | n    | split vertical
 | **Go To**             | ,gb             | n    | go to buffer

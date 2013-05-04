@@ -36,6 +36,8 @@ nnoremap ,, :silent !tput clear<cr>:redraw!<cr>
 nnoremap ,sv :vs<cr>
 nnoremap ,sp :sp<cr>
 
+nnoremap ,qq :confirm qall<cr>
+
 " using yadr's window killer instead of a simple :q
 "noremap Q :q<cr>
 
