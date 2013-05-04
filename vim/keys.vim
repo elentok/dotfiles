@@ -36,7 +36,8 @@ nnoremap ,, :silent !tput clear<cr>:redraw!<cr>
 nnoremap ,sv :vs<cr>
 nnoremap ,sp :sp<cr>
 
-noremap Q :q<cr>
+" using yadr's window killer instead of a simple :q
+"noremap Q :q<cr>
 
 nnoremap <silent> <Leader>] :exe "resize " . (&lines * 2/3)<CR>
 nnoremap <silent> <Leader>[ :exe "resize " . (&lines * 1/3)<CR>
