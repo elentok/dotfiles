@@ -82,6 +82,9 @@ Command Line Tips
 ## zsh remove extension
     name='file.ext'
     echo ${name:r} # => outputs 'file'
+## zsh basename
+    fullpath='/path/to/file.ext'
+    echo ${fullpath:t} # => outputs 'file.ext'
 ## zsh regexp
     name='file-bob.txt'
     echo ${name:s/bob/joe} # => outputs 'file-joe.txt'
@@ -89,3 +92,5 @@ Command Line Tips
 ## tmux - detach all other clients
     tmux attach -d
     tmux attach -d -t specific_session_name
+## bzr - pull repository
+    bzr branch bzr+ssh://{username}@{hostname}/path/to/repo local_dir_to_create
