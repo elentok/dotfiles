@@ -41,10 +41,11 @@ Vim
 |                       | ,gd             | n    | go to directory
 |                       | ,gf             | n    | go to file (CtrlP)
 |                       | C-p             | n    | go to file (CtrlP)
-|                       | ,gg             | n    | toggle nerd tree
 |                       | ,gm             | n    | go to most recently used file
-|                       | ,gn             | n    | nerd tree (and focus current file)
-|                       | C-\             | n    | nerd tree (and focus current file)
+|                       | ,gg             | n    | go to nerd tree
+|                       | ,gn             | n    | go to nerd tree (and focus current file)
+|                       | ,tn             | n    | toggle nerd tree
+|                       | C-\             | n    | go to nerd tree (and focus current file)
 |                       | ,go             | n    | go to alternate file
 |                       | ,gs             | n    | go to snippets file
 |                       | ,gt             | n    | go to tag

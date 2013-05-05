@@ -63,7 +63,7 @@ noremap ,gb :CtrlPBuffer<cr>
 noremap ,gc :CtrlPChange<cr>
 noremap ,gd :cd <C-R>=expand("%:p:h")<cr>
 noremap ,gf :CtrlP<cr>
-noremap ,gg :NERDTreeToggle<cr>
+noremap ,gg :NERDTreeFocus<cr>
 noremap ,gm :CtrlPMRUFiles<cr>
 noremap ,gn :NERDTreeFind<cr>
 noremap ,go :call GotoAlternateFile()<cr>
@@ -189,6 +189,7 @@ noremap ,ti :IndentGuidesToggle<cr>
 noremap ,ts :set spell!<cr>
 noremap ,tw :call ToggleWord()<cr>
 noremap ,te :SyntasticToggleMode<cr>:redraw!<cr>
+noremap ,tn :NERDTreeToggle<cr>
 
 " MS-Windows {{{1
 if g:os == 'windows'
