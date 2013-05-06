@@ -26,6 +26,10 @@ let g:ctrlp_custom_ignore = {
 
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
+let g:syntastic_mode_map = { "mode": "active",
+                           \ "active_filetypes": [],
+                           \ "passive_filetypes": ['sass', 'scss']}
+
 " Colors {{{1
 set background=dark
 if has('gui_running')
