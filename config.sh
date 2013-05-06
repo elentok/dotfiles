@@ -51,6 +51,12 @@ error() {
   echo -e "${RED}✘ $*$RESET"
 }
 
+# confirm {{{1
+confirm() {
+  read "yesno?${1} (yes/[no])? "
+  [ "$yesno" = "yes" ]
+  return $?
+}
 # backup {{{1
 backup() {
   info "\n  backing up to ${1}.backup"
