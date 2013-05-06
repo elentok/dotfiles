@@ -2,7 +2,8 @@
 # vim: foldmethod=marker
 
 # DOTF directory {{{1
-DOTF=`dirname ${BASH_SOURCE[0]}`
+
+DOTF=`dirname ${BASH_SOURCE[0]-$0}`
 export DOTF=`cd $DOTF && pwd`
 
 
