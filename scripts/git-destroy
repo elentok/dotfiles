@@ -1,0 +1,58 @@
+#!/bin/zsh
+
+source $DOTF/config.sh
+
+main() {
+  if [[ "$1" == "" ]]; then
+    usage
+  else
+    destroy_branch "$1"
+  fi
+}
+
+usage() {
+  echo "Deletes branch from local and origin"
+  echo
+  echo "Usage:"
+  echo
+  echo "  git destroy {branch-name}"
+}
+
+destroy_branch() {
+  name="$1"
+  if branch_exists "$name"; then
+    destroy_local_branch "$name"
+    destroy_remote_branch "$name"
+  else
+    error "ERROR: Branch '$name' doesn't exists!"
+  fi
+}
+
+branch_exists() {
+  git branch | sed 's/^[\* ]*//' | grep "^${1}$" > /dev/null
+}
+
+destroy_local_branch() {
+  if confirm "Destroy local branch '$1'"; then
+    bullet "Destroying..."
+    git branch -d "$1"
+    if [[ $? -ne 0 ]]; then
+      error "An error occured"
+      exit 1
+    fi
+  fi
+}
+
+destroy_remote_branch() {
+  if confirm "Destroy remote branch '$1'"; then
+    bullet "Destroying..."
+    git push --delete origin "$1"
+    if [[ $? -ne 0 ]]; then
+      error "An error occured"
+      exit 1
+    fi
+  fi
+}
+
+
+main $*
