@@ -15,7 +15,8 @@ Vim
 |                       | ]b              | n    | next buffer
 |                       | {               | n    | previous paragraph
 |                       | }               | n    | next paragraph
-|                       | Alt-j,k,l       | i    | move down, up, right
+|                       | Ctrl-j,k,l      | i    | move down, up, right
+|                       | Ctrl-e          | i    | go to end of line
 | **Selection**         | vi&lt;space&gt; | n    | select text between spaces
 |                       | vi( / vi{ / vi[ | n    | select text between brackets
 |                       | vii             | n    | select text with the same indentation
@@ -64,6 +65,7 @@ Vim
 |                       | ,ehj            | n    | join hash
 |                       | ,ey             | n    | yank to * and + registers
 |                       | ,e=             | n    | tabularize =
+|                       | ,e>             | n    | tabularize =>
 |                       | ,e:             | n    | tabularize :
 |                       | ,e\             | n    | tabularize \                                                     |
 |                       | ,e1             | n    | finish line with "#" chars

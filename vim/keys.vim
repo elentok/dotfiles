@@ -7,6 +7,7 @@ noremap - 20k
 inoremap <c-l> <right>
 inoremap <c-k> <up>
 inoremap <c-j> <down>
+inoremap <c-e> <c-o>$
 
 " Find {{{1
 noremap <cr> :nohls<cr>
@@ -96,6 +97,7 @@ noremap ,wq :wq<cr>
 noremap ,er :call Confirm("Revert unsaved changes?", "e!")<cr>
 
 noremap ,e= :Tab /=<cr>
+noremap ,e> :Tab /=><cr>
 noremap ,e: :Tab /:\zs<cr>
 noremap ,e\ :Tab /\|<cr>
 
