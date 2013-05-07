@@ -5,3 +5,5 @@ set show-date = relative
 set show-id = yes
 set author-width = 2
 set show-refs = yes
+
+bind main r !git rebase -i %(commit)
