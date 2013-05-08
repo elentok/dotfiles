@@ -1,0 +1,24 @@
+#!/bin/bash
+
+main() {
+  if [[ "$1" == "" ]]; then
+    usage
+  else
+    create $*
+  fi
+}
+
+usage() {
+  echo "Usage:"
+  echo "  newsh [filename] [optional:bash/zsh]"
+}
+
+create() {
+  file=$1
+  shell=${2-bash}
+  echo "#!/bin/$shell" > "$file"
+  chmod +x "$file"
+  vim "$file"
+}
+
+main $*
