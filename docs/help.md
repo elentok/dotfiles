@@ -94,3 +94,6 @@ Command Line Tips
     tmux attach -d -t specific_session_name
 ## bzr - pull repository
     bzr branch bzr+ssh://{username}@{hostname}/path/to/repo local_dir_to_create
+## irc - register nick
+    /msg nickserv help
+    /msg nickserv register <password> <email-address>
