@@ -9,6 +9,7 @@ export DOTF=`cd $DOTF && pwd`
 
 # Colors {{{1
 export BLACK="\033[30m"
+export GRAY="\033[1;30m"
 export RED="\033[31m"
 export GREEN="\033[32m"
 export YELLOW="\033[33m"
@@ -40,7 +41,7 @@ bullet() {
 }
 
 info() {
-  echo -e "${BLACK}$*$RESET"
+  echo -e "${GRAY}$*$RESET"
 }
 
 success() {
