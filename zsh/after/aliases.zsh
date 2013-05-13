@@ -77,5 +77,6 @@ alias psg='ps aux | grep'
 alias q='qlmanage -p'
 alias trailer='wget -U QuickTime'
 alias z='zeus'
+alias hh='history'
 
 # vim: foldmethod=marker
