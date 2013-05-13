@@ -106,6 +106,7 @@ set incsearch   " incremental search
 set ignorecase  " ignore case when search
 set smartcase   " ignore case if search pattern is all lowercase, case-sensitive otherwise
 set hlsearch    " highlight search terms
+set wrapscan    " wrap around when searching
 
 " Highlight Current Line (disabled) {{{1
 "set cursorline
