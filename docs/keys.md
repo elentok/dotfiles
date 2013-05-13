@@ -32,6 +32,7 @@ Vim
 |                       | ,fo             | n,v  | find in stack overflow
 | **Docs**              | ,dm             | n    | markdown cheatsheet
 |                       | ,dj             | n    | jade cheatsheet
+|                       | ,dk             | n    | open docs/keys.md
 | **Window Management** | ctrl-h,j,k,l    | n    | move to window
 |                       | Q               | n    | close or kill window (uses yadr's window killer)
 |                       | ,qq             | n    | closes vim (confirms unsaved changes)

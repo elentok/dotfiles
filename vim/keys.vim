@@ -23,6 +23,7 @@ vnoremap ,fo "9y:call Browse("http://stackoverflow.com/search?q=<c-r>9")<cr>
 " Documentation {{{1
 nnoremap ,dm :call Browse("https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet")<cr>
 nnoremap ,dj :call Browse("https://github.com/visionmedia/jade#readme")<cr>
+nnoremap ,dk :e $DOTF/docs/keys.md<cr>
 
 
 " Window management {{{1
