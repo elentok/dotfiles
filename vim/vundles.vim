@@ -60,7 +60,7 @@ Bundle 'tpope/vim-repeat'
 Bundle "nelstrom/vim-visual-star-search"
 Bundle 'freitass/todo.txt-vim'
 Bundle 'iandoe/vim-osx-colorpicker'
-Bundle 'Shougo/neocomplcache'
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'airblade/vim-gitgutter'
 
 " text objects:

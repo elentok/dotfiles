@@ -43,6 +43,18 @@ install_vundle() {
   success "done"
 }
 
+compile_youcompleteme() {
+  bullet "Compiling YouCompleteMe... "
+  if [[ -e "$DOTF/vim/bundle/YouCompleteMe/python/ycm_core.so" ]]; then
+    info 'Already compiled.'
+  else
+    (
+      cd $DOTF/vim/bundle/YouCompleteMe
+      ./install.sh
+    )
+  fi
+}
+
 install_utils() {
   npm_install vimspec
   npm_install coffeelint
@@ -64,5 +76,6 @@ else
 
   install_symlinks
   install_vundle
+  compile_youcompleteme
   install_utils
 fi
