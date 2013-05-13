@@ -30,7 +30,9 @@ let g:syntastic_mode_map = { "mode": "active",
                            \ "active_filetypes": [],
                            \ "passive_filetypes": ['sass', 'scss']}
 
-let g:neocomplcache_enable_at_startup = 1
+let g:ycm_key_list_select_completion = [ '<C-J>', '<Down>' ]
+let g:ycm_key_list_previous_completion = [ '<C-K>', '<Up>' ]
+let g:ycm_min_num_of_chars_for_completion = 2
 
 " Colors {{{1
 set background=dark
