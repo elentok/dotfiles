@@ -119,8 +119,11 @@ Other Apps
 Pixelmator
 ----------
 * v - move
-* z - zoom
+* z - zoom (use alt to zoom out)
 * m - rectangular select (marquee)
+* h or hold space - hand tool
+* cmd+1 - tools
+* cmd+2 - layers
 
 iMessages
 ----------
