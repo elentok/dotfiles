@@ -61,12 +61,10 @@ Bundle "nelstrom/vim-visual-star-search"
 Bundle 'freitass/todo.txt-vim'
 Bundle 'iandoe/vim-osx-colorpicker'
 Bundle 'Shougo/neocomplcache'
+Bundle 'airblade/vim-gitgutter'
 
 " text objects:
 Bundle 'michaeljsmith/vim-indent-object'
-
-"Bundle 'airblade/vim-gitgutter'
-"Bundle 'skwp/vim-colors-solarized.git'
 
 " Go language
 "Bundle 'jnwhiteh/vim-golang'
