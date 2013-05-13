@@ -30,6 +30,8 @@ let g:syntastic_mode_map = { "mode": "active",
                            \ "active_filetypes": [],
                            \ "passive_filetypes": ['sass', 'scss']}
 
+let g:neocomplcache_enable_at_startup = 1
+
 " Colors {{{1
 set background=dark
 if has('gui_running')
