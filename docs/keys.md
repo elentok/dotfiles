@@ -94,6 +94,8 @@ Vim
 |                       | ,( or ,)        | n,v  | surround with ()
 |                       | ,[ or ,]        | n,v  | surround with []
 |                       | ,{ or ,}        | n,v  | surround with {}
+| **Session**           | ,so             | n    | open session
+|                       | ,ss             | n    | save session
 | **Git (v=version)*    | ,vd             | n    | git diff
 |                       | ,vh             | n    | show history of current file (using tig)
 |                       | ,vrf            | n    | revert file changes (git co)

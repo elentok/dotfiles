@@ -210,3 +210,6 @@ func! PostStartupKeys()
   vmap <tab> >gv
   vmap <s-tab> <gv
 endfunc
+" Session {{{1
+nnoremap ,ss :SaveSession temp<cr>
+nnoremap ,so :OpenSession temp<cr>

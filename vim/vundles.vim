@@ -61,6 +61,7 @@ Bundle 'tpope/vim-repeat'
 Bundle "nelstrom/vim-visual-star-search"
 Bundle 'iandoe/vim-osx-colorpicker'
 Bundle 'dag/vim-fish'
+Bundle 'xolox/vim-session'
 
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'airblade/vim-gitgutter'
