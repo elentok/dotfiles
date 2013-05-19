@@ -20,6 +20,9 @@ noremap ,fo :call WebSearch("http://stackoverflow.com/search?q=%query%")<cr>
 vnoremap ,fg "9y:call Browse("https://google.com/search?q=<c-r>9")<cr>
 vnoremap ,fo "9y:call Browse("http://stackoverflow.com/search?q=<c-r>9")<cr>
 
+nnoremap / /\v
+vnoremap / /\v
+
 " Documentation {{{1
 nnoremap ,dm :call Browse("https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet")<cr>
 nnoremap ,dj :call Browse("https://github.com/visionmedia/jade#readme")<cr>
