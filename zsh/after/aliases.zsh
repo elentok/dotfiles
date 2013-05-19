@@ -7,10 +7,18 @@ alias tmt='tm new-session -A  -s test-output' # create or attach to 'test-output
 
 # Todo.txt {{{1
 alias t='todo.sh -t -d $DOTF/todo/todo.cfg'
-alias tl='t ls'
+alias tl='t ls $TODO_CONTEXT'
 alias te='t edit'
 alias ta='t add'
 alias tap='t append'
+tc() {
+  if [[ "$*" == "" ]]; then
+    echo "Current todo.txt context is '$TODO_CONTEXT'"
+  else
+    export TODO_CONTEXT="$*";
+    echo "Set todo.txt context to '$TODO_CONTEXT'"
+  fi
+}
 
 # Git {{{1
 alias gca='git commit --amend'
