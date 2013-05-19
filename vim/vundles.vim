@@ -29,7 +29,7 @@ Bundle 'applescript.vim'
 Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
 Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "ervandew/supertab"
+"Bundle "ervandew/supertab"
 Bundle "tomtom/tlib_vim"
 Bundle "SirVer/ultisnips"
 "Bundle "snipmate-snippets"

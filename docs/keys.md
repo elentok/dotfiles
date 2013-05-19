@@ -55,7 +55,8 @@ Vim
 |                       | ``              | n    | go to tag in current file
 | **Editing**           | ctrl-_          | n,i  | toggle hebrew mode
 |                       | tab/C-tab       | v    | indent/deindent (without losing selection)
-|                       | tab             | i    | autocomplete or snippet
+|                       | tab             | i    | autocomplete
+|                       | C-j             | i    | expand snippet
 |                       | &lt;c-t&gt;     | i    | show available snippets
 |                       | C-\             | i    | add ";" to the end of the line
 |                       | ,ef             | n    | edit file
