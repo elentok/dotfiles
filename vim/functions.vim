@@ -127,3 +127,12 @@ func! ToggleWord()
     exec "normal viwc" . word
   end
 endfunc
+
+" revert {{{1
+func! RevertFile()
+  if &modified
+    call Confirm("Revert unsaved changes?", "e!")
+  else
+    e!
+  end
+endfunc

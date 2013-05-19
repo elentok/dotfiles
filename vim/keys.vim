@@ -98,7 +98,7 @@ noremap ,rf :read <C-R>=expand("%:p:h") . $delimiter <cr>
 noremap ,ew :w<cr>
 noremap ,ww :w<cr>
 noremap ,wq :wq<cr>
-noremap ,er :call Confirm("Revert unsaved changes?", "e!")<cr>
+noremap ,er :call RevertFile()<cr>
 
 noremap ,e= :Tab /=<cr>
 noremap ,e> :Tab /=><cr>
