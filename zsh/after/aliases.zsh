@@ -1,4 +1,5 @@
 alias x=exit
+alias c=clear
 
 # Tmux {{{1
 alias tm='tmux -u'
