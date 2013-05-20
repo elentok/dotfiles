@@ -44,6 +44,9 @@ install_vundle() {
 }
 
 compile_youcompleteme() {
+  # required to compile YouCompleteMe
+  brew_install cmake
+
   bullet "Compiling YouCompleteMe... "
   if [[ -e "$DOTF/vim/bundle/YouCompleteMe/python/ycm_core.so" ]]; then
     info 'Already compiled.'
