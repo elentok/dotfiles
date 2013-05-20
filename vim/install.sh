@@ -32,6 +32,7 @@ install_on_linux() {
 install_symlinks() {
   symlink "$DOTF/vim/vimrc" ~/.vimrc
   symlink "$DOTF/vim" ~/.vim
+  symlink "$DOTF/vim/bundle/supertagger/ctags" ~/.ctags
   symlink "$DOTF/vim/pylintrc" ~/.pylintrc
 }
 
