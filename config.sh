@@ -156,11 +156,28 @@ gem_cache() {
 brew_install() {
   bullet "Installing ${1}... "
 
-  if [ "`brew ls -1 | grep \"^$1\$\"`" != "" ]; then
+  #if [ "`brew ls -1 | grep \"^$1\$\"`" != "" ]; then
+  if has_brew_package "$1"; then
     info "already installed"
   else
     brew install $*
   fi
+}
+
+brew_install_url() {
+  name=$1
+  shift
+
+  bullet "Installing ${name}... "
+  if has_brew_package "$name"; then
+    info "already installed"
+  else
+    brew install $*
+  fi
+}
+
+has_brew_package() {
+  [ "`brew ls -1 | grep \"^$1\$\"`" != "" ]
 }
 
 # Python {{{1
