@@ -15,7 +15,7 @@ install_fish() {
 }
 
 install_fish_on_mac() {
-  brew_install_url fish https://raw.github.com/ridiculousfish/homebrew/9a481458491b654457707a75d98ad770ad248d88/Library/Formula/fish.rb
+  brew_install fish
   add_to_etc_shells
 }
 
