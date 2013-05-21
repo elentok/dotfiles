@@ -39,6 +39,8 @@ let g:ycm_min_num_of_chars_for_completion = 2
 let g:session_autosave = 'no'
 let g:session_autoload = 'no'
 
+let g:gitgutter_eager = 0
+
 " Colors {{{1
 set background=dark
 if has('gui_running')
