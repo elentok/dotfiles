@@ -14,6 +14,8 @@ augroup Elentok_Misc
   autocmd BufRead,BufEnter gitconfig setlocal filetype=gitconfig
   autocmd BufRead,BufEnter .gitconfig* setlocal filetype=gitconfig
 
+  autocmd BufRead,BufEnter *.load setlocal filetype=fish
+
   " Javascript
   autocmd BufRead,BufEnter *.js setlocal nocindent smartindent
   autocmd BufRead,BufEnter *.json setlocal filetype=javascript
