@@ -23,6 +23,7 @@ function tc -d "filter todo.txt by given context"
 end
 
 # Git {{{1
+alias g='git'
 alias gp='git push'
 alias gca='git commit --amend'
 alias gcm='git commit --message'
@@ -33,7 +34,7 @@ alias ts='tig status'
 
 # Vim {{{1
 alias v=vim
-alias va='vim $DOTF/zsh/after/aliases.zsh; source $DOTF/zsh/after/aliases.zsh'
+alias va='vim $DOTF/fish/aliases.load; . $DOTF/fish/aliases.load'
 alias txt='cd ~/Dropbox/PlainText; and vim'
 alias vimt='vim ~/Dropbox/vim.TODO'
 
