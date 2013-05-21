@@ -48,7 +48,8 @@ install_oh_my_fish() {
 create_symlinks() {
   #mkdir -p ~/.config/fish/custom/plugins
   #symlink "$DOTF/fish" ~/.config/fish/custom/plugins/elentok
-  symlink "$DOTF/fish/config.fish" ~/.config/fish/config.fish
+  #symlink "$DOTF/fish/config.fish" ~/.config/fish/config.fish
+  symlink "$DOTF/fish" ~/.oh-my-fish/custom
 }
 
 install_fish
