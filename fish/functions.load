@@ -1,0 +1,8 @@
+function vd -d "Vim Diff"
+  diff --brief $argv
+  if test $status = 0
+    echo Files are identical
+  else
+    vimdiff $argv
+  end
+end
