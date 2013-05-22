@@ -25,6 +25,8 @@ end
 # Git {{{1
 alias g='git'
 alias gp='git push'
+alias gco='git checkout'
+make_completion gco 'git checkout'
 alias gca='git commit --amend'
 alias gcm='git commit --message'
 alias gs='git status'
