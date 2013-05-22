@@ -17,6 +17,10 @@ Vim
 |                       | }               | n    | next paragraph
 |                       | Ctrl-j,k,l      | i    | move down, up, right
 |                       | Ctrl-e          | i    | go to end of line
+| **Diff**              | do              | n,v  | diff get/obtain (takes the change from the other pane)
+|                       | dp              | n,v  | diff put (put the change in other pane)
+|                       | ]c              | n    | next change
+|                       | [c              | n    | previous change
 | **Selection**         | vi&lt;space&gt; | n    | select text between spaces
 |                       | vi( / vi{ / vi[ | n    | select text between brackets
 |                       | vii             | n    | select text with the same indentation
