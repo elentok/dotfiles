@@ -6,3 +6,6 @@ function vd -d "Vim Diff"
     vimdiff $argv
   end
 end
+
+function fish_greeting
+end
