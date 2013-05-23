@@ -15,3 +15,7 @@ set fish_plugins autojump brew bundler node python rails rake rvm
 
 # Load oh-my-fish cofiguration.
 . $fish_path/oh-my-fish.fish
+
+for file in ~/.dotlocal/*.fish
+  . $file
+end
