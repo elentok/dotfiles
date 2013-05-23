@@ -69,6 +69,9 @@ Bundle 'airblade/vim-gitgutter'
 " text objects:
 Bundle 'michaeljsmith/vim-indent-object'
 
+" file formats
+Bundle 'evanmiller/nginx-vim-syntax'
+
 " Go language
 "Bundle 'jnwhiteh/vim-golang'
 "Bundle 'go-vim'
