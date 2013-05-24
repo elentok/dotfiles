@@ -1,5 +1,9 @@
 " vim: foldmethod=marker
 
+if $SHELL =~ 'fish'
+  set shell=/bin/sh
+endif
+
 let mapleader = ","
 
 let $root=expand("<sfile>:p:h")
