@@ -26,10 +26,7 @@ Bundle 'tpope/vim-unimpaired'
 Bundle 'danro/rename.vim'
 Bundle 'godlygeek/tabular'
 Bundle 'applescript.vim'
-Bundle 'mattn/webapi-vim'
-Bundle 'mattn/gist-vim'
 Bundle "MarcWeber/vim-addon-mw-utils"
-"Bundle "ervandew/supertab"
 Bundle "tomtom/tlib_vim"
 Bundle "SirVer/ultisnips"
 "Bundle "snipmate-snippets"
@@ -46,14 +43,11 @@ Bundle 'wavded/vim-stylus'
 Bundle 'groenewege/vim-less'
 Bundle 'scrooloose/syntastic.git'
 Bundle 'mileszs/ack.vim'
-Bundle 'rodjek/vim-puppet'
 Bundle 'jtratner/vim-flavored-markdown.git'
 Bundle 'elentok/vim-markdown-folding'
-Bundle 'vim-scripts/camelcasemotion'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'skwp/greplace.vim'
 Bundle 'Raimondi/delimitMate'
-Bundle 'gregsexton/gitv'
 Bundle 'tpope/vim-dispatch'
 Bundle 'AndrewRadev/splitjoin.vim'
 Bundle 'tpope/vim-abolish'
