@@ -1,5 +1,4 @@
 set -xg DOTF $HOME/.dotfiles
-set fish_plugins autojump bundler brew rails rake rvm
 
 function make_completion --argument alias command
   complete -c $alias -xa "(

@@ -8,7 +8,8 @@ set fish_theme robbyrussell
 # Custom plugins may be added to ~/.oh-my-fish/custom/plugins/
 # Example format: set fish_plugins autojump bundler
 
-set fish_plugins autojump brew bundler node python rails rake rvm
+#set fish_plugins autojump brew bundler node python rails rake rvm
+set fish_plugins brew bundler node rails
 
 # Path to your custom folder (default path is $FISH/custom)
 #set fish_custom $HOME/dotfiles/oh-my-fish

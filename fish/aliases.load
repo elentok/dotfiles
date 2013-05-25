@@ -1,97 +1,88 @@
-alias x=exit
-alias c=clear
+function x; exit; end
+function c; clear; end
 
 # Tmux {{{1
-alias tm='tmux -u'
-alias tma='tm a'
-alias tmt='tm new-session -A  -s test-output' # create or attach to 'test-output' session
+function tm; tmux -u $argv; end
+function tma; tm a $argv; end
+function tmt; tm new-session -A  -s test-output $argv; end # create or attach to 'test-output' session
 
 # Todo.txt {{{1
-alias t='todo.sh -t -d $DOTF/todo/todo.cfg'
-alias tl='t ls $TODO_CONTEXT'
-alias te='t edit'
-alias ta='t add'
-alias tap='t append'
-
-function tc -d "filter todo.txt by given context"
-  if [ "$argv" = "" ]
-    echo Current todo.txt context is "$TODO_CONTEXT"
-  else
-    set -g TODO_CONTEXT "$argv"
-    echo "Set todo.txt context to '$TODO_CONTEXT'"
-  end
-end
+function t; todo.sh -t -d $DOTF/todo/todo.cfg $argv; end
+function tl; t ls $argv; end
+function te; t edit $argv; end
+function ta; t add $argv; end
+function tap; t append $argv; end
 
 # Git {{{1
-alias g='git'
-alias gp='git push'
-alias gco='git checkout'
+function g; git $argv; end
+function gp; git push $argv; end
+function gco; git checkout $argv; end
 make_completion gco 'git checkout'
-alias gca='git commit --amend'
-alias gcm='git commit --message'
-alias gs='git status'
-alias gst='git status'
-alias gl='git pull'
-alias ts='tig status'
+function gca; git commit --amend $argv; end
+function gcm; git commit --message $argv; end
+function gs; git status $argv; end
+function gst; git status $argv; end
+function gl; git pull $argv; end
+function ts; tig status $argv; end
 
 # Vim {{{1
-alias v=vim
-alias va='vim $DOTF/fish/aliases.load; . $DOTF/fish/aliases.load'
-alias txt='cd ~/Dropbox/PlainText; and vim'
-alias vimt='vim ~/Dropbox/vim.TODO'
+function v; vim $argv; end
+function va; vim $DOTF/fish/aliases.load; . $DOTF/fish/aliases.load $argv; end
+function txt; cd ~/Dropbox/PlainText; and vim $argv; end
+function vimt; vim ~/Dropbox/vim.TODO $argv; end
 
 # Find {{{1
-alias ff='find . -iname'
-alias ackc='ack --coffee'
+function ff; find . -iname $argv; end
+function ackc; ack --coffee $argv; end
 
 # Mac Specific {{{1
 if [ (uname -s) = "Darwin" ]
-  alias ls='ls -FGsk'
+  function ls; ls -FGsk $argv; end
   # s = show size
   # k = show size in kilobytes
 
 # Linux Specific {{{1
 else
-  alias ack='ack-grep'
-  alias ls='ls --color=always -XFhs'
-  alias cl='xclip -selection clipboard -o'
-  alias st='scrot -s'
-  alias wp='feh --bg-fill'
+  function ack; ack-grep $argv; end
+  function ls; ls --color=always -XFhs $argv; end
+  function cl; xclip -selection clipboard -o $argv; end
+  function st; scrot -s $argv; end
+  function wp; feh --bg-fill $argv; end
 
   # mpc {{{2
-  alias m=ncmpcpp
-  alias mf='mpc search filename'
-  alias ma='mpc add'
-  alias mp='mpc play'
-  alias mcl='mpc clear'
+  function m; ncmpcpp $argv; end
+  function mf; mpc search filename $argv; end
+  function ma; mpc add $argv; end
+  function mp; mpc play $argv; end
+  function mcl; mpc clear $argv; end
   # 2}}}
 end
 
 # Helpers {{{1
 
-alias c1='awk "{ print \$1 }"'
-alias c2='awk "{ print \$2 }"'
-alias c3='awk "{ print \$3 }"'
-alias c4='awk "{ print \$4 }"'
-alias c5='awk "{ print \$5 }"'
-alias c6='awk "{ print \$6 }"'
+function c1; awk "{ print \$1 }" $argv; end
+function c2; awk "{ print \$2 }" $argv; end
+function c3; awk "{ print \$3 }" $argv; end
+function c4; awk "{ print \$4 }" $argv; end
+function c5; awk "{ print \$5 }" $argv; end
+function c6; awk "{ print \$6 }" $argv; end
 
-alias total='awk "{ s+=\$1 } END { print s }"'
-alias tot='awk "{ s+=\$1 } END { printf(\"%''d\n\", s) }"'
+function total; awk "{ s+=\$1 } END { print s }" $argv; end
+#function tot; awk "{ s+=\$1 } END { printf(\"% $argv; end'd\n\", s) }"'
 
 # Other {{{1
-alias ak='ssh-add ~/.keys/bitbucket.ssh.private'
-alias bw='convert -colors 2'
-alias cf='/bin/ls -1 | wc -l' # count files
-alias dotf='cd $DOTF'
-alias k='less $DOTF/docs/keys.md'
-alias kk='vim $DOTF/docs/keys.md'
-alias n='env NODE_NO_READLINE=1 rlwrap -p Green -S "node >>> " node'
-alias pryy='pry -r ./config/environment'
-alias psg='ps aux | grep'
-alias q='qlmanage -p'
-alias trailer='wget -U QuickTime'
-alias z='zeus'
-alias hh='history'
+function ak; ssh-add ~/.keys/bitbucket.ssh.private $argv; end
+function bw; convert -colors 2 $argv; end
+function cf; /bin/ls -1 | wc -l $argv; end # count files
+function dotf; cd $DOTF $argv; end
+function k; less $DOTF/docs/keys.md $argv; end
+function kk; vim $DOTF/docs/keys.md $argv; end
+function n; env NODE_NO_READLINE=1 rlwrap -p Green -S "node >>> " node $argv; end
+function pryy; pry -r ./config/environment $argv; end
+function psg; ps aux | grep $argv; end
+function q; qlmanage -p $argv; end
+function trailer; wget -U QuickTime $argv; end
+function z; zeus $argv; end
+function hh; history $argv; end
 
 # vim: foldmethod=marker
