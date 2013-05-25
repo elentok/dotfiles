@@ -17,6 +17,8 @@ if [ "$old_head" != "$new_head" ]; then
   echo -ne "\nPress any key to run the installer..."
   read -n 1
 
+  brew update
+
   ./install.sh
 fi
 
