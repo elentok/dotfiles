@@ -37,7 +37,7 @@ function ackc; ack --coffee $argv; end
 
 # Mac Specific {{{1
 if [ (uname -s) = "Darwin" ]
-  function ls; ls -FGsk $argv; end
+  function ls; /bin/ls -FGsk $argv; end
   # s = show size
   # k = show size in kilobytes
 
