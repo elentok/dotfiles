@@ -52,6 +52,8 @@ create_symlinks() {
   symlink "$DOTF/fish" ~/.oh-my-fish/custom
 }
 
+# coreutils is required for 'gls' (gnu ls instead of bsd ls)
+brew_install coreutils
 install_fish
 install_oh_my_fish
 create_symlinks
