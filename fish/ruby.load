@@ -1,0 +1,14 @@
+set PATH $HOME/.rvm/bin $PATH
+
+function r
+  if test "$argv" = ""
+    echo $CURRENT_RUBY
+  else
+    set -xg CURRENT_RUBY $argv
+    set PATH $HOME/.rvm/gems/$argv/bin \
+      $HOME/.rvm/gems/$argv@global/bin \
+      $HOME/.rvm/rubies/$argv/bin $PATH
+  end
+end
+
+r ruby-2.0.0-p0
