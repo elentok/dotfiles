@@ -7,7 +7,8 @@ function tma; tm a $argv; end
 function tmt; tm new-session -A  -s test-output $argv; end # create or attach to 'test-output' session
 
 # Todo.txt {{{1
-function t; todo.sh -t -d $DOTF/todo/todo.cfg $argv; end
+function t; vim "+Todo $argv"; end
+function tt; todo.sh -t -d $DOTF/todo/todo.cfg $argv; end
 function tl; t ls $argv; end
 function te; t edit $argv; end
 function ta; t add $argv; end
