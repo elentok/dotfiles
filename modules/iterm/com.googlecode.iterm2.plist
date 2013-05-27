@@ -679,6 +679,20 @@
 	<real>1</real>
 	<key>GlobalKeyMap</key>
 	<dict>
+		<key>0x5b-0x100000</key>
+		<dict>
+			<key>Action</key>
+			<integer>10</integer>
+			<key>Text</key>
+			<string>[</string>
+		</dict>
+		<key>0x5d-0x100000</key>
+		<dict>
+			<key>Action</key>
+			<integer>10</integer>
+			<key>Text</key>
+			<string>]</string>
+		</dict>
 		<key>0x62-0x80000</key>
 		<dict>
 			<key>Action</key>
