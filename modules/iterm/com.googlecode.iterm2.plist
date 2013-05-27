@@ -957,13 +957,15 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSColorPanel</key>
-	<string>307 274 214 309 0 0 1440 878 </string>
+	<string>619 274 214 309 0 0 1440 878 </string>
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>2300 37 445 270 1440 -180 1920 1080 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>1531 168 924 485 1440 -180 1920 1080 </string>
+	<string>452 309 924 485 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1440 -180 1920 1080 1440 -180 1920 1080 </string>
+	<string>3360 82 1243 656 3360 -150 1680 1050 </string>
+	<key>NSWindow Frame iTerm Window 1</key>
+	<string>561 247 650 526 0 0 1440 878 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -974,11 +976,11 @@
 			<key>Ansi 0 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.070588238537311554</real>
+				<real>0.091140255331993103</real>
 				<key>Green Component</key>
-				<real>0.070588238537311554</real>
+				<real>0.09113871306180954</real>
 				<key>Red Component</key>
-				<real>0.070588238537311554</real>
+				<real>0.091141439974308014</real>
 			</dict>
 			<key>Ansi 1 Color</key>
 			<dict>
@@ -1100,11 +1102,11 @@
 			<key>Ansi 8 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.14117647707462311</real>
+				<real>0.35635796189308167</real>
 				<key>Green Component</key>
-				<real>0.14117647707462311</real>
+				<real>0.35635194182395935</real>
 				<key>Red Component</key>
-				<real>0.14117647707462311</real>
+				<real>0.35636261105537415</real>
 			</dict>
 			<key>Ansi 9 Color</key>
 			<dict>
