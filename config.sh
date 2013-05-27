@@ -279,3 +279,23 @@ install_deb() {
     rm -f /tmp/apt-cache
   fi
 }
+
+# make_dir {{{1
+make_dir() {
+  bullet "Creating directory ${1}... "
+  if [ -e $1 ]; then
+    info "already exists"
+  else
+    mkdir -p $1
+    if [ $? == 0 ]; then
+      success "created"
+    else
+      info "  trying with sudo:"
+      sudo mkdir -p $1
+      if [ $? != 0 ]; then
+        error "FAILED"
+        exit 1
+      fi
+    fi
+  fi
+}
