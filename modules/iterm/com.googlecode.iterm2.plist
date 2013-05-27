@@ -717,9 +717,9 @@
 		<key>0x68-0x100000</key>
 		<dict>
 			<key>Action</key>
-			<integer>2</integer>
+			<integer>10</integer>
 			<key>Text</key>
-			<string></string>
+			<string>h</string>
 		</dict>
 		<key>0x68-0x140000</key>
 		<dict>
@@ -728,12 +728,26 @@
 			<key>Text</key>
 			<string>&lt;</string>
 		</dict>
+		<key>0x6a-0x100000</key>
+		<dict>
+			<key>Action</key>
+			<integer>10</integer>
+			<key>Text</key>
+			<string>j</string>
+		</dict>
 		<key>0x6a-0x140000</key>
 		<dict>
 			<key>Action</key>
 			<integer>10</integer>
 			<key>Text</key>
 			<string>-</string>
+		</dict>
+		<key>0x6b-0x100000</key>
+		<dict>
+			<key>Action</key>
+			<integer>10</integer>
+			<key>Text</key>
+			<string>k</string>
 		</dict>
 		<key>0x6b-0x140000</key>
 		<dict>
@@ -745,9 +759,9 @@
 		<key>0x6c-0x100000</key>
 		<dict>
 			<key>Action</key>
-			<integer>0</integer>
+			<integer>10</integer>
 			<key>Text</key>
-			<string></string>
+			<string>l</string>
 		</dict>
 		<key>0x6c-0x140000</key>
 		<dict>
