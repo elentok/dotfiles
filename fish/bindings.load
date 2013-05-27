@@ -5,6 +5,6 @@ end
 
 function edit-commandline
   commandline > ~/.shell-command.fish
-  vim ~/.shell-command.fish
+  eval "$EDITOR ~/.shell-command.fish"
   commandline (cat ~/.shell-command.fish)
 end
