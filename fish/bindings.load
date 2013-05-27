@@ -1,3 +1,10 @@
 function fish_user_key_bindings
   bind \c] accept-autosuggestion
+  bind \cx edit-commandline
+end
+
+function edit-commandline
+  commandline > ~/.shell-command.fish
+  vim ~/.shell-command.fish
+  commandline (cat ~/.shell-command.fish)
 end
