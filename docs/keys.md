@@ -120,6 +120,13 @@ Vim
 |                       | ,ti             | n    | toggle indent guides
 
 
+Fish Shell
+===========
+| Key             | Action
+| -----------     | ---------
+| c-\]            | accept autosuggestion
+| c-x             | edit commandline using $EDITOR
+
 Other Apps
 ==========
 
