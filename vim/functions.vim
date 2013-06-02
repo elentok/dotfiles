@@ -116,7 +116,11 @@ let g:alternate_words = {
       \ "border-left": "border-right",
       \ "border-right": "border-left",
       \ "border-top": "border-bottom",
-      \ "border-bottom": "border-top"
+      \ "border-bottom": "border-top",
+      \ "margin-left": "margin-right",
+      \ "margin-right": "margin-left",
+      \ "margin-top": "margin-bottom",
+      \ "margin-bottom": "margin-top"
       \}
 
 
