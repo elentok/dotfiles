@@ -4,6 +4,11 @@ command! AutoWrap set formatoptions+=c formatoptions+=t
 command! AutoWrapOff set formatoptions-=c formatoptions-=t
 command! W :w
 
+command! Evundles edit ~/.dotfiles/vim/vundles.vim
+command! Efunctions edit ~/.dotfiles/vim/functions.vim
+command! Ekeys edit ~/.dotfiles/vim/keys.vim
+command! Esettings edit ~/.dotfiles/vim/settings.vim
+
 " Hebrew {{{1
 func! ToggleHebrew()
   if &rl
