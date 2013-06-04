@@ -1,4 +1,5 @@
 set -xg DOTF $HOME/.dotfiles
+set -xg DOTL $HOME/.dotlocal
 
 function make_completion --argument alias command
   complete -c $alias -xa "(
