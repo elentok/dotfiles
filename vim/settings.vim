@@ -35,6 +35,7 @@ let g:UltiSnipsExpandTrigger = '<c-j>'
 "let g:ycm_key_list_select_completion = [ '<tab>', '<C-J>', '<Down>' ]
 "let g:ycm_key_list_previous_completion = [ '<C-K>', '<Up>' ]
 let g:ycm_min_num_of_chars_for_completion = 2
+let g:ycm_collect_identifiers_from_tags_files = 1
 
 let g:session_autosave = 'no'
 let g:session_autoload = 'no'
