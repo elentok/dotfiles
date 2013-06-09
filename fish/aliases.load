@@ -18,11 +18,14 @@ function tap; t append $argv; end
 function g; git $argv; end
 function gp; git push $argv; end
 function gco; git checkout $argv; end
-make_completion gco 'git checkout'
 function gca; git commit --amend $argv; end
 function gcm; git commit --message $argv; end
 function gs; git status $argv; end
 function gst; git status $argv; end
+function grb; git rebase $argv; end
+function gpr; git pull --rebase $argv; end
+function gl; git pull $argv; end
+function grc; git rebase continue $argv; end
 function gl; git pull $argv; end
 function ts; tig status $argv; end
 
@@ -31,7 +34,6 @@ function v; vim $argv; end
 function va; vim $DOTF/fish/aliases.load; . $DOTF/fish/aliases.load $argv; end
 function txt; cd ~/Dropbox/PlainText; and vim $argv; end
 function vimt; vim ~/Dropbox/vim.TODO $argv; end
-
 # Find {{{1
 function ff; find . -iname $argv; end
 function ackc; ack --coffee $argv; end
