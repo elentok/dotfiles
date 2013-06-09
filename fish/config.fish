@@ -17,6 +17,8 @@ set fish_plugins brew bundler node rails
 # Load oh-my-fish cofiguration.
 . $fish_path/oh-my-fish.fish
 
-for file in ~/.dotlocal/*.fish
+for file in ~/.dotlocal/fish/*.load
   . $file
 end
+
+#r ruby-2.0.0-p0
