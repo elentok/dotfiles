@@ -7,3 +7,4 @@ set author-width = 2
 set show-refs = yes
 
 bind main r !git rebase -i %(commit)
+bind main y !sh -c 'echo %(commit) | pbcopy'
