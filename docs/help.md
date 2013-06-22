@@ -97,3 +97,6 @@ Command Line Tips
 ## irc - register nick
     /msg nickserv help
     /msg nickserv register <password> <email-address>
+## Fix "There is no connected camera" macbook air problem
+    sudo killall VDCAssistant
+    (see https://discussions.apple.com/thread/4158054?start=0&tstart=0)
