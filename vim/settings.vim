@@ -28,9 +28,9 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 
 let g:syntastic_mode_map = { "mode": "active",
                            \ "active_filetypes": [],
-                           \ "passive_filetypes": ['sass', 'scss']}
+                           \ "passive_filetypes": ['sass', 'scss', 'haml']}
 
-let g:UltiSnipsExpandTrigger = '<c-j>'
+let g:UltiSnipsExpandTrigger = '<c-]>'
 
 "let g:ycm_key_list_select_completion = [ '<tab>', '<C-J>', '<Down>' ]
 "let g:ycm_key_list_previous_completion = [ '<C-K>', '<Up>' ]
