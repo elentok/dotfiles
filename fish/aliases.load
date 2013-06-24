@@ -1,5 +1,11 @@
 function x; exit; end
 function c; clear; end
+function pdr; powder restart; end
+function i18n; zeus rake i18n:js:export; end
+function rrr
+  zeus rake tmp:clear
+  zeus rake assets:clean
+end
 
 # Tmux {{{1
 function tm; tmux -u $argv; end
