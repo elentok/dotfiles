@@ -9,7 +9,7 @@ set fish_theme robbyrussell
 # Example format: set fish_plugins autojump bundler
 
 #set fish_plugins autojump brew bundler node python rails rake rvm
-set fish_plugins brew bundler node rails
+set fish_plugins brew bundler node rails rvm
 
 # Path to your custom folder (default path is $FISH/custom)
 #set fish_custom $HOME/dotfiles/oh-my-fish
