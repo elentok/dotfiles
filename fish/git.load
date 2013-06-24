@@ -1,0 +1,43 @@
+function __fish_git_branches
+  git branch --no-color -a 2>/dev/null | sed 's/^..//'
+end
+
+function __fish_git_tags
+  git tag
+end
+
+function __fish_git_remotes
+  git remote
+end
+
+# aliases
+function g; git $argv; end
+function ga; git add $argv; end
+function gp; git push $argv; end
+function gco; git checkout $argv; end
+function gca; git commit --amend $argv; end
+function gcm; git commit --message $argv; end
+function gs; git status $argv; end
+function gst; git status $argv; end
+function grb; git rebase $argv; end
+function gpr; git pull --rebase $argv; end
+function gl; git pull $argv; end
+function grc; git rebase --continue $argv; end
+function gl; git pull $argv; end
+function ts; tig status $argv; end
+
+# gco (git checkout)
+complete -c gco -a '(__fish_git_branches)' --description 'Branch'
+complete -c gco -a '(__fish_git_tags)' --description 'Tag'
+complete -c gco -s b -d 'Create a new branch'
+
+# gp (git push)
+complete --no-files -c gp -a '(__fish_git_remotes)' --description 'Remote'
+complete --no-files -c gp -a '(__fish_git_branches)' --description 'Branch'
+
+# gdestroy (git destroy)
+function gdestroy
+  git destroy $argv
+end
+
+complete --no-files -c gdestroy -a '(__fish_git_branches)' --description 'Branch'

@@ -14,20 +14,6 @@ function te; t edit $argv; end
 function ta; t add $argv; end
 function tap; t append $argv; end
 
-# Git {{{1
-function g; git $argv; end
-function gp; git push $argv; end
-function gco; git checkout $argv; end
-function gca; git commit --amend $argv; end
-function gcm; git commit --message $argv; end
-function gs; git status $argv; end
-function gst; git status $argv; end
-function grb; git rebase $argv; end
-function gpr; git pull --rebase $argv; end
-function gl; git pull $argv; end
-function grc; git rebase continue $argv; end
-function gl; git pull $argv; end
-function ts; tig status $argv; end
 
 # Vim {{{1
 function v; vim $argv; end

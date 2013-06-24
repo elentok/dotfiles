@@ -11,10 +11,5 @@ function gec -d "Edit Conflict"
   end
 end
 
-function grc -d "Resolve Conflict"
-  git add $argv
-end
-
 complete --no-files -c gec -a '(__fish_git_conflicts)'
-complete --no-files -c grc -a '(__fish_git_conflicts)'
 
