@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [[ "$(which fribidi)" == "" ]]; then
+  echo "Requires 'fribidi' (run 'brew install fribidi')"
+  exit 1
+fi
+
+if [[ "$*" == "" ]]; then
+  echo "Usage: israelpost {itemcode}"
+else
+  url="http://www.israelpost.co.il/itemtrace.nsf/trackandtraceJSON?openagent&_=1372171578320&lang=HE&itemcode=$*"
+  curl -s $url | json itemcodeinfo | fribidi
+fi
