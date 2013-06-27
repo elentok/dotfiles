@@ -23,6 +23,7 @@ function tap; t append $argv; end
 
 # Vim {{{1
 function v; vim $argv; end
+function vl; vim '+OpenSession! last'; end
 function va; vim $DOTF/fish/aliases.load; . $DOTF/fish/aliases.load $argv; end
 function txt; cd ~/Dropbox/PlainText; and vim $argv; end
 function vimt; vim ~/Dropbox/vim.TODO $argv; end

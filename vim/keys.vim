@@ -214,3 +214,4 @@ endfunc
 " Session {{{1
 nnoremap ,ss :SaveSession temp<cr>
 nnoremap ,so :OpenSession temp<cr>
+nnoremap ,sl :OpenSession last<cr>

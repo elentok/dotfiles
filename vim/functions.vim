@@ -4,6 +4,7 @@ command! AutoWrap set formatoptions+=c formatoptions+=t
 command! AutoWrapOff set formatoptions-=c formatoptions-=t
 command! W :w
 
+command! Eautocmds edit ~/.dotfiles/vim/autocmds.vim
 command! Evundles edit ~/.dotfiles/vim/vundles.vim
 command! Efunctions edit ~/.dotfiles/vim/functions.vim
 command! Ekeys edit ~/.dotfiles/vim/keys.vim
