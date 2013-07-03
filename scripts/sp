@@ -7,7 +7,7 @@ if [ "$what" == "" ]; then
   what='spec'
 fi
 
-if [ -e "zeus.json" ]; then
+if [ -e ".zeus.sock" ]; then
   echo "Running 'zeus rspec $what'"
   zeus rspec $what
 else
