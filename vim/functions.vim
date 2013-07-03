@@ -146,3 +146,12 @@ func! RevertFile()
     e!
   end
 endfunc
+
+" format ruby object {{{1
+func! FormatRubyObject()
+  while stridx(getline('.'), ',') != -1
+    exec "normal! 0f,lr\<cr>"
+  endwhile
+endfunc
+
+command! -range FormatRubyObject call FormatRubyObject()
