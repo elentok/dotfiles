@@ -1,4 +1,5 @@
 begin
+  require 'irb/completion'
   require 'irbtools'
 rescue LoadError
   warn "Could not load irbtools, add 'irbtools' to your Gemfile"
