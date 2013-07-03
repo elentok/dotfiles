@@ -7,6 +7,10 @@ function rrr
   zeus rake assets:clean
 end
 
+function cp
+  /bin/cp -v -i $argv
+end
+
 # Tmux {{{1
 function tm; tmux -u $argv; end
 function tma; tm a $argv; end
