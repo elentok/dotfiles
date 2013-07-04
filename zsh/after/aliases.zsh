@@ -68,6 +68,7 @@ alias tot='awk "{ s+=\$1 } END { printf(\"%''d\n\", s) }"'
 alias bw='convert -colors 2'
 alias cf='/bin/ls -1 | wc -l' # count files
 alias dotf='cd $DOTF'
+alias dotl='cd $DOTL'
 alias k='less $DOTF/docs/keys.md'
 alias kk='vim $DOTF/docs/keys.md'
 alias n='env NODE_NO_READLINE=1 rlwrap -p Green -S "node >>> " node'

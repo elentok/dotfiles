@@ -10,9 +10,10 @@ export VISUAL=vim
 export EDITOR=vim
 
 export DOTF=~/.dotfiles
+export DOTL=~/.dotlocal
 
 PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
-PATH=$PATH:$HOME/.rvm/bin:$DOTF/scripts
+PATH=$PATH:$HOME/.rvm/bin:$DOTF/scripts:$DOTL/scripts
 PATH=$PATH:$HOME/bin:$HOME/projects/railsnew:$HOME/scripts
 PATH=$PATH:/usr/local/share/python
 PATH=/usr/local/share/npm/bin:$PATH
