@@ -80,7 +80,7 @@ symlink() {
   bullet "Linking $source\n      ==> ${target}... "
   if [ -e "$target" ]; then
     if [ -h "$target" ]; then
-      if [ "$source" == "`readlink $target`" ]; then
+      if [ "$source" == "$(readlink "$target")" ]; then
         info " already exists"
         return
       fi
