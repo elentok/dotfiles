@@ -3,7 +3,12 @@
 source `dirname $0`/../config.sh
 
 install_symlinks() {
-  symlink "$DOTF/chrome/Custom.css" "$HOME/Library/Application Support/Google/Chrome/Default/User StyleSheets/Custom.css"
+  CHROME_DIR="$HOME/Library/Application Support/Google/Chrome"
+
+  while read dir; do
+    symlink "$DOTF/chrome/Custom.css" "$dir/Custom.css"
+  done < <(find "$CHROME_DIR" -iname 'User StyleSheets')
+
 }
 
 header "Chrome"
