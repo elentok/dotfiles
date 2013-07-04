@@ -1,20 +1,21 @@
-if [[ -s "$HOME/.dotlocal/before.zsh" ]]; then
-  source "$HOME/.dotlocal/before.zsh"
-fi
+source_dir() {
+  if [[ -d "$*" ]]; then
+    # the "(N)" part means "nullglob" (see http://mywiki.wooledge.org/NullGlob)
+    for config_file in $*/*.zsh(N); do
+      source $config_file
+    done
+  fi
+}
 
-for config_file in $HOME/.zsh/before/*.zsh; do
-  source $config_file
-done
+source_dir ~/.dotlocal/zsh/before
+source_dir ~/.dotfiles/zsh/before
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-for config_file in $HOME/.zsh/after/*.zsh; do
-  source $config_file
-done
+source_dir ~/.dotfiles/zsh/after
+source_dir ~/.dotlocal/zsh/after
 
-if [[ -s "$HOME/.dotlocal/after.zsh" ]]; then
-  source "$HOME/.dotlocal/after.zsh"
-fi
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

@@ -7,19 +7,9 @@ alias tma='tm a'
 alias tmt='tm new-session -A  -s test-output' # create or attach to 'test-output' session
 
 # Todo.txt {{{1
-alias t='todo.sh -t -d $DOTF/todo/todo.cfg'
-alias tl='t ls $TODO_CONTEXT'
-alias te='t edit'
-alias ta='t add'
-alias tap='t append'
-tc() {
-  if [[ "$*" == "" ]]; then
-    echo "Current todo.txt context is '$TODO_CONTEXT'"
-  else
-    export TODO_CONTEXT="$*";
-    echo "Set todo.txt context to '$TODO_CONTEXT'"
-  fi
-}
+t() { vim "+Todo $*" }
+alias tl='t ls'
+alias tt='todo.sh -t -d $DOTF/todo/todo.cfg'
 
 # Git {{{1
 alias gca='git commit --amend'
@@ -30,6 +20,7 @@ alias ts='tig status'
 
 # Vim {{{1
 alias v=vim
+alias vl='vim "+OpenSession! last"'
 alias va='vim $DOTF/zsh/after/aliases.zsh; source $DOTF/zsh/after/aliases.zsh'
 alias txt='cd ~/Dropbox/PlainText && vim'
 alias vimt='vim ~/Dropbox/vim.TODO'
@@ -74,7 +65,6 @@ alias total='awk "{ s+=\$1 } END { print s }"'
 alias tot='awk "{ s+=\$1 } END { printf(\"%''d\n\", s) }"'
 
 # Other {{{1
-alias ak='ssh-add ~/.keys/bitbucket.ssh.private'
 alias bw='convert -colors 2'
 alias cf='/bin/ls -1 | wc -l' # count files
 alias dotf='cd $DOTF'
