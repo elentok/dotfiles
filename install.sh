@@ -9,7 +9,7 @@ fi
 
 ./nodejs/install.sh $*
 ./git/install.sh $*
-./fish/install.sh $*
+./zsh/install.sh $*
 ./tmux/install.sh $*
 ./vim/install.sh $*
 ./ack/install.sh $*
