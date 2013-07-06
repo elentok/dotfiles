@@ -47,11 +47,16 @@ install_symlinks() {
   symlink "$DOTF/zsh/prompt_elentok_setup" ~/.zprezto/modules/prompt/functions/prompt_elentok_setup
 }
 
+install_requirements() {
+  brew_install fasd
+}
+
 header "Zsh"
 
 if [ "$1" == "symlinks" ]; then
   install_symlinks
 else
+  install_requirements
   install_zsh
   install_prezto
   install_symlinks

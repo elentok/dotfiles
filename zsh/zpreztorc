@@ -39,6 +39,7 @@ zstyle ':prezto:load' pmodule \
   'node' \
   'osx' \
   'tmux' \
+  'fasd' \
   'syntax-highlighting'
 
 #
