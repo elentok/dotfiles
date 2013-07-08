@@ -1,0 +1,20 @@
+#!/bin/bash
+
+list_git_conflicts() {
+  git diff --name-only --diff-filter=U
+}
+
+first = `list_git_conflicts | head -1`
+vim "$first"
+read "yesno?Mark as resolved? (yes/[no])?"
+if [ "$yesno" = "yes" ]; then
+  echo "✔ Marked as resolved"
+  git add "$first"
+fi
+
+remaining = `list_git_conflicts | wc -l`
+if [[ $remaining -eq 0 ]]; then
+  echo "all conflicts resolved"
+else
+  echo "$remaining conflicts remaining"
+fi
