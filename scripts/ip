@@ -1,0 +1,7 @@
+#!/bin/bash
+ips() {
+  ifconfig | grep 'inet ' | awk '{print $2}'
+}
+
+ips | tail -1 | pbcopy
+ips
