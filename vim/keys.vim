@@ -105,6 +105,7 @@ noremap ,e> :Tab /=><cr>
 noremap ,e: :Tab /:\zs<cr>
 noremap ,e\ :Tab /\|<cr>
 noremap ,e{ :Tab /{<cr>
+noremap ,e, :Tab /,\zs<cr>
 
 " add symbols to the end of the lines:
 noremap ,e1 :exec ":normal A <c-v><esc>" . (79 - strlen(getline("."))) . "A#"<cr>
