@@ -17,6 +17,7 @@ alias gs='git status'
 alias gst='git status'
 alias gl='git pull'
 alias ts='tig status'
+alias ga='git add'
 
 # Vim {{{1
 alias v=vim
@@ -26,12 +27,14 @@ alias txt='cd ~/Dropbox/PlainText && vim'
 alias vimt='vim ~/Dropbox/vim.TODO'
 
 # Find {{{1
-alias ff='find . -iname'
+alias find='gfind'
+alias ff='gfind . -iname'
 alias ackc='ack --coffee'
 
 # Mac Specific {{{1
 if [[ "`uname -s`" == "Darwin" ]]; then
-  alias ls='ls -FGsk'
+  #alias ls='ls -FGsk'
+  alias ls='/usr/local/bin/gls --color=always -XFhs'
   # s = show size
   # k = show size in kilobytes
 

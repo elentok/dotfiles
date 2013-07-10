@@ -17,13 +17,15 @@ PATH=$PATH:$HOME/.rvm/bin:$DOTF/scripts:$DOTL/scripts
 PATH=$PATH:$HOME/bin:$HOME/projects/railsnew:$HOME/scripts
 PATH=$PATH:/usr/local/share/python
 PATH=/usr/local/share/npm/bin:$PATH
-PATH=$PATH:$GOBIN
 export PATH
 
 export MPD_HOST=bob@localhost
 export SHORT_HOSTNAME=`short-hostname`
-export GOROOT=/usr/local/Cellar/go/1.0.3
-export GOBIN=$GOROOT/bin
+
+# GO
+export GOROOT=/usr/local/Cellar/go/1.1
+export GOPATH=$HOME/.go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 [[ -s /Users/3david/.nvm/nvm.sh ]] && . /Users/3david/.nvm/nvm.sh # This loads NVM
 
