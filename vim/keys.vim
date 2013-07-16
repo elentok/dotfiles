@@ -209,8 +209,9 @@ endif
 
 " Post Startup {{{1
 func! PostStartupKeys()
-  vmap <tab> >gv
-  vmap <s-tab> <gv
+  vnoremap <tab> >gv
+  vnoremap <s-tab> <gv
+  vnoremap <space> 20j
 endfunc
 " Session {{{1
 nnoremap ,ss :SaveSession temp<cr>
