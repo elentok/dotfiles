@@ -2,12 +2,21 @@
 
 source `dirname $0`/../config.sh
 
+latest_version() {
+  brew ls --versions go | awk '{ print $NF }'
+}
+
 install_on_mac() {
-  brew_install hg
+  brew_install mercurial
   brew_install go
   make_dir $HOME/.go
+  fix_go_locations
+}
 
-  mv /usr/local/Cellar/go/1.0.3/bin/* /usr/local/Cellar/go/1.1/bin/
+fix_go_locations() {
+  latest=$(latest_version)
+  symlink /usr/local/Cellar/go/{$latest,default}
+  symlink /usr/local/Cellar/go/1.0.3/bin /usr/local/Cellar/go/bin
 }
 
 install_goreplace() {
