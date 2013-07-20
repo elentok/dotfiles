@@ -3,7 +3,7 @@
 source `dirname $0`/../config.sh
 
 latest_version() {
-  brew ls --versions go | awk '{ print $NF }'
+  /bin/ls -1 /usr/local/Cellar/go | grep -E '^[0-9\.]+$' | sort | tail -1
 }
 
 install_on_mac() {
