@@ -20,6 +20,19 @@ function! IdentifyOS()
   end
 endfunc
 
+function! GetPythonVersion()
+  if !exists('g:python_version')
+    python <<endpython
+import sys
+import vim
+version = sys.version.split(' ')[0].replace('.', '')
+vim.command("let g:python_version=%s" % version)
+endpython
+  end
+  return g:python_version
+
+endfunc
+
 let g:os = IdentifyOS()
 
 if g:os == 'windows'
@@ -41,8 +54,11 @@ else
   let $defaultfont='Monaco\ for\ Powerline:h13'
   let $alternatefont='Ubuntu\ Mono\ 13'
   let g:Powerline_symbols='fancy'
-  " the 'wildignorecase' option is not available for windows
-  set wildignorecase
+
+  if g:os == 'mac'
+    " the 'wildignorecase' option is not available for windows
+    set wildignorecase
+  end
   
   if file_readable('/usr/local/bin/ctags')
     let g:ctags='/usr/local/bin/ctags'

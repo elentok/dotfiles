@@ -6,6 +6,9 @@ set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
+" editing
+Bundle 'jwhitley/vim-matchit'
+
 " vundles
 Bundle 'kien/ctrlp.vim'
 Bundle 'elentok/mailr.vim'
@@ -29,7 +32,9 @@ Bundle 'godlygeek/tabular'
 Bundle 'applescript.vim'
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
-Bundle "SirVer/ultisnips"
+if GetPythonVersion() > 270
+  Bundle "SirVer/ultisnips"
+end
 "Bundle "snipmate-snippets"
 "Bundle "garbas/vim-snipmate"
 Bundle 'tpope/vim-rails.git'
@@ -57,7 +62,10 @@ Bundle "nelstrom/vim-visual-star-search"
 Bundle 'iandoe/vim-osx-colorpicker'
 Bundle 'vim-scripts/fish-syntax'
 Bundle 'xolox/vim-misc'
-Bundle 'xolox/vim-session'
+
+if version >= 730
+  Bundle 'xolox/vim-session'
+end
 
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'airblade/vim-gitgutter'
@@ -69,7 +77,7 @@ Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'evanmiller/nginx-vim-syntax'
 
 " Go language
-"Bundle 'jnwhiteh/vim-golang'
+Bundle 'jnwhiteh/vim-golang'
 "Bundle 'go-vim'
 
 if file_readable(expand("~/.dotlocal/vundles.vim"))

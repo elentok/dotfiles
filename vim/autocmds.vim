@@ -68,6 +68,8 @@ augroup Elentok_Misc
   " fix nerdtree width
   autocmd BufEnter * if exists("b:NERDTreeType") | call FixNERDTreeWidth() | endif
 
-  autocmd VimLeavePre * SaveSession last
+  if version >= 730
+    autocmd VimLeavePre * SaveSession last
+  end
 augroup END
 
