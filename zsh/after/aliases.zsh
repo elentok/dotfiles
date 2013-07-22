@@ -81,5 +81,6 @@ alias q='qlmanage -p'
 alias trailer='wget -U QuickTime'
 alias z='zeus'
 alias hh='history'
+alias hex='od -xcb'
 
 # vim: foldmethod=marker

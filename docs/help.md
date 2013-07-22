@@ -103,3 +103,5 @@ Command Line Tips
 
 ## format xml
     cat file.xml | xmllint --format -
+## hex view
+    od -xcb {file}
