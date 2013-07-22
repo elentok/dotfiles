@@ -20,6 +20,7 @@ to use ssh run this:
   (can be accessed from the command line using the `k` command)
 * [help.md](docs/help.md) - a cheatsheet of useful commands
   (can be accessed from the command line using the `h` or `h {query}` commands)
+* [commands.md](docs/commands.md) - a cheatsheet of of my custom shell scripts
 
 Customization
 --------------

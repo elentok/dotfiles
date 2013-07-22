@@ -28,7 +28,9 @@ alias vimt='vim ~/Dropbox/vim.TODO'
 
 # Find {{{1
 alias find='gfind'
-alias ff='gfind . -iname'
+ff() {
+  gfind . -iname "*$**"
+}
 alias ackc='ack --coffee'
 
 # Mac Specific {{{1
