@@ -99,6 +99,8 @@ noremap ,ew :w<cr>
 noremap ,ww :w<cr>
 noremap ,wq :wq<cr>
 noremap ,er :call RevertFile()<cr>
+noremap ,e"' :s/"/'/g<cr>
+noremap ,e'" :s/'/"/g<cr>
 
 noremap ,e= :Tab /=<cr>
 noremap ,e> :Tab /=><cr>
