@@ -63,7 +63,7 @@ Bundle 'iandoe/vim-osx-colorpicker'
 Bundle 'vim-scripts/fish-syntax'
 Bundle 'xolox/vim-misc'
 
-if version >= 730
+if version >= 703
   Bundle 'xolox/vim-session'
 end
 
