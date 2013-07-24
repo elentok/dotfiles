@@ -1,0 +1,6 @@
+#!/bin/bash
+tar czvf vim-$(date +%Y%m%d).tar.gz \
+  --exclude 'YouCompleteMe' \
+  --exclude 'node_modules' \
+  --exclude '.git' \
+  vim config.sh 
