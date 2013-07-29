@@ -180,6 +180,20 @@ has_brew_package() {
   [ "`brew ls -1 | grep \"^$1\$\"`" != "" ]
 }
 
+brew_tap() {
+  repo=$1
+  bullet "Tapping brew repository ${repo}... "
+  if has_brew_tap "$repo"; then
+    info "already installed"
+  else
+    brew tap $*
+  fi
+}
+
+has_brew_tap() {
+  [ "`brew tap | grep \"^$1\$\"`" != "" ]
+}
+
 # Python {{{1
 python_install() {
   bullet "Installing ${1}... "

@@ -18,6 +18,7 @@ fi
 
 if [ "$OS" == "mac" ]; then
   ./keyremap4macbook/install.sh
+  ./modules/homebrew-cask.sh
 
   header 'Other packages'
   brew_install imagemagick
