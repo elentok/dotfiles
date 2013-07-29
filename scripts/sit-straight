@@ -1,0 +1,7 @@
+#!/bin/bash
+
+while [[ 1 ]]; do
+  terminal-notifier -message "Sit Straight"
+  say "Sit straight!"
+  sleep 180
+done
