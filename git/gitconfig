@@ -54,3 +54,5 @@
 [core]
   editor = /usr/bin/vim
 #  pager = 
+[credential]
+	helper = osxkeychain
