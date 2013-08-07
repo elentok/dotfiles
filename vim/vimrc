@@ -81,6 +81,10 @@ endif
 
 " }}}1
 
+if file_readable(expand("~/.dotlocal/before.vim"))
+  source ~/.dotlocal/before.vim
+endif
+
 source $vimfiles/vundles.vim
 source $vimfiles/settings.vim
 source $vimfiles/functions.vim
