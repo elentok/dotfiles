@@ -2,6 +2,11 @@ alias x=exit
 alias c=clear
 
 # Tmux {{{1
+TMUX_CONFIG="$DOTF/tmux/tmux.conf"
+if [ "$(uname)" = "Darwin" ]; then
+  TMUX_CONFIG="$DOTF/tmux/tmux-osx.conf"
+fi
+alias tmux="tmux -f $TMUX_CONFIG"
 alias tm='tmux -u'
 alias tma='tm a'
 alias tmt='tm new-session -A  -s test-output' # create or attach to 'test-output' session
