@@ -67,7 +67,9 @@ if version >= 703
   Bundle 'xolox/vim-session'
 end
 
-Bundle 'Valloric/YouCompleteMe'
+if !exists('g:disable_ycm')
+  Bundle 'Valloric/YouCompleteMe'
+end
 Bundle 'airblade/vim-gitgutter'
 
 " text objects:
