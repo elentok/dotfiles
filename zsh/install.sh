@@ -55,6 +55,9 @@ header "Zsh"
 
 if [ "$1" == "symlinks" ]; then
   install_symlinks
+elif [ "$1" == "basic" ]; then
+  install_prezto
+  install_symlinks
 else
   install_requirements
   install_zsh
