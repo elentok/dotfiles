@@ -71,6 +71,9 @@ install_utils() {
 header "Vim"
 if [ "$1" == "symlinks" ]; then
   install_symlinks
+elif [ "$1" == "basic" ]; then
+  install_symlinks
+  install_vundle
 else
   if [ "`uname -s`" == "Darwin" ]; then
     install_on_mac
