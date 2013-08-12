@@ -4,11 +4,21 @@ export BLUE="\033[34m"
 export RED="\033[31m"
 export RESET="\033[0m"
 
-bounce() {
-  git diff $* | grep --line-number 'console\.'
+changes() {
+  git diff --cached $* | grep -v -E '^-'
 }
 
-git diff --name-only | while read filename; do
+bounce() {
+  if [[ "$*" =~ \.coffee$ ]]; then
+    changes $* | grep -E '(console|window)'
+    changes $* | grep -E '^\+?\s*#' | grep -v -E '^\+?#= require'
+  elif [[ "$*" =~ \.js$ ]]; then
+    changes $* | grep -E '(console|window)'
+    changes $* | grep -E '^\+?\s*//' | grep -v -E '^\+?//= require'
+  fi
+}
+
+git diff --cached --name-only | while read filename; do
   result=`bounce "$filename"`
   if [[ "$result" != "" ]]; then
     echo -e "${BLUE}${filename}${RESET}"
