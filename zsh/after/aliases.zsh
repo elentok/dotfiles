@@ -89,5 +89,6 @@ alias trailer='wget -U QuickTime'
 alias z='zeus'
 alias hh='history'
 alias hex='od -xcb'
+alias pix='open -a Pixelmator'
 
 # vim: foldmethod=marker
