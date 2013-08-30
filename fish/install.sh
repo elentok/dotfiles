@@ -16,6 +16,8 @@ install_fish() {
 
 install_fish_on_mac() {
   brew_install fish
+  brew_install coreutils
+  symlink /usr/local/Cellar/coreutils/8.21/bin/gtimeout /usr/local/bin/timeout
   add_to_etc_shells
 }
 
