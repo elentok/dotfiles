@@ -155,3 +155,18 @@ func! FormatRubyObject()
 endfunc
 
 command! -range FormatRubyObject call FormatRubyObject()
+
+" js2coffee {{{1
+func! Js2Coffee()
+  silent! %s/\s\+$//
+  silent! %s/; *$//
+  silent! %s/\v[A-Za-z_]+\.prototype\.([a-zA-Z_]+) *\= *function\s*\(\) *\{/\1: ->/gc
+  silent! %s/\v[A-Za-z_]+\.prototype\.([a-zA-Z_]+) *\= *function\s*(\(.*\)) *\{/\1: \2 ->/gc
+  silent! %s/\v\s*function\s*\(\) *\{/\1 ->/gc
+  silent! %s/\v\s*function\s*(\([^\)]*\)) *\{/\1 ->/gc
+  silent! %s/this\./@/gc
+  silent! %s/var //gc
+  silent! %s/var //gc
+  silent! %g/var //gc
+  silent! %g/^\s*}\s*$/d
+endfunc
