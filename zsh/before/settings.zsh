@@ -13,7 +13,7 @@ export DOTF=~/.dotfiles
 export DOTL=~/.dotlocal
 
 PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
-PATH=$PATH:$HOME/.rvm/bin:$DOTF/scripts:$DOTL/scripts
+PATH=$PATH:$DOTF/scripts:$DOTL/scripts
 PATH=$PATH:$HOME/bin:$HOME/projects/railsnew:$HOME/scripts
 PATH=$PATH:/usr/local/share/python
 PATH=/usr/local/share/npm/bin:$PATH
@@ -36,7 +36,7 @@ fi
 
 fpath=(/usr/local/share/npm/lib/node_modules/tailr/completions $fpath)
 fpath=(/usr/local/share/npm/lib/node_modules/dns-switcher/completions $fpath)
-fpath=(/Users/3david/.rvm/gems/ruby-2.0.0-p0/gems/shaft-0.8/completions $fpath)
+#fpath=(/Users/3david/.rvm/gems/ruby-2.0.0-p0/gems/shaft-0.8/completions $fpath)
 
 zstyle ':presto:load' pmodule 'git'
 

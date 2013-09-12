@@ -2,6 +2,14 @@
 
 source `dirname $0`/../config.sh
 
+RUBY_VERSION='2.0.0-p247'
+
+install_rbenv() {
+  brew_install rbenv
+  brew_install ruby-build
+  eval "$(rbenv init -)"
+}
+
 install_requirements() {
   if [ "$OS" == "linux" ]; then
     bullet "Installing rvm requirements"
@@ -17,21 +25,11 @@ install_requirements() {
   fi
 }
 
-install_rvm() {
-  bullet "Installing rvm... "
-  if [ -d ~/.rvm ]; then
-    info "already installed"
-  else
-    curl -L https://get.rvm.io | bash -s stable --rails --autolibs=enabled
-    . $HOME/.rvm/scripts/rvm
-  fi
-}
-
 install_ruby() {
-  bullet "Installing ruby 2.0.0..."
-  if [ "`rvm list | grep '2.0.0'`" == "" ]; then
-    rvm install 2.0.0 --autolibs=4
-    rvm use --default 2.0.0
+  bullet "Installing ruby $RUBY_VERSION... "
+  if [ "`rbenv versions | grep $RUBY_VERSION`" == "" ]; then
+    rbenv install $RUBY_VERSION
+    rbenv global $RUBY_VERSION
   else
     info "already installed"
   fi
@@ -66,9 +64,10 @@ install_phantomjs_on_linux() {
 
 header "Ruby"
 if [ "$1" != "symlinks" ]; then
-  install_requirements
-  install_rvm
+  #install_requirements
+  install_rbenv
   install_ruby
-  install_phantomjs
+  #install_ruby
+  #install_phantomjs
 fi
 create_symlinks

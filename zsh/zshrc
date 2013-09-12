@@ -17,5 +17,3 @@ fi
 
 source_dir ~/.dotfiles/zsh/after
 source_dir ~/.dotlocal/zsh/after
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
