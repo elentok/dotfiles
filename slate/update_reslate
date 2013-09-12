@@ -1,0 +1,3 @@
+#!/bin/bash
+
+curl https://raw.github.com/lunixbochs/reslate/master/reslate.js > reslate.js

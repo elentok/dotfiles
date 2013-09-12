@@ -3,7 +3,7 @@
 source `dirname $0`/../config.sh
 
 install_symlinks() {
-  symlink "$DOTF/slate/config" ~/.slate
+  symlink "$DOTF/slate/slate.js" ~/.slate.js
 }
 
 header "Slate"
