@@ -46,6 +46,11 @@ Command Line Tips
     git branch -d {branch}
     git push --delete origin {branch}
 
+## git remove untracked files
+    git clean -f            (all untracked files)
+    git clean -f -n         (dry run)
+    git clean -f -n {path}  (dry run on files in path)
+
 ## ImageMagick resize
     convert --sample 50% input.png output.jpg
 
