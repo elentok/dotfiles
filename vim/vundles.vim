@@ -37,6 +37,7 @@ if GetPythonVersion() > 270
 end
 "Bundle "snipmate-snippets"
 "Bundle "garbas/vim-snipmate"
+Bundle 'vim-ruby/vim-ruby'
 Bundle 'tpope/vim-rails.git'
 Bundle 'tpope/vim-haml'
 Bundle 'elentok/vim-rails-extra'
