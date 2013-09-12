@@ -19,9 +19,11 @@ fi
 if [ "$OS" == "mac" ]; then
   ./keyremap4macbook/install.sh
   ./modules/homebrew-cask.sh
+  ./slate/install.sh $*
 
   header 'Other packages'
   brew_install imagemagick
+  brew_install ghostscript
   #./modules/mac-smb-performance-fix/install.sh $*
 else
 
