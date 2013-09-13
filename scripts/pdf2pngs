@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+  echo "Usage:"
+  echo
+  echo "  pdf2pngs {file.pdf}"
+else
+  input=$1
+  output=${input/.pdf/_%03d.png}
+  
+  command gs -dBATCH -dNOPAUSE -sDEVICE=png16m -r150x150 -sOutputFile="$output" "$input"
+fi
+
