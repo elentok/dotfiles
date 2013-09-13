@@ -194,6 +194,22 @@ has_brew_tap() {
   [ "`brew tap | grep \"^$1\$\"`" != "" ]
 }
 
+# Homebrew Cask {{{1
+
+brew_cask_install() {
+  bullet "Installing ${1}... "
+
+  if has_brew_cask_package "$1"; then
+    info "already installed"
+  else
+    brew install $*
+  fi
+}
+
+has_brew_cask_package() {
+  [ "`brew cask list | grep \"^$1\$\"`" != "" ]
+}
+
 # Python {{{1
 python_install() {
   bullet "Installing ${1}... "

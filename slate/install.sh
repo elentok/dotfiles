@@ -7,4 +7,5 @@ install_symlinks() {
 }
 
 header "Slate"
+brew_cask_install slate
 install_symlinks
