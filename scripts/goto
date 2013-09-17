@@ -1,0 +1,30 @@
+#!/bin/sh
+
+goto() {
+  app_name="$*"
+
+  osascript <<EOF
+  tell application "System Events"
+    set active_app to name of the first process whose frontmost is true
+  end tell
+
+  if active_app = "$app_name" then
+    # activate next window
+    tell application "System Events"
+      keystroke "\`" using command down
+    end tell
+  else
+    # activate app
+    tell application "$app_name"
+      activate
+    end tell
+  end if
+EOF
+}
+
+goto $*
+terminal-notifier -message "$*"
+
+#bind h:cmd,shift shell '/Users/3david/.dotfiles/scripts/goto "Google Chrome"'
+#bind 1:cmd,shift shell '~/.dotfiles/scripts/goto "iTerm"'
+#bind k:ctrl,shift shell '~/.dotfiles/scripts/goto "MacVim"'

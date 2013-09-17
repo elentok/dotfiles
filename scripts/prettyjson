@@ -1,0 +1,6 @@
+#!/bin/bash
+
+file="$*"
+
+mv "$file" "${file}.original"
+cat "${file}.original" | json > "$file"

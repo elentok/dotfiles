@@ -23,6 +23,7 @@ alias gst='git status'
 alias gl='git pull'
 alias ts='tig status'
 alias ga='git add'
+alias grb='git rebase'
 
 # Vim {{{1
 alias v=vim
@@ -73,6 +74,10 @@ alias c6='awk "{ print \$6 }"'
 
 alias total='awk "{ s+=\$1 } END { print s }"'
 alias tot='awk "{ s+=\$1 } END { printf(\"%''d\n\", s) }"'
+
+# SSH {{{1
+export SSH_TERM=xterm-256color
+alias ssh='TERM=$SSH_TERM ssh'
 
 # Other {{{1
 alias bw='convert -colors 2'
