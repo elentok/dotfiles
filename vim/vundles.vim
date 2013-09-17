@@ -80,8 +80,12 @@ Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'evanmiller/nginx-vim-syntax'
 
 " Go language
-Bundle 'jnwhiteh/vim-golang'
+"Bundle 'jnwhiteh/vim-golang'
 "Bundle 'go-vim'
+"Bundle 'Blackrush/vim-gocode'
+Bundle 'nsf/gocode', { 'rtp': 'vim/' }
+
+set runtimepath+=$GOROOT/misc/vim
 
 if file_readable(expand("~/.dotlocal/vundles.vim"))
   source ~/.dotlocal/vundles.vim
