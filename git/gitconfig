@@ -10,6 +10,7 @@
 [diff]
 [color]
   ui = auto
+  diff = auto
 [alias]
   st = status
   ci = commit
