@@ -15,15 +15,6 @@ let g:user_spec_runners = {
 
 let g:run_with_vimux=1
 
-let g:ctrlp_dotfiles = 0
-"let g:ctrlp_root_markers = ['Gemfile', 'package.json', '.git']
-let g:ctrlp_root_markers = ['.git']
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_by_filename = 1
-let g:ctrlp_custom_ignore = {
-  \ 'dir': '\v[\/](tmp|site-packages|node_modules|components)$',
-  \ }
-
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
 let g:syntastic_mode_map = { "mode": "active",
@@ -41,6 +32,45 @@ let g:session_autosave = 'no'
 let g:session_autoload = 'no'
 
 let g:gitgutter_eager = 0
+
+" CtrlP Settings {{{1
+
+let g:ctrlp_dotfiles = 0
+"let g:ctrlp_root_markers = ['Gemfile', 'package.json', '.git']
+let g:ctrlp_root_markers = ['.git']
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_by_filename = 1
+let g:ctrlp_custom_ignore = {
+  \ 'dir': '\v[\/](tmp|site-packages|node_modules|components)$',
+  \ }
+
+"let g:ctrlp_open_func = {
+  "\ 'buffers': 'CtrlP_CloseBuffer'
+  "\}
+
+"func! CtrlP_CloseBuffer(action, line)
+  "call confirm("action = " . a:action)
+  "if a:action == 'x'
+    "let filename = fnameescape(fnamemodify(a:line, ':p'))
+    "silent! execute 'bd' filename
+  "else
+    "call call('ctrlp#acceptfile', [a:action, a:line])
+  "endif
+"endfunc
+
+
+let g:ctrlp_buffer_func = {
+  \ 'enter': 'CtrlP_Enter'}
+
+func! CtrlP_Enter()
+  nn <buffer> <f3> :call CtrlP_CloseBuffer()<cr>
+endfunc
+
+func! CtrlP_CloseBuffer()
+  let buf=fnamemodify(getline('.')[2:], ':p')
+  exec 'bd' buf
+  call feedkeys("\<f5>")
+endfunc
 
 " Airline Settings {{{1
 
