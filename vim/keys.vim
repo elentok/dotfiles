@@ -71,6 +71,7 @@ noremap ,gd :cd <C-R>=expand("%:p:h")<cr>
 noremap ,gf :CtrlP<cr>
 noremap ,gg :NERDTreeFocus<cr>
 noremap ,gm :CtrlPMRUFiles<cr>
+noremap ,gM :CtrlPModified<cr>
 noremap ,gn :NERDTreeFind<cr>
 noremap ,go :call GotoAlternateFile()<cr>
 noremap ,gs :UltiSnipsEdit<cr>
@@ -78,6 +79,12 @@ noremap ,gt :CtrlPTag<cr>
 noremap ,gv :tabe $vimrc<cr>
 noremap `` :CtrlPBufTag<cr>
 inoremap <c-s> <c-o>:w<cr>
+
+noremap ,jm :CtrlPModels<cr>
+noremap ,jv :CtrlPViews<cr>
+noremap ,jc :CtrlPControllers<cr>
+noremap ,jp :CtrlPPresenters<cr>
+noremap ,jt :CtrlPTemplates<cr>
 
 noremap <silent> <C-\> :NERDTreeFind<cr>:vertical res 30<cr>
 
