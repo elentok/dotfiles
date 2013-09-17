@@ -1,7 +1,0 @@
-#!/bin/bash
-
-rr='source ~/.config/dotfiles/scripts/init-rvm'
-
-tmux new-session -d -n "guard" "bash -c '$rr && guard'"
-tmux new-window -n "http" "bash -c 'python -m SimpleHTTPServer'"
-tmux attach

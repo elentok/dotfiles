@@ -30,6 +30,8 @@ install_ruby() {
   if [ "`rbenv versions | grep $RUBY_VERSION`" == "" ]; then
     rbenv install $RUBY_VERSION
     rbenv global $RUBY_VERSION
+    gem install bundle
+    rbenv rehash
   else
     info "already installed"
   fi

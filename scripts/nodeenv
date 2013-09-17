@@ -1,7 +1,0 @@
-#!/bin/bash
-
-rr='source ~/.config/dotfiles/scripts/init-rvm'
-
-tmux new-session -d -n "server" "bash -c 'supervisor app.coffee'"
-tmux new-window -n "livereload" "bash -c '$rr && guard'"
-tmux attach
