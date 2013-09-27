@@ -42,3 +42,4 @@ if [ "$OS" == "mac" ]; then
 fi
 
 install_goreplace
+install_gocode
