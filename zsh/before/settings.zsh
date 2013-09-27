@@ -23,7 +23,7 @@ export MPD_HOST=bob@localhost
 export SHORT_HOSTNAME=`short-hostname`
 
 # GO
-export GOROOT=/usr/local/Cellar/go/1.1
+export GOROOT=/usr/local/Cellar/go/default/libexec
 export GOPATH=$HOME/.go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
