@@ -44,10 +44,12 @@ function prompt_elentok_setup {
   # Set ruby-info parameters.
   zstyle ':prezto:module:ruby:info:version' format ' %F{8}(%v)%f'
 
+  
+
   # Define prompts.
   PROMPT="
 %F{blue}%~%f\${vcs_info_msg_0_}\${ruby_info[version]}
-%(?.%F{green}${1:-❯ }%f.%F{red}${1:-❯ }%f)"
+%(?.%F{green}`random_animal`  ${1:-❯ }%f.%F{red}${1:-❯ }%f)"
 #RPROMPT='${ruby_info[version]}'
 
 }
@@ -76,6 +78,15 @@ function prompt_elentok_preview {
     print
     prompt_preview_theme 'elentok' "$"
   fi
+}
+
+# Credit to https://github.com/aviaron
+function random_animal {
+  FIRST_ANIMAL=128045
+  ICONS_COUNT=17
+  UTF_CODE=$(( $RANDOM % $ICONS_COUNT + $FIRST_ANIMAL ))
+  EMOJI="\U`printf '%x\n' $UTF_CODE`"
+  echo $EMOJI
 }
 
 prompt_elentok_setup "$@"
