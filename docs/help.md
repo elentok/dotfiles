@@ -110,3 +110,5 @@ Command Line Tips
     cat file.xml | xmllint --format -
 ## hex view
     od -xcb {file}
+## mac - clear cache
+    dscacheutil -flushcache
