@@ -67,8 +67,8 @@ install_utils() {
   npm_install marked
   npm_install instant-markdown-d
   gem_install redcarpet pygments.rb
-  python_install pylint
-  pip install --user git+git://github.com/Lokaltog/powerline
+  pip_install pylint
+  pip_install powerline-status
 }
 
 header "Vim"

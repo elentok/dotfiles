@@ -211,13 +211,17 @@ has_brew_cask_package() {
 }
 
 # Python {{{1
-python_install() {
+pip_install() {
   bullet "Installing ${1}... "
-  if [ "`which $1`" != "" ]; then
+  if has_pip_package "$1"; then
     info " already installed"
   else
-    sudo easy_install $1
+    sudo pip install $1
   fi
+}
+
+has_pip_package() {
+  [ "`pip list | grep \"^$1\b\"`" != "" ]
 }
 
 # Git {{{1
