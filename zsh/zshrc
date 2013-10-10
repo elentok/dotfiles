@@ -1,8 +1,8 @@
+typeset -F SECONDS=0
+export START_TIME=$SECONDS
+
 if [ -e ~/.profiling ]; then
   echo "zshrc started"
-
-  typeset -F SECONDS=0
-  start=$SECONDS
 
   source() {
     local before=$SECONDS
@@ -32,7 +32,5 @@ fi
 source_dir ~/.dotfiles/zsh/after
 source_dir ~/.dotlocal/zsh/after
 
-if [ -e ~/.profiling ]; then
-  duration=$((($SECONDS - $start) * 1000))
-  echo "$(printf '%7.2f' $duration)ms TOTAL"
-fi
+duration=$((($SECONDS - $START_TIME) * 1000))
+echo "\033[1;30m($(printf '%.2f' $duration)ms)\033[0m"
