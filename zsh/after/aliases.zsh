@@ -96,6 +96,7 @@ alias z='zeus'
 alias hh='history'
 alias hex='od -xcb'
 alias pix='open -a Pixelmator'
+alias rbr='rbenv rehash'
 
 alias fliph='convert -flop'
 alias flipv='convert -flip'
