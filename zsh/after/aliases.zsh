@@ -21,6 +21,7 @@ alias gca='git commit --amend'
 alias gs='git status'
 alias gst='git status'
 alias gl='git pull'
+alias glr='git pull --rebase'
 alias ts='tig status'
 alias ga='git add'
 alias grb='git rebase'
@@ -95,5 +96,8 @@ alias z='zeus'
 alias hh='history'
 alias hex='od -xcb'
 alias pix='open -a Pixelmator'
+
+alias fliph='convert -flop'
+alias flipv='convert -flip'
 
 # vim: foldmethod=marker
