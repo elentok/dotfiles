@@ -19,7 +19,10 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 
 let g:syntastic_mode_map = { "mode": "active",
                            \ "active_filetypes": [],
-                           \ "passive_filetypes": ['sass', 'scss', 'haml']}
+                           \ "passive_filetypes": ['sass', 'scss', 'haml', 'html']}
+
+
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 
 let g:UltiSnipsExpandTrigger = '<c-]>'
 
@@ -36,6 +39,8 @@ let g:session_autosave = 'no'
 let g:session_autoload = 'no'
 
 let g:gitgutter_eager = 0
+
+let g:instant_markdown_slow = 1
 
 " CtrlP Settings {{{1
 
@@ -76,19 +81,6 @@ func! CtrlP_CloseBuffer()
   call feedkeys("\<f5>")
 endfunc
 
-" Airline Settings {{{1
-
-if $DISABLE_SPECIAL_CHARS == ""
-  let g:airline_left_sep = '⮀'
-  let g:airline_left_alt_sep = '⮁'
-  let g:airline_right_sep = '⮂'  
-  let g:airline_right_alt_sep = '⮃'
-  let g:airline_linecolumn_prefix = '␤'
-  let g:airline_branch_prefix = '⭠ ' 
-  let g:airline_readonly_symbol = ''
-end
-"'⭤'
-
 
 " Colors {{{1
 set background=dark
@@ -116,6 +108,7 @@ endif
 
 " General {{{1
 behave mswin
+set ttyfast
 set guioptions=gt " use 'e' for gui tabs
 set number            " show line numbers
 set mouse=a
