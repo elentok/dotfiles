@@ -227,3 +227,8 @@ endfunc
 nnoremap <Leader>ss :SaveSession temp<cr>
 nnoremap <Leader>so :OpenSession temp<cr>
 nnoremap <Leader>sl :OpenSession last<cr>
+
+" Profiling {{{1
+
+nnoremap <silent> <leader>PP :exe ":profile start profile.log"<cr>:exe ":profile func *"<cr>:exe ":profile file *"<cr>
+nnoremap <silent> <leader>PQ :exe ":profile pause"<cr>:noautocmd qall!<cr>
