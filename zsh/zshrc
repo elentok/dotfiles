@@ -1,3 +1,17 @@
+if [ -e ~/.profiling ]; then
+  echo "zshrc started"
+
+  typeset -F SECONDS=0
+  start=$SECONDS
+
+  source() {
+    local before=$SECONDS
+    . $*
+    local duration=$((($SECONDS - $before) * 1000))
+    echo "$(printf '%7.2f' $duration)ms $*"
+  }
+fi
+
 source_dir() {
   if [[ -d "$*" ]]; then
     # the "(N)" part means "nullglob" (see http://mywiki.wooledge.org/NullGlob)
@@ -17,3 +31,8 @@ fi
 
 source_dir ~/.dotfiles/zsh/after
 source_dir ~/.dotlocal/zsh/after
+
+if [ -e ~/.profiling ]; then
+  duration=$((($SECONDS - $start) * 1000))
+  echo "$(printf '%7.2f' $duration)ms TOTAL"
+fi
