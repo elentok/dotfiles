@@ -134,7 +134,7 @@ func! ToggleWord()
   let word = expand("<cword>")
   if has_key(g:alternate_words, word)
     let word = g:alternate_words[word]
-    exec "normal viwc" . word
+    exec "normal ciw" . word
   end
 endfunc
 
