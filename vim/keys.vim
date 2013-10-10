@@ -169,6 +169,11 @@ map <Leader>{ ysiw{
 vmap <Leader>} c{ <C-R>" }<ESC>
 vmap <Leader>{ c{<C-R>"}<ESC>
 
+map <Leader>> ysiw>
+map <Leader>< ysiw<
+vmap <Leader>> c<<C-R>"><ESC>
+vmap <Leader>< c<<C-R>"><ESC>
+
 " Run {{{1
 noremap <Leader>rr :w<cr>:call RunCurrentFile()<cr>
 noremap <Leader>rm :call MarkdownPreview()<cr>
