@@ -49,7 +49,7 @@ function prompt_elentok_setup {
   # Define prompts.
   PROMPT="
 %F{blue}%~%f\${vcs_info_msg_0_}\${ruby_info[version]}
-%(?.%F{green}`random_animal`  ${1:-❯ }%f.%F{red}${1:-❯ }%f)"
+%(?.%F{green}`random_animal`  ${1:-❯ }%f.%F{red}`random_animal`  ${1:-❯ }%f)"
 #RPROMPT='${ruby_info[version]}'
 
 }
