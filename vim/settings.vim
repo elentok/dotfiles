@@ -23,6 +23,10 @@ let g:syntastic_mode_map = { "mode": "active",
 
 let g:UltiSnipsExpandTrigger = '<c-]>'
 
+" disable these buttons (for now)
+let g:UltiSnipsJumpForwardTrigger = '<c-f9>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-f10>'
+
 "let g:ycm_key_list_select_completion = [ '<tab>', '<C-J>', '<Down>' ]
 "let g:ycm_key_list_previous_completion = [ '<C-K>', '<Up>' ]
 let g:ycm_min_num_of_chars_for_completion = 2
