@@ -60,6 +60,10 @@ Command Line Tips
     convert file1.png file2.png output.pdf
     convert -page {width}x{height} file1.png file2.png output.pdf
 
+## ImageMagick flip images
+    convert arrow-left.png -flop arrow-right.gif
+    convert arrow-up.png   -flip arrow-down.gif
+
 ## reset terminal
     ctrl+c reset
     ctrl+c stty sane
