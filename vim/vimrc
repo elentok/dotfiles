@@ -22,15 +22,9 @@ endfunc
 
 function! GetPythonVersion()
   if !exists('g:python_version')
-    python <<endpython
-import sys
-import vim
-version = sys.version.split(' ')[0].replace('.', '')
-vim.command("let g:python_version=%s" % version)
-endpython
+    let g:python_version = pyeval("sys.version.split(' ')[0].replace('.', '')")
   end
   return g:python_version
-
 endfunc
 
 let g:os = IdentifyOS()
