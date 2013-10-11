@@ -41,7 +41,7 @@ if GetPythonVersion() > 270
 end
 "Bundle "snipmate-snippets"
 "Bundle "garbas/vim-snipmate"
-"Bundle 'tpope/vim-rails.git'
+Bundle 'tpope/vim-rails.git'
 Bundle 'elentok/vim-rails-extra'
 Bundle 'scrooloose/syntastic.git'
 Bundle 'mileszs/ack.vim'
@@ -79,7 +79,7 @@ Bundle 'wavded/vim-stylus'
 Bundle 'groenewege/vim-less'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'pangloss/vim-javascript'
-"Bundle 'vim-ruby/vim-ruby'
+Bundle 'vim-ruby/vim-ruby'
 Bundle 'elentok/vim-markdown-folding'
 Bundle 'jtratner/vim-flavored-markdown.git'
 "Bundle 'vim-scripts/fish-syntax'
