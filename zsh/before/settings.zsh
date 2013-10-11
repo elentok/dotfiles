@@ -20,9 +20,9 @@ PATH=/usr/local/share/npm/bin:$PATH
 export PATH
 
 export MPD_HOST=bob@localhost
-export SHORT_HOSTNAME=`short-hostname`
+#export SHORT_HOSTNAME=`short-hostname`
 
-[[ -s /Users/3david/.nvm/nvm.sh ]] && . /Users/3david/.nvm/nvm.sh # This loads NVM
+#[[ -s /Users/3david/.nvm/nvm.sh ]] && . /Users/3david/.nvm/nvm.sh # This loads NVM
 
 # so tmux will allow 256 colors:
 if [[ "$TERM" != "screen-256color" ]]; then
