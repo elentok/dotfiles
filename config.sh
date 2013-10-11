@@ -211,7 +211,15 @@ has_brew_cask_package() {
 }
 
 # Python {{{1
+verify_pip_installed() {
+  if [ "`which pip`" == "" ]; then
+    bullet "Installing pip... "
+    sudo easy_install pip
+  fi
+}
+
 pip_install() {
+  verify_pip_installed
   bullet "Installing ${1}... "
   if has_pip_package "$1"; then
     info " already installed"
