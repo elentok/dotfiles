@@ -15,6 +15,7 @@ Bundle 'elentok/alternate-spec.vim'
 Bundle 'elentok/supertagger'
 Bundle 'elentok/spec-runner.vim'
 Bundle 'elentok/todo.vim'
+Bundle 'elentok/togglr.vim'
 
 " navigation
 Bundle 'kien/ctrlp.vim'

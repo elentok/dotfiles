@@ -207,7 +207,6 @@ xnoremap <silent>i<space> t oT o
 " Toggle stuff {{{1
 noremap <Leader>ti :IndentGuidesToggle<cr>
 noremap <Leader>ts :set spell!<cr>
-noremap <Leader>tw :call ToggleWord()<cr>
 noremap <Leader>te :SyntasticToggleMode<cr>:redraw!<cr>
 noremap <Leader>tn :NERDTreeToggle<cr>
 

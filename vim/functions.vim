@@ -103,41 +103,6 @@ func! MarkdownPreview()
   call system('qlmanage -p /tmp/markdown-preview.html &')
 endfunc
 
-" toggle values {{{1
-
-
-let g:alternate_words = {
-      \ "true": "false",
-      \ "True": "False",
-      \ "false": "true",
-      \ "False": "True",
-      \ "should": "should_not",
-      \ "should_not": "should",
-      \ "be_true": "be_false",
-      \ "be_false": "be_true",
-      \ "yes": "no",
-      \ "no": "yes",
-      \ "left": "right",
-      \ "right": "left",
-      \ "border-left": "border-right",
-      \ "border-right": "border-left",
-      \ "border-top": "border-bottom",
-      \ "border-bottom": "border-top",
-      \ "margin-left": "margin-right",
-      \ "margin-right": "margin-left",
-      \ "margin-top": "margin-bottom",
-      \ "margin-bottom": "margin-top"
-      \}
-
-
-func! ToggleWord()
-  let word = expand("<cword>")
-  if has_key(g:alternate_words, word)
-    let word = g:alternate_words[word]
-    exec "normal ciw" . word
-  end
-endfunc
-
 " revert {{{1
 func! RevertFile()
   if &modified
