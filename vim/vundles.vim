@@ -37,12 +37,7 @@ Bundle 'danro/rename.vim'
 Bundle 'godlygeek/tabular'
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
-if GetPythonVersion() > 270
-  Bundle "SirVer/ultisnips"
-end
-"Bundle "snipmate-snippets"
-"Bundle "garbas/vim-snipmate"
-Bundle 'tpope/vim-rails.git'
+
 Bundle 'elentok/vim-rails-extra'
 Bundle 'scrooloose/syntastic.git'
 Bundle 'mileszs/ack.vim'
@@ -86,9 +81,6 @@ Bundle 'jtratner/vim-flavored-markdown.git'
 "Bundle 'vim-scripts/fish-syntax'
 
 " Go language
-"Bundle 'jnwhiteh/vim-golang'
-"Bundle 'go-vim'
-"Bundle 'Blackrush/vim-gocode'
 Bundle 'nsf/gocode', { 'rtp': 'vim/' }
 
 
