@@ -109,6 +109,7 @@ endif
 " General {{{1
 behave mswin
 set ttyfast
+set lazyredraw
 set guioptions=gt " use 'e' for gui tabs
 set number            " show line numbers
 set mouse=a
