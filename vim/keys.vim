@@ -11,8 +11,8 @@ inoremap <c-e> <c-o>$
 
 " Find {{{1
 noremap <cr> :nohls<cr>
-noremap <Leader>ff :Ack! <c-r>=expand("<cword>")<cr><cr>
-vnoremap <Leader>ff "9y:Ack! '<c-r>9'<cr>
+noremap <Leader>ff :Ack! <c-r>=EscapeForQuery(expand("<cword>"))<cr><cr>
+vnoremap <Leader>ff "9y:Ack! '<c-r>=EscapeRegisterForQuery(9)<cr>'<cr>
 noremap <Leader>fc :Ack! 
 noremap <Leader>fr :Gsearch<cr>
 noremap <Leader>fg :call WebSearch("https://google.com/search?q=%query%")<cr>

@@ -155,3 +155,15 @@ func! ScriptifyValues(ArgLead, CmdLine, CursorPos)
 endfunc
 
 command! -nargs=1 -complete=customlist,ScriptifyValues Scriptify call Scriptify("<args>")
+
+" Escaped search {{{1
+func! EscapeForQuery(text)
+  let text = substitute(a:text, '\v(\[|\]|\$|\^)', '\\\1', 'g')
+  let text = substitute(text, "'", "''", 'g')
+  return text
+endfunc
+
+func! EscapeRegisterForQuery(register)
+  return EscapeForQuery(getreg(a:register))
+endfunc
+
