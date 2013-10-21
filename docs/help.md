@@ -114,5 +114,8 @@ Command Line Tips
     cat file.xml | xmllint --format -
 ## hex view
     od -xcb {file}
-## mac - clear cache
+## mac - clear dns cache
     dscacheutil -flushcache
+## bash - read file line by line
+    cat $filename | while read line; do echo $line; done
+
