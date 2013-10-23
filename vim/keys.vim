@@ -107,12 +107,7 @@ noremap <Leader>er :call RevertFile()<cr>
 noremap <Leader>e"' :s/"/'/g<cr>
 noremap <Leader>e'" :s/'/"/g<cr>
 
-noremap <Leader>e= :Tab /=<cr>
-noremap <Leader>e> :Tab /=><cr>
-noremap <Leader>e: :Tab /:\zs<cr>
-noremap <Leader>e\ :Tab /\|<cr>
-noremap <Leader>e{ :Tab /{<cr>
-noremap <Leader>e, :Tab /,\zs<cr>
+vnoremap <silent> <Enter> :EasyAlign<Enter>
 
 " add symbols to the end of the lines:
 noremap <Leader>e1 :exec ":normal A <c-v><esc>" . (79 - strlen(getline("."))) . "A#"<cr>

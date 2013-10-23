@@ -35,7 +35,7 @@ Bundle 'tpope/vim-surround'
 "Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'danro/rename.vim'
-Bundle 'godlygeek/tabular'
+Bundle 'junegunn/vim-easy-align'
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 

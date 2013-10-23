@@ -70,10 +70,7 @@ Vim
 |                       | \ehs            | n    | split hash
 |                       | \ehj            | n    | join hash
 |                       | \ey             | n    | yank to * and + registers
-|                       | \e=             | n    | tabularize =
-|                       | \e>             | n    | tabularize =>
-|                       | \e:             | n    | tabularize :
-|                       | \e\             | n    | tabularize \                                                     |
+|                       | &lt;Enter&gt;   | v    | EasyAlign (e.g. &lt;Enter&gt;: or &lt;Enter&gt;=)
 |                       | \e1             | n    | finish line with "#" chars
 |                       | \e2             | n    | finish line with "=" chars
 |                       | \e3             | n    | finish line with "-" chars
