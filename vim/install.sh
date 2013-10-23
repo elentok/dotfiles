@@ -65,8 +65,6 @@ install_utils() {
   npm_install jshint
   npm_install jsonlint
   npm_install marked
-  npm_install instant-markdown-d
-  gem_install redcarpet pygments.rb
   pip_install pylint
   pip_install powerline-status
 }

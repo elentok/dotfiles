@@ -96,13 +96,6 @@ function! Confirm(message, command)
   end
 endfunc
 
-" markdown {{{1
-func! MarkdownPreview()
-  w
-  call system('marked ' . expand('%') . ' > /tmp/markdown-preview.html')
-  call system('qlmanage -p /tmp/markdown-preview.html &')
-endfunc
-
 " revert {{{1
 func! RevertFile()
   if &modified

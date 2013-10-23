@@ -17,6 +17,7 @@ Bundle 'elentok/spec-runner.vim'
 Bundle 'elentok/todo.vim'
 Bundle 'elentok/togglr.vim'
 Bundle 'elentok/replace-all.vim'
+Bundle 'elentok/markdown-preview.vim'
 
 " navigation
 Bundle 'kien/ctrlp.vim'
@@ -66,7 +67,6 @@ Bundle 'michaeljsmith/vim-indent-object'
 " file formats
 Bundle 'tpope/vim-haml'
 Bundle 'evanmiller/nginx-vim-syntax'
-Bundle 'suan/vim-instant-markdown'
 Bundle 'applescript.vim'
 Bundle 'avakhov/vim-yaml'
 Bundle 'yaml.vim'
