@@ -777,6 +777,13 @@
 			<key>Text</key>
 			<string></string>
 		</dict>
+		<key>0x72-0x100000</key>
+		<dict>
+			<key>Action</key>
+			<integer>13</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
 		<key>0x7f-0x80000</key>
 		<dict>
 			<key>Action</key>
@@ -935,7 +942,9 @@
 	<key>NSFontPanelPreviewHeight</key>
 	<real>0.0</real>
 	<key>NSNavLastRootDirectory</key>
-	<string>/Volumes/Data HD/Dropbox</string>
+	<string>~/.config/dotvim/vimfiles/colors</string>
+	<key>NSNavPanelExpandedStateForSaveMode</key>
+	<true/>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -975,11 +984,17 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>2300 37 445 270 1440 -180 1920 1080 </string>
 	<key>NSWindow Frame Preferences</key>
+<<<<<<< Updated upstream
 	<string>452 309 924 485 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>3360 82 1243 656 3360 -150 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>561 247 650 526 0 0 1440 878 </string>
+=======
+	<string>47 243 924 485 0 0 1440 900 </string>
+	<key>NSWindow Frame iTerm Window 0</key>
+	<string>1761 129 650 476 1440 -180 1920 1080 </string>
+>>>>>>> Stashed changes
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1764,7 +1779,11 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2013-03-20T10:16:38Z</date>
+<<<<<<< Updated upstream
+	<date>2013-05-27T08:45:54Z</date>
+=======
+	<date>2013-03-23T12:57:29Z</date>
+>>>>>>> Stashed changes
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -1821,6 +1840,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>1.0.0.20130302</string>
+	<string>1.0.0.20130319</string>
 </dict>
 </plist>
