@@ -1,0 +1,9 @@
+#!/bin/bash
+vim --cmd 'profile start vim-profile.log' \
+    --cmd 'profile func *' \
+    --cmd 'profile file *' \
+    -c 'profdel func *' \
+    -c 'profdel file *' \
+    -c 'qa!'
+
+vim --startuptime vim-startup.log
