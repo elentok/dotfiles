@@ -30,6 +30,7 @@ augroup Elentok_Misc
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
   autocmd FileType smarty setlocal autoindent
   autocmd FileType java setlocal foldmethod=syntax noexpandtab
+  autocmd FileType ruby setlocal omnifunc=
 
   " Spell checking
   autocmd FileType gitcommit setlocal spell
