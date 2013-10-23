@@ -33,7 +33,7 @@ Bundle 'Lokaltog/powerline', { 'rtp': 'powerline/bindings/vim' }
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-surround'
-"Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'danro/rename.vim'
 Bundle 'junegunn/vim-easy-align'
