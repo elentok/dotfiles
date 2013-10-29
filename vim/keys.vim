@@ -106,6 +106,7 @@ noremap <Leader>wq :wq<cr>
 noremap <Leader>er :call RevertFile()<cr>
 noremap <Leader>e"' :s/"/'/g<cr>
 noremap <Leader>e'" :s/'/"/g<cr>
+noremap <Leader>rws :%s/\s\+$//<cr>
 
 vnoremap <silent> <Enter> :EasyAlign<Enter>
 

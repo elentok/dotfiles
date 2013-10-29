@@ -67,6 +67,7 @@ Vim
 |                       | \et             | n    | edit file in tab
 |                       | \rf             | n    | read file
 |                       | \er             | n    | revert unsaved changes (:e!)
+|                       | \rws            | n    | remove trailing whitespace
 |                       | \ehs            | n    | split hash
 |                       | \ehj            | n    | join hash
 |                       | \ey             | n    | yank to * and + registers
