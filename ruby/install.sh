@@ -41,6 +41,7 @@ create_symlinks() {
   symlink "$DOTF/ruby/irbrc" ~/.irbrc
   symlink "$DOTF/ruby/rdebugrc" ~/.rdebugrc
   symlink "$DOTF/ruby/editrc" ~/.editrc
+  symlink "$DOTF/ruby/pow/powconfig" ~/.powconfig
 }
 
 install_phantomjs() {
