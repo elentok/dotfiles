@@ -1,0 +1,15 @@
+#!/bin/bash
+
+source $DOTF/config.sh
+
+header "Updating scripts"
+
+update_script() {
+  bullet "Updating ${2}... "
+  wget "$1" --output-document "$2"
+  chmod +x "$2"
+}
+
+update_script "https://github.com/garybernhardt/selecta/raw/master/selecta" selecta
+
+
