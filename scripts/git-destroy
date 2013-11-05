@@ -38,7 +38,7 @@ branch_exists() {
 }
 
 remote_branches() {
-  git branch --all --remotes | cut -c 3- | rev | cut -d "/" -f 1 | rev
+  git all-branches --remotes
 }
 
 remote_branch_exists() {

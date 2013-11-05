@@ -1,0 +1,4 @@
+#!/bin/bash
+
+git branch --all | cut -c 3- | sed -E 's#^remotes/[^/]+/##' | sort | uniq
+
