@@ -119,3 +119,12 @@ Command Line Tips
 ## bash - read file line by line
     cat $filename | while read line; do echo $line; done
 
+## psql show all tables
+  psql -h {host} -p {port} -U {username} {database}
+  \? - show help (all commands)
+  \l - show all databases
+  \d - show all tables and other objects
+  \dt - show all tables
+  \db - show all tablespaces
+  \d+ - describe table
+  
