@@ -86,7 +86,7 @@ alias cf='/bin/ls -1 | wc -l' # count files
 alias dotf='cd $DOTF'
 alias dotl='cd $DOTL'
 alias k='less $DOTF/docs/keys.md'
-alias kk='vim $DOTF/docs/keys.md'
+alias ke='vim $DOTF/docs/keys.md'
 alias n='env NODE_NO_READLINE=1 rlwrap -p Green -S "node >>> " node'
 alias pryy='pry -r ./config/environment'
 alias psg='ps aux | grep'
@@ -100,5 +100,10 @@ alias rbr='rbenv rehash'
 
 alias fliph='convert -flop'
 alias flipv='convert -flip'
+
+# Selecta {{{1
+alias kk='kill `ps aux | selecta | awk ''{print $2 }''`'
+alias gcoo='git all-branches | selecta | xargs git checkout'
+alias gdestroy='git destroy `git all-branches | selecta`'
 
 # vim: foldmethod=marker
