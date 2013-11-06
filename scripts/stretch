@@ -14,6 +14,8 @@ main() {
     stretch_start $*;;
   "stop")
     stretch_stop $*;;
+  "restart")
+    stretch_restart $*;;
   "status")
     stretch_status $*;;
   *)
@@ -53,6 +55,10 @@ stretch_status() {
   return 1
 }
 
+stretch_restart() {
+  stretch_stop
+  stretch_start
+}
 
 usage() {
   echo "$0 <start|stop|status>";
@@ -73,7 +79,7 @@ iterate() {
 
   if [ $(($i % 30)) -eq 0 ]; then
     yell "Stretch neck"
-  elif [ $(($i % 5)) -eq 0 ]; then
+  elif [ $(($i % 10)) -eq 0 ]; then
     yell "Look far"
     countdown 10
   elif [ $(($i % 2)) -eq 0 ]; then
