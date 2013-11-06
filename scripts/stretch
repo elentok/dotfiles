@@ -1,0 +1,102 @@
+#!/bin/bash
+
+mkdir -p ~/.stretch
+LOG_FILE=~/.stretch/log
+PID_FILE=~/.stretch/pid
+
+main() {
+  cmd=$1
+  shift
+  case "$cmd" in
+  "bg")
+    background_worker $*;;
+  "start")
+    stretch_start $*;;
+  "stop")
+    stretch_stop $*;;
+  "status")
+    stretch_status $*;;
+  *)
+    usage;;
+  esac
+}
+
+stretch_start() {
+  if stretch_status --silent; then
+    echo "Already started."
+  else
+    stretch bg > $LOG_FILE 2>&1 &
+    echo $! > $PID_FILE
+    stretch_status
+  fi
+}
+
+stretch_stop() {
+  if stretch_status --silent; then
+    kill $(cat $PID_FILE)
+    stretch_status
+  else
+    echo "Not running."
+  fi
+}
+
+stretch_status() {
+  if [ -e "$PID_FILE" ]; then
+    ps -p $(cat $PID_FILE) > /dev/null
+    if [ $? -eq 0 ]; then
+      [ "$1" != "--silent" ] && echo "Running"
+      return 0
+    fi
+  fi
+
+  [ "$1" != "--silent" ] && echo "Not Running"
+  return 1
+}
+
+
+usage() {
+  echo "$0 <start|stop|status>";
+}
+
+background_worker() {
+  local i=0
+  while true; do
+    iterate $i
+    sleep 60
+    i=$(( $i + 1 ))
+  done
+}
+
+iterate() {
+  local i=$1
+  echo "Iteration $i"
+
+  if [ $(($i % 30)) -eq 0 ]; then
+    yell "Stretch neck"
+  elif [ $(($i % 5)) -eq 0 ]; then
+    yell "Look far"
+    countdown 10
+  elif [ $(($i % 2)) -eq 0 ]; then
+    yell "Sit straight"
+  fi
+
+
+  if [ $(($i % 60)) -eq 60 ]; then
+    i=0
+  fi
+}
+
+yell() {
+  say "$*"
+  terminal-notifier -message "$*"
+}
+
+countdown() {
+  for i in `seq $1 1`; do
+    yell $i
+    sleep 1
+  done
+  yell "done"
+}
+
+main $*
