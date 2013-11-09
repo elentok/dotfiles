@@ -106,4 +106,9 @@ alias kk='kill `ps aux | selecta | awk ''{print $2 }''`'
 alias gcoo='git all-branches | selecta | xargs git checkout'
 alias gdestroy='git destroy `git all-branches | selecta`'
 
+# Pomo {{{1
+alias p='pomo'
+alias pi='pomo interactive'
+alias pms='pomo stats'
+
 # vim: foldmethod=marker
