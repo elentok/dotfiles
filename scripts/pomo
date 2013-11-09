@@ -1,0 +1,114 @@
+#!/bin/bash
+
+mkdir -p ~/.pomo
+LOG_FILE=~/.pomo/log
+PID_FILE=~/.pomo/pid
+STATUS_FILE=~/.pomo/status
+
+ITERATION_MINUTES=20
+
+main() {
+  func=pomo_$1
+  if func_exists $func; then
+    shift
+    $func $*
+  else
+    usage
+  fi
+}
+
+pomo_bg() {
+  log "session started"
+  local min=$ITERATION_MINUTES
+  while (( $min > 5 )); do
+    echo "$min minutes remaining"
+    echo $min > $STATUS_FILE
+    min=$(($min - 1))
+    sleep 60
+  done
+  while [[ $min > 0 ]]; do
+    yell "$min minutes remaining"
+    echo $min > $STATUS_FILE
+    min=$(($min - 1))
+    sleep 60
+  done
+  yell "done"
+  log "session complete"
+  rm $STATUS_FILE
+}
+
+log() {
+  echo "`now` $*" >> $LOG_FILE
+}
+
+yell() {
+  terminal-notifier -message "$*"
+  echo "$*"
+  say "$*"
+}
+
+pomo_start() {
+  pomo_status && echo "Already running" && return
+  echo "Starting... "
+  pomo bg > /dev/null 2>&1 &
+  echo $! > $PID_FILE
+  echo "Started"
+}
+
+pomo_status() {
+  if [ -e $STATUS_FILE ]; then
+    minutes=`cat $STATUS_FILE`
+    echo "$minutes minutes remaining"
+    return 0
+  else
+    echo "not running"
+    return 1
+  fi
+}
+
+pomo_stop() {
+  pomo_status || return
+  echo "Stopping... "
+  kill $(cat $PID_FILE)
+  rm $PID_FILE
+  log "session interrupted ($(cat $STATUS_FILE) minutes remaining)"
+  rm $STATUS_FILE
+}
+
+pomo_log() {
+  tail -f $LOG_FILE
+}
+
+pomo_stats() {
+  total=$(today_log | grep "session started" | wc -l)
+  success=$(today_log | grep "session complete" | wc -l)
+  failed=$(today_log | grep "session interrupted" | wc -l)
+
+  echo "Today:"
+  echo "$total sessions"
+  echo "$success succeeded"
+  echo "$failed failed"
+}
+
+today_log() {
+  grep "^$(today)" $LOG_FILE
+}
+
+func_exists() {
+  [ "$(type -t $1)" == "function" ]
+}
+
+now() {
+  date +%Y-%m-%d\ %H:%M
+}
+
+today() {
+  date +%Y-%m-%d
+}
+
+usage() {
+  echo "Usage: $0 <start|stop|status>"
+}
+
+
+main $*
