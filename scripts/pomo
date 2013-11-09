@@ -1,5 +1,10 @@
 #!/bin/bash
 
+RED="\033[31m"
+GREEN="\033[32m"
+BLUE="\033[34m"
+RESET="\033[0m"
+
 mkdir -p ~/.pomo
 LOG_FILE=~/.pomo/log
 PID_FILE=~/.pomo/pid
@@ -15,6 +20,14 @@ main() {
   else
     usage
   fi
+}
+
+red() {
+  echo -e "${RED}$*$RESET"
+}
+
+green() {
+  echo -e "${GREEN}$*$RESET"
 }
 
 pomo_bg() {
@@ -48,31 +61,33 @@ yell() {
 }
 
 pomo_start() {
-  pomo_status && echo "Already running" && return
+  pomo_status --silent && green "Already running" && return
   echo -n "Starting... "
   pomo bg > /dev/null 2>&1 &
   echo $! > $PID_FILE
-  echo "Started"
+  green "Started"
 }
 
 pomo_status() {
   if [ -e $STATUS_FILE ]; then
     minutes=`cat $STATUS_FILE`
-    [ "$1" != "--silent" ] && echo "$minutes minutes remaining"
+    [ "$1" != "--silent" ] && green "$minutes minutes remaining"
     return 0
   else
-    [ "$1" != "--silent" ] && echo "not running"
+    [ "$1" != "--silent" ] && red "Not running"
     return 1
   fi
 }
 
 pomo_stop() {
   pomo_status || return
-  echo "Stopping... "
+  echo -n "Stopping... "
   kill $(cat $PID_FILE)
   rm $PID_FILE
   log "session interrupted ($(cat $STATUS_FILE) minutes remaining)"
   rm $STATUS_FILE
+  sleep 1
+  pomo_status
 }
 
 pomo_log() {
