@@ -37,6 +37,7 @@ stretch_stop() {
   if stretch_status --silent; then
     kill $(cat $PID_FILE)
     stretch_status
+    rm $PID_FILE
   else
     echo "Not running."
   fi
