@@ -4,5 +4,5 @@ else
   export GOROOT=/usr/local/Cellar/go/default
 fi
 
-export GOPATH=$HOME/.go
+export GOPATH=$HOME/.go-global
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin

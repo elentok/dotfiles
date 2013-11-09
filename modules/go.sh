@@ -21,12 +21,12 @@ install_on_mac() {
   check_mac_installation
   brew_install mercurial
   brew_install go
-  make_dir $HOME/.go
+  make_dir $HOME/.go-global
   fix_go_locations
 }
 
 install_goreplace() {
-  cd ~/.go
+  cd ~/.go-global
   mkdir -p bin
   cd bin
   go get github.com/piranha/goreplace
