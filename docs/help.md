@@ -128,3 +128,6 @@ Command Line Tips
   \db - show all tablespaces
   \d+ - describe table
   
+
+## cut prefix
+  echo "hello" | cut -c 3- # will output "llo"
