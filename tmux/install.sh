@@ -1,6 +1,8 @@
 #!/bin/bash
 
+ls `dirname $0`/../config.sh
 source `dirname $0`/../config.sh
+echo $OS
 
 install_tmux() {
   if [ "$OS" == "mac" ]; then
@@ -14,7 +16,11 @@ install_tmux() {
 }
 
 install_symlinks() {
-  symlink "$DOTF/tmux/tmux.conf" ~/.tmux.conf
+  if [ "$OS" == "mac" ]; then
+    symlink "$DOTF/tmux/tmux-osx.conf" ~/.tmux.conf
+  else
+    symlink "$DOTF/tmux/tmux.conf" ~/.tmux.conf
+  fi
 }
 
 
