@@ -79,6 +79,7 @@ alias tot='awk "{ s+=\$1 } END { printf(\"%''d\n\", s) }"'
 # SSH {{{1
 export SSH_TERM=xterm-256color
 alias ssh='TERM=$SSH_TERM ssh'
+alias s=ssh
 
 # Other {{{1
 alias bw='convert -colors 2'
@@ -101,6 +102,14 @@ alias rbr='rbenv rehash'
 alias fliph='convert -flop'
 alias flipv='convert -flip'
 
+function encrypt() {
+  openssl des3 -salt -in $* -out $*.secret
+}
+
+function decrypt() {
+  openssl des3 -salt -d -in $* -out $*.plain
+}
+
 # Selecta {{{1
 alias kk='kill `ps aux | selecta | awk ''{print $2 }''`'
 alias gcoo='git all-branches | selecta | xargs git checkout'
@@ -109,6 +118,6 @@ alias gdestroy='git destroy `git all-branches | selecta`'
 # Pomo {{{1
 alias p='pomo'
 alias pi='pomo interactive'
-alias pms='pomo stats'
+alias pom='pomo stats'
 
 # vim: foldmethod=marker
