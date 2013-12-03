@@ -9,6 +9,7 @@ mkdir -p ~/.pomo
 LOG_FILE=~/.pomo/log
 PID_FILE=~/.pomo/pid
 STATUS_FILE=~/.pomo/status
+PAUSE_FILE=~/.pomo/pause
 
 ITERATION_MINUTES=20
 
@@ -19,6 +20,7 @@ main() {
     $func $*
   else
     usage
+    pomo_stats
   fi
 }
 
@@ -34,12 +36,14 @@ pomo_bg() {
   log "session started"
   local min=$ITERATION_MINUTES
   while (( $min > 5 )); do
+    while [ -e $PAUSE_FILE ]; do sleep 10; done
     echo "$min minutes remaining"
     echo $min > $STATUS_FILE
     min=$(($min - 1))
     sleep 60
   done
   while [[ $min > 0 ]]; do
+    while [ -e $PAUSE_FILE ]; do sleep 10; done
     yell "$min minutes remaining"
     echo $min > $STATUS_FILE
     min=$(($min - 1))
@@ -63,6 +67,7 @@ yell() {
 pomo_start() {
   pomo_status --silent && green "Already running" && return
   echo -n "Starting... "
+  rm -f $PAUSE_FILE
   pomo bg > /dev/null 2>&1 &
   echo $! > $PID_FILE
   green "Started"
@@ -71,7 +76,10 @@ pomo_start() {
 pomo_status() {
   if [ -e $STATUS_FILE ]; then
     minutes=`cat $STATUS_FILE`
-    [ "$1" != "--silent" ] && green "$minutes minutes remaining"
+    if [ "$1" != "--silent" ]; then
+      green "$minutes minutes remaining"
+      [ -e $PAUSE_FILE ] && red "Paused"
+    fi
     return 0
   else
     [ "$1" != "--silent" ] && red "Not running"
@@ -90,6 +98,16 @@ pomo_stop() {
   pomo_status
 }
 
+pomo_pause() {
+  echo "Paused"
+  touch $PAUSE_FILE
+}
+
+pomo_unpause() {
+  echo "Unpaused"
+  rm -f $PAUSE_FILE
+}
+
 pomo_log() {
   tail -f $LOG_FILE
 }
@@ -99,6 +117,9 @@ pomo_stats() {
   success=$(today_log | grep "session complete" | wc -l)
   failed=$(today_log | grep "session interrupted" | wc -l)
 
+  pomo_status
+
+  echo "----------"
   echo "Today:"
   echo "$total sessions"
   echo "$success succeeded"
@@ -140,6 +161,7 @@ today() {
 
 usage() {
   echo "Usage: $0 <start|stop|status>"
+  echo " "
 }
 
 
