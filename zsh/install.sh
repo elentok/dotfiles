@@ -5,8 +5,9 @@ source `dirname $0`/../config.sh
 install_zsh() {
   if [ "$OS" == "mac" ]; then
     brew_install zsh
-    zsh_bin="$(which zsh)"
-    if [ "$SHELL" != "$zsh_bin" ]; then
+    my_shell=$(echo $SHELL | rev | cut -d/ -f1 | rev)
+    if [ "$my_shell" != "zsh" ]; then
+      zsh_bin="$(which zsh)"
       bullet "Changing shell to ${zsh_bin}... "
       chsh -s "$zsh_bin"
     fi
