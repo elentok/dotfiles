@@ -34,6 +34,7 @@ install_prezto_symlinks() {
   for rcfile in ~/.zprezto/runcoms/z*; do
     name=`basename $rcfile`
     [ "$name" == "zshrc" ] && continue
+    [ "$name" == "zprofile" ] && continue
     [ "$name" == "zpreztorc" ] && continue
     symlink $rcfile ~/.$name
   done
@@ -44,6 +45,7 @@ install_symlinks() {
 
   symlink "$DOTF/zsh" ~/.zsh 
   symlink "$DOTF/zsh/zshrc" ~/.zshrc
+  symlink "$DOTF/zsh/zprofile" ~/.zprofile
   symlink "$DOTF/zsh/zpreztorc" ~/.zpreztorc
   symlink "$DOTF/zsh/prompt_elentok_setup" ~/.zprezto/modules/prompt/functions/prompt_elentok_setup
 }
