@@ -43,7 +43,7 @@ alias ackc='ack --coffee'
 # Mac Specific {{{1
 if [[ "`uname -s`" == "Darwin" ]]; then
   #alias ls='ls -FGsk'
-  alias ls='/usr/local/bin/gls --color=always -XFhs'
+  alias ls='$BREW_HOME/bin/gls --color=always -XFhs'
   # s = show size
   # k = show size in kilobytes
 

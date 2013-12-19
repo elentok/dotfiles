@@ -12,7 +12,13 @@ export EDITOR=vim
 export DOTF=~/.dotfiles
 export DOTL=~/.dotlocal
 
-PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
+BREW_HOME=/usr/local
+if [ -e "$HOME/.homebrew" ]; then
+  BREW_HOME=$HOME/.homebrew
+fi
+export BREW_HOME
+
+PATH=$BREW_HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
 PATH=$PATH:$DOTF/scripts:$DOTL/scripts
 PATH=$PATH:$HOME/bin:$HOME/projects/railsnew:$HOME/scripts
 PATH=/usr/local/share/npm/bin:$PATH

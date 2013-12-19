@@ -6,6 +6,13 @@
 DOTF=`dirname ${BASH_SOURCE[0]-$0}`
 export DOTF=`cd $DOTF && pwd`
 
+# BREW_HOME directory {{{1
+BREW_HOME=/usr/local
+if [ -e "$HOME/.homebrew" ]; then
+  BREW_HOME=$HOME/.homebrew
+fi
+export BREW_HOME
+
 
 # Colors {{{1
 export BLACK="\033[30m"

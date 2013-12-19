@@ -12,7 +12,7 @@ install_on_mac() {
 }
 
 create_vim_bin_symlink() {
-  latest_vim=`/bin/ls -1 -d /usr/local/Cellar/macvim/7.* | sort -n | tail -1`
+  latest_vim=`/bin/ls -1 -d $BREW_HOME/Cellar/macvim/7.* | sort -n | tail -1`
   symlink $latest_vim/bin/vim /usr/bin/vim
 }
 
