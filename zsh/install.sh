@@ -48,6 +48,7 @@ install_symlinks() {
 }
 
 install_requirements() {
+  brew_install coreutils
   brew_install fasd
 }
 
