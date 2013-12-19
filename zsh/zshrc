@@ -21,6 +21,7 @@ source_dir() {
   fi
 }
 
+source_dir ~/.dotfiles/zsh/base.zsh
 source_dir ~/.dotlocal/zsh/before
 source_dir ~/.dotfiles/zsh/before
 

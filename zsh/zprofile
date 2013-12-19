@@ -1,0 +1,3 @@
+source ~/.zprezto/runcoms/zprofile
+source ~/.dotfiles/zsh/base.zsh
+
