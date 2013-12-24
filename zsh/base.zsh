@@ -21,5 +21,5 @@ export BREW_HOME
 PATH=$BREW_HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
 PATH=$PATH:$DOTF/scripts:$DOTL/scripts
 PATH=$PATH:$HOME/bin:$HOME/projects/railsnew:$HOME/scripts
-PATH=/usr/local/share/npm/bin:$PATH
+PATH=$PATH:/usr/local/share/npm/bin
 export PATH
