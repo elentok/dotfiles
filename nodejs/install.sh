@@ -21,6 +21,7 @@ npm_install grunt
 npm_install grunt-cli
 npm_install bower
 npm_install json
+npm_install jsontool
 npm_install mocha
 
 npm_install dns-switcher
