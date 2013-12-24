@@ -97,6 +97,8 @@ Command Line Tips
 ## zsh regexp
     name='file-bob.txt'
     echo ${name:s/bob/joe} # => outputs 'file-joe.txt'
+## zsh rebuild (reindex) autocomplete
+    compinit
 
 ## tmux - detach all other clients
     tmux attach -d
