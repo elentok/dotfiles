@@ -1,12 +1,14 @@
 " init vundle
 set nocompatible " disable vi compatibility
 filetype off
+filetype plugin indent off
 "let &rtp .= ',' . $vimfiles . "/bundle/vundle"
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
-Bundle 'sickill/vim-monokai'
+Bundle 'altercation/vim-colors-solarized'
+"Bundle 'sickill/vim-monokai'
 
 " vundles
 Bundle 'elentok/run.vim'
