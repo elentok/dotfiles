@@ -1,0 +1,49 @@
+#!/bin/bash
+
+DEVICE=en0
+
+main() {
+  cmd=$1
+  shift
+  cmd_exists="$(type -t wifi_$cmd)"
+  if [ "$cmd_exists" == "" ]; then
+    usage
+  else
+    wifi_$cmd $*
+  fi
+}
+
+usage() {
+  echo "Usage:"
+  echo "  wifi (on|off|status|devices|list|connect)"
+}
+
+wifi_on() {
+  echo "Turning WIFI on..."
+  networksetup -setairportpower $DEVICE on
+}
+
+wifi_off() {
+  echo "Turning WIFI off..."
+  networksetup -setairportpower $DEVICE off
+}
+
+wifi_status() {
+  networksetup -getairportnetwork $DEVICE
+  networksetup -getairportpower $DEVICE
+}
+
+wifi_devices() {
+  networksetup -listallhardwareports
+}
+
+wifi_connect() {
+  echo "Connecting to $*..."
+  networksetup -setairportnetwork en0 $*
+}
+
+wifi_list() {
+  /System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport scan
+}
+
+main $*
