@@ -82,12 +82,11 @@ Bundle 'jtratner/vim-flavored-markdown.git'
 
 " Go language
 Bundle 'nsf/gocode', { 'rtp': 'vim/' }
-
-
-set runtimepath+=$GOROOT/misc/vim
+Bundle 'jnwhiteh/vim-golang'
 
 if file_readable(expand("~/.dotlocal/vundles.vim"))
   source ~/.dotlocal/vundles.vim
 endif
 
 filetype plugin indent on
+syntax on

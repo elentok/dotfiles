@@ -3,16 +3,16 @@
 source `dirname $0`/../config.sh
 
 latest_version() {
-  /bin/ls -1 /usr/local/Cellar/go | grep -E '^[0-9\.]+$' | sort | tail -1
+  /bin/ls -1 $BREW_HOME/Cellar/go | grep -E '^[0-9\.]+$' | sort | tail -1
 }
 
 fix_go_locations() {
   latest=$(latest_version)
-  symlink /usr/local/Cellar/go/{$latest,default}
+  symlink $BREW_HOME/Cellar/go/{$latest,default}
 }
 
 check_mac_installation() {
-  if [ ! -x "/usr/local/bin/go" ]; then
+  if [ ! -x "$BREW_HOME/bin/go" ]; then
     brew remove --force go
   fi
 }
@@ -41,5 +41,5 @@ if [ "$OS" == "mac" ]; then
   install_on_mac
 fi
 
-install_goreplace
+#install_goreplace
 install_gocode
