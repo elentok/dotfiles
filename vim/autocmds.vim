@@ -22,6 +22,8 @@ augroup Elentok_Misc
   autocmd BufRead,BufEnter Brewfile setlocal filetype=coffee
   autocmd BufRead,BufNewFile *.hamlc set ft=haml
   autocmd BufRead,BufNewFile *.hamljs set ft=haml
+  autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
+
 
   " Autocomplete
   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
