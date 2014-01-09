@@ -1,7 +1,7 @@
-if [ -e /usr/local/Cellar/go/default/libexec ]; then
-  export GOROOT=/usr/local/Cellar/go/default/libexec
+if [ -e $BREW_HOME/Cellar/go/default/libexec ]; then
+  export GOROOT=$BREW_HOME/Cellar/go/default/libexec
 else
-  export GOROOT=/usr/local/Cellar/go/default
+  export GOROOT=$BREW_HOME/Cellar/go/default
 fi
 
 export GOPATH=$HOME/.go-global
