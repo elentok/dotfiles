@@ -116,13 +116,14 @@ if has('gui_running')
 else
   " enable 256 colors in the terminal
   set t_Co=256
-  color Monokai
+  color solarized
+  "color Monokai
   
-  hi Normal ctermbg=None
-  hi Folded ctermbg=233
-  hi NonText ctermbg=None
-  hi Folded cterm=bold
-  hi Special ctermfg=lightblue
+  "hi Normal ctermbg=None
+  "hi Folded ctermbg=233
+  "hi NonText ctermbg=None
+  "hi Folded cterm=bold
+  "hi Special ctermfg=lightblue
 endif
 
 
