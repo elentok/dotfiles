@@ -1,11 +1,29 @@
-#!/bin/bash
- 
-echo -e "\033[0mCOLOR_NC (No color)"
-echo -e "\033[1;37mCOLOR_WHITE\t\033[0;30mCOLOR_BLACK"
-echo -e "\033[0;34mCOLOR_BLUE\t\033[1;34mCOLOR_LIGHT_BLUE"
-echo -e "\033[0;32mCOLOR_GREEN\t\033[1;32mCOLOR_LIGHT_GREEN"
-echo -e "\033[0;36mCOLOR_CYAN\t\033[1;36mCOLOR_LIGHT_CYAN"
-echo -e "\033[0;31mCOLOR_RED\t\033[1;31mCOLOR_LIGHT_RED"
-echo -e "\033[0;35mCOLOR_PURPLE\t\033[1;35mCOLOR_LIGHT_PURPLE"
-echo -e "\033[0;33mCOLOR_YELLOW\t\033[1;33mCOLOR_LIGHT_YELLOW"
-echo -e "\033[1;30mCOLOR_GRAY\t\033[0;37mCOLOR_LIGHT_GRAY"
+#!/usr/bin/env ruby
+
+RESET="\033[0m"
+
+colors = {
+  black: 30,
+  red: 31,
+  green: 32,
+  yellow: 33,
+  blue: 34,
+  purple: 35,
+  cyan: 36,
+  white: 37
+}
+
+def show_color(name, value, bold = false)
+  mode = bold ? 1 : 0
+  name = "bold #{name}" if bold
+  code = "\033[#{mode};#{value}m"
+  display = "\\033[#{mode};#{value}m"
+
+  puts "#{code}#{display}\t#{name}#{RESET}"
+end
+
+colors.each do |name, value|
+  show_color(name, value)
+  show_color(name, value, true)
+end
+
