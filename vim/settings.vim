@@ -118,8 +118,9 @@ else
   set t_Co=256
   color solarized
   "color Monokai
-  
-  "hi Normal ctermbg=None
+
+  " Fix for when using the Hydrozen iterm2 colors scheme
+  hi Normal ctermbg=None
   "hi Folded ctermbg=233
   "hi NonText ctermbg=None
   "hi Folded cterm=bold
