@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# Created by David Elentok.
+# https://github.com/elentok/dotfiles
+
+RESET="\033[0m"
+red="\033[41;37m"
+green="\033[42;37m"
+yellow="\033[43;37m"
+blue="\033[44;37m"
+purple="\033[45;37m"
+cyan="\033[46;37m"
+
+pattern="$1"
+
+SED='sed'
+FLAGS='g'
+
+if [ "$1" == "-i" ]; then
+  shift
+  FLAGS='gI'
+fi
+
+if [ "$(uname -s)" == "Darwin" ]; then # if mac
+  if [ "$(which gsed)" != "" ]; then
+    SED='gsed'
+  else
+    FLAGS='g' # OSX sed doesn't support case insensitive
+  fi
+fi
+
+usage() {
+  echo "Usage:"
+  echo "  hl [options] {regexp} [color]"
+  echo
+  echo "Options:"
+  echo "  -i    case insensitive"
+  echo
+  echo "Example:"
+  echo "  tail -f production.log | hl -i '(error|warn)' "
+  echo "  tail -f production.log | hl -i '(error|warn)' red "
+}
+
+get_color_code() {
+  color="blue"
+  if [ $# -gt 0 ]; then color=$1; fi
+  eval echo \$$color
+}
+
+if [ $# -eq 0 ]; then
+  usage
+else
+  color=$(get_color_code $2)
+  $SED -E "s/$1/$(printf $color)&$(printf $RESET)/$FLAGS"
+fi
+
+
+
