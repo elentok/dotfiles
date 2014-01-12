@@ -11,8 +11,6 @@ blue="\033[44;37m"
 purple="\033[45;37m"
 cyan="\033[46;37m"
 
-pattern="$1"
-
 SED='sed'
 FLAGS='g'
 
@@ -37,8 +35,8 @@ usage() {
   echo "  -i    case insensitive"
   echo
   echo "Example:"
-  echo "  tail -f production.log | hl -i '(error|warn)' "
-  echo "  tail -f production.log | hl -i '(error|warn)' red "
+  echo "  tail -f production.log | hl -i '(error|warn)'"
+  echo "  tail -f production.log | hl -i 'error.*' red | hl -i 'warn.*' yellow"
 }
 
 get_color_code() {
