@@ -13,17 +13,25 @@ colors = {
   white: 37
 }
 
-def show_color(name, value, bold = false)
+def show_color(name, value, bold = false, background = false)
   mode = bold ? 1 : 0
   name = "bold #{name}" if bold
-  code = "\033[#{mode};#{value}m"
-  display = "\\033[#{mode};#{value}m"
+  if background
+    code = "\033[#{value+10};#{37}m"
+    display = "\\033[#{value+10};#{37}m"
+  else
+    code = "\033[#{mode};#{value}m"
+    display = "\\033[#{mode};#{value}m"
+  end
 
   puts "#{code}#{display}\t#{name}#{RESET}"
 end
 
+show_color 'reset', $RESET
+
 colors.each do |name, value|
   show_color(name, value)
   show_color(name, value, true)
+  show_color(name, value, false, true)
 end
 
