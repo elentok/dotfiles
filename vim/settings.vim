@@ -121,6 +121,7 @@ else
 
   " Fix for when using the Hydrozen iterm2 colors scheme
   hi Normal ctermbg=None
+  hi rubyDefine ctermfg=2 cterm=none ctermbg=None
   "hi Folded ctermbg=233
   "hi NonText ctermbg=None
   "hi Folded cterm=bold
