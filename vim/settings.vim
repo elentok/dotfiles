@@ -147,6 +147,7 @@ set iskeyword=@,48-57,_,192-255,$,#,-
 set switchbuf=useopen
 set listchars=tab:»·,trail:·
 set list
+set cryptmethod=blowfish
 if executable("ag")
   set grepprg=ag\ --nogroup\ --nocolor
 endif
