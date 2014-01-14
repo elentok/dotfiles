@@ -54,6 +54,9 @@ Bundle 'tpope/vim-repeat'
 Bundle 'iandoe/vim-osx-colorpicker'
 Bundle 'xolox/vim-misc'
 
+" dark/zen room, no distraction mode
+Bundle 'junegunn/goyo.vim'
+
 if version >= 703
   Bundle 'xolox/vim-session'
 end
