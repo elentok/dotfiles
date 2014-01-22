@@ -77,7 +77,7 @@ alias total='awk "{ s+=\$1 } END { print s }"'
 alias tot='awk "{ s+=\$1 } END { printf(\"%''d\n\", s) }"'
 
 # SSH {{{1
-export SSH_TERM=xterm-256color
+export SSH_TERM=xterm
 alias ssh='TERM=$SSH_TERM ssh'
 alias s=ssh
 
