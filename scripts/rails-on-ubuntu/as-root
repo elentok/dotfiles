@@ -1,0 +1,7 @@
+#!/bin/bash
+
+apt-get install git build-essential \
+  libc6-dev libssl-dev libmysql++-dev libsqlite3-dev \
+  libssl-dev libreadline6-dev zlib1g-dev libyaml-dev \
+  libreadline-dev libxslt1-dev \
+  ncurses-dev libffi-dev libgdbm-dev
