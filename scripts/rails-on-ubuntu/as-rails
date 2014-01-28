@@ -1,0 +1,49 @@
+#!/bin/bash
+
+BLUE="\033[34m"
+RESET="\033[0m"
+
+main() {
+  install_rbenv
+  load_rbenv
+  install_ruby_build
+  install_ruby
+}
+
+install_rbenv() {
+  header "Installing rbenv"
+  git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+  echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
+  echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+}
+
+load_rbenv() {
+  header "Loading rbenv"
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+}
+
+install_ruby_build() {
+  header "Installing ruby-build"
+  git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+}
+
+install_ruby() {
+  header "Installing Ruby 2.0.0"
+  rbenv install 2.0.0-p0
+
+  header "Installing Ruby 1.9.3"
+  rbenv install 1.9.3-p0
+
+  header "Initializing Ruby"
+  rbenv global 2.0.0-p0
+  rbenv rehash
+  ruby --version # should output 2.0.0-p0
+}
+
+header() {
+  echo ""
+  echo "${BLUE}* $*${RESET}"
+}
+
+main
