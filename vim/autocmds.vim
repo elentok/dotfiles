@@ -31,7 +31,9 @@ augroup Elentok_Misc
   autocmd FileType html setlocal autoindent omnifunc=htmlcomplete#CompleteTags
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
   autocmd FileType smarty setlocal autoindent
-  autocmd FileType java setlocal foldmethod=syntax noexpandtab
+  autocmd FileType java setlocal
+  \ omnifunc=eclim#java#complete#CodeComplete
+  \ completefunc=eclim#java#complete#CodeComplete
   autocmd FileType ruby setlocal omnifunc=
 
   " Spell checking

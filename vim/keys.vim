@@ -234,3 +234,9 @@ nnoremap <Leader>sl :OpenSession last<cr>
 
 nnoremap <silent> <leader>PP :exe ":profile start profile.log"<cr>:exe ":profile func *"<cr>:exe ":profile file *"<cr>
 nnoremap <silent> <leader>PQ :exe ":profile pause"<cr>:noautocmd qall!<cr>
+
+" Java {{{1
+nnoremap <leader>ji :JavaImport<cr>
+nnoremap <leader>jm :JavaImpl<cr>
+nnoremap <leader>jg :JavaGet<cr>
+nnoremap <leader>js :JavaGetSet<cr>
