@@ -5,6 +5,6 @@
 oplop $*
 
 if [ $? -eq 0 ]; then
-  (sleep 3; echo -n "bla" | pbcopy) &
+  (sleep 20; echo -n "bla" | pbcopy) &
 fi
 
