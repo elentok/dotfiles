@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Runs oplop, and forgets the password when done
+
+oplop $*
+
+if [ $? -eq 0 ]; then
+  (sleep 3; echo -n "bla" | pbcopy) &
+fi
+
