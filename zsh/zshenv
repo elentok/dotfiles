@@ -1,1 +1,4 @@
-export MPD_HOST=bob@localhost
+source ~/.zprezto/runcoms/zshenv
+
+# Fix $TERM problem with remote servers
+alias ssh='TERM=xterm ssh'
