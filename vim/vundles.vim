@@ -13,6 +13,7 @@ Bundle 'altercation/vim-colors-solarized'
 " vundles
 Bundle 'elentok/run.vim'
 Bundle 'elentok/plaintasks.vim'
+Bundle 'elentok/notes.vim'
 Bundle 'elentok/alternate-spec.vim'
 Bundle 'elentok/supertagger'
 Bundle 'elentok/spec-runner.vim'
