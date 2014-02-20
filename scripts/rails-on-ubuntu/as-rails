@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DEFAULT_RAILS=2.0.0-p247
+
 BLUE="\033[34m"
 RESET="\033[0m"
 
@@ -13,6 +15,12 @@ main() {
 install_rbenv() {
   header "Installing rbenv"
   git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+  add_rbenv_to_bash_profile
+}
+
+add_rbenv_to_bash_profile() {
+  echo '' >> ~/.bash_profile
+  echo '# rbenv:' >> ~/.bash_profile
   echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
   echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
 }
@@ -29,21 +37,24 @@ install_ruby_build() {
 }
 
 install_ruby() {
-  header "Installing Ruby 2.0.0"
-  rbenv install 2.0.0-p0
+  header "Installing Ruby $DEFAULT_RAILS"
+  rbenv install $DEFAULT_RAILS
 
-  header "Installing Ruby 1.9.3"
-  rbenv install 1.9.3-p0
+  #header "Installing Ruby 1.9.3"
+  #rbenv install 1.9.3-p0
 
   header "Initializing Ruby"
-  rbenv global 2.0.0-p0
+  rbenv global $DEFAULT_RAILS
   rbenv rehash
+
+  echo "Active ruby version: (should be $DEFAULT_RAILS)"
   ruby --version # should output 2.0.0-p0
 }
 
 header() {
   echo ""
-  echo "${BLUE}* $*${RESET}"
+  echo -e "${BLUE}==============================${RESET}"
+  echo -e "${BLUE}* $*${RESET}"
 }
 
 main
