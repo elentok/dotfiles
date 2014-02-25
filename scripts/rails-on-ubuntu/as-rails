@@ -1,6 +1,6 @@
 #!/bin/bash
-
-DEFAULT_RAILS=2.0.0-p247
+RAILS_VERSIONS=( 1.9.3-p0 2.0.0-p0 2.0.0-p247 )
+DEFAULT_RAILS=${RAILS_VERSIONS[$(( $total-1 ))]}
 
 BLUE="\033[34m"
 RESET="\033[0m"
@@ -37,18 +37,23 @@ install_ruby_build() {
 }
 
 install_ruby() {
-  header "Installing Ruby $DEFAULT_RAILS"
-  rbenv install $DEFAULT_RAILS
-
-  #header "Installing Ruby 1.9.3"
-  #rbenv install 1.9.3-p0
-
-  header "Initializing Ruby"
+  for rv in "${RAILS_VERSIONS[@]}"
+  do
+    header "Installing Ruby $rv"
+	  rbenv install $rv
+	  
+	  header "Setting up Ruby $rv"
+	  rbenv global $rv
+	  gem install bundler
+	  rbenv rehash
+  done
+  
+  header "Initializing global Ruby"
   rbenv global $DEFAULT_RAILS
   rbenv rehash
 
   echo "Active ruby version: (should be $DEFAULT_RAILS)"
-  ruby --version # should output 2.0.0-p0
+  ruby --version # should output 2.0.0-p247
 }
 
 header() {
