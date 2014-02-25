@@ -1,0 +1,11 @@
+#!/bin/bash
+
+eval "$(rbenv init --no-rehash -)"
+
+if [ -e ".zeus.sock" ]; then
+  echo "Running 'zeus rake i18n:js:export'"
+  zeus rake i18n:js:export
+else
+  echo "Running 'rake i18n:js:export'"
+  rake i18n:js:export
+fi
