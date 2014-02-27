@@ -201,6 +201,8 @@ set wrapscan    " wrap around when searching
 set backup writebackup
 set backupdir=$temp_dir
 set dir=$temp_dir
+" store undo history even after closing a file
+set undofile undodir=$temp_dir
 
 " Folding {{{1
 set foldtext=getline(v:foldstart)
