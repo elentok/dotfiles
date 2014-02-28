@@ -32,7 +32,9 @@ Bundle "nelstrom/vim-visual-star-search"
 Bundle 'jasoncodes/ctrlp-modified.vim'
 Bundle 'elentok/ctrlp-objects.vim'
 Bundle 'benmills/vimux'
-Bundle 'Lokaltog/powerline', { 'rtp': 'powerline/bindings/vim' }
+if has('python')
+  Bundle 'Lokaltog/powerline', { 'rtp': 'powerline/bindings/vim' }
+end
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-surround'
@@ -62,7 +64,7 @@ if version >= 703
   Bundle 'xolox/vim-session'
 end
 
-if !exists('g:disable_ycm')
+if has('python') && !exists('g:disable_ycm')
   Bundle 'Valloric/YouCompleteMe'
 end
 "Bundle 'airblade/vim-gitgutter'
