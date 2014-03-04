@@ -34,6 +34,8 @@ Bundle 'elentok/ctrlp-objects.vim'
 Bundle 'benmills/vimux'
 if has('python')
   Bundle 'Lokaltog/powerline', { 'rtp': 'powerline/bindings/vim' }
+else
+  Bundle 'bling/vim-airline'
 end
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
