@@ -43,6 +43,7 @@ let g:gitgutter_eager = 0
 let g:instant_markdown_slow = 1
 
 let g:airline_powerline_fonts=1
+let g:neocomplete#enable_at_startup = 1
 
 " CtrlP Settings {{{1
 
