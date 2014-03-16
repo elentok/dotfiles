@@ -1,0 +1,73 @@
+#!/usr/bin/env lua
+
+require 'string'
+
+function main()
+  if table.getn(arg) == 0 then
+    help()
+  else
+    convert(arg[1])
+  end
+end
+
+function convert(input)
+  if string.match(input, "^[0-9][0-9]?[ap]m$") then
+    print(convert_to_24(input))
+  elseif string.match(input, "^[0-9][0-9]?$") then
+    print(convert_to_ampm(input))
+  else
+    print "Invalid input"
+  end
+end
+
+function convert_to_24(input)
+  ampm = string.match(input, "([ap]m)")
+  number = string.match(input, "([0-9]+)")
+  number = tonumber(number)
+
+  if ampm == "am" then
+    return number % 12
+  else
+    if number == 12 then
+      return number
+    else
+      return number + 12
+    end
+  end
+end
+
+function convert_to_ampm(input)
+  number = tonumber(input)
+  if number == 0 then
+    return "12am"
+  elseif number < 12 then
+    return number .. "am"
+  elseif number == 12 then
+    return "12pm"
+  else
+    return (number % 12) .. "pm"
+  end
+end
+
+function help()
+  print [[
+  meridiem = noon
+  AM = ante meridiem
+  PM = post meridiem
+
+  12am => 00:00
+  01am => 01:00
+  ...
+  10am => 10:00
+  11am => 11:00
+
+  12pm => 12:00
+  01pm => 13:00
+  ..
+  10pm => 22:00
+  11pm => 23:00
+  ]]
+end
+
+main()
+
