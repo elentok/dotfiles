@@ -1,0 +1,2 @@
+source ~/.vimrc
+set runtimepath+=$NEOROOT/docs
