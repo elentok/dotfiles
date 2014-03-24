@@ -126,6 +126,7 @@ else
   hi Normal ctermbg=None
   hi rubyDefine ctermfg=2 cterm=none ctermbg=None
   hi Folded cterm=bold
+  hi Noise ctermfg=10
   "hi Folded ctermbg=233
   "hi NonText ctermbg=None
   "hi Folded cterm=bold
