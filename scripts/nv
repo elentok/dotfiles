@@ -1,4 +1,6 @@
 #!/bin/bash
 
-export VIMRUNTIME=$BREW_HOME/Cellar/macvim/7.4-72/MacVim.app/Contents/Resources/vim/runtime
-$HOME/.neovim-src/build/bin/nvim $@
+export NEOROOT="$HOME/.neovim-src"
+export VIMRUNTIME=$NEOROOT/vimscript/runtime
+
+$NEOROOT/neovim/build/bin/nvim $@
