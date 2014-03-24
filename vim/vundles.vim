@@ -66,7 +66,9 @@ if version >= 703
   Bundle 'xolox/vim-session'
 end
 
-Bundle 'Shougo/neocomplete.vim'
+if has('lua')
+  Bundle 'Shougo/neocomplete.vim'
+end
 "if has('python') && !exists('g:disable_ycm')
   "Bundle 'Valloric/YouCompleteMe'
 "end
