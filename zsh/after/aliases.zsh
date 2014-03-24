@@ -98,6 +98,7 @@ alias hh='history'
 alias hex='od -xcb'
 alias pix='open -a Pixelmator'
 alias rbr='rbenv rehash'
+alias gulp='gulp --require coffee-script/register'
 
 alias fliph='convert -flop'
 alias flipv='convert -flip'
