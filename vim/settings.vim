@@ -4,6 +4,7 @@ syntax enable
 
 " Plugin specific {{{1
 let NERDTreeIgnore=['\.zeus\.sock$', '\~$']
+let NERDTreeHijackNetrw = 0
 let g:VimuxOrientation = "h"
 let g:VimuxHeight = "40"
 let g:VimuxUseNearestPane = 1
