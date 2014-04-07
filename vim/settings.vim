@@ -244,3 +244,10 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
 set ttimeout
 set ttimeoutlen=20
 set notimeout
+
+" Insert mode cursor {{{1
+let s:xterm_underline = "\<Esc>[4 q"
+let s:xterm_line = "\<Esc>[6 q"
+let s:xterm_block = "\<Esc>[2 q"
+let &t_SI .= s:xterm_line   " Blinking bar cursor when in insert mode
+let &t_EI .= s:xterm_block  " Solid block cursor when in normal mode]]"
