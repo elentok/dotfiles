@@ -33,8 +33,15 @@ install_goreplace() {
   go build github.com/piranha/goreplace
 }
 
-install_gocode() {
-  go get -u github.com/nsf/gocode
+go_get() {
+  pkg="$1"
+  bullet "Installing Go package '$pkg'..."
+  if [ -e "$GOPATH/src/$pkg" ]; then
+    info " already installed"
+  else
+    info ""
+    go get -u "$pkg"
+  fi
 }
 
 if [ "$OS" == "mac" ]; then
@@ -42,4 +49,5 @@ if [ "$OS" == "mac" ]; then
 fi
 
 #install_goreplace
-install_gocode
+go_get github.com/nsf/gocode
+go_get github.com/gpmgo/gopm
