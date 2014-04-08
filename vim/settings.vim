@@ -20,7 +20,7 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 
 let g:syntastic_mode_map = { "mode": "active",
                            \ "active_filetypes": [],
-                           \ "passive_filetypes": ['sass', 'scss', 'haml', 'html']}
+                           \ "passive_filetypes": ['sass', 'scss', 'haml', 'html', 'dart']}
 
 
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
