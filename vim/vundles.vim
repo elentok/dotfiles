@@ -94,7 +94,8 @@ Bundle 'jtratner/vim-flavored-markdown.git'
 "Bundle 'vim-scripts/fish-syntax'
 
 " Go language
-Bundle 'nsf/gocode', { 'rtp': 'vim/' }
+"Bundle 'nsf/gocode', { 'rtp': 'vim/' }
+Bundle 'Blackrush/vim-gocode'
 Bundle 'jnwhiteh/vim-golang'
 
 if file_readable(expand("~/.dotlocal/vundles.vim"))
