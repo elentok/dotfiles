@@ -51,3 +51,4 @@ fi
 #install_goreplace
 go_get github.com/nsf/gocode
 go_get github.com/gpmgo/gopm
+go_get github.com/codegangsta/gin
