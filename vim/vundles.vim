@@ -59,10 +59,6 @@ Bundle 'xolox/vim-misc'
 " dark/zen room, no distraction mode
 Bundle 'junegunn/goyo.vim'
 
-if version >= 703
-  Bundle 'xolox/vim-session'
-end
-
 if has('lua')
   Bundle 'Shougo/neocomplete.vim'
 end
