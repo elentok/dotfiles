@@ -1,7 +1,8 @@
 # VI bindings
 bindkey -v
 
-bindkey '^R' history-incremental-search-backward
+bindkey '^R' history-incremental-pattern-search-backward
+bindkey '^F' history-incremental-pattern-search-forward
 bindkey '^N' down-line-or-search
 bindkey '^K' kill-line
 bindkey '^P' up-line-or-search
