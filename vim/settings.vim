@@ -44,6 +44,7 @@ let g:gitgutter_eager = 0
 let g:instant_markdown_slow = 1
 
 let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#auto_completion_start_length = 4
 
 " Airline {{{1
 
