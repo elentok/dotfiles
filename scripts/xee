@@ -1,0 +1,3 @@
+#!/bin/bash
+
+/Applications/Xee.app/Contents/MacOS/Xee `grealpath $1`
