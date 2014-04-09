@@ -95,8 +95,9 @@ Bundle 'jtratner/vim-flavored-markdown.git'
 
 " Go language
 "Bundle 'nsf/gocode', { 'rtp': 'vim/' }
-Bundle 'Blackrush/vim-gocode'
-Bundle 'jnwhiteh/vim-golang'
+"Bundle 'Blackrush/vim-gocode'
+"Bundle 'jnwhiteh/vim-golang'
+Bundle 'fatih/vim-go'
 
 if file_readable(expand("~/.dotlocal/vundles.vim"))
   source ~/.dotlocal/vundles.vim

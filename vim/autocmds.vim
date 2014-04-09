@@ -24,6 +24,8 @@ augroup Elentok_Misc
   autocmd BufRead,BufNewFile *.hamljs set ft=haml
   autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=expr foldexpr=IndentFoldExpr(v:lnum) nofoldenable
 
+  " Go
+  autocmd FileType go setlocal ts=8 sw=8 softtabstop=8 noexpandtab nolist
 
   " Autocomplete
   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
