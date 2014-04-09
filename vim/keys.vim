@@ -225,10 +225,6 @@ func! PostStartupKeys()
   unmap [p
   unmap ]p
 endfunc
-" Session {{{1
-nnoremap <Leader>ss :SaveSession temp<cr>
-nnoremap <Leader>so :OpenSession temp<cr>
-nnoremap <Leader>sl :OpenSession last<cr>
 
 " Profiling {{{1
 
