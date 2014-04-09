@@ -32,11 +32,8 @@ Bundle "nelstrom/vim-visual-star-search"
 Bundle 'jasoncodes/ctrlp-modified.vim'
 Bundle 'elentok/ctrlp-objects.vim'
 Bundle 'benmills/vimux'
-if has('python')
-  Bundle 'Lokaltog/powerline', { 'rtp': 'powerline/bindings/vim' }
-else
-  Bundle 'bling/vim-airline'
-end
+"Bundle 'Lokaltog/powerline', { 'rtp': 'powerline/bindings/vim' }
+Bundle 'bling/vim-airline'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-surround'
