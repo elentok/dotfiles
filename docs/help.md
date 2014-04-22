@@ -133,3 +133,9 @@ Command Line Tips
 
 ## cut prefix
   echo "hello" | cut -c 3- # will output "llo"
+
+## curl with cookie
+  curl --cookie "cookie_name=cookie_value" http://...
+
+## curl follow redirects
+  curl -L http://...
