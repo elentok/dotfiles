@@ -5,9 +5,12 @@ if [ "$1" == "grayscale" ]; then
   COLORS=16
   DEPTH=4
 else
-  COLORS=${COLORS:-default}
-  DEPTH=${DEPTH:-default}
+  COLORS=${COLORS:-2}
+  DEPTH=${DEPTH:-1}
 fi
+
+echo "Colors: $COLORS"
+echo "Depth:  $DEPTH"
 
 for file in "$@"; do
   if [ "`identify \"$file\" | grep '\<2c\>'`" == "" ]; then
