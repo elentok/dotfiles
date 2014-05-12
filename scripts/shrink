@@ -1,12 +1,21 @@
 #!/bin/bash
 
+if [ "$1" == "grayscale" ]; then
+  shift
+  COLORS=16
+  DEPTH=4
+else
+  COLORS=${COLORS:-default}
+  DEPTH=${DEPTH:-default}
+fi
+
 for file in "$@"; do
   if [ "`identify \"$file\" | grep '\<2c\>'`" == "" ]; then
     echo "Converting $file"
     original="`echo $file | sed 's/.png/ (original).png/'`"
     mv "$file" "$original"
-    convert -colors 2 "$original" temp.png
-    convert -depth 1 temp.png "$file"
+    convert -colors $COLORS "$original" temp.png
+    convert -depth $DEPTH temp.png "$file"
     rm temp.png
   fi
 done
