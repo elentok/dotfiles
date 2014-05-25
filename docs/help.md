@@ -51,6 +51,14 @@ Command Line Tips
     git clean -f -n         (dry run)
     git clean -f -n {path}  (dry run on files in path)
 
+## git change author
+
+    git rebase -i {tag/commit}
+    # mark the commits you want to change with "edit" (or "e")
+    # for each commit do:
+    git commit --amend --author="Author Name <email@address.com>"
+    git rebase --continue
+
 ## ImageMagick resize
     convert --sample 50% input.png output.jpg
 
@@ -129,6 +137,7 @@ Command Line Tips
   \dt - show all tables
   \db - show all tablespaces
   \d+ - describe table
+  \x {on|off} - turn extended display on/off
   
 
 ## cut prefix
