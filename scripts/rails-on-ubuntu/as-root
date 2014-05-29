@@ -9,4 +9,5 @@ apt-get install g++ gcc make git build-essential \
   libxml2-dev libxslt1-dev autoconf libc6-dev libgdbm-dev \
   libncurses5-dev automake libtool bison pkg-config libffi-dev \
   ncurses-dev libssl-dev libssl \
-  imagemagick libmagickwand-dev
+  imagemagick libmagickwand-dev \
+  postgresql-server-dev-9.1
