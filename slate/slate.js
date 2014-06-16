@@ -55,6 +55,15 @@ slate.bindAll({
         // centers
         u: $('center', 'top'),
         n: $('center', 'bottom'),
+
+
+        //
+        c: [
+          $('center', 'center', 1.2, 1.2),
+          $('center', 'center', 1.5, 1.5)
+        ],
+
+
         //'return': $('center', 'center'),
         // throw to monitor
         'return': ['throw 0 resize',
@@ -64,7 +73,7 @@ slate.bindAll({
         '3': $('toss', '2', 'resize'),
         // direct focus 
         a: $.focus('Adium'),
-        c: $.focus('Google Chrome'),
+        g: $.focus('Google Chrome'),
         s: $.focus('Sublime Text'),
         t: $.focus('iTerm'),
         f: $.focus('Finder'),
