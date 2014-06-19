@@ -1,10 +1,14 @@
 color cursor white black
 bind generic P !git add -p %(file)
-set show-author = abbreviated
-set show-date = relative
-set show-id = yes
-set author-width = 2
-set show-refs = yes
+
+
+set ignore-case   = yes # Ignore case when searching?
+set mouse         = yes # Enable mouse support?
+set line-graphics = utf-8
+
+set main-view  = line-number:no,interval=5 id:yes date:relative author:abbreviated,width=2 commit-title:yes,graph,refs,overflow=yes
+set blame-view = date:relative author:abbreviated,width=2 file-name:auto id:yes,color line-number:no,interval=5 text
+set tree-view  = line-number:no,interval=5 mode author:abbreviated,width=2 file-size:units date:default id:no file-name
 
 bind main r !git rebase -i %(commit)
 bind main y !sh -c 'echo %(commit) | pbcopy'
