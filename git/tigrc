@@ -11,4 +11,4 @@ set blame-view = date:relative author:abbreviated,width=2 file-name:auto id:yes,
 set tree-view  = line-number:no,interval=5 mode author:abbreviated,width=2 file-size:units date:default id:no file-name
 
 bind main r !git rebase -i %(commit)
-bind main y !sh -c 'echo %(commit) | pbcopy'
+bind main y @sh -c 'printf %(commit) | pbcopy'
