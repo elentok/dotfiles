@@ -889,19 +889,47 @@
 	<real>1</real>
 	<key>GlobalKeyMap</key>
 	<dict>
+		<key>0x48-0x120000</key>
+		<dict>
+			<key>Action</key>
+			<integer>10</integer>
+			<key>Text</key>
+			<string>H</string>
+		</dict>
+		<key>0x4a-0x120000</key>
+		<dict>
+			<key>Action</key>
+			<integer>10</integer>
+			<key>Text</key>
+			<string>J</string>
+		</dict>
+		<key>0x4b-0x120000</key>
+		<dict>
+			<key>Action</key>
+			<integer>10</integer>
+			<key>Text</key>
+			<string>K</string>
+		</dict>
+		<key>0x4c-0x120000</key>
+		<dict>
+			<key>Action</key>
+			<integer>10</integer>
+			<key>Text</key>
+			<string>L</string>
+		</dict>
 		<key>0x5b-0x100000</key>
 		<dict>
 			<key>Action</key>
-			<integer>2</integer>
+			<integer>10</integer>
 			<key>Text</key>
-			<string></string>
+			<string>[</string>
 		</dict>
 		<key>0x5d-0x100000</key>
 		<dict>
 			<key>Action</key>
-			<integer>0</integer>
+			<integer>10</integer>
 			<key>Text</key>
-			<string></string>
+			<string>]</string>
 		</dict>
 		<key>0x62-0x80000</key>
 		<dict>
@@ -927,9 +955,9 @@
 		<key>0x68-0x100000</key>
 		<dict>
 			<key>Action</key>
-			<integer>18</integer>
+			<integer>10</integer>
 			<key>Text</key>
-			<string></string>
+			<string>h</string>
 		</dict>
 		<key>0x68-0x140000</key>
 		<dict>
@@ -948,9 +976,9 @@
 		<key>0x6a-0x100000</key>
 		<dict>
 			<key>Action</key>
-			<integer>21</integer>
+			<integer>10</integer>
 			<key>Text</key>
-			<string></string>
+			<string>j</string>
 		</dict>
 		<key>0x6a-0x140000</key>
 		<dict>
@@ -969,9 +997,9 @@
 		<key>0x6b-0x100000</key>
 		<dict>
 			<key>Action</key>
-			<integer>20</integer>
+			<integer>10</integer>
 			<key>Text</key>
-			<string></string>
+			<string>k</string>
 		</dict>
 		<key>0x6b-0x140000</key>
 		<dict>
@@ -990,9 +1018,9 @@
 		<key>0x6c-0x100000</key>
 		<dict>
 			<key>Action</key>
-			<integer>19</integer>
+			<integer>10</integer>
 			<key>Text</key>
-			<string></string>
+			<string>l</string>
 		</dict>
 		<key>0x6c-0x140000</key>
 		<dict>
@@ -1199,7 +1227,7 @@
 		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
 		hAErATGG
 		</data>
-		<string>302</string>
+		<string>287</string>
 	</array>
 	<key>NSTableView Hidden Columns KeyBingingTable</key>
 	<array/>
@@ -1208,9 +1236,11 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>929 88 445 270 0 0 1440 878 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>332 928 924 485 0 0 2560 1578 </string>
+	<string>1085 674 924 485 0 0 2560 1578 </string>
+	<key>NSWindow Frame SUStatusFrame</key>
+	<string>1722 1142 384 129 0 0 2560 1578 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 1089 665 476 0 0 2560 1578 </string>
+	<string>0 0 2560 1600 0 0 2560 1578 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
