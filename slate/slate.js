@@ -59,6 +59,7 @@ slate.bindAll({
 
         //
         c: [
+          $('center', 'center', 1.1, 1.1),
           $('center', 'center', 1.2, 1.2),
           $('center', 'center', 1.5, 1.5)
         ],
