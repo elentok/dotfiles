@@ -1,0 +1,15 @@
+#!/bin/bash
+
+branch=$(git rev-parse --abbrev-ref HEAD)
+
+read -p "Pull from origin/$branch? [Y/n] " yesno
+
+echo
+
+if [[ "$yesno" =~ [nN] ]]; then
+  echo "Aborted."
+else
+  echo "Pulling from origin/${branch}..."
+  git pull --rebase origin $branch
+fi
+

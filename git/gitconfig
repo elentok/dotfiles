@@ -13,6 +13,7 @@
   diff = auto
 [alias]
   pl = pull --rebase
+  pm = pull-me
   ps = push
   st = status
   ci = commit
