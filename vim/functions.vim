@@ -215,3 +215,13 @@ function! GetNextNonEmptyLine(lnum)
   endwhile
   return -1
 endfunc
+
+" Background {{{1
+function! ToggleBackground()
+  if &background == "dark"
+    set background=light
+  else
+    set background=dark
+  endif
+  call writefile(["set background=" . &background], expand("~/.vimstate"))
+endfunc
