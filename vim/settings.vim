@@ -126,19 +126,7 @@ else
   " enable 256 colors in the terminal
   set t_Co=256
   color solarized
-  "color Monokai
-
-  " Fix for when using the Hydrozen iterm2 colors scheme
-  hi Normal ctermbg=None
-  hi rubyDefine ctermfg=2 cterm=none ctermbg=None
-  hi Folded cterm=bold
-  hi Noise ctermfg=10
-  "hi Folded ctermbg=233
-  "hi NonText ctermbg=None
-  "hi Folded cterm=bold
-  "hi Special ctermfg=lightblue
 endif
-
 
 " Go language (disabled) {{{1
 "set rtp+=$GOROOT/misc/vim
