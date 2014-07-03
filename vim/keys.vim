@@ -206,6 +206,7 @@ noremap <Leader>ts :set spell!<cr>
 noremap <Leader>te :SyntasticToggleMode<cr>:redraw!<cr>
 noremap <Leader>tn :NERDTreeToggle<cr>
 noremap <Leader>tc :set list!<cr>
+noremap <Leader>tb :call ToggleBackground()<cr>
 
 
 " MS-Windows {{{1

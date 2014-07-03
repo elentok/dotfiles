@@ -86,6 +86,10 @@ source $vimfiles/keys.vim
 source $vimfiles/autocmds.vim
 source $vimfiles/abbr.vim
 
+if file_readable(expand("~/.vimstate"))
+  source ~/.vimstate
+endif
+
 if file_readable(expand("~/.dotlocal/after.vim"))
   source ~/.dotlocal/after.vim
 endif
