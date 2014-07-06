@@ -2,5 +2,5 @@
 
 source `dirname $0`/../config.sh
 
-brew_tap phinze/cask
+brew_tap caskroom/cask
 brew_install brew-cask
