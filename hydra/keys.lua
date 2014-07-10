@@ -1,5 +1,6 @@
 -- define the hyper key
 local hyper = {"cmd", "ctrl"}
+local hypershift = {"cmd", "ctrl", "shift"}
 
 hotkey.bind(hyper, "R", repl.open)
 hotkey.bind(hyper, 'D', opendictionary)
@@ -10,23 +11,19 @@ hotkey.bind(hyper, 'D', opendictionary)
 hotkey.bind(hyper, "F1", hydra.reload)
 
 
---hotkey.bind(hyper, 'h', function() window.focusedwindow():focuswindow_west() end)
---hotkey.bind(hyper, 'l', function() window.focusedwindow():focuswindow_east() end)
---hotkey.bind(hyper, 'k', function() window.focusedwindow():focuswindow_north() end)
---hotkey.bind(hyper, 'j', function() window.focusedwindow():focuswindow_south() end)
---
+hotkey.bind(hyper, 'h', function() window.focusedwindow():focuswindow_west() end)
+hotkey.bind(hyper, 'l', function() window.focusedwindow():focuswindow_east() end)
+hotkey.bind(hyper, 'k', function() window.focusedwindow():focuswindow_north() end)
+hotkey.bind(hyper, 'j', function() window.focusedwindow():focuswindow_south() end)
 
-hotkey.bind(hyper, 'm', ext.grid.maximize_window)
+hotkey.bind(hypershift, 'j', dowin(ext.win.push, "down"))
+hotkey.bind(hypershift, 'k', dowin(ext.win.push, "up"))
+hotkey.bind(hypershift, 'h', dowin(ext.win.push, "left"))
+hotkey.bind(hypershift, 'l', dowin(ext.win.push, "right"))
 
+hotkey.bind(hypershift, 'down', dowin(ext.win.nudge, "down"))
+hotkey.bind(hypershift, 'up', dowin(ext.win.nudge, "up"))
+hotkey.bind(hypershift, 'left', dowin(ext.win.nudge, "left"))
+hotkey.bind(hypershift, 'right', dowin(ext.win.nudge, "right"))
 
-hotkey.bind(hyper, '=', function() ext.grid.adjustwidth( 1) end)
-hotkey.bind(hyper, '-', function() ext.grid.adjustwidth(-1) end)
-
-hotkey.bind(hyper, 'u', ext.grid.resizewindow_taller)
-hotkey.bind(hyper, 'o', ext.grid.resizewindow_wider)
-hotkey.bind(hyper, 'i', ext.grid.resizewindow_thinner)
-
-hotkey.bind(hyper, 'j', ext.grid.pushwindow_down)
-hotkey.bind(hyper, 'k', ext.grid.pushwindow_up)
-hotkey.bind(hyper, 'h', ext.grid.pushwindow_left)
-hotkey.bind(hyper, 'l', ext.grid.pushwindow_right)
+hotkey.bind(hypershift, 'm', dowin(ext.win.full))
