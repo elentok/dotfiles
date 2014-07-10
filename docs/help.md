@@ -59,6 +59,15 @@ Command Line Tips
     git commit --amend --author="Author Name <email@address.com>"
     git rebase --continue
 
+## git checkout remote branch
+
+    git checkout -b {branch} origin/{branch}
+
+## git resolve conflict using theirs
+
+    git co --theirs path/to/file
+    git add path/to/file
+
 ## ImageMagick resize
     convert --sample 50% input.png output.jpg
 
