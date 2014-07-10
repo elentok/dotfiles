@@ -2,6 +2,9 @@
 
 source $DOTF/config.sh
 
+BACKUPS_TO_KEEP=5
+ANDROID_LOG=/sdcard/.sync-to-android.log
+
 main() {
   if [ $# -lt 3 ]; then
     usage
@@ -31,6 +34,7 @@ sync() {
 
   create_backup_dir
   backup
+  remove_old_backups
   push_to_android
 }
 
@@ -45,15 +49,24 @@ create_backup_dir() {
 }
 
 backup() {
-  bullet "Backing up $BLUE$target$RESET... "
+  bullet "Backing up $BLUE$target$RESET\n"
   date=$(date +%Y-%m-%d_%H%M)
+  suffix=""
 
   if android_file_exists $target; then
-    adb_shell mv $target $backup/$date
+    backup_target=$backup/$date
+    while android_file_exists $backup_target; do
+      suffix=$((suffix + 1))
+      backup_target="$backup/$date-$suffix"
+    done
+
+    echo -ne "  to $BLUE$backup_target$RESET..."
+
+    adb_shell mv $target $backup_target
     if [ $? -eq 0 ]; then
       success "done."
     else
-      error "ERROR"
+      show_adb_error
       exit 1
     fi
   else
@@ -61,19 +74,40 @@ backup() {
   fi
 }
 
+remove_old_backups() {
+  bullet "Deleting old backups...\n"
+  backups_to_delete | while read name; do
+    bullet "Deleting $BLUE${name}$RESET... "
+
+    if adb_shell rm -rf $backup/$name; then
+      success "done"
+    else
+      show_adb_error
+      exit 1
+    fi
+
+  done
+}
+
+backups_to_delete() {
+  adb shell ls $backup/ | sort -r | tail -n+$((BACKUPS_TO_KEEP+1)) | tr -d '\r'
+  if [ $? -ne 0 ]; then
+    error "Error getting backups to delete"
+    exit 1
+  fi
+}
+
 push_to_android() {
   bullet "Copying files to $BLUE$target$RESET... "
   info ""
 
-  adb push $source $target
-
+  adb push $source $target > /tmp/push-to-android 2>&1
+  tail -2 /tmp/push-to-android
+  echo "(see /tmp/push-to-android for more details)"
 }
 
 android_is_dir() {
-  dir=$1
-
-  exitcode=$(adb shell "test -d '$dir'; echo -n $?")
-  [ "$exitcode" == "0" ]
+  adb_shell test -d $1
 }
 
 android_file_exists() {
@@ -81,13 +115,23 @@ android_file_exists() {
 }
 
 adb_shell() {
+  cmd="$* > $ANDROID_LOG 2>&1; echo -n \$?"
   if [ "$DEBUG" != "" ]; then
-    echo
-    echo "DEBUG: adb shell \"$*; echo -n \$?\""
-    echo
+    echo -e "\n$YELLOW======================="
+    echo "DEBUG: $cmd"
+    echo -e "=======================$RESET"
   fi
-  exitcode=$(adb shell "$* > /dev/null 2>&1; echo -n \$?")
+  exitcode=$(adb shell $cmd)
   [ "$exitcode" == "0" ]
+}
+
+show_adb_error() {
+  echo
+  error "======================"
+  error "Exit code: $exitcode"
+  error "Error output:"
+  adb shell cat $ANDROID_LOG
+  error "======================"
 }
 
 main $*
