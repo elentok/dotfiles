@@ -1,0 +1,93 @@
+#!/bin/bash
+
+source $DOTF/config.sh
+
+main() {
+  if [ $# -lt 3 ]; then
+    usage
+  else
+    sync $*
+  fi
+}
+
+usage() {
+  echo
+  echo "Usage:"
+  echo
+  echo "  sync-to-android <source> <target> <backup-dir>"
+  echo
+}
+
+sync() {
+  source="$1"
+  target="$2"
+  backup="$3"
+
+  echo
+  echo -e "Syncing from local $BLUE$source$RESET"
+  echo -e "         to device $BLUE$target$RESET"
+  echo -e "(Using $BLUE$backup$RESET for backups)"
+  echo
+
+  create_backup_dir
+  backup
+  push_to_android
+}
+
+create_backup_dir() {
+  bullet "Creating $BLUE$backup$RESET directory... "
+  if android_is_dir $backup; then
+    info "already exists."
+  else
+    adb shell mkdir -p $backup
+    success "done."
+  fi
+}
+
+backup() {
+  bullet "Backing up $BLUE$target$RESET... "
+  date=$(date +%Y-%m-%d_%H%M)
+
+  if android_file_exists $target; then
+    adb_shell mv $target $backup/$date
+    if [ $? -eq 0 ]; then
+      success "done."
+    else
+      error "ERROR"
+      exit 1
+    fi
+  else
+    info "doesn't exist, not necessary."
+  fi
+}
+
+push_to_android() {
+  bullet "Copying files to $BLUE$target$RESET... "
+  info ""
+
+  adb push $source $target
+
+}
+
+android_is_dir() {
+  dir=$1
+
+  exitcode=$(adb shell "test -d '$dir'; echo -n $?")
+  [ "$exitcode" == "0" ]
+}
+
+android_file_exists() {
+  adb_shell test -e $1
+}
+
+adb_shell() {
+  if [ "$DEBUG" != "" ]; then
+    echo
+    echo "DEBUG: adb shell \"$*; echo -n \$?\""
+    echo
+  fi
+  exitcode=$(adb shell "$* > /dev/null 2>&1; echo -n \$?")
+  [ "$exitcode" == "0" ]
+}
+
+main $*
