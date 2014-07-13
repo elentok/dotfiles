@@ -8,7 +8,6 @@ install_on_mac() {
 
   brew_install ctags
   brew_install the_silver_searcher # ag
-  brew_install tidy
 }
 
 create_vim_bin_symlink() {
@@ -38,7 +37,7 @@ install_symlinks() {
 
 install_vundle() {
   cd ~/.vim
-  git_clone http://github.com/gmarik/vundle.git bundle/vundle
+  git_clone https://github.com/gmarik/vundle.git bundle/vundle
   bullet "Running BundleInstall... "
   vim +BundleInstall +qall
   success "done"
@@ -53,8 +52,7 @@ compile_youcompleteme() {
     info 'Already compiled.'
   else
     (
-      cd $DOTF/vim/bundle/YouCompleteMe
-      ./install.sh
+      cd $DOTF/vim/bundle/YouCompleteMe && ./install.sh
     )
   fi
 }
@@ -83,7 +81,8 @@ else
   fi
 
   install_symlinks
+
   install_vundle
-  compile_youcompleteme
+  #compile_youcompleteme
   install_utils
 fi

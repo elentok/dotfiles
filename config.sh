@@ -48,7 +48,7 @@ bullet() {
 }
 
 info() {
-  echo -e "${GRAY}$*$RESET"
+  echo -e "${CYAN}$*$RESET"
 }
 
 success() {
@@ -231,7 +231,7 @@ pip_install() {
   if has_pip_package "$1"; then
     info " already installed"
   else
-    sudo pip install $1
+    pip install $1
   fi
 }
 
