@@ -19,7 +19,7 @@ fi
 if [ "$OS" == "mac" ]; then
   ./keyremap4macbook/install.sh
   ./modules/homebrew-cask.sh
-  ./slate/install.sh $*
+  ./hydra/install
 
   header 'Other packages'
   brew_install imagemagick
