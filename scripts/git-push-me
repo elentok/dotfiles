@@ -1,0 +1,15 @@
+#!/bin/bash
+
+branch=$(git rev-parse --abbrev-ref HEAD)
+
+read -p "Push $branch to origin? [Y/n] " yesno
+
+echo
+
+if [[ "$yesno" =~ [nN] ]]; then
+  echo "Aborted."
+else
+  echo "Pushing ${branch} to origin..."
+  git push origin $branch
+fi
+
