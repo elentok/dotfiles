@@ -90,6 +90,14 @@ function ext.frame.fit(screen, frame)
   return frame
 end
 
+-- returns frame fited inside screen
+function ext.frame.fit_percentage(screen, percentages)
+  frame.w = screen.w * percentages.w / 100
+  frame.h = screen.h * percentages.h / 100
+
+  return frame
+end
+
 -- returns frame centered inside screen
 function ext.frame.center(screen, frame)
   frame.x = screen.w / 2 - frame.w / 2 + screen.x

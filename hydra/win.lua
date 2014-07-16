@@ -79,6 +79,17 @@ function ext.win.size(win, size)
   win:setframe(frame)
 end
 
+-- set window size and center
+function ext.win.size_percentage(win, percentages)
+  local screen = win:screen():frame_without_dock_or_menu()
+  local frame = win:frame()
+
+  frame = ext.frame.fit_percentage(screen, percentages)
+  frame = ext.frame.center(screen, frame)
+
+  win:setframe(frame)
+end
+
 -- save and restore window positions
 local positions = {}
 
