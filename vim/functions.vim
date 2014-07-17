@@ -225,3 +225,8 @@ function! ToggleBackground()
   endif
   call writefile(["set background=" . &background], expand("~/.vimstate"))
 endfunc
+
+function! HighlightLongLines()
+  highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+  match OverLength /\%81v.\+/
+endfunc
