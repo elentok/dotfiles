@@ -1,14 +1,14 @@
 # vim: filetype=zsh
+#
 # A simple theme from elentok.
 #
-#
 
-function +vi-git-status() {
-  # Check for untracked files or updated submodules since vcs_info does not.
-  if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-    hook_com[unstaged]=' %F{8}✗%f'
-  fi
-}
+#function +vi-git-status() {
+  ## Check for untracked files or updated submodules since vcs_info does not.
+  #if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+    #hook_com[unstaged]=' %F{8}✗%f'
+  #fi
+#}
 
 function prompt_elentok_precmd {
   vcs_info
@@ -35,11 +35,12 @@ function prompt_elentok_setup {
   zstyle ':vcs_info:*' check-for-changes true
   zstyle ':vcs_info:*' get-revision true
   zstyle ':vcs_info:*' use-simple true
+  zstyle ':vcs_info:*' stagedstr ' %F{green}✗%f'
   zstyle ':vcs_info:*' unstagedstr ' %F{red}✗%f'
   zstyle ':vcs_info:*' formats ' %F{green}[%b]%f%u'
   #zstyle ':vcs_info:*' formats ' %F{green}[%b]%f %F{white}%.7i%f%u'
   zstyle ':vcs_info:*' actionformats ' %F{blue}%b%f %F{white}%.7i%f +%a%u'
-  zstyle ':vcs_info:git*+set-message:*' hooks git-status
+  #zstyle ':vcs_info:git*+set-message:*' hooks git-status
 
   # Set ruby-info parameters.
   zstyle ':prezto:module:ruby:info:version' format ' %F{gray}(%v)%f'
