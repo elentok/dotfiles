@@ -156,6 +156,8 @@ endif
 " makes sure the active window will always be at least 80 characters
 set winwidth=84
 
+set colorcolumn=80
+
 set undolevels=1000
 set history=300       " remember 300 commands
 set visualbell t_vb=
