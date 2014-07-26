@@ -1,0 +1,13 @@
+#!/bin/bash
+
+cd $DOTF
+cd ..
+now=$(date +%Y-%m-%d_%H-%M)
+filename=dotfiles-${now}.tar.bz2
+echo "Exporting dotfiles to $filename"
+tar cjf $filename .dotfiles
+echo "Done"
+echo
+ls $filename
+
+
