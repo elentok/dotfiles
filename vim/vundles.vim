@@ -27,6 +27,8 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'jwhitley/vim-matchit'
 Bundle "nelstrom/vim-visual-star-search"
 
+Bundle 'christoomey/vim-tmux-navigator'
+
 " editing
 
 Bundle 'jasoncodes/ctrlp-modified.vim'
