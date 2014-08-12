@@ -6,6 +6,7 @@ RUBY_VERSION='2.0.0-p247'
 
 install_rbenv() {
   brew_install rbenv
+  brew_install rbenv-gem-rehash
   brew_install ruby-build
   eval "$(rbenv init -)"
 }
