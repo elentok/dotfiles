@@ -7,7 +7,8 @@ set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
-Bundle 'altercation/vim-colors-solarized'
+"Bundle 'altercation/vim-colors-solarized'
+Bundle 'hydrozen/solarized', { 'rtp': 'vim-colors-solarized/' }
 "Bundle 'sickill/vim-monokai'
 
 " vundles
