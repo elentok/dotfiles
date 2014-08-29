@@ -171,7 +171,10 @@ set wildmode=full
 set wildignore=*.swp,*.bak,*.pyc,*.class,*.o,*.obj
 
 " Formatting {{{1
-set formatoptions=qro
+
+" see ':help fo-table' for more info
+set formatoptions=qroc
+
 "set fillchars=vert:\|,fold:-
 set fillchars=
 set tabstop=2
