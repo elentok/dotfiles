@@ -10,7 +10,7 @@ augroup Elentok_Misc
   autocmd BufRead,BufEnter *.scss setlocal foldmethod=marker foldmarker={,}
   autocmd BufRead,BufEnter *.applescript set filetype=applescript
   autocmd BufRead,BufEnter *.rxls setlocal filetype=ruby
-  autocmd BufRead,BufEnter *.md,*.markdown setlocal filetype=ghmarkdown
+  autocmd BufRead,BufEnter *.md,*.markdown setlocal filetype=ghmarkdown formatoptions+=t
   autocmd BufRead,BufEnter gitconfig setlocal filetype=gitconfig
   autocmd BufRead,BufEnter .gitconfig* setlocal filetype=gitconfig
 
