@@ -1,0 +1,27 @@
+#!/usr/bin/env coffee
+
+util        = require 'util'
+querystring = require 'querystring'
+
+process.stdin.setEncoding 'utf8'
+
+chunks = []
+
+process.stdin.on 'readable', ->
+  chunk = process.stdin.read()
+  if chunk?
+    chunks.push(chunk)
+
+process.stdin.on 'end', ->
+  parseQueryString chunks.join('')
+
+parseQueryString = (str) ->
+  vars = querystring.parse(str)
+
+  if process.argv.length > 2
+    key = process.argv[2]
+    console.log vars[key]
+  else
+    console.log util.inspect(vars, colors: true)
+
+
