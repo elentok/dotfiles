@@ -6,6 +6,12 @@ export YELLOW="\033[33m"
 export BLUE="\033[34m"
 export RESET="\033[0m"
 
+SED='sed'
+if [ "$(which gsed)" != "" ]; then
+  # use gnu-sed if available
+  SED='gsed'
+fi
+
 usage() {
   echo "Usage:"
   echo
@@ -20,7 +26,7 @@ simulate() {
   shift
   has_results='no'
   for file in $*; do
-    new_file=$(echo $file | sed -E "$regexp")
+    new_file=$(echo $file | $SED "$regexp")
     if [ "$file" != "$new_file" ]; then
       echo "Will rename ${YELLOW}${file}$RESET"
       echo "         to ${BLUE}${new_file}$RESET"
@@ -41,7 +47,7 @@ rename() {
   regexp=$1
   shift
   for file in $*; do
-    new_file=$(echo $file | sed -E "$regexp")
+    new_file=$(echo $file | $SED "$regexp")
     if [ "$file" != "$new_file" ]; then
       rename_file "$file" "$new_file"
     fi
