@@ -56,6 +56,7 @@ install_symlinks() {
 install_requirements() {
   brew_install coreutils
   brew_install fasd
+  brew_install gnu-sed
 }
 
 header "Zsh"
