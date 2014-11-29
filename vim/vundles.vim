@@ -87,6 +87,8 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'elentok/vim-markdown-folding'
 Bundle 'jtratner/vim-flavored-markdown.git'
+Bundle 'Arduino-syntax-file'
+Bundle 'jplaut/vim-arduino-ino'
 "Bundle 'vim-scripts/fish-syntax'
 
 " Go language
