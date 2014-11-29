@@ -13,6 +13,7 @@ augroup Elentok_Misc
   autocmd BufRead,BufEnter *.md,*.markdown setlocal filetype=ghmarkdown formatoptions+=t
   autocmd BufRead,BufEnter gitconfig setlocal filetype=gitconfig
   autocmd BufRead,BufEnter .gitconfig* setlocal filetype=gitconfig
+  autocmd BufRead,BufEnter *.ino setlocal filetype=arduino cindent
 
   autocmd BufRead,BufEnter *.load setlocal filetype=fish
 
