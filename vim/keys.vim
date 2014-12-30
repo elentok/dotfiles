@@ -14,7 +14,6 @@ noremap <cr> :nohls<cr>
 noremap <Leader>ff :Ack! <c-r>=EscapeForQuery(expand("<cword>"))<cr><cr>
 vnoremap <Leader>ff "9y:Ack! '<c-r>=EscapeRegisterForQuery(9)<cr>'<cr>
 noremap <Leader>fc :Ack! 
-noremap <Leader>fr :Gsearch<cr>
 noremap <Leader>fg :call WebSearch("https://google.com/search?q=%query%")<cr>
 noremap <Leader>fo :call WebSearch("http://stackoverflow.com/search?q=%query%")<cr>
 vnoremap <Leader>fg "9y:call Browse("https://google.com/search?q=<c-r>9")<cr>

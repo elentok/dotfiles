@@ -16,6 +16,7 @@ augroup Elentok_Misc
   autocmd BufRead,BufEnter *.ino setlocal filetype=arduino cindent
 
   autocmd BufRead,BufEnter *.load setlocal filetype=fish
+  autocmd BufRead,BufEnter COMMIT_EDITMSG setlocal colorcolumn=72
 
   " Javascript
   autocmd BufRead,BufEnter *.js setlocal nocindent smartindent
@@ -24,6 +25,7 @@ augroup Elentok_Misc
   autocmd BufRead,BufNewFile *.hamlc set ft=haml
   autocmd BufRead,BufNewFile *.hamljs set ft=haml
   autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=expr foldexpr=IndentFoldExpr(v:lnum) nofoldenable
+  autocmd FileType yaml setl foldmethod=expr foldexpr=IndentFoldExpr(v:lnum) nofoldenable
 
   " Go
   autocmd FileType go setlocal ts=8 sw=8 softtabstop=8 noexpandtab nolist

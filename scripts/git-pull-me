@@ -1,15 +1,16 @@
 #!/bin/bash
 
+remote="noreview"
 branch=$(git rev-parse --abbrev-ref HEAD)
 
-read -p "Pull from origin/$branch? [Y/n] " yesno
+read -p "Pull from $remote/$branch? [Y/n] " yesno
 
 echo
 
 if [[ "$yesno" =~ [nN] ]]; then
   echo "Aborted."
 else
-  echo "Pulling from origin/${branch}..."
-  git pull --rebase origin $branch
+  echo "Pulling from $remote/${branch}..."
+  git pull --rebase $remote $branch
 fi
 

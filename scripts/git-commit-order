@@ -1,0 +1,36 @@
+#!/bin/bash
+
+main() {
+  if [ "$1" != "" ]; then
+    commit-order $1
+  else
+    usage
+  fi
+}
+
+usage() {
+  echo
+  echo "Usage:"
+  echo
+  echo "  git commit-order [revision range]"
+  echo
+}
+
+commit-order() {
+  i=1
+  git_log "$1" | reverse_lines | while read line; do
+    echo "$i. $line"
+    i=$(($i+1))
+  done
+}
+
+git_log() {
+  range="$1"
+  git log --pretty=format:%s "$range"
+}
+
+reverse_lines() {
+  sed '1!G;h;$!d'
+}
+
+main $@

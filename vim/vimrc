@@ -21,7 +21,7 @@ function! IdentifyOS()
 endfunc
 
 function! GetPythonVersion()
-  if !exists('g:python_version')
+  if has('python') && !exists('g:python_version')
     let g:python_version = pyeval("sys.version.split(' ')[0].replace('.', '')")
   end
   return g:python_version

@@ -46,6 +46,7 @@
   zip = "!zipArchive() { git archive --format zip --output $1 $2; }; zipArchive"
   tgz = "!zipArchive() { git archive --format tgz --output $1 $2; }; zipArchive"
   changes = log --pretty=format:'* %C(yellow)%s%Creset %C(black)(%cr)%Creset'
+  last = log -1 --pretty=%B
 
 [format]
   pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset
