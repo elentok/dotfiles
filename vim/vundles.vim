@@ -24,7 +24,7 @@ Bundle 'elentok/replace-all.vim'
 Bundle 'elentok/markdown-preview.vim'
 
 " navigation
-Bundle 'kien/ctrlp.vim'
+Bundle 'ctrlpvim/ctrlp.vim'
 Bundle 'jwhitley/vim-matchit'
 Bundle "nelstrom/vim-visual-star-search"
 
@@ -64,7 +64,7 @@ Bundle 'junegunn/goyo.vim'
 
 if has('lua')
   Bundle 'Shougo/neocomplete.vim'
-end
+endif
 "if has('python') && !exists('g:disable_ycm')
   "Bundle 'Valloric/YouCompleteMe'
 "end
@@ -89,6 +89,8 @@ Bundle 'elentok/vim-markdown-folding'
 Bundle 'jtratner/vim-flavored-markdown.git'
 Bundle 'Arduino-syntax-file'
 Bundle 'jplaut/vim-arduino-ino'
+"Bundle 'jtratner/vim-flavored-markdown.git'
+Bundle 'tpope/vim-markdown'
 "Bundle 'vim-scripts/fish-syntax'
 
 " Go language

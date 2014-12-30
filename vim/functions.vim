@@ -11,6 +11,9 @@ command! Ekeys      edit ~/.dotfiles/vim/keys.vim
 command! Esettings  edit ~/.dotfiles/vim/settings.vim
 command! Eabbr      edit ~/.dotfiles/vim/abbr.vim
 
+command! -range=% NumberLines call NumberLines()
+command! CSScomb call CSScomb()
+
 " Hebrew {{{1
 func! ToggleHebrew()
   if &rl
@@ -226,7 +229,18 @@ function! ToggleBackground()
   call writefile(["set background=" . &background], expand("~/.vimstate"))
 endfunc
 
-function! HighlightLongLines()
-  highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-  match OverLength /\%81v.\+/
+" Number Lines {{{1
+function! NumberLines()
+  let i = line('.') - a:firstline + 1
+  exec "s/^/" . i .". /"
 endfunc
+
+" CSSComb {{{1
+
+function! CSScomb()
+  let csscomb_root = $BREW_HOME . '/lib/node_modules/csscomb'
+  let config = csscomb_root . '/config/zen.json'
+  execute "silent !csscomb -c " . config . " " . expand('%')
+  redraw!
+endfunction
+
