@@ -59,17 +59,6 @@ def normalize_color(color):
 
     return color
 
-
-def usage():
-    print """
-color2css
-
-Usage:
-  color2css {color-code}
-
-Note:
-    """
-
 if __name__ == "__main__":
     main()
 
