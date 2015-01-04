@@ -13,6 +13,7 @@ command! Eabbr      edit ~/.dotfiles/vim/abbr.vim
 
 command! -range=% NumberLines call NumberLines()
 command! CSScomb call CSScomb()
+command! -nargs=+ CSScolor call CSScolor("<args>")
 
 " Hebrew {{{1
 func! ToggleHebrew()
@@ -244,3 +245,12 @@ function! CSScomb()
   redraw!
 endfunction
 
+function! CSScolor(color)
+  let format="sass"
+  if &filetype == "less"
+    let format="less"
+  endif
+  let css=system("color2css " . a:color . " --format " . format)
+  let @c=css
+  normal "cp
+endfunction
