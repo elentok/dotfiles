@@ -1,0 +1,43 @@
+#!/bin/bash
+
+RESET="\033[0m"
+BLUE="\033[34m"
+
+main() {
+  if [ "$1" == "" ]; then
+    usage
+  else
+    tag $1
+  fi
+}
+
+usage() {
+  echo
+  echo 'Usage:'
+  echo
+  echo '  git vertag {version}'
+  echo
+}
+
+tag() {
+  TAG="$1"
+  MESSAGE="Bumped to $1"
+  if confirm; then
+    echo
+    echo -e "Created tag $BLUE$TAG$RESET"
+    git tag -a "$TAG" -m "$MESSAGE"
+  else
+    echo
+    echo 'Aborted'
+  fi
+}
+
+confirm() {
+  echo -e -n "Create tag '$BLUE$TAG$RESET' with message '$BLUE$MESSAGE$RESET' "
+  read -p "(y/[n])? " yesno
+  [ "$yesno" = "y" ]
+}
+
+
+
+main $*
