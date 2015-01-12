@@ -12,3 +12,5 @@ bindkey '^E' end-of-line
 
 # don't log to history commands starting with a space
 setopt HIST_IGNORE_SPACE
+
+source $DOTF/vim/colors/base16-elentok.dark.sh
