@@ -1,20 +1,23 @@
 #!/bin/bash
 
-echo ""
-echo "========================================"
-echo 'Installing the "Ubuntu Mono for Powerline" and "Monaco for Powerline" fonts'
-echo "========================================"
+source `dirname $0`/../../config.sh
 
-DIR=$(dirname "${BASH_SOURCE[0]}")
-DIR=$(cd -P $DIR && pwd)
+header 'Installing the Powerline fonts'
 
-mkdir -p ~/.fonts
-cp -R "$DIR/ubuntu-mono-for-powerline" ~/.fonts
-cp -R "$DIR/monaco-for-powerline" ~/.fonts
-fc-cache -vf
+if [ "$OS" == "mac" ]; then
+  font_dir="$HOME/Library/Fonts"
+else
+  font_dir="$HOME/.fonts"
+  mkdir -p $font_dir
+fi
 
-echo "========================================"
-echo "Installation complete."
-echo ""
-echo "Check https://github.com/Lokaltog/vim-powerline/wiki/Patched-fonts for more patched fonts"
-echo "========================================"
+find "$DOTF/vim/powerline-fonts" -name '*.[o,t]tf' -type f | \
+  while read file; do
+    copy_to_dir "$file" "$font_dir"
+  done
+
+# For linux
+if [ "$OS" == "linux" ]; then
+  bullet "Updating font cache"
+  fc-cache -v -f $font_dir
+fi
