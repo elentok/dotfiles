@@ -348,3 +348,31 @@ make_dir() {
     fi
   fi
 }
+
+# copy_to_dir {{{1
+copy_to_dir() {
+  source="$1"
+  target_dir="$2"
+  if [[ ! "$target_dir" =~ /$ ]]; then
+    target_dir="$target_dir/"
+  fi
+
+  if [ ! -d "$target_dir" ]; then
+    make_dir "$target_dir"
+  fi
+
+  basename="$(basename "$source")"
+
+  bullet "Copying '$basename' to '$target_dir'... "
+  if [ -e "$target_dir$basename" ]; then
+    info 'already exists.'
+  else
+    cp "$source" "$target_dir"
+    if [ $? != 0 ]; then
+      error 'FAILED'
+      exit 1
+    else
+      success 'done'
+    fi
+  fi
+}

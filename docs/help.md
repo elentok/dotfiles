@@ -157,3 +157,6 @@ Command Line Tips
 
 ## curl follow redirects
   curl -L http://...
+
+## which ubuntu version am I running
+  lsb_release -a

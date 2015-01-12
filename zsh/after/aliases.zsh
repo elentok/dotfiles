@@ -25,6 +25,7 @@ alias glr='git pull --rebase'
 alias ts='tig status'
 alias ga='git add'
 alias grb='git rebase'
+alias gas='git rebase -i --autosquash'
 
 # Vim {{{1
 alias v=vim
