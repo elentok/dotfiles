@@ -5,10 +5,10 @@
 " :colorscheme works in terminals supported by base16-shell scripts
 " User must set this variable in .vimrc
 "   let g:base16_shell_path=base16-builder/output/shell/
-if !has('gui_running')
-  let s:mypath=expand("<sfile>:p")
-  "execute "silent !/bin/sh ".s:mypath."/base16-elentok.".&background.".sh"
-endif
+"if !has('gui_running')
+  "let s:mypath=expand("<sfile>:p")
+  ""execute "silent !/bin/sh ".s:mypath."/base16-elentok.".&background.".sh"
+"endif
 
 " GUI color definitions
 let s:gui00 = "1a1a1a"
