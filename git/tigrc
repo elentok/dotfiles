@@ -1,4 +1,4 @@
-color cursor white black
+color cursor black green
 bind generic P !git add -p %(file)
 
 
