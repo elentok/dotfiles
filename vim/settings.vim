@@ -127,7 +127,8 @@ if has('gui_running')
 else
   " enable 256 colors in the terminal
   set t_Co=256
-  color solarized
+  let base16colorspace=256
+  color base16-elentok
 endif
 
 " Go language (disabled) {{{1
