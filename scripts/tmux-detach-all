@@ -1,0 +1,32 @@
+#!/bin/bash
+
+main() {
+  echo
+  count=$(attached_sessions | wc -l)
+  count=$(($count))
+  if [ $count -eq 0 ]; then
+    echo 'no attached sessions'
+    exit 1
+  else
+    read -p "Detach $count sessions? [Y/n] " yesno
+    if [ "$yesno" != "n" ]; then
+      echo
+      attached_sessions | while read session; do
+        echo -e "Detaching ${session}..."
+        if tmux detach-client -s $session; then
+          echo "done."
+        else
+          echo "FAILED!"
+          exit 1
+        fi
+      done
+    fi
+  fi
+
+}
+
+attached_sessions() {
+  tmux list-sessions | grep '(attached)' | cut -d':' -f1
+}
+
+main $@
