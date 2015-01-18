@@ -1,0 +1,104 @@
+#!/bin/bash
+
+NEWLINE_REGEX="(\s*\r?\n){3,}"
+EOF_NEWLINE_REGEX="(\s*\r?\n){2,}\Z"
+
+REGEX="($NEWLINE_REGEX|$EOF_NEWLINE_REGEX)"
+
+RED="\033[31m"
+GREEN="\033[32m"
+RESET="\033[0m"
+
+
+EXIT_CODE=0
+
+main() {
+  cmd="$1"
+  shift
+  case "$cmd" in
+    "staged")
+      check_staged $@
+      ;;
+    "commit")
+      check_commit $@
+      ;;
+    "file")
+      check_file $@
+      ;;
+    *)
+      usage
+      exit 256
+      ;;
+  esac
+
+  if [ $EXIT_CODE -eq 0 ]; then
+    echo
+    echo -e "${GREEN}✔ The files are valid (no double newlines)${RESET}"
+    echo
+  else
+    echo
+    echo -e "${RED}✘ Found double newlines!${RESET}"
+    echo
+    exit $EXIT_CODE
+  fi
+}
+
+check_staged() {
+  FILES="$(get_staged_files)"
+  check_files
+}
+
+check_commit() {
+  id="${1:-HEAD}"
+  echo "Checking commit '$id'..."
+  FILES="$(get_commit_files $id)"
+  check_files
+}
+
+check_file() {
+  if [ "$*" == "" ]; then
+    usage
+    exit 256
+  fi
+
+  FILES="$@"
+  check_files
+}
+
+check_files() {
+  while read file; do
+    if [ "$file" == "" ]; then continue; fi
+    OUTPUT="$(ag --line-numbers --color "$REGEX" $file)"
+    if [ $? -eq 0 ]; then
+      echo
+      echo "===== $file ====="
+      echo "$OUTPUT"
+      EXIT_CODE=1
+    fi
+  done <<< "$FILES"
+}
+
+usage() {
+  echo
+  echo "newlines staged"
+  echo "newlines commit (hash|branch|tag) (default: 'HEAD')"
+  echo "newlines file   {filename}"
+  echo
+}
+
+get_staged_files() {
+  # get staged non-deleted files
+  git diff --staged --name-status | grep -v '^D' | awk '{ print $2 }' | \
+    filter_by_extension
+}
+
+get_commit_files() {
+  git show $1 --name-status | grep -v '^D' | awk '{ print $2 }' | \
+    filter_by_extension
+}
+
+filter_by_extension() {
+  grep -E '\.(coffee|js|html|jade|haml|hamlc|erb|css|scss)$'
+}
+
+main $@
