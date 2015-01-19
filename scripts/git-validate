@@ -2,21 +2,25 @@
 
 NEWLINE_REGEX="(\s*\r?\n){3,}"
 EOF_NEWLINE_REGEX="(\s*\r?\n){2,}\Z"
+BAD_WORDS="console\.log|ddescribe|iit|describe\.only|it\.only|debugger"
 
-REGEX="($NEWLINE_REGEX|$EOF_NEWLINE_REGEX)"
+REGEX="($NEWLINE_REGEX|$EOF_NEWLINE_REGEX|$BAD_WORDS)"
 
 RED="\033[31m"
 GREEN="\033[32m"
 RESET="\033[0m"
 
-
 EXIT_CODE=0
+
+SHOW_COMMAND="cat"
+GREP_COMMAND="pcregrep --line-number --color=always --multiline "$REGEX""
 
 main() {
   cmd="$1"
   shift
   case "$cmd" in
     "staged")
+      SHOW_COMMAND="show_staged_file"
       check_staged $@
       ;;
     "commit")
@@ -33,14 +37,18 @@ main() {
 
   if [ $EXIT_CODE -eq 0 ]; then
     echo
-    echo -e "${GREEN}✔ The files are valid (no double newlines)${RESET}"
+    echo -e "${GREEN}✔ The files are valid${RESET}"
     echo
   else
     echo
-    echo -e "${RED}✘ Found double newlines!${RESET}"
+    echo -e "${RED}✘ Found errors!${RESET}"
     echo
     exit $EXIT_CODE
   fi
+}
+
+show_staged_file() {
+  git show ":$1"
 }
 
 check_staged() {
@@ -68,11 +76,11 @@ check_file() {
 check_files() {
   while read file; do
     if [ "$file" == "" ]; then continue; fi
-    OUTPUT="$(ag --line-numbers --color "$REGEX" $file)"
+    output="$($SHOW_COMMAND "$file" | $GREP_COMMAND)"
     if [ $? -eq 0 ]; then
       echo
       echo "===== $file ====="
-      echo "$OUTPUT"
+      echo "$output"
       EXIT_CODE=1
     fi
   done <<< "$FILES"
@@ -80,9 +88,9 @@ check_files() {
 
 usage() {
   echo
-  echo "newlines staged"
-  echo "newlines commit (hash|branch|tag) (default: 'HEAD')"
-  echo "newlines file   {filename}"
+  echo "git-validate staged"
+  echo "git-validate commit (hash|branch|tag) (default: 'HEAD')"
+  echo "git-validate file   {filename}"
   echo
 }
 
