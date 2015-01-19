@@ -34,15 +34,22 @@ def main():
         convert(color, args.format)
 
 def convert(color, var_format):
-    prefix = "$"
-    if var_format == "less":
-        prefix = "@"
+    prefix = __find_prefix(var_format)
     color = normalize_color(color)
-    output = subprocess.check_output(["name-that-color", color]).strip()
-    name = find_name(output)
+    name = find_name(color)
     print "%s%s: %s;" % (prefix, name, color)
 
-def find_name(output):
+def find_name(color):
+    output = subprocess.check_output(["name-that-color", color]).strip()
+    return __find_name_in_output(output)
+
+def __find_prefix(var_format):
+    if var_format == "less":
+        return "@"
+    else:
+        return "$"
+
+def __find_name_in_output(output):
     name = re.sub("^.* name is ", "", output)
     name = name.lower().replace(" ", "-")
     return name
