@@ -1,5 +1,5 @@
 #!/bin/bash
-RAILS_VERSIONS=( 1.9.3-p0 2.0.0-p0 2.0.0-p247 )
+RAILS_VERSIONS=( 2.0.0-p594 )
 DEFAULT_RAILS=${RAILS_VERSIONS[$(( $total-1 ))]}
 
 BLUE="\033[34m"

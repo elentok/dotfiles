@@ -250,7 +250,7 @@ function! CSScolor(color)
   if &filetype == "less"
     let format="less"
   endif
-  let css=system("color2css " . a:color . " --format " . format)
+  let css=system("color2css.py " . a:color . " --format " . format)
   let @c=css
   normal "cp
 endfunction

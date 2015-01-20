@@ -75,11 +75,8 @@ slate.bindAll({
         // direct focus 
         a: $.focus('Adium'),
         g: $.focus('Google Chrome'),
-        s: $.focus('Sublime Text'),
         t: $.focus('iTerm'),
         f: $.focus('Finder'),
-        e: $.focus('Sparrow'),
-        x: $.focus('X11'),
         p: $.focus('Spotify'),
         // utility functions
         f1: 'relaunch',
