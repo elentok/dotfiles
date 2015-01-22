@@ -10,6 +10,8 @@
   #fi
 #}
 
+HOSTNAME=`hostname`
+
 function prompt_elentok_precmd {
   vcs_info
 
@@ -26,6 +28,7 @@ function prompt_elentok_setup {
   # Load required functions.
   autoload -Uz add-zsh-hook
   autoload -Uz vcs_info
+  autoload -Uz colors && colors
 
   # Add hook for calling vcs_info before each command.
   add-zsh-hook precmd prompt_elentok_precmd
@@ -43,13 +46,14 @@ function prompt_elentok_setup {
   #zstyle ':vcs_info:git*+set-message:*' hooks git-status
 
   # Set ruby-info parameters.
-  zstyle ':prezto:module:ruby:info:version' format ' %F{gray}(%v)%f'
+  zstyle ':prezto:module:ruby:info:version' format ' %F{blue}(%v)%f'
 
   
 
   # Define prompts.
   PROMPT="
-%F{blue}%~%f\${vcs_info_msg_0_}\${ruby_info[version]} %F{gray}[%D{%Y-%m-%d %H:%M:%S}]%f
+%{\$fg_bold[black]%}($HOSTNAME)%f
+%F{blue}%~%f\${vcs_info_msg_0_}\${ruby_info[version]} %{\$fg_bold[black]%}[%D{%Y-%m-%d %H:%M:%S}]%f
 %(?.%F{green}`random_animal`  ${1:-❯ }%f.%F{red}`random_animal`  ${1:-❯ }%f)"
 #RPROMPT='${ruby_info[version]}'
 
