@@ -8,6 +8,7 @@ REGEX="($NEWLINE_REGEX|$EOF_NEWLINE_REGEX|$BAD_WORDS)"
 
 RED="\033[31m"
 GREEN="\033[32m"
+BLUE="\033[34m"
 RESET="\033[0m"
 
 EXIT_CODE=0
@@ -28,6 +29,9 @@ main() {
       ;;
     "file")
       check_file $@
+      ;;
+    "all")
+      check_all $@
       ;;
     *)
       usage
@@ -59,6 +63,7 @@ check_staged() {
 check_commit() {
   id="${1:-HEAD}"
   echo "Checking commit '$id'..."
+  get_commit_files $id
   FILES="$(get_commit_files $id)"
   check_files
 }
@@ -73,13 +78,19 @@ check_file() {
   check_files
 }
 
+check_all() {
+  echo "Checking all files"
+  FILES="$(git ls-files)"
+  check_files
+}
+
 check_files() {
   while read file; do
     if [ "$file" == "" ]; then continue; fi
     output="$($SHOW_COMMAND "$file" | $GREP_COMMAND)"
     if [ $? -eq 0 ]; then
       echo
-      echo "===== $file ====="
+      echo -e "$BLUE===== $file =====$RESET"
       echo "$output"
       EXIT_CODE=1
     fi
@@ -91,6 +102,7 @@ usage() {
   echo "git-validate staged"
   echo "git-validate commit (hash|branch|tag) (default: 'HEAD')"
   echo "git-validate file   {filename}"
+  echo "git-validate all"
   echo
 }
 

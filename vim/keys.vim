@@ -1,5 +1,9 @@
 " vim: foldmethod=marker
 "
+
+inoremap <esc> <nop>
+inoremap jk <esc>
+
 " Navigation {{{1
 noremap <space> 20j
 vnoremap <space> 20j
