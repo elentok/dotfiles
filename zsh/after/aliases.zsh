@@ -56,14 +56,15 @@ else
   alias st='scrot -s'
   alias wp='feh --bg-fill'
 
-  # mpc {{{2
-  alias m=ncmpcpp
-  alias mf='mpc search filename'
-  alias ma='mpc add'
-  alias mp='mpc play'
-  alias mcl='mpc clear'
-  # 2}}}
 fi
+
+# mpc {{{1
+alias m=ncmpcpp
+alias mf='mpc search filename'
+alias ma='mpc add'
+alias mp='mpc toggle'
+alias mcl='mpc clear'
+# 2}}}
 
 # Helpers {{{1
 

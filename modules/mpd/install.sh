@@ -26,6 +26,7 @@ create_symlinks() {
 
   mkdir -p ~/.ncmpcpp
   ln -sf "$DOTF/modules/mpd/ncmpcpp-config" ~/.ncmpcpp/config
+  ln -sf "$DOTF/modules/mpd/ncmpcpp-bindings" ~/.ncmpcpp/bindings
 
   success "done"
 }
