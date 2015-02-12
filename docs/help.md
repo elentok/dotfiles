@@ -163,3 +163,7 @@ Command Line Tips
 
 ## which ubuntu version am I running
   lsb_release -a
+
+## lsof - show all used ports
+  lsof -i -n -P
+  (use sudo to show processes by all users)
