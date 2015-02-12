@@ -1,31 +1,42 @@
 #!/bin/bash
 
-echo ""
-echo "========================================"
-echo "Installing Music Player Daemon + Clients"
-echo "========================================"
-sudo apt-get install -y mpd mpc ncmpcpp ncmpc-lyrics
+source `dirname $0`/../../config.sh
 
-echo "========================================"
-echo "Disabling system mpd service"
-echo "========================================"
-sudo update-rc.d -f mpd remove
+install_on_mac() {
+  brew_install mpd
+  brew_install mpc
+  brew_install ncmpcpp
+}
 
-echo ""
-echo "========================================"
-echo "Creating mpd symlinks"
-echo "========================================"
+install_on_linux() {
+  bullet "Installing mpd + clients"
+  sudo apt-get install -y mpd mpc ncmpcpp ncmpc-lyrics
 
+  bullet "Remove mpd from update-rc.d"
+  sudo update-rc.d -f mpd remove
+}
 
-DIR=$(dirname "${BASH_SOURCE[0]}")
-DIR=$(cd -P $DIR && pwd)
+create_symlinks() {
+  bullet "Creating symlinks... "
+  mkdir -p ~/.mpd
+  mkdir -p ~/.mpd/playlists/
+  mkdir -p ~/.mpd/var/
+  touch ~/.mpd/var/tag_cache
+  ln -sf "$DOTF/modules/mpd/mpd.conf" ~/.mpd/mpd.conf
 
-mkdir -p ~/.mpd
-mkdir -p ~/.mpd/playlists/
-mkdir -p ~/.mpd/var/
-touch ~/.mpd/var/tag_cache
-ln -sf "$DIR/mpd.conf" ~/.mpd/mpd.conf
+  mkdir -p ~/.ncmpcpp
+  ln -sf "$DOTF/modules/mpd/ncmpcpp-config" ~/.ncmpcpp/config
 
+  success "done"
+}
 
-mkdir -p ~/.ncmpcpp
-ln -sf "$DIR/ncmpcpp-config" ~/.ncmpcpp/config
+header "Music Player Daemon"
+
+if [ "$OS" == "mac" ]; then
+  install_on_mac
+else
+  install_on_linux
+fi
+
+create_symlinks
+
