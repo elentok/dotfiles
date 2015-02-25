@@ -209,7 +209,7 @@ brew_cask_install() {
   if has_brew_cask_package "$1"; then
     info "already installed"
   else
-    brew install $*
+    brew cask install $*
   fi
 }
 

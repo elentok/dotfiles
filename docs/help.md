@@ -167,3 +167,13 @@ Command Line Tips
 ## lsof - show all used ports
   lsof -i -n -P
   (use sudo to show processes by all users)
+
+## kext - show loaded modules
+  kextstat
+
+## kext - unload module
+  sudo kextunload -v -b {bundle-id}
+
+  e.g.
+
+    sudo kextunload -v -b com.FTDI.driver.FTDIUSBSerialDriver
