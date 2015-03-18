@@ -177,3 +177,11 @@ Command Line Tips
   e.g.
 
     sudo kextunload -v -b com.FTDI.driver.FTDIUSBSerialDriver
+
+## s3cmd - set public read on all files
+
+  s3cmd setacl 's3://{bucket-name}/{path}/**/*' --acl-public --verbose
+
+## s3cmd - list all files (recursively)
+
+  s3cmd ls 's3://{bucket-name}/{path}' -r

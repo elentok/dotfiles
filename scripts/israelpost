@@ -8,6 +8,6 @@ fi
 if [[ "$*" == "" ]]; then
   echo "Usage: israelpost {itemcode}"
 else
-  url="http://www.israelpost.co.il/itemtrace.nsf/trackandtraceJSON?openagent&_=1372171578320&lang=HE&itemcode=$*"
-  curl -s $url | json itemcodeinfo | fribidi
+  url="http://www.israelpost.co.il/itemtrace.nsf/trackandtraceJSON?openagent&_=1372171578320&lang=EN&itemcode=$*"
+  curl -s $url | json itemcodeinfo
 fi
