@@ -2,102 +2,94 @@
 set nocompatible " disable vi compatibility
 filetype off
 filetype plugin indent off
-"let &rtp .= ',' . $vimfiles . "/bundle/vundle"
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
-Bundle 'gmarik/vundle'
 
-"Bundle 'altercation/vim-colors-solarized'
-Bundle 'hydrozen/solarized', { 'rtp': 'vim-colors-solarized/' }
-"Bundle 'sickill/vim-monokai'
+call plug#begin('~/.vim/plugged')
 
 " vundles
-Bundle 'elentok/run.vim'
-Bundle 'elentok/plaintasks.vim'
-Bundle 'elentok/notes.vim'
-Bundle 'elentok/alternate-spec.vim'
-Bundle 'elentok/supertagger'
-Bundle 'elentok/spec-runner.vim'
-Bundle 'elentok/todo.vim'
-Bundle 'elentok/togglr.vim'
-Bundle 'elentok/replace-all.vim'
-Bundle 'elentok/markdown-preview.vim'
+Plug 'elentok/run.vim'
+Plug 'elentok/plaintasks.vim'
+Plug 'elentok/notes.vim'
+Plug 'elentok/alternate-spec.vim'
+Plug 'elentok/supertagger'
+Plug 'elentok/spec-runner.vim'
+Plug 'elentok/todo.vim'
+Plug 'elentok/togglr.vim'
+Plug 'elentok/replace-all.vim'
+Plug 'elentok/markdown-preview.vim'
 
 " navigation
-Bundle 'ctrlpvim/ctrlp.vim'
-Bundle 'jwhitley/vim-matchit'
-Bundle "nelstrom/vim-visual-star-search"
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'jwhitley/vim-matchit'
+Plug 'nelstrom/vim-visual-star-search'
 
-Bundle 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
+
+Plug 'vim-scripts/buffet.vim'
 
 " editing
 
-Bundle 'jasoncodes/ctrlp-modified.vim'
-Bundle 'elentok/ctrlp-objects.vim'
-Bundle 'benmills/vimux'
-"Bundle 'Lokaltog/powerline', { 'rtp': 'powerline/bindings/vim' }
-Bundle 'bling/vim-airline'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'danro/rename.vim'
-Bundle 'junegunn/vim-easy-align'
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
+Plug 'jasoncodes/ctrlp-modified.vim'
+Plug 'elentok/ctrlp-objects.vim'
+Plug 'benmills/vimux'
+"Plug 'Lokaltog/powerline', { 'rtp': 'powerline/bindings/vim' }
+Plug 'bling/vim-airline'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-unimpaired'
+Plug 'danro/rename.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
 
-Bundle 'elentok/vim-rails-extra'
-Bundle 'scrooloose/syntastic.git'
-Bundle 'mileszs/ack.vim'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'Raimondi/delimitMate'
-Bundle 'tpope/vim-dispatch'
-Bundle 'AndrewRadev/splitjoin.vim'
-Bundle 'tpope/vim-abolish'
-Bundle 'tpope/vim-repeat'
-Bundle 'iandoe/vim-osx-colorpicker'
-Bundle 'xolox/vim-misc'
+Plug 'elentok/vim-rails-extra'
+Plug 'scrooloose/syntastic'
+Plug 'mileszs/ack.vim'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'Raimondi/delimitMate'
+Plug 'tpope/vim-dispatch'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-repeat'
+Plug 'iandoe/vim-osx-colorpicker'
+Plug 'xolox/vim-misc'
 
 " dark/zen room, no distraction mode
-Bundle 'junegunn/goyo.vim'
+Plug 'junegunn/goyo.vim'
 
 if has('lua')
-  Bundle 'Shougo/neocomplete.vim'
+  Plug 'Shougo/neocomplete.vim'
 endif
 "if has('python') && !exists('g:disable_ycm')
-  "Bundle 'Valloric/YouCompleteMe'
+  "Plug 'Valloric/YouCompleteMe'
 "end
-"Bundle 'airblade/vim-gitgutter'
 
 " text objects:
-Bundle 'michaeljsmith/vim-indent-object'
+Plug 'michaeljsmith/vim-indent-object'
 
 " file formats
-Bundle 'tpope/vim-haml'
-Bundle 'evanmiller/nginx-vim-syntax'
-Bundle 'applescript.vim'
-Bundle 'avakhov/vim-yaml'
-Bundle 'yaml.vim'
-Bundle 'digitaltoad/vim-jade'
-Bundle 'wavded/vim-stylus'
-Bundle 'groenewege/vim-less'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'pangloss/vim-javascript'
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'elentok/vim-markdown-folding'
-Bundle 'jtratner/vim-flavored-markdown.git'
-Bundle 'Arduino-syntax-file'
-Bundle 'jplaut/vim-arduino-ino'
-"Bundle 'jtratner/vim-flavored-markdown.git'
-Bundle 'tpope/vim-markdown'
-"Bundle 'vim-scripts/fish-syntax'
+Plug 'tpope/vim-haml'
+Plug 'evanmiller/nginx-vim-syntax'
+Plug 'applescript.vim'
+Plug 'avakhov/vim-yaml'
+Plug 'yaml.vim'
+Plug 'digitaltoad/vim-jade'
+Plug 'wavded/vim-stylus'
+Plug 'groenewege/vim-less'
+Plug 'kchmck/vim-coffee-script'
+Plug 'pangloss/vim-javascript'
+Plug 'vim-ruby/vim-ruby'
+Plug 'elentok/vim-markdown-folding'
+Plug 'jtratner/vim-flavored-markdown'
+Plug 'Arduino-syntax-file'
+Plug 'jplaut/vim-arduino-ino'
+Plug 'tpope/vim-markdown'
+Plug 'asymmetric/upstart.vim'
+Plug 'mtscout6/vim-cjsx'
 
 " Go language
-"Bundle 'nsf/gocode', { 'rtp': 'vim/' }
-"Bundle 'Blackrush/vim-gocode'
-"Bundle 'jnwhiteh/vim-golang'
-Bundle 'fatih/vim-go'
+Plug 'fatih/vim-go'
 
 if file_readable(expand("~/.dotlocal/vundles.vim"))
   source ~/.dotlocal/vundles.vim
@@ -105,3 +97,4 @@ endif
 
 filetype plugin indent on
 syntax on
+call plug#end()

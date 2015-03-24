@@ -35,13 +35,18 @@ install_symlinks() {
   symlink "$DOTF/vim/pylintrc" ~/.pylintrc
 }
 
-install_vundle() {
-  cd ~/.vim
-  git_clone https://github.com/gmarik/vundle.git bundle/vundle
-  bullet "Running BundleInstall... "
-  vim +BundleInstall +qall
-  success "done"
-}
+#install_vundle() {
+  #cd ~/.vim
+  #git_clone https://github.com/gmarik/vundle.git bundle/vundle
+  #bullet "Running BundleInstall... "
+  #vim +BundleInstall +qall
+  #success "done"
+#}
+
+#install_plug_vim() {
+  #curl -fLo $DOTF/vim/autoload/plug.vim --create-dirs \
+        #https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+#}
 
 compile_youcompleteme() {
   # required to compile YouCompleteMe
@@ -72,7 +77,7 @@ if [ "$1" == "symlinks" ]; then
   install_symlinks
 elif [ "$1" == "basic" ]; then
   install_symlinks
-  install_vundle
+  #install_vundle
 else
   if [ "`uname -s`" == "Darwin" ]; then
     install_on_mac
@@ -82,7 +87,7 @@ else
 
   install_symlinks
 
-  install_vundle
+  #install_vundle
   #compile_youcompleteme
   install_utils
 fi

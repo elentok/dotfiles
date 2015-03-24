@@ -3,6 +3,7 @@
 tags
 .DS_Store
 vim/bundle
+vim/plugged
 vim/sessions
 vim/eclim
 vim/plugin/eclim.vim
