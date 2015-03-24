@@ -91,8 +91,8 @@ Plug 'mtscout6/vim-cjsx'
 " Go language
 Plug 'fatih/vim-go'
 
-if file_readable(expand("~/.dotlocal/vundles.vim"))
-  source ~/.dotlocal/vundles.vim
+if file_readable(expand("~/.dotlocal/plugs.vim"))
+  source ~/.dotlocal/plugs.vim
 endif
 
 filetype plugin indent on
