@@ -258,3 +258,8 @@ if g:os == "mac"
   let &t_SI .= s:xterm_line   " Blinking bar cursor when in insert mode
   let &t_EI .= s:xterm_block  " Solid block cursor when in normal mode]]"
 endif
+
+" Neovim {{{1
+if has('nvim')
+  let g:tmux_navigator_no_mappings = 1
+endif

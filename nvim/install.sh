@@ -3,7 +3,8 @@
 source `dirname $0`/../config.sh
 
 install_neovim() {
-  brew install --HEAD https://raw.github.com/neovim/neovim/master/neovim.rb
+  brew_tap neovim/homebrew-neovim 
+  brew_install neovim
 }
 
 install_symlinks() {
