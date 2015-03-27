@@ -1,6 +1,0 @@
-#!/bin/bash
-
-export NEOROOT="$HOME/.neovim-src"
-export VIMRUNTIME=$NEOROOT/vimscript/runtime
-
-$NEOROOT/neovim/build/bin/nvim $@

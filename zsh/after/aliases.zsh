@@ -102,6 +102,7 @@ alias pix='open -a Pixelmator'
 alias rbr='rbenv rehash'
 alias gulp='gulp --require coffee-script/register'
 alias pio='platformio'
+alias nv='nvim'
 
 alias fliph='convert -flop'
 alias flipv='convert -flip'

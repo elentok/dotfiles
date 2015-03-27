@@ -1,7 +1,7 @@
 " vim: foldmethod=marker
 "
 
-inoremap <esc> <nop>
+"inoremap <esc> <nop>
 inoremap jk <esc>
 
 " Navigation {{{1
@@ -251,3 +251,15 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~ '\s'
   endfunction"}}}
+
+" Neovim {{{1
+if has('nvim')
+  tnoremap <c-\><c-\> <c-\><c-n>
+
+  tnoremap <c-h> <c-\><c-n><c-w>h
+  tnoremap <c-j> <c-\><c-n><c-w>j
+  tnoremap <c-k> <c-\><c-n><c-w>k
+  tnoremap <c-l> <c-\><c-n><c-w>l
+  " goto insert mode when entering a terminal window
+  au WinEnter term://* startinsert
+endif
