@@ -58,6 +58,6 @@
   default = matching
 [core]
   editor = /usr/bin/vim
-#  pager = 
+
 ;[credential]
-	;helper = osxkeychain
+  ;helper = osxkeychain
