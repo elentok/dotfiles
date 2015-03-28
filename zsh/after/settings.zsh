@@ -16,3 +16,6 @@ setopt HIST_IGNORE_SPACE
 source $DOTF/vim/colors/base16-elentok.dark.sh
 
 export MPD_HOST=bob@localhost
+
+# neovim
+export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
