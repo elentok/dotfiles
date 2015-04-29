@@ -96,7 +96,7 @@ endfunc
 " EasyAlign {{{1
 
 let g:easy_align_delimiters = {
-      \ '>': { 'pattern': '>>\|=>\|>' },
+      \ '>': { 'pattern': '>>\|->\|=>\|>' },
       \ '/': { 'pattern': '//\+\|/\*\|\*/', 'ignore_groups': ['String'] },
       \ '#': { 'pattern': '#\+', 'ignore_groups': ['String'], 'delimiter_align': 'l' },
       \ ']': {
@@ -115,9 +115,9 @@ let g:easy_align_delimiters = {
       \     'pattern': ' \(\S\+\s*[;=]\)\@=',
       \     'left_margin': 0,
       \     'right_margin': 0
-      \   }
+      \   },
+      \ '\': { 'pattern': '[\\]', 'ignore_groups': [] }
       \ }
-
 
 " Colors {{{1
 set background=dark
