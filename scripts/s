@@ -1,0 +1,104 @@
+#!/bin/bash
+
+HISTORY_FILE=~/.ssh/history
+HISTORY_SIZE=10
+
+ssh_config_usernames() {
+  if [ -e ~/.ssh/config ]; then
+    grep '^\s*User[= ]' ~/.ssh/config |
+      sed -e 's/^[[:space:]]*User[= ]//' |
+      sed 's/"//g'
+  fi
+}
+
+other_usernames() {
+  if [ -e ~/.ssh/usernames ]; then
+    cat ~/.ssh/usernames
+  fi
+}
+
+all_usernames() {
+  (ssh_config_usernames && other_usernames) | sort | uniq
+}
+
+select_user() {
+  (echo 'default' && all_usernames) | selecta
+}
+
+etc_hosts() {
+  cat /etc/hosts | grep '^[0-9]' | awk '{ print $2; }'
+}
+
+known_hosts() {
+  if [ -e ~/.ssh/known_hosts ]; then
+    cat ~/.ssh/known_hosts |
+      awk '{ print $1; }' |
+      grep '^[0-9a-zA-Z]' |
+      cut -d, -f1 |
+      sed 's/\.$//'
+  fi
+}
+
+ssh_config_hosts() {
+  if [ -e ~/.ssh/config ]; then
+    grep '^\s*Host' ~/.ssh/config |
+      awk '{print $2}' |
+      grep -E '^[0-9A-Za-z_\-\.]+$'
+  fi
+}
+
+hosts() {
+  (etc_hosts && known_hosts && ssh_config_hosts) | sort | uniq
+}
+
+history_items() {
+  if [ -e $HISTORY_FILE ]; then
+    cat $HISTORY_FILE
+  fi
+}
+
+select_server() {
+  (history_items && hosts) | selecta
+}
+
+add_to_history() {
+  if [ -e "$HISTORY_FILE" ]; then
+    mv -f $HISTORY_FILE $HISTORY_FILE.tmp
+    (echo "$*" && history_tail "$*") > $HISTORY_FILE
+    rm $HISTORY_FILE.tmp
+  else
+    echo "$*" > $HISTORY_FILE
+  fi
+}
+
+history_tail() {
+  grep -v "$*" $HISTORY_FILE.tmp |
+    head -n $(($HISTORY_SIZE - 1))
+}
+
+server=$(select_server)
+if [ -n "$server" ]; then
+
+  if [[ "$server" =~ "@" ]]; then
+    full="$server"
+  else
+    user=$(select_user)
+    if [ -z "$user" ]; then
+      full="$server"
+    elif [ "$user" == "default" ]; then
+      full="$server"
+    else
+      full="$user@$server"
+    fi
+  fi
+
+  if [ -e "$full" ]; then
+    echo "Aborting."
+    exit 1
+  fi
+
+  add_to_history "$full"
+
+  echo "Connecting to $full..."
+  ssh $full
+fi

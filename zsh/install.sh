@@ -57,6 +57,7 @@ install_requirements() {
   brew_install coreutils
   brew_install fasd
   brew_install gnu-sed
+  brew_install selecta
 }
 
 header "Zsh"
