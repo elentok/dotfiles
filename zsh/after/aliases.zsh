@@ -81,7 +81,7 @@ alias tot='awk "{ s+=\$1 } END { printf(\"%''d\n\", s) }"'
 # SSH {{{1
 export SSH_TERM=xterm
 alias ssh='TERM=$SSH_TERM ssh'
-alias s=ssh
+alias t='tailr `tailr --list | tr " " "\n" | selecta`'
 
 # Other {{{1
 alias bw='convert -colors 2'
