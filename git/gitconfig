@@ -57,7 +57,7 @@
 [push]
   default = matching
 [core]
-  editor = /usr/bin/vim
+  editor = vim
 
 ;[credential]
   ;helper = osxkeychain

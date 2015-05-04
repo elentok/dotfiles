@@ -20,7 +20,7 @@ changelog() {
   if [[ "$1" =~ "\.\." ]]; then
     range="$1"
   else
-    range="${1}..HEAD"
+    range="${1}~1..HEAD"
   fi
 
   git_log "$range" | while read line; do
