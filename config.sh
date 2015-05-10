@@ -25,6 +25,15 @@ export CYAN="\033[36m"
 export UNDERLINE="\033[4m"
 export RESET="\033[0m"
 
+# Check if command exists {{{1
+has_command() {
+  type "$1" > /dev/null 2>&1
+}
+
+command_missing() {
+  ! has_command "$1"
+}
+
 # Identify OS {{{1
 if [ "`uname -s`" = "Darwin" ]; then
   export OS=mac
@@ -32,7 +41,7 @@ else
   export OS=linux
 fi
 
-if [ "`which X`" = "" ]; then
+if command_missing X; then
   export HAS_GUI=no
 else
   export HAS_GUI=yes
@@ -113,6 +122,11 @@ symlink() {
 # NPM {{{1
 npm_install() {
   bullet "Installing ${1}..."
+
+  if ! has_command npm; then
+    error "npm is not installed, skipping"
+    return
+  fi
 
   if [ "`npm_cache | grep \"\\b$1\\b\"`" ]; then
     info " already installed"
@@ -219,14 +233,20 @@ has_brew_cask_package() {
 
 # Python {{{1
 verify_pip_installed() {
-  if [ "`which pip`" == "" ]; then
+  if command_missing pip; then
     bullet "Installing pip... "
-    sudo easy_install pip
+
+    if command_missing easy_install; then
+      error "easy_install is missing, skipping"
+      false
+    else
+      sudo easy_install pip
+    fi
   fi
 }
 
 pip_install() {
-  verify_pip_installed
+  verify_pip_installed || return
   bullet "Installing ${1}... "
   if has_pip_package "$1"; then
     info " already installed"
@@ -376,3 +396,5 @@ copy_to_dir() {
     fi
   fi
 }
+
+

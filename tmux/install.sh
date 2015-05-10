@@ -1,8 +1,15 @@
 #!/bin/bash
 
-ls `dirname $0`/../config.sh
 source `dirname $0`/../config.sh
-echo $OS
+
+main() {
+  header "tmux"
+
+  if [ "$1" != "symlinks" ]; then
+    install_tmux
+  fi
+  install_symlinks
+}
 
 install_tmux() {
   if [ "$OS" == "mac" ]; then
@@ -22,10 +29,3 @@ install_symlinks() {
     symlink "$DOTF/tmux/tmux.conf" ~/.tmux.conf
   fi
 }
-
-
-header "tmux"
-if [ "$1" != "symlinks" ]; then
-  install_tmux
-fi
-install_symlinks
