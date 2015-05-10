@@ -397,4 +397,7 @@ copy_to_dir() {
   fi
 }
 
-
+# user {{{1
+user_exists() {
+  id "$1" > /dev/null 2>&1
+}
