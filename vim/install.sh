@@ -2,6 +2,20 @@
 
 source `dirname $0`/../config.sh
 
+main() {
+  header "Vim"
+
+  if [ "$OS" == "mac" ]; then
+    install_on_mac
+  else
+    install_on_linux
+  fi
+
+  install_symlinks
+  install_vim_plugins
+  install_utils
+}
+
 install_on_mac() {
   brew_install macvim --with-cscope --override-system-vim --with-lua
   create_vim_bin_symlink
@@ -16,12 +30,15 @@ create_vim_bin_symlink() {
 }
 
 install_on_linux() {
-  apt_install vim-gnome exuberant-ctags tidy
-
-  if [ "$HAS_GUI" = "yes" ]; then
+  if [ "$HAS_GUI" == "yes" ]; then
+    apt_install vim-gnome
     bullet "Installing Powerline fonts\n"
     bash "$DOTF/vim/powerline-fonts/install.sh"
+  else
+    apt_install vim
   fi
+
+  apt_install exuberant-ctags tidy
 
   #add_ppa tomaz-muraus/the-silver-searcher
   #apt_install the-silver-searcher
@@ -35,31 +52,10 @@ install_symlinks() {
   symlink "$DOTF/vim/pylintrc" ~/.pylintrc
 }
 
-#install_vundle() {
-  #cd ~/.vim
-  #git_clone https://github.com/gmarik/vundle.git bundle/vundle
-  #bullet "Running BundleInstall... "
-  #vim +BundleInstall +qall
-  #success "done"
-#}
-
-#install_plug_vim() {
-  #curl -fLo $DOTF/vim/autoload/plug.vim --create-dirs \
-        #https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-#}
-
-compile_youcompleteme() {
-  # required to compile YouCompleteMe
-  brew_install cmake
-
-  bullet "Compiling YouCompleteMe... "
-  if [[ -e "$DOTF/vim/bundle/YouCompleteMe/python/ycm_core.so" ]]; then
-    info 'Already compiled.'
-  else
-    (
-      cd $DOTF/vim/bundle/YouCompleteMe && ./install.sh
-    )
-  fi
+install_vim_plugins() {
+  bullet "Running PlugInstall... "
+  vim +PlugInstall +qall
+  success "done"
 }
 
 install_utils() {
@@ -72,22 +68,4 @@ install_utils() {
   pip_install powerline-status
 }
 
-header "Vim"
-if [ "$1" == "symlinks" ]; then
-  install_symlinks
-elif [ "$1" == "basic" ]; then
-  install_symlinks
-  #install_vundle
-else
-  if [ "`uname -s`" == "Darwin" ]; then
-    install_on_mac
-  else
-    install_on_linux
-  fi
-
-  install_symlinks
-
-  #install_vundle
-  #compile_youcompleteme
-  install_utils
-fi
+main $@
