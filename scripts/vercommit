@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source $DOTF/config.sh
+source $DOTF/framework
 
 ver=$(semver)
 

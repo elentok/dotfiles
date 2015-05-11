@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source `dirname $0`/../config.sh
+source `dirname $0`/../framework
 
 main() {
   cmd="$1"
@@ -159,7 +159,7 @@ vim-export() {
     --exclude 'YouCompleteMe' \
     --exclude 'node_modules' \
     --exclude '.git' \
-    vim config.sh
+    vim framework
 }
 
 main "$@"

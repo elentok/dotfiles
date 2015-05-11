@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source `dirname $0`/../config.sh
+source `dirname $0`/../framework
 
 install_zsh() {
   if [ "$OS" == "mac" ]; then

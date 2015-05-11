@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Installs vim exported from the dotfiles
+
+mkdir ~/.dotfiles
+cd ~/.dotfiles
+tar xzvf ~/vim-*.tar.gz
+cd ~/.dotfiles/vim
+./install.sh symlinks

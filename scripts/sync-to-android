@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source $DOTF/config.sh
+source $DOTF/framework
 
 BACKUPS_TO_KEEP=5
 ANDROID_LOG=/sdcard/.sync-to-android.log
