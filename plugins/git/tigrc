@@ -1,10 +1,10 @@
 color cursor black green
 bind generic P !git add -p %(file)
 
-
 set ignore-case   = yes # Ignore case when searching?
 set mouse         = yes # Enable mouse support?
 set line-graphics = utf-8
+set split-view-width = 50%
 
 set main-view  = line-number:no,interval=5 id:yes date:relative author:abbreviated,width=2 commit-title:yes,graph,refs,overflow=yes
 set blame-view = date:relative author:abbreviated,width=2 file-name:auto id:yes,color line-number:no,interval=5 text

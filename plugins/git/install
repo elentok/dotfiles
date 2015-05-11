@@ -2,6 +2,17 @@
 
 source `dirname $0`/../../framework
 
+GITCONFIG="$HOME/.gitconfig"
+
+main() {
+  header "Git"
+  if [ "$1" != "symlinks" ]; then
+    install_git
+  fi
+  install_gitconfig
+  install_symlinks
+}
+
 install_git() {
   if [ "$OS" == "mac" ]; then
     brew_install git
@@ -12,36 +23,41 @@ install_git() {
 }
 
 install_gitconfig() {
-  bullet 'Installing ~/.gitconfig... '
-  if [ -e ~/.gitconfig ]; then
-    if [ -h ~/.gitconfig ]; then
-      backup ~/.gitconfig
-
-      echo "[include]" > ~/.gitconfig
-      echo "  path = $DOTF/git/gitconfig" >> ~/.gitconfig
-      success 'done'
-    else
-      if [ -n "$(grep "path = $DOTF/git/gitconfig" ~/.gitconfig)" ]; then
-        info 'already installed'
-      else
-        echo >> ~/.gitconfig
-        echo "[include]" >> ~/.gitconfig
-        echo "  path = $DOTF/git/gitconfig" >> ~/.gitconfig
-        success 'done'
-      fi
-    fi
-
+  bullet "Installing $GITCONFIG... "
+  if [ -e $GITCONFIG -o -h $GITCONFIG ]; then
+    fix_existing_gitconfig
+  else
+    write_to_gitconfig
+    success 'done'
   fi
 }
 
-install_symlinks() {
-  symlink "$DOTF/git/tigrc" ~/.tigrc
+fix_existing_gitconfig() {
+  if [ -h $GITCONFIG ]; then
+    backup $GITCONFIG
+    write_to_gitconfig
+    success 'done'
+  else
+    if [ -n "$(grep "path = $DOTF/plugins/git/gitconfig" $GITCONFIG)" ]; then
+      info 'already installed'
+    else
+      echo >> $GITCONFIG
+      write_to_gitconfig
+      success 'done'
+    fi
+  fi
 }
 
-header "Git"
-if [ "$1" != "symlinks" ]; then
-  install_git
-fi
+write_to_gitconfig() {
+  if [ ! -e $GITCONFIG ]; then
+    touch $GITCONFIG
+  fi
+  echo "[include]" >> $GITCONFIG
+  echo "  path = $DOTF/plugins/git/gitconfig" >> $GITCONFIG
+}
 
-install_gitconfig
-install_symlinks
+install_symlinks() {
+  symlink "$DOTF/plugins/git/tigrc" ~/.tigrc
+}
+
+main "$@"
