@@ -1,0 +1,165 @@
+#!/bin/bash
+
+source `dirname $0`/../config.sh
+
+main() {
+  cmd="$1"
+  shift
+  case "$cmd" in
+  list | l)
+    list-plugins
+    ;;
+  install | i)
+    install
+    ;;
+  update | i)
+    update
+    ;;
+  plugin | p)
+    plugins "$@"
+    ;;
+  export-vim)
+    export-vim
+    ;;
+  *)
+    usage
+    ;;
+  esac
+}
+
+usage() {
+  echo
+  echo "Elentok's dotfiles"
+  echo
+  echo "Usage:"
+  echo
+  echo "  dotf list                        - lists all plugins"
+  echo "  dotf plugin [plugin] [plugin]... - install specific plugins"
+  echo
+  echo "  dotf install                     - installs all plugins"
+  echo "  dotf update                      - pulls from git and reruns install"
+  echo
+  echo "  dotf export-vim                  - exports vim config to .tar.gz"
+}
+
+list-plugins() {
+  (
+    echo vim
+    echo zsh
+    /bin/ls -1 $DOTF/plugins
+  ) | sort
+}
+
+install() {
+  is_workstation && install_workstation
+  is_server && install_server
+  show_done
+}
+
+install_workstation() {
+  common_plugins
+  is_mac && mac_plugins
+  is_linux && linux_plugins
+}
+
+install_server() {
+  plugin zsh
+  plugin vim
+}
+
+update() {
+  header "Updating dotfiles"
+  cd $DOTF
+
+  bullet "Pulling changes... "
+  old_head=`git rev-parse HEAD`
+  git pull
+  new_head=`git rev-parse HEAD`
+
+  if [ "$old_head" != "$new_head" ]; then
+    echo -e "\nPulled the following changes:"
+    git changes ${old_head}..${new_head}
+
+    echo -ne "\nPress any key to run the installer..."
+    read -n 1
+
+    if is_mac; then
+      brew update
+    fi
+
+    install
+  fi
+}
+
+show_done() {
+  echo -e "$GREEN=========================="
+  echo "Done"
+  echo -e "==========================$RESET"
+}
+
+common_plugins() {
+  plugin nodejs
+  plugin git
+  plugin zsh
+  plugin tmux
+  plugin vim
+  plugin ruby
+  plugin mpd
+}
+
+mac_plugins() {
+  plugin keyremap4macbook
+  plugin homebrew-cask
+  brew_install imagemagick
+  brew_install ghostscript
+}
+
+linux_plugins() {
+  apt_install mercurial htop samba libpam-smbpass unrar
+
+  if [ "$HAS_GUI" = 'yes' ]; then
+    plugin linux-gui-apps
+  fi
+}
+
+plugins() {
+  if [ $# -eq 0 ]; then
+    error "No plugins specified"
+    return
+  fi
+
+  while [ $# -gt 0 ]; do
+    plugin $1
+    shift
+  done
+  show_done
+}
+
+plugin() {
+  local filename="$DOTF/plugins/$1/install"
+
+  if [ ! -x $filename ]; then
+    local filename="$DOTF/plugins/${1}"
+  fi
+
+  if [ ! -x $filename ]; then
+    local filename="$DOTF/${1}/install"
+  fi
+
+  if [ ! -x $filename ]; then
+    error "Cannot find plugin '$1'"
+    return
+  fi
+
+  $filename
+}
+
+vim-export() {
+  tar czvf vim-$(date +%Y%m%d).tar.gz \
+    --exclude 'YouCompleteMe' \
+    --exclude 'node_modules' \
+    --exclude '.git' \
+    vim config.sh
+}
+
+main "$@"

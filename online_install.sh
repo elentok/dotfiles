@@ -27,4 +27,4 @@ git clone $repo_root .dotfiles
 echo "========================================"
 echo "Installing"
 cd ~/.dotfiles
-./install.sh
+./scripts/dotf install
