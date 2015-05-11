@@ -12,7 +12,7 @@ main() {
   install | i)
     install
     ;;
-  update | i)
+  update | u)
     update
     ;;
   plugin | p)

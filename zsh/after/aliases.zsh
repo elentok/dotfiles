@@ -2,9 +2,9 @@ alias x=exit
 alias c=clear
 
 # Tmux {{{1
-TMUX_CONFIG="$DOTF/tmux/tmux.conf"
+TMUX_CONFIG="$DOTF/plugins/tmux/tmux.conf"
 if [ "$(uname)" = "Darwin" ]; then
-  TMUX_CONFIG="$DOTF/tmux/tmux-osx.conf"
+  TMUX_CONFIG="$DOTF/plugins/tmux/tmux-osx.conf"
 fi
 alias tmux="tmux -f $TMUX_CONFIG"
 alias tm='tmux -u'
@@ -86,7 +86,7 @@ alias t='tailr `tailr --list | tr " " "\n" | selecta`'
 # Other {{{1
 alias bw='convert -colors 2'
 alias cf='/bin/ls -1 | wc -l' # count files
-alias dotf='cd $DOTF'
+alias dotfi='cd $DOTF'
 alias dotl='cd $DOTL'
 alias k='less $DOTF/docs/keys.md'
 alias ke='vim $DOTF/docs/keys.md'
