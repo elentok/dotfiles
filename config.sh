@@ -70,10 +70,34 @@ error() {
 
 # confirm {{{1
 confirm() {
-  read "yesno?${1} (yes/[no])? "
+  local default=${2:-no}
+  ask "${1} (yes/no)?" yesno $default
   [ "$yesno" = "yes" ]
   return $?
 }
+
+# ask {{{1
+# (by @n0nick)
+# Usage:
+#   ask "What's up?" answer "ok"
+#   echo $answer
+ask() {
+  local question=$1
+  local default=$3
+  local resultvar=$2
+
+  echo -n "$question "
+  if [ "$default" ]; then
+    echo -n "[$default] "
+  fi
+  read reply
+  echo
+
+  reply="${reply:-$default}"
+  reply=$(echo $reply | sed "s/'/'\"'\"'/g")
+  eval $resultvar="'$reply'"
+}
+
 # backup {{{1
 backup() {
   info "\n  backing up to ${1}.backup"
