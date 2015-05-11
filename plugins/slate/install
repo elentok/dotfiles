@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source `dirname $0`/../../config.sh
+source `dirname $0`/../../framework
 
 install_symlinks() {
   symlink "$DOTF/slate/slate.js" ~/.slate.js

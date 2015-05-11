@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source `dirname $0`/../config.sh
+source `dirname $0`/../framework
 
 latest_version() {
   /bin/ls -1 $BREW_HOME/Cellar/go | grep -E '^[0-9\.]+$' | sort | tail -1
