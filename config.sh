@@ -41,6 +41,13 @@ else
   export OS=linux
 fi
 
+is_mac() {
+  [ "$OS" = "mac" ]
+}
+is_linux() {
+  [ "$OS" = "linux" ]
+}
+
 if command_missing X; then
   export HAS_GUI=no
 else

@@ -1,9 +1,9 @@
 #!/bin/bash
 
-source `dirname $0`/../config.sh
+source `dirname $0`/../../config.sh
 
 install_neovim() {
-  brew_tap neovim/homebrew-neovim 
+  brew_tap neovim/homebrew-neovim
   brew_install neovim
 }
 

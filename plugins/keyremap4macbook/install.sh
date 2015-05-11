@@ -3,7 +3,7 @@
 # Most of these settings where taken from Steve losh:
 # http://stevelosh.com/blog/2012/10/a-modern-space-cadet/#controlescape
 
-source `dirname $0`/../config.sh
+source `dirname $0`/../../config.sh
 
 INSTALLED="no"
 

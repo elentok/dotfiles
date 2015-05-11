@@ -22,11 +22,11 @@ create_symlinks() {
   mkdir -p ~/.mpd/playlists/
   mkdir -p ~/.mpd/var/
   touch ~/.mpd/var/tag_cache
-  ln -sf "$DOTF/modules/mpd/mpd.conf" ~/.mpd/mpd.conf
+  ln -sf "$DOTF/plugins/mpd/mpd.conf" ~/.mpd/mpd.conf
 
   mkdir -p ~/.ncmpcpp
-  ln -sf "$DOTF/modules/mpd/ncmpcpp-config" ~/.ncmpcpp/config
-  ln -sf "$DOTF/modules/mpd/ncmpcpp-bindings" ~/.ncmpcpp/bindings
+  ln -sf "$DOTF/plugins/mpd/ncmpcpp-config" ~/.ncmpcpp/config
+  ln -sf "$DOTF/plugins/mpd/ncmpcpp-bindings" ~/.ncmpcpp/bindings
 
   success "done"
 }
