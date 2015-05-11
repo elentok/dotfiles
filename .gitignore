@@ -7,3 +7,4 @@ vim/plugged
 vim/sessions
 vim/eclim
 vim/plugin/eclim.vim
+vim/.netrwhist

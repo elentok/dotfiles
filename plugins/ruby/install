@@ -39,10 +39,10 @@ install_ruby() {
 }
 
 create_symlinks() {
-  symlink "$DOTF/ruby/irbrc" ~/.irbrc
-  symlink "$DOTF/ruby/rdebugrc" ~/.rdebugrc
-  symlink "$DOTF/ruby/editrc" ~/.editrc
-  symlink "$DOTF/ruby/pow/powconfig" ~/.powconfig
+  symlink "$DOTF/plugins/ruby/irbrc" ~/.irbrc
+  symlink "$DOTF/plugins/ruby/rdebugrc" ~/.rdebugrc
+  symlink "$DOTF/plugins/ruby/editrc" ~/.editrc
+  symlink "$DOTF/plugins/ruby/pow/powconfig" ~/.powconfig
 }
 
 install_phantomjs() {
@@ -71,7 +71,6 @@ if [ "$1" != "symlinks" ]; then
   #install_requirements
   install_rbenv
   install_ruby
-  #install_ruby
   #install_phantomjs
 fi
 create_symlinks
