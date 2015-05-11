@@ -432,3 +432,42 @@ copy_to_dir() {
 user_exists() {
   id "$1" > /dev/null 2>&1
 }
+
+# dotfiles mode {{{1
+identify_dotfiles_platform() {
+  if [ -n "$DOTFILES_PLATFORM" ]; then
+    return
+  fi
+
+  local platform_file="$HOME/.dotlocal/zsh/before/platform.zsh"
+  echo "PLATFORM FILE [$platform_file]"
+  if [ -e $platform_file ]; then
+    echo "EXISTS!"
+    source $platform_file
+  else
+    echo "ASKING!"
+    ask "What is this platform ([w]orkstation, [s]server)?" platform w
+    if [ "$platform" = "w" ]; then
+      export DOTFILES_PLATFORM=workstation
+    elif [ "$platform" = "s" ]; then
+      export DOTFILES_PLATFORM=server
+    else
+      identify_dotfiles_platform
+      return
+    fi
+
+    mkdir -p $(dirname $platform_file)
+    echo "Saving platform ($DOTFILES_PLATFORM)"
+    echo "export DOTFILES_PLATFORM=$DOTFILES_PLATFORM" > $platform_file
+  fi
+}
+
+is_workstation() {
+  identify_dotfiles_platform
+  [ "$DOTFILES_PLATFORM" = "workstation" ]
+}
+
+is_server() {
+  identify_dotfiles_platform
+  [ "$DOTFILES_PLATFORM" = "server" ]
+}
