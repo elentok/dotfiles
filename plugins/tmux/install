@@ -24,8 +24,10 @@ install_tmux() {
 
 install_symlinks() {
   if [ "$OS" == "mac" ]; then
-    symlink "$DOTF/tmux/tmux-osx.conf" ~/.tmux.conf
+    symlink "$DOTF/plugins/tmux/tmux-osx.conf" ~/.tmux.conf
   else
-    symlink "$DOTF/tmux/tmux.conf" ~/.tmux.conf
+    symlink "$DOTF/plugins/tmux/tmux.conf" ~/.tmux.conf
   fi
 }
+
+main $*
