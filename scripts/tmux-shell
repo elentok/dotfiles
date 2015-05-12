@@ -3,18 +3,20 @@
 BLUE="\033[34m"
 RESET="\033[0m"
 
-echo -e "$BLUE============================="
-echo 'Running:'
-echo "  $@"
-echo -e "=============================$RESET"
-echo
+if [ $# -gt 0 ]; then
+  echo -e "$BLUE============================="
+  echo 'Running:'
+  echo "  $@"
+  echo -e "=============================$RESET"
+  echo
 
-"$@"
+  "$@"
 
-echo
-echo -e "$BLUE============================="
-echo 'Done running:'
-echo "  $@"
-echo -e "=============================$RESET"
+  echo
+  echo -e "$BLUE============================="
+  echo 'Done running:'
+  echo "  $@"
+  echo -e "=============================$RESET"
+fi
 
 $SHELL

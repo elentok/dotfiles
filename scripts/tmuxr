@@ -92,7 +92,7 @@ session() {
   fi
 
   # -d = detach from session
-  t new-session -d -s "$name" -n "$name" tmux-shell "$@"
+  t new-session -d -s "$name" -n "$window_name" tmux-shell "$@"
   CURRENT_SESSION="$name"
   CURRENT_WINDOW=1
 }
