@@ -1,0 +1,20 @@
+#!/bin/bash
+
+BLUE="\033[34m"
+RESET="\033[0m"
+
+echo -e "$BLUE============================="
+echo 'Running:'
+echo "  $@"
+echo -e "=============================$RESET"
+echo
+
+"$@"
+
+echo
+echo -e "$BLUE============================="
+echo 'Done running:'
+echo "  $@"
+echo -e "=============================$RESET"
+
+$SHELL

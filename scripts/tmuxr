@@ -1,0 +1,132 @@
+#!/bin/bash
+
+LOG=~/.tmuxr.log
+
+main() {
+  local cmd="$1"
+  shift
+  case "$cmd" in
+    list | l)  list "$@";;
+    start | o) start "$@";;
+    *) usage;;
+  esac
+}
+
+usage() {
+  echo
+  echo 'Tmuxr'
+  echo
+  echo 'Usage:'
+  echo
+  echo '  tmuxr start {template-name} - starts a new tmux session from template'
+  echo '  tmuxr list                  - lists all available tmux templates'
+  echo '                                (stored in ~/.tmuxr/)'
+  echo
+  echo 'Template commands:'
+  echo
+  echo '  session {session-name} {window-name} {command}'
+  echo '  window {window-name} {command}'
+  echo '  split_below {command}'
+  echo '  split_right {command}'
+  echo '  even'
+  echo '  attach'
+}
+
+list() {
+  if [ -d ~/.tmuxr ]; then
+    /bin/ls -1 ~/.tmuxr/
+  else
+    error "~/.tmuxr directory doesn't exist"
+  fi
+}
+
+error() {
+  >&2 echo "$@"
+}
+
+start() {
+  local filename="$HOME/.tmuxr/$1"
+  if [ ! -e "$filename" ]; then
+    filename="$1"
+  fi
+
+  if [ ! -e "$filename" ]; then
+    error "Cannot find template by name '$1'"
+    exit 1
+  fi
+
+  echo >> $LOG
+  echo "Create session from  '$filename'" >> $LOG
+  source "$filename"
+}
+
+t() {
+  local cmd="$1"
+  shift
+
+  local session_arg=""
+  if [[ ! "$@" =~ "-t" ]]; then
+    if [ "$cmd" != "new-session" ]; then
+      session_arg="-t $CURRENT_SESSION"
+    fi
+  fi
+
+  echo "$ $cmd $session_arg $@" >> $LOG
+  tmux "$cmd" $session_arg "$@"
+}
+
+w() {
+  local cmd="$1"
+  shift
+  t "$cmd" -t $CURRENT_SESSION:$CURRENT_WINDOW "$@"
+}
+
+session() {
+  local name="$1"
+  local window_name="$2"
+  shift
+  shift
+  if has_session "$name"; then
+    attach "$name"
+    exit 1
+  fi
+
+  # -d = detach from session
+  t new-session -d -s "$name" -n "$name" tmux-shell "$@"
+  CURRENT_SESSION="$name"
+  CURRENT_WINDOW=1
+}
+
+has_session() {
+  tmux list-sessions | cut -d: -f1 | grep "^$1$" > /dev/null
+}
+
+window() {
+  local name="$1"
+  shift
+
+  t new-window -t $CURRENT_SESSION: -n "$name" tmux-shell "$@"
+  CURRENT_WINDOW=$((CURRENT_WINDOW + 1))
+}
+
+split_below() {
+  w split-window tmux-shell "$@"
+}
+
+split_right() {
+  w split-window -h tmux-shell "$@"
+}
+
+attach() {
+  if [ "$1" != "" ]; then
+    CURRENT_SESSION="$1"
+  fi
+  t attach-session
+}
+
+even() {
+  w select-layout even-horizontal
+  w select-layout even-vertical
+}
+
+main "$@"
