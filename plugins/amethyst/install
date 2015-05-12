@@ -1,0 +1,20 @@
+#!/bin/bash
+
+source `dirname $0`/../../framework
+
+main() {
+  header "Amethyst (tiling window manager)"
+  brew_cask_install amethyst
+  install_toggle_osx_shadows
+}
+
+
+install_toggle_osx_shadows() {
+  local toggle_osx_shadows="$BREW_HOME/Cellar/toggle-osx-shadows/osx/bin/toggle-osx-shadows"
+
+  if [ ! -x "$toggle_osx_shadows" ]; then
+    bullet "Instal"
+    brew install https://raw.githubusercontent.com/puffnfresh/toggle-osx-shadows/master/homebrew/toggle-osx-shadows.rb
+  fi
+}
+
