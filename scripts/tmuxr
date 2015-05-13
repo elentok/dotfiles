@@ -26,9 +26,10 @@ usage() {
   echo
   echo '  session {session-name} {window-name} {command}'
   echo '  window {window-name} {command}'
-  echo '  split_below {command}'
-  echo '  split_right {command}'
-  echo '  even'
+  echo '  split-below {command}'
+  echo '  split-right {command}'
+  echo '  even-horizontal'
+  echo '  even-vertical'
   echo '  attach'
 }
 
@@ -109,11 +110,11 @@ window() {
   CURRENT_WINDOW=$((CURRENT_WINDOW + 1))
 }
 
-split_below() {
+split-below() {
   w split-window tmux-shell "$@"
 }
 
-split_right() {
+split-right() {
   w split-window -h tmux-shell "$@"
 }
 
@@ -124,9 +125,12 @@ attach() {
   t attach-session
 }
 
-even() {
-  w select-layout even-horizontal
+even-vertical() {
   w select-layout even-vertical
+}
+
+even-horizontal() {
+  w select-layout even-horizontal
 }
 
 main "$@"
