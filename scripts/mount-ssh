@@ -1,0 +1,8 @@
+#!/bin/bash
+
+sshfs \
+  -ocache=no \
+  -onolocalcaches \
+  -ovolname=ssh \
+  -odefer_permissions \
+  "$@"
