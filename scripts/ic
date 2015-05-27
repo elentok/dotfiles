@@ -1,0 +1,9 @@
+#!/bin/bash
+
+root=$(git rev-parse --show-toplevel)
+
+if [ -n "$root" ]; then
+  cd $root
+fi
+
+nesh -c --prompt 'icoffee> ' -e $DOTF/plugins/nesh/init.coffee
