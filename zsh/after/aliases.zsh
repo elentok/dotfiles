@@ -92,6 +92,7 @@ alias rbr='rbenv rehash'
 alias gulp='gulp --require coffee-script/register'
 alias pio='platformio'
 alias nv='nvim'
+alias ts='tig status'
 
 alias fliph='convert -flop'
 alias flipv='convert -flip'
