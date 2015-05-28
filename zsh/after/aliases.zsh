@@ -16,17 +16,6 @@ t() { vim "+Todo $*" }
 alias tl='t ls'
 alias tt='todo.sh -t -d $DOTF/todo/todo.cfg'
 
-# Git {{{1
-alias gca='git commit --amend'
-alias gs='git status'
-alias gst='git status'
-alias gl='git pull'
-alias glr='git pull --rebase'
-alias ts='tig status'
-alias ga='git add'
-alias grb='git rebase'
-alias gas='git rebase -i --autosquash'
-
 # Vim {{{1
 alias v=vim
 alias vl='vim "+OpenSession! last"'
