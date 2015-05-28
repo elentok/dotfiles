@@ -93,7 +93,7 @@ ask() {
   local default=$3
   local resultvar=$2
 
-  echo -n "$question "
+  echo -ne "$question "
   if [ "$default" ]; then
     echo -n "[$default] "
   fi

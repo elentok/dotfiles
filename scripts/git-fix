@@ -1,0 +1,42 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+main() {
+  if [ $# -eq 0 ]; then
+    usage
+  else
+    fix-commit "$1"
+  fi
+}
+
+usage() {
+  echo "Usage:"
+  echo
+  echo "git fix <revision>"
+  echo
+}
+
+fix-commit() {
+  rev="$1"
+  title=$(commit-title $rev)
+
+  if confirm "Fixup $BLUE'$title'$RESET" yes; then
+
+    bullet "Creating fixup commit... "
+    git commit --fixup $rev
+    info "done."
+
+    if confirm "Autosquash" yes; then
+      bullet "Autosquashing... "
+      git rebase -i --autosquash $rev~1
+      info "done."
+    fi
+  fi
+}
+
+commit-title() {
+  git log -1 --pretty=%s $1
+}
+
+main "$@"
