@@ -55,6 +55,8 @@ Plug 'tpope/vim-repeat'
 Plug 'iandoe/vim-osx-colorpicker'
 Plug 'xolox/vim-misc'
 
+Plug 'reedes/vim-pencil'
+Plug 'reedes/vim-wordy'
 " dark/zen room, no distraction mode
 Plug 'junegunn/goyo.vim'
 
