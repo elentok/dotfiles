@@ -186,6 +186,7 @@ set backspace=indent,eol,start " allow backspacing over everything in insert mod
 set whichwrap=<,>,[,]
 set expandtab
 set nowrap
+set breakindent " https://retracile.net/wiki/VimBreakIndent
 set linebreak
 set showbreak=>>
 
