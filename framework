@@ -34,6 +34,11 @@ command_missing() {
   ! has_command "$1"
 }
 
+# Check if process is running {{{1
+is_running() {
+  ps cax | grep "$1" > /dev/null 2>&1
+}
+
 # Identify OS {{{1
 if [ "`uname -s`" = "Darwin" ]; then
   export OS=mac
@@ -466,4 +471,66 @@ is_workstation() {
 is_server() {
   identify_dotfiles_platform
   [ "$DOTFILES_PLATFORM" = "server" ]
+}
+
+# extract flag {{{1
+
+# Usage:
+#   func() {
+#     FLAG1=no
+#     FLAG2=no
+#     while extract_flag "$1"; do shift; done
+#     echo "1=$FLAG1 2=$FLAG2"
+#   }
+#
+# func --flag1          # 1=yes 2=no
+# func --flag2          # 1=no 2=yes
+# func --flag1 --flag2  # 1=yes 2=yes
+# func --flag1=value    # 1=value 2=yes
+#
+extract_flag() {
+  if [[ "$1" =~ ^-- ]]; then
+    local flag_name="${1/--/}"
+    local value='yes'
+
+    if [[ "$flag_name" =~ "=" ]]; then
+      local value="$(echo $flag_name | cut -d= -f2)"
+      local flag_name="$(echo $flag_name | cut -d= -f1 | awk '{print toupper($0)}')"
+    fi
+
+    eval "$flag_name=\"$value\""
+    return 0
+  fi
+
+  return 1
+}
+
+# Run command {{{1
+#
+# Usage:
+#   run_command [--sudo] [--bg] <name> <command> <arg1>...
+#
+run_command() {
+  SUDO=no
+  BG=no
+  while extract_flag "$1"; do shift; done
+
+  name="$1"
+  shift
+
+  bullet "Starting ${name}... "
+  if is_running "$1"; then
+    info 'Already running.'
+  else
+    cmd='sh -c'
+    if [ "$SUDO" == 'yes' ]; then
+      cmd='sudo -s'
+    fi
+
+    if [ "$BG" == 'yes' ]; then
+      $cmd "$@" &
+    else
+      $cmd "$@"
+    fi
+  fi
 }
