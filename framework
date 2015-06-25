@@ -155,6 +155,20 @@ symlink() {
   fi
 }
 
+# Install Brew/Apt package {{{1
+install_package() {
+  APT=''
+  BREW=''
+
+  while extract_flag "$1"; do shift; done
+
+  if [ "$OS" == "mac" ]; then
+    brew_install "$BREW"
+  else
+    brew_install "$APT"
+  fi
+}
+
 # NPM {{{1
 npm_install() {
   bullet "Installing ${1}..."

@@ -1,0 +1,34 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+main() {
+  check_pv
+  if [ $# -lt 2 ]; then
+    usage
+  else
+    echo
+    echo "Copying from $1"
+    echo "          to $2"
+    echo
+    sudo dd if="$1" | pv | sudo dd of="$2"
+  fi
+}
+
+usage() {
+  cat<<EOF
+
+ddd - dd with progress report
+
+Usage:
+  ddd <input> <output>
+EOF
+}
+
+check_pv() {
+  if ! has_command pv; then
+    install_package --apt=pv --brew=pv
+  fi
+}
+
+main "$@"
