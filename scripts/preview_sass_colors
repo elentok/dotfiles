@@ -1,0 +1,99 @@
+#!/usr/bin/env ruby
+
+def main
+  if ARGV.length > 0
+    generate_html(ARGV[0])
+  else
+    usage
+  end
+end
+
+def usage
+  puts <<-EOF
+
+preview_sass_colors - Generates html preview of SASS color variables
+
+Usage:
+
+  preview_sass_colors <file.scss>
+
+  EOF
+end
+
+HEADER = "<!doctype html>
+<html>
+<head>
+  <title>Sass Colors Preview</title>
+  <style type='text/css'>
+    body {
+      font-style: sans-serif;
+    }
+    .color {
+      width: 200px;
+      height: 150px;
+      position: relative;
+      float: left;
+    }
+
+    .color .details {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.5);
+      padding: 5px;
+      text-align: right;
+    }
+
+    .color .details .value {
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+"
+
+FOOTER = "
+</body>
+</html>
+"
+
+def generate_html(source_sass)
+  colors = find_colors(source_sass)
+  File.open 'preview.html', 'w' do |f|
+    f << HEADER
+    f << generate_elements(colors)
+    f << FOOTER
+  end
+end
+
+def generate_elements(colors)
+  colors.map do |name, value|
+    "<div class='color' style='background-color: #{value}'>" \
+      "<div class='details'>" \
+        "<div class='name'>#{name}</div>" \
+        "<div class='value'>#{value}</div>" \
+      "</div>" \
+    "</div>"
+  end.join "\n"
+end
+
+def find_colors(source_sass)
+  regex = /^[$@]([a-zA-Z0-9\-_]+):\s*(#[^;]+);?$/
+
+  colors = {}
+
+  File.open(source_sass) do |f|
+    f.each_line do |line|
+      match = regex.match(line.strip)
+      if match
+        name = match[1]
+        color = match[2]
+        colors[name] = color
+      end
+    end
+  end
+
+  colors
+end
+
+main
