@@ -8,7 +8,7 @@ install_neovim() {
 }
 
 install_symlinks() {
-  symlink "$DOTF/nvim/nvimrc" ~/.nvimrc
+  symlink "$DOTF/plugins/nvim/nvimrc" ~/.nvimrc
 }
 
 install_neovim
