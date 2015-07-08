@@ -81,9 +81,9 @@ augroup Elentok_Misc
   "autocmd BufRead * call HighlightLongLines()
 augroup END
 
-augroup pencil
-  autocmd!
-  autocmd FileType markdown,mkd call pencil#init()
-  autocmd FileType text         call pencil#init()
-  autocmd FileType gitcommit    call pencil#init()
-augroup END
+"augroup pencil
+  "autocmd!
+  "autocmd FileType markdown,mkd call pencil#init()
+  "autocmd FileType text         call pencil#init()
+  "autocmd FileType git,*commit*,*COMMIT* call pencil#init({'textwidth': 72})
+"augroup END

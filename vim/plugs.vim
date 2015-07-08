@@ -54,6 +54,7 @@ Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-repeat'
 Plug 'iandoe/vim-osx-colorpicker'
 Plug 'xolox/vim-misc'
+Plug 'ngmy/vim-rubocop'
 
 Plug 'reedes/vim-pencil'
 Plug 'reedes/vim-wordy'

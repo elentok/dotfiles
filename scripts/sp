@@ -25,6 +25,9 @@ fi
 if [ -e ".zeus.sock" ]; then
   echo "Running 'zeus rspec $what'"
   zeus rspec $what
+elif [ -x "bin/rspec" ]; then
+  echo "Running 'bin/rspec $what'"
+  bin/rspec $what
 else
   echo "Running 'rspec $what'"
   rspec $what
