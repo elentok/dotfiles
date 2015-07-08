@@ -1,0 +1,15 @@
+#!/bin/bash
+
+source `dirname $0`/../framework
+
+main() {
+  header "Mac Apps"
+  brew_cask_install alfred
+  brew_cask_install iterm2
+  brew_cask_install 1password
+  brew_cask_install telegram
+  brew_cask_install forklift
+  #brew_cask_install dash # it installs dash3 which is a paid upgrade
+}
+
+main
