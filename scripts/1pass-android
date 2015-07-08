@@ -1,0 +1,7 @@
+#!/bin/bash
+
+sync-to-android \
+  ~/.1pass/1Password.agilekeychain \
+  /sdcard/1Password.agilekeychain \
+  /sdcard/1pass-backup
+
