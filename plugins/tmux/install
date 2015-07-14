@@ -5,10 +5,9 @@ source `dirname $0`/../../framework
 main() {
   header "tmux"
 
-  if [ "$1" != "symlinks" ]; then
-    install_tmux
-  fi
+  install_tmux
   install_symlinks
+  install_plugins
 }
 
 install_tmux() {
@@ -23,11 +22,12 @@ install_tmux() {
 }
 
 install_symlinks() {
-  if [ "$OS" == "mac" ]; then
-    symlink "$DOTF/plugins/tmux/tmux-osx.conf" ~/.tmux.conf
-  else
-    symlink "$DOTF/plugins/tmux/tmux.conf" ~/.tmux.conf
-  fi
+  symlink "$DOTF/plugins/tmux/tmux.conf" ~/.tmux.conf
+}
+
+install_plugins() {
+  mkdir -p ~/.tmux/plugins
+  git_clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 }
 
 main $*
