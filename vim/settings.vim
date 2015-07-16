@@ -65,10 +65,11 @@ let g:ctrlp_custom_ignore = {
   \ }
 let g:ctrlp_buftag_types = {
   \ 'coffee': '',
+  \ 'ghmarkdown': '',
+  \ 'go': '',
   \ 'javascript': '',
-  \ 'scss': '',
   \ 'markdown': '',
-  \ 'ghmarkdown': ''
+  \ 'scss': ''
   \ }
 
 "let g:ctrlp_open_func = {
