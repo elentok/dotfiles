@@ -63,6 +63,13 @@ let g:ctrlp_by_filename = 0
 let g:ctrlp_custom_ignore = {
   \ 'dir': '\v[\/](tmp|site-packages|node_modules|bower_components)$',
   \ }
+let g:ctrlp_buftag_types = {
+  \ 'coffee': '',
+  \ 'javascript': '',
+  \ 'scss': '',
+  \ 'markdown': '',
+  \ 'ghmarkdown': ''
+  \ }
 
 "let g:ctrlp_open_func = {
   "\ 'buffers': 'CtrlP_CloseBuffer'

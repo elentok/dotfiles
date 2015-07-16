@@ -1,0 +1,30 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+function main() {
+  ROOT=$(find-parent-with .git tags Gemfile)
+
+  bullet "Generating ctags for ${ROOT}... "
+
+  ctags $(exclude_args) -R --c++-kinds=+p --fields=+ilaS --extra=+q \
+    --exclude=@$DOTF/vim/ctagsignore \
+    -f $ROOT/tags $ROOT
+  if [ $? -eq 0 ]; then
+    success 'done.'
+  else
+    error 'FAILED.'
+  fi
+}
+
+function exclude_args() {
+  if [ -e "$HOME/.ctagsignore" ]; then
+    echo -e " --exclude=@$HOME/.ctagsignore"
+  fi
+
+  if [ -e "$ROOT/.ctagsignore" ]; then
+    echo -e " --exclude=@$ROOT/.ctagsignore"
+  fi
+}
+
+main "$@"

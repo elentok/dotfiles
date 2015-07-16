@@ -1,4 +1,6 @@
+# The .zshenv file is loaded by ALL shells (including non-login shells)
 source ~/.zprezto/runcoms/zshenv
+source ~/.dotfiles/zsh/base.zsh
 
 # Fix $TERM problem with remote servers
 alias ssh='TERM=xterm ssh'

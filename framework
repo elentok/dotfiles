@@ -556,3 +556,29 @@ run_command() {
     fi
   fi
 }
+
+# Find parent {{{1
+
+# Looks for a parent directory with one of the following files
+# e.g.
+#
+# root=$(find-parent-with .git Gemfile)
+#
+function find-parent-with() {
+  local path=''
+  while [ 1 ]; do
+    local abspath=$(cd ./$path; pwd)
+    if [ "$abspath" == "/" ]; then
+      return 1
+    fi
+
+    for filename in "$@"; do
+      if [ -e "$abspath/$filename" ]; then
+        echo "$abspath"
+        return 0
+      fi
+    done
+
+    path="../$path"
+  done
+}
