@@ -1,0 +1,57 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+main() {
+  cmd="$1"
+  shift
+
+  case "$cmd" in
+    list | l)
+      list
+      ;;
+    id)
+      find-id "$@"
+      ;;
+    *)
+      usage
+      ;;
+  esac
+}
+
+usage() {
+  cat<<EOF
+
+osx-apps
+
+Usage:
+  osx-apps list
+  osx-apps id [app-title]
+
+EOF
+}
+
+list() {
+  list_osascript | osascript | $SED 's/, /\n/g' | sort
+}
+
+list_osascript() {
+  cat <<EOF
+tell application "System Events"
+  name of every process where background only is false
+end tell
+EOF
+}
+
+find-id() {
+  local name="$1"
+  if [ -z "$name" ]; then
+    name="$(list | selecta)"
+  fi
+
+  id=$(osascript -e "id of app \"$name\"")
+  echo $id | pbcopy
+  echo "$id (copied to clipboard)"
+}
+
+main "$@"
