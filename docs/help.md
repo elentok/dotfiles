@@ -185,3 +185,9 @@ Command Line Tips
 ## s3cmd - list all files (recursively)
 
   s3cmd ls 's3://{bucket-name}/{path}' -r
+
+## mac - get app id
+
+  osascript -e 'id of app "Finder"'
+
+  (e.g. for amethyst)
