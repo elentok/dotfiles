@@ -1,3 +1,2 @@
+# The .zprofile file is only loaded by login shells
 source ~/.zprezto/runcoms/zprofile
-source ~/.dotfiles/zsh/base.zsh
-

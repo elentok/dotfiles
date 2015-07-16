@@ -93,6 +93,7 @@ alias gulp='gulp --require coffee-script/register'
 alias pio='platformio'
 alias nv='nvim'
 alias ts='tig status'
+alias cd/='cd "$(find-root)"'
 
 alias fliph='convert -flop'
 alias flipv='convert -flip'

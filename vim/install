@@ -50,6 +50,7 @@ install_symlinks() {
   symlink "$DOTF/vim" ~/.vim
   symlink "$DOTF/vim/bundle/supertagger/ctags" ~/.ctags
   symlink "$DOTF/vim/pylintrc" ~/.pylintrc
+  symlink "$DOTF/vim/ctags" ~/.ctags
 }
 
 install_vim_plugins() {
