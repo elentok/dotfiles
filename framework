@@ -59,6 +59,14 @@ else
   export HAS_GUI=yes
 fi
 
+# Use gsed {{{1
+export SED=sed
+if is_mac; then
+  if has_command gsed; then
+    export SED=gsed
+  fi
+fi
+
 # display methods (header/bullet/info/success/error) {{{1
 header() {
   echo -e "\n${BLUE}${UNDERLINE}☻ $*$RESET"
