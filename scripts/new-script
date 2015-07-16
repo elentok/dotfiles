@@ -1,0 +1,40 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+main() {
+  local name="$1"
+
+  if [ "$name" == "" ]; then
+    ask 'Name:' name
+  fi
+
+  create-script "$name"
+}
+
+usage() {
+  cat<<EOF
+
+new-script
+
+Usage:
+  new-script [name]
+
+EOF
+}
+
+create-script() {
+  local name="$1"
+  local full_name="$DOTF/scripts/$name"
+  echo "Creating $full_name..."
+  sed "s/{{script-name}}/$name/g" $DOTF/scripts/template.sh > $full_name
+  chmod +x $full_name
+  if ! vim $full_name; then
+    echo
+    if confirm "Vim returned non-zero exit code, delete script?"; then
+      rm -f $full_name
+    fi
+  fi
+}
+
+main "$@"
