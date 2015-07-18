@@ -109,8 +109,8 @@ common_plugins() {
 }
 
 mac_plugins() {
-  plugin keyremap4macbook
   plugin homebrew-cask
+  plugin karabiner
   brew_install imagemagick
   brew_install ghostscript
 }
