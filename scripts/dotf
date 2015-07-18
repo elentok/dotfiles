@@ -78,12 +78,13 @@ update() {
 
   if [ "$old_head" != "$new_head" ]; then
     echo -e "\nPulled the following changes:"
-    git changes ${old_head}..${new_head}
+    git changelog ${old_head}..${new_head}
 
     echo -ne "\nPress any key to run the installer..."
     read -n 1
 
     if is_mac; then
+      bullet 'Updating brew... '
       brew update
     fi
 
