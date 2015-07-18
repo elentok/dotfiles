@@ -10,13 +10,10 @@ main() {
     list-plugins
     ;;
   install | i)
-    install
+    install "$@"
     ;;
   update | u)
     update
-    ;;
-  plugin | p)
-    plugins "$@"
     ;;
   export-vim)
     export-vim
@@ -33,13 +30,11 @@ usage() {
   echo
   echo "Usage:"
   echo
-  echo "  dotf list                        - lists all plugins"
-  echo "  dotf plugin [plugin] [plugin]... - install specific plugins"
-  echo
-  echo "  dotf install                     - installs all plugins"
-  echo "  dotf update                      - pulls from git and reruns install"
-  echo
-  echo "  dotf export-vim                  - exports vim config to .tar.gz"
+  echo "  dotf list                         - lists all plugins"
+  echo "  dotf install                      - installs all plugins"
+  echo "  dotf install [plugin] [plugin]... - install specific plugins"
+  echo "  dotf update                       - pulls from git and reruns install"
+  echo "  dotf export-vim                   - exports vim config to .tar.gz"
 }
 
 list-plugins() {
@@ -51,6 +46,11 @@ list-plugins() {
 }
 
 install() {
+  if [ $# -gt 0 ]; then
+    plugins "$@"
+    return
+  fi
+
   is_workstation && install_workstation
   is_server && install_server
   show_done
