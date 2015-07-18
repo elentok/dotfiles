@@ -11,7 +11,7 @@ main() {
     echo "Copying from $1"
     echo "          to $2"
     echo
-    sudo dd if="$1" | pv | sudo dd of="$2"
+    sudo sh -c "dd if="$1" bs=100m | pv | dd of="$2" bs=100m"
   fi
 }
 
