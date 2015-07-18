@@ -111,6 +111,7 @@ common_plugins() {
 mac_plugins() {
   plugin homebrew-cask
   plugin karabiner
+  plugin osx-tuning
   brew_install imagemagick
   brew_install ghostscript
 }
