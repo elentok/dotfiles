@@ -65,6 +65,7 @@ install_utils() {
   npm_install jshint
   npm_install jsonlint
   npm_install marked
+  npm_install name-that-color
   pip_install pylint
   pip_install powerline-status
 }

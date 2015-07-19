@@ -9,15 +9,21 @@ main() {
 }
 
 confirm-undo() {
+  echo -e $GREEN
+  echo This will undo the last commit by:
   echo
-  echo 'This will undo the last commit:'
+  echo 1. moving the changes into the index
+  echo 2. removing the last commit
   echo
+  echo "(so you won't lose your changes)"
+
   echo -e "$YELLOW"
   echo '----------------------------------------------------------------------'
   git-last-commit
   echo '----------------------------------------------------------------------'
   echo -e "$RESET"
   echo
+
   confirm 'Shall we begin?'
 }
 
