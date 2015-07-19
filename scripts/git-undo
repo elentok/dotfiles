@@ -1,0 +1,28 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+main() {
+  if confirm-undo; then
+    git reset --soft HEAD\^
+  fi
+}
+
+confirm-undo() {
+  echo
+  echo 'This will undo the last commit:'
+  echo
+  echo -e "$YELLOW"
+  echo '----------------------------------------------------------------------'
+  git-last-commit
+  echo '----------------------------------------------------------------------'
+  echo -e "$RESET"
+  echo
+  confirm 'Shall we begin?'
+}
+
+git-last-commit() {
+  git log -1 --pretty="%B"
+}
+
+main "$@"
