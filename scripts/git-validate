@@ -15,6 +15,7 @@ EXIT_CODE=0
 
 SHOW_COMMAND="cat"
 GREP_COMMAND="pcregrep --line-number --color=always --multiline "$REGEX""
+HOOK_FILE='.git/hooks/pre-commit'
 
 main() {
   cmd="$1"
@@ -32,6 +33,10 @@ main() {
       ;;
     "all")
       check_all $@
+      ;;
+    "install")
+      install $@
+      exit $?
       ;;
     *)
       usage
@@ -119,6 +124,18 @@ get_commit_files() {
 
 filter_by_extension() {
   grep -E '\.(coffee|js|html|jade|haml|hamlc|erb|css|scss)$'
+}
+
+install() {
+  if [ ! -e $HOOK_FILE ]; then
+    echo 'Installing pre-commit hook'
+    echo '#!/bin/bash' > $HOOK_FILE
+    echo 'git validate staged' >> $HOOK_FILE
+    chmod +x $HOOK_FILE
+  else
+    echo 'pre-commit hook already exists, editing'
+    vim $HOOK_FILE
+  fi
 }
 
 main $@
