@@ -6,15 +6,17 @@ GITCONFIG="$HOME/.gitconfig"
 
 main() {
   header "Git"
-  if [ "$1" != "symlinks" ]; then
-    install_git
-  fi
+  should_install_custom_git && install_git
   install_gitconfig
   install_symlinks
 }
 
+should_install_custom_git() {
+  [ ! -x /usr/local/git/current/bin/git ]
+}
+
 install_git() {
-  if [ "$OS" == "mac" ]; then
+  if is_mac; then
     brew_install git
     brew_install tig
   else

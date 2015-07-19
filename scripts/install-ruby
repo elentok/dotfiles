@@ -1,0 +1,38 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+main() {
+  echo 'Select ruby version:'
+  echo
+  local ruby_version=$(select_version)
+
+  if is_installed $ruby_version; then
+    echo -e "${GREEN}Ruby $ruby_version is already installed$RESET"
+  else
+    install_version $ruby_version
+  fi
+}
+
+ruby_versions() {
+  rbenv install --list | grep -v 'Available'
+}
+
+is_installed() {
+  rbenv versions | grep "\<$1\>" > /dev/null 2>&1
+}
+
+select_version() {
+  ruby_versions | selecta
+}
+
+install_version() {
+  local version=$1
+
+  rbenv install $version
+  gem install bundler
+  gem install powder
+  rbenv rehash
+}
+
+main
