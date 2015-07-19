@@ -11,7 +11,7 @@ function main() {
     --exclude=@$DOTF/vim/ctagsignore \
     -f $ROOT/tags $ROOT
   if [ $? -eq 0 ]; then
-    success 'done.'
+    success "done (generated $(count-ctags) tags)."
   else
     error 'FAILED.'
   fi
@@ -25,6 +25,10 @@ function exclude_args() {
   if [ -e "$ROOT/.ctagsignore" ]; then
     echo -e " --exclude=@$ROOT/.ctagsignore"
   fi
+}
+
+function count-ctags() {
+  grep -v '^!' $ROOT/tags | wc -l | $SED 's/\s*//g'
 }
 
 main "$@"
