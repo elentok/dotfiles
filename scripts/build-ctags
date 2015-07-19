@@ -5,9 +5,13 @@ source $DOTF/framework
 function main() {
   ROOT=$(find-parent-with .git tags Gemfile)
 
-  bullet "Generating ctags for ${ROOT}... "
+  header "Generating ctags for ${ROOT}"
 
-  ctags $(exclude_args) -R --c++-kinds=+p --fields=+ilaS --extra=+q \
+  build_exclude_args
+
+  bullet 'Generating... '
+
+  ctags $EXCLUDE_ARGS -R --c++-kinds=+p --fields=+ilaS --extra=+q \
     --exclude=@$DOTF/vim/ctagsignore \
     -f $ROOT/tags $ROOT
   if [ $? -eq 0 ]; then
@@ -17,13 +21,17 @@ function main() {
   fi
 }
 
-function exclude_args() {
-  if [ -e "$HOME/.ctagsignore" ]; then
-    echo -e " --exclude=@$HOME/.ctagsignore"
+function build_exclude_args() {
+  EXCLUDE_ARGS=""
+
+  if [ -e "$DOTF/vim/ctagsignore" ]; then
+    bullet "Loading $DOTF/vim/ctagsignore\n"
+    EXCLUDE_ARGS="--exclude=@$DOTF/vim/ctagsignore"
   fi
 
   if [ -e "$ROOT/.ctagsignore" ]; then
-    echo -e " --exclude=@$ROOT/.ctagsignore"
+    bullet "Loading $ROOT/.ctagsignore\n"
+    EXCLUDE_ARGS="$EXCLUDE_ARGS --exclude=@$ROOT/.ctagsignore"
   fi
 }
 
