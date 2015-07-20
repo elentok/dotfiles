@@ -17,7 +17,7 @@ usage() {
 }
 
 changelog() {
-  if [[ "$1" =~ "\.\." ]]; then
+  if [[ "$1" == *..* ]]; then
     range="$1"
   else
     range="${1}~1..HEAD"
