@@ -92,7 +92,7 @@ error() {
 confirm() {
   local default=${2:-no}
   ask "${1} (yes/no)?" yesno $default
-  [ "$yesno" = "yes" ]
+  [ "$yesno" = "yes" -o "$yesno" = "y" ]
   return $?
 }
 
@@ -116,6 +116,12 @@ ask() {
   reply="${reply:-$default}"
   reply=$(echo $reply | sed "s/'/'\"'\"'/g")
   eval $resultvar="'$reply'"
+}
+
+pause() {
+  local text=${1:-Press any key to continue... }
+  echo -ne "$text"
+  read -n 1
 }
 
 # backup {{{1
@@ -581,4 +587,9 @@ function find-parent-with() {
 
     path="../$path"
   done
+}
+
+# helpers {{{1
+trim() {
+  $SED -E 's/(^\s+|\s+$)//g'
 }

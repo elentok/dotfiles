@@ -1,0 +1,99 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+ROOT=$(git rev-parse --git-dir)
+
+main() {
+  REMAINING=$(git-conflicts-count)
+
+  if [ "$REMAINING" == "0" ]; then
+    success 'There are no conflicts :-)'
+  else
+    resolve-all
+  fi
+
+  if is-rebase; then
+    if confirm 'Continue rebase?'; then
+      git rebase --continue
+    fi
+  elif is-merge; then
+    if confirm 'Continue merge?'; then
+      git commit
+    fi
+  fi
+}
+
+resolve-all() {
+  describe-conflicts
+  echo -e "${GREEN}Starting to resolve...$RESET\n"
+  while [ "$REMAINING" != "0" ]; do
+    resolve-first
+    REMAINING=$(git-conflicts-count)
+  done
+}
+
+resolve-first() {
+  local first=$(git-conflicts | head -1)
+
+  bullet "Resolving $first... "
+
+  if has-conflicts "$first"; then
+    conflicts=$(file-conflicts-count "$first")
+    info "it has $conflicts conflict(s)"
+  else
+    info 'no conflicts'
+  fi
+
+  pause 'Press any key to edit...'
+  $EDITOR $first
+
+  if [ $? -eq 0 ]; then
+    if has-conflicts "$first"; then
+      error "File $first still has error markers"
+    else
+      if confirm "Mark $first as resolved?"; then
+        git add $first
+      fi
+    fi
+  fi
+}
+
+has-conflicts() {
+  [ "$(file-conflicts-count $1)" != "0" ]
+}
+
+file-conflicts-count() {
+  markers=$(grep -E '^(<<<<<<<|>>>>>>>|=======)' "$1" | wc -l | trim)
+  echo $((markers / 3))
+}
+
+describe-conflicts() {
+  echo
+  echo '======================================================================'
+  echo
+  echo -e "${BLUE}${UNDERLINE}$REMAINING conflict(s) remaining$RESET"
+  echo
+  git-conflicts | sed 's/^/  * /'
+  echo
+  echo '======================================================================'
+  echo
+}
+
+git-conflicts() {
+  git diff --name-only --diff-filter=U
+}
+
+git-conflicts-count() {
+  git-conflicts | wc -l | trim
+}
+
+is-rebase() {
+  [ -d "$ROOT/rebase-apply" -o -d "$ROOT/rebase-merge" ]
+}
+
+is-merge() {
+  [ -e "$ROOT/MERGE_HEAD" ]
+}
+
+main "$@"
