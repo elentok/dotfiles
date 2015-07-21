@@ -22,7 +22,7 @@ alias find='gfind'
 ff() {
   gfind . -iname "*$**"
 }
-alias ackc='ack --coffee'
+alias agg="ag --ignore '*.yml'"
 
 # Mac Specific {{{1
 if [[ "`uname -s`" == "Darwin" ]]; then
