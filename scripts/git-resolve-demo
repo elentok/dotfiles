@@ -1,0 +1,29 @@
+#!/bin/bash
+
+rm -rf ~/tmp/git-resolve-demo
+mkdir -p ~/tmp/git-resolve-demo
+cd ~/tmp/git-resolve-demo
+
+git init
+
+echo 'I am file1' > file1.txt
+echo 'I am file2' > file2.txt
+git add --all
+git commit -m 'Initial commit'
+
+git checkout -b branch1
+echo 'I am file1 of branch1' > file1.txt
+echo 'I am file2 of branch1' > file2.txt
+git add --all
+git commit -m 'Branch1 commit'
+
+git checkout master
+echo 'I am file1 of the new master' > file1.txt
+echo 'I am file2 of the new master' > file2.txt
+git add --all
+git commit -m 'Master commit'
+
+git checkout branch1
+git rebase master
+
+git resolve
