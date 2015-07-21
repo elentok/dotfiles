@@ -36,21 +36,22 @@ resolve-all() {
 resolve-first() {
   local first=$(git-conflicts | head -1)
 
-  bullet "Resolving $first... "
+  bullet "Resolving ${YELLOW}$first${RESET}... "
 
   if has-conflicts "$first"; then
-    conflicts=$(file-conflicts-count "$first")
-    info "it has $conflicts conflict(s)"
+    conflicts=$(file-conflict-markers-count "$first")
+    info "it has $conflicts conflict marker(s)"
   else
     info 'no conflicts'
   fi
 
   pause 'Press any key to edit...'
-  $EDITOR $first
+  vim $first
 
   if [ $? -eq 0 ]; then
     if has-conflicts "$first"; then
       error "File $first still has error markers"
+      echo
     else
       if confirm "Mark $first as resolved?"; then
         git add $first
@@ -60,12 +61,11 @@ resolve-first() {
 }
 
 has-conflicts() {
-  [ "$(file-conflicts-count $1)" != "0" ]
+  [ "$(file-conflict-markers-count $1)" != "0" ]
 }
 
-file-conflicts-count() {
-  markers=$(grep -E '^(<<<<<<<|>>>>>>>|=======)' "$1" | wc -l | trim)
-  echo $((markers / 3))
+file-conflict-markers-count() {
+  grep -E '^(<<<<<<<|>>>>>>>|=======)' "$1" | wc -l | trim
 }
 
 describe-conflicts() {
