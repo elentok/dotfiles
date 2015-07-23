@@ -68,6 +68,13 @@ if is_mac; then
 fi
 
 # display methods (header/bullet/info/success/error) {{{1
+title() {
+  echo -e "\n${BLUE}$*"
+  echo "$*" | sed 's/./=/g'
+  echo -e $RESET
+  echo
+}
+
 header() {
   echo -e "\n${BLUE}${UNDERLINE}☻ $*$RESET"
 }
@@ -347,6 +354,10 @@ git_get_origin() {
   git remote -v | grep fetch | awk '{print $2}'
 }
 
+git-repo-is-dirty() {
+  [ "$(git status --porcelain)" != "" ]
+}
+
 # Apt: Install {{{1
 apt_install() {
   for pkg in $*; do
@@ -592,4 +603,9 @@ function find-parent-with() {
 # helpers {{{1
 trim() {
   $SED -E 's/(^\s+|\s+$)//g'
+}
+
+device-for() {
+  mountpoint="$1"
+  diskutil info "$1" | grep 'Device Node' | cut -d: -f2 | trim
 }
