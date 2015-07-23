@@ -1,0 +1,100 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+main() {
+  if [ $# -eq 0 ]; then
+    usage
+  else
+    run "$@"
+  fi
+}
+
+usage() {
+  cat<<EOF
+
+optiscan - Optimize scanned images
+
+Usage:
+  optiscan [--resize[=<width>x<height]] <name>...
+  optiscan [--grayscale] <name>...
+  optiscan [--colors=<c> --depth=<d>] <name>...
+
+Options:
+  --grayscale                 Use 16 colors and a depth of 4
+  --colors=<c>                Number of colors (default: 2)
+  --depth=<d>                 Depth of color (default: 1)
+  --resize[=<width>x<height>] Resize the image to fit in these bounds
+                              (when --resize is specified defaults to 1500x1500,
+                              otherwise defaults to "no")
+EOF
+}
+
+run() {
+  RESIZE=no
+  GRAYSCALE=no
+  COLORS=2
+  DEPTH=1
+
+  while extract_flag "$1"; do shift; done
+
+  if [ "$GRAYSCALE" == 'yes' ]; then
+    COLORS=16
+    DEPTH=4
+  fi
+
+  if [ "$RESIZE" == 'yes' ]; then
+    RESIZE='1500x1500'
+  fi
+
+  for file in "$@"; do
+    optimize "$file"
+  done
+}
+
+optimize() {
+  local file="$1"
+  local output="$(optimized-filename-for "$file")"
+  local tmpfile1="$TMPDIR/optiscan1.png"
+  local tmpfile2="$TMPDIR/optiscan2.png"
+
+  bullet "Optimizing $file... "
+
+  if [ -e "$output" ]; then
+    if ! confirm 'Output file exists, overwrite?'; then
+      return
+    fi
+  fi
+
+  local original_size=$(filesize $file)
+
+  if [ "$RESIZE" != "no" ]; then
+    convert -resize "$RESIZE"\> "$file" "$tmpfile1"
+  else
+    cp "$file" "$tmpfile1"
+  fi
+
+  convert -colors $COLORS "$tmpfile1" "$tmpfile2"
+  convert -depth $DEPTH "$tmpfile2" "$output"
+
+  local optimized_size=$(filesize $output)
+
+  local kb=$((optimized_size / 1024))
+  local percentage_of_original=$(($optimized_size * 100 / $original_size))
+
+  success "done (${kb}kb, ${percentage_of_original}% of original)."
+}
+
+optimized-filename-for() {
+  local file="$1"
+  local basename="$(basename "$file")"
+  local dirname="$(dirname "$file")"
+
+  if [ ! -d "$dirname/optimized" ]; then
+    mkdir -p "$dirname/optimized"
+  fi
+
+  echo "$dirname/optimized/${basename%.*}.png"
+}
+
+main "$@"
