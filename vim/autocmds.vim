@@ -47,6 +47,9 @@ augroup Elentok_Misc
   autocmd FileType ghmarkdown setlocal spell
   autocmd FileType markdown setlocal spell
 
+  " Git commits
+  autocmd FileType gitcommit setlocal comments=fb:-,fb:* colorcolumn=72
+
   " UTF8
   autocmd FileType vim setlocal nobomb
 
