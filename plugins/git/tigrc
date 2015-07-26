@@ -75,6 +75,7 @@ bind generic @+ :toggle diff-context +1
 
 bind generic c  none
 bind generic cc !git commit
+bind generic co !git checkout %(commit)
 bind generic ca !?@git commit --amend --no-edit
 
 bind generic K view-help
