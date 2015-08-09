@@ -1,0 +1,42 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+main() {
+  if [ $# -eq 0 ]; then
+    usage
+  else
+    run "$@"
+  fi
+}
+
+usage() {
+  cat<<EOF
+
+rm-empty - Removes empty directories
+
+Usage:
+  rm-empty <path>...
+
+EOF
+}
+
+run() {
+  empty-directories "$1"
+}
+
+empty-directories() {
+  $FIND "$1" -type d | while read dir; do
+    if is-empty "$dir"; then
+      bullet "Deleting ${dir}... "
+      rmdir "$dir" && success 'done.' || error 'failed!'
+    fi
+  done
+}
+
+is-empty() {
+  rm -f "$1/.DS_Store"
+  [ -z "$(ls -A "$1")" ]
+}
+
+main "$@"
