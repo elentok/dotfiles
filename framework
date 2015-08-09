@@ -77,7 +77,7 @@ define_gnu_commands() {
 }
 
 if is_mac; then
-  define_gnu_commands sed stat
+  define_gnu_commands sed stat find
 fi
 
 # display methods (header/bullet/info/success/error) {{{1
