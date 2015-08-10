@@ -1,0 +1,85 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+DEFAULT_AGENT="$HOME/.ssh/default-agent"
+LOCAL_AGENT="/tmp/ssh-agent-$USER"
+
+main() {
+  local cmd="$1"
+  shift
+
+  case "$cmd" in
+    list   | l) list-agents ;;
+    which  | w) default-agent;;
+    choose | c) choose-agent;;
+    set    | s) set-agent "$@";;
+    fix    | f) fix;;
+    *)          usage;;
+  esac
+}
+
+usage() {
+  cat<<EOF
+
+ssh-switch - Switches between SSH agents
+
+Usage:
+  ssh-switch list              - list the available agents
+  ssh-switch which             - show the default agent
+  ssh-switch choose            - choose a default agent (interactive)
+  ssh-switch set [socket-path] - switch to specific agent
+EOF
+}
+
+list-agents() {
+  echo 'local'
+  if [ -e "/tmp/ssh-*/agent*" ]; then
+    $STAT -c "%n (%y)" /tmp/ssh-*/agent*
+  fi
+}
+
+default-agent() {
+  if [ -e $DEFAULT_AGENT ]; then
+    local real="$(realpath $DEFAULT_AGENT)"
+    if [ -e "$real" ]; then
+      echo $real
+    fi
+  fi
+}
+
+choose-agent() {
+  local agent=$(list-agents | selecta | cut -d' ' -f1)
+  if [ -z "$agent" ]; then
+    error 'User aborted'
+    exit 1
+  fi
+  set-agent "$agent"
+}
+
+set-agent() {
+  local agent="$1"
+  if [ "$agent" == 'local' ]; then
+    local agent="$LOCAL_AGENT"
+  fi
+  if ! is-agent-running "$agent"; then
+    if confirm "No agent at '$agent', create?"; then
+      ssh-agent -a "$agent" > /dev/null
+    fi
+  fi
+
+  echo "Setting default agent: $agent"
+  ln -sf $agent $DEFAULT_AGENT
+}
+
+fix() {
+  if ! is-agent-running "$DEFAULT_AGENT"; then
+    set-agent 'local'
+  fi
+}
+
+is-agent-running() {
+  [ -n "$1" -a -e "$1" ]
+}
+
+main "$@"
