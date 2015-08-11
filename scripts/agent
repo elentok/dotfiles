@@ -22,19 +22,21 @@ main() {
 usage() {
   cat<<EOF
 
-ssh-switch - Switches between SSH agents
+agent - Switches between SSH agents
 
 Usage:
-  ssh-switch list              - list the available agents
-  ssh-switch which             - show the default agent
-  ssh-switch choose            - choose a default agent (interactive)
-  ssh-switch set [socket-path] - switch to specific agent
+  agent list              - list the available agents
+  agent which             - show the default agent
+  agent choose            - choose a default agent (interactive)
+  agent set [socket-path] - switch to specific agent
+  agent fix               - attempt to fix a zombie default agent
 EOF
 }
 
 list-agents() {
   echo 'local'
-  if [ -e "/tmp/ssh-*/agent*" ]; then
+
+  if [ -e /tmp/ssh-*/agent* ]; then
     $STAT -c "%n (%y)" /tmp/ssh-*/agent*
   fi
 }

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+source `dirname $0`/../../framework
+
+main() {
+  header "SSH"
+  install_symlinks
+}
+
+install_symlinks() {
+  symlink "$DOTF/plugins/ssh/rc" ~/.ssh/rc
+}
+
+main "$@"
+
