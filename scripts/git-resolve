@@ -21,6 +21,10 @@ main() {
     if confirm 'Continue merge?'; then
       git commit
     fi
+  elif is-cherry-pick; then
+    if confirm 'Continue cherry pick?'; then
+      git cherry-pick --continue
+    fi
   fi
 }
 
@@ -94,6 +98,10 @@ is-rebase() {
 
 is-merge() {
   [ -e "$ROOT/MERGE_HEAD" ]
+}
+
+is-cherry-pick() {
+  [ -e "$ROOT/CHERRY_PICK_HEAD" ]
 }
 
 main "$@"
