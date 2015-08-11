@@ -53,9 +53,8 @@
   rh = reset HEAD
   s = status
   sl = stash list
-  st = stash
   sp = stash pop
-  ss = stash show -p
+  ss = stash save --patch
   t = tag
   semtag = !git tag -a $(semver tag) -m \"tagging $(semver tag)\"
   g = grep --break --heading --line-number
