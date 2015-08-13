@@ -43,7 +43,7 @@ list-agents() {
 
 default-agent() {
   if [ -e $DEFAULT_AGENT ]; then
-    local real="$(realpath $DEFAULT_AGENT)"
+    local real="$(readlink $DEFAULT_AGENT)"
     if [ -e "$real" ]; then
       echo $real
     fi
