@@ -272,3 +272,15 @@ endif
 if has('nvim')
   let g:tmux_navigator_no_mappings = 1
 endif
+
+" Neomake {{{1
+let g:neomake_scss_enabled_makers = ['scsslint']
+let g:neomake_coffee_enabled_makers = ['coffeelint']
+let g:neomake_error_sign = {
+    \ 'text': 'E>',
+    \ 'texthl': 'ErrorMsg',
+    \ }
+let g:neomake_warning_sign = {
+    \ 'text': 'W>',
+    \ 'texthl': 'WarningMsg',
+    \ }
