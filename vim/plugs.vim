@@ -43,7 +43,13 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 
 Plug 'elentok/vim-rails-extra'
-Plug 'scrooloose/syntastic'
+
+if has('nvim')
+  Plug 'benekastah/neomake'
+else
+  Plug 'scrooloose/syntastic'
+endif
+
 Plug 'mileszs/ack.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'Raimondi/delimitMate'

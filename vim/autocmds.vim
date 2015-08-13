@@ -81,6 +81,10 @@ augroup Elentok_Misc
   " fix nerdtree width
   autocmd BufEnter * if exists("b:NERDTreeType") | call FixNERDTreeWidth() | endif
 
+  if has('nvim')
+    autocmd! BufWritePost * Neomake
+  endif
+
   "autocmd BufRead * call HighlightLongLines()
 augroup END
 
