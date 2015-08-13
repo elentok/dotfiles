@@ -6,6 +6,8 @@ fi
 export TMUX_TMPDIR=/tmp/$USERNAME
 mkdir -p $TMUX_TMPDIR
 
+export EDITOR=vim
+
 fpath=($BREW_HOME/lib/node_modules/tailr/completions $fpath)
 fpath=(/usr/local/share/npm/lib/node_modules/tailr/completions $fpath)
 fpath=(/usr/local/share/npm/lib/node_modules/dns-switcher/completions $fpath)
