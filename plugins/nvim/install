@@ -2,6 +2,18 @@
 
 source `dirname $0`/../../framework
 
+main() {
+  install_requirements
+  install_neovim
+  install_symlinks
+}
+
+install_requirements() {
+  # python3 is required for the deoplete plugin
+  brew_install python3
+  pip3_install neovim
+}
+
 install_neovim() {
   brew_tap neovim/homebrew-neovim
   brew_install neovim
@@ -12,5 +24,4 @@ install_symlinks() {
   symlink "$DOTF/vim" ~/.nvim
 }
 
-install_neovim
-install_symlinks
+main

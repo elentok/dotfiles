@@ -271,6 +271,7 @@ endif
 " Neovim {{{1
 if has('nvim')
   let g:tmux_navigator_no_mappings = 1
+  let g:deoplete#enable_at_startup = 1
 endif
 
 " Neomake {{{1
