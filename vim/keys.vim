@@ -256,6 +256,10 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
 if has('nvim')
   tnoremap <c-\><c-\> <c-\><c-n>
 
+  " fix <C-h> (https://github.com/neovim/neovim/issues/2048)
+  nmap <BS> <C-h>
+
+  tnoremap <c-w> <c-\><c-n><c-w>
   tnoremap <c-h> <c-\><c-n><c-w>h
   tnoremap <c-j> <c-\><c-n><c-w>j
   tnoremap <c-k> <c-\><c-n><c-w>k
