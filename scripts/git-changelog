@@ -1,36 +1,61 @@
-#!/bin/bash
+#!/usr/bin/env ruby
 
-main() {
-  if [ "$1" != "" ]; then
-    changelog $1
+def main
+  if ARGV.length > 0
+    changelog ARGV[0]
   else
     usage
-  fi
-}
+  end
+end
 
-usage() {
-  echo
-  echo "Usage:"
-  echo
-  echo "  git changelog [commit or revision range]"
-  echo
-}
+def usage
+  puts <<EOF
+  Usage:
 
-changelog() {
-  if [[ "$1" == *..* ]]; then
-    range="$1"
+    git changelog [commit or revision range]
+EOF
+end
+
+def changelog(hash)
+  if hash =~ /\.\./
+    range="#{hash}"
   else
-    range="${1}~1..HEAD"
-  fi
+    range="#{hash}~1..HEAD"
+  end
 
-  git_log "$range" | while read line; do
-    echo "* $line"
-  done
-}
+  `git log --pretty=%h #{range}`.each_line do |line|
+    puts Commit.new(line.strip).format
+  end
+end
 
-git_log() {
-  range="$1"
-  git log --pretty=format:%s "$range"
-}
+def format_commit(hash)
+end
 
-main $@
+class Commit
+  def initialize(hash)
+    @hash = hash
+  end
+
+  def title
+    @title ||= `git log -1 --pretty=%s #{@hash}`.strip
+  end
+
+  def issues
+    @issues ||= find_issues
+  end
+
+  def format
+    [
+      "* #{title}",
+      issues.length == 0 ? nil : "(#{issues.join(', ')})"
+    ].compact.join(' ')
+  end
+
+  private
+
+  def find_issues
+    `git log -1 --pretty=%B #{@hash}`.scan(/b\/[0-9]+/)
+  end
+end
+
+main
