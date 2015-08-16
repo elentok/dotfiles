@@ -20,7 +20,7 @@ def changelog(hash)
   if hash =~ /\.\./
     range="#{hash}"
   else
-    range="#{hash}~1..HEAD"
+    range="#{hash}..HEAD"
   end
 
   `git log --pretty=%h #{range}`.each_line do |line|
