@@ -47,6 +47,7 @@ Plug 'elentok/vim-rails-extra'
 if has('nvim')
   Plug 'benekastah/neomake'
   Plug 'kassio/neoterm'
+  Plug 'Shougo/deoplete.nvim'
 else
   Plug 'scrooloose/syntastic'
 endif

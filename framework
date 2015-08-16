@@ -343,6 +343,21 @@ has_pip_package() {
   [ "`pip list | grep \"^$1\b\"`" != "" ]
 }
 
+# Pip3 {{{1
+pip3_install() {
+  bullet "Installing pip package ${1}... "
+  if has_pip3_package "$1"; then
+    info " already installed"
+  else
+    pip3 install --user $1
+  fi
+}
+
+has_pip3_package() {
+  [ "`pip3 list | grep \"^$1\b\"`" != "" ]
+}
+
+
 # Git {{{1
 git_clone() {
   origin=$1
