@@ -244,13 +244,20 @@ nnoremap <leader>js :JavaGetSet<cr>
 " Completion {{{1
 "inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
-        \ <SID>check_back_space() ? "\<TAB>" :
-        \ neocomplete#start_manual_complete()
-  function! s:check_back_space() "{{{
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-  endfunction"}}}
+function! s:check_back_space() "{{{
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
+
+if has('nvim')
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
+          \ <SID>check_back_space() ? "\<TAB>" :
+          \ deoplete#mappings#manual_complete()
+else
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
+          \ <SID>check_back_space() ? "\<TAB>" :
+          \ neocomplete#start_manual_complete()
+endif
 
 " Neovim {{{1
 if has('nvim')
