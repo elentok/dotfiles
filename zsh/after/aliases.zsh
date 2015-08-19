@@ -44,6 +44,7 @@ fi
 alias m=ncmpcpp
 alias mf='mpc search filename'
 alias ma='mpc add'
+alias mn='mpc next'
 alias mp='mpc toggle'
 alias mcl='mpc clear'
 # 2}}}
