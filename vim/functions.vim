@@ -119,6 +119,9 @@ endfunc
 
 command! -range FormatRubyObject call FormatRubyObject()
 
+" preview sass colors {{{1
+command! PreviewSassColors !preview_sass_colors % && open preview.html
+
 " js2coffee {{{1
 func! Js2Coffee()
   silent! %s/\s\+$//
