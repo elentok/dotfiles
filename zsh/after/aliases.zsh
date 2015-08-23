@@ -33,7 +33,6 @@ if [[ "`uname -s`" == "Darwin" ]]; then
 
 # Linux Specific {{{1
 else
-  alias ack='ack-grep'
   alias ls='ls --color=always -XFhs'
   alias cl='xclip -selection clipboard -o'
   alias st='scrot -s'
