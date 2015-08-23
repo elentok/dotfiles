@@ -1,0 +1,36 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+ROOT="$HOME/Music"
+DELETED="$HOME/Music-Deleted"
+
+main() {
+  song_title=$(mpc current --format '[%artist% - %title%]')
+  song_filename=$(mpc current --format '[%file%]')
+
+  info 'Current playing song:'
+  echo -e "  title:    ${YELLOW}$song_title$RESET"
+  echo -e "  filename: ${YELLOW}$song_filename$RESET"
+  echo
+
+  if confirm 'Delete'; then
+    delete-song "$song_filename"
+    mpc rm
+    mpc update
+  fi
+}
+
+delete-song() {
+  local song_filename="$1"
+  echo 'Deleting... '
+  mkdir -p "$DELETED"
+
+  cd "$ROOT"
+  mv "$song_filename" "$DELETED" && success 'done'
+}
+
+
+
+
+main
