@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 source $DOTF/framework
 
@@ -7,7 +7,7 @@ ROOT=$(git rev-parse --git-dir)
 main() {
   REMAINING=$(git-conflicts-count)
 
-  if [ "$REMAINING" == "0" ]; then
+  if [ "$REMAINING" = "0" ]; then
     success 'There are no conflicts :-)'
   else
     resolve-all
@@ -50,7 +50,7 @@ resolve-first() {
   fi
 
   pause 'Press any key to edit...'
-  vim $first
+  $EDITOR $first
 
   if [ $? -eq 0 ]; then
     if has-conflicts "$first"; then
