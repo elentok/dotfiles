@@ -114,6 +114,7 @@ mac_plugins() {
   plugin osx-tuning
   brew_install imagemagick
   brew_install ghostscript
+  brew_install ncdu
 }
 
 linux_plugins() {
