@@ -1,0 +1,105 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+main() {
+  cmd="$1"
+  shift
+
+  if [ -z "$(which parallelshell)" ]; then
+    npm_install parallelshell
+  fi
+
+  case "$cmd" in
+    new)   new-playground "$@" ;;
+    watch) watch-playground ;;
+    *)     usage ;;
+  esac
+}
+
+usage() {
+  cat<<EOF
+
+playground
+
+Usage:
+  playground new [name]
+  playground watch
+
+Options:
+  -h --help     Show this screen.
+  --version     Show version.
+  --speed=<kn>  Speed in knots [default: 10].
+  --moored      Moored (anchored) mine.
+  --drifting    Drifting mine.
+
+EOF
+}
+
+new-playground() {
+  root="$(pwd)"
+  if [ -n "$1" ]; then
+    root="$root/$1"
+  fi
+
+  bullet 'Creating directories... '
+  mkdir -p $root
+  mkdir -p $root/src
+  mkdir -p $root/build
+  cd $root
+  success 'done'
+
+  bullet 'Creating files... '
+  create-index-jade
+  create-app-coffee
+  create-app-scss
+  success 'done'
+  echo
+
+  if confirm 'Start watching?'; then
+    watch-playground
+  fi
+}
+
+create-index-jade() {
+  cat > src/index.jade <<EOF
+doctype html
+html
+  head
+    title Playground
+    link(rel='stylesheet' href='app.css' type='text/css')
+
+  body
+    h1 Playground
+
+    .container
+
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js')
+    script(src='test.coffee')
+EOF
+}
+
+create-app-coffee() {
+  cat > src/app.coffee <<EOF
+console.log 'Playground loaded'
+EOF
+}
+
+create-app-scss() {
+  cat > src/app.scss <<EOF
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+EOF
+}
+
+watch-playground() {
+  (sleep 1 && open build/index.html) &
+
+  build_jade='jade -w src/index.jade --out build'
+  build_coffee='coffee -o build -wc src/app.coffee'
+  build_sass='sass --watch src/app.scss:build/app.css'
+  parallelshell "$build_jade" "$build_coffee" "$build_sass"
+}
+
+main "$@"
