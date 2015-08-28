@@ -4,12 +4,19 @@ require "#{ENV['DOTF']}/framework.rb"
 require 'date'
 
 require_relative './packages/reader'
+require_relative './packages/tracker'
 
 def main
   if ARGV.length == 0
     usage
   else
-    PackagePrinter.print PackageReader.read(ARGV[0])
+    cmd = ARGV.shift
+    packages = PackageReader.read('~/.packages')
+    if cmd == 'report'
+      PackagePrinter.print(packages)
+    elsif cmd == 'track'
+      PackageTracker.track(packages)
+    end
   end
 end
 
@@ -19,7 +26,8 @@ pkgs - package tracking utility
 
 Usage:
 
-  pkgs <packages-file>
+  pkgs report
+  pkgs show
 
   EOF
 end
@@ -40,13 +48,7 @@ class PackagePrinter
   end
 
   def print_pkg(pkg)
-    puts [
-      '☻',
-      pkg.title.ljust(@title_width),
-      gray("(ordered on"),
-      yellow(pkg.store),
-      gray("#{pkg.time_ago})")
-    ].join(' ')
+    puts "☻ #{pkg.pretty_name(@title_width)}"
   end
 
   def self.print(packages)

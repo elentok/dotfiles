@@ -1,14 +1,24 @@
 class Package
   attr_accessor :title, :date, :estimated, :tracking, :store
   def initialize(title, options = {})
-    @title = title
-    @store = options[:store]
-    @date = Date.parse(options[:date])
+    @title     = title
+    @tracking  = options[:tracking]
+    @store     = options[:store]
+    @date      = Date.parse(options[:date])
     @estimated = DeliveryEstimation.parse(options[:estimated])
   end
 
   def to_s
     @title
+  end
+
+  def pretty_name(title_width = 0)
+    [
+      title.ljust(title_width),
+      gray("(ordered on"),
+      yellow(store),
+      gray("#{time_ago})")
+    ].join(' ')
   end
 
   def order
