@@ -1,0 +1,9 @@
+# vim: syntax=ruby
+
+store :ebay do
+  pkg 'Something', date: '2015-08-20', tracking: '123456', estimated: 'Sep 2, 2015 - Sep 10, 2015'
+end
+
+store :amazon do
+  pkg 'Something else', date: '2015-08-20', tracking: '9999', estimated: 'Sep 2, 2015 - Sep 10, 2015'
+end

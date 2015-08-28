@@ -1,0 +1,57 @@
+#!/usr/bin/ruby
+
+require "#{ENV['DOTF']}/framework.rb"
+require 'date'
+
+require_relative './packages/reader'
+
+def main
+  if ARGV.length == 0
+    usage
+  else
+    PackagePrinter.print PackageReader.read(ARGV[0])
+  end
+end
+
+def usage
+  puts <<-EOF
+pkgs - package tracking utility
+
+Usage:
+
+  pkgs <packages-file>
+
+  EOF
+end
+
+class PackagePrinter
+  def initialize(packages)
+    @packages = packages.sort_by(&:order)
+  end
+
+  def print
+    @title_width = @packages.map() { |pkg| pkg.title.length }.max
+
+    @packages.group_by(&:when_to_expect).each do |when_to_expect, pkgs|
+      puts green("#{when_to_expect.capitalize}")
+      pkgs.sort_by(&:days_ago).reverse.each { |pkg| print_pkg(pkg) }
+      puts
+    end
+  end
+
+  def print_pkg(pkg)
+    puts [
+      '☻',
+      pkg.title.ljust(@title_width),
+      gray("(ordered on"),
+      yellow(pkg.store),
+      gray("#{pkg.time_ago})")
+    ].join(' ')
+  end
+
+  def self.print(packages)
+    self.new(packages).print
+  end
+end
+
+main
