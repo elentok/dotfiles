@@ -1,0 +1,44 @@
+#!/bin/bash
+
+set -e
+
+source $DOTF/framework
+
+main() {
+  title 'Git Autopush'
+
+  commit-if-needed
+  pull
+  push
+  success 'done'
+}
+
+commit-if-needed() {
+  bullet 'Checking for changes... '
+  if git-repo-is-dirty; then
+    echo
+    commit
+  else
+    info 'no changes'
+  fi
+}
+
+commit() {
+  bullet "Commiting changes...\n"
+  date=$(date +%Y-%m-%d\ %H:%M)
+  git add --all
+  git commit -m "Update $date"
+  echo
+}
+
+pull() {
+  bullet "Pulling changes... "
+  git pull --rebase
+}
+
+push() {
+  bullet "Pushing changes... "
+  git push
+}
+
+main "$@"
