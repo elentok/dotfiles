@@ -94,10 +94,10 @@ class DeliveryEstimation
 
   def when
     if overdue?
-      :overdue
+      'overdue'
     else
       if Date.today > @from
-        :any_day_now
+        'any day now'
       else
         when_to_start_expecting
       end
