@@ -4,6 +4,7 @@ require "#{ENV['DOTF']}/framework.rb"
 require 'date'
 
 require_relative './packages/reader'
+require_relative './packages/report'
 require_relative './packages/tracker'
 
 def main
@@ -13,7 +14,7 @@ def main
     cmd = ARGV.shift
     packages = PackageReader.read('~/.packages')
     if cmd == 'report'
-      PackagePrinter.print(packages)
+      PackageReport.print(packages)
     elsif cmd == 'track'
       PackageTracker.track(packages)
     end
@@ -30,30 +31,6 @@ Usage:
   pkgs show
 
   EOF
-end
-
-class PackagePrinter
-  def initialize(packages)
-    @packages = packages.sort_by(&:order)
-  end
-
-  def print
-    @title_width = @packages.map() { |pkg| pkg.title.length }.max
-
-    @packages.group_by(&:when_to_expect).each do |when_to_expect, pkgs|
-      puts green("#{when_to_expect.capitalize}")
-      pkgs.sort_by(&:days_ago).reverse.each { |pkg| print_pkg(pkg) }
-      puts
-    end
-  end
-
-  def print_pkg(pkg)
-    puts "☻ #{pkg.pretty_name(@title_width)}"
-  end
-
-  def self.print(packages)
-    self.new(packages).print
-  end
 end
 
 main

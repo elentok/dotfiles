@@ -18,9 +18,9 @@ class PackageReader
     @store = nil
   end
 
-  def pkg(title, options = {})
+  def pkg(title, date, estimated = nil, options = {})
     (options ||= {}).merge!(store: @store)
-    @packages << Package.new(title, options)
+    @packages << Package.new(title, date, estimated, options)
   end
 
   def self.read(filename)
