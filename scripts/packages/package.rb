@@ -1,11 +1,11 @@
 class Package
   attr_accessor :title, :date, :estimated, :tracking, :store
-  def initialize(title, options = {})
+  def initialize(title, date, estimated = nil, options = {})
     @title     = title
     @tracking  = options[:tracking]
     @store     = options[:store]
-    @date      = Date.parse(options[:date])
-    @estimated = DeliveryEstimation.parse(options[:estimated])
+    @date      = Date.parse(date)
+    @estimated = DeliveryEstimation.parse(estimated)
   end
 
   def to_s
@@ -41,10 +41,14 @@ class Package
     elsif days_ago == 1
       'yesterday'
     elsif days_ago < 7
-      "#{days_ago} day(s) ago"
+      "#{days_ago} days ago"
     else
       weeks = (days_ago / 7).to_i
-      "#{weeks} week(s) ago"
+      if weeks == 1
+        '1 week ago'
+      else
+        "#{weeks} weeks ago"
+      end
     end
   end
 
