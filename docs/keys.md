@@ -86,7 +86,7 @@ Vim
 |                       | zc              | n    | close fold
 |                       | zM              | n    | close all folds
 |                       | zR              | n    | open all folds
-| **Spelling**          | \ts             | n    | toggle spelling
+| **Spelling**          | cos             | n    | toggle spelling
 |                       | z=              | n    | suggest correct spelling
 |                       | zg              | n    | define current word as correctly spelled
 |                       | zw              | n    | define current word as wrongly spelled
