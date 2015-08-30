@@ -2,22 +2,22 @@
 
 source `dirname $0`/../../framework
 
-header 'Installing the Powerline fonts'
+header 'Installing fonts'
 
-if [ "$OS" == "mac" ]; then
+if is_mac; then
   font_dir="$HOME/Library/Fonts"
 else
   font_dir="$HOME/.fonts"
   mkdir -p $font_dir
 fi
 
-find "$DOTF/vim/powerline-fonts" -name '*.[o,t]tf' -type f | \
+find "$DOTF/plugins/fonts" -name '*.[o,t]tf' -type f | \
   while read file; do
     copy_to_dir "$file" "$font_dir"
   done
 
 # For linux
-if [ "$OS" == "linux" ]; then
+if is_linux; then
   bullet "Updating font cache"
   fc-cache -v -f $font_dir
 fi
