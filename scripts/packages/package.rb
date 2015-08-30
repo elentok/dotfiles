@@ -5,7 +5,7 @@ class Package
     @tracking  = options[:tracking]
     @store     = options[:store]
     @date      = Date.parse(date)
-    @estimated = DeliveryEstimation.parse(estimated)
+    @estimated = DeliveryEstimation.parse(estimated, @date)
   end
 
   def to_s
@@ -63,10 +63,19 @@ class DeliveryEstimation
     @to = to
   end
 
-  def self.parse(raw)
+  def self.parse(raw, order_date)
     return nil if raw.nil?
 
-    dates = raw.split(' - ').map { |date| Date.parse(date) }
+    match = /^(\d)+-(\d)+ days$/.match(raw)
+    if match.nil?
+      dates = raw.split(' - ').map { |date| Date.parse(date) }
+    else
+      dates = [
+        order_date + match[1].to_i,
+        order_date + match[2].to_i
+      ]
+    end
+
     DeliveryEstimation.new(*dates)
   end
 
