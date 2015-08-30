@@ -11,6 +11,7 @@ module PackageTracker
     if IsraelPost.supported?(pkg.tracking)
       puts "☻ Tracking #{pkg.pretty_name}..."
       puts IsraelPost.track(pkg.tracking)
+      puts
     end
   end
 end
