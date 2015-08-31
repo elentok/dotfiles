@@ -18,6 +18,9 @@ class PackageReader
     @store = nil
   end
 
+  def arrived(&block)
+  end
+
   def pkg(title, date, estimated = nil, options = {})
     (options ||= {}).merge!(store: @store)
     @packages << Package.new(title, date, estimated, options)
