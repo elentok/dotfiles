@@ -15,6 +15,16 @@ command! -range=% NumberLines call NumberLines()
 command! CSScomb call CSScomb()
 command! -nargs=+ CSScolor call CSScolor("<args>")
 
+" Fugitive overrides {{{1
+if exists(':Gpush') == 2
+  delcommand Gpush
+endif
+if exists(':Gpull') == 2
+  delcommand Gpull
+endif
+command! -nargs=* Gpush QuickShell git push --verbose <args>
+command! -nargs=* Gpull QuickShell git pull --verbose --rebase <args>
+
 " Hebrew {{{1
 func! ToggleHebrew()
   if &rl
