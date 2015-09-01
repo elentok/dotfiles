@@ -260,6 +260,7 @@ endif
 " Neovim {{{1
 if has('nvim')
   tnoremap <c-\><c-\> <c-\><c-n>
+  tnoremap jk <c-\><c-n>
 
   " fix <C-h> (https://github.com/neovim/neovim/issues/2048)
   nmap <BS> <C-h>
@@ -269,6 +270,7 @@ if has('nvim')
   tnoremap <c-j> <c-\><c-n><c-w>j
   tnoremap <c-k> <c-\><c-n><c-w>k
   tnoremap <c-l> <c-\><c-n><c-w>l
+
   " goto insert mode when entering a terminal window
-  au WinEnter term://* startinsert
+  "au WinEnter term://* startinsert
 endif
