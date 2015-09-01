@@ -14,3 +14,15 @@ COLORS.each do |name, value|
     [value, text, RESET].join()
   end
 end
+
+def confirm?(question, default = 'no')
+  ask?("#{question} (yes/no)?", default) =~ /^y$/
+end
+
+def ask?(question, default = nil)
+  STDOUT.write "#{question} "
+  STDOUT.write "[#{default}] " unless default.nil?
+  answer = STDIN.readline.strip
+
+  answer == '' ? default : answer
+end

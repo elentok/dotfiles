@@ -1,0 +1,70 @@
+#!/usr/bin/ruby
+
+require "#{ENV['DOTF']}/framework.rb"
+
+def main
+  if ARGV.length == 0
+    usage
+  else
+    kill_matching(Regexp.new(ARGV[0]))
+  end
+end
+
+def usage
+  puts <<-EOF
+
+kill-match - kill all processing matching a pattern
+
+Usage:
+
+  kill-match [pattern]
+
+  EOF
+end
+
+def kill_matching(re)
+  to_kill = processes.select { |p| p.path =~ re }
+  unless to_kill.any?
+    puts 'No processes found'
+    exit 1
+  end
+
+  puts "Found #{to_kill.length} processes:"
+  to_kill.each { |p| puts "- #{p.pid}\t#{p.path}" }
+  puts
+  if confirm? 'Kill?'
+    to_kill.each { |p| p.kill! }
+  end
+end
+
+def processes
+  `ps aux`.split("\n").map { |line| AProcess.parse(line) }
+    .compact
+    .reject { |p| p.pid == $$ }
+end
+
+class AProcess
+  attr_reader :user, :pid, :path
+
+  def initialize(user, pid, path)
+    @user = user
+    @pid = pid
+    @path = path
+  end
+
+  def kill!
+    puts "- illing #{@pid}"
+    puts `kill #{@pid}`
+  end
+
+  def self.parse(line)
+    fields = line.split(/\s+/, 11)
+    AProcess.new(fields[0], fields[1].to_i, fields[10])
+  end
+
+  def to_s
+    [@pid, @user, @path[0..70]].join("\t")
+  end
+end
+
+main
