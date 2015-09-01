@@ -273,3 +273,14 @@ function! OnSave(cmd)
 endfunction
 
 command! -nargs=* OnSave call OnSave("<args>")
+
+" Exec {{{1
+function! QuickShell(cmd)
+  if has('nvim')
+    let cmd=substitute(a:cmd, '%', '"' . expand('%') . '"', 'g')
+    split
+    exec "terminal " . cmd
+  else
+    exec "!" . a:cmd
+  endif
+endfunction
