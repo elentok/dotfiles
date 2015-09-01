@@ -14,7 +14,7 @@ inoremap <c-l> <right>
 inoremap <c-e> <c-o>$
 
 " Find {{{1
-noremap <cr> :nohls<cr>
+nnoremap <cr> :nohls<cr><cr>
 noremap <Leader>ff :Ack! <c-r>=EscapeForQuery(expand("<cword>"))<cr><cr>
 vnoremap <Leader>ff "9y:Ack! '<c-r>=EscapeRegisterForQuery(9)<cr>'<cr>
 noremap <Leader>fc :Ack! 
