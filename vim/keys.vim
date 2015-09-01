@@ -184,14 +184,14 @@ noremap <Leader>rt :exec "!build-ctags"<cr>
 
 
 " Git (v = version control) {{{1
-noremap <Leader>vs :call QuickShell('tig status')<cr>
+noremap <Leader>vs :QuickShell tig status<cr>
 noremap <Leader>vrf :call Confirm("Revert current file?", "!git co %")<cr>
-noremap <Leader>vrp :!git co -p %<cr>
-noremap <Leader>vd :call QuickShell('git diff %')<cr>
+noremap <Leader>vrp :QuickShell git co -p %<cr>
+noremap <Leader>vd :QuickShell git diff %<cr>
 "noremap <Leader>vd :silent !clear; git diff %<cr>:redraw!<cr>
-noremap <Leader>vaf :call QuickShell('git add %')<cr>
-noremap <Leader>vap :call QuickShell('git add -p %')<cr>
-noremap <Leader>vh :call QuickShell('tig %')<cr>
+noremap <Leader>vaf :QuickShell git add %<cr>
+noremap <Leader>vap :QuickShell git add -p %<cr>
+noremap <Leader>vh :QuickShell tig %<cr>
 noremap <Leader>vc :Gcommit<cr>
 
 " Spaces text object {{{1
