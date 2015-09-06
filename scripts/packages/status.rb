@@ -10,10 +10,12 @@ class PackageStatus
     puts blue("Expecting #{@packages.length} packages:")
     puts
 
-    @packages.group_by(&:when_to_expect).each do |when_to_expect, pkgs|
-      puts green("#{when_to_expect.capitalize} (#{pkgs.length} packages)")
-      pkgs.sort_by(&:days_ago).reverse.each { |pkg| print_pkg(pkg) }
-      puts
+    @packages.group_by(&:when_to_expect)
+      .sort_by { |value, _| value.order }
+      .each do |when_to_expect, pkgs|
+      puts green("#{when_to_expect} (#{pkgs.length} packages)")
+        pkgs.sort_by(&:days_ago).reverse.each { |pkg| print_pkg(pkg) }
+        puts
     end
   end
 
