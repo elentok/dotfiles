@@ -62,6 +62,8 @@ nnoremap + <c-w>+
 nnoremap > <c-w>>
 nnoremap < <c-w><
 
+nnoremap coq :cclose<cr>
+
 
 " Go to {{{1
 noremap <Leader>b :CtrlPBuffer<cr>
@@ -184,6 +186,7 @@ noremap <Leader>rt :exec "!build-ctags"<cr>
 
 
 " Git (v = version control) {{{1
+noremap <Leader>vt :QuickShell tig<cr>
 noremap <Leader>vs :QuickShell tig status<cr>
 noremap <Leader>vrf :call Confirm("Revert current file?", "!git co %")<cr>
 noremap <Leader>vrp :QuickShell git co -p %<cr>
@@ -250,7 +253,7 @@ endfunction"}}}
 if has('nvim')
   inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
           \ <SID>check_back_space() ? "\<TAB>" :
-          \ deoplete#mappings#manual_complete()
+          \ "\<C-n>"
 else
   inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
           \ <SID>check_back_space() ? "\<TAB>" :

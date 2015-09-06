@@ -72,7 +72,7 @@
 [push]
   default = matching
 [core]
-  editor = vim
+  editor = nvim
 
 ;[credential]
   ;helper = osxkeychain
