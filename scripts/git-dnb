@@ -1,0 +1,31 @@
+#!/bin/bash
+
+DEV_BRANCH='develop'
+
+source $DOTF/framework
+
+set -e
+
+main() {
+  title 'Git - Dev and back again'
+
+  local my_branch="$(git my-branch)"
+
+  bullet "Checking out $DEV_BRANCH... "
+  git checkout $DEV_BRANCH
+  echo
+
+  bullet 'Pulling... '
+  git pull --rebase
+  echo
+
+  bullet "Checking out $my_branch... "
+  git checkout $my_branch
+  echo
+
+  bullet "Rebasing with $DEV_BRANCH... "
+  git rebase $DEV_BRANCH
+  echo
+}
+
+main "$@"
