@@ -1,4 +1,4 @@
-class PackageReport
+class PackageStatus
   def initialize(packages)
     @packages = packages.sort_by(&:order)
   end
