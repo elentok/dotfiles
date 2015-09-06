@@ -40,20 +40,21 @@ class Package
       'today'
     elsif days_ago == 1
       'yesterday'
-    elsif days_ago < 7
-      "#{days_ago} days ago"
     else
       weeks = (days_ago / 7).to_i
-      if weeks == 1
-        '1 week ago'
-      else
-        "#{weeks} weeks ago"
-      end
+      days = days_ago - weeks * 7
+
+      names = %w(w d)
+      values = [weeks, days]
+
+      values.map.with_index do |value, index|
+        "#{value}#{names[index]}" if value > 0
+      end.compact.join(' ') + ' ago'
     end
   end
 
   def when_to_expect
-    @estimated.nil? ? 'unknown' : @estimated.when
+    @estimated.nil? ? When.unknown : @estimated.when
   end
 end
 
@@ -87,34 +88,78 @@ class DeliveryEstimation
     (@from - Date.today).to_i
   end
 
-  def when_to_start_expecting
-    days = days_to_start_expecting
-    if days >= 7
-      weeks = (days / 7).to_i
-      if weeks == 1
-        'next week'
-      else
-        "in #{weeks} weeks"
-      end
-    else
-      if Date.today.wday < @from.wday
-        'this week'
-      else
-        'next week'
-      end
-    end
-  end
-
   def when
     if overdue?
-      'overdue'
+      When.overdue
     else
       if Date.today > @from
-        'any day now'
+        When.any_day_now
       else
         when_to_start_expecting
       end
     end
   end
+
+  def when_to_start_expecting
+    days = days_to_start_expecting
+    if days >= 7
+      weeks = (days / 7).to_i
+      if weeks == 1
+        When.next_week
+      else
+        When.in_x_weeks(weeks)
+      end
+    else
+      if Date.today.wday < @from.wday
+        When.this_week
+      else
+        When.next_week
+      end
+    end
+  end
+
 end
 
+class When
+  attr_reader :name, :order, :color
+
+  def initialize(name, order, color = nil)
+    @name = name
+    @order = order
+    @color = color
+  end
+
+  def to_s
+    @name.to_s.gsub(/_/, ' ').capitalize
+  end
+
+  def self.add(name, order, color = nil)
+    if color.nil?
+      color = 'nil'
+    else
+      color = ":#{color}"
+    end
+
+    puts '-----------------------'
+    puts \
+      "def self.#{name}; " \
+      "  @@#{name} ||= When.new(:#{name}, #{order}, #{color});" \
+      "end"
+
+    self.class_eval \
+      "def self.#{name}; " \
+      "  @@#{name} ||= When.new(:#{name}, #{order}, #{color});" \
+      "end"
+  end
+
+  add :overdue,     0,   :red
+  add :any_day_now, 1,   :yellow
+  add :this_week,   2,   :green
+  add :next_week,   3
+  add :unknown,     999, :gray
+
+  def self.in_x_weeks(x)
+    @@other ||= {}
+    @@other[x] ||= When.new("in_#{x}_weeks".to_sym, 3 + x)
+  end
+end
