@@ -4,18 +4,19 @@ require "#{ENV['DOTF']}/framework.rb"
 require 'date'
 
 require_relative './packages/reader'
-require_relative './packages/report'
+require_relative './packages/status'
 require_relative './packages/tracker'
 
 def main
   if ARGV.length == 0
     usage
   else
-    cmd = ARGV.shift
+    cmd = ARGV.shift.to_sym
     packages = PackageReader.read('~/.packages')
-    if cmd == 'report'
-      PackageReport.print(packages)
-    elsif cmd == 'track'
+    case cmd
+    when :status
+      PackageStatus.print(packages)
+    when :track
       PackageTracker.track(packages)
     end
   end
@@ -27,7 +28,7 @@ pkgs - package tracking utility
 
 Usage:
 
-  pkgs report
+  pkgs status
   pkgs show
 
   EOF
