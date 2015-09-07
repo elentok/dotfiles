@@ -140,12 +140,6 @@ class When
       color = ":#{color}"
     end
 
-    puts '-----------------------'
-    puts \
-      "def self.#{name}; " \
-      "  @@#{name} ||= When.new(:#{name}, #{order}, #{color});" \
-      "end"
-
     self.class_eval \
       "def self.#{name}; " \
       "  @@#{name} ||= When.new(:#{name}, #{order}, #{color});" \
