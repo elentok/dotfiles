@@ -285,3 +285,8 @@ let g:neomake_warning_sign = {
     \ 'text': 'W>',
     \ 'texthl': 'WarningMsg',
     \ }
+
+" NERDCommenter {{{1
+let g:NERDCustomDelimiters = {
+    \ 'scss': { 'left': '//' }
+\ }
