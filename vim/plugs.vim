@@ -25,6 +25,8 @@ Plug 'christoomey/vim-tmux-navigator'
 
 Plug 'vim-scripts/buffet.vim'
 
+Plug 'itchyny/calendar.vim'
+
 " editing
 
 Plug 'jasoncodes/ctrlp-modified.vim'

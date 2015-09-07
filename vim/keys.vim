@@ -82,6 +82,8 @@ noremap <Leader>gv :tabe $vimrc<cr>
 noremap `` :CtrlPBufTag<cr>
 inoremap <c-s> <c-o>:w<cr>
 
+noremap <Leader>oc :Calendar -view=year -split=vertical -width=27<cr>
+
 noremap <Leader>jm :CtrlPModels<cr>
 noremap <Leader>jv :CtrlPViews<cr>
 noremap <Leader>jc :CtrlPControllers<cr>
