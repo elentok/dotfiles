@@ -173,6 +173,7 @@ set undolevels=1000
 set history=300       " remember 300 commands
 set visualbell t_vb=
 
+let g:netrw_localrmdir='rm -r'
 
 " Wild mode {{{1
 set wildmenu
