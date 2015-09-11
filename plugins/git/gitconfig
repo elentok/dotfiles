@@ -7,12 +7,11 @@
 
 [include]
   path = ~/.dotlocal/gitconfig
-[rebase]
-  autosquash = true
-[diff]
+
 [color]
   ui = auto
   diff = auto
+
 [alias]
   a = add
   aa = add --all
@@ -71,8 +70,15 @@
 
 [push]
   default = matching
+
 [core]
   editor = nvim
+
+[pull]
+  rebase = true
+
+[rebase]
+  autosquash = true
 
 ;[credential]
   ;helper = osxkeychain
