@@ -15,16 +15,6 @@ command! -range=% NumberLines call NumberLines()
 command! CSScomb call CSScomb()
 command! -nargs=+ CSScolor call CSScolor("<args>")
 
-" Fugitive overrides {{{1
-if exists(':Gpush') == 2
-  delcommand Gpush
-endif
-if exists(':Gpull') == 2
-  delcommand Gpull
-endif
-command! -nargs=* Gpush QuickShell git push --verbose <args>
-command! -nargs=* Gpull QuickShell git pull --verbose --rebase <args>
-
 " Hebrew {{{1
 func! ToggleHebrew()
   if &rl
@@ -287,9 +277,8 @@ command! -nargs=* OnSave call OnSave("<args>")
 " Exec {{{1
 if has('nvim')
   function! QuickShell(cmd)
-    let cmd=substitute(a:cmd, '%', '"' . expand('%') . '"', 'g')
     vsplit
-    exec "terminal " . cmd
+    execute 'terminal' a:cmd
   endfunction
 
   command! -nargs=+ QuickShell call QuickShell("<args>")
