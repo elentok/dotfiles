@@ -125,6 +125,8 @@ noremap <Leader>e3 :exec ":normal A <c-v><esc>" . (59 - strlen(getline("."))) . 
 inoremap <c-t> <c-r>=UltiSnips_ListSnippets()<cr>
 inoremap <C-\> <c-o>ma<c-o>A;<c-o>`a
 
+nnoremap mal :SidewaysLeft<cr>
+nnoremap mar :SidewaysRight<cr>
 
 " From https://github.com/skwp/dotfiles/blob/master/vim/plugin/settings/stop-visual-paste-insanity.vim:
 " If you visually select something and hit paste

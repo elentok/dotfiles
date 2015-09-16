@@ -5,6 +5,7 @@ filetype plugin indent off
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'AndrewRadev/sideways.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Arduino-syntax-file'
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -67,7 +68,6 @@ Plug 'vim-scripts/buffet.vim'
 Plug 'wavded/vim-stylus'
 Plug 'xolox/vim-misc'
 Plug 'yaml.vim'
-
 if has('nvim')
   Plug 'benekastah/neomake'
   Plug 'kassio/neoterm'
