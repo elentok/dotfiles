@@ -13,7 +13,7 @@ end
 def usage
   puts <<-EOF
 
-kill-match - kill all processing matching a pattern
+kill-match - kill all processes matching a pattern
 
 Usage:
 
@@ -53,7 +53,7 @@ class AProcess
   end
 
   def kill!
-    puts "- illing #{@pid}"
+    puts "- killing #{@pid}"
     puts `kill #{@pid}`
   end
 
