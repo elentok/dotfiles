@@ -24,6 +24,7 @@ set ruler                      " enable ruler
 set scrolloff=3
 set shiftwidth=2
 set showbreak=>>
+set showcmd     " show the number of selected lines in the command bar
 set softtabstop=2
 set switchbuf=useopen
 set tabstop=2
