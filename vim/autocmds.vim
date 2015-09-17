@@ -24,8 +24,8 @@ augroup Elentok_Misc
   autocmd FileType gitcommit  setlocal comments=fb:-,fb:* colorcolumn=72
   autocmd FileType vim setlocal nobomb
 
-  autocmd FileType gitcommit,markdown       setlocal spell spellcapcheck=
-  autocmd FileType coffee,yaml FoldByIndent setlocal foldmethod=expr
+  autocmd FileType gitcommit,markdown setlocal spell spellcapcheck=
+  autocmd FileType coffee,yaml        setlocal foldmethod=expr
     \ nofoldenable foldexpr=IndentFoldExpr(v:lnum)
 
   " When editing a file, always jump to the last known cursor position.
