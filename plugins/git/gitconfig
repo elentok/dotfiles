@@ -82,3 +82,5 @@
 
 ;[credential]
   ;helper = osxkeychain
+
+; vim: filetype=gitconfig
