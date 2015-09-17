@@ -230,9 +230,6 @@ func! PostStartupKeys()
   vnoremap <tab> >gv
   vnoremap <s-tab> <gv
   vnoremap <space> 20j
-  " disable [p and ]p vim-unimpaired mappings
-  unmap [p
-  unmap ]p
 endfunc
 
 " Profiling {{{1
