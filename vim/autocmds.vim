@@ -7,6 +7,7 @@ augroup Elentok_Misc
   autocmd BufRead,BufEnter *.ino         setlocal filetype=arduino
   autocmd BufRead,BufEnter *.hamlc       setlocal filetype=haml
   autocmd BufRead,BufEnter *.hamljs      setlocal filetype=haml
+  autocmd BufRead,BufEnter *.es6         setlocal filetype=javascript
 
   autocmd FileType arduino    setlocal cindent
   autocmd FileType css,scss   setlocal foldmethod=marker foldmarker={,}
