@@ -1,0 +1,14 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+main() {
+  setup-keybindings
+}
+
+setup-keybindings() {
+  itermcfg set '<cmd-[>' send_keys '<c-a>h'
+  itermcfg set '<cmd-]>' send_keys '<c-a>l'
+}
+
+main
