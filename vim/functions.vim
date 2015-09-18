@@ -11,6 +11,9 @@ command! Ekeys      edit ~/.dotfiles/vim/keys.vim
 command! Esettings  edit ~/.dotfiles/vim/settings.vim
 command! Eabbr      edit ~/.dotfiles/vim/abbr.vim
 
+command! FoldByIndent setlocal foldmethod=expr nofoldenable
+  \ foldexpr=IndentFoldExpr(v:lnum)
+
 command! -range=% NumberLines call NumberLines()
 command! CSScomb call CSScomb()
 command! -nargs=+ CSScolor call CSScolor("<args>")

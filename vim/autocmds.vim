@@ -26,8 +26,7 @@ augroup Elentok_Misc
   autocmd FileType vim setlocal nobomb
 
   autocmd FileType gitcommit,markdown setlocal spell spellcapcheck=
-  autocmd FileType coffee,yaml        setlocal foldmethod=expr
-    \ nofoldenable foldexpr=IndentFoldExpr(v:lnum)
+  autocmd FileType coffee,yaml        FoldByIndent
 
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
