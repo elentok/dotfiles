@@ -112,6 +112,7 @@ mac_plugins() {
   plugin homebrew-cask
   plugin karabiner
   plugin osx-tuning
+  plugin iterm
   brew_install imagemagick
   brew_install ghostscript
   brew_install ncdu
