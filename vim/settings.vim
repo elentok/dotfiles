@@ -2,6 +2,8 @@
 
 syntax enable
 
+let mapleader = ','
+
 behave mswin
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set breakindent                " https://retracile.net/wiki/VimBreakIndent
