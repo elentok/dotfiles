@@ -32,205 +32,206 @@ class CLI
   end
 
   def get_key(key)
-    map = ItermBinding.find(key)
+    map = Iterm::KeyMap.find(key)
     puts map
   end
 
   def set_key(key, action_name, text)
-    action = ActionFactory.new.from_name(action_name, text)
-    binding = ItermBinding.new(key, action)
+    action = Iterm::Action::Factory.new.from_name(action_name, text)
+    binding = Iterm::KeyMap.new(key, action)
     puts "Setting key #{key} to #{action}"
     binding.create!
   end
 end
 
 def plist_buddy(cmd)
-  puts "PlistBuddy #{cmd}"
   plist_file = "$HOME/Library/Preferences/com.googlecode.iterm2.plist"
   `/usr/libexec/PlistBuddy -c "#{cmd}" "#{plist_file}"`
 end
 
-class Action
-  def self.action(name, id = nil)
-    id = 'nil' if id.nil?
-    self.class_eval "def self.name; :#{name}; end"
-    self.class_eval "def self.own_id; #{id}; end"
-    self.class_eval "def self.id; #{id} || super; end"
+module Iterm
+  class KeyMap
+    def initialize(key, action)
+      key = Key.parse(key).first if key.is_a? String
+
+      @key = key
+      @action = action
+    end
+
+    def self.find(key)
+      key = Key.parse(key).first if key.is_a? String
+
+      output = plist_buddy("Print GlobalKeyMap:#{key.for_iterm}").strip
+      return nil if output.length == 0
+
+      text = / Text = (.*)$/.match(output)[1]
+      action_id = / Action = (.*)$/.match(output)[1].to_i
+
+      KeyMap.new(key, Action::Factory.new.from_id(action_id, text))
+    end
+
+    def create!
+      base = "GlobalKeyMap:#{@key.for_iterm}"
+      plist_buddy("Add #{base} dict")
+      plist_buddy("Add #{base}:Text string")
+      plist_buddy("Set #{base}:Text '#{@action.text}'")
+      plist_buddy("Add #{base}:Action integer")
+      plist_buddy("Set #{base}:Action #{@action.class.id}")
+      `defaults read-type com.googlecode.iterm2 GlobalKeyMap`
+    end
+
+    def to_s
+      "#{@key}: #{@action}"
+    end
   end
-end
 
-class SendEscapeAction < Action
-  action :send_esc, 10
-
-  def initialize(text)
-    @text = text
-  end
-
-  def to_s
-    %(Send escape "^[#{@text}")
-  end
-end
-
-class SendHexAction < Action
-  attr_reader :hex, :keys
-  action :send_hex, 11
-
-  def text; hex; end
-
-  def initialize(hex)
-    @hex = hex
-    @keys = parse_hex(hex) unless @keys
-  end
-
-  def parse_hex(hex)
-    hex.split(' ').map do |value|
-      value = Integer(value)
-      if value <= 26 # Ctrl-Z
-        key = ('a'.ord - 1 + value).chr
-        "<c-#{key}>"
-      else
-        value.chr
+  module Action
+    class Base
+      def self.action(name, id = nil)
+        id = 'nil' if id.nil?
+        self.class_eval "def self.name; :#{name}; end"
+        self.class_eval "def self.own_id; #{id}; end"
+        self.class_eval "def self.id; #{id} || super; end"
       end
-    end.join('')
-  end
-
-  def to_s
-    %(Send hex "#{@hex}" (#{@keys}))
-  end
-end
-
-class SendKeysAction < SendHexAction
-  action :send_keys
-  def initialize(keys)
-    @keys = keys
-    super(keys_to_hex(keys))
-  end
-
-  def keys_to_hex(keys)
-    Key.parse(keys).map(&:to_hex).join(' ')
-  end
-
-  def to_s
-    %(Send keys "#{@keys}" (hex: "#{@hex}"))
-  end
-end
-
-class ActionFactory
-  def initialize
-    @by_id = {}
-    @by_name = {}
-    [SendHexAction, SendKeysAction, SendEscapeAction].each do |klass|
-      @by_id[klass.own_id] = klass unless klass.own_id.nil?
-      @by_name[klass.name] = klass unless klass.name.nil?
     end
-  end
 
-  def from_id(id, text)
-    @by_id[id].new(text)
-  end
+    class SendEscape < Base
+      action :send_esc, 10
 
-  def from_name(name, text)
-    klass = @by_name[name.to_sym]
-    fail Exception.new("No action '#{name}'") if klass.nil?
-    klass.new(text)
-  end
-end
-
-class ItermBinding
-  def initialize(key, action)
-    key = Key.parse(key).first if key.is_a? String
-
-    @key = key
-    @action = action
-  end
-
-  def self.find(key)
-    key = Key.parse(key).first if key.is_a? String
-
-    output = plist_buddy("Print GlobalKeyMap:#{key.for_iterm}").strip
-    return nil if output.length == 0
-
-    text = / Text = (.*)$/.match(output)[1]
-    action_id = / Action = (.*)$/.match(output)[1].to_i
-
-    ItermBinding.new(key, ActionFactory.new.from_id(action_id, text))
-  end
-
-  def create!
-    base = "GlobalKeyMap:#{@key.for_iterm}"
-    plist_buddy("Add #{base} dict")
-    plist_buddy("Add #{base}:Text string")
-    plist_buddy("Set #{base}:Text '#{@action.text}'")
-    plist_buddy("Add #{base}:Action integer")
-    plist_buddy("Set #{base}:Action #{@action.class.id}")
-    `defaults read-type com.googlecode.iterm2 GlobalKeyMap`
-  end
-
-  def to_s
-    "#{@key}: #{@action}"
-  end
-end
-
-class Key
-  attr_reader :key, :modifier
-
-  def initialize(key, modifier = nil)
-    @modifier = modifier.to_sym if modifier
-    @key = key
-  end
-
-  def self.parse(string)
-    string.split(/[<>]/).map do |key|
-      if key =~ /-/
-        modifier, key = key.split('-')
-        Key.new(key, modifier)
-      else
-        key.split('').map { |chr| Key.new(chr) }
+      def initialize(text)
+        @text = text
       end
-    end.flatten
-  end
 
-  def to_s
-    @modifier ? "<#{@modifier}-#{@key}>" : key
-  end
-
-  def to_ord
-    if @modifier == :c
-      key.downcase!
-      if key.ord.between? 'a'.ord, 'z'.ord
-        (key.ord - 'a'.ord) + 1
-      else
-        fail 'not implemented'
+      def to_s
+        %(Send escape "^[#{@text}")
       end
-    else
-      key.ord
+    end
+
+    class SendHex < Base
+      attr_reader :hex, :keys
+      action :send_hex, 11
+
+      def text; hex; end
+
+      def initialize(hex)
+        @hex = hex
+        @keys = parse_hex(hex) unless @keys
+      end
+
+      def parse_hex(hex)
+        hex.split(' ').map do |value|
+          value = Integer(value)
+          if value <= 26 # Ctrl-Z
+            key = ('a'.ord - 1 + value).chr
+            "<c-#{key}>"
+          else
+            value.chr
+          end
+        end.join('')
+      end
+
+      def to_s
+        %(Send hex "#{@hex}" (#{@keys}))
+      end
+    end
+
+    class SendKeys < SendHex
+      action :send_keys
+      def initialize(keys)
+        @keys = keys
+        super(keys_to_hex(keys))
+      end
+
+      def keys_to_hex(keys)
+        Key.parse(keys).map(&:to_hex).join(' ')
+      end
+
+      def to_s
+        %(Send keys "#{@keys}" (hex: "#{@hex}"))
+      end
+    end
+
+    class Factory
+      def initialize
+        @by_id = {}
+        @by_name = {}
+        [SendHex, SendKeys, SendEscape].each do |klass|
+          @by_id[klass.own_id] = klass unless klass.own_id.nil?
+          @by_name[klass.name] = klass unless klass.name.nil?
+        end
+      end
+
+      def from_id(id, text)
+        @by_id[id].new(text)
+      end
+
+      def from_name(name, text)
+        klass = @by_name[name.to_sym]
+        fail Exception.new("No action '#{name}'") if klass.nil?
+        klass.new(text)
+      end
     end
   end
 
-  def to_hex
-    ord = to_ord
-    "0x#{ord.to_s(16).rjust(2, '0')}" unless ord.nil?
-  end
+  class Key
+    attr_reader :key, :modifier
 
-  def for_iterm
-    if @modifier
-      "#{key_for_iterm}-#{modifier_for_iterm}"
-    else
-      key_for_iterm
+    def initialize(key, modifier = nil)
+      @modifier = modifier.to_sym if modifier
+      @key = key
     end
-  end
 
-  def modifier_for_iterm
-    if @modifier == :cmd
-      '0x100000'
+    def self.parse(string)
+      string.split(/[<>]/).map do |key|
+        if key =~ /-/
+          modifier, key = key.split('-')
+          Key.new(key, modifier)
+        else
+          key.split('').map { |chr| Key.new(chr) }
+        end
+      end.flatten
     end
-  end
 
-  def key_for_iterm
-    "0x#{key.ord.to_s(16).rjust(2, '0')}"
+    def to_s
+      @modifier ? "<#{@modifier}-#{@key}>" : key
+    end
+
+    def to_ord
+      if @modifier == :c
+        key.downcase!
+        if key.ord.between? 'a'.ord, 'z'.ord
+          (key.ord - 'a'.ord) + 1
+        else
+          fail 'not implemented'
+        end
+      else
+        key.ord
+      end
+    end
+
+    def to_hex
+      ord = to_ord
+      "0x#{ord.to_s(16).rjust(2, '0')}" unless ord.nil?
+    end
+
+    def for_iterm
+      if @modifier
+        "#{key_for_iterm}-#{modifier_for_iterm}"
+      else
+        key_for_iterm
+      end
+    end
+
+    def modifier_for_iterm
+      if @modifier == :cmd
+        '0x100000'
+      end
+    end
+
+    def key_for_iterm
+      "0x#{key.ord.to_s(16).rjust(2, '0')}"
+    end
   end
 end
-
-#puts Key.parse("<cmd-[>ab<cmd-]>c").map(&:for_iterm)
 
 CLI.new.main(ARGV)
