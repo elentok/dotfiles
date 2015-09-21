@@ -1,0 +1,72 @@
+#!/usr/bin/env ruby
+
+module CLI
+  def self.main
+    cmd = ARGV.first
+    ARGV.shift
+
+    case cmd
+    when 'list-devices'
+      puts Device.all
+    when 'booted-device'
+      puts Device.booted
+    when 'install-app'
+      install_app(*ARGV)
+    else
+      usage
+    end
+  end
+
+  def self.usage
+    puts <<-EOF
+
+  ios - iOS Simulator helper script
+
+  Usage:
+
+    ios list-devices
+    ios booted-device
+    ios install-app <path-to-app-folder>
+
+    EOF
+  end
+
+  def self.install_app(path)
+    system("xcrun simctl install booted \"#{path}\"")
+  end
+end
+
+class Device
+  attr_reader :id, :name, :status
+  def initialize(id, name, status)
+    @id = id
+    @name = name
+    @status = status
+  end
+
+  def self.all
+    @all ||= `xcrun simctl list devices`.split("\n")
+      .map { |line| self.parse(line) }
+      .compact
+  end
+
+  def self.booted
+    all.find { |device| device.status == :booted }
+  end
+
+  def self.parse(line)
+    match = /^([^(]+) \(([^)]+)\) \(([^\)]+)\)/.match(line.strip)
+    if match
+      id = match[2]
+      name = match[1].strip
+      status = match[3].downcase.to_sym
+      Device.new(id, name, status)
+    end
+  end
+
+  def to_s
+    "#{@id} #{@name} (#{@status})"
+  end
+end
+
+CLI.main
