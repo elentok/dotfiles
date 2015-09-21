@@ -286,3 +286,9 @@ else
   command! -nargs=+ QuickShell !<args>
 end
 
+" Misc {{{1
+function! EscapeCurrentFileDir()
+  let path = expand("%:p:h")
+  let path = substitute(path, ' ', '\\ ', 'g')
+  return path
+endfunction
