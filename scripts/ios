@@ -8,6 +8,8 @@ module CLI
     case cmd
     when 'list-devices'
       puts Device.all
+    when 'list-apps'
+      list_apps(*ARGV)
     when 'booted-device'
       puts Device.booted
     when 'install-app'
@@ -25,6 +27,7 @@ module CLI
   Usage:
 
     ios list-devices
+    ios list-apps [device-id]
     ios booted-device
     ios install-app <path-to-app-folder>
 
@@ -33,6 +36,11 @@ module CLI
 
   def self.install_app(path)
     system("xcrun simctl install booted \"#{path}\"")
+  end
+
+  def self.list_apps(id = nil)
+    device = id ? Device.find_by_id(id) : Device.booted
+    puts device.apps
   end
 end
 
@@ -54,6 +62,10 @@ class Device
     all.find { |device| device.status == :booted }
   end
 
+  def self.find_by_id(id)
+    all.find { |device| device.id == id }
+  end
+
   def self.parse(line)
     match = /^([^(]+) \(([^)]+)\) \(([^\)]+)\)/.match(line.strip)
     if match
@@ -66,6 +78,33 @@ class Device
 
   def to_s
     "#{@id} #{@name} (#{@status})"
+  end
+
+  def apps
+    Dir["#{apps_root_dir}/*"].map do |path|
+      App.new File.basename(path), self
+    end
+  end
+
+  def root_dir
+    @root_dir ||= File.expand_path(
+      "~/Library/Developer/CoreSimulator/Devices/#{@id}")
+  end
+
+  def apps_root_dir
+    @apps_root_dir ||= File.join(root_dir, 'Data/Containers/Data/Application')
+  end
+end
+
+class App
+  attr_reader :id
+  def initialize(id, device)
+    @id = id
+    @device = device
+  end
+
+  def to_s
+    @id
   end
 end
 
