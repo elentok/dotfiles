@@ -110,7 +110,4 @@ alias p='pomo'
 alias pi='pomo interactive'
 alias pom='pomo stats'
 
-# Git {{{1
-alias gap='git autopush'
-
 # vim: foldmethod=marker

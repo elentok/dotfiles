@@ -5,7 +5,7 @@ set -e
 source $DOTF/framework
 
 main() {
-  title 'Git Autopush'
+  title 'Git Sync'
 
   commit-if-needed
   pull
