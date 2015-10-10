@@ -6,6 +6,7 @@ require 'date'
 require_relative './packages/reader'
 require_relative './packages/status'
 require_relative './packages/tracker'
+require_relative './packages/export'
 
 def main
   if ARGV.length == 0
@@ -18,6 +19,8 @@ def main
       PackageStatus.print(packages)
     when :track
       PackageTracker.track(packages)
+    when :export
+      PackageExport.export(packages)
     end
   end
 end
