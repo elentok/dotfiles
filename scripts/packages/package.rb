@@ -8,6 +8,16 @@ class Package
     @estimated = DeliveryEstimation.parse(estimated, @date)
   end
 
+  def serialize
+    {
+      title:      @title,
+      tracking:   @tracking,
+      store:      @store,
+      order_date: @date,
+      expected:   @estimated ? @estimated.serialize : nil
+    }.select { |key, value| !value.nil? }
+  end
+
   def to_s
     @title
   end
@@ -62,6 +72,16 @@ class DeliveryEstimation
   def initialize(from, to = nil)
     @from = from
     @to = to
+  end
+
+  def serialize
+    if @from && @to
+      { from: @from, to: @to }
+    elsif @from
+      @from
+    elsif @to
+      @to
+    end
   end
 
   def self.parse(raw, order_date)
