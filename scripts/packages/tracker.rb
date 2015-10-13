@@ -25,7 +25,8 @@ module IsraelPost
   end
 
   def self.supported?(number)
-    number =~ /^[A-Z]{2}\d{9}[A-Z]{2}$/
+    number =~ /^[A-Z]{2}\d{9}[A-Z]{2}$/ ||
+      number =~ /^\d{13}$/
   end
 
   def self.url(number)
