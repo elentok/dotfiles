@@ -1,6 +1,6 @@
 {
-  "mod1": [ "command", "shift" ],
-  "mod2": [ "command", "shift", "control" ],
+  "mod1": [ "option", "shift" ],
+  "mod2": [ "control", "option", "shift" ],
   "floating": [
     "com.kapeli.dash",
     "com.apple.iphonesimulator",
