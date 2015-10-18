@@ -1,6 +1,21 @@
 require 'open-uri'
 require 'json'
 
+begin
+  require 'html_to_plain_text'
+rescue LoadError
+  puts 'Error: html_to_plain_text gem is missing, installing...'
+  if system('sudo /usr/bin/gem install html_to_plain_text')
+    puts
+    puts 'Gem installed, please run again'
+    exit 0
+  else
+    puts 'Error installing gem, please run again'
+    exit 1
+  end
+end
+
+
 module PackageTracker
   def self.track(packages)
     packages.select { |pkg| pkg.tracking && pkg.tracking.length > 0 }
@@ -20,7 +35,12 @@ module IsraelPost
   def self.track(number)
     open(url(number)) do |f|
       body = f.read
-      JSON.parse(body)['itemcodeinfo'].split('<br>').first
+      html = JSON.parse(body)['itemcodeinfo']
+
+      HtmlToPlainText.plain_text(html)
+
+
+        #.split('<br>').first
     end
   end
 
