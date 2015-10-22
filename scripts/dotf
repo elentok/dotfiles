@@ -102,6 +102,7 @@ common_plugins() {
   plugin nodejs
   plugin git
   plugin zsh
+  plugin bash
   plugin tmux
   plugin vim
   plugin ruby
