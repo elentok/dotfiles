@@ -11,6 +11,12 @@ class Device
     @attribs[:label].downcase!
   end
 
+  def self.all
+    `lsblk -l --pairs -o name,fstype,mountpoint,label`.split("\n").map do |line|
+      parse(line)
+    end
+  end
+
   def self.parse(line)
     attribs = {}
     line.scan(/([A-Z]+)="([^"]+)"/).each do |item|
@@ -19,6 +25,7 @@ class Device
     end
     Device.new(attribs) if attribs.keys.length > 1
   end
+
 
   def to_s
     [
@@ -35,9 +42,9 @@ class Device
     @attribs[:fstype] && @attribs[:fstype] != 'swap' &&
       @attribs[:mountpoint] != '/'
   end
+  
 end
 
-`lsblk -l --pairs -o name,fstype,mountpoint,label`.split("\n").each do |line|
-  device = Device.parse(line)
+Device.all.each do |device|
   puts device if device && device.automount?
 end
