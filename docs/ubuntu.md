@@ -34,6 +34,19 @@ NOTE: when mounting partitions use the "users" group as the mountpoint's group.
 Auto-mount partitions
 -----------------------
 
+## Option #1: Edit fstab manually
+
+```
+{device} {mount-path} ntfs nls=iso8859-8,umask=027,utf8,gid=sambashare,uid=david 0 0
+```
+
+For example:
+```
+/dev/sdb1 /media/hd1 ntfs nls=iso8859-8,umask=027,utf8,gid=sambashare,uid=david 0 0
+```
+
+## Option #2: Using pysdm
+
 1. Install the "Storage Device Manager":
 
 ```bash
