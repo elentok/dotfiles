@@ -15,6 +15,8 @@ export DOTL=~/.dotlocal
 BREW_HOME=/usr/local
 if [ -e "$HOME/.homebrew" ]; then
   BREW_HOME=$HOME/.homebrew
+elif [ -e "$HOME/.linuxbrew" ]; then
+  BREW_HOME=$HOME/.linuxbrew
 fi
 export BREW_HOME
 
