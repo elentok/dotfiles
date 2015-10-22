@@ -54,7 +54,7 @@ function prompt_elentok_setup {
   PROMPT="
 %{\$fg_bold[black]%}($HOSTNAME)%f
 %F{blue}%~%f\${vcs_info_msg_0_}\${ruby_info[version]} %{\$fg_bold[black]%}[%D{%Y-%m-%d %H:%M:%S}]%f
-%(?.%F{green}`random_animal`  ${1:-❯ }%f.%F{red}`random_animal`  ${1:-❯ }%f)"
+%(?.%F{green}`cmd_prefix`${1:-❯ }%f.%F{red}`cmd_prefix`${1:-❯ }%f)"
 #RPROMPT='${ruby_info[version]}'
 
 }
@@ -91,8 +91,17 @@ function random_animal {
   ICONS_COUNT=17
   UTF_CODE=$(( $RANDOM % $ICONS_COUNT + $FIRST_ANIMAL ))
   EMOJI="\U`printf '%x\n' $UTF_CODE`"
-  echo $EMOJI
+  echo -n $EMOJI
 }
 
-prompt_elentok_setup "$@"
+if [ "$(uname -s)" = "Darwin" ]; then
+  # animal images are only supported on Mac
+  function cmd_prefix {
+    random_animal
+    echo -n '  '
+  }
+else
+  function cmd_prefix {}
+fi
 
+prompt_elentok_setup "$@"
