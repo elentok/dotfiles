@@ -26,7 +26,7 @@ run() {
 }
 
 empty-directories() {
-  $FIND "$1" -type d | while read dir; do
+  find "$1" -type d | while read dir; do
     if is-empty "$dir"; then
       bullet "Deleting ${dir}... "
       rmdir "$dir" && success 'done.' || error 'failed!'

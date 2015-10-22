@@ -67,18 +67,6 @@ to_uppercase() {
   fi
 }
 
-# Use gnu commands on mac {{{1
-define_gnu_commands() {
-  for cmd in "$@"; do
-    if has_command "g$cmd"; then
-      eval "export $(to_uppercase $cmd)=g$cmd"
-    fi
-  done
-}
-
-if is_mac; then
-  define_gnu_commands sed stat find
-fi
 
 # display methods (header/bullet/info/success/error) {{{1
 title() {
@@ -632,7 +620,7 @@ function find-parent-with() {
 
 # helpers {{{1
 trim() {
-  $SED -E 's/(^\s+|\s+$)//g'
+  sed -E 's/(^\s+|\s+$)//g'
 }
 
 device-for() {
@@ -642,5 +630,5 @@ device-for() {
 
 # Files {{{1
 filesize() {
-  $STAT -c%s "$1"
+  stat -c%s "$1"
 }
