@@ -1,4 +1,8 @@
 # The .zshenv file is loaded by ALL shells (including non-login shells)
+
+if [ -n "$ZSHENV_LOADED" ]; then return; fi
+export ZSHENV_LOADED='yes'
+
 source ~/.zprezto/runcoms/zshenv
 source ~/.dotfiles/zsh/base.zsh
 
