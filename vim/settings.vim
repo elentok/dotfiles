@@ -6,7 +6,6 @@ let mapleader = ','
 
 behave mswin
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
-set breakindent                " https://retracile.net/wiki/VimBreakIndent
 set colorcolumn=80
 set expandtab
 set fillchars=                 " set fillchars=vert:\|,fold:-
@@ -40,6 +39,9 @@ set winwidth=84                " makes sure the active window will always be at 
 
 set titlestring=0\ %t%(\ %M%)%(\ (%{expand(\ " %:~:.:h\")})%)%(\ %a%)
 
+if exists('+breakindent')
+  set breakindent                " https://retracile.net/wiki/VimBreakIndent
+end
 
 if !has('nvim')
   set ttyfast
