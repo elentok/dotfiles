@@ -1,0 +1,7 @@
+#!/bin/bash
+
+source `dirname $0`/../../framework
+
+header 'Bash'
+
+symlink "$DOTF/plugins/bash/bash_profile" ~/.bash_profile
