@@ -18,9 +18,8 @@ alias txt='cd ~/Dropbox/PlainText && vim'
 alias vimt='vim ~/Dropbox/vim.TODO'
 
 # Find {{{1
-alias find='gfind'
 ff() {
-  gfind . -iname "*$**"
+  find . -iname "*$**"
 }
 alias agg="ag --ignore '*.yml'"
 

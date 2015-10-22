@@ -18,8 +18,18 @@ if [ -e "$HOME/.homebrew" ]; then
 fi
 export BREW_HOME
 
-PATH=$BREW_HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
+PATH=$BREW_HOME/bin
+PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
 PATH=$PATH:$DOTF/scripts:$DOTL/scripts
-PATH=$PATH:$HOME/bin:$HOME/projects/railsnew:$HOME/scripts
+PATH=$PATH:$HOME/bin:$HOME/scripts
 PATH=$PATH:/usr/local/share/npm/bin
+
+# replace bsd binaries with gnu
+for pkg in coreutils findutils gnu-sed; do
+  gnubin="$BREW_HOME/opt/$pkg/libexec/gnubin"
+  if [ -e "$gnubin" ]; then
+    PATH=$gnubin:$PATH
+  fi
+done
+
 export PATH
