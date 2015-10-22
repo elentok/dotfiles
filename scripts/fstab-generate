@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+
+user = ENV['SUDO_USER'] || ENV['USER']
+OPTIONS = "nls=iso8859-8,umask=027,utf8,gid=sambashare,uid=#{user}"
+
+class Device
+  def initialize(attribs)
+    @attribs = attribs
+
+    @attribs[:label] ||= @attribs[:name]
+    @attribs[:label].downcase!
+  end
+
+  def self.parse(line)
+    attribs = {}
+    line.scan(/([A-Z]+)="([^"]+)"/).each do |item|
+      key, value = item
+      attribs[key.downcase.to_sym] = value
+    end
+    Device.new(attribs) if attribs.keys.length > 1
+  end
+
+  def to_s
+    [
+      "/dev/#{@attribs[:name]}",
+      "/media/#{@attribs[:label]}",
+      "#{@attribs[:fstype]}",
+      OPTIONS,
+      0, # dump
+      0  # pass
+    ].join(' ')
+  end
+
+  def automount?
+    @attribs[:fstype] && @attribs[:fstype] != 'swap' &&
+      @attribs[:mountpoint] != '/'
+  end
+end
+
+`lsblk -l --pairs -o name,fstype,mountpoint,label`.split("\n").each do |line|
+  device = Device.parse(line)
+  puts device if device && device.automount?
+end
