@@ -37,7 +37,7 @@ list-agents() {
   echo 'local'
 
   if [ -e /tmp/ssh-*/agent* ]; then
-    $STAT -c "%n (%y)" /tmp/ssh-*/agent*
+    stat -c "%n (%y)" /tmp/ssh-*/agent*
   fi
 }
 

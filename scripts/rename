@@ -26,7 +26,7 @@ simulate() {
   shift
   has_results='no'
   for file in $*; do
-    new_file=$(echo $file | $SED "$regexp")
+    new_file=$(echo $file | sed "$regexp")
     if [ "$file" != "$new_file" ]; then
       echo "Will rename ${YELLOW}${file}$RESET"
       echo "         to ${BLUE}${new_file}$RESET"
@@ -47,7 +47,7 @@ rename() {
   regexp=$1
   shift
   for file in $*; do
-    new_file=$(echo $file | $SED "$regexp")
+    new_file=$(echo $file | sed "$regexp")
     if [ "$file" != "$new_file" ]; then
       rename_file "$file" "$new_file"
     fi

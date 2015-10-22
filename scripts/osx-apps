@@ -32,7 +32,7 @@ EOF
 }
 
 list() {
-  list_osascript | osascript | $SED 's/, /\n/g' | sort
+  list_osascript | osascript | sed 's/, /\n/g' | sort
 }
 
 list_osascript() {

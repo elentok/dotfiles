@@ -36,7 +36,7 @@ function build_exclude_args() {
 }
 
 function count-ctags() {
-  grep -v '^!' $ROOT/tags | wc -l | $SED 's/\s*//g'
+  grep -v '^!' $ROOT/tags | wc -l | sed 's/\s*//g'
 }
 
 main "$@"

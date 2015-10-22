@@ -49,7 +49,7 @@ if [ $# -eq 0 ]; then
   usage
 else
   color=$(get_color_code $2)
-  $SED -E "s/$1/$(printf $color)&$(printf $RESET)/$FLAGS"
+  sed -E "s/$1/$(printf $color)&$(printf $RESET)/$FLAGS"
 fi
 
 
