@@ -43,7 +43,7 @@ Auto-mount partitions
 2. Open it, and for each partition use these settings:
 
 ```bash
-  nls=iso8859-8,umask=027,utf8,gid=users,uid=david
+  nls=iso8859-8,umask=027,utf8,gid=sambashare,uid=david
 ```
 
   by setting the gid to "users", the special samba user defined in the previous section
