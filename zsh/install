@@ -55,12 +55,19 @@ install_symlinks() {
 
 install_requirements() {
   if [ "$OS" == "mac" ]; then
-    brew_install coreutils
-    brew_install findutils --with-default-names
-    brew_install fasd
-    brew_install gnu-sed
     brew_install selecta
+    install_gnu_utils
   fi
+}
+
+install_gnu_utils() {
+  brew_install coreutils
+  brew_install findutils --with-default-names
+  brew_install fasd
+  brew_install gnu-sed
+
+  brew_tap homebrew/dupes
+  brew_install grep --with-default-names
 }
 
 header "Zsh"
