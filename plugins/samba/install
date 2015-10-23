@@ -9,6 +9,8 @@ main() {
   fi
 
   header "Samba sharing"
+
+  apt_install samba
   init_samba_username
   create_system_user
   create_samba_user
