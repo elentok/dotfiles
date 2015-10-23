@@ -71,9 +71,6 @@
 [push]
   default = matching
 
-[core]
-  editor = nvim
-
 [pull]
   rebase = true
 
