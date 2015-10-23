@@ -1,0 +1,81 @@
+#!/bin/bash
+
+source `dirname $0`/../../framework
+
+main() {
+  if [ "$OS" != "linux" ]; then
+    echo 'Only supported on linux'
+    exit 1
+  fi
+
+  header "Samba sharing"
+  init_samba_username
+  create_system_user
+  create_samba_user
+  add_to_smbusers
+}
+
+init_samba_username() {
+  bullet 'Setting up samba username... '
+
+  filename="$HOME/.samba-username"
+
+  if [ -e "$filename" ]; then
+    SAMBA_USERNAME="$(cat $filename)"
+    info $SAMBA_USERNAME
+  else
+    ask "\nEnter the guest username:" SAMBA_USERNAME "johnsmith"
+    if [ -z "$SAMBA_USERNAME" ]; then
+      exit 1
+    fi
+    echo $SAMBA_USERNAME > $filename
+    echo $SAMBA_USERNAME
+  fi
+}
+
+create_system_user() {
+  bullet 'Creating system user... '
+  if user_exists $SAMBA_USERNAME; then
+    info 'already exists.'
+    return
+  else
+    sudo useradd $SAMBA_USERNAME -g sambashare && success 'done'
+  fi
+}
+
+create_samba_user() {
+  bullet 'Creating samba user... '
+  if smb_user_exists $SAMBA_USERNAME; then
+    info 'already exists.'
+  else
+    sudo smbpasswd -a $SAMBA_USERNAME && success 'done'
+  fi
+}
+
+add_to_smbusers() {
+  bullet 'Adding user to /etc/samba/smbusers... '
+  if is_in_smbusers; then
+    info 'already exists.'
+  else
+    line="$SAMBA_USERNAME = $SAMBA_USERNAME"
+    sudo sh -c "echo '$line' >> /etc/samba/smbusers" & success 'done'
+  fi
+}
+
+is_in_smbusers() {
+  cat /etc/samba/smbusers | grep "^$SAMBA_USERNAME\s*=" > /dev/null
+}
+
+list_smb_users() {
+  sudo pdbedit -L
+}
+
+list_smb_usernames() {
+  list_smb_users | cut -d: -f1
+}
+
+smb_user_exists() {
+  list_smb_usernames | grep "^$1$" > /dev/null
+}
+
+main "$@"
