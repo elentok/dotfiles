@@ -26,3 +26,19 @@ def ask?(question, default = nil)
 
   answer == '' ? default : answer
 end
+
+def require_or_install_gem(pkg, gem_name)
+  begin
+    require pkg
+  rescue LoadError
+    puts "Error: #{gem_name} gem is missing, installing... "
+    if system('sudo /usr/bin/gem install #{gem_name}')
+      puts
+      puts 'Gem installed, please run again'
+      exit 0
+    else
+      puts 'Error installing gem, please run again'
+      exit 1
+    end
+  end
+end
