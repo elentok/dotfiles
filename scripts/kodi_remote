@@ -1,0 +1,56 @@
+#!/usr/bin/env ruby
+
+require 'json'
+require 'yaml'
+
+def main
+  if ARGV.length < 3
+    usage
+  else
+    url = build_url_from_name(ARGV[0])
+    request url, ARGV[1], ARGV[2]
+  end
+end
+
+def build_url_from_name(name)
+  kodis = YAML.load_file(File.expand_path('~/.config/kodis.yml'))
+  kodi = kodis[name]
+  auth = ''
+  auth = "#{kodi['username']}:#{kodi['password']}@" if kodi['username']
+
+  "http://#{auth}#{kodi['host']}:#{kodi['port']}"
+end
+
+def usage
+  puts <<-EOF
+
+  kodi_remote - Kodi remote control script
+
+  Usage:
+
+    kodi_remote {host} {action} {library}
+
+  Examples:
+
+    kodi_remote htpc scan video
+    kodi_remote htpc scan music
+    kodi_remote htpc clean video
+    kodi_remote htpc clean music
+
+  EOF
+end
+
+def request(url, action, library)
+  method = "#{library.capitalize}Library.#{action.capitalize}"
+  json = {
+    jsonrpc: '2.0',
+    method: method,
+    id: 'mybash' }.to_json
+
+  cmd = 'curl --silent --show-error ' \
+    "--data-binary '#{json}' " \
+    "-H 'content-type: application/json;' #{url}/jsonrpc"
+  `#{cmd}`
+end
+
+main
