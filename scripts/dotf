@@ -7,7 +7,7 @@ main() {
   shift
   case "$cmd" in
   list | l)
-    list-plugins
+    list_plugins
     ;;
   install | i)
     install "$@"
@@ -16,7 +16,7 @@ main() {
     update
     ;;
   export-vim)
-    export-vim
+    export_vim
     ;;
   *)
     usage
@@ -37,11 +37,12 @@ usage() {
   echo "  dotf export-vim                   - exports vim config to .tar.gz"
 }
 
-list-plugins() {
+list_plugins() {
   (
     echo vim
     echo zsh
     /bin/ls -1 $DOTF/plugins
+    /bin/ls -1 $DOTL/plugins 2>/dev/null
   ) | sort
 }
 
@@ -141,17 +142,9 @@ plugins() {
 }
 
 plugin() {
-  local filename="$DOTF/plugins/$1/install"
+  local filename="$(find_plugin "$1")"
 
-  if [ ! -x $filename ]; then
-    local filename="$DOTF/plugins/${1}"
-  fi
-
-  if [ ! -x $filename ]; then
-    local filename="$DOTF/${1}/install"
-  fi
-
-  if [ ! -x $filename ]; then
+  if [ -z "$filename" ]; then
     error "Cannot find plugin '$1'"
     return
   fi
@@ -159,7 +152,26 @@ plugin() {
   $filename
 }
 
-vim-export() {
+find_plugin() {
+  local filenames=(
+    "$DOTF/$1/install"
+    "$DOTF/plugins/$1/install"
+    "$DOTF/plugins/$1"
+    "$DOTL/plugins/$1/install"
+    "$DOTL/plugins/$1"
+  )
+
+  for filename in ${filenames[@]}; do
+    if [ -x "$filename" ]; then
+      echo "$filename"
+      return 0
+    fi
+  done
+
+  return 1
+}
+
+export_vim() {
   tar czvf vim-$(date +%Y%m%d).tar.gz \
     --exclude 'YouCompleteMe' \
     --exclude 'node_modules' \
