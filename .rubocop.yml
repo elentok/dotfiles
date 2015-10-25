@@ -1,0 +1,25 @@
+require: rubocop-rspec
+
+
+# The following three overrides allow writing code like this:
+#
+#   it { should eq 'one two three' \
+#                  'four five six' }
+
+Style/MultilineBlockLayout:
+  Exclude:
+    - 'spec/**/*'
+
+Style/BlockDelimiters:
+  Exclude:
+    - 'spec/**/*'
+
+Style/BlockEndNewline:
+  Exclude:
+    - 'spec/**/*'
+
+Style/Documentation:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
