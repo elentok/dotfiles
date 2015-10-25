@@ -108,7 +108,7 @@ class Day
   def pretty
     if @date == Date.today
       red(text)
-    elsif @date.wday == 6
+    elsif @date.wday >= 5
       gray(text)
     else
       text
