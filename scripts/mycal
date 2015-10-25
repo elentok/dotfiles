@@ -1,0 +1,123 @@
+#!/usr/bin/env ruby
+
+require_relative '../framework'
+require 'date'
+
+class CLI
+  def main
+    month = Month.new
+    month.prev.print
+    puts
+    month.print
+    puts
+    month.next.print
+  end
+end
+
+class Date
+  def start_of_month
+    self - mday + 1
+  end
+
+  def start_of_week
+    self - wday
+  end
+end
+
+class Month
+  attr_reader :start, :weeks
+
+  def initialize(date = Date.today)
+    date = Date.parse(date) unless date.is_a? Date
+    @start = date.start_of_month
+
+    build_weeks
+  end
+
+  def print
+    puts green(@start.strftime('%B %Y').center(27))
+    puts Date::DAYNAMES.map { |name| name[0..2] }.join(' ')
+    @weeks.each { |week| puts week.pretty }
+  end
+
+  def next
+    Month.new(@start.next_month)
+  end
+
+  def prev
+    Month.new(@start.prev_month)
+  end
+
+  private
+
+  def build_weeks
+    week = Week.new
+    @weeks = []
+
+    date = @start.start_of_week
+
+    while date < @start
+      week.add(nil)
+      date += 1
+    end
+
+    while date.month == @start.month
+      week.add Day.new(date)
+
+      if date.wday == 6
+        @weeks << week
+        week = Week.new
+      end
+
+      date += 1
+    end
+
+    @weeks << week unless week.empty?
+  end
+end
+
+class Week
+  def initialize
+    @days = []
+  end
+
+  def add(day)
+    @days << day
+  end
+
+  def empty?
+    @days.empty?
+  end
+
+  def pretty
+    @days.map do |day|
+      if day.nil?
+        '   '
+      else
+        day.pretty
+      end
+    end.join(' ')
+  end
+end
+
+class Day
+  def initialize(date)
+    @date = date
+  end
+
+  def pretty
+    if @date == Date.today
+      red(text)
+    elsif @date.wday == 6
+      gray(text)
+    else
+      text
+    end
+  end
+
+  def text
+    @date.mday.to_s.ljust(3)
+  end
+end
+
+CLI.new.main
