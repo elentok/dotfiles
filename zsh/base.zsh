@@ -6,9 +6,6 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
-export VISUAL=vim
-export EDITOR=vim
-
 export DOTF=~/.dotfiles
 export DOTL=~/.dotlocal
 
@@ -33,5 +30,19 @@ for pkg in coreutils findutils gnu-sed; do
     PATH=$gnubin:$PATH
   fi
 done
+
+has_command() {
+  type "$1" > /dev/null 2>&1
+}
+
+if has_command nvim; then
+  export EDITOR=nvim
+else
+  export EDITOR=vim
+fi
+
+export VISUAL=$EDITOR
+export GIT_EDITOR=$EDITOR
+
 
 export PATH

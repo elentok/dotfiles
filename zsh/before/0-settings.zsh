@@ -6,16 +6,6 @@ fi
 export TMUX_TMPDIR=/tmp/$USERNAME
 mkdir -p $TMUX_TMPDIR
 
-has_command() {
-  type "$1" > /dev/null 2>&1
-}
-
-if has_command nvim; then
-  export EDITOR=nvim
-else
-  export EDITOR=vim
-fi
-
 fpath=($BREW_HOME/lib/node_modules/tailr/completions $fpath)
 fpath=(/usr/local/share/npm/lib/node_modules/tailr/completions $fpath)
 fpath=(/usr/local/share/npm/lib/node_modules/dns-switcher/completions $fpath)
