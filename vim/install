@@ -51,6 +51,7 @@ install_symlinks() {
   symlink "$DOTF/vim/bundle/supertagger/ctags" ~/.ctags
   symlink "$DOTF/vim/pylintrc" ~/.pylintrc
   symlink "$DOTF/vim/ctags" ~/.ctags
+  symlink "$DOTF/vim/scss-lint.yml" ~/.scss-lint.yml
 }
 
 install_vim_plugins() {
@@ -66,6 +67,7 @@ install_utils() {
   npm_install jsonlint
   npm_install marked
   npm_install name-that-color
+  gem_install scss_lint
   pip_install pylint
   pip_install powerline-status
 }

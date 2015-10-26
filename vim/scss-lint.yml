@@ -1,0 +1,12 @@
+linters:
+  NestingDepth:
+    max_depth: 4
+
+  PropertySortOrder:
+    enabled: false
+
+  QualifyingElement:
+    enabled: false
+
+  ImportantRule:
+    enabled: false
