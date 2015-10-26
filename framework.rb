@@ -9,9 +9,11 @@ COLORS = {
 
 RESET = "\033[0m"
 
-COLORS.each do |name, value|
-  define_method name do |text|
-    [value, text, RESET].join()
+class Object
+  COLORS.each do |name, value|
+    define_method name do |text|
+      [value, text, RESET].join()
+    end
   end
 end
 
