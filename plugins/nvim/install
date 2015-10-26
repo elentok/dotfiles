@@ -20,6 +20,9 @@ install_neovim() {
 }
 
 install_symlinks() {
+  symlink "$DOTF/vim" ~/.config/nvim
+
+  # backwards compatibility:
   symlink "$DOTF/plugins/nvim/nvimrc" ~/.nvimrc
   symlink "$DOTF/vim" ~/.nvim
 }
