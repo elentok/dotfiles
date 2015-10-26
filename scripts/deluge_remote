@@ -13,11 +13,11 @@ class CLI
       puts api.complete_torrents
     when 'remove-complete'
       api.complete_torrents.each do |torrent|
-        puts "Removing #{torrent}... "
+        print "Removing #{torrent}... "
         if api.remove(torrent)
-          puts 'done'
+          puts green('done')
         else
-          puts 'ERROR'
+          puts red('ERROR')
         end
       end
     else
@@ -59,11 +59,11 @@ class API
   end
 
   def complete_torrents
-    torrents.filter { |t| t.complete? }
+    torrents.select { |t| t.complete? }
   end
 
-  def remote(torrent, remove_data = false)
-    @client.core.remove_torrent(torrent, remove_data)
+  def remove(torrent, remove_data = false)
+    @client.core.remove_torrent(torrent.hash, remove_data)
   end
 end
 
@@ -81,7 +81,8 @@ class Torrent
   end
 
   def complete?
-    @state != :downloading
+    @state == :seeding ||
+      @state == :complete
   end
 end
 
