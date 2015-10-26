@@ -191,6 +191,24 @@ install_package() {
   fi
 }
 
+install_tgz() {
+  local url="$1"
+  local filename="$(basename "$url")"
+  mkdir -p ~/.self-build
+  cd ~/.self-build
+  wget "$1"
+  tar xzf "$filename"
+
+  local root_dir="$(tar tzf "$filename" | head -1)"
+  cd "$root_dir"
+
+  if [ -x "configure" ]; then
+    ./configure
+  fi
+  make
+  make install
+}
+
 # NPM {{{1
 npm_install() {
   bullet "Installing ${1}..."
