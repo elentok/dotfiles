@@ -191,3 +191,7 @@ Command Line Tips
   osascript -e 'id of app "Finder"'
 
   (e.g. for amethyst)
+
+## vim sudo tee trick
+
+  :w !sudo tee %
