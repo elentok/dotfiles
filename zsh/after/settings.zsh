@@ -19,3 +19,5 @@ export MPD_HOST=bob@localhost
 
 # neovim
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+export GREP_OPTIONS=
