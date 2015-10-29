@@ -6,17 +6,28 @@ main() {
   install_requirements
   install_neovim
   install_symlinks
+  install_nvim_plugins
 }
 
 install_requirements() {
-  # python3 is required for the deoplete plugin
-  brew_install python3
+  if is_mac; then
+    # python3 is required for the deoplete plugin
+    brew_install python3
+  else
+    apt_install python-dev python-pip python3-dev python3-pip
+  fi
+
   pip3_install neovim
 }
 
 install_neovim() {
-  brew_tap neovim/homebrew-neovim
-  brew_install neovim
+  if is_mac; then
+    brew_tap neovim/homebrew-neovim
+    brew_install neovim
+  else
+    add_ppa neovim-ppa/unstable
+    apt_install neovim
+  fi
 }
 
 install_symlinks() {
@@ -25,6 +36,12 @@ install_symlinks() {
   # backwards compatibility:
   symlink "$DOTF/plugins/nvim/nvimrc" ~/.nvimrc
   symlink "$DOTF/vim" ~/.nvim
+}
+
+install_nvim_plugins() {
+  bullet "Running PlugInstall... "
+  nvim +PlugInstall +qall
+  success "done"
 }
 
 main
