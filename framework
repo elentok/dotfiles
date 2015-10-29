@@ -546,7 +546,7 @@ add_user_to_group() {
   if user_has_group $group $user; then
     info 'already exists.'
   else
-    sudo useradd $user -g $group
+    sudo usermod -a -G $user $group
     show_result die_on_error
   fi
 }
