@@ -20,9 +20,9 @@ install_git() {
     brew_install git
     brew_install tig
   else
-    apt_install git
+    apt_install git libncurses5-dev
     if ! has_command tig; then
-      install_tgz 'https://github.com/jonas/tig/archive/tig-2.1.1.tar.gz'
+      install_tgz --sudo 'https://github.com/jonas/tig/archive/tig-2.1.1.tar.gz'
     fi
   fi
 }

@@ -205,6 +205,9 @@ install_package() {
 }
 
 install_tgz() {
+  SUDO=no
+  while extract_flag "$1"; do shift; done
+
   local url="$1"
   local filename="$(basename "$url")"
   mkdir -p ~/.self-build
@@ -218,8 +221,14 @@ install_tgz() {
   if [ -x "configure" ]; then
     ./configure
   fi
-  make
-  make install
+
+  if [ "$SUDO" == 'yes' ]; then
+    sudo make
+    sudo make install
+  else
+    make
+    make install
+  fi
 }
 
 # NPM {{{1
@@ -339,11 +348,15 @@ verify_pip_installed() {
   if command_missing pip; then
     bullet "Installing pip... "
 
-    if command_missing easy_install; then
-      error "easy_install is missing, skipping"
-      false
+    if is_linux; then
+      apt_install python-pip
     else
-      sudo easy_install pip
+      if command_missing easy_install; then
+        error "easy_install is missing, skipping"
+        false
+      else
+        sudo easy_install pip
+      fi
     fi
   fi
 }
@@ -531,7 +544,7 @@ user_has_group() {
     user=$(whoami)
   fi
 
-  groups $user | cut -d: -f2 | grep "\b$user\b" > /dev/null
+  groups $user | cut -d: -f2 | grep "\b$group\b" > /dev/null
 }
 
 add_user_to_group() {
@@ -546,7 +559,7 @@ add_user_to_group() {
   if user_has_group $group $user; then
     info 'already exists.'
   else
-    sudo usermod -a -G $user $group
+    sudo usermod -a -G $group $user
     show_result die_on_error
   fi
 }
