@@ -1,0 +1,96 @@
+#!/usr/bin/env ruby
+
+USAGE = "
+dotvar - manages ~/.config/variables.yml
+
+Usage:
+
+  dotvar exists {key}
+  dotvar get {key}
+  dotvar add {key} {prompt}
+  dotvar add_password {key} {prompt}
+  dotvar env"
+
+require 'io/console' # for $stdin.noecho
+require 'yaml'
+
+VAR_FILE = File.expand_path('~/.config/variables.yml')
+VAR_FILE_MODE = 0600
+
+def main
+  set_var_file_permissions
+
+  case ARGV[0]
+  when 'exists'
+    exit 1 unless read_vars.has_key?(ARGV[1])
+  when 'get'
+    get_var(ARGV[1])
+  when 'add'
+    add_var(ARGV[1], ARGV[2])
+  when 'add_password'
+    add_var(ARGV[1], ARGV[2], password: true)
+  when 'env'
+    env
+  else
+    puts USAGE
+  end
+end
+
+def env
+  read_vars.each do |key, value|
+    puts "export #{key}=#{value}"
+  end
+end
+
+def get_var(key)
+  value = read_vars[key]
+  if value
+    puts value
+  else
+    $stderr.puts "var '#{key}' not found"
+    exit 1
+  end
+end
+
+def add_var(key, prompt, options = {})
+  print prompt
+  if options[:password]
+    value = $stdin.noecho(&:gets).strip
+    puts
+
+    print 'Enter again to confirm: '
+    confirm_value = $stdin.noecho(&:gets).strip
+    puts
+
+    if value != confirm_value
+      $stderr.puts "\nPasswords don't match, try again."
+      return add_var(key, prompt, options)
+    end
+  else
+    value = $stdin.gets.strip
+  end
+  vars = read_vars
+  vars[key] = value
+
+  File.open(VAR_FILE, 'w') do |out|
+    YAML.dump vars, out
+  end
+  set_var_file_permissions
+end
+
+def read_vars
+  data = {}
+
+  if File.exist? VAR_FILE
+    data = YAML.load_file VAR_FILE
+    data = {} if data == false
+  end
+
+  data
+end
+
+def set_var_file_permissions
+  File.chmod(VAR_FILE_MODE,  VAR_FILE) if File.exists?(VAR_FILE)
+end
+
+main
