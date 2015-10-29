@@ -1,6 +1,34 @@
 Ubuntu Tweaks
 ==============
 
+## nVidia HDMI Audio
+
+source: https://wiki.archlinux.org/index.php/PulseAudio/Examples#HDMI_output_configuration
+
+1) list all of the available audio outputs:
+
+    aplay -l
+
+2) test for the correct card:
+
+    aplay -D plughw:1,8 /usr/share/sounds/alsa/Front_Right.wav
+
+  where 1 is the card and 3 is the device substitute in the values listed from
+  the previous section. If there is no audio, then try substituting a different
+  device (on my card I had to use card 1 device 8)
+
+3) edit `/etc/pulse/default.pa`:
+
+    load-module module-alsa-sink device=hw:1,8
+
+  where the 1 is the card and the 8 is the device found to work in the previous
+  section.
+
+4) restart pulse audio
+
+    $ pulseaudio -k
+    $ pulseaudio --start
+
 Touchpad
 ---------
 

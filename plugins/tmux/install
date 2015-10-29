@@ -17,7 +17,12 @@ install_tmux() {
     # for more info, see:
     #   http://robots.thoughtbot.com/post/19398560514/how-to-copy-and-paste-with-tmux-on-mac-os-x
   else
-    apt_install tmux
+    if ! has_command tmux; then
+      apt_install libevent-dev
+      install_tgz --sudo \
+        --install=no \
+        'https://github.com/tmux/tmux/releases/download/2.1/tmux-2.1.tar.gz'
+    fi
   fi
 }
 
