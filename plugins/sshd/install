@@ -1,0 +1,29 @@
+#!/bin/bash
+
+source `dirname $0`/../../framework
+
+main() {
+  header "SSH Server"
+  if is_linux; then
+    apt_install openssh-server
+  fi
+
+  setup_authorized_keys
+}
+
+setup_authorized_keys() {
+  bullet 'Creating ~/.ssh/authorized_keys... '
+  if [ -e ~/.ssh/authorized_keys ]; then
+    info 'already exists'
+  else
+    mkdir -p ~/.ssh
+    touch ~/.ssh/authorized_keys
+    show_result
+  fi
+
+  bullet 'Setting ~/.ssh/authorized_keys permissions... '
+  chmod 600 ~/.ssh/authorized_keys
+  show_result
+}
+
+main
