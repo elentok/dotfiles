@@ -18,21 +18,11 @@ main() {
 }
 
 init_samba_username() {
-  bullet 'Setting up samba username... '
-
-  filename="$HOME/.samba-username"
-
-  if [ -e "$filename" ]; then
-    SAMBA_USERNAME="$(cat $filename)"
-    info $SAMBA_USERNAME
-  else
-    ask "\nEnter the guest username:" SAMBA_USERNAME "johnsmith"
-    if [ -z "$SAMBA_USERNAME" ]; then
-      exit 1
-    fi
-    echo $SAMBA_USERNAME > $filename
-    echo $SAMBA_USERNAME
+  if ! dotvar exists samba_username; then
+    dotvar add samba_username 'Enter the samba username: '
   fi
+
+  SAMBA_USERNAME=$(dotvar get samba_username)
 }
 
 create_system_user() {
