@@ -96,6 +96,19 @@ error() {
   echo -e "${RED}✘ $*$RESET"
 }
 
+show_result() {
+  if [ $? -eq 0 ]; then
+    success 'done'
+  else
+    error 'FAIL'
+    if [ "$1" = "die_on_error" ]; then
+      exit 1
+    else
+      return 1
+    fi
+  fi
+}
+
 # confirm {{{1
 confirm() {
   local default=${2:-no}
@@ -341,7 +354,7 @@ pip_install() {
   if has_pip_package "$1"; then
     info " already installed"
   else
-    pip install $1
+    pip install --user $1
   fi
 }
 
@@ -509,6 +522,33 @@ copy_to_dir() {
 # user {{{1
 user_exists() {
   id "$1" > /dev/null 2>&1
+}
+
+user_has_group() {
+  local group="$1"
+  local user="${2}"
+  if [ -z "$user" ]; then
+    user=$(whoami)
+  fi
+
+  groups $user | cut -d: -f2 | grep "\b$user\b" > /dev/null
+}
+
+add_user_to_group() {
+  local group="$1"
+  local user="${2}"
+  if [ -z "$user" ]; then
+    user=$(whoami)
+  fi
+
+  bullet "Adding '$user' to group '$group'... "
+
+  if user_has_group $group $user; then
+    info 'already exists.'
+  else
+    sudo useradd $user -g $group
+    show_result die_on_error
+  fi
 }
 
 # dotfiles platform {{{1
