@@ -6,6 +6,8 @@
 DOTF=`dirname ${BASH_SOURCE[0]-$0}`
 export DOTF=`cd $DOTF && pwd`
 
+source $DOTF/zsh/base.zsh
+
 # BREW_HOME directory {{{1
 BREW_HOME=/usr/local
 if [ -e "$HOME/.homebrew" ]; then
