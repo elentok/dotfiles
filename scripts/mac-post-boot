@@ -13,7 +13,6 @@ run_app() {
 
 run_command --bg 'Music Player Daemon' mpd
 run_command --sudo 'Nginx' nginx
-run_app Theremin
 
 bullet "Add ssh key... "
 if [ -z "$(ssh-add -l)" ]; then

@@ -687,7 +687,7 @@ run_command() {
   else
     cmd='sh -c'
     if [ "$SUDO" == 'yes' ]; then
-      cmd='sudo -s'
+      cmd='sudoo'
     fi
 
     if [ "$BG" == 'yes' ]; then
