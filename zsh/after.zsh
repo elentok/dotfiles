@@ -10,6 +10,7 @@ fi
 
 alias agg="ag --ignore '*.yml'"
 alias be='bundle exec'
+alias bl='tr ":" "\n"'
 alias c1='awk "{ print \$1 }"'
 alias c2='awk "{ print \$2 }"'
 alias c3='awk "{ print \$3 }"'
