@@ -68,6 +68,7 @@ install_utils() {
   npm_install marked
   npm_install name-that-color
   gem_install scss_lint
+  gem_install haml_lint
   pip_install pylint
   pip_install powerline-status
 }
