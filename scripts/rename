@@ -1,82 +1,84 @@
-#!/bin/zsh
+#!/usr/bin/env ruby
 
-export RED="\033[31m"
-export GREEN="\033[32m"
-export YELLOW="\033[33m"
-export BLUE="\033[34m"
-export RESET="\033[0m"
+require "#{ENV['DOTF']}/framework.rb"
+require 'fileutils'
 
-SED='sed'
-if [ "$(which gsed)" != "" ]; then
-  # use gnu-sed if available
-  SED='gsed'
-fi
+class Renamer
+  def initialize
+    @options = parse_cli_options(
+      desc: 'Renames filenames',
+      usage: 'rename [options] <pattern> <replacement> <file>...',
+      min_items: 3,
+      options: {
+        yes: [ '-y', '--yes', "Don't ask for confirmation" ]
+      })
 
-usage() {
-  echo "Usage:"
-  echo
-  echo "  rename {regexp} files"
-  echo
-  echo "  example:"
-  echo "    rename 's/one/two/' *.png"
-}
+    @pattern = Regexp.new(ARGV.shift, 'g')
+    @replacement = ARGV.shift
+    @matches = find_matches
 
-simulate() {
-  regexp=$1
-  shift
-  has_results='no'
-  for file in $*; do
-    new_file=$(echo $file | sed "$regexp")
-    if [ "$file" != "$new_file" ]; then
-      echo "Will rename ${YELLOW}${file}$RESET"
-      echo "         to ${BLUE}${new_file}$RESET"
-      has_results='yes'
-    fi
-  done
-  [ "$has_results" = 'yes' ]
-  return $?
-}
+    if @matches.empty?
+      puts 'No matches'
+    else
+      @matches.each { |m| m.print }
+      puts
+      if @options[:yes] || confirm?('Rename?')
+        rename!
+      end
+    end
+  end
 
-confirm() {
-  read "yesno?Rename (yes/[no])? "
-  [ "$yesno" = "yes" ]
-  return $?
-}
+  private
 
-rename() {
-  regexp=$1
-  shift
-  for file in $*; do
-    new_file=$(echo $file | sed "$regexp")
-    if [ "$file" != "$new_file" ]; then
-      rename_file "$file" "$new_file"
-    fi
-  done
-}
+  def find_matches
+    [].tap do |matches|
+      ARGV.each do |filename|
+        basename = File.basename(filename)
+        new_basename = basename.gsub(@pattern, @replacement)
+        if basename != new_basename
+          matches << Match.new(filename, new_basename)
+        end
+      end
+    end
+  end
 
-rename_file() {
-  echo "Renaming ${YELLOW}${file}$RESET"
-  echo "      to ${GREEN}${new_file}$RESET"
+  def rename!
+    @matches.each do |match|
+      match.print 'Renaming '
+      match.rename!
+    end
+  end
+end
 
-  git ls-files --error-unmatch $file > /dev/null 2>&1
-  if [ $? -eq 0 ]; then
-    git mv "$file" "$new_file"
-  else
-    mv "$file" "$new_file"
-  fi
-}
+class Match
+  def initialize(from_fullpath, to_basename)
+    @from_fullpath = from_fullpath
+    @to_basename = to_basename
+    @from_dirname = File.dirname(from_fullpath)
+    @from_basename = File.basename(from_fullpath)
+    @to_fullpath = File.join(@from_dirname, @to_basename)
+  end
 
-case "$1" in
-  "")
-    usage
-    ;;
-  *)
-    if simulate $*; then
-      if confirm; then rename $*; fi
-    fi
-    ;;
-esac
+  def indent(prefix)
+    ' ' * (prefix.length + @from_dirname.length - 3)
+  end
 
+  def print(prefix = '')
+    puts "#{prefix}#{gray(@from_dirname)}/#{@from_basename}"
+    puts "#{indent(prefix)} => #{blue(@to_basename)}"
+  end
 
+  def rename!
+    if git?
+      system "git mv '#{@from_fullpath}' '#{@to_fullpath}'"
+    else
+      FileUtils.mv @from_fullpath, @to_fullpath
+    end
+  end
 
+  def git?
+    system("git ls-files --error-unmatch #{@from_fullpath} > /dev/null 2>&1")
+  end
+end
 
+Renamer.new

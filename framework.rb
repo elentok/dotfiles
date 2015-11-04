@@ -9,6 +9,8 @@ COLORS = {
 
 RESET = "\033[0m"
 
+require 'optparse'
+
 class Object
   COLORS.each do |name, value|
     define_method name do |text|
@@ -40,6 +42,29 @@ def require_or_install_gem(pkg, gem_name)
       exit 0
     else
       puts 'Error installing gem, please run again'
+      exit 1
+    end
+  end
+end
+
+def parse_cli_options(format)
+  {}.tap do |options|
+    parser = OptionParser.new do |opts|
+      opts.banner = "#{format[:desc]}\n\n" \
+        "Usage:\n    #{format[:usage]}\n\n" \
+        "Options:\n"
+
+      format[:options].each do |name, attribs|
+        opts.on(*attribs) do
+          options[name] = true
+        end
+      end
+    end
+
+    parser.parse!
+    min_items = format[:min_items] || 0
+    if ARGV.length < min_items
+      puts parser.help
       exit 1
     end
   end
