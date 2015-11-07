@@ -46,6 +46,7 @@ alias v=vim
 alias va='vim $DOTF/zsh/after/aliases.zsh; source $DOTF/zsh/after/aliases.zsh'
 alias vl='vim "+OpenSession! last"'
 alias x=exit
+alias pth='echo $PATH | tr ":" "\n"'
 
 function encrypt() {
   openssl des3 -salt -in $* -out $*.secret

@@ -26,6 +26,7 @@ source_dir ~/.dotlocal/zsh/before
 source_dir ~/.dotfiles/zsh/before
 
 # Source Prezto.
+zstyle ':presto:load' pmodule 'git'
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi

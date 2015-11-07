@@ -6,5 +6,3 @@ fi
 
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-
-alias ginpm="GOPATH=$PWD/.vendor gin"
