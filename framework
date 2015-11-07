@@ -566,39 +566,30 @@ add_user_to_group() {
   fi
 }
 
-# dotfiles platform {{{1
+# platform (workstation/server) {{{1
+
 identify_dotfiles_platform() {
-  if [ -n "$DOTFILES_PLATFORM" ]; then
-    return
-  fi
+  ask "What is this platform ([w]orkstation, [s]server)?" platform w
 
-  local platform_file="$HOME/.dotlocal/zsh/before/platform.zsh"
-  if [ -e $platform_file ]; then
-    source $platform_file
+  if [ "$platform" = "w" ]; then
+    dotvar set platform workstation
+  elif [ "$platform" = "s" ]; then
+    dotvar set platform server
   else
-    ask "What is this platform ([w]orkstation, [s]server)?" platform w
-    if [ "$platform" = "w" ]; then
-      export DOTFILES_PLATFORM=workstation
-    elif [ "$platform" = "s" ]; then
-      export DOTFILES_PLATFORM=server
-    else
-      identify_dotfiles_platform
-      return
-    fi
-
-    mkdir -p $(dirname $platform_file)
-    echo "export DOTFILES_PLATFORM=$DOTFILES_PLATFORM" > $platform_file
+    identify_dotfiles_platform
   fi
 }
 
-is_workstation() {
+if ! dotvar exists platform; then
   identify_dotfiles_platform
-  [ "$DOTFILES_PLATFORM" = "workstation" ]
+fi
+
+is_workstation() {
+  [ "$(dotvar get platform)" == 'workstation' ]
 }
 
 is_server() {
-  identify_dotfiles_platform
-  [ "$DOTFILES_PLATFORM" = "server" ]
+  [ "$(dotvar get platform)" == 'server' ]
 }
 
 # extract flag {{{1
