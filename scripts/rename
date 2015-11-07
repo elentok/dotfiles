@@ -60,7 +60,7 @@ class Match
   end
 
   def indent(prefix)
-    ' ' * (prefix.length + @from_dirname.length - 3)
+    ' ' * [prefix.length + @from_dirname.length - 3, 0].max
   end
 
   def print(prefix = '')
