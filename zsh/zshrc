@@ -21,9 +21,13 @@ source_dir() {
   fi
 }
 
+source_if_exists() {
+  if [ -e "$1" ]; then source $1; fi
+}
+
 source ~/.dotfiles/zsh/base.zsh
-source_dir ~/.dotlocal/zsh/before
-source_dir ~/.dotfiles/zsh/before
+source_if_exists ~/.dotlocal/zsh/before.zsh
+source ~/.dotfiles/zsh/before.zsh
 
 # Source Prezto.
 zstyle ':presto:load' pmodule 'git'
@@ -31,8 +35,8 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-source_dir ~/.dotfiles/zsh/after
-source_dir ~/.dotlocal/zsh/after
+source ~/.dotfiles/zsh/after.zsh
+source_if_exists ~/.dotlocal/zsh/after.zsh
 
 duration=$((($SECONDS - $START_TIME) * 1000))
 echo "\033[1;30m($(printf '%.2f' $duration)ms)\033[0m"
