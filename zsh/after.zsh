@@ -56,9 +56,9 @@ alias tot='awk "{ s+=\$1 } END { printf(\"%''d\n\", s) }"'
 alias total='awk "{ s+=\$1 } END { print s }"'
 alias ts='tig status'
 alias v=vim
-alias va='vim $DOTF/zsh/after/aliases.zsh; source $DOTF/zsh/after/aliases.zsh'
 alias vl='vim "+OpenSession! last"'
 alias x=exit
+alias vz='file="$(edit-zsh-dotfile)" && source $file'
 
 if [[ "`uname -s`" == "Darwin" ]]; then
 
