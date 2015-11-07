@@ -1,0 +1,18 @@
+#!/bin/bash
+
+main() {
+  file="$(select-file)"
+  $EDITOR $file
+  echo $file
+}
+
+select-file() {
+  list-files | selecta
+}
+
+list-files() {
+  ls -1 $DOTF/zsh/*.zsh
+  ls -1 $DOTL/zsh/*.zsh
+}
+
+main
