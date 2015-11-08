@@ -15,6 +15,33 @@ if [ -e "$HOME/.homebrew" ]; then
 fi
 export BREW_HOME
 
+# Machine varibles {{{1
+MACHINE_VARFILE=$HOME/.config/machine
+
+if [ -e $MACHINE_VARFILE ]; then
+  source $MACHINE_VARFILE
+fi
+
+store_variable() {
+  local key="$1"
+  local value="$2"
+
+  if [ ! -e $MACHINE_VARFILE ]; then touch $MACHINE_VARFILE; fi
+
+  (
+    grep -v "export $key=" $MACHINE_VARFILE
+    echo "export $key='$(escape_variable "$value")'"
+  ) > tmpfile
+  mv -f tmpfile $MACHINE_VARFILE
+  chmod 600 $MACHINE_VARFILE
+
+  eval "export $key='$(escape_variable "$value")'"
+}
+
+escape_variable() {
+  echo -n "$value" | sed "s/'/\\\\'/g"
+}
+
 
 # Colors {{{1
 export BLACK="\033[30m"
@@ -133,12 +160,27 @@ ask() {
   if [ "$default" ]; then
     echo -n "[$default] "
   fi
-  read reply
+  read $read_args reply
   echo
 
   reply="${reply:-$default}"
   reply=$(echo $reply | sed "s/'/'\"'\"'/g")
   eval $resultvar="'$reply'"
+}
+
+ask_password() {
+  local question=$1
+  local resultvar=$2
+
+  read_args="-s" ask "$question" password1
+  read_args="-s" ask "Enter again to confirm: " password2
+
+  if [ "$password1" = "$password2" ]; then
+    eval $resultvar=$(printf %q $password1)
+  else
+    echo "The passwords don't match, please try again."
+    ask_password "$@"
+  fi
 }
 
 pause() {
@@ -572,24 +614,24 @@ identify_dotfiles_platform() {
   ask "What is this platform ([w]orkstation, [s]server)?" platform w
 
   if [ "$platform" = "w" ]; then
-    dotvar set platform workstation
+    store_variable platform workstation
   elif [ "$platform" = "s" ]; then
-    dotvar set platform server
+    store_variable platform server
   else
     identify_dotfiles_platform
   fi
 }
 
-if ! dotvar exists platform; then
+if [ -z "$platform" ]; then
   identify_dotfiles_platform
 fi
 
 is_workstation() {
-  [ "$(dotvar get platform)" == 'workstation' ]
+  [ "$platform" == 'workstation' ]
 }
 
 is_server() {
-  [ "$(dotvar get platform)" == 'server' ]
+  [ "$platform" == 'server' ]
 }
 
 # extract flag {{{1

@@ -18,29 +18,28 @@ main() {
 }
 
 init_samba_username() {
-  if ! dotvar exists samba_username; then
-    dotvar add samba_username 'Enter the samba username: '
+  if [ -z "$samba_username" ]; then
+    ask 'Enter the samba username: ' samba_username
+    store_variable samba_username "$samba_username"
   fi
-
-  SAMBA_USERNAME=$(dotvar get samba_username)
 }
 
 create_system_user() {
   bullet 'Creating system user... '
-  if user_exists $SAMBA_USERNAME; then
+  if user_exists $samba_username; then
     info 'already exists.'
     return
   else
-    sudo useradd $SAMBA_USERNAME -g sambashare && success 'done'
+    sudo useradd $samba_username -g sambashare && success 'done'
   fi
 }
 
 create_samba_user() {
   bullet 'Creating samba user... '
-  if smb_user_exists $SAMBA_USERNAME; then
+  if smb_user_exists $samba_username; then
     info 'already exists.'
   else
-    sudo smbpasswd -a $SAMBA_USERNAME && success 'done'
+    sudo smbpasswd -a $samba_username && success 'done'
   fi
 }
 
@@ -49,13 +48,13 @@ add_to_smbusers() {
   if is_in_smbusers; then
     info 'already exists.'
   else
-    line="$SAMBA_USERNAME = $SAMBA_USERNAME"
+    line="$samba_username = $samba_username"
     sudo sh -c "echo '$line' >> /etc/samba/smbusers" & success 'done'
   fi
 }
 
 is_in_smbusers() {
-  cat /etc/samba/smbusers | grep "^$SAMBA_USERNAME\s*=" > /dev/null
+  cat /etc/samba/smbusers | grep "^$samba_username\s*=" > /dev/null
 }
 
 list_smb_users() {
