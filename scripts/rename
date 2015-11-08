@@ -13,7 +13,7 @@ class Renamer
         yes: [ '-y', '--yes', "Don't ask for confirmation" ]
       })
 
-    @pattern = Regexp.new(ARGV.shift, 'g')
+    @pattern = Regexp.new(ARGV.shift, 'ig')
     @replacement = ARGV.shift
     @matches = find_matches
 
