@@ -20,7 +20,7 @@ class Object
 end
 
 def confirm?(question, default = 'no')
-  ask?("#{question} (yes/no)?", default) =~ /^y$/
+  ask?("#{question} (yes/no)?", default) =~ /^(y|yes)$/
 end
 
 def ask?(question, default = nil)
