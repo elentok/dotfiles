@@ -1,46 +1,50 @@
 #!/usr/bin/env ruby
 
-module CLI
-  def self.main
+USAGE = "
+ios - iOS Simulator helper script
+
+Usage:
+
+  ios start
+  ios list-devices
+  ios list-apps [device-id]
+  ios booted-device
+  ios install-app <path-to-app-folder>
+"
+
+class CLI
+  def main
     cmd = ARGV.first
     ARGV.shift
+    cmd = cmd.gsub(/-/, '_') if cmd
 
-    case cmd
-    when 'list-devices'
-      puts Device.all
-    when 'list-apps'
-      list_apps(*ARGV)
-    when 'booted-device'
-      puts Device.booted
-    when 'install-app'
-      install_app(*ARGV)
+    if cmd
+      send(cmd, *ARGV)
     else
-      usage
+      puts USAGE
     end
   end
 
-  def self.usage
-    puts <<-EOF
-
-  ios - iOS Simulator helper script
-
-  Usage:
-
-    ios list-devices
-    ios list-apps [device-id]
-    ios booted-device
-    ios install-app <path-to-app-folder>
-
-    EOF
+  def list_devices
+    puts Device.all
   end
 
-  def self.install_app(path)
-    system("xcrun simctl install booted \"#{path}\"")
-  end
-
-  def self.list_apps(id = nil)
+  def list_apps(id = nil)
     device = id ? Device.find_by_id(id) : Device.booted
     puts device.apps
+  end
+
+  def booted_device
+    puts Device.booted
+  end
+
+  def start
+    system('/Applications/Xcode.app/Contents/Developer/Applications/' \
+      'Simulator.app')
+  end
+
+  def install_app(path)
+    system("xcrun simctl install booted \"#{path}\"")
   end
 end
 
@@ -108,4 +112,4 @@ class App
   end
 end
 
-CLI.main
+CLI.new.main
