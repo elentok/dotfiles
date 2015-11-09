@@ -34,7 +34,7 @@ set visualbell
 set whichwrap=<,>,[,]
 set wildignore=*.swp,*.bak,*.pyc,*.class,*.o,*.obj
 set wildmenu
-set wildmode=full
+set wildmode=list:longest,full
 set winwidth=84                " makes sure the active window will always be at least 80 characters
 
 set titlestring=0\ %t%(\ %M%)%(\ (%{expand(\ " %:~:.:h\")})%)%(\ %a%)
