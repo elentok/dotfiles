@@ -3,44 +3,37 @@
 require "#{ENV['DOTF']}/framework.rb"
 
 def main
-  if ARGV.length == 0
-    usage
-  else
-    kill_matching(Regexp.new(ARGV[0]))
-  end
+  options = parse_cli_options(
+    desc: 'Kills all processes matching a pattern',
+    usage: 'kill-match [options] <pattern>',
+    min_items: 1,
+    options: {
+      sudo: ['-s', '--sudo', 'Use "sudo kill"']
+    })
+
+  kill_matching(Regexp.new(ARGV.first), options)
 end
 
-def usage
-  puts <<-EOF
-
-kill-match - kill all processes matching a pattern
-
-Usage:
-
-  kill-match [pattern]
-
-  EOF
-end
-
-def kill_matching(re)
+def kill_matching(re, options = {})
   to_kill = processes.select { |p| p.path =~ re }
-  unless to_kill.any?
-    puts 'No processes found'
-    exit 1
-  end
+  die 'No processes found' if to_kill.empty?
 
   puts "Found #{to_kill.length} processes:"
-  to_kill.each { |p| puts "- #{p.pid}\t#{p.path}" }
+  to_kill.each(&:print)
   puts
-  if confirm? 'Kill?'
-    to_kill.each { |p| p.kill! }
-  end
+  to_kill.each { |p| p.kill!(options) } if confirm? 'Kill?'
+end
+
+def die(message)
+  puts message
+  exit 1
 end
 
 def processes
-  `ps aux`.split("\n").map { |line| AProcess.parse(line) }
+  `ps aux`.split("\n")
+    .map { |line| AProcess.parse(line) }
     .compact
-    .reject { |p| p.pid == $$ }
+    .reject { |p| p.pid == Process.pid }
 end
 
 class AProcess
@@ -52,9 +45,14 @@ class AProcess
     @path = path
   end
 
-  def kill!
+  def kill!(options = {})
     puts "- killing #{@pid}"
-    puts `kill #{@pid}`
+
+    if options[:sudo]
+      system("sudo kill #{@pid}")
+    else
+      system("kill #{@pid}")
+    end
   end
 
   def self.parse(line)
@@ -64,6 +62,10 @@ class AProcess
 
   def to_s
     [@pid, @user, @path[0..70]].join("\t")
+  end
+
+  def print
+    puts "- #{red(pid)}\t#{gray(path)}"
   end
 end
 

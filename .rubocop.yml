@@ -23,3 +23,6 @@ Style/Documentation:
 
 Style/ClassAndModuleChildren:
   Enabled: false
+
+Style/FileName:
+  Enabled: false
