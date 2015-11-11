@@ -39,7 +39,7 @@ class CLI
   end
 
   def start
-    system('/Applications/Xcode.app/Contents/Developer/Applications/' \
+    system('open /Applications/Xcode.app/Contents/Developer/Applications/' \
       'Simulator.app')
   end
 
