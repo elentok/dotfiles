@@ -17,6 +17,7 @@ alias c3='awk "{ print \$3 }"'
 alias c4='awk "{ print \$4 }"'
 alias c5='awk "{ print \$5 }"'
 alias c6='awk "{ print \$6 }"'
+alias summ='awk "{ s+=\$1 } END { print s }"'
 alias c=clear
 alias cd/='cd "$(find-root)"'
 alias cf='/bin/ls -1 | wc -l' # count files
@@ -33,7 +34,8 @@ alias i18n='bin/rake i18n:js:export'
 alias k='less $DOTF/docs/keys.md'
 alias ke='vim $DOTF/docs/keys.md'
 alias kk='kill `ps aux | selecta | awk ''{print $2 }''`'
-alias ls='ls --color=always -XFhs'
+alias ls='command ls --color=always -XFhs'
+alias lss='command ls -1 -s'
 alias m=ncmpcpp
 alias ma='mpc add'
 alias mcl='mpc clear'

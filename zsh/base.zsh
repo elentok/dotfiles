@@ -25,6 +25,7 @@ for pkg in coreutils findutils gnu-sed; do
   fi
 done
 
+PATH=$PATH:$HOME/.rbenv/shims
 PATH=$PATH:/usr/local/share/npm/bin
 PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
 
