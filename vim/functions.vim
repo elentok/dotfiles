@@ -18,6 +18,9 @@ command! -range=% NumberLines call NumberLines()
 command! CSScomb call CSScomb()
 command! -nargs=+ CSScolor call CSScolor("<args>")
 
+command! -nargs=* -complete=file Ag
+      \ Grepper! -tool ag -switch -open -query <args>
+
 " Hebrew {{{1
 func! ToggleHebrew()
   if &rl
