@@ -1,0 +1,252 @@
+#!/usr/bin/env ruby
+
+require "#{ENV['DOTF']}/framework.rb"
+require 'English' # for $CHILD_STATUS
+
+class CLI
+  def initialize
+    @repo = Repo.new(ARGV[0] || '.')
+    @repo.fetch_all
+    report_local_branches_without_remote
+    report_remote_branches_without_local
+    report_unsynced_branches
+  end
+
+  def report_local_branches_without_remote
+    return if @repo.local_branches_without_remote.empty?
+
+    puts red('Local branches without remote:')
+    @repo.local_branches_without_remote.each { |_, branch| puts "* #{branch}" }
+    puts
+  end
+
+  def report_remote_branches_without_local
+    return if @repo.remote_branches_without_local.empty?
+
+    puts red('Remote branches without remote:')
+    @repo.remote_branches_without_local.each { |_, branch| puts "* #{branch}" }
+    puts
+  end
+
+  def report_unsynced_branches
+    return if @repo.unsynced_branches.empty?
+
+    puts red('Unsynced branches without remote:')
+    @repo.unsynced_branches.each do |pair|
+      puts "* #{pair}"
+    end
+    puts
+
+    @repo.unsynced_branches.each do |pair|
+      pair.sync! if confirm?(yellow("Sync #{pair}?"))
+    end
+  end
+end
+
+class Repo
+  attr_reader :local_branches, :remote_branches
+
+  def initialize(directory)
+    @directory = directory
+    @local_branches = {}
+    @remote_branches = {}
+    load_branches
+  end
+
+  def remotes
+    @remotes ||= git('remote').split("\n").map { |name| Remote.new(self, name) }
+  end
+
+  def fetch_all
+    remotes.each do |remote|
+      remote.fetch unless remote.name == 'review'
+    end
+  end
+
+  def load_branches
+    git('branch --all').each_line do |line|
+      branch = Branch.parse(line, self)
+      next if branch.name == 'HEAD'
+
+      if branch.is_a? RemoteBranch
+        remote_branches[branch.name] = branch
+      else
+        local_branches[branch.name] = branch
+      end
+    end
+
+    add_remotes_to_local_branches
+  end
+
+  def add_remotes_to_local_branches
+    remote_branches.each do |name, remote_branch|
+      local_branch = local_branches[name]
+      local_branch.remote_branches << remote_branch if local_branch
+    end
+  end
+
+  def local_branches_without_remote
+    local_branches.select { |name, _| !remote_branches.key? name }
+  end
+
+  def remote_branches_without_local
+    remote_branches.select { |name, _| !local_branches.key? name }
+  end
+
+  def unsynced_branches
+    @unsynched ||= [].tap do |pairs|
+      local_branches.each do |_, local|
+        local.remote_branches.each do |remote|
+          pairs << Pair.new(local, remote) if local.hash != remote.hash
+        end
+      end
+    end
+  end
+
+  def git(command)
+    output = `cd #{@directory} && git #{command}`
+    exit_code = $CHILD_STATUS.to_i
+    fail GitError, "Git command returned status #{exit_code}" if exit_code != 0
+    output
+  end
+end
+
+class GitError < Exception
+end
+
+class Remote
+  attr_reader :name
+
+  def initialize(repo, name)
+    @repo = repo
+    @name = name
+  end
+
+  def fetch
+    puts blue("* Fetching remote '#{@name}'")
+    @repo.git("fetch #{@name}")
+  end
+end
+
+class Branch
+  attr_reader :repo, :name, :git_name
+
+  def initialize(repo, name)
+    @repo = repo
+    @name = name
+    @git_name = name
+  end
+
+  def hash
+    @hash ||= @repo.git("log -1 --pretty=%h #{git_name}").strip
+  end
+
+  def to_s
+    @git_name
+  end
+
+  def self.parse(line, repo)
+    line = line.gsub(/^\*/, '').strip
+    if line.start_with? 'remotes/'
+      RemoteBranch.new(repo, line)
+    else
+      LocalBranch.new(repo, line)
+    end
+  end
+end
+
+class LocalBranch < Branch
+  attr_reader :remote_branches
+
+  def initialize(repo, name)
+    super
+    @remote_branches = []
+  end
+end
+
+class RemoteBranch < Branch
+  attr_reader :remote_name
+
+  def initialize(repo, name)
+    super
+
+    name.gsub!(/ ->.*/, '')
+    _, @remote_name, @name = name.split('/', 3)
+    @git_name = "#{@remote_name}/#{@name}"
+  end
+end
+
+class Pair
+  def initialize(local, remote)
+    @local = local
+    @remote = remote
+  end
+
+  def to_s
+    "#{@local} <=> #{@remote}"
+  end
+
+  def sync!
+    puts blue("* Synchronizing #{self}")
+
+    puts green("  * Checking out branch #{@local}")
+    git "checkout #{@local}"
+
+    pull
+    push
+  end
+
+  def pull
+    puts green("  * Pulling from #{remote_arg}")
+
+    begin
+      git "pull --rebase=false --ff-only #{remote_arg}"
+    rescue GitError
+      pull_alternatives
+    end
+  end
+
+  def pull_alternatives
+    case pick_alternative
+    when 'rebase'
+      git "pull --rebase #{remote_arg}"
+    when 'reset'
+      git "reset --hard #{@remote}"
+    when 'pushf'
+      git "push -f #{remote_arg}"
+    end
+  end
+
+  def pick_alternative
+    puts red("Can't fast forward, these are the changes:")
+    puts log
+    puts
+
+    puts yellow('These are your options:')
+    puts "  [rebase] Do a pull with rebase (#{@local} <= #{@remote})"
+    puts "  [reset]  Do a hard reset       (#{@local} <= #{@remote})"
+    puts "  [pushf]  Do a push -f          (#{@local} => #{@remote})"
+    ask yellow('What would you like to do?')
+  end
+
+  def remote_arg
+    "#{@remote.remote_name} #{@remote.name}"
+  end
+
+  def push
+    puts green("  * Pushing to #{remote_arg}")
+    git "push #{remote_arg}"
+
+    puts
+  end
+
+  def log
+    git("log #{@local}..#{@remote}")
+  end
+
+  def git(command)
+    @local.repo.git(command)
+  end
+end
+
+CLI.new

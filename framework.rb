@@ -20,10 +20,10 @@ class Object
 end
 
 def confirm?(question, default = 'no')
-  ask?("#{question} (yes/no)?", default) =~ /^(y|yes)$/
+  ask("#{question} (yes/no)?", default) =~ /^(y|yes)$/
 end
 
-def ask?(question, default = nil)
+def ask(question, default = nil)
   STDOUT.write "#{question} "
   STDOUT.write "[#{default}] " unless default.nil?
   answer = STDIN.readline.strip
