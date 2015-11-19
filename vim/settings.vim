@@ -227,8 +227,6 @@ endif
 " Neomake {{{1
 let g:neomake_scss_enabled_makers = ['scsslint']
 let g:neomake_coffee_enabled_makers = ['coffeelint']
-let g:neomake_haml_enabled_makers = ['hamllint']
-"let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_error_sign = {
     \ 'text': 'E>',
     \ 'texthl': 'ErrorMsg',
