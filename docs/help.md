@@ -195,3 +195,15 @@ Command Line Tips
 ## vim sudo tee trick
 
   :w !sudo tee %
+
+## gpg - generate key
+gpg --gen-key
+
+## gpg - export the public key
+gpg --export --armor {email} > gpg-public-key.txt
+
+## gpg -import key
+gpg --import gpg-public-key.txt
+
+## gpg - encrypt using public key
+gpg --encrypt --output encrypted.gpg --recipient {email} {file-to-encrypt}
