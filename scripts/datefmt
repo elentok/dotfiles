@@ -1,0 +1,30 @@
+#!/bin/bash
+
+USAGE='
+
+Date formatter
+
+Usage:
+
+  datefmt <format>
+
+Formats:
+
+  date              2015-11-21
+  time              10-54
+  datetime          2015-11-21_10-54
+  pretty            2015-11-21 10:54
+'
+
+main() {
+  case "$1" in
+    'date')     date +%Y-%m-%d;;
+    'time')     date +%H-%M;;
+    'datetime') date +%Y-%m-%d_%H-%M;;
+    'pretty')   date +%Y-%m-%d\ %H:%M;;
+    *)
+      echo "$USAGE"
+  esac
+}
+
+main "$@"

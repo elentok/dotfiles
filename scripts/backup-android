@@ -1,0 +1,27 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+main() {
+  if [ -n "$1" ]; then
+    local backup_dir='.'
+  else
+    local backup_dir="phone-backup-$(datefmt datetime)"
+  fi
+
+  if ! confirm "Create backup in ${backup_dir}"; then
+    exit 1
+  fi
+
+  if [ ! -e "$backup_dir" ]; then
+    mkdir -p "$backup_dir"
+  fi
+
+  cd "$backup_dir"
+
+  adb-sync --reverse /sdcard/DCIM/Camera "$backup_dir"
+  adb-sync --reverse /sdcard/WhatsApp "$backup_dir"
+}
+
+
+main "$@"
