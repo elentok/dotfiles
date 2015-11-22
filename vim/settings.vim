@@ -240,3 +240,14 @@ let g:neomake_warning_sign = {
 let g:NERDCustomDelimiters = {
     \ 'scss': { 'left': '//' }
 \ }
+
+" Grepper {{{1
+let g:grepper = {
+  \ 'tools':  ['ag'],
+  \ 'open':   1,
+  \ 'switch': 0,
+  \ 'jump':   0
+\ }
+
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
