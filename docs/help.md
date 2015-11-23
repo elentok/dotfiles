@@ -68,6 +68,10 @@ Command Line Tips
     git co --theirs path/to/file
     git add path/to/file
 
+## git remove dead remote branches
+
+    git remote prune {remote}
+
 ## ImageMagick resize
     convert --sample 50% input.png output.jpg
 
