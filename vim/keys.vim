@@ -193,10 +193,10 @@ noremap <Leader>rt :exec "!build-ctags"<cr>
 noremap <Leader>vt :QuickShell tig<cr>
 noremap <Leader>vs :QuickShell tig status<cr>
 noremap <Leader>vrf :call Confirm("Revert current file?", "!git co %")<cr>
-noremap <Leader>vrp :Git co -p<cr>
-noremap <Leader>vd  :Git diff<cr>
-noremap <Leader>vaf :Git add<cr>
-noremap <Leader>vap :Git add -p<cr>
+noremap <Leader>vrp :Git co -p %<cr>
+noremap <Leader>vd  :Git diff %<cr>
+noremap <Leader>vaf :Git add %<cr>
+noremap <Leader>vap :Git add -p %<cr>
 noremap <Leader>vh :QuickShell tig %<cr>
 noremap <Leader>vc :Gcommit<cr>
 
@@ -277,3 +277,8 @@ if has('nvim')
   " goto insert mode when entering a terminal window
   "au WinEnter term://* startinsert
 endif
+
+" Misc {{{1
+
+noremap <Leader>co0 :CSScolor '<c-r>0'<cr>
+noremap <Leader>co* :CSScolor '<c-r>*'<cr>
