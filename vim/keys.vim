@@ -184,7 +184,7 @@ noremap <Leader>rr :w<cr>:call RunCurrentFile()<cr>
 noremap <Leader>rm :MarkdownPreview<cr>
 vnoremap <Leader>rl "xy:call netrw#NetrwBrowseX(@x, 0)<cr>
 vnoremap <Leader>rs "9y:<c-r>9<cr>
-noremap <Leader>rt :exec "!build-ctags"<cr>
+noremap <Leader>rt :QuickShell build-ctags<cr>
 
 
 
