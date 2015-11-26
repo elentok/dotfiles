@@ -280,7 +280,7 @@ command! -nargs=* OnSave call OnSave("<args>")
 " Exec {{{1
 if has('nvim')
   function! QuickShell(cmd)
-    vsplit
+    tabe %
     execute 'terminal' a:cmd
   endfunction
 
