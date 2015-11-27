@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'AndrewRadev/sideways.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Arduino-syntax-file'
+Plug 'Konfekt/FastFold'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Raimondi/delimitMate'
 Plug 'applescript.vim'
