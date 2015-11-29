@@ -17,7 +17,6 @@ alias c3='awk "{ print \$3 }"'
 alias c4='awk "{ print \$4 }"'
 alias c5='awk "{ print \$5 }"'
 alias c6='awk "{ print \$6 }"'
-alias summ='awk "{ s+=\$1 } END { print s }"'
 alias c=clear
 alias cd/='cd "$(find-root)"'
 alias cf='/bin/ls -1 | wc -l' # count files
@@ -52,6 +51,7 @@ alias q='qlmanage -p'
 alias rbr='rbenv rehash'
 alias rrr='bin/rake tmp:clear; bin/rake assets:clean'
 alias ssh='TERM=$SSH_TERM ssh'
+alias summ='awk "{ s+=\$1 } END { print s }"'
 alias t='tailr `tailr --list | tr " " "\n" | selecta`'
 alias tm='tmux -u'
 alias tma='tm a'
@@ -60,8 +60,8 @@ alias total='awk "{ s+=\$1 } END { print s }"'
 alias ts='tig status'
 alias v=vim
 alias vl='vim "+OpenSession! last"'
-alias x=exit
 alias vz='file="$(edit-zsh-dotfile)" && source $file'
+alias x=exit
 
 if [[ "`uname -s`" == "Darwin" ]]; then
 
