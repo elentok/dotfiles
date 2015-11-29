@@ -282,3 +282,5 @@ endif
 
 noremap <Leader>co0 :CSScolor '<c-r>0'<cr>
 noremap <Leader>co* :CSScolor '<c-r>*'<cr>
+
+vnoremap ,s :!sort<cr>
