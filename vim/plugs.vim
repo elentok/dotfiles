@@ -55,6 +55,7 @@ Plug 'reedes/vim-pencil'
 Plug 'reedes/vim-wordy'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+Plug 'shime/vim-livedown', { 'on': 'LivedownPreview' }
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-dispatch'

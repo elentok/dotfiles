@@ -67,6 +67,7 @@ install_utils() {
   npm_install jsonlint
   npm_install marked
   npm_install name-that-color
+  npm_install livedown
   gem_install scss_lint
   gem_install haml_lint
   pip_install pylint
