@@ -33,6 +33,7 @@ Plug 'elentok/vim-markdown-folding'
 Plug 'elentok/vim-rails-extra'
 Plug 'evanmiller/nginx-vim-syntax'
 Plug 'fatih/vim-go'
+Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 Plug 'groenewege/vim-less'
 Plug 'iandoe/vim-osx-colorpicker'
 Plug 'itchyny/calendar.vim'
