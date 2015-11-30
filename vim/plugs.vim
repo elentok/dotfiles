@@ -54,6 +54,7 @@ Plug 'othree/yajs.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'reedes/vim-pencil'
 Plug 'reedes/vim-wordy'
+Plug 'schickling/vim-bufonly', { 'on': ['BufOnly', 'Bonly', 'BOnly'] }
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'shime/vim-livedown', { 'on': 'LivedownPreview' }
