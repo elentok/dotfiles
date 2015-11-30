@@ -246,7 +246,7 @@ let g:grepper = {
   \ 'tools':  ['ag'],
   \ 'open':   1,
   \ 'switch': 0,
-  \ 'jump':   0
+  \ 'jump':   1
 \ }
 
 nmap gs <plug>(GrepperOperator)
