@@ -18,6 +18,9 @@ command! -range=% NumberLines call NumberLines()
 command! CSScomb call CSScomb()
 command! -nargs=+ CSScolor call CSScolor("<args>")
 
+command! PowderRestart QuickShell echo 'Restarting pow...' && powder restart
+command! NginxRestart QuickShell echo 'Restarting nginx...' && sudoo nginx -s reload
+
 " Hebrew {{{1
 func! ToggleHebrew()
   if &rl
@@ -280,7 +283,11 @@ command! -nargs=* OnSave call OnSave("<args>")
 " Exec {{{1
 if has('nvim')
   function! QuickShell(cmd)
-    tabe %
+    if bufname(".")
+      tabe %
+    else
+      tabe
+    endif
     execute 'terminal' a:cmd
   endfunction
 
