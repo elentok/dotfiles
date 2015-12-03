@@ -52,7 +52,7 @@ function prompt_elentok_setup {
 
   # Define prompts.
   PROMPT="
-%{\$fg_bold[black]%}($HOSTNAME)%f
+%{\$fg_bold[black]%}($USERNAME at $HOSTNAME)%f
 %F{blue}%~%f\${vcs_info_msg_0_}\${ruby_info[version]} %{\$fg_bold[black]%}[%D{%Y-%m-%d %H:%M:%S}]%f
 %(?.%F{green}`cmd_prefix`${1:-❯ }%f.%F{red}`cmd_prefix`${1:-❯ }%f)"
 #RPROMPT='${ruby_info[version]}'
