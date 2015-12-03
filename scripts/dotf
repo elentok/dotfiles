@@ -118,6 +118,7 @@ mac_plugins() {
   brew_install imagemagick
   brew_install ghostscript
   brew_install ncdu
+  brew_cask_install spectacle
 }
 
 linux_plugins() {
