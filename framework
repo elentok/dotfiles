@@ -311,11 +311,11 @@ gem_install() {
 }
 
 gem_install_single() {
-  bullet "Installing gem ${1}... "
+  bullet "Installing gem ${1}... [sudo] "
   if [ "`gem_cache | grep \"^$1\\b\"`" != "" ]; then
     info "already installed"
   else
-    gem install $*
+    sudo /usr/bin/gem install $*
     rm -f /tmp/gem_cache
   fi
 }
@@ -324,7 +324,7 @@ rm -f /tmp/gem_cache
 
 gem_cache() {
   if [ ! -e /tmp/gem_cache ]; then
-    gem list > /tmp/gem_cache
+    /usr/bin/gem list > /tmp/gem_cache
   fi
   cat /tmp/gem_cache
 }
