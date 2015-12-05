@@ -1,0 +1,61 @@
+#!/bin/bash
+
+USAGE="
+
+Telegram Bot CLI
+
+Usage:
+
+  telegram send {chat_id} {text}
+  telegram updates
+"
+
+source $DOTF/framework
+
+main() {
+  load_bot_token
+
+  cmd=$1
+  shift
+
+  case "$cmd" in
+    'send')
+      send "$@"
+      ;;
+    'updates')
+      updates
+      ;;
+    *)
+      echo "$USAGE"
+      ;;
+  esac
+}
+
+send() {
+  if [ $# -lt 2 ]; then
+    echo "$USAGE"
+    exit 1
+  fi
+
+  local chat_id="$1"
+  local text="$2"
+
+  echo "SENDING '$text' to '$chat_id'"
+  curl "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+    --request POST \
+    --data-urlencode "chat_id=$chat_id" \
+    --data-urlencode "text=$text"
+}
+
+updates() {
+  curl "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates"
+}
+
+load_bot_token() {
+  if [ -z "$TELEGRAM_BOT_TOKEN" ]; then
+    ask 'Enter bot token:' token
+    store_variable TELEGRAM_BOT_TOKEN "$token"
+  fi
+}
+
+main "$@"
