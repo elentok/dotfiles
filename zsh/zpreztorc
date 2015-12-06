@@ -33,9 +33,6 @@ zstyle ':prezto:load' pmodule \
   'utility' \
   'completion' \
   'git' \
-  'rails' \
-  'ruby' \
-  'node' \
   'osx' \
   'tmux' \
   'fasd' \
