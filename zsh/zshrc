@@ -33,6 +33,16 @@ source ~/.dotfiles/zsh/base.zsh
 source_if_exists ~/.dotlocal/zsh/before.zsh
 source ~/.dotfiles/zsh/before.zsh
 
+# rbenv {{{1
+
+rbenv_cache="$HOME/.cache/dotfiles/rbenv-init"
+mkdir -p ~/.cache/dotfiles
+if [ ! -e "$rbenv_cache" ]; then
+  rbenv init --no-rehash - > "$rbenv_cache"
+fi
+
+source $rbenv_cache
+
 # Prezto {{{1
 zstyle ':presto:load' pmodule 'git'
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
