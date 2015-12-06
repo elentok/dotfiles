@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source $DOTF/framework
-
 DEFAULT_AGENT="$HOME/.ssh/default-agent"
 LOCAL_AGENT="/tmp/ssh-agent-$USER"
 
@@ -65,9 +63,7 @@ set-agent() {
     local agent="$LOCAL_AGENT"
   fi
   if ! is-agent-running "$agent"; then
-    if confirm "No agent at '$agent', create?"; then
-      ssh-agent -a "$agent" > /dev/null
-    fi
+    ssh-agent -a "$agent" > /dev/null
   fi
 
   echo "Setting default agent: $agent"
@@ -75,6 +71,7 @@ set-agent() {
 }
 
 fix() {
+  echo
   if ! is-agent-running "$DEFAULT_AGENT"; then
     set-agent 'local'
   fi
