@@ -1,3 +1,4 @@
+# Profiling (setup) {{{1
 typeset -F SECONDS=0
 export START_TIME=$SECONDS
 
@@ -12,6 +13,7 @@ if [ -e ~/.profiling ]; then
   }
 fi
 
+# Helper functions {{{1
 source_dir() {
   if [[ -d "$*" ]]; then
     # the "(N)" part means "nullglob" (see http://mywiki.wooledge.org/NullGlob)
@@ -25,18 +27,24 @@ source_if_exists() {
   if [ -e "$1" ]; then source $1; fi
 }
 
+# Before {{{1
+
 source ~/.dotfiles/zsh/base.zsh
 source_if_exists ~/.dotlocal/zsh/before.zsh
 source ~/.dotfiles/zsh/before.zsh
 
-# Source Prezto.
+# Prezto {{{1
 zstyle ':presto:load' pmodule 'git'
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+# After {{{1
 source ~/.dotfiles/zsh/after.zsh
 source_if_exists ~/.dotlocal/zsh/after.zsh
 
+# Profiling (summary) {{{1
 duration=$((($SECONDS - $START_TIME) * 1000))
 echo "\033[1;30m($(printf '%.2f' $duration)ms)\033[0m"
+
+# vim: foldmethod=marker
