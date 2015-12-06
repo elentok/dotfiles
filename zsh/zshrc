@@ -41,6 +41,7 @@ fi
 
 # After {{{1
 source ~/.dotfiles/zsh/after.zsh
+source ~/.dotfiles/zsh/prompt
 source_if_exists ~/.dotlocal/zsh/after.zsh
 
 # Profiling (summary) {{{1
