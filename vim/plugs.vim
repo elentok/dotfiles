@@ -13,7 +13,7 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Raimondi/delimitMate'
 Plug 'applescript.vim'
 Plug 'asymmetric/upstart.vim'
-Plug 'avakhov/vim-yaml'
+Plug 'avakhov/vim-yaml' " indentation
 Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
 Plug 'christoomey/vim-tmux-navigator'
@@ -21,10 +21,8 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'digitaltoad/vim-jade'
 Plug 'elentok/alternate-spec.vim'
 Plug 'elentok/ctrlp-objects.vim'
-Plug 'elentok/markdown-preview.vim'
 Plug 'elentok/notes.vim'
-Plug 'elentok/plaintasks.vim'
-Plug 'elentok/replace-all.vim'
+Plug 'elentok/replace-all.vim', { 'on': ['FindAll', 'ReplaceAll'] }
 Plug 'elentok/run.vim'
 Plug 'elentok/spec-runner.vim'
 Plug 'elentok/todo.vim'
@@ -36,13 +34,12 @@ Plug 'fatih/vim-go'
 Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 Plug 'groenewege/vim-less'
 Plug 'iandoe/vim-osx-colorpicker'
-Plug 'itchyny/calendar.vim'
-Plug 'jasoncodes/ctrlp-modified.vim'
+Plug 'itchyny/calendar.vim', { 'on': 'Calendar' }
+Plug 'jasoncodes/ctrlp-modified.vim', { 'on': 'CtrlPModified' }
 Plug 'jplaut/vim-arduino-ino'
-Plug 'jtratner/vim-flavored-markdown'
-Plug 'junegunn/goyo.vim' " dark/zen room, no distraction mode
+Plug 'jtratner/vim-flavored-markdown' " add on to tpope's markdown plugin (git flavored markdown)
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " dark/zen room, no distraction mode
 Plug 'junegunn/vim-easy-align'
-Plug 'jwhitley/vim-matchit'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mhinz/vim-grepper'
 Plug 'michaeljsmith/vim-indent-object'
@@ -52,11 +49,9 @@ Plug 'nelstrom/vim-visual-star-search'
 Plug 'ngmy/vim-rubocop'
 Plug 'othree/yajs.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'reedes/vim-pencil'
-Plug 'reedes/vim-wordy'
 Plug 'schickling/vim-bufonly', { 'on': ['BufOnly', 'Bonly', 'BOnly'] }
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': [ 'NERDTreeToggle', 'NERDTreeFocus', 'NERDTreeFind'] }
 Plug 'shime/vim-livedown', { 'on': 'LivedownPreview' }
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-abolish'
@@ -69,16 +64,16 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-ruby/vim-ruby'
-Plug 'vim-scripts/buffet.vim'
-Plug 'wavded/vim-stylus'
 Plug 'xolox/vim-misc'
-Plug 'yaml.vim'
+Plug 'yaml.vim' " syntax highlighting
+
 if has('nvim')
   Plug 'benekastah/neomake'
   Plug 'kassio/neoterm'
   Plug 'Shougo/deoplete.nvim'
 else
   Plug 'scrooloose/syntastic'
+  Plug 'jwhitley/vim-matchit' " embedded in neovim
 endif
 
 
