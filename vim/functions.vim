@@ -22,6 +22,7 @@ command! PowderRestart QuickShell echo 'Restarting pow...' && powder restart
 command! NginxRestart QuickShell echo 'Restarting nginx...' && sudoo nginx -s reload
 command! -nargs=* Bundle QuickShell bundle <args>
 command! -nargs=* Cap QuickShell bundle exec cap <args>
+command! Pkgs QuickShell pkgs status
 
 " Hebrew {{{1
 func! ToggleHebrew()
