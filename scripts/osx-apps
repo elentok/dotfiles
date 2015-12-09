@@ -46,7 +46,7 @@ EOF
 find-id() {
   local name="$1"
   if [ -z "$name" ]; then
-    name="$(list | selecta)"
+    name="$(list | fzf)"
   fi
 
   id=$(osascript -e "id of app \"$name\"")

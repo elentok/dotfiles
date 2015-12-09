@@ -22,7 +22,7 @@ all_usernames() {
 }
 
 select_user() {
-  (echo 'default' && all_usernames) | selecta
+  (echo 'default' && all_usernames) | fzf
 }
 
 etc_hosts() {
@@ -58,7 +58,7 @@ history_items() {
 }
 
 select_server() {
-  (history_items && hosts) | selecta
+  (history_items && hosts) | fzf
 }
 
 add_to_history() {

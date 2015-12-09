@@ -49,7 +49,7 @@ default-agent() {
 }
 
 choose-agent() {
-  local agent=$(list-agents | selecta | cut -d' ' -f1)
+  local agent=$(list-agents | fzf | cut -d' ' -f1)
   if [ -z "$agent" ]; then
     error 'User aborted'
     exit 1
