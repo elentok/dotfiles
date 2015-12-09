@@ -1,8 +1,40 @@
 export DOTF=~/.dotfiles
 export DOTL=~/.dotlocal
 
-# BREW_HOME {{{1
+# OS {{{1
+if [ "`uname -s`" = "Darwin" ]; then
+  export OS=mac
+else
+  export OS=linux
+fi
 
+is_mac() {
+  [ "$OS" = "mac" ]
+}
+is_linux() {
+  [ "$OS" = "linux" ]
+}
+
+# Helper functions {{{1
+source_if_exists() {
+  if [ -e "$1" ]; then source $1; fi
+}
+
+# Check if command exists {{{1
+has_command() {
+  type "$1" > /dev/null 2>&1
+}
+
+command_missing() {
+  ! has_command "$1"
+}
+
+# Check if process is running {{{1
+is_running() {
+  ps cax | grep "$1" > /dev/null 2>&1
+}
+
+# BREW_HOME {{{1
 for dir in ~/.linuxbrew ~/.homebrew /usr/local; do
   if [ -e "$dir" ]; then
     export BREW_HOME=$dir
@@ -11,8 +43,6 @@ for dir in ~/.linuxbrew ~/.homebrew /usr/local; do
 done
 
 # PATH {{{1
-
-
 PATH=$DOTF/scripts:$DOTL/scripts
 PATH=$PATH:$BREW_HOME/bin
 PATH=$PATH:$HOME/bin:$HOME/scripts:$HOME/.local/bin
@@ -32,11 +62,6 @@ PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
 export PATH
 
 # EDITOR {{{1
-
-has_command() {
-  type "$1" > /dev/null 2>&1
-}
-
 if has_command nvim; then
   export EDITOR=nvim
 else
@@ -47,7 +72,6 @@ export VISUAL=$EDITOR
 export GIT_EDITOR=$EDITOR
 
 # TMUX {{{1
-
 # so tmux will allow 256 colors:
 if [[ "$TERM" != "screen-256color" ]]; then
   export TERM=xterm-256color

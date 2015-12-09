@@ -3,8 +3,7 @@
 if [ -n "$ZSHENV_LOADED" ]; then return; fi
 export ZSHENV_LOADED='yes'
 
-source ~/.zprezto/runcoms/zshenv
-source ~/.dotfiles/zsh/base.zsh
+source ~/.dotfiles/zsh/core.zsh
 
 # Fix $TERM problem with remote servers
 alias ssh='TERM=xterm ssh'

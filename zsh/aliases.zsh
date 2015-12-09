@@ -1,13 +1,7 @@
-# SSH {{{1
-export SSH_TERM=xterm
+# vim: foldmethod=marker
 
-if [ -n "$TMUX" ]; then
-  export SSH_AUTH_SOCK="$HOME/.ssh/default-agent"
-  agent fix
-fi
-
-# Aliases {{{1
-
+# All Aliases {{{1
+alias ..='cd ..'
 alias agg="ag --ignore '*.yml'"
 alias be='bundle exec'
 alias bl='tr ":" "\n"'
@@ -20,15 +14,19 @@ alias c6='awk "{ print \$6 }"'
 alias c=clear
 alias cd/='cd "$(find-root)"'
 alias cf='/bin/ls -1 | wc -l' # count files
+alias df='df -kh'
 alias dotfi='cd $DOTF'
 alias dotl='cd $DOTL'
+alias du='du -kh'
 alias fliph='convert -flop'
 alias flipv='convert -flip'
+alias g='git'
 alias gcoo='git all-branches | fzf | xargs git checkout'
 alias gdestroy='git destroy `git all-branches | fzf`'
 alias gulp='gulp --require coffee-script/register'
 alias hex='od -xcb'
 alias hh='history'
+alias most-used-commands="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
 alias i18n='bin/rake i18n:js:export'
 alias k='less $DOTF/docs/keys.md'
 alias ke='vim $DOTF/docs/keys.md'
@@ -64,49 +62,26 @@ alias vl='vim "+OpenSession! last"'
 alias vz='file="$(edit-zsh-dotfile)" && source $file'
 alias x=exit
 
-if [[ "`uname -s`" == "Darwin" ]]; then
+# Confirm filesystem operations {{{1
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
 
+# Mac/Linux {{{1
+if is_mac; then
+  alias o='open'
 else
-  alias cl='xclip -selection clipboard -o'
-  alias st='scrot -s'
-  alias wp='feh --bg-fill'
+  alias o='xdg-open'
+  alias pbpaste='xclip -selection clipboard -out'
+
+  if has_command xclip; then
+    alias pbcopy='xclip -selection clipboard -in'
+    alias pbpaste='xclip -selection clipboard -out'
+  elif has_command xsel; then
+    alias pbcopy='xsel --clipboard --input'
+    alias pbpaste='xsel --clipboard --output'
+  fi
 fi
 
-# Functions {{{1
-
-function encrypt() {
-  openssl des3 -salt -in $* -out $*.secret
-}
-
-function decrypt() {
-  openssl des3 -salt -d -in $* -out $*.plain
-}
-
-ff() {
-  find . -iname "*$**"
-}
-
-# Settings: Bindings {{{1
-
-# VI bindings
-bindkey -v
-
-bindkey '^R' history-incremental-pattern-search-backward
-bindkey '^F' history-incremental-pattern-search-forward
-bindkey '^N' down-line-or-search
-bindkey '^K' kill-line
-bindkey '^P' up-line-or-search
-bindkey '^A' beginning-of-line
-bindkey '^E' end-of-line
-
-# Settings: Misc {{{1
-
-# don't log to history commands starting with a space
-setopt HIST_IGNORE_SPACE
-source $DOTF/vim/colors/base16-elentok.dark.sh
-
-export MPD_HOST=bob@localhost
-export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-export GREP_OPTIONS=
-
-# vim: foldmethod=marker
+alias pbc='pbcopy'
+alias pbp='pbpaste'

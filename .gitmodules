@@ -1,0 +1,6 @@
+[submodule "zsh/vendor/zsh-completions"]
+	path = zsh/vendor/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions
+[submodule "zsh/vendor/zsh-syntax-highlighting"]
+	path = zsh/vendor/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting
