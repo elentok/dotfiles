@@ -23,7 +23,7 @@ is_installed() {
 }
 
 select_version() {
-  ruby_versions | selecta
+  ruby_versions | fzf
 }
 
 install_version() {

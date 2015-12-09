@@ -7,7 +7,7 @@ main() {
 }
 
 select-file() {
-  list-files | selecta
+  list-files | fzf
 }
 
 list-files() {
