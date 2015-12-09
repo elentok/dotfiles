@@ -70,4 +70,7 @@ else
   install_symlinks
   install_fzf
   reset_completion_cache
+
+  # fix premissions issue
+  chmod -R g-w $DOTF/zsh/vendor/zsh-completions
 fi
