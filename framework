@@ -6,7 +6,7 @@
 DOTF=`dirname ${BASH_SOURCE[0]-$0}`
 export DOTF=`cd $DOTF && pwd`
 
-source $DOTF/zsh/base.zsh
+source $DOTF/zsh/core.zsh
 
 # BREW_HOME directory {{{1
 BREW_HOME=/usr/local
@@ -54,34 +54,7 @@ export CYAN="\033[36m"
 export UNDERLINE="\033[4m"
 export RESET="\033[0m"
 
-# Check if command exists {{{1
-has_command() {
-  type "$1" > /dev/null 2>&1
-}
-
-command_missing() {
-  ! has_command "$1"
-}
-
-# Check if process is running {{{1
-is_running() {
-  ps cax | grep "$1" > /dev/null 2>&1
-}
-
 # Identify OS {{{1
-if [ "`uname -s`" = "Darwin" ]; then
-  export OS=mac
-else
-  export OS=linux
-fi
-
-is_mac() {
-  [ "$OS" = "mac" ]
-}
-is_linux() {
-  [ "$OS" = "linux" ]
-}
-
 if command_missing X; then
   export HAS_GUI=no
 else

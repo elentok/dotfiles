@@ -20,37 +20,10 @@ install_zsh() {
   fi
 }
 
-
-install_prezto() {
-  bullet "Installing prezto..."
-  if [ ! -d ~/.zprezto ]; then
-    git_clone https://github.com/sorin-ionescu/prezto.git ~/.zprezto --recursive 
-  else
-    info " already exists"
-  fi
-
-}
-
-install_prezto_symlinks() {
-  for rcfile in ~/.zprezto/runcoms/z*; do
-    name=`basename $rcfile`
-    [ "$name" == "zshrc" ] && continue
-    [ "$name" == "zprofile" ] && continue
-    [ "$name" == "zshenv" ] && continue
-    [ "$name" == "zpreztorc" ] && continue
-    symlink $rcfile ~/.$name
-  done
-}
-
 install_symlinks() {
-  install_prezto_symlinks
-
   symlink "$DOTF/zsh" ~/.zsh 
   symlink "$DOTF/zsh/zshrc" ~/.zshrc
-  symlink "$DOTF/zsh/zprofile" ~/.zprofile
   symlink "$DOTF/zsh/zshenv" ~/.zshenv
-  symlink "$DOTF/zsh/zpreztorc" ~/.zpreztorc
-  symlink "$DOTF/zsh/prompt_elentok_setup" ~/.zprezto/modules/prompt/functions/prompt_elentok_setup
 }
 
 install_requirements() {
@@ -70,22 +43,31 @@ install_gnu_utils() {
 }
 
 install_fzf() {
-  bullet "Installing FZF...\n"
-  git clone https://github.com/junegunn/fzf.git ~/.fzf --depth 1
-  ~/.fzf/install
+  bullet 'Installing FZF... '
+  if [ -e ~/.fzf ]; then
+    info 'already installed.'
+  else
+    git_clone https://github.com/junegunn/fzf.git ~/.fzf --depth 1
+    ~/.fzf/install
+  fi
+}
+
+reset_completion_cache() {
+  bullet 'Resetting completion cache...'
+  rm -rf ~/.zcompcache
+  rm -rf ~/.local/share/zcompcache
+  rm -f ~/.zcompdump
+  zsh -c 'autoload -U compinit && compinit'
 }
 
 header "Zsh"
 
 if [ "$1" == "symlinks" ]; then
   install_symlinks
-elif [ "$1" == "basic" ]; then
-  install_prezto
-  install_symlinks
 else
   install_requirements
   install_zsh
-  install_prezto
   install_symlinks
   install_fzf
+  reset_completion_cache
 fi
