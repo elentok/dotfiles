@@ -18,15 +18,9 @@ main() {
 
 install_on_mac() {
   brew_install macvim --with-cscope --override-system-vim --with-lua
-  create_vim_bin_symlink
 
   brew_install ctags
   brew_install the_silver_searcher # ag
-}
-
-create_vim_bin_symlink() {
-  latest_vim=`/bin/ls -1 -d $BREW_HOME/Cellar/macvim/7.* | sort -n | tail -1`
-  symlink $latest_vim/bin/vim /usr/bin/vim
 }
 
 install_on_linux() {

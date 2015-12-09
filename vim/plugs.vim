@@ -17,10 +17,8 @@ Plug 'avakhov/vim-yaml' " indentation
 Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'digitaltoad/vim-jade'
 Plug 'elentok/alternate-spec.vim'
-Plug 'elentok/ctrlp-objects.vim'
 Plug 'elentok/notes.vim'
 Plug 'elentok/replace-all.vim', { 'on': ['FindAll', 'ReplaceAll'] }
 Plug 'elentok/run.vim'
@@ -35,9 +33,10 @@ Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 Plug 'groenewege/vim-less'
 Plug 'iandoe/vim-osx-colorpicker'
 Plug 'itchyny/calendar.vim', { 'on': 'Calendar' }
-Plug 'jasoncodes/ctrlp-modified.vim', { 'on': 'CtrlPModified' }
 Plug 'jplaut/vim-arduino-ino'
 Plug 'jtratner/vim-flavored-markdown' " add on to tpope's markdown plugin (git flavored markdown)
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " dark/zen room, no distraction mode
 Plug 'junegunn/vim-easy-align'
 Plug 'kchmck/vim-coffee-script'

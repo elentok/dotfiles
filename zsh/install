@@ -70,6 +70,12 @@ install_gnu_utils() {
   brew_install grep --with-default-names
 }
 
+install_fzf() {
+  bullet "Installing FZF...\n"
+  git clone https://github.com/junegunn/fzf.git ~/.fzf --depth 1
+  ~/.fzf/install
+}
+
 header "Zsh"
 
 if [ "$1" == "symlinks" ]; then
@@ -82,4 +88,5 @@ else
   install_zsh
   install_prezto
   install_symlinks
+  install_fzf
 fi
