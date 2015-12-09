@@ -46,6 +46,10 @@ fi
 source ~/.dotfiles/zsh/after.zsh
 source ~/.dotfiles/zsh/prompt
 source_if_exists ~/.dotlocal/zsh/after.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# required so ~/.zshenv will be loaded by sub-processes
+unset ZSHENV_LOADED
 
 # Profiling (summary) {{{1
 duration=$((($SECONDS - $START_TIME) * 1000))
