@@ -11,6 +11,7 @@ Plug 'Arduino-syntax-file'
 Plug 'Konfekt/FastFold'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Raimondi/delimitMate'
+Plug 'airblade/vim-gitgutter'
 Plug 'applescript.vim'
 Plug 'asymmetric/upstart.vim'
 Plug 'avakhov/vim-yaml' " indentation
