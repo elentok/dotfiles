@@ -1,6 +1,7 @@
 augroup Elentok_Misc
   autocmd!
   autocmd VimEnter * set t_vb=
+  autocmd VimEnter * echomsg printf("Took %dms to load", g:vimrc_time)
 
   autocmd BufRead,BufEnter *.applescript setlocal filetype=applescript
   autocmd BufRead,BufEnter *.rxls        setlocal filetype=ruby

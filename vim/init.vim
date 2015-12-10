@@ -1,10 +1,6 @@
 " vim: foldmethod=marker
 
-if $SHELL =~ 'fish'
-  set shell=/bin/sh
-endif
-
-"let mapleader = ","
+let start=reltime()
 
 let $root=expand("<sfile>:p:h")
 
@@ -93,3 +89,5 @@ endif
 if file_readable(expand("~/.dotlocal/after.vim"))
   source ~/.dotlocal/after.vim
 endif
+
+let g:vimrc_time=float2nr(str2float(reltimestr(reltime(start))) * 1000)

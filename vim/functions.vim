@@ -85,12 +85,6 @@ func! Browse(url)
   end
 endfunc
 
-" Calc {{{1
-
-if has('python')
-  :command! -nargs=+ Calc :py print <args>
-  :py from math import *
-end
 
 " fix nerdtree width {{{1
 function! FixNERDTreeWidth()
