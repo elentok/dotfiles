@@ -10,6 +10,7 @@ command! Efunctions edit ~/.dotfiles/vim/functions.vim
 command! Ekeys      edit ~/.dotfiles/vim/keys.vim
 command! Esettings  edit ~/.dotfiles/vim/settings.vim
 command! Eabbr      edit ~/.dotfiles/vim/abbr.vim
+command! Ealiases   edit ~/.dotfiles/zsh/aliases.zsh
 
 command! FoldByIndent setlocal foldmethod=expr nofoldenable
   \ foldexpr=IndentFoldExpr(v:lnum)
