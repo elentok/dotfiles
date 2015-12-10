@@ -7,65 +7,66 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'AndrewRadev/sideways.vim'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'Arduino-syntax-file'
 Plug 'Konfekt/FastFold'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Raimondi/delimitMate'
 Plug 'airblade/vim-gitgutter'
-Plug 'applescript.vim'
-Plug 'asymmetric/upstart.vim'
-Plug 'avakhov/vim-yaml' " indentation
 Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'digitaltoad/vim-jade'
 Plug 'elentok/alternate-spec.vim'
-Plug 'elentok/notes.vim'
 Plug 'elentok/replace-all.vim', { 'on': ['FindAll', 'ReplaceAll'] }
 Plug 'elentok/run.vim'
 Plug 'elentok/spec-runner.vim'
-Plug 'elentok/todo.vim'
 Plug 'elentok/togglr.vim'
-Plug 'elentok/vim-markdown-folding'
 Plug 'elentok/vim-rails-extra'
-Plug 'evanmiller/nginx-vim-syntax'
-Plug 'fatih/vim-go'
 Plug 'gregsexton/gitv', { 'on': 'Gitv' }
-Plug 'groenewege/vim-less'
 Plug 'iandoe/vim-osx-colorpicker'
 Plug 'itchyny/calendar.vim', { 'on': 'Calendar' }
-Plug 'jplaut/vim-arduino-ino'
-Plug 'jtratner/vim-flavored-markdown' " add on to tpope's markdown plugin (git flavored markdown)
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " dark/zen room, no distraction mode
 Plug 'junegunn/vim-easy-align'
-Plug 'kchmck/vim-coffee-script'
 Plug 'mhinz/vim-grepper'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'mtscout6/vim-cjsx'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'ngmy/vim-rubocop'
-Plug 'othree/yajs.vim'
-Plug 'pangloss/vim-javascript'
 Plug 'schickling/vim-bufonly', { 'on': ['BufOnly', 'Bonly', 'BOnly'] }
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': [ 'NERDTreeToggle', 'NERDTreeFocus', 'NERDTreeFind'] }
-Plug 'shime/vim-livedown', { 'on': 'LivedownPreview' }
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-haml'
-Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'vim-ruby/vim-ruby'
 Plug 'xolox/vim-misc'
-Plug 'yaml.vim' " syntax highlighting
+
+" File formats:
+Plug 'applescript.vim',                { 'for': 'applescript' }
+Plug 'Arduino-syntax-file',            { 'for': 'ino' }
+Plug 'jplaut/vim-arduino-ino',         { 'for': 'ino' }
+Plug 'asymmetric/upstart.vim',         { 'for': 'upstart' }
+Plug 'digitaltoad/vim-jade',           { 'for': 'jade' }
+Plug 'elentok/notes.vim',              { 'for': 'notes' }
+Plug 'elentok/todo.vim',               { 'for': 'todo' }
+Plug 'elentok/vim-markdown-folding',   { 'for': 'markdown' }
+Plug 'tpope/vim-markdown',             { 'for': 'markdown' }
+Plug 'jtratner/vim-flavored-markdown', { 'for': 'markdown' } " add-on to tpope's markdown plugin (git flavored markdown)
+Plug 'shime/vim-livedown',             { 'for': 'markdown', 'on': 'LivedownPreview' }
+Plug 'evanmiller/nginx-vim-syntax',    { 'for': 'nginx' }
+Plug 'fatih/vim-go',                   { 'for': 'go' }
+Plug 'groenewege/vim-less',            { 'for': 'less' }
+Plug 'othree/yajs.vim',                { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript',        { 'for': 'javascript' }
+Plug 'kchmck/vim-coffee-script',       { 'for': 'coffee' }
+Plug 'vim-ruby/vim-ruby',              { 'for': 'ruby' }
+Plug 'yaml.vim',                       { 'for': 'yaml' } " syntax highlighting
+Plug 'avakhov/vim-yaml',               { 'for': 'yaml' } " indentation
+Plug 'tpope/vim-haml',                 { 'for': 'haml' }
 
 if has('nvim')
   Plug 'benekastah/neomake'
