@@ -218,12 +218,6 @@ if g:os == "mac"
   let &t_EI .= s:xterm_block  " Solid block cursor when in normal mode]]"
 endif
 
-" Neovim {{{1
-if has('nvim')
-  let g:tmux_navigator_no_mappings = 1
-  "let g:deoplete#enable_at_startup = 1
-endif
-
 " Neomake {{{1
 let g:neomake_scss_enabled_makers = ['scsslint']
 let g:neomake_coffee_enabled_makers = ['coffeelint']
