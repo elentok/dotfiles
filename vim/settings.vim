@@ -188,7 +188,9 @@ let g:xml_syntax_folding=1
 " With the following settings Vim's UTF-8 behaves as follows:
 " - new files with no nonascii chars (>1byte) will be saved as ANSI (no BOM)
 " - new files with nonascii chars will be saved as UTF-8 (with BOM)
-set encoding=utf-8
+if &encoding != 'utf-8'
+  set encoding=utf-8
+endif
 " create Unicode files with B.O.M. by default
 "setglobal fileencoding=utf-8 bomb
 setglobal fileencoding=utf-8
