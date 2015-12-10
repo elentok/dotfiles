@@ -32,13 +32,7 @@ nnoremap <Leader>dm :call Browse("https://github.com/adam-p/markdown-here/wiki/M
 nnoremap <Leader>dj :call Browse("https://github.com/visionmedia/jade#readme")<cr>
 nnoremap <Leader>dk :e $DOTF/docs/keys.md<cr>
 
-
 " Window management {{{1
-
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
 nnoremap <Leader>l :silent !tput clear<cr>:redraw!<cr>
 nnoremap <Leader><Leader> :silent !tput clear<cr>:redraw!<cr>
 
