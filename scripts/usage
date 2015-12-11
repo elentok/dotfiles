@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# Displays a usage message from the first comment block in the given file
+#
+# Usage:
+#
+#    usage <filename>
+
+if [ $# -eq 0 ]; then
+  usage "$0"
+else
+  cat "$1" | sed --quiet '/^#/!q;s/^# \?//;1d;p'
+fi
