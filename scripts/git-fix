@@ -1,20 +1,20 @@
 #!/bin/bash
+#
+# Creates a fixup commit and rebases it
+#
+# Usage:
+#
+# git fix <revision>
+#
 
 source $DOTF/framework
 
 main() {
   if [ $# -eq 0 ]; then
-    usage
+    usage "$0"
   else
     fix-commit "$1"
   fi
-}
-
-usage() {
-  echo "Usage:"
-  echo
-  echo "git fix <revision>"
-  echo
 }
 
 fix-commit() {

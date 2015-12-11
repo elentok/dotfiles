@@ -1,22 +1,20 @@
 #!/bin/bash
+#
+# Creates a version tag
+#
+# Usage:
+#
+#   git vertag {version}
 
 RESET="\033[0m"
 BLUE="\033[34m"
 
 main() {
   if [ "$1" == "" ]; then
-    usage
+    usage "$0"
   else
     tag $1
   fi
-}
-
-usage() {
-  echo
-  echo 'Usage:'
-  echo
-  echo '  git vertag {version}'
-  echo
 }
 
 tag() {
@@ -37,7 +35,5 @@ confirm() {
   read -p "(y/[n])? " yesno
   [ "$yesno" = "y" ]
 }
-
-
 
 main $*

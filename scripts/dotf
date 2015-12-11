@@ -1,4 +1,14 @@
 #!/bin/bash
+#
+# Elentok's dotfiles
+#
+# Usage:
+#
+#   dotf list                         - lists all plugins
+#   dotf install                      - installs all plugins
+#   dotf install [plugin] [plugin]... - install specific plugins
+#   dotf update                       - pulls from git and reruns install
+#   dotf export-vim                   - exports vim config to .tar.gz
 
 source `dirname $0`/../framework
 
@@ -19,22 +29,9 @@ main() {
     export_vim
     ;;
   *)
-    usage
+    usage "$0"
     ;;
   esac
-}
-
-usage() {
-  echo
-  echo "Elentok's dotfiles"
-  echo
-  echo "Usage:"
-  echo
-  echo "  dotf list                         - lists all plugins"
-  echo "  dotf install                      - installs all plugins"
-  echo "  dotf install [plugin] [plugin]... - install specific plugins"
-  echo "  dotf update                       - pulls from git and reruns install"
-  echo "  dotf export-vim                   - exports vim config to .tar.gz"
 }
 
 list_plugins() {

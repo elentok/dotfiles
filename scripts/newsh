@@ -1,16 +1,16 @@
 #!/bin/bash
+#
+# Creates a new script in ~/.dotfiles/scripts
+#
+# Usage:
+#   newsh <filename> [optional:bash/zsh]
 
 main() {
   if [[ "$1" == "" ]]; then
-    usage
+    usage "$0"
   else
     create $*
   fi
-}
-
-usage() {
-  echo "Usage:"
-  echo "  newsh [filename] [optional:bash/zsh]"
 }
 
 create() {

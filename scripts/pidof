@@ -1,8 +1,12 @@
 #!/bin/bash
+#
+# Usage:
+#
+#   pidof {process-name}
 
 main() {
   if [ $# -eq 0 ]; then
-    usage
+    usage "$0"
   else
     find_pid "$1"
   fi
@@ -11,14 +15,6 @@ main() {
 find_pid() {
   results=$(ps axc | awk '{print $1" "$5}' | grep " $1\$")
   [ ! -z "$results" ] && echo "$results" | cut -d' ' -f1
-}
-
-usage() {
-  echo
-  echo "Usage:"
-  echo
-  echo "  pidof {process-name}"
-  echo
 }
 
 main $*

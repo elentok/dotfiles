@@ -1,7 +1,16 @@
 #!/bin/bash
-
-# Created by David Elentok.
-# https://github.com/elentok/dotfiles
+#
+# Highlights patterns in stdin
+#
+# Usage:
+#   hl [options] {regexp} [color]
+#
+# Options:
+#   -i    case insensitive
+#
+# Example:
+#   tail -f production.log | hl -i '(error|warn)'
+#   tail -f production.log | hl -i 'error.*' red | hl -i 'warn.*' yellow
 
 RESET="\033[0m"
 red="\033[41;37m"
@@ -27,18 +36,6 @@ if [ "$(uname -s)" == "Darwin" ]; then # if mac
   fi
 fi
 
-usage() {
-  echo "Usage:"
-  echo "  hl [options] {regexp} [color]"
-  echo
-  echo "Options:"
-  echo "  -i    case insensitive"
-  echo
-  echo "Example:"
-  echo "  tail -f production.log | hl -i '(error|warn)'"
-  echo "  tail -f production.log | hl -i 'error.*' red | hl -i 'warn.*' yellow"
-}
-
 get_color_code() {
   color="blue"
   if [ $# -gt 0 ]; then color=$1; fi
@@ -46,11 +43,8 @@ get_color_code() {
 }
 
 if [ $# -eq 0 ]; then
-  usage
+  usage "$0"
 else
   color=$(get_color_code $2)
   sed -E "s/$1/$(printf $color)&$(printf $RESET)/$FLAGS"
 fi
-
-
-

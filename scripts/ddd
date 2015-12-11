@@ -1,11 +1,16 @@
 #!/bin/bash
+#
+# ddd - dd with progress report
+#
+# Usage:
+#   ddd <input> <output>
 
 source $DOTF/framework
 
 main() {
   check_pv
   if [ $# -lt 2 ]; then
-    usage
+    usage "$0"
   else
     echo
     echo "Copying from $1"
@@ -13,16 +18,6 @@ main() {
     echo
     sudo sh -c "dd if="$1" bs=100m | pv | dd of="$2" bs=100m"
   fi
-}
-
-usage() {
-  cat<<EOF
-
-ddd - dd with progress report
-
-Usage:
-  ddd <input> <output>
-EOF
 }
 
 check_pv() {
