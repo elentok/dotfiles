@@ -1,23 +1,17 @@
 #!/bin/bash
+#
+# s3upload
+#
+# Usage:
+#
+#   s3upload <bucket> <bucket_path> <local_file>...
 
 main() {
   if [ $# -lt 3 ]; then
-    usage
+    usage "$0"
   else
     upload "$@"
   fi
-}
-
-usage() {
-  cat <<EOF
-
-s3upload
-
-Usage:
-
-  s3upload <bucket> <bucket_path> <local_file>...
-
-EOF
 }
 
 upload() {

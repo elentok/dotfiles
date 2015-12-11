@@ -1,4 +1,13 @@
 #!/bin/bash
+#
+# agent - Switches between SSH agents
+#
+# Usage:
+#   agent list              - list the available agents
+#   agent which             - show the default agent
+#   agent choose            - choose a default agent (interactive)
+#   agent set [socket-path] - switch to specific agent
+#   agent fix               - attempt to fix a zombie default agent
 
 DEFAULT_AGENT="$HOME/.ssh/default-agent"
 LOCAL_AGENT="/tmp/ssh-agent-$USER"
@@ -13,22 +22,8 @@ main() {
     choose | c) choose-agent;;
     set    | s) set-agent "$@";;
     fix    | f) fix;;
-    *)          usage;;
+    *)          usage "$0";;
   esac
-}
-
-usage() {
-  cat<<EOF
-
-agent - Switches between SSH agents
-
-Usage:
-  agent list              - list the available agents
-  agent which             - show the default agent
-  agent choose            - choose a default agent (interactive)
-  agent set [socket-path] - switch to specific agent
-  agent fix               - attempt to fix a zombie default agent
-EOF
 }
 
 list-agents() {

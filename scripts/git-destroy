@@ -1,21 +1,21 @@
 #!/bin/zsh
+#
+# Deletes branch from local and origin
+#
+# Usage:
+#
+#   git destroy {branch-name}
 
 source $DOTF/framework
 
+SOURCE="$0"
+
 main() {
   if [[ "$1" == "" ]]; then
-    usage
+    usage "$SOURCE"
   else
     destroy_branch "$1"
   fi
-}
-
-usage() {
-  echo "Deletes branch from local and origin"
-  echo
-  echo "Usage:"
-  echo
-  echo "  git destroy {branch-name}"
 }
 
 destroy_branch() {
@@ -67,5 +67,4 @@ destroy_remote_branch() {
   fi
 }
 
-
-main $*
+main "$@"

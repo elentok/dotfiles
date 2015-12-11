@@ -1,4 +1,11 @@
 #!/bin/bash
+#
+# Creates a new playground project
+#
+# Usage:
+#
+#   playground new [name]
+#   playground watch
 
 source $DOTF/framework
 
@@ -13,27 +20,8 @@ main() {
   case "$cmd" in
     new)   new-playground "$@" ;;
     watch) watch-playground ;;
-    *)     usage ;;
+    *)     usage "$0" ;;
   esac
-}
-
-usage() {
-  cat<<EOF
-
-playground
-
-Usage:
-  playground new [name]
-  playground watch
-
-Options:
-  -h --help     Show this screen.
-  --version     Show version.
-  --speed=<kn>  Speed in knots [default: 10].
-  --moored      Moored (anchored) mine.
-  --drifting    Drifting mine.
-
-EOF
 }
 
 new-playground() {

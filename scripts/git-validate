@@ -1,4 +1,11 @@
 #!/bin/bash
+#
+# Usage:
+#
+#   git-validate staged
+#   git-validate commit (hash|branch|tag) (default: 'HEAD')
+#   git-validate file   {filename}
+#   git-validate all
 
 NEWLINE_REGEX="(\s*\r?\n){3,}"
 EOF_NEWLINE_REGEX="(\s*\r?\n){2,}\Z"
@@ -39,7 +46,7 @@ main() {
       exit $?
       ;;
     *)
-      usage
+      usage "$0"
       exit 256
       ;;
   esac
@@ -75,7 +82,7 @@ check_commit() {
 
 check_file() {
   if [ "$*" == "" ]; then
-    usage
+    usage "$0"
     exit 256
   fi
 
@@ -100,15 +107,6 @@ check_files() {
       EXIT_CODE=1
     fi
   done <<< "$FILES"
-}
-
-usage() {
-  echo
-  echo "git-validate staged"
-  echo "git-validate commit (hash|branch|tag) (default: 'HEAD')"
-  echo "git-validate file   {filename}"
-  echo "git-validate all"
-  echo
 }
 
 get_staged_files() {

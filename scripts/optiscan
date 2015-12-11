@@ -1,33 +1,28 @@
 #!/bin/bash
+#
+# optiscan - Optimize scanned images
+#
+# Usage:
+#   optiscan [--resize[=<width>x<height]] <name>...
+#   optiscan [--grayscale] <name>...
+#   optiscan [--colors=<c> --depth=<d>] <name>...
+#
+# Options:
+#   --grayscale                 Use 16 colors and a depth of 4
+#   --colors=<c>                Number of colors (default: 2)
+#   --depth=<d>                 Depth of color (default: 1)
+#   --resize[=<width>x<height>] Resize the image to fit in these bounds
+#                               (when --resize is specified defaults to 1500x1500,
+#                               otherwise defaults to "no")
 
 source $DOTF/framework
 
 main() {
   if [ $# -eq 0 ]; then
-    usage
+    usage "$0"
   else
     run "$@"
   fi
-}
-
-usage() {
-  cat<<EOF
-
-optiscan - Optimize scanned images
-
-Usage:
-  optiscan [--resize[=<width>x<height]] <name>...
-  optiscan [--grayscale] <name>...
-  optiscan [--colors=<c> --depth=<d>] <name>...
-
-Options:
-  --grayscale                 Use 16 colors and a depth of 4
-  --colors=<c>                Number of colors (default: 2)
-  --depth=<d>                 Depth of color (default: 1)
-  --resize[=<width>x<height>] Resize the image to fit in these bounds
-                              (when --resize is specified defaults to 1500x1500,
-                              otherwise defaults to "no")
-EOF
 }
 
 run() {

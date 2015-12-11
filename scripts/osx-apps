@@ -1,4 +1,10 @@
 #!/bin/bash
+#
+# osx-apps
+#
+# Usage:
+#   osx-apps list
+#   osx-apps id [app-title]
 
 source $DOTF/framework
 
@@ -14,21 +20,9 @@ main() {
       find-id "$@"
       ;;
     *)
-      usage
+      usage "$0"
       ;;
   esac
-}
-
-usage() {
-  cat<<EOF
-
-osx-apps
-
-Usage:
-  osx-apps list
-  osx-apps id [app-title]
-
-EOF
 }
 
 list() {

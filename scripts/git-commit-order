@@ -1,19 +1,15 @@
 #!/bin/bash
+#
+# Usage:
+#
+#   git commit-order [revision range]
 
 main() {
   if [ "$1" != "" ]; then
     commit-order $1
   else
-    usage
+    usage "$0"
   fi
-}
-
-usage() {
-  echo
-  echo "Usage:"
-  echo
-  echo "  git commit-order [revision range]"
-  echo
 }
 
 commit-order() {
