@@ -1,14 +1,11 @@
 #!/bin/bash
-
-USAGE="
-
-Telegram Bot CLI
-
-Usage:
-
-  telegram send {chat_id} {text}
-  telegram updates
-"
+#
+# Telegram Bot CLI
+#
+# Usage:
+#
+#   telegram send {chat_id} {text}
+#   telegram updates
 
 source $DOTF/framework
 
@@ -26,7 +23,7 @@ main() {
       updates
       ;;
     *)
-      echo "$USAGE"
+      usage "$0"
       ;;
   esac
 }
