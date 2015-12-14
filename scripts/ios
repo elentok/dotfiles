@@ -10,6 +10,7 @@ Usage:
   ios list-apps [device-id]
   ios booted-device
   ios install-app <path-to-app-folder>
+  ios log                               - tail the active device's system.log
 "
 
 class CLI
@@ -18,7 +19,7 @@ class CLI
     ARGV.shift
     cmd = cmd.gsub(/-/, '_') if cmd
 
-    if cmd
+    if cmd && respond_to?(cmd)
       send(cmd, *ARGV)
     else
       puts USAGE
@@ -36,6 +37,14 @@ class CLI
 
   def booted_device
     puts Device.booted
+  end
+
+  def log
+    log_path = "~/Library/Logs/CoreSimulator/#{Device.booted.id}/system.log"
+    puts '-----------------------------------------------------'
+    puts "Tailing #{log_path}..."
+    puts '-----------------------------------------------------'
+    system("tail -f #{log_path}")
   end
 
   def start
