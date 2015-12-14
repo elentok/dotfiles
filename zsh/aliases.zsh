@@ -70,6 +70,9 @@ alias rm='rm -i'
 # Mac/Linux {{{1
 if is_mac; then
   alias o='open'
+  alias hda='hdiutil attach'
+  alias hdd='hdiutil detach'
+  alias hdi='hdiutil info'
 else
   alias o='xdg-open'
   alias pbpaste='xclip -selection clipboard -out'
