@@ -47,8 +47,8 @@ augroup Elentok_Misc
 
   " fix nerdtree width
   autocmd BufEnter *
-    \ if exists("b:NERDTreeType")           |
-    \   call FixNERDTreeWidth()             |
+    \ if exists("b:NERDTree")   |
+    \   call FixNERDTreeWidth() |
     \ endif
 
   if has('nvim')
