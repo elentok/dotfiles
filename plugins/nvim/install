@@ -18,6 +18,7 @@ install_requirements() {
   fi
 
   pip3_install neovim
+  pip_install neovim
 }
 
 install_neovim() {
