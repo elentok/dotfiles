@@ -101,6 +101,11 @@ setopt EXTENDED_GLOB        # Use extended globbing syntax.
 unsetopt CLOBBER            # Do not overwrite existing files with > and >>.
                             # Use >! and >>! to bypass.
 
+# FZF {{{1
+
+# make FZF respect .gitignore
+export FZF_DEFAULT_COMMAND='ag -g ""'
+
 # Misc {{{1
 
 # don't log to history commands starting with a space
