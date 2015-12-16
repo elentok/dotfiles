@@ -10,7 +10,8 @@ Usage:
   ios list-apps [device-id]
   ios booted-device
   ios install-app <path-to-app-folder>
-  ios log                               - tail the active device's system.log
+  ios log                              - tail the active device's system.log
+  ios root                             - the root path of the booted device
 "
 
 class CLI
@@ -45,6 +46,10 @@ class CLI
     puts "Tailing #{log_path}..."
     puts '-----------------------------------------------------'
     system("tail -f #{log_path}")
+  end
+
+  def root
+    puts Device.booted.root_dir
   end
 
   def start
