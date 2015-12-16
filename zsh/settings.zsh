@@ -16,6 +16,7 @@ fpath=($DOTF/zsh/vendor/zsh-completions/src $fpath)
 export GOROOT=$BREW_HOME/opt/go/libexec
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export GO15VENDOREXPERIMENT=1
 
 # Ruby {{{1
 
