@@ -12,6 +12,8 @@ Usage:
   ios install-app <path-to-app-folder>
   ios log                              - tail the active device's system.log
   ios root                             - the root path of the booted device
+  ios app-root <app-name>              - the root path of an app on the booted
+                                         device (e.g. 'Bla.app')
 "
 
 class CLI
@@ -50,6 +52,15 @@ class CLI
 
   def root
     puts Device.booted.root_dir
+  end
+
+  def app_root(name)
+    search_path = File.join(Device.booted.root_dir, 'data', 'Containers',
+                            'Bundle', 'Application')
+
+    Dir["#{search_path}/**/#{name}"].each do |path|
+      puts path
+    end
   end
 
   def start

@@ -67,6 +67,12 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 
+# iOS Simulator {{{1
+alias iosroot='cd `ios root`'
+function iosapp() {
+  cd "$(ios app-root "$*")"
+}
+
 # Mac/Linux {{{1
 if is_mac; then
   alias o='open'
