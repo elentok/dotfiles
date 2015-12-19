@@ -50,8 +50,9 @@ run() {
 optimize() {
   local file="$1"
   local output="$(optimized-filename-for "$file")"
-  local tmpfile1="$TMPDIR/optiscan1.png"
-  local tmpfile2="$TMPDIR/optiscan2.png"
+  local ext="${file##*.}"
+  local tmpfile1="$TMPDIR/optiscan1.$ext"
+  local tmpfile2="$TMPDIR/optiscan2.$ext"
 
   bullet "Optimizing $file... "
 
@@ -82,6 +83,7 @@ optimize() {
 
 optimized-filename-for() {
   local file="$1"
+  local ext="${file##*.}"
   local basename="$(basename "$file")"
   local dirname="$(dirname "$file")"
 
@@ -89,7 +91,7 @@ optimized-filename-for() {
     mkdir -p "$dirname/optimized"
   fi
 
-  echo "$dirname/optimized/${basename%.*}.png"
+  echo "$dirname/optimized/${basename%.*}.$ext"
 }
 
 main "$@"
