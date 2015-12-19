@@ -24,6 +24,7 @@ command! NginxRestart QuickShell echo 'Restarting nginx...' && sudoo nginx -s re
 command! -nargs=* Bundle QuickShell bundle <args>
 command! -nargs=* Cap QuickShell bundle exec cap <args>
 command! Pkgs QuickShell pkgs status
+command! SudoWrite :w !sudo tee %
 
 " Hebrew {{{1
 func! ToggleHebrew()
