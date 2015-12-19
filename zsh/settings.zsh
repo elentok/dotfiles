@@ -27,6 +27,13 @@ if [ ! -e "$rbenv_cache" ]; then
 fi
 
 source $rbenv_cache
+
+# Mac Specific {{{1
+
+if is_mac; then
+  export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+fi
+
 # History {{{1
 HISTFILE="$HOME/.zhistory" # The path to the history file.
 HISTSIZE=10000                   # The maximum number of events to save in the internal history.
@@ -101,7 +108,6 @@ setopt HIST_IGNORE_SPACE
 source $DOTF/vim/colors/base16-elentok.dark.sh
 
 export MPD_HOST=bob@localhost
-export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 export GREP_OPTIONS=
 
 setopt RC_QUOTES          # Allow 'Henry''s Garage' instead of 'Henry'\''s Garage'.
