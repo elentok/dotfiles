@@ -18,15 +18,12 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export GO15VENDOREXPERIMENT=1
 
-# Ruby {{{1
+# 3rd party {{{1
 
-rbenv_cache="$HOME/.cache/dotfiles/rbenv-init"
-mkdir -p ~/.cache/dotfiles
-if [ ! -e "$rbenv_cache" ]; then
-  rbenv init --no-rehash - > "$rbenv_cache"
-fi
+cached_eval rbenv rbenv init --no-rehash -
 
-source $rbenv_cache
+cached_eval fasd fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install \
+  zsh-wcomp zsh-wcomp-install
 
 # Mac Specific {{{1
 
@@ -65,6 +62,10 @@ function encrypt() {
 
 function decrypt() {
   openssl des3 -salt -d -in $* -out $*.plain
+}
+
+function j() {
+  cd "$(fasd -d "$@" | fzf --no-sort --tac)"
 }
 
 function ff {
