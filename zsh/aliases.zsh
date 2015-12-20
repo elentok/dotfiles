@@ -61,6 +61,7 @@ alias v=vim
 alias vl='vim "+OpenSession! last"'
 alias vz='file="$(edit-zsh-dotfile)" && source $file'
 alias x=exit
+alias tailpow='tail -f $(find ~/Library/Logs/Pow -name "*.log" | fzf)'
 
 # Confirm filesystem operations {{{1
 alias cp='cp -i'
