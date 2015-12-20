@@ -65,7 +65,7 @@ function decrypt() {
 }
 
 function j() {
-  cd "$(fasd -d "$@" | fzf --no-sort --tac)"
+  cd "$(fasd -l -d "$@" | fzf --no-sort --tac)"
 }
 
 function ff {
