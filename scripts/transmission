@@ -1,0 +1,55 @@
+#!/bin/bash
+#
+# Sends a magnet link to transmission
+#
+# Usage:
+#
+#   transmission [options] <magnet_link>
+#
+# Options:
+#
+#   --server=SERVER    the hostname or ip where transmission is hosted
+#                      (default: 'localhost')
+#   --port=PORT        the transmission port (default: 9091)
+#   --user=USER        the transmission username
+#   --pass=PASS        the transmission password
+#   --paused           pause the download (default: false)
+
+source $DOTF/framework
+
+main() {
+  SERVER=localhost
+  PORT=9091
+  USER=
+  PASS=
+  PAUSED='false'
+  while extract_flag "$1"; do shift; done
+
+  if [ $# -eq 0 ]; then
+    usage $0
+  else
+    send_magnet_link $1
+  fi
+}
+
+send_magnet_link() {
+  local link="$1"
+
+  if [ -n "$USER" ]; then
+    USER_AUTH="--user $USER:$PASS"
+  fi
+
+  echo "header=[$(get_session_header)]"
+
+  curl --silent --anyauth $USER_AUTH --header "$(get_session_header)" \
+    "http://$SERVER:$PORT/transmission/rpc" \
+    -d "{\"method\":\"torrent-add\",\"arguments\":{\"paused\":${PAUSED},\"filename\":\"${link}\"}}"
+}
+
+get_session_header() {
+  curl --silent --anyauth $USER_AUTH \
+    "http://$SERVER:$PORT/transmission/rpc" \
+    | sed 's/.*<code>//g;s/<\/code>.*//g'
+}
+
+main "$@"
