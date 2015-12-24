@@ -63,6 +63,9 @@ alias vz='file="$(edit-zsh-dotfile)" && source $file'
 alias x=exit
 alias tailpow='tail -f $(find ~/Library/Logs/Pow -name "*.log" | fzf)'
 
+alias ew='whichx $EDITOR'
+alias cw='whichx cat'
+
 # Confirm filesystem operations {{{1
 alias cp='cp -i'
 alias mv='mv -i'

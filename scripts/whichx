@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+# Run which and execute a command on it
+#
+# Usage:
+#
+#   whichx <command> <file-to-search-for>
+#
+# Example:
+#
+#   whichx cat my-script
+
+source $DOTF/framework
+
+main() {
+  if [ $# -lt 2 ]; then
+    usage $0
+    exit 1
+  fi
+
+  local filename="$2"
+  local fullpath="$(which $filename)"
+
+  >&2 echo -e "$BLUE>> $1 $fullpath$RESET"
+  eval "$1 $fullpath"
+}
+
+main "$@"
