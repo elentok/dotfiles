@@ -1,0 +1,76 @@
+#!/usr/bin/ruby
+#
+# Transmission Bitorrent Client CLI
+#
+# Usage:
+#
+#   bt add-magnet <link>
+
+require 'json'
+require "#{ENV['DOTF']}/framework.rb"
+load "#{ENV['DOTF']}/scripts/dotvar"
+
+class BtClient
+  def initialize(config = {})
+    @host = config[:host] || 'localhost'
+    @port = config[:port] || 9091
+    @req_options = {}
+    @req_options[:basic_auth] = [config[:user], config[:pass]] if config[:user]
+    authenticate(config)
+  end
+
+  def authenticate(config)
+    puts 'Authenticating...'
+    options = {}
+
+    res = http_client.get('/transmission/rpc', options)
+    match = %r(<code>(.*)</code>).match(res.body)
+    fail "Can't find session id" if match.nil?
+
+    name, value = match[1].split(': ')
+    puts "Authenticated: #{name}: #{value}"
+    http_client.headers[name] = value
+  end
+
+  def add_magnet(link, options = {})
+    res = http_client.post '/transmission/rpc',
+                           method: 'torrent-add',
+                           arguments:
+                           {
+                             paused: !!options[:paused],
+                             filename: link
+                           }
+
+    puts res.body
+  end
+
+  private
+
+  def http_client
+    @http_client ||= HttpClient.new(@host, port: @port, req: @req_options)
+  end
+end
+
+class CLI < BaseCLI
+  def usage
+    system("usage #{__FILE__}")
+  end
+
+  def add_magnet(link)
+    bt_client.add_magnet(link)
+  end
+
+  def bt_client
+    @bt_client ||= BtClient.new(bt_client_config)
+  end
+
+  def bt_client_config
+    YAML.load_file(File.expand_path('~/.config/transmission-cli.yml'))
+  end
+end
+
+#client = Client.new(user: 'jnur', pass: 'kishot', host: '10.0.1.113')
+
+#client.add_magnet('bla')
+
+CLI.new.start
