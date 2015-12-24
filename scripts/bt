@@ -20,7 +20,7 @@ class BtClient
   end
 
   def authenticate(config)
-    puts 'Authenticating...'
+    STDERR.puts 'Authenticating...'
     options = {}
 
     res = http_client.get('/transmission/rpc', options)
@@ -28,7 +28,7 @@ class BtClient
     fail "Can't find session id" if match.nil?
 
     name, value = match[1].split(': ')
-    puts "Authenticated: #{name}: #{value}"
+    STDERR.puts "Authenticated: #{name}: #{value}"
     http_client.headers[name] = value
   end
 
@@ -42,6 +42,17 @@ class BtClient
                            }
 
     puts res.body
+  end
+
+  def list
+    res = http_client.post '/transmission/rpc',
+                           method: 'torrent-get',
+                           fields: 'name',
+                           arguments: {
+                             fields: [ 'name', 'status' ]
+                           }
+
+    res.body
   end
 
   private
@@ -59,6 +70,12 @@ class CLI < BaseCLI
   def add_magnet(link)
     bt_client.add_magnet(link)
   end
+
+  def ls
+    puts bt_client.list
+  end
+
+  private
 
   def bt_client
     @bt_client ||= BtClient.new(bt_client_config)
