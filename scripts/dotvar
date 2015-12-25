@@ -61,8 +61,6 @@ module DotVar
       store[key] = read(prompt)
     end
 
-    private
-
     def store
       @store ||= Store.default
     end
