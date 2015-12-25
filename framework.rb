@@ -85,7 +85,7 @@ class BaseCLI
     ARGV.shift
     cmd = cmd.gsub(/-/, '_') if cmd
 
-    if respond_to?(cmd)
+    if cmd && respond_to?(cmd)
       send(cmd, *ARGV)
     else
       usage
