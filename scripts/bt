@@ -5,6 +5,7 @@
 # Usage:
 #
 #   bt ls
+#   bt remove-complete
 #   bt add-magnet <link>
 
 require 'json'
@@ -49,12 +50,21 @@ module Bt
     def list
       res = http_client.post('/transmission/rpc',
                              method: 'torrent-get',
-                             fields: 'name',
                              arguments: {
-                               fields: [ 'name', 'status', 'percentDone' ]
+                               fields: [ 'id', 'name', 'status' ]
                              })
 
       JSON.parse(res.body)['arguments']['torrents'].map { |raw| Torrent.new(raw) }
+    end
+
+    def remove(torrent_ids)
+      res = http_client.post('/transmission/rpc',
+                             method: 'torrent-remove',
+                             arguments: {
+                               ids: torrent_ids
+                             })
+
+      res.body
     end
 
     private
@@ -75,7 +85,10 @@ module Bt
       :seed           # 6  Seeding
     ]
 
+    attr_reader :id, :name
+
     def initialize(raw = {})
+      @id = raw['id']
       @name = raw['name']
       @status = STATUSES[raw['status']]
     end
@@ -100,6 +113,12 @@ module Bt
 
     def ls
       puts bt_client.list
+    end
+
+    def remove_complete
+      ids = bt_client.list.select(&:complete?).map(&:id)
+      puts "Removing #{ids.length} complete torrents..."
+      puts bt_client.remove(ids)
     end
 
     private
