@@ -18,6 +18,13 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export GO15VENDOREXPERIMENT=1
 
+# Pebble {{{1
+export PEBBLE_SDKS="$HOME/Library/Application Support/Pebble SDK/SDKs"
+export PEBBLE_SDK_VERSION='3.8.2'
+export PEBBLE_SDK_DEVICE='basalt'
+export PEBBLE_INCLUDE="$PEBBLE_SDKS/$PEBBLE_SDK_VERSION/sdk-core/pebble/$PEBBLE_SDK_DEVICE/include"
+export CPATH="$PEBBLE_INCLUDE"
+
 # 3rd party {{{1
 
 cached_eval rbenv rbenv init --no-rehash -
