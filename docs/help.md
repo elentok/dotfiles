@@ -211,3 +211,8 @@ gpg --import gpg-public-key.txt
 
 ## gpg - encrypt using public key
 gpg --encrypt --output encrypted.gpg --recipient {email} {file-to-encrypt}
+
+## crontab
+Columns: minute hour day-of-month month day-of-week command
+Every 30 minutes:
+  */30 * * * * the_command
