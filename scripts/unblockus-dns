@@ -1,0 +1,80 @@
+#!/bin/bash
+#
+# Enable/disable Unblock-US DNS
+#
+# Usage:
+#
+#   unblockus-dns <enable|disable|status>
+
+source $DOTF/framework
+
+DNS1='208.122.23.23'
+DNS2='208.122.23.22'
+
+LINUX_DHCP_LINE="prepend domain-name-servers $DNS1, $DNS2"
+
+main() {
+  case "$1" in
+    enable)
+      ${OS}_enable
+      ;;
+    disable)
+      ${OS}_disable
+      ;;
+    status)
+      ${OS}_status
+      ;;
+    *)
+      usage "$0"
+      ;;
+  esac
+}
+
+
+linux_enable() {
+  echo -n 'Enabling... '
+  if is_enabled_in_resolv_conf; then
+    echo 'Already enabled in resolv.conf.'
+    exit 0
+  fi
+
+  if is_enabled_in_dhclient_conf; then
+    echo 'Already enabled in dhclient.conf, restarting networking service'
+    sudo service networking restart
+    exit 0
+  fi
+
+  # TODO
+}
+
+linux_disable() {
+  echo 'disable'
+
+  # TODO
+}
+
+linux_status() {
+  echo -n '/etc/resolv.conf:        '
+  is_enabled_in_resolv_conf && echo_on || echo_off
+
+  echo -n '/etc/dhcp/dhclient.conf: '
+  is_enabled_in_dhclient_conf && echo_on || echo_off
+}
+
+is_enabled_in_resolv_conf() {
+  grep -E "($DNS1|$DNS2)" /etc/resolv.conf > /dev/null
+}
+
+is_enabled_in_dhclient_conf() {
+  grep -E "$DNS1, $DNS2" /etc/dhcp/dhclient.conf > /dev/null
+}
+
+echo_on() {
+  echo -e "${GREEN}ON${RESET}"
+}
+
+echo_off() {
+  echo -e "${RED}OFF${RESET}"
+}
+
+main "$@"
