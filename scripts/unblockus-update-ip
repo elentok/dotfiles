@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ ! -e ~/.config/unblockus ]; then
+  echo
+  echo "Please create ~/.config/unblockus:"
+  echo
+  echo "export EMAIL=..."
+  echo "export PASSWORD=..."
+  exit 1
+fi
+
+source ~/.config/unblockus
+
+echo "[$(date +%Y-%m-%d\ %H:%M)] Updating unblock-us IP"
+curl "https://api.unblock-us.com/login?$EMAIL:$PASSWORD"
