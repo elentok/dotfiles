@@ -76,7 +76,6 @@ title() {
   echo -e "\n${BLUE}$*"
   echo "$*" | sed 's/./=/g'
   echo -e $RESET
-  echo
 }
 
 header() {

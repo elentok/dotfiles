@@ -1,0 +1,90 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+main() {
+  check_sudo
+  check_sshd
+}
+
+check_sudo() {
+  title 'Sudo'
+  check_sudo_group_in_sudoers
+
+  if user_has_group sudo; then
+    success "User $(whoami) has group 'sudo'"
+  else
+    if confirm "Add $(whoami) to 'sudo' group?"; then
+      add_user_to_group sudo
+    fi
+  fi
+}
+
+check_sudo_group_in_sudoers() {
+  if is_sudo_group_in_sudoers; then
+    success 'Sudoers include the sudo group'
+  else
+    error 'Sudoers do not include the sudo group'
+    echo '  Run `visudo` and add the following line:'
+    echo
+    echo '    %sudo ALL=(ALL:ALL) ALL'
+    echo
+  fi
+}
+
+is_sudo_group_in_sudoers() {
+  [ -n "$(sudo grep -E '^%sudo[[:space:]]+ALL=\(ALL:ALL\)[[:space:]]+ALL[[:space:]]*$' /etc/sudoers)" ]
+}
+
+check_sshd() {
+  title 'SSH Server'
+
+  check_sshd_port
+  check_sshd_root_login
+  check_sshd_password_auth
+}
+
+check_sshd_root_login() {
+  if [ "$(get_sshd_setting PermitRootLogin)" == 'no' ]; then
+    success 'Root login is disabled'
+  else
+    error 'Root login is enabled'
+    echo '  Edit /etc/ssh/sshd_config,'
+    echo '  And add "PermitRootLogin no"'
+    echo '  (only do this after verifying your user can sudo)'
+  fi
+}
+
+check_sshd_password_auth() {
+  if [ "$(get_sshd_setting PasswordAuthentication)" == 'no' ]; then
+    success 'Password authentication is disabled'
+  else
+    error 'Password authentication is enabled'
+    echo '  Edit /etc/ssh/sshd_config,'
+    echo '  And add "PasswordAuthentication no"'
+    echo '  (only do this after verifying your user can sudo)'
+  fi
+}
+
+is_sshd_password_auth() {
+  grep -E '^PasswordAuthentication[[:space:]]+no' /etc/ssh/sshd_config > /dev/null
+}
+
+check_sshd_port() {
+  port="$(get_sshd_setting Port)"
+  if [ -n "$port" -a "$port" != '22' ]; then
+    success "Not using port 22 (using $port)"
+  else
+    error 'Using port 22 for ssh'
+    echo '  Edit /etc/ssh/sshd_config,'
+    echo '  Change the line "Port 22" to "Port {my-random-port}"'
+  fi
+}
+
+get_sshd_setting() {
+  local pattern="^$1[[:space:]]+"
+  grep -E "$pattern" /etc/ssh/sshd_config | sed -E "s/$pattern//" | \
+    sed -E "s/[[:space:]]+$//"
+}
+
+main "$@"
