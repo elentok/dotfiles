@@ -282,7 +282,7 @@ command! -nargs=* OnSave call OnSave("<args>")
 " Exec {{{1
 if has('nvim')
   function! QuickShell(cmd)
-    if bufname(".")
+    if bufname('%') != ''
       tabe %
     else
       tabe
