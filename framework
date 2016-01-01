@@ -26,7 +26,7 @@ store_variable() {
   local key="$1"
   local value="$2"
 
-  mkdir -f $HOME/.config
+  mkdir -p $HOME/.config
   if [ ! -e $MACHINE_VARFILE ]; then touch $MACHINE_VARFILE; fi
 
   (
