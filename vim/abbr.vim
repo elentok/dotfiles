@@ -9,3 +9,4 @@ iabbr #time <c-r>=strftime("%H:%M:%S")<cr>
 cabbr Gps Git push
 cabbr Gpl Git pull
 cabbr Gap Git add -p
+cabbr Gam Gcommit --amend
