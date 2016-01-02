@@ -1,5 +1,9 @@
 # vim: foldmethod=marker
 
+if [ -e ~/.config/machine ]; then
+  source ~/.config/machine
+fi
+
 # Android {{{1
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/tools
@@ -120,7 +124,7 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 setopt HIST_IGNORE_SPACE
 source $DOTF/vim/colors/base16-elentok.dark.sh
 
-export MPD_HOST=bob@localhost
+export MPD_HOST=$MPD_PASSWORD@localhost
 export GREP_OPTIONS=
 
 setopt RC_QUOTES          # Allow 'Henry''s Garage' instead of 'Henry'\''s Garage'.

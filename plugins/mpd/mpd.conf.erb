@@ -1,0 +1,37 @@
+# Music Player Daemon Configuration File
+#
+# Run `man mpd.conf` for more information.
+
+# Files and directories
+music_directory    "~/Music"
+playlist_directory "~/.mpd/playlists"
+db_file            "~/.mpd/var/tag_cache"
+log_file           "~/.mpd/var/mpd.log"
+pid_file           "~/.mpd/var/pid"
+state_file         "~/.mpd/var/state"
+sticker_file       "~/.mpd/var/sticker.sql"
+
+# Network and security
+bind_to_address "any"
+password "<%= ENV['MPD_PASSWORD'] %>@read,add,control,admin"
+
+# Input
+input {
+  plugin "curl"
+}
+
+# Output
+<% if ENV['OS'] == 'mac' %>
+audio_output {
+  type       "osx"
+  name       "Mac Audio Output"
+  mixer_type "software"
+}
+<% else %>
+audio_output {
+  type "pulse"
+  name "Linux PulseAudio Audio Output"
+  # server "remote_server" # optional
+  # sink "remote_server_sink" # optional
+}
+<% end %>

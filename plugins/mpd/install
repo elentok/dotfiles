@@ -2,6 +2,31 @@
 
 source `dirname $0`/../../framework
 
+main() {
+  header "Music Player Daemon"
+
+  setup_vars
+
+  if is_mac; then
+    install_on_mac
+  else
+    install_on_linux
+  fi
+
+  build_config
+  create_symlinks
+}
+
+setup_vars() {
+  if [ -n "$MPD_PASSWORD" ]; then return; fi
+
+  if ask_password 'Enter MPD password:' password; then
+    store_variable MPD_PASSWORD "$password"
+  else
+    exit 1
+  fi
+}
+
 install_on_mac() {
   brew_install mpd
   brew_install mpc
@@ -10,7 +35,7 @@ install_on_mac() {
 
 install_on_linux() {
   bullet "Installing mpd + clients"
-  sudo apt-get install -y mpd mpc ncmpcpp ncmpc-lyrics
+  apt_install mpd mpc ncmpcpp
 
   bullet "Remove mpd from update-rc.d"
   sudo update-rc.d -f mpd remove
@@ -22,7 +47,6 @@ create_symlinks() {
   mkdir -p ~/.mpd/playlists/
   mkdir -p ~/.mpd/var/
   touch ~/.mpd/var/tag_cache
-  ln -sf "$DOTF/plugins/mpd/mpd.conf" ~/.mpd/mpd.conf
 
   mkdir -p ~/.ncmpcpp
   ln -sf "$DOTF/plugins/mpd/ncmpcpp-config" ~/.ncmpcpp/config
@@ -31,13 +55,11 @@ create_symlinks() {
   success "done"
 }
 
-header "Music Player Daemon"
+build_config() {
+  bullet 'Building config file... '
+  backup ~/.mpd/mpd.conf
+  erb $DOTF/plugins/mpd/mpd.conf.erb > ~/.mpd/mpd.conf
+  show_result
+}
 
-if [ "$OS" == "mac" ]; then
-  install_on_mac
-else
-  install_on_linux
-fi
-
-create_symlinks
-
+main "$@"
