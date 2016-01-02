@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# Finds apps listening to specific port
+#
+# Usage:
+#
+#   listener <port>
+
+if [ -z "$1" ]; then
+  usage "$0"
+else
+  lsof -i :$1 | grep LISTEN
+fi
