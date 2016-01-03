@@ -105,4 +105,9 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
+# DOTLOCAL {{{1
+if [ -e "$DOTL/zsh/core.zsh" ]; then
+  source "$DOTL/zsh/core.zsh"
+fi
+
 # vim: foldmethod=marker
