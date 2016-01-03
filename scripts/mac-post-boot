@@ -2,6 +2,13 @@
 
 source $DOTF/framework
 
+main() {
+  start_mpd
+  run_command --sudo 'Nginx' nginx
+  echo
+  add_ssh_key
+}
+
 run_app() {
   bullet "Starting $1... "
   if is_running "$1"; then
@@ -11,13 +18,27 @@ run_app() {
   fi
 }
 
-run_command --bg 'Music Player Daemon' mpd
-run_command --sudo 'Nginx' nginx
+start_mpd() {
+  bullet 'Starting Music Player Daemon... '
+  if is_running mpd; then
+    info 'Already running.'
+  else
+    echo '(running in background...)'
+    mpd &
+    sleep 1
+    is_running mpd
+    show_result
+  fi
+  echo
+}
 
-bullet "Add ssh key... "
-if [ -z "$(ssh-add -l)" ]; then
-  ssh-add
-else
-  info 'already added.'
-fi
+add_ssh_key() {
+  bullet "Add ssh key... "
+  if [ -z "$(ssh-add -l)" ]; then
+    ssh-add
+  else
+    info 'already added.'
+  fi
+}
 
+main "$@"

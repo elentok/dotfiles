@@ -665,8 +665,10 @@ run_command() {
 
     if [ "$BG" == 'yes' ]; then
       $cmd "$@" &
+      success '(started in background)'
     else
       $cmd "$@"
+      show_result
     fi
   fi
 }
