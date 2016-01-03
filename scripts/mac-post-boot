@@ -34,7 +34,7 @@ start_mpd() {
 
 add_ssh_key() {
   bullet "Add ssh key... "
-  if [ -z "$(ssh-add -l)" ]; then
+  if [ -z "$(ssh-add -l | grep '\.ssh/id_')" ]; then
     ssh-add
   else
     info 'already added.'
