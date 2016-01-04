@@ -237,6 +237,8 @@ let g:NERDCustomDelimiters = {
     \ 'scss': { 'left': '//' }
 \ }
 
+let g:NERDSpaceDelims = 1
+
 " Grepper {{{1
 let g:grepper = {
   \ 'tools':  ['ag'],
