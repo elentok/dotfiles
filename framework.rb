@@ -1,7 +1,9 @@
 # vim: foldmethod=marker
 
-require 'optparse'
 require 'net/http'
+require 'optparse'
+require 'singleton'
+require 'yaml'
 
 # Colors {{{1
 COLORS = {
@@ -58,23 +60,47 @@ end
 # CLI {{{1
 def parse_cli_options(format)
   {}.tap do |options|
-    parser = OptionParser.new do |opts|
+    OptionsCLI.new(format)
+
+    parser.parse!
+  end
+end
+
+class OptionsCLI
+  attr_reader :options
+
+  def initialize(format = {})
+    @format = format
+    @options = {}
+    parser.parse!
+    min_items = format[:min_items] || 0
+    if ARGV.length < min_items
+      puts parser.help
+      exit 1
+    end
+  end
+
+  def format
+    @format
+  end
+
+  def parser
+    @parser ||= create_parser
+  end
+
+  private
+
+  def create_parser
+    OptionParser.new do |opts|
       opts.banner = "#{format[:desc]}\n\n" \
         "Usage:\n    #{format[:usage]}\n\n" \
         "Options:\n"
 
       format[:options].each do |name, attribs|
         opts.on(*attribs) do
-          options[name] = true
+          @options[name] = true
         end
       end
-    end
-
-    parser.parse!
-    min_items = format[:min_items] || 0
-    if ARGV.length < min_items
-      puts parser.help
-      exit 1
     end
   end
 end
@@ -132,3 +158,47 @@ class HttpClient
     end
   end
 end
+
+# FileCache {{{1
+class FileCache
+  include Singleton
+
+  CACHE_DIR = File.expand_path('~/.cache/dotfiles')
+
+  def initialize
+    Dir.mkdir(CACHE_DIR) unless Dir.exist?(CACHE_DIR)
+  end
+
+  def fetch(name, &block)
+    filename = File.join(CACHE_DIR, name)
+    if File.exist?(filename)
+      load_from_cache(filename)
+    else
+      yield.tap { |value| save_to_cache(value, filename) }
+    end
+  end
+
+  def load_from_cache(filename)
+    if yaml?(filename)
+      YAML.load_file(filename)
+    else
+      File.open(filename).read
+    end
+  end
+
+  def save_to_cache(value, filename)
+    File.open(filename, 'w') do |f|
+      value = YAML.dump(value) if yaml?(filename)
+      f.write(value)
+    end
+  end
+
+  def yaml?(filename)
+    ['.yml', '.yaml'].include? File.extname(filename)
+  end
+
+  def self.fetch(name, &block)
+    instance.fetch(name, &block)
+  end
+end
+
