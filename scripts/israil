@@ -1,0 +1,59 @@
+#!/usr/bin/env ruby
+
+require "#{ENV['DOTF']}/framework.rb"
+require 'open-uri'
+require_or_install_gem 'nokogiri', 'nokogiri'
+
+HOMEPAGE_URL = 'http://www.rail.co.il/EN/Pages/homepage.aspx'
+
+CACHE_DIR = File.expand_path('~/.cache/israrail')
+Dir.mkdir(CACHE_DIR) unless Dir.exist?(CACHE_DIR)
+
+def stations
+  # http://www.rail.co.il/EN/Pages/homepage.aspx
+end
+
+class Station
+  def self.all
+  end
+end
+
+class StationsFetcher
+  def fetch
+    return YAML.load_file(cache_filename) if File.exist?(cache_filename)
+
+    x = doc.css('#ctl00_PlaceHolderMain_ucSmallDrivePlanUC_cmbOriginStation option')
+
+    require 'pry'
+    binding.pry
+  end
+
+  def doc
+    @doc ||= Nokogiri::HTML(html)
+  end
+
+  def html
+    return @html if @html
+
+    @html =
+      if File.exist?(html_cache_filename)
+        open(html_cache_filename).read
+      else
+        open(HOMEPAGE_URL).read.tap { |html| save_html_to_cache(html) }
+      end
+  end
+
+  def save_html_to_cache(html)
+    File.open(html_cache_filename, 'w') { |f| f.write(html) }
+  end
+
+  def cache_filename
+    @cache_filename ||= File.join(CACHE_DIR, 'stations.yml')
+  end
+
+  def html_cache_filename
+    @html_cache_filename ||= File.join(CACHE_DIR, 'homepage.html')
+  end
+end
+
+StationsFetcher.new.fetch
