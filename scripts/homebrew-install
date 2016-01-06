@@ -1,0 +1,10 @@
+#!/bin/bash
+
+export BREW_HOME=~/.homebrew
+
+git clone https://github.com/Homebrew/homebrew $BREW_HOME
+
+export PATH=$BREW_HOME/bin:$PATH
+
+sudo xcodebuild -license accept
+sudo xcode-select --install
