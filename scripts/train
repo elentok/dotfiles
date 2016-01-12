@@ -1,9 +1,9 @@
-#!/usr/bin/env ruby
+#!/usr/bin/ruby
 
 require "#{ENV['DOTF']}/framework.rb"
 require 'date'
 require 'open-uri'
-require_or_install_gem 'nokogiri', 'nokogiri'
+require_or_install_gem 'nokogumbo', 'nokogumbo'
 
 HOMEPAGE_URL = 'http://www.rail.co.il/EN/Pages/homepage.aspx'
 
@@ -96,7 +96,7 @@ class StationFetcher
   end
 
   def doc
-    @doc ||= Nokogiri::HTML(html)
+    @doc ||= Nokogiri::HTML5(html)
   end
 
   def html
