@@ -44,7 +44,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'xolox/vim-misc'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'Vallori/YouCompleteMe', { 'do': './install.py', 'for': 'c' }
 
 " File formats:
 Plug 'applescript.vim',                { 'for': 'applescript' }
