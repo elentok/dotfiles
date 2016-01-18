@@ -3,34 +3,31 @@
 require "#{ENV['DOTF']}/framework.rb"
 require 'fileutils'
 
-DEFAULT_FIT='1500x1500'
+DEFAULT_FIT = '1500x1500'
 
-class CLI
+class CLI < OptionsCLI
+  desc 'Optimizes images'
+  usage 'optimg [options] <file>...'
+  min_items 1
+  options \
+    verbose:   ['-v', '--verbose',   'Show more information'],
+    bw:        ['-b', '--bw',        'Use 2 colors and a depth of 1'],
+    grayscale: ['-g', '--grayscale', 'Use 16 colors and a depth of 4'],
+    colors:    ['-c', '--colors',    'Number of colors'],
+    depth:     ['-d', '--depth',     'Depth of color'],
+    fit:       ['-f', '--fit',       'Resize the image to fit in these ' \
+                'bounds (if no size defined defaults to 1500x1500)']
+
   def start
-    @options = parse_cli_options(
-      desc: 'Optimizes images',
-      usage: 'optimg [options] <file>...',
-      min_items: 1,
-      options: {
-        verbose:   [ '-v', '--verbose',   'Show more information'],
-        bw:        [ '-b', '--bw',        'Use 2 colors and a depth of 1' ],
-        grayscale: [ '-g', '--grayscale', 'Use 16 colors and a depth of 4' ],
-        colors:    [ '-c', '--colors',    'Number of colors' ],
-        depth:     [ '-d', '--depth',     'Depth of color' ],
-        fit:       [ '-f', '--fit',       'Resize the image to fit in these ' \
-                     'bounds (if no size defined defaults to 1500x1500)']
-      }
-    )
-
-    @options.merge!(colors: 2, depth: 1)  if @options[:bw]
-    @options.merge!(colors: 16, depth: 4) if @options[:grayscale]
-    @options.merge!(fit: DEFAULT_FIT)     if @options[:fit] == true
+    options.merge!(colors: 2, depth: 1)  if options[:bw]
+    options.merge!(colors: 16, depth: 4) if options[:grayscale]
+    options.merge!(fit: DEFAULT_FIT)     if options[:fit] == true
 
     ARGV.each { |filename| optimize(filename) }
   end
 
   def optimize(filename)
-    ImageOptimizer.new(filename, @options).optimize!
+    ImageOptimizer.new(filename, options).optimize!
   end
 end
 

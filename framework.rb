@@ -57,31 +57,43 @@ def require_or_install_gem(pkg, gem_name)
   end
 end
 
-# CLI {{{1
-def parse_cli_options(format)
-  {}.tap do |options|
-    OptionsCLI.new(format)
+# Class Options {{{1
 
-    parser.parse!
+module ClassOptions
+  def class_options(*names)
+    names.each do |name|
+      class_eval <<-RUBY, __FILE__, __LINE__ + 1
+        def self.#{name}(value)
+          self.instance_variable_set(:@#{name}, value)
+        end
+
+        def #{name}
+          self.class.instance_variable_get(:@#{name})
+        end
+      RUBY
+    end
   end
 end
 
+# CLI {{{1
 class OptionsCLI
-  attr_reader :options
+  extend ClassOptions
 
-  def initialize(format = {})
-    @format = format
+  class_options :desc, :usage, :min_items, :options
+
+  attr_reader :options, :format
+
+  def initialize
     @options = {}
     parser.parse!
-    min_items = format[:min_items] || 0
-    if ARGV.length < min_items
+    if min_items && ARGV.length < min_items
       puts parser.help
       exit 1
     end
   end
 
-  def format
-    @format
+  def start
+    fail Error, 'Implement me'
   end
 
   def parser
@@ -92,11 +104,11 @@ class OptionsCLI
 
   def create_parser
     OptionParser.new do |opts|
-      opts.banner = "#{format[:desc]}\n\n" \
-        "Usage:\n    #{format[:usage]}\n\n" \
+      opts.banner = "#{desc}\n\n" \
+        "Usage:\n    #{usage}\n\n" \
         "Options:\n"
 
-      format[:options].each do |name, attribs|
+      options.each do |name, attribs|
         opts.on(*attribs) do
           @options[name] = true
         end

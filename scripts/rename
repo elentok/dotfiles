@@ -3,41 +3,34 @@
 require "#{ENV['DOTF']}/framework.rb"
 require 'fileutils'
 
-class Renamer
-  def initialize
-    @options = parse_cli_options(
-      desc: 'Renames filenames',
-      usage: 'rename [options] <pattern> <replacement> <file>...',
-      min_items: 3,
-      options: {
-        yes: [ '-y', '--yes', "Don't ask for confirmation" ]
-      })
+class CLI < OptionsCLI
+  desc 'Renames filenames'
+  usage 'rename [options] <pattern> <replacement> <file>...'
+  min_items 3
+  options \
+    yes: ['-y', '--yes', "Don't ask for confirmation"]
 
+  def start
     @pattern = Regexp.new(ARGV.shift, 'ig')
     @replacement = ARGV.shift
-    @matches = find_matches
 
-    if @matches.empty?
+    if matches.empty?
       puts 'No matches'
     else
-      @matches.each { |m| m.print }
+      matches.each(&:print)
       puts
-      if @options[:yes] || confirm?('Rename?')
-        rename!
-      end
+      rename! if options[:yes] || confirm?('Rename?')
     end
   end
 
   private
 
-  def find_matches
-    [].tap do |matches|
+  def matches
+    @matches ||= [].tap do |matches|
       ARGV.each do |filename|
         basename = File.basename(filename)
         new_basename = basename.gsub(@pattern, @replacement)
-        if basename != new_basename
-          matches << Match.new(filename, new_basename)
-        end
+        matches << Match.new(filename, new_basename) if basename != new_basename
       end
     end
   end
@@ -81,4 +74,4 @@ class Match
   end
 end
 
-Renamer.new
+CLI.new.start

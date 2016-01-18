@@ -2,16 +2,16 @@
 
 require "#{ENV['DOTF']}/framework.rb"
 
-def main
-  options = parse_cli_options(
-    desc: 'Kills all processes matching a pattern',
-    usage: 'kill-match [options] <pattern>',
-    min_items: 1,
-    options: {
-      sudo: ['-s', '--sudo', 'Use "sudo kill"']
-    })
+class CLI < OptionsCLI
+  desc 'Kills all processes matching a pattern'
+  usage 'kill-match [options] <pattern>'
+  min_items 1
+  options \
+    sudo: ['-s', '--sudo', 'Use "sudo kill"']
 
-  kill_matching(Regexp.new(ARGV.first), options)
+  def start
+    kill_matching(Regexp.new(ARGV.first), options)
+  end
 end
 
 def kill_matching(re, options = {})
@@ -69,4 +69,4 @@ class AProcess
   end
 end
 
-main
+CLI.new.start
