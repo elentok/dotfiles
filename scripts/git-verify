@@ -219,8 +219,7 @@ class Pair
 
   def pick_alternative
     puts red("Can't fast forward, these are the changes:")
-    puts log
-    puts
+    show_diff
 
     puts yellow('These are your options:')
     puts "  [rebase] Do a pull with rebase (#{@local} <= #{@remote})"
@@ -240,8 +239,13 @@ class Pair
     puts
   end
 
-  def log
-    git("log #{@local}..#{@remote}")
+  def show_diff
+    local_info = git("show --no-patch --format='(%s) %cr' #{@local}")
+    print yellow("Local:  #{local_info}")
+
+    remote_info = git("show --no-patch --format='(%s) %cr' #{@remote}")
+    print yellow("Remote: #{remote_info}")
+    puts
   end
 
   def git(command)
