@@ -1,0 +1,46 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+BUILD_DIR="$HOME/tmp"
+APPS_ROOT="$HOME/Applications/Web"
+
+main() {
+  npm_install nativefier
+
+  mkdir -p "$APPS_ROOT"
+
+  create_native WhatsApp 'https://web.whatsapp.com'
+  create_native TelegramWeb 'https://web.telegram.org'
+}
+
+create_native() {
+  name="$1"
+  url="$2"
+  shift
+  shift
+
+  bullet "Creating native app '$name'... "
+  if native_app_exists $name; then
+    info 'already exists.'
+    return
+  fi
+
+  echo
+
+  rm -rf "$BUILD_DIR/${name}-darwin-x64"
+  mkdir -p $BUILD_DIR
+  cd $BUILD_DIR
+
+  nativefier --app-name "$name" \
+    --icon "$DOTF/plugins/nativefier/icons/${name}.icns" \
+    "$url" "$@"
+  mv "$BUILD_DIR/${name}-darwin-x64/${name}.app" "$APPS_ROOT/"
+  open "$APPS_ROOT/${name}.app"
+}
+
+native_app_exists() {
+  [ -e "$APPS_ROOT/${1}.app" ]
+}
+
+main
