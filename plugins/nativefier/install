@@ -12,6 +12,7 @@ main() {
 
   create_native WhatsApp 'https://web.whatsapp.com'
   create_native TelegramWeb 'https://web.telegram.org'
+  create_native Hangouts 'https://hangouts.google.com'
 }
 
 create_native() {
