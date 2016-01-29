@@ -1,0 +1,80 @@
+#!/usr/bin/env ruby
+
+require "#{ENV['DOTF']}/framework.rb"
+
+class CLI < OptionsCLI
+  desc 'Runs refactor commands on files'
+  usage 'refactor <refactor-file> <files-to-refactor>'
+  min_items 2
+
+  def start
+    commands = Commands::Reader.read(ARGV.shift)
+
+    puts yellow('Commands:')
+    commands.each { |c| puts "* #{c}" }
+
+    puts
+    puts yellow('Refactoring:')
+    runner = Commands::Runner.new(commands)
+    ARGV.each do |filename|
+      print blue("* #{filename}... ")
+      runner.run!(filename)
+      puts 'done.'
+    end
+  end
+end
+
+module Commands
+  class Reader
+    attr_reader :commands
+
+    def initialize
+      @commands = []
+    end
+
+    def self.read(filename)
+      filename = File.expand_path(filename)
+      reader = new
+      reader.instance_eval File.read(filename), filename
+      reader.commands
+    end
+
+    def replace(*items, &block)
+      @commands.push Replace.new(*items, &block)
+    end
+  end
+
+  class Runner
+    def initialize(commands)
+      @commands = commands
+    end
+
+    def run!(filename)
+      text = File.open(filename, 'r').read
+      @commands.each { |c| text = c.run(text) }
+      File.open(filename, 'w') { |f| f.puts text }
+    end
+  end
+
+  class Replace
+    def initialize(*items, &block)
+      @items = items
+      @block = block
+    end
+
+    def run(text)
+      if @block
+        puts "Calling gsub with [#{@items}, #{@block}]"
+        text.gsub(*@items, &@block)
+      else
+        text.gsub(*@items)
+      end
+    end
+
+    def to_s
+      "Replace '#{@from}' to '#{@to}'"
+    end
+  end
+end
+
+CLI.new.start
