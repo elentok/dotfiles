@@ -223,6 +223,9 @@ endif
 " Neomake {{{1
 let g:neomake_scss_enabled_makers = ['scsslint']
 let g:neomake_coffee_enabled_makers = ['coffeelint']
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_jsx_enabled_makers = ['eslint']
+let g:neomake_html_enabled_makers = []
 let g:neomake_error_sign = {
     \ 'text': 'E>',
     \ 'texthl': 'ErrorMsg',
@@ -249,3 +252,8 @@ let g:grepper = {
 
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
+
+" UltiSnips {{{1
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
