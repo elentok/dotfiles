@@ -41,9 +41,14 @@ Use `~/.dotlocal/gitconfig`:
 
 ### Zsh settings & aliases
 
-Use `~/.dotlocal/after.zsh` or `~/.dotlocal/before.zsh`.
+You can use the following files to customize your zsh settings:
+
+* `~/.dotlocal/zsh/core.zsh` - runs on all sessions (both login and non-login)
+* `~/.dotlocal/zsh/before.zsh` - runs at the beginning of all login sessions
+  (right after core.zsh)
+* `~/.dotlocal/zsh/after.zsh` - runs at the of all of all login sessions
 
 ### Vim
 
-* Add custom vundles to `~/.dotlocal/vundles.vim`
-* Add custom settings to `~/.dotlocal/after.vim`
+* Add custom plugins to `~/.dotlocal/plugs.vim`
+* Add custom settings to `~/.dotlocal/before.vim` or `~/.dotlocal/after.vim`
