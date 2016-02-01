@@ -13,6 +13,7 @@ main() {
   create_native WhatsApp 'https://web.whatsapp.com'
   create_native TelegramWeb 'https://web.telegram.org'
   create_native Hangouts 'https://hangouts.google.com'
+  create_native YouTube 'https://www.youtube.com'
 }
 
 create_native() {
@@ -33,9 +34,12 @@ create_native() {
   mkdir -p $BUILD_DIR
   cd $BUILD_DIR
 
-  nativefier --app-name "$name" \
-    --icon "$DOTF/plugins/nativefier/icons/${name}.icns" \
-    "$url" "$@"
+  local icon_file="$DOTF/plugins/nativefier/icons/${name}.icns"
+  if [ -e "$icon_file" ]; then
+    local icon_arg="--icon $icon_file"
+  fi
+
+  nativefier --app-name "$name" $icon_arg "$url" "$@"
   mv "$BUILD_DIR/${name}-darwin-x64/${name}.app" "$APPS_ROOT/"
   open "$APPS_ROOT/${name}.app"
 }
