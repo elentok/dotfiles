@@ -3,8 +3,8 @@
 require "#{ENV['DOTF']}/framework.rb"
 
 class CLI < OptionsCLI
-  desc 'Runs refactor commands on files'
-  usage 'refactor <refactor-file> <files-to-refactor>'
+  desc 'Runs migration commands on files'
+  usage 'migrate <migration-file> <files-to-migrate>'
   min_items 2
 
   def start
@@ -14,12 +14,15 @@ class CLI < OptionsCLI
     commands.each { |c| puts "* #{c}" }
 
     puts
-    puts yellow('Refactoring:')
+    puts yellow('Migrating:')
     runner = Commands::Runner.new(commands)
     ARGV.each do |filename|
-      print blue("* #{filename}... ")
-      runner.run!(filename)
-      puts 'done.'
+      print "* #{filename}... "
+      if runner.run!(filename)
+        puts green('made changes.')
+      else
+        puts gray('no changes.')
+      end
     end
   end
 end
@@ -50,9 +53,14 @@ module Commands
     end
 
     def run!(filename)
-      text = File.open(filename, 'r').read
+      original_text = File.open(filename, 'r').read
+      text = original_text
       @commands.each { |c| text = c.run(text) }
+
+      return false if text == original_text
+
       File.open(filename, 'w') { |f| f.puts text }
+      true
     end
   end
 
@@ -63,16 +71,15 @@ module Commands
     end
 
     def run(text)
-      if @block
-        puts "Calling gsub with [#{@items}, #{@block}]"
-        text.gsub(*@items, &@block)
-      else
-        text.gsub(*@items)
-      end
+      text.gsub(*@items, &@block)
     end
 
     def to_s
-      "Replace '#{@from}' to '#{@to}'"
+      if @block
+        "Replace '#{@items[0]}' to [Block]"
+      else
+        "Replace '#{@items[0]}' to '#{@items[1]}'"
+      end
     end
   end
 end
