@@ -173,8 +173,17 @@ set wrapscan    " wrap around when searching
 
 " Backup {{{1
 set backup writebackup
-set backupdir=$temp_dir
-set dir=$temp_dir
+set backupdir=$HOME/.local/share/vim-backup
+set dir=$HOME/.local/share/vim-swap
+
+if !isdirectory(&backupdir)
+  call mkdir(&backupdir)
+end
+
+if !isdirectory(&dir)
+  call mkdir(&dir)
+end
+
 " store undo history even after closing a file
 " (disabled because it's annoying)
 " set undofile undodir=$temp_dir
