@@ -23,7 +23,7 @@ module Bt
     end
 
     def authenticate(config)
-      STDERR.puts 'Authenticating...'
+      STDERR.puts 'Authenticating...' if ENV['DEBUG']
       options = {}
 
       res = http_client.get('/transmission/rpc', options)
@@ -31,7 +31,7 @@ module Bt
       fail "Can't find session id" if match.nil?
 
       name, value = match[1].split(': ')
-      STDERR.puts "Authenticated: #{name}: #{value}"
+      STDERR.puts "Authenticated: #{name}: #{value}" if ENV['DEBUG']
       http_client.headers[name] = value
     end
 
@@ -51,7 +51,8 @@ module Bt
       res = http_client.post('/transmission/rpc',
                              method: 'torrent-get',
                              arguments: {
-                               fields: [ 'id', 'name', 'status' ]
+                               fields: [ 'id', 'name', 'status', 'percentDone',
+                                         'rateDownload' ]
                              })
 
       JSON.parse(res.body)['arguments']['torrents'].map { |raw| Torrent.new(raw) }
@@ -85,12 +86,15 @@ module Bt
       :seed           # 6  Seeding
     ]
 
-    attr_reader :id, :name
+    attr_reader :id, :name, :percent, :download_rate
 
     def initialize(raw = {})
+      puts raw
       @id = raw['id']
       @name = raw['name']
       @status = STATUSES[raw['status']]
+      @percent = raw['percentDone']
+      @download_rate = raw['rateDownload']
     end
 
     def complete?
@@ -98,7 +102,18 @@ module Bt
     end
 
     def to_s
-      "#{@status.to_s.ljust(13)}  #{@name}"
+      "#{@status.to_s.ljust(13)}  #{percent_s.rjust(4)} #{download_rate_s} " \
+        "#{@name}"
+    end
+
+    def percent_s
+      "#{(@percent * 100).to_i}%"
+    end
+
+    def download_rate_s
+      return '' if complete?
+
+      "#{@download_rate}"
     end
   end
 
