@@ -18,16 +18,18 @@ module Bt
       @host = config[:host] || 'localhost'
       @port = config[:port] || 9091
       @req_options = {}
-      @req_options[:basic_auth] = [config[:user], config[:pass]] if config[:user]
-      authenticate(config)
+      if config[:user]
+        @req_options[:basic_auth] = [config[:user], config[:pass]]
+      end
+      authenticate
     end
 
-    def authenticate(config)
+    def authenticate
       STDERR.puts 'Authenticating...' if ENV['DEBUG']
       options = {}
 
       res = http_client.get('/transmission/rpc', options)
-      match = %r(<code>(.*)</code>).match(res.body)
+      match = %r{<code>(.*)</code>}.match(res.body)
       fail "Can't find session id" if match.nil?
 
       name, value = match[1].split(': ')
@@ -36,39 +38,43 @@ module Bt
     end
 
     def add_magnet(link, options = {})
-      res = http_client.post '/transmission/rpc',
-                             method: 'torrent-add',
-                             arguments:
-                             {
-                               paused: !!options[:paused],
-                               filename: link
-                             }
+      res = post('/transmission/rpc',
+                 method: 'torrent-add',
+                 arguments:
+                 {
+                   paused: options[:paused],
+                   filename: link
+                 })
 
       puts res.body
     end
 
     def list
-      res = http_client.post('/transmission/rpc',
-                             method: 'torrent-get',
-                             arguments: {
-                               fields: [ 'id', 'name', 'status', 'percentDone',
-                                         'rateDownload' ]
-                             })
+      res = post('/transmission/rpc',
+                 method: 'torrent-get',
+                 arguments: {
+                   fields: %w(id name status percentDone rateDownload)
+                 })
 
-      JSON.parse(res.body)['arguments']['torrents'].map { |raw| Torrent.new(raw) }
+      JSON.parse(res.body)['arguments']['torrents']
+        .map { |raw| Torrent.new(raw) }
     end
 
     def remove(torrent_ids)
-      res = http_client.post('/transmission/rpc',
-                             method: 'torrent-remove',
-                             arguments: {
-                               ids: torrent_ids
-                             })
+      res = post('/transmission/rpc',
+                 method: 'torrent-remove',
+                 arguments: {
+                   ids: torrent_ids
+                 })
 
       res.body
     end
 
     private
+
+    def post(*args)
+      http_client.post(*args)
+    end
 
     def http_client
       @http_client ||= HttpClient.new(@host, port: @port, req: @req_options)
@@ -89,7 +95,6 @@ module Bt
     attr_reader :id, :name, :percent, :download_rate
 
     def initialize(raw = {})
-      puts raw
       @id = raw['id']
       @name = raw['name']
       @status = STATUSES[raw['status']]
@@ -102,8 +107,12 @@ module Bt
     end
 
     def to_s
-      "#{@status.to_s.ljust(13)}  #{percent_s.rjust(4)} #{download_rate_s} " \
-        "#{@name}"
+      [
+        @status.to_s.ljust(13),
+        percent_s.rjust(4),
+        download_rate_s.rjust(8),
+        @name
+      ].join(' ')
     end
 
     def percent_s
@@ -113,7 +122,7 @@ module Bt
     def download_rate_s
       return '' if complete?
 
-      "#{@download_rate}"
+      "#{@download_rate / 1000}kb/s"
     end
   end
 
@@ -147,13 +156,14 @@ module Bt
 
       {}.tap do |config|
         config[:host] = dotvar.store['bt_host'] ||
-          dotvar.add('bt_host', 'Enter transmission host: ')
+                        dotvar.add('bt_host', 'Enter transmission host: ')
 
         config[:user] = dotvar.store['bt_user'] ||
-          dotvar.add('bt_user', 'Enter transmission username: ')
+                        dotvar.add('bt_user', 'Enter transmission username: ')
 
         config[:pass] = dotvar.store['bt_pass'] ||
-          dotvar.add_password('bt_pass', 'Enter transmission password: ')
+                        dotvar.add_password('bt_pass',
+                                            'Enter transmission password: ')
       end
     end
   end
