@@ -9,13 +9,13 @@ class CLI < OptionsCLI
   desc 'Optimizes images'
   usage 'optimg [options] <file>...'
   min_items 1
-  options \
+  cli_options \
     verbose:   ['-v', '--verbose',   'Show more information'],
     bw:        ['-b', '--bw',        'Use 2 colors and a depth of 1'],
     grayscale: ['-g', '--grayscale', 'Use 16 colors and a depth of 4'],
     colors:    ['-c', '--colors',    'Number of colors'],
     depth:     ['-d', '--depth',     'Depth of color'],
-    fit:       ['-f', '--fit',       'Resize the image to fit in these ' \
+    fit:       ['-f', '--fit RES',   'Resize the image to fit in these ' \
                 'bounds (if no size defined defaults to 1500x1500)']
 
   def start
@@ -23,7 +23,7 @@ class CLI < OptionsCLI
     options.merge!(colors: 16, depth: 4) if options[:grayscale]
     options.merge!(fit: DEFAULT_FIT)     if options[:fit] == true
 
-    ARGV.each { |filename| optimize(filename) }
+    ARGV.each { |filename| optimize(filename) if File.file?(filename) }
   end
 
   def optimize(filename)
