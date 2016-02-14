@@ -1,0 +1,126 @@
+#!/usr/bin/env ruby
+
+require "#{ENV['DOTF']}/framework.rb"
+require 'mini_exiftool'
+
+class CLI < OptionsCLI
+  desc 'Backs up photos from memory card'
+  usage 'photobackup <source> <target>'
+  min_items 2
+
+  def start
+    source_root = ARGV[0]
+    target_root = ARGV[1]
+    backup = PhotoBackup.new(source_root, target_root)
+    backup.run!
+  end
+end
+
+class PhotoBackup
+  def initialize(source_root, target_root)
+    @source_root = source_root
+    @target_root = target_root
+  end
+
+  def run!
+    @target_index = TargetIndex.new(@target_root)
+
+    source_files.each do |source_filename|
+      next unless File.file?(source_filename)
+
+      puts "* source: #{source_filename}"
+      backup(source_filename)
+    end
+  end
+
+  def warn(message)
+    puts "WARNING: #{message}"
+  end
+
+  def backup(source_filename)
+    source_file = SourceFile.new(source_filename)
+    target_path = @target_index.find(source_file) ||
+                  File.join(@target_root, source_file.dir)
+
+    target_filename = File.join(target_path, source_file.target_name)
+
+    puts "       => #{target_filename}"
+    FileUtils.mkdir_p(target_path)
+    FileUtils.cp(source_filename, target_filename)
+  end
+
+  def source_files
+    Dir[File.join(@source_root, '**', '*')].sort
+  end
+end
+
+class SourceFile
+  def initialize(filename)
+    @filename = filename
+    @exif = MiniExiftool.new(filename)
+  end
+
+  def date
+    @exif.date_time_original
+  end
+
+  def dir
+    @dir ||= File.join(year_dir, month_day_dir)
+  end
+
+  def year_dir
+    @year_dir ||= date.strftime('%Y')
+  end
+
+  def month_day_dir
+    @month_day_dir ||= date.strftime('%m-%d')
+  end
+
+  def target_name
+    @target_name ||= build_target_name
+  end
+
+  def camera
+    @camera ||= @exif.model.downcase.sub('dmc-', '')
+  end
+
+  private
+
+  def build_target_name
+    basename = File.basename(@filename, '.*')
+    ext = File.extname(@filename).downcase
+    basename = "#{camera}-#{basename}" unless basename.start_with? camera
+    "#{basename}#{ext}"
+  end
+end
+
+class TargetIndex
+  def initialize(target_root)
+    @target_root = target_root
+    scan
+  end
+
+  def scan
+    Dir[File.join(@target_root, '*')].each do |year_dir|
+      return unless File.directory?(year_dir)
+      year = File.basename(year_dir)
+      scan_year(year)
+    end
+  end
+
+  def scan_year(year)
+    Dir[File.join(@target_root, year, '*')].each do |month_day_dir|
+      return unless File.directory?(month_day_dir)
+
+      match = /^(\d\d)-(\d\d)(_\d\d)?/.match(File.basename(month_day_dir))
+      puts "[[[#{match}]]]"
+
+      puts month_day_dir
+    end
+  end
+
+  def find(datetime)
+  end
+end
+
+CLI.new.start if __FILE__ == $PROGRAM_NAME

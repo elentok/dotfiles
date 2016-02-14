@@ -1,0 +1,12 @@
+#!/bin/bash
+
+source `dirname $0`/../framework
+
+if is_mac; then
+  brew_install libexif exiftool
+else
+  apt_install libexif-dev exiftool
+fi
+
+gem_install exiftool
+gem_install mini_exiftool
