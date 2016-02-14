@@ -79,7 +79,7 @@ end
 class OptionsCLI
   extend ClassOptions
 
-  class_options :desc, :usage, :min_items, :options
+  class_options :desc, :usage, :min_items, :cli_options
 
   attr_reader :options, :format
 
@@ -108,9 +108,9 @@ class OptionsCLI
         "Usage:\n    #{usage}\n\n" \
         "Options:\n"
 
-      options.each do |name, attribs|
-        opts.on(*attribs) do
-          @options[name] = true
+      cli_options.each do |name, attribs|
+        opts.on(*attribs) do |value|
+          @options[name] = value
         end
       end
     end
