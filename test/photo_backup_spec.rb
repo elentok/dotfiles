@@ -19,11 +19,14 @@ class Helper
     FileUtils.mkdir_p join(path)
   end
 
+  def cp(source, target)
+    FileUtils.cp join(source), join(target)
+  end
+
   def create_photo(filename, date, exif_attribs = {})
     fullpath = join(filename)
     FileUtils.mkdir_p File.dirname(fullpath)
 
-    puts "convert -size 100x100 xc:white #{fullpath}"
     system("convert -size 100x100 xc:white #{fullpath}")
     exif = MiniExiftool.new(fullpath)
     exif.date_time_original = DateTime.parse(date)
@@ -33,7 +36,6 @@ class Helper
   end
 
   def cleanup!
-    print 'before cleanup:'
     FileUtils.remove_entry tmpdir
     @tmpdir = nil
   end
@@ -82,8 +84,22 @@ describe PhotoBackup do
 
         context 'when the photo exists' do
           context 'when same hash' do
-            it "doesn't backup" do
-              expect(subject).not_to receive(:backup)
+            it "doesn't copy" do
+              helper.mkdir 'target/2016/03-01'
+              helper.cp 'source/photo1.jpg',
+                        'target/2016/03-01/fz300-photo1.jpg'
+              expect(subject).to_not receive(:copy)
+              subject.run!
+            end
+          end
+
+          context 'when not same hash' do
+            it "warns the user" do
+              helper.mkdir 'target/2016/03-01'
+              helper.cp 'source/photo1.jpg',
+                        'target/2016/03-01/fz300-photo1.jpg'
+              expect(subject).to_not receive(:copy)
+              subject.run!
             end
           end
         end
@@ -100,30 +116,3 @@ describe PhotoBackup do
     end
   end
 end
-
-# describe TargetRepo do
-  # describe '#should_backup?' do
-    # before :each do
-      # allow(subject).to receive(:dir_exists?).with()
-    # end
-
-    # context 'when photo date directory exists' do
-    # end
-
-    # context 'when photo date directory does not exists' do
-      # it { is_expected.to be_true }
-    # end
-  # end
-# end
-
-# describe PhotoBackup do
-  # describe '#backup' do
-    # let(:filename) { 'SOURCE_FILENAME' }
-    # let(:exif)     { {} }
-
-    # before :each do
-      # allow(MiniExiftool).to receive(:new).with(filename)
-        # .and_return(exif)
-    # end
-  # end
-# end

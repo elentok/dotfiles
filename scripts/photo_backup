@@ -23,7 +23,7 @@ class PhotoBackup
   end
 
   def run!
-    @target_index = TargetIndex.new(@target_root)
+    @target_file_finder = TargetFileFinder.new(@target_root)
 
     source_files.each do |source_filename|
       next unless File.file?(source_filename)
@@ -39,11 +39,18 @@ class PhotoBackup
 
   def backup(source_filename)
     source_file = SourceFile.new(source_filename)
-    target_path = @target_index.find(source_file) ||
-                  File.join(@target_root, source_file.dir)
+    target_file = @target_file_finder.find(source_file)
 
-    target_filename = File.join(target_path, source_file.target_name)
+    puts "FOUND TARGET FILE: #{target_file}"
 
+    return if target_file
+    puts "NOT Returning"
+    target_filename = File.join(@target_root, source_file.dir,
+                                source_file.target_name)
+    copy(source_filename, target_filename)
+  end
+
+  def copy(source_filename, target_filename)
     puts "       => #{target_filename}"
     FileUtils.mkdir_p(target_path)
     FileUtils.cp(source_filename, target_filename)
@@ -51,6 +58,19 @@ class PhotoBackup
 
   def source_files
     Dir[File.join(@source_root, '**', '*')].sort
+  end
+end
+
+class TargetFileFinder
+  def initialize(target_root)
+    @target_root = target_root
+  end
+
+  def find(source_file)
+    target_filename = File.join(@target_root, source_file.dir,
+                                source_file.target_name)
+
+    return target_filename if File.exist?(target_filename)
   end
 end
 
@@ -94,33 +114,49 @@ class SourceFile
   end
 end
 
-class TargetIndex
-  def initialize(target_root)
-    @target_root = target_root
-    scan
-  end
+# class TargetIndex
+  # def initialize(target_root)
+    # @target_root = target_root
+    # @years = {}
+    # scan
+  # end
 
-  def scan
-    Dir[File.join(@target_root, '*')].each do |year_dir|
-      return unless File.directory?(year_dir)
-      year = File.basename(year_dir)
-      scan_year(year)
-    end
-  end
+  # def scan
+    # Dir[File.join(@target_root, '*')].each do |year_dir|
+      # return unless File.directory?(year_dir)
+      # year = File.basename(year_dir)
+      # @years[year.to_i] = scan_year(year)
+    # end
+  # end
 
-  def scan_year(year)
-    Dir[File.join(@target_root, year, '*')].each do |month_day_dir|
-      return unless File.directory?(month_day_dir)
+  # def scan_year(year)
+    # YearIndex.new(@target_root, year)
+  # end
 
-      match = /^(\d\d)-(\d\d)(_\d\d)?/.match(File.basename(month_day_dir))
-      puts "[[[#{match}]]]"
+  # def find(datetime)
+  # end
+# end
 
-      puts month_day_dir
-    end
-  end
+# class YearIndex
+  # def initialize(target_root, year)
+    # @target_root = target_root
+    # @year = year
+  # end
 
-  def find(datetime)
-  end
-end
+  # def 
+    # Dir[File.join(@target_root, year, '*')].each do |month_day_dir|
+      # return unless File.directory?(month_day_dir)
+
+      # match = /^(\d\d)-(\d\d)(_\d\d)?/.match(File.basename(month_day_dir))
+      # puts "[[[#{match}]]]"
+      # if match
+        # month = match[1].to_i
+        # day = match[2].to_i
+        # # day_to = match[3].to_i if match[3]
+      # end
+
+      # puts month_day_dir
+    # end
+# end
 
 CLI.new.start if __FILE__ == $PROGRAM_NAME
