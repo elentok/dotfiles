@@ -16,12 +16,6 @@ fpath=(/usr/local/share/npm/lib/node_modules/dns-switcher/completions $fpath)
 fpath=($HOME/.rbenv/versions/2.0.0-p247/lib/ruby/gems/2.0.0/gems/shaft-0.8.8/completions $fpath)
 fpath=($DOTF/zsh/vendor/zsh-completions/src $fpath)
 
-# Go {{{1
-export GOROOT=$BREW_HOME/opt/go/libexec
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-export GO15VENDOREXPERIMENT=1
-
 # Pebble {{{1
 export PEBBLE_SDKS="$HOME/Library/Application Support/Pebble SDK/SDKs"
 export PEBBLE_SDK_VERSION='3.8.2'
