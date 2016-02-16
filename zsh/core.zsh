@@ -58,10 +58,16 @@ for dir in ~/.linuxbrew ~/.homebrew /usr/local; do
   fi
 done
 
+# Go {{{1
+export GOROOT=$BREW_HOME/opt/go/libexec
+export GOPATH=$HOME/go
+export GO15VENDOREXPERIMENT=1
+
 # PATH {{{1
 PATH=$DOTF/scripts:$DOTL/scripts
 PATH=$PATH:$BREW_HOME/bin
 PATH=$PATH:$HOME/bin:$HOME/scripts:$HOME/.local/bin
+PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # replace bsd binaries with gnu
 for pkg in coreutils findutils gnu-sed; do
