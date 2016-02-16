@@ -9,6 +9,7 @@ main() {
   should_install_custom_git && install_git
   install_gitconfig
   install_symlinks
+  install_diff_so_fancy
 }
 
 should_install_custom_git() {
@@ -63,6 +64,14 @@ write_to_gitconfig() {
 
 install_symlinks() {
   symlink "$DOTF/plugins/git/tigrc" ~/.tigrc
+}
+
+install_diff_so_fancy() {
+  if is_mac; then
+    npm_install diff-so-fancy
+  else
+    brew_install diff-so-fancy
+  fi
 }
 
 main "$@"
