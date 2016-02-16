@@ -77,6 +77,16 @@
 [rebase]
   autosquash = true
 
+[pager]
+  show = diff-so-fancy | less --tabs=1,5 -RFX
+  diff = diff-so-fancy | less --tabs=1,5 -RFX
+
+[color "diff-highlight"]
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
+  oldNormal = red bold
+
 ;[credential]
   ;helper = osxkeychain
 
