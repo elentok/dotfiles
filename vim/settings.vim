@@ -7,6 +7,7 @@ let mapleader = ','
 behave mswin
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set colorcolumn=80
+set completeopt=menuone,noinsert,noselect
 set expandtab
 set fillchars=                 " set fillchars=vert:\|,fold:-
 set formatoptions=qroc         " see ':help fo-table' for more info

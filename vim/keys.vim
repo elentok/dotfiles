@@ -239,20 +239,30 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
-function! s:check_back_space() "{{{
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction"}}}
+function! SmartTab()
+  " if the completion popup is visible
+  if pumvisible()
+    return "\<c-n>"
+  elseif IsBeginningOfLine() || IsLastCharWhitespace()
+    return "\<tab>"
+  else
+    if &omnifunc != ''
+      return "\<c-x>\<c-o>"
+    else
+      return "\<c-n>"
+    end
+  end
+endfunction
 
-if has('nvim')
-  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
-          \ <SID>check_back_space() ? "\<TAB>" :
-          \ "\<C-n>"
-else
-  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
-          \ <SID>check_back_space() ? "\<TAB>" :
-          \ neocomplete#start_manual_complete()
-endif
+function! IsBeginningOfLine()
+  return col('.') == 1
+endfunction
+
+function! IsLastCharWhitespace()
+  return getline('.')[col('.') - 2]  =~ '\s'
+endfunction
+
+inoremap <expr><tab> SmartTab()
 
 " Neovim {{{1
 if has('nvim')
