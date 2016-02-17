@@ -68,9 +68,9 @@ install_symlinks() {
 
 install_diff_so_fancy() {
   if is_mac; then
-    npm_install diff-so-fancy
-  else
     brew_install diff-so-fancy
+  else
+    npm_install diff-so-fancy
   fi
 }
 
