@@ -267,3 +267,6 @@ xmap gs <plug>(GrepperOperator)
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" Go {{{1
+let g:go_fmt_command = "goimports"
