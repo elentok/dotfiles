@@ -46,8 +46,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'xolox/vim-misc'
 Plug 'Vallori/YouCompleteMe', { 'do': './install.py', 'for': 'c' }
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets' " snippets for ultisnips
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets' " snippets for ultisnips
 
 " File formats:
 Plug 'applescript.vim',                { 'for': 'applescript' }
