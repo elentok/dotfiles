@@ -216,3 +216,8 @@ gpg --encrypt --output encrypted.gpg --recipient {email} {file-to-encrypt}
 Columns: minute hour day-of-month month day-of-week command
 Every 30 minutes:
   */30 * * * * the_command
+## go (golang)
+
+Debugging native compilations:
+
+* use "-x" to printout the build flags (e.g. `go get -x {package}`)

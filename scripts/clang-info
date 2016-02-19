@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+clang -x c -v -E /dev/null "$@"
