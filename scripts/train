@@ -8,15 +8,10 @@ require_or_install_gem 'nokogumbo', 'nokogumbo'
 HOMEPAGE_URL = 'http://www.rail.co.il/EN/Pages/homepage.aspx'
 
 class CLI < OptionsCLI
-  def format
-    {
-      desc: 'Train Schedule',
-      usage: 'train [options] <origin> <dest> [time]',
-      options: {
-        list:   [ '-l', '--list',   'Lists all stations' ]
-      }
-    }
-  end
+  desc 'Train Schedule'
+  usage 'train [options] <origin> <dest> [time]'
+  cli_options(
+    list: [ '-l', '--list',   'Lists all stations' ])
 
   def start
     if options[:list]

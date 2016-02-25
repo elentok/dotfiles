@@ -6,7 +6,7 @@ class CLI < OptionsCLI
   desc 'Kills all processes matching a pattern'
   usage 'kill-match [options] <pattern>'
   min_items 1
-  options \
+  cli_options \
     sudo: ['-s', '--sudo', 'Use "sudo kill"']
 
   def start

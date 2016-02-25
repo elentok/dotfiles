@@ -7,7 +7,7 @@ class CLI < OptionsCLI
   desc 'Renames filenames'
   usage 'rename [options] <pattern> <replacement> <file>...'
   min_items 3
-  options \
+  cli_options \
     yes: ['-y', '--yes', "Don't ask for confirmation"]
 
   def start
