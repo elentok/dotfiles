@@ -64,10 +64,8 @@ export GOPATH=$HOME/go
 export GO15VENDOREXPERIMENT=1
 
 if is_mac; then
-  if [ "$BREW_HOME" != "/usr/local" ]; then
-    export CGO_CPPFLAGS="-I $BREW_HOME/include"
-    export CGO_LDFLAGS="-L $BREW_HOME/lib"
-  fi
+  export CGO_CPPFLAGS="-I $BREW_HOME/include"
+  export CGO_LDFLAGS="-L $BREW_HOME/lib"
 fi
 
 # PATH {{{1
