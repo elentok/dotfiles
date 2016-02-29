@@ -46,6 +46,10 @@ Command Line Tips
     git branch -d {branch}
     git push --delete origin {branch}
 
+## git delete tag
+    git tag -d {tag}
+    git push origin :refs/tags/{tag}
+
 ## git remove untracked files
     git clean -f            (all untracked files)
     git clean -f -n         (dry run)
