@@ -231,6 +231,7 @@ if g:os == "mac"
 endif
 
 " Neomake {{{1
+" let g:neomake_go_enabled_makers = ['govet']
 let g:neomake_scss_enabled_makers = ['scsslint']
 let g:neomake_coffee_enabled_makers = ['coffeelint']
 let g:neomake_javascript_enabled_makers = ['eslint']

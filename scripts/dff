@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
-KEYS = [:device, :size, :used, :available, :capacity, :mount]
+KEYS = [:device, :size, :used, :available, :capacity, :mount, :available_gb,
+        :size_gb]
 
 BLACK="\033[30m"
 GRAY="\033[1;30m"
@@ -13,15 +14,22 @@ UNDERLINE="\033[4m"
 RESET="\033[0m"
 
 class Disk
-  attr_reader :device, :size, :used, :available, :capacity, :mount
+  attr_reader :device, :size, :used, :available, :capacity, :mount,
+              :available_gb, :size_gb
 
   def initialize(parts)
-    @device    = parts[0]
-    @size      = parts[1]
-    @used      = parts[2]
-    @available = parts[3]
-    @capacity  = parts[4]
-    @mount     = parts.last
+    @device       = parts[0]
+    @size         = parts[1].to_i
+    @used         = parts[2]
+    @available    = parts[3].to_i
+    @capacity     = parts[4]
+    @available_gb = size_to_gb(@available)
+    @size_gb      = size_to_gb(@size)
+    @mount        = parts.last
+  end
+
+  def size_to_gb(size)
+    (size.to_f / 1024 / 1024).round(1).to_s
   end
 
   def state
@@ -59,7 +67,7 @@ end
 
 module Loader
   def self.disks
-    output = `df -g`
+    output = `df`
 
     disks = []
 
@@ -82,9 +90,9 @@ class DiskFormatter
     [
       @disk.color,
       rjust(:capacity),
-      rjust(:available) + 'G',
+      rjust(:available_gb) + 'G',
       'free (of',
-      rjust(:size) + 'G)',
+      rjust(:size_gb) + 'G)',
       ljust(:mount),
       "#{GRAY}(#{@disk.device})",
       RESET
@@ -92,11 +100,11 @@ class DiskFormatter
   end
 
   def rjust(key)
-    @disk.send(key).rjust(@column_widths[key])
+    @disk.send(key).to_s.rjust(@column_widths[key])
   end
 
   def ljust(key)
-    @disk.send(key).ljust(@column_widths[key])
+    @disk.send(key).to_s.ljust(@column_widths[key])
   end
 end
 
@@ -113,7 +121,7 @@ class Formatter
     disks.each do |disk|
       KEYS.each do |key|
         width = column_widths[key] || 0
-        column_widths[key] = [width, disk.send(key).length].max
+        column_widths[key] = [width, disk.send(key).to_s.length].max
       end
     end
     column_widths
