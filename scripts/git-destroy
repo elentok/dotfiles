@@ -4,7 +4,7 @@
 #
 # Usage:
 #
-#   git destroy {branch-name}
+#   git destroy <branch-name> [origin]
 
 source $DOTF/framework
 
@@ -14,12 +14,13 @@ main() {
   if [[ "$1" == "" ]]; then
     usage "$SOURCE"
   else
-    destroy_branch "$1"
+    destroy_branch "$1" "$2"
   fi
 }
 
 destroy_branch() {
   name="$1"
+  origin="${2:-origin}"
   if branch_exists "$name"; then
     destroy_local_branch "$name"
   else
@@ -27,7 +28,7 @@ destroy_branch() {
   fi
 
   if remote_branch_exists "$name"; then
-    destroy_remote_branch "$name"
+    destroy_remote_branch "$name" "$origin"
   else
     echo "Remote branch '$name' doesn't exist"
   fi
@@ -57,9 +58,11 @@ destroy_local_branch() {
 }
 
 destroy_remote_branch() {
-  if confirm "Destroy remote branch '$1'"; then
+  local branch="$1"
+  local origin="$2"
+  if confirm "Destroy remote branch '$branch'"; then
     bullet "Destroying..."
-    git push --delete origin "$1"
+    git push --delete "$origin" "$branch"
     if [[ $? -ne 0 ]]; then
       error "An error occured"
       exit 1
