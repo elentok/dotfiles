@@ -54,7 +54,8 @@ describe PhotoBackup do
   after(:each) { helper.cleanup! }
 
   let(:subject) { described_class.new(helper.join('source'),
-                                      helper.join('target')) }
+                                      helper.join('target'),
+                                      verbose: false) }
 
   describe '#run!' do
     context 'when the photo target dir does not exist' do
@@ -94,11 +95,12 @@ describe PhotoBackup do
           end
 
           context 'when not same hash' do
-            it "warns the user" do
+            it 'warns the user' do
               helper.mkdir 'target/2016/03-01'
-              helper.cp 'source/photo1.jpg',
-                        'target/2016/03-01/fz300-photo1.jpg'
-              expect(subject).to_not receive(:copy)
+              helper.create_photo 'target/2016/03-01/fz300-photo1.jpg',
+                                  '2016-03-01 11:12', model: 'other_camera'
+
+              expect(subject).to receive(:warn)
               subject.run!
             end
           end
