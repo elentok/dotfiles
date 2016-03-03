@@ -17,9 +17,10 @@ class CLI < OptionsCLI
 end
 
 class PhotoBackup
-  def initialize(source_root, target_root)
+  def initialize(source_root, target_root, options = {})
     @source_root = source_root
     @target_root = target_root
+    @verbose = options[:verbose]
   end
 
   def run!
@@ -28,7 +29,7 @@ class PhotoBackup
     source_files.each do |source_filename|
       next unless File.file?(source_filename)
 
-      puts "* source: #{source_filename}"
+      puts "* source: #{source_filename}" if @verbose
       backup(source_filename)
     end
   end
@@ -41,18 +42,17 @@ class PhotoBackup
     source_file = SourceFile.new(source_filename)
     target_file = @target_file_finder.find(source_file)
 
-    puts "FOUND TARGET FILE: #{target_file}"
-
-    return if target_file
-    puts "NOT Returning"
-    target_filename = File.join(@target_root, source_file.dir,
-                                source_file.target_name)
-    copy(source_filename, target_filename)
+    if target_file
+      # check if matching
+    else
+      target_filename = source_file.default_target_filename(@target_root)
+      copy(source_filename, target_filename)
+    end
   end
 
   def copy(source_filename, target_filename)
-    puts "       => #{target_filename}"
-    FileUtils.mkdir_p(target_path)
+    puts "       => #{target_filename}" if @verbose
+    FileUtils.mkdir_p(File.dirname(target_filename))
     FileUtils.cp(source_filename, target_filename)
   end
 
@@ -102,6 +102,10 @@ class SourceFile
 
   def camera
     @camera ||= @exif.model.downcase.sub('dmc-', '')
+  end
+
+  def default_target_filename(target_root)
+    File.join(target_root, dir, target_name)
   end
 
   private
