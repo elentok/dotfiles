@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+def find_items(dir)
+  fields = %w(FileName DateTimeOriginal Model FocalLengthIn35mmFormat Aperture
+              ShutterSpeed ISO)
+
+  `exiftool "#{dir}" -r \
+    -d '%Y-%m-%d %H:%M' \
+    -p '$#{fields.join(',$')}' \
+    2>/dev/null`.split("\n")
+end
+
+class Item
+end
+
+identify_images('$HOME/Pictures/Lumix23').each do |record|
+  puts "[#{record}]"
+end
