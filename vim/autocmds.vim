@@ -13,7 +13,7 @@ augroup Elentok_Misc
   autocmd FileType arduino    setlocal cindent
   autocmd FileType css,scss   setlocal foldmethod=marker foldmarker={,}
     \ omnifunc=csscomplete#CompleteCSS
-  autocmd FileType go         setlocal ts=8 sw=8 softtabstop=8 noexpandtab nolist
+  autocmd FileType go         setlocal ts=4 sw=4 softtabstop=4 noexpandtab nolist
   autocmd FileType html       setlocal omnifunc=htmlcomplete#CompleteTags ai
   autocmd FileType java       setlocal omnifunc=eclim#java#complete#CodeComplete
     \ completefunc=eclim#java#complete#CodeComplete
