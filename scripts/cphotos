@@ -93,11 +93,31 @@ def parse(raw, dir)
   )
 end
 
-def find_target(item, target_dir)
-  year = item.date.strftime('%Y')
-  year_dir = File.join(target_dir, year)
-  day_dir = File.join(year_dir, item.date.strftime('%m-%d'))
+TARGET_CACHE = {}
 
+def find_target(item, target_dir)
+  year_dir = File.join(target_dir, item.date.strftime('%Y'))
+  day_dir = File.join(year_dir, item.date.strftime('%m-%d'))
+  original_day_dir = day_dir
+
+  if TARGET_CACHE[original_day_dir]
+    day_dir = TARGET_CACHE[original_day_dir]
+  else
+    alternate = find_alternate_day_dir(item, year_dir, day_dir)
+    day_dir = alternate if alternate
+  end
+
+  TARGET_CACHE[original_day_dir] = day_dir
+
+  if Dir.exists?(day_dir)
+    target = find_item_in_target_dir(item, day_dir)
+    return target if target
+  end
+
+  File.join(day_dir, [item.prefix, item.params].join('-') + item.ext)
+end
+
+def find_alternate_day_dir(item, year_dir, day_dir)
   if Dir.exists?(year_dir)
     dir_with_desc = Dir["#{day_dir}*"].first
     if dir_with_desc
@@ -107,13 +127,6 @@ def find_target(item, target_dir)
       day_dir = dir if dir
     end
   end
-
-  if Dir.exists?(day_dir)
-    target = find_item_in_target_dir(item, day_dir)
-    return target if target
-  end
-
-  File.join(day_dir, [item.prefix, item.params].join('-') + item.ext)
 end
 
 def find_multi_day_target(item, year_dir)
