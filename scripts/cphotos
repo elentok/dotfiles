@@ -3,10 +3,35 @@
 require 'ostruct'
 require 'date'
 
+  # require 'pry'
+  # binding.pry
+
+
 def main(source_dir, target_dir)
+  analyze(source_dir, target_dir)
+end
+
+def analyze(source_dir, target_dir)
+  result = OpenStruct.new(added: [], modified: [])
+
   find_items(source_dir).each do |item|
-    puts item
-    puts "  => #{find_target(item, target_dir)}"
+    target = find_target(item, target_dir)
+    status = identify_status(item, target)
+    if status != :same
+      result[status] << OpenStruct.new(item: item, target: target)
+    end
+  end
+
+  result
+end
+
+def identify_status(item, target)
+  return :added unless File.exist?(target)
+
+  if File.size(target) == File.size(item.filename)
+    :same
+  else
+    :modified
   end
 end
 
@@ -35,17 +60,33 @@ def parse(raw, dir)
     File.basename(filename, '.*').downcase.gsub(/^_+/, '')
   ].join('-')
 
+  if model
+    model = model.downcase.sub('dmc-', '')
+      .sub('canon eos ', '').sub(' digital', '')
+  end
+
+  if focal_length && focal_length.length > 0
+    focal_length.sub!(' ', '')
+  end
+
+  if exposure_time
+    if exposure_time.include?('/')
+      exposure_time = "#{exposure_time.sub('1/', '')}hz"
+    else
+      exposure_time = "#{exposure_time}s"
+    end
+  end
+
+  aperture = "f#{aperture.sub(/\.0+/, '')}" if aperture
+  iso = "i#{iso}" if iso
+
   params = [
     model.downcase.sub('dmc-', '').sub('canon eos ', '').sub(' digital', ''),
-    focal_length.length > 0 ? focal_length.sub(' ', '') : nil,
-    exposure_time.include?('/') ? "#{exposure_time.sub('1/', '')}hz"  : "#{exposure_time}s",
-    "f#{aperture.sub(/\.0+/, '')}",
-    "i#{iso}"
-  ].compact.join('-')
+    focal_length, exposure_time, aperture, iso].compact.join('-')
 
   OpenStruct.new(
     filename: File.join(dir, filename),
-    ext:      File.extname(filename),
+    ext:      File.extname(filename).downcase,
     date:     date,
     prefix:   prefix,
     params:   params
@@ -53,18 +94,47 @@ def parse(raw, dir)
 end
 
 def find_target(item, target_dir)
-  year_dir = File.join(target_dir, item.date.strftime('%Y'))
+  year = item.date.strftime('%Y')
+  year_dir = File.join(target_dir, year)
   day_dir = File.join(year_dir, item.date.strftime('%m-%d'))
 
   if Dir.exists?(year_dir)
-    if Dir.exists?(day_dir)
-      Dir[File.join(day_dir, "#{item.prefix}*#{item.ext}")].sort.each do |match|
-        return match
+    dir_with_desc = Dir["#{day_dir}*"].first
+    if dir_with_desc
+      day_dir = dir_with_desc
+    else
+      Dir[File.join(year_dir, '*')].each do |dir|
+        dates = /^[\d\-_]+/.match(File.basename(dir))[0]
+        from, to = dates.split('_')
+        next unless to
+
+        from_month, _ = from.split('-')
+        from = DateTime.parse("#{year}-#{from}")
+        if to.include? '-'
+          to = DateTime.parse("#{year}-#{to} 23:59:59")
+        else
+          to = DateTime.parse("#{year}-#{from_month}-#{to} 23:59:59")
+        end
+
+        if item.date >= from && item.date <= to
+          days = (item.date - from).to_i + 1
+          day_dir = File.join(dir, "day#{days.to_s.rjust(2, '0')}")
+          break
+        end
       end
     end
+  end
+
+  if Dir.exists?(day_dir)
+    target = find_item_in_target_dir(item, day_dir)
+    return target if target
   end
 
   File.join(day_dir, [item.prefix, item.params].join('-') + item.ext)
 end
 
-main(*ARGV)
+def find_item_in_target_dir(item, dir)
+  Dir[File.join(dir, "#{item.prefix}*#{item.ext}")].sort.first
+end
+
+main(*ARGV) if __FILE__ == $PROGRAM_NAME
