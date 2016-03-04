@@ -1,24 +1,68 @@
 #!/usr/bin/env ruby
 
+require "#{ENV['DOTF']}/framework.rb"
 require 'ostruct'
 require 'date'
-
-  # require 'pry'
-  # binding.pry
-
+require 'fileutils'
+require 'pathname'
 
 def main(source_dir, target_dir)
-  analyze(source_dir, target_dir)
+  puts 'Analyzing...'
+  result = analyze(source_dir, target_dir)
+
+  if result.added.empty?
+    puts 'No new files'
+  else
+    puts "#{result.added.length} new file(s) (#{result.totals[:added] / 1024 / 1024}mb):"
+    result.added.each { |added| puts "- #{added.target} (#{added.item.size_mb})" }
+    puts
+  end
+
+  if result.modified.empty?
+    puts 'No modified files'
+  else
+    puts "#{result.modified.length} new file(s) (#{result.totals[:modified] / 1024 / 1024}mb):"
+    result.modified.each { |modified| puts "- #{modified.target} (#{modified.item.size_mb})" }
+    puts
+  end
+
+  puts
+  if confirm?('Copy files?', 'yes')
+    copy(result.added, target_dir)
+  end
+end
+
+def copy(added_files, target_dir)
+  FileUtils.mkdir_p(target_dir)
+  f = open(File.join(target_dir, 'copy.log'), 'a')
+  f.puts "# Copy start (#{DateTime.now})"
+
+  target_pathname = Pathname.new(target_dir)
+
+  added_files.each do |added_file|
+    target_rel_path = Pathname.new(added_file.target).relative_path_from(target_pathname)
+    puts "Copying #{target_rel_path}..."
+    FileUtils.mkdir_p(File.dirname(added_file.target))
+    FileUtils.cp(added_file.item.filename, added_file.target)
+    f.puts ">> #{target_rel_path}"
+  end
+
+  puts "Done."
+  f.puts "# Copy complete (#{DateTime.now})"
+ensure
+  f.close() unless f.nil?
 end
 
 def analyze(source_dir, target_dir)
-  result = OpenStruct.new(added: [], modified: [])
+  result = OpenStruct.new(added: [], modified: [], totals: {})
 
   find_items(source_dir).each do |item|
     target = find_target(item, target_dir)
     status = identify_status(item, target)
     if status != :same
       result[status] << OpenStruct.new(item: item, target: target)
+      result.totals[status] ||= 0
+      result.totals[status] += item.size
     end
   end
 
@@ -28,7 +72,7 @@ end
 def identify_status(item, target)
   return :added unless File.exist?(target)
 
-  if File.size(target) == File.size(item.filename)
+  if File.size(target) == item.size
     :same
   else
     :modified
@@ -67,6 +111,8 @@ def parse(raw, dir)
 
   if focal_length && focal_length.length > 0
     focal_length.sub!(' ', '')
+  else
+    focal_length = nil
   end
 
   if exposure_time
@@ -84,13 +130,24 @@ def parse(raw, dir)
     model.downcase.sub('dmc-', '').sub('canon eos ', '').sub(' digital', ''),
     focal_length, exposure_time, aperture, iso].compact.join('-')
 
-  OpenStruct.new(
+  Item.new(
     filename: File.join(dir, filename),
     ext:      File.extname(filename).downcase,
     date:     date,
     prefix:   prefix,
     params:   params
   )
+end
+
+class Item < OpenStruct
+  def size
+    return @size unless @size.nil?
+    @size = File.size(filename)
+  end
+
+  def size_mb
+    @size_mb ||= "#{size / 1024 / 1024}mb"
+  end
 end
 
 TARGET_CACHE = {}
