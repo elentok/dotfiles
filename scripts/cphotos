@@ -103,25 +103,8 @@ def find_target(item, target_dir)
     if dir_with_desc
       day_dir = dir_with_desc
     else
-      Dir[File.join(year_dir, '*')].each do |dir|
-        dates = /^[\d\-_]+/.match(File.basename(dir))[0]
-        from, to = dates.split('_')
-        next unless to
-
-        from_month, _ = from.split('-')
-        from = DateTime.parse("#{year}-#{from}")
-        if to.include? '-'
-          to = DateTime.parse("#{year}-#{to} 23:59:59")
-        else
-          to = DateTime.parse("#{year}-#{from_month}-#{to} 23:59:59")
-        end
-
-        if item.date >= from && item.date <= to
-          days = (item.date - from).to_i + 1
-          day_dir = File.join(dir, "day#{days.to_s.rjust(2, '0')}")
-          break
-        end
-      end
+      dir = find_multi_day_target(item, year_dir)
+      day_dir = dir if dir
     end
   end
 
@@ -131,6 +114,31 @@ def find_target(item, target_dir)
   end
 
   File.join(day_dir, [item.prefix, item.params].join('-') + item.ext)
+end
+
+def find_multi_day_target(item, year_dir)
+  year = item.date.strftime('%Y')
+
+  Dir[File.join(year_dir, '*')].each do |dir|
+    dates = /^[\d\-_]+/.match(File.basename(dir))[0]
+    from, to = dates.split('_')
+    next unless to
+
+    from_month, _ = from.split('-')
+    from = DateTime.parse("#{year}-#{from}")
+    if to.include? '-'
+      to = DateTime.parse("#{year}-#{to} 23:59:59")
+    else
+      to = DateTime.parse("#{year}-#{from_month}-#{to} 23:59:59")
+    end
+
+    if item.date >= from && item.date <= to
+      days = (item.date - from).to_i + 1
+      return File.join(dir, "day#{days.to_s.rjust(2, '0')}")
+    end
+  end
+
+  nil
 end
 
 def find_item_in_target_dir(item, dir)
