@@ -1,18 +1,70 @@
 #!/usr/bin/env ruby
 
+require 'ostruct'
+require 'date'
+
+def main(source_dir, target_dir)
+  find_items(source_dir).each do |item|
+    puts item
+    puts "  => #{find_target(item, target_dir)}"
+  end
+end
+
 def find_items(dir)
   fields = %w(FileName DateTimeOriginal Model FocalLengthIn35mmFormat Aperture
-              ShutterSpeed ISO)
+              ExposureTime ISO)
 
-  `exiftool "#{dir}" -r \
-    -d '%Y-%m-%d %H:%M' \
-    -p '$#{fields.join(',$')}' \
-    2>/dev/null`.split("\n")
+  root = File.file?(dir) ? File.dirname(dir) : dir
+
+  `exiftool "#{dir}" -recurse -ignoreMinorErrors \
+    -dateFormat '%Y-%m-%d %H:%M' \
+    -printFormat '$#{fields.join(',$')}' \
+    2>/dev/null`
+  .split("\n")
+  .map { |raw| parse(raw, root) }
 end
 
-class Item
+def parse(raw, dir)
+  filename, date, model, focal_length, aperture, exposure_time, iso =
+    raw.split(',')
+
+  date = DateTime.parse(date)
+
+  prefix = [
+    date.strftime("%H%M"),
+    File.basename(filename, '.*').downcase.gsub(/^_+/, '')
+  ].join('-')
+
+  params = [
+    model.downcase.sub('dmc-', '').sub('canon eos ', '').sub(' digital', ''),
+    focal_length.length > 0 ? focal_length.sub(' ', '') : nil,
+    exposure_time.include?('/') ? "#{exposure_time.sub('1/', '')}hz"  : "#{exposure_time}s",
+    "f#{aperture.sub(/\.0+/, '')}",
+    "i#{iso}"
+  ].compact.join('-')
+
+  OpenStruct.new(
+    filename: File.join(dir, filename),
+    ext:      File.extname(filename),
+    date:     date,
+    prefix:   prefix,
+    params:   params
+  )
 end
 
-identify_images('$HOME/Pictures/Lumix23').each do |record|
-  puts "[#{record}]"
+def find_target(item, target_dir)
+  year_dir = File.join(target_dir, item.date.strftime('%Y'))
+  day_dir = File.join(year_dir, item.date.strftime('%m-%d'))
+
+  if Dir.exists?(year_dir)
+    if Dir.exists?(day_dir)
+      Dir[File.join(day_dir, "#{item.prefix}*#{item.ext}")].sort.each do |match|
+        return match
+      end
+    end
+  end
+
+  File.join(day_dir, [item.prefix, item.params].join('-') + item.ext)
 end
+
+main(*ARGV)
