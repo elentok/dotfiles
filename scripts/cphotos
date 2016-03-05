@@ -12,7 +12,7 @@ def main(source_dir, target_dir)
   analysis.print
 
   puts
-  if confirm?('Copy files?', 'yes')
+  if analysis.added.any? && confirm?('Copy files?', 'yes')
     analysis.copy!
   end
 end
@@ -42,9 +42,7 @@ class Analysis < OpenStruct
         next
       end
 
-      target = find_target(source_item, target_dir)
-      pair = Pair.new(source: source_item, target: target,
-                      target_root: target_dir)
+      pair = Pair.new(source_item, target_dir)
 
       if pair.status != :same
         self[pair.status] << pair
@@ -70,25 +68,25 @@ class Analysis < OpenStruct
   end
 
   def print
-    print_group :added
-    print_group :modified
-    print_group :deleted
+    print_group :added, :green
+    print_group :modified, :blue
+    print_group :deleted, :yellow
 
     if errors.any?
-      puts "* #{errors.length} error(s):"
+      puts "#{COLORS[:red]}* #{errors.length} error(s):"
       errors.each(&:print)
-      puts
+      puts RESET
     end
   end
 
-  def print_group(name)
+  def print_group(name, color)
     if send(name).empty?
-      puts "* No #{name} files"
+      puts "#{COLORS[color]}* No #{name} files#{RESET}"
     else
       list = send(name)
-      puts "* #{list.length} #{name} file(s) (#{totals[name] / 1024 / 1024}mb):"
+      puts "#{COLORS[color]}* #{list.length} #{name} file(s) (#{totals[name] / 1024 / 1024}mb):"
       print_files(list)
-      puts
+      puts RESET
     end
   end
 
@@ -131,7 +129,20 @@ class Error
   end
 end
 
+TARGET_CACHE = {}
+
 class Pair < OpenStruct
+  attr_reader :source, :target_dir
+
+  def initialize(source, target_dir)
+    @source = source
+    @target_dir = target_dir
+  end
+
+  def target
+    @target ||= find_target
+  end
+
   def print
     puts "  - #{target} (#{source.size_mb})"
   end
@@ -142,6 +153,66 @@ class Pair < OpenStruct
 
   private
 
+  def year_dir
+    @year_dir ||= File.join(@target_dir, @source.date.strftime('%Y'))
+  end
+
+  def default_day_dir
+    @default_day_dir ||= File.join(year_dir, @source.date.strftime('%m-%d'))
+  end
+
+  def find_target
+    day_dir = default_day_dir
+
+    if TARGET_CACHE[default_day_dir]
+      day_dir = TARGET_CACHE[default_day_dir]
+    elsif Dir.exists?(year_dir)
+      day_dir = find_dir_with_desc || find_multi_day_target || default_day_dir
+    end
+
+    TARGET_CACHE[default_day_dir] = day_dir
+
+    if Dir.exists?(day_dir)
+      target = find_source_in_target_dir(day_dir)
+      return target if target
+    end
+
+    File.join(day_dir, [@source.prefix, @source.params].join('-') + @source.ext)
+  end
+
+  def find_dir_with_desc
+    Dir["#{default_day_dir}*"].first
+  end
+
+  def find_multi_day_target
+    year = @source.date.strftime('%Y')
+
+    Dir[File.join(year_dir, '*')].each do |dir|
+      dates = /^[\d\-_]+/.match(File.basename(dir))[0]
+      from, to = dates.split('_')
+      next unless to
+
+      from_month, _ = from.split('-')
+      from = DateTime.parse("#{year}-#{from}")
+      if to.include? '-'
+        to = DateTime.parse("#{year}-#{to} 23:59:59")
+      else
+        to = DateTime.parse("#{year}-#{from_month}-#{to} 23:59:59")
+      end
+
+      if @source.date >= from && @source.date <= to
+        days = (@source.date - from).to_i + 1
+        return File.join(dir, "day#{days.to_s.rjust(2, '0')}")
+      end
+    end
+
+    nil
+  end
+
+  def find_source_in_target_dir(dir)
+    Dir[File.join(dir, "#{@source.prefix}*#{@source.ext}")].sort.first
+  end
+
   def identify_status
     if File.exist?(target)
       File.size(target) == source.size ? :same : :modified
@@ -151,7 +222,7 @@ class Pair < OpenStruct
   end
 
   def deleted?
-    log_file = File.join(target_root, 'copy.log')
+    log_file = File.join(target_dir, 'copy.log')
     return false unless File.exist?(log_file)
     system("grep '^#{source.log_line}' '#{log_file}' > /dev/null")
   end
@@ -223,71 +294,6 @@ class SourceItem < OpenStruct
   def log_line
     @log_line ||= ['>>', date.strftime('%Y-%m-%d'), prefix].join(' ')
   end
-end
-
-TARGET_CACHE = {}
-
-def find_target(item, target_dir)
-  year_dir = File.join(target_dir, item.date.strftime('%Y'))
-  day_dir = File.join(year_dir, item.date.strftime('%m-%d'))
-  original_day_dir = day_dir
-
-  if TARGET_CACHE[original_day_dir]
-    day_dir = TARGET_CACHE[original_day_dir]
-  else
-    alternate = find_alternate_day_dir(item, year_dir, day_dir)
-    day_dir = alternate if alternate
-  end
-
-  TARGET_CACHE[original_day_dir] = day_dir
-
-  if Dir.exists?(day_dir)
-    target = find_item_in_target_dir(item, day_dir)
-    return target if target
-  end
-
-  File.join(day_dir, [item.prefix, item.params].join('-') + item.ext)
-end
-
-def find_alternate_day_dir(item, year_dir, day_dir)
-  if Dir.exists?(year_dir)
-    dir_with_desc = Dir["#{day_dir}*"].first
-    if dir_with_desc
-      day_dir = dir_with_desc
-    else
-      dir = find_multi_day_target(item, year_dir)
-      day_dir = dir if dir
-    end
-  end
-end
-
-def find_multi_day_target(item, year_dir)
-  year = item.date.strftime('%Y')
-
-  Dir[File.join(year_dir, '*')].each do |dir|
-    dates = /^[\d\-_]+/.match(File.basename(dir))[0]
-    from, to = dates.split('_')
-    next unless to
-
-    from_month, _ = from.split('-')
-    from = DateTime.parse("#{year}-#{from}")
-    if to.include? '-'
-      to = DateTime.parse("#{year}-#{to} 23:59:59")
-    else
-      to = DateTime.parse("#{year}-#{from_month}-#{to} 23:59:59")
-    end
-
-    if item.date >= from && item.date <= to
-      days = (item.date - from).to_i + 1
-      return File.join(dir, "day#{days.to_s.rjust(2, '0')}")
-    end
-  end
-
-  nil
-end
-
-def find_item_in_target_dir(item, dir)
-  Dir[File.join(dir, "#{item.prefix}*#{item.ext}")].sort.first
 end
 
 main(*ARGV) if __FILE__ == $PROGRAM_NAME
