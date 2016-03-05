@@ -7,28 +7,44 @@ require 'fileutils'
 require 'pathname'
 
 def main(source_dir, target_dir)
-  puts 'Analyzing...'
-  result = analyze(source_dir, target_dir)
+  result = analyze(source_dir, target_dir, true)
 
   if result.added.empty?
     puts 'No new files'
   else
     puts "#{result.added.length} new file(s) (#{result.totals[:added] / 1024 / 1024}mb):"
-    result.added.each { |added| puts "- #{added.target} (#{added.item.size_mb})" }
+    print_files(result.added)
     puts
   end
 
   if result.modified.empty?
     puts 'No modified files'
   else
-    puts "#{result.modified.length} new file(s) (#{result.totals[:modified] / 1024 / 1024}mb):"
-    result.modified.each { |modified| puts "- #{modified.target} (#{modified.item.size_mb})" }
+    puts "#{result.modified.length} modified file(s) (#{result.totals[:modified] / 1024 / 1024}mb):"
+    print_files(result.modified)
     puts
   end
+
+  if result.errors.any?
+    puts "#{result.errors.length} error(s):"
+    result.error.each { |e| puts e }
+    puts
+  end
+
 
   puts
   if confirm?('Copy files?', 'yes')
     copy(result.added, target_dir)
+  end
+end
+
+def print_files(pairs, max = 10)
+  if pairs.length > max
+    pairs[0..max/2-1].each(&:print)
+    puts '  ...'
+    pairs[-max/2..-1].each(&:print)
+  else
+    pairs.each(&:print)
   end
 end
 
@@ -53,20 +69,41 @@ ensure
   f.close() unless f.nil?
 end
 
-def analyze(source_dir, target_dir)
-  result = OpenStruct.new(added: [], modified: [], totals: {})
+def analyze(source_dir, target_dir, verbose = false)
+  result = OpenStruct.new(added: [], modified: [], totals: {}, errors: [])
 
-  find_items(source_dir).each do |item|
+  puts 'Looking for photos...' if verbose
+  t = Time.now
+
+  items = find_items(source_dir)
+  puts 'Analyzing #{items.length} photos...' if verbose
+
+
+  items.each do |item|
+    if item.is_a? Error
+      result.errors << item
+      next
+    end
+
     target = find_target(item, target_dir)
     status = identify_status(item, target)
     if status != :same
-      result[status] << OpenStruct.new(item: item, target: target)
+      result[status] << Pair.new(source: item, target: target)
       result.totals[status] ||= 0
       result.totals[status] += item.size
     end
   end
 
+  puts "Took #{(Time.now - t).round(3)}sec"
   result
+end
+
+class Error < OpenStruct; end
+
+class Pair < OpenStruct
+  def print
+    puts "- #{target} (#{source.size_mb})"
+  end
 end
 
 def identify_status(item, target)
@@ -94,9 +131,12 @@ def find_items(dir)
 end
 
 def parse(raw, dir)
+  return Error.new(raw: raw) if raw.start_with? 'Error:'
+
   filename, date, model, focal_length, aperture, exposure_time, iso =
     raw.split(',')
 
+  return Error.new(raw: raw) if date.nil? || date.length == 0
   date = DateTime.parse(date)
 
   prefix = [
@@ -137,6 +177,10 @@ def parse(raw, dir)
     prefix:   prefix,
     params:   params
   )
+
+rescue
+  puts "Error parsing #{filename}"
+  raise
 end
 
 class Item < OpenStruct
