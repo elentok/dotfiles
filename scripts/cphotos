@@ -17,9 +17,7 @@ def main(source_dir, target_dir)
     puts
   end
 
-  if result.modified.empty?
-    puts 'No modified files'
-  else
+  if result.modified.any?
     puts "#{result.modified.length} modified file(s) (#{result.totals[:modified] / 1024 / 1024}mb):"
     print_files(result.modified)
     puts
@@ -27,7 +25,7 @@ def main(source_dir, target_dir)
 
   if result.errors.any?
     puts "#{result.errors.length} error(s):"
-    result.error.each { |e| puts e }
+    result.errors.each(&:print)
     puts
   end
 
@@ -59,7 +57,7 @@ def copy(added_files, target_dir)
     target_rel_path = Pathname.new(added_file.target).relative_path_from(target_pathname)
     puts "Copying #{target_rel_path}..."
     FileUtils.mkdir_p(File.dirname(added_file.target))
-    FileUtils.cp(added_file.item.filename, added_file.target)
+    FileUtils.cp(added_file.source.filename, added_file.target)
     f.puts ">> #{target_rel_path}"
   end
 
@@ -76,8 +74,7 @@ def analyze(source_dir, target_dir, verbose = false)
   t = Time.now
 
   items = find_items(source_dir)
-  puts 'Analyzing #{items.length} photos...' if verbose
-
+  puts "Analyzing #{items.length} photos..." if verbose
 
   items.each do |item|
     if item.is_a? Error
@@ -98,7 +95,15 @@ def analyze(source_dir, target_dir, verbose = false)
   result
 end
 
-class Error < OpenStruct; end
+class Error
+  def initialize(message)
+    @message = message
+  end
+
+  def print
+    puts @message
+  end
+end
 
 class Pair < OpenStruct
   def print
@@ -117,8 +122,8 @@ def identify_status(item, target)
 end
 
 def find_items(dir)
-  fields = %w(FileName DateTimeOriginal Model FocalLengthIn35mmFormat Aperture
-              ExposureTime ISO)
+  fields = %w(Directory FileName DateTimeOriginal Model FocalLengthIn35mmFormat
+              Aperture ExposureTime ISO)
 
   root = File.file?(dir) ? File.dirname(dir) : dir
 
@@ -127,16 +132,16 @@ def find_items(dir)
     -printFormat '$#{fields.join(',$')}' \
     2>/dev/null`
   .split("\n")
-  .map { |raw| parse(raw, root) }
+  .map { |raw| parse(raw) }
 end
 
-def parse(raw, dir)
-  return Error.new(raw: raw) if raw.start_with? 'Error:'
+def parse(raw)
+  return Error.new(raw) if raw.start_with? 'Error:'
 
-  filename, date, model, focal_length, aperture, exposure_time, iso =
+  dir, filename, date, model, focal_length, aperture, exposure_time, iso =
     raw.split(',')
 
-  return Error.new(raw: raw) if date.nil? || date.length == 0
+  return Error.new("Error: no exif data for #{filename}") if date.nil? || date.length == 0
   date = DateTime.parse(date)
 
   prefix = [
