@@ -15,6 +15,9 @@ describe '#analyze' do
 
     FileUtils.cp 'test/fixtures/exif.jpg',
       '/tmp/photos-target/2016/02-01/0202-p1020308-fz1000.jpg'
+
+    IO.write '/tmp/photos-target/copy.log',
+      ">> 2016-10-05 0102-p1020310"
   end
 
   after :each do
@@ -37,5 +40,10 @@ describe '#analyze' do
 
     expect(result.added[3].target).to eq \
       '/tmp/photos-target/2016/03-30_04-12 multi day trip/day04/0102-p1020309-fz1000.jpg'
+
+    expect(result.deleted.length).to eq 1
+
+    expect(result.deleted[0].target).to eq \
+      '/tmp/photos-target/2016/10-05/0102-p1020310-fz1000.jpg'
   end
 end
