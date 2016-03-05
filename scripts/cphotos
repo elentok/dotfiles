@@ -23,12 +23,17 @@ def main(source_dir, target_dir)
     puts
   end
 
+  if result.deleted.any?
+    puts "#{result.deleted.length} deleted file(s) (#{result.totals[:deleted] / 1024 / 1024}mb):"
+    print_files(result.deleted)
+    puts
+  end
+
   if result.errors.any?
     puts "#{result.errors.length} error(s):"
     result.errors.each(&:print)
     puts
   end
-
 
   puts
   if confirm?('Copy files?', 'yes')
@@ -51,14 +56,14 @@ def copy(added_files, target_dir)
   f = open(File.join(target_dir, 'copy.log'), 'a')
   f.puts "# Copy start (#{DateTime.now})"
 
-  target_pathname = Pathname.new(target_dir)
+  # target_pathname = Pathname.new(target_dir)
 
   added_files.each do |added_file|
-    target_rel_path = Pathname.new(added_file.target).relative_path_from(target_pathname)
-    puts "Copying #{target_rel_path}..."
+    # target_rel_path = Pathname.new(added_file.target).relative_path_from(target_pathname)
+    puts "Copying #{added_file.target}..."
     FileUtils.mkdir_p(File.dirname(added_file.target))
     FileUtils.cp(added_file.source.filename, added_file.target)
-    f.puts ">> #{target_rel_path}"
+    f.puts added_file.source.log_line
   end
 
   puts "Done."
@@ -68,7 +73,8 @@ ensure
 end
 
 def analyze(source_dir, target_dir, verbose = false)
-  result = OpenStruct.new(added: [], modified: [], totals: {}, errors: [])
+  result = OpenStruct.new(added: [], modified: [], deleted: [], totals: {},
+                          errors: [])
 
   puts 'Looking for photos...' if verbose
   t = Time.now
@@ -83,7 +89,7 @@ def analyze(source_dir, target_dir, verbose = false)
     end
 
     target = find_target(item, target_dir)
-    status = identify_status(item, target)
+    status = identify_status(item, target, target_dir)
     if status != :same
       result[status] << Pair.new(source: item, target: target)
       result.totals[status] ||= 0
@@ -111,21 +117,31 @@ class Pair < OpenStruct
   end
 end
 
-def identify_status(item, target)
-  return :added unless File.exist?(target)
-
-  if File.size(target) == item.size
-    :same
+def identify_status(source, target, target_root)
+  if File.exist?(target)
+    if File.size(target) == source.size
+      :same
+    else
+      :modified
+    end
   else
-    :modified
+    if deleted?(source, target_root)
+      :deleted
+    else
+      :added
+    end
   end
+end
+
+def deleted?(source, target_root)
+  log_file = File.join(target_root, 'copy.log')
+  return false unless File.exist?(log_file)
+  system("grep '^#{source.log_line}' '#{log_file}' > /dev/null")
 end
 
 def find_items(dir)
   fields = %w(Directory FileName DateTimeOriginal Model FocalLengthIn35mmFormat
               Aperture ExposureTime ISO)
-
-  root = File.file?(dir) ? File.dirname(dir) : dir
 
   `exiftool "#{dir}" -recurse -ignoreMinorErrors \
     -dateFormat '%Y-%m-%d %H:%M' \
@@ -171,18 +187,14 @@ def parse(raw)
   aperture = "f#{aperture.sub(/\.0+/, '')}" if aperture
   iso = "i#{iso}" if iso
 
-  params = [
-    model.downcase.sub('dmc-', '').sub('canon eos ', '').sub(' digital', ''),
-    focal_length, exposure_time, aperture, iso].compact.join('-')
-
   Item.new(
     filename: File.join(dir, filename),
     ext:      File.extname(filename).downcase,
     date:     date,
     prefix:   prefix,
-    params:   params
+    params:   [model, focal_length, exposure_time, aperture, iso]
+              .compact.join('-')
   )
-
 rescue
   puts "Error parsing #{filename}"
   raise
@@ -196,6 +208,10 @@ class Item < OpenStruct
 
   def size_mb
     @size_mb ||= "#{size / 1024 / 1024}mb"
+  end
+
+  def log_line
+    @log_line ||= ['>>', date.strftime('%Y-%m-%d'), prefix].join(' ')
   end
 end
 
