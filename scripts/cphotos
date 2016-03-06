@@ -210,7 +210,7 @@ class Pair < OpenStruct
   end
 
   def find_source_in_target_dir(dir)
-    Dir[File.join(dir, "#{@source.prefix}*#{@source.ext}")].sort.first
+    Dir[File.join(dir, '**', "#{@source.prefix}*#{@source.ext}")].sort.first
   end
 
   def identify_status
