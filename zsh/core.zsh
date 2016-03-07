@@ -121,4 +121,7 @@ if [ -e "$DOTL/zsh/core.zsh" ]; then
   source "$DOTL/zsh/core.zsh"
 fi
 
+# MISC {{{1
+export SSH_TERM=xterm-color
+
 # vim: foldmethod=marker
