@@ -9,6 +9,10 @@ main() {
 setup-keybindings() {
   itermcfg set '<cmd-[>' send_keys '<c-a>h'
   itermcfg set '<cmd-]>' send_keys '<c-a>l'
+  itermcfg set '<cmd-h>' send_esc h
+  itermcfg set '<cmd-j>' send_esc j
+  itermcfg set '<cmd-k>' send_esc k
+  itermcfg set '<cmd-l>' send_esc l
 }
 
 main
