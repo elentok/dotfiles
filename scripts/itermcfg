@@ -96,6 +96,7 @@ module Iterm
     end
 
     class SendEscape < Base
+      attr_reader :text
       action :send_esc, 10
 
       def initialize(text)

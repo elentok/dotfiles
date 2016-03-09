@@ -7,6 +7,7 @@ GITCONFIG="$HOME/.gitconfig"
 main() {
   header "Git"
   should_install_custom_git && install_git
+  install_tig
   install_gitconfig
   install_symlinks
   install_diff_so_fancy
@@ -19,9 +20,15 @@ should_install_custom_git() {
 install_git() {
   if is_mac; then
     brew_install git
-    brew_install tig
   else
     apt_install git libncurses5-dev
+  fi
+}
+
+install_tig() {
+  if is_mac; then
+    brew_install tig
+  else
     if ! has_command tig; then
       install_tgz --sudo 'https://github.com/jonas/tig/archive/tig-2.1.1.tar.gz'
     fi
