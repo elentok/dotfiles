@@ -2,11 +2,22 @@
 
 source `dirname $0`/../../framework
 
-RUBY_VERSION='2.2.2'
+RUBY_VERSION='2.3.0'
+
+main() {
+  header "Ruby"
+
+  # install_requirements
+  install_rbenv
+  install_ruby
+  if is_mac; then
+    install_pow
+  fi
+  create_symlinks
+}
 
 install_rbenv() {
   brew_install rbenv
-  brew_install rbenv-gem-rehash
   brew_install ruby-build
   eval "$(rbenv init -)"
 }
@@ -38,6 +49,13 @@ install_ruby() {
   fi
 }
 
+install_pow() {
+  if [ ! -e "$HOME/Library/Application Support/Pow" ]; then
+    bullet 'Installing pow...'
+    curl get.pow.cx | sh
+  fi
+}
+
 create_symlinks() {
   symlink "$DOTF/plugins/ruby/irbrc" ~/.irbrc
   symlink "$DOTF/plugins/ruby/rdebugrc" ~/.rdebugrc
@@ -66,11 +84,4 @@ install_phantomjs_on_linux() {
   fi
 }
 
-header "Ruby"
-if [ "$1" != "symlinks" ]; then
-  #install_requirements
-  install_rbenv
-  install_ruby
-  #install_phantomjs
-fi
-create_symlinks
+main "$@"
