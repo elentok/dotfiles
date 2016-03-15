@@ -23,10 +23,11 @@ augroup Elentok_Misc
   autocmd FileType ruby       setlocal omnifunc=
   autocmd FileType xml        setlocal foldmethod=syntax
   autocmd Filetype python     setlocal ts=4 softtabstop=4 shiftwidth=4
-  autocmd FileType gitcommit  setlocal comments=fb:-,fb:* colorcolumn=72
+  autocmd FileType gitcommit,markdown setlocal spell spellcapcheck=
+  autocmd FileType gitcommit  setlocal comments=fb:-,fb:* colorcolumn=72 textwidth=72
+  autocmd FileType markdown   setlocal textwidth=80
   autocmd FileType vim setlocal nobomb
 
-  autocmd FileType gitcommit,markdown setlocal spell spellcapcheck=
   autocmd FileType coffee,yaml        FoldByIndent
 
   " When editing a file, always jump to the last known cursor position.
