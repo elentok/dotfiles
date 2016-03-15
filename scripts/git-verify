@@ -105,6 +105,7 @@ class Repo
 
   def git(command)
     output = `cd #{@directory} && git #{command}`
+    puts gray(">> git #{command}")
     exit_code = $CHILD_STATUS.to_i
     fail GitError, "Git command returned status #{exit_code}" if exit_code != 0
     output
@@ -153,6 +154,10 @@ class Branch
       LocalBranch.new(repo, line)
     end
   end
+
+  def protected?
+    %(master develop).include?(@name)
+  end
 end
 
 class LocalBranch < Branch
@@ -193,7 +198,10 @@ class Pair
     git "checkout #{@local}"
 
     pull
-    push
+
+    if !@local.protected? || confirm?(yellow("Push to #{@remote}?"))
+      push
+    end
   end
 
   def pull
