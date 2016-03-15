@@ -16,7 +16,10 @@ class CLI < OptionsCLI
     colors:    ['-c', '--colors',    'Number of colors'],
     depth:     ['-d', '--depth',     'Depth of color'],
     fit:       ['-f', '--fit RES',   'Resize the image to fit in these ' \
-                'bounds (if no size defined defaults to 1500x1500)']
+                'bounds (if no size defined defaults to 1500x1500)'],
+    output:    ['-o', '--output OUTPUT', 'Output directory ' \
+                '(defaults to "optimized")'],
+    silent:    ['-s', '--silent', "Don't overwrite files"]
 
   def start
     options.merge!(colors: 2, depth: 1)  if options[:bw]
@@ -47,7 +50,8 @@ class ImageOptimizer
         basename = File.basename(@source_file)
         dirname = File.dirname(@source_file)
 
-        optimized_dir = File.join(dirname, 'optimized')
+        optimized_dir = @options[:output] ||
+                        optimized_dir = File.join(dirname, 'optimized')
         Dir.mkdir(optimized_dir) unless Dir.exist?(optimized_dir)
 
         File.join(optimized_dir, basename)
@@ -68,6 +72,7 @@ class ImageOptimizer
     puts blue("* Optimizing #{@source_file}...")
 
     if File.exist?(target_file)
+      return if @options[:silent]
       return unless confirm?('  Output file exists, overwrite')
     end
 
