@@ -63,6 +63,10 @@ export GOROOT=$BREW_HOME/opt/go/libexec
 export GOPATH=$HOME/go
 export GO15VENDOREXPERIMENT=1
 
+if [ -d "$BREW_HOME/share/app-engine-go-64/goroot" ]; then
+  export GOPATH=$GOPATH:$BREW_HOME/share/app-engine-go-64/goroot
+fi
+
 if is_mac; then
   export CGO_CPPFLAGS="-I $BREW_HOME/include"
   export CGO_LDFLAGS="-L $BREW_HOME/lib"
