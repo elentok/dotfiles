@@ -88,7 +88,14 @@ let g:syntastic_mode_map = { "mode": "active",
                            \ "active_filetypes": [],
                            \ "passive_filetypes": ['sass', 'scss', 'haml', 'html', 'dart']}
 
+
 " CtrlP {{{1
+
+" Use Silversearcher to list files (much faster)
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+" Silversearcher is fast enough, so no need for caching
+let g:ctrlp_use_caching = 0
 
 let g:ctrlp_dotfiles = 0
 let g:ctrlp_root_markers = ['.git']
