@@ -23,8 +23,9 @@ Plug 'elentok/vim-rails-extra'
 Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 Plug 'iandoe/vim-osx-colorpicker'
 Plug 'itchyny/calendar.vim', { 'on': 'Calendar' }
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " dark/zen room, no distraction mode
 Plug 'junegunn/vim-easy-align'
 Plug 'mhinz/vim-grepper'
