@@ -60,7 +60,8 @@ done
 
 # Go {{{1
 export GOROOT=$BREW_HOME/opt/go/libexec
-export GOPATH=$HOME/go
+export MAIN_GOPATH=$HOME/go
+export GOPATH=$MAIN_GO_PATH
 export GO15VENDOREXPERIMENT=1
 
 if [ -d "$BREW_HOME/share/app-engine-go-64/goroot" ]; then
@@ -76,7 +77,7 @@ fi
 PATH=$DOTF/scripts:$DOTL/scripts
 PATH=$PATH:$BREW_HOME/bin
 PATH=$PATH:$HOME/bin:$HOME/scripts:$HOME/.local/bin
-PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+PATH=$PATH:$GOROOT/bin:$MAIN_GOPATH/bin
 
 # replace bsd binaries with gnu
 for pkg in coreutils findutils gnu-sed; do
