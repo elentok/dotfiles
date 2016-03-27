@@ -95,7 +95,7 @@ let g:syntastic_mode_map = { "mode": "active",
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
 " Silversearcher is fast enough, so no need for caching
-let g:ctrlp_use_caching = 0
+" let g:ctrlp_use_caching = 0
 
 let g:ctrlp_dotfiles = 0
 let g:ctrlp_root_markers = ['.git']
