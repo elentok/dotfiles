@@ -1,0 +1,72 @@
+#!/bin/zsh
+
+main() {
+  for year in *; do
+    if is_year "$year"; then
+      process_year $year
+    fi
+  done
+}
+
+is_year() {
+  [[ $1 =~ ^[0-9]{4}$ ]]
+}
+
+process_year() {
+  local year="$1"
+
+  echo "Year: $year"
+
+  cd $year
+
+  for date in *; do
+    if is_date "$date"; then
+      process_date "$year" "$date"
+    fi
+  done
+
+  cd ..
+}
+
+is_date() {
+  [[ $1 =~ ^[0-9]{2}-[0-9]{2} ]]
+}
+
+process_date() {
+  local year="$1"
+  local date_dirname="$2"
+  local date="$year$(echo $date_dirname | awk '{print $1}' | sed 's/-//')"
+
+  process_date_dir "$date_dirname" "$date"
+}
+
+process_date_dir() {
+  local dir="$1"
+  local date="$2"
+
+  echo
+  echo '-------------------------------'
+  echo "Processing `pwd`/$dir ($date):"
+
+  cd "$dir"
+
+  for file in *; do
+    if [ -d "$file" ]; then
+      echo "DIR=[`pwd`/$file]"
+      process_date_dir "$file" "$date"
+    elif is_time "$file"; then
+      local new_file="$date-$file"
+      echo "$file"
+      echo "  -> $new_file"
+      mv "$file" "$new_file"
+    fi
+  done
+
+  cd ..
+}
+
+is_time() {
+  [[ $1 =~ ^[0-2][0-9]{3}- ]]
+}
+
+main "$@"
