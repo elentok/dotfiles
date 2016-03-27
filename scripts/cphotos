@@ -240,7 +240,7 @@ class SourceItem < OpenStruct
     date = DateTime.parse(date)
 
     prefix = [
-      date.strftime("%H%M"),
+      date.strftime("%Y%m%d-%H%M"),
       File.basename(filename, '.*').downcase.gsub(/^_+/, '')
     ].join('-')
 
@@ -292,7 +292,7 @@ class SourceItem < OpenStruct
   end
 
   def log_line
-    @log_line ||= ['>>', date.strftime('%Y-%m-%d'), prefix].join(' ')
+    @log_line ||= ['>>', prefix].join(' ')
   end
 end
 
