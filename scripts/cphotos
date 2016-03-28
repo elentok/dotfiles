@@ -105,8 +105,10 @@ class Analysis < OpenStruct
     f = open(File.join(target_dir, 'copy.log'), 'a')
     f.puts "# Copy start (#{DateTime.now})"
 
-    added.each do |pair|
-      puts "Copying #{pair.target}..."
+    total = added.length.to_s
+    added.each_with_index do |pair, index|
+      pos = (index + 1).to_s.ljust(total.length)
+      puts "#{pos}/#{total}: Copying #{pair.target}..."
       FileUtils.mkdir_p(File.dirname(pair.target))
       FileUtils.cp(pair.source.filename, pair.target)
       f.puts pair.source.log_line

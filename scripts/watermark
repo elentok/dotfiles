@@ -7,7 +7,7 @@
 
 require 'fileutils'
 
-HEIGHT_PERCENTAGE = 1.3
+HEIGHT_PERCENTAGE = 1.6
 PADDING_PERCENTAGE = 0.5
 STROKE_PERCENTAGE = 0.05
 
@@ -25,6 +25,8 @@ def main
 end
 
 def add_watermark(text, color, filename)
+  puts
+  puts '------------------------------------------'
   puts "Adding watermark '#{text}' (#{color}) to '#{filename}'..."
 
   dir = File.join(File.dirname(filename), 'watermarked')
@@ -38,10 +40,12 @@ def add_watermark(text, color, filename)
   padding = img.height * PADDING_PERCENTAGE / 100
   stroke_width = img.height * STROKE_PERCENTAGE / 100
 
-  puts "Using font size '#{font_size}'"
+  puts "* orientation: '#{img.portrait? ? 'portrait' : 'landscape'}'"
+  puts "* font size: '#{font_size}'"
 
   cmd = <<-EOF
     convert "#{filename}" -pointsize "#{font_size}" \
+      -auto-orient \
       -stroke black \
       -strokewidth #{stroke_width} \
       -weight bold \
@@ -56,20 +60,28 @@ def add_watermark(text, color, filename)
 end
 
 class Image
+  attr_reader :width, :height
+
   def initialize(filename)
     @filename = filename
+
+    identify = `identify -format "#{fields}" "#{@filename}"`.split(' ')
+    orientation = identify[0]
+    if orientation == '1' || orientation == '3'
+      @width = identify[1].to_i
+      @height = identify[2].to_i
+    else
+      @width = identify[2].to_i
+      @height = identify[1].to_i
+    end
   end
 
-  def identify
-    @identify ||= `identify "#{@filename}"`.split(' ')
+  def fields
+    %w(exif:orientation width height).map { |f| "%[#{f}]" }.join(' ')
   end
 
-  def size
-    @size ||= identify[2].split('x').map(&:to_i)
-  end
-
-  def height
-    size[0]
+  def portrait?
+    @height > @width
   end
 end
 
