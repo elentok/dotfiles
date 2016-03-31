@@ -112,6 +112,9 @@ unsetopt CLOBBER            # Do not overwrite existing files with > and >>.
 # make FZF respect .gitignore
 export FZF_DEFAULT_COMMAND='ag -g ""'
 
+# SSH {{{1
+export SSH_AUTH_SOCK="$HOME/.ssh/default-agent"
+
 # Misc {{{1
 
 # don't log to history commands starting with a space
@@ -128,3 +131,4 @@ setopt NOTIFY             # Report status of background jobs immediately.
 unsetopt BG_NICE          # Don't run all background jobs at a lower priority.
 unsetopt HUP              # Don't kill jobs on shell exit.
 unsetopt CHECK_JOBS       # Don't report on jobs when shell exit.
+
