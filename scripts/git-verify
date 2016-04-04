@@ -105,7 +105,7 @@ class Repo
 
   def git(command)
     output = `cd #{@directory} && git #{command}`
-    puts gray(">> git #{command}")
+    puts gray("  >> git #{command}")
     exit_code = $CHILD_STATUS.to_i
     fail GitError, "Git command returned status #{exit_code}" if exit_code != 0
     output
@@ -140,6 +140,10 @@ class Branch
 
   def hash
     @hash ||= @repo.git("log -1 --pretty=%h #{git_name}").strip
+  end
+
+  def reset_hash!
+    @hash = nil
   end
 
   def to_s
@@ -199,6 +203,8 @@ class Pair
 
     pull
 
+    return if synced?
+
     if !@local.protected? || confirm?(yellow("Push to #{@remote}?"))
       push
     end
@@ -209,6 +215,8 @@ class Pair
 
     begin
       git "pull --rebase=false --ff-only #{remote_arg}"
+      @local.reset_hash!
+      @remote.reset_hash!
     rescue GitError
       pull_alternatives
     end
@@ -258,6 +266,10 @@ class Pair
 
   def git(command)
     @local.repo.git(command)
+  end
+
+  def synced?
+    @local.hash == @remote.hash
   end
 end
 
