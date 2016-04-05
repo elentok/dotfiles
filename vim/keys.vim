@@ -183,7 +183,7 @@ noremap <Leader>vrp :Git co -p %<cr>
 noremap <Leader>vd  :Git diff %<cr>
 noremap <Leader>vaf :Git add %<cr>
 noremap <Leader>vap :Git add -p %<cr>
-noremap <Leader>vh :QuickShell tig %<cr>
+noremap <Leader>vh :VimuxRunCommand("tig " . bufname("%"))<cr>
 noremap <Leader>vc :Gcommit<cr>
 
 " Spaces text object {{{1
