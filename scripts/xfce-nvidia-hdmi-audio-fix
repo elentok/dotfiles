@@ -1,0 +1,60 @@
+#!/bin/bash
+
+set -e
+
+source $DOTF/framework
+
+main() {
+  stop-xfce4-volumed
+  restart-pulseaudio
+
+  sleep 2
+
+  pacmd set-default-sink alsa_output.hw_1_8
+
+  stop-xfce4-volumed
+  restart-pulseaudio
+  start-xfce4-volumed
+
+  bullet 'Done.'
+}
+
+restart-pulseaudio() {
+  stop-pulseaudio
+  start-pulseaudio
+}
+
+restart-xfce4-volumed() {
+  stop-xfce4-volumed
+  start-xfce4-volumed
+}
+
+stop-xfce4-volumed() {
+  if is_running xfce4-volumed; then
+    bullet 'Stopping xfce4-volumed...'
+    killall -9 xfce4-volumed
+    show_result
+  fi
+}
+
+start-xfce4-volumed() {
+  bullet 'Starting xfce4-volumed...'
+  xfce4-volumed
+  show_result
+}
+
+stop-pulseaudio() {
+  if is_running pulseaudio; then
+    bullet 'Stopping PulseAudio...'
+    pulseaudio -k
+    show_result
+  fi
+}
+
+start-pulseaudio() {
+  bullet 'Starting PulseAudio...'
+  pulseaudio --start
+  show_result
+}
+
+main "$@"
