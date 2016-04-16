@@ -61,7 +61,7 @@ done
 # Go {{{1
 export GOROOT=$BREW_HOME/opt/go/libexec
 export MAIN_GOPATH=$HOME/go
-export GOPATH=$MAIN_GO_PATH
+export GOPATH=$MAIN_GOPATH
 export GO15VENDOREXPERIMENT=1
 
 if [ -d "$BREW_HOME/share/app-engine-go-64/goroot" ]; then

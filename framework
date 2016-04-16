@@ -435,6 +435,18 @@ git-repo-is-dirty() {
   [ "$(git status --porcelain)" != "" ]
 }
 
+# Go Get {{{1
+go_get() {
+  pkg="$1"
+  bullet "Installing Go package '$pkg'..."
+  if [ -e "$GOPATH/src/$pkg" ]; then
+    info " already installed"
+  else
+    info ""
+    go get -u "$pkg"
+  fi
+}
+
 # Apt: Install {{{1
 apt_install() {
   for pkg in $*; do
