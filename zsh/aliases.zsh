@@ -3,6 +3,7 @@
 # All Aliases {{{1
 alias ..='cd ..'
 alias agg="ag --ignore '*.yml'"
+alias ba='bt add-magnet "$(pbp)"'
 alias be='bundle exec'
 alias bl='tr ":" "\n"'
 alias c1='awk "{ print \$1 }"'
