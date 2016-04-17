@@ -81,6 +81,23 @@ function find-exec {
   find . -type f -iname "*${1:-}*" -exec "${2:-file}" '{}' \;
 }
 
+function videos() {
+  ag '.' -l --nocolor -g '(mkv|avi|mp4)'
+}
+
+function p() {
+  local filename="$(videos | fzf)"
+  if [ -n "$filename" ]; then
+    open "$filename"
+  fi
+}
+
+if is_linux; then
+  function open() {
+    xdg-open "$@"
+  }
+fi
+
 # Bindings {{{1
 
 # VI bindings
