@@ -114,6 +114,7 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 
 # SSH {{{1
 export SSH_AUTH_SOCK="$HOME/.ssh/default-agent"
+agent fix
 
 # Misc {{{1
 
