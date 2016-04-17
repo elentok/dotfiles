@@ -67,6 +67,7 @@ alias tailpow='tail -f $(find ~/Library/Logs/Pow -name "*.log" | fzf)'
 
 alias ew='whichx $EDITOR'
 alias cw='whichx cat'
+alias o='open'
 
 # Confirm filesystem operations {{{1
 alias cp='cp -i'
@@ -81,12 +82,10 @@ function iosapp() {
 
 # Mac/Linux {{{1
 if is_mac; then
-  alias o='open'
   alias hda='hdiutil attach'
   alias hdd='hdiutil detach'
   alias hdi='hdiutil info'
 else
-  alias o='xdg-open'
   alias pbpaste='xclip -selection clipboard -out'
 
   if has_command xclip; then
