@@ -55,10 +55,7 @@ class CLI
   end
 
   def app_root(name)
-    search_path = File.join(Device.booted.root_dir, 'data', 'Containers',
-                            'Bundle', 'Application')
-
-    Dir["#{search_path}/**/#{name}"].each do |path|
+    Device.booted.app_root(name).each do |path|
       puts path
     end
   end
@@ -123,6 +120,13 @@ class Device
   def apps_root_dir
     @apps_root_dir ||= File.join(root_dir, 'Data/Containers/Data/Application')
   end
+
+  def app_root(name)
+    search_path = File.join(root_dir, 'data', 'Containers', 'Bundle',
+                            'Application')
+
+    Dir["#{search_path}/**/#{name}"]
+  end
 end
 
 class App
@@ -137,4 +141,4 @@ class App
   end
 end
 
-CLI.new.main
+CLI.new.main if __FILE__ == $PROGRAM_NAME
