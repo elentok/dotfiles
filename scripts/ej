@@ -1,0 +1,14 @@
+#!/bin/bash
+
+main() {
+  disk="$(list-mounts | fzf)"
+  if [ -n "$disk" ]; then
+    diskutil eject "$disk"
+  fi
+}
+
+list-mounts() {
+  /bin/ls -1 /Volumes/
+}
+
+main "$@"
