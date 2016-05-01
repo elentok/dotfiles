@@ -7,6 +7,7 @@ class CLI
   def initialize
     @repo = Repo.new(ARGV[0] || '.')
     @repo.fetch_all
+    puts
     report_local_branches_without_remote
     report_remote_branches_without_local
     report_unsynced_branches
@@ -23,7 +24,7 @@ class CLI
   def report_remote_branches_without_local
     return if @repo.remote_branches_without_local.empty?
 
-    puts red('Remote branches without remote:')
+    puts red('Remote branches without local:')
     @repo.remote_branches_without_local.each { |_, branch| puts "* #{branch}" }
     puts
   end
@@ -59,7 +60,10 @@ class Repo
 
   def fetch_all
     remotes.each do |remote|
-      remote.fetch unless remote.name == 'review'
+      unless remote.name == 'review'
+        remote.fetch
+        remote.prune
+      end
     end
   end
 
@@ -105,7 +109,7 @@ class Repo
 
   def git(command)
     output = `cd #{@directory} && git #{command}`
-    puts gray("  >> git #{command}")
+    puts gray("  >> git #{command}") if ENV['VERBOSE']
     exit_code = $CHILD_STATUS.to_i
     fail GitError, "Git command returned status #{exit_code}" if exit_code != 0
     output
@@ -126,6 +130,11 @@ class Remote
   def fetch
     puts blue("* Fetching remote '#{@name}'")
     @repo.git("fetch #{@name}")
+  end
+
+  def prune
+    puts blue("* Removing dead branches from '#{@name}'")
+    @repo.git("remote prune #{@name}")
   end
 end
 
