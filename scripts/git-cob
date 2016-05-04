@@ -1,0 +1,14 @@
+#!/bin/bash
+
+main() {
+  branch="$(local-branches | fzf)"
+  if [ -n "$branch" ]; then
+    git checkout "$branch"
+  fi
+}
+
+local-branches() {
+  git branch | cut -c 3-
+}
+
+main "$@"
