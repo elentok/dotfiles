@@ -1,14 +1,30 @@
-#!/bin/bash
+#!/usr/bin/env ruby
 
-main() {
-  branch="$(local-branches | fzf)"
-  if [ -n "$branch" ]; then
-    git checkout "$branch"
-  fi
-}
+def main
+  local_branches = `git branch | cut -c 3-`.split("\n")
+  remote_branches =
+    `git branch --remote | cut -c 3- | grep -v '/HEAD'`.split("\n")
 
-local-branches() {
-  git branch | cut -c 3-
-}
+  remote_only_branches = remote_branches.select do |branch|
+    _remote, branch = branch.split('/', 2)
+    !local_branches.include?(branch)
+  end
 
-main "$@"
+  branches = [].concat(local_branches).concat(remote_only_branches).join("\n")
+
+  branch = `echo "#{branches}" | fzf`.strip
+
+  return unless branch.length > 0
+
+  if remote_only_branches.include? branch
+    puts "The branch '#{branch}' is not checked out locally, " \
+      'creating a local branch...'
+
+    _remote, branch_name = branch.split('/', 2)
+    system "git checkout -b #{branch_name} #{branch}"
+  else
+    system "git checkout #{branch}"
+  end
+end
+
+main
