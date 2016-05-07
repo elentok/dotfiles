@@ -39,7 +39,11 @@ if g:os == 'windows'
 else
   let $temp_dir='/tmp/vim-' . $USER
   let $vimrc=expand('~/.vimrc')
-  let $vimfiles=expand('~/.vim')
+  if has('nvim')
+    let $vimfiles=expand('~/.nvim')
+  else
+    let $vimfiles=expand('~/.vim')
+  endif
   let $delimiter = '/'
   let $defaultfont='Monaco\ for\ Powerline:h13'
   let $alternatefont='Ubuntu\ Mono\ 13'
