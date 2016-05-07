@@ -5,7 +5,11 @@ source `dirname $0`/../../framework
 main() {
   header "SSH Server"
   if is_linux; then
-    apt_install openssh-server
+    if is_arch; then
+      pacman_install openssh
+    else
+      apt_install openssh-server
+    fi
   fi
 
   setup_authorized_keys
