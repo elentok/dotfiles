@@ -50,6 +50,24 @@ is_running() {
   ps cax | grep "$1" > /dev/null 2>&1
 }
 
+# Identify Linux Distro {{{1
+if is_linux; then
+  if has_command pacman; then
+    export DISTRO=arch
+  else
+    export DISTRO=debian
+  fi
+fi
+
+is_arch() {
+  [ "$DISTRO" = "arch" ]
+}
+
+is_debian() {
+  [ "$DISTRO" = "debian" ]
+}
+
+
 # BREW_HOME {{{1
 for dir in ~/.linuxbrew ~/.homebrew /usr/local; do
   if [ -e "$dir" ]; then

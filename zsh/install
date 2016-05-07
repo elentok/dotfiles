@@ -3,7 +3,7 @@
 source `dirname $0`/../framework
 
 install_zsh() {
-  if [ "$OS" == "mac" ]; then
+  if is_mac; then
     brew_install zsh
     my_shell=$(echo $SHELL | rev | cut -d/ -f1 | rev)
     if [ "$my_shell" != "zsh" ]; then
@@ -12,10 +12,18 @@ install_zsh() {
       chsh -s "$zsh_bin"
     fi
   else
-    apt_install zsh
-    if [ "$SHELL" != "/bin/zsh" ]; then
-      bullet "Changing shell to /bin/zsh... "
-      sudo usermod -s /bin/zsh $USER
+    if is_arch; then
+      pacman_install zsh
+    else
+      apt_install zsh
+    fi
+    
+    bullet "Changing user's shell to $THE_ZSH... "
+    if [[ "$SHELL" =~ /zsh ]]; then
+      info 'already set'
+    else
+      THE_ZSH="$(which zsh)"
+      sudo usermod -s $THE_ZSH $USER
     fi
   fi
 }
@@ -27,8 +35,11 @@ install_symlinks() {
 }
 
 install_requirements() {
-  if [ "$OS" == "mac" ]; then
+  if is_mac; then
     install_gnu_utils
+    brew_install rbenv fasd
+  elif is_arch; then
+    yaourt_install rbenv fasd
   fi
 }
 

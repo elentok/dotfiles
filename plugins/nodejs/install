@@ -6,21 +6,17 @@ header "NodeJS"
 
 if is_mac; then
   brew_install node
+elif is_arch; then
+  pacman_install nodejs npm
 else
   add_ppa chris-lea/node.js
   apt_install nodejs
 fi
 
-
-
 npm_install coffee-script
-npm_install supervisor
-npm_install grunt
-npm_install grunt-cli
 npm_install bower
 npm_install json
 npm_install jsontool
-npm_install mocha
 npm_install live-server
 npm_install jade
 npm_install jstransformer-coffee-script
@@ -28,4 +24,3 @@ npm_install jstransformer-less
 
 npm_install dns-switcher
 npm_install tailr
-npm_install logparty

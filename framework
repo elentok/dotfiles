@@ -361,12 +361,22 @@ has_brew_cask_package() {
 }
 
 # Python {{{1
+
+export PIP2="pip"
+if is_arch; then
+  export PIP2="pip2"
+fi
+
 verify_pip_installed() {
-  if command_missing pip; then
-    bullet "Installing pip... "
+  if command_missing $PIP2; then
+    bullet "Installing $PIP2... "
 
     if is_linux; then
-      apt_install python-pip
+      if is_debian; then
+        apt_install python-pip
+      else
+        pacman -S python2-pip python-pip
+      fi
     else
       if command_missing easy_install; then
         error "easy_install is missing, skipping"
@@ -384,28 +394,31 @@ pip_install() {
   if has_pip_package "$1"; then
     info " already installed"
   else
-    pip install --user $1
+    $PIP2 install --user $1
   fi
 }
 
 has_pip_package() {
-  [ "`pip list | grep \"^$1\b\"`" != "" ]
+  [ "`$PIP2 list | grep \"^$1\b\"`" != "" ]
 }
 
 # Pip3 {{{1
+export PIP3="pip3"
+if is_arch; then
+  export PIP3="pip"
+fi
 pip3_install() {
   bullet "Installing pip package ${1}... "
   if has_pip3_package "$1"; then
     info " already installed"
   else
-    pip3 install --user $1
+    $PIP3 install --user $1
   fi
 }
 
 has_pip3_package() {
-  [ "`pip3 list | grep \"^$1\b\"`" != "" ]
+  [ "`$PIP3 list | grep \"^$1\b\"`" != "" ]
 }
-
 
 # Git {{{1
 git_clone() {
@@ -495,6 +508,40 @@ add_ppa() {
     apt_install software-properties-common
     sudo add-apt-repository -y ppa:${1}
     sudo apt-get update
+  fi
+}
+
+# Pacman: Install {{{1
+pacman_install() {
+  for pkg in $*; do
+    pacman_install_single $pkg
+  done
+}
+
+pacman_install_single() {
+  bullet "Installing ${1}..."
+
+  if pacman -Q "$1" > /dev/null 2>&1; then
+    info " already installed"
+  else
+    sudo pacman -S --noconfirm ${1}
+  fi
+}
+
+# Yaourt: Install {{{1
+yaourt_install() {
+  for pkg in $*; do
+    yaourt_install_single $pkg
+  done
+}
+
+yaourt_install_single() {
+  bullet "Installing ${1}..."
+
+  if yaourt -Q "$1" > /dev/null 2>&1; then
+    info " already installed"
+  else
+    yaourt -S --noconfirm ${1}
   fi
 }
 
