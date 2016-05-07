@@ -108,5 +108,18 @@ Install GUI
 -----------
 
 ```
-pacman -S cinnamon lightdm gnome-terminal
+pacman -S cinnamon lightdm lightdm-gtk-greeter gnome-terminal xorg-server \
+  xorg-server-utils
+
+# if you have an intel graphics card:
+pacman -S xf86-video-intel mesa-libgl
+
+# enable lightdm
+systemctl enable lightdm.service
 ```
+
+Install Google Chrome
+---------------------
+
+* Install [Yaourt](https://archlinux.fr/yaourt-en)
+* Run `yaourt -S google-chrome`
