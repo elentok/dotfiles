@@ -640,6 +640,23 @@ add_user_to_group() {
   fi
 }
 
+# group {{{1
+group_exists() {
+  cat /etc/group | grep "^$1:" > /dev/null 2>&1
+}
+
+create_group() {
+  local group="$1"
+
+  bullet "Creating group '$group'... "
+  if group_exists "$group"; then
+    info 'already exists.'
+  else
+    sudo groupadd "$group"
+    show_result die_on_error
+  fi
+}
+
 # platform (workstation/server) {{{1
 
 identify_dotfiles_platform() {

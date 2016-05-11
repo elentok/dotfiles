@@ -109,13 +109,11 @@ Install GUI
 
 ```
 pacman -S cinnamon lightdm lightdm-gtk-greeter gnome-terminal xorg-server \
-  xorg-server-utils
+  xorg-server-utils xclip
 
-# if you have an intel graphics card:
-pacman -S xf86-video-intel mesa-libgl
+pacman -S xf86-video-intel mesa-libgl # if you have an intel graphics card:
 
-# enable lightdm
-systemctl enable lightdm.service
+systemctl enable lightdm.service # enable lightdm
 ```
 
 Install Google Chrome
