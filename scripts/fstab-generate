@@ -12,7 +12,7 @@ class Device
   end
 
   def self.all
-    `lsblk -l --pairs -o name,fstype,mountpoint,label`.split("\n").map do |line|
+    `lsblk --pairs -o name,fstype,mountpoint,label`.split("\n").map do |line|
       parse(line)
     end
   end
@@ -42,7 +42,6 @@ class Device
     @attribs[:fstype] && @attribs[:fstype] != 'swap' &&
       @attribs[:mountpoint] != '/'
   end
-  
 end
 
 Device.all.each do |device|

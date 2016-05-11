@@ -2,16 +2,28 @@
 
 source `dirname $0`/../../framework
 
+set -e
+
 main() {
-  if [ "$OS" != "linux" ]; then
+  if ! is_linux; then
     echo 'Only supported on linux'
     exit 1
   fi
 
   header "Samba sharing"
 
-  apt_install samba
+  if is_arch; then
+    pacman_install samba
+    if [ ! -e /etc/samba/smb.conf ]; then
+      bullet "Creating /etc/samba/smb.conf (sudo)... "
+      sudo cp /etc/samba/smb.conf{.default,}
+      show_result die_on_error
+    fi
+  else
+    apt_install samba
+  fi
   init_samba_username
+  create_group sambashare
   create_system_user
   create_samba_user
   add_to_smbusers
