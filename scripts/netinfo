@@ -1,0 +1,28 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+main() {
+  if is_arch; then
+    arch-netinfo
+  fi
+}
+
+arch-netinfo() {
+  arch-devices | while read device; do
+    echo "$device:"
+    echo "  ip:  $(arch-device-ip $device)"
+    echo "  mac: $(cat /sys/class/net/$device/address)"
+    echo
+  done
+}
+
+arch-devices() {
+  /bin/ls -1 /sys/class/net
+}
+
+arch-device-ip() {
+  ip addr show "$1" | grep 'inet ' | awk '{print $2}'
+}
+
+main "$@"
