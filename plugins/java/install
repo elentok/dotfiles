@@ -1,0 +1,17 @@
+#!/bin/bash
+
+source `dirname $0`/../../framework
+
+main() {
+  if [ "$OS" != "linux" ]; then
+    echo 'Only supported on linux'
+    exit 1
+  fi
+
+  header 'Oracle Java'
+
+  add_ppa webupd8team/java
+  apt_install oracle-java8-installer
+}
+
+main "$@"

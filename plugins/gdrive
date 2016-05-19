@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+go_get github.com/odeke-em/drive/cmd/drive
