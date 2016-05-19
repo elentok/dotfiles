@@ -1,0 +1,35 @@
+#!/bin/bash
+#
+# Opens an application or switches to an already active one
+#
+# Usage:
+#
+#   open-app {window-name} {exec}
+
+source $DOTF/framework
+
+main() {
+  if command_missing wmctrl; then
+    pacman_install wmctrl
+  fi
+
+  if [ $# -lt 2 ]; then
+    usage "$0"
+    exit 1
+  fi
+
+  local window="$1"
+  local exec="$2"
+
+  if window-open "$window"; then
+    wmctrl -a "$window"
+  else
+    "$exec"
+  fi
+}
+
+window-open() {
+  wmctrl -l | grep "$1" > /dev/null 2>&1
+}
+
+main "$@"

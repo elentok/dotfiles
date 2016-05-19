@@ -36,10 +36,18 @@ install_on_mac() {
 
 install_on_linux() {
   bullet "Installing mpd + clients"
-  apt_install mpd mpc ncmpcpp
+  if is_arch; then
+    pacman_install mpd mpc ncmpcpp
+  else
+    apt_install mpd mpc ncmpcpp
 
-  bullet "Remove mpd from update-rc.d"
-  sudo update-rc.d -f mpd remove
+    bullet "Remove mpd from update-rc.d"
+    sudo update-rc.d -f mpd remove
+  fi
+
+  linux-add-to-startup --name="Music Player Daemon" \
+                       --file="mpd" \
+                       --exec="mpd"
 }
 
 create_symlinks() {

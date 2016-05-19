@@ -1,0 +1,53 @@
+#!/bin/bash
+#
+# Add .desktop entries to ~/.config/autostart
+#
+# linux-add-to-startup --name="Music Player Daemon"
+#                      --file="mpd"
+#                      --exec="mpd"
+
+source $DOTF/framework
+
+AUTOSTART="$HOME/.config/autostart"
+
+main() {
+  FILE=''
+  NAME=''
+  EXEC=''
+  while extract_flag "$1"; do shift; done
+
+  echo "FILE=$FILE"
+  echo "NAME=$NAME"
+  echo "EXEC=$EXEC"
+
+  if [ -z "$FILE" -o -z "$NAME" -o -z "$EXEC" ]; then
+    usage "$0"
+    exit 1
+  fi
+
+  make_dir "$AUTOSTART"
+
+  local filename="$AUTOSTART/${FILE}.desktop"
+
+  bullet "Creating ${filename}..."
+  if [ -e "$filename" ]; then
+    info 'already exists'
+    exit 0
+  fi
+
+  cat > "${filename}" <<EOF
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=${NAME}
+Exec=${EXEC}
+StartupNotify=false
+Terminal=false
+Hidden=false
+X-GNOME-Autostart-enabled=false
+EOF
+
+  show_result
+}
+
+main "$@"
