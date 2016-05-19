@@ -789,3 +789,24 @@ device-for() {
 filesize() {
   stat -c%s "$1"
 }
+
+# Services {{{1
+service-start() {
+  bullet "Starting service $1... "
+  if is_arch; then
+    sudo systemctl start $1
+  else
+    sudo service $1 start
+  fi
+  show_result
+}
+
+service-stop() {
+  bullet "Stopping service $1... "
+  if is_arch; then
+    sudo systemctl stop $1
+  else
+    sudo service $1 stop
+  fi
+  show_result
+}
