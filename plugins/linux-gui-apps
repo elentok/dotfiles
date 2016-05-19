@@ -4,4 +4,8 @@ source `dirname $0`/framework
 
 header "GUI Apps"
 
-apt_install keepassx gimp pysdm regexxer krusader vlc
+if is_arch; then
+  pacman_install qt4 vlc
+else
+  apt_install keepassx gimp pysdm regexxer krusader vlc
+fi

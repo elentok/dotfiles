@@ -121,7 +121,11 @@ mac_plugins() {
 }
 
 linux_plugins() {
-  apt_install mercurial htop unrar
+  if is_arch; then
+    pacman_install htop
+  else
+    apt_install htop
+  fi
 
   if [ "$HAS_GUI" = 'yes' ]; then
     plugin linux-gui-apps
