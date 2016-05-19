@@ -1,20 +1,18 @@
 #!/bin/bash
 
-echo ""
-echo "========================================"
-echo "Installing Midnight Commander"
-echo "========================================"
+source $DOTF/framework
 
-DIR=$(dirname "${BASH_SOURCE[0]}")
-DIR=$(cd -P $DIR && pwd)
+main() {
+  header 'Midnight Commander'
 
-if [ "`uname -s`" == "Darwin" ]; then
-  brew install mc
-  mkdir -p ~/.config/mc
-  ln -sf "$DIR/ini" ~/.config/mc/ini
-else
-  sudo apt-get install -y mc
-  mkdir -p ~/.mc
-  ln -sf "$DIR/ini" ~/.mc/ini
-fi
+  if is_mac; then
+    brew_install mc
+  else
+    apt_install mc
+  fi
 
+  make_dir ~/.config/mc
+  symlink "$DOTF/plugin/mc/ini" ~/.config/mc/ini
+}
+
+main "$@"

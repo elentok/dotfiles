@@ -1,12 +1,12 @@
 #!/bin/bash
 
-brew install ranger
+brew_install ranger
 
-brew install atool # archive tool (for als)
-brew install w3c
+brew_install atool # archive tool (for als)
+brew_install w3c
 
 # these require XQuarts to be installed
-brew install xpdf
-brew install imlib2 # for libcaca
-brew install libcaca --with-imlib2 # for img2txt
+brew_install xpdf
+brew_install imlib2 # for libcaca
+brew_install libcaca --with-imlib2 # for img2txt
 

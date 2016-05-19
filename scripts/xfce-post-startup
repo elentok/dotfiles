@@ -1,7 +1,7 @@
 #!/usr/bin/zsh -l
 
-(
-  date
-  xfce-nvidia-hdmi-audio-fix
-  echo '=========================='
-) >> ~/tmp/xfce-post-startup 2>&1
+# (
+  # date
+  # xfce-nvidia-hdmi-audio-fix
+  # echo '=========================='
+# ) >> ~/tmp/xfce-post-startup 2>&1
