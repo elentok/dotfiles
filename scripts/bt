@@ -5,6 +5,8 @@
 # Usage:
 #
 #   bt ls
+#   bt retry              - removes failed torrents and re-adds magnets
+#   bt magnets            - outputs the magnet links of the current torrents
 #   bt remove-complete
 #   bt add-magnet <link>
 
@@ -53,7 +55,8 @@ module Bt
       res = post('/transmission/rpc',
                  method: 'torrent-get',
                  arguments: {
-                   fields: %w(id name status percentDone rateDownload)
+                   fields: %w(id name status percentDone rateDownload magnetLink
+                              error errorString)
                  })
 
       JSON.parse(res.body)['arguments']['torrents']
@@ -92,7 +95,7 @@ module Bt
       :seed           # 6  Seeding
     ]
 
-    attr_reader :id, :name, :percent, :download_rate
+    attr_reader :id, :name, :percent, :download_rate, :magnet_link
 
     def initialize(raw = {})
       @id = raw['id']
@@ -100,6 +103,9 @@ module Bt
       @status = STATUSES[raw['status']]
       @percent = raw['percentDone']
       @download_rate = raw['rateDownload']
+      @magnet_link = raw['magnetLink']
+      @error = raw['error']
+      @error_string = raw['errorString']
     end
 
     def complete?
@@ -111,8 +117,17 @@ module Bt
         @status.to_s.ljust(13),
         percent_s.rjust(4),
         download_rate_s.rjust(8),
-        @name
+        @name,
+        error
       ].join(' ')
+    end
+
+    def failed?
+      @error != 0
+    end
+
+    def error
+      failed? ? @error_string : nil
     end
 
     def percent_s
@@ -137,6 +152,19 @@ module Bt
 
     def ls
       puts bt_client.list
+    end
+
+    def retry
+      bt_client.list.select(&:failed?).each do |t|
+        bt_client.remove([t.id])
+        bt_client.add_magnet(t.magnet_link)
+      end
+    end
+
+    def magnets
+      bt_client.list.each do |t|
+        puts "#{t.magnet_link} #{t.name}"
+      end
     end
 
     def remove_complete
