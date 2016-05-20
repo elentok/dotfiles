@@ -1,0 +1,35 @@
+#!/bin/bash
+#
+# Tail free space
+#
+# Usage:
+#
+#   tail-df /dev/...
+
+INTERVAL=3 # seconds
+
+main() {
+  local device="$1"
+
+  if [ $# -lt 1 ]; then
+    usage "$0"
+    exit 1
+  fi
+
+  last=''
+
+  while true; do
+    items="$(df -h $device | tail -1)"
+    used="$(echo "$items" | awk '{print $3}')"
+    used_p="$(echo "$items" | awk '{print $5}')"
+
+    if [ "$last" != "$used_p ($used)" ]; then
+      last="$used_p ($used)"
+      echo "[$(date +%Y%m%d\ %H:%M:%S)] Used: $last]"
+    fi
+
+    sleep $INTERVAL
+  done
+}
+
+main "$@"
