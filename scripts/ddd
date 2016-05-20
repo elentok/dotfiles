@@ -16,13 +16,13 @@ main() {
     echo "Copying from $1"
     echo "          to $2"
     echo
-    sudo sh -c "dd if="$1" bs=100m | pv | dd of="$2" bs=100m"
+    sudo sh -c "dd if='$1' | pv | dd of='$2'"
   fi
 }
 
 check_pv() {
   if ! has_command pv; then
-    install_package --apt=pv --brew=pv
+    install_package --apt=pv --brew=pv --pacman=pv
   fi
 }
 

@@ -211,13 +211,16 @@ symlink() {
 install_package() {
   APT=''
   BREW=''
+  PACMAN=''
 
   while extract_flag "$1"; do shift; done
 
-  if [ "$OS" == "mac" ]; then
+  if is_mac; then
     brew_install "$BREW"
+  elif is_arch; then
+    pacman_install "$PACMAN"
   else
-    brew_install "$APT"
+    apt_install "$APT"
   fi
 }
 
