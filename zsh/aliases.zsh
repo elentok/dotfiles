@@ -5,6 +5,7 @@ alias ..='cd ..'
 alias agg="ag --ignore '*.yml'"
 alias ba='bt add-magnet "$(pbp)"'
 alias be='bundle exec'
+alias bec='bundle exec cap'
 alias bl='tr ":" "\n"'
 alias c1='awk "{ print \$1 }"'
 alias c2='awk "{ print \$2 }"'

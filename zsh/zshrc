@@ -10,6 +10,7 @@ source_if_exists ~/.dotlocal/zsh/before.zsh
 source $DOTF/zsh/settings.zsh
 source $DOTF/zsh/aliases.zsh
 source $DOTF/zsh/completion.zsh
+source $DOTF/zsh/keybindings.zsh
 source $DOTF/zsh/vendor/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $DOTF/zsh/prompt.zsh
 source ~/.fzf.zsh
