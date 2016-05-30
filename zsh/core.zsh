@@ -147,4 +147,8 @@ fi
 # MISC {{{1
 export SSH_TERM=xterm-color
 
+if is_mac; then
+  export JAVA_HOME="$(/usr/libexec/java_home)"
+fi
+
 # vim: foldmethod=marker
