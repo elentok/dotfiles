@@ -25,7 +25,7 @@ main() {
 
     if [ "$last" != "$used_p ($used)" ]; then
       last="$used_p ($used)"
-      echo "[$(date +%Y%m%d\ %H:%M:%S)] Used: $last]"
+      echo "[$(date +%Y%m%d\ %H:%M:%S)] Used: $last"
     fi
 
     sleep $INTERVAL
