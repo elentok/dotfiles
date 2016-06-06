@@ -61,7 +61,7 @@ class Disk
   end
 
   def show?
-    (@mount =~ /\/Volumes/) || (@mount == '/')
+    (@mount =~ /\/(Volumes|media)/) || (@mount == '/')
   end
 end
 
