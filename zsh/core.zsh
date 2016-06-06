@@ -94,6 +94,7 @@ fi
 # PATH {{{1
 PATH=$DOTF/scripts:$DOTL/scripts
 PATH=$PATH:$BREW_HOME/bin
+PATH=$PATH:$HOME/.fzf/bin
 PATH=$PATH:$HOME/bin:$HOME/scripts:$HOME/.local/bin
 PATH=$PATH:$GOROOT/bin:$MAIN_GOPATH/bin
 
