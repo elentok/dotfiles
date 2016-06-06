@@ -1,14 +1,34 @@
 #!/bin/bash
 
+source $DOTF/framework
+
 main() {
-  disk="$(list-mounts | fzf)"
-  if [ -n "$disk" ]; then
-    diskutil eject "$disk"
+  local disk="$(list-mounts | fzf)"
+
+  if [ -z "$disk" ]; then
+    exit 1
+  fi
+
+  local device="$(echo $disk | awk '{print $2}')"
+  local mountpoint="$(echo $disk | awk '{print $1}')"
+
+  if confirm "Eject $device (mounted at $mountpoint)?" yes; then
+    bullet "Ejecting..."
+    eject-$OS "$mountpoint"
+    show_result
   fi
 }
 
 list-mounts() {
-  /bin/ls -1 /Volumes/
+  mount | grep -E '/(media|Volumes)' | awk '{print $1,$3}'
+}
+
+eject-osx() {
+  diskutil eject "$mountpoint"
+}
+
+eject-linux() {
+  umount "$mountpoint"
 }
 
 main "$@"
