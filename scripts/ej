@@ -23,7 +23,7 @@ list-mounts() {
   mount | grep -E '/(media|Volumes)' | awk '{print $1,$3}'
 }
 
-eject-osx() {
+eject-mac() {
   diskutil eject "$mountpoint"
 }
 
