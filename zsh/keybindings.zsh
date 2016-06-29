@@ -7,7 +7,7 @@ my-fzf-trigger-completion() {
 zle -N my-fzf-trigger-completion
 bindkey '^f' my-fzf-trigger-completion
 
-# ^xb: branch completion {{{1
+# ^x^x: branch completion {{{1
 
 my-branch-completion() {
   LBUFFER="${LBUFFER}$(git all-branches | fzf)"
@@ -17,6 +17,6 @@ my-branch-completion() {
 }
 
 zle -N my-branch-completion
-bindkey '^xb' my-branch-completion
+bindkey '^x^x' my-branch-completion
 
 # vim: foldmethod=marker
