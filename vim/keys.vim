@@ -61,17 +61,17 @@ nnoremap coq :cclose<cr>
 
 
 " Go to {{{1
-noremap <c-p> :CtrlP<cr>
-noremap <Leader>b :CtrlPBuffer<cr>
-noremap <Leader>gb :CtrlPBuffer<cr>
+noremap <c-p> :FZF<cr>
+noremap <Leader>b :Buffers<cr>
+noremap <Leader>gb :Buffers<cr>
 noremap <Leader>gd :cd <C-R>=expand("%:p:h")<cr>
 noremap <Leader>gg :NERDTreeFocus<cr>
-noremap <Leader>gm :CtrlPMRUFiles<cr>
+" noremap <Leader>gm :CtrlPMRUFiles<cr>
 noremap <Leader>gn :NERDTreeFind<cr>
 noremap <Leader>go :call GotoAlternateFile()<cr>
-noremap <Leader>gt :CtrlPTag<cr>
+noremap <Leader>gt :Tags<cr>
 noremap <Leader>gv :tabe $vimrc<cr>
-noremap `` :CtrlPBufTag<cr>
+noremap `` :BTags<cr>
 inoremap <c-s> <c-o>:w<cr>
 
 noremap <Leader>oc :Calendar -view=year -split=vertical -width=27<cr>
