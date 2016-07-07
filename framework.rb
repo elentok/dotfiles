@@ -4,6 +4,7 @@ require 'net/http'
 require 'optparse'
 require 'singleton'
 require 'yaml'
+require 'uri'
 
 # Colors {{{1
 COLORS = {
@@ -214,3 +215,12 @@ class FileCache
   end
 end
 
+# Mail {{{1
+def mailto(to, params = {})
+  params =
+    params
+    .map { |key, value| "#{key}=#{URI.encode_www_form_component(value)}" }
+    .join('&')
+  uri = "mailto:#{to}?#{params}"
+  system("open '#{uri}'")
+end
