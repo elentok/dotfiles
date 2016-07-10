@@ -26,6 +26,12 @@ command! -nargs=* Cap QuickShell bundle exec cap <args>
 command! Pkgs QuickShell pkgs status
 command! SudoWrite :w !sudo tee %
 
+command! FZFMru call fzf#run({
+\  'source':  v:oldfiles,
+\  'sink':    'e',
+\  'options': '-m -x +s',
+\  'down':    '40%'})
+
 " Hebrew {{{1
 func! ToggleHebrew()
   if &rl
