@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+# Extract URLs from nginx access logs
+
+EXCLUDE = %r{^\/favicon\.ico$}
+
+ARGF.each do |line|
+  m = line.match(/GET ([^ ]+)/)
+  next unless m
+
+  url = m[1]
+  next if url =~ EXCLUDE
+
+  puts url
+end
