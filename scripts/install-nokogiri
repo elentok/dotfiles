@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# This usually helps installing nokogiri when it can't find it's dependencies
+
+gem install nokogiri -- --use-system-libraries
