@@ -50,6 +50,7 @@ Plug 'xolox/vim-misc'
 Plug 'majutsushi/tagbar'
 " Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets' " snippets for ultisnips
+Plug 'mhinz/vim-startify'
 
 " File formats:
 Plug 'applescript.vim',                { 'for': 'applescript' }
