@@ -242,7 +242,7 @@ function! SmartTab()
     if &omnifunc != ''
       return "\<c-x>\<c-o>"
     else
-      return "\<c-n>"
+      return "\<c-x>\<c-n>"
     end
   end
 endfunction
