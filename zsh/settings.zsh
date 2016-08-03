@@ -133,6 +133,19 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 export SSH_AUTH_SOCK="$HOME/.ssh/default-agent"
 agent fix
 
+
+# GCloud SDK {{{1
+
+local gcloud_path="$HOME/google-cloud-sdk"
+
+if [ -e "$gcloud_path" ]; then
+  # The next line updates PATH for the Google Cloud SDK.
+  source "$gcloud_path/path.zsh.inc"
+
+  # The next line enables shell command completion for gcloud.
+  source "$gcloud_path/completion.zsh.inc"
+fi
+
 # Misc {{{1
 
 # don't log to history commands starting with a space
