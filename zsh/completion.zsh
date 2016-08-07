@@ -1,3 +1,5 @@
+# vim: foldmethod=marker
+
 # Zsh completion {{{1
 autoload -U compinit && compinit
 
@@ -52,4 +54,19 @@ _fzf_complete_bec_post() {
   awk '{print $1}'
 }
 
-# vim: foldmethod=marker
+# FZF Completion: npm {{{1
+alias nr="npm run"
+
+_fzf_complete_nr() {
+  _fzf_complete "" "$@" < <(
+    _npm_list_scripts
+  )
+}
+
+_npm_list_scripts() {
+  node -e 'const s = require("./package.json").scripts; Object.keys(s).forEach(key => { console.log(`${key}: ${s[key]}`) })'
+}
+
+_fzf_complete_nr_post() {
+  IFS=": " awk '{print $1}' | sed 's/:$//'
+}
