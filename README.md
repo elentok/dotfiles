@@ -52,3 +52,13 @@ You can use the following files to customize your zsh settings:
 
 * Add custom plugins to `~/.dotlocal/plugs.vim`
 * Add custom settings to `~/.dotlocal/before.vim` or `~/.dotlocal/after.vim`
+
+Basic Vim Setup
+---------------
+
+To install my basic vim setup (without any plugins and should work on old
+versions of vim):
+
+```
+curl https://raw.githubusercontent.com/elentok/dotfiles/master/vim/basic.vim > ~/.vimrc
+```
