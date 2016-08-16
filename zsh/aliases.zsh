@@ -1,5 +1,7 @@
 # vim: foldmethod=marker
 
+unalias s
+
 # All Aliases {{{1
 alias ..='cd ..'
 alias agg="ag --ignore '*.yml'"
