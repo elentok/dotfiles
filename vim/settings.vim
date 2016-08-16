@@ -62,6 +62,9 @@ let g:netrw_localrmdir='rm -r'
 
 " Plugin specific {{{1
 
+" fzf
+let g:fzf_prefer_tmux = 1
+
 " matchit
 let loaded_matchparen=1 " do not show highlight matching parenthesis automatically
 let NERDTreeIgnore=['\.zeus\.sock$', '\~$']
