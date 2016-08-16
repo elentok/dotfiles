@@ -57,6 +57,7 @@ Plug 'Arduino-syntax-file',            { 'for': 'ino' }
 Plug 'jplaut/vim-arduino-ino',         { 'for': 'ino' }
 Plug 'asymmetric/upstart.vim',         { 'for': 'upstart' }
 Plug 'digitaltoad/vim-jade',           { 'for': 'jade', 'commit': '319cba1ee5313e8b50fd912d10dfe40a171f0312' }
+Plug 'digitaltoad/vim-pug',            { 'for': 'pug' }
 Plug 'elentok/notes.vim',              { 'for': 'notes' }
 Plug 'elentok/todo.vim',               { 'for': 'todo' }
 Plug 'elentok/vim-markdown-folding',   { 'for': 'markdown' }
