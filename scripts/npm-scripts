@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+
+const fs = require('fs')
+const F = require('../framework.js')
+
+function main() {
+  const scripts = JSON.parse(fs.readFileSync('package.json', 'utf8')).scripts
+
+  let nameColumnWidth = 0
+
+  Object.keys(scripts).forEach((name) => {
+    if (name.length > nameColumnWidth) {
+      nameColumnWidth = name.length
+    }
+  })
+
+  Object.keys(scripts).forEach((name) => {
+    const prettyName = F.green(padRight(name, nameColumnWidth))
+    console.info(`${prettyName}  - ${scripts[name]}`)
+  })
+}
+
+function padRight(string, length) {
+  while (string.length < length) {
+    string += " "
+  }
+  return string
+}
+
+main()

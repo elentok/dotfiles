@@ -103,3 +103,13 @@ fi
 
 alias pbc='pbcopy'
 alias pbp='pbpaste'
+
+# FZF Shortcuts {{{1
+npr() {
+  # calling "print -s" adds the command to zsh history
+
+  cmd="$(npm-scripts | fzf --ansi | awk '{print $1}')" && \
+    print -s "npm run $cmd" && \
+    echo "> npm run $cmd" && \
+    npm run $cmd
+}
