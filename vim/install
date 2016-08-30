@@ -14,6 +14,7 @@ main() {
   install_symlinks
   install_vim_plugins
   install_utils
+  install_linters
 }
 
 install_on_mac() {
@@ -56,16 +57,21 @@ install_vim_plugins() {
 
 install_utils() {
   npm_install vimspec
-  npm_install coffeelint
-  npm_install jshint
-  npm_install jsonlint
   npm_install marked
   npm_install name-that-color
   npm_install livedown
+  pip_install powerline-status
+}
+
+install_linters() {
+  npm_install coffeelint
+  npm_install eslint
+  npm_install jsonlint
+  npm_install sass-lint
+  pip_install pylint
+  pip_install yamllint
   gem_install scss_lint
   gem_install haml_lint
-  pip_install pylint
-  pip_install powerline-status
 }
 
 main $@
