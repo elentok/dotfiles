@@ -11,6 +11,11 @@ function main() {
 
   const scripts = JSON.parse(fs.readFileSync('package.json', 'utf8')).scripts
 
+  if (!scripts) {
+    console.error('Error: package.json file has no scripts')
+    process.exit(2)
+  }
+
   let nameColumnWidth = 0
 
   Object.keys(scripts).forEach((name) => {
