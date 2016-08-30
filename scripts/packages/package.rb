@@ -1,11 +1,11 @@
 class Package
   attr_accessor :title, :date, :estimated, :tracking, :store
-  def initialize(title, date, estimated = nil, options = {})
+  def initialize(title, store, options = {})
     @title     = title
-    @tracking  = options[:tracking]
-    @store     = options[:store]
-    @date      = Date.parse(date)
-    @estimated = DeliveryEstimation.parse(estimated, @date)
+    @tracking  = options['tracking']
+    @store     = store
+    @date      = options['when']
+    @estimated = DeliveryEstimation.parse(options['due'], @date)
   end
 
   def serialize
