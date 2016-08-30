@@ -108,8 +108,11 @@ alias pbp='pbpaste'
 npr() {
   # calling "print -s" adds the command to zsh history
 
-  cmd="$(npm-scripts | fzf --ansi | awk '{print $1}')" && \
+  cmd="$(npm-scripts | fzf --ansi --exit-0 | awk '{print $1}')"
+
+  if [ -n "$cmd" ]; then
     print -s "npm run $cmd" && \
-    echo "> npm run $cmd" && \
-    npm run $cmd
+      echo "> npm run $cmd" && \
+      npm run $cmd
+  fi
 }
