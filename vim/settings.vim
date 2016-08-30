@@ -92,6 +92,7 @@ let g:syntastic_mode_map = { "mode": "active",
                            \ "passive_filetypes": ['sass', 'scss', 'haml', 'html', 'dart']}
 
 let g:markdown_fold_style = 'nested'
+let g:deoplete#enable_at_startup = 1
 
 " CtrlP {{{1
 
@@ -273,9 +274,9 @@ nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
 
 " UltiSnips {{{1
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsExpandTrigger="<c-j>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Go {{{1
 let g:go_fmt_command = "goimports"

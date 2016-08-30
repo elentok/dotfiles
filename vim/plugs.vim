@@ -36,6 +36,7 @@ Plug 'ngmy/vim-rubocop'
 Plug 'schickling/vim-bufonly', { 'on': ['BufOnly', 'Bonly', 'BOnly'] }
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTree', 'NERDTreeToggle', 'NERDTreeFocus', 'NERDTreeFind'] }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTree', 'NERDTreeToggle', 'NERDTreeFocus', 'NERDTreeFind']}
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-abolish'
@@ -48,8 +49,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'xolox/vim-misc'
 " Plug 'Vallori/YouCompleteMe', { 'do': './install.py', 'for': 'c' }
 Plug 'majutsushi/tagbar'
-" Plug 'SirVer/ultisnips'
-" Plug 'honza/vim-snippets' " snippets for ultisnips
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets' " snippets for ultisnips
 
 " File formats:
 Plug 'applescript.vim',                { 'for': 'applescript' }
