@@ -69,6 +69,7 @@ Plug 'fatih/vim-go',                   { 'for': 'go' }
 Plug 'groenewege/vim-less',            { 'for': 'less' }
 Plug 'othree/yajs.vim',                { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript',        { 'for': 'javascript' }
+Plug 'mxw/vim-jsx',                    { 'for': 'javascript' }
 Plug 'kchmck/vim-coffee-script',       { 'for': 'coffee' }
 Plug 'vim-ruby/vim-ruby',              { 'for': 'ruby' }
 Plug 'yaml.vim',                       { 'for': 'yaml' } " syntax highlighting
