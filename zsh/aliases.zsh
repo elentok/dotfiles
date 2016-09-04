@@ -124,3 +124,12 @@ t() {
     tailr $log
   fi
 }
+
+capd() {
+  stage="$(cd config/capistrano/stages && /bin/ls -1 | sed 's/.rb//' | fzf --exit-0)"
+  if [ -n "$stage" ]; then
+    echo "Deploying to $stage..."
+    print -s "be cap $stage deploy"
+    bundle exec cap $stage deploy
+  fi
+}
