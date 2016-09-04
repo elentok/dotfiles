@@ -57,7 +57,6 @@ alias rv='ruby --version'
 alias ssh='TERM=$SSH_TERM ssh'
 alias summ='awk "{ s+=\$1 } END { print s }"'
 alias sub='subliminal download -l en -s'
-alias t='tailr `tailr --list | tr " " "\n" | fzf`'
 alias tm='tmux -u'
 alias tma='tm a'
 alias tot='awk "{ s+=\$1 } END { printf(\"%''d\n\", s) }"'
@@ -114,5 +113,14 @@ npr() {
     print -s "npm run $cmd" && \
       echo "> npm run $cmd" && \
       npm run $cmd
+  fi
+}
+
+t() {
+  log="$(tailr --list | tr " " "\n" | fzf --exit-0)"
+  if [ -n "$log" ]; then
+    echo "Tailing $log..."
+    print -s "tailr $log"
+    tailr $log
   fi
 }
