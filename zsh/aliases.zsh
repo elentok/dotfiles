@@ -135,7 +135,7 @@ capd() {
 }
 
 de() {
-  local file="$(cd $DOTF && ag -l --ignore 'zsh/vendor' | fzf)"
+  local file="$(cd $DOTF && ag -l --ignore 'zsh/vendor' | fzf --exit-0)"
   if [ -n "$file" ]; then
     print -s "$EDITOR $file"
     $EDITOR $DOTF/$file
