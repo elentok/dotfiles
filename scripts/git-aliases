@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+
+const F = require('../framework.js')
+const execSync = require("child_process").execSync
+
+function main() {
+  const aliases = getAliases()
+  const nameColumnWidth = Math.max(... aliases.map(a => a.name.length))
+  aliases.forEach(({ name, value }) => {
+    name = F.green(F.padRight(name, nameColumnWidth))
+    console.info(`${name}  ${value}`)
+  })
+}
+
+function getAliases() {
+  return execSync("git alias").toString().trim().split("\n")
+    .map(line => {
+      line = line.replace(/^alias\./, '')
+      const index = line.indexOf(" ")
+      return {
+        name: line.substring(0, index),
+        value: line.substring(index + 1),
+      }
+    })
+}
+
+main()
