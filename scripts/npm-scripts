@@ -25,16 +25,9 @@ function main() {
   })
 
   Object.keys(scripts).forEach((name) => {
-    const prettyName = F.green(padRight(name, nameColumnWidth))
+    const prettyName = F.green(F.padRight(name, nameColumnWidth))
     console.info(`${prettyName}  - ${scripts[name]}`)
   })
-}
-
-function padRight(string, length) {
-  while (string.length < length) {
-    string += " "
-  }
-  return string
 }
 
 main()

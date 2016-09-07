@@ -9,7 +9,14 @@ const F = {
     cyan: "\033[36m",
   },
 
-  RESET: "\033[0m"
+  RESET: "\033[0m",
+
+  padRight(string, length) {
+    while (string.length < length) {
+      string += " "
+    }
+    return string
+  },
 }
 
 Object.keys(F.COLORS).forEach((name) => {
