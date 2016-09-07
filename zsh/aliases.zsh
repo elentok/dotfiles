@@ -138,6 +138,6 @@ de() {
   local file="$(cd $DOTF && ag -l --ignore 'zsh/vendor' | fzf)"
   if [ -n "$file" ]; then
     print -s "$EDITOR $file"
-    $EDITOR $file
+    $EDITOR $DOTF/$file
   fi
 }
