@@ -1,0 +1,7 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+if confirm "${YELLOW}Run [git $*]?$RESET" yes; then
+  git $@
+fi

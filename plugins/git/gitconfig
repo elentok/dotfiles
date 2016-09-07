@@ -18,15 +18,8 @@
   ap = add -p
   b = branch
   bv = branch -vv
-  bd = branch -d
-  bdd = branch -D
-  bm = branch -m
-  br = branch -r
-  cf = commit --amend --no-edit
-  cfx = commit --fixup
   ci = commit
   cm = commit -e -m
-  clf = clean -f
   cp = cherry-pick
   cia = commit --amend
   cb = checkout -b
@@ -54,8 +47,8 @@
   rh = reset HEAD
   s = status
   sl = stash list
-  sp = stash pop
-  ss = stash save --patch
+  sp = confirm stash pop
+  ss = confirm stash save --patch
   t = tag
   semtag = !git tag -a $(semver tag) -m \"tagging $(semver tag)\"
   g = grep --break --heading --line-number
