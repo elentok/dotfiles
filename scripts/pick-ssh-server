@@ -99,6 +99,5 @@ if [ -n "$server" ]; then
 
   add_to_history "$full"
 
-  echo "Connecting to $full..."
-  ssh $full
+  echo "$full"
 fi

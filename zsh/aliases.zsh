@@ -125,6 +125,15 @@ t() {
   fi
 }
 
+s() {
+  server="$(pick-ssh-server)"
+  if [ -n "$server" ]; then
+    echo "Connecting to $server..."
+    print -s "ssh $server"
+    ssh $server
+  fi
+}
+
 capd() {
   stage="$(cd config/capistrano/stages && /bin/ls -1 | sed 's/.rb//' | fzf --exit-0)"
   if [ -n "$stage" ]; then
