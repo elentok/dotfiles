@@ -1,0 +1,32 @@
+#!/bin/bash
+#
+# Yank tmux pane contents
+#
+# Usage:
+#
+#   tmux-yank (all|visible)
+#
+
+main() {
+  case "$1" in
+    all)
+      tmux capture-pane -S -32768
+      yank
+      ;;
+    visible)
+      tmux capture-pane
+      yank
+      ;;
+    *)
+      usage "$0"
+      ;;
+  esac
+}
+
+yank() {
+  tmux save-buffer ~/.tmux/saved-clipboard
+  tmux delete-buffer
+  cat ~/.tmux/saved-clipboard | pbcopy
+}
+
+main "$@"
