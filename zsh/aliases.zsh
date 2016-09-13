@@ -121,6 +121,15 @@ npr() {
   fi
 }
 
+npd() {
+  site="$(json -f sites.json --keys -a | fzf --exit-0)"
+  if [ -n "$site" ]; then
+    print -s "npm run deploy $site" && \
+      echo "> npm run deploy $site" && \
+      npm run deploy $site
+  fi
+}
+
 t() {
   log="$(tailr --list | tr " " "\n" | fzf --exit-0)"
   if [ -n "$log" ]; then
