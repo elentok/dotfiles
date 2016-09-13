@@ -1,0 +1,19 @@
+#!/bin/bash
+
+
+main() {
+  local session="$(list-sessions | fzf --exit-0)"
+
+  if [ -n "$session" ]; then
+    tmux switch-client -t "$session"
+  fi
+}
+
+list-sessions() {
+  local current_session="$(tmux display-message -p '#S')"
+
+  tmux list-sessions -F "#{session_name}" | \
+    grep -v "$current_session"
+}
+
+main "$@"
