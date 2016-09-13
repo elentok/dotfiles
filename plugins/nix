@@ -1,0 +1,11 @@
+#!/bin/bash
+
+main() {
+  install-nix
+}
+
+install-nix() {
+  curl https://nixos.org/nix/install | sh
+}
+
+main "$@"
