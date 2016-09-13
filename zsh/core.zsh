@@ -153,3 +153,8 @@ if is_mac; then
 fi
 
 # vim: foldmethod=marker
+# Nix Package Manager {{{1
+if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+  source $HOME/.nix-profile/etc/profile.d/nix.sh;
+fi
+
