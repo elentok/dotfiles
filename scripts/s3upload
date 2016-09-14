@@ -4,10 +4,14 @@
 #
 # Usage:
 #
-#   s3upload <bucket> <bucket_path> <local_file>...
+#   s3upload <bucket_path> <local_file>...
+
+source "$DOTF/framework"
+
+MAX_AGE=${MAX_AGE:-600}
 
 main() {
-  if [ $# -lt 3 ]; then
+  if [ $# -lt 2 ]; then
     usage "$0"
   else
     upload "$@"
@@ -15,10 +19,8 @@ main() {
 }
 
 upload() {
-  BUCKET="$1"
-  BUCKET_PATH="$2"
+  BUCKET_PATH="$1"
 
-  shift
   shift
 
   while [ $# -gt 0 ]; do
@@ -31,11 +33,15 @@ upload_single() {
   local local_file="$1"
   local name=$(basename $local_file)
 
-  echo "Uploading ${local_file}..."
-  s3cmd put "$local_file" "s3://$BUCKET/$BUCKET_PATH/$name"
+  echo
+  echo -e "${BLUE}Uploading ${local_file}...$RESET"
+  s3cmd put "$local_file" "s3://$BUCKET_PATH/$name"
 
-  echo "Setting Public ACL on ${local_file}..."
-  s3cmd setacl "s3://$BUCKET/$BUCKET_PATH/$name" --acl-public --verbose
+  bullet "Setting Public ACL on ${local_file}..."
+  s3cmd setacl "s3://$BUCKET_PATH/$name" --acl-public --verbose
+
+  bullet "Setting max-age to $MAX_AGE Public ACL on ${local_file}..."
+  s3cmd modify "s3://$BUCKET_PATH/$name" --add-header=Cache-Control:max-age=$MAX_AGE
 }
 
 main "$@"
