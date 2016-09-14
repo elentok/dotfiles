@@ -17,6 +17,7 @@
   aa = add --all
   ap = add -p
   b = branch
+  bd = branch -d
   bv = branch -vv
   ci = commit
   cm = commit -e -m
