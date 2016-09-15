@@ -167,7 +167,8 @@ endfunc
 let g:hash_tags = {
   \ 'python': '#!/usr/bin/env python',
   \ 'ruby': '#!/usr/bin/env ruby',
-  \ 'bash': '#!/bin/bash'
+  \ 'bash': '#!/bin/bash',
+  \ 'node': '#!/usr/bin/env node'
   \}
 
 func! Scriptify(lang)
