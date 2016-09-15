@@ -66,6 +66,9 @@ noremap <Leader>b :Buffers<cr>
 noremap <Leader>gb :Buffers<cr>
 noremap <Leader>gd :cd <C-R>=expand("%:p:h")<cr>
 noremap <Leader>gg :NERDTreeFocus<cr>
+noremap <Leader>gs :FZFGitStaged<cr>
+noremap <Leader>gu :FZFGitUnstaged<cr>
+noremap <Leader>gc :FZFGitChanged<cr>
 noremap <Leader>gm :FZFMru<cr>
 noremap <Leader>gn :NERDTreeFind<cr>
 noremap <Leader>go :call GotoAlternateFile()<cr>

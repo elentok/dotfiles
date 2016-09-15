@@ -32,6 +32,21 @@ command! FZFMru call fzf#run({
 \  'options': '-m -x +s',
 \  'down':    '40%'})
 
+command! FZFGitStaged call fzf#run({
+      \ "source": "git diff --name-only --cached",
+      \ "options": "--prompt 'Git Staged>'",
+      \ "sink": "e"})
+
+command! FZFGitUnstaged call fzf#run({
+      \ "source": "git diff --name-only",
+      \ "options": "--prompt 'Git Unstaged>'",
+      \ "sink": "e"})
+
+command! FZFGitChanged call fzf#run({
+      \ "source": "git diff --name-only HEAD",
+      \ "options": "--prompt 'Git Changed>'",
+      \ "sink": "e"})
+
 " Hebrew {{{1
 func! ToggleHebrew()
   if &rl
