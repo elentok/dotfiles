@@ -5,16 +5,19 @@ require "#{ENV['DOTF']}/lib/git.rb"
 class CLI < OptionsCLI
   desc 'Verify local git repo is synced with remotes'
   usage 'git verify [options]'
-  cli_options \
-    checkout_remotes: ['-r', '--checkout-remotes',
+  cli_options(
+    show_remotes:     ['-r', '--show-remotes',
+                       'Show remote branches without local'],
+    checkout_remotes: ['-R', '--checkout-remotes',
                        'Checkout remote branches without local']
+  )
 
   def start
     @repo = Repo.new(ARGV[0] || '.')
     @repo.fetch_all
     puts
     report_local_branches_without_remote
-    report_remote_branches_without_local
+    report_remote_branches_without_local if options[:show_remotes]
     report_unsynced_branches
 
     checkout_remotes if options[:checkout_remotes]
@@ -81,11 +84,8 @@ class Pair
 
     pull
 
-    return if synced?
-
-    if !@local.protected? || confirm?(yellow("Push to #{@remote}?"))
-      push
-    end
+    return if synced? || @local.protected?
+    push if confirm?(yellow("Push to #{@remote}?"))
   end
 
   def pull
