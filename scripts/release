@@ -29,6 +29,9 @@ main() {
 
   header 'Pushing master branch (and tags)'
   git push noreview master --tags
+
+  header 'Sending an email'
+  pbpaste | mailto "" "Deploying $(git lasttag)"
 }
 
 has-develop-branch() {
