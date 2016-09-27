@@ -30,3 +30,5 @@ setup-ssh() {
   fi
   chmod 600 ~/.ssh/authorized_keys
 }
+
+main
