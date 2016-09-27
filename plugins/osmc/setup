@@ -1,0 +1,20 @@
+#!/bin/bash
+
+main() {
+  fix-smb
+}
+
+fix-smb() {
+  echo "* Fixing SMB..."
+
+  cd ~/.smb
+  if [ -e "smb-original.conf" ]; then
+    echo "  already fixed"
+    return
+  fi
+
+  mv smb.conf smb-original.conf
+  curl https://raw.githubusercontent.com/elentok/dotfiles/master/plugins/osmc/smb.conf > smb.conf
+  echo "  replaced ~/.smb/smb.conf - you need to reboot"
+}
+
