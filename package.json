@@ -1,0 +1,21 @@
+{
+  "name": "dotfiles",
+  "version": "1.0.0",
+  "description": "elentok's dotfiles",
+  "main": "framework.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elentok/dotfiles.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/elentok/dotfiles/issues"
+  },
+  "homepage": "https://github.com/elentok/dotfiles#readme",
+  "private": true
+}
