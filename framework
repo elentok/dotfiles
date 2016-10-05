@@ -366,7 +366,7 @@ has_brew_cask_package() {
 # Python {{{1
 
 export PIP2="pip"
-if is_arch; then
+if has_command "pip2"; then
   export PIP2="pip2"
 fi
 
@@ -406,10 +406,11 @@ has_pip_package() {
 }
 
 # Pip3 {{{1
-export PIP3="pip3"
-if is_arch; then
-  export PIP3="pip"
+export PIP3="pip"
+if has_command "pip3"; then
+  export PIP3="pip3"
 fi
+
 pip3_install() {
   bullet "Installing pip package ${1}... "
   if has_pip3_package "$1"; then
