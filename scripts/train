@@ -1,0 +1,108 @@
+#!/usr/bin/env node
+
+const program = require("commander")
+const axios = require("axios")
+const $ = require("cheerio")
+const colors = require("colors")
+const moment = require("moment")
+
+class Station {
+  constructor($option) {
+    this.id = $option.val()
+    this.title = $option.text()
+    this.name = this.title.toLowerCase()
+      .replace(/\(.*$/, '').replace(/'/, '').trim().replace(/ /, '-')
+  }
+
+  print() {
+    const comment = colors.grey(`(${this.id} ${this.title})`)
+    console.info(`${this.name} ${comment}`)
+  }
+}
+
+class StationRepository {
+  getAll() {
+
+  }
+
+
+  fetchAll() {
+    return axios.get("http://www.rail.co.il/EN/Pages/homepage.aspx")
+      .then(response => {
+        const $html = $.load(response.data)
+        const selector =
+          "#ctl00_PlaceHolderMain_ucSmallDrivePlan_cmbOriginStation option"
+        return $html(selector).toArray()
+          .filter(option => $(option).val() !== "")
+          .map(option => new Station($(option)))
+      })
+  }
+}
+
+class Train {
+  constructor($tr) {
+    const tds = $tr.find('> td')
+
+    Object.assign(this, {
+      departure: $(tds[1]).text(),
+      arrival: $(tds[2]).text(),
+      duration: $(tds[3]).text(),
+      changing: $(tds[4]).text(),
+    })
+  }
+
+  print() {
+    let message =
+      `${this.departure} => ${this.arrival}\t (elapsed: ${this.duration})`
+
+    if (this.changing !== "Without changing") {
+      message += ` (${this.changing})`
+    }
+
+    console.info(message)
+  }
+
+  static fetch(originId, destId, departure = moment()) {
+    if (typeof departure === "string") {
+      departure = moment(departure, "HH:mm").add(1, 'day')
+    }
+
+    const url = "http://www.rail.co.il/EN/DrivePlan/Pages/DrivePlan.aspx"
+
+    return axios.get(url, {
+      params: {
+        OriginStationId: originId,
+        DestStationId: destId,
+        HoursDeparture: departure.hours(),
+        MinutesDeparture: departure.minutes(),
+        GoingTrainCln: departure.format('YYYY-MM-DD'),
+        GoingHourDeparture: true,
+      }
+    }).then(response => {
+      const $html = $.load(response.data)
+      const fs = require("fs")
+      fs.writeFileSync("trains.html", response.data)
+      return $html('.timeTable tr[name=TrainRow]')
+        .toArray()
+        .map(tr => new Train($(tr)))
+    })
+  }
+}
+
+program
+  .arguments("<origin> <dest> [time]")
+  .option("-l --list", "list all stations")
+  .action((origin, dest, time) => {
+    Train.fetch(origin, dest, time).then(trains => {
+      trains.forEach(t => t.print())
+    }).catch(e => {
+      console.error(e)
+    })
+  })
+  .parse(process.argv)
+
+if (program.list) {
+  Station.fetchAll().then(stations => {
+    stations.forEach(station => station.print())
+  }).catch(e => console.error(e))
+}
