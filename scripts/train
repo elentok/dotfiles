@@ -38,7 +38,7 @@ class StationRepository {
       path.join(process.env.HOME, ".cache/dotfiles/stations.json")
   }
 
-  getAll() {
+  fetch() {
     if (this._stations != null) {
       return Promise.resolve(this._stations)
     }
@@ -54,6 +54,12 @@ class StationRepository {
         this._saveToCache()
         return stations
       })
+  }
+
+  findByName(name) {
+    this.fetch().then(stations => {
+      return stations.find(s => s.name === name)
+    })
   }
 
   _loadFromCache() {
@@ -134,21 +140,40 @@ class Train {
   }
 }
 
-program
-  .arguments("<origin> <dest> [time]")
-  .option("-l --list", "list all stations")
-  .action((origin, dest, time) => {
-    Train.fetch(origin, dest, time).then(trains => {
-      trains.forEach(t => t.print())
+class CLI {
+  constructor() {
+    this.repo = new StationRepository()
+  }
+
+  fetchTrains(origin, dest, time) {
+    this.repo.fetch().then(stations => {
+      const originId = stations.find(s => s.name === origin).id
+      const destId = stations.find(s => s.name === dest).id
+
+      return Train.fetch(originId, destId, time)
+        .then(trains => {
+          trains.forEach(t => t.print())
+        })
     }).catch(e => {
       console.error(e)
     })
-  })
+  }
+
+  listStations() {
+    return this.repo.fetch().then(stations => {
+      stations.forEach(station => station.print())
+    })
+  }
+}
+
+const cli = new CLI()
+
+program
+  .arguments("<origin> <dest> [time]")
+  .option("-l --list", "list all stations")
+  .action((origin, dest, time) => { cli.fetchTrains(origin, dest, time) })
   .parse(process.argv)
 
 if (program.list) {
-  const repo = new StationRepository()
-  repo.getAll().then(stations => {
-    stations.forEach(station => station.print())
-  }).catch(e => console.error(e))
+  cli.listStations().catch(e => console.error(e))
 }
