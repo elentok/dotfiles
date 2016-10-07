@@ -115,7 +115,7 @@ class Train {
 
   static fetch(originId, destId, departure = moment()) {
     if (typeof departure === "string") {
-      departure = moment(departure, "HH:mm").add(1, 'day')
+      departure = this.parseTime(departure).add(1, 'day')
     }
 
     const url = "http://www.rail.co.il/EN/DrivePlan/Pages/DrivePlan.aspx"
@@ -137,6 +137,20 @@ class Train {
         .toArray()
         .map(tr => new Train($(tr)))
     })
+  }
+
+  static parseTime(time) {
+    let parsed = moment(time, "YYYY-MM-DD HH:mm")
+    if (parsed.isValid()) {
+      return parsed
+    }
+
+    parsed = moment(time, "HH:mm")
+    if (parsed.isValid()) {
+      return parsed
+    }
+
+    return null
   }
 }
 
