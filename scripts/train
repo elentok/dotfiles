@@ -5,13 +5,24 @@ const axios = require("axios")
 const $ = require("cheerio")
 const colors = require("colors")
 const moment = require("moment")
+const fs = require("fs")
+const path = require("path")
+const shell = require("shelljs")
 
 class Station {
-  constructor($option) {
-    this.id = $option.val()
-    this.title = $option.text()
-    this.name = this.title.toLowerCase()
-      .replace(/\(.*$/, '').replace(/'/, '').trim().replace(/ /, '-')
+  constructor({ id, name, title }) {
+    this.id = id
+    this.name = name
+    this.title = title
+  }
+
+  static fromElement($option) {
+    return new Station({
+      id: $option.val(),
+      title: $option.text(),
+      name: $option.text().toLowerCase()
+        .replace(/\(.*$/, '').replace(/'/, '').trim().replace(/ /, '-')
+    })
   }
 
   print() {
@@ -21,20 +32,54 @@ class Station {
 }
 
 class StationRepository {
-  getAll() {
-
+  constructor() {
+    this._stations = null
+    this._cacheFilename =
+      path.join(process.env.HOME, ".cache/dotfiles/stations.json")
   }
 
+  getAll() {
+    if (this._stations != null) {
+      return Promise.resolve(this._stations)
+    }
 
-  fetchAll() {
+    this._stations = this._loadFromCache()
+    if (this._stations != null) {
+      return Promise.resolve(this._stations)
+    }
+
+    return this._loadFromServer()
+      .then(stations => {
+        this._stations = stations
+        this._saveToCache()
+        return stations
+      })
+  }
+
+  _loadFromCache() {
+    try { fs.statSync(this._cacheFilename) } catch (e) { return null }
+
+    return JSON.parse(fs.readFileSync(this._cacheFilename))
+      .map(attribs => new Station(attribs))
+  }
+
+  _saveToCache() {
+    const cacheDir = path.dirname(this._cacheFilename)
+    shell.mkdir('-p', cacheDir)
+
+    fs.writeFileSync(this._cacheFilename, JSON.stringify(this._stations))
+  }
+
+  _loadFromServer() {
     return axios.get("http://www.rail.co.il/EN/Pages/homepage.aspx")
       .then(response => {
         const $html = $.load(response.data)
         const selector =
           "#ctl00_PlaceHolderMain_ucSmallDrivePlan_cmbOriginStation option"
+
         return $html(selector).toArray()
           .filter(option => $(option).val() !== "")
-          .map(option => new Station($(option)))
+          .map(option => Station.fromElement($(option)))
       })
   }
 }
@@ -102,7 +147,8 @@ program
   .parse(process.argv)
 
 if (program.list) {
-  Station.fetchAll().then(stations => {
+  const repo = new StationRepository()
+  repo.getAll().then(stations => {
     stations.forEach(station => station.print())
   }).catch(e => console.error(e))
 }
