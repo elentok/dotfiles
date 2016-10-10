@@ -1,0 +1,12 @@
+#!/bin/bash
+
+get() {
+  echo
+  echo "GET /$1"
+  echo "----------------"
+  curl -s -H host:pow localhost/$1 | json
+}
+
+get config.json
+get env.json
+get status.json
