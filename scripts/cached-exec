@@ -1,0 +1,49 @@
+#!/bin/bash
+#
+# Usage:
+#
+#   cached-exec <id> <expiration> <cmd>
+#
+# Runs <cmd>, caches the output to ~/.local/cached-exec/<id>
+#
+# When running again, if the caches is less than <expiration> minutes old it
+# will return the output immediately
+
+CACHE_DIR="$HOME/.cache/dotfiles/cached-exec"
+mkdir -p "$CACHE_DIR"
+
+main() {
+  if [ $# -lt 3 ]; then
+    usage "$0"
+    return 1
+  fi
+
+  local id="$1"
+  local expiration="$2"
+  local cmd="$3"
+
+  local cache_file="$CACHE_DIR/$id"
+
+  if [ -e "$cache_file" ]; then
+    local cache_modified=$(stat "$cache_file" --format "%Y")
+    local now=$(date +"%s")
+    local cache_minutes=$(( ($now - $cache_modified) / 60))
+    echo "CACHE_MINUTES [$cache_minutes]"
+    if [ $cache_minutes -lt $expiration ]; then
+      cat "$cache_file"
+      exit 0
+    fi
+  fi
+
+  $SHELL -c "$cmd" > "$cache_file"
+  local result=$?
+  cat "$cache_file"
+
+  if [ $result -ne 0 ]; then
+    rm "$cache_file"
+  fi
+
+  return $result
+}
+
+main "$@"
