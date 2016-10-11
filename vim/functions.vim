@@ -323,3 +323,13 @@ function! EscapeCurrentFileDir()
   let path = substitute(path, ' ', '\\ ', 'g')
   return path
 endfunction
+
+function! Coffee2JS()
+  silent exec '%s/@\([a-zA-Z0-9]\+\):  *\(([^)]\+)\) ->/static \1\2 {'
+  silent exec '%s/\([a-zA-Z0-9]\+\):  *\(([^)]\+)\) ->/\1\2 {'
+  silent exec '%s/@\([a-zA-Z0-9_]\+\)/this.\1'
+  silent exec '%s/\([a-zA-Z0-9_]\+\)\.\.\./... \1'
+  silent exec '%s/"\([^"]*\)#\([^"]*\)"/`\1$\2`'
+  silent exec '%s/: ->/() {'
+  silent exec '%s/:$/: {'
+endfunction
