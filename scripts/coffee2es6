@@ -1,0 +1,5 @@
+#!/bin/bash
+
+TRANSFORMS=let,class,template,default-param,arrow,arg-spread,obj-method,obj-shorthand
+
+coffee -csb | lebab --transform $TRANSFORMS
