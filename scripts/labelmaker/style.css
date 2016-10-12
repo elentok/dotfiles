@@ -1,0 +1,42 @@
+body {
+  font-family: 'Merriweather', serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.root {
+}
+
+.label {
+  border: 1px solid #ddd;
+  text-align: center;
+  padding: 4%;
+  display: inline-block;
+  vertical-align: middle;
+
+  /* collapse the borders */
+  margin-left: -1px;
+  margin-top: -1px;
+}
+
+.label__body {
+  display: table-cell;
+  vertical-align: middle;
+  width: 250px;
+  height: 200px;
+}
+
+.label__icon {
+  font-size: 50px;
+  line-height: 60px;
+}
+
+.label__title {
+  font-size: 40px;
+}
+
+.label__subtitle {
+  font-size: 18px;
+}
