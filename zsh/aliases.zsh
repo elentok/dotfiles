@@ -165,3 +165,10 @@ de() {
     $EDITOR $DOTF/$file
   fi
 }
+
+cdd() {
+  local dir="$(dff | fzf --ansi --exit-0 | awk '{print $6}')"
+  if [ -n "$dir" ]; then
+    cd "$dir"
+  fi
+}
