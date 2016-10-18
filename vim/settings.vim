@@ -28,6 +28,7 @@ set shiftwidth=2
 set showbreak=>>
 set showcmd     " show the number of selected lines in the command bar
 set softtabstop=2
+set suffixesadd+=.rb,.js,.coffee,.js.coffee
 set switchbuf=useopen
 set tabstop=2
 set undolevels=1000
