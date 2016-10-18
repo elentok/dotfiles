@@ -1,5 +1,24 @@
 #!/bin/bash
 
-TRANSFORMS=let,class,template,default-param,arrow,arg-spread,obj-method,obj-shorthand
+# TRANSFORMS=let,class,template,default-param,arrow,arg-spread,obj-method,obj-shorthand
 
-coffee -csb | lebab --transform $TRANSFORMS
+# coffee -csb | lebab --transform $TRANSFORMS
+
+
+sed 's/@\([a-zA-Z0-9]\+\):  *\(([^)]\+)\) ->/static \1\2 {/' | \
+  sed 's/\([a-zA-Z0-9]\+\):  *\(([^)]\+)\) ->/\1\2 {/' | \
+  sed 's/@\([a-zA-Z0-9_\$]\+\)/this.\1/g' | \
+  sed 's/\([a-zA-Z0-9_]\+\)\.\.\./... \1/' | \
+  sed 's/"\([^"]*\)#\([^"]*\)"/`\1$\2`/' | \
+
+  sed -E 's/(context|describe|it) (.*)->/\1(\2function() {/' | \
+  sed -E 's/subject -> (.*)$/subject(function() { return \1 })/' | \
+  sed -E 's/given (.*) -> (.*)$/given({ \1 () => \2 })/' | \
+  sed -E 's/(\.to[A-Z][^ ]*) (.*)$/\1(\2)/' | \
+  sed -E 's/(before|after)Each ->/\1Each(function() {/' | \
+
+  sed 's/: ->/() {/' | \
+  sed 's/:$/: {/' | \
+  sed 's/^\(\s*\)#/\1\/\//' | \
+  sed 's/^\(\s*\)#/\1\/\//' | \
+  sed 's/::/.prototype./'
