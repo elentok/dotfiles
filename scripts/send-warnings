@@ -1,0 +1,9 @@
+#!/bin/bash
+
+chat_id="$(dotvar get telegram_chat_id)"
+warnings="$(warnings)"
+
+if [ -n "$warnings" ]; then
+  telegram send "$chat_id" "WARNING FROM ${HOSTNAME}:
+$warnings"
+fi

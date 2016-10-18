@@ -20,7 +20,6 @@ function shouldWarn(disk) {
 const warnings = checkFreeSpace()
 
 if (warnings.length > 0) {
-  console.info("WARNING:")
   warnings.forEach(warning => {
     console.info(warning)
   })
