@@ -24,7 +24,7 @@ body {
 .label__body {
   display: table-cell;
   vertical-align: middle;
-  width: 250px;
+  width: 300px;
   height: 200px;
 }
 
