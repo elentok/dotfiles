@@ -2,12 +2,19 @@
 
 const disks = require("../lib/disks")
 
-function checkFreeSpace() {
-  const MIN_FREE_GB = 4
+const MIN_FREE_GB = 4
 
-  return disks.free().filter(disk => disk.freeGB < MIN_FREE_GB)
+function checkFreeSpace() {
+  return disks.free()
+    .filter(disk => shouldWarn(disk))
     .map(disk =>
       `Disk "${disk.mount}" has low free space (only ${disk.getFree()})`)
+}
+
+function shouldWarn(disk) {
+  return (disk.freeGB < MIN_FREE_GB) && (
+    (disk.mount === "/") ||
+    (disk.mount.match(/^\/(media|Volumes)/)))
 }
 
 const warnings = checkFreeSpace()
