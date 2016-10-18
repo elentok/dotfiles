@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+const disks = require("../lib/disks")
+
+function checkFreeSpace() {
+  const MIN_FREE_GB = 4
+
+  return disks.free().filter(disk => disk.freeGB < MIN_FREE_GB)
+    .map(disk =>
+      `Disk "${disk.mount}" has low free space (only ${disk.getFree()})`)
+}
+
+const warnings = checkFreeSpace()
+
+if (warnings.length > 0) {
+  console.info("WARNING:")
+  warnings.forEach(warning => {
+    console.info(warning)
+  })
+}
