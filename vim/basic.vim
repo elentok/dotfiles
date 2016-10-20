@@ -3,6 +3,7 @@
 
 " Settings {{{1
 set nocompatible
+set background=dark
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set colorcolumn=80
 set completeopt=menuone
