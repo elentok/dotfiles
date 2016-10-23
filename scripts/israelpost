@@ -4,5 +4,5 @@ if [[ "$*" == "" ]]; then
   echo "Usage: israelpost {itemcode}"
 else
   url="http://www.israelpost.co.il/itemtrace.nsf/trackandtraceJSON?openagent&_=1372171578320&lang=EN&itemcode=$*"
-  curl -s $url | json itemcodeinfo
+  curl -s $url | json itemcodeinfo | sed -E "s#<[^>]+>.*##g"
 fi
