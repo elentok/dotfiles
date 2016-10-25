@@ -1,27 +1,41 @@
-#!/usr/bin/env coffee
+#!/usr/bin/env node
 
-util        = require 'util'
-querystring = require 'querystring'
+const util = require('util')
+const querystring = require('querystring')
 
-process.stdin.setEncoding 'utf8'
+process.stdin.setEncoding('utf8')
 
-chunks = []
+const chunks = []
 
-process.stdin.on 'readable', ->
-  chunk = process.stdin.read()
-  if chunk?
+process.stdin.on('readable', () => {
+  const chunk = process.stdin.read()
+  if (chunk != null) {
     chunks.push(chunk)
+  }
+})
 
-process.stdin.on 'end', ->
-  parseQueryString chunks.join('')
+process.stdin.on('end', () => {
+  parseQueryString(chunks.join(''))
+})
 
-parseQueryString = (str) ->
-  vars = querystring.parse(str)
+function parseQueryString(str) {
+  let url = null
 
-  if process.argv.length > 2
-    key = process.argv[2]
-    console.log vars[key]
-  else
-    console.log util.inspect(vars, colors: true)
+  if (str.includes("?")) {
+    const m = str.match(/^([^\?]+)\?(.*)$/)
+    url = m[1]
+    str = m[2]
+  }
 
+  const vars = querystring.parse(str)
 
+  if (process.argv.length > 2) {
+    const key = process.argv[2]
+    console.info(vars[key])
+  } else {
+    if (url != null) {
+      console.info(`URL: ${url}\n`)
+    }
+    console.info(util.inspect(vars, { colors: true }))
+  }
+}
