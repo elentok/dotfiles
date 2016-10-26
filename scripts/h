@@ -40,7 +40,7 @@ private
   end
 
   def self.matches?(section, text)
-    section =~ Regexp.new(text)
+    section =~ Regexp.new(text, 'i')
   end
 
 end
@@ -53,7 +53,7 @@ module SectionRenderer
 
   def self.render(section, query)
     highlight = "#{GREEN}#{BOLD_ON}#{query}#{DEFAULT}#{BOLD_OFF}"
-    section.gsub Regexp.new(query), highlight
+    section.gsub Regexp.new(query, 'i'), highlight
   end
 end
 
