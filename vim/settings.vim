@@ -247,6 +247,7 @@ endif
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_jsx_enabled_makers = ['eslint']
 let g:neomake_html_enabled_makers = []
+let g:neomake_java_enabled_makers = []
 let g:neomake_error_sign = {
     \ 'text': 'E>',
     \ 'texthl': 'ErrorMsg',
