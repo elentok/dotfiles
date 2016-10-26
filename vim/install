@@ -15,6 +15,8 @@ main() {
   install_vim_plugins
   install_utils
   install_linters
+
+  (cd $DOTF/vim && ./ctags-build)
 }
 
 install_on_mac() {
@@ -43,9 +45,7 @@ install_on_linux() {
 install_symlinks() {
   symlink "$DOTF/vim/init.vim" ~/.vimrc
   symlink "$DOTF/vim" ~/.vim
-  symlink "$DOTF/vim/bundle/supertagger/ctags" ~/.ctags
   symlink "$DOTF/vim/pylintrc" ~/.pylintrc
-  symlink "$DOTF/vim/ctags" ~/.ctags
   symlink "$DOTF/vim/scss-lint.yml" ~/.scss-lint.yml
 }
 

@@ -1,9 +1,13 @@
+# vim: foldmethod=marker
+
+# Markdown {{{1
 --langdef=markdown
 --langmap=markdown:.md.markdown.mdown.mkd.mkdn
 --regex-markdown=/^#[ \t]+(.*)/\1/h,heading1/
 --regex-markdown=/^##[ \t]+(.*)/\1/h,heading2/
 --regex-markdown=/^###[ \t]+(.*)/\1/h,heading3/
 
+# Ruby {{{1
 --regex-ruby=/(^|[:;])[ \t]*([A-Z][[:alnum:]_]+) *=/\2/c,class,constant/
 --regex-ruby=/(^|;)[ \t]*(has_many|belongs_to|has_one|has_and_belongs_to_many)\(? *:([[:alnum:]_]+)/\3/f,function,association/
 --regex-ruby=/(^|;)[ \t]*(named_)?scope\(? *:([[:alnum:]_]+)/\3/f,function,named_scope/
@@ -12,6 +16,7 @@
 --regex-ruby=/(^|;)[ \t]*event\(? *:([[:alnum:]_]+)/\2!/f,function,aasm_event/
 --regex-ruby=/(^|;)[ \t]*event\(? *:([[:alnum:]_]+)/\2?/f,function,aasm_event/
 
+# CoffeeScript {{{1
 --langdef=coffee
 --langmap=coffee:.coffee
 --regex-coffee=/^[[:space:]]*([a-zA-Z_0-9\.]+\.)?([a-zA-Z_0-9]+)[[:space:]]*=[[:space:]]*([a-zA-Z_0-9\.]+)\.extend/\2/c,class/
@@ -21,17 +26,78 @@
 --regex-coffee=/^[[:space:]]*([a-zA-Z_0-9\.]+\.)?([a-zA-Z_0-9]+)[[:space:]]*[=:][[:space:]]*(\([^\)]+\))?[[:space:]]*[=-]>/\2/m,method/
 --regex-coffee=/^([A-Z][a-zA-Z_0-9\.]+\.)?([a-zA-Z_0-9]+)[[:space:]]*=[[:space:]]*$/\2/o,object/
 
---langdef=js
---langmap=js:.js
---regex-js=/^[[:space:]]*([a-zA-Z_0-9\.]+\.)?([a-zA-Z_0-9]+)[[:space:]]*=[[:space:]]*([a-zA-Z_0-9\.]+)\.extend/\2/c,class/
---regex-js=/^[[:space:]]*([a-zA-Z_0-9\.]+\.)?([a-zA-Z_0-9]+)[[:space:]]*=[[:space:]]*(OpenLayers|OL).Class/\2/c,class/
---regex-js=/^[[:space:]]*([a-zA-Z_0-9\.]+\.)?([a-zA-Z_0-9]+) *[=:] function/\2/m, method/
---regex-js=/^[A-Z]([a-zA-Z_0-9\.]+\.)?([a-zA-Z_0-9]+) *= *{ *$/\2/o, object/
+# JavaScript {{{1
 
+# --langdef=javascript
+--langmap=javascript:.js
+--langmap=javascript:+.jsx
+
+# Constants {{{2
+
+# A constant: AAA0_123 = { or AAA0_123: {
+--regex-javascript=/[ \t.]([A-Z][A-Z0-9._$]+)[ \t]*[=:][ \t]*([0-9"'\[\{]|null)/\1/n,constant/
+
+# Properties {{{2
+
+# .name = {
+--regex-javascript=/\.([A-Za-z0-9._$]+)[ \t]*=[ \t]*\{/\1/o,object/
+
+# "name": {
+--regex-javascript=/['"]*([A-Za-z0-9_$]+)['"]*[ \t]*:[ \t]*\{/\1/o,object/
+
+# parent["name"] = {
+--regex-javascript=/([A-Za-z0-9._$]+)\[["']([A-Za-z0-9_$]+)["']\][ \t]*=[ \t]*\{/\1\.\2/o,object/
+
+# Classes {{{2
+
+# name = (function()
+--regex-javascript=/([A-Za-z0-9._$]+)[ \t]*=[ \t]*\(function\(\)/\1/c,class/
+
+# "name": (function()
+--regex-javascript=/['"]*([A-Za-z0-9_$]+)['"]*:[ \t]*\(function\(\)/\1/c,class/
+
+# class ClassName
+--regex-javascript=/class[ \t]+([A-Za-z0-9._$]+)[ \t]*/\1/c,class/
+
+# ClassName = React.createClass
+--regex-javascript=/([A-Za-z$][A-Za-z0-9_$()]+)[ \t]*=[ \t]*[Rr]eact.createClass[ \t]*\(/\1/c,class/
+
+# Capitalised object: Name = whatever({
+--regex-javascript=/([A-Z][A-Za-z0-9_$]+)[ \t]*=[ \t]*[A-Za-z0-9_$]*[ \t]*[{(]/\1/c,class/
+
+# Capitalised object: Name: whatever({
+--regex-javascript=/([A-Z][A-Za-z0-9_$]+)[ \t]*:[ \t]*[A-Za-z0-9_$]*[ \t]*[{(]/\1/c,class/
+
+# Functions {{{2
+
+# name = function(
+--regex-javascript=/([A-Za-z$][A-Za-z0-9_$]+)[ \t]*=[ \t]*function[ \t]*\(/\1/f,function/
+
+# Methods {{{2
+
+# Class method or function (this matches too many things which I filter out separtely)
+# name() {
+--regex-javascript=/(function)*[ \t]*([A-Za-z$_][A-Za-z0-9_$]+)[ \t]*\([^)]*\)[ \t]*\{/\2/f,function/
+
+# "name": function(
+--regex-javascript=/['"]*([A-Za-z$][A-Za-z0-9_$]+)['"]*:[ \t]*function[ \t]*\(/\1/m,method/
+
+# parent["name"] = function(
+--regex-javascript=/([A-Za-z0-9_$]+)\[["']([A-Za-z0-9_$]+)["']\][ \t]*=[ \t]*function[ \t]*\(/\2/m,method/
+
+# Misc {{{2
+--regex-javascript=/^[[:space:]]*([a-zA-Z_0-9\.]+\.)?([a-zA-Z_0-9]+)[[:space:]]*=[[:space:]]*([a-zA-Z_0-9\.]+)\.extend/\2/c,class/
+--regex-javascript=/^[[:space:]]*([a-zA-Z_0-9\.]+\.)?([a-zA-Z_0-9]+)[[:space:]]*=[[:space:]]*(OpenLayers|OL).Class/\2/c,class/
+--regex-javascript=/^[[:space:]]*([a-zA-Z_0-9\.]+\.)?([a-zA-Z_0-9]+) *[=:] function/\2/m, method/
+--regex-javascript=/^[A-Z]([a-zA-Z_0-9\.]+\.)?([a-zA-Z_0-9]+) *= *{ *$/\2/o, object/
+
+
+# SCSS {{{1
 --langdef=scss
 --langmap=scss:.scss
 --regex-scss=/^[@]mixin ([^ (]+).*/\1/m,method/
 
+# Go {{{1
 --langdef=Go
 --langmap=Go:.go
 --regex-Go=/func([ \t]+\([^)]+\))?[ \t]+([a-zA-Z0-9_]+)/\2/d,func/
