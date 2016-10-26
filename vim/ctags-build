@@ -1,0 +1,4 @@
+#!/bin/bash
+
+rm ~/.ctags
+grep -vE '^(#|$)' ctags > ~/.ctags
