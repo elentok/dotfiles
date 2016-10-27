@@ -37,7 +37,6 @@ Plug 'ngmy/vim-rubocop'
 Plug 'schickling/vim-bufonly', { 'on': ['BufOnly', 'Bonly', 'BOnly'] }
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTree', 'NERDTreeToggle', 'NERDTreeFocus', 'NERDTreeFind'] }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTree', 'NERDTreeToggle', 'NERDTreeFocus', 'NERDTreeFind']}
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-abolish'
@@ -81,18 +80,14 @@ Plug 'tpope/vim-haml',                 { 'for': 'haml' }
 if has('nvim')
   Plug 'benekastah/neomake'
   Plug 'kassio/neoterm'
-  Plug 'Shougo/deoplete.nvim'
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
   Plug 'scrooloose/syntastic'
   Plug 'jwhitley/vim-matchit' " embedded in neovim
+  if has('lua')
+    Plug 'Shougo/neocomplete.vim'
+  endif
 endif
-
-
-if has('lua')
-  Plug 'Shougo/neocomplete.vim'
-endif
-
-"Plug 'Lokaltog/powerline', { 'rtp': 'powerline/bindings/vim' }
 
 if file_readable(expand("~/.dotlocal/plugs.vim"))
   source ~/.dotlocal/plugs.vim
