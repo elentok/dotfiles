@@ -45,6 +45,7 @@ alias mn='mpc next'
 alias mt='mpc toggle'
 alias ngx='sudoo nginx -s reload'
 alias nv='nvim'
+alias npd='npm run deploy'
 alias pdr='powder restart'
 alias pio='platformio'
 alias pix='open -a Pixelmator'
@@ -119,15 +120,6 @@ npr() {
     print -s "npm run $cmd" && \
       echo "> npm run $cmd" && \
       npm run $cmd
-  fi
-}
-
-npd() {
-  site="$(json -f sites.json --keys -a | fzf --exit-0)"
-  if [ -n "$site" ]; then
-    print -s "npm run deploy $site" && \
-      echo "> npm run deploy $site" && \
-      npm run deploy $site
   fi
 }
 
