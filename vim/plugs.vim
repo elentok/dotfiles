@@ -48,7 +48,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'xolox/vim-misc'
 " Plug 'Vallori/YouCompleteMe', { 'do': './install.py', 'for': 'c' }
-Plug 'majutsushi/tagbar'
+" Plug 'majutsushi/tagbar'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets' " snippets for ultisnips
 
