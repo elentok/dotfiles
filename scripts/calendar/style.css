@@ -14,7 +14,7 @@ body {
 }
 
 .c-notes__contents {
-  height: 710px;
+  padding-top: 1px;
 }
 
 .c-day {
@@ -36,12 +36,15 @@ body {
 }
 
 .c-day__contents {
-  height: 330px;
+  /* height: 330px; */
 }
 
-.c-day--5 .c-day__contents,
+.c-day--5 .c-day__contents {
+  height: 118px;
+}
+
 .c-day--6 .c-day__contents {
-  height: 139px;
+  height: 117px;
 }
 
 .c-text--header {
@@ -50,7 +53,10 @@ body {
   font-size: 30px;
 }
 
-.c-lines {
-  background:
-    repeating-linear-gradient(to bottom, white, white 15px, #eee 15px,  #eee 16px);
+.c-line {
+  height: 15px;
+}
+
+.c-line:not(:last-child) {
+  border-bottom: 1px solid #eee;
 }
