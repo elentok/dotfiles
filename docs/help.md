@@ -18,16 +18,16 @@ Command Line Tips
     7z u -p{password} -mhe target.7z files
 
 ### gpg - generate key
-gpg --gen-key
+    gpg --gen-key
 
 ### gpg - export the public key
-gpg --export --armor {email} > gpg-public-key.txt
+    gpg --export --armor {email} > gpg-public-key.txt
 
 ### gpg -import key
-gpg --import gpg-public-key.txt
+    gpg --import gpg-public-key.txt
 
 ### gpg - encrypt using public key
-gpg --encrypt --output encrypted.gpg --recipient {email} {file-to-encrypt}
+    gpg --encrypt --output encrypted.gpg --recipient {email} {file-to-encrypt}
 
 ## Git
 
@@ -160,62 +160,65 @@ gpg --encrypt --output encrypted.gpg --recipient {email} {file-to-encrypt}
     dscacheutil -flushcache
 
 ### kext - show loaded modules
-  kextstat
+    kextstat
 
 ### kext - unload module
-  sudo kextunload -v -b {bundle-id}
+    sudo kextunload -v -b {bundle-id}
 
-  e.g.
+    e.g.
 
-    sudo kextunload -v -b com.FTDI.driver.FTDIUSBSerialDriver
+      sudo kextunload -v -b com.FTDI.driver.FTDIUSBSerialDriver
 
 ### mac - get app id
 
-  osascript -e 'id of app "Finder"'
+    osascript -e 'id of app "Finder"'
 
-  (e.g. for amethyst)
+    (e.g. for amethyst)
 
 
 ## SQL
 
 ### psql show all tables
-  psql -h {host} -p {port} -U {username} {database}
-  \? - show help (all commands)
-  \l - show all databases
-  \d - show all tables and other objects
-  \dt - show all tables
-  \db - show all tablespaces
-  \d+ - describe table
-  \x {on|off} - turn extended display on/off
+    psql -h {host} -p {port} -U {username} {database}
+    \? - show help (all commands)
+    \l - show all databases
+    \d - show all tables and other objects
+    \dt - show all tables
+    \db - show all tablespaces
+    \d+ - describe table
+    \x {on|off} - turn extended display on/off
 
 ## Curl
 
 ### curl with cookie
-  curl --cookie "cookie_name=cookie_value" http://...
+    curl --cookie "cookie_name=cookie_value" http://...
 
 ### curl follow redirects
-  curl -L http://...
+    curl -L http://...
 
 ## AWS S3
 
 ### s3cmd - set public read on all files
 
-  s3cmd setacl 's3://{bucket-name}/{path}/**/*' --acl-public --verbose
+    s3cmd setacl 's3://{bucket-name}/{path}/**/*' --acl-public --verbose
 
 ### s3cmd - list all files (recursively)
 
-  s3cmd ls 's3://{bucket-name}/{path}' -r
+    s3cmd ls 's3://{bucket-name}/{path}' -r
 
 ## Vim
 
 ### vim sudo tee trick
 
-  :w !sudo tee %
+    :w !sudo tee %
 
 ## Crontab
-Columns: minute hour day-of-month month day-of-week command
+
+Columns: `minute hour day-of-month month day-of-week command`
+
 Every 30 minutes:
-  */30 * * * * the_command
+
+    */30 * * * * the_command
 
 ## Go (golang)
 
@@ -226,11 +229,11 @@ Debugging native compilations:
 ## Misc
 
 ### lsof - show all used ports
-  lsof -i -n -P
-  (use sudo to show processes by all users)
+    lsof -i -n -P
+    (use sudo to show processes by all users)
 
 ### cut prefix
-  echo "hello" | cut -c 3- # will output "llo"
+    echo "hello" | cut -c 3- # will output "llo"
 
 ### reset terminal
     ctrl+c reset
@@ -257,7 +260,7 @@ Debugging native compilations:
     tmux attach -d -t specific_session_name
 
 ### which ubuntu version am I running
-  lsb_release -a
+    lsb_release -a
 
 ### diff directories
 
