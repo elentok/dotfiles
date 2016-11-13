@@ -7,9 +7,9 @@ const MONTHS = [
   "September", "October", "November", "December"]
 
 const Lines = {
-  WORKDAY: 18,
-  WEEKEND: 7,
-  NOTES: 40,
+  WORKDAY: 13,
+  WEEKEND: 6,
+  NOTES: 29,
 }
 
 function renderLines(count) {
