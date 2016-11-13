@@ -1,10 +1,26 @@
-/* globals div window document */
+/* globals add div window document */
 
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
   "Saturday"]
 const MONTHS = [
   "January", "February", "March", "April", "May", "June", "July", "August",
   "September", "October", "November", "December"]
+
+const Lines = {
+  WORKDAY: 18,
+  WEEKEND: 7,
+  NOTES: 40,
+}
+
+function renderLines(count) {
+  const lines = []
+
+  for (let i=0; i < count; i++) {
+    lines.push(div("c-line"))
+  }
+
+  return lines
+}
 
 class DayView {
   constructor(date) {
@@ -14,7 +30,8 @@ class DayView {
 
   render() {
     this.el.appendChild(div("c-day__date c-text--header", this.formatDate()))
-    this.el.appendChild(div("c-day__contents c-lines"))
+    const lines = this.date.getDay() >= 5 ? Lines.WEEKEND : Lines.WORKDAY
+    this.el.appendChild(div("c-day__contents c-lines", renderLines(lines)))
     return this.el
   }
 
@@ -49,3 +66,5 @@ class WeekView {
 const date = new Date(document.location.search.slice(1))
 const weekView = window.weekView = new WeekView(date)
 document.querySelector(".c-week-container").appendChild(weekView.render())
+
+add(document.querySelector(".c-notes__contents"), renderLines(Lines.NOTES))
