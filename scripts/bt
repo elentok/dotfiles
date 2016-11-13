@@ -32,7 +32,7 @@ module Bt
 
       res = http_client.get('/transmission/rpc', options)
       match = %r{<code>(.*)</code>}.match(res.body)
-      fail "Can't find session id" if match.nil?
+      raise "Can't find session id in '#{res.body}" if match.nil?
 
       name, value = match[1].split(': ')
       STDERR.puts "Authenticated: #{name}: #{value}" if ENV['DEBUG']
