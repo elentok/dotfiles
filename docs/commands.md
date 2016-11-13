@@ -4,7 +4,8 @@ Custom Shell Commands (functions & aliases)
 ## Rename (rename)
 
 ```bash
-  rename 's/query/replacement/g' path/to/files*png
+  rename 'query' 'replacement' path/to/files*png
+  rename 'query' 'replacement' **/*.png
 ```
 
 ## Find file by name (ff)
@@ -15,13 +16,13 @@ Finds file containing a given text:
   ff bob
 ```
 
-## Git Conflict Resolver (gec)
+## Git Conflict Resolver (git resolve)
 
 Opens each conflicted file, allows you to fix the conflict
 and asks if you wish to save it
 
 ```bash
-  gec
+  git resolve
 ```
     
 ## Git Destroy (git destroy)
