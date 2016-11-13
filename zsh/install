@@ -4,7 +4,6 @@ source `dirname $0`/../framework
 
 install_zsh() {
   if is_mac; then
-    brew_install zsh
     my_shell=$(echo $SHELL | rev | cut -d/ -f1 | rev)
     if [ "$my_shell" != "zsh" ]; then
       zsh_bin="$(which zsh)"
