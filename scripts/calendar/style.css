@@ -1,0 +1,56 @@
+body {
+  /* font-family: Merriweather; */
+  font-family: 'Pompiere';
+
+}
+
+.c-week-container {
+  margin-right: 200px;
+}
+
+.c-notes {
+  width: 200px;
+  float: right;
+}
+
+.c-notes__contents {
+  height: 710px;
+}
+
+.c-day {
+  border: 1px solid #3879d9;
+  border-left: 0;
+  float: left;
+  width: 33%;
+  box-sizing: border-box;
+}
+
+.c-day--0,
+.c-day--3 {
+  border-left: 1px solid #3879d9;
+}
+
+.c-day__date {
+  background-color: #3879d9;
+  color: white;
+}
+
+.c-day__contents {
+  height: 330px;
+}
+
+.c-day--5 .c-day__contents,
+.c-day--6 .c-day__contents {
+  height: 139px;
+}
+
+.c-text--header {
+  line-height: 50px;
+  padding: 0 7px;
+  font-size: 30px;
+}
+
+.c-lines {
+  background:
+    repeating-linear-gradient(to bottom, white, white 15px, #eee 15px,  #eee 16px);
+}
