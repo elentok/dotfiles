@@ -149,7 +149,7 @@ fi
 export SSH_TERM=xterm-color
 
 if is_mac; then
-  export JAVA_HOME="$(/usr/libexec/java_home)"
+  export JAVA_HOME="$(/usr/libexec/java_home 2> /dev/null)"
 fi
 
 # vim: foldmethod=marker
