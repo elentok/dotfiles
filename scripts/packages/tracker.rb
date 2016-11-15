@@ -37,10 +37,15 @@ module IsraelPost
       body = f.read
       html = JSON.parse(body)['itemcodeinfo']
 
-      HtmlToPlainText.plain_text(html)
+      text = HtmlToPlainText.plain_text(html)
 
+      if text =~ /postal item was delivered/
+        text = green(text)
+      else
+        text = gray(text)
+      end
 
-        #.split('<br>').first
+      text
     end
   end
 
