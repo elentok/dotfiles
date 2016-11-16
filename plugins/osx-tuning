@@ -33,7 +33,8 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 
 # Speed up Mission Control animations
-defaults write com.apple.dock expose-animation-duration -float 0.1
+defaults write com.apple.dock expose-animation-duration -int 0
+
 
 # Don’t animate opening applications from the Dock
 defaults write com.apple.dock launchanim -bool false
