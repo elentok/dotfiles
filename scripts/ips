@@ -1,7 +1,15 @@
 #!/bin/bash
-ips() {
+
+ips-linux-arch() {
+  ip addr show | grep 'inet ' | awk '{print $2}' | sed -E 's#/[0-9]+##'
+}
+
+ips-mac-() {
   ifconfig | grep 'inet ' | awk '{print $2}'
 }
 
-ips | tail -1 | pbcopy
+ips() {
+  ips-$OS-$DISTRO
+}
+
 ips
