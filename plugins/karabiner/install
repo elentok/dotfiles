@@ -7,7 +7,7 @@ source `dirname $0`/../../framework
 
 header "Karabiner (previously KeyRemap4MacBook)"
 
-# brew_cask_install karabiner
+brew_cask_install karabiner
 
 bullet "Setting up"
 source $DOTF/plugins/karabiner/settings
