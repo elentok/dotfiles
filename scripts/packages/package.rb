@@ -6,6 +6,10 @@ class Package
     @store     = store
     @date      = options['when']
     @estimated = DeliveryEstimation.parse(options['due'], @date)
+
+    if @date.nil?
+      puts "WARNING: Package '#{@title}' is missing 'when'"
+    end
   end
 
   def serialize
