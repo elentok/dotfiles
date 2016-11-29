@@ -45,6 +45,10 @@ if exists('+breakindent')
   set breakindent                " https://retracile.net/wiki/VimBreakIndent
 end
 
+if has("nvim-0.1.7")
+  set inccommand=nosplit
+endif
+
 if !has('nvim')
   set ttyfast
   set t_vb=
