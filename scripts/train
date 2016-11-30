@@ -8,6 +8,7 @@ const moment = require("moment")
 const fs = require("fs")
 const path = require("path")
 const shell = require("shelljs")
+const Table = require("easy-table")
 
 class Station {
   constructor({ id, name, title }) {
@@ -113,9 +114,17 @@ class Train {
     console.info(message)
   }
 
+  addToTable(table) {
+    table.cell("Departure", this.departure)
+    table.cell("Arrival", this.arrival)
+    table.cell("Duration", this.duration)
+    table.cell("Details", this.changing)
+    table.newRow()
+  }
+
   static fetch(originId, destId, departure = moment()) {
     if (typeof departure === "string") {
-      departure = this.parseTime(departure).add(1, 'day')
+      departure = this.parseTime(departure)
     }
 
     const url = "http://www.rail.co.il/EN/DrivePlan/Pages/DrivePlan.aspx"
@@ -130,13 +139,16 @@ class Train {
         GoingHourDeparture: true,
       }
     }).then(response => {
-      const $html = $.load(response.data)
-      const fs = require("fs")
-      fs.writeFileSync("trains.html", response.data)
-      return $html('.timeTable tr[name=TrainRow]')
-        .toArray()
-        .map(tr => new Train($(tr)))
+      // Uncomment this line to debug the parser
+      // fs.writeFileSync("trains.html", response.data)
+      return this.parse(response.data)
     })
+  }
+
+  static parse(html) {
+    const $html = $.load(html)
+    const rows = $html('tr[name=TrainRow]').toArray()
+    return rows.map(tr => new Train($(tr)))
   }
 
   static parseTime(time) {
@@ -166,7 +178,10 @@ class CLI {
 
       return Train.fetch(originId, destId, time)
         .then(trains => {
-          trains.forEach(t => t.print())
+          console.info(`Found ${trains.length} trains:\n`)
+          const table = new Table()
+          trains.forEach(t => t.addToTable(table))
+          console.info(table.toString())
         })
     }).catch(e => {
       console.error(e)
