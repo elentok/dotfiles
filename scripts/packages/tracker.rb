@@ -23,10 +23,19 @@ module PackageTracker
   end
 
   def self.track_pkg(pkg)
-    if IsraelPost.supported?(pkg.tracking)
+    tracker = find_tracker(pkg)
+    if tracker
       puts "☻ Tracking #{pkg.pretty_name}..."
-      puts IsraelPost.track(pkg.tracking)
+      puts tracker.track(pkg.tracking)
       puts
+    end
+  end
+
+  def self.find_tracker(pkg)
+    if IsraelPost.supported?(pkg.tracking)
+      IsraelPost
+    elsif IParcel.supported?(pkg.tracking)
+      IParcel
     end
   end
 end
@@ -55,7 +64,21 @@ module IsraelPost
   end
 
   def self.url(number)
-    "http://www.israelpost.co.il/itemtrace.nsf/trackandtraceJSON" +
+    'http://www.israelpost.co.il/itemtrace.nsf/trackandtraceJSON' \
       "?openagent&_=1372171578320&lang=EN&itemcode=#{number}"
+  end
+end
+
+module IParcel
+  REGEX = /class="currEvent[^>]+>([^<]+)/.freeze
+
+  def self.track(number)
+    url = "https://tracking.i-parcel.com/?TrackingNumber=#{number}"
+    html = `curl --silent '#{url}'`
+    puts REGEX.match(html)[1].strip
+  end
+
+  def self.supported?(number)
+    number =~ /^AG/
   end
 end
