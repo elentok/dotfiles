@@ -68,7 +68,7 @@ Plug 'shime/vim-livedown',             { 'for': 'markdown', 'on': 'LivedownPrevi
 Plug 'evanmiller/nginx-vim-syntax',    { 'for': 'nginx' }
 Plug 'fatih/vim-go',                   { 'for': 'go' }
 Plug 'groenewege/vim-less',            { 'for': 'less' }
-Plug 'othree/yajs.vim',                { 'for': 'javascript' }
+Plug 'othree/yajs.vim',                { 'for': 'javascript', 'tag': '1.6' }
 Plug 'pangloss/vim-javascript',        { 'for': 'javascript' }
 Plug 'mxw/vim-jsx',                    { 'for': 'javascript' }
 Plug 'kchmck/vim-coffee-script',       { 'for': 'coffee' }
