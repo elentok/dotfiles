@@ -253,11 +253,11 @@ let g:neomake_jsx_enabled_makers = ['eslint']
 let g:neomake_html_enabled_makers = []
 let g:neomake_java_enabled_makers = []
 let g:neomake_error_sign = {
-    \ 'text': 'E>',
+    \ 'text': '✖',
     \ 'texthl': 'ErrorMsg',
     \ }
 let g:neomake_warning_sign = {
-    \ 'text': 'W>',
+    \ 'text': '⚠',
     \ 'texthl': 'WarningMsg',
     \ }
 
