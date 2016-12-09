@@ -81,6 +81,7 @@ if has('nvim')
   Plug 'benekastah/neomake'
   Plug 'kassio/neoterm'
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 else
   Plug 'scrooloose/syntastic'
   Plug 'jwhitley/vim-matchit' " embedded in neovim
