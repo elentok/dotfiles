@@ -164,3 +164,11 @@ cdd() {
     cd "$dir"
   fi
 }
+
+vp() {
+  local plugin="$(cd $HOME/.vim/plugged && /bin/ls -1 | fzf --ansi --exit-0)"
+  if [ -n "$plugin" ]; then
+    cd "$HOME/.vim/plugged/$plugin"
+  fi
+}
+
