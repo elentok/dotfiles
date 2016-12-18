@@ -67,6 +67,10 @@ let g:netrw_localrmdir='rm -r'
 
 " Plugin specific {{{1
 
+" pangloss/vim-javascript
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_flow = 1
+
 " fzf
 " let g:fzf_prefer_tmux = 1
 
