@@ -140,11 +140,6 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
-# DOTLOCAL {{{1
-if [ -e "$DOTL/zsh/core.zsh" ]; then
-  source "$DOTL/zsh/core.zsh"
-fi
-
 # MISC {{{1
 export SSH_TERM=xterm-color
 
@@ -159,3 +154,7 @@ if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
   export MANPATH=$HOME/.nix-profile/share/man:$MANPATH
 fi
 
+# DOTLOCAL {{{1
+if [ -e "$DOTL/zsh/core.zsh" ]; then
+  source "$DOTL/zsh/core.zsh"
+fi
