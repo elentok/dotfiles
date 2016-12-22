@@ -46,7 +46,7 @@ You can use the following files to customize your zsh settings:
 * `~/.dotlocal/zsh/core.zsh` - runs on all sessions (both login and non-login)
 * `~/.dotlocal/zsh/before.zsh` - runs at the beginning of all login sessions
   (right after core.zsh)
-* `~/.dotlocal/zsh/after.zsh` - runs at the of all of all login sessions
+* `~/.dotlocal/zsh/after.zsh` - runs at the end of all of all login sessions
 
 ### Vim
 
