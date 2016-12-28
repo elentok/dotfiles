@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+# Convert macOS DMG images to ISO
+#
+# Usage:
+#
+#   dmg2iso {dmg-file}
+#
+
+if [ $# -lt 1 ]; then
+  usage $0
+  exit 1
+fi
+
+source="$1"
+target="${source/.dmg/.iso}"
+
+echo "Converting $source to $target..."
+
+if hdiutil convert "$source" -format UDTO -o "$target"; then
+  mv "$target.cdr" "$target"
+fi
