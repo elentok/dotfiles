@@ -226,6 +226,14 @@ Debugging native compilations:
 
 * use "-x" to printout the build flags (e.g. `go get -x {package}`)
 
+## Markdown
+
+### Markdown footnote links
+
+This is a link to [Something][1]
+
+[1]: http://something.com
+
 ## Misc
 
 ### lsof - show all used ports
