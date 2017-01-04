@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Parses each line of the input as a separate json object
+
+while read line; do
+  echo "-------------------------------"
+  echo $line | prettyjson
+done
