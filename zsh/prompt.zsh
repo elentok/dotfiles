@@ -32,6 +32,10 @@ directory="%F{blue}%~%f"
 # User and host {{{1
 user_and_host="%{\$fg_bold[black]%}$USERNAME at $(hostname)%f"
 
+# Time {{{1
+time="%D{%H:%M:%S.%.}"
+time="%{\$fg_bold[black]%}($time)%f"
+
 # Git {{{1
 
 # required zsh modules
@@ -55,7 +59,7 @@ git_status='${vcs_info_msg_0_}'
 # Full prompt {{{1
 
 PROMPT="
-$user_and_host
+$user_and_host $time
 $directory$git_status
 $random_animal$exit_code"
 
