@@ -35,6 +35,7 @@
   h = help
   l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr by %C(yellow)%an%Creset)%Creset'
   m = merge
+  my-branch = rev-parse --abbrev-ref HEAD
   mff = merge --no-ff
   mffo = merge --ff-only
   pl = pull
