@@ -59,6 +59,7 @@
   g = grep --break --heading --line-number
   alias = config --get-regexp '^alias\\.'
   msg = log -1 --pretty=%B
+  ls = log --pretty='%h %s'
   lasttag = describe --abbrev=0
 
 [format]
