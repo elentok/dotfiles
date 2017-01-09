@@ -8,6 +8,9 @@
 [include]
   path = ~/.dotlocal/gitconfig
 
+[core]
+  excludesfile = ~/.dotfiles/plugins/git/gitignore
+
 [color]
   ui = auto
   diff = auto
