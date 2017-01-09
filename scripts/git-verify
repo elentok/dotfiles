@@ -93,11 +93,12 @@ class Pair
 
     begin
       git "pull --rebase=false --ff-only #{remote_arg}"
-      @local.reset_hash!
-      @remote.reset_hash!
     rescue GitError
       pull_alternatives
     end
+
+    @local.reset_hash!
+    @remote.reset_hash!
   end
 
   def pull_alternatives
