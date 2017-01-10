@@ -3,7 +3,7 @@
 source $DOTF/framework
 
 main() {
-  start_mpd
+  # start_mpd
   run_command --sudo 'Nginx' nginx
   echo
   add_ssh_key
