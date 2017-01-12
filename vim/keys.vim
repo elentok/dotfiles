@@ -278,6 +278,11 @@ if has('nvim')
   "au WinEnter term://* startinsert
 endif
 
+" Plugin: neoterm {{{1
+
+nnoremap <silent> ,tc :call neoterm#close()<cr>
+nnoremap <silent> ,t0 :call neoterm#clear()<cr>
+
 " Misc {{{1
 
 noremap <Leader>co0 :CSScolor '<c-r>0'<cr>
