@@ -1,5 +1,7 @@
 " vim: foldmethod=marker
 
+" General {{{1
+
 syntax enable
 
 let mapleader = ','
