@@ -17,12 +17,22 @@ COLORS = {
   cyan:      "\033[36m"}
 
 RESET = "\033[0m"
+CLEAR_LINE = "\r\033[K"
+HOURGLASS = '⏳ '
 
 class Object
   COLORS.each do |name, value|
     define_method name do |text|
       [value, text, RESET].join()
     end
+  end
+
+  def print_progress(message)
+    printf blue("#{CLEAR_LINE}#{HOURGLASS} #{message}...")
+  end
+
+  def clear_line
+    printf CLEAR_LINE
   end
 end
 

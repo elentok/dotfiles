@@ -54,6 +54,11 @@ export BLUE="\033[34m"
 export CYAN="\033[36m"
 export UNDERLINE="\033[4m"
 export RESET="\033[0m"
+export CLEAR_LINE="\r\033[K"
+
+# Special Characters {{{1
+
+export HOURGLASS="⏳"
 
 # Identify OS {{{1
 if command_missing X; then
