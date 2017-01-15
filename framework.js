@@ -10,6 +10,9 @@ const F = {
   },
 
   RESET: "\033[0m",
+  CLEAR_LINE: "\r\033[K",
+
+  HOURGLASS: "⏳ ",
 
   padRight(string, length) {
     while (string.length < length) {
@@ -17,6 +20,15 @@ const F = {
     }
     return string
   },
+
+  printProgress(message) {
+    process.stdout.write(
+      `${this.HOURGLASS} ${this.COLORS.blue}${message}...${this.RESET}`)
+  },
+
+  clearLine() {
+    process.stdout.write(this.CLEAR_LINE)
+  }
 }
 
 Object.keys(F.COLORS).forEach((name) => {
