@@ -9,7 +9,10 @@ if [ ! -e "$REPOS_LIST" ]; then
   exit 1
 fi
 
-cat $REPOS_LIST | while read repo; do
+repos=()
+while read repo; do repos+=($repo); done < $REPOS_LIST
+
+for repo in ${repos[@]}; do
   repo="${repo/\~/$HOME}"
   bullet "Verifying $repo...\n"
 
