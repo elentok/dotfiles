@@ -58,7 +58,7 @@ export CLEAR_LINE="\r\033[K"
 
 # Special Characters {{{1
 
-export HOURGLASS="⏳"
+export HOURGLASS="⏳ "
 
 # Identify OS {{{1
 if command_missing X; then
@@ -91,12 +91,20 @@ bullet() {
   echo -e -n "${YELLOW}➜$RESET $*"
 }
 
+progress() {
+  printf "${BLUE}${HOURGLASS} ${PROGRESS_PREFIX}$*..."
+}
+
+clear_line() {
+  printf "$CLEAR_LINE"
+}
+
 info() {
   echo -e "${CYAN}$*$RESET"
 }
 
 success() {
-  echo -e "${GREEN}✔ $*$RESET"
+  printf "${GREEN}✔ $*$RESET\n"
 }
 
 error() {
