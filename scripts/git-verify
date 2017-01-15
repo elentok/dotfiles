@@ -15,7 +15,6 @@ class CLI < OptionsCLI
   def start
     @repo = Repo.new(ARGV[0] || '.')
     @repo.fetch_all
-    puts
     report_local_branches_without_remote
     report_remote_branches_without_local if options[:show_remotes]
     report_unsynced_branches
@@ -26,8 +25,8 @@ class CLI < OptionsCLI
   def report_local_branches_without_remote
     return if @repo.local_branches_without_remote.empty?
 
-    puts red('Local branches without remote:')
-    @repo.local_branches_without_remote.each { |_, branch| puts "* #{branch}" }
+    # branch_names = @repo.local_branches_without_remote.map
+    puts red("Local branches without remote: #{@repo.local_branches_without_remote.keys.join(', ')}")
     puts
   end
 
@@ -42,11 +41,8 @@ class CLI < OptionsCLI
   def report_unsynced_branches
     return if @repo.unsynced_branches.empty?
 
-    puts red('Unsynced branches without remote:')
-    @repo.unsynced_branches.each do |pair|
-      puts "* #{pair}"
-    end
-    puts
+    names = @repo.unsynced_branches.map(&:local).join(', ')
+    puts red("Unsynced branches without remote: #{names}")
 
     @repo.unsynced_branches.each do |pair|
       pair.sync! if confirm?(yellow("Sync #{pair}?"))
@@ -67,6 +63,8 @@ class CLI < OptionsCLI
 end
 
 class Pair
+  attr_reader :local, :remote
+
   def initialize(local, remote)
     @local = local
     @remote = remote
@@ -77,24 +75,27 @@ class Pair
   end
 
   def sync!
-    puts blue("* Synchronizing #{self}")
-
-    puts green("  * Checking out branch #{@local}")
+    print_progress "Checking out branch #{@local}"
     git "checkout #{@local}"
+    clear_line
 
     pull
+    clear_line
 
     return if synced? || @local.protected?
     push if confirm?(yellow("Push to #{@remote}?"))
   end
 
   def pull
-    puts green("  * Pulling from #{remote_arg}")
+    print_progress "Pulling from #{remote_arg}"
 
     begin
       git "pull --rebase=false --ff-only #{remote_arg}"
     rescue GitError
+      clear_line
       pull_alternatives
+    else
+      clear_line
     end
 
     @local.reset_hash!
@@ -109,6 +110,7 @@ class Pair
       git "reset --hard #{@remote}"
     when 'pushf'
       git "push -f #{remote_arg}"
+    when 'skip'
     end
   end
 
@@ -120,6 +122,7 @@ class Pair
     puts "  [rebase] Do a pull with rebase (#{@local} <= #{@remote})"
     puts "  [reset]  Do a hard reset       (#{@local} <= #{@remote})"
     puts "  [pushf]  Do a push -f          (#{@local} => #{@remote})"
+    puts '  [skip]   Do nothing'
     ask yellow('What would you like to do?')
   end
 
@@ -128,18 +131,26 @@ class Pair
   end
 
   def push
-    puts green("  * Pushing to #{remote_arg}")
+    print_progress "Pushing to #{remote_arg}"
     git "push #{remote_arg}"
-
-    puts
+    clear_line
   end
 
   def show_diff
-    local_info = git("show --no-patch --format='(%s) %cr' #{@local}")
-    print yellow("Local:  #{local_info}")
+    local_info = @local.repo.ref_info(@local)
+    remote_info = @local.repo.ref_info(@remote)
 
-    remote_info = git("show --no-patch --format='(%s) %cr' #{@remote}")
-    print yellow("Remote: #{remote_info}")
+    if local_info.commit_time > remote_info.commit_time
+      puts green("  * Local:  #{local_info}")
+      puts red("  * Remote: #{remote_info}")
+    elsif local_info.commit_time < remote_info.commit_time
+      puts red("  * Local:  #{local_info}")
+      puts green("  * Remote: #{remote_info}")
+    else
+      puts yellow("  * Local:  #{local_info}")
+      puts yellow("  * Remote: #{remote_info}")
+    end
+
     puts
   end
 

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+REPOS_LIST="$HOME/.config/repos-to-verify"
+
+if [ ! -e "$REPOS_LIST" ]; then
+  printf "${RED}Please create list of repositories in '$REPOS_LIST'${RESET}\n"
+  exit 1
+fi
+
+cat $REPOS_LIST | while read repo; do
+  repo="${repo/\~/$HOME}"
+  bullet "Verifying $repo...\n"
+
+  (cd $repo && git verify)
+  if [ $? -ne 0 ]; then
+    error "ERROR: Verification failed"
+    exit 2
+  fi
+done

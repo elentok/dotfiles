@@ -67,12 +67,32 @@ class Repo
     end
   end
 
+  def ref_info(ref)
+    title, commit_time = git("show --no-patch --format='%s||%ct' #{ref}")
+      .split('||')
+
+    return RefInfo.new(ref, title, commit_time)
+  end
+
   def git(command)
-    output = `cd #{@directory} && git #{command}`
+    output = `cd #{@directory} && git #{command} 2>> /tmp/git-verify.log`
     puts gray("  >> git #{command}") if ENV['VERBOSE']
     exit_code = $CHILD_STATUS.to_i
     fail GitError, "Git command returned status #{exit_code}" if exit_code != 0
     output
+  end
+end
+
+class RefInfo
+  attr_reader :ref, :title, :commit_time
+  def initialize(ref, title, commit_time)
+    @ref = ref
+    @title = title
+    @commit_time = Time.at(commit_time.to_i)
+  end
+
+  def to_s
+    "#{@title} (#{@commit_time})"
   end
 end
 
@@ -88,13 +108,15 @@ class Remote
   end
 
   def fetch
-    puts blue("* Fetching remote '#{@name}'")
+    print_progress "Fetching remote '#{@name}'"
     @repo.git("fetch #{@name}")
+    clear_line
   end
 
   def prune
-    puts blue("* Removing dead branches from '#{@name}'")
+    print_progress "Removing dead branches from '#{@name}'"
     @repo.git("remote prune #{@name}")
+    clear_line
   end
 end
 
