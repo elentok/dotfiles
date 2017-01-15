@@ -149,6 +149,12 @@ Command Line Tips
 ### zsh read file line by line
     cat $filename | while read line; do echo $line; done
 
+    # to avoid the subshell (so you can access variables outside the loop) you
+    # can do this:
+
+    lines=()
+    while read line; do lines+=($line); done < $filename
+    for line in ${lines[@]}; do ...; done
 
 ## Mac
 
