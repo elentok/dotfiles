@@ -4,6 +4,7 @@ setxkbmap -option 'grp:alt_shift_toggle' -option 'ctrl:nocaps'
 (sleep 3; feh --bg-fill ~/.config/wallpaper.jpg) &
 # mpd &
 # gnome-settings-daemon &
+xfce4-volumed &
 nm-applet &
 # ~/.dropbox-dist/dropboxd &
 google-chrome &
