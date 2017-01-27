@@ -10,6 +10,7 @@ require 'fileutils'
 HEIGHT_PERCENTAGE = 1.6
 PADDING_PERCENTAGE = 0.5
 STROKE_PERCENTAGE = 0.05
+FONT = File.expand_path("../../plugins/fonts/MagraBold.ttf", __FILE__)
 
 def main
   if ARGV.length < 3
@@ -38,7 +39,7 @@ def add_watermark(text, color, filename)
 
   font_size = img.height * HEIGHT_PERCENTAGE / 100
   padding = img.height * PADDING_PERCENTAGE / 100
-  stroke_width = img.height * STROKE_PERCENTAGE / 100
+  stroke_width = img.height * STROKE_PERCENTAGE / 50
 
   puts "* orientation: '#{img.portrait? ? 'portrait' : 'landscape'}'"
   puts "* font size: '#{font_size}'"
@@ -49,6 +50,7 @@ def add_watermark(text, color, filename)
       -stroke black \
       -strokewidth #{stroke_width} \
       -weight bold \
+      -font "#{FONT}" \
       -draw "gravity southeast \
             fill #{color} text #{padding},#{padding} '#{text}'" \
       "#{output}"
