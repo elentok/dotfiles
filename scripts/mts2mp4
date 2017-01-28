@@ -1,0 +1,37 @@
+#!/bin/bash
+#
+# Usage:
+#
+#   mts2mp4 <same|720|1080> <input-file> [output]
+#
+
+if [ $# -lt 2 ]; then
+  usage $0
+  exit 1
+fi
+
+mode="$1"
+input="$2"
+
+if [ -n "$3" ]; then
+  output="$3"
+else
+  output="${input/.MTS/.mp4}"
+fi
+
+echo "Mode:   $mode"
+echo "Input:  $input"
+echo "Output: $output"
+echo
+
+case "$mode" in
+  same)
+    ffmpeg -i "$input" -c:v copy -c:a aac -b:a 128k -s 1280x720 "$output"
+    ;;
+  720)
+    ffmpeg -i "$input" -vcodec libx264 -acodec aac -b:a 128k -s 1280x720 "$output"
+    ;;
+  1080)
+    ffmpeg -i "$input" -vcodec libx264 -acodec aac -b:a 128k -s 1920x1080 "$output"
+    ;;
+esac
