@@ -28,6 +28,7 @@ alias flipv='convert -flip'
 alias g='git'
 alias gcoo='git all-branches | fzf | xargs git checkout'
 alias gdestroy='git destroy `git all-branches | fzf`'
+alias gsp='gsutil acl ch -u AllUsers:R'
 alias hex='od -xcb'
 alias hh='history'
 alias most-used-commands="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"

@@ -202,6 +202,12 @@ Command Line Tips
 ### curl follow redirects
     curl -L http://...
 
+## Google Cloud (gsutil)
+
+### gsutil set public read
+
+    gsutil acl ch -u AllUsers:R gs://bucket/file.txt
+
 ## AWS S3
 
 ### s3cmd - set public read on all files
