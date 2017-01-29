@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+const fs = require("fs")
+const path = require("path")
+
+function snakize(name) {
+  return name.replace(/^([A-Z])/, match => match.toLowerCase())
+    .replace(/[_-]?([A-Z])/g, (match, char) => `-${char.toLowerCase()}`)
+}
+
+fs.readdirSync(".").forEach(filename => {
+  const dirname = path.dirname(filename)
+  const basename = path.basename(filename)
+
+  const newname = snakize(basename)
+
+  if (basename === newname) return
+
+  console.info(`Renaming "${basename}" to "${newname}"`)
+  fs.renameSync(filename, path.join(dirname, newname))
+})
