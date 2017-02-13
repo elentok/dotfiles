@@ -63,12 +63,23 @@ const config = {
         test: /\.s?css$/,
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
-          use: ["css-loader", "sass-loader", {
-            loader: "postcss-loader",
-            options: {
-              plugins: [autoprefixer({ browsers: ["last 2 versions"] })],
-            }
-          }]
+          use: [
+            "css-loader",
+            {
+              loader: "postcss-loader",
+              options: {
+                plugins: [autoprefixer({ browsers: ["last 2 versions"] })],
+              }
+            },
+            {
+              loader: "sass-loader",
+              options: {
+                includePaths: [
+                  path.resolve(__dirname, 'src'),
+                  path.resolve(__dirname, 'node_modules')
+                ],
+              }
+            }]
         }),
       },
     ]
