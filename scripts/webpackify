@@ -1,0 +1,74 @@
+#!/bin/bash
+
+set -e
+
+source $DOTF/framework
+ROOT=$DOTF/scripts/webpack
+
+KARMA=yes
+
+main() {
+  ask_questions
+
+  [ ! -e package.json ] && create_package_json
+
+  yarn_add
+  cp -vf $ROOT/webpack.config.js .
+
+  setup_src
+  [ "$KARMA" == "yes" ] && setup_tests
+}
+
+ask_questions() {
+  if confirm "Install karma?" yes; then KARMA=yes; else KARMA=no; fi
+
+  if [ ! -e "package.json" ]; then
+    ask "Project name?" NAME "$(basename $PWD)"
+    ask "Project description?" DESC
+  fi
+}
+
+create_package_json() {
+  erb name="$NAME" desc="$DESC" $ROOT/package.json.erb > package.json
+}
+
+yarn_add() {
+  PACKAGES=(
+    webpack webpack-dev-server@^1.16.3
+    babel-core babel-loader babel-preset-es2015
+    babel-plugin-transform-object-assign
+    es6-promise whatwg-fetch
+    css-loader style-loader sass-loader node-sass
+    postcss-loader autoprefixer
+    yml-loader
+    pug pug-loader
+    html-webpack-plugin extract-text-webpack-plugin@beta
+    exports-loader imports-loader
+    file-loader)
+
+  if [ "$KARMA" == "yes" ]; then
+    PACKAGES+=(karma karma-jasmine jasmine-core karma-phantomjs-launcher
+      karma-webpack)
+  fi
+
+  yarn add ${PACKAGES[@]}
+}
+
+setup_src() {
+  mkdir -p src/
+  if [ ! -e src/index.js ]; then
+    echo 'console.log("Hello World")' > src/index.js
+  fi
+
+  if [ ! -e src/index.pug ]; then
+    cp -vf $ROOT/index.pug src/index.pug
+  fi
+}
+
+setup_tests() {
+  cp -vf $ROOT/karma.conf.js .
+  mkdir -p test/
+  cp -vf $ROOT/test-index.js test/index.js
+}
+
+main "$@"
