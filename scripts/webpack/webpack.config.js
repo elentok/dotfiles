@@ -29,7 +29,7 @@ const config = {
     extensions: [".js", ".pug", ".css", ".scss", ".yml", ".yaml"],
     modules: [
       path.join(__dirname, "src"),
-      path.join(__dirname, "../node_modules")],
+      path.join(__dirname, "node_modules")],
   },
 
   module: {
