@@ -4,13 +4,10 @@ source `dirname $0`/../../framework
 
 header "NodeJS"
 
-if is_mac; then
-  brew_install node
-elif is_arch; then
+if is_arch; then
   pacman_install nodejs npm
 else
-  add_ppa chris-lea/node.js
-  apt_install nodejs
+  brew_install node
 fi
 
 npm_install coffee-script
@@ -22,5 +19,4 @@ npm_install jade
 npm_install jstransformer-coffee-script
 npm_install jstransformer-less
 
-npm_install dns-switcher
 npm_install tailr
