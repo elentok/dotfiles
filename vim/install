@@ -29,13 +29,11 @@ install_on_mac() {
 install_on_linux() {
   if [ "$HAS_GUI" == "yes" ]; then
     apt_install vim-gnome
-    bullet "Installing Powerline fonts\n"
-    bash "$DOTF/vim/powerline-fonts/install.sh"
   else
     apt_install vim
   fi
 
-  apt_install exuberant-ctags tidy silversearch-ag
+  apt_install exuberant-ctags tidy silversearcher-ag
 }
 
 install_symlinks() {
