@@ -246,6 +246,26 @@ This is a link to [Something][1]
 
 [1]: http://something.com
 
+## Nix
+
+### update (like apt-get update)
+    nix-channel --update
+
+### upgrade (like apt-get upgrade)
+    nix-env -u
+
+### install package
+    nix-env -i {package}
+
+### remove package
+    nix-env -e {package}
+
+### find packages
+    nix-env -qaP '.*{name}.*'
+
+### show package info
+    nix-env -qa --description '.*{name}.*'
+
 ## Misc
 
 ### lsof - show all used ports
