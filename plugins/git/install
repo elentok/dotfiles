@@ -6,15 +6,13 @@ GITCONFIG="$HOME/.gitconfig"
 
 main() {
   header "Git"
-  should_install_custom_git && install_git
+  if ! has_command git; then
+    install_git
+  fi
   install_tig
   install_gitconfig
   install_symlinks
   install_diff_so_fancy
-}
-
-should_install_custom_git() {
-  [ ! -x /usr/local/git/current/bin/git ]
 }
 
 install_git() {
@@ -28,14 +26,10 @@ install_git() {
 }
 
 install_tig() {
-  if is_mac; then
-    brew_install tig
+  if is_arch; then
+    pacman_install tig
   else
-    if is_arch; then
-      pacman_install tig
-    elif ! has_command tig; then
-      install_tgz --sudo 'https://github.com/jonas/tig/archive/tig-2.1.1.tar.gz'
-    fi
+    brew_install tig
   fi
 }
 
