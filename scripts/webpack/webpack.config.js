@@ -98,25 +98,15 @@ const config = {
       filename: "../index.html"
     }),
   ],
+
+  devtool: "sourcemap",
+  devServer: {
+    port: 8081,
+  },
 }
 
-switch (env) {
-case "development":
-  Object.assign(config, {
-    devtool: "sourcemap",
-    devServer: {
-      port: 8081,
-    }
-  })
-  break
-
-case "test":
-  Object.assign(config, { devtool: "sourcemap" })
-  break
-
-case "production":
+if (env === "production") {
   config.plugins.push(new webpack.optimize.UglifyJsPlugin())
-  break
 }
 
 module.exports = config
