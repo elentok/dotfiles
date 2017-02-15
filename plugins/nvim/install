@@ -24,14 +24,11 @@ install_requirements() {
 }
 
 install_neovim() {
-  if is_mac; then
-    brew_tap neovim/homebrew-neovim
-    brew_install neovim
-  elif is_arch; then
+  if is_arch; then
     pacman_install neovim
   else
-    add_ppa neovim-ppa/unstable
-    apt_install neovim
+    brew_tap neovim/homebrew-neovim
+    brew_install neovim
   fi
 }
 
