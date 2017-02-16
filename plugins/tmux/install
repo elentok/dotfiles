@@ -11,19 +11,15 @@ main() {
 }
 
 install_tmux() {
-  if is_mac; then
-    brew_install tmux
-    brew_install reattach-to-user-namespace
-    # for more info, see:
-    #   http://robots.thoughtbot.com/post/19398560514/how-to-copy-and-paste-with-tmux-on-mac-os-x
-  elif is_arch; then
+  if is_arch; then
     pacman_install tmux
   else
-    if ! has_command tmux; then
-      apt_install libevent-dev
-      install_tgz --sudo \
-        --install=no \
-        'https://github.com/tmux/tmux/releases/download/2.1/tmux-2.1.tar.gz'
+    brew_install tmux
+
+    if is_mac; then
+      brew_install reattach-to-user-namespace
+      # for more info, see:
+      #   http://robots.thoughtbot.com/post/19398560514/how-to-copy-and-paste-with-tmux-on-mac-os-x
     fi
   fi
 }
