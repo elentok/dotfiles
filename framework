@@ -277,9 +277,13 @@ npm_install() {
     info " already installed"
   else
     npm="npm"
-    if [ "$OS" == "linux" ]; then npm="sudo npm"; fi
+    if ! is_user_nodejs; then npm="sudo npm"; fi
     $npm install -g $*
   fi
+}
+
+is_user_nodejs() {
+  [ -n "$(which node | grep $HOME)" ]
 }
 
 rm -f /tmp/npm_cache
