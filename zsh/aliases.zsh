@@ -1,6 +1,8 @@
 # vim: foldmethod=marker
 
-unalias s
+if is_mac; then
+  unalias s
+fi
 
 # All Aliases {{{1
 alias ..='cd ..'
