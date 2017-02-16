@@ -10,9 +10,6 @@ main() {
   # install_requirements
   install_rbenv
   install_ruby
-  if is_mac; then
-    install_pow
-  fi
   create_symlinks
 }
 
@@ -20,21 +17,6 @@ install_rbenv() {
   brew_install rbenv
   brew_install ruby-build
   eval "$(rbenv init -)"
-}
-
-install_requirements() {
-  if [ "$OS" == "linux" ]; then
-    bullet "Installing rvm requirements"
-    # run "rvm requirements" and you get this list of packages:
-    apt_install build-essential openssl libreadline6 libreadline6-dev \
-      curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 \
-      libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev \
-      automake libtool bison subversion
-
-    #sudo apt-get install -y libreadline-gplv2-dev libreadline-dev
-    apt_install libreadline-dev
-    apt_install libxslt1-dev
-  fi
 }
 
 install_ruby() {
@@ -49,39 +31,10 @@ install_ruby() {
   fi
 }
 
-install_pow() {
-  if [ ! -e "$HOME/Library/Application Support/Pow" ]; then
-    bullet 'Installing pow...'
-    curl get.pow.cx | sh
-  fi
-}
-
 create_symlinks() {
   symlink "$DOTF/plugins/ruby/irbrc" ~/.irbrc
   symlink "$DOTF/plugins/ruby/rdebugrc" ~/.rdebugrc
   symlink "$DOTF/plugins/ruby/editrc" ~/.editrc
-  symlink "$DOTF/plugins/ruby/pow/powconfig" ~/.powconfig
-}
-
-install_phantomjs() {
-  if [ "$OS" == "mac" ]; then
-    brew_install phantomjs
-  else
-    install_phantomjs_on_linux
-  fi
-}
-
-install_phantomjs_on_linux() {
-  bullet "Installing phantomjs... "
-  if [ "`which phantomjs`" != "" ]; then
-    info "already installed"
-  else
-    cd ~/Downloads
-    wget http://phantomjs.googlecode.com/files/phantomjs-1.6.0-linux-x86_64-dynamic.tar.bz2
-    tar xjvf phantomjs-1.6.0-linux-x86_64-dynamic.tar.bz2
-    sudo mv phantomjs-1.6.0-linux-x86_64-dynamic /opt/phantomjs
-    sudo ln -s /opt/phantomjs/bin/phantomjs /usr/bin/
-  fi
 }
 
 main "$@"

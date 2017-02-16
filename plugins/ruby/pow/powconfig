@@ -1,3 +1,0 @@
-#!/bin/bash
-eval "$(rbenv init --no-rehash -)"
-export POW_DST_PORT=19999
