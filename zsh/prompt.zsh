@@ -33,7 +33,11 @@ directory="%F{blue}%~%f"
 user_and_host="%{\$fg_bold[black]%}$USERNAME at $(hostname)%f"
 
 # Time {{{1
-time="%D{%H:%M:%S.%.}"
+if [ "$ZSH_VERSION" = "5.0.5" ]; then
+  time="%D{%H:%M:%S}"
+else
+  time="%D{%H:%M:%S.%.}"
+fi
 time="%{\$fg_bold[black]%}($time)%f"
 
 # Git {{{1
