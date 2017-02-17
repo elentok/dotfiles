@@ -29,7 +29,7 @@ main() {
 list-agents() {
   echo 'local'
 
-  if [ -e /tmp/ssh-*/agent* ]; then
+  if [ -n "$(find /tmp/ssh-* -iname 'agent*')" ]; then
     stat -c "%n (%y)" /tmp/ssh-*/agent*
   fi
 }
