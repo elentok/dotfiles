@@ -29,9 +29,11 @@ case "$mode" in
     ffmpeg -i "$input" -c:v copy -c:a aac -b:a 128k -s 1280x720 "$output"
     ;;
   720)
+    output="${output/.mp4/-720.mp4}"
     ffmpeg -i "$input" -vcodec libx264 -acodec aac -b:a 128k -s 1280x720 "$output"
     ;;
   1080)
+    output="${output/.mp4/-1080.mp4}"
     ffmpeg -i "$input" -vcodec libx264 -acodec aac -b:a 128k -s 1920x1080 "$output"
     ;;
 esac
