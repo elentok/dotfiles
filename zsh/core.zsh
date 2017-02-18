@@ -110,6 +110,10 @@ PATH=$PATH:$HOME/.rbenv/shims
 PATH=$PATH:/usr/local/share/npm/bin
 PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
 
+if [ -e /usr/lib/cinnamon-settings-daemon ]; then
+  PATH=$PATH:/usr/lib/cinnamon-settings-daemon
+fi
+
 export PATH
 
 # EDITOR {{{1
