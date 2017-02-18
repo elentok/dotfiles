@@ -1,20 +1,30 @@
 #!/bin/bash
 
-source $DOTF/zsh/core.zsh
+(
+  echo "======================================"
 
-setxkbmap -option 'grp:alt_shift_toggle' -option 'ctrl:nocaps'
+  source $HOME/.dotfiles/zsh/core.zsh
 
-has_command cinnamon-settings-daemon && cinnamon-settings-daemon &
+  setxkbmap -option 'grp:alt_shift_toggle' -option 'ctrl:nocaps'
 
-# Set the wallpaper
-if has_command feh; then
-  (sleep 3; feh --bg-fill ~/.config/wallpaper.jpg) &
-fi
+  has_command cinnamon-settings-daemon && cinnamon-settings-daemon &
 
-# Network Management Applet
-has_command nm-applet && nm-applet &
+  # Set the wallpaper
+  if has_command feh; then
+    (sleep 3; feh --bg-fill ~/.config/wallpaper.jpg) &
+  fi
 
-google-chrome &
-x-terminal-emulator &
+  # Network Management Applet
+  has_command nm-applet && nm-applet &
 
-i3
+  if has_command google-chrome-stable; then
+    google-chrome-stable &
+  elif has_command google-chrome; then
+    google-chrome &
+  fi
+
+  x-terminal-emulator &
+
+  i3
+
+) >> ~/.i3/log 2>&1
