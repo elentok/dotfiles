@@ -16,3 +16,6 @@ symlink "$I3/i3status.conf" "$HOME/.i3/i3status.conf"
 symlink "$I3/i3-session" "$HOME/.i3/i3-session"
 
 sudo sh -c "cat $I3/i3-session.desktop | sed \"s#{HOME}#$HOME#\" > /usr/share/xsessions/i3-session.desktop"
+
+# Make nemo (cinnamon's nautilus) not show desktop icons
+gsettings set org.nemo.desktop show-desktop-icons false
