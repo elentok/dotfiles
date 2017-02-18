@@ -54,7 +54,8 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec rofi -show run
+bindsym $mod+Shift+D exec dmenu_run
 
 bindsym Mod1+Control+l exec cinnamon-screensaver-command --lock 2> /dev/null
 
