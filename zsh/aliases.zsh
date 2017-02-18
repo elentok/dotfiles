@@ -110,6 +110,7 @@ fi
 alias pbc='pbcopy'
 alias pbp='pbpaste'
 
+
 # FZF Shortcuts {{{1
 npr() {
   # calling "print -s" adds the command to zsh history
@@ -137,7 +138,7 @@ t() {
   fi
 }
 
-s() {
+ss() {
   server="$(pick-ssh-server)"
   if [ -n "$server" ]; then
     echo "Connecting to $server..."
