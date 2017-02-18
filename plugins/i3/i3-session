@@ -23,7 +23,11 @@
     google-chrome &
   fi
 
-  x-terminal-emulator &
+  if has_command x-terminal-emulator; then
+    x-terminal-emulator &
+  elif has_command i3-sensible-terminal; then
+    i3-sensible-terminal &
+  fi
 
   i3
 
