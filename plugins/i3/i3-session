@@ -8,6 +8,7 @@
   setxkbmap -option 'grp:alt_shift_toggle' -option 'ctrl:nocaps'
 
   has_command cinnamon-settings-daemon && cinnamon-settings-daemon &
+  has_command cinnamon-screensaver && cinnamon-screensaver &
 
   # Set the wallpaper
   if has_command feh; then
