@@ -13,6 +13,6 @@ wget https://github.com/DaveDavenport/rofi/releases/download/1.1.0/rofi-1.1.0.ta
 
 tar xvzf rofi.tgz
 cd rofi*
-./configure
+PKG_CONFIG=/usr/bin/pkg-config ./configure
 make
 sudo make install

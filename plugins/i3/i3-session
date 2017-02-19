@@ -30,6 +30,8 @@
     i3-sensible-terminal &
   fi
 
+  xrdb ~/.Xresources
+
   i3
 
 ) >> ~/.i3/log 2>&1
