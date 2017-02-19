@@ -19,3 +19,9 @@ sudo sh -c "cat $I3/i3-session.desktop | sed \"s#{HOME}#$HOME#\" > /usr/share/xs
 
 # Make nemo (cinnamon's nautilus) not show desktop icons
 gsettings set org.nemo.desktop show-desktop-icons false
+
+if is_debian; then
+  apt_install pavucontrol
+else
+  pacman_install pavucontrol
+fi
