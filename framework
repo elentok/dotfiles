@@ -259,8 +259,9 @@ install_tgz() {
     sudo make
     sudo make install
   else
+    mkdir -p $HOME/.local
     make
-    make install
+    make install --prefix=$HOME/.local
   fi
 }
 
