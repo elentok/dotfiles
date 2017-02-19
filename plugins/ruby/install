@@ -11,6 +11,8 @@ main() {
   install_rbenv
   install_ruby
   create_symlinks
+
+  install_nokogiri
 }
 
 install_requirements() {
@@ -18,7 +20,13 @@ install_requirements() {
     # As instructed in https://github.com/rbenv/ruby-build/wiki
     apt_install autoconf bison build-essential libssl-dev libyaml-dev \
       libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 \
-      libgdbm-dev
+      libgdbm-dev libxml2-dev libxslt-dev
+  fi
+}
+
+install_nokogiri() {
+  if command_missing nokogiri; then
+    gem install nokogiri -- --use-system-libraries
   fi
 }
 
@@ -40,7 +48,7 @@ install_ruby() {
   if [ "`rbenv versions | grep $RUBY_VERSION`" == "" ]; then
     rbenv install $RUBY_VERSION
     rbenv global $RUBY_VERSION
-    gem install bundle
+    gem install bundler
     rbenv rehash
   else
     info "already installed"
