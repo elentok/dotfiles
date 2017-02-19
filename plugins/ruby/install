@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source `dirname $0`/../../framework
+source $DOTF/framework
 
 RUBY_VERSION='2.3.0'
 
@@ -23,8 +23,15 @@ install_requirements() {
 }
 
 install_rbenv() {
-  brew_install rbenv
-  brew_install ruby-build
+  if is_mac; then
+    brew_install rbenv
+    brew_install ruby-build
+  else
+    git_clone "https://github.com/rbenv/rbenv.git" "$HOME/.rbenv"
+    git_clone "https://github.com/rbenv/ruby-build.git" \
+      "$HOME/.rbenv/plugins/ruby-build"
+  fi
+
   eval "$(rbenv init -)"
 }
 
