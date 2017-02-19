@@ -162,3 +162,10 @@ fi
 if [ -e "$DOTL/zsh/core.zsh" ]; then
   source "$DOTL/zsh/core.zsh"
 fi
+
+# I3 {{{1
+if is_linux; then
+  export XDG_CURRENT_DESKTOP=i3
+fi
+
+# vim: foldmethod=marker

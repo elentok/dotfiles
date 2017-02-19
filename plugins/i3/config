@@ -230,6 +230,7 @@ assign [class="empathy-chat"] 3: chat
 
 # Pidgin
 assign [class="Pidgin"] 3: chat
+assign [class="Telegram"] 3: chat
 
 # =============================================
 # Launcher keybidings
