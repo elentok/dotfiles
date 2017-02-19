@@ -32,6 +32,10 @@
 
   xrdb ~/.Xresources
 
+  if [ -e $DOTL/i3-session ]; then
+    source $DOTL/i3-session
+  fi
+
   i3
 
 ) >> ~/.i3/log 2>&1
