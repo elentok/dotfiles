@@ -34,11 +34,14 @@ install_symlinks() {
 }
 
 install_requirements() {
+  if is_arch; then
+    yaourt_install rbenv fasd
+  else
+    brew_install rbenv fasd
+  fi
+
   if is_mac; then
     install_gnu_utils
-    brew_install rbenv fasd
-  elif is_arch; then
-    yaourt_install rbenv fasd
   fi
 }
 
