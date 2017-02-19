@@ -10,6 +10,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+set $shiftalt Shift+Mod1
 #set $mod Mod1
 
 # font for window titles. ISO 10646 = Unicode
@@ -253,3 +254,5 @@ bindsym Mod1+Print exec bash ~/.config/dotfiles/scripts/sshot select
 bindsym $mod+F1 exec feh --bg-fill ~/.config/wallpaper.jpg
 bindsym $mod+F2 exec feh --bg-fill ~/.config/icloud.png
 
+bindsym $shiftalt+equal exec pactl set-sink-volume @DEFAULT_SINK@ +5% && killall -SIGUSR1 i3status
+bindsym $shiftalt+minus exec pactl set-sink-volume @DEFAULT_SINK@ -- -5% && killall -SIGUSR1 i3status
