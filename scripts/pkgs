@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 
 require "#{ENV['DOTF']}/framework.rb"
 require 'date'
