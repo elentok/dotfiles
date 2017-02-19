@@ -14,6 +14,7 @@ mkdir -p ~/.i3
 symlink "$I3/config" "$HOME/.i3/config"
 symlink "$I3/i3status.conf" "$HOME/.i3/i3status.conf"
 symlink "$I3/i3-session" "$HOME/.i3/i3-session"
+symlink "$I3/Xresources" "$HOME/.Xresources"
 
 sudo sh -c "cat $I3/i3-session.desktop | sed \"s#{HOME}#$HOME#\" > /usr/share/xsessions/i3-session.desktop"
 
