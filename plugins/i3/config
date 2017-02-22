@@ -22,10 +22,10 @@ font pango:Open Sans 10
 
 
 #class                  border  backgr. text
-client.unfocused        #4c4c4c #000000 #4c4c4c
-client.focused_inactive #aaaaaa #000000 #aaaaaa
-client.focused          #e1aa5d #000000 #ffffff
-client.urgent           #a0cf5d #000000 #eeeeee
+# client.unfocused        #4c4c4c #000000 #4c4c4c
+# client.focused_inactive #aaaaaa #000000 #aaaaaa
+# client.focused          #e1aa5d #000000 #ffffff
+# client.urgent           #a0cf5d #000000 #eeeeee
 
 #bar.unfocused           #4c4c4c #000000 #aaaaaa
 #bar.focused             #e1aa5d #000000 #ffffff
