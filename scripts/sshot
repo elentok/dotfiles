@@ -1,3 +1,12 @@
 #!/bin/bash
 sleep 0.5
-import png:- | xclip -selection c -t image/png
+
+if [ "$1" == "to-file" ]; then
+  mkdir -p ~/screenshots
+  cd ~/screenshots
+
+  filename="$(date '+%Y%m%d-%H%M%S').png"
+  import png:- > $filename
+else
+  import png:- | xclip -selection c -t image/png
+fi
