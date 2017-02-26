@@ -1,0 +1,46 @@
+#!/bin/bash
+#
+# Nginx development SSL certificate setup
+#
+# Usage:
+#
+#   nginx-setup-ssl <base_filename> <common_name>
+#
+
+set -e
+
+if [ $# -lt 2 ]; then
+  usage "$0"
+  exit 1
+fi
+
+base_filename="$1"
+common_name="$2"
+
+etc_nginx="$BREW_HOME/etc/nginx"
+openssl="openssl"
+mkdir="mkdir"
+
+if [ ! -d "$etc_nginx" ]; then
+  etc_nginx="/etc/nginx"
+  openssl="sudo openssl"
+  mkdir="sudo mkdir"
+fi
+
+ssl_path="$etc_nginx/ssl"
+key_path="$ssl_path/$base_filename.key"
+crt_path="$ssl_path/$base_filename.crt"
+
+subj="/C=US/ST=NA/L=/O=/CN=$common_name"
+
+$mkdir -p "$ssl_path"
+
+$openssl req -new -x509 -nodes -days 365 \
+  -newkey rsa:2048 \
+  -subj $subj \
+  -keyout $key_path \
+  -out $crt_path
+
+echo "Created new certificate:"
+echo "  - $key_path"
+echo "  - $crt_path"
