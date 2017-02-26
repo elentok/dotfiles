@@ -50,6 +50,8 @@ module IsraelPost
 
       if text =~ /postal item was delivered/
         text = green(text)
+      elsif !(text =~ /There is no information/)
+        text = blue(text)
       else
         text = gray(text)
       end
