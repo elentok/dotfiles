@@ -292,3 +292,9 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 
 " Go {{{1
 let g:go_fmt_command = "goimports"
+
+" GNU Global (gtags) {{{1
+let gtags_script=expand("$BREW_HOME/share/gtags/gtags-cscope.vim")
+if filereadable(gtags_script)
+  exec "source " . gtags_script
+endif
