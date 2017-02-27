@@ -211,6 +211,9 @@ bar {
 #
 # Note: to find the class of a window, run "xprop | grep -i class"
 
+# Float by default:
+for_window [class="Cerebro"] floating enable
+
 # Gimp: float by default, open in workspace #3
 for_window [class="Gimp"] floating enable
 assign [class="Gimp"] 4: gimp
