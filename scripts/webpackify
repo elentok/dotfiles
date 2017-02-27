@@ -42,7 +42,7 @@ yarn_add() {
     postcss-loader autoprefixer
     yml-loader
     pug pug-loader
-    html-webpack-plugin extract-text-webpack-plugin@beta
+    html-webpack-plugin extract-text-webpack-plugin
     exports-loader imports-loader
     file-loader)
 
