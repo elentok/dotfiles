@@ -25,9 +25,9 @@ export CPATH="$PEBBLE_INCLUDE"
 
 # 3rd party {{{1
 
-cached_eval rbenv rbenv init --no-rehash -
+with_cache rbenv source rbenv init --no-rehash -
 
-cached_eval fasd fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install \
+with_cache fasd source fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install \
   zsh-wcomp zsh-wcomp-install
 
 # Mac Specific {{{1
