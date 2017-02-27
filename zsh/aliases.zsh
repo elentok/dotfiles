@@ -72,6 +72,7 @@ alias vl='vim "+OpenSession! last"'
 alias vz='file="$(edit-zsh-dotfile)" && source $file'
 alias x=exit
 alias y=yarn
+alias yr=yarn run
 alias tailpow='tail -f $(find ~/Library/Logs/Pow -name "*.log" | fzf)'
 alias ports='sudo echo && (sudo lsof -i -n -P | fzf --header-lines=1)'
 
