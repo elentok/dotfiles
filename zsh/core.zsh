@@ -20,20 +20,22 @@ source_if_exists() {
   if [ -e "$1" ]; then source $1; fi
 }
 
-CACHED_EVAL_ROOT="$HOME/.cache/dotfiles"
+DOTF_CACHE_ROOT="$HOME/.cache/dotfiles"
 
-cached_eval() {
+with_cache() {
   local cache_key="$1"
-  local cache_file="$CACHED_EVAL_ROOT/$cache_key"
+  local cache_command="$2"
+  local cache_file="$DOTF_CACHE_ROOT/$cache_key"
+  shift
   shift
 
-  mkdir -p "$CACHED_EVAL_ROOT"
+  mkdir -p "$DOTF_CACHE_ROOT"
 
   if [ ! -e "$cache_file" ]; then
     "$@" > "$cache_file"
   fi
 
-  source "$cache_file"
+  $cache_command "$cache_file"
 }
 
 # Check if command exists {{{1
