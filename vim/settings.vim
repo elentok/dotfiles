@@ -298,3 +298,7 @@ let gtags_script=expand("$BREW_HOME/share/gtags/gtags-cscope.vim")
 if filereadable(gtags_script)
   exec "source " . gtags_script
 endif
+
+" Neoformat {{{1
+let g:neoformat_enabled_javascript = ['prettier']
+let g:neoformat_enabled_scss = ['stylefmt']
