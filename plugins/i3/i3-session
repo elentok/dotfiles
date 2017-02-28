@@ -32,6 +32,10 @@
 
   xrdb ~/.Xresources
 
+  if [ -x $HOME/Applications/cerebro.AppImage ]; then
+    $HOME/Applications/cerebro.AppImage &
+  fi
+
   if [ -e $DOTL/i3-session ]; then
     source $DOTL/i3-session
   fi
