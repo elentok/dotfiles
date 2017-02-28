@@ -30,6 +30,15 @@ augroup Elentok_Misc
 
   autocmd FileType coffee,yaml        FoldByIndent
 
+  " Neoformat:
+  "
+  " autocmd BufWritePre * Neoformat
+  autocmd BufWritePre *.js Neoformat
+  " autocmd FileType javascript set formatprg=prettier\ --stdin
+  " autocmd BufWritePre *.js exe "normal! gggqG\<C-o>\<C-o>"
+
+  " RestoreCursorPosition:
+  "
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
   " (happens when dropping a file on gvim).
