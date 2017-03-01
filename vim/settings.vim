@@ -302,3 +302,6 @@ endif
 " Neoformat {{{1
 let g:neoformat_enabled_javascript = ['prettier']
 let g:neoformat_enabled_scss = ['stylefmt']
+
+let g:neoformat_java_google = {'exe': 'google-java-format'}
+let g:neoformat_enabled_java = ['google']
