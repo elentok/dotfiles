@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# credit to @n0nick:
+#   https://github.com/n0nick/dotfiles/blob/master/i3/keyboard-toggle.sh
+
+LANG=$(setxkbmap -query | awk '/layout/{print $2}')
+
+if [ "$LANG" == "il,us" ]; then
+  setxkbmap us,il
+else
+  setxkbmap il,us
+fi

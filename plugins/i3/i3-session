@@ -5,7 +5,8 @@
 
   source $HOME/.dotfiles/zsh/core.zsh
 
-  setxkbmap -option 'grp:alt_shift_toggle' -option 'ctrl:nocaps'
+  # setxkbmap -option 'grp:alt_shift_toggle' -option 'ctrl:nocaps'
+  setxkbmap -option 'grp:win_space_toggle' -option 'ctrl:nocaps'
 
   has_command cinnamon-settings-daemon && cinnamon-settings-daemon &
   has_command cinnamon-screensaver && cinnamon-screensaver &
