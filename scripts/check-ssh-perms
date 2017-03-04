@@ -1,0 +1,8 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+root=${1-$HOME}
+
+verify-perms 700 $root/.ssh
+verify-perms 600 $root/.ssh/authorized_keys

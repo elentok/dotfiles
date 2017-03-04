@@ -832,3 +832,20 @@ service-stop() {
   fi
   show_result
 }
+
+# Verify permissions {{{1
+verify-perms() {
+  local expected="$1"
+  local file="$2"
+
+  printf "* Verifying '$file' has permissions '$expected'... "
+
+  local actual="$(stat --format=%a $file)"
+  if [ "$actual" == "$expected" ]; then
+    info 'ok'
+  else
+    chmod $expected "$file"
+    show_result
+  fi
+}
+
