@@ -64,7 +64,6 @@ rules:
   no-whitespace-before-property: error
   object-curly-spacing: [error, always]
   padded-blocks: [error, never]
-  semi: [error, never]
   space-before-blocks: [error, always]
   space-before-function-paren: [error, never]
   space-in-parens: [error, never]
