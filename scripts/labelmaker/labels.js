@@ -8,8 +8,8 @@ window.labels = [
 
   { icon: "hdd-o", title: "HDD & DVD Burner" },
   { icon: "hdd-o", title: "HDD & Flash drives" },
-  { icon: "circle-o", title: "Blank CDs & DVDs", subtitle: ("and cases") },
-  { icon: "plug", title: "Extension Cords", subtitle: ("and splitters") },
+  { icon: "circle-o", title: "Blank CDs & DVDs", subtitle: "and cases" },
+  { icon: "plug", title: "Extension Cords", subtitle: "and splitters" },
 
   { icon: "usb", title: "USB Cables" },
   { icon: "usb", title: "USB Misc", subtitle: "(Chargers, Adapters)" },
@@ -27,5 +27,5 @@ window.labels = [
   { icon: "mobile", title: "Mobile", subtitle: "(Watch, MicroSD adapters)" },
   { icon: "question-circle", title: "Junk 1" },
   { icon: "question-circle", title: "Junk 2" },
-  { icon: "question-circle", title: "Mini-Junk" },
-]
+  { icon: "question-circle", title: "Mini-Junk" }
+];
