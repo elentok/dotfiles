@@ -1,0 +1,13 @@
+#!/bin/bash
+
+confirm() {
+  printf 'No\nYes\n' | \
+    dmenu -nb '#151515' -nf '#999999' -sb '#f00060' -sf '#000000' \
+    -fn '-*-*-medium-r-normal-*-*-*-*-*-*-100-*-*' -i \
+    -p "End X session?"
+}
+
+if [ "$(confirm)" == "Yes" ]; then
+  echo "Exiting"
+  i3-msg exit
+fi
