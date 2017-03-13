@@ -106,10 +106,11 @@ if is_linux; then
   }
 fi
 
-# Bindings {{{1
-
-# VI bindings
+# VI key bindings {{{1
 bindkey -v
+
+# Make <esc> switch quickly to normal mode
+export KEYTIMEOUT=1
 
 bindkey '^R' history-incremental-pattern-search-backward
 bindkey '^F' history-incremental-pattern-search-forward
@@ -118,6 +119,17 @@ bindkey '^K' kill-line
 bindkey '^P' up-line-or-search
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
+
+# VI Mode Indicator {{{2
+precmd() { RPROMPT="" }
+function zle-line-init zle-keymap-select {
+   VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+   RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
+   zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
 
 # Directories {{{1
 setopt AUTO_CD              # Auto changes to a directory without typing cd.
