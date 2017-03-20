@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 HELP_FILENAME = "#{ENV['DOTF']}/docs/help.md"
+LOCAL_HELP_GLOB = "#{ENV['DOTL']}/docs/*.md"
 
 module HelpReader
 
@@ -65,6 +66,11 @@ def main
     system("vim #{HELP_FILENAME} < `tty` > `tty`")
   else
     puts HelpReader.read_sections(HELP_FILENAME, query)
+
+    local_help_files = "#{ENV['DOTL']}/docs/*.md"
+    Dir[LOCAL_HELP_GLOB].each do |filename|
+      puts HelpReader.read_sections(filename, query)
+    end
   end
 end
 
