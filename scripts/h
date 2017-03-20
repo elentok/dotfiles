@@ -1,32 +1,30 @@
 #!/usr/bin/env ruby
 
-HELP_FILENAME = "#{ENV['DOTF']}/docs/help.md"
-LOCAL_HELP_GLOB = "#{ENV['DOTL']}/docs/*.md"
+HELP_FILENAME = "#{ENV['DOTF']}/docs/help.md".freeze
+LOCAL_HELP_GLOB = "#{ENV['DOTL']}/docs/*.md".freeze
 
 module HelpReader
-
   def self.read_sections(filename, query = nil)
     sections = []
 
     File.open(filename, 'r') do |f|
-      section = ""
+      section_lines = []
 
       f.each_line do |line|
         if starts_section?(line)
-          add_section!(sections, section, query)
-          section = line
+          add_section!(sections, section_lines.join, query)
+          section_lines = [line]
         else
-          section += line
+          section_lines.push(line)
         end
       end
 
-      add_section!(sections, section, query)
+      add_section!(sections, section_lines.join, query)
     end
 
     sections
   end
-  
-private
+
   def self.starts_section?(line)
     line =~ /^\#/
   end
@@ -36,21 +34,20 @@ private
     if query.nil?
       sections << section
     elsif matches?(section, query)
-      sections << SectionRenderer.render(section, query) 
+      sections << SectionRenderer.render(section, query)
     end
   end
 
   def self.matches?(section, text)
     section =~ Regexp.new(text, 'i')
   end
-
 end
 
 module SectionRenderer
-  GREEN = "\e[32m"
-  DEFAULT = "\e[0m"
-  BOLD_ON = "\033[1m"
-  BOLD_OFF = "\033[22m"
+  GREEN = "\e[32m".freeze
+  DEFAULT = "\e[0m".freeze
+  BOLD_ON = "\033[1m".freeze
+  BOLD_OFF = "\033[22m".freeze
 
   def self.render(section, query)
     highlight = "#{GREEN}#{BOLD_ON}#{query}#{DEFAULT}#{BOLD_OFF}"
@@ -60,7 +57,7 @@ end
 
 def main
   query = nil
-  query = ARGV[0] if ARGV.length > 0
+  query = ARGV[0] unless ARGV.empty?
 
   if query == 'e'
     system("vim #{HELP_FILENAME} < `tty` > `tty`")
@@ -74,6 +71,4 @@ def main
   end
 end
 
-if __FILE__ == $0
-  main
-end
+main if __FILE__ == $PROGRAM_NAME
