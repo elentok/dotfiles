@@ -177,7 +177,9 @@ if is_linux; then
   export XDG_CURRENT_DESKTOP=i3
 
   # So tmux sessions opened from ssh can access X11
-  export DISPLAY=:0
+  if [ -z "$DISPLAY" ]; then
+    export DISPLAY=:0
+  fi
 fi
 
 # vim: foldmethod=marker
