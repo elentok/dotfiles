@@ -54,6 +54,7 @@
   sl = stash list
   sp = confirm stash pop
   ss = confirm stash save --patch
+  smu = submodule update --init --recursive
   t = tag
   semtag = !git tag -a $(semver tag) -m \"tagging $(semver tag)\"
   g = grep --break --heading --line-number
