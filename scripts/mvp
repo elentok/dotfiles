@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+# Move files with progress
+#
+# Usage:
+#
+# mvp <file1> [file2]... <target-dir>
+#
+
+if [ $# -lt 2 ]; then
+  usage $0
+  exit 1
+fi
+
+rsync -av --progress --remove-source-files "$@"
