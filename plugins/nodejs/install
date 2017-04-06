@@ -15,8 +15,4 @@ npm_install bower
 npm_install json
 npm_install jsontool
 npm_install live-server
-npm_install jade
-npm_install jstransformer-coffee-script
-npm_install jstransformer-less
-
 npm_install tailr
