@@ -12,6 +12,8 @@
 
 source `dirname $0`/../framework
 
+benchmark-start
+
 main() {
   cmd="$1"
   shift
@@ -94,7 +96,7 @@ update() {
 
 show_done() {
   echo -e "$GREEN=========================="
-  echo "Done"
+  echo "Done ($(benchmark-stop))"
   echo -e "==========================$RESET"
 }
 
