@@ -62,12 +62,11 @@ install_utils() {
 install_linters() {
   npm_install coffeelint
   npm_install eslint
+  npm_install prettier
   npm_install jsonlint
   npm_install sass-lint
   pip_install pylint
   pip_install yamllint
-  gem_install scss_lint
-  gem_install haml_lint
 }
 
 main $@

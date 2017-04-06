@@ -16,7 +16,7 @@ install_zsh() {
     else
       apt_install zsh
     fi
-    
+
     bullet "Changing user's shell to $THE_ZSH... "
     if [[ "$SHELL" =~ /zsh ]]; then
       info 'already set'
@@ -28,7 +28,7 @@ install_zsh() {
 }
 
 install_symlinks() {
-  symlink "$DOTF/zsh" ~/.zsh 
+  symlink "$DOTF/zsh" ~/.zsh
   symlink "$DOTF/zsh/zshrc" ~/.zshrc
   symlink "$DOTF/zsh/zshenv" ~/.zshenv
 }

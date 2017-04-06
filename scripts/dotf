@@ -108,18 +108,18 @@ common_plugins() {
   plugin tmux
   plugin vim
   plugin ruby
-  plugin mpd
+  # plugin mpd
 }
 
 mac_plugins() {
-  plugin homebrew-cask
-  plugin karabiner
+  # plugin homebrew-cask
+  # plugin karabiner
   plugin osx-tuning
   plugin iterm
   brew_install imagemagick
   brew_install ghostscript
   brew_install ncdu
-  brew_cask_install spectacle
+  # brew_cask_install spectacle
 }
 
 linux_plugins() {

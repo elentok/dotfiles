@@ -420,7 +420,7 @@ pip_install() {
 }
 
 has_pip_package() {
-  [ "`$PIP2 list | grep \"^$1\b\"`" != "" ]
+  [ "`$PIP2 list --format=legacy | grep \"^$1\b\"`" != "" ]
 }
 
 # Pip3 {{{1
@@ -439,7 +439,7 @@ pip3_install() {
 }
 
 has_pip3_package() {
-  [ "`$PIP3 list | grep \"^$1\b\"`" != "" ]
+  [ "`$PIP3 list --format=legacy | grep \"^$1\b\"`" != "" ]
 }
 
 # Git {{{1
