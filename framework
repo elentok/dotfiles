@@ -849,3 +849,17 @@ verify-perms() {
   fi
 }
 
+# Benchmark {{{1
+benchmark-start() {
+  export START_TIME=$SECONDS
+}
+
+benchmark-stop() {
+  duration=$((($SECONDS - $START_TIME) * 1000))
+  if [[ $duration > 1000 ]]; then
+    duration=$(($duration / 1000))
+    printf '%.2fs' $duration
+  else
+    printf '%.2fms' $duration
+  fi
+}
