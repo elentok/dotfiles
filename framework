@@ -284,7 +284,7 @@ npm_install() {
 }
 
 is_user_nodejs() {
-  [ -n "$(which node | grep $HOME)" ]
+  [ "$(stat --format=%U $(which node))" = "$(whoami)" ]
 }
 
 rm -f /tmp/npm_cache
