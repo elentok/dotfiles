@@ -5,9 +5,10 @@ source `dirname $0`/../../framework
 header "NodeJS"
 
 if is_arch; then
-  pacman_install nodejs npm
+  pacman_install nodejs npm yarn
 else
   brew_install node
+  brew_install yarn
 fi
 
 npm_install coffee-script
