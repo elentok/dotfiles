@@ -49,7 +49,7 @@ rules:
 
   comma-spacing: [error, { before: false, after: true }]
   func-call-spacing: [error, never]
-  indent: [error, 2]
+  indent: [error, 2, { SwitchCase: 1 }]
   key-spacing: [error, { beforeColon: false, afterColon: true }]
   keyword-spacing: [error, { before: true, after: true }]
   max-depth: [error, { max: 4 }]
@@ -79,6 +79,5 @@ rules:
   prefer-const: [error, { destructuring: all }]
   prefer-rest-params: error
   prefer-spread: error
-  prefer-template: error
   template-curly-spacing: [error, never]
   rest-spread-spacing: [error, always]
