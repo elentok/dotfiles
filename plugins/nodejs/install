@@ -18,3 +18,4 @@ npm_install jsontool
 npm_install live-server
 npm_install tailr
 npm_install tern
+npm_install eslint
