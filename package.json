@@ -25,8 +25,10 @@
     "commander": "^2.9.0",
     "easy-table": "^1.0.0",
     "fetch-plus": "^3.10.4",
+    "js-yaml": "^3.8.3",
     "moment": "^2.15.1",
     "node-fetch": "^1.6.3",
-    "shelljs": "^0.7.4"
+    "shelljs": "^0.7.4",
+    "underscore": "^1.8.3"
   }
 }
