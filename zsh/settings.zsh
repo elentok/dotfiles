@@ -25,11 +25,14 @@ export CPATH="$PEBBLE_INCLUDE"
 
 # 3rd party {{{1
 
-with_cache rbenv source rbenv init --no-rehash -
+if has_command rbenv; then
+  with_cache rbenv source rbenv init --no-rehash -
+fi
 
-with_cache fasd source fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install \
-  zsh-wcomp zsh-wcomp-install
-
+if has_command fasd; then
+  with_cache fasd source fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install \
+    zsh-wcomp zsh-wcomp-install
+fi
 # Mac Specific {{{1
 
 # History {{{1
@@ -150,7 +153,6 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 # SSH {{{1
 export SSH_AUTH_SOCK="$HOME/.ssh/active-agent"
 agent setup > /dev/null
-
 
 # GCloud SDK {{{1
 

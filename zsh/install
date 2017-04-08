@@ -13,7 +13,7 @@ install_zsh() {
   else
     if is_arch; then
       pacman_install zsh
-    else
+    elif is_debian; then
       apt_install zsh
     fi
 
