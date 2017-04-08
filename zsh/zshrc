@@ -14,7 +14,9 @@ source $DOTF/zsh/completion.zsh
 source $DOTF/zsh/keybindings.zsh
 source $DOTF/zsh/vendor/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $DOTF/zsh/prompt.zsh
-source ~/.fzf.zsh
+if [ -e ~/.fzf.zsh ]; then
+  source ~/.fzf.zsh
+fi
 source_if_exists ~/.dotlocal/zsh/after.zsh
 
 # required so ~/.zshenv will be loaded by sub-processes

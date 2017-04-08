@@ -56,6 +56,8 @@ is_running() {
 if is_linux; then
   if has_command pacman; then
     export DISTRO=arch
+  elif [[ "$HOME" =~ termux ]]; then
+    export DISTRO=termux
   else
     export DISTRO=debian
   fi
@@ -65,10 +67,19 @@ is_arch() {
   [ "$DISTRO" = "arch" ]
 }
 
+is_termux() {
+  [ "$DISTRO" = "termux" ]
+}
+
 is_debian() {
   [ "$DISTRO" = "debian" ]
 }
 
+# TMP 
+export TMP=/tmp
+if is_termux; then
+  export TMP=$HOME/tmp
+fi
 
 # Homebrew {{{1
 for dir in ~/.linuxbrew ~/.homebrew /usr/local; do
@@ -139,6 +150,10 @@ if has_command yarn; then
   PATH=$PATH:$yarn_bin
 fi
 
+if is_termux; then
+  PATH=$PATH:/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets
+fi
+
 export PATH
 
 # Node {{{1
@@ -165,7 +180,7 @@ if [[ "$TERM" != "screen-256color" ]]; then
   export TERM=xterm-256color
 fi
 
-export TMUX_TMPDIR=/tmp/$USERNAME
+export TMUX_TMPDIR=$TMP/$USERNAME
 mkdir -p $TMUX_TMPDIR
 
 # LOCALE {{{1

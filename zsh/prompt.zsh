@@ -51,6 +51,7 @@ autoload -Uz colors && colors
 # refresh the git status before every command
 add-zsh-hook precmd vcs_info
 
+if [ "$DISTRO" != "termux" ]; then
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true # required to show staged/unstaged
 zstyle ':vcs_info:*' use-simple true # faster, but less accurate
@@ -65,6 +66,7 @@ zstyle ':vcs_info:*' actionformats ' at %F{green}%b%f%u%c (%a)'
 # zstyle ':vcs_info:*' disable-patterns "${(b)HOME}/.zsh(|/*)"
 
 git_status='${vcs_info_msg_0_}'
+fi
 
 # Full prompt {{{1
 
