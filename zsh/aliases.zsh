@@ -68,7 +68,11 @@ alias tma='tm a'
 alias tot='awk "{ s+=\$1 } END { printf(\"%''d\n\", s) }"'
 alias total='awk "{ s+=\$1 } END { print s }"'
 alias ts='tig status'
-alias vi=nvim
+if has_command nvim; then
+  alias vi=nvim
+else
+  alias vi=vim
+fi
 alias vl='vim "+OpenSession! last"'
 alias vz='file="$(edit-zsh-dotfile)" && source $file'
 alias x=exit
