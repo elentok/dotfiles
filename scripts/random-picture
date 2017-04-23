@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# Usage:
+#
+#   random-picture {root}
+
+if [ $# -lt 1 ]; then
+  usage $0
+  exit 1
+fi
+
+find $PWD -iname '*jpg' | shuf | head -1
