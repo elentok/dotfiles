@@ -95,6 +95,7 @@ fi
 
 # PATH {{{1
 PATH=$DOTF/scripts:$DOTL/scripts
+PATH=$PATH:$HOME/.yarn/bin
 PATH=$PATH:$BREW_HOME/bin
 PATH=$PATH:$HOME/.fzf/bin
 PATH=$PATH:$HOME/bin:$HOME/scripts:$HOME/.local/bin
