@@ -1,0 +1,4 @@
+#!/bin/bash
+
+xscreensaver-command --lock
+# i3lock -i "$(random-picture ~/Pictures/MyBest)"
