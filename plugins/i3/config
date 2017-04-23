@@ -58,8 +58,8 @@ bindsym $mod+Shift+Q kill
 bindsym $mod+d exec rofi -show run
 bindsym $mod+Shift+D exec dmenu_run
 
-bindsym Mod1+Control+l exec cinnamon-screensaver-command --lock 2> /dev/null
-bindsym Scroll_Lock exec cinnamon-screensaver-command --lock 2> /dev/null
+bindsym Mod1+Control+l exec locklinux
+bindsym Scroll_Lock exec locklinux
 
 # change focus
 #bindsym $mod+j focus left
@@ -263,3 +263,5 @@ bindsym $shiftalt+equal exec pactl set-sink-volume @DEFAULT_SINK@ +5% && killall
 bindsym $shiftalt+minus exec pactl set-sink-volume @DEFAULT_SINK@ -- -5% && killall -SIGUSR1 i3status
 
 bindsym Ctrl+space exec "keyboard-toggle"
+
+exec xscreensaver &

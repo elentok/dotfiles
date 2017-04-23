@@ -22,7 +22,7 @@ sudo sh -c "cat $I3/i3-session.desktop | sed \"s#{HOME}#$HOME#\" > /usr/share/xs
 gsettings set org.nemo.desktop show-desktop-icons false
 
 if is_debian; then
-  apt_install pavucontrol
+  apt_install pavucontrol xscreensaver
 else
-  pacman_install pavucontrol
+  pacman_install pavucontrol xscreensaver
 fi
