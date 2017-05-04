@@ -8,6 +8,8 @@ fi
 alias ..='cd ..'
 alias agg="ag --ignore '*.yml'"
 alias ba='bt add-magnet "$(pbp)"'
+alias bdr='bin/docker/run'
+alias bdb='bin/docker/build'
 alias be='bundle exec'
 alias bec='bundle exec cap'
 alias bl='tr ":" "\n"'
