@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+# Optimize images for a non-HD digital frame
+#
+# Usage:
+#
+#   digframe {input-directory} {output-directory}
+
+if [ $# -lt 2 ]; then
+  usage $0
+  exit 1
+fi
+
+input="$1"
+output="$2"
+
+mkdir -p "$output"
+
+for dir in $input/*; do
+  if [ ! -d "$dir" ]; then
+    continue
+  fi
+
+  echo "Optimizing $dir"
+  optimg --silent --fit 2048x1536 --output "$output/$(basename $dir)" $dir/*
+done
