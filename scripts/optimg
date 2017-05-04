@@ -5,6 +5,8 @@ require 'fileutils'
 
 DEFAULT_FIT = '1500x1500'
 
+TMPDIR = ENV['TMPDIR'] || "/tmp"
+
 class CLI < OptionsCLI
   desc 'Optimizes images'
   usage 'optimg [options] <file>...'
@@ -60,12 +62,12 @@ class ImageOptimizer
 
   def tempfile1
     @tempfile1 ||=
-      File.join(ENV['TMPDIR'], "tempfile1#{extension}")
+      File.join(TMPDIR, "tempfile1#{extension}")
   end
 
   def tempfile2
     @tempfile2 ||=
-      File.join(ENV['TMPDIR'], "tempfile2#{extension}")
+      File.join(TMPDIR, "tempfile2#{extension}")
   end
 
   def optimize!
