@@ -17,7 +17,8 @@ function random_animal {
   echo -n $EMOJI
 }
 
-if [ "$(uname -s)" = "Darwin" ]; then
+# Only support on Mac and outside of neovim
+if [ "$(uname -s)" = "Darwin" -a -z "$NVIM_LISTEN_ADDRESS" ]; then
   random_animal="$(random_animal)  "
 fi
 
