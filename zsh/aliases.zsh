@@ -76,6 +76,7 @@ else
   alias vi=vim
 fi
 alias vl='vim "+OpenSession! last"'
+alias vs='abduco -A neovim-session nvim'
 alias vz='file="$(edit-zsh-dotfile)" && source $file'
 alias x=exit
 alias y=yarn
