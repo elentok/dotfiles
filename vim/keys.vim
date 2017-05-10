@@ -277,6 +277,10 @@ if has('nvim')
   " goto insert mode when entering a terminal window
   "au WinEnter term://* startinsert
 
+  tnoremap <c-a>a <c-a>
+  tnoremap <c-a>v <c-\><c-n><c-w>v<c-w>l:terminal<cr>
+  tnoremap <c-a>s <c-\><c-n><c-w>s<c-w>j:terminal<cr>
+
   nnoremap <c-a>v <c-w>v<c-w>l:terminal<cr>
   nnoremap <c-a>s <c-w>s<c-w>j:terminal<cr>
 endif
