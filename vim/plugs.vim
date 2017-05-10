@@ -5,6 +5,7 @@ filetype plugin indent off
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'confirm-quit'
 Plug 'AndrewRadev/sideways.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 " Plug 'Konfekt/FastFold'
