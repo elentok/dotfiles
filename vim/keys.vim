@@ -276,6 +276,9 @@ if has('nvim')
 
   " goto insert mode when entering a terminal window
   "au WinEnter term://* startinsert
+
+  nnoremap <c-a>v <c-w>v<c-w>l:terminal<cr>
+  nnoremap <c-a>s <c-w>s<c-w>j:terminal<cr>
 endif
 
 " Plugin: neoterm {{{1
