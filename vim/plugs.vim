@@ -55,8 +55,8 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets' " snippets for ultisnips
 
 " File formats:
-Plug 'applescript.vim',                { 'for': 'applescript' }
-Plug 'Arduino-syntax-file',            { 'for': 'ino' }
+Plug 'vim-scripts/applescript.vim',    { 'for': 'applescript' }
+Plug 'vim-scripts/Arduino-syntax-file',{ 'for': 'ino' }
 Plug 'jplaut/vim-arduino-ino',         { 'for': 'ino' }
 Plug 'asymmetric/upstart.vim',         { 'for': 'upstart' }
 Plug 'digitaltoad/vim-jade',           { 'for': 'jade', 'commit': '319cba1ee5313e8b50fd912d10dfe40a171f0312' }
@@ -75,7 +75,7 @@ Plug 'pangloss/vim-javascript',        { 'for': 'javascript' }
 Plug 'mxw/vim-jsx',                    { 'for': 'javascript' }
 Plug 'kchmck/vim-coffee-script',       { 'for': 'coffee' }
 Plug 'vim-ruby/vim-ruby',              { 'for': 'ruby' }
-Plug 'yaml.vim',                       { 'for': 'yaml' } " syntax highlighting
+Plug 'vim-scripts/yaml.vim',           { 'for': 'yaml' } " syntax highlighting
 Plug 'avakhov/vim-yaml',               { 'for': 'yaml' } " indentation
 Plug 'tpope/vim-haml',                 { 'for': 'haml' }
 
