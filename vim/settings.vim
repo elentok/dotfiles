@@ -24,6 +24,7 @@ set listchars=tab:»·,trail:·
 set mouse=a
 set nowrap
 set number                     " show line numbers
+set previewheight=20
 set ruler                      " enable ruler
 set scrolloff=3
 set shiftwidth=2
