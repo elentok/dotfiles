@@ -41,8 +41,19 @@ nnoremap <Leader>qq :confirm qall<cr>
 " using yadr's window killer instead of a simple :q
 "noremap Q :q<cr>
 
-nnoremap <silent> <Leader>] :exe "resize " . (&lines * 2/3)<CR>
-nnoremap <silent> <Leader>[ :exe "resize " . (&lines * 1/3)<CR>
+nnoremap <silent> <Leader>12 :exe "vertical resize " . (&columns * 1/2)<CR>
+nnoremap <silent> <Leader>13 :exe "vertical resize " . (&columns * 1/3)<CR>
+nnoremap <silent> <Leader>14 :exe "vertical resize " . (&columns * 1/4)<CR>
+nnoremap <silent> <Leader>23 :exe "vertical resize " . (&columns * 2/3)<CR>
+nnoremap <silent> <Leader>34 :exe "vertical resize " . (&columns * 3/4)<CR>
+nnoremap <silent> <Leader>11 :exe "vertical resize " . &columns<CR>
+
+nnoremap <silent> \12 :exe "resize " . (&lines * 1/2)<CR>
+nnoremap <silent> \13 :exe "resize " . (&lines * 1/3)<CR>
+nnoremap <silent> \14 :exe "resize " . (&lines * 1/4)<CR>
+nnoremap <silent> \23 :exe "resize " . (&lines * 2/3)<CR>
+nnoremap <silent> \34 :exe "resize " . (&lines * 3/4)<CR>
+nnoremap <silent> \11 :exe "resize " . &lines<CR>
 
 " resize windows
 " these are difficult to type, so I use the following iTerm mappings:
