@@ -1,4 +1,3 @@
-" init vundle
 set nocompatible " disable vi compatibility
 filetype off
 filetype plugin indent off
@@ -7,7 +6,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'AndrewRadev/sideways.vim'
 Plug 'AndrewRadev/splitjoin.vim'
-" Plug 'Konfekt/FastFold'
 Plug 'Raimondi/delimitMate'
 Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
@@ -21,7 +19,6 @@ Plug 'elentok/vim-rails-extra'
 Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 Plug 'iandoe/vim-osx-colorpicker'
 Plug 'itchyny/calendar.vim', { 'on': 'Calendar' }
-" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jamessan/vim-gnupg'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -47,8 +44,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'xolox/vim-misc'
-" Plug 'Vallori/YouCompleteMe', { 'do': './install.py', 'for': 'c' }
-" Plug 'majutsushi/tagbar'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets' " snippets for ultisnips
 
@@ -68,7 +63,6 @@ Plug 'shime/vim-livedown',             { 'for': 'markdown', 'on': 'LivedownPrevi
 Plug 'evanmiller/nginx-vim-syntax',    { 'for': 'nginx' }
 Plug 'fatih/vim-go',                   { 'for': 'go' }
 Plug 'groenewege/vim-less',            { 'for': 'less' }
-" Plug 'othree/yajs.vim',                { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript',        { 'for': 'javascript' }
 Plug 'mxw/vim-jsx',                    { 'for': 'javascript' }
 Plug 'kchmck/vim-coffee-script',       { 'for': 'coffee' }
