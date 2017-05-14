@@ -48,10 +48,6 @@ if exists('+breakindent')
   set breakindent                " https://retracile.net/wiki/VimBreakIndent
 end
 
-if has("nvim-0.1.7")
-  set inccommand=nosplit
-endif
-
 if !has('nvim')
   set ttyfast
   set t_vb=
@@ -67,6 +63,11 @@ if executable("ag")
 endif
 
 let g:netrw_localrmdir='rm -r'
+
+" Neovim specific {{{1
+if has("nvim")
+  set inccommand=nosplit
+endif
 
 " Plugin specific {{{1
 
