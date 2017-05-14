@@ -274,7 +274,9 @@ inoremap <expr><tab> SmartTab()
 " Neovim {{{1
 if has('nvim')
   tnoremap <c-\><c-\> <c-\><c-n>
-  tnoremap jk <c-\><c-n>
+  tnoremap <c-_> <c-\><c-n>
+  tnoremap <c-cr> <c-\><c-n>
+  " tnoremap jk <c-\><c-n>
 
   " fix <C-h> (https://github.com/neovim/neovim/issues/2048)
   nmap <BS> <C-h>
