@@ -63,10 +63,11 @@ nnoremap <silent> \11 :exe "resize " . &lines<CR>
 "   Control-Cmd-k => Esc-+
 "   Control-Cmd-l => Esc->
 
-nnoremap _ <c-w>-
-nnoremap + <c-w>+
-nnoremap > <c-w>>
-nnoremap < <c-w><
+" TODO: try to get these working again:
+" nnoremap _ <c-w>-
+" nnoremap + <c-w>+
+" nnoremap > <c-w>>
+" nnoremap < <c-w><
 
 nnoremap coq :cclose<cr>
 
@@ -276,7 +277,8 @@ if has('nvim')
   tnoremap <c-\><c-\> <c-\><c-n>
   tnoremap <c-_> <c-\><c-n>
   tnoremap <c-cr> <c-\><c-n>
-  " tnoremap jk <c-\><c-n>
+
+  tnoremap <c-q> <c-\><c-n>
 
   " fix <C-h> (https://github.com/neovim/neovim/issues/2048)
   nmap <BS> <C-h>
