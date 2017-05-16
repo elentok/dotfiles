@@ -296,6 +296,7 @@ if has('nvim')
   tnoremap <c-a>v <c-\><c-n><c-w>v<c-w>l:terminal<cr>
   tnoremap <c-a>s <c-\><c-n><c-w>s<c-w>j:terminal<cr>
 
+  nnoremap <c-a>r :so $vimrc<cr>
   nnoremap <c-a>c :tabe<cr>:terminal<cr>
   nnoremap <c-a>v <c-w>v<c-w>l:terminal<cr>
   nnoremap <c-a>s <c-w>s<c-w>j:terminal<cr>
