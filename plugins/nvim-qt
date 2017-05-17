@@ -1,0 +1,11 @@
+#!/bin/bash
+
+source $DOTF/framework
+
+apt_install qt5-default
+git clone https://github.com/equalsraf/neovim-qt /tmp/neovim-qt
+cd /tmp/neovim-qt
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Release ..
+make
