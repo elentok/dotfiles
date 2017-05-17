@@ -46,7 +46,7 @@ list_plugins() {
 }
 
 install() {
-  git submodule update --init --recursive
+  (cd $DOTF && git submodule update --init --recursive)
 
   if [ $# -gt 0 ]; then
     plugins "$@"
