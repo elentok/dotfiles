@@ -266,6 +266,17 @@ This is a link to [Something][1]
 ### show package info
     nix-env -qa --description '.*{name}.*'
 
+## dpkg
+
+### list all packages
+    dpkg -l
+
+### search for a package
+    dpkg -l '*qt*'
+
+### list files in package
+    dpkg -L 'package-name'
+
 ## Misc
 
 ### lsof - show all used ports
