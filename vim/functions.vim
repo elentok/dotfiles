@@ -25,6 +25,7 @@ command! -nargs=* Bundle QuickShell bundle <args>
 command! -nargs=* Cap QuickShell bundle exec cap <args>
 command! Pkgs QuickShell pkgs status
 command! SudoWrite :w !sudo tee %
+command! BufClean :call DeleteHiddenBuffers()
 
 command! FZFMru call fzf#run({
 \  'source':  v:oldfiles,
@@ -316,6 +317,21 @@ if has('nvim')
 else
   command! -nargs=+ QuickShell !<args>
 end
+
+" Delete Hidden Buffers {{{1
+" See http://stackoverflow.com/a/30101152
+function! DeleteHiddenBuffers()
+  let tpbl=[]
+  let closed = 0
+  call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+  for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+    if getbufvar(buf, '&mod') == 0
+      silent execute 'bwipeout' buf
+      let closed += 1
+    endif
+  endfor
+  echo "Closed ".closed." hidden buffers"
+endfunction
 
 " Misc {{{1
 function! EscapeCurrentFileDir()
