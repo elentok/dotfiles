@@ -1,0 +1,34 @@
+#!/bin/bash
+#
+# Initializes docker setup
+#
+# Usage:
+#
+# dockerify
+
+source $DOTF/framework
+
+ask "What's the image name?" image_name
+ask "What's the base image name?" base_image_name
+ask "What's the root app path (inside the image)?" root
+
+echo "FROM $base_image_name" > Dockerfile
+mkdir -p bin/docker
+
+cat > bin/docker/build <<EOF
+#!/usr/bin/env bash
+
+docker build -t $image_name .
+EOF
+
+
+cat > bin/docker/run <<EOF
+#!/usr/bin/env bash
+
+docker run \$DOCKER_ARGS \
+  -ti \
+  -v "\$(pwd):$root" \
+  $image_name "\$@"
+EOF
+
+chmod +x bin/docker/{run, build}
