@@ -80,7 +80,7 @@ alias vs='NVIM_KEEP_ALIVE=true abduco -A neovim-session nvim'
 alias vz='file="$(edit-zsh-dotfile)" && source $file'
 alias x=exit
 alias y=yarn
-alias yr=yarn run
+alias yr='yarn run'
 alias tailpow='tail -f $(find ~/Library/Logs/Pow -name "*.log" | fzf)'
 alias ports='sudo echo && (sudo lsof -i -n -P | fzf --header-lines=1)'
 
