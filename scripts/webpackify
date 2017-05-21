@@ -34,7 +34,7 @@ create_package_json() {
 
 yarn_add() {
   PACKAGES=(
-    webpack webpack-dev-server@^1.16.3
+    webpack webpack-dev-server
     babel-core babel-loader babel-preset-es2015
     babel-plugin-transform-object-assign
     es6-promise whatwg-fetch
