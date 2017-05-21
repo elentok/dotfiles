@@ -59,6 +59,11 @@ zstyle ':vcs_info:*' unstagedstr ' %F{red}✗%f'
 zstyle ':vcs_info:*' formats ' at %F{green}%b%f%u%c'
 zstyle ':vcs_info:*' actionformats ' at %F{green}%b%f%u%c (%a)'
 
+# To disable the source control part of the prompt (in case of slow downs) use
+# the following command:
+#
+# zstyle ':vcs_info:*' disable-patterns "${(b)HOME}/.zsh(|/*)"
+
 git_status='${vcs_info_msg_0_}'
 
 # Full prompt {{{1
