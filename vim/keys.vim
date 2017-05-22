@@ -86,6 +86,7 @@ noremap <Leader>gc :FZFGitChanged<cr>
 noremap <Leader>gm :FZFMru<cr>
 noremap <Leader>gn :NERDTreeFind<cr>
 noremap <Leader>go :call GotoAlternateFile()<cr>
+noremap <Leader>gp :FZFProj<cr>
 noremap <Leader>gt :Tags<cr>
 noremap <Leader>gv :tabe $vimrc<cr>
 noremap `` :BTags<cr>

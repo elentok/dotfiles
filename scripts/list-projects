@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+cat ~/.projects | while read line; do
+  ls -d ${~line} | sed "s#$HOME#~#"
+done

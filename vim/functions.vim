@@ -366,6 +366,22 @@ endfunction
 
 command! WinOnly call WinOnly()
 
+" Proj {{{1
+
+command! FZFProj call fzf#run({
+      \ "source": "list-projects",
+      \ "options": "--prompt 'Project> '",
+      \ "sink": "Proj"})
+
+function! Proj(dir)
+  tabe
+  exec "tcd " . a:dir
+  NERDTree
+  wincmd l
+endfunction
+
+command! -complete=dir -nargs=+ Proj call Proj("<args>")
+
 " Misc {{{1
 function! EscapeCurrentFileDir()
   let path = expand("%:p:h")
