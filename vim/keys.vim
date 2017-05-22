@@ -39,6 +39,7 @@ nnoremap <Leader><Leader> :silent !tput clear<cr>:redraw!<cr>
 nnoremap <Leader>qq :confirm qall<cr>
 
 noremap <Leader>wo :WinOnly<cr>
+noremap <Leader>tc :tabc<cr>
 
 " using yadr's window killer instead of a simple :q
 "noremap Q :q<cr>
@@ -308,7 +309,7 @@ endif
 
 " Plugin: neoterm {{{1
 
-nnoremap <silent> ,tc :call neoterm#close()<cr>
+nnoremap <silent> ,t- :call neoterm#close()<cr>
 nnoremap <silent> ,t0 :call neoterm#clear()<cr>
 
 " Misc {{{1
