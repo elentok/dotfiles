@@ -12,6 +12,8 @@ command! Esettings  edit ~/.dotfiles/vim/settings.vim
 command! Eabbr      edit ~/.dotfiles/vim/abbr.vim
 command! Ealiases   edit ~/.dotfiles/zsh/aliases.zsh
 
+command! -nargs=+ Ewhich     exec "edit " . system("which <args>")
+
 command! FoldByIndent setlocal foldmethod=expr nofoldenable
   \ foldexpr=IndentFoldExpr(v:lnum)
 
