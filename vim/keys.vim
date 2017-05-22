@@ -38,6 +38,8 @@ nnoremap <Leader><Leader> :silent !tput clear<cr>:redraw!<cr>
 
 nnoremap <Leader>qq :confirm qall<cr>
 
+noremap <Leader>wo :WinOnly<cr>
+
 " using yadr's window killer instead of a simple :q
 "noremap Q :q<cr>
 
