@@ -1,3 +1,4 @@
+# encoding: utf-8
 # vim: foldmethod=marker
 
 require 'net/http'
