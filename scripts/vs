@@ -1,0 +1,39 @@
+#!/bin/bash
+#
+# Attaches or creates an abduco session with neovim
+#
+# Usage:
+#
+#   vs [session-name]
+#
+# If "session-name" is not defined:
+# - If there are no sessions it will create "neovim-session"
+# - If there's only one session it will attach to it
+# - If there are multiple sessions it will use FZF to pick a session
+
+export NVIM_KEEP_ALIVE=true
+
+main() {
+  if [ "$1" == "-h" -o "$1" == "--help" ]; then
+    usage $0
+    exit 1
+  fi
+
+  get-session-name $1
+  ABDUCO_SESSION="$ABDUCO_SESSION" abduco -A "$ABDUCO_SESSION" bash -c nvim
+}
+
+get-session-name() {
+  if [ -n "$1" ]; then
+    ABDUCO_SESSION="$1"
+  else
+    ABDUCO_SESSION="$(abduco -l | grep -v '^Active' | fzf --select-1 --exit-0 | rev | awk '{print $1}' | rev)"
+    if [ -z "$ABDUCO_SESSION" ]; then
+      ABDUCO_SESSION="neovim-session"
+    fi
+  fi
+
+  export ABDUCO_SESSION
+}
+
+main "$@"
