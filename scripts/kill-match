@@ -51,7 +51,7 @@ class AProcess
     if options[:sudo]
       system("sudo kill #{@pid}")
     else
-      system("kill #{@pid}")
+      system("kill -9 #{@pid}")
     end
   end
 
