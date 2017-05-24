@@ -19,21 +19,34 @@ main() {
     exit 1
   fi
 
-  get-session-name $1
-  ABDUCO_SESSION="$ABDUCO_SESSION" abduco -A "$ABDUCO_SESSION" bash -c nvim
+  local session="$(get-session-name $1)"
+  if [ -z "$session" ]; then
+    echo "User aborted"
+    exit 2
+  fi
+
+  ABDUCO_SESSION="$session" abduco -A "$session" bash -c nvim
 }
 
 get-session-name() {
   if [ -n "$1" ]; then
-    ABDUCO_SESSION="$1"
+    echo "$1"
   else
-    ABDUCO_SESSION="$(abduco -l | grep -v '^Active' | fzf --select-1 --exit-0 | rev | awk '{print $1}' | rev)"
-    if [ -z "$ABDUCO_SESSION" ]; then
-      ABDUCO_SESSION="neovim-session"
+    active_count=$(sessions | wc -l)
+    if [ $active_count == 0 ]; then
+      echo "neovim-session"
+    elif [ $active_count == 1 ]; then
+      sessions
+    else
+      sessions | \
+        fzf --prompt='Session> ' --select-1 --exit-0 | \
+        rev | awk '{print $1}' | rev
     fi
   fi
+}
 
-  export ABDUCO_SESSION
+sessions() {
+  abduco -l | grep -v '^Active'
 }
 
 main "$@"
