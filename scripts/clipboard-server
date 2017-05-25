@@ -1,0 +1,5 @@
+#!/bin/bash
+
+while (true); do
+  nc -l 7777 | pbcopy
+done
