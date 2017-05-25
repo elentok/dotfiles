@@ -92,7 +92,7 @@ is_live() {
     return $FALSE
   fi
 
-  if kill -0 "$pid_file" > /dev/null 2>&1; then
+  if kill -0 "$(cat $pid_file)" > /dev/null 2>&1; then
     return $TRUE
   else
     rm -f "$pid_file"
