@@ -36,13 +36,17 @@ get-session-name() {
     if [ $active_count == 0 ]; then
       echo "neovim-session"
     elif [ $active_count == 1 ]; then
-      sessions
+      sessions | leave-only-session-name
     else
       sessions | \
         fzf --prompt='Session> ' --select-1 --exit-0 | \
-        rev | awk '{print $1}' | rev
+        leave-only-session-name
     fi
   fi
+}
+
+leave-only-session-name() {
+  rev | awk '{print $1}' | rev
 }
 
 sessions() {
