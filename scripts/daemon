@@ -1,0 +1,103 @@
+#!/bin/bash
+#
+# Starts/stops daemons
+#
+# Usage:
+#
+#   daemon start <name> <cmd>
+#   daemon stop <name>
+#   daemon status <name>
+#   daemon list
+
+TRUE=0
+FALSE=1
+ROOT=/tmp/my-daemons
+mkdir -p $ROOT
+
+main() {
+  local cmd="daemon_$1"
+  shift
+
+  if [[ "$(type $cmd)" =~ "function" ]]; then
+    $cmd "$@"
+  else
+    usage $0
+    exit 1
+  fi
+}
+
+daemon_start() {
+  if [ $# -lt 2 ]; then
+    echo "Error: not enough parameters for command 'start'"
+    usage $0
+    exit 1
+  fi
+
+  local name="$1"
+  local cmd="$2"
+
+  if is_live "$name"; then
+    echo "Exiting, daemon '$name' is already active"
+    exit 2
+  fi
+
+  mkdir -p "$ROOT/$name"
+
+  echo "Starting daemon '$name' ($cmd)"
+  nohup "$cmd" > "$ROOT/$name/output" 2>&1 &
+  pid="$!"
+  echo $pid > "$ROOT/$name/pid"
+  echo "done (pid: $pid)"
+}
+
+daemon_stop() {
+  if [ $# -eq 0 ]; then
+    echo "Error: not enough parameters for command 'stop'"
+    usage $0
+    exit 1
+  fi
+
+  if ! is_live "$1"; then
+    echo "Exiting, daemon '$1' is not active"
+    exit 2
+  fi
+}
+
+daemon_status() {
+  if [ $# -eq 0 ]; then
+    echo "Error: not enough parameters for command 'status'"
+    usage $0
+    exit 1
+  fi
+
+  if is_live "$1"; then
+    echo "Daemon $1 is active"
+  else
+    echo "Daemon $1 is not active"
+  fi
+}
+
+daemon_list() {
+  for name in "$ROOT/*"; do
+    if is_live "$name"; then
+      echo $name
+    fi
+  done
+}
+
+is_live() {
+  local pid_file="$ROOT/$1/pid"
+
+  if [ ! -e "$pid_file" ]; then
+    return $FALSE
+  fi
+
+  if kill -0 "$pid_file" > /dev/null 2>&1; then
+    return $TRUE
+  else
+    rm -f "$pid_file"
+    return $FALSE
+  fi
+}
+
+main "$@"
