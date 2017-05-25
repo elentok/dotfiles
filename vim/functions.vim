@@ -376,8 +376,6 @@ command! FZFProj call fzf#run({
 function! Proj(dir)
   tabe
   exec "tcd " . a:dir
-  NERDTree
-  wincmd l
 endfunction
 
 command! -complete=dir -nargs=+ Proj call Proj("<args>")
