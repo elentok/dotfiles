@@ -1,0 +1,3 @@
+#!/bin/bash
+
+nc -q0 localhost 7777
