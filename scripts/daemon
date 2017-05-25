@@ -79,8 +79,9 @@ daemon_status() {
 
 daemon_list() {
   for name in "$ROOT/*"; do
-    if is_live "$name"; then
-      echo $name
+    local basename="$(basename $name)"
+    if is_live "$basename"; then
+      echo $basename
     fi
   done
 }
