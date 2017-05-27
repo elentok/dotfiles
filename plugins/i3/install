@@ -4,8 +4,11 @@ source $DOTF/framework
 
 header "i3 Window Manager"
 
-if command_missing i3; then
-  pacman_install i3
+if is_arch; then
+  if command_missing i3; then
+    pacman_install i3
+  fi
+  pacman_install rofi
 fi
 
 I3="$DOTF/plugins/i3"
