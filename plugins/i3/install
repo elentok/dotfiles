@@ -8,7 +8,7 @@ if is_arch; then
   if command_missing i3; then
     pacman_install i3
   fi
-  pacman_install rofi
+  pacman_install rofi dmenu
 fi
 
 I3="$DOTF/plugins/i3"
