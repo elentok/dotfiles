@@ -149,10 +149,50 @@ Install Google Chrome
 * Install [Yaourt](https://archlinux.fr/yaourt-en)
 * Run `yaourt -S google-chrome`
 
-Install WiFi GUI (NetworkManager and applet)
---------------------------------------------
+i3
+---
+
+Install the network manager (service + applet):
+
 ```
 yaourt -S networkmanager network-manager-applet
 systemctl enable NetworkManager
 systemctl start NetworkManager
+```
+
+Audio
+-----
+
+```
+sudo pacman -S pulseaudio pavucontrol
+```
+
+
+MacBook Air
+-----------
+
+### Use better trackpad driver
+
+Install the mtrack driver:
+```
+yaourt -S xf86-input-mtrack.git
+```
+
+Put the following text in `/etc/X11/xorg.conf.d/10-mtrack.conf`:
+
+```
+Section "InputClass"
+  MatchIsTouchpad "on"
+  Identifier "Touchpads"
+  Driver "mtrack"
+
+  Option "Thumbsize" "50"
+  Option "ScrollDistance" "100"
+
+  # Natural two-finger scrolling (similar to OS X)
+  Option "ScrollUpButton" "5"
+  Option "ScrollDownButton" "4"
+  Option "ScrollLeftButton" "7"
+  Option "ScrollRightButton" "6"
+EndSection
 ```
