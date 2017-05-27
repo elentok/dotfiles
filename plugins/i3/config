@@ -260,7 +260,11 @@ bindsym $mod+F1 exec feh --bg-fill ~/.config/wallpaper.jpg
 bindsym $mod+F2 exec feh --bg-fill ~/.config/icloud.png
 
 bindsym $shiftalt+equal exec pactl set-sink-volume @DEFAULT_SINK@ +5% && killall -SIGUSR1 i3status
-bindsym $shiftalt+minus exec pactl set-sink-volume @DEFAULT_SINK@ -- -5% && killall -SIGUSR1 i3status
+bindsym $shiftalt+minus exec pactl set-sink-volume @DEFAULT_SINK@ -5% && killall -SIGUSR1 i3status
+
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && killall -SIGUSR1 i3status
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && killall -SIGUSR1 i3status
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 bindsym Ctrl+space exec "keyboard-toggle"
 
