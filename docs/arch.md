@@ -21,6 +21,35 @@ sysctl vm.swappiness=1 # when using SSD, minimize swappiness
 mount /dev/sdXA /mnt
 ```
 
+### Setup Network
+
+First, get the name of the relevant network interface by running either of:
+
+```
+ip link
+ls /sys/class/net
+```
+
+On a wired network, just enable the DHCP service:
+
+```
+systemctl enable dhcpcd@{device-name}.service
+
+```
+
+On a wireless network, connected to the access point and afterwards start the
+dhcp client manually (if you enable the service like in wired network it will
+delay the boot since it will try to enable DHCP without a WiFi connection):
+
+```
+wpa_supplicant -i INTERFACE -c <(wpa_passphrase "SSID" "PASSWORD")
+dhcpcd INTERFACE
+
+```
+
+Running the DHCP client manually is only for the installation process,
+afterwards you can use NetworkManager to do an easier setup.
+
 ### Install
 
 ```
@@ -64,14 +93,6 @@ echo '{HOSTNAME}' > /etc/hostname
 
 Edit `/etc/hosts` and add the hostname to the end of the `localhost` entries
 
-### Enable DHCP
-
-```
-ls /sys/class/net # get device names
-systemctl enable dhcpcd@{device-name}.service
-
-```
-
 ### Set the ROOT password
 
 ```
@@ -90,6 +111,12 @@ reboot
 
 ```
 pacman -S zsh neovim git tig the_silver_searcher
+```
+
+Install the packages required for making WiFi connections (post-boot):
+
+```
+pacman -S iw wpa_supplicant NetworkManager
 ```
 
 Create user
@@ -121,3 +148,11 @@ Install Google Chrome
 
 * Install [Yaourt](https://archlinux.fr/yaourt-en)
 * Run `yaourt -S google-chrome`
+
+Install WiFi GUI (NetworkManager and applet)
+--------------------------------------------
+```
+yaourt -S networkmanager network-manager-applet
+systemctl enable NetworkManager
+systemctl start NetworkManager
+```
