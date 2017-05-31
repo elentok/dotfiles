@@ -1,49 +1,94 @@
 #!/bin/bash
+#
+# WiFi management script
+#
+# Usage:
+#
+#   wifi (on|off|status|devices|list|connect)
+
+source $DOTF/framework
 
 DEVICE=en0
 
 main() {
   cmd=$1
   shift
-  cmd_exists="$(type -t wifi_$cmd)"
-  if [ "$cmd_exists" == "" ]; then
-    usage
+  if has_command "wifi_${cmd}"; then
+    wifi_${cmd} "$@"
+  elif has_command "${OS}_wifi_${cmd}"; then
+    ${OS}_wifi_${cmd} "$@"
   else
-    wifi_$cmd $*
+    usage $0
   fi
 }
 
-usage() {
-  echo "Usage:"
-  echo "  wifi (on|off|status|devices|list|connect)"
+linux_wifi_on() {
+  echo "Turning WIFI on..."
+  nmcli radio wifi on
 }
 
-wifi_on() {
+mac_wifi_on() {
   echo "Turning WIFI on..."
   networksetup -setairportpower $DEVICE on
 }
 
-wifi_off() {
+linux_wifi_off() {
+  echo "Turning WIFI off..."
+  nmcli radio wifi off
+}
+
+mac_wifi_off() {
   echo "Turning WIFI off..."
   networksetup -setairportpower $DEVICE off
 }
 
-wifi_status() {
+mac_wifi_status() {
   networksetup -getairportnetwork $DEVICE
   networksetup -getairportpower $DEVICE
 }
 
-wifi_devices() {
+linux_wifi_status() {
+  nmcli connection show --active
+}
+
+mac_wifi_devices() {
   networksetup -listallhardwareports
 }
 
-wifi_connect() {
-  echo "Connecting to $*..."
-  networksetup -setairportnetwork en0 $*
+linux_wifi_devices() {
+  echo 'NOT SUPPORTED'
 }
 
-wifi_list() {
+mac_wifi_connect() {
+  networksetup -setairportnetwork en0 "$@"
+}
+
+linux_wifi_connect() {
+  local ap="$1"
+  if [ -z "$ap" ]; then
+    ap=$(linux_pick_accesspoint)
+  fi
+
+  if [ -z "$ap" ]; then
+    echo "User aborted."
+    exit 1
+  fi
+
+  echo "Connecting to $ap..."
+  nmcli device wifi connect "$ap"
+}
+
+linux_pick_accesspoint() {
+  nmcli device wifi list | grep -v 'SSID' | fzf --exit-0 --select-1 | \
+    sed -E 's/^\*?\s*//' | awk '{ print $1 }'
+}
+
+mac_wifi_list() {
   /System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport scan
 }
 
-main $*
+linux_wifi_list() {
+  nmcli device wifi list
+}
+
+main "$@"
