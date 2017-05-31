@@ -38,10 +38,11 @@ if g:os == 'windows'
   let $opener='start'
 else
   let $temp_dir='/tmp/vim-' . $USER
-  let $vimrc=expand('~/.vimrc')
   if has('nvim')
-    let $vimfiles=expand('~/.nvim')
+    let $vimrc=expand('~/.config/nvim/init.vim')
+    let $vimfiles=expand('~/.config/nvim')
   else
+    let $vimrc=expand('~/.vimrc')
     let $vimfiles=expand('~/.vim')
   endif
   let $delimiter = '/'

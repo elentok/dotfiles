@@ -3,63 +3,68 @@
 source `dirname $0`/../framework
 
 main() {
-  header "Vim"
+  header "(Neo)Vim"
 
-  if [ "$OS" == "mac" ]; then
-    install_on_mac
-  else
-    install_on_linux
-  fi
-
+  install_neovim
   install_symlinks
-  install_vim_plugins
-  install_utils
-  install_linters
+  install_plugins
+  install_cli_tools
 
   (cd $DOTF/vim && ./ctags-build)
 }
 
-install_on_mac() {
-  brew_install macvim --with-cscope --override-system-vim --with-lua
-
-  brew_install ctags
-  brew_install the_silver_searcher # ag
-}
-
-install_on_linux() {
-  if [ "$HAS_GUI" == "yes" ]; then
-    apt_install vim-gnome
-  else
-    apt_install vim
+install_requirements() {
+  if is_mac; then
+    # python3 is required for the deoplete plugin
+    brew_install python3 abduco
+  elif is_arch; then
+    pacman_install python-pip python2-pip abduco
+  elif is_debian; then
+    apt_install python-dev python-pip python3-dev python3-pip
   fi
 
-  apt_install exuberant-ctags tidy
-  brew_install the_silver_searcher # ag
-  brew_install global --with-pygments
+  pip3_install neovim
+  pip_install neovim
+}
+
+install_neovim() {
+  if is_arch; then
+    pacman_install neovim
+  else
+    brew_tap neovim/homebrew-neovim
+    brew_install neovim
+  fi
 }
 
 install_symlinks() {
+  symlink "$DOTF/vim" ~/.config/nvim
+
+  symlink "$DOTF/vim/pylintrc" ~/.pylintrc
+
+  # vim backwards compatibility
   symlink "$DOTF/vim/init.vim" ~/.vimrc
   symlink "$DOTF/vim" ~/.vim
-  symlink "$DOTF/vim/pylintrc" ~/.pylintrc
-  symlink "$DOTF/vim/scss-lint.yml" ~/.scss-lint.yml
 }
 
-install_vim_plugins() {
+install_plugins() {
   bullet "Running PlugInstall... "
-  vim +PlugInstall +qall
+  nvim +PlugInstall +qall
   success "done"
 }
 
-install_utils() {
+install_cli_tools() {
+  if is_arch; then
+    pacman_install ctags tidy
+  else
+    brew_install ctags
+    brew_install the_silver_searcher # ag
+    brew_install global --with-pygments
+  fi
+
   npm_install vimspec
   npm_install marked
   npm_install name-that-color
   npm_install livedown
-  pip_install powerline-status
-}
-
-install_linters() {
   npm_install coffeelint
   npm_install eslint
   npm_install prettier
