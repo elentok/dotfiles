@@ -3,14 +3,14 @@
 source `dirname $0`/../framework
 
 main() {
-  header "(Neo)Vim"
+  header "NeoVim"
 
   install_neovim
   install_symlinks
   install_plugins
   install_cli_tools
 
-  (cd $DOTF/vim && ./ctags-build)
+  (cd $DOTF/nvim && ./ctags-build)
 }
 
 install_requirements() {
@@ -37,13 +37,13 @@ install_neovim() {
 }
 
 install_symlinks() {
-  symlink "$DOTF/vim" ~/.config/nvim
+  symlink "$DOTF/nvim" ~/.config/nvim
 
-  symlink "$DOTF/vim/pylintrc" ~/.pylintrc
+  symlink "$DOTF/nvim/pylintrc" ~/.pylintrc
 
   # vim backwards compatibility
-  symlink "$DOTF/vim/init.vim" ~/.vimrc
-  symlink "$DOTF/vim" ~/.vim
+  symlink "$DOTF/nvim/init.vim" ~/.vimrc
+  symlink "$DOTF/nvim" ~/.vim
 }
 
 install_plugins() {

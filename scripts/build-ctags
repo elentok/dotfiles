@@ -12,7 +12,7 @@ function main() {
   bullet 'Generating... '
 
   ctags $EXCLUDE_ARGS -R --c++-kinds=+p --fields=+ilaS --extra=+q \
-    --exclude=@$DOTF/vim/ctagsignore \
+    --exclude=@$DOTF/nvim/ctagsignore \
     -f $ROOT/tags $ROOT
   if [ $? -eq 0 ]; then
     success "done (generated $(count-ctags) tags)."
@@ -24,9 +24,9 @@ function main() {
 function build_exclude_args() {
   EXCLUDE_ARGS=""
 
-  if [ -e "$DOTF/vim/ctagsignore" ]; then
-    bullet "Loading $DOTF/vim/ctagsignore\n"
-    EXCLUDE_ARGS="--exclude=@$DOTF/vim/ctagsignore"
+  if [ -e "$DOTF/nvim/ctagsignore" ]; then
+    bullet "Loading $DOTF/nvim/ctagsignore\n"
+    EXCLUDE_ARGS="--exclude=@$DOTF/nvim/ctagsignore"
   fi
 
   if [ -e "$ROOT/.ctagsignore" ]; then
