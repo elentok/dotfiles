@@ -1,0 +1,22 @@
+#!/bin/bash
+
+LOCAL_TOUCHPAD=$DOTF/plugins/mac-linux/30-touchpad.conf
+X11_TOUCHPAD=/etc/X11/xorg.conf.d/30-touchpad.conf
+
+main() {
+  install-touchpad-conf
+}
+
+install-touchpad-conf() {
+  if ! is-conf-updated; then
+    echo "Trackpad config file changed, deploying..."
+    sudo cp -f $LOCAL_TOUCHPAD $X11_TOUCHPAD
+    echo "done."
+  fi
+}
+
+is-conf-updated() {
+  diff $LOCAL_TOUCHPAD $X11_TOUCHPAD > /dev/null 2>&1
+}
+
+main "$@"
