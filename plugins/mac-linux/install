@@ -1,11 +1,14 @@
 #!/bin/bash
 
+source $DOTF/framework
+
 LOCAL_TOUCHPAD=$DOTF/plugins/mac-linux/30-touchpad.conf
 X11_TOUCHPAD=/etc/X11/xorg.conf.d/30-touchpad.conf
 
 main() {
   install-touchpad-conf
   pacman_install xorg-xbacklight
+  yaourt_install kbdlight
 }
 
 install-touchpad-conf() {
