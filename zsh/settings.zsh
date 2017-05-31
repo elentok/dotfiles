@@ -169,7 +169,7 @@ fi
 
 # don't log to history commands starting with a space
 setopt HIST_IGNORE_SPACE
-source $DOTF/vim/colors/base16-elentok.dark.sh
+source $DOTF/nvim/colors/base16-elentok.dark.sh
 
 export MPD_HOST=$MPD_PASSWORD@localhost
 export GREP_OPTIONS=
