@@ -27,5 +27,5 @@ gsettings set org.nemo.desktop show-desktop-icons false
 if is_debian; then
   apt_install pavucontrol xscreensaver
 else
-  pacman_install pavucontrol xscreensaver
+  pacman_install pavucontrol xscreensaver xclip
 fi
