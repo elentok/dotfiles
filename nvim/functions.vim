@@ -4,12 +4,12 @@ command! AutoWrap set formatoptions+=c formatoptions+=t
 command! AutoWrapOff set formatoptions-=c formatoptions-=t
 command! W :w
 
-command! Eautocmds  edit ~/.dotfiles/vim/autocmds.vim
-command! Eplugs     edit ~/.dotfiles/vim/plugs.vim
-command! Efunctions edit ~/.dotfiles/vim/functions.vim
-command! Ekeys      edit ~/.dotfiles/vim/keys.vim
-command! Esettings  edit ~/.dotfiles/vim/settings.vim
-command! Eabbr      edit ~/.dotfiles/vim/abbr.vim
+command! Eautocmds  edit ~/.dotfiles/nvim/autocmds.vim
+command! Eplugs     edit ~/.dotfiles/nvim/plugs.vim
+command! Efunctions edit ~/.dotfiles/nvim/functions.vim
+command! Ekeys      edit ~/.dotfiles/nvim/keys.vim
+command! Esettings  edit ~/.dotfiles/nvim/settings.vim
+command! Eabbr      edit ~/.dotfiles/nvim/abbr.vim
 command! Ealiases   edit ~/.dotfiles/zsh/aliases.zsh
 
 command! -nargs=+ Ewhich     exec "edit " . system("which <args>")
