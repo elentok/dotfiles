@@ -45,6 +45,7 @@
   pst = push --tags
   pullff = pull --ff-only
   r = reset
+  rp = reset --patch
   rb = rebase
   rbc = rebase --continue
   rbs = rebase --skip
