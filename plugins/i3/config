@@ -192,5 +192,6 @@ assign [class="Gimp"] 4: gimp
 assign [class="Google-chrome"] 2: www
 assign [class="Telegram"] 3: chat
 
+# Run on startup {{{1
 exec xscreensaver -no-splash &
 exec setxkbmap us
