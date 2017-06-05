@@ -274,3 +274,4 @@ bindsym XF86KbdBrightnessUp exec kbdlight up 5
 bindsym Ctrl+space exec "keyboard-toggle"
 
 exec xscreensaver -no-splash &
+exec setxkbmap us
