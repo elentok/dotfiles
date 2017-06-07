@@ -74,8 +74,15 @@ Plug 'tpope/vim-haml',                 { 'for': 'haml' }
 if has('nvim')
   Plug 'benekastah/neomake'
   Plug 'kassio/neoterm'
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+
+  Plug 'roxma/nvim-completion-manager',
+        \ { 'do': 'pip3 install --user neovim jedi mistune psutil setproctitle' }
+  Plug 'roxma/nvim-cm-tern'
+  Plug 'roxma/ncm-rct-complete'
+  Plug 'roxma/neco-vim'
+
+  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  " Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 else
   Plug 'scrooloose/syntastic'
   Plug 'jwhitley/vim-matchit' " embedded in neovim
