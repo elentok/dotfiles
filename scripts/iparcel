@@ -1,0 +1,84 @@
+#!/usr/bin/env node
+
+const axios = require("axios");
+const $ = require("cheerio");
+const Table = require("easy-table");
+
+class IParcelResult {
+  constructor(status, history) {
+    this.status = status;
+    this.history = history;
+  }
+
+  toString() {
+    return [
+      `Current status: ${this.status}\n`,
+      "History:",
+      this._getHistoryTable().toString()
+    ].join("\n");
+  }
+
+  _getHistoryTable() {
+    const table = new Table();
+    this.history.forEach(({ date, text }) => {
+      table.cell("Date", date);
+      table.cell("Description", text);
+      table.newRow();
+    });
+    return table;
+  }
+}
+
+const IParcel = {
+  isSupported(number) {
+    return /^[A-Z]{6}\d{11}$/.test(number);
+  },
+
+  track(number) {
+    return axios
+      .get("https://tracking.i-parcel.com", {
+        params: { TrackingNumber: number }
+      })
+      .then(response => {
+        return this._parse(response.data);
+      });
+  },
+
+  _parse(html) {
+    const $html = $.load(html);
+
+    const status = $html(".currEvent").text();
+    const history = $html(".trackingResults .result").toArray().map(item => {
+      const $item = $(item);
+      return {
+        date: $item
+          .find(".date")
+          .html()
+          .replace("<br>", " ")
+          .replace(/<[^>]+>/g, ""),
+        text: $item.find(".event").text().trim().replace(/\s*\r?\n\s*/, " - ")
+      };
+    });
+
+    return new IParcelResult(status, history);
+  }
+};
+
+if (require.main === module) {
+  const number = process.argv[2];
+  if (number) {
+    console.info(`Tracking ${number}...`);
+    IParcel.track(number)
+      .catch(err => {
+        console.error();
+        console.error(err);
+      })
+      .then(result => {
+        console.info(result.toString());
+      });
+  } else {
+    console.info("Usage:\n\n  iparcel <number>");
+  }
+} else {
+  module.exports = IParcel;
+}
