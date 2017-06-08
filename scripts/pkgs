@@ -8,6 +8,8 @@ const Table = require("easy-table");
 const axios = require("axios");
 const htmlToText = require("html-to-text");
 const colors = require("colors");
+const IParcel = require("./iparcel");
+
 const CLEAR_LINE = "\r\x1B[K";
 
 const IsraelPost = {
@@ -46,6 +48,8 @@ class Package {
     if (tracking != null) {
       if (IsraelPost.isSupported(tracking)) {
         this.tracker = IsraelPost;
+      } else if (IParcel.isSupported(tracking)) {
+        this.tracker = IParcel;
       }
     }
   }
