@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+# Usage:
+#
+#   vol 20   - will set the volume to 20%
+#   vol +20  - will increase the volume by 20%
+#   vol -20  - will decrease the volume by 20%
+
+if [ $# -eq 0 ]; then
+  usage $0
+  exit 1
+fi
+
+pactl set-sink-volume @DEFAULT_SINK@ $1% && killall -SIGUSR1 i3status
