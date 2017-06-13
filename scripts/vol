@@ -11,4 +11,4 @@ if [ $# -eq 0 ]; then
   exit 1
 fi
 
-pactl set-sink-volume @DEFAULT_SINK@ $1% && killall -SIGUSR1 i3status
+pactl -- set-sink-volume @DEFAULT_SINK@ "$1%" && killall -SIGUSR1 i3status

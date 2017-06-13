@@ -35,10 +35,10 @@ bindsym Print exec bash ~/.dotfiles/scripts/sshot
 bindsym Mod1+Print exec bash ~/.dotfiles/scripts/sshot to-file
 
 # Keys: Volume {{{2
-bindsym $shiftalt+equal exec pactl set-sink-volume @DEFAULT_SINK@ +5% && killall -SIGUSR1 i3status
-bindsym $shiftalt+minus exec pactl set-sink-volume @DEFAULT_SINK@ -5% && killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && killall -SIGUSR1 i3status
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && killall -SIGUSR1 i3status
+bindsym $shiftalt+equal exec vol +5
+bindsym $shiftalt+minus exec vol -5
+bindsym XF86AudioRaiseVolume exec vol +5
+bindsym XF86AudioLowerVolume exec vol -5
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # Keys: Brightness {{{2
