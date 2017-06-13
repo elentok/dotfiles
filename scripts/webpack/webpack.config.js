@@ -8,10 +8,12 @@ const env = process.env.NODE_ENV || "development";
 
 let jsFilename = "[name].js";
 let cssFilename = "[name].css";
+let htmlFilename = "index.html";
 
 if (env === "production") {
   jsFilename = "[name]-[hash].js";
   cssFilename = "[name]-[contenthash].css";
+  htmlFilename = "../index.html";
 }
 
 const config = {
@@ -96,12 +98,13 @@ const config = {
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "src/index.pug"),
-      filename: "../index.html"
+      filename: htmlFilename
     })
   ],
 
   devtool: "sourcemap",
   devServer: {
+    contentBase: false,
     port: 8081
   }
 };
