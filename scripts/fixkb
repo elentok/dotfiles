@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# This is required for some reason, or the next "setxkbmap" won't work.
+setxkbmap us
+
+# Reset all options
+setxkbmap -option
+
+# see /usr/share/X11/xkb/rules/base.lst for more options
+setxkbmap -option 'grp:menu_toggle' -option 'ctrl:nocaps'
