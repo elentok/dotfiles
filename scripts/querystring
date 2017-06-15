@@ -1,41 +1,44 @@
 #!/usr/bin/env node
 
-const util = require('util')
-const querystring = require('querystring')
+const util = require("util");
+const querystring = require("querystring");
+const url = require("url");
 
-process.stdin.setEncoding('utf8')
+process.stdin.setEncoding("utf8");
 
-const chunks = []
+const chunks = [];
 
-process.stdin.on('readable', () => {
-  const chunk = process.stdin.read()
+process.stdin.on("readable", () => {
+  const chunk = process.stdin.read();
   if (chunk != null) {
-    chunks.push(chunk)
+    chunks.push(chunk);
   }
-})
+});
 
-process.stdin.on('end', () => {
-  parseQueryString(chunks.join(''))
-})
+process.stdin.on("end", () => {
+  parseQueryString(chunks.join(""));
+});
 
 function parseQueryString(str) {
-  let url = null
+  // let url = null;
 
-  if (str.includes("?")) {
-    const m = str.match(/^([^\?]+)\?(.*)$/)
-    url = m[1]
-    str = m[2]
-  }
+  // if (str.includes("?")) {
+    // const m = str.match(/^([^\?]+)\?(.*)$/);
+    // url = m[1];
+    // str = m[2];
+  // }
 
-  const vars = querystring.parse(str)
+  const u = url.parse(str);
+
+  const vars = querystring.parse(u.query);
 
   if (process.argv.length > 2) {
-    const key = process.argv[2]
-    console.info(vars[key])
+    const key = process.argv[2];
+    console.info(vars[key]);
   } else {
     if (url != null) {
-      console.info(`URL: ${url}\n`)
+      console.info(`URL: ${url}\n`);
     }
-    console.info(util.inspect(vars, { colors: true }))
+    console.info(util.inspect(vars, { colors: true }));
   }
 }
