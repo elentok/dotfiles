@@ -1,0 +1,17 @@
+#!/bin/bash
+
+dir="${1:-$PWD}"
+
+if [ ! -d "$dir" ]; then
+  dir="$(dirname $dir)"
+fi
+
+cd "$dir"
+
+ROOT="$(git rev-parse --show-toplevel 2> /dev/null)"
+
+if [ $? -eq 0 ]; then
+  echo "$ROOT"
+else
+  echo "$dir"
+fi
