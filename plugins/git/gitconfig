@@ -33,7 +33,9 @@
   di = diff
   f = fetch
   h = help
-  l = log --graph
+  l = log
+  ll = log -5
+  lg = log --graph
   m = merge
   my-branch = rev-parse --abbrev-ref HEAD
   mff = merge --no-ff
@@ -66,7 +68,8 @@
 
 [format]
   ; TODO: Should I use "%cr" or "%ar" for the date?
-  pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s (%C(blue)%cr by %C(green)%an%Creset)%Creset
+  ; pretty=format:%C(yellow)%h%Creset -%C(green)%d%Creset %s (%C(blue)%cr by %C(green)%an%Creset)%Creset
+  pretty=format:%C(bold red)%h%Creset %C(blue)%>(13)%cr%Creset%C(green)%d%Creset %s (%C(green)%an%Creset)%Creset
 
 [merge]
   tool = vimdiff
