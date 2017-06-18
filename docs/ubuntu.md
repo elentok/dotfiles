@@ -91,8 +91,8 @@ For example:
   can access shares on these partitions. Also, by setting the "umask" to 027 that user
   will only have read-access.
 
-Java
------
+## Java
+
 
 download jre from http://www.java.com and extract it to /usr/lib/jvm
 
@@ -100,3 +100,7 @@ download jre from http://www.java.com and extract it to /usr/lib/jvm
 sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jre1.7.0_05/bin/java 2
 sudo update-alternatives --config java
 ```
+
+## Change default terminal (x-terminal-emulator)
+
+sudo update-alternatives --config x-terminal-emulator
