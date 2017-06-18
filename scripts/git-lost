@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+# Git dangling commits helper
+#
+
+main() {
+  dangling-commits | while read commit; do
+    git log -1 $commit --pretty=[%ai]\ %h\ %s
+  done
+}
+
+dangling-commits() {
+  git fsck --lost-found | grep 'dangling commit' | sed 's/dangling commit //'
+}
+
+main "$@"
