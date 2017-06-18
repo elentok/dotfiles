@@ -87,6 +87,7 @@ source $vimfiles/keys.vim
 source $vimfiles/autocmds.vim
 source $vimfiles/abbr.vim
 source $vimfiles/git.vim
+source $vimfiles/features.vim
 
 if file_readable(expand("~/.vimstate"))
   source ~/.vimstate
