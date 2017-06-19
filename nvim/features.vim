@@ -1,3 +1,5 @@
+" vim: foldmethod=marker
+
 " Tab: Cd to buffer root {{{1
 
 noremap <Leader>tcd :TabCdToBufRoot<cr>

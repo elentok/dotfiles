@@ -277,35 +277,6 @@ endfunction
 
 inoremap <expr><tab> SmartTab()
 
-" Neovim {{{1
-if has('nvim')
-  tnoremap <c-\><c-\> <c-\><c-n>
-  tnoremap <c-_> <c-\><c-n>
-  tnoremap <c-cr> <c-\><c-n>
-
-  tnoremap <c-q> <c-\><c-n>
-
-  " fix <C-h> (https://github.com/neovim/neovim/issues/2048)
-  nmap <BS> <C-h>
-
-  tnoremap <c-w> <c-\><c-n><c-w>
-  tnoremap <c-h> <c-\><c-n><c-w>h
-  tnoremap <c-j> <c-\><c-n><c-w>j
-  tnoremap <c-k> <c-\><c-n><c-w>k
-  tnoremap <c-l> <c-\><c-n><c-w>l
-
-  " goto insert mode when entering a terminal window
-  "au WinEnter term://* startinsert
-
-  tnoremap <c-a>a <c-a>
-  tnoremap <c-a>v <c-\><c-n><c-w>v<c-w>l:terminal<cr>
-  tnoremap <c-a>s <c-\><c-n><c-w>s<c-w>j:terminal<cr>
-
-  nnoremap <c-a>r :so $vimrc<cr>
-  nnoremap <c-a>c :tabe<cr>:terminal<cr>
-  nnoremap <c-a>v <c-w>v<c-w>l:terminal<cr>
-  nnoremap <c-a>s <c-w>s<c-w>j:terminal<cr>
-endif
 
 " Plugin: neoterm {{{1
 
