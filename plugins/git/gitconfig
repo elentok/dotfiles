@@ -69,7 +69,7 @@
 [format]
   ; TODO: Should I use "%cr" or "%ar" for the date?
   ; pretty=format:%C(yellow)%h%Creset -%C(green)%d%Creset %s (%C(blue)%cr by %C(green)%an%Creset)%Creset
-  pretty=format:%C(bold red)%h%Creset %C(blue)%>(13)%cr%Creset%C(green)%d%Creset %s (%C(green)%an%Creset)%Creset
+  pretty=format:%C(bold red)%h%Creset %C(blue)%>(14)%cr%Creset%C(green)%d%Creset %s (%C(green)%an%Creset)%Creset
 
 [merge]
   tool = vimdiff
