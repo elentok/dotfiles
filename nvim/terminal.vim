@@ -35,3 +35,41 @@ augroup Elentok_Terminal
   autocmd BufWinEnter,WinEnter term://* startinsert
   autocmd BufLeave term://* stopinsert
 augroup END
+
+" Open all hidden terminals in a tab {{{1
+command! TermClean call OpenHiddenTerminals()
+function! OpenHiddenTerminals()
+  let terminals = FindHiddenTerminals()
+
+  if len(terminals) == 0
+    echomsg "There are no hidden terminals"
+    return
+  endif
+
+  tabnew
+  let is_first = 1
+  for term in terminals
+    if !is_first
+      wincmd s
+    endif
+
+    exec "buffer " . term
+
+    let is_first = 0
+  endfor
+  echomsg "Opened " . len(terminals) . " hidden terminals"
+endfunction
+
+function! FindHiddenTerminals()
+  let terminals = []
+
+  let all_buffers=[]
+  call map(range(1, tabpagenr('$')), 'extend(all_buffers, tabpagebuflist(v:val))')
+  for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(all_buffers, v:val)==-1')
+    if bufname(buf) =~ "^term://"
+      call add(terminals, buf)
+    endif
+  endfor
+
+  return terminals
+endfunc
