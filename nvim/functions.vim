@@ -8,6 +8,8 @@ command! Eautocmds  edit ~/.dotfiles/nvim/autocmds.vim
 command! Eplugs     edit ~/.dotfiles/nvim/plugs.vim
 command! Efunctions edit ~/.dotfiles/nvim/functions.vim
 command! Ekeys      edit ~/.dotfiles/nvim/keys.vim
+command! Efeatures  edit ~/.dotfiles/nvim/features.vim
+command! Eterminal  edit ~/.dotfiles/nvim/terminal.vim
 command! Esettings  edit ~/.dotfiles/nvim/settings.vim
 command! Eabbr      edit ~/.dotfiles/nvim/abbr.vim
 command! Ealiases   edit ~/.dotfiles/zsh/aliases.zsh

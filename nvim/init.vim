@@ -89,6 +89,10 @@ source $vimfiles/abbr.vim
 source $vimfiles/git.vim
 source $vimfiles/features.vim
 
+if has('nvim')
+  source $vimfiles/terminal.vim
+endif
+
 if file_readable(expand("~/.vimstate"))
   source ~/.vimstate
 endif
