@@ -106,9 +106,8 @@ common_plugins() {
   plugin zsh
   plugin bash
   plugin tmux
-  plugin vim
+  plugin nvim
   plugin ruby
-  # plugin mpd
 }
 
 mac_plugins() {

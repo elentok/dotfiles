@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source `dirname $0`/framework
+source $DOTF/framework
 
 header "GUI Apps"
 
