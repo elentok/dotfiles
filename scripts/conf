@@ -1,0 +1,55 @@
+#!/bin/bash
+#
+# Usage:
+#
+#   conf get {filename} {key}
+#   conf set {filename} {key} {value}
+
+main() {
+  local cmd="$1"
+  shift
+  case $cmd in
+    get|set)
+      conf_$cmd "$@"
+      ;;
+    *)
+      usage $0
+      exit 1
+  esac
+}
+
+conf_get() {
+  if [ $# -lt 2 ]; then usage $0; exit 1; fi
+
+  local filename="$1"
+  local key="$2"
+
+  if [ ! -f $filename ]; then return; fi
+
+  grep "^${key}\s*=" $filename | sed "s/^${key}\s*=\s*//"
+}
+
+conf_set() {
+  if [ $# -lt 3 ]; then usage $0; exit 1; fi
+
+  local filename="$1"
+  local key="$2"
+  local value="$3"
+  local line="${key} = ${value}"
+
+  if [ ! -f "$filename" ]; then
+    echo "$line" > "$filename"
+    return
+  fi
+
+
+  if grep "^${key}\s*=" "$filename" > /dev/null; then
+    local old_value="$(conf_get $filename $key)"
+    if [ "$value" == "$old_value" ]; then return; fi
+    sed -i.bak -e "s/^${key}\s*=.*$/${line}/" "$filename"
+  else
+    echo "$line" >> "$filename"
+  fi
+}
+
+main "$@"
