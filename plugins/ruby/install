@@ -7,12 +7,15 @@ RUBY_VERSION='2.3.0'
 main() {
   header "Ruby"
 
-  install_requirements
-  install_rbenv
-  install_ruby
-  create_symlinks
+  if is_arch; then
+    pacman_install ruby
+  else
+    install_requirements
+    install_rbenv
+    install_ruby
+  fi
 
-  install_nokogiri
+  create_symlinks
 }
 
 install_requirements() {
@@ -21,12 +24,6 @@ install_requirements() {
     apt_install autoconf bison build-essential libssl-dev libyaml-dev \
       libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 \
       libgdbm-dev libxml2-dev libxslt-dev
-  fi
-}
-
-install_nokogiri() {
-  if command_missing nokogiri; then
-    gem install nokogiri -- --use-system-libraries
   fi
 }
 
