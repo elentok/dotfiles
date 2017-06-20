@@ -17,23 +17,10 @@ process.stdout.on("error", err => {
 });
 
 function main() {
-  const proc = exec(`git log --decorate=full --pretty="${FORMAT}"`);
+  const args = process.argv.splice(2).join(" ");
+  const proc = exec(`git log --decorate=full --pretty="${FORMAT}" ${args}`);
   const rl = readline.createInterface({ input: proc.stdout });
-  const limit = findLimit();
-  let total = 0;
-  rl.on("line", line => {
-    parseLine(line);
-    if (limit != null && ++total >= limit) {
-      process.exit(0);
-    }
-  });
-}
-
-function findLimit() {
-  const arg = process.argv.find(a => /^-\d+$/.test(a));
-  if (arg == null) return null;
-
-  return -1 * parseInt(arg, 10);
+  rl.on("line", line => parseLine(line));
 }
 
 function parseLine(line) {
