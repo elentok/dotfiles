@@ -34,8 +34,7 @@
   f = fetch
   h = help
   l = !git plog ${1} | less --raw-control-chars --quit-if-one-screen --no-init
-  ll = plog -7
-  L = plog -15
+  ll = plog -10
   lg = log --graph
   m = merge
   my-branch = rev-parse --abbrev-ref HEAD
