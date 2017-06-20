@@ -33,8 +33,7 @@
   di = diff
   f = fetch
   h = help
-  l = plog
-  lp = !git plog | less -R
+  l = !git plog ${1} | less --raw-control-chars --quit-if-one-screen --no-init
   ll = plog -7
   lg = log --graph
   m = merge
