@@ -33,8 +33,9 @@
   di = diff
   f = fetch
   h = help
-  l = log
-  ll = log -5
+  l = plog
+  lp = !git plog | less -R
+  ll = plog -7
   lg = log --graph
   m = merge
   my-branch = rev-parse --abbrev-ref HEAD
