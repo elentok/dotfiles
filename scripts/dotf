@@ -122,10 +122,12 @@ mac_plugins() {
 }
 
 linux_plugins() {
+  header "Applications"
+
   if is_arch; then
-    pacman_install htop
+    pacman_install htop imagemagick ncdu
   else
-    apt_install htop
+    apt_install htop imagemagick ncdu
   fi
 
   if [ "$HAS_GUI" = 'yes' ]; then
