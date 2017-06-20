@@ -4,28 +4,57 @@ source $DOTF/framework
 
 header "i3 Window Manager"
 
-if is_arch; then
-  if command_missing i3; then
-    pacman_install i3
+main() {
+  install_i3
+  install_symlinks
+  install_session_file
+  install_utils
+  fix_nemo_desktop
+}
+
+install_i3() {
+  if is_arch; then
+    pacman_install i3-wm rofi dmenu
   fi
-  pacman_install rofi dmenu
-fi
+}
 
-I3="$DOTF/plugins/i3"
+install_symlinks() {
+  I3="$DOTF/plugins/i3"
 
-mkdir -p ~/.i3
-symlink "$I3/config" "$HOME/.i3/config"
-symlink "$I3/i3status.conf" "$HOME/.i3/i3status.conf"
-symlink "$I3/i3-session" "$HOME/.i3/i3-session"
-symlink "$I3/Xresources" "$HOME/.Xresources"
+  mkdir -p ~/.i3
+  symlink "$I3/config" "$HOME/.i3/config"
+  symlink "$I3/i3status.conf" "$HOME/.i3/i3status.conf"
+  symlink "$I3/i3-session" "$HOME/.i3/i3-session"
+  symlink "$I3/Xresources" "$HOME/.Xresources"
+}
 
-sudo sh -c "cat $I3/i3-session.desktop | sed \"s#{HOME}#$HOME#\" > /usr/share/xsessions/i3-session.desktop"
+install_session_file() {
+  bullet "Installing i3-session.desktop... "
+  local tmpfile=/tmp/i3-session.desktop
+  local targetfile=/usr/share/xsessions/i3-session.desktop
 
-# Make nemo (cinnamon's nautilus) not show desktop icons
-gsettings set org.nemo.desktop show-desktop-icons false
+  rm -f $tmpfile
+  sed "s#{HOME}#$HOME#" $I3/i3-session.desktop > $tmpfile
 
-if is_debian; then
-  apt_install pavucontrol xscreensaver
-else
-  pacman_install pavucontrol xscreensaver xclip
-fi
+  if diff $tmpfile $targetfile > /dev/null; then
+    info 'already installed'
+  else
+    sudo mv -f $tmpfile $targetfile
+    show_result die_on_error
+  fi
+}
+
+fix_nemo_desktop() {
+  # Make nemo (cinnamon's nautilus) not show desktop icons
+  gsettings set org.nemo.desktop show-desktop-icons false
+}
+
+install_utils() {
+  if is_arch; then
+    pacman_install pavucontrol xscreensaver xclip
+  else
+    apt_install pavucontrol xscreensaver
+  fi
+}
+
+main "$@"
