@@ -86,6 +86,7 @@ function leftPad(string, width, char = " ") {
 
 function formatDate(dateString) {
   dateString = dateString
+    .replace(/ seconds?/, "s")
     .replace(/ minutes?/, "m")
     .replace(/ hours?/, "h")
     .replace(/ days?/, "d")
@@ -93,7 +94,7 @@ function formatDate(dateString) {
     .replace(/ years?/, "y")
     .replace(/ weeks?/, "w");
 
-  return leftPad(dateString, 10);
+  return leftPad(dateString, 12);
 }
 
 function shortenAuthor(author) {
