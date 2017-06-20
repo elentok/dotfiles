@@ -1,0 +1,108 @@
+#!/usr/bin/env node
+
+const chalk = require("chalk");
+const { exec } = require("child_process");
+const readline = require("readline");
+
+const FORMAT = "%h;;;%cr;;;%D;;;%an;;;%s";
+
+// Keep colors when piping to head/less/...
+chalk.enabled = true;
+
+// Exit successfuly when the output pipe is closed (e.g. when piping to "head")
+process.stdout.on("error", err => {
+  if (err.code === "EPIPE") {
+    process.exit(0);
+  }
+});
+
+function main() {
+  const proc = exec(`git log --decorate=full --pretty="${FORMAT}"`);
+  const rl = readline.createInterface({ input: proc.stdout });
+  const limit = findLimit();
+  let total = 0;
+  rl.on("line", line => {
+    parseLine(line);
+    if (limit != null && ++total >= limit) {
+      process.exit(0);
+    }
+  });
+}
+
+function findLimit() {
+  const arg = process.argv.find(a => /^-\d+$/.test(a));
+  if (arg == null) return null;
+
+  return -1 * parseInt(arg, 10);
+}
+
+function parseLine(line) {
+  let [hash, commitDate, refs, author, subject] = line.split(";;;");
+
+  hash = chalk.magenta(hash);
+  commitDate = chalk.blue(formatDate(commitDate));
+  author = chalk.green(shortenAuthor(author));
+  refs = formatRefs(refs);
+  const dot = chalk.blue("●");
+  console.info(`${hash} ${commitDate} ${author} ${dot}${refs} ${subject}`);
+}
+
+function formatRefs(refs) {
+  refs = refs.trim();
+  if (refs.length === 0) return "";
+
+  refs = refs
+    .replace(/^\(/, "")
+    .replace(/\)$/, "")
+    .split(", ");
+
+  return " " + refs.map(formatRef).join(" ");
+}
+
+function formatRef(ref) {
+  ref = ref.replace("HEAD -> ", "");
+
+  if (/^tag:/.test(ref)) {
+    const tag = ref.substring(15);
+    return chalk.magenta(`<${tag}>`);
+  }
+
+  if (/^refs\/heads\//.test(ref)) {
+    const branch = ref.substring(11);
+    return chalk.green(`[${branch}]`);
+  }
+
+  ref = ref.replace(/^refs\/remotes\//, "");
+  return chalk.yellow(`{${ref}}`);
+}
+
+function leftPad(string, width, char = " ") {
+  while (string.length < width) {
+    string = `${char}${string}`;
+  }
+
+  return string;
+}
+
+function formatDate(dateString) {
+  dateString = dateString
+    .replace(/ minutes?/, "m")
+    .replace(/ hours?/, "h")
+    .replace(/ days?/, "d")
+    .replace(/ months?/, "mo")
+    .replace(/ years?/, "y")
+    .replace(/ weeks?/, "w");
+
+  return leftPad(dateString, 10);
+}
+
+function shortenAuthor(author) {
+  author = author
+    .split(" ")
+    .map(word => word.charAt(0))
+    .join("")
+    .substring(0, 2);
+  return leftPad(author, 2);
+}
+
+main();
