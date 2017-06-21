@@ -31,7 +31,7 @@ class IParcelResult {
 
 const IParcel = {
   isSupported(number) {
-    return /^[A-Z]{6}\d{11}$/.test(number);
+    return /^[A-Z]{6,7}\d{10,11}$/.test(number);
   },
 
   track(number) {
