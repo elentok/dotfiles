@@ -27,6 +27,7 @@ bindsym Scroll_Lock exec locklinux
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+d exec rofi -show run
 bindsym $mod+Shift+D exec dmenu_run
+bindsym $mod+q exec qalculate
 
 # Keys: Screenshot {{{2
 bindsym $mod+p exec bash ~/.dotfiles/scripts/sshot
@@ -183,6 +184,8 @@ for_window [class="Cerebro"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Gimp"] floating enable
 for_window [class="feh"] floating enable
+for_window [class="Qalculate-gtk"] floating enable
+for_window [class="Qalculate"] floating enable
 for_window [title="Copying.*"] floating enable
 for_window [title="Open Database -.*"] floating enable
 for_window [title=".* KeePass Password Safe"] floating enable
