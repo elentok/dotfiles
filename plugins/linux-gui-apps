@@ -4,8 +4,10 @@ source $DOTF/framework
 
 header "GUI Apps"
 
+COMMON="vlc feh gimp"
+
 if is_arch; then
-  pacman_install qt4 vlc
+  pacman_install $COMMON qt4
 else
-  apt_install keepassx gimp pysdm regexxer krusader vlc
+  apt_install keepassx $COMMON
 fi

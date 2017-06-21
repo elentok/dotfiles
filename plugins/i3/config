@@ -182,6 +182,7 @@ bar {
 for_window [class="Cerebro"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Gimp"] floating enable
+for_window [class="feh"] floating enable
 for_window [title="Copying.*"] floating enable
 for_window [title="Open Database -.*"] floating enable
 for_window [title=".* KeePass Password Safe"] floating enable
