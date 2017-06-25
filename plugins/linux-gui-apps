@@ -7,7 +7,7 @@ header "GUI Apps"
 COMMON="vlc feh gimp qalculate-gtk"
 
 if is_arch; then
-  pacman_install $COMMON keepassxc
+  pacman_install $COMMON keepassxc gvfs
 else
   apt_install keepassx $COMMON
 fi
