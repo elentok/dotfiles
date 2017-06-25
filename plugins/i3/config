@@ -191,6 +191,7 @@ for_window [title="Open Database -.*"] floating enable
 for_window [title=".* KeePass Password Safe"] floating enable
 for_window [title="Unlock Login .*"] floating enable
 for_window [title="Edit Entry"] floating enable
+for_window [class="keepassxc"] floating enable
 
 # Default workspaces {{{2
 assign [class="Gimp"] 4: gimp
