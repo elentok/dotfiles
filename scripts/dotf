@@ -53,6 +53,8 @@ install() {
     return
   fi
 
+  (cd $DOTF && yarn install)
+
   is_workstation && install_workstation
   is_server && install_server
   show_done
