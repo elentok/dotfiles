@@ -125,9 +125,9 @@ linux_plugins() {
   header "Applications"
 
   if is_arch; then
-    pacman_install htop imagemagick ncdu
+    pacman_install htop imagemagick ncdu wget
   else
-    apt_install htop imagemagick ncdu
+    apt_install htop imagemagick ncdu wget
   fi
 
   if [ "$HAS_GUI" = 'yes' ]; then

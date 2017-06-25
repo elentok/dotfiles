@@ -27,7 +27,7 @@ bindsym Scroll_Lock exec locklinux
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+d exec rofi -show run
 bindsym $mod+Shift+D exec dmenu_run
-bindsym $mod+q exec qalculate
+bindsym $mod+q exec qalculate-gtk
 
 # Keys: Screenshot {{{2
 bindsym $mod+p exec bash ~/.dotfiles/scripts/sshot
