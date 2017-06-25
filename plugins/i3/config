@@ -194,7 +194,6 @@ for_window [title="Edit Entry"] floating enable
 
 # Default workspaces {{{2
 assign [class="Gimp"] 4: gimp
-assign [class="Google-chrome"] 2: www
 assign [class="Telegram"] 3: chat
 
 # Run on startup {{{1
