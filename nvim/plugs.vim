@@ -79,7 +79,7 @@ if has('nvim')
         \ { 'do': 'pip3 install --user neovim jedi mistune psutil setproctitle' }
   Plug 'roxma/nvim-cm-tern'
   Plug 'roxma/ncm-rct-complete'
-  Plug 'roxma/neco-vim'
+  Plug 'Shougo/neco-vim'
 
   " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   " Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
