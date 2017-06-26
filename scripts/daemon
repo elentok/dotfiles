@@ -18,7 +18,7 @@ main() {
   local cmd="daemon_$1"
   shift
 
-  if [[ "$(type $cmd)" =~ "function" ]]; then
+  if [[ "$(type $cmd 2>/dev/null)" =~ "function" ]]; then
     $cmd "$@"
   else
     usage $0
