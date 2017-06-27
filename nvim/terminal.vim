@@ -20,6 +20,7 @@ tnoremap <c-l> <c-\><c-n><c-w>l
 
 nnoremap <c-a>r :so $vimrc<cr>
 nnoremap <c-a>c :tabe<cr>:terminal<cr>
+tnoremap <c-a>a <c-a>
 tnoremap <c-a>c <c-\><c-n>:tabe<cr>:terminal<cr>
 
 nnoremap <c-a>v :TermVertical<cr>
