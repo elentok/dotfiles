@@ -291,3 +291,12 @@ noremap <Leader>co* :CSScolor '<c-r>*'<cr>
 vnoremap ,s :!sort<cr>
 
 nnoremap <Leader>nf :Neoformat<cr>
+
+" Tabs {{{1
+noremap <m-.> gt
+inoremap <m-.> <c-o>gt
+tnoremap <m-.> <c-\><c-n>gt
+
+noremap <m-,> gT
+inoremap <m-,> <c-o>gT
+tnoremap <m-,> <c-\><c-n>gT
