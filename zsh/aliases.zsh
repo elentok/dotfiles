@@ -23,6 +23,7 @@ alias c=clear
 alias cd/='cd "$(find-root)"'
 alias cf='/bin/ls -1 | wc -l' # count files
 alias df='df -kh'
+alias doc='docker-compose'
 alias dotfi='cd $DOTF'
 alias dotl='cd $DOTL'
 alias du='du -kh'
