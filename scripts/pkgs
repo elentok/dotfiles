@@ -21,7 +21,7 @@ const IsraelPost = {
     const url = this._getUrl(number);
     return axios.get(url).then(response => {
       const text = htmlToText.fromString(response.data.itemcodeinfo, {
-        wordwrap: 100,
+        wordwrap: 50,
         tables: true
       });
       return text;
