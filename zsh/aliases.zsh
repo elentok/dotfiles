@@ -24,6 +24,7 @@ alias cd/='cd "$(find-root)"'
 alias cf='/bin/ls -1 | wc -l' # count files
 alias df='df -kh'
 alias doc='docker-compose'
+alias dr='docker-compose run'
 alias dotfi='cd $DOTF'
 alias dotl='cd $DOTL'
 alias du='du -kh'
@@ -81,7 +82,6 @@ fi
 alias vl='vim "+OpenSession! last"'
 alias vz='file="$(edit-zsh-dotfile)" && source $file'
 alias x=exit
-alias y=yarn
 alias yr='yarn run'
 alias tailpow='tail -f $(find ~/Library/Logs/Pow -name "*.log" | fzf)'
 alias ports='sudo echo && (sudo lsof -i -n -P | fzf --header-lines=1)'
