@@ -30,13 +30,6 @@ augroup Elentok_Misc
 
   autocmd FileType coffee,yaml        FoldByIndent
 
-  " Neoformat:
-  "
-  " autocmd BufWritePre * Neoformat
-  autocmd BufWritePre *.js Neoformat
-  " autocmd FileType javascript set formatprg=prettier\ --stdin
-  " autocmd BufWritePre *.js exe "normal! gggqG\<C-o>\<C-o>"
-
   " RestoreCursorPosition:
   "
   " When editing a file, always jump to the last known cursor position.
@@ -51,9 +44,6 @@ augroup Elentok_Misc
 
   " remap <cr> in quickfix buffers
   autocmd BufRead * call RemapCrInQuickFixBuffers()
-
-  " autocompile coffeescript
-  autocmd BufWritePost *.coffee call CoffeeMake()
 
   " fix nerdtree width
   autocmd BufEnter *

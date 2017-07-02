@@ -302,13 +302,6 @@ if filereadable(gtags_script)
   exec "source " . gtags_script
 endif
 
-" Neoformat {{{1
-let g:neoformat_enabled_javascript = ['prettier']
-let g:neoformat_enabled_scss = ['stylefmt']
-
-let g:neoformat_java_google = {'exe': 'google-java-format'}
-let g:neoformat_enabled_java = ['google']
-
 " Statusline {{{1
 set statusline=
 set statusline+=%f " Path to the file in the buffer, as typed or relative to current directory
