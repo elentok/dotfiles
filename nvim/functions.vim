@@ -172,7 +172,7 @@ endfunc
 let g:hash_tags = {
   \ 'python': '#!/usr/bin/env python',
   \ 'ruby': '#!/usr/bin/env ruby',
-  \ 'bash': '#!/bin/bash',
+  \ 'bash': '#!/usr/bin/env bash',
   \ 'node': '#!/usr/bin/env node'
   \}
 
