@@ -50,8 +50,4 @@ augroup Elentok_Misc
     \ if exists("b:NERDTree")   |
     \   call FixNERDTreeWidth() |
     \ endif
-
-  if has('nvim')
-    autocmd! BufWritePost * Neomake
-  endif
 augroup END

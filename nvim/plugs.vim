@@ -72,7 +72,7 @@ Plug 'avakhov/vim-yaml',               { 'for': 'yaml' } " indentation
 Plug 'tpope/vim-haml',                 { 'for': 'haml' }
 
 if has('nvim')
-  Plug 'benekastah/neomake'
+  Plug 'w0rp/ale'
   Plug 'kassio/neoterm'
 
   Plug 'roxma/nvim-completion-manager',
