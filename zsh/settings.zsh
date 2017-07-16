@@ -148,6 +148,9 @@ unsetopt CLOBBER            # Do not overwrite existing files with > and >>.
 # make FZF respect .gitignore
 export FZF_DEFAULT_COMMAND='ag -g ""'
 
+# https://github.com/junegunn/fzf/issues/809
+[ -n "$NVIM_LISTEN_ADDRESS" ] && export FZF_DEFAULT_OPTS='--no-height'
+
 # SSH {{{1
 export SSH_AUTH_SOCK="$HOME/.ssh/default-agent"
 agent fix
