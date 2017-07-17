@@ -298,8 +298,10 @@ let g:go_fmt_command = "goimports"
 
 " ALE (Linters) {{{1
 let g:ale_linters = {
-      \ 'go': ['gofmt', 'go vet'],
+      \ 'go': ['gofmt', 'go vet', 'gometalinter'],
       \}
+
+let g:ale_go_gometalinter_options = "--disable=golint"
 
 " GNU Global (gtags) {{{1
 let gtags_script=expand("$BREW_HOME/share/gtags/gtags-cscope.vim")
