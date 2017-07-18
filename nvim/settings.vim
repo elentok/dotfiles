@@ -303,6 +303,13 @@ let g:ale_linters = {
 
 let g:ale_go_gometalinter_options = "--disable=golint"
 
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
+hi ALEWarningSign ALEErrorSign
+
+nmap <silent> [g <Plug>(ale_previous_wrap)
+nmap <silent> ]g <Plug>(ale_next_wrap)
+
 " GNU Global (gtags) {{{1
 let gtags_script=expand("$BREW_HOME/share/gtags/gtags-cscope.vim")
 if filereadable(gtags_script)
