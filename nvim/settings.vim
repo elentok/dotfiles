@@ -305,7 +305,7 @@ let g:ale_go_gometalinter_options = "--disable=golint"
 
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '⚠'
-hi ALEWarningSign ALEErrorSign
+hi link ALEWarningSign ALEErrorSign
 
 nmap <silent> [g <Plug>(ale_previous_wrap)
 nmap <silent> ]g <Plug>(ale_next_wrap)
