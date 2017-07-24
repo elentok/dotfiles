@@ -126,7 +126,9 @@ fi
 export PATH
 
 # EDITOR {{{1
-if has_command nvim; then
+if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
+  export EDITOR='nvr -cc split --remote-wait'
+elif has_command nvim; then
   export EDITOR=nvim
 else
   export EDITOR=vim
