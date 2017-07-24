@@ -29,8 +29,10 @@ const IsraelPost = {
   },
 
   _getUrl(number) {
-    return "http://www.israelpost.co.il/itemtrace.nsf/trackandtraceJSON" +
-      `?openagent&_=1372171578320&lang=EN&itemcode=${number}`;
+    return (
+      "http://www.israelpost.co.il/itemtrace.nsf/trackandtraceJSON" +
+      `?openagent&_=1372171578320&lang=EN&itemcode=${number}`
+    );
   }
 };
 
@@ -138,6 +140,7 @@ class Tracker {
       process.stderr.write(CLEAR_LINE);
       console.info(`Package ${pkg.name} (${pkg.tracking}):`);
 
+      text = this._indentText(text);
       if (this._isDelivered(text)) {
         text = colors.green(text);
       } else if (!/There is no information/.test(text)) {
@@ -154,9 +157,20 @@ class Tracker {
     });
   }
 
+  _indentText(text) {
+    if (text == null || text.length === 0) return "";
+    return text
+      .toString()
+      .split("\n")
+      .map(line => line.replace(/^/, "  "))
+      .join("\n");
+  }
+
   _isDelivered(text) {
-    return /Delivered to addressee/.test(text) ||
-      /postal item was delivered/.test(text);
+    return (
+      /Delivered to addressee/.test(text) ||
+      /postal item was delivered/.test(text)
+    );
   }
 }
 
