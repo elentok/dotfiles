@@ -305,7 +305,7 @@ let g:ale_linters = {
 let g:ale_go_gometalinter_options = "--disable=golint"
 
 let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '⚠'
+let g:ale_sign_warning = '?'
 hi link ALEErrorSign Error
 hi link ALEWarningSign Error
 
