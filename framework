@@ -274,7 +274,7 @@ npm_install() {
     return
   fi
 
-  if [ "`npm_cache | grep \"\\b$1\\b\"`" ]; then
+  if [ -d "$NODE_MODULES/$1" ]; then
     info " already installed"
   else
     npm="npm"
@@ -285,15 +285,6 @@ npm_install() {
 
 is_user_nodejs() {
   [ "$(stat --format=%U $(which node))" = "$(whoami)" ]
-}
-
-rm -f /tmp/npm_cache
-
-npm_cache() {
-  if [ ! -e /tmp/npm_cache ]; then
-    npm ls -g 2>/dev/null > /tmp/npm_cache
-  fi
-  cat /tmp/npm_cache
 }
 
 # Gems {{{1

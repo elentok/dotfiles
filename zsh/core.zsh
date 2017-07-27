@@ -93,6 +93,9 @@ if is_mac; then
   export CGO_LDFLAGS="-L $BREW_HOME/lib"
 fi
 
+# Node {{{1
+export NODE_MODULES="$(cd "$(dirname $(which node))/../lib/node_modules" && pwd)"
+
 # PATH {{{1
 PATH=$DOTF/scripts:$DOTL/scripts
 PATH=$PATH:$HOME/.yarn/bin
