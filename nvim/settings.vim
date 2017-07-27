@@ -299,13 +299,15 @@ let g:go_fmt_command = "goimports"
 " ALE (Linters) {{{1
 let g:ale_linters = {
       \ 'go': ['gofmt', 'go vet', 'gometalinter'],
+      \ 'html': ['htmlhint'],
       \}
 
 let g:ale_go_gometalinter_options = "--disable=golint"
 
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '⚠'
-hi link ALEWarningSign ALEErrorSign
+hi link ALEErrorSign Error
+hi link ALEWarningSign Error
 
 nmap <silent> [g <Plug>(ale_previous_wrap)
 nmap <silent> ]g <Plug>(ale_next_wrap)
