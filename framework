@@ -8,12 +8,6 @@ export DOTF=`cd $DOTF && pwd`
 
 source $DOTF/zsh/core.zsh
 
-# BREW_HOME directory {{{1
-BREW_HOME=/usr/local
-if [ -e "$HOME/.homebrew" ]; then
-  BREW_HOME=$HOME/.homebrew
-fi
-export BREW_HOME
 
 # Machine varibles {{{1
 MACHINE_VARFILE=$HOME/.config/machine
@@ -353,7 +347,7 @@ brew_tap() {
 }
 
 has_brew_tap() {
-  [ "`brew_list_taps | grep \"^$1\$\"`" != "" ]
+  brew_list_taps | grep "^$1$" > /dev/null
 }
 
 brew_list_taps() {
