@@ -127,7 +127,6 @@ noremap <Leader>e1 :exec ":normal A <c-v><esc>" . (79 - strlen(getline("."))) . 
 noremap <Leader>e2 :exec ":normal A <c-v><esc>" . (69 - strlen(getline("."))) . "A="<cr>
 noremap <Leader>e3 :exec ":normal A <c-v><esc>" . (59 - strlen(getline("."))) . "A-"<cr>
 
-inoremap <c-t> <c-r>=UltiSnips_ListSnippets()<cr>
 inoremap <C-\> <c-o>ma<c-o>A;<c-o>`a
 
 nnoremap ]m :SidewaysRight<cr>
