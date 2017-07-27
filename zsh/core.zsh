@@ -72,7 +72,7 @@ is_debian() {
 
 # BREW_HOME {{{1
 for dir in ~/.linuxbrew ~/.homebrew /usr/local; do
-  if [ -e "$dir" ]; then
+  if [ -d "$dir" ]; then
     export BREW_HOME=$dir
     break
   fi
