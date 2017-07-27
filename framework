@@ -362,7 +362,11 @@ brew_tap() {
 }
 
 has_brew_tap() {
-  [ "`brew tap | grep \"^$1\$\"`" != "" ]
+  [ "`brew_list_taps | grep \"^$1\$\"`" != "" ]
+}
+
+brew_list_taps() {
+  cd $BREW_HOME/Library/Taps && /bin/ls -1d */*
 }
 
 # Homebrew Cask {{{1
