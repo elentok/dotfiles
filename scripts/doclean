@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+# Kills all docker containers
+#
+# Usage:
+#
+#   doclean [filter]
+
+if [ "$1" == "-h" ]; then
+  usage $0
+  exit 1
+fi
+
+containers=$(docker ps -qa --no-trunc --filter "$1")
+
+if [ -z "$containers" ]; then
+  echo "No containers found"
+  exit 1
+fi
+
+docker rm $containers
