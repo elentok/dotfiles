@@ -78,3 +78,4 @@ endfunc
 
 " Use neovim-remote to prevent opening vim inside the terminal {{{1
 " let $VISUAL = 'nvr -cc split --remote-wait'
+
