@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+REPO="$HOME/.local/share/powerline-fonts"
+
+main() {
+  if [ -e $REPO ]; then
+    pull-repo
+  else
+    clone-repo
+  fi
+
+  cd $REPO
+  ./install.sh
+}
+
+clone-repo() {
+  mkdir -p ~/.local/share
+  cd ~/.local/share
+  git clone https://github.com/powerline/fonts powerline-fonts
+  cd powerline-fonts
+}
+
+pull-repo() {
+  cd $REPO
+  git pull
+}
+
+main "$@"
