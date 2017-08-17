@@ -1,0 +1,53 @@
+#!/usr/bin/env node
+
+const prompt = require("prompt");
+const Database = require("./keepass/database");
+const Diff = require("./keepass/diff");
+
+function usage() {
+  console.info(
+    `
+keesync
+
+Usage:
+
+    keesync [file1.kdbx] [file2.kdbx]
+  `
+  );
+}
+
+function main() {
+  const args = process.argv.slice(2);
+
+  if (args.length < 2) {
+    usage();
+    process.exit(1);
+  }
+
+  start(args[0], args[1]);
+}
+
+function start(filename1, filename2) {
+  prompt.start();
+  prompt.get([{ name: "password", hidden: true }], (err, result) => {
+    if (err) {
+      console.error(err);
+      process.exit(2);
+    }
+
+    Promise.all([
+      Database.load(filename1, result.password),
+      Database.load(filename2, result.password)
+    ])
+      .then(([db1, db2]) => {
+        const diff = new Diff();
+        diff.compare(db1, db2);
+        diff.summary();
+      })
+      .catch(err => {
+        console.error("Error loading database", err);
+      });
+  });
+}
+
+main();
