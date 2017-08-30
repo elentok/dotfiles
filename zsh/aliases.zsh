@@ -80,6 +80,7 @@ else
   alias vi=vim
 fi
 alias vo='nvr -o'
+alias vv='nvr -O'
 alias vl='vim "+OpenSession! last"'
 alias vz='file="$(edit-zsh-dotfile)" && source $file'
 alias x=exit
