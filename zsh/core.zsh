@@ -101,6 +101,10 @@ PATH=$PATH:$HOME/.fzf/bin
 PATH=$PATH:$HOME/bin:$HOME/scripts:$HOME/.local/bin
 PATH=$PATH:$GOROOT/bin:$MAIN_GOPATH/bin
 
+if [ -d $HOME/Library/Python/3.6/bin ]; then
+  PATH=$PATH:$HOME/Library/Python/3.6/bin
+fi
+
 # replace bsd binaries with gnu
 for pkg in coreutils findutils gnu-sed; do
   gnubin="$BREW_HOME/opt/$pkg/libexec/gnubin"
