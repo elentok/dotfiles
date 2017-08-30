@@ -73,6 +73,7 @@ install_cli_tools() {
   npm_install sass-lint
   pip_install pylint
   pip_install yamllint
+  pip3_install neovim-remote
 }
 
 main $@

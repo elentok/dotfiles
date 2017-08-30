@@ -79,6 +79,7 @@ if has_command nvim; then
 else
   alias vi=vim
 fi
+alias vo='nvr -o'
 alias vl='vim "+OpenSession! last"'
 alias vz='file="$(edit-zsh-dotfile)" && source $file'
 alias x=exit
