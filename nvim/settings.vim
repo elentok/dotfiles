@@ -300,6 +300,7 @@ let g:go_fmt_command = "goimports"
 let g:ale_linters = {
       \ 'go': ['gofmt', 'go vet', 'gometalinter'],
       \ 'html': ['htmlhint'],
+      \ 'scss': ['sasslint'],
       \}
 
 let g:ale_go_gometalinter_options = "--disable=golint"
