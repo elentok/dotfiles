@@ -45,39 +45,40 @@ class Diff {
 
   _compareSubgroups(group1, group2) {
     const sg2byUuid = {};
-    group2.groups.forEach(sg2 => sg2byUuid[sg2.uuid] = sg2);
+    group2.groups.forEach(sg2 => (sg2byUuid[sg2.uuid] = sg2));
 
     group1.groups.forEach(sg1 => {
       const sg2 = sg2byUuid[sg1.uuid];
       delete sg2byUuid[sg1.uuid];
 
       if (sg2 == null) {
-        this.db1missingGroups.add(sg2);
+        this.db1missingGroups.push(sg2);
       } else {
         this._compareGroups(sg1, sg2);
       }
     });
 
-    Object.values(sg2byUuid).forEach(sg2 => this.db2missingGroups.add(sg2));
+    Object.values(sg2byUuid).forEach(sg2 => this.db2missingGroups.push(sg2));
   }
 
   _compareEntries(group1, group2) {
     const entry2byUuid = {};
-    group2.entries.forEach(entry2 => entry2byUuid[entry2.uuid] = entry2);
+    group2.entries.forEach(entry2 => (entry2byUuid[entry2.uuid] = entry2));
 
     group1.entries.forEach(entry1 => {
       const entry2 = entry2byUuid[entry1.uuid];
       delete entry2byUuid[entry1.uuid];
 
       if (entry2 == null) {
-        this.db1missingEntries.add(entry2);
+        this.db2missingEntries.push(entry1);
       } else {
         this._compareSameEntry(entry1, entry2);
       }
     });
 
     Object.values(entry2byUuid).forEach(entry2 =>
-      this.db2missingEntries.add(entry2));
+      this.db1missingEntries.push(entry2)
+    );
   }
 
   _compareSameEntry(entry1, entry2) {
