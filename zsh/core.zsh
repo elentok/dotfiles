@@ -78,6 +78,14 @@ for dir in ~/.linuxbrew ~/.homebrew /usr/local; do
   fi
 done
 
+# BREW_ROOT {{{1
+for dir in ~/.linuxbrew ~/.homebrew /usr/local/Homebrew; do
+  if [ -d "$dir" ]; then
+    export BREW_ROOT=$dir
+    break
+  fi
+done
+
 # Go {{{1
 export GOROOT=$BREW_HOME/opt/go/libexec
 export MAIN_GOPATH=$HOME/go
