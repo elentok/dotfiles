@@ -98,6 +98,18 @@ Command Line Tips
 
     git rebase -i --exec <build command> <first sha you want to test>~
 
+### git remove submodule
+
+1. Delete module from .gitmodules and stage it (`git add .gitmodules`)
+2. Delete the section from .git/config
+3. Run
+
+    git rm --cached path/to/submodule
+    rm -rf .git/modules/submodule
+
+4. Commit the change
+5. Delete the now untracked submodule files (`rm -rf path/to/submodule`).
+
 ## ImageMagick
 
 ### ImageMagick resize
