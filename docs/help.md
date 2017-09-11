@@ -332,3 +332,7 @@ This is a link to [Something][1]
 
     # show diff for each file:
     diff -r dirA dirB
+
+## change ubuntu/debian default terminal
+
+    sudo update-alternatives --config x-terminal-emulator
