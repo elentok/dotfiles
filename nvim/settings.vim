@@ -301,6 +301,7 @@ let g:ale_linters = {
       \ 'go': ['gofmt', 'go vet', 'gometalinter'],
       \ 'html': ['htmlhint'],
       \ 'scss': ['sasslint'],
+      \ 'typescript': ['tslint', 'tsserver', 'typecheck'],
       \}
 
 let g:ale_go_gometalinter_options = "--disable=golint"
