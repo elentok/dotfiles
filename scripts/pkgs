@@ -37,14 +37,14 @@ const IsraelPost = {
 };
 
 class Package {
-  constructor(name, store, { when, tracking }) {
+  constructor({ name, store, date, tracking }) {
     this.name = name;
     this.store = store;
-    this.when = when;
+    this.date = date;
     this.tracking = tracking;
 
-    if (when == null) {
-      console.warn(`WARNING: Package "${name}" is missing "when"`);
+    if (date == null) {
+      console.warn(`WARNING: Package "${name}" is missing "date"`);
     }
 
     if (tracking != null) {
@@ -66,7 +66,7 @@ class Package {
   }
 
   getTimeAgo() {
-    const msAgo = new Date() - this.when;
+    const msAgo = new Date() - this.date;
     const daysAgo = Math.floor(msAgo / 1000 / 60 / 60 / 24);
 
     if (daysAgo === 0) {
@@ -91,24 +91,13 @@ class Package {
 }
 
 function loadPackages() {
-  const packagesByStore = yaml.safeLoad(
-    fs.readFileSync(path.join(process.env.HOME, ".packages"))
-  );
-
-  const packages = [];
-
-  Object.keys(packagesByStore).forEach(store => {
-    const packagesByName = packagesByStore[store];
-    Object.keys(packagesByName).forEach(name => {
-      packages.push(new Package(name, store, packagesByName[name]));
-    });
-  });
-
-  return packages;
+  return yaml
+    .safeLoad(fs.readFileSync(path.join(process.env.HOME, ".packages")))
+    .map(package => new Package(package));
 }
 
 function listPackages() {
-  const packages = _.sortBy(loadPackages(), pkg => pkg.when);
+  const packages = _.sortBy(loadPackages(), pkg => pkg.date);
   const table = new Table();
   packages.forEach(pkg => pkg.addToTable(table));
 
