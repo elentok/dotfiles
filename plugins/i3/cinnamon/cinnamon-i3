@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Register with cinnamon-session so that it does not kill the whole session thinking it is dead.
+if [ -n "$DESKTOP_AUTOSTART_ID" ]; then
+  dbus-send --session --dest=org.gnome.SessionManager \
+    "/org/gnome/SessionManager" org.gnome.SessionManager.RegisterClient \
+    "string:i3-cinnamon" "string:$DESKTOP_AUTOSTART_ID"
+fi
+
+i3
+
+test -n "$DESKTOP_AUTOSTART_ID" && {
+  dbus-send --print-reply --session --dest=org.gnome.SessionManager \
+    "/org/gnome/SessionManager" org.gnome.SessionManager.Logout "uint32:1"
+}
