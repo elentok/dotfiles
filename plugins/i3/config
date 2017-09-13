@@ -198,5 +198,8 @@ assign [class="Gimp"] 4: gimp
 assign [class="Telegram"] 3: chat
 
 # Run on startup {{{1
-exec xscreensaver -no-splash &
-exec setxkbmap us
+# exec xscreensaver -no-splash &
+# exec setxkbmap us
+# exec --no-startup-id cinnamon-settings-daemon
+# exec --no-startup-id cinnamon-screensaver
+

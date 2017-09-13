@@ -1,0 +1,5 @@
+# -*- mode: conf -*-
+
+[Cinnamon Session]
+Name=i3
+RequiredComponents=cinnamon-i3;cinnamon-settings-daemon;cinnamon-screensaver;polkit-gnome-authentication-agent-1;
