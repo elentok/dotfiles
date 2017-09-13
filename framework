@@ -591,6 +591,34 @@ make_dir() {
   fi
 }
 
+# sudo_copy {{{1
+sudo_copy() {
+  bullet "Copying $(basename $1) to $2 (with sudo)... "
+
+  if should_sudo_copy "$1" "$2"; then
+    if [ -e "$2.backup" ]; then
+      sudo mv -f "$2" "$2.backup"
+    fi
+
+    sudo cp -f "$1" "$2"
+    show_result die_on_error
+  else
+    info 'already exists'
+  fi
+}
+
+should_sudo_copy() {
+  if [ ! -e "$2" ]; then
+    return 0
+  fi
+
+  if diff "$1" "$2" > /dev/null; then
+    return 1
+  fi
+
+  return 0
+}
+
 # copy_to_dir {{{1
 copy_to_dir() {
   source="$1"
@@ -833,7 +861,7 @@ verify-perms() {
   if [ "$actual" == "$expected" ]; then
     info 'ok'
   else
-    chmod $expected "$file"
+    ${CHMOD:-chmod} $expected "$file"
     show_result
   fi
 }
