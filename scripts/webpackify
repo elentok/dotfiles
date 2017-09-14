@@ -14,6 +14,7 @@ main() {
 
   yarn_add
   cp -vf $ROOT/webpack.config.js .
+  cp -vf $ROOT/babelrc.json .babelrc
 
   setup_src
   [ "$KARMA" == "yes" ] && setup_tests

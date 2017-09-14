@@ -38,15 +38,7 @@ const config = {
       {
         test: /\.js$/,
         exclude: /node_modules\/underscore/,
-        use: [
-          {
-            loader: "babel-loader",
-            options: {
-              presets: ["es2015"],
-              plugins: ["transform-object-assign"]
-            }
-          }
-        ]
+        use: "babel-loader"
       },
 
       // fonts
@@ -91,9 +83,11 @@ const config = {
   plugins: [
     new ExtractTextPlugin({ filename: cssFilename }),
     new webpack.ProvidePlugin({
-      fetch: "imports-loader?" +
+      fetch:
+        "imports-loader?" +
         "this=>global!exports-loader?global.fetch!whatwg-fetch",
-      Promise: "imports-loader?" +
+      Promise:
+        "imports-loader?" +
         "this=>global!exports-loader?global.Promise!es6-promise"
     }),
     new HtmlWebpackPlugin({
