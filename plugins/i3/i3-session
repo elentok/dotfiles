@@ -14,7 +14,8 @@
   setxkbmap -option 'grp:menu_toggle' -option 'ctrl:nocaps'
 
   cinnamon-settings-daemon &
-  cinnamon-screensaver &
+
+  light-locker --lock-on-suspend --no-late-locking &
 
   # Network Management Applet
   has_command nm-applet && nm-applet &

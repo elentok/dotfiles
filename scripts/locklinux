@@ -1,4 +1,3 @@
 #!/bin/bash
 
-cinnamon-screensaver-command --lock
-# i3lock -i "$(random-picture ~/Pictures/MyBest)"
+light-locker-command -l
