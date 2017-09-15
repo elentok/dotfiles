@@ -4,13 +4,16 @@
 #
 # Usage:
 #   agent list              - list the available agents
-#   agent which             - show the default agent
-#   agent choose            - choose a default agent (interactive)
+#   agent status            - show the active agent
+#   agent choose            - choose a active agent (interactive)
 #   agent set [socket-path] - switch to specific agent
-#   agent fix               - attempt to fix a zombie default agent
+#   agent setup             - attempt to fix a zombie active agent
+#   agent stop              - stop the local ssh agent
 
-DEFAULT_AGENT="$HOME/.ssh/default-agent"
-LOCAL_AGENT="/tmp/ssh-agent-$USER"
+LIFE=28800 # 8 hours
+ACTIVE_AGENT="$HOME/.ssh/active-agent"
+LOCAL_AGENT="$HOME/.ssh/local-agent"
+LOCAL_AGENT_PIDFILE="$HOME/.ssh/local-agent-pid"
 
 main() {
   local cmd="$1"
@@ -18,25 +21,25 @@ main() {
 
   case "$cmd" in
     list   | l) list-agents ;;
-    which  | w) default-agent;;
+    status | w) show-status;;
     choose | c) choose-agent;;
     set    | s) set-agent "$@";;
-    fix    | f) fix;;
+    setup  | f) setup;;
+    stop)       stop-local-agent;;
     *)          usage "$0";;
   esac
 }
 
 list-agents() {
-  echo 'local'
-
+  echo "local"
   if [ -n "$(find /tmp/ssh-* -iname 'agent*')" ]; then
     stat -c "%n (%y)" /tmp/ssh-*/agent*
   fi
 }
 
-default-agent() {
-  if [ -e $DEFAULT_AGENT ]; then
-    local real="$(readlink $DEFAULT_AGENT)"
+show-active-agent() {
+  if [ -e $ACTIVE_AGENT ]; then
+    local real="$(readlink $ACTIVE_AGENT)"
     if [ -e "$real" ]; then
       echo $real
     fi
@@ -49,31 +52,87 @@ choose-agent() {
     error 'User aborted'
     exit 1
   fi
+
   set-agent "$agent"
+}
+
+setup() {
+  set-agent "$(show-active-agent)"
 }
 
 set-agent() {
   local agent="$1"
-  if [ "$agent" == 'local' ]; then
-    local agent="$LOCAL_AGENT"
-  fi
-  if ! is-agent-running "$agent"; then
-    ssh-agent -a "$agent" > /dev/null
-  fi
-
-  echo "Setting default agent: $agent"
-  ln -sf $agent $DEFAULT_AGENT
-}
-
-fix() {
-  echo
-  if ! is-agent-running "$DEFAULT_AGENT"; then
-    set-agent 'local'
+  if [ "$agent" == 'local' -o "$agent" == "$LOCAL_AGENT" ]; then
+    setup-local-agent
+  else
+    setup-forwarded-agent "$agent"
+    echo "Setting active agent: $agent"
   fi
 }
 
-is-agent-running() {
-  [ -n "$1" -a -e "$1" ]
+setup-forwarded-agent() {
+  echo -n "Setting up remote agent... "
+
+  if [ -e "$1" ]; then
+    echo -n "Setting up symlink... "
+    ln -sf $1 $ACTIVE_AGENT
+    echo "done."
+    return 0
+  fi
+
+  setup-local-agent
+}
+
+setup-local-agent() {
+  echo -n "Setting up local agent... "
+  if [ -e "$LOCAL_AGENT" ]; then
+    if is-local-agent-running; then
+      echo "Local agent is already running."
+      return 0
+    fi
+  fi
+
+  create-local-agent
+  ln -sf $LOCAL_AGENT $ACTIVE_AGENT
+}
+
+create-local-agent() {
+  echo -n "Creating local agent... "
+  eval "$(ssh-agent -a $LOCAL_AGENT -t $LIFE)" > /dev/null
+  echo $SSH_AGENT_PID > $LOCAL_AGENT_PIDFILE
+  echo "created (pid $SSH_AGENT_PID)."
+}
+
+show-status() {
+  local active_agent="$(show-active-agent)"
+
+  if [ -z "$active_agent" ]; then
+    echo "No active ssh agent"
+  elif is-local-agent; then
+    echo "Agent:        $active_agent"
+    echo "Type:         local"
+    echo "PID:          $(cat $LOCAL_AGENT_PIDFILE)"
+    is-local-agent-running && \
+      echo "Status:       running" || \
+      echo "Status:       not running"
+  else
+    echo "Agent:        $active_agent"
+    echo "Type: Forwarded"
+  fi
+}
+
+is-local-agent() {
+  [ "$(show-active-agent)" == "$LOCAL_AGENT" ]
+}
+
+is-local-agent-running() {
+  kill -0 "$(cat $LOCAL_AGENT_PIDFILE)" > /dev/null
+}
+
+stop-local-agent() {
+  killall ssh-agent 2> /dev/null
+  rm -f "$LOCAL_AGENT"
+  rm -f "$LOCAL_AGENT_PID"
 }
 
 main "$@"
