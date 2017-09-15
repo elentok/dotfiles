@@ -11,20 +11,13 @@ main() {
   install_symlinks
   install_session_file
   install_utils
-  # fix_nemo_desktop
-  #
-  sudo_copy "$I3/cinnamon/cinnamon-i3" "/usr/bin/cinnamon-i3"
-  sudo_copy "$I3/cinnamon/cinnamon-i3-session" "/usr/bin/cinnamon-i3-session"
-  sudo_copy "$I3/cinnamon/i3.session" "/usr/share/cinnamon-session/sessions/i3.session"
-  sudo_copy "$I3/cinnamon/xsession.desktop" "/usr/share/xsessions/cinnamon-i3.desktop"
-  sudo_copy "$I3/cinnamon/app.desktop" "/usr/share/applications/cinnamon-i3.desktop"
+  # sudo_copy "$I3/cinnamon/cinnamon-i3" "/usr/bin/cinnamon-i3"
+  # sudo_copy "$I3/cinnamon/cinnamon-i3-session" "/usr/bin/cinnamon-i3-session"
+  # sudo_copy "$I3/cinnamon/i3.session" "/usr/share/cinnamon-session/sessions/i3.session"
+  # sudo_copy "$I3/cinnamon/xsession.desktop" "/usr/share/xsessions/cinnamon-i3.desktop"
+  # sudo_copy "$I3/cinnamon/app.desktop" "/usr/share/applications/cinnamon-i3.desktop"
 
   update-desktop-database -q
-
-  # sudo_copy "$I3/gnome/bin" "/usr/bin/i3-gnome"
-  # sudo_copy "$I3/gnome/gnome.session" "/usr/share/gnome-session/sessions/i3-gnome.session"
-  # sudo_copy "$I3/gnome/xsession.desktop" "/usr/share/xsessions/i3-gnome.desktop"
-  # sudo_copy "$I3/gnome/app.desktop" "/usr/share/applications/i3-gnome.desktop"
 }
 
 install_i3() {
@@ -64,7 +57,8 @@ fix_nemo_desktop() {
 
 install_utils() {
   if is_arch; then
-    pacman_install pavucontrol xscreensaver xclip
+    pacman_install pavucontrol xscreensaver xclip lxrandr \
+      light-locker lightdm-gtk-greeter-settings
   else
     apt_install pavucontrol xscreensaver
   fi
