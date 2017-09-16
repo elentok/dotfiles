@@ -31,10 +31,8 @@ bindsym $mod+Shift+D exec dmenu_run
 bindsym $mod+q exec qalculate-gtk
 
 # Keys: Screenshot {{{2
-bindsym $mod+p exec bash ~/.dotfiles/scripts/sshot
-bindsym $mod+Shift+P exec bash ~/.dotfiles/scripts/sshot to-file
-bindsym Print exec bash ~/.dotfiles/scripts/sshot
-bindsym Mod1+Print exec bash ~/.dotfiles/scripts/sshot to-file
+bindsym $mod+p exec xfce4-screenshooter
+bindsym Print exec xfce4-screenshooter
 
 # Keys: Volume {{{2
 bindsym $shiftalt+equal exec vol +5
