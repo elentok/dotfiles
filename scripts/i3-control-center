@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
 OPTIONS="
-Theme (lxappearance)
+Appearance (xfce4-appearance-settings)
 Sound (pavucontrol)
 Login Screen (gksu lightdm-gtk-greeter-settings)
-Monitors (lxrandr)"
+Session (xfce4-session-settings)
+Keyboard (xfce4-keyboard-settings)
+Mouse (xfce4-mouse-settings)
+Power Management (xfce4-power-manager-settings)
+Monitors (xfce4-display-settings)"
 
 # -i: case insensitive
 result="$(echo "$OPTIONS" | grep -v '^$' | rofi -dmenu -i -p "> ")"
