@@ -25,6 +25,7 @@ bindsym Scroll_Lock exec locklinux
 
 # Keys: Apps {{{2
 bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+c exec i3-control-center
 bindsym $mod+d exec rofi -show run
 bindsym $mod+Shift+D exec dmenu_run
 bindsym $mod+q exec qalculate-gtk
