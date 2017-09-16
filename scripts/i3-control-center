@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+OPTIONS="
+Theme (lxappearance)
+Sound (pavucontrol)
+Login Screen (light-dm-gtk-greeter-settings)
+Monitors (lxrandr)"
+
+# -i: case insensitive
+result="$(echo "$OPTIONS" | grep -v '^$' | rofi -dmenu -i -p "> ")"
+
+if [ -z "$result" ]; then
+  exit 1
+fi
+
+cmd="$(echo $result | sed -E 's/^.*\((.*)\)/\1/')"
+$cmd

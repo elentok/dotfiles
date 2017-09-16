@@ -57,8 +57,8 @@ fix_nemo_desktop() {
 
 install_utils() {
   if is_arch; then
-    pacman_install pavucontrol xscreensaver xclip lxrandr \
-      light-locker lightdm-gtk-greeter-settings
+    pacman_install pavucontrol xscreensaver xclip lxrandr-gtk3 \
+      light-locker lightdm-gtk-greeter-settings lxappearance-gtk3
   else
     apt_install pavucontrol xscreensaver
   fi
