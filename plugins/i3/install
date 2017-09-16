@@ -59,7 +59,7 @@ install_utils() {
   if is_arch; then
     pacman_install pavucontrol xscreensaver xclip lxrandr-gtk3 \
       light-locker lightdm-gtk-greeter-settings lxappearance-gtk3 \
-      adapta-gtk-theme
+      adapta-gtk-theme gksu
   else
     apt_install pavucontrol xscreensaver
   fi

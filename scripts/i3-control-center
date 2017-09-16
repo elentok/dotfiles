@@ -3,7 +3,7 @@
 OPTIONS="
 Theme (lxappearance)
 Sound (pavucontrol)
-Login Screen (light-dm-gtk-greeter-settings)
+Login Screen (gksu lightdm-gtk-greeter-settings)
 Monitors (lxrandr)"
 
 # -i: case insensitive
