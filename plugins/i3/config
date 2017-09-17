@@ -26,8 +26,8 @@ bindsym Scroll_Lock exec locklinux
 # Keys: Apps {{{2
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+c exec i3-control-center
-bindsym $mod+d exec rofi -show run
-bindsym $mod+Shift+D exec dmenu_run
+bindsym $mod+d exec xfce4-appfinder
+bindsym $mod+Shift+D exec rofi -show run
 bindsym $mod+q exec qalculate-gtk
 
 # Keys: Screenshot {{{2
@@ -191,6 +191,7 @@ for_window [title=".* KeePass Password Safe"] floating enable
 for_window [title="Unlock Login .*"] floating enable
 for_window [title="Edit Entry"] floating enable
 for_window [class="keepassxc"] floating enable
+for_window [class="Xfce4-appfinder"] floating enable
 
 # Default workspaces {{{2
 assign [class="Gimp"] 4: gimp
