@@ -61,7 +61,9 @@ install_utils() {
       light-locker lightdm-gtk-greeter-settings \
       adapta-gtk-theme gksu qt5-styleplugins
   else
-    apt_install pavucontrol xscreensaver
+    apt_install pavucontrol xscreensaver \
+      light-locker gksu lightdm-gtk-greeter-settings \
+      xfce4 xfce4-screenshooter
   fi
 }
 
