@@ -11,7 +11,7 @@
 
   # see /usr/share/X11/xkb/rules/base.lst for more options
   # setxkbmap -option 'grp:alt_shift_toggle' -option 'ctrl:nocaps'
-  setxkbmap -option 'grp:menu_toggle' -option 'ctrl:nocaps'
+  setxkbmap -option 'ctrl:nocaps' -option 'altwin:swap_alt_win'
 
   light-locker --lock-on-suspend --no-late-locking &
   xfce4-session &
