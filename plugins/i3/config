@@ -99,19 +99,6 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 bindsym $mod+grave workspace back_and_forth
 
-# trying this out, not sure about it yet
-bindsym Mod1+1 workspace 1: main
-bindsym Mod1+2 workspace 2: www
-bindsym Mod1+3 workspace 3: chat
-bindsym Mod1+4 workspace 4: gimp
-bindsym Mod1+5 workspace 5
-bindsym Mod1+6 workspace 6
-bindsym Mod1+7 workspace 7
-bindsym Mod1+8 workspace 8
-bindsym Mod1+9 workspace 9
-bindsym Mod1+0 workspace 10
-bindsym Mod1+grave workspace back_and_forth
-
 # Keys: Move window to workspace {{{2
 bindsym $mod+Shift+exclam move workspace 1: main
 bindsym $mod+Shift+at move workspace 2: www
