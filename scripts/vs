@@ -19,10 +19,15 @@ main() {
     exit 1
   fi
 
+  if [ -n "$ABDUCO_SESSION" ]; then
+    echo "Error: already inside abduco session"
+    exit 2
+  fi
+
   local session="$(get-session-name $1)"
   if [ -z "$session" ]; then
     echo "User aborted"
-    exit 2
+    exit 3
   fi
 
   ABDUCO_SESSION="$session" abduco -A "$session" bash -c nvim
