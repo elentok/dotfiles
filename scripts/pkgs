@@ -69,10 +69,11 @@ class TrackingNumber {
 }
 
 class Order {
-  constructor({ name, store, date, tracking }) {
-    this.name = name;
+  constructor({ name, store, date, tracking, items }) {
     this.store = store;
     this.date = date;
+    this.items = items;
+    this.name = name || (this.items || []).join(", ");
 
     if (date == null) {
       console.warn(`WARNING: Order "${name}" is missing "date"`);
