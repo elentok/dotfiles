@@ -68,14 +68,14 @@ class TrackingNumber {
   }
 }
 
-class Package {
+class Order {
   constructor({ name, store, date, tracking }) {
     this.name = name;
     this.store = store;
     this.date = date;
 
     if (date == null) {
-      console.warn(`WARNING: Package "${name}" is missing "date"`);
+      console.warn(`WARNING: Order "${name}" is missing "date"`);
     }
 
     this.tracking = this._createTrackingNumbers(tracking);
@@ -134,44 +134,44 @@ class Package {
   }
 }
 
-function loadPackages() {
+function loadOrders() {
   return yaml
     .safeLoad(fs.readFileSync(path.join(process.env.HOME, ".packages")))
-    .map(package => new Package(package));
+    .map(order => new Order(order));
 }
 
-function listPackages() {
-  const packages = _.sortBy(loadPackages(), pkg => pkg.date);
+function listOrders() {
+  const orders = _.sortBy(loadOrders(), order => order.date);
   const table = new Table();
-  packages.forEach(pkg => pkg.addToTable(table));
+  orders.forEach(order => order.addToTable(table));
 
-  console.info(`\nExpecting ${packages.length} packages:\n`);
+  console.info(`\nExpecting ${orders.length} orders:\n`);
   console.info(table.toString());
 }
 
 class Tracker {
-  track(packages) {
-    const trackable = packages.filter(pkg => pkg.canTrack());
+  track(orders) {
+    const trackable = orders.filter(order => order.canTrack());
     this.remaining = trackable.length;
     this._printStatus();
 
-    return Promise.all(trackable.map(pkg => this._trackPackage(pkg)));
+    return Promise.all(trackable.map(order => this._trackOrder(order)));
   }
 
   _printStatus() {
     let msg;
     if (this.remaining > 0) {
-      msg = colors.yellow(`Tracking... ${this.remaining} packages left...`);
+      msg = colors.yellow(`Tracking... ${this.remaining} orders left...`);
     } else {
       msg = colors.green("\n=============\nDone :)\n=============\n");
     }
     process.stderr.write(`${CLEAR_LINE}${msg}`);
   }
 
-  _trackPackage(pkg) {
-    return pkg.track().then(results => {
+  _trackOrder(order) {
+    return order.track().then(results => {
       process.stderr.write(CLEAR_LINE);
-      console.info(`Package ${pkg.name}:`);
+      console.info(`Order ${order.name}:`);
 
       results.forEach(result => this._printTrackingResult(result));
 
@@ -218,11 +218,11 @@ const command = process.argv[2];
 switch (command) {
   case "l":
   case "list":
-    listPackages();
+    listOrders();
     break;
 
   case "t":
   case "track":
-    new Tracker().track(loadPackages());
+    new Tracker().track(loadOrders());
     break;
 }
