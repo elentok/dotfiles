@@ -36,31 +36,63 @@ const IsraelPost = {
   }
 };
 
+class TrackingNumber {
+  constructor(number) {
+    this.number = number;
+    this.tracker = this._getTracker();
+  }
+
+  canTrack() {
+    return this.tracker != null;
+  }
+
+  track() {
+    return this.tracker.track(this.number).then(text => {
+      return {
+        text,
+        number: this.number
+      };
+    });
+  }
+
+  _getTracker() {
+    if (IsraelPost.isSupported(this.number)) {
+      return IsraelPost;
+    }
+
+    if (IParcel.isSupported(this.number)) {
+      return IParcel;
+    }
+
+    return null;
+  }
+}
+
 class Package {
   constructor({ name, store, date, tracking }) {
     this.name = name;
     this.store = store;
     this.date = date;
-    this.tracking = tracking;
 
     if (date == null) {
       console.warn(`WARNING: Package "${name}" is missing "date"`);
     }
 
-    if (tracking != null) {
-      if (IsraelPost.isSupported(tracking)) {
-        this.tracker = IsraelPost;
-      } else if (IParcel.isSupported(tracking)) {
-        this.tracker = IParcel;
-      }
-    }
+    this.tracking = this._createTrackingNumbers(tracking);
+  }
+
+  _createTrackingNumbers(numbers) {
+    if (numbers == null) return [];
+    if (!Array.isArray(numbers)) return [new TrackingNumber(numbers)];
+
+    return numbers.map(number => new TrackingNumber(number));
   }
 
   addToTable(table) {
     table.cell("Name", this.name);
     table.cell("Order date", this.getTimeAgo());
     if (this.tracking != null) {
-      table.cell("Tracking#", this.tracking);
+      table.cell("Tracking#", this.tracking.map(t => t.number).join(", "));
     }
     table.newRow();
   }
@@ -88,6 +120,18 @@ class Package {
       return values.join(" ") + " ago";
     }
   }
+
+  canTrack() {
+    return this._getTrackable().length > 0;
+  }
+
+  track() {
+    return Promise.all(this._getTrackable().map(t => t.track()));
+  }
+
+  _getTrackable() {
+    return this.tracking.filter(t => t.canTrack());
+  }
 }
 
 function loadPackages() {
@@ -107,11 +151,11 @@ function listPackages() {
 
 class Tracker {
   track(packages) {
-    const trackable = packages.filter(pkg => pkg.tracker != null);
+    const trackable = packages.filter(pkg => pkg.canTrack());
     this.remaining = trackable.length;
     this._printStatus();
 
-    return Promise.all(trackable.map(pkg => this._trackSingle(pkg)));
+    return Promise.all(trackable.map(pkg => this._trackPackage(pkg)));
   }
 
   _printStatus() {
@@ -124,26 +168,33 @@ class Tracker {
     process.stderr.write(`${CLEAR_LINE}${msg}`);
   }
 
-  _trackSingle(pkg) {
-    return pkg.tracker.track(pkg.tracking).then(text => {
+  _trackPackage(pkg) {
+    return pkg.track().then(results => {
       process.stderr.write(CLEAR_LINE);
-      console.info(`Package ${pkg.name} (${pkg.tracking}):`);
+      console.info(`Package ${pkg.name}:`);
 
-      text = this._indentText(text);
-      if (this._isDelivered(text)) {
-        text = colors.green(text);
-      } else if (!/There is no information/.test(text)) {
-        text = colors.blue(text);
-      } else {
-        text = colors.gray(text);
-      }
-
-      console.info(text);
-      console.info();
+      results.forEach(result => this._printTrackingResult(result));
 
       this.remaining--;
       this._printStatus();
     });
+  }
+
+  _printTrackingResult(result) {
+    console.info(`  Tracking #${result.number}:`);
+
+    let text = result.text;
+    text = this._indentText(text);
+    if (this._isDelivered(text)) {
+      text = colors.green(text);
+    } else if (!/There is no information/.test(text)) {
+      text = colors.blue(text);
+    } else {
+      text = colors.gray(text);
+    }
+
+    console.info(text);
+    console.info();
   }
 
   _indentText(text) {
