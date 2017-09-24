@@ -40,6 +40,7 @@ alias hh='history'
 alias most-used-commands="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
 alias i18n='bin/rake i18n:js:export'
 alias k='less $DOTF/docs/keys.md'
+alias kb='xkeyboard'
 alias ke='vim $DOTF/docs/keys.md'
 alias kk='kill `ps aux | fzf | awk ''{print $2 }''`'
 alias ls='command ls --color=always -XFhs'

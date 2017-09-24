@@ -49,7 +49,6 @@ bindsym XF86KbdBrightnessUp exec kbdlight up 5
 
 # Keys: Misc {{{2
 bindsym $mod+Shift+Q kill
-bindsym Ctrl+space exec "keyboard-toggle"
 
 # Keys: Switch windows {{{2
 bindsym $mod+h focus left
