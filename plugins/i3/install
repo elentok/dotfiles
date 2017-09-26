@@ -59,11 +59,11 @@ install_utils() {
   if is_arch; then
     pacman_install pavucontrol xscreensaver xclip \
       light-locker lightdm-gtk-greeter-settings \
-      adapta-gtk-theme gksu qt5-styleplugins
+      adapta-gtk-theme gksu qt5-styleplugins ristretto
   else
     apt_install pavucontrol xscreensaver \
       light-locker gksu lightdm-gtk-greeter-settings \
-      xfce4 xfce4-screenshooter
+      xfce4 xfce4-screenshooter ristretto
   fi
 }
 
