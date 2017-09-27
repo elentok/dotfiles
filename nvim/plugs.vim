@@ -77,14 +77,14 @@ if has('nvim')
   Plug 'w0rp/ale'
   Plug 'kassio/neoterm'
 
-  Plug 'roxma/nvim-completion-manager',
-        \ { 'do': 'pip3 install --user neovim jedi mistune psutil setproctitle' }
-  Plug 'roxma/nvim-cm-tern'
-  Plug 'roxma/ncm-rct-complete'
-  Plug 'Shougo/neco-vim'
+  " Plug 'roxma/nvim-completion-manager',
+        " \ { 'do': 'pip3 install --user neovim jedi mistune psutil setproctitle' }
+  " Plug 'roxma/nvim-cm-tern'
+  " Plug 'roxma/ncm-rct-complete'
 
-  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  " Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+  Plug 'Shougo/neco-vim'
 else
   Plug 'scrooloose/syntastic'
   Plug 'jwhitley/vim-matchit' " embedded in neovim
