@@ -105,7 +105,13 @@ let g:syntastic_mode_map = { "mode": "active",
                            \ "passive_filetypes": ['sass', 'scss', 'haml', 'html', 'dart']}
 
 let g:markdown_fold_style = 'nested'
+
+" Deoplete {{{1
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#ternjs#types = 1
+let g:deoplete#sources#ternjs#docs = 1
+let g:deoplete#sources#ternjs#case_insensitive = 1
+let g:deoplete#sources#ternjs#include_keywords = 1
 
 " CtrlP {{{1
 
