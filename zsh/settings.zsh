@@ -152,7 +152,7 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 [ -n "$NVIM_LISTEN_ADDRESS" ] && export FZF_DEFAULT_OPTS='--no-height'
 
 # SSH {{{1
-export SSH_AUTH_SOCK="$HOME/.ssh/local-agent"
+export SSH_AUTH_SOCK="$HOME/.ssh/active-agent"
 agent setup > /dev/null
 
 
