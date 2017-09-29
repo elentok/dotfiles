@@ -126,7 +126,8 @@ is-local-agent() {
 }
 
 is-local-agent-running() {
-  kill -0 "$(cat $LOCAL_AGENT_PIDFILE)" > /dev/null
+  local pid="$(cat $LOCAL_AGENT_PIDFILE)"
+  [ -n "$pid" ] && kill -0 "$pid" > /dev/null
 }
 
 stop-local-agent() {
