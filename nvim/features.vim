@@ -69,8 +69,9 @@ endfunc
 vnoremap <Leader>ys :call CopyThroughSSH()<cr>
 
 " Snippets {{{1
-let g:UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
-inoremap <silent> <c-u> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>
+let g:UltiSnipsExpandTrigger="<c-u>"
+" let g:UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
+" inoremap <silent> <c-u> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>
 
 " When running inside abudo disable the 'violent' quit commands {{{1
 if $NVIM_KEEP_ALIVE != ""
