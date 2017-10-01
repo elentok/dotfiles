@@ -1,213 +1,235 @@
 #!/usr/bin/env node
 
-const F = require("../framework.js")
-const program = require("commander")
-const axios = require("axios")
-const $ = require("cheerio")
-const colors = require("colors")
-const moment = require("moment")
-const fs = require("fs")
-const path = require("path")
-const shell = require("shelljs")
-const Table = require("easy-table")
+const F = require("../framework.js");
+const program = require("commander");
+const axios = require("axios");
+const $ = require("cheerio");
+const colors = require("colors");
+const moment = require("moment");
+const fs = require("fs");
+const path = require("path");
+const shell = require("shelljs");
+const Table = require("easy-table");
 
 class Station {
   constructor({ id, name, title }) {
-    this.id = id
-    this.name = name
-    this.title = title
+    this.id = id;
+    this.name = name;
+    this.title = title;
   }
 
   static fromElement($option) {
     return new Station({
       id: $option.val(),
       title: $option.text(),
-      name: $option.text().toLowerCase()
-        .replace(/\(.*$/, '').replace(/'/, '').trim().replace(/ /, '-')
-    })
+      name: $option
+        .text()
+        .toLowerCase()
+        .replace(/\(.*$/, "")
+        .replace(/'/, "")
+        .trim()
+        .replace(/ /, "-")
+    });
   }
 
   print() {
-    const comment = colors.grey(`(${this.id} ${this.title})`)
-    console.info(`${this.name} ${comment}`)
+    const comment = colors.grey(`(${this.id} ${this.title})`);
+    console.info(`${this.name} ${comment}`);
   }
 }
 
 class StationRepository {
   constructor() {
-    this._stations = null
-    this._cacheFilename =
-      path.join(process.env.HOME, ".cache/dotfiles/stations.json")
+    this._stations = null;
+    this._cacheFilename = path.join(
+      process.env.HOME,
+      ".cache/dotfiles/stations.json"
+    );
   }
 
   fetch() {
     if (this._stations != null) {
-      return Promise.resolve(this._stations)
+      return Promise.resolve(this._stations);
     }
 
-    this._stations = this._loadFromCache()
+    this._stations = this._loadFromCache();
     if (this._stations != null) {
-      return Promise.resolve(this._stations)
+      return Promise.resolve(this._stations);
     }
 
-    F.printProgress("Fetching stations")
-    return this._loadFromServer()
-      .then(stations => {
-        F.clearLine()
-        this._stations = stations
-        this._saveToCache()
-        return stations
-      })
+    F.printProgress("Fetching stations");
+    return this._loadFromServer().then(stations => {
+      F.clearLine();
+      this._stations = stations;
+      this._saveToCache();
+      return stations;
+    });
   }
 
   findByName(name) {
     this.fetch().then(stations => {
-      return stations.find(s => s.name === name)
-    })
+      return stations.find(s => s.name === name);
+    });
   }
 
   _loadFromCache() {
-    try { fs.statSync(this._cacheFilename) } catch (e) { return null }
+    try {
+      fs.statSync(this._cacheFilename);
+    } catch (e) {
+      return null;
+    }
 
-    return JSON.parse(fs.readFileSync(this._cacheFilename))
-      .map(attribs => new Station(attribs))
+    return JSON.parse(fs.readFileSync(this._cacheFilename)).map(
+      attribs => new Station(attribs)
+    );
   }
 
   _saveToCache() {
-    const cacheDir = path.dirname(this._cacheFilename)
-    shell.mkdir('-p', cacheDir)
+    const cacheDir = path.dirname(this._cacheFilename);
+    shell.mkdir("-p", cacheDir);
 
-    fs.writeFileSync(this._cacheFilename, JSON.stringify(this._stations))
+    fs.writeFileSync(
+      this._cacheFilename,
+      JSON.stringify(this._stations, null, 2)
+    );
   }
 
   _loadFromServer() {
-    return axios.get("http://www.rail.co.il/EN/Pages/homepage.aspx")
+    return axios
+      .get("http://www.rail.co.il/EN/Pages/homepage.aspx")
       .then(response => {
-        const $html = $.load(response.data)
+        const $html = $.load(response.data);
         const selector =
-          "#ctl00_PlaceHolderMain_ucSmallDrivePlan_cmbOriginStation option"
+          "#ctl00_PlaceHolderMain_ucSmallDrivePlan_cmbOriginStation option";
 
-        return $html(selector).toArray()
+        return $html(selector)
+          .toArray()
           .filter(option => $(option).val() !== "")
-          .map(option => Station.fromElement($(option)))
-      })
+          .map(option => Station.fromElement($(option)));
+      });
   }
 }
 
 class Train {
   constructor($tr) {
-    const tds = $tr.find('> td')
+    const tds = $tr.find("> td");
 
     Object.assign(this, {
       departure: $(tds[1]).text(),
       arrival: $(tds[2]).text(),
       duration: $(tds[3]).text(),
-      changing: $(tds[4]).text(),
-    })
+      changing: $(tds[4]).text()
+    });
   }
 
   print() {
-    let message =
-      `${this.departure} => ${this.arrival}\t (elapsed: ${this.duration})`
+    let message = `${this.departure} => ${this.arrival}\t (elapsed: ${this
+      .duration})`;
 
     if (this.changing !== "Without changing") {
-      message += ` (${this.changing})`
+      message += ` (${this.changing})`;
     }
 
-    console.info(message)
+    console.info(message);
   }
 
   addToTable(table) {
-    table.cell("Departure", this.departure)
-    table.cell("Arrival", this.arrival)
-    table.cell("Duration", this.duration)
-    table.cell("Details", this.changing)
-    table.newRow()
+    table.cell("Departure", this.departure);
+    table.cell("Arrival", this.arrival);
+    table.cell("Duration", this.duration);
+    table.cell("Details", this.changing);
+    table.newRow();
   }
 
   static fetch(originId, destId, departure = moment()) {
     if (typeof departure === "string") {
-      departure = this.parseTime(departure)
+      departure = this.parseTime(departure);
     }
 
-    const url = "http://www.rail.co.il/EN/DrivePlan/Pages/DrivePlan.aspx"
+    const url = "http://www.rail.co.il/EN/DrivePlan/Pages/DrivePlan.aspx";
 
-    F.printProgress("Fetching trains")
-    return axios.get(url, {
-      params: {
-        OriginStationId: originId,
-        DestStationId: destId,
-        HoursDeparture: departure.hours(),
-        MinutesDeparture: departure.minutes(),
-        GoingTrainCln: departure.format('YYYY-MM-DD'),
-        GoingHourDeparture: true,
-      }
-    }).then(response => {
-      F.clearLine()
-      // Uncomment this line to debug the parser
-      // fs.writeFileSync("trains.html", response.data)
-      return this.parse(response.data)
-    })
+    F.printProgress("Fetching trains");
+    return axios
+      .get(url, {
+        params: {
+          OriginStationId: originId,
+          DestStationId: destId,
+          HoursDeparture: departure.hours(),
+          MinutesDeparture: departure.minutes(),
+          GoingTrainCln: departure.format("YYYY-MM-DD"),
+          GoingHourDeparture: true
+        }
+      })
+      .then(response => {
+        F.clearLine();
+        // Uncomment this line to debug the parser
+        // fs.writeFileSync("trains.html", response.data)
+        return this.parse(response.data);
+      });
   }
 
   static parse(html) {
-    const $html = $.load(html)
-    const rows = $html('tr[name=TrainRow]').toArray()
-    return rows.map(tr => new Train($(tr)))
+    const $html = $.load(html);
+    const rows = $html("tr[name=TrainRow]").toArray();
+    return rows.map(tr => new Train($(tr)));
   }
 
   static parseTime(time) {
-    let parsed = moment(time, "YYYY-MM-DD HH:mm")
+    let parsed = moment(time, "YYYY-MM-DD HH:mm");
     if (parsed.isValid()) {
-      return parsed
+      return parsed;
     }
 
-    parsed = moment(time, "HH:mm")
+    parsed = moment(time, "HH:mm");
     if (parsed.isValid()) {
-      return parsed
+      return parsed;
     }
 
-    return null
+    return null;
   }
 }
 
 class CLI {
   constructor() {
-    this.repo = new StationRepository()
+    this.repo = new StationRepository();
   }
 
   fetchTrains(origin, dest, time) {
-    this.repo.fetch().then(stations => {
-      const originId = stations.find(s => s.name === origin).id
-      const destId = stations.find(s => s.name === dest).id
+    this.repo
+      .fetch()
+      .then(stations => {
+        const originId = stations.find(s => s.name === origin).id;
+        const destId = stations.find(s => s.name === dest).id;
 
-      return Train.fetch(originId, destId, time)
-        .then(trains => {
-          console.info(`Found ${trains.length} trains:\n`)
-          const table = new Table()
-          trains.forEach(t => t.addToTable(table))
-          console.info(table.toString())
-        })
-    }).catch(e => {
-      console.error(e)
-    })
+        return Train.fetch(originId, destId, time).then(trains => {
+          console.info(`Found ${trains.length} trains:\n`);
+          const table = new Table();
+          trains.forEach(t => t.addToTable(table));
+          console.info(table.toString());
+        });
+      })
+      .catch(e => {
+        console.error(e);
+      });
   }
 
   listStations() {
     return this.repo.fetch().then(stations => {
-      stations.forEach(station => station.print())
-    })
+      stations.forEach(station => station.print());
+    });
   }
 }
 
-const cli = new CLI()
+const cli = new CLI();
 
 program
   .arguments("<origin> <dest> [time]")
   .option("-l --list", "list all stations")
-  .action((origin, dest, time) => { cli.fetchTrains(origin, dest, time) })
-  .parse(process.argv)
+  .action((origin, dest, time) => {
+    cli.fetchTrains(origin, dest, time);
+  })
+  .parse(process.argv);
 
 if (program.list) {
-  cli.listStations().catch(e => console.error(e))
+  cli.listStations().catch(e => console.error(e));
 }
