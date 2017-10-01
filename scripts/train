@@ -12,24 +12,16 @@ const shell = require("shelljs");
 const Table = require("easy-table");
 
 class Station {
-  constructor({ id, name, title }) {
+  constructor({ id, title, hebTitle }) {
     this.id = id;
-    this.name = name;
     this.title = title;
-  }
-
-  static fromElement($option) {
-    return new Station({
-      id: $option.val(),
-      title: $option.text(),
-      name: $option
-        .text()
-        .toLowerCase()
-        .replace(/\(.*$/, "")
-        .replace(/'/, "")
-        .trim()
-        .replace(/ /, "-")
-    });
+    this.hebTitle = hebTitle;
+    this.name = title
+      .toLowerCase()
+      .replace(/\(.*$/, "")
+      .replace(/'/g, "")
+      .trim()
+      .replace(/\s/g, "-");
   }
 
   print() {
@@ -95,18 +87,21 @@ class StationRepository {
   }
 
   _loadFromServer() {
-    return axios
-      .get("http://www.rail.co.il/EN/Pages/homepage.aspx")
-      .then(response => {
-        const $html = $.load(response.data);
-        const selector =
-          "#ctl00_PlaceHolderMain_ucSmallDrivePlan_cmbOriginStation option";
+    return axios.get("https://www.rail.co.il").then(response => {
+      const match = response.data.match(/var stationSegRes=(.*);var/);
+      if (match == null) {
+        throw new Error("Can't load stations");
+      }
 
-        return $html(selector)
-          .toArray()
-          .filter(option => $(option).val() !== "")
-          .map(option => Station.fromElement($(option)));
+      const raw = JSON.parse(match[1]);
+      return raw.Data.Data.CustomPropertys.map(rawStation => {
+        return new Station({
+          id: rawStation.Id,
+          title: rawStation.Eng.join(", "),
+          hebTitle: rawStation.Heb.join(", ")
+        });
       });
+    });
   }
 }
 
