@@ -62,7 +62,7 @@ setup() {
 
 set-agent() {
   local agent="$1"
-  if [ "$agent" == 'local' -o "$agent" == "$LOCAL_AGENT" ]; then
+  if [ -z "$agent" -o "$agent" == 'local' -o "$agent" == "$LOCAL_AGENT" ]; then
     setup-local-agent
   else
     setup-forwarded-agent "$agent"
@@ -71,7 +71,7 @@ set-agent() {
 }
 
 setup-forwarded-agent() {
-  echo -n "Setting up remote agent... "
+  echo -n "Setting up remote agent ($1)... "
 
   if [ -e "$1" ]; then
     echo -n "Setting up symlink... "
