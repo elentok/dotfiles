@@ -22,7 +22,6 @@
     "axios": "^0.14.0",
     "chalk": "^1.1.3",
     "cheerio": "^0.22.0",
-    "colors": "^1.1.2",
     "commander": "^2.9.0",
     "easy-table": "^1.0.0",
     "fetch-plus": "^3.10.4",
