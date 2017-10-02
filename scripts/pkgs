@@ -7,7 +7,7 @@ const _ = require("underscore");
 const Table = require("easy-table");
 const axios = require("axios");
 const htmlToText = require("html-to-text");
-const colors = require("colors");
+const chalk = require("chalk");
 const IParcel = require("./iparcel");
 
 const CLEAR_LINE = "\r\x1B[K";
@@ -162,9 +162,9 @@ class Tracker {
   _printStatus() {
     let msg;
     if (this.remaining > 0) {
-      msg = colors.yellow(`Tracking... ${this.remaining} orders left...`);
+      msg = chalk.yellow(`Tracking... ${this.remaining} orders left...`);
     } else {
-      msg = colors.green("\n=============\nDone :)\n=============\n");
+      msg = chalk.green("\n=============\nDone :)\n=============\n");
     }
     process.stderr.write(`${CLEAR_LINE}${msg}`);
   }
@@ -187,11 +187,11 @@ class Tracker {
     let text = result.text;
     text = this._indentText(text);
     if (this._isDelivered(text)) {
-      text = colors.green(text);
+      text = chalk.green(text);
     } else if (!/There is no information/.test(text)) {
-      text = colors.blue(text);
+      text = chalk.blue(text);
     } else {
-      text = colors.gray(text);
+      text = chalk.gray(text);
     }
 
     console.info(text);
