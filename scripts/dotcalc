@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+xfce4-terminal --title=DotCalc -x calc
