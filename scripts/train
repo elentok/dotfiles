@@ -106,23 +106,19 @@ class StationRepository {
 }
 
 class Train {
-  constructor($tr) {
-    const tds = $tr.find("> td");
-
-    Object.assign(this, {
-      departure: $(tds[1]).text(),
-      arrival: $(tds[2]).text(),
-      duration: $(tds[3]).text(),
-      changing: $(tds[4]).text()
-    });
+  constructor({ arrival, departure, duration, hasExchange }) {
+    this.arrival = arrival;
+    this.departure = departure;
+    this.duration = duration;
+    this.hasExchange = hasExchange;
   }
 
   print() {
     let message = `${this.departure} => ${this.arrival}\t (elapsed: ${this
       .duration})`;
 
-    if (this.changing !== "Without changing") {
-      message += ` (${this.changing})`;
+    if (this.hasExchange) {
+      message += ` (exchange)`;
     }
 
     console.info(message);
@@ -132,7 +128,7 @@ class Train {
     table.cell("Departure", this.departure);
     table.cell("Arrival", this.arrival);
     table.cell("Duration", this.duration);
-    table.cell("Details", this.changing);
+    table.cell("Details", this.hasExchange ? "Has Exchange" : "");
     table.newRow();
   }
 
@@ -141,32 +137,39 @@ class Train {
       departure = this.parseTime(departure);
     }
 
-    const url = "http://www.rail.co.il/EN/DrivePlan/Pages/DrivePlan.aspx";
+    const url = "https://www.rail.co.il/apiinfo/api/Plan/GetRoutes";
 
     F.printProgress("Fetching trains");
     return axios
       .get(url, {
         params: {
-          OriginStationId: originId,
-          DestStationId: destId,
-          HoursDeparture: departure.hours(),
-          MinutesDeparture: departure.minutes(),
-          GoingTrainCln: departure.format("YYYY-MM-DD"),
-          GoingHourDeparture: true
+          OId: originId,
+          TId: destId,
+          Date: departure.format("YYYYMMDD"),
+          Hour: departure.format("HHMM"),
+          isGoing: true
         }
       })
       .then(response => {
         F.clearLine();
         // Uncomment this line to debug the parser
-        // fs.writeFileSync("trains.html", response.data)
+        // fs.writeFileSync("trains.json", JSON.stringify(response.data))
         return this.parse(response.data);
       });
   }
 
-  static parse(html) {
-    const $html = $.load(html);
-    const rows = $html("tr[name=TrainRow]").toArray();
-    return rows.map(tr => new Train($(tr)));
+  static parse(rawData) {
+    return rawData.Data.Routes.map(route => {
+      const firstTrain = route.Train[0];
+      const lastTrain = route.Train[route.Train.length - 1];
+
+      return new Train({
+        duration: route.EstTime,
+        arrival: firstTrain.ArrivalTime.replace(":00", ""),
+        departure: lastTrain.DepartureTime.replace(":00", ""),
+        hasExchange: route.IsExchange
+      });
+    });
   }
 
   static parseTime(time) {
