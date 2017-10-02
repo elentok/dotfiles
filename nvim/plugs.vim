@@ -36,6 +36,7 @@ Plug 'schickling/vim-bufonly', { 'on': ['BufOnly', 'Bonly', 'BOnly'] }
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTree', 'NERDTreeToggle', 'NERDTreeFocus', 'NERDTreeFind'] }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTree', 'NERDTreeToggle', 'NERDTreeFocus', 'NERDTreeFind']}
+Plug 'Quramy/tsuquyomi'
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-abolish'
