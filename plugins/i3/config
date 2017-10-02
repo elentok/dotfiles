@@ -29,7 +29,7 @@ bindsym $mod+c exec i3-control-center
 bindsym Ctrl+space exec xfce4-appfinder
 bindsym $mod+d exec xfce4-appfinder
 bindsym $mod+Shift+D exec rofi -show run
-bindsym $mod+q exec qalculate-gtk
+bindsym $mod+q exec dotcalc
 
 # Keys: Screenshot {{{2
 bindsym $mod+p exec xfce4-screenshooter
@@ -172,6 +172,7 @@ for_window [class="Gimp"] floating enable
 for_window [class="feh"] floating enable
 for_window [class="Qalculate-gtk"] floating enable
 for_window [class="Qalculate"] floating enable
+for_window [title="DotCalc"] floating enable
 for_window [title="Copying.*"] floating enable
 for_window [title="Open Database -.*"] floating enable
 for_window [title=".* KeePass Password Safe"] floating enable

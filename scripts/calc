@@ -21,7 +21,7 @@ function calculate(expr) {
           c.sourceCurrency,
           c.targetCurrency
         );
-        return `${result.value} ${result.to}`;
+        return `${result.value.toFixed(2)} ${result.to}`;
       });
   }
 
