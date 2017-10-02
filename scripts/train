@@ -1,15 +1,14 @@
 #!/usr/bin/env node
 
 const F = require("../framework.js");
+const _ = require("underscore");
 const program = require("commander");
 const axios = require("axios");
-const $ = require("cheerio");
-const colors = require("colors");
+const chalk = require("chalk");
 const moment = require("moment");
 const fs = require("fs");
 const path = require("path");
 const shell = require("shelljs");
-const Table = require("easy-table");
 
 class Station {
   constructor({ id, title, hebTitle }) {
@@ -25,29 +24,20 @@ class Station {
   }
 
   print() {
-    const comment = colors.grey(`(${this.id} ${this.title})`);
+    const comment = chalk.grey(`(${this.id} ${this.title})`);
     console.info(`${this.name} ${comment}`);
   }
 }
 
-class StationRepository {
-  constructor() {
-    this._stations = null;
-    this._cacheFilename = path.join(
-      process.env.HOME,
-      ".cache/dotfiles/stations.json"
-    );
-  }
+const StationRepo = {
+  _stations: null,
+  _cacheFilename: path.join(process.env.HOME, ".cache/dotfiles/stations.json"),
 
   fetch() {
-    if (this._stations != null) {
-      return Promise.resolve(this._stations);
-    }
+    if (this._stations != null) return Promise.resolve(this._stations);
 
     this._stations = this._loadFromCache();
-    if (this._stations != null) {
-      return Promise.resolve(this._stations);
-    }
+    if (this._stations != null) return Promise.resolve(this._stations);
 
     F.printProgress("Fetching stations");
     return this._loadFromServer().then(stations => {
@@ -56,13 +46,13 @@ class StationRepository {
       this._saveToCache();
       return stations;
     });
-  }
+  },
 
   findByName(name) {
     this.fetch().then(stations => {
       return stations.find(s => s.name === name);
     });
-  }
+  },
 
   _loadFromCache() {
     try {
@@ -74,7 +64,7 @@ class StationRepository {
     return JSON.parse(fs.readFileSync(this._cacheFilename)).map(
       attribs => new Station(attribs)
     );
-  }
+  },
 
   _saveToCache() {
     const cacheDir = path.dirname(this._cacheFilename);
@@ -84,14 +74,12 @@ class StationRepository {
       this._cacheFilename,
       JSON.stringify(this._stations, null, 2)
     );
-  }
+  },
 
   _loadFromServer() {
     return axios.get("https://www.rail.co.il").then(response => {
       const match = response.data.match(/var stationSegRes=(.*);var/);
-      if (match == null) {
-        throw new Error("Can't load stations");
-      }
+      if (match == null) throw new Error("Can't load stations");
 
       const raw = JSON.parse(match[1]);
       return raw.Data.Data.CustomPropertys.map(rawStation => {
@@ -103,7 +91,7 @@ class StationRepository {
       });
     });
   }
-}
+};
 
 class Train {
   constructor({ arrival, departure, duration, hasExchange }) {
@@ -114,25 +102,14 @@ class Train {
   }
 
   print() {
-    let message = `${this.departure} => ${this.arrival}\t (elapsed: ${this
-      .duration})`;
-
-    if (this.hasExchange) {
-      message += ` (exchange)`;
-    }
-
-    console.info(message);
+    const exchange = this.hasExchange ? ", has exchange" : "";
+    const details = chalk.grey(`(${this.duration}${exchange})`);
+    console.info(`${this.departure} => ${this.arrival} ${details}`);
   }
+}
 
-  addToTable(table) {
-    table.cell("Departure", this.departure);
-    table.cell("Arrival", this.arrival);
-    table.cell("Duration", this.duration);
-    table.cell("Details", this.hasExchange ? "Has Exchange" : "");
-    table.newRow();
-  }
-
-  static fetch(originId, destId, departure = moment()) {
+const TrainRepo = {
+  fetch(originId, destId, departure = moment()) {
     if (typeof departure === "string") {
       departure = this.parseTime(departure);
     }
@@ -156,23 +133,23 @@ class Train {
         // fs.writeFileSync("trains.json", JSON.stringify(response.data))
         return this.parse(response.data);
       });
-  }
+  },
 
-  static parse(rawData) {
+  parse(rawData) {
     return rawData.Data.Routes.map(route => {
       const firstTrain = route.Train[0];
       const lastTrain = route.Train[route.Train.length - 1];
 
       return new Train({
-        duration: route.EstTime,
-        arrival: firstTrain.ArrivalTime.replace(":00", ""),
-        departure: lastTrain.DepartureTime.replace(":00", ""),
+        duration: route.EstTime.replace(":00", ""),
+        arrival: firstTrain.ArrivalTime.replace(":00", "").split(" ")[1],
+        departure: lastTrain.DepartureTime.replace(":00", "").split(" ")[1],
         hasExchange: route.IsExchange
       });
     });
-  }
+  },
 
-  static parseTime(time) {
+  parseTime(time) {
     let parsed = moment(time, "YYYY-MM-DD HH:mm");
     if (parsed.isValid()) {
       return parsed;
@@ -185,49 +162,37 @@ class Train {
 
     return null;
   }
-}
+};
 
-class CLI {
-  constructor() {
-    this.repo = new StationRepository();
-  }
-
+const CLI = {
   fetchTrains(origin, dest, time) {
-    this.repo
-      .fetch()
+    StationRepo.fetch()
       .then(stations => {
         const originId = stations.find(s => s.name === origin).id;
         const destId = stations.find(s => s.name === dest).id;
 
-        return Train.fetch(originId, destId, time).then(trains => {
+        return TrainRepo.fetch(originId, destId, time).then(trains => {
           console.info(`Found ${trains.length} trains:\n`);
-          const table = new Table();
-          trains.forEach(t => t.addToTable(table));
-          console.info(table.toString());
+          trains.forEach(t => t.print());
         });
       })
-      .catch(e => {
-        console.error(e);
-      });
-  }
+      .catch(e => console.error(e));
+  },
 
   listStations() {
-    return this.repo.fetch().then(stations => {
+    return StationRepo.fetch().then(stations => {
+      stations = _(stations).sortBy("title");
       stations.forEach(station => station.print());
     });
   }
-}
-
-const cli = new CLI();
+};
 
 program
   .arguments("<origin> <dest> [time]")
   .option("-l --list", "list all stations")
-  .action((origin, dest, time) => {
-    cli.fetchTrains(origin, dest, time);
-  })
+  .action((origin, dest, time) => CLI.fetchTrains(origin, dest, time))
   .parse(process.argv);
 
 if (program.list) {
-  cli.listStations().catch(e => console.error(e));
+  CLI.listStations().catch(e => console.error(e));
 }
