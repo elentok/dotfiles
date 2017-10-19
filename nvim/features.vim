@@ -81,3 +81,8 @@ if $NVIM_KEEP_ALIVE != ""
 
   let $NVIM_KEEP_ALIVE=""
 endif
+
+" Git {{{1
+
+command! Gca Gcommit --amend
+command! Gpsr Git push review
