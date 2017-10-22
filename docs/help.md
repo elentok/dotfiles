@@ -29,6 +29,12 @@ Command Line Tips
 ### gpg - encrypt using public key
     gpg --encrypt --output encrypted.gpg --recipient {email} {file-to-encrypt}
 
+### gpg - verify sig file
+
+    gpg {file.sig}          # find public key ID
+    gpg --recv-key {key-id} # import key
+    gpg {file.sig}          # verify signature
+
 ## Git
 
 ### git undo commit
