@@ -136,7 +136,7 @@ dr() {
 
   if [ $# -gt 0 ]; then
     docker-compose run $@
-    exit $?
+    return $?
   fi
 
   cmd="$(docker-compose-services | fzf --ansi --exit-0 | awk '{print $1}')"
