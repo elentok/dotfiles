@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+
+const fs = require("fs");
+const yaml = require("js-yaml");
+const chalk = require("chalk");
+chalk.enabled = true;
+
+const config = yaml.load(fs.readFileSync("docker-compose.yml"));
+
+Object.keys(config.services).forEach(serviceName => {
+  const service = config.services[serviceName];
+  if (service.command) {
+    const command = service.command.replace(/\n/g, " ");
+    console.info(`${serviceName} - ${chalk.grey(command)}`);
+  } else {
+    console.info(serviceName);
+  }
+});
