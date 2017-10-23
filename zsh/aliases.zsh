@@ -25,7 +25,6 @@ alias cd/='cd "$(find-root)"'
 alias cf='/bin/ls -1 | wc -l' # count files
 alias df='df -kh'
 alias doc='docker-compose'
-alias dr='docker-compose run'
 alias dotfi='cd $DOTF'
 alias dotl='cd $DOTL'
 alias du='du -kh'
@@ -132,6 +131,23 @@ alias pbp='pbpaste'
 
 
 # FZF Shortcuts {{{1
+dr() {
+  # calling "print -s" adds the command to zsh history
+
+  if [ $# -gt 0 ]; then
+    docker-compose run $@
+    exit $?
+  fi
+
+  cmd="$(docker-compose-services | fzf --ansi --exit-0 | awk '{print $1}')"
+
+  if [ -n "$cmd" ]; then
+    print -s "docker-compose run $cmd" && \
+      echo "> docker-compose run $cmd" && \
+      docker-compose run $cmd
+  fi
+}
+
 npr() {
   # calling "print -s" adds the command to zsh history
 
