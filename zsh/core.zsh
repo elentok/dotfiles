@@ -70,21 +70,23 @@ is_debian() {
 }
 
 
-# BREW_HOME {{{1
+# Homebrew {{{1
 for dir in ~/.linuxbrew ~/.homebrew /usr/local; do
-  if [ -d "$dir" ]; then
+  if [ -e "$dir/bin/brew" ]; then
     export BREW_HOME=$dir
     break
   fi
 done
 
-# BREW_ROOT {{{1
-for dir in ~/.linuxbrew ~/.homebrew /usr/local/Homebrew; do
-  if [ -d "$dir" ]; then
-    export BREW_ROOT=$dir
-    break
+if [ -e "$BREW_HOME" ]; then
+  if [ -e "$BREW_HOME/Homebrew" ]; then
+    export BREW_ROOT="$BREW_HOME/Homebrew"
+  else
+    export BREW_ROOT="$BREW_HOME"
   fi
-done
+
+  export XDG_DATA_DIRS="$BREW_HOME/share"
+fi
 
 # Go {{{1
 export GOROOT=$BREW_HOME/opt/go/libexec
@@ -104,7 +106,9 @@ fi
 # PATH {{{1
 PATH=$DOTF/scripts:$DOTL/scripts
 PATH=$PATH:$HOME/.yarn/bin
-PATH=$PATH:$BREW_HOME/bin
+if [ -n "$BREW_HOME" ]; then
+  PATH=$PATH:$BREW_HOME/bin:$BREW_HOME/sbin
+fi
 PATH=$PATH:$HOME/.fzf/bin
 PATH=$PATH:$HOME/bin:$HOME/scripts:$HOME/.local/bin
 PATH=$PATH:$GOROOT/bin:$MAIN_GOPATH/bin
