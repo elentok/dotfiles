@@ -34,7 +34,6 @@ if g:os == 'windows'
   let $alternatefont="Courier_New:h12:cHEBREW"
   let g:ruby_path='C:/ruby187'
   set grepprg="findstr /nI"
-  let g:Powerline_symbols='compatible'
   let $opener='start'
 else
   let $temp_dir='/tmp/vim-' . $USER
@@ -48,7 +47,6 @@ else
   let $delimiter = '/'
   let $defaultfont='Monaco\ for\ Powerline:h13'
   let $alternatefont='Ubuntu\ Mono\ 13'
-  let g:Powerline_symbols='fancy'
 
   if g:os == 'mac'
     " the 'wildignorecase' option is not available for windows
