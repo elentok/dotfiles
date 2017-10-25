@@ -1,21 +1,9 @@
 #!/bin/bash
 #
-# Kills all docker containers
+# Cleans up zombie containers and images
 #
-# Usage:
-#
-#   doclean [filter]
+containers=$(docker ps -qa --no-trunc --filter "status=exited")
+[ -n "$containers" ] && docker rm $containers
 
-if [ "$1" == "-h" ]; then
-  usage $0
-  exit 1
-fi
-
-containers=$(docker ps -qa --no-trunc --filter "$1")
-
-if [ -z "$containers" ]; then
-  echo "No containers found"
-  exit 1
-fi
-
-docker rm $containers
+images=$(docker images -q --no-trunc --filter "dangling=true")
+[ -n "$images" ] && docker rmi $images
