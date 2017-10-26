@@ -97,6 +97,7 @@ setup-local-agent() {
 }
 
 create-local-agent() {
+  rm -f $LOCAL_AGENT
   echo -n "Creating local agent... "
   eval "$(ssh-agent -a $LOCAL_AGENT -t $LIFE)" > /dev/null
   echo $SSH_AGENT_PID > $LOCAL_AGENT_PIDFILE
