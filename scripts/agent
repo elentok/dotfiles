@@ -85,6 +85,11 @@ setup-forwarded-agent() {
 
 setup-local-agent() {
   echo -n "Setting up local agent... "
+  create-local-agent
+  ln -sf $LOCAL_AGENT $ACTIVE_AGENT
+}
+
+create-local-agent() {
   if [ -e "$LOCAL_AGENT" ]; then
     if is-local-agent-running; then
       echo "Local agent is already running."
@@ -92,11 +97,6 @@ setup-local-agent() {
     fi
   fi
 
-  create-local-agent
-  ln -sf $LOCAL_AGENT $ACTIVE_AGENT
-}
-
-create-local-agent() {
   rm -f $LOCAL_AGENT
   echo -n "Creating local agent... "
   eval "$(ssh-agent -a $LOCAL_AGENT -t $LIFE)" > /dev/null
