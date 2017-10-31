@@ -1,218 +1,16 @@
 #!/usr/bin/env node
 
-const yaml = require("js-yaml");
-const path = require("path");
-const fs = require("fs");
-const _ = require("underscore");
 const Table = require("easy-table");
-const axios = require("axios");
-const htmlToText = require("html-to-text");
-const chalk = require("chalk");
-const IParcel = require("./iparcel");
-
-const CLEAR_LINE = "\r\x1B[K";
-
-const IsraelPost = {
-  isSupported(number) {
-    return /^[A-Z]{2}\d{9}[A-Z]{2}$/.test(number) || /^\d{13}$/.test(number);
-  },
-
-  track(number) {
-    const url = this._getUrl(number);
-    return axios.get(url).then(response => {
-      const text = htmlToText.fromString(response.data.itemcodeinfo, {
-        wordwrap: 50,
-        tables: true
-      });
-      return text;
-    });
-  },
-
-  _getUrl(number) {
-    return (
-      "http://www.israelpost.co.il/itemtrace.nsf/trackandtraceJSON" +
-      `?openagent&_=1372171578320&lang=EN&itemcode=${number}`
-    );
-  }
-};
-
-class TrackingNumber {
-  constructor(number) {
-    this.number = number;
-    this.tracker = this._getTracker();
-  }
-
-  canTrack() {
-    return this.tracker != null;
-  }
-
-  track() {
-    return this.tracker.track(this.number).then(text => {
-      return {
-        text,
-        number: this.number
-      };
-    });
-  }
-
-  _getTracker() {
-    if (IsraelPost.isSupported(this.number)) {
-      return IsraelPost;
-    }
-
-    if (IParcel.isSupported(this.number)) {
-      return IParcel;
-    }
-
-    return null;
-  }
-}
-
-class Order {
-  constructor({ name, store, date, tracking, items }) {
-    this.store = store;
-    this.date = date;
-    this.items = items;
-    this.name = name || (this.items || []).join(", ");
-
-    if (date == null) {
-      console.warn(`WARNING: Order "${name}" is missing "date"`);
-    }
-
-    this.tracking = this._createTrackingNumbers(tracking);
-  }
-
-  _createTrackingNumbers(numbers) {
-    if (numbers == null) return [];
-    if (!Array.isArray(numbers)) return [new TrackingNumber(numbers)];
-
-    return numbers.map(number => new TrackingNumber(number));
-  }
-
-  addToTable(table) {
-    table.cell("Name", this.name);
-    table.cell("Order date", this.getTimeAgo());
-    if (this.tracking != null) {
-      table.cell("Tracking#", this.tracking.map(t => t.number).join(", "));
-    }
-    table.newRow();
-  }
-
-  getTimeAgo() {
-    const msAgo = new Date() - this.date;
-    const daysAgo = Math.floor(msAgo / 1000 / 60 / 60 / 24);
-
-    if (daysAgo === 0) {
-      return "today";
-    } else if (daysAgo === 1) {
-      return "yesterday";
-    } else {
-      const weeks = Math.floor(daysAgo / 7);
-      const days = daysAgo - weeks * 7;
-
-      const values = [];
-      if (weeks > 0) {
-        values.push(`${weeks}w`);
-      }
-      if (days > 0) {
-        values.push(`${days}d`);
-      }
-
-      return values.join(" ") + " ago";
-    }
-  }
-
-  canTrack() {
-    return this._getTrackable().length > 0;
-  }
-
-  track() {
-    return Promise.all(this._getTrackable().map(t => t.track()));
-  }
-
-  _getTrackable() {
-    return this.tracking.filter(t => t.canTrack());
-  }
-}
-
-function loadOrders() {
-  return yaml
-    .safeLoad(fs.readFileSync(path.join(process.env.HOME, ".packages")))
-    .map(order => new Order(order));
-}
+const OrderRepo = require("./packages/order-repo");
+const Tracker = require("./packages/tracker");
 
 function listOrders() {
-  const orders = _.sortBy(loadOrders(), order => order.date);
   const table = new Table();
+  const orders = OrderRepo.load();
   orders.forEach(order => order.addToTable(table));
 
   console.info(`\nExpecting ${orders.length} orders:\n`);
   console.info(table.toString());
-}
-
-class Tracker {
-  track(orders) {
-    const trackable = orders.filter(order => order.canTrack());
-    this.remaining = trackable.length;
-    this._printStatus();
-
-    return Promise.all(trackable.map(order => this._trackOrder(order)));
-  }
-
-  _printStatus() {
-    let msg;
-    if (this.remaining > 0) {
-      msg = chalk.yellow(`Tracking... ${this.remaining} orders left...`);
-    } else {
-      msg = chalk.green("\n=============\nDone :)\n=============\n");
-    }
-    process.stderr.write(`${CLEAR_LINE}${msg}`);
-  }
-
-  _trackOrder(order) {
-    return order.track().then(results => {
-      process.stderr.write(CLEAR_LINE);
-      console.info(`Order ${order.name}:`);
-
-      results.forEach(result => this._printTrackingResult(result));
-
-      this.remaining--;
-      this._printStatus();
-    });
-  }
-
-  _printTrackingResult(result) {
-    console.info(`  Tracking #${result.number}:`);
-
-    let text = result.text;
-    text = this._indentText(text);
-    if (this._isDelivered(text)) {
-      text = chalk.green(text);
-    } else if (!/There is no information/.test(text)) {
-      text = chalk.blue(text);
-    } else {
-      text = chalk.gray(text);
-    }
-
-    console.info(text);
-    console.info();
-  }
-
-  _indentText(text) {
-    if (text == null || text.length === 0) return "";
-    return text
-      .toString()
-      .split("\n")
-      .map(line => line.replace(/^/, "  "))
-      .join("\n");
-  }
-
-  _isDelivered(text) {
-    return (
-      /Delivered to addressee/.test(text) ||
-      /postal item was delivered/.test(text)
-    );
-  }
 }
 
 const command = process.argv[2];
@@ -224,6 +22,6 @@ switch (command) {
 
   case "t":
   case "track":
-    new Tracker().track(loadOrders());
+    new Tracker().track(OrderRepo.load());
     break;
 }
