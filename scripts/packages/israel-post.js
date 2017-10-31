@@ -13,8 +13,22 @@ const IsraelPost = {
         wordwrap: 50,
         tables: true
       });
-      return text;
+
+      let status = "in-transit";
+      if (this._isDelivered(text)) {
+        status = "delivered";
+      } else if (/There is no information/.test(text)) {
+        status = "unknown";
+      }
+
+      return { text, status };
     });
+  },
+
+  _isDelivered(text) {
+    return;
+    /Delivered to addressee/.test(text) ||
+      /postal item was delivered/.test(text);
   },
 
   _getUrl(number) {

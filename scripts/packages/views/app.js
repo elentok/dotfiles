@@ -8,10 +8,11 @@ class TrackingNumber {
   track() {
     const resultEl = this.el.querySelector(".o-order-tn__result");
 
-    fetch(`/track/${this.el.dataset.number}`)
+    return fetch(`/track/${this.el.dataset.number}`)
       .then(response => response.json())
       .then(json => {
         resultEl.innerText = json.text;
+        return json;
       });
   }
 }
@@ -25,7 +26,16 @@ class Order {
   }
 
   track() {
-    this.trackingNumbers.forEach(number => number.track());
+    Promise.all(
+      this.trackingNumbers.map(number => number.track())
+    ).then(results => {
+      results.forEach(result => {
+        if (result.status) {
+          const status = result.status.toLowerCase().replace(/ /g, "-");
+          this.el.classList.add(`o-order--${status}`);
+        }
+      });
+    });
   }
 }
 
