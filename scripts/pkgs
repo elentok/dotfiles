@@ -24,4 +24,9 @@ switch (command) {
   case "track":
     new Tracker().track(OrderRepo.load());
     break;
+
+  case "s":
+  case "server":
+    require("./packages/server");
+    break;
 }
