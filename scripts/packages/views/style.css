@@ -64,7 +64,17 @@ body {
   padding-top: 10px;
 }
 
+.o-order-tn {
+  margin-top: 10px;
+}
+
 .o-order-tn__result table {
-  color: #777;
+  color: #555;
   font-size: 100%;
+  border-collapse: collapse;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.o-order-tn__result td {
+  padding: 10px;
 }

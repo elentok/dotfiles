@@ -1,5 +1,6 @@
 const axios = require("axios");
 const htmlToText = require("html-to-text");
+const $ = require("cheerio");
 
 const IsraelPost = {
   isSupported(number) {
@@ -21,14 +22,43 @@ const IsraelPost = {
         status = "unknown";
       }
 
-      return { text, status };
+      return {
+        text,
+        status,
+        history: this._parseHtml(response.data.itemcodeinfo)
+      };
     });
   },
 
+  _parseHtml(html) {
+    const $html = $.load(html);
+
+    return $html("tr")
+      .toArray()
+      .map(item => {
+        const $item = $(item);
+        const tds = $item
+          .find("td")
+          .toArray()
+          .map(td => $(td).html());
+        const postalUnit = tds[1];
+        const city = tds[2];
+        const description = tds[3];
+        return {
+          date: tds[0],
+          postalUnit,
+          city,
+          description,
+          text: `${description} (${city}, ${postalUnit})`
+        };
+      });
+  },
+
   _isDelivered(text) {
-    return;
-    /Delivered to addressee/.test(text) ||
-      /postal item was delivered/.test(text);
+    return (
+      /Delivered to addressee/.test(text) ||
+      /postal item was delivered/.test(text)
+    );
   },
 
   _getUrl(number) {
