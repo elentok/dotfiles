@@ -38,15 +38,11 @@ body {
 .o-order__summary,
 .o-order__tracking {
   font-size: 80%;
-  color: #777;
+  color: #555;
 }
 
 .o-order__summary {
   margin-bottom: 10px;
-}
-
-.o-order__tracking {
-  margin-top: 10px;
 }
 
 .o-order__store {
@@ -60,4 +56,15 @@ body {
 
 .o-order__name {
   font-weight: bold;
+}
+
+.o-order__tracking {
+  margin-top: 10px;
+  border-top: 1px solid #999;
+  padding-top: 10px;
+}
+
+.o-order-tn__result table {
+  color: #777;
+  font-size: 100%;
 }
