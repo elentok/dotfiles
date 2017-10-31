@@ -20,6 +20,21 @@ body {
   border-radius: 5px;
 }
 
+.o-order--in-transit {
+  background-color: hsla(195, 67%, 86%, 1);
+  border-color: hsla(195, 67%, 50%, 1);
+}
+
+.o-order--on-hold {
+  background-color: hsla(0, 57%, 77%, 1);
+  border-color: hsla(0, 57%, 50%, 1);
+}
+
+.o-order--delivered {
+  background-color: hsla(120, 72%, 81%, 1);
+  border-color: hsla(120, 72%, 81%, 1);
+}
+
 .o-order__summary,
 .o-order__tracking {
   font-size: 80%;

@@ -12,11 +12,8 @@ class TrackingNumber {
   }
 
   track() {
-    return this.tracker.track(this.number).then(text => {
-      return {
-        text,
-        number: this.number
-      };
+    return this.tracker.track(this.number).then(result => {
+      return Object.assign(result, { number: this.number });
     });
   }
 
