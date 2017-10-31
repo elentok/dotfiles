@@ -26,5 +26,11 @@ html
 
           if order.tracking && order.tracking.length
             .o-order__tracking
-              = "Tracking: "
-              = order.tracking.map(t => t.number).join(", ")
+              .o-order__tracking_title Tracking:
+              each number in order.tracking
+                .o-order-tn(data-number= number.number)
+                  .o-order-tn__number= number.number
+                  .o-order-tn__result
+
+    script(type="text/javascript")
+      include app.js
