@@ -1,0 +1,48 @@
+body {
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+.o-orders {
+  column-width: 320px;
+  column-fill: balance;
+}
+
+.o-orders .o-order {
+  margin-bottom: 10px;
+}
+
+.o-order {
+  break-inside: avoid-column;
+  background-color: #eee;
+  border: 1px solid #aaa;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.o-order__summary,
+.o-order__tracking {
+  font-size: 80%;
+  color: #777;
+}
+
+.o-order__summary {
+  margin-bottom: 10px;
+}
+
+.o-order__tracking {
+  margin-top: 10px;
+}
+
+.o-order__store {
+  text-transform: uppercase;
+}
+
+.o-order__store {
+  float: right;
+  display: inline-block;
+}
+
+.o-order__name {
+  font-weight: bold;
+}

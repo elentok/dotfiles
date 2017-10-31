@@ -1,7 +1,8 @@
 const TrackingNumber = require("./tracking-number");
 
 class Order {
-  constructor({ name, store, date, tracking, items }) {
+  constructor({ id, name, store, date, tracking, items }) {
+    this.id = id;
     this.store = store;
     this.date = date;
     this.items = items;
