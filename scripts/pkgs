@@ -3,10 +3,12 @@
 const Table = require("easy-table");
 const OrderRepo = require("./packages/order-repo");
 const Tracker = require("./packages/tracker");
+const Importer = require("./packages/importer");
+const nodemon = require("nodemon");
 
 function listOrders() {
   const table = new Table();
-  const orders = OrderRepo.load();
+  const orders = OrderRepo.all();
   orders.forEach(order => order.addToTable(table));
 
   console.info(`\nExpecting ${orders.length} orders:\n`);
@@ -22,11 +24,25 @@ switch (command) {
 
   case "t":
   case "track":
-    new Tracker().track(OrderRepo.load());
+    new Tracker().track(OrderRepo.all());
     break;
 
   case "s":
   case "server":
     require("./packages/server");
+    break;
+
+  case "i":
+  case "import":
+    Importer.importFromClipboard();
+    break;
+
+  case "d":
+  case "dev":
+    nodemon({
+      exec: "scripts/pkgs server",
+      watch: "scripts/packages",
+      verbose: true
+    });
     break;
 }

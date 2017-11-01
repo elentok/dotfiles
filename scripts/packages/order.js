@@ -1,18 +1,43 @@
 const TrackingNumber = require("./tracking-number");
+const Item = require("./item");
 
 class Order {
-  constructor({ id, name, store, date, tracking, items }) {
-    this.id = id;
-    this.store = store;
-    this.date = date;
-    this.items = items;
-    this.name = name || (this.items || []).join(", ");
+  constructor(attribs) {
+    this.update(attribs);
+  }
 
-    if (date == null) {
-      console.warn(`WARNING: Order "${name}" is missing "date"`);
+  update(attribs) {
+    this.id = attribs.id;
+    this.store = attribs.store;
+    this.date = new Date(attribs.date);
+    this.items = (attribs.items || []).map(item => new Item(item));
+    this.name = attribs.name; // || (this.items || []).join(", ");
+
+    if (attribs.date == null) {
+      console.warn(`WARNING: Order "${attribs.name}" is missing "date"`);
     }
 
-    this.tracking = this._createTrackingNumbers(tracking);
+    this.tracking = this._createTrackingNumbers(attribs.tracking);
+  }
+
+  toJSON() {
+    const json = {};
+    Object.keys(this).forEach(key => {
+      if (this[key] != null) {
+        const value = this[key];
+        if (Array.isArray(value) && value.length === 0) return;
+        json[key] = this[key];
+      }
+    });
+
+    if (this.items != null && this.items.length > 0) {
+      json.items = this.items.map(item => item.toJSON());
+    }
+
+    if (this.tracking.length > 0) {
+      json.tracking = this.tracking.map(tn => tn.number);
+    }
+    return json;
   }
 
   _createTrackingNumbers(numbers) {

@@ -1,0 +1,5 @@
+mixin item(item)
+  if (typeof(item) === "string")
+    = item
+  else
+    a(href=item.url target="_blank" rel="noopener noreferrer")= item.title

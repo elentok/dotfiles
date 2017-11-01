@@ -5,33 +5,13 @@ html
     style(type="text/css")
       include style.css
   body
+    include order
+    include item
+
     h1 Orders
     .o-orders
       each order in orders
-        .o-order
-          .o-order__summary
-            if order.store
-              .o-order__store= order.store
-            .o-order__date= order.getTimeAgo()
-
-          if order.id
-            .o-order__id ID #{order.id}
-
-          unless order.items
-            .o-order__name= order.name
-
-          if order.items
-            ul.o-order__items
-              each item in order.items
-                li.o-order-item= item
-
-          if order.tracking && order.tracking.length
-            .o-order__tracking
-              .o-order__tracking_title Tracking:
-              each number in order.tracking
-                .o-order-tn(data-number= number.number)
-                  .o-order-tn__number= number.number
-                  .o-order-tn__result
+        +order(order)
 
     script(type="text/javascript")
       include app.js

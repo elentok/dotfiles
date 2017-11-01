@@ -8,9 +8,12 @@ app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
 app.get("/", (req, res) => {
-  res.render("index", {
-    orders: OrderRepo.load()
-  });
+  res.render("index", { orders: OrderRepo.all() });
+});
+
+app.get("/reset", (req, res) => {
+  OrderRepo.reset();
+  res.status(200).send("OK");
 });
 
 app.get("/track/:number", (req, res) => {
