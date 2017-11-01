@@ -32,10 +32,6 @@ with_cache fasd source fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-inst
 
 # Mac Specific {{{1
 
-if is_mac; then
-  export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-fi
-
 # History {{{1
 HISTFILE="$HOME/.zhistory" # The path to the history file.
 HISTSIZE=10000                   # The maximum number of events to save in the internal history.
