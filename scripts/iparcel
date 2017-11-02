@@ -3,9 +3,13 @@
 const axios = require("axios");
 const $ = require("cheerio");
 const Table = require("easy-table");
+const Status = require("./packages/status");
 
 class IParcelResult {
   constructor(status, history) {
+    if (!(status instanceof Status)) {
+      status = Status.fromName(status);
+    }
     this.status = status;
     this.history = history;
   }
@@ -48,17 +52,23 @@ const IParcel = {
     const $html = $.load(html);
 
     const status = $html(".currEvent").text();
-    const history = $html(".trackingResults .result").toArray().map(item => {
-      const $item = $(item);
-      return {
-        date: $item
-          .find(".date")
-          .html()
-          .replace("<br>", " ")
-          .replace(/<[^>]+>/g, ""),
-        text: $item.find(".event").text().trim().replace(/\s*\r?\n\s*/, " - ")
-      };
-    });
+    const history = $html(".trackingResults .result")
+      .toArray()
+      .map(item => {
+        const $item = $(item);
+        return {
+          date: $item
+            .find(".date")
+            .html()
+            .replace("<br>", " ")
+            .replace(/<[^>]+>/g, ""),
+          text: $item
+            .find(".event")
+            .text()
+            .trim()
+            .replace(/\s*\r?\n\s*/, " - ")
+        };
+      });
 
     return new IParcelResult(status, history);
   }

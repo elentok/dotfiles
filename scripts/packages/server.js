@@ -16,6 +16,13 @@ app.get("/reset", (req, res) => {
   res.status(200).send("OK");
 });
 
+app.get("/track-all", (req, res) => {
+  Promise.all(OrderRepo.getTrackable().map(o => o.track())).then(results => {
+    OrderRepo.save();
+    res.json(results.filter(r => r.changed).map(r => r.order));
+  });
+});
+
 app.get("/track/:number", (req, res) => {
   const number = new TrackingNumber(req.params.number);
   if (number.canTrack()) {

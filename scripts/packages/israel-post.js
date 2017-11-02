@@ -1,6 +1,7 @@
 const axios = require("axios");
 const htmlToText = require("html-to-text");
 const $ = require("cheerio");
+const Status = require("./status");
 
 const IsraelPost = {
   isSupported(number) {
@@ -15,11 +16,11 @@ const IsraelPost = {
         tables: true
       });
 
-      let status = "in-transit";
+      let status = Status.fromName("in-transit");
       if (this._isDelivered(text)) {
-        status = "delivered";
+        status = Status.fromName("delivered");
       } else if (/There is no information/.test(text)) {
-        status = "unknown";
+        status = Status.fromName("unknown");
       }
 
       return {

@@ -3,7 +3,13 @@ const IParcel = require("../iparcel");
 
 class TrackingNumber {
   constructor(number) {
-    this.number = number;
+    if (typeof number === "object") {
+      this.number = number.number;
+      this.lastUpdate = number.lastUpdate;
+    } else {
+      this.number = number;
+    }
+
     this.tracker = this._getTracker();
   }
 
@@ -13,8 +19,17 @@ class TrackingNumber {
 
   track() {
     return this.tracker.track(this.number).then(result => {
+      this.lastUpdate = this._buildLastUpdate(result);
       return Object.assign(result, { number: this.number });
     });
+  }
+
+  _buildLastUpdate(result) {
+    const update = {};
+    if (result.text) update.text = result.text;
+    if (result.history && result.history.length)
+      update.history = result.history;
+    return update;
   }
 
   _getTracker() {
@@ -27,6 +42,15 @@ class TrackingNumber {
     }
 
     return null;
+  }
+
+  toJSON() {
+    if (this.lastUpdate == null) return this.number;
+
+    return {
+      number: this.number,
+      lastUpdate: this.lastUpdate
+    };
   }
 }
 
