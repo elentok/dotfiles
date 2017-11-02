@@ -5,21 +5,24 @@ const { leftPad, max } = require("./utils");
 
 class Order {
   constructor(attribs) {
+    this.items = [];
+    this.tracking = [];
     this.update(attribs);
   }
 
   update(attribs) {
-    this.id = attribs.id;
-    this.store = attribs.store;
-    this.date = new Date(attribs.date);
-    this.items = (attribs.items || []).map(item => new Item(item));
-    this.name = attribs.name; // || (this.items || []).join(", ");
+    if (attribs.id) this.id = attribs.id;
+    if (attribs.store) this.store = attribs.store;
+    if (attribs.date) this.date = new Date(attribs.date);
+    if (attribs.items) {
+      this.items = (attribs.items || []).map(item => new Item(item));
+    }
+    if (attribs.name) this.name = attribs.name;
 
-    if (attribs.date == null) {
-      console.warn(`WARNING: Order "${attribs.name}" is missing "date"`);
+    if (attribs.tracking) {
+      this.tracking = this._createTrackingNumbers(attribs.tracking);
     }
 
-    this.tracking = this._createTrackingNumbers(attribs.tracking);
     this.status = this._parseStatus(attribs);
   }
 
