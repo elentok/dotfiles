@@ -1,15 +1,7 @@
 const TrackingNumber = require("./tracking-number");
 const Item = require("./item");
-
-const STATUS_VALUES = {
-  unknown: 0,
-  processing: 1,
-  shipped: 2,
-  "in-transit": 3,
-  shufersal: 10,
-  delivered: 100,
-  "on-hold": 200
-};
+const Status = require("./status");
+const { leftPad, max } = require("./utils");
 
 class Order {
   constructor(attribs) {
@@ -20,7 +12,6 @@ class Order {
     this.id = attribs.id;
     this.store = attribs.store;
     this.date = new Date(attribs.date);
-    this.status = attribs.status;
     this.items = (attribs.items || []).map(item => new Item(item));
     this.name = attribs.name; // || (this.items || []).join(", ");
 
@@ -29,6 +20,20 @@ class Order {
     }
 
     this.tracking = this._createTrackingNumbers(attribs.tracking);
+    this.status = this._parseStatus(attribs);
+  }
+
+  _parseStatus(attribs) {
+    if (attribs.status != null) {
+      if (attribs.status instanceof Status) return attribs.status;
+      return Status.fromName(attribs.status);
+    }
+
+    if (attribs.tracking != null && attribs.tracking.length > 0) {
+      return Status.fromName("shipped");
+    }
+
+    return Status.fromName("unknown");
   }
 
   toJSON() {
@@ -41,12 +46,14 @@ class Order {
       }
     });
 
+    json.status = this.status.toJSON();
+
     if (this.items != null && this.items.length > 0) {
       json.items = this.items.map(item => item.toJSON());
     }
 
     if (this.tracking.length > 0) {
-      json.tracking = this.tracking.map(tn => tn.number);
+      json.tracking = this.tracking.map(tn => tn.toJSON());
     }
     return json;
   }
@@ -96,7 +103,28 @@ class Order {
   }
 
   track() {
-    return Promise.all(this._getTrackable().map(t => t.track()));
+    return Promise.all(
+      this._getTrackable().map(tn => tn.track())
+    ).then(results => {
+      const newStatus = this._identifyNewStatus(results);
+      const changed = this.status.name !== newStatus.name;
+      if (changed) this.status = newStatus;
+
+      return {
+        changed,
+        order: this,
+        results
+      };
+    });
+  }
+
+  _identifyNewStatus(trackingResults) {
+    const result = max(trackingResults, r => r.status.value);
+    if (result.status.value >= this.status.value) {
+      return result.status;
+    }
+
+    return this.status;
   }
 
   _getTrackable() {
@@ -104,21 +132,8 @@ class Order {
   }
 
   getSortValue() {
-    let trackingValue = STATUS_VALUES[this.getStatus()].toString();
-    while (trackingValue.length < 4) {
-      trackingValue = `0${trackingValue}`;
-    }
-    return [trackingValue, this.date.toISOString()].join("-");
-  }
-
-  getStatus() {
-    if (this.status != null) return this.status;
-
-    if (this.tracking != null && this.tracking.length > 0) {
-      return "shipped";
-    }
-
-    return "unknown";
+    const statusValue = leftPad(this.status.value, 4, "0");
+    return [statusValue, this.date.toISOString()].join("-");
   }
 }
 

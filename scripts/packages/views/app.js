@@ -61,12 +61,12 @@ class Order {
   constructor(el) {
     this.el = el;
 
-    this.el
-      .querySelector(".o-toolbar-item--refresh")
-      .addEventListener("click", event => {
-        event.preventDefault();
-        this.track();
-      });
+    // this.el
+    // .querySelector(".o-toolbar-item--refresh")
+    // .addEventListener("click", event => {
+    // event.preventDefault();
+    // this.track();
+    // });
 
     this.trackingNumbers = Array.from(el.querySelectorAll(".o-order-tn")).map(
       numberEl => new TrackingNumber(numberEl)
@@ -101,4 +101,16 @@ const orders = Array.from(document.querySelectorAll(".o-order")).map(
   el => new Order(el)
 );
 
-orders.forEach(o => o.track());
+document.querySelector(".o-btn--refresh").addEventListener("click", e => {
+  e.preventDefault();
+
+  fetch("/track-all")
+    .then(result => result.json())
+    .then(json => {
+      if (json && json.length > 0) {
+        window.location.href = window.location.href;
+      }
+    });
+});
+
+// orders.forEach(o => o.track());

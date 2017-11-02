@@ -3,6 +3,10 @@ body {
   font-size: 14px;
 }
 
+.o-btn--refresh {
+  font-size: 24px;
+}
+
 .o-orders {
   column-width: 320px;
   column-fill: balance;
@@ -21,7 +25,7 @@ body {
 }
 
 .o-order--refreshing {
-  opacity: .2;
+  opacity: 0.2;
 }
 
 .o-order--in-transit {

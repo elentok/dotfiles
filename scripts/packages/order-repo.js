@@ -12,6 +12,10 @@ const OrderRepo = {
     return this._all;
   },
 
+  getTrackable() {
+    return this.all().filter(o => o.canTrack());
+  },
+
   reset() {
     this._load();
   },
@@ -59,6 +63,7 @@ const OrderRepo = {
       return yaml.safeDump(raw);
     } catch (e) {
       console.error("Error generating YAML:", e);
+      console.error(JSON.stringify(raw, null, 2));
       throw e;
     }
   }
