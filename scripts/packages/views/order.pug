@@ -1,5 +1,5 @@
 mixin order(order)
-  .o-order
+  .o-order(data-sort-value=order.getSortValue() class=`o-order--${order.getStatus()}`)
     .o-order__toolbar
       .o-toolbar
         a.o-toolbar-item.o-toolbar-item--refresh(href="#") &#8634;

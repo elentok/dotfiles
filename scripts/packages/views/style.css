@@ -29,6 +29,11 @@ body {
   border-color: hsla(195, 67%, 50%, 1);
 }
 
+.o-order--shipped {
+  background-color: hsla(39, 94%, 84%, 1);
+  border-color: hsla(39, 94%, 50%, 1);
+}
+
 .o-order--on-hold {
   background-color: hsla(0, 57%, 77%, 1);
   border-color: hsla(0, 57%, 50%, 1);
@@ -36,7 +41,7 @@ body {
 
 .o-order--delivered {
   background-color: hsla(120, 72%, 81%, 1);
-  border-color: hsla(120, 72%, 81%, 1);
+  border-color: hsla(120, 72%, 40%, 1);
 }
 
 .o-order__summary,

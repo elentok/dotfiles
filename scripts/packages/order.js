@@ -1,6 +1,16 @@
 const TrackingNumber = require("./tracking-number");
 const Item = require("./item");
 
+const STATUS_VALUES = {
+  unknown: 0,
+  processing: 1,
+  shipped: 2,
+  "in-transit": 3,
+  shufersal: 10,
+  delivered: 100,
+  "on-hold": 200
+};
+
 class Order {
   constructor(attribs) {
     this.update(attribs);
@@ -10,6 +20,7 @@ class Order {
     this.id = attribs.id;
     this.store = attribs.store;
     this.date = new Date(attribs.date);
+    this.status = attribs.status;
     this.items = (attribs.items || []).map(item => new Item(item));
     this.name = attribs.name; // || (this.items || []).join(", ");
 
@@ -90,6 +101,24 @@ class Order {
 
   _getTrackable() {
     return this.tracking.filter(t => t.canTrack());
+  }
+
+  getSortValue() {
+    let trackingValue = STATUS_VALUES[this.getStatus()].toString();
+    while (trackingValue.length < 4) {
+      trackingValue = `0${trackingValue}`;
+    }
+    return [trackingValue, this.date.toISOString()].join("-");
+  }
+
+  getStatus() {
+    if (this.status != null) return this.status;
+
+    if (this.tracking != null && this.tracking.length > 0) {
+      return "shipped";
+    }
+
+    return "unknown";
   }
 }
 

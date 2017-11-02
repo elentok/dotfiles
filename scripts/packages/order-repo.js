@@ -28,7 +28,7 @@ const OrderRepo = {
   },
 
   _sort() {
-    this._all = _.sortBy(this._all, order => order.date);
+    this._all = _.sortBy(this._all, order => order.getSortValue());
     this._all.reverse();
   },
 
