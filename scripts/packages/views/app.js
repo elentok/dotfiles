@@ -18,6 +18,8 @@ class TrackingNumber {
   }
 
   track() {
+    this.el.classList.add("o-order--refreshing");
+
     const resultEl = this.el.querySelector(".o-order-tn__result");
 
     return fetch(`/track/${this.el.dataset.number}`)
@@ -28,7 +30,12 @@ class TrackingNumber {
         } else if (json.text != null) {
           resultEl.innerText = json.text;
         }
+        this.el.classList.remove("o-order--refreshing");
         return json;
+      })
+      .catch(err => {
+        console.error(`Error tracking ${this.el.dataset.number}`, err);
+        this.el.classList.remove("o-order--refreshing");
       });
   }
 
@@ -53,6 +60,14 @@ class TrackingNumber {
 class Order {
   constructor(el) {
     this.el = el;
+
+    this.el
+      .querySelector(".o-toolbar-item--refresh")
+      .addEventListener("click", event => {
+        event.preventDefault();
+        this.track();
+      });
+
     this.trackingNumbers = Array.from(el.querySelectorAll(".o-order-tn")).map(
       numberEl => new TrackingNumber(numberEl)
     );

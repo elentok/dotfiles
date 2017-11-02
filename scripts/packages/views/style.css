@@ -20,6 +20,10 @@ body {
   border-radius: 5px;
 }
 
+.o-order--refreshing {
+  opacity: .2;
+}
+
 .o-order--in-transit {
   background-color: hsla(195, 67%, 86%, 1);
   border-color: hsla(195, 67%, 50%, 1);
@@ -77,4 +81,13 @@ body {
 
 .o-order-tn__result td {
   padding: 10px;
+}
+
+.o-order__toolbar {
+  text-align: right;
+}
+
+.o-toolbar-item {
+  padding: 3px;
+  text-decoration: none;
 }

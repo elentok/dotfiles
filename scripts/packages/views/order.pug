@@ -1,5 +1,9 @@
 mixin order(order)
   .o-order
+    .o-order__toolbar
+      .o-toolbar
+        a.o-toolbar-item.o-toolbar-item--refresh(href="#") &#8634;
+
     .o-order__summary
       if order.store
         .o-order__store= order.store
