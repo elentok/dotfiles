@@ -62,3 +62,12 @@ versions of vim):
 ```
 curl https://raw.githubusercontent.com/elentok/dotfiles/master/vim/basic.vim > ~/.vimrc
 ```
+
+Basic Zsh Setup
+---------------
+
+To install my basic zsh setup:
+
+```
+curl https://raw.githubusercontent.com/elentok/dotfiles/master/zsh/basic.zsh > ~/.zshrc
+```
