@@ -1,0 +1,34 @@
+#!/usr/bin/env node
+
+const fs = require("fs");
+const path = require("path");
+const UglifyJS = require("uglify-js");
+
+if (!fs.existsSync("build")) {
+  fs.mkdir("build");
+}
+
+const HEADER = `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookmarklets</title>
+  </head>
+  <body>
+`;
+
+const FOOTER = `</body>
+</html>
+`;
+
+const stream = fs.createWriteStream("bookmarklets.html");
+stream.write(HEADER);
+
+fs.readdirSync(__dirname).forEach(file => {
+  if (!/\.js/.test(file)) return;
+
+  const source = fs.readFileSync(path.join(__dirname, file)).toString();
+  const result = UglifyJS.minify(source);
+  stream.write(`  <a href="javascript:${escape(result.code)}">${file}</a>\n`);
+});
+
+stream.end(FOOTER);
