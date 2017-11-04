@@ -36,6 +36,7 @@
     "prompt": "^1.0.0",
     "pug": "^2.0.0-rc.4",
     "shelljs": "^0.7.4",
+    "uglify-es": "^3.1.6",
     "uglify-js": "^3.1.6",
     "underscore": "^1.8.3"
   }
