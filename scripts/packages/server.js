@@ -8,6 +8,7 @@ app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
 app.get("/", (req, res) => {
+  OrderRepo.reset();
   res.render("index", { orders: OrderRepo.all() });
 });
 
