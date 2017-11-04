@@ -2,7 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const UglifyJS = require("uglify-js");
+const UglifyES = require("uglify-es");
 
 if (!fs.existsSync("build")) {
   fs.mkdir("build");
@@ -27,8 +27,12 @@ fs.readdirSync(__dirname).forEach(file => {
   if (!/\.js/.test(file)) return;
 
   const source = fs.readFileSync(path.join(__dirname, file)).toString();
-  const result = UglifyJS.minify(source);
-  stream.write(`  <a href="javascript:${escape(result.code)}">${file}</a>\n`);
+  const result = UglifyES.minify(source);
+  if (result.error != null) {
+    console.error("Build failed: ", result.error);
+  } else {
+    stream.write(`  <a href="javascript:${escape(result.code)}">${file}</a>\n`);
+  }
 });
 
 stream.end(FOOTER);
