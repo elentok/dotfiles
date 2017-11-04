@@ -29,6 +29,8 @@ class Item {
     if (this.img == null) return Promise.resolve(true);
 
     const filename = path.join(getImagesDir(), `${this.id}.jpg`);
+    if (fs.existsSync(filename)) return Promise.resolve(true);
+
     console.info(`Download image ${filename}`);
     return download(this.img, filename);
   }

@@ -47,9 +47,12 @@ const OrderRepo = {
       order = new Order(order);
     }
 
+    order.downloadImages();
+
     this.all().push(order);
     this._byId[order.id] = order;
     if (save) this.save();
+    return order;
   },
 
   save() {
