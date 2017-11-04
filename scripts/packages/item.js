@@ -1,3 +1,7 @@
+const path = require("path");
+const fs = require("fs");
+const { getImagesDir, download } = require("./utils");
+
 class Item {
   constructor(titleOrOptions) {
     if (typeof titleOrOptions === "string") {
@@ -19,6 +23,14 @@ class Item {
       if (this[key] != null) json[key] = this[key];
     });
     return json;
+  }
+
+  downloadImage() {
+    if (this.img == null) return Promise.resolve(true);
+
+    const filename = path.join(getImagesDir(), `${this.id}.jpg`);
+    console.info(`Download image ${filename}`);
+    return download(this.img, filename);
   }
 }
 

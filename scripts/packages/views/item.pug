@@ -2,4 +2,6 @@ mixin item(item)
   if (typeof(item) === "string")
     = item
   else
-    a(href=item.url target="_blank" rel="noopener noreferrer")= item.title
+    a(href=item.url target="_blank" rel="noopener noreferrer")
+      img.o-order-item__img(src="/images/" + item.id + ".jpg")
+      .o-order-item__title= item.title
