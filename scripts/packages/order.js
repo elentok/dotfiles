@@ -138,6 +138,10 @@ class Order {
     const statusValue = leftPad(this.status.value, 4, "0");
     return [statusValue, this.date.toISOString()].join("-");
   }
+
+  downloadImages() {
+    return this.items.forEach(item => item.downloadImage());
+  }
 }
 
 module.exports = Order;

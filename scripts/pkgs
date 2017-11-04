@@ -37,6 +37,10 @@ switch (command) {
     Importer.importFromClipboard();
     break;
 
+  case "download":
+    OrderRepo.all().forEach(o => o.downloadImages());
+    break;
+
   case "d":
   case "dev":
     nodemon({

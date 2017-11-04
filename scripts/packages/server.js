@@ -3,9 +3,12 @@ const express = require("express");
 const app = express();
 const OrderRepo = require("./order-repo");
 const TrackingNumber = require("./tracking-number");
+const { getImagesDir } = require("./utils");
 
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
+
+app.use("/images", express.static(getImagesDir()));
 
 app.get("/", (req, res) => {
   OrderRepo.reset();

@@ -96,6 +96,14 @@ body {
   text-align: right;
 }
 
+.o-order-item__img {
+  max-width: 100px;
+}
+
+.o-order-item__title {
+  font-size: 80%;
+}
+
 .o-toolbar-item {
   padding: 3px;
   text-decoration: none;

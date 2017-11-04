@@ -3,8 +3,9 @@ const fs = require("fs");
 const yaml = require("js-yaml");
 const Order = require("./order");
 const _ = require("underscore");
+const { getDataDir } = require("./utils");
 
-const ORDERS_FILENAME = path.join(process.env.HOME, ".packages");
+const ORDERS_FILENAME = path.join(getDataDir(), "packages.yml");
 
 const OrderRepo = {
   all() {
