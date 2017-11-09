@@ -9,7 +9,11 @@ html
     include item
 
     h1 Orders
-    button.o-btn--refresh  &#8634;
+
+    .o-toolbar
+      button.o-toolbar-btn.o-toolbar-btn--refresh &#8634;
+      button.o-toolbar-btn.o-toolbar-btn--archive Archive
+      .o-toolbar__message
 
     .o-orders
       each order in orders

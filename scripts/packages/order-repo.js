@@ -64,7 +64,7 @@ const OrderRepo = {
     this._sort();
     const raw = this._all.map(o => o.toJSON());
     try {
-      return yaml.safeDump(raw);
+      return yaml.safeDump(raw, { skipInvalid: true });
     } catch (e) {
       console.error("Error generating YAML:", e);
       console.error(JSON.stringify(raw, null, 2));
