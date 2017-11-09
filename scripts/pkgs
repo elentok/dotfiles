@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const path = require("path");
 const Table = require("easy-table");
 const OrderRepo = require("./packages/order-repo");
 const Tracker = require("./packages/tracker");
@@ -43,6 +44,8 @@ switch (command) {
 
   case "d":
   case "dev":
+    process.chdir(path.join(__dirname, ".."));
+
     nodemon({
       exec: "scripts/pkgs server",
       watch: "scripts/packages",

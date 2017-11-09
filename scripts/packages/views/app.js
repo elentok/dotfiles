@@ -1,4 +1,4 @@
-/* globals document fetch */
+/* globals document fetch window */
 
 function dom(tagName, className, contents) {
   const el = document.createElement(tagName);
@@ -97,20 +97,32 @@ class Order {
   }
 }
 
-const orders = Array.from(document.querySelectorAll(".o-order")).map(
-  el => new Order(el)
-);
+class App {
+  constructor() {
+    this.ui = {
+      refreshButton: document.querySelector(".o-toolbar-btn--refresh"),
+      message: document.querySelector(".o-toolbar__message")
+    };
 
-document.querySelector(".o-btn--refresh").addEventListener("click", e => {
-  e.preventDefault();
-
-  fetch("/track-all")
-    .then(result => result.json())
-    .then(json => {
-      if (json && json.length > 0) {
-        window.location.href = window.location.href;
-      }
+    this.ui.refreshButton.addEventListener("click", e => {
+      e.preventDefault();
+      this.track();
     });
-});
+  }
 
-// orders.forEach(o => o.track());
+  track() {
+    this.ui.message.innerText = "Tracking...";
+
+    fetch("/track-all")
+      .then(result => result.json())
+      .then(json => {
+        if (json && json.length > 0) {
+          window.location.href = window.location.href;
+        } else {
+          this.ui.message.innerText = "Done tracking, no updates";
+        }
+      });
+  }
+}
+
+window.app = new App();

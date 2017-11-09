@@ -3,8 +3,29 @@ body {
   font-size: 14px;
 }
 
-.o-btn--refresh {
-  font-size: 24px;
+.o-toolbar {
+  margin-bottom: 10px;
+}
+
+.o-toolbar-btn {
+  border-radius: 5px;
+  box-shadow: none;
+  border: 1px solid #ccc;
+  background: #eee;
+  margin-right: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  cursor: pointer;
+}
+
+.o-toolbar-btn,
+.o-toolbar__message {
+  font-size: 20px;
+  line-height: 44px;
+}
+
+.o-toolbar__message {
+  display: inline-block;
 }
 
 .o-orders {
