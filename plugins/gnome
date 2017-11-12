@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
 
+source $DOTF/framework
+
 gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
-gsettings set org.gnome.desktop.wm.preferences mouse-button-modifier '<Alt>'
+# gsettings set org.gnome.desktop.wm.preferences mouse-button-modifier '<Alt>'
+
+if is_arch; then
+  pacman_install gst-libav gst-plugins-ugly
+fi
