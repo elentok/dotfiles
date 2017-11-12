@@ -36,4 +36,14 @@ case "$mode" in
     output="${output/.mp4/-1080.mp4}"
     ffmpeg -i "$input" -vcodec libx264 -acodec aac -b:a 128k -s 1920x1080 "$output"
     ;;
+  mpeg2-1080)
+    output="${output/.mp4/-mpeg2-1080.mp4}"
+    # "-qscale:v 2" specifies high quality (https://superuser.com/questions/835871)
+    ffmpeg -i "$input" -vcodec mpeg2video -qscale:v 2 -acodec mp3 -b:a 128k -s 1920x1080 "$output"
+    ;;
+  mpeg2)
+    output="${output/.mp4/-mpeg2.mp4}"
+    # "-qscale:v 2" specifies high quality (https://superuser.com/questions/835871)
+    ffmpeg -i "$input" -vcodec mpeg2video -qscale:v 2 -acodec mp3 -b:a 128k "$output"
+    ;;
 esac
