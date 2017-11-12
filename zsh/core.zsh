@@ -197,17 +197,4 @@ if [ -e "$DOTL/zsh/core.zsh" ]; then
   source "$DOTL/zsh/core.zsh"
 fi
 
-# Linux Specific {{{1
-if is_linux; then
-  if [ -z "$WAYLAND_DISPLAY" ]; then
-    # i3
-    export XDG_CURRENT_DESKTOP=i3
-
-    # So tmux sessions opened from ssh can access X11
-    if [ -z "$DISPLAY" ]; then
-      export DISPLAY=:0
-    fi
-  fi
-fi
-
 # vim: foldmethod=marker
