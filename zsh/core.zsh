@@ -199,12 +199,14 @@ fi
 
 # Linux Specific {{{1
 if is_linux; then
-  # i3
-  export XDG_CURRENT_DESKTOP=i3
+  if [ -z "$WAYLAND_DISPLAY" ]; then
+    # i3
+    export XDG_CURRENT_DESKTOP=i3
 
-  # So tmux sessions opened from ssh can access X11
-  if [ -z "$DISPLAY" ]; then
-    export DISPLAY=:0
+    # So tmux sessions opened from ssh can access X11
+    if [ -z "$DISPLAY" ]; then
+      export DISPLAY=:0
+    fi
   fi
 fi
 
