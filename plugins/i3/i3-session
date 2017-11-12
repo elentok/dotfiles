@@ -9,7 +9,7 @@
   xkeyboard
 
   light-locker --lock-on-suspend --no-late-locking &
-  xfce4-session &
+  # xfce4-session &
 
   # Network Management Applet
   has_command nm-applet && nm-applet &
