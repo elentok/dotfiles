@@ -1,0 +1,194 @@
+# vim: foldmethod=marker
+
+# Modifiers {{{1
+set $mod Mod4
+set $shiftalt Shift+Mod1
+#set $mod Mod1
+
+# Font {{{1
+font pango:Open Sans 10
+
+# Settings {{{1
+
+# Mouse+$mod drags floating windows:
+floating_modifier $mod
+focus_follows_mouse no
+
+# Keybindings {{{1
+# Keys: i3 management (exit/restart/reload/lock) {{{2
+bindsym $mod+Shift+C reload
+# restart i3 inplace (preserves your layout/session):
+bindsym $mod+Shift+R restart
+bindsym $mod+Shift+E exec i3-confirm-exit
+bindsym Mod1+Control+l exec locklinux
+bindsym Scroll_Lock exec locklinux
+
+# Keys: Apps {{{2
+bindsym $mod+Return exec termite
+bindsym $mod+c exec i3-control-center
+bindsym Ctrl+space exec xfce4-appfinder
+bindsym $mod+d exec xfce4-appfinder
+bindsym $mod+Shift+D exec rofi -show run
+bindsym $mod+q exec dotcalc
+
+# Keys: Screenshot {{{2
+bindsym $mod+p exec xfce4-screenshooter
+bindsym Print exec xfce4-screenshooter
+
+# Keys: Volume {{{2
+bindsym $shiftalt+equal exec vol +5
+bindsym $shiftalt+minus exec vol -5
+bindsym XF86AudioRaiseVolume exec vol +5
+bindsym XF86AudioLowerVolume exec vol -5
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+# Keys: Brightness {{{2
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5
+bindsym XF86KbdBrightnessDown exec kbdlight down 5
+bindsym XF86KbdBrightnessUp exec kbdlight up 5
+
+# Keys: Misc {{{2
+bindsym $mod+Shift+Q kill
+
+# Keys: Switch windows {{{2
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Keys: Move windows {{{2
+bindsym $mod+Shift+H move left
+bindsym $mod+Shift+J move down
+bindsym $mod+Shift+K move up
+Bindsym $mod+Shift+L move right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Keys: Layout {{{2
+bindsym $mod+a focus parent
+bindsym $mod+shift+a focus child
+bindsym $mod+o split h
+bindsym $mod+v split v
+bindsym $mod+f fullscreen
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+e layout default
+bindsym $mod+Shift+space floating toggle
+# switch between tiling / floating windows:
+bindsym $mod+space focus mode_toggle
+
+# Keys: Workspaces {{{2
+bindsym $mod+1 workspace 1: main
+bindsym $mod+2 workspace 2: www
+bindsym $mod+3 workspace 3: chat
+bindsym $mod+4 workspace 4: gimp
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+bindsym $mod+grave workspace back_and_forth
+
+# Keys: Move window to workspace {{{2
+bindsym $mod+Shift+exclam move workspace 1: main
+bindsym $mod+Shift+at move workspace 2: www
+bindsym $mod+Shift+numbersign move workspace 3: chat
+bindsym $mod+Shift+dollar move workspace 4: gimp
+bindsym $mod+Shift+percent move workspace 5
+bindsym $mod+Shift+asciicircum move workspace 6
+bindsym $mod+Shift+ampersand move workspace 7
+bindsym $mod+Shift+asterisk move workspace 8
+bindsym $mod+Shift+parenleft move workspace 9
+bindsym $mod+Shift+parenright move workspace 10
+
+# Resize Mode {{{1
+mode "resize" {
+  # These bindings trigger as soon as you enter the resize mode
+
+  # They resize the border in the direction you pressed, e.g.
+  # when pressing left, the window is resized so that it has
+  # more space on its left
+
+  bindsym h resize shrink left 10 px or 10 ppt
+  bindsym Shift+H resize grow   left 10 px or 10 ppt
+
+  bindsym j resize shrink down 10 px or 10 ppt
+  bindsym Shift+J resize grow   down 10 px or 10 ppt
+
+  bindsym k resize shrink up 10 px or 10 ppt
+  bindsym Shift+K resize grow   up 10 px or 10 ppt
+
+  bindsym l resize shrink right 10 px or 10 ppt
+  bindsym Shift+L resize grow   right 10 px or 10 ppt
+
+  # same bindings, but for the arrow keys
+  bindsym Left resize shrink left 10 px or 10 ppt
+  bindsym Shift+Left resize grow   left 10 px or 10 ppt
+
+  bindsym Down resize shrink down 10 px or 10 ppt
+  bindsym Shift+Down resize grow   down 10 px or 10 ppt
+
+  bindsym Up resize shrink up 10 px or 10 ppt
+  bindsym Shift+Up resize grow   up 10 px or 10 ppt
+
+  bindsym Right resize shrink right 10 px or 10 ppt
+  bindsym Shift+Right resize grow   right 10 px or 10 ppt
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Status Bar {{{1
+
+bar {
+  status_command i3status -c ~/.i3/i3status.conf
+  #colors {
+    #background #000000
+    #statusline #ffffff
+  #}
+}
+
+# App Specific Settings {{{1
+
+# Note: to find the class of a window, run "xprop | grep -i class"
+
+# Float by default {{{2
+for_window [class="Cerebro"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="Gimp"] floating enable
+for_window [class="feh"] floating enable
+for_window [class="Qalculate-gtk"] floating enable
+for_window [class="Qalculate"] floating enable
+for_window [title="DotCalc"] floating enable
+for_window [title="Copying.*"] floating enable
+for_window [title="Open Database -.*"] floating enable
+for_window [title=".* KeePass Password Safe"] floating enable
+for_window [title="Unlock Login .*"] floating enable
+for_window [title="Edit Entry"] floating enable
+for_window [class="keepassxc"] floating enable
+for_window [class="Xfce4-appfinder"] floating enable
+for_window [class="Lightdm-gtk-greeter-settings"] floating enable
+
+# Default workspaces {{{2
+assign [class="Gimp"] 4: gimp
+assign [class="Telegram"] 3: chat
+
+# Run on startup {{{1
+# exec xscreensaver -no-splash &
+# exec setxkbmap us
+# exec --no-startup-id cinnamon-settings-daemon
+# exec --no-startup-id cinnamon-screensaver
+

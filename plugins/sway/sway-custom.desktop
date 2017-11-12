@@ -1,0 +1,6 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Sway (custom)
+Comment=Customized Sway instance
+Exec={ROOT}/sway-custom
+Type=Application

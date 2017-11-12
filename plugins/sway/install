@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+
+SWAY="$DOTF/plugins/sway"
+
+main() {
+  if is_arch; then
+    pacman_install sway termite
+    yaourt_install sway-dmenu-desktop
+  fi
+
+  symlink "$SWAY" "$HOME/.config/sway"
+
+  install_session_file
+}
+
+install_session_file() {
+  bullet "Installing sway-custom.desktop... "
+  local tmpfile=/tmp/sway-custom.desktop
+  local targetfile=/usr/share/wayland-sessions/sway-custom.desktop
+
+  rm -f $tmpfile
+  sed "s#{ROOT}#$SWAY#" $SWAY/sway-custom.desktop > $tmpfile
+
+  if diff $tmpfile $targetfile > /dev/null 2>&1; then
+    info 'already installed'
+  else
+    sudo mv -f $tmpfile $targetfile
+    show_result die_on_error
+  fi
+
+  update-desktop-database -q
+}
+
+main "$@"
