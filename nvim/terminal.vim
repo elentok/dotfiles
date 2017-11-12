@@ -34,6 +34,7 @@ command! TermHorizontal wincmd s | wincmd j | terminal
 " Remain in insert mode {{{1
 augroup Elentok_Terminal
   autocmd!
+  autocmd TermOpen * setlocal nonumber | startinsert
   autocmd BufWinEnter,WinEnter term://* startinsert
   autocmd BufLeave term://* stopinsert
 augroup END
