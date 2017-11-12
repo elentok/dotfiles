@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+export XKB_DEFAULT_LAYOUT=us,il
+#export XKB_DEFAULT_VARIANT=,nodeadkeys
+export XKB_DEFAULT_OPTIONS=grp:win_space_toggle,ctrl:nocaps,altwin:swap_lalt_lwin
+
+sway
