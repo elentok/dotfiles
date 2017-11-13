@@ -31,7 +31,6 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'ngmy/vim-rubocop'
 Plug 'roxma/vim-tmux-clipboard'
-Plug 'ryanoasis/vim-devicons'
 Plug 'sbdchd/neoformat'
 Plug 'schickling/vim-bufonly', { 'on': ['BufOnly', 'Bonly', 'BOnly'] }
 Plug 'scrooloose/nerdcommenter'
@@ -50,6 +49,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'xolox/vim-misc'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets' " snippets for ultisnips
+
+Plug 'ryanoasis/vim-devicons'
 
 " File formats:
 Plug 'vim-scripts/applescript.vim',    { 'for': 'applescript' }
