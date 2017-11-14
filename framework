@@ -440,8 +440,13 @@ git_clone() {
     if [ -d $target/.git ]; then
       current_origin=`cd $target && git_get_origin`
       if [ "$current_origin" == "$origin" ]; then
-        info " already cloned"
-        # thought: (cd $target && git pull)
+
+        if [ "$3" == "--update" ]; then
+          info " already cloned, just updating"
+          (cd "$target" && git pull)
+        else
+          info " already cloned"
+        fi
         return
       fi
     fi
