@@ -21,9 +21,9 @@ main() {
 install_requirements() {
   if is_debian; then
     # As instructed in https://github.com/rbenv/ruby-build/wiki
-    apt_install autoconf bison build-essential libssl-dev libyaml-dev \
-      libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 \
-      libgdbm-dev libxml2-dev libxslt-dev
+    apt_install gcc-6 autoconf bison build-essential libssl1.0-dev libyaml-dev \
+      libreadline-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 \
+      libgdbm-dev libxml2-dev libxslt1-dev
   fi
 }
 
@@ -32,9 +32,9 @@ install_rbenv() {
     brew_install rbenv
     brew_install ruby-build
   else
-    git_clone "https://github.com/rbenv/rbenv.git" "$HOME/.rbenv"
+    git_clone "https://github.com/rbenv/rbenv.git" "$HOME/.rbenv" --update
     git_clone "https://github.com/rbenv/ruby-build.git" \
-      "$HOME/.rbenv/plugins/ruby-build"
+      "$HOME/.rbenv/plugins/ruby-build" --update
   fi
 
   eval "$(rbenv init -)"
@@ -43,13 +43,17 @@ install_rbenv() {
 install_ruby() {
   bullet "Installing ruby $RUBY_VERSION... "
   if [ "`rbenv versions | grep $RUBY_VERSION`" == "" ]; then
-    rbenv install $RUBY_VERSION
+    PATH="$(path_without_linuxbrew)" rbenv install $RUBY_VERSION
     rbenv global $RUBY_VERSION
     gem install bundler
     rbenv rehash
   else
     info "already installed"
   fi
+}
+
+path_without_linuxbrew() {
+  echo $PATH | tr ':' '\n' | grep -v linuxbrew | tr '\n' ':' | sed 's/:$//'
 }
 
 create_symlinks() {
