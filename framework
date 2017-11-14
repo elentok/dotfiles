@@ -486,9 +486,7 @@ apt_install() {
 apt_install_single() {
   bullet "Installing ${1}..."
 
-  has=`apt_cache | grep "^$1$"`
-
-  if [ "$has" != "" ]; then
+  if has_apt_package "$1"; then
     info " already installed"
   else
     sudo apt-get install -y ${1}
@@ -497,6 +495,10 @@ apt_install_single() {
 }
 
 rm -f /tmp/apt_cache || sudo rm -f /tmp/apt_cache
+
+has_apt_package() {
+  apt_cache | grep -E "^$1(:amd64)?$" > /dev/null
+}
 
 apt_cache() {
   if [ ! -e /tmp/apt_cache ]; then
