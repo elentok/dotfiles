@@ -1,0 +1,4 @@
+semi: false # No semicolons
+singleQuote: true
+
+# vim: filetype=yaml
