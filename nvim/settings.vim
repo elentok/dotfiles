@@ -80,8 +80,7 @@ let g:javascript_plugin_flow = 1
 
 " matchit
 let loaded_matchparen=1 " do not show highlight matching parenthesis automatically
-let NERDTreeIgnore=['\.zeus\.sock$', '\~$']
-let NERDTreeHijackNetrw = 0
+
 let g:VimuxOrientation = "h"
 let g:VimuxHeight = "40"
 let g:VimuxUseNearestPane = 1
@@ -326,3 +325,8 @@ set statusline+=%{&readonly?'\ ':''}
 set statusline+=%= " Separation point between left and right aligned items
 set statusline+=\ [%{''!=#&filetype?&filetype:'none'}]
 set statusline+=\ %l:%v " Line number + column number
+
+" NERDTree {{{1
+let NERDTreeIgnore=['\.zeus\.sock$', '\~$']
+let NERDTreeHijackNetrw = 0
+let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
