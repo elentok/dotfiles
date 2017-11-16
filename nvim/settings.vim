@@ -329,4 +329,14 @@ set statusline+=\ %l:%v " Line number + column number
 " NERDTree {{{1
 let NERDTreeIgnore=['\.zeus\.sock$', '\~$']
 let NERDTreeHijackNetrw = 0
+
+" Dev Icons {{{1
 let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
+let g:WebDevIconsNerdTreeGitPluginForceVAlign = 0
+
+" better folder icons
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+let g:DevIconsEnableFolderPatternMatching = 0
+let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ' '
+let g:DevIconsDefaultFolderOpenSymbol = ' '
