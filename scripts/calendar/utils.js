@@ -1,33 +1,33 @@
 /* globals document */
 
 function div(className, content = null) {
-  const el = document.createElement("div");
-  el.className = className;
+  const el = document.createElement('div')
+  el.className = className
   if (content != null) {
-    add(el, content);
+    add(el, content)
   }
-  return el;
+  return el
 }
 
 function add(parent, children) {
   if (children == null) {
-    return;
+    return
   }
   if (children.forEach) {
-    children.forEach(child => addSingle(parent, child));
+    children.forEach(child => addSingle(parent, child))
   } else {
-    addSingle(parent, children);
+    addSingle(parent, children)
   }
 }
 
 function addSingle(parent, child) {
   if (child == null) {
-    return;
+    return
   }
 
-  if (typeof child === "string") {
-    child = document.createTextNode(child);
+  if (typeof child === 'string') {
+    child = document.createTextNode(child)
   }
 
-  parent.appendChild(child);
+  parent.appendChild(child)
 }
