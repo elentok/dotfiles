@@ -1,0 +1,16 @@
+# Put this file in /usr/lib/systemd/system
+
+[Unit]
+Description=Telegram MQTT Proxy
+Requires=network.target
+
+[Service]
+User=david
+Environment=TELEGRAM_BOT_TOKEN=<%= ENV['TELEGRAM_BOT_TOKEN'] %>
+Environment=TELEGRAM_CHAT_ID=<%= ENV['TELEGRAM_CHAT_ID'] %>
+ExecStart=<%= ENV['HOME'] %>/.dotfiles/scripts/telegram-mqtt-proxy
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
