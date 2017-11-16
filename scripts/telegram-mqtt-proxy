@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+
+const MQTT_HOST = process.env.TELEGRAM_MQTT_HOST || 'localhost'
+const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN
+const CHAT_ID = process.env.TELEGRAM_CHAT_ID
+
+if (BOT_TOKEN == null) {
+  console.error('Please set the TELEGRAM_BOT_TOKEN environment variable')
+}
+
+if (CHAT_ID == null) {
+  console.error('Please set the TELEGRAM_CHAT_ID environment variable')
+}
+
+const qs = require('qs')
+const axios = require('axios')
+const mqtt = require('mqtt')
+const client = mqtt.connect(`mqtt://${MQTT_HOST}`)
+
+client.on('connect', () => client.subscribe('telegram:send'))
+
+function sendToTelegram(message) {
+  const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`
+  // eslint-disable-next-line camelcase
+  const body = qs.stringify({ chat_id: CHAT_ID, text: message })
+  console.info('Making request to', url, 'with', body)
+  axios.post(url, body).catch(err => {
+    console.error('Error sending message:', err.message)
+  })
+}
+
+client.on('message', (topic, message) => {
+  if (topic === 'telegram:send') {
+    sendToTelegram(message)
+  }
+})
