@@ -1,8 +1,9 @@
 mixin order(order)
-  .o-order(data-sort-value=order.getSortValue() class=`o-order--${order.status.name}`)
-    //- .o-order__toolbar
-      //- .o-toolbar
-        //- a.o-toolbar-item.o-toolbar-item--refresh(href="#") &#8634;
+  .o-order(data-sort-value=order.getSortValue() data-id=order.id class=`o-order--${order.status.name}`)
+    .o-order__toolbar
+      .o-toolbar
+        a.o-toolbar-item.o-toolbar-item--archive(href="#") &#10004;
+        a.o-toolbar-item.o-toolbar-item--add-tracking(href="#") &#128230;
 
     .o-order__summary
       if order.store

@@ -1,4 +1,4 @@
-/* globals document fetch window */
+/* globals document fetch window prompt */
 
 function dom(tagName, className, contents) {
   const el = document.createElement(tagName)
@@ -61,39 +61,53 @@ class Order {
   constructor(el) {
     this.el = el
 
-    // this.el
-    // .querySelector(".o-toolbar-item--refresh")
-    // .addEventListener("click", event => {
-    // event.preventDefault();
-    // this.track();
-    // });
+    const getButton = name => this.el.querySelector(`.o-toolbar-item--${name}`)
+
+    function onClick(name, callback) {
+      getButton(name).addEventListener('click', event => {
+        event.preventDefault()
+        callback()
+      })
+    }
+
+    onClick('archive', () => this.archive())
+    onClick('add-tracking', () => this.addTracking())
 
     this.trackingNumbers = Array.from(el.querySelectorAll('.o-order-tn')).map(
       numberEl => new TrackingNumber(numberEl)
     )
   }
 
+  archive() {
+    fetch(`/orders/${this.el.dataset.id}/archive`).then(() => this.el.remove())
+  }
+
+  addTracking() {
+    const number = prompt('Enter tracking number:')
+    fetch(`/orders/${this.el.dataset.id}/addTracking/${number}`)
+  }
+
   track() {
-    Promise.all(this.trackingNumbers.map(number => number.track())).then(
-      results => {
-        let finalStatus = null
+    Promise.all(
+      this.trackingNumbers.map(number => number.track())
+    ).then(results => {
+      let finalStatus = null
 
-        results.forEach(result => {
-          if (result.status) {
-            if (result.status !== 'unknown') finalStatus = result.status
-            const status = result.status.toLowerCase().replace(/ /g, '-')
-            this.el.classList.add(`o-order--${status}`)
-          }
-        })
-
-        if (finalStatus != null) {
-          this.el.parentElement.insertBefore(
-            this.el,
-            this.el.parentElement.childNodes[0]
-          )
+      results.forEach(result => {
+        if (result.status) {
+          if (result.status !== 'unknown') finalStatus = result.status
+          const status = result.status.toLowerCase().replace(/ /g, '-')
+          this.el.classList.add(`o-order--${status}`)
         }
+      })
+
+      if (finalStatus != null) {
+        this.el.parentElement.insertBefore(
+          this.el,
+          this.el.parentElement.childNodes[0]
+        )
       }
-    )
+    })
   }
 }
 
@@ -108,6 +122,10 @@ class App {
       e.preventDefault()
       this.track()
     })
+
+    this.orders = Array.from(document.querySelectorAll('.o-order')).map(
+      el => new Order(el)
+    )
   }
 
   track() {

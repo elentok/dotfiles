@@ -106,19 +106,19 @@ class Order {
   }
 
   track() {
-    return Promise.all(this._getTrackable().map(tn => tn.track())).then(
-      results => {
-        const newStatus = this._identifyNewStatus(results)
-        const changed = this.status.name !== newStatus.name
-        if (changed) this.status = newStatus
+    return Promise.all(
+      this._getTrackable().map(tn => tn.track())
+    ).then(results => {
+      const newStatus = this._identifyNewStatus(results)
+      const changed = this.status.name !== newStatus.name
+      if (changed) this.status = newStatus
 
-        return {
-          changed,
-          order: this,
-          results
-        }
+      return {
+        changed,
+        order: this,
+        results
       }
-    )
+    })
   }
 
   _identifyNewStatus(trackingResults) {
@@ -132,6 +132,10 @@ class Order {
 
   _getTrackable() {
     return this.tracking.filter(t => t.canTrack())
+  }
+
+  addTracking(number) {
+    this.tracking.push(new TrackingNumber(number))
   }
 
   getSortValue() {
