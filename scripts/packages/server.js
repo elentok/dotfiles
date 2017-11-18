@@ -36,6 +36,19 @@ app.get('/track/:number', (req, res) => {
   }
 })
 
+app.get('/orders/:id/archive', (req, res) => {
+  const order = OrderRepo.findById(req.params.id)
+  OrderRepo.archive(order)
+  res.status(200).send('OK')
+})
+
+app.get('/orders/:id/addTracking/:number', (req, res) => {
+  const order = OrderRepo.findById(req.params.id)
+  order.addTracking(req.params.number)
+  OrderRepo.save()
+  res.status(200).send('OK')
+})
+
 app.listen(9999, () => {
   console.info('Packages server listening at port 9999')
 })

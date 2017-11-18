@@ -1,11 +1,14 @@
 const path = require('path')
-const fs = require('fs')
-const yaml = require('js-yaml')
-const Order = require('./order')
 const _ = require('underscore')
+const Order = require('./order')
+const OrdersFile = require('./orders-file')
 const { getDataDir } = require('./utils')
 
 const ORDERS_FILENAME = path.join(getDataDir(), 'packages.yml')
+const ARCHIVE_FILENAME = path.join(getDataDir(), 'archive.yml')
+
+const ORDERS_FILE = new OrdersFile(ORDERS_FILENAME)
+const ARCHIVE_FILE = new OrdersFile(ARCHIVE_FILENAME)
 
 const OrderRepo = {
   all() {
@@ -22,9 +25,7 @@ const OrderRepo = {
   },
 
   _load() {
-    this._all = yaml
-      .safeLoad(fs.readFileSync(ORDERS_FILENAME))
-      .map(order => new Order(order))
+    this._all = ORDERS_FILE.load()
 
     this._byId = {}
     this._all.forEach(o => (this._byId[o.id] = o))
@@ -57,19 +58,29 @@ const OrderRepo = {
 
   save() {
     if (this._all == null) return
-    fs.writeFileSync(ORDERS_FILENAME, this._dump())
+    this._sort()
+    ORDERS_FILE.save(this._all)
   },
 
-  _dump() {
-    this._sort()
-    const raw = this._all.map(o => o.toJSON())
-    try {
-      return yaml.safeDump(raw, { skipInvalid: true })
-    } catch (e) {
-      console.error('Error generating YAML:', e)
-      console.error(JSON.stringify(raw, null, 2))
-      throw e
-    }
+  archive(order) {
+    this._addToArchiveFile(order)
+    this.remove(order)
+  },
+
+  _addToArchiveFile(order) {
+    const orders = ARCHIVE_FILE.load()
+
+    if (orders.some(o => o.id === order.id)) return
+
+    orders.push(order)
+    ARCHIVE_FILE.save(orders)
+  },
+
+  remove(order) {
+    if (this._all == null) this._load()
+    this._all = this._all.filter(o => o.id !== order.id)
+    delete this._byId[order.id]
+    this.save()
   }
 }
 

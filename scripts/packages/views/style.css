@@ -29,7 +29,7 @@ body {
 }
 
 .o-orders {
-  column-width: 320px;
+  column-width: 200px;
   column-fill: balance;
 }
 
@@ -98,6 +98,11 @@ body {
   padding-top: 10px;
 }
 
+.o-order__items {
+  list-style-type: none;
+  padding: 0;
+}
+
 .o-order-tn {
   margin-top: 10px;
 }
@@ -128,4 +133,5 @@ body {
 .o-toolbar-item {
   padding: 3px;
   text-decoration: none;
+  color: #999;
 }
