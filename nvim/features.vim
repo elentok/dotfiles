@@ -20,7 +20,10 @@ endfunction
 let g:neoformat_enabled_javascript = ['prettier']
 let g:neoformat_enabled_scss = ['prettier']
 let g:neoformat_enabled_css = ['prettier']
-let g:neoformat_java_google = {'exe': 'google-java-format'}
+let g:neoformat_java_google = {
+      \ 'exe': 'google-java-format',
+      \ 'args': ['-'],
+      \ 'stdin': 1}
 let g:neoformat_enabled_java = ['google']
 
 let g:autoformat_filetypes = ['json', 'javascript', 'css', 'scss', 'typescript']
