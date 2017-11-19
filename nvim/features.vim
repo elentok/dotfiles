@@ -26,7 +26,7 @@ let g:neoformat_java_google = {
       \ 'stdin': 1}
 let g:neoformat_enabled_java = ['google']
 
-let g:autoformat_filetypes = ['json', 'javascript', 'css', 'scss', 'typescript']
+let g:autoformat_filetypes = ['json', 'javascript', 'css', 'scss', 'typescript', 'java']
 
 func! AutoFormat()
   if exists("b:af") && b:af == 0
