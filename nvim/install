@@ -2,6 +2,8 @@
 
 source `dirname $0`/../framework
 
+NEOVIM_VERSION='v0.2.2'
+
 main() {
   header "NeoVim"
 
@@ -30,10 +32,33 @@ install_requirements() {
 install_neovim() {
   if is_arch; then
     pacman_install neovim
+  elif is_debian; then
+    install_neovim_appimage
   else
     brew_tap neovim/homebrew-neovim
     brew_install neovim
   fi
+}
+
+install_neovim_appimage() {
+  mkdir -p ~/Applications
+  cd ~/Applications
+
+  local filename="nvim-$NEOVIM_VERSION.AppImage"
+
+  if [ ! -e $filename ]; then
+    bullet 'Downloading Neovim AppImage... '
+    curl -L https://github.com/neovim/neovim/releases/download/$NEOVIM_VERSION/nvim.appimage \
+      -o $filename
+    show_result
+
+    chmod +x $filename
+  fi
+
+  symlink $filename nvim.AppImage
+
+  mkdir -p ~/bin
+  symlink ~/Applications/nvim.AppImage ~/bin/nvim
 }
 
 install_symlinks() {
