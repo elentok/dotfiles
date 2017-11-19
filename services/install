@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#
+# ./install {service-name}
+
+if [ ! -e "$1.service.erb" ]; then
+  usage "$0"
+  exit 1
+fi
+
+erb "$1.service.erb" > ~/.local/share/systemd/user/$1.service
