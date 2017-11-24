@@ -29,12 +29,14 @@ body {
 }
 
 .o-orders {
-  column-width: 200px;
-  column-fill: balance;
+  display: flex;
+  flex-flow: row wrap;
 }
 
 .o-orders .o-order {
   margin-bottom: 10px;
+  margin-right: 10px;
+  max-width: 200px;
 }
 
 .o-order {
