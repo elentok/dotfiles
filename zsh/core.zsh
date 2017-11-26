@@ -95,8 +95,6 @@ if [ -e "$BREW_HOME" ]; then
   else
     export BREW_ROOT="$BREW_HOME"
   fi
-
-  export XDG_DATA_DIRS="$BREW_HOME/share"
 fi
 
 # Go {{{1
