@@ -4,8 +4,8 @@ const Order = require('./order')
 const OrdersFile = require('./orders-file')
 const { getDataDir } = require('./utils')
 
-const ORDERS_FILENAME = path.join(getDataDir(), 'packages.yml')
-const ARCHIVE_FILENAME = path.join(getDataDir(), 'archive.yml')
+const ORDERS_FILENAME = path.join(getDataDir(), 'packages.json')
+const ARCHIVE_FILENAME = path.join(getDataDir(), 'archive.json')
 
 const ORDERS_FILE = new OrdersFile(ORDERS_FILENAME)
 const ARCHIVE_FILE = new OrdersFile(ARCHIVE_FILENAME)
