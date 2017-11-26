@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+
+const fs = require('fs')
+const yaml = require('js-yaml')
+
+const args = process.argv.splice(2)
+if (args.length === 0) {
+  console.info('Usage:\n')
+  console.info('  yaml2json <input.yml> [output.json]')
+  process.exit(1)
+}
+
+const input = args[0]
+let output = args[2]
+if (output == null) {
+  output = input.replace(/\.ya?ml$/, '') + '.json'
+}
+
+console.info(`Converting ${input}`)
+console.info(`        to ${output}`)
+
+const data = yaml.safeLoad(fs.readFileSync(input))
+const json = JSON.stringify(data, null, 2)
+fs.writeFileSync(output, json)
