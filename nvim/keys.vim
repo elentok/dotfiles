@@ -145,6 +145,8 @@ vnoremap p "_dP
 "let g:UltiSnipsJumpForwardTrigger="<tab>"
 "let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
+noremap ,ya :%y+<cr>
+
 " Surround {{{1
 
 " <Leader># Surround a word with #{ruby interpolation}
