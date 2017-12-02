@@ -24,6 +24,7 @@ class Order {
     }
 
     this.status = this._parseStatus(attribs)
+    this.downloadImages()
   }
 
   _parseStatus(attribs) {
