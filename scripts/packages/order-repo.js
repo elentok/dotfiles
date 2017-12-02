@@ -16,6 +16,10 @@ const OrderRepo = {
     return this._all
   },
 
+  allArchived() {
+    return ARCHIVE_FILE.load()
+  },
+
   getTrackable() {
     return this.all().filter(o => o.canTrack())
   },
