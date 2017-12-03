@@ -1,6 +1,19 @@
 /* global window */
 
 window.labels = [
+  { icon: 'cogs', title: 'Engines & Sensors' },
+  {
+    icon: 'archive',
+    title: 'Electronics',
+    subtitle: '(Connectors, Arduino, Battery holders, Power)'
+  },
+  { icon: 'times-circle-o', title: 'Fans' },
+  { icon: 'shopping-bag', title: 'Bags' },
+  { icon: 'crop', title: 'Screws & Angles' },
+  { icon: 'flash', title: 'Electronic Wires' },
+  { icon: 'anchor', title: 'Screws & Tools' },
+  { icon: 'laptop', title: 'Raspberry Pi' },
+
   { icon: 'cubes', title: 'Lego' },
   { icon: 'leaf', title: 'Gardening', subtitle: '(Taftafot, adapters)' },
   { icon: 'search', title: 'Magnifiers' },
