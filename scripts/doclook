@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+id="$(docker ps --format '{{.ID}} {{.Image}} ({{.Command}})' | fzf | awk '{print $1}')"
+
+[ -z "$id" ] && exit 1
+
+docker exec -ti $id bash
