@@ -7,6 +7,7 @@
 
   # Setup X11 keyboard
   xkeyboard
+  xmouse
 
   light-locker --lock-on-suspend --no-late-locking &
   # xfce4-session &
