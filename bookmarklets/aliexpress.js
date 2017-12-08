@@ -41,12 +41,12 @@ function elentokAliExpressExporter() {
 
     return {
       id: id.innerText,
-      date: new Date(date.innerText),
+      date: new Date(date.innerText.replace(/\./g, '')),
       store: 'aliexpress',
       seller: sellerName.innerText,
       amount: amount.innerText,
       status: parseStatus(status.innerText.trim()),
-      items: items
+      items
     }
   }
 
