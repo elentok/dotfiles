@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-const fs = require("fs");
-const path = require("path");
-const UglifyES = require("uglify-es");
+const fs = require('fs')
+const path = require('path')
+const UglifyES = require('uglify-es')
 
-if (!fs.existsSync("build")) {
-  fs.mkdir("build");
+if (!fs.existsSync('build')) {
+  fs.mkdir('build')
 }
 
 const HEADER = `<!DOCTYPE html>
@@ -14,25 +14,26 @@ const HEADER = `<!DOCTYPE html>
     <title>Bookmarklets</title>
   </head>
   <body>
-`;
+`
 
 const FOOTER = `</body>
 </html>
-`;
+`
 
-const stream = fs.createWriteStream("bookmarklets.html");
-stream.write(HEADER);
+const outputFilename = path.join(__dirname, 'bookmarklets.html')
+const stream = fs.createWriteStream(outputFilename)
+stream.write(HEADER)
 
 fs.readdirSync(__dirname).forEach(file => {
-  if (!/\.js/.test(file)) return;
+  if (!/\.js/.test(file)) return
 
-  const source = fs.readFileSync(path.join(__dirname, file)).toString();
-  const result = UglifyES.minify(source);
+  const source = fs.readFileSync(path.join(__dirname, file)).toString()
+  const result = UglifyES.minify(source)
   if (result.error != null) {
-    console.error("Build failed: ", result.error);
+    console.error('Build failed: ', result.error)
   } else {
-    stream.write(`  <a href="javascript:${escape(result.code)}">${file}</a>\n`);
+    stream.write(`  <a href="javascript:${escape(result.code)}">${file}</a>\n`)
   }
-});
+})
 
-stream.end(FOOTER);
+stream.end(FOOTER)
