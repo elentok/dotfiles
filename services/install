@@ -1,10 +1,20 @@
 #!/usr/bin/env bash
 #
-# ./install {service-name}
+# ./install {service-name} [user|system]
 
-if [ ! -e "$1.service.erb" ]; then
+name="$1"
+mode="$2"
+
+name="$(echo $name | sed 's/\.service\.erb$//')"
+
+if [ ! -e "$name.service.erb" ]; then
   usage "$0"
   exit 1
 fi
 
-erb "$1.service.erb" > ~/.local/share/systemd/user/$1.service
+if [ "$mode" == "user" ]; then
+  erb "$name.service.erb" > "$HOME/.local/share/systemd/user/$name.service"
+else
+  erb "$name.service.erb" > /tmp/$name.service
+  sudo mv /tmp/$name.service "/usr/lib/systemd/system/$name.service"
+fi
