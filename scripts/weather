@@ -1,0 +1,29 @@
+#!/usr/bin/env node
+
+const weather = require('weather-js')
+const args = process.argv.splice(2)
+
+args.forEach(city => {
+  weather.find({ search: city, degreeType: 'C' }, (err, result) => {
+    if (err) {
+      console.error(err)
+      return
+    }
+
+    const data = result[0].current
+    const temp = `${data.temperature}°C`
+
+    const forecast = result[0].forecast.find(f => f.date === data.date)
+
+    const message = [
+      `Weather forecast for ${forecast.day} ${forecast.date} (${city}):`,
+      `Temperature: ${temp} (${forecast.low}-${forecast.high})`,
+      `Skies: ${data.skytext}`,
+      `Winds: ${data.winddisplay}`,
+      `Precipitation: ${forecast.precip}%`,
+      ''
+    ].join('\n')
+
+    console.info(message)
+  })
+})
