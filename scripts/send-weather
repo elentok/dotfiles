@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# This is meant to be used as a cron job:
+#
+# 0 6 * * * zsh -c "$HOME/.dotfiles/scripts/send-weather '{City1}' '{City2}'" >> /tmp/cron.log 2>&1
+
+set -e
+
+curl --data-urlencode "message=$(weather "$@")" http://localhost:10000/send
