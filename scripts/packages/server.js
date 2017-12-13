@@ -49,6 +49,12 @@ app.get('/orders/:id/addTracking/:number', (req, res) => {
   res.status(200).send('OK')
 })
 
-app.listen(9999, () => {
-  console.info('Packages server listening at port 9999')
-})
+if (process.argv.includes('--public')) {
+  app.listen(9999, () => {
+    console.info('Packages server listening at port 9999 (public)')
+  })
+} else {
+  app.listen(9999, '127.0.0.1', () => {
+    console.info('Packages server listening at port 9999 (internal)')
+  })
+}
