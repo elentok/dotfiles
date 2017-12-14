@@ -1,0 +1,10 @@
+---
+version: "2"
+services:
+  base:
+    image: elentok/dotfiles
+
+  dev:
+    extends: base
+    volumes:
+      - .:/root/.dotfiles

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+cd $DOTF
+docker build -t elentok/dotfiles:latest .

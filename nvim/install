@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 source `dirname $0`/../framework
 
 NEOVIM_VERSION='v0.2.2'
@@ -7,6 +9,7 @@ NEOVIM_VERSION='v0.2.2'
 main() {
   header "NeoVim"
 
+  install_requirements
   install_neovim
   install_symlinks
   install_plugins
@@ -20,7 +23,7 @@ install_requirements() {
     # python3 is required for the deoplete plugin
     brew_install python3 abduco
   elif is_arch; then
-    pacman_install python-pip python2-pip abduco
+    pacman_install python python-pip abduco
   elif is_debian; then
     apt_install python-dev python-pip python3-dev python3-pip
   fi
@@ -65,7 +68,7 @@ install_symlinks() {
   symlink "$DOTF/nvim" ~/.config/nvim
 
   symlink "$DOTF/nvim/pylintrc" ~/.pylintrc
-  mkdir -p ~/.config/yamllint/config
+  mkdir -p ~/.config/yamllint
   symlink "$DOTF/nvim/yamllint-config" ~/.config/yamllint/config
 
   # vim backwards compatibility
@@ -75,7 +78,7 @@ install_symlinks() {
 
 install_plugins() {
   bullet "Running PlugInstall... "
-  nvim +PlugInstall +qall
+  nvim --headless +PlugInstall +UpdateRemotePlugins +qall
   success "done"
 }
 
@@ -89,7 +92,6 @@ install_cli_tools() {
   fi
 
   npm_install htmlhint
-  npm_install vimspec
   npm_install marked
   npm_install name-that-color
   npm_install livedown

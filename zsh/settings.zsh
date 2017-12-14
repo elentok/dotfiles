@@ -148,7 +148,7 @@ unsetopt CLOBBER            # Do not overwrite existing files with > and >>.
 export FZF_DEFAULT_COMMAND='ag -g ""'
 
 # https://github.com/junegunn/fzf/issues/809
-[ -n "$NVIM_LISTEN_ADDRESS" ] && export FZF_DEFAULT_OPTS='--no-height'
+[ -n "${NVIM_LISTEN_ADDRESS:-}" ] && export FZF_DEFAULT_OPTS='--no-height'
 
 # SSH {{{1
 export SSH_AUTH_SOCK="$HOME/.ssh/active-agent"
@@ -172,7 +172,6 @@ fi
 setopt HIST_IGNORE_SPACE
 source $DOTF/nvim/colors/base16-elentok.dark.sh
 
-export MPD_HOST=$MPD_PASSWORD@localhost
 export GREP_OPTIONS=
 
 setopt RC_QUOTES          # Allow 'Henry''s Garage' instead of 'Henry'\''s Garage'.

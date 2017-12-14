@@ -53,6 +53,7 @@ is_running() {
 }
 
 # Identify Linux Distro {{{1
+export DISTRO=''
 if is_linux; then
   if has_command pacman; then
     export DISTRO=arch
@@ -82,6 +83,7 @@ if is_termux; then
 fi
 
 # Homebrew {{{1
+BREW_HOME=''
 for dir in ~/.linuxbrew ~/.homebrew /usr/local; do
   if [ -e "$dir/bin/brew" ]; then
     export BREW_HOME=$dir
@@ -154,8 +156,6 @@ fi
 
 export PATH
 
-# Node {{{1
-export NODE_MODULES="$(cd "$(dirname $(which node))/../lib/node_modules" && pwd)"
 
 # EDITOR {{{1
 
@@ -178,7 +178,7 @@ if [[ "$TERM" != "screen-256color" ]]; then
   export TERM=xterm-256color
 fi
 
-export TMUX_TMPDIR=$TMP/$USERNAME
+export TMUX_TMPDIR="$TMP/$(whoami)"
 mkdir -p $TMUX_TMPDIR
 
 # LOCALE {{{1

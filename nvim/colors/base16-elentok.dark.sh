@@ -33,7 +33,7 @@ color_foreground="e6/e1/dc" # Base 05
 color_background="1a/1a/1a" # Base 00
 color_cursor="e6/e1/dc" # Base 05
 
-if [ -n "$TMUX" ]; then
+if [ -n "${TMUX:-}" ]; then
   # tell tmux to pass the escape sequences through
   # (Source: http://permalink.gmane.org/gmane.comp.terminal-emulators.tmux.user/1324)
   printf_template="\033Ptmux;\033\033]4;%d;rgb:%s\007\033\\"
@@ -77,7 +77,7 @@ printf $printf_template 20 $color20
 printf $printf_template 21 $color21
 
 # foreground / background / cursor color
-if [ -n "$ITERM_SESSION_ID" ]; then
+if [ -n "${ITERM_SESSION_ID:-}" ]; then
   # iTerm2 proprietary escape codes
   printf $printf_template_custom Pg e6e1dc # forground
   printf $printf_template_custom Ph 1a1a1a # background

@@ -17,12 +17,12 @@ install_zsh() {
       apt_install zsh
     fi
 
-    bullet "Changing user's shell to $THE_ZSH... "
+    zsh_bin="$(which zsh)"
+    bullet "Changing user's shell to $zsh_bin... "
     if [[ "$SHELL" =~ /zsh ]]; then
       info 'already set'
     else
-      THE_ZSH="$(which zsh)"
-      sudo usermod -s $THE_ZSH $USER
+      sudo usermod -s $zsh_bin $(whoami)
     fi
   fi
 }
@@ -35,9 +35,9 @@ install_symlinks() {
 
 install_requirements() {
   if is_arch; then
-    yaourt_install rbenv fasd
+    pacman_install fasd
   else
-    brew_install rbenv fasd
+    brew_install fasd
   fi
 
   if is_mac; then
@@ -61,7 +61,7 @@ install_fzf() {
     info 'already installed.'
   else
     git_clone https://github.com/junegunn/fzf.git ~/.fzf --depth 1
-    ~/.fzf/install
+    ~/.fzf/install --completion --key-bindings --no-update-rc
   fi
 }
 
@@ -75,15 +75,11 @@ reset_completion_cache() {
 
 header "Zsh"
 
-if [ "$1" == "symlinks" ]; then
-  install_symlinks
-else
-  install_requirements
-  install_zsh
-  install_symlinks
-  install_fzf
-  reset_completion_cache
+install_requirements
+install_zsh
+install_symlinks
+install_fzf
+reset_completion_cache
 
-  # fix premissions issue
-  chmod -R g-w $DOTF/zsh/vendor/zsh-completions
-fi
+# fix premissions issue
+chmod -R g-w $DOTF/zsh/vendor/zsh-completions
