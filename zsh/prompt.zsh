@@ -73,6 +73,6 @@ fi
 PROMPT="
 $user_and_host $time
 $directory$git_status
-$random_animal$exit_code"
+$exit_code"
 
 # vim: filetype=zsh foldmethod=marker

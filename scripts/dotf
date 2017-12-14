@@ -9,6 +9,7 @@
 #   dotf install [plugin] [plugin]... - install specific plugins
 #   dotf update                       - pulls from git and reruns install
 #   dotf export-vim                   - exports vim config to .tar.gz
+#
 
 source `dirname $0`/../framework
 
@@ -46,29 +47,27 @@ list_plugins() {
 }
 
 install() {
-  (cd $DOTF && git submodule update --init --recursive)
-
   if [ $# -gt 0 ]; then
     plugins "$@"
     return
   fi
 
-  (cd $DOTF && yarn install)
+  install_all
+}
 
-  is_workstation && install_workstation
-  is_server && install_server
+install_all() {
+  cd $DOTF
+
+  plugin git
+
+  git submodule update --init --recursive
+
+  base_plugins
+  gui_plugins
+
+  yarn install
+
   show_done
-}
-
-install_workstation() {
-  common_plugins
-  is_mac && mac_plugins
-  is_linux && linux_plugins
-}
-
-install_server() {
-  plugin zsh
-  plugin vim
 }
 
 update() {
@@ -102,39 +101,34 @@ show_done() {
   echo -e "==========================$RESET"
 }
 
-common_plugins() {
+base_plugins() {
   plugin nodejs
-  plugin git
   plugin zsh
   plugin bash
   plugin tmux
   plugin nvim
   plugin ruby
-}
 
-mac_plugins() {
-  # plugin homebrew-cask
-  # plugin karabiner
-  plugin osx-tuning
-  plugin iterm
-  brew_install imagemagick
-  brew_install ghostscript
-  brew_install ncdu
-  # brew_cask_install spectacle
-}
-
-linux_plugins() {
-  header "Applications"
+  install_package ncdu
+  install_package wget
+  install_package htop
+  install_package imagemagick
 
   if is_arch; then
-    pacman_install htop imagemagick ncdu wget
-  else
-    apt_install htop imagemagick ncdu wget
+    pacman_install openssh
+  fi
+}
+
+gui_plugins() {
+  if is_mac; then
+    plugin osx-tuning
+    plugin iterm
+  elif is_linux; then
+    if [ "$HAS_GUI" = 'yes' ]; then
+      plugin linux-gui-apps
+    fi
   fi
 
-  if [ "$HAS_GUI" = 'yes' ]; then
-    plugin linux-gui-apps
-  fi
 }
 
 plugins() {

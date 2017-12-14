@@ -1,6 +1,8 @@
 #!/bin/bash
 # vim: foldmethod=marker
 
+set -euo pipefail
+
 # DOTF directory {{{1
 
 DOTF=`dirname ${BASH_SOURCE[0]-$0}`
@@ -268,6 +270,10 @@ npm_install() {
     return
   fi
 
+  if [ -z "${NODE_MODULES:-}" ]; then
+    export NODE_MODULES="$(cd "$(dirname $(which node))/../lib/node_modules" && pwd)"
+  fi
+
   if [ -d "$NODE_MODULES/$1" ]; then
     info " already installed"
   else
@@ -435,13 +441,14 @@ has_pip3_package() {
 git_clone() {
   origin=$1
   target=$2
+  option=${3:-}
   bullet "Cloning $origin => ${target}..."
   if [ -d $target ]; then
     if [ -d $target/.git ]; then
       current_origin=`cd $target && git_get_origin`
       if [ "$current_origin" == "$origin" ]; then
 
-        if [ "$3" == "--update" ]; then
+        if [ "$option" == "--update" ]; then
           info " already cloned, just updating"
           (cd "$target" && git pull)
         else
@@ -701,32 +708,6 @@ create_group() {
     sudo groupadd "$group"
     show_result die_on_error
   fi
-}
-
-# platform (workstation/server) {{{1
-
-identify_dotfiles_platform() {
-  ask "What is this platform ([w]orkstation, [s]server)?" platform w
-
-  if [ "$platform" = "w" ]; then
-    store_variable platform workstation
-  elif [ "$platform" = "s" ]; then
-    store_variable platform server
-  else
-    identify_dotfiles_platform
-  fi
-}
-
-if [ -z "$platform" ]; then
-  identify_dotfiles_platform
-fi
-
-is_workstation() {
-  [ "$platform" == 'workstation' ]
-}
-
-is_server() {
-  [ "$platform" == 'server' ]
 }
 
 # extract flag {{{1
