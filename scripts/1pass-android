@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 sync-to-android \
   ~/.1pass/1Password.agilekeychain \

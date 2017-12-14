@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [ ! -e ".upload" ]; then
   echo 'export UPLOAD_USER=""' > .upload

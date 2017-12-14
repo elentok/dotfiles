@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 list_git_conflicts() {
   git diff --name-only --diff-filter=U

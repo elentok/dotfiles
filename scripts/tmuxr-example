@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 session session1 window1 echo 'pane 1.1'
 split_below echo 'pane 1.2'

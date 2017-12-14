@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Author : Mark Wu, http://blog.markplace.net
 # License: GPL3, http://www.gnu.org/copyleft/gpl.html
 # Credit : Inspired by and based on Paul Mansfield's projectview, http://github.com/the1ts/todo.txt-plugins/blob/master/README.projects

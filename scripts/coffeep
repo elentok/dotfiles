@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 if [ $# -eq 1 ]
 then
     coffee -p $1 | cat -n

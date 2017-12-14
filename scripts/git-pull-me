@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 remote="noreview"
 branch=$(git rev-parse --abbrev-ref HEAD)

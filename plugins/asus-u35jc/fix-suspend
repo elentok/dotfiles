@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo "Copying custom asus script to /etc/pm/sleep.d"
 cp 20_custom-asus-u35jc /etc/pm/sleep.d/20_custom-asus-u35jc

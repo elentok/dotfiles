@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # TRANSFORMS=let,class,template,default-param,arrow,arg-spread,obj-method,obj-shorthand
 

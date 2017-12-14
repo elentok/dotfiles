@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 semver=$(semver)
 git add .semver
