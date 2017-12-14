@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 BLUE="\033[34m"
 RESET="\033[0m"

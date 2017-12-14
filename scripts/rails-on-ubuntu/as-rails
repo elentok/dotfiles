@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 RAILS_VERSIONS=( 2.0.0-p594 )
 DEFAULT_RAILS=${RAILS_VERSIONS[$(( $total-1 ))]}
 

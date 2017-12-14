@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 rm -rf ~/tmp/git-resolve-demo
 mkdir -p ~/tmp/git-resolve-demo

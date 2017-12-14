@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Open current directory in forklift
 
 echo -n $PWD | pbcopy

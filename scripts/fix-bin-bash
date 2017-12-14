@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+ag -l '^#!/bin/bash' | while read filename; do
+  echo "Fixing $filename..."
+  sed -i 's%^#!/bin/bash%#!/usr/bin/env bash%' "$filename"
+done
+

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 HISTORY_FILE=~/.ssh/history
 HISTORY_SIZE=10

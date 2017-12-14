@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 sleep 0.5
 
 if [ "$1" == "to-file" ]; then

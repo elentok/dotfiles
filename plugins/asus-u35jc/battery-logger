@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 function show_stats() {
   rate=`grep "present rate" /proc/acpi/battery/BAT0/state | awk '{print $3}'`

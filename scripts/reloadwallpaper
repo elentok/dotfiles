@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/usr/bin/env bash
 feh --bg-fill ~/.config/wallpaper.jpg

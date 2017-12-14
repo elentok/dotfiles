@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 tmux new-session -d -n "server" "bash -c 'rails server'"
 tmux new-window -n "guard" "bash -c 'bundle exec guard -n false'"

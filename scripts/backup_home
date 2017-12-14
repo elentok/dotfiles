@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 date=`date +%Y%m%d`
 filename="backup_${HOST}_$date.tar.bz2"

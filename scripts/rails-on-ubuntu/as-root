@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 apt-get install g++ gcc make git build-essential \
   libc6-dev patch openssl libmysql++-dev \

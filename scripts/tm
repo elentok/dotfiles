@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # if a tmux session already exists, attach to it,
 # otherwise create a new session.

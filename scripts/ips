@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ips-linux-arch() {
   ip addr show | grep 'inet ' | awk '{print $2}' | sed -E 's#/[0-9]+##'

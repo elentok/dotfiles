@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 git branch --all | grep -v '\->' | cut -c 3- | sed -E 's#^remotes/[^/]+/##' | sort | uniq
 

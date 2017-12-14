@@ -1,3 +1,3 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 (( $# > 0 )) && qlmanage -p "$@" &> /dev/null

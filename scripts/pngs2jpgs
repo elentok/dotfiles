@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 for file in *.png; do
   jpgfile=`echo $file | sed 's/\.png/.jpg/'`

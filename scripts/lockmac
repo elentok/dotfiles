@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/usr/bin/env bash
 open /System/Library/Frameworks/Screensaver.framework/Versions/A/Resources/ScreenSaverEngine.app

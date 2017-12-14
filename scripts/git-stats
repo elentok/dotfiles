@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/usr/bin/env bash
 git log --pretty=tformat: --numstat $1..$2 | awk '{added += $1; removed += $2} END {print "+" added " -" removed " (" (added-removed) ")" }'

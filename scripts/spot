@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 function spot_command() {
   echo "tell application \"Spotify\" to $*" | osascript
