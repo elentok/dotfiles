@@ -142,6 +142,7 @@ ask() {
   if [ "$default" ]; then
     echo -n "[$default] "
   fi
+  local read_args=''
   read $read_args reply
   echo
 
