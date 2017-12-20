@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+
+ROOT=$DOTF/plugins/vscode
+
+symlink "$ROOT/settings.json" "$HOME/.config/Code/User/settings.json"
+symlink "$ROOT/keybindings.json" "$HOME/.config/Code/User/keybindings.json"

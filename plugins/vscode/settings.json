@@ -1,0 +1,13 @@
+{
+    "window.zoomLevel": 1,
+    "editor.fontFamily": "'mononoki Nerd Font Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "terminal.integrated.enableBold": false,
+    "terminal.integrated.lineHeight": 1.1,
+
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j", "k"],
+            "after": ["<Esc>"]
+        }
+    ]
+}
