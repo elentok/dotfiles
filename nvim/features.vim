@@ -77,7 +77,7 @@ let g:UltiSnipsExpandTrigger="<c-u>"
 " inoremap <silent> <c-u> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>
 
 " When running inside abudo disable the 'violent' quit commands {{{1
-if $NVIM_KEEP_ALIVE != ""
+if $NVIM_KEEP_ALIVE != "" || exists("g:gui_oni")
   cabbr qa echo ':qa has been disabled'<cr>
   cabbr wqa echo ':wqa has been disabled'<cr>
   cabbr cq echo ':cq has been disabled'<cr>
