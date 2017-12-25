@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+
+symlink "$DOTF/plugins/oni" ~/.oni
+
