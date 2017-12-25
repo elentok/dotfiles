@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+for dir in "$HOME/.config/Code" "$HOME/Library/Application Support/Code"; do
+  if [ -d "$dir" ]; then
+    echo "$dir"
+    exit 0
+  fi
+done
+
+exit 1
