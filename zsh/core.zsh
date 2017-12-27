@@ -118,19 +118,21 @@ if is_mac; then
 fi
 
 # PATH {{{1
-PATH=$DOTF/scripts:$DOTL/scripts
-PATH=$PATH:$HOME/.yarn/bin
-PATH=$PATH:$N_PREFIX/bin
-if [ -n "$BREW_HOME" ]; then
-  PATH=$PATH:$BREW_HOME/bin:$BREW_HOME/sbin
-fi
-PATH=$PATH:$HOME/.fzf/bin
-PATH=$PATH:$HOME/bin:$HOME/scripts:$HOME/.local/bin
-PATH=$PATH:$GOROOT/bin:$MAIN_GOPATH/bin
+PATH="$DOTF/scripts:\
+$DOTL/scripts:\
+$HOME/.yarn/bin:\
+$N_PREFIX/bin"
 
-if [ -d $HOME/Library/Python/3.6/bin ]; then
-  PATH=$PATH:$HOME/Library/Python/3.6/bin
-fi
+
+PATH="$PATH:\
+$HOME/.fzf/bin:\
+$HOME/bin:\
+$HOME/scripts:\
+$HOME/.local/bin"
+
+[ -n "$BREW_HOME" ] && PATH=$PATH:$BREW_HOME/bin:$BREW_HOME/sbin
+[ -n "$GOROOT" ] && PATH=$PATH:$GOROOT/bin:$MAIN_GOPATH/bin
+[ -d $HOME/Library/Python/3.6/bin ] && PATH=$PATH:$HOME/Library/Python/3.6/bin
 
 # replace bsd binaries with gnu
 for pkg in coreutils findutils gnu-sed; do
@@ -140,9 +142,16 @@ for pkg in coreutils findutils gnu-sed; do
   fi
 done
 
-PATH=$PATH:$HOME/.rbenv/bin:$HOME/.rbenv/shims
-PATH=$PATH:/usr/local/share/npm/bin
-PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
+PATH="$PATH:\
+$HOME/.rbenv/bin:\
+$HOME/.rbenv/shims:\
+/usr/local/share/npm/bin:\
+/usr/local/bin:\
+/usr/local/sbin:\
+/usr/bin:\
+/bin:\
+/usr/sbin:\
+/sbin"
 
 if [ -e /usr/lib/cinnamon-settings-daemon ]; then
   PATH=$PATH:/usr/lib/cinnamon-settings-daemon
