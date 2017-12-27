@@ -271,11 +271,9 @@ npm_install() {
     return
   fi
 
-  if [ -z "${NODE_MODULES:-}" ]; then
-    export NODE_MODULES="$(cd "$(dirname $(which node))/../lib/node_modules" && pwd)"
-  fi
+  node_modules="$(cd "$(dirname $(which node))/../lib/node_modules" && pwd)"
 
-  if [ -d "$NODE_MODULES/$1" ]; then
+  if [ -d "$node_modules/$1" ]; then
     info " already installed"
   else
     npm="npm"
