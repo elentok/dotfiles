@@ -99,6 +99,9 @@ if [ -e "$BREW_HOME" ]; then
   fi
 fi
 
+# NodeJS {{{1
+export N_PREFIX=$HOME/.n
+
 # Go {{{1
 export GOROOT=$BREW_HOME/opt/go/libexec
 export MAIN_GOPATH=$HOME/go
@@ -117,6 +120,7 @@ fi
 # PATH {{{1
 PATH=$DOTF/scripts:$DOTL/scripts
 PATH=$PATH:$HOME/.yarn/bin
+PATH=$PATH:$N_PREFIX/bin
 if [ -n "$BREW_HOME" ]; then
   PATH=$PATH:$BREW_HOME/bin:$BREW_HOME/sbin
 fi
