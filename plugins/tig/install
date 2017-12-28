@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+
+TIG_VERSION=2.3.2
+
+main() {
+  header 'Tig'
+
+  if is_arch; then
+    pacman_install tig
+  elif command_missing tig; then
+    install_tig_targz
+  fi
+
+  symlink "$DOTF/plugins/tig/tigrc" ~/.tigrc
+}
+
+install_tig_targz() {
+  is_debian && apt_install libncurses5-dev
+
+  local filename=tig-$TIG_VERSION.tar.gz
+
+  if [ ! -e $TMP/$filename ]; then
+    curl -L https://github.com/jonas/tig/releases/download/tig-$TIG_VERSION/$filename \
+      -o $TMP/$filename
+  fi
+
+  if [ ! -d $TMP/tig-$TIG_VERSION ]; then
+    cd $TMP
+    tar xzvf $filename
+  fi
+
+  cd $TMP/tig-$TIG_VERSION
+  make prefix=$HOME/.local
+  make install prefix=$HOME/.local
+}
+
+main "$@"

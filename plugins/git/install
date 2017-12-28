@@ -9,9 +9,7 @@ main() {
   if ! has_command git; then
     install_git
   fi
-  install_tig
   install_gitconfig
-  install_symlinks
   install_diff_so_fancy
 }
 
@@ -21,15 +19,7 @@ install_git() {
   elif is_arch; then
     pacman_install git
   else
-    apt_install git libncurses5-dev
-  fi
-}
-
-install_tig() {
-  if is_arch; then
-    pacman_install tig
-  else
-    brew_install tig
+    apt_install git
   fi
 }
 
@@ -65,10 +55,6 @@ write_to_gitconfig() {
   fi
   echo "[include]" >> $GITCONFIG
   echo "  path = $DOTF/plugins/git/gitconfig" >> $GITCONFIG
-}
-
-install_symlinks() {
-  symlink "$DOTF/plugins/git/tigrc" ~/.tigrc
 }
 
 install_diff_so_fancy() {
