@@ -6,6 +6,9 @@ if [ "`uname -s`" = "Darwin" ]; then
   export OS=mac
 else
   export OS=linux
+  if [[ "$(cat /proc/version)" =~ 'Microsoft' ]]; then
+    export IS_WSL=yes
+  fi
 fi
 
 is_mac() {
@@ -14,7 +17,9 @@ is_mac() {
 is_linux() {
   [ "$OS" = "linux" ]
 }
-
+is_wsl() {
+  [ "$IS_WSL" = "yes" ]
+}
 # Helper functions {{{1
 source_if_exists() {
   if [ -e "$1" ]; then source $1; fi
