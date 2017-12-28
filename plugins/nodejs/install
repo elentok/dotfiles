@@ -11,9 +11,16 @@ main() {
     pacman_install nodejs npm yarn
   else
     git_clone https://github.com/tj/n $N_PREFIX
+    install_node
   fi
 
   install_packages
+}
+
+install_node() {
+  if [[ ! "$(n ls)" =~ 'ο' ]]; then
+    n latest
+  fi
 }
 
 install_packages() {
