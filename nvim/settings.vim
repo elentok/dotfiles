@@ -169,18 +169,14 @@ let g:easy_align_delimiters = {
       \ }
 
 " Colors {{{1
-set background=dark
-if has('gui_running')
-  color ir_black
-  hi Normal guibg=#121212
-else
-  " enable 256 colors in the terminal
-  set t_Co=256
-  let base16colorspace=256
-  color base16-elentok
+if (has("termguicolors"))
+  set termguicolors
 endif
 
-
+colorscheme one
+set background=dark
+call one#highlight('Normal', '', '1a1a1a', '')
+call one#highlight('Folded', '555555', '111111', '')
 
 " Search {{{1
 set incsearch   " incremental search
