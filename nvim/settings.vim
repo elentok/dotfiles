@@ -173,6 +173,7 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
+let g:one_allow_italics = 1
 colorscheme one
 set background=dark
 call one#highlight('Normal', '', '1a1a1a', '')
