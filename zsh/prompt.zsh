@@ -23,8 +23,8 @@ function random_animal {
 # fi
 
 # Exit code {{{1
-success="%F{green}❯%f"
-error="%F{red}❯%f"
+success="%F{green}›%f"
+error="%F{red}›%f"
 exit_code="%(?.$success.$error) "
 
 # Directory {{{1
