@@ -667,7 +667,7 @@ user_exists() {
 
 user_has_group() {
   local group="$1"
-  local user="${2}"
+  local user="${2:-}"
   if [ -z "$user" ]; then
     user=$(whoami)
   fi
