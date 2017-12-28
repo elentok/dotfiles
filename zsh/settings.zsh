@@ -170,7 +170,6 @@ fi
 
 # don't log to history commands starting with a space
 setopt HIST_IGNORE_SPACE
-source $DOTF/nvim/colors/base16-elentok.dark.sh
 
 export GREP_OPTIONS=
 
