@@ -16,8 +16,8 @@ source `dirname $0`/../framework
 benchmark-start
 
 main() {
-  cmd="$1"
-  shift
+  cmd="${1:-}"
+  shift || true
   case "$cmd" in
   list | l)
     list_plugins
