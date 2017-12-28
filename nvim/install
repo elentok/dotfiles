@@ -38,9 +38,25 @@ install_neovim() {
   elif is_debian; then
     install_neovim_appimage
   else
-    brew_tap neovim/homebrew-neovim
-    brew_install neovim
+    install_neovim_mac
   fi
+}
+
+install_neovim_mac() {
+  mkdir -p ~/Applications
+  cd ~/Applications
+
+  if [ ! -e ~/Applications/nvim-osx64 ]; then
+    bullet 'Downloading Neovim for Mac... '
+    curl -L https://github.com/neovim/neovim/releases/download/$NEOVIM_VERSION/nvim-macos.tar.gz \
+      -o /tmp/nvim-macos.tar.gz
+    show_result
+
+    tar xzvf /tmp/nvim-macos.tar.gz
+  fi
+
+  mkdir -p ~/bin
+  symlink ~/Applications/nvim-osx64/bin/nvim ~/bin/nvim
 }
 
 install_neovim_appimage() {
