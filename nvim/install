@@ -25,7 +25,7 @@ install_requirements() {
   elif is_arch; then
     pacman_install python python-pip abduco
   elif is_debian; then
-    apt_install python-dev python-pip python3-dev python3-pip
+    apt_install python-dev python-pip python3-dev python3-pip abduco
   fi
 
   pip3_install neovim neovim-remote
@@ -36,7 +36,9 @@ install_neovim() {
   if is_arch; then
     pacman_install neovim
   elif is_debian; then
-    install_neovim_appimage
+    if command_missing nvim; then
+      install_neovim_appimage
+    fi
   else
     install_neovim_mac
   fi
@@ -81,6 +83,7 @@ install_neovim_appimage() {
 }
 
 install_symlinks() {
+  mkdir -p ~/.config
   symlink "$DOTF/nvim" ~/.config/nvim
 
   symlink "$DOTF/nvim/pylintrc" ~/.pylintrc
@@ -101,6 +104,8 @@ install_plugins() {
 install_cli_tools() {
   if is_arch; then
     pacman_install ctags tidy
+  elif is_debian; then
+    apt_install silversearcher-ag exuberant-ctags global
   else
     brew_install ctags
     brew_install the_silver_searcher # ag
