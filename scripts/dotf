@@ -102,6 +102,8 @@ show_done() {
 }
 
 base_plugins() {
+  plugin git
+  plugin tig
   plugin nodejs
   plugin zsh
   plugin bash
