@@ -11,9 +11,7 @@ main() {
 }
 
 install_tmux() {
-  if is_arch; then
-    pacman_install tmux
-  else
+  if is_mac; then
     brew_install tmux
 
     if is_mac; then
@@ -23,6 +21,8 @@ install_tmux() {
     fi
 
     brew unlink openssl
+  else
+    install_package tmux
   fi
 }
 

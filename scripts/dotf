@@ -58,8 +58,6 @@ install() {
 install_all() {
   cd $DOTF
 
-  plugin git
-
   git submodule update --init --recursive
 
   base_plugins
@@ -102,23 +100,21 @@ show_done() {
 }
 
 base_plugins() {
-  plugin git
-  plugin tig
   plugin nodejs
+  plugin git
   plugin zsh
+  plugin nvim
+  plugin tig
   plugin bash
   plugin tmux
-  plugin nvim
   plugin ruby
 
   install_package ncdu
   install_package wget
   install_package htop
-  install_package imagemagick
+  install_package --yum=ImageMagick imagemagick
 
-  if is_arch; then
-    pacman_install openssh
-  fi
+  is_arch && pacman_install openssh
 }
 
 gui_plugins() {
