@@ -64,6 +64,8 @@ if is_linux; then
     export DISTRO=arch
   elif [[ "$HOME" =~ termux ]]; then
     export DISTRO=termux
+  elif [[ "$(cat /proc/version)" =~ "fedora" ]]; then
+    export DISTRO=fedora
   else
     export DISTRO=debian
   fi
@@ -79,6 +81,10 @@ is_termux() {
 
 is_debian() {
   [ "$DISTRO" = "debian" ]
+}
+
+is_fedora() {
+  [ "$DISTRO" = "fedora" ]
 }
 
 # TMP 

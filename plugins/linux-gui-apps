@@ -8,6 +8,8 @@ COMMON="vlc feh gimp qalculate-gtk"
 
 if is_arch; then
   pacman_install $COMMON keepassxc gvfs
-else
+elif is_debian; then
   apt_install keepassx $COMMON
+elif is_fedora; then
+  yum_install keepassxc gimp
 fi

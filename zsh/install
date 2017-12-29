@@ -2,6 +2,19 @@
 
 source `dirname $0`/../framework
 
+main() {
+  header "Zsh"
+
+  install_requirements
+  install_zsh
+  install_symlinks
+  install_fzf
+  reset_completion_cache
+
+  # fix premissions issue
+  chmod -R g-w $DOTF/zsh/vendor/zsh-completions
+}
+
 install_zsh() {
   if is_mac; then
     my_shell=$(echo $SHELL | rev | cut -d/ -f1 | rev)
@@ -11,11 +24,7 @@ install_zsh() {
       chsh -s "$zsh_bin"
     fi
   else
-    if is_arch; then
-      pacman_install zsh
-    elif is_debian; then
-      apt_install zsh
-    fi
+    install_package zsh
 
     zsh_bin="$(which zsh)"
     bullet "Changing user's shell to $zsh_bin... "
@@ -73,13 +82,4 @@ reset_completion_cache() {
   zsh -c 'autoload -U compinit && compinit'
 }
 
-header "Zsh"
-
-install_requirements
-install_zsh
-install_symlinks
-install_fzf
-reset_completion_cache
-
-# fix premissions issue
-chmod -R g-w $DOTF/zsh/vendor/zsh-completions
+main "$@"
