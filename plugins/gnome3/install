@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+$DOTF/plugins/gnome3/one-dark.sh
