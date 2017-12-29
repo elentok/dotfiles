@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+
+header 'Telegram'
+
+if [ ! -e ~/Applications/Telegram ]; then
+  curl -L https://telegram.org/dl/desktop/linux -o $TMP/telegram.tar.xz
+  mkdir -p ~/Applications
+  cd ~/Applications
+  tar xvf $TMP/telegram.tar.xz
+fi
+
+mkdir -p ~/bin
+symlink "$HOME/Applications/Telegram/Telegram" ~/bin/telegram
