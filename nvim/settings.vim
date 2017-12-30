@@ -176,7 +176,7 @@ endif
 let g:one_allow_italics = 1
 colorscheme one
 set background=dark
-call one#highlight('Normal', '', '1a1a1a', '')
+" call one#highlight('Normal', '', '1a1a1a', '')
 call one#highlight('Folded', '555555', '111111', '')
 
 " Search {{{1
