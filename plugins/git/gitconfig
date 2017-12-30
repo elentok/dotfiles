@@ -11,6 +11,9 @@
 [core]
   excludesfile = ~/.dotfiles/plugins/git/gitignore
 
+  # Always use linux line endings
+  autocrlf = input
+
 [color]
   ui = auto
   diff = auto
