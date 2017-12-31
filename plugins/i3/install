@@ -11,6 +11,9 @@ main() {
   install_symlinks
   install_session_file
   install_utils
+
+  install_package compton
+
   # sudo_copy "$I3/cinnamon/cinnamon-i3" "/usr/bin/cinnamon-i3"
   # sudo_copy "$I3/cinnamon/cinnamon-i3-session" "/usr/bin/cinnamon-i3-session"
   # sudo_copy "$I3/cinnamon/i3.session" "/usr/share/cinnamon-session/sessions/i3.session"
