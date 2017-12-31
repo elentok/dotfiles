@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+
+VERSION=${1:-0.6}
+INSTALL_DIR=$HOME/.apps/abduco/$VERSION
+
+header "Building Abduco $VERSION"
+
+mkdir -p $INSTALL_DIR
+
+mkdir -p $TMP/build
+cd $TMP/build
+
+curl -L http://www.brain-dump.org/projects/abduco/abduco-$VERSION.tar.gz \
+  -o abduco-$VERSION.tar.gz
+
+tar xzvf abduco-$VERSION.tar.gz
+cd abduco-$VERSION
+
+make install PREFIX=$INSTALL_DIR
+
+symlink $INSTALL_DIR/bin/abduco $HOME/bin/abduco
