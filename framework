@@ -427,7 +427,7 @@ if has_command "pip3"; then
 fi
 
 pip3_install() {
-  bullet "Installing pip package ${1}... "
+  bullet "Installing pip3 package ${1}... "
   if has_pip3_package "$1"; then
     info " already installed"
   else
