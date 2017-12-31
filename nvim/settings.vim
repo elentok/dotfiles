@@ -179,6 +179,7 @@ colorscheme one
 set background=dark
 " call one#highlight('Normal', '', '1a1a1a', '')
 call one#highlight('Folded', '555555', '111111', '')
+call one#highlight('VertSplit', '', '5c6370', 'none')
 
 " Search {{{1
 set incsearch   " incremental search
