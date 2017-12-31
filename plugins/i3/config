@@ -191,4 +191,4 @@ assign [class="Telegram"] 3: chat
 # exec setxkbmap us
 # exec --no-startup-id cinnamon-settings-daemon
 # exec --no-startup-id cinnamon-screensaver
-
+exec --no-startup-id compton --config $DOTF/plugins/i3/compton.conf -b
