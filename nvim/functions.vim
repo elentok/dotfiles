@@ -382,6 +382,34 @@ endfunction
 
 command! -complete=dir -nargs=+ Proj call Proj("<args>")
 
+" TabLine {{{1
+function! Elentok_TabLine()
+  let s = ''
+  let current_tab = tabpagenr() - 1
+  for index in range(tabpagenr('$'))
+    if index == current_tab
+      let s .= '%#TabLineSel# '
+    else
+      let s .= '%#TabLine# '
+    endif
+    let s .= index . Elentok_TabText(index) . ' '
+  endfor
+  let s .= '%#TabLineFill#%T'
+  return s
+endfunction
+
+function! Elentok_TabText(index)
+  let buffers = tabpagebuflist(a:index + 1)
+  let name = bufname(buffers[0])
+  if len(name) > 0
+    return ': ' . fnamemodify(name, ":t")
+  else
+    return ''
+  endif
+endfunction
+
+set tabline=%!Elentok_TabLine()
+
 " Misc {{{1
 function! EscapeCurrentFileDir()
   let path = expand("%:p:h")
