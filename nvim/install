@@ -40,9 +40,7 @@ install_neovim() {
   elif is_mac; then
     install_neovim_mac
   else
-    if command_missing nvim; then
-      install_neovim_appimage
-    fi
+    command_missing nvim && $DOTF/nvim/build
   fi
 }
 
