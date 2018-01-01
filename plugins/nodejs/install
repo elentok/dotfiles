@@ -7,12 +7,8 @@ source `dirname $0`/../../framework
 main() {
   header 'NodeJS'
 
-  if is_arch; then
-    pacman_install nodejs npm yarn
-  else
-    git_clone https://github.com/tj/n $N_PREFIX
-    install_node
-  fi
+  git_clone https://github.com/tj/n $N_PREFIX
+  install_node
 
   install_packages
 }
