@@ -10,7 +10,8 @@
 #   agent setup             - attempt to fix a zombie active agent
 #   agent stop              - stop the local ssh agent
 
-LIFE=28800 # 8 hours
+LIFE_HOURS=48
+LIFE_SECONDS=$(( $LIFE_HOURS * 60 * 60 ))
 ACTIVE_AGENT="$HOME/.ssh/active-agent"
 LOCAL_AGENT="$HOME/.ssh/local-agent"
 LOCAL_AGENT_PIDFILE="$HOME/.ssh/local-agent-pid"
@@ -101,7 +102,7 @@ create-local-agent() {
 
   rm -f $LOCAL_AGENT
   echo -n "Creating local agent... "
-  eval "$(ssh-agent -a $LOCAL_AGENT -t $LIFE)" > /dev/null
+  eval "$(ssh-agent -a $LOCAL_AGENT -t $LIFE_SECONDS)" > /dev/null
   echo $SSH_AGENT_PID > $LOCAL_AGENT_PIDFILE
   echo "created (pid $SSH_AGENT_PID)."
 }
