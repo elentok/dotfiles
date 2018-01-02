@@ -8,12 +8,10 @@ Plug 'AndrewRadev/sideways.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'airblade/vim-gitgutter'
-Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'elentok/alternate-spec.vim'
 Plug 'elentok/replace-all.vim', { 'on': ['FindAll', 'ReplaceAll'] }
 Plug 'elentok/run.vim'
-Plug 'elentok/spec-runner.vim'
 Plug 'elentok/togglr.vim'
 Plug 'elentok/vim-rails-extra'
 Plug 'gregsexton/gitv', { 'on': 'Gitv' }
