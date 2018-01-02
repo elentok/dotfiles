@@ -41,6 +41,7 @@ set undolevels=1000
 set visualbell
 set whichwrap=<,>,[,]
 set wildignore=*.swp,*.bak,*.pyc,*.class,*.o,*.obj
+set wildignorecase
 set wildmenu
 set wildmode=list:longest,full
 set winwidth=84                " makes sure the active window will always be at least 80 characters
