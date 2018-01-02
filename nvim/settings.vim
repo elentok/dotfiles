@@ -2,7 +2,9 @@
 
 " General {{{1
 
-syntax enable
+if !exists("g:syntax_on")
+  syntax enable
+endif
 
 let mapleader = ','
 
@@ -71,22 +73,19 @@ if has("nvim")
 endif
 
 " Colors {{{1
-if !exists("g:elentok_colors_initialized")
-  call confirm('aAAAA')
-  if (has("termguicolors"))
-    set termguicolors
-  endif
-
-  let g:one_allow_italics = 1
-  colorscheme one
-  set background=dark
-  " call one#highlight('Normal', '', '1a1a1a', '')
-  call one#highlight('Folded', '555555', '111111', '')
-  call one#highlight('VertSplit', '', '5c6370', 'none')
-  hi TabLine gui=none
-
-  let g:elentok_colors_initialized = 1
+if (has("termguicolors"))
+  set termguicolors
 endif
+
+let g:one_allow_italics = 1
+colorscheme one
+set background=dark
+" call one#highlight('Normal', '', '1a1a1a', '')
+call one#highlight('Folded', '555555', '111111', '')
+call one#highlight('VertSplit', '', '5c6370', 'none')
+hi TabLine gui=none
+
+let g:elentok_colors_initialized = 1
 
 " Search {{{1
 set incsearch   " incremental search
