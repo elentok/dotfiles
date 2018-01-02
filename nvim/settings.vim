@@ -70,117 +70,23 @@ if has("nvim")
   set inccommand=nosplit
 endif
 
-" Plugin specific {{{1
-
-" pangloss/vim-javascript
-let g:javascript_plugin_jsdoc = 1
-let g:javascript_plugin_flow = 1
-
-" fzf
-" let g:fzf_prefer_tmux = 1
-
-" matchit
-let loaded_matchparen=1 " do not show highlight matching parenthesis automatically
-
-let g:VimuxOrientation = "h"
-let g:VimuxHeight = "40"
-let g:VimuxUseNearestPane = 1
-let g:run_with_vimux=1
-let g:user_spec_runners = {
-  \ 'ruby': { 'command': 'sp {file}' },
-  \ 'java': { 'command': 'make test' }
-  \}
-let g:ackprg = 'ag --nogroup --nocolor --column'
-let g:session_autosave = 'no'
-let g:session_autoload = 'no'
-let g:gitgutter_eager = 0
-let g:instant_markdown_slow = 1
-let g:markdown_fold_style = 'nested'
-
-" Deoplete {{{1
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#ternjs#types = 1
-let g:deoplete#sources#ternjs#docs = 1
-let g:deoplete#sources#ternjs#case_insensitive = 1
-let g:deoplete#sources#ternjs#include_keywords = 1
-
-" CtrlP {{{1
-
-" Use Silversearcher to list files (much faster)
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-" Silversearcher is fast enough, so no need for caching
-" let g:ctrlp_use_caching = 0
-
-let g:ctrlp_dotfiles = 0
-let g:ctrlp_root_markers = ['.git']
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_by_filename = 0
-let g:ctrlp_custom_ignore = {
-  \ 'dir': '\v[\/](tmp|site-packages|node_modules|bower_components)$',
-  \ }
-let g:ctrlp_buftag_types = {
-  \ 'coffee': '',
-  \ 'ghmarkdown': '',
-  \ 'go': '',
-  \ 'javascript': '',
-  \ 'markdown': '',
-  \ 'scss': ''
-  \ }
-
-let g:ctrlp_buffer_func = {
-  \ 'enter': 'CtrlP_Enter'}
-
-func! CtrlP_Enter()
-  nn <buffer> <f3> :call CtrlP_CloseBuffer()<cr>
-endfunc
-
-func! CtrlP_CloseBuffer()
-  let buf=fnamemodify(getline('.')[2:], ':p')
-  exec 'bd' buf
-  call feedkeys("\<f5>")
-endfunc
-
-
-" EasyAlign {{{1
-
-let g:easy_align_delimiters = {
-      \ '"': { 'pattern': '"', 'ignore_groups': ['String'] },
-      \ '>': { 'pattern': '>>\|->\|=>\|>' },
-      \ '/': { 'pattern': '//\+\|/\*\|\*/', 'ignore_groups': ['String'] },
-      \ '#': { 'pattern': '#\+', 'ignore_groups': ['String'], 'delimiter_align': 'l' },
-      \ ']': {
-      \     'pattern':       '[[\]]',
-      \     'left_margin':   0,
-      \     'right_margin':  0,
-      \     'stick_to_left': 0
-      \   },
-      \ ')': {
-      \     'pattern':       '[()]',
-      \     'left_margin':   0,
-      \     'right_margin':  0,
-      \     'stick_to_left': 0
-      \   },
-      \ 'd': {
-      \     'pattern': ' \(\S\+\s*[;=]\)\@=',
-      \     'left_margin': 0,
-      \     'right_margin': 0
-      \   },
-      \ '\': { 'pattern': '[\\]', 'ignore_groups': [] }
-      \ }
-
 " Colors {{{1
-if (has("termguicolors"))
-  set termguicolors
-endif
+if !exists("g:elentok_colors_initialized")
+  call confirm('aAAAA')
+  if (has("termguicolors"))
+    set termguicolors
+  endif
 
-let g:one_allow_italics = 1
-colorscheme one
-set background=dark
-" call one#highlight('Normal', '', '1a1a1a', '')
-call one#highlight('Folded', '555555', '111111', '')
-call one#highlight('VertSplit', '', '5c6370', 'none')
-hi TabLine gui=none
+  let g:one_allow_italics = 1
+  colorscheme one
+  set background=dark
+  " call one#highlight('Normal', '', '1a1a1a', '')
+  call one#highlight('Folded', '555555', '111111', '')
+  call one#highlight('VertSplit', '', '5c6370', 'none')
+  hi TabLine gui=none
+
+  let g:elentok_colors_initialized = 1
+endif
 
 " Search {{{1
 set incsearch   " incremental search
@@ -240,8 +146,7 @@ set ttimeout
 set ttimeoutlen=20
 set notimeout
 
-" Insert mode cursor {{{1
-
+" Insert mode cursor (mac-only) {{{1
 " this trick messes up linux terminals
 if g:os == "mac"
   let s:xterm_underline = "\<Esc>[4 q"
@@ -251,48 +156,17 @@ if g:os == "mac"
   let &t_EI .= s:xterm_block  " Solid block cursor when in normal mode]]"
 endif
 
-" Neomake {{{1
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_jsx_enabled_makers = ['eslint']
-let g:neomake_scss_enabled_makers = ['sasslint']
-let g:neomake_html_enabled_makers = []
-let g:neomake_java_enabled_makers = []
-let g:neomake_error_sign = {
-    \ 'text': '✖',
-    \ 'texthl': 'ErrorMsg',
-    \ }
-let g:neomake_warning_sign = {
-    \ 'text': '⚠',
-    \ 'texthl': 'WarningMsg',
-    \ }
+" Statusline {{{1
+set statusline=
+set statusline+=%f " Path to the file in the buffer, as typed or relative to current directory
+set statusline+=%< " Where to truncate line
+set statusline+=%{&modified?'\ +':''}
+set statusline+=%{&readonly?'\ ':''}
+set statusline+=%= " Separation point between left and right aligned items
+set statusline+=\ [%{''!=#&filetype?&filetype:'none'}]
+set statusline+=\ %l:%v " Line number + column number
 
-" NERDCommenter {{{1
-let g:NERDCustomDelimiters = {
-    \ 'scss': { 'left': '//' }
-\ }
-
-let g:NERDSpaceDelims = 1
-
-" Grepper {{{1
-let g:grepper = {
-  \ 'tools':  ['ag'],
-  \ 'open':   1,
-  \ 'switch': 0,
-  \ 'jump':   1
-\ }
-
-nmap gs <plug>(GrepperOperator)
-xmap gs <plug>(GrepperOperator)
-
-" UltiSnips {{{1
-let g:UltiSnipsExpandTrigger="<c-j>"
-" let g:UltiSnipsJumpForwardTrigger="<c-b>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" Go {{{1
-let g:go_fmt_command = "goimports"
-
-" ALE (Linters) {{{1
+" Plugin: w0rp/ale (live linting) {{{1
 let g:ale_linters = {
       \ 'go': ['gofmt', 'go vet', 'gometalinter'],
       \ 'html': ['htmlhint'],
@@ -310,27 +184,7 @@ hi link ALEWarningSign Error
 nmap <silent> [g <Plug>(ale_previous_wrap)
 nmap <silent> ]g <Plug>(ale_next_wrap)
 
-" GNU Global (gtags) {{{1
-let gtags_script=expand("$BREW_HOME/share/gtags/gtags-cscope.vim")
-if filereadable(gtags_script)
-  exec "source " . gtags_script
-endif
-
-" Statusline {{{1
-set statusline=
-set statusline+=%f " Path to the file in the buffer, as typed or relative to current directory
-set statusline+=%< " Where to truncate line
-set statusline+=%{&modified?'\ +':''}
-set statusline+=%{&readonly?'\ ':''}
-set statusline+=%= " Separation point between left and right aligned items
-set statusline+=\ [%{''!=#&filetype?&filetype:'none'}]
-set statusline+=\ %l:%v " Line number + column number
-
-" NERDTree {{{1
-let NERDTreeIgnore=['\.zeus\.sock$', '\~$']
-let NERDTreeHijackNetrw = 0
-
-" Dev Icons {{{1
+" Plugin: ryanoasis/vim-devicons {{{1
 let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
 let g:WebDevIconsNerdTreeGitPluginForceVAlign = 0
 
@@ -340,3 +194,78 @@ let g:DevIconsEnableFoldersOpenClose = 1
 let g:DevIconsEnableFolderPatternMatching = 0
 let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ' '
 let g:DevIconsDefaultFolderOpenSymbol = ' '
+
+" Plugin: pangloss/vim-javascript {{{1
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_flow = 1
+
+" Plugin: airblade/vim-gitgutter {{{1
+let g:gitgutter_eager = 0
+
+" Plugin: jtratner/vim-flavored-markdown {{{1
+let g:markdown_fold_style = 'nested'
+
+" Plugin: Shougo/deoplete.nvim {{{1
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#ternjs#types = 1
+let g:deoplete#sources#ternjs#docs = 1
+let g:deoplete#sources#ternjs#case_insensitive = 1
+let g:deoplete#sources#ternjs#include_keywords = 1
+
+" Plugin: junegunn/vim-easy-align {{{1
+let g:easy_align_delimiters = {
+      \ '"': { 'pattern': '"', 'ignore_groups': ['String'] },
+      \ '>': { 'pattern': '>>\|->\|=>\|>' },
+      \ '/': { 'pattern': '//\+\|/\*\|\*/', 'ignore_groups': ['String'] },
+      \ '#': { 'pattern': '#\+', 'ignore_groups': ['String'], 'delimiter_align': 'l' },
+      \ ']': {
+      \     'pattern':       '[[\]]',
+      \     'left_margin':   0,
+      \     'right_margin':  0,
+      \     'stick_to_left': 0
+      \   },
+      \ ')': {
+      \     'pattern':       '[()]',
+      \     'left_margin':   0,
+      \     'right_margin':  0,
+      \     'stick_to_left': 0
+      \   },
+      \ 'd': {
+      \     'pattern': ' \(\S\+\s*[;=]\)\@=',
+      \     'left_margin': 0,
+      \     'right_margin': 0
+      \   },
+      \ '\': { 'pattern': '[\\]', 'ignore_groups': [] }
+      \ }
+
+" Plugin: scrooloose/nerdtree {{{1
+let NERDTreeIgnore=['\.zeus\.sock$', '\~$']
+let NERDTreeHijackNetrw = 0
+
+" Plugin: scrooloose/nerdcommenter {{{1
+let g:NERDCustomDelimiters = {
+    \ 'scss': { 'left': '//' }
+\ }
+
+let g:NERDSpaceDelims = 1
+
+" Plugin: fatih/vim-go {{{1
+let g:go_fmt_command = "goimports"
+
+" Plugin: SirVer/ultisnips {{{1
+let g:UltiSnipsExpandTrigger="<c-j>"
+
+" Plugin: mhinz/vim-grepper {{{1
+let g:grepper = {
+  \ 'tools':  ['ag'],
+  \ 'open':   1,
+  \ 'switch': 0,
+  \ 'jump':   1
+\ }
+
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
+
+
+" Temp (stuff I'm not sure about) {{{1
+let loaded_matchparen=1 " do not show highlight matching parenthesis automatically
