@@ -10,6 +10,8 @@
 #   agent setup             - attempt to fix a zombie active agent
 #   agent stop              - stop the local ssh agent
 
+set -euo pipefail
+
 LIFE_HOURS=48
 LIFE_SECONDS=$(( $LIFE_HOURS * 60 * 60 ))
 ACTIVE_AGENT="$HOME/.ssh/active-agent"
@@ -19,8 +21,8 @@ LOCAL_AGENT_PIDFILE="$HOME/.ssh/local-agent-pid"
 mkdir -p $HOME/.ssh
 
 main() {
-  local cmd="$1"
-  shift
+  local cmd="${1:-none}"
+  [ $# -gt 0 ] && shift
 
   case "$cmd" in
     list   | l) list-agents ;;
@@ -130,14 +132,25 @@ is-local-agent() {
 }
 
 is-local-agent-running() {
+  if [ ! -e $LOCAL_AGENT_PIDFILE ]; then
+    return 1
+  fi
+
   local pid="$(cat $LOCAL_AGENT_PIDFILE)"
   [ -n "$pid" ] && kill -0 "$pid" > /dev/null
 }
 
 stop-local-agent() {
-  killall ssh-agent 2> /dev/null
+  if ! is-local-agent-running; then
+    echo 'Local agent is not running'
+    return
+  fi
+
+  echo -n 'Stopping local ssh agent...'
+  kill "$(cat $LOCAL_AGENT_PIDFILE)"
   rm -f "$LOCAL_AGENT"
-  rm -f "$LOCAL_AGENT_PID"
+  rm -f "$LOCAL_AGENT_PIDFILE"
+  echo 'done.'
 }
 
 main "$@"
