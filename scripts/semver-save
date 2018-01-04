@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-semver=$(semver)
-git add .semver
-echo "Commiting 'Bumped version to $semver'"
-git ci -m "Bumped version to $semver"
-echo "Tagging '$semver'"
-git tag $semver
-echo "done."
