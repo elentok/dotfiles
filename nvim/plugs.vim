@@ -68,7 +68,7 @@ Plug 'chr4/nginx.vim',                 { 'for': 'nginx' }
 Plug 'fatih/vim-go',                   { 'for': 'go' }
 Plug 'groenewege/vim-less',            { 'for': 'less' }
 Plug 'pangloss/vim-javascript',        { 'for': 'javascript' }
-Plug 'mxw/vim-jsx',                    { 'for': 'javascript' }
+Plug 'MaxMEllon/vim-jsx-pretty',       { 'for': 'javascript' }
 Plug 'kchmck/vim-coffee-script',       { 'for': 'coffee' }
 Plug 'vim-ruby/vim-ruby',              { 'for': 'ruby' }
 Plug 'vim-scripts/yaml.vim',           { 'for': 'yaml' } " syntax highlighting
