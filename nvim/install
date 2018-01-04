@@ -92,6 +92,7 @@ install_symlinks() {
   symlink "$DOTF/nvim/pylintrc" ~/.pylintrc
   mkdir -p ~/.config/yamllint
   symlink "$DOTF/nvim/yamllint-config" ~/.config/yamllint/config
+  symlink "$DOTF/nvim/tern-config" ~/.tern-config
 
   # vim backwards compatibility
   symlink "$DOTF/nvim/init.vim" ~/.vimrc
@@ -136,6 +137,7 @@ install_cli_tools() {
   npm_install prettier
   npm_install jsonlint
   npm_install sass-lint
+  npm_install tern
   pip_install pylint
   pip_install yamllint
 
