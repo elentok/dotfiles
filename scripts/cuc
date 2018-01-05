@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-if [ -e "zeus.json" ]; then
-  echo "Running 'zeus cucumber $*'"
-  zeus cucumber $*
-else
-  echo "Running 'cucumber $*'"
-  cucumber $*
-fi
