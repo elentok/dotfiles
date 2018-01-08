@@ -135,15 +135,14 @@ confirm() {
 #   echo $answer
 ask() {
   local question=$1
-  local default=$3
+  local default=${3:-}
   local resultvar=$2
 
   echo -ne "$question "
   if [ "$default" ]; then
     echo -n "[$default] "
   fi
-  local read_args=''
-  read $read_args reply
+  read ${read_args:-} reply
   echo
 
   reply="${reply:-$default}"
