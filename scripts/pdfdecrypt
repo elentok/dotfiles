@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#
+# Pdf Decrypt
+#
+# Usage:
+#
+#   pdfdecrypt {input} {output}
+
+source $DOTF/framework
+
+if [ $# -lt 2 ]; then
+  usage $0
+  exit 1
+fi
+
+ask_password 'Enter pdf password:' pass
+pdftk "$1" input_pw "$pass" output "$2"
