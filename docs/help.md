@@ -342,3 +342,14 @@ This is a link to [Something][1]
 ## change ubuntu/debian default terminal
 
     sudo update-alternatives --config x-terminal-emulator
+
+## XDG
+
+### get default mailto handler
+
+    xdg-mime query default x-scheme-handler/mailto
+
+### set chrome as the default mailto handler
+
+    xdg-mime default google-chrome.desktop x-scheme-handler/mailto
+
