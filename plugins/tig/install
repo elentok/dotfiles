@@ -17,7 +17,7 @@ main() {
 }
 
 install_tig_targz() {
-  is_debian && apt_install libncurses5-dev
+  is_debian && apt_install libncursesw5-dev
   is_fedora && yum_install ncurses-devel
 
   local filename=tig-$TIG_VERSION.tar.gz
@@ -33,8 +33,14 @@ install_tig_targz() {
   fi
 
   cd $TMP/tig-$TIG_VERSION
-  make prefix=$HOME/.local
-  make install prefix=$HOME/.local
+  INSTALL_DIR=$HOME/.apps/tig/$TIG_VERSION
+  mkdir -p $INSTALL_DIR
+
+  ./configure
+  make prefix=$INSTALL_DIR
+  make install prefix=$INSTALL_DIR
+
+  symlink $INSTALL_DIR/bin/tig $HOME/bin/tig
 }
 
 main "$@"
