@@ -9,6 +9,8 @@ main() {
 
   if is_arch; then
     pacman_install tig
+  elif is_mac; then
+    brew_install tig
   elif command_missing tig; then
     install_tig_targz
   fi
