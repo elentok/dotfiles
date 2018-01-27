@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+#
+# install-service {service-filename-erb} [user|system]
+
+filename="$1"
+mode="$2"
+
+name="$(basename $filename | sed 's/\.service\.erb$//')"
+
+if [ ! -e "$filename" ]; then
+  usage "$0"
+  exit 1
+fi
+
+if [ "$mode" == "user" ]; then
+  erb "$filename" > "$HOME/.local/share/systemd/user/$name.service"
+elif [ "$mode" == "system" ]; then
+  erb "$filename" > /tmp/$name.service
+  sudo mv /tmp/$name.service "/usr/lib/systemd/system/$name.service"
+else
+  usage "$0"
+  exit 1
+fi
