@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+owner=$(stat -c '%U:%G' package.json)
+
+sudo chown -R $owner config/ tmp/
