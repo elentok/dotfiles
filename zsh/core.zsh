@@ -93,6 +93,10 @@ if is_termux; then
   export TMP=$HOME/tmp
 fi
 
+# Disable <Ctrl-s> lock {{{1
+# see https://unix.stackexchange.com/questions/72086
+stty -ixon
+
 # Homebrew {{{1
 BREW_HOME=''
 for dir in ~/.linuxbrew ~/.homebrew /usr/local; do
