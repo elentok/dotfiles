@@ -15,7 +15,7 @@ git-aliases-widget() {
   return $ret
 }
 zle     -N   git-aliases-widget
-bindkey '^G' git-aliases-widget
+bindkey '^Ga' git-aliases-widget
 
 ssh-server-widget() {
   LBUFFER="${LBUFFER}$(pick-ssh-server)"
