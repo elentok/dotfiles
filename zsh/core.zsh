@@ -93,9 +93,12 @@ if is_termux; then
   export TMP=$HOME/tmp
 fi
 
-# Disable <Ctrl-s> lock {{{1
-# see https://unix.stackexchange.com/questions/72086
-stty -ixon
+# Disable <Ctrl-s> lock on interactive shells {{{1
+# see:
+# * https://stackoverflow.com/questions/24623021
+# * https://unix.stackexchange.com/questions/72086
+# * https://unix.stackexchange.com/questions/26676
+[[ $- == *i* ]] && stty -ixon
 
 # Homebrew {{{1
 BREW_HOME=''
