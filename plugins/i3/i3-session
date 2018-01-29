@@ -10,6 +10,7 @@
   xmouse
 
   light-locker --lock-on-suspend --no-late-locking &
+  xfce4-clipman &
   # xfce4-session &
 
   # Network Management Applet
