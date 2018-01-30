@@ -185,6 +185,10 @@ if is_termux; then
   PATH=$PATH:/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets
 fi
 
+if is_wsl; then
+  PATH=$PATH:/mnt/c/Windows:/mnt/c/Windows/System32:/mnt/c/Windows/System32/WindowsPowerShell/v1.0
+fi
+
 export PATH
 
 
