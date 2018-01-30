@@ -1,0 +1,41 @@
+#!/usr/bin/env zsh
+#
+# Usage:
+#
+#   clip copy
+#   clip paste
+#
+
+main() {
+  case "$1" in
+    c|copy) copy;;
+    p|paste) paste;;
+    *) usage "$@"
+  esac
+}
+
+copy() {
+  if has_command pbcopy; then
+    pbcopy
+  elif has_command xclip; then
+    xclip -selection clipboard -in
+  elif has_command xsel; then
+    xsel --clipboard --input
+  else
+    echo 'Error: missing copy command (pbcopy, xclip or xsel)'
+  fi
+}
+
+paste() {
+  if has_command pbpaste; then
+    pbpaste
+  elif has_command xclip; then
+    xclip -selection clipboard -out
+  elif has_command xsel; then
+    xsel --clipboard --output
+  else
+    echo 'Error: missing copy command (pbpaste, xclip or xsel)'
+  fi
+}
+
+main "$@"

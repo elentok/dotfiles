@@ -12,7 +12,7 @@ set tree-view  = line-number:no,interval=5 mode author:abbreviated,width=2 file-
 
 bind main r !git rebase -i %(commit)
 bind main f !git fix %(commit)
-bind main y @sh -c 'printf %(commit) | pbcopy'
+bind main y @sh -c 'printf %(commit) | clip copy'
 
 bind generic h scroll-left
 bind generic j move-down
