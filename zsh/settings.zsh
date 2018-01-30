@@ -99,7 +99,13 @@ function p() {
   fi
 }
 
-if is_linux; then
+if is_wsl; then
+  function open() {
+    filepath=$(echo $@ | sed -E 's#/mnt/([a-z])#\1:#' | tr '/' '\\')
+    echo "Running: powershell.exe Start $filepath"
+    powershell.exe "Start $filepath"
+  }
+elif is_linux; then
   function open() {
     xdg-open "$@"
   }
