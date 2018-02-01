@@ -15,7 +15,9 @@ main() {
 }
 
 copy() {
-  if has_command pbcopy; then
+  if is_wsl; then
+    clip.exe
+  elif has_command pbcopy; then
     pbcopy
   elif has_command xclip; then
     xclip -selection clipboard -in
