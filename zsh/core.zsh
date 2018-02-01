@@ -2,6 +2,7 @@ export DOTF=~/.dotfiles
 export DOTL=~/.dotlocal
 
 # OS {{{1
+export IS_WSL=no
 if [ "`uname -s`" = "Darwin" ]; then
   export OS=mac
 else
