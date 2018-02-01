@@ -91,7 +91,6 @@ alias ports='sudo echo && (sudo lsof -i -n -P | fzf --header-lines=1)'
 
 alias ew='whichx $EDITOR'
 alias cw='whichx cat'
-alias o='open'
 
 # Neovim<->Shell Integration {{{1
 alias vo='nvr -o'
