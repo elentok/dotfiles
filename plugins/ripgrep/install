@@ -8,12 +8,16 @@ main() {
   if is_arch; then
     pacman_install ripgrep
   elif is_debian; then
+    PLATFORM='x86_64-unknown-linux-musl'
+    install_ripgrep_tgz
+  elif is_mac; then
+    PLATFORM='x86_64-apple-darwin'
     install_ripgrep_tgz
   fi
 }
 
 install_ripgrep_tgz() {
-  name="ripgrep-$VERSION-x86_64-unknown-linux-musl"
+  name="ripgrep-$VERSION-$PLATFORM"
   url="https://github.com/BurntSushi/ripgrep/releases/download/$VERSION/$name.tar.gz"
 
 
