@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#
+# Cross-platform "opener" (xdg-open/open/start)
+# Usage:
+#
+#   o <file-or-directory>
+#
+
+source $DOTF/zsh/core.zsh
+
+if is_wsl; then
+  filepath=$(echo $@ | sed -E 's#/mnt/([a-z])#\1:#' | tr '/' '\\')
+  echo "Running: powershell.exe Start $filepath"
+  powershell.exe "Start $filepath"
+elif is_linux; then
+  xdg-open "$@"
+elif is_mac; then
+  open "$@"
+else
+  echo 'ERROR: no idea how to open this file (not linux, mac or wsl)'
+  exit 1
+fi
