@@ -461,7 +461,7 @@ git_clone() {
     backup $target
   fi
 
-  git clone $*
+  git clone "$1" "$2"
 }
 
 git_get_origin() {
