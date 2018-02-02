@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+
+VERSION=3.4.1
+
+main() {
+  header 'ffmpeg'
+
+  if is_arch; then
+    pacman_install ffmpeg
+  elif is_mac; then
+    brew_install ffmpeg
+  else
+  # elif command_missing ffmpeg; then
+    install_ffmpeg_binaries
+  fi
+}
+
+install_ffmpeg_binaries() {
+  local name="ffmpeg-$VERSION"
+  local filename="ffmpeg-$VERSION-64bit-static.tar.xz"
+  url="https://johnvansickle.com/ffmpeg/releases/$filename"
+
+  curl -L "$url" -o $TMP/$filename
+
+  install_dir=$HOME/.apps/ffmpeg/$VERSION
+  mkdir -p $install_dir
+  cd $install_dir
+
+  tar --strip-components=1 -xf $TMP/$filename
+  symlink $install_dir/ffmpeg $HOME/bin/ffmpeg
+}
+
+main "$@"
