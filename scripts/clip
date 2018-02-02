@@ -6,6 +6,8 @@
 #   clip paste
 #
 
+source $DOTF/zsh/core.zsh
+
 main() {
   case "$1" in
     c|copy) copy;;
