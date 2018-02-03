@@ -257,7 +257,7 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 
 " Plugin: mhinz/vim-grepper {{{1
 let g:grepper = {
-  \ 'tools':  ['ag'],
+  \ 'tools':  ['rg'],
   \ 'open':   1,
   \ 'switch': 0,
   \ 'jump':   1
