@@ -21,6 +21,16 @@ is_linux() {
 is_wsl() {
   [ "$IS_WSL" = "yes" ]
 }
+
+# Shell {{{1
+function is_zsh() {
+  [ -n "$(ps -p $$ | grep zsh)" ]
+}
+
+function is_bash() {
+  [ -n "$(ps -p $$ | grep bash)" ]
+}
+
 # Helper functions {{{1
 source_if_exists() {
   if [ -e "$1" ]; then source $1; fi
