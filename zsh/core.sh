@@ -256,4 +256,8 @@ if [ -e "$DOTL/zsh/core.zsh" ]; then
   source "$DOTL/zsh/core.zsh"
 fi
 
+if [ -e "$DOTL/zsh/core.sh" ]; then
+  source "$DOTL/zsh/core.sh"
+fi
+
 # vim: foldmethod=marker

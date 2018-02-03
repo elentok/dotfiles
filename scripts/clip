@@ -6,7 +6,7 @@
 #   clip paste
 #
 
-source $DOTF/zsh/core.zsh
+source $DOTF/zsh/core.sh
 
 main() {
   case "$1" in

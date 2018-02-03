@@ -5,10 +5,10 @@ if [ -e ~/.profiling ]; then
   source $DOTF/zsh/profiling.zsh
 fi
 
-source $DOTF/zsh/core.zsh
+source $DOTF/zsh/core.sh
 source_if_exists ~/.dotlocal/zsh/before.zsh
 source $DOTF/zsh/zsh.zsh
-source $DOTF/zsh/settings.zsh
+source $DOTF/zsh/settings.sh
 source $DOTF/zsh/widgets.zsh
 source $DOTF/zsh/aliases.zsh
 source $DOTF/zsh/completion.zsh

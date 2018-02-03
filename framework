@@ -8,7 +8,7 @@ set -euo pipefail
 DOTF=`dirname ${BASH_SOURCE[0]-$0}`
 export DOTF=`cd $DOTF && pwd`
 
-source $DOTF/zsh/core.zsh
+source $DOTF/zsh/core.sh
 
 
 # Machine varibles {{{1

@@ -3,7 +3,7 @@
 (
   echo "======================================"
 
-  source $HOME/.dotfiles/zsh/core.zsh
+  source $HOME/.dotfiles/zsh/core.sh
 
   # Setup X11 keyboard
   xkeyboard
