@@ -86,7 +86,8 @@ fi
 # FZF {{{1
 
 # make FZF respect .gitignore
-export FZF_DEFAULT_COMMAND='ag -g ""'
+# export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
 
 # https://github.com/junegunn/fzf/issues/809
 [ -n "${NVIM_LISTEN_ADDRESS:-}" ] && export FZF_DEFAULT_OPTS='--no-height'
