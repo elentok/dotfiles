@@ -12,7 +12,7 @@ command! Efeatures  edit ~/.dotfiles/nvim/features.vim
 command! Eterminal  edit ~/.dotfiles/nvim/terminal.vim
 command! Esettings  edit ~/.dotfiles/nvim/settings.vim
 command! Eabbr      edit ~/.dotfiles/nvim/abbr.vim
-command! Ealiases   edit ~/.dotfiles/zsh/aliases.zsh
+command! Ealiases   edit ~/.dotfiles/zsh/aliases.sh
 
 command! -nargs=+ Ewhich     exec "edit " . system("which <args>")
 
