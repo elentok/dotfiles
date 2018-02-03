@@ -6,7 +6,7 @@
 #   o <file-or-directory>
 #
 
-source $DOTF/zsh/core.zsh
+source $DOTF/zsh/core.sh
 
 if is_wsl; then
   filepath=$(echo $@ | sed -E 's#/mnt/([a-z])#\1:#' | tr '/' '\\')

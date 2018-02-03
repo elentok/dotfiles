@@ -1,2 +1,2 @@
-source ~/.dotfiles/zsh/core.zsh
-source ~/.dotfiles/zsh/settings.zsh
+source ~/.dotfiles/zsh/core.sh
+source ~/.dotfiles/zsh/settings.sh
