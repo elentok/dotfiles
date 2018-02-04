@@ -33,6 +33,7 @@ bindsym $mod+q exec dotcalc
 
 # Keys: Screenshot {{{2
 bindsym $mod+p exec xfce4-screenshooter
+bindsym $mod+shift+p exec gpick --pick --single
 bindsym Print exec xfce4-screenshooter
 bindsym $mod+shift+s exec xfce4-screenshooter -r -c
 
@@ -170,6 +171,7 @@ bar {
 for_window [class="Cerebro"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Gimp"] floating enable
+for_window [class="Gpick"] floating enable
 for_window [class="feh"] floating enable
 for_window [class="Qalculate-gtk"] floating enable
 for_window [class="Qalculate"] floating enable
