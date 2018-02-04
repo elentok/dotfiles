@@ -13,6 +13,7 @@ source $DOTF/zsh/widgets.zsh
 source $DOTF/zsh/aliases.sh
 source $DOTF/zsh/completion.zsh
 source $DOTF/zsh/keybindings.zsh
+source $DOTF/zsh/fzf-git.sh	
 source $DOTF/zsh/vendor/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $DOTF/zsh/prompt.zsh
 if [ -e ~/.fzf.zsh ]; then
