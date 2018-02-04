@@ -1,6 +1,7 @@
 source ~/.dotfiles/zsh/core.sh
 source ~/.dotfiles/zsh/settings.sh
 source ~/.dotfiles/zsh/aliases.sh
+source ~/.dotfiles/zsh/fzf-git.sh	
 source ~/.dotfiles/plugins/bash/prompt.sh
 if [ -e ~/.fzf.bash ]; then
   source ~/.fzf.bash
