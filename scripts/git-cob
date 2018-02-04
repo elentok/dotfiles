@@ -12,7 +12,7 @@ def main
 
   branches = [].concat(local_branches).concat(remote_only_branches).join("\n")
 
-  branch = `echo "#{branches}" | fzf`.strip
+  branch = `echo "#{branches}" | fzf --preview 'git log {1} | head -50'`.strip
 
   return unless branch.length > 0
 
