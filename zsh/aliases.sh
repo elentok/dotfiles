@@ -69,6 +69,7 @@ alias qless='less --chop-long-lines --RAW-CONTROL-CHARS --quit-if-one-screen --n
 alias rbr='rbenv rehash'
 alias rrr='bin/rake tmp:clear; bin/rake assets:clean'
 alias rv='ruby --version'
+alias rg='rg $(cat $RIPGREP_CONFIG_PATH | tr "\n" " ")'
 alias ssh='TERM=$SSH_TERM ssh'
 alias summ='awk "{ s+=\$1 } END { print s }"'
 alias sub='subliminal download -l en -s'

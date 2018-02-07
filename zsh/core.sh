@@ -239,6 +239,7 @@ export LC_CTYPE=en_US.UTF-8
 # MISC {{{1
 export SSH_TERM=xterm-color
 export LESS="--RAW-CONTROL-CHARS"
+export RIPGREP_CONFIG_PATH="$DOTF/plugins/ripgrep/ripgreprc"
 
 if is_mac; then
   export JAVA_HOME="$(/usr/libexec/java_home 2> /dev/null)"
