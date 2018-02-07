@@ -92,8 +92,8 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+1 workspace 1: main
 bindsym $mod+2 workspace 2: www
 bindsym $mod+3 workspace 3: chat
-bindsym $mod+4 workspace 4: gimp
-bindsym $mod+5 workspace 5
+bindsym $mod+4 workspace 4: personal
+bindsym $mod+5 workspace 5: gimp
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
@@ -105,8 +105,8 @@ bindsym $mod+grave workspace back_and_forth
 bindsym $mod+Shift+exclam move workspace 1: main
 bindsym $mod+Shift+at move workspace 2: www
 bindsym $mod+Shift+numbersign move workspace 3: chat
-bindsym $mod+Shift+dollar move workspace 4: gimp
-bindsym $mod+Shift+percent move workspace 5
+bindsym $mod+Shift+dollar move workspace 4: personal
+bindsym $mod+Shift+percent move workspace 5: gimp
 bindsym $mod+Shift+asciicircum move workspace 6
 bindsym $mod+Shift+ampersand move workspace 7
 bindsym $mod+Shift+asterisk move workspace 8
@@ -186,7 +186,7 @@ for_window [class="Xfce4-appfinder"] floating enable
 for_window [class="Lightdm-gtk-greeter-settings"] floating enable
 
 # Default workspaces {{{2
-assign [class="Gimp"] 4: gimp
+assign [class="Gimp"] 5: gimp
 assign [class="Telegram"] 3: chat
 
 # Run on startup {{{1
