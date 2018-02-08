@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+
+branch=$(git my-branch)
+
+echo -e "${BLUE}➜ Switching to develop branch...$RESET"
+git checkout develop
+echo
+
+echo -e "${BLUE}➜ Pulling develop branch...$RESET"
+git pull
+echo
+
+echo -e "${BLUE}➜ Switching back to ${branch} branch...$RESET"
+git checkout $branch
+echo
+
+success 'DONE'
+
