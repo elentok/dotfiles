@@ -107,3 +107,9 @@ if [ -e "$gcloud_path" ]; then
   # The next line enables shell command completion for gcloud.
   source "$gcloud_path/completion.zsh.inc"
 fi
+
+# LS_COLORS {{{1
+
+# Make sure the 'other writeable' group is visible
+# (for directories under WSL)
+export LS_COLORS="$(echo $LS_COLORS | sed 's/ow=34;42/ow=30;42/')"
