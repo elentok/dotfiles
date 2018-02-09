@@ -1,3 +1,5 @@
+# vim: filetype=sh
+
 source ~/.dotfiles/zsh/core.sh
 source ~/.dotfiles/zsh/settings.sh
 source ~/.dotfiles/zsh/aliases.sh
@@ -6,3 +8,6 @@ source ~/.dotfiles/plugins/bash/prompt.sh
 if [ -e ~/.fzf.bash ]; then
   source ~/.fzf.bash
 fi
+
+# Enable ** glob
+shopt -s globstar
