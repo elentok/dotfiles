@@ -1,2 +1,5 @@
---type-add haml:*.haml
---type-add coffee:*.coffee
+--smart-case
+--type-add
+haml:*.haml
+--type-add
+coffee:*.coffee
