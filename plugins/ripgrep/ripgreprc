@@ -1,1 +1,2 @@
 --type-add haml:*.haml
+--type-add coffee:*.coffee
