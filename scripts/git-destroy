@@ -1,10 +1,10 @@
 #!/bin/zsh
 #
-# Deletes branch from local and origin
+# Deletes branch from local and remote
 #
 # Usage:
 #
-#   git destroy <branch-name> [origin]
+#   git destroy <branch-name>
 
 source $DOTF/framework
 
@@ -14,13 +14,23 @@ main() {
   if [[ "$1" == "" ]]; then
     usage "$SOURCE"
   else
-    destroy_branch "$1" "$2"
+    destroy_branch "$1"
+  fi
+}
+
+find_remote() {
+  local branch="$1"
+  local full_name=$(git branch --remote | sed 's/^ *//' | grep -E "^[^\/]+/${branch}$")
+  if [ -z "$full_name" ]; then
+    return 1
+  else
+    echo "$full_name" | cut -d/ -f1
   fi
 }
 
 destroy_branch() {
   name="$1"
-  origin="${2:-origin}"
+  remote="$(find_remote $1)"
   if branch_exists "$name"; then
     destroy_local_branch "$name"
   else
@@ -28,7 +38,7 @@ destroy_branch() {
   fi
 
   if remote_branch_exists "$name"; then
-    destroy_remote_branch "$name" "$origin"
+    destroy_remote_branch "$name" "$remote"
   else
     echo "Remote branch '$name' doesn't exist"
   fi
@@ -59,10 +69,10 @@ destroy_local_branch() {
 
 destroy_remote_branch() {
   local branch="$1"
-  local origin="$2"
+  local remote="$2"
   if confirm "Destroy remote branch '$branch'"; then
     bullet "Destroying..."
-    git push --delete "$origin" "$branch"
+    git push --delete "$remote" "$branch"
     if [[ $? -ne 0 ]]; then
       error "An error occured"
       exit 1
