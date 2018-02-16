@@ -1,0 +1,83 @@
+#!/usr/bin/env node
+
+const path = require('path')
+const fs = require('fs')
+
+function main() {
+  const months = parseExpenses()
+  analyze(months).forEach(m => {
+    console.info(`${m.month} ${m.cost}nis (#${m.count}, avg: ${m.average})`)
+    Object.keys(m.byTags).forEach(tag => {
+      const stat = m.byTags[tag]
+      const percent = (stat.cost / m.cost * 100).toFixed(0)
+      console.info(`  - ${percent}%\t${stat.cost}nis\t#${stat.count}\t${tag}`)
+    })
+  })
+}
+
+function analyze(months) {
+  return Object.keys(months).map(month => {
+    const expenses = months[month]
+    const cost = sum(expenses.map(e => e.cost))
+    const average = (cost / expenses.length).toFixed(0)
+
+    const byTags = analyzeByTags(expenses)
+
+    return { month, cost, count: expenses.length, average, byTags }
+  })
+}
+
+function analyzeByTags(expenses) {
+  const stats = {}
+
+  expenses.forEach(expense => {
+    expense.tags.forEach(tag => {
+      if (stats[tag] == null) stats[tag] = { count: 0, cost: 0 }
+      stats[tag].count++
+      stats[tag].cost += expense.cost
+    })
+  })
+
+  return stats
+}
+
+function sum(array) {
+  let sum = 0
+  for (let i=0; i<array.length; i++) {
+    sum += array[i]
+  }
+  return sum
+}
+
+function parseExpenses() {
+  const months = {}
+
+  fs
+    .readFileSync(path.join(process.env.HOME, 'notes', 'expenses.csv'))
+    .toString()
+    .split('\n')
+    .forEach(line => {
+      if (line.match(/^#/) || line.match(/^\s*$/)) return
+
+      const expense = parseExpense(line)
+      const month = expense.date.substring(0, 7)
+      if (months[month] == null) months[month] = []
+      months[month].push(expense)
+    })
+
+  return months
+}
+
+function parseExpense(line) {
+  const [date, cost, store, description] = line.split(',')
+
+  let tags = []
+  const tagMatch = description.match(/\[([^\]]+)\]/)
+  if (tagMatch) {
+    tags = tagMatch[1].split(',')
+  }
+
+  return { date, cost: parseInt(cost, 10), store, description, tags }
+}
+
+main()
