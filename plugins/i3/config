@@ -182,6 +182,7 @@ for_window [title=".* KeePass Password Safe"] floating enable
 for_window [title="Unlock Login .*"] floating enable
 for_window [title="Edit Entry"] floating enable
 for_window [class="keepassxc"] floating enable
+for_window [class="KeePass2"] floating enable
 for_window [class="Xfce4-appfinder"] floating enable
 for_window [class="Lightdm-gtk-greeter-settings"] floating enable
 
