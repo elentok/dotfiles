@@ -1,10 +1,11 @@
 body {
   background-color: black;
   color: white;
-  font-family: 'Pompiere';
+  font-family: 'Kreon', serif;
 }
 
 .time {
+  margin-top: 40px;
   font-size: 200px;
   text-align: center;
 }
@@ -12,4 +13,24 @@ body {
 .date {
   font-size: 120px;
   text-align: center;
+}
+
+.calendar {
+  font-size: 30px;
+}
+
+.calendar table {
+  margin: auto;
+  margin-top: 50px;
+}
+
+.calendar td,
+.calendar th {
+  text-align: center;
+  padding: 5px;
+}
+
+.calendar td.is-today {
+  color: red;
+  font-weight: bold;
 }
