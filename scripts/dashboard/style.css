@@ -30,6 +30,13 @@ body {
   padding: 5px;
 }
 
+.calendar td:nth-child(6),
+.calendar td:nth-child(7),
+.calendar th:nth-child(6),
+.calendar th:nth-child(7) {
+  opacity: 0.5;
+}
+
 .calendar td.is-today {
   color: red;
   font-weight: bold;
