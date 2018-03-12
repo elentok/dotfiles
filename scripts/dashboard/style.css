@@ -1,0 +1,15 @@
+body {
+  background-color: black;
+  color: white;
+  font-family: 'Pompiere';
+}
+
+.time {
+  font-size: 200px;
+  text-align: center;
+}
+
+.date {
+  font-size: 120px;
+  text-align: center;
+}
