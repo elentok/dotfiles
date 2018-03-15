@@ -59,8 +59,6 @@ install_gnu_utils() {
   brew_install findutils --with-default-names
   brew_install fasd
   brew_install gnu-sed
-
-  brew_tap homebrew/dupes
   brew_install grep --with-default-names
 }
 
