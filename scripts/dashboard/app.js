@@ -16,6 +16,17 @@ function update() {
   ui.time.innerText = moment().format('HH:mm')
   ui.date.innerText = moment().format('dddd, MMMM DD')
   renderCalendar()
+  updateNightMode()
+}
+
+function updateNightMode() {
+  const hour = moment().hour()
+  const isNight = hour > 22 || hour < 6
+  if (isNight) {
+    document.body.classList.add('is-night')
+  } else {
+    document.body.classList.remove('is-night')
+  }
 }
 
 function renderCalendar() {

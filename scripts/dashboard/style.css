@@ -4,6 +4,10 @@ body {
   font-family: 'Kreon', serif;
 }
 
+body.is-night {
+  color: #999;
+}
+
 .time {
   margin-top: 40px;
   font-size: 200px;
