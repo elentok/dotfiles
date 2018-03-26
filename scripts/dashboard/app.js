@@ -8,13 +8,14 @@ var ui = {
 }
 
 function initialize() {
-  setTimeout(update, 200)
-  renderCalendar()
+  setInterval(update, 1000)
+  update()
 }
 
 function update() {
   ui.time.innerText = moment().format('HH:mm')
   ui.date.innerText = moment().format('dddd, MMMM DD')
+  renderCalendar()
 }
 
 function renderCalendar() {
