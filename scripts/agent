@@ -137,7 +137,7 @@ is-local-agent-running() {
   fi
 
   local pid="$(cat $LOCAL_AGENT_PIDFILE)"
-  [ -n "$pid" ] && kill -0 "$pid" > /dev/null
+  [ -n "$pid" ] && kill -0 "$pid" > /dev/null 2>&1
 }
 
 stop-local-agent() {
