@@ -48,6 +48,7 @@ Plug 'xolox/vim-misc'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets' " snippets for ultisnips
 Plug 'rakr/vim-one'
+Plug 'ludovicchabant/vim-gutentags'
 
 Plug 'ryanoasis/vim-devicons'
 
