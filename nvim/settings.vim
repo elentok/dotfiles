@@ -163,6 +163,7 @@ set statusline+=%< " Where to truncate line
 set statusline+=%{&modified?'\ +':''}
 set statusline+=%{&readonly?'\ ':''}
 set statusline+=%= " Separation point between left and right aligned items
+set statusline+=%{gutentags#statusline()}
 set statusline+=\ [%{''!=#&filetype?&filetype:'none'}]
 set statusline+=\ %l:%v " Line number + column number
 
@@ -266,6 +267,9 @@ let g:grepper = {
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
 
+" Plugin: ludovicchabant/vim-gutentags {{{1
+let g:gutentags_ctags_exclude = [
+  \ 'node_modules', 'bower_components', 'logs', 'tmp', 'public', 'vendor' ]
 
 " Temp (stuff I'm not sure about) {{{1
 let loaded_matchparen=1 " do not show highlight matching parenthesis automatically
