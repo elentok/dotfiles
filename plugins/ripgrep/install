@@ -2,7 +2,7 @@
 
 source $DOTF/framework
 
-VERSION='0.8.0'
+VERSION='0.8.1'
 
 main() {
   if is_arch; then
