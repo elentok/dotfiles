@@ -5,6 +5,28 @@ source $DOTF/framework
 VERSION='0.8.1'
 
 main() {
+  header 'Ripgrep'
+
+  bullet 'Installing ripgrep...'
+  if is_ripgrep_installed; then
+    info 'already installed'
+  else
+    install_ripgrep
+  fi
+
+  symlink $DOTF/plugins/ripgrep/rgignore $HOME/.rgignore
+}
+
+is_ripgrep_installed() {
+  if command_missing rg; then
+    return -1
+  fi
+
+  version="$(rg --version | head -1 | awk '{ print $2 }')"
+  [ "$version" == "$VERSION" ]
+}
+
+install_ripgrep() {
   if is_arch; then
     pacman_install ripgrep
   elif is_debian; then
