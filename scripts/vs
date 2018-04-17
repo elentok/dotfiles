@@ -13,6 +13,10 @@
 
 export NVIM_KEEP_ALIVE=true
 
+if [ -z "$DISPLAY" ]; then
+  export DISPLAY=:0
+fi
+
 main() {
   if [ "$1" == "-h" -o "$1" == "--help" ]; then
     usage $0
