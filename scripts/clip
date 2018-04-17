@@ -12,7 +12,7 @@ main() {
   case "$1" in
     c|copy) copy;;
     p|paste) paste;;
-    *) usage "$@"
+    *) usage $DOTF/scripts/clip
   esac
 }
 
