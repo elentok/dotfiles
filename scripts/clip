@@ -31,7 +31,9 @@ copy() {
 }
 
 paste() {
-  if has_command pbpaste; then
+  if is_wsl; then
+    powershell.exe -Command Get-Clipboard
+  elif has_command pbpaste; then
     pbpaste
   elif has_command xclip; then
     xclip -selection clipboard -out
