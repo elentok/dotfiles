@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+
+title() {
+  echo
+  echo -e "$RESET$GREEN$@"
+  echo -e "-------------------------------------------$RESET"
+}
+
+if has_command pip3; then
+  echo "PIP3 version: $(pip3 --version)"
+fi
+
+if has_command pip; then
+  echo "PIP version: $(pip --version)"
+fi
+
+echo
+
+upgrade() {
+  if has_command pip3; then
+    title "Upgrading $1"
+    pip3 install $1 --upgrade --user
+  fi
+
+  if has_command pip; then
+    title "Upgrading $1"
+    pip install $1 --upgrade --user
+  fi
+}
+
+upgrade pip
+upgrade neovim
+upgrade neovim-remote
+upgrade httpie
