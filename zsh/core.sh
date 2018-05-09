@@ -186,12 +186,6 @@ if [ -e /usr/lib/cinnamon-settings-daemon ]; then
   PATH=$PATH:/usr/lib/cinnamon-settings-daemon
 fi
 
-# yarn
-if has_command yarn; then
-  yarn_bin="$(with_cache yarn-global-bin cat yarn global bin)"
-  PATH=$PATH:$yarn_bin
-fi
-
 if is_termux; then
   PATH=$PATH:/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets
 fi
