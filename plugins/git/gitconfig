@@ -28,10 +28,10 @@
   b = branch
   bd = branch -d
   bv = branch -vv
-  ci = commit
-  cm = commit -e -m
+  c = commit
+  cm = commit -m
   cp = cherry-pick
-  cia = commit --amend
+  ca = commit --amend
   cb = checkout -b
   co = checkout
   d = diff
