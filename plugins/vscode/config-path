@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
 
-for dir in "$HOME/.config/Code" "$HOME/Library/Application Support/Code"; do
+source $DOTF/framework
+
+if is_wsl; then
+  win_home="$(wsl-path2mnt $(wsl-get-env UserProfile))"
+  dirs=("$win_home/AppData/Roaming/Code")
+else
+  dirs=("$HOME/.config/Code" "$HOME/Library/Application Support/Code")
+fi
+
+for dir in ${dirs[@]}; do
   if [ -d "$dir" ]; then
     echo "$dir"
     exit 0

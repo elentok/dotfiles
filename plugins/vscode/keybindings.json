@@ -1,3 +1,7 @@
 // Place your key bindings in this file to overwrite the defaults
 [
+    {
+        "key": "ctrl+shift+`",
+        "command": "workbench.action.terminal.focusNext"
+    }
 ]

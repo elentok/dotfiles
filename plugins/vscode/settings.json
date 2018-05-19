@@ -1,13 +1,28 @@
 {
     "window.zoomLevel": 1,
-    "editor.fontFamily": "'mononoki Nerd Font Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
-    "terminal.integrated.enableBold": false,
     "terminal.integrated.lineHeight": 1.1,
-
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2,
+    "editor.rulers": [
+        80,
+        100
+    ],
     "vim.insertModeKeyBindings": [
         {
-            "before": ["j", "k"],
-            "after": ["<Esc>"]
+            "before": [
+                "j",
+                "k"
+            ],
+            "after": [
+                "<Esc>"
+            ]
         }
-    ]
+    ],
+    "terminal.integrated.shell.windows": "C:\\Windows\\System32\\bash.exe",
+    "cSpell.userWords": [
+        "Ribcage"
+    ],
+    "[markdown]": {
+        "editor.quickSuggestions": true
+    }
 }
