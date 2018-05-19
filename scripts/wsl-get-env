@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+cmd.exe /c "<nul set /p=%$1%" 2> /dev/null

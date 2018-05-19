@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+win_path=$1
+
+win_drive="${win_path%%:*}:"
+win_dir="${win_path#*:}"
+
+mnt_root="$(findmnt --noheadings --first-only --output TARGET "$win_drive")"
+mnt_path="${mnt_root}${win_dir//\\//}"
+
+echo "$mnt_path"
