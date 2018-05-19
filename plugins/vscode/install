@@ -3,7 +3,7 @@
 source $DOTF/framework
 
 ROOT=$DOTF/plugins/vscode
-CODE_CONFIG="$($DOTF/plugins/vscode/config-path)"
+CODE_CONFIG="$(vscode-config-path)"
 
 cp -vf "$ROOT/settings.json" "$CODE_CONFIG/User/settings.json"
 cp -vf "$ROOT/keybindings.json" "$CODE_CONFIG/User/keybindings.json"
