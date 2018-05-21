@@ -36,7 +36,7 @@ store_variable() {
 }
 
 escape_variable() {
-  echo -n "$value" | sed "s/'/\\\\'/g"
+  echo -n "$1" | sed 's/''/\\''/g'
 }
 
 
