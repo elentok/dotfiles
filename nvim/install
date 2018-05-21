@@ -42,7 +42,7 @@ install_neovim() {
     install_neovim_mac
   else
     if command_missing nvim; then
-      $DOTF/nvim/build
+      PRIMARY=yes $DOTF/nvim/build
     fi
   fi
 }

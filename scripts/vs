@@ -34,7 +34,12 @@ main() {
     exit 3
   fi
 
-  ABDUCO_SESSION="$session" abduco -A "$session" bash -c nvim
+  local command='nvim'
+  if [ "$session" == 'master' ]; then
+    command='nvim-master'
+  fi
+
+  ABDUCO_SESSION="$session" abduco -A "$session" bash -c $command
 }
 
 get-session-name() {
