@@ -14,6 +14,8 @@ main() {
 
   install_package compton
 
+  disable_dunst_ctrl_grave
+
   # sudo_copy "$I3/cinnamon/cinnamon-i3" "/usr/bin/cinnamon-i3"
   # sudo_copy "$I3/cinnamon/cinnamon-i3-session" "/usr/bin/cinnamon-i3-session"
   # sudo_copy "$I3/cinnamon/i3.session" "/usr/share/cinnamon-session/sessions/i3.session"
@@ -69,6 +71,14 @@ install_utils() {
       light-locker gksu lightdm-gtk-greeter-settings \
       xfce4 xfce4-screenshooter ristretto xfce4-clipman
   fi
+}
+
+disable_dunst_ctrl_grave() {
+  if [ -e ~/.config/dunst/dunstrc ]; then return; fi
+
+  mkdir -p ~/.config/dunst
+
+  cat /etc/xdg/dunst/dunstrc | sed 's/history = ctrl+grave/# &/' > ~/.config/dunst/dunstrc
 }
 
 main "$@"
