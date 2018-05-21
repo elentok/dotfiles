@@ -11,6 +11,7 @@ let mapleader = ','
 behave mswin
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set textwidth=80
+set clipboard=unnamedplus
 set colorcolumn=+0
 set completeopt=menuone,noinsert,noselect
 set expandtab
