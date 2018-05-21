@@ -505,7 +505,8 @@ apt_install_single() {
 rm -f /tmp/apt_cache || sudo rm -f /tmp/apt_cache
 
 has_apt_package() {
-  apt_cache | grep -E "^$1(:amd64)?$" > /dev/null
+  local name="$(echo "$1" | sed 's/+/\\+/g')"
+  apt_cache | grep -E "^$name(:amd64)?$" > /dev/null
 }
 
 apt_cache() {
