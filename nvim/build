@@ -25,4 +25,8 @@ make install \
   CMAKE_EXTRA_FLAGS=-DCMAKE_INSTALL_PREFIX=$INSTALL_DIR \
   CMAKE_BUILD_TYPE=RelWithDebInfo
 
-symlink $INSTALL_DIR/bin/nvim $HOME/bin/nvim
+symlink $INSTALL_DIR/bin/nvim $HOME/bin/nvim-$VERSION
+
+if [ "${PRIMARY:-}" == 'yes' ]; then
+  symlink $INSTALL_DIR/bin/nvim $HOME/bin/nvim
+fi
