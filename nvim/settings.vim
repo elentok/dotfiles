@@ -164,7 +164,7 @@ set statusline+=%< " Where to truncate line
 set statusline+=%{&modified?'\ +':''}
 set statusline+=%{&readonly?'\ ':''}
 set statusline+=%= " Separation point between left and right aligned items
-set statusline+=%{gutentags#statusline()}
+" set statusline+=%{gutentags#statusline()}
 set statusline+=\ [%{''!=#&filetype?&filetype:'none'}]
 set statusline+=\ %l:%v " Line number + column number
 
