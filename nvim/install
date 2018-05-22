@@ -137,7 +137,7 @@ install_cli_tools() {
   npm_install prettier
   npm_install jsonlint
   npm_install sass-lint
-  npm_install tern
+  npm_install javascript-typescript-langserver
   pip_install pylint
   pip_install yamllint
 
