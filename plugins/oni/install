@@ -2,5 +2,7 @@
 
 source $DOTF/framework
 
-symlink "$DOTF/plugins/oni" ~/.oni
+symlink "$DOTF/plugins/oni" ~/.config/oni
 
+npm_install typescript
+npm_install ts-server
