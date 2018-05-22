@@ -35,7 +35,6 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTree', 'NERDTreeToggle', 'NERDTreeFocus', 'NERDTreeFind'] }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTree', 'NERDTreeToggle', 'NERDTreeFocus', 'NERDTreeFind']}
 Plug 'Quramy/tsuquyomi'
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-dispatch'
@@ -86,8 +85,11 @@ if has('nvim')
   " Plug 'roxma/nvim-cm-tern'
   " Plug 'roxma/ncm-rct-complete'
 
+  Plug 'autozimu/LanguageClient-neovim', {
+      \ 'branch': 'next',
+      \ 'do': 'bash install.sh',
+      \ }
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
   Plug 'Shougo/neco-vim'
 else
   Plug 'scrooloose/syntastic'
