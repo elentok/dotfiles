@@ -47,7 +47,9 @@ set wildmenu
 set wildmode=list:longest,full
 set winwidth=84                " makes sure the active window will always be at least 80 characters
 
-set titlestring=0\ %t%(\ %M%)%(\ (%{expand(\ " %:~:.:h\")})%)%(\ %a%)
+if !exists('g:gui_oni')
+  set titlestring=0\ %t%(\ %M%)%(\ (%{expand(\ " %:~:.:h\")})%)%(\ %a%)
+end
 
 if exists('+breakindent')
   set breakindent                " https://retracile.net/wiki/VimBreakIndent
@@ -62,8 +64,10 @@ if has('cryptv')
   set cryptmethod=blowfish
 endif
 
-
-if executable("ag")
+if executable("rg")
+  set grepprg=rg\ --vimgrep\ --no-heading
+  set grepformat=%f:%l:%c:%m,%f:%l:%m
+elseif executable("ag")
   set grepprg=ag\ --nogroup\ --nocolor
 endif
 
@@ -79,15 +83,17 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-let g:one_allow_italics = 1
-colorscheme one
-set background=dark
-" call one#highlight('Normal', '', '1a1a1a', '')
-call one#highlight('Folded', '555555', '111111', '')
-call one#highlight('VertSplit', '', '5c6370', 'none')
-hi TabLine gui=none
+if !exists('g:oni_gui')
+  let g:one_allow_italics = 1
+  colorscheme one
+  set background=dark
+  " call one#highlight('Normal', '', '1a1a1a', '')
+  call one#highlight('Folded', '555555', '111111', '')
+  call one#highlight('VertSplit', '', '5c6370', 'none')
+  hi TabLine gui=none
+  let g:elentok_colors_initialized = 1
+endif
 
-let g:elentok_colors_initialized = 1
 
 " Search {{{1
 set incsearch   " incremental search
