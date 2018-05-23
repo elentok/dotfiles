@@ -264,9 +264,6 @@ let g:NERDSpaceDelims = 1
 " Plugin: fatih/vim-go {{{1
 let g:go_fmt_command = "goimports"
 
-" Plugin: SirVer/ultisnips {{{1
-let g:UltiSnipsExpandTrigger="<c-j>"
-
 " Plugin: mhinz/vim-grepper {{{1
 let g:grepper = {
   \ 'tools':  ['rg'],

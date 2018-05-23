@@ -33,6 +33,11 @@ nnoremap <Leader>dj :call Browse("https://github.com/visionmedia/jade#readme")<c
 nnoremap <Leader>dk :e $DOTF/docs/keys.md<cr>
 
 " Window management {{{1
+nnoremap <silent> <c-h> <c-w>h
+nnoremap <silent> <c-j> <c-w>j
+nnoremap <silent> <c-k> <c-w>k
+nnoremap <silent> <c-l> <c-w>l
+
 nnoremap <Leader>l :silent !tput clear<cr>:redraw!<cr>
 nnoremap <Leader><Leader> :silent !tput clear<cr>:redraw!<cr>
 

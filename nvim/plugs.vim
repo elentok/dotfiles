@@ -8,7 +8,6 @@ Plug 'AndrewRadev/sideways.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'airblade/vim-gitgutter'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'elentok/alternate-spec.vim'
 Plug 'elentok/replace-all.vim', { 'on': ['FindAll', 'ReplaceAll'] }
 Plug 'elentok/run.vim'
@@ -22,19 +21,16 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " dark/zen room, no distraction mode
 Plug 'junegunn/vim-easy-align'
-Plug 'leafgarland/typescript-vim'
 Plug 'mhinz/vim-grepper'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'nelstrom/vim-visual-star-search'
-Plug 'ngmy/vim-rubocop'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'sbdchd/neoformat'
 Plug 'schickling/vim-bufonly', { 'on': ['BufOnly', 'Bonly', 'BOnly'] }
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTree', 'NERDTreeToggle', 'NERDTreeFocus', 'NERDTreeFind'] }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTree', 'NERDTreeToggle', 'NERDTreeFocus', 'NERDTreeFind']}
-Plug 'Quramy/tsuquyomi'
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-dispatch'
@@ -44,10 +40,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'xolox/vim-misc'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets' " snippets for ultisnips
 Plug 'rakr/vim-one'
-" Plug 'ludovicchabant/vim-gutentags'
 
 Plug 'ryanoasis/vim-devicons'
 
@@ -75,15 +68,11 @@ Plug 'vim-ruby/vim-ruby',                 { 'for': 'ruby' }
 Plug 'vim-scripts/yaml.vim',              { 'for': 'yaml' } " syntax highlighting
 Plug 'avakhov/vim-yaml',                  { 'for': 'yaml' } " indentation
 Plug 'tpope/vim-haml',                    { 'for': 'haml' }
+Plug 'leafgarland/typescript-vim',        { 'for': 'typescript' }
 
 if has('nvim')
   Plug 'w0rp/ale'
   Plug 'kassio/neoterm'
-
-  " Plug 'roxma/nvim-completion-manager',
-        " \ { 'do': 'pip3 install --user neovim jedi mistune psutil setproctitle' }
-  " Plug 'roxma/nvim-cm-tern'
-  " Plug 'roxma/ncm-rct-complete'
 
   Plug 'autozimu/LanguageClient-neovim', {
       \ 'branch': 'next',
@@ -91,12 +80,6 @@ if has('nvim')
       \ }
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'Shougo/neco-vim'
-else
-  Plug 'scrooloose/syntastic'
-  Plug 'jwhitley/vim-matchit' " embedded in neovim
-  if has('lua')
-    Plug 'Shougo/neocomplete.vim'
-  endif
 endif
 
 if file_readable(expand("~/.dotlocal/plugs.vim"))
