@@ -62,7 +62,6 @@ Plug 'fatih/vim-go',                      { 'for': 'go' }
 Plug 'groenewege/vim-less',               { 'for': 'less' }
 Plug 'pangloss/vim-javascript',           { 'for': 'javascript' }
 Plug 'MaxMEllon/vim-jsx-pretty',          { 'for': 'javascript' }
-Plug 'kristijanhusak/vim-js-file-import', { 'for': 'javascript' }
 Plug 'kchmck/vim-coffee-script',          { 'for': 'coffee' }
 Plug 'vim-ruby/vim-ruby',                 { 'for': 'ruby' }
 Plug 'vim-scripts/yaml.vim',              { 'for': 'yaml' } " syntax highlighting
@@ -74,12 +73,15 @@ if has('nvim')
   Plug 'w0rp/ale'
   Plug 'kassio/neoterm'
 
-  Plug 'autozimu/LanguageClient-neovim', {
-      \ 'branch': 'next',
-      \ 'do': 'bash install.sh',
-      \ }
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'Shougo/neco-vim'
+  if !exists('g:gui_oni')
+    Plug 'kristijanhusak/vim-js-file-import', { 'for': 'javascript' }
+    Plug 'autozimu/LanguageClient-neovim', {
+        \ 'branch': 'next',
+        \ 'do': 'bash install.sh',
+        \ }
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'Shougo/neco-vim'
+  endif
 endif
 
 if file_readable(expand("~/.dotlocal/plugs.vim"))

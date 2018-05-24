@@ -83,7 +83,7 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-if !exists('g:oni_gui')
+if !exists('g:gui_oni')
   let g:one_allow_italics = 1
   colorscheme one
   set background=dark
@@ -281,3 +281,15 @@ let g:gutentags_ctags_exclude = [
 
 " Temp (stuff I'm not sure about) {{{1
 let loaded_matchparen=1 " do not show highlight matching parenthesis automatically
+
+if !exists('$DOTF')
+  let $DOTF = expand('~/.dotfiles')
+endif
+
+if !exists('$RIPGREP_CONFIG_PATH')
+  let $RIPGREP_CONFIG_PATH = $DOTF . '/plugins/ripgrep/ripgreprc'
+endif
+
+if !exists('$FZF_DEFAULT_COMMAND')
+  let $FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+endif
