@@ -305,3 +305,17 @@ tnoremap <m-.> <c-\><c-n>gt
 noremap <m-,> gT
 inoremap <m-,> <c-o>gT
 tnoremap <m-,> <c-\><c-n>gT
+
+" Oni {{{1
+
+if exists('g:gui_oni')
+  nnoremap Y 0vjy
+
+  noremap ≥ gt
+  inoremap ≥ gt
+  tnoremap ≥ <c-\><c-n>gt
+
+  noremap ≤ gT
+  inoremap ≤ <c-o>gT
+  tnoremap ≤ <c-\><c-n>gT
+end

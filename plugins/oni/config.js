@@ -20,11 +20,13 @@ exports.deactivate = function (oni) {
 exports.configuration = {
     //add custom config here, such as
     'ui.colorscheme': 'nord',
-    //"oni.useDefaultConfig": true,
+    // the default configs clash with my own
+    'oni.useDefaultConfig': false,
     //"oni.bookmarks": ["~/Documents"],
-    'editor.fontSize': '16px',
-    'ui.fontSize': '16px',
-    //"editor.fontFamily": "Monaco",
+    'editor.fontSize': '15px',
+    'ui.fontSize': '15px',
+    'editor.fontFamily': 'mononokiNerdFontCM-Regular',
+    'editor.renderer': 'webgl',
     // UI customizations
     // "ui.animations.enabled": true,
     // "ui.fontSmoothing": "auto",
