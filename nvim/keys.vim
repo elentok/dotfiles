@@ -310,12 +310,4 @@ tnoremap <m-,> <c-\><c-n>gT
 
 if exists('g:gui_oni')
   nnoremap Y 0vjy
-
-  noremap ≥ gt
-  inoremap ≥ gt
-  tnoremap ≥ <c-\><c-n>gt
-
-  noremap ≤ gT
-  inoremap ≤ <c-o>gT
-  tnoremap ≤ <c-\><c-n>gT
 end
