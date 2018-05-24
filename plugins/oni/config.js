@@ -9,6 +9,7 @@ exports.activate = function (oni) {
     // Add input bindings here:
     //
     oni.input.bind('<c-enter>', function () { return console.log('Control+Enter was pressed'); });
+    oni.input.bind(['<enter>', '<tab>'], 'contextMenu.select');
     //
     // Or remove the default bindings here by uncommenting the below line:
     //
