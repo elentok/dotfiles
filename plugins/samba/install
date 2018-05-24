@@ -19,8 +19,8 @@ main() {
       sudo cp /etc/samba/smb.conf{.default,}
       show_result die_on_error
     fi
-    systemctl enable smbd.service
-    systemctl enable nmbd.service
+    systemctl enable smb.service
+    systemctl enable nmb.service
   else
     apt_install samba
   fi
