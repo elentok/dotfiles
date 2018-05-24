@@ -1,28 +1,35 @@
 {
-    "window.zoomLevel": 1,
-    "terminal.integrated.lineHeight": 1.1,
-    "editor.formatOnSave": true,
-    "editor.tabSize": 2,
-    "editor.rulers": [
-        80,
-        100
-    ],
-    "vim.insertModeKeyBindings": [
-        {
-            "before": [
-                "j",
-                "k"
-            ],
-            "after": [
-                "<Esc>"
-            ]
-        }
-    ],
-    "terminal.integrated.shell.windows": "C:\\Windows\\System32\\bash.exe",
-    "cSpell.userWords": [
-        "Ribcage"
-    ],
-    "[markdown]": {
-        "editor.quickSuggestions": true
+  "window.zoomLevel": 1,
+  "editor.fontFamily":
+    "'mononoki Nerd Font Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+  "editor.minimap.enabled": false,
+  "terminal.integrated.lineHeight": 1.1,
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.rulers": [80, 100],
+
+  "cSpell.userWords": ["elentok"],
+
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "k"],
+      "after": ["<Esc>"]
     }
+  ],
+  "sync.gist": "d343aab8ec48a9f77c6f75a7275a2f6a",
+  "sync.host": "",
+  "sync.pathPrefix": "",
+  "sync.quietSync": false,
+  "sync.askGistName": false,
+  "sync.removeExtensions": true,
+  "sync.syncExtensions": true,
+  "sync.autoDownload": false,
+  "sync.autoUpload": false,
+  "sync.lastUpload": "2018-05-24T06:19:03.494Z",
+  "sync.lastDownload": "2018-05-23T07:05:01.027Z",
+  "sync.forceDownload": false,
+  "gitlens.advanced.messages": {
+    "suppressShowKeyBindingsNotice": true
+  },
+  "gitlens.historyExplorer.enabled": true
 }

@@ -9,7 +9,7 @@ else
   dirs=("$HOME/.config/Code" "$HOME/Library/Application Support/Code")
 fi
 
-for dir in ${dirs[@]}; do
+for dir in "${dirs[@]}"; do
   if [ -d "$dir" ]; then
     echo "$dir"
     exit 0
