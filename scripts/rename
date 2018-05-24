@@ -17,7 +17,7 @@ class CLI < OptionsCLI
     if matches.empty?
       puts 'No matches'
     else
-      matches.each(&:print)
+      matches.each{ |m| m.print('   ') }
       puts
       rename! if options[:yes] || confirm?('Rename?')
     end
