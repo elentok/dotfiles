@@ -1,4 +1,4 @@
-if ($host.Name -eq 'ConsoleHost') {
+if (($host.Name -eq 'ConsoleHost') -Or ($host.Name -eq 'Visual Studio Code Host')) {
   Import-Module PSReadLine
   Set-PSReadlineOption -EditMode Vi
 
