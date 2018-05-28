@@ -3,7 +3,7 @@ if (!(Get-Command choco -errorAction SilentlyContinue)) {
 }
 
 choco install -y nodejs googlechrome 7zip git vscode keepass telegram doublecmd libreoffice vlc `
-  irfanview irfanviewplugins Everything
+  irfanview irfanviewplugins Everything f.lux
 
 Write-Output 'Setting up git'
 $gitconfig = Join-Path $DOTF 'plugins/git/gitconfig'
