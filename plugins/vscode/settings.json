@@ -11,7 +11,9 @@
     100
   ],
   "cSpell.userWords": [
-    "elentok"
+    "elentok",
+    "noopener",
+    "noreferrer"
   ],
   "vim.insertModeKeyBindings": [
     {
