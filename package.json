@@ -39,6 +39,7 @@
     "qs": "^6.5.1",
     "shelljs": "^0.7.4",
     "ts-node": "^6.0.5",
+    "tslint": "^5.10.0",
     "typescript": "^2.8.3",
     "uglify-es": "^3.1.6",
     "uglify-js": "^3.1.6",
