@@ -47,5 +47,6 @@
     "suppressShowKeyBindingsNotice": true
   },
   "gitlens.historyExplorer.enabled": true,
-  "git.autofetch": true
+  "git.autofetch": true,
+  "vim.useSystemClipboard": true
 }
