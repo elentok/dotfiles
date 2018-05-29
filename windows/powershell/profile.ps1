@@ -9,4 +9,6 @@ if (($host.Name -eq 'ConsoleHost') -Or ($host.Name -eq 'Visual Studio Code Host'
   Set-Alias chi 'choco install -y'
   Set-Alias chs 'choco search'
   Set-Alias grep Select-String
+  Set-Alias head 'select -first 10'
+  Set-Alias tail 'select -last 10'
 }
