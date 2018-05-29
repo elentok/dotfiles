@@ -203,7 +203,11 @@ export PATH
 # if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
   # export EDITOR='nvr -cc split --remote-wait'
 
-if has_command nvim; then
+if [ ! -z "$VSCODE_IPC_HOOK" ]; then
+  # Use vscode as the editor for things like Git when run from within vscode's
+  # integrated terminal
+	export EDITOR="code -w"
+elif has_command nvim; then
   export EDITOR=nvim
 else
   export EDITOR=vim
