@@ -1,9 +1,10 @@
-import { existsSync } from 'fs'
 import { join } from 'path'
-import Extensions from './extensions'
 import * as prompt from 'prompt'
+import Extensions from './extensions'
 
-type Answers = { [extension: string]: string }
+interface IAnswers {
+  [extension: string]: string
+}
 
 /*
 
@@ -56,8 +57,8 @@ export default class ExtensionSyncer {
     }
   }
 
-  private analyze(): Promise<Answers> {
-    return new Promise<Answers>(resolve => {
+  private analyze(): Promise<IAnswers> {
+    return new Promise<IAnswers>(resolve => {
       prompt.get(this.createQuestions(), (err, result) => {
         if (err != null) {
           console.error(err)
