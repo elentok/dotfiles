@@ -22,3 +22,4 @@ vscodevim.vim
 yzhang.dictionary-completion
 yzhang.markdown-all-in-one
 eg2.tslint
+mrmlnc.vscode-jade-snippets
