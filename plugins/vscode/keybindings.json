@@ -1,7 +1,17 @@
-// Place your key bindings in this file to overwrite the defaults
 [
-    {
-        "key": "ctrl+shift+`",
-        "command": "workbench.action.terminal.focusNext"
-    }
+  // Place your key bindings in this file to overwrite the defaults
+  {
+    "key": "ctrl+shift+`",
+    "command": "workbench.action.terminal.focusNext"
+  },
+  {
+    "key": "] e",
+    "command": "editor.action.moveLinesDownAction",
+    "when": "editorTextFocus && !editorReadonly && vim.mode != 'Insert'"
+  },
+  {
+    "key": "[ e",
+    "command": "editor.action.moveLinesUpAction",
+    "when": "editorTextFocus && !editorReadonly && vim.mode != 'Insert'"
+  }
 ]
