@@ -5,8 +5,9 @@
   "rules": {
     "semicolon": [true, "never"],
     "quotemark": [true, "single"],
-    "no-console": [true, "log", "error"],
-    "arrow-parens": [false]
+    "no-console": [true, "log"],
+    "arrow-parens": [false],
+    "trailing-comma": [true, { "multiline": "never", "singleline": "never" }]
   },
   "rulesDirectory": []
 }

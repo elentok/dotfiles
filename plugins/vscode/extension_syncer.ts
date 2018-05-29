@@ -1,38 +1,101 @@
-import { readFileSync, statSync } from 'fs'
-import { join, resolve } from 'path'
-import { exec } from 'shelljs'
+import { existsSync } from 'fs'
+import { join } from 'path'
+import Extensions from './extensions'
+import * as prompt from 'prompt'
+
+type Answers = { [extension: string]: string }
+
+/*
+
+How it works?
+
+Compare installed extensions and extensions.txt,
+ask the user what to do about:
+
+1. Extensions in extensions.txt that aren't installed: install/remove
+2. Installed extensions not in extensions.txt: add/uninstall
+
+*/
 
 export default class ExtensionSyncer {
   private configPath: string
-  private installed: string[]
-  private toInstall: string[]
-  private installedHash: { [name: string]: boolean }
+  private dotfilesFilepath: string
+  private dotfiles: Extensions
+  private installed: Extensions
 
   constructor(configPath: string) {
-    this.toInstall = readFileSync(resolve(__dirname, 'extensions.txt'))
-      .toString()
-      .split('\n')
-
-    this.installed = exec(`code --list-extensions`, { silent: true })
-      .stdout.toString()
-      .trim()
-      .split('\n')
-
-    this.installedHash = {}
-    this.installed.forEach(e => this.installedHash[name])
-  }
-
-  public isInstalled(name: string): boolean {
-    return this.installedHash[name]
+    this.dotfilesFilepath = join(__dirname, 'extensions.txt')
+    this.dotfiles = Extensions.fromTextFile(this.dotfilesFilepath)
+    this.installed = Extensions.fromVSCode()
   }
 
   public run() {
-    this.installed
-      .filter(name => !this.isInstalled(name))
-      .forEach(name => this.install(name))
+    this.analyze().then(result => {
+      Object.keys(result).forEach(extension => {
+        const action = result[extension]
+        this.runAction(extension, action)
+      })
+      this.dotfiles.save(this.dotfilesFilepath)
+    })
   }
 
-  public install(name: string): void {
-    exec(`code --install-extension ${name}`)
+  private runAction(extension: string, action: string) {
+    switch (action) {
+      case 'i':
+        Extensions.install(extension)
+        break
+      case 'u':
+        Extensions.uninstall(extension)
+        break
+      case 'a':
+        this.dotfiles.add(extension)
+        break
+      case 'r':
+        this.dotfiles.remove(extension)
+        break
+    }
+  }
+
+  private analyze(): Promise<Answers> {
+    return new Promise<Answers>(resolve => {
+      prompt.get(this.createQuestions(), (err, result) => {
+        if (err != null) {
+          console.error(err)
+          process.exit(1)
+        } else {
+          resolve(result)
+        }
+      })
+    })
+  }
+
+  private createQuestions() {
+    return this.createNotInDotfilesQuestions().concat(this.createNotInstalledQuestions())
+  }
+
+  private createNotInDotfilesQuestions() {
+    return this.installed
+      .all()
+      .filter(ext => !this.dotfiles.includes(ext))
+      .map(name => {
+        return {
+          description: `${name} is missing from extensions.txt, [a]dd/[u]ninstall?`,
+          name,
+          pattern: /^[au]$/
+        }
+      })
+  }
+
+  private createNotInstalledQuestions() {
+    return this.dotfiles
+      .all()
+      .filter(ext => !this.installed.includes(ext))
+      .map(name => {
+        return {
+          description: `${name} is not installed, [i]nstall/[r]emove?`,
+          name,
+          pattern: /^[ir]$/
+        }
+      })
   }
 }

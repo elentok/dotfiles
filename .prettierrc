@@ -1,4 +1,5 @@
-semi: false # No semicolons
-singleQuote: true
-
-# vim: filetype=yaml
+{
+  "semi": false,
+  "singleQuote": true,
+  "printWidth": 100
+}
