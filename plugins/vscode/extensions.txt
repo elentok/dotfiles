@@ -21,3 +21,4 @@ streetsidesoftware.code-spell-checker
 vscodevim.vim
 yzhang.dictionary-completion
 yzhang.markdown-all-in-one
+eg2.tslint
