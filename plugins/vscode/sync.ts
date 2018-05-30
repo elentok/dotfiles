@@ -1,4 +1,4 @@
-import { copyFileSync, readFileSync, statSync } from 'fs'
+import { copyFileSync, existsSync, readFileSync, statSync } from 'fs'
 import { join, resolve } from 'path'
 import { exec } from 'shelljs'
 import ExtensionSyncer from './extension_syncer'
@@ -22,7 +22,7 @@ class Syncer {
         return join(process.env.USERPROFILE, 'AppData', 'Roaming', 'Code')
 
       case 'darwin':
-        return join(process.env.HOME, 'AppData', 'Roaming', 'Code')
+        return join(process.env.HOME, 'Library', 'Application Support', 'Code')
 
       default:
         return join(process.env.HOME, '.config', 'Code')
@@ -33,17 +33,19 @@ class Syncer {
     const dotfilesPath = join(__dirname, filename)
     const vscodePath = join(this.configPath, 'User', filename)
 
-    if (
-      readFileSync(dotfilesPath).toString() ===
-      readFileSync(vscodePath).toString()
-    ) {
+    if (!existsSync(vscodePath)) {
+      console.info('  Using dotfiles version (target is missing)')
+      copyFileSync(dotfilesPath, vscodePath)
+    }
+
+    if (readFileSync(dotfilesPath).toString() === readFileSync(vscodePath).toString()) {
       return
     }
 
-    console.info(`Config file '${filename}' has changed`)
-
     const dotfilesStat = statSync(dotfilesPath)
     const vscodeStat = statSync(vscodePath)
+
+    console.info(`Config file '${filename}' has changed`)
 
     if (dotfilesStat.mtime > vscodeStat.mtime) {
       console.info('  Using dotfiles version')
