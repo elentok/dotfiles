@@ -17,6 +17,7 @@ export default class Extensions {
         .stdout.toString()
         .trim()
         .split('\n')
+        .filter(name => name.length > 0)
     )
   }
 
