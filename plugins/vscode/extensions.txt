@@ -25,3 +25,4 @@ eg2.tslint
 CraigMaslowski.erb
 misogi.ruby-rubocop
 mrmlnc.vscode-puglint
+glen-84.sass-lint
