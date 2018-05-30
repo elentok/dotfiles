@@ -24,3 +24,4 @@ yzhang.markdown-all-in-one
 eg2.tslint
 CraigMaslowski.erb
 misogi.ruby-rubocop
+mrmlnc.vscode-puglint
