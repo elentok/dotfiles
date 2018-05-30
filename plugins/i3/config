@@ -33,7 +33,7 @@ bindsym $mod+q exec dotcalc
 
 # Keys: Screenshot {{{2
 bindsym $mod+p exec xfce4-screenshooter
-bindsym $mod+shift+p exec gpick --pick --single
+#bindsym $mod+shift+p exec gpick --pick --single
 bindsym Print exec xfce4-screenshooter
 bindsym $mod+shift+s exec xfce4-screenshooter -r -c
 
