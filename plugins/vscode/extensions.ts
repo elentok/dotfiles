@@ -46,6 +46,10 @@ export default class Extensions {
     return this.names
   }
 
+  public count(): number {
+    return this.names.length
+  }
+
   public add(name: string): void {
     this.names.push(name)
     this.byName[name] = true
