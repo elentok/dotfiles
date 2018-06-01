@@ -71,16 +71,15 @@ echo 'LANG=en_US.UTF-8' > /etc/locale.conf
 ### Time
 
 ```
-tzselect
 ln -s /usr/share/zoneinfo/{Zone}/{SubZone} /etc/localtime
-hwclock --systohc --utc
+hwclock --systohc
 
 ```
 
 ### Grub
 
 ```
-pacman -S grub os-prober
+pacman -S grub os-prober intel-ucode
 grub-install --target=i386-pc /dev/sdX
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
@@ -92,6 +91,12 @@ echo '{HOSTNAME}' > /etc/hostname
 ```
 
 Edit `/etc/hosts` and add the hostname to the end of the `localhost` entries
+
+```
+127.0.0.1 localhost
+::1       localhost
+127.0.1.1 {HOSTNAME}.localdomain {HOSTNAME}
+```
 
 ### Set the ROOT password
 
@@ -110,7 +115,7 @@ reboot
 ### Install basic packages
 
 ```
-pacman -S zsh neovim git tig the_silver_searcher
+pacman -S zsh neovim git tig ripgrep
 ```
 
 Install the packages required for making WiFi connections (post-boot):
