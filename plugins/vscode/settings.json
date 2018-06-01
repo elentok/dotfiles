@@ -1,29 +1,18 @@
 {
   "window.zoomLevel": 1,
-  "editor.fontFamily": "'mononoki Nerd Font Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+  "editor.fontFamily":
+    "'mononoki Nerd Font Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
   "editor.minimap.enabled": false,
   "terminal.integrated.lineHeight": 1.1,
   "editor.formatOnSave": true,
   "editor.detectIndentation": false,
   "editor.tabSize": 2,
-  "editor.rulers": [
-    80,
-    100
-  ],
-  "cSpell.userWords": [
-    "elentok",
-    "noopener",
-    "noreferrer"
-  ],
+  "editor.rulers": [80, 100],
+  "cSpell.userWords": ["elentok", "noopener", "noreferrer"],
   "vim.insertModeKeyBindings": [
     {
-      "before": [
-        "j",
-        "k"
-      ],
-      "after": [
-        "<Esc>"
-      ]
+      "before": ["j", "k"],
+      "after": ["<Esc>"]
     }
   ],
   "vim.handleKeys": {
@@ -49,9 +38,13 @@
   "gitlens.historyExplorer.enabled": true,
   "git.autofetch": true,
   "vim.useSystemClipboard": true,
+  "puglint.enable": true,
+  "search.exclude": {
+    "**/dist": true,
+    "**/vendor": true,
+    "**/node_modules": true,
+    "**/bower_components": true
+  },
   "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\bash.exe",
-  "terminal.integrated.shellArgs.windows": [
-    "-c",
-    "zsh"
-  ]
+  "terminal.integrated.shellArgs.windows": ["-c", "zsh"]
 }
