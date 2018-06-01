@@ -31,6 +31,11 @@ export default class ExtensionSyncer {
   }
 
   public run() {
+    if (this.installed.count() === 0) {
+      this.dotfiles.all().forEach(name => Extensions.install(name))
+      return
+    }
+
     this.analyze().then(result => {
       Object.keys(result).forEach(extension => {
         const action = result[extension]
