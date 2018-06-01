@@ -2,6 +2,8 @@
 
 if is_mac; then
   unalias s
+elif is_wsl; then
+  alias code='/mnt/c/Program\ Files/Microsoft\ VS\ Code/code.exe'
 fi
 
 # All Aliases {{{1
