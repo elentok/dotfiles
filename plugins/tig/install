@@ -19,7 +19,7 @@ main() {
 }
 
 install_tig_targz() {
-  is_debian && apt_install libncursesw5-dev
+  is_debian && apt_install libncursesw5-dev build-essential
   is_fedora && yum_install ncurses-devel
 
   local filename=tig-$TIG_VERSION.tar.gz

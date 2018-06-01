@@ -5,6 +5,10 @@
 # [github]
 #   user = elentok
 
+# git config --local user.name 'David Elentok'
+# git config --local user.email '3david@gmail.com'
+# git config --local github.user 'elentok'
+
 [include]
   path = ~/.dotlocal/gitconfig
 

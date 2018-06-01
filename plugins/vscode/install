@@ -3,7 +3,11 @@
 source $DOTF/framework
 
 ROOT=$DOTF/plugins/vscode
-CODE_CONFIG="$(vscode-config-path)"
 
-cp -vf "$ROOT/settings.json" "$CODE_CONFIG/User/settings.json"
-cp -vf "$ROOT/keybindings.json" "$CODE_CONFIG/User/keybindings.json"
+if is_wsl; then
+  symlink \
+    $(wslpath $(wsl-get-env USERPROFILE))/AppData/Roaming/Code \
+    $HOME/.config/Code
+fi
+
+yarn vscode:sync
