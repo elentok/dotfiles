@@ -5,10 +5,6 @@ $documents = [System.Environment]::GetFolderPath('MyDocuments')
 
 mkdir $target -Force
 
-# Compress-Archive -Path $documents `
-#   -CompressionLevel Fastest `
-#   -DestinationPath $target\Documents.zip
-
 Remove-Item $target\Local.7z
 7z a `
   -xr!Packages `
@@ -31,4 +27,4 @@ Remove-Item $target\Roaming.7z
 7z a $target\Roaming.7z $HOME\AppData\Roaming
 
 Remove-Item $target\Documents.7z
-7z a -r $target\Documents1.7z $documents
+7z a -r $target\Documents.7z $documents
