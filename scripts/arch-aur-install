@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Usage:
+#
+# arch-aur-install {package_name}
+
+set -euo pipefail
+
+if [ $# -eq 0 ]; then
+  usage $0
+fi
+
+pkg=$1
+
+mkdir -p /tmp/arch-aur
+cd /tmp/arch-aur
+
+rm -rf $pkg.tar.gz $pkg
+
+curl -L -O https://aur.archlinux.org/cgit/aur.git/snapshot/$pkg.tar.gz
+tar -xvf $pkg.tar.gz
+cd $pkg
+
+less PKGBUILD
+if [ -e $pkg.install ]; then
+  less $pkg.install
+fi
+
+makepkg -si
