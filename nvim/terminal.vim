@@ -77,6 +77,17 @@ function! FindHiddenTerminals()
   return terminals
 endfunc
 
-" Use neovim-remote to prevent opening vim inside the terminal {{{1
-" let $VISUAL = 'nvr -cc split --remote-wait'
+" report exit code back to neovim-remote {{{1
+function! Elentok_NotifyExitCode(code)
+  if exists('b:nvr')
+    for client in b:nvr
+      silent! call rpcnotify(client, 'Exit', a:code)
+    endfor
+  endif
+endfunction
 
+augroup Elentok_Terminal_Wait
+  autocmd!
+  autocmd BufDelete * call Elentok_NotifyExitCode(1)
+  autocmd BufWritePost * call Elentok_NotifyExitCode(0)
+augroup END

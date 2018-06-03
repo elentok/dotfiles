@@ -200,10 +200,9 @@ export PATH
 # EDITOR {{{1
 
 # TODO: figure this out
-# if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
-  # export EDITOR='nvr -cc split --remote-wait'
-
-if [ ! -z "${VSCODE_IPC_HOOK:-}" ]; then
+if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
+  export EDITOR='nvr -cc split --remote-wait'
+elif [ ! -z "${VSCODE_IPC_HOOK:-}" ]; then
   # Use vscode as the editor for things like Git when run from within vscode's
   # integrated terminal
 	export EDITOR="code -w"
