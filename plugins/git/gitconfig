@@ -16,7 +16,7 @@
   excludesfile = ~/.dotfiles/plugins/git/gitignore
 
   # Always use linux line endings
-  autocrlf = input
+  autocrlf = false
 
   # Make the pager quit if the output is less than the screen width
   pager = less -F -X
