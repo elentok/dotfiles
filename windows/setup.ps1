@@ -16,6 +16,7 @@ Write-Output 'Setting up git'
 $DOTF = Resolve-Path (Join-Path $PSScriptRoot '..')
 $gitconfig = Join-Path $DOTF 'plugins/git/gitconfig'
 git config --global include.path $gitconfig
+git config --global core.autocrlf false
 git config --global user.name 'David Elentok'
 git config --global user.email '3david@gmail.com'
 git config --global github.user 'elentok'
