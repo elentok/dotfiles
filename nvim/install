@@ -20,6 +20,8 @@ main() {
 }
 
 install_requirements() {
+  dotf i ripgrep
+
   if is_mac; then
     # python3 is required for the deoplete plugin
     brew_install python3
@@ -119,12 +121,11 @@ install_cli_tools() {
   if is_arch; then
     pacman_install ctags tidy
   elif is_debian; then
-    apt_install silversearcher-ag exuberant-ctags global
+    apt_install exuberant-ctags global
   elif is_fedora; then
-    yum_install the_silver_searcher ctags
+    yum_install ctags
   else
     brew_install ctags
-    brew_install the_silver_searcher # ag
     brew_install global --with-pygments
   fi
 
