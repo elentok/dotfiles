@@ -21,6 +21,9 @@ is_linux() {
 is_wsl() {
   [ "$IS_WSL" = "yes" ]
 }
+is_in_neovim() {
+  [ -n "${NVIM_LISTEN_ADDRESS:-}" ]
+}
 
 # Shell {{{1
 function is_zsh() {

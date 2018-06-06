@@ -79,12 +79,6 @@ alias tma='tm a'
 alias tot='awk "{ s+=\$1 } END { printf(\"%''d\n\", s) }"'
 alias total='awk "{ s+=\$1 } END { print s }"'
 alias ts='tig status'
-if has_command nvim; then
-  alias vi=nvim
-else
-  alias vi=vim
-fi
-alias vl='vim "+OpenSession! last"'
 alias vz='file="$(edit-zsh-dotfile)" && source $file'
 alias x=exit
 alias yr='yarn run'
@@ -94,10 +88,19 @@ alias ports='sudo echo && (sudo lsof -i -n -P | fzf --header-lines=1)'
 alias ew='whichx $EDITOR'
 alias cw='whichx cat'
 
-# Neovim<->Shell Integration {{{1
-alias vo='nvr -o'
-alias vv='nvr -O'
+# Neovim {{{1
+if has_command nvim; then
+  if is_in_neovim; then
+    alias vi='nvr -o'
+    alias vv='nvr -O'
+  else
+    alias vi=nvim
+  fi
+else
+  alias vi=vim
+fi
 alias vcd='nvr --remote-send "<c-\><c-n>:tcd $PWD<cr>i"'
+alias vl='vim "+OpenSession! last"'
 
 # Confirm filesystem operations {{{1
 alias cp='cp -i'
