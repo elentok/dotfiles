@@ -1,22 +1,14 @@
 #!/usr/bin/env bash
 
 source $DOTF/framework
+source $DOTF/scripts/build-helper
 
-VERSION=${1:-v0.2.2}
-INSTALL_DIR=$HOME/.apps/neovim/$VERSION
-
-header "Building Neovim $VERSION"
-
-mkdir -p $INSTALL_DIR
+prepare_build neovim v0.2.2 "$*"
 
 if is_debian; then
   apt_install libtool-bin autoconf automake cmake g++ pkg-config \
     python-pip python-dev unzip
 fi
-
-rm -rf $TMP/build/neovim
-mkdir -p $TMP/build
-cd $TMP/build
 
 git clone --branch $VERSION https://github.com/neovim/neovim.git
 
@@ -25,8 +17,4 @@ make install \
   CMAKE_EXTRA_FLAGS=-DCMAKE_INSTALL_PREFIX=$INSTALL_DIR \
   CMAKE_BUILD_TYPE=RelWithDebInfo
 
-symlink $INSTALL_DIR/bin/nvim $HOME/bin/nvim-$VERSION
-
-if [ "${PRIMARY:-}" == 'yes' ]; then
-  symlink $INSTALL_DIR/bin/nvim $HOME/bin/nvim
-fi
+install_symlinks bin/nvim

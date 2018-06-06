@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+INSTALL_ROOT=$HOME/.apps
+BUILD_ROOT=$TMP/build
+BIN_DIR=$HOME/bin
+
+function prepare_build() {
+  NAME=$1
+  DEFAULT_VERSION=$2
+  VERSION=${3:-$DEFAULT_VERSION}
+  INSTALL_DIR=$INSTALL_ROOT/$NAME/$VERSION
+
+  header "Building $NAME $VERSION"
+
+  mkdir -p $INSTALL_DIR
+
+  rm -rf $TMP/build/$NAME
+  mkdir -p $TMP/build/$NAME
+  cd $TMP/build/$NAME
+}
+
+function install_symlinks() {
+  local path_to_binary=$1
+  local target_name=$(basename $path_to_binary)
+
+  symlink $INSTALL_DIR/$path_to_binary $BIN_DIR/$target_name-$VERSION
+
+  if [ "${PRIMARY:-}" == 'yes' ]; then
+    symlink $INSTALL_DIR/$path_to_binary $BIN_DIR/nvim
+  fi
+}
