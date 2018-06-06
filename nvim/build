@@ -11,7 +11,7 @@ mkdir -p $INSTALL_DIR
 
 if is_debian; then
   apt_install libtool-bin autoconf automake cmake g++ pkg-config \
-    python-pip python-dev
+    python-pip python-dev unzip
 fi
 
 rm -rf $TMP/build/neovim
