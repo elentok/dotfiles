@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 
-brew_install ranger
+source $DOTF/framework
 
-brew_install atool # archive tool (for als)
-brew_install w3c
+if is_mac; then
+  brew_install ranger atool
+fi
+
+#brew_install atool # archive tool (for als)
+#brew_install w3c
 
 # these require XQuarts to be installed
-brew_install xpdf
-brew_install imlib2 # for libcaca
-brew_install libcaca --with-imlib2 # for img2txt
-
+# brew_install xpdf
+# brew_install imlib2 # for libcaca
+# brew_install libcaca --with-imlib2 # for img2txt
