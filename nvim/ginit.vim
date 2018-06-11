@@ -1,2 +1,2 @@
-Guifont Hack:h11
-GuiLinespace 5
+Guifont mononoki Nerd Font Mono:h12
+GuiLinespace 1
