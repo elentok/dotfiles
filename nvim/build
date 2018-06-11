@@ -10,7 +10,7 @@ if is_debian; then
     python-pip python-dev unzip
 fi
 
-git clone --branch $VERSION https://github.com/neovim/neovim.git
+git clone --depth 1 --branch $VERSION https://github.com/neovim/neovim.git
 
 cd neovim
 make install \
