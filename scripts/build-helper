@@ -8,14 +8,18 @@ function prepare_build() {
   NAME=$1
   DEFAULT_VERSION=$2
   VERSION=${3:-$DEFAULT_VERSION}
+  BUILD_DIR=$TMP/build/$NAME
   INSTALL_DIR=$INSTALL_ROOT/$NAME/$VERSION
 
   header "Building $NAME $VERSION"
 
   mkdir -p $INSTALL_DIR
 
-  rm -rf $TMP/build/$NAME
-  mkdir -p $TMP/build/$NAME
+  if [ "${CLEAN:-}" != "no" ]; then
+    rm -rf $BUILD_DIR
+  fi
+
+  mkdir -p $BUILD_DIR
   cd $TMP/build/$NAME
 }
 
@@ -26,6 +30,6 @@ function install_symlinks() {
   symlink $INSTALL_DIR/$path_to_binary $BIN_DIR/$target_name-$VERSION
 
   if [ "${PRIMARY:-}" == 'yes' ]; then
-    symlink $INSTALL_DIR/$path_to_binary $BIN_DIR/nvim
+    symlink $INSTALL_DIR/$path_to_binary $BIN_DIR/$target_name
   fi
 }
