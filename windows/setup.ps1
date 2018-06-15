@@ -22,3 +22,4 @@ git config --global user.email '3david@gmail.com'
 git config --global github.user 'elentok'
 
 . powershell\setup.ps1
+. nvim.ps1
