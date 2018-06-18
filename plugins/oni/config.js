@@ -3,34 +3,19 @@ exports.__esModule = true;
 var path = require("path");
 var HOME = process.env.HOME;
 exports.activate = function (oni) {
-    console.log('config activated');
-    // Input
-    //
-    // Add input bindings here:
-    //
-    oni.input.bind('<c-enter>', function () { return console.log('Control+Enter was pressed'); });
+    console.info('Oni config activated');
+    oni.input.bind('<c-enter>', function () { return console.info('Control+Enter was pressed'); });
     oni.input.bind(['<enter>', '<tab>'], 'contextMenu.select');
-    //
-    // Or remove the default bindings here by uncommenting the below line:
-    //
+    // Remove default bindings:
     // oni.input.unbind("<c-p>")
 };
 exports.deactivate = function (oni) {
-    console.log('config deactivated');
+    console.info('Oni config deactivated');
 };
 exports.configuration = {
-    //add custom config here, such as
-    'ui.colorscheme': 'nord',
-    // the default configs clash with my own
-    'oni.useDefaultConfig': false,
-    //"oni.bookmarks": ["~/Documents"],
-    'editor.fontSize': '15px',
-    'ui.fontSize': '15px',
     'editor.fontFamily': 'mononokiNerdFontCM-Regular',
+    'editor.fontSize': '15px',
     'editor.renderer': 'webgl',
-    // UI customizations
-    // "ui.animations.enabled": true,
-    // "ui.fontSmoothing": "auto",
     'environment.additionalPaths': [
         path.resolve(HOME, '.dotfiles', 'scripts'),
         path.resolve(HOME, '.dotlocal', 'bin'),
@@ -39,5 +24,8 @@ exports.configuration = {
         path.resolve(HOME, 'bin'),
         '/usr/local/bin',
         '/usr/bin'
-    ]
+    ],
+    'oni.useDefaultConfig': false,
+    'ui.colorscheme': 'nord',
+    'ui.fontSize': '15px'
 };

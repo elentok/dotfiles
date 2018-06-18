@@ -5,7 +5,8 @@
   "main": "framework.js",
   "scripts": {
     "format": "prettier --write '**/*.js' '**/*.css'",
-    "vscode:sync": "ts-node plugins/vscode/sync.ts"
+    "vscode:sync": "ts-node plugins/vscode/sync.ts",
+    "tslint": "tslint -c tslint.json"
   },
   "repository": {
     "type": "git",
