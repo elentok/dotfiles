@@ -26,6 +26,7 @@ exports.configuration = {
         '/usr/bin'
     ],
     'oni.useDefaultConfig': false,
+    'sidebar.default.open': false,
     'ui.colorscheme': 'nord',
     'ui.fontSize': '15px'
 };
