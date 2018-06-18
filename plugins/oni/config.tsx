@@ -32,6 +32,7 @@ export const configuration = {
     '/usr/bin'
   ],
   'oni.useDefaultConfig': false, // the default configs clash with my own
+  'sidebar.default.open': false,
   'ui.colorscheme': 'nord',
   'ui.fontSize': '15px'
 }
