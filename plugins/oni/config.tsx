@@ -1,44 +1,27 @@
-import * as React from 'react'
 import * as Oni from 'oni-api'
 import * as path from 'path'
+import * as React from 'react'
 
 const HOME: string = process.env.HOME
 
 export const activate = (oni: Oni.Plugin.Api) => {
-  console.log('config activated')
+  console.info('Oni config activated')
 
-  // Input
-  //
-  // Add input bindings here:
-  //
-  oni.input.bind('<c-enter>', () => console.log('Control+Enter was pressed'))
+  oni.input.bind('<c-enter>', () => console.info('Control+Enter was pressed'))
   oni.input.bind(['<enter>', '<tab>'], 'contextMenu.select')
-  //
-  // Or remove the default bindings here by uncommenting the below line:
-  //
+
+  // Remove default bindings:
   // oni.input.unbind("<c-p>")
 }
 
 export const deactivate = (oni: Oni.Plugin.Api) => {
-  console.log('config deactivated')
+  console.info('Oni config deactivated')
 }
 
 export const configuration = {
-  //add custom config here, such as
-
-  'ui.colorscheme': 'nord',
-
-  // the default configs clash with my own
-  'oni.useDefaultConfig': false,
-  //"oni.bookmarks": ["~/Documents"],
-  'editor.fontSize': '15px',
-  'ui.fontSize': '15px',
   'editor.fontFamily': 'mononokiNerdFontCM-Regular',
+  'editor.fontSize': '15px',
   'editor.renderer': 'webgl',
-
-  // UI customizations
-  // "ui.animations.enabled": true,
-  // "ui.fontSmoothing": "auto",
   'environment.additionalPaths': [
     path.resolve(HOME, '.dotfiles', 'scripts'),
     path.resolve(HOME, '.dotlocal', 'bin'),
@@ -47,5 +30,8 @@ export const configuration = {
     path.resolve(HOME, 'bin'),
     '/usr/local/bin',
     '/usr/bin'
-  ]
+  ],
+  'oni.useDefaultConfig': false, // the default configs clash with my own
+  'ui.colorscheme': 'nord',
+  'ui.fontSize': '15px'
 }
