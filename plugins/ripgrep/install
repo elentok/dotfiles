@@ -51,6 +51,7 @@ install_ripgrep_tgz() {
   cd $install_dir
 
   tar --strip-components=1 -xzf $TMP/$name.tar.gz
+  mkdir -p $HOME/bin
   symlink $install_dir/rg $HOME/bin/rg
 }
 

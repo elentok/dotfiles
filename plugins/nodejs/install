@@ -21,10 +21,8 @@ install_node() {
 
 install_packages() {
   npm_install yarn
-  npm_install coffeescript
   npm_install json
   npm_install live-server
-  npm_install tern
   npm_install eslint
   npm_install typescript
   npm_install tslint
