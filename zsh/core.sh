@@ -107,6 +107,23 @@ if is_termux; then
   export TMP=$HOME/tmp
 fi
 
+# File owner
+function file-owner() {
+  if is-gnu-stat; then
+    stat --format=%U "$*"
+  else
+    stat -f '%Su' "$*"
+  fi
+}
+
+function is-gnu-stat() {
+  if is_mac; then
+    [[ "$(which stat)" =~ /gnubin/ ]]
+  else
+    return 0
+  fi
+}
+
 # Disable <Ctrl-s> lock on interactive shells {{{1
 # see:
 # * https://stackoverflow.com/questions/24623021

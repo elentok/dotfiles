@@ -4,7 +4,7 @@ set -euo pipefail
 
 source `dirname $0`/../framework
 
-NEOVIM_VERSION='v0.2.2'
+NEOVIM_VERSION='v0.3.0'
 
 main() {
   header "NeoVim"
@@ -139,8 +139,8 @@ install_cli_tools() {
   npm_install jsonlint
   npm_install sass-lint
   npm_install javascript-typescript-langserver
-  pip_install pylint
-  pip_install yamllint
+  pip3_install pylint
+  pip3_install yamllint
 
   is_fedora && yum_install redhat-rpm-config
   pip3_install neovim-remote

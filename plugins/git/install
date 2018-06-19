@@ -10,6 +10,7 @@ main() {
     install_git
   fi
   install_gitconfig
+  setup_git_user
   install_diff_so_fancy
 }
 
@@ -64,6 +65,18 @@ install_diff_so_fancy() {
     pacman_install diff-so-fancy
   else
     npm_install diff-so-fancy
+  fi
+}
+
+setup_git_user() {
+  if [ -z "$(git config --global user.name)" ]; then
+    ask 'Git username?' git_username 'David Elentok'
+    git config --global user.name "$git_username"
+  fi
+
+  if [ -z "$(git config --global user.email)" ]; then
+    ask 'Git username?' git_email '3david@gmail.com'
+    git config --global user.email "$git_email"
   fi
 }
 
