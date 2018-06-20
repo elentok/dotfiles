@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+available-versions() {
+  rbenv install --list | grep -v 'Available versions' | sed -E 's/^\s+//'
+}
+
+echo 'Updating rbenv...'
+(cd ~/.rbenv && git pull)
+
+echo 'Updating ruby-build...'
+(cd ~/.rbenv/plugins/ruby-build && git pull)
+
+version="$(available-versions | fzf)"
+
+echo "Installing $version..."
+
+rbenv install $version
+mkdir /tmp/ruby-$version
+cd /tmp/ruby-$version
+rbenv local $version
+
+echo 'Installing bundler...'
+gem install bundler
+rbenv rehash
