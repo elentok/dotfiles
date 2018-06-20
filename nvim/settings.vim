@@ -256,6 +256,12 @@ let g:easy_align_delimiters = {
 let NERDTreeIgnore=['\.zeus\.sock$', '\~$']
 let NERDTreeHijackNetrw = 0
 
+if !empty($DISABLE_UNICODE)
+  let g:NERDTreeDirArrows = 1
+  let g:NERDTreeDirArrowCollapsible = 'v'
+  let g:NERDTreeDirArrowExpandable = '>'
+endif
+
 " Plugin: scrooloose/nerdcommenter {{{1
 let g:NERDCustomDelimiters = {
     \ 'scss': { 'left': '//' }
