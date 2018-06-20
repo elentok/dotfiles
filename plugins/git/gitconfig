@@ -57,6 +57,7 @@
   pst = push --tags
   pullff = pull --ff-only
   r = reset
+  reyarn = !git reset HEAD yarn.lock && git checkout yarn.lock && yarn install && git add yarn.lock
   rp = reset --patch
   rb = rebase
   rbc = rebase --continue
