@@ -1,16 +1,20 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+source $DOTF/framework
 
 available-versions() {
   rbenv install --list | grep -v 'Available versions' | sed -E 's/^\s+//'
 }
 
-echo 'Updating rbenv...'
-(cd ~/.rbenv && git pull)
+if is_mac; then
+  brew upgrade rbenv ruby-build || true
+else
+  echo 'Updating rbenv...'
+  (cd ~/.rbenv && git pull)
 
-echo 'Updating ruby-build...'
-(cd ~/.rbenv/plugins/ruby-build && git pull)
+  echo 'Updating ruby-build...'
+  (cd ~/.rbenv/plugins/ruby-build && git pull)
+fi
 
 version="$(available-versions | fzf)"
 
