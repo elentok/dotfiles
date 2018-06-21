@@ -75,7 +75,6 @@ if has('nvim')
   Plug 'kassio/neoterm'
 
   if !exists('g:gui_oni')
-    Plug 'mhartington/nvim-typescript'
     Plug 'kristijanhusak/vim-js-file-import', { 'for': 'javascript' }
     Plug 'autozimu/LanguageClient-neovim', {
         \ 'branch': 'next',
