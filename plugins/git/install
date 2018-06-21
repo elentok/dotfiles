@@ -69,13 +69,13 @@ install_diff_so_fancy() {
 }
 
 setup_git_user() {
-  if [ -z "$(git config --global user.name)" ]; then
+  if [ -z "$(git config --global --includes user.name)" ]; then
     ask 'Git username?' git_username 'David Elentok'
     git config --global user.name "$git_username"
   fi
 
-  if [ -z "$(git config --global user.email)" ]; then
-    ask 'Git username?' git_email '3david@gmail.com'
+  if [ -z "$(git config --global --includes user.email)" ]; then
+    ask 'Git email?' git_email '3david@gmail.com'
     git config --global user.email "$git_email"
   fi
 }
