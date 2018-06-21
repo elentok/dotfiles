@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+const Repo = require('../lib/git/repo')
+
+const r = new Repo(process.cwd())
+r.fetchRemotes()
+
+console.info('Local branches:')
+r.localBranches().forEach(branch => {
+  console.info(`- ${branch.gitName} (${branch.hash()})${branch.hasRemotes() ? '' : ' (NO REMOTE)'}`)
+})
+
+console.info('\nRemote branches:')
+r.remoteBranches().forEach(branch => console.info(`- ${branch.gitName} (${branch.hash()})`))
+
+const unsyncedBranches = r.unsyncedBranches()
+if (unsyncedBranches.length > 0) {
+  console.info('\nUnsynched branches:')
+  r.unsyncedBranches().forEach(pair => console.info(`- ${pair.local.gitName}`))
+}
