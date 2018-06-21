@@ -5,7 +5,7 @@ source `dirname $0`/../../framework
 header 'Arduino'
 
 # Install the Arduino command line toolkit (http://inotool.org/)
-#pip_install ino
+#pip2_install ino
 
 # Install PlatformIO
 python -c "$(curl -fsSL https://raw.githubusercontent.com/ivankravets/platformio/master/scripts/get-platformio.py)"

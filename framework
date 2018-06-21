@@ -384,7 +384,7 @@ if has_command "pip2"; then
   export PIP2="pip2"
 fi
 
-verify_pip_installed() {
+pip2_is_installed() {
   if command_missing $PIP2; then
     bullet "Installing $PIP2... "
 
@@ -405,17 +405,17 @@ verify_pip_installed() {
   fi
 }
 
-pip_install() {
-  verify_pip_installed || return
+pip2_install() {
+  pip2_is_installed || return
   bullet "Installing ${1}... "
-  if has_pip_package "$1"; then
+  if has_pip2_package "$1"; then
     info " already installed"
   else
     $PIP2 install --user $1
   fi
 }
 
-has_pip_package() {
+has_pip2_package() {
   [ "`$PIP2 list | grep \"^$1\b\"`" != "" ]
 }
 
