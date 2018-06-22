@@ -7,7 +7,7 @@
 #   vs [session-name]
 #
 # If "session-name" is not defined:
-# - If there are no sessions it will create "neovim-session"
+# - If there are no sessions it will create "default"
 # - If there's only one session it will attach to it
 # - If there are multiple sessions it will use FZF to pick a session
 
@@ -17,13 +17,16 @@ if [ -z "$DISPLAY" ]; then
   export DISPLAY=:0
 fi
 
+SESSIONS_DIR=$TMP/nvim-sessions
+mkdir -p $SESSIONS_DIR
+
 main() {
   if [ "$1" == "-h" -o "$1" == "--help" ]; then
     usage $0
     exit 1
   fi
 
-  if [ -n "$ABDUCO_SESSION" ]; then
+  if [ -n "$DTACH_SESSION" ]; then
     echo "Error: already inside abduco session"
     exit 2
   fi
@@ -39,7 +42,9 @@ main() {
     command='nvim-master'
   fi
 
-  ABDUCO_SESSION="$session" abduco -A "$session" bash -c $command
+  echo "SESSION[$session]"
+
+  DTACH_SESSION="$session" dtach -A "$SESSIONS_DIR/$session" -r winch bash -c $command
 }
 
 get-session-name() {
@@ -48,7 +53,7 @@ get-session-name() {
   else
     active_count=$(sessions | wc -l)
     if [ $active_count == 0 ]; then
-      echo "neovim-session"
+      echo "default"
     elif [ $active_count == 1 ]; then
       sessions | leave-only-session-name
     else
@@ -64,7 +69,7 @@ leave-only-session-name() {
 }
 
 sessions() {
-  abduco -l | grep -v '^Active'
+  (cd $SESSIONS_DIR && /bin/ls -1)
 }
 
 main "$@"

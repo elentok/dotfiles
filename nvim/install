@@ -13,7 +13,7 @@ main() {
   install_neovim
   install_symlinks
   install_plugins
-  install_abduco
+  install_dtach
   install_cli_tools
 
   (cd $DOTF/nvim && ./ctags-build)
@@ -33,6 +33,7 @@ install_requirements() {
     yum_install python3-devel gcc
   fi
 
+  npm_install neovim
   pip3_install neovim
   pip3_install neovim-remote
 }
@@ -107,14 +108,8 @@ install_plugins() {
   success "done"
 }
 
-install_abduco() {
-  if is_debian; then
-    if command_missing abduco; then
-      $DOTF/nvim/build-abduco
-    fi
-  else
-    install_package abduco
-  fi
+install_dtach() {
+  install_package dtach
 }
 
 install_cli_tools() {
