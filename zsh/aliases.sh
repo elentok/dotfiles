@@ -219,3 +219,7 @@ vp() {
   fi
 }
 
+# DOTLOCAL {{{1
+if [ -e "$DOTL/zsh/aliases.sh" ]; then
+  source "$DOTL/zsh/aliases.sh"
+fi
