@@ -2,7 +2,7 @@
 
 source $DOTF/framework
 
-RUBY_VERSION='2.5.0'
+RUBY_VERSION='2.5.1'
 
 main() {
   header "Ruby"
