@@ -220,6 +220,4 @@ vp() {
 }
 
 # DOTLOCAL {{{1
-if [ -e "$DOTL/zsh/aliases.sh" ]; then
-  source "$DOTL/zsh/aliases.sh"
-fi
+source_if_exists "$DOTL/zsh/aliases.sh"
