@@ -270,12 +270,7 @@ if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
 fi
 
 # DOTLOCAL {{{1
-if [ -e "$DOTL/zsh/core.zsh" ]; then
-  source "$DOTL/zsh/core.zsh"
-fi
-
-if [ -e "$DOTL/zsh/core.sh" ]; then
-  source "$DOTL/zsh/core.sh"
-fi
+source_if_exists "$DOTL/zsh/core.zsh"
+source_if_exists "$DOTL/zsh/core.sh"
 
 # vim: foldmethod=marker
