@@ -382,6 +382,14 @@ endfunction
 
 command! -complete=dir -nargs=+ Proj call Proj("<args>")
 
+" Markserv {{{1
+function! Markserv()
+  QuickShell('markserv')
+  tabprevious
+  exec 'silent !o "http://localhost:8642/%"'
+endfunction
+command! Markserv call Markserv()
+
 " TabLine {{{1
 function! Elentok_TabLine()
   let s = ''

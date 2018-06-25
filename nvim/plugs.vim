@@ -56,7 +56,6 @@ Plug 'elentok/todo.vim',                  { 'for': 'todo' }
 Plug 'elentok/vim-markdown-folding',      { 'for': 'markdown' }
 Plug 'tpope/vim-markdown',                { 'for': 'markdown' }
 Plug 'jtratner/vim-flavored-markdown',    { 'for': 'markdown' } " add-on to tpope's markdown plugin (git flavored markdown)
-Plug 'shime/vim-livedown',                { 'for': 'markdown', 'on': 'LivedownPreview' }
 Plug 'chr4/nginx.vim',                    { 'for': 'nginx' }
 Plug 'fatih/vim-go',                      { 'for': 'go' }
 Plug 'groenewege/vim-less',               { 'for': 'less' }
