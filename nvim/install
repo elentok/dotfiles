@@ -124,6 +124,7 @@ install_cli_tools() {
     brew_install global --with-pygments
   fi
 
+  npm_install markserv
   npm_install htmlhint
   npm_install marked
   npm_install name-that-color
