@@ -85,3 +85,40 @@ endif
 " Git {{{1
 
 command! Gca Gcommit --amend
+
+" Intellisense/Autocomplete {{{1
+let g:LanguageClient_serverCommands = {
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'typescript': ['javascript-typescript-stdio'],
+    \ }
+
+let g:LanguageClient_diagnosticsEnable = 0
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+function! SmartTab()
+  " if the completion popup is visible
+  if pumvisible()
+    return "\<c-n>"
+  elseif IsBeginningOfLine() || IsLastCharWhitespace()
+    return "\<tab>"
+  else
+    if &omnifunc != ''
+      return "\<c-x>\<c-o>"
+    else
+      return "\<c-x>\<c-n>"
+    end
+  end
+endfunction
+
+function! IsBeginningOfLine()
+  return col('.') == 1
+endfunction
+
+function! IsLastCharWhitespace()
+  return getline('.')[col('.') - 2]  =~ '\s'
+endfunction
+
+inoremap <expr><tab> SmartTab()

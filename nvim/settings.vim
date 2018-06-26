@@ -174,17 +174,6 @@ set statusline+=%= " Separation point between left and right aligned items
 set statusline+=\ [%{''!=#&filetype?&filetype:'none'}]
 set statusline+=\ %l:%v " Line number + column number
 
-" Plugin: autozimu/LanguageClient-neovim {{{1
-let g:LanguageClient_serverCommands = {
-    \ 'javascript': ['javascript-typescript-stdio'],
-    \ 'typescript': ['javascript-typescript-stdio'],
-    \ }
-
-let g:LanguageClient_diagnosticsEnable = 0
-
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 " Plugin: w0rp/ale (live linting) {{{1
 let g:ale_linters = {

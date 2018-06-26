@@ -254,35 +254,6 @@ nnoremap <leader>jm :JavaImpl<cr>
 nnoremap <leader>jg :JavaGet<cr>
 nnoremap <leader>js :JavaGetSet<cr>
 
-" Completion {{{1
-"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-function! SmartTab()
-  " if the completion popup is visible
-  if pumvisible()
-    return "\<c-n>"
-  elseif IsBeginningOfLine() || IsLastCharWhitespace()
-    return "\<tab>"
-  else
-    if &omnifunc != ''
-      return "\<c-x>\<c-o>"
-    else
-      return "\<c-x>\<c-n>"
-    end
-  end
-endfunction
-
-function! IsBeginningOfLine()
-  return col('.') == 1
-endfunction
-
-function! IsLastCharWhitespace()
-  return getline('.')[col('.') - 2]  =~ '\s'
-endfunction
-
-inoremap <expr><tab> SmartTab()
-
-
 " Plugin: neoterm {{{1
 
 nnoremap <silent> ,t- :call neoterm#close()<cr>
