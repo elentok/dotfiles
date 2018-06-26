@@ -2,13 +2,15 @@
 
 source $DOTF/framework
 
+branch_to_pull=${1:-develop}
+
 branch=$(git my-branch)
 
-echo -e "${BLUE}➜ Switching to develop branch...$RESET"
-git checkout develop
+echo -e "${BLUE}➜ Switching to ${branch_to_pull} branch...$RESET"
+git checkout ${branch_to_pull}
 echo
 
-echo -e "${BLUE}➜ Pulling develop branch...$RESET"
+echo -e "${BLUE}➜ Pulling ${branch_to_pull} branch...$RESET"
 git pull
 echo
 
