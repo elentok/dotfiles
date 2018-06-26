@@ -98,6 +98,8 @@ nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
+set completefunc=LanguageClient#complete
+
 function! SmartTab()
   " if the completion popup is visible
   if pumvisible()
@@ -105,7 +107,9 @@ function! SmartTab()
   elseif IsBeginningOfLine() || IsLastCharWhitespace()
     return "\<tab>"
   else
-    if &omnifunc != ''
+    if &completefunc != ''
+      return "\<c-x>\<c-u>"
+    elseif &omnifunc != ''
       return "\<c-x>\<c-o>"
     else
       return "\<c-x>\<c-n>"
