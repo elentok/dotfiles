@@ -180,6 +180,7 @@ let g:ale_linters = {
       \ 'go': ['gofmt', 'go vet', 'gometalinter'],
       \ 'html': ['htmlhint'],
       \ 'scss': ['sasslint'],
+      \ 'javascript': ['eslint'],
       \ 'typescript': ['tslint', 'tsserver', 'typecheck'],
       \}
 
