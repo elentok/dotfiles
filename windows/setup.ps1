@@ -7,7 +7,7 @@ if (!(Get-Command choco -errorAction SilentlyContinue)) {
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 
 choco install -y nodejs googlechrome 7zip git vscode keepass telegram doublecmd libreoffice vlc `
-  irfanview irfanviewplugins Everything transgui procexp
+  irfanview irfanviewplugins Everything transgui procexp wsltty
 
 Write-Output 'Installing yarn'
 npm i -g yarn
