@@ -8,3 +8,6 @@ export PATH=$BREW_HOME/bin:$PATH
 
 sudo xcodebuild -license accept
 sudo xcode-select --install
+
+export PATH=$BREW_HOME/.bin:$PATH
+brew update
