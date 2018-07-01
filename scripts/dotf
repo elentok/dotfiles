@@ -115,7 +115,9 @@ base_plugins() {
   install_package htop
   install_package --yum=ImageMagick imagemagick
 
-  is_arch && pacman_install openssh
+  if is_arch; then
+    pacman_install openssh
+  fi
 }
 
 gui_plugins() {

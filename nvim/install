@@ -20,8 +20,6 @@ main() {
 }
 
 install_requirements() {
-  dotf i ripgrep
-
   if is_mac; then
     # python3 is required for the deoplete plugin
     brew_install python3
