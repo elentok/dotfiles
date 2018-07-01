@@ -4,12 +4,12 @@ source $DOTF/framework
 
 header "GUI Apps"
 
-COMMON="vlc feh gimp qalculate-gtk"
+COMMON="vlc feh gimp qalculate-gtk keepassxc"
 
 if is_arch; then
-  pacman_install $COMMON keepassxc gvfs
+  pacman_install $COMMON gvfs
 elif is_debian; then
-  apt_install keepassx $COMMON
+  apt_install $COMMON
 elif is_fedora; then
-  yum_install keepassxc gimp
+  yum_install $COMMON
 fi
