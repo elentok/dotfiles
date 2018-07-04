@@ -73,14 +73,6 @@ endfunc
 vnoremap <Leader>ys :call CopyThroughSSH()<cr>
 
 
-" When running inside abudo disable the 'violent' quit commands {{{1
-if $NVIM_KEEP_ALIVE != "" || exists("g:gui_oni")
-  cabbr qa echo ':qa has been disabled'<cr>
-  cabbr wqa echo ':wqa has been disabled'<cr>
-  cabbr cq echo ':cq has been disabled'<cr>
-
-  let $NVIM_KEEP_ALIVE=""
-endif
 
 " Git {{{1
 
