@@ -78,7 +78,21 @@ vnoremap <Leader>ys :call CopyThroughSSH()<cr>
 
 command! Gca Gcommit --amend
 
+" Typescript {{{1
+function! Elentok_TypescriptMappings()
+  nnoremap K :TSDoc<cr>
+  nnoremap gd :TSDef<cr>
+  nnoremap <Leader>tr :TSRename<cr>
+  nnoremap <Leader>tf :TSRefs<cr>
+endfunction
+
+augroup Elentok_Typescript
+  autocmd!
+  autocmd FileType typescript call Elentok_TypescriptMappings()
+augroup END
+
 " Intellisense/Autocomplete {{{1
+
 let g:LanguageClient_serverCommands = {
     \ 'javascript': ['javascript-typescript-stdio'],
     \ 'typescript': ['javascript-typescript-stdio'],
@@ -86,9 +100,9 @@ let g:LanguageClient_serverCommands = {
 
 let g:LanguageClient_diagnosticsEnable = 0
 
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+" nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+" nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 set completefunc=LanguageClient#complete
 
