@@ -103,8 +103,8 @@ noremap <Leader>oc :Calendar -view=year -split=vertical -width=27<cr>
 noremap <silent> <C-\> :NERDTreeFind<cr>:vertical res 30<cr>
 
 " Editing {{{1
-" noremap <c-_> :call ToggleHebrew()<cr>
-" inoremap <c-_> <c-o>:call ToggleHebrew()<cr>
+noremap <c-_> :call ToggleHebrew()<cr>
+inoremap <c-_> <c-o>:call ToggleHebrew()<cr>
 noremap <Leader>ehs :SplitjoinSplit<cr>
 noremap <Leader>ehj :SplitjoinJoin<cr>
 noremap <backspace> zc
