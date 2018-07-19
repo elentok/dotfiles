@@ -1,3 +1,5 @@
+const readline = require('readline')
+
 const F = {
   COLORS: {
     black: '\x1B[30m',
@@ -22,13 +24,26 @@ const F = {
   },
 
   printProgress(message) {
-    process.stdout.write(
-      `${this.HOURGLASS} ${this.COLORS.blue}${message}...${this.RESET}`
-    )
+    process.stdout.write(`${this.HOURGLASS} ${this.COLORS.blue}${message}...${this.RESET}`)
   },
 
   clearLine() {
     process.stdout.write(this.CLEAR_LINE)
+  },
+
+  ask(question) {
+    return new Promise(resolve => {
+      const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
+      rl.question(question, answer => {
+        rl.close()
+        resolve(answer)
+      })
+    })
+  },
+
+  confirm(question) {
+    const prettyQuestion = `${F.COLORS.yellow} ${question} [y/N]? ${F.RESET}`
+    return F.ask(prettyQuestion).then(answer => /^[yY](es)?/.test(answer))
   }
 }
 
