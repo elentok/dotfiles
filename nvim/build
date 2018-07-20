@@ -3,18 +3,27 @@
 source $DOTF/framework
 source $DOTF/scripts/build-helper
 
-prepare_build neovim v0.2.2 "$*"
+prepare_build neovim v0.3.1 "$*"
 
 if is_debian; then
-  apt_install libtool-bin autoconf automake cmake g++ pkg-config \
-    python-pip python-dev unzip
+  apt_install ninja-build gettext libtool libtool-bin autoconf \
+    automake cmake g++ pkg-config unzip
+elif is_mac; then
+  brew_install ninja
+  brew_install libtool
+  brew_install automake
+  brew_install cmake
+  brew_install pkg-config
+  brew_install gettext
 fi
 
 git clone --depth 1 --branch $VERSION https://github.com/neovim/neovim.git
 
 cd neovim
-make install \
-  CMAKE_EXTRA_FLAGS=-DCMAKE_INSTALL_PREFIX=$INSTALL_DIR \
+make \
+  CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$INSTALL_DIR" \
   CMAKE_BUILD_TYPE=RelWithDebInfo
+
+make install
 
 install_symlinks bin/nvim
