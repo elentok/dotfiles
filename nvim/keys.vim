@@ -154,6 +154,8 @@ noremap ,ya :%y+<cr>
 
 " Surround {{{1
 
+vmap <Leader>b c**<C-R>"**<ESC>
+
 " <Leader># Surround a word with #{ruby interpolation}
 map <Leader># ysiw#
 vmap <Leader># c#{<C-R>"}<ESC>
