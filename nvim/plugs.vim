@@ -76,13 +76,14 @@ if has('nvim')
   if !exists('g:gui_oni')
     Plug 'kristijanhusak/vim-js-file-import', { 'for': 'javascript' }
 
-    Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
+    " Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
     " Plug 'autozimu/LanguageClient-neovim', {
         " \ 'branch': 'next',
         " \ 'do': 'bash install.sh',
         " \ }
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'Shougo/neco-vim'
+    " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    " Plug 'Shougo/neco-vim'
+    Plug 'neoclide/coc.nvim', {'do': 'yarn install'}
   endif
 endif
 
