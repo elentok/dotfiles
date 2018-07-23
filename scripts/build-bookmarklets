@@ -1,0 +1,42 @@
+#!/usr/bin/env node
+
+const fs = require('fs')
+const path = require('path')
+const UglifyES = require('uglify-es')
+
+const HEADER = `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookmarklets</title>
+  </head>
+  <body>
+`
+
+const FOOTER = `</body>
+</html>
+`
+
+let dirname = process.cwd()
+if (process.argv.length > 2) {
+  dirname = process.argv[2]
+}
+
+const outputFilename = path.join(dirname, 'bookmarklets.html')
+const stream = fs.createWriteStream(outputFilename)
+stream.write(HEADER)
+
+fs.readdirSync(dirname).forEach(file => {
+  if (!/\.js/.test(file)) return
+
+  console.info(`Building ${file}...`)
+
+  const source = fs.readFileSync(path.join(dirname, file)).toString()
+  const result = UglifyES.minify(source)
+  if (result.error != null) {
+    console.error('Build failed: ', result.error)
+  } else {
+    stream.write(`  <a href="javascript:${escape(result.code)}">${file}</a>\n`)
+  }
+})
+
+stream.end(FOOTER)
