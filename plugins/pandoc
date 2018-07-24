@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+source $DOTF/scripts/build-helper
+
+MAC_VERSION=2.2.2.1
+
+main() {
+  if has_command pandoc; then return; fi
+
+  if is_debian; then
+    apt_install pandoc
+  elif is_arch; then
+    pacman_install pandoc
+  elif is_mac; then
+    PRIMARY=yes install_on_mac
+  fi
+}
+
+install_on_mac() {
+  prepare_build pandoc $MAC_VERSION "$*"
+
+  url="https://github.com/jgm/pandoc/releases/download/$VERSION/pandoc-$VERSION-macOS.zip"
+  curl -L "$url" -o $BUILD_DIR/pandoc.zip  
+
+  cd $INSTALL_DIR
+  unzip $BUILD_DIR/pandoc.zip
+
+  install_symlinks pandoc-$VERSION/bin/pandoc
+}
+
+main
