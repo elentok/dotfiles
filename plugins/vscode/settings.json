@@ -1,20 +1,53 @@
 {
-  "window.zoomLevel": 1,
-  "editor.fontFamily": "'mononoki Nerd Font Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
-  "editor.minimap.enabled": false,
-  "terminal.integrated.lineHeight": 1.1,
-  "editor.formatOnSave": true,
-  "editor.detectIndentation": false,
-  "editor.tabSize": 2,
-  "editor.rulers": [
-    80,
-    100
-  ],
   "cSpell.userWords": [
     "elentok",
     "noopener",
     "noreferrer"
   ],
+  "editor.detectIndentation": false,
+  "editor.fontFamily": "'mononoki Nerd Font Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+  "editor.formatOnSave": true,
+  "editor.minimap.enabled": false,
+  "editor.rulers": [
+    80,
+    100
+  ],
+  "editor.tabSize": 2,
+  "git.autofetch": true,
+  "gitlens.advanced.messages": {
+    "suppressShowKeyBindingsNotice": true
+  },
+  "gitlens.historyExplorer.enabled": true,
+  "puglint.enable": true,
+  "search.exclude": {
+    "**/dist": true,
+    "**/vendor": true,
+    "**/node_modules": true,
+    "**/bower_components": true
+  },
+  "sync.askGistName": false,
+  "sync.autoDownload": false,
+  "sync.autoUpload": false,
+  "sync.forceDownload": false,
+  "sync.gist": "d343aab8ec48a9f77c6f75a7275a2f6a",
+  "sync.host": "",
+  "sync.lastDownload": "2018-05-24T06:19:03.494Z",
+  "sync.lastUpload": "",
+  "sync.pathPrefix": "",
+  "sync.quietSync": false,
+  "sync.removeExtensions": true,
+  "sync.syncExtensions": true,
+  "terminal.integrated.lineHeight": 1.1,
+  "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\bash.exe",
+  "terminal.integrated.shellArgs.windows": [
+    "-c",
+    "zsh"
+  ],
+  "vim.foldfix": true,
+  "vim.handleKeys": {
+    "<C-k>": false,
+    "<C-b>": false
+  },
   "vim.insertModeKeyBindings": [
     {
       "before": [
@@ -26,40 +59,7 @@
       ]
     }
   ],
-  "vim.handleKeys": {
-    "<C-k>": false,
-    "<C-b>": false,
-    "<C-r>": false
-  },
-  "sync.gist": "d343aab8ec48a9f77c6f75a7275a2f6a",
-  "sync.host": "",
-  "sync.pathPrefix": "",
-  "sync.quietSync": false,
-  "sync.askGistName": false,
-  "sync.removeExtensions": true,
-  "sync.syncExtensions": true,
-  "sync.autoDownload": false,
-  "sync.autoUpload": false,
-  "sync.lastUpload": "",
-  "sync.lastDownload": "2018-05-24T06:19:03.494Z",
-  "sync.forceDownload": false,
-  "gitlens.advanced.messages": {
-    "suppressShowKeyBindingsNotice": true
-  },
-  "gitlens.historyExplorer.enabled": true,
-  "git.autofetch": true,
   "vim.useSystemClipboard": true,
-  "puglint.enable": true,
-  "search.exclude": {
-    "**/dist": true,
-    "**/vendor": true,
-    "**/node_modules": true,
-    "**/bower_components": true
-  },
-  "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\bash.exe",
-  "terminal.integrated.shellArgs.windows": [
-    "-c",
-    "zsh"
-  ],
-  "vim.foldfix": true
+  "vim.visualstar": true,
+  "window.zoomLevel": 1,
 }
