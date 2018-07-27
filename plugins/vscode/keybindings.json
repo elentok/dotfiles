@@ -33,5 +33,15 @@
     "key": "ctrl+k",
     "command": "workbench.action.focusAboveGroup",
     "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+w s",
+    "command": "workbench.action.splitEditorDown",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+w q",
+    "command": "workbench.action.closeActiveEditor",
+    "when": "editorTextFocus"
   }
 ]
