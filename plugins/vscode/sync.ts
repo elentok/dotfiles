@@ -14,6 +14,10 @@ class Syncer {
     this.syncConfigFiles('settings.json')
     this.syncConfigFiles('keybindings.json')
     new ExtensionSyncer(this.configPath).run()
+
+    if (process.platform === 'darwin') {
+      exec('defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false')
+    }
   }
 
   private getConfigPath(): string {
