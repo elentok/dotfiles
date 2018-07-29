@@ -4,7 +4,8 @@
     "Epicardium",
     "elentok",
     "noopener",
-    "noreferrer"
+    "noreferrer",
+    "surfactant"
   ],
   "editor.detectIndentation": false,
   "editor.fontFamily": "'mononoki Nerd Font Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
@@ -58,6 +59,19 @@
       ],
       "after": [
         "<Esc>"
+      ]
+    }
+  ],
+  "vim.leader": ",",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        ",",
+        "t",
+        "b"
+      ],
+      "commands": [
+        "workbench.action.toggleSidebarVisibility"
       ]
     }
   ],
