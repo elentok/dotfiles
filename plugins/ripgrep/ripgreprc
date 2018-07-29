@@ -3,3 +3,5 @@
 haml:*.haml
 --type-add
 coffee:*.coffee
+--type-add
+pug:*.pug
