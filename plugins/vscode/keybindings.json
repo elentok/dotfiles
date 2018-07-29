@@ -15,11 +15,6 @@
     "when": "editorTextFocus && !editorReadonly && vim.mode != 'Insert'"
   },
   {
-    "key": ", t b",
-    "command": "workbench.action.toggleSidebarVisibility",
-    "when": "editorTextFocus && vim.mode != 'Insert'"
-  },
-  {
     "key": "ctrl+h",
     "command": "workbench.action.focusLeftGroup",
     "when": "editorTextFocus"
