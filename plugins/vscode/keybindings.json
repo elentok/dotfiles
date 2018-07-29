@@ -26,8 +26,20 @@
   },
   {
     "key": "ctrl+j",
-    "command": "workbench.action.focusRightGroup",
+    "command": "workbench.action.focusBelowGroup",
     "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+s",
+    "command": "workbench.action.files.save"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "workbench.action.quickOpen"
+  },
+  {
+    "key": "shift+ctrl+p",
+    "command": "workbench.action.showCommands"
   },
   {
     "key": "ctrl+k",
