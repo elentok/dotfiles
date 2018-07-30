@@ -60,5 +60,13 @@
     "key": "ctrl+w q",
     "command": "workbench.action.closeActiveEditor",
     "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+w w",
+    "command": "extension.switchWorkspace",
+  },
+  {
+    "key": "ctrl+w ctrl+w",
+    "command": "extension.switchWorkspaceNewWindow",
   }
 ]

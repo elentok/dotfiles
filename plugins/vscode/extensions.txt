@@ -29,3 +29,4 @@ glen-84.sass-lint
 DavidAnson.vscode-markdownlint
 DougFinke.vscode-pandoc
 stkb.rewrap
+sadesyllas.vscode-workspace-switcher

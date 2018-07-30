@@ -77,5 +77,8 @@
   ],
   "vim.useSystemClipboard": true,
   "vim.visualstar": true,
+  "vscodeWorkspaceSwitcher.paths": [
+    "~/.config/code-workspaces"
+  ],
   "window.zoomLevel": 1,
 }
