@@ -29,16 +29,15 @@ if g:os == 'windows'
   let $temp_dir=$TEMP . '\\vim'
   let $vimrc=expand('<sfile>:p')
   let $vimfiles=expand('<sfile>:p:h')
-  "let $vimrc=$VIMRUNTIME . '/../.vimrc'
-  "let $vimfiles=$VIMRUNTIME . '/../vimfiles'
   let $delimiter='\\'
   let $defaultfont="Consolas:h12:cANSI"
   let $alternatefont="Courier_New:h12:cHEBREW"
   let g:ruby_path='C:/ruby187'
   set grepprg="findstr /nI"
   let $opener='start'
-  set shell=powershell shellquote=( shellpipe=\| shellredir=> shellxquote=
-  set shellcmdflag=-NoLogo\ -NoProfile\ -ExecutionPolicy\ RemoteSigned\ -Command
+  " PowerShell doesn't work well with fzf:
+  "set shell=powershell shellquote=( shellpipe=\| shellredir=> shellxquote=
+  "set shellcmdflag=-NoLogo\ -NoProfile\ -ExecutionPolicy\ RemoteSigned\ -Command
 else
   let $temp_dir='/tmp/vim-' . $USER
   if has('nvim')

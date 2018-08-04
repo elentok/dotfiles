@@ -18,18 +18,26 @@ tnoremap <c-l> <c-\><c-n><c-w>l
 
 " Tmux-like <c-a> mappings {{{1
 
+if g:os == 'windows'
+  let g:termshell='powershell'
+else
+  let g:termshell=''
+endif
+
+command! Term exec 'terminal ' . g:termshell
+
 nnoremap <c-a>r :so $vimrc<cr>
-nnoremap <c-a>c :tabe<cr>:terminal<cr>
+nnoremap <c-a>c :tabe<cr>:Term<cr>
 tnoremap <c-a>a <c-a>
-tnoremap <c-a>c <c-\><c-n>:tabe<cr>:terminal<cr>
+tnoremap <c-a>c <c-\><c-n>:tabe<cr>:Term<cr>
 
 nnoremap <c-a>v :TermVertical<cr>
 tnoremap <c-a>v <c-\><c-n>:TermVertical<cr>
-command! TermVertical wincmd v | wincmd l | terminal
+command! TermVertical wincmd v | wincmd l | Term
 
 nnoremap <c-a>s :TermHorizontal<cr>
 tnoremap <c-a>s <c-\><c-n>:TermHorizontal<cr>
-command! TermHorizontal wincmd s | wincmd j | terminal
+command! TermHorizontal wincmd s | wincmd j | Term
 
 " Remain in insert mode {{{1
 augroup Elentok_Terminal
