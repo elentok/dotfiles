@@ -85,11 +85,11 @@ endif
 
 if !exists('g:gui_oni')
   let g:one_allow_italics = 1
-  colorscheme one
+  silent! colorscheme one
   set background=dark
   " call one#highlight('Normal', '', '1a1a1a', '')
-  call one#highlight('Folded', '555555', '111111', '')
-  call one#highlight('VertSplit', '', '5c6370', 'none')
+  silent! call one#highlight('Folded', '555555', '111111', '')
+  silent! call one#highlight('VertSplit', '', '5c6370', 'none')
   hi TabLine gui=none
   let g:elentok_colors_initialized = 1
 endif
@@ -289,5 +289,9 @@ if !exists('$RIPGREP_CONFIG_PATH')
 endif
 
 if !exists('$FZF_DEFAULT_COMMAND')
-  let $FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+  if g:os == 'windows'
+    let $FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules}/*"'
+  else
+    let $FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+  endif
 endif
