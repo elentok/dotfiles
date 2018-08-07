@@ -78,57 +78,47 @@ vnoremap <Leader>ys :call CopyThroughSSH()<cr>
 
 command! Gca Gcommit --amend
 
-" Typescript {{{1
-function! Elentok_TypescriptMappings()
-  nnoremap K :TSDoc<cr>
-  nnoremap gd :TSDef<cr>
-  nnoremap <Leader>tr :TSRename<cr>
-  nnoremap <Leader>tf :TSRefs<cr>
+" Language Servers {{{1
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" Use <C-x></C-u> to complete custom sources, including emoji, include and words
+imap <silent> <C-x><C-u> <Plug>(coc-complete-custom)
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-augroup Elentok_Typescript
-  autocmd!
-  autocmd FileType typescript call Elentok_TypescriptMappings()
-augroup END
+" Use <c-space> for trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
 
-" Intellisense/Autocomplete {{{1
+" Use <cr> for confirm completion.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-let g:LanguageClient_serverCommands = {
-    \ 'javascript': ['javascript-typescript-stdio'],
-    \ 'typescript': ['javascript-typescript-stdio'],
-    \ }
+" Use `[c` and `]c` for navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
-let g:LanguageClient_diagnosticsEnable = 0
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
-" nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-" nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+" Use K for show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-set completefunc=LanguageClient#complete
-
-function! SmartTab()
-  " if the completion popup is visible
-  if pumvisible()
-    return "\<c-n>"
-  elseif IsBeginningOfLine() || IsLastCharWhitespace()
-    return "\<tab>"
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
   else
-    if &completefunc != ''
-      return "\<c-x>\<c-u>"
-    elseif &omnifunc != ''
-      return "\<c-x>\<c-o>"
-    else
-      return "\<c-x>\<c-n>"
-    end
-  end
+    call CocAction('doHover')
+  endif
 endfunction
 
-function! IsBeginningOfLine()
-  return col('.') == 1
-endfunction
-
-function! IsLastCharWhitespace()
-  return getline('.')[col('.') - 2]  =~ '\s'
-endfunction
-
-inoremap <expr><tab> SmartTab()
+" Show signature help while editing
+autocmd CursorHoldI,CursorMovedI * silent! call CocAction('showSignatureHelp')
