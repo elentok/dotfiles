@@ -1,7 +1,7 @@
 # vim: foldmethod=marker
 
 # Modifiers {{{1
-set $mod Mod4
+set $mod Mod1
 set $shiftalt Shift+Mod1
 #set $mod Mod1
 
