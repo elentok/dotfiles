@@ -152,7 +152,11 @@ fi
 export N_PREFIX=$HOME/.n
 
 # Go {{{1
-export GOROOT=$BREW_HOME/opt/go/libexec
+if [ -e $HOME/.apps/go ]; then
+  export GOROOT=$HOME/.apps/go
+else
+  export GOROOT=$BREW_HOME/opt/go/libexec
+fi
 export MAIN_GOPATH=$HOME/go
 export GOPATH=$MAIN_GOPATH
 export GO15VENDOREXPERIMENT=1
