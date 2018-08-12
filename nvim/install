@@ -133,10 +133,13 @@ install_cli_tools() {
   npm_install jsonlint
   npm_install sass-lint
   npm_install javascript-typescript-langserver
-  npm_install tslint-server
-  npm_install css-langserver
+
+  npm_install typescript
   npm_install vscode-html-languageserver-bin 
   npm_install vscode-json-languageserver
+  npm_install css-langserver
+  npm_install eslint-server
+  npm_install tslint-server
   pip3_install pylint
   pip3_install yamllint
 
