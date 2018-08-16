@@ -122,3 +122,44 @@ endfunction
 
 " Show signature help while editing
 autocmd CursorHoldI,CursorMovedI * silent! call CocAction('showSignatureHelp')
+
+" Go To Project {{{1
+function! Proj(dir)
+  tabe
+  exec "tcd " . a:dir
+endfunction
+
+command! -complete=dir -nargs=+ Proj call Proj("<args>")
+
+command! FZFProj tabe | call fzf#run({
+      \ "source": "list-projects",
+      \ "options": "--prompt 'Project> '",
+      \ "sink": 'Proj'})
+
+noremap <Leader>gp :FZFProj<cr>
+
+" Automatically set working directory {{{1
+function! SetBufferWorkingDirectory()
+  if !exists('b:working_dir')
+    let b:working_dir = FindWorkingDirectory()
+  endif
+
+  exec 'lcd ' . b:working_dir
+endfunction
+
+function! FindWorkingDirectory()
+  lcd %:p:h
+
+  let git_dir = system('git rev-parse --show-toplevel')
+  let is_git_dir = empty(matchstr(git_dir, '^fatal:.*'))
+  if is_git_dir
+    return git_dir
+  endif
+
+  return getcwd()
+endfunction
+
+augroup Elentok_AutoWorkingDirectory
+  autocmd!
+  autocmd BufEnter * call SetBufferWorkingDirectory()
+augroup END
