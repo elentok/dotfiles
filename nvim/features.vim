@@ -163,3 +163,12 @@ augroup Elentok_AutoWorkingDirectory
   autocmd!
   autocmd BufEnter * call SetBufferWorkingDirectory()
 augroup END
+
+" Redraw when gaining focus {{{1
+
+if exists('#FocusGained')
+  augroup Elentok_AutoRedraw
+    autocmd!
+    autocmd FocusGained * silent !tput clear | redraw!
+  augroup END
+endif
