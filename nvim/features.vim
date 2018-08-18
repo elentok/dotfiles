@@ -128,11 +128,12 @@ autocmd CursorHoldI,CursorMovedI * silent! call CocAction('showSignatureHelp')
 function! Proj(dir)
   tabe
   exec "tcd " . a:dir
+  FZF
 endfunction
 
 command! -complete=dir -nargs=+ Proj call Proj("<args>")
 
-command! FZFProj tabe | call fzf#run({
+command! FZFProj call fzf#run({
       \ "source": "list-projects",
       \ "options": "--prompt 'Project> '",
       \ "sink": 'Proj'})
