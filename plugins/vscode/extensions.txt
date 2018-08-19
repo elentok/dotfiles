@@ -13,7 +13,6 @@ ms-vscode.cpptools
 ms-vscode.Go
 ms-vscode.PowerShell
 PeterJausovec.vscode-docker
-rebornix.Ruby
 Shan.code-settings-sync
 sleistner.vscode-fileutils
 slevesque.vscode-autohotkey
@@ -30,3 +29,6 @@ DavidAnson.vscode-markdownlint
 DougFinke.vscode-pandoc
 stkb.rewrap
 sadesyllas.vscode-workspace-switcher
+felipecaputo.git-project-manager
+msjsdiag.debugger-for-chrome
+rebornix.ruby
