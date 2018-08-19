@@ -82,7 +82,6 @@ alias total='awk "{ s+=\$1 } END { print s }"'
 alias ts='tig status'
 alias vz='file="$(edit-zsh-dotfile)" && source $file'
 alias x=exit
-alias yr='yarn run'
 alias tailpow='tail -f $(find ~/Library/Logs/Pow -name "*.log" | fzf)'
 alias ports='sudo echo && (sudo lsof -i -n -P | fzf --header-lines=1)'
 
@@ -150,6 +149,23 @@ dr() {
     print -s "docker-compose run $cmd" && \
       echo "> docker-compose run $cmd" && \
       docker-compose run $cmd
+  fi
+}
+
+yr() {
+  # calling "print -s" adds the command to zsh history
+
+  if [ $# -gt 0 ]; then
+    yarn run $@
+    exit $?
+  fi
+
+  cmd="$(npm-scripts | fzf --ansi --exit-0 | awk '{print $1}')"
+
+  if [ -n "$cmd" ]; then
+    print -s "yarn run $cmd" && \
+      echo "> yarn run $cmd" && \
+      yarn run $cmd
   fi
 }
 
