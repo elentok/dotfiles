@@ -5,7 +5,8 @@
     "elentok",
     "noopener",
     "noreferrer",
-    "surfactant"
+    "surfactant",
+    "waze"
   ],
   "editor.detectIndentation": false,
   "editor.fontFamily": "'mononoki Nerd Font Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
