@@ -34,7 +34,7 @@ func! AutoFormat()
     return
   endif
   if index(g:autoformat_filetypes, &filetype) != -1
-    Neoformat
+    silent Neoformat
   endif
 endfunc
 
