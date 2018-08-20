@@ -149,8 +149,6 @@ function! SetBufferWorkingDirectory()
     let b:working_dir = FindWorkingDirectory()
   endif
 
-  echomsg 'cd: ' . b:working_dir
-
   exec 'cd ' . b:working_dir
 endfunction
 
@@ -169,6 +167,7 @@ endfunction
 augroup Elentok_AutoWorkingDirectory
   autocmd!
   autocmd BufRead * call SetBufferWorkingDirectory()
+  autocmd WinEnter * call SetBufferWorkingDirectory()
 augroup END
 
 " Redraw when gaining focus {{{1
