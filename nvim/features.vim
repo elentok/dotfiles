@@ -142,11 +142,17 @@ noremap <Leader>gp :FZFProj<cr>
 
 " Automatically set working directory {{{1
 function! SetBufferWorkingDirectory()
+  if &buftype ==# 'terminal'
+    return
+  end
+
   if !exists('b:working_dir')
     let b:working_dir = FindWorkingDirectory()
   endif
 
-  exec 'lcd ' . b:working_dir
+  echomsg 'Changing directory to ' . b:working_dir
+
+  exec 'cd ' . b:working_dir
 endfunction
 
 function! FindWorkingDirectory()
