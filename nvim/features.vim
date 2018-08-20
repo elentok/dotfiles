@@ -128,7 +128,6 @@ autocmd CursorHoldI,CursorMovedI * silent! call CocAction('showSignatureHelp')
 function! Proj(dir)
   tabe
   exec "tcd " . a:dir
-  FZF
 endfunction
 
 command! -complete=dir -nargs=+ Proj call Proj("<args>")
@@ -150,7 +149,7 @@ function! SetBufferWorkingDirectory()
     let b:working_dir = FindWorkingDirectory()
   endif
 
-  echomsg 'Changing directory to ' . b:working_dir
+  echomsg 'cd: ' . b:working_dir
 
   exec 'cd ' . b:working_dir
 endfunction
@@ -169,7 +168,7 @@ endfunction
 
 augroup Elentok_AutoWorkingDirectory
   autocmd!
-  autocmd BufEnter * call SetBufferWorkingDirectory()
+  autocmd BufRead * call SetBufferWorkingDirectory()
 augroup END
 
 " Redraw when gaining focus {{{1
