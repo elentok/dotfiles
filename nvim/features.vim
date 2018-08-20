@@ -177,6 +177,6 @@ augroup END
 if exists('#FocusGained')
   augroup Elentok_AutoRedraw
     autocmd!
-    autocmd FocusGained * silent !tput clear | redraw!
+    autocmd FocusGained * redraw!
   augroup END
 endif
