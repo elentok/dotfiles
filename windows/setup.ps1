@@ -13,7 +13,8 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-L
 choco install -y nodejs googlechrome 7zip git vscode keepass telegram doublecmd libreoffice vlc `
   irfanview irfanviewplugins Everything transgui procexp wsltty pandoc
 
-scoop install neovim fzf ripgrep git
+scoop bucket add extras
+scoop install neovim fzf ripgrep git firefox
 
 Write-Output 'Enabling SSH Agent'
 Set-Service -name "ssh-agent" -startuptype "automatic"
