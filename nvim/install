@@ -122,6 +122,13 @@ install_cli_tools() {
     brew_install global --with-pygments
   fi
 
+  if is_wsl; then
+    if missing_command win32yank; then
+      explain_win32yank
+      exit 1
+    fi
+  fi
+
   npm_install markserv
   npm_install htmlhint
   npm_install marked
@@ -135,7 +142,7 @@ install_cli_tools() {
   npm_install javascript-typescript-langserver
 
   npm_install typescript
-  npm_install vscode-html-languageserver-bin 
+  npm_install vscode-html-languageserver-bin
   npm_install vscode-json-languageserver
   npm_install css-langserver
   npm_install eslint-server
@@ -145,6 +152,16 @@ install_cli_tools() {
 
   is_fedora && yum_install redhat-rpm-config
   pip3_install neovim-remote
+}
+
+explain_win32yank() {
+  echo '=================================='
+  echo 'Missing win32yank!'
+  echo
+  echo '1. Download latest release from https://github.com/equalsraf/win32yank/releases'
+  echo '2. Extract win32yank.exe to C:/Windows/System32'
+  echo '3. In WSL symlink win32yank.exe to ~/bin/win32yank'
+  echo '=================================='
 }
 
 main $@
