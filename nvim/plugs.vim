@@ -42,8 +42,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'xolox/vim-misc'
 Plug 'rakr/vim-one'
 Plug 'KabbAmine/vCoolor.vim'
-
 Plug 'ryanoasis/vim-devicons'
+Plug 'davidbeckingsale/writegood.vim'
 
 " File formats:
 Plug 'vim-scripts/applescript.vim',       { 'for': 'applescript' }
