@@ -13,9 +13,9 @@
 
 export NVIM_KEEP_ALIVE=true
 
-if [ -z "$DISPLAY" ]; then
-  export DISPLAY=:0
-fi
+# if [ -z "$DISPLAY" ]; then
+  # export DISPLAY=:1
+# fi
 
 SESSIONS_DIR=$TMP/nvim-sessions
 mkdir -p $SESSIONS_DIR
