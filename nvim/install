@@ -39,10 +39,10 @@ install_requirements() {
 install_neovim() {
   if is_arch; then
     pacman_install neovim
-  elif is_mac; then
-    install_neovim_mac
-  else
-    if command_missing nvim; then
+  elif command_missing nvim; then
+    if is_mac; then
+      install_neovim_mac
+    else
       PRIMARY=yes $DOTF/nvim/build
     fi
   fi
