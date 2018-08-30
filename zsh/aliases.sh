@@ -118,6 +118,9 @@ if is_mac; then
   alias hda='hdiutil attach'
   alias hdd='hdiutil detach'
   alias hdi='hdiutil info'
+elif is_wsl; then
+  alias pbpaste='win32yank -o'
+  alias pbcopy='win32yank -i'
 else
   alias pbpaste='xclip -selection clipboard -out'
 

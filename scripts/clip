@@ -18,7 +18,7 @@ main() {
 
 copy() {
   if is_wsl; then
-    clip.exe
+    win32yank -i
   elif has_command pbcopy; then
     pbcopy
   elif has_command xclip; then
@@ -32,7 +32,7 @@ copy() {
 
 paste() {
   if is_wsl; then
-    powershell.exe -Command Get-Clipboard
+    win32yank -o
   elif has_command pbpaste; then
     pbpaste
   elif has_command xclip; then
