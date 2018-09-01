@@ -1,10 +1,8 @@
-Arch Linux
-==========
+# Arch Linux
 
 Based on the amazing [Arch Linux Wiki](https://wiki.archlinux.org/index.php/Beginners%27_guide)
 
-Installation
-------------
+## Installation
 
 ### Create Partitions
 
@@ -34,21 +32,19 @@ On a wired network, just enable the DHCP service:
 
 ```
 systemctl enable dhcpcd@{device-name}.service
-
 ```
 
-On a wireless network, connected to the access point and afterwards start the
-dhcp client manually (if you enable the service like in wired network it will
-delay the boot since it will try to enable DHCP without a WiFi connection):
+On a wireless network, connected to the access point and afterwards start the dhcp client manually
+(if you enable the service like in wired network it will delay the boot since it will try to enable
+DHCP without a WiFi connection):
 
 ```
 wpa_supplicant -i INTERFACE -c <(wpa_passphrase "SSID" "PASSWORD")
 dhcpcd INTERFACE
-
 ```
 
-Running the DHCP client manually is only for the installation process,
-afterwards you can use NetworkManager to do an easier setup.
+Running the DHCP client manually is only for the installation process, afterwards you can use
+NetworkManager to do an easier setup.
 
 ### Install
 
@@ -73,7 +69,6 @@ echo 'LANG=en_US.UTF-8' > /etc/locale.conf
 ```
 ln -s /usr/share/zoneinfo/{Zone}/{SubZone} /etc/localtime
 hwclock --systohc
-
 ```
 
 ### Grub
@@ -124,8 +119,7 @@ Install the packages required for making WiFi connections (post-boot):
 pacman -S iw wpa_supplicant NetworkManager
 ```
 
-Create user
------------
+## Create user
 
 ```
 useradd -m -G wheel -s /usr/bin/zsh {USER}
@@ -133,29 +127,26 @@ usermod -aG users {USER}
 passwd {USER}
 ```
 
-Run `visudo` and uncomment the line `%wheel ALL=(ALL) ALL` to allow all members
-of the `wheel` group to run `sudo`
+Run `visudo` and uncomment the line `%wheel ALL=(ALL) ALL` to allow all members of the `wheel` group
+to run `sudo`
 
-Install GUI
------------
+## Install GUI
 
 ```
 pacman -S cinnamon lightdm lightdm-gtk-greeter gnome-terminal xorg-server \
-  xorg-server-utils xclip
+  xclip ttf-ubuntu-font-family firefox
 
 pacman -S xf86-video-intel mesa-libgl # if you have an intel graphics card:
 
 systemctl enable lightdm.service # enable lightdm
 ```
 
-Install Google Chrome
----------------------
+## Install Google Chrome
 
 * Install [Yaourt](https://archlinux.fr/yaourt-en)
 * Run `yaourt -S google-chrome`
 
-i3
----
+## i3
 
 Install the network manager (service + applet):
 
@@ -165,20 +156,18 @@ systemctl enable NetworkManager
 systemctl start NetworkManager
 ```
 
-Audio
------
+## Audio
 
 ```
 sudo pacman -S pulseaudio pavucontrol
 ```
 
-
-MacBook Air
------------
+## MacBook Air
 
 ### Use better trackpad driver
 
 Install the mtrack driver:
+
 ```
 yaourt -S xf86-input-mtrack.git
 ```
