@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+pacman -Qs "$*" | grep '^local/' | sed 's#local/##' | awk '{ print $1 }'
