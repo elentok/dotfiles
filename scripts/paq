@@ -1,3 +1,12 @@
 #!/usr/bin/env bash
 
-pacman -Qs "$*" | grep '^local/' | sed 's#local/##' | awk '{ print $1 }'
+source $DOTF/framework
+
+if is_arch; then
+  pacman -Qs "$*" | grep '^local/' | sed 's#local/##' | awk '{ print $1 }'
+elif is_debian; then
+  dpkg -l | grep '^ii' | awk '{print $2}' | grep "$*"
+else
+  echo 'Unsupported operating system'
+  exit 1
+fi
