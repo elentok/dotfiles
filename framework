@@ -266,6 +266,12 @@ install_tgz() {
 
 # NPM {{{1
 npm_install() {
+  for pkg in $*; do
+    npm_install_single $pkg
+  done
+}
+
+npm_install_single() {
   bullet "Installing ${1}..."
 
   if ! has_command npm; then
