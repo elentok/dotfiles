@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+package=$(pacman -S --quiet --search | fzf --exit-0 --preview 'pacman -Ss ^{}$')
+
+sudo pacman -S $package
