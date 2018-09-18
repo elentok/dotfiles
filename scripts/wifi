@@ -11,7 +11,7 @@ source $DOTF/framework
 DEVICE=en0
 
 main() {
-  cmd=$1
+  cmd=${1:-}
   shift
   if has_command "wifi_${cmd}"; then
     wifi_${cmd} "$@"
