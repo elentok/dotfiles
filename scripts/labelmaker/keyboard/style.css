@@ -1,0 +1,21 @@
+body {
+  font-family: 'Roboto Condensed', serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  width: 700px;
+}
+
+.key {
+  border: 2px solid #ccc;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+  padding: 2px 4px;
+  font-size: 50px;
+}
