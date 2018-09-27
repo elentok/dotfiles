@@ -12,6 +12,7 @@ window.keys = [
   'L1',
   'L1',
   'Tab',
+  '\' " ({fab fa-windows})',
   '{fab fa-windows}',
   '{fas fa-backspace}',
   'Home',
@@ -20,7 +21,7 @@ window.keys = [
   'Pg{fas fa-long-arrow-alt-down}',
   'F11',
   'F12',
-  '⏎',
+  '{{⏎}}',
   '{fas fa-volume-up}',
   '{fas fa-volume-down}',
   '{far fa-play-circle}',
@@ -34,5 +35,9 @@ window.keys = [
   '7',
   '8',
   '9',
-  '*'
+  '*',
+  '[{',
+  ']}',
+  '.',
+  '['
 ]

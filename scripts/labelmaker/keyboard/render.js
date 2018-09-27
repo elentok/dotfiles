@@ -9,8 +9,11 @@ function render(keys) {
     // if (key.primary) add(body, div('key__primary', key.primary))
     // if (key.shift) add(body, div('key__shift', key.shift))
 
-    const html = key.replace(/\{([^}]+)\}/, (_, className) => `<i class="${className}" />`)
+    const html = key
+      .replace(/\{\{([^}]+)\}\}/, (_, content) => `<strong>${content}</strong>`) 
+      .replace(/\{([^}]+)\}/, (_, className) => `<i class="${className}"></i>`)
     const el = div('key')
+    console.log(html)
     el.innerHTML = html
 
     add(root, el)
