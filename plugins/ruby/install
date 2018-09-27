@@ -23,11 +23,8 @@ main() {
 install_requirements() {
   if is_debian; then
     # As instructed in https://github.com/rbenv/ruby-build/wiki
-    apt_install autoconf bison build-essential libssl1.0-dev libyaml-dev \
-      zlib1g-dev libncurses5-dev libffi-dev libgdbm3 \
-      libgdbm-dev
-
-    #libreadline6-dev 
+    apt-get install autoconf bison build-essential libssl-dev libyaml-dev
+      libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm5 libgdbm-dev
   fi
 }
 
