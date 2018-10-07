@@ -71,7 +71,7 @@ Plug 'leafgarland/typescript-vim',        { 'for': 'typescript' }
 Plug 'PProvost/vim-ps1'
 
 if has('nvim')
-  " Plug 'w0rp/ale'
+  Plug 'w0rp/ale'
   Plug 'kassio/neoterm'
 
   if !exists('g:gui_oni')
