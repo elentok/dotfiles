@@ -85,7 +85,7 @@ if has('nvim')
         " \ }
     " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     " Plug 'Shougo/neco-vim'
-    Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+    Plug 'neoclide/coc.nvim', {'do': 'yarn install' }
   endif
 endif
 
