@@ -4,6 +4,7 @@ filetype plugin indent off
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'AndrewRadev/sideways.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Raimondi/delimitMate'
