@@ -107,7 +107,7 @@ install_plugins() {
 
   extensions="coc-tsserver coc-json coc-html coc-eslint coc-tslint coc-css coc-prettier"
   bullet "Running CocInstall... "
-  nvim --headless "+CocInstall $extensions" +qall
+  nvim "+CocInstall $extensions"
   success "done"
 }
 

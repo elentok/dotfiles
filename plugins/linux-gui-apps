@@ -4,10 +4,10 @@ source $DOTF/framework
 
 header "GUI Apps"
 
-COMMON="vlc feh gimp qalculate-gtk keepassxc gvfs-smb gnome-screenshot"
+COMMON="vlc feh gimp qalculate-gtk keepassxc gnome-screenshot"
 
 if is_arch; then
-  pacman_install $COMMON gvfs
+  pacman_install $COMMON gvfs gvfs-smb 
 elif is_debian; then
   apt_install $COMMON
 elif is_fedora; then
