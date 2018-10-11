@@ -101,7 +101,7 @@ is_fedora() {
   [ "$DISTRO" = "fedora" ]
 }
 
-# TMP 
+# TMP
 export TMP=/tmp
 if is_termux; then
   export TMP=$HOME/tmp
@@ -185,7 +185,9 @@ $HOME/.local/bin"
 
 [ -n "$BREW_HOME" ] && PATH=$PATH:$BREW_HOME/bin:$BREW_HOME/sbin
 [ -n "$GOROOT" ] && PATH=$PATH:$GOROOT/bin:$MAIN_GOPATH/bin
-[ -d $HOME/Library/Python/3.6/bin ] && PATH=$PATH:$HOME/Library/Python/3.6/bin
+for ver in 3.6 3.7; do
+  [ -d $HOME/Library/Python/$ver/bin ] && PATH=$PATH:$HOME/Library/Python/$ver/bin
+done
 
 # replace bsd binaries with gnu
 for pkg in coreutils findutils gnu-sed; do
