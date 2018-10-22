@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+function count_lines() {
+  rg -v '^\s*$' -g "$1" src/ | wc -l
+}
+
+echo 'Remaining JS files:'
+echo '==================='
+rg --files -g '*js' src/
+
+
+echo
+echo 'Summary:'
+echo '========'
+js=$(rg --files -g '*js' src/ | wc -l)
+ts=$(rg --files -g '*ts' src/ | wc -l)
+echo "JS files: $js"
+echo "TS files: $ts"
+
+js_lines=$(count_lines '*js')
+ts_lines=$(count_lines '*ts')
+echo "JS lines: $js_lines"
+echo "TS lines: $ts_lines"
+
+total=$(($js + $ts))
+echo "Progress (files): $(($ts * 100 / $total))%"
+
+total_lines=$(($js_lines + $ts_lines))
+echo "Progress (lines): $(($ts_lines * 100 / $total_lines))%"
