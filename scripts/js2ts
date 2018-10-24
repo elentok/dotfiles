@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 
 function count_lines() {
-  rg -v '^\s*$' -g "$1" src/ | wc -l
+  rg -v '^\s*$' -g "$1" . | wc -l
 }
 
 echo 'Remaining JS files:'
 echo '==================='
-rg --files -g '*js' src/
+rg --files -g '*js' .
 
 
 echo
 echo 'Summary:'
 echo '========'
-js=$(rg --files -g '*js' src/ | wc -l)
-ts=$(rg --files -g '*ts' src/ | wc -l)
+js=$(rg --files -g '*js' . | wc -l)
+ts=$(rg --files -g '*ts' . | wc -l)
 echo "JS files: $js"
 echo "TS files: $ts"
 
