@@ -162,7 +162,7 @@ function! SetBufferWorkingDirectory()
     return
   end
 
-  if matchstr(bufname('%'), '^coc:')
+  if match(bufname(''), '^coc:.*') >= 0
     return
   end
 
