@@ -162,6 +162,10 @@ function! SetBufferWorkingDirectory()
     return
   end
 
+  if matchstr(bufname('%'), '^coc:')
+    return
+  end
+
   if !exists('b:working_dir')
     let b:working_dir = FindWorkingDirectory()
   endif
