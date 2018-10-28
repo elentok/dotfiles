@@ -4,7 +4,14 @@ source $DOTF/framework
 
 if is_mac; then
   brew_install ranger atool
+elif is_arch; then
+  pacman_install ranger
+elif is_debian; then
+  apt_install ranger
 fi
+
+mkdir -p ~/.config/ranger
+symlink $DOTF/plugins/ranger/rc.conf ~/.config/ranger/rc.conf
 
 #brew_install atool # archive tool (for als)
 #brew_install w3c
@@ -13,3 +20,4 @@ fi
 # brew_install xpdf
 # brew_install imlib2 # for libcaca
 # brew_install libcaca --with-imlib2 # for img2txt
+
