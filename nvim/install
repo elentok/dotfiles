@@ -21,8 +21,7 @@ main() {
 
 install_requirements() {
   if is_mac; then
-    # python3 is required for the deoplete plugin
-    brew_install python3
+    brew_install python
   elif is_arch; then
     pacman_install python python-pip
   elif is_debian; then
