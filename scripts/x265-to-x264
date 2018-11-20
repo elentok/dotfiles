@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+async
+
+while [ $# -gt 0 ]; do
+  echo "$1"
+  ffmpeg -i "$1" -bsf:v h264_mp4toannexb -sn -map 0:0 -map 0:1 -vcodec libx264 "$1.ts"
+  mv $1.ts $1.mpg
+  shift
+done
