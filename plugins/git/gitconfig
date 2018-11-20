@@ -54,6 +54,7 @@
   plr = pull --rebase
   ps = push
   psa = push noreview develop master --tags
+  psm = push noreview master --tags
   pst = push --tags
   pullff = pull --ff-only
   r = reset
