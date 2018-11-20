@@ -2,7 +2,12 @@
 
 source $DOTF/framework
 
-branch_to_pull=${1:-develop}
+default_branch=master
+if [ -n "$(git all-branches | grep '^develop$')" ]; then
+  default_branch=develop
+fi
+
+branch_to_pull=${1:-$default_branch}
 
 branch=$(git my-branch)
 
@@ -19,4 +24,3 @@ git checkout $branch
 echo
 
 success 'DONE'
-
