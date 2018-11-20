@@ -4,10 +4,12 @@
   "jsRules": {},
   "rules": {
     "semicolon": [true, "never"],
-    "quotemark": [true, "single"],
+    "quotemark": [true, "single", "avoid-escape"],
     "no-console": [true, "log"],
     "arrow-parens": [false],
-    "trailing-comma": [true, { "multiline": "never", "singleline": "never" }]
+    "trailing-comma": [true, { "multiline": "never", "singleline": "never" }],
+    "object-literal-sort-keys": false,
+    "curly": [true, "ignore-same-line"]
   },
   "rulesDirectory": []
 }
