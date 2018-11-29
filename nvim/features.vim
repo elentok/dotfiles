@@ -157,7 +157,17 @@ command! FZFProj call fzf#run({
 noremap <Leader>gp :FZFProj<cr>
 
 " Automatically set working directory {{{1
+function! TermSetWorkDir(dir)
+  let b:working_dir = a:dir
+  exec 'cd ' . b:working_dir
+endfunction
+
 function! SetBufferWorkingDirectory()
+  if exists('b:working_dir')
+    exec 'cd ' . b:working_dir
+    return
+  endif
+
   if &buftype ==# 'terminal'
     return
   end

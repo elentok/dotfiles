@@ -94,6 +94,17 @@ if has_command nvim; then
   if is_in_neovim; then
     alias vi='nvr -o'
     alias vv='nvr -O'
+
+    function nvim-set-workdir() {
+      nvr --remote-send "<c-\><c-n>:call TermSetWorkDir('$PWD')<cr>i"
+    }
+
+    nvim-set-workdir
+
+    function cd() {
+      builtin cd "$@"
+      nvim-set-workdir
+    }
   else
     alias vi=nvim
   fi
