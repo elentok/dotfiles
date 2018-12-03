@@ -44,6 +44,7 @@ augroup Elentok_Terminal
   autocmd!
   autocmd TermOpen * setlocal nonumber | startinsert
   autocmd BufWinEnter,WinEnter term://* startinsert
+  autocmd BufWinEnter,WinEnter term://* wincmd + | wincmd -
   autocmd BufLeave term://* stopinsert
 augroup END
 
