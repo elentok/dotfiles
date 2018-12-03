@@ -163,7 +163,10 @@ function! TermSetWorkDir(dir)
 endfunction
 
 function! SetBufferWorkingDirectory()
-  if exists('b:working_dir')
+  if exists('b:working_dir') && b:working_dir != ''
+    if exists('g:debug_autocd')
+      echomsg 'AutoCD (cached): ' . b:working_dir
+    endif
     exec 'cd ' . b:working_dir
     return
   endif
@@ -180,11 +183,22 @@ function! SetBufferWorkingDirectory()
     let b:working_dir = FindWorkingDirectory()
   endif
 
+  if exists('g:debug_autocd')
+    echomsg 'AutoCD: ' . b:working_dir
+  endif
+
   exec 'cd ' . b:working_dir
 endfunction
 
 function! FindWorkingDirectory()
-  lcd %:p:h
+  let buffer_dir = expand('%:p:h')
+
+  " remove '.git/*' suffix (git rev-parse doesn't work well inside the .git/ dir)
+  let buffer_dir = substitute(buffer_dir, '\v/?\.git($|/.*$)', '', '')
+
+  echomsg 'BufferDir: ' . buffer_dir
+
+  exec 'lcd ' . buffer_dir
 
   let git_dir = system('git rev-parse --show-toplevel')
   let is_git_dir = empty(matchstr(git_dir, '^fatal:.*'))
