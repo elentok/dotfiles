@@ -196,8 +196,6 @@ function! FindWorkingDirectory()
   " remove '.git/*' suffix (git rev-parse doesn't work well inside the .git/ dir)
   let buffer_dir = substitute(buffer_dir, '\v/?\.git($|/.*$)', '', '')
 
-  echomsg 'BufferDir: ' . buffer_dir
-
   exec 'lcd ' . buffer_dir
 
   let git_dir = system('git rev-parse --show-toplevel')
