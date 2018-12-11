@@ -6,7 +6,6 @@ main() {
   make_dir $HOME/go
   source $DOTF/framework
 
-  brew_install mercurial
   brew_install go
 }
 
