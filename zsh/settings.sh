@@ -112,7 +112,8 @@ if [ -e "$gcloud_path" ]; then
   source "$gcloud_path/path.zsh.inc"
 
   # The next line enables shell command completion for gcloud.
-  source "$gcloud_path/completion.zsh.inc"
+  # Disabling this for now, it seems to cause some sort of delay on OSX
+  # source "$gcloud_path/completion.zsh.inc"
 fi
 
 # LS_COLORS {{{1
