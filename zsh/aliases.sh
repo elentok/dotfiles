@@ -99,8 +99,6 @@ if has_command nvim; then
       nvr --remote-send "<c-\><c-n>:call TermSetWorkDir('$PWD')<cr>i"
     }
 
-    nvim-set-workdir
-
     function cd() {
       builtin cd "$@"
       nvim-set-workdir
