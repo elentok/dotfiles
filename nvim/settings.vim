@@ -243,7 +243,7 @@ let g:easy_align_delimiters = {
       \ }
 
 " Plugin: scrooloose/nerdtree {{{1
-let NERDTreeIgnore=['\.zeus\.sock$', '\~$']
+let NERDTreeIgnore=['\.zeus\.sock$', '\~$', '^node_modules$']
 let NERDTreeHijackNetrw = 0
 
 if !empty($DISABLE_UNICODE)
