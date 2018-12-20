@@ -2,7 +2,9 @@
 
 source $DOTF/framework
 
-symlink "$DOTF/plugins/oni" ~/.config/oni
+# symlink "$DOTF/plugins/oni" ~/.config/oni
+mkdir -p ~/.config/oni
+symlink "$DOTF/plugins/oni/config.tsx" ~/.config/oni/config.tsx
 
-npm_install typescript
-npm_install ts-server
+# npm_install typescript
+# npm_install ts-server
