@@ -56,8 +56,11 @@ command! Gca Gcommit --amend
 
 " Language Servers {{{1
 
+" Better display for messages
 set cmdheight=2
-set updatetime=1000
+
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
@@ -89,6 +92,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gR <Plug>(coc-references)
 nmap <silent> gr <Plug>(coc-rename)
+nmap <silent> gA <Plug>(coc-codeaction)
 
 " Use K for show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -101,8 +105,16 @@ function! s:show_documentation()
   endif
 endfunction
 
-" Show signature help while editing
-autocmd CursorHoldI,CursorMovedI * silent! call CocAction('showSignatureHelp')
+
+augroup Elentok_COC
+  autocmd!
+  " Highlight symbol under cursor on CursorHold
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+  " Show signature help while editing
+  autocmd CursorHoldI,CursorMovedI * silent! call CocAction('showSignatureHelp')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup END
 
 " Go To Project {{{1
 function! Proj(dir)
