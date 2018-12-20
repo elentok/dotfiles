@@ -17,42 +17,18 @@ function! TabCdToBufRoot()
 endfunction
 
 " Automatic formatting (prettier) {{{1
-" let g:neoformat_enabled_javascript = ['prettier']
-" let g:neoformat_enabled_json = ['prettier']
-" let g:neoformat_enabled_scss = ['prettier']
-" let g:neoformat_enabled_css = ['prettier']
-" let g:neoformat_java_google = {
-      " \ 'exe': 'google-java-format',
-      " \ 'args': ['-'],
-      " \ 'stdin': 1}
-" let g:neoformat_enabled_java = ['google']
+let g:autoformat_filetypes = ['json', 'javascript', 'css', 'scss', 'typescript', 'java', 'markdown']
 
-" let g:autoformat_filetypes = ['json', 'javascript', 'css', 'scss', 'typescript', 'java', 'markdown']
+func! AutoFormat()
+  if index(g:autoformat_filetypes, &filetype) != -1
+    CocCommand prettier.formatFile
+  endif
+endfunc
 
-" func! AutoFormat()
-  " if exists("b:af") && b:af == 0
-    " return
-  " endif
-  " if index(g:autoformat_filetypes, &filetype) != -1
-    " ALEFix
-  " endif
-" endfunc
-
-" func! AutoFormatToggle()
-  " if exists("b:af")
-    " let b:af = !b:af
-  " else
-    " let b:af = 0
-  " end
-  " echo "AutoFormat: " . (b:af ? "on" : "off")
-" endfunc
-
-" augroup Elentok_Neoformat
-  " autocmd!
-  " autocmd BufWritePre * call AutoFormat()
-" augroup END
-
-" nnoremap ,taf :call AutoFormatToggle()<cr>
+augroup Elentok_Neoformat
+  autocmd!
+  autocmd BufWritePre * call AutoFormat()
+augroup END
 
 " Copy over SSH {{{1
 
