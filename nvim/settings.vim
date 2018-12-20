@@ -184,6 +184,20 @@ let g:ale_linters = {
       \ 'typescript': ['tslint', 'tsserver', 'typecheck'],
       \}
 
+let g:ale_fixers = {
+      \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \   'javascript': ['eslint', 'prettier'],
+      \   'json': ['prettier'],
+      \   'typescript': ['prettier'],
+      \   'css': ['prettier'],
+      \   'scss': ['prettier'],
+      \   'markdown': ['prettier'],
+      \}
+
+
+let g:ale_fix_on_save = 1
+
+
 let g:ale_go_gometalinter_options = "--disable=golint"
 
 let g:ale_sign_error = '✖'
