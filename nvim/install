@@ -104,8 +104,7 @@ install_plugins() {
   nvim --headless +PlugInstall +UpdateRemotePlugins +qall
   success "done"
 
-  # coc-eslint coc-tslint coc-prettier
-  extensions="coc-tsserver coc-json coc-html coc-css"
+  extensions="coc-tsserver coc-tslint coc-eslint coc-prettier coc-json coc-html coc-css"
   bullet "Running CocInstall... "
   nvim "+CocInstall $extensions"
   success "done"
