@@ -53,7 +53,7 @@
   pl = pull
   plr = pull --rebase
   ps = push
-  psa = push noreview develop master --tags
+  psa = push noreview production master --tags
   psm = push noreview master --tags
   pst = push --tags
   pullff = pull --ff-only
