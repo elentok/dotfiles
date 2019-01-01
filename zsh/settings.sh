@@ -52,9 +52,16 @@ function j() {
   cd "$(fasd -l -d "$@" | fzf -1 --no-sort --tac)"
 }
 
-function ff {
-  find . -iname "*$**"
-}
+if has_command rg; then
+  function ff {
+    rg --files -g "*$**"
+  }
+else
+  function ff {
+    find . -iname "*$**"
+  }
+fi
+
 
 function find-exec {
   find . -type f -iname "*${1:-}*" -exec "${2:-file}" '{}' \;
