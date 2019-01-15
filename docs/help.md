@@ -116,6 +116,11 @@ Command Line Tips
 4. Commit the change
 5. Delete the now untracked submodule files (`rm -rf path/to/submodule`).
 
+### git export and import patch
+
+git format-patch -1 {hash}
+git am < {file.patch}
+
 ## ImageMagick
 
 ### ImageMagick resize
