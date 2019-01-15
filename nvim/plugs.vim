@@ -45,6 +45,7 @@ Plug 'rakr/vim-one'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'davidbeckingsale/writegood.vim'
+Plug 'christoomey/vim-tmux-navigator'
 
 " File formats:
 Plug 'vim-scripts/applescript.vim',       { 'for': 'applescript' }
