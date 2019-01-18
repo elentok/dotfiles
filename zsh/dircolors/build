@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+root=$DOTF/zsh/dircolors
+dircolors $root/dircolors.config > $root/dircolors.sh

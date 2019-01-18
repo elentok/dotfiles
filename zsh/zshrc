@@ -9,6 +9,7 @@ source $DOTF/zsh/core.sh
 source_if_exists ~/.dotlocal/zsh/before.zsh
 source $DOTF/zsh/zsh.zsh
 source $DOTF/zsh/settings.sh
+source $DOTF/zsh/dircolors/dircolors.sh
 source $DOTF/zsh/widgets.zsh
 source $DOTF/zsh/aliases.sh
 source $DOTF/zsh/completion.zsh
