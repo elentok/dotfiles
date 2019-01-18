@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source $DOTF/framework
+source $DOTF/scripts/build-helper
+
+prepare_build tmux 2.8 "$*"
+
+if is_debian; then
+  apt_install libevent1-dev libncursesw5-dev build-essential
+elif is_mac; then
+  echo 'Unsupported platform'
+  exit 1
+fi
+
+git clone --depth 1 --branch $VERSION https://github.com/tmux/tmux.git
+
+cd tmux
+sh autogen.sh
+./configure
+make prefix=$INSTALL_DIR
+make install prefix=$INSTALL_DIR
+
+install_symlinks bin/tmux
