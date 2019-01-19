@@ -54,7 +54,11 @@ function j() {
 
 if has_command rg; then
   function ff {
-    rg --files -g "*$**"
+    if [ $# -eq 0 ]; then
+      rg --files
+    else
+      rg --files -g "*$**"
+    fi
   }
 else
   function ff {
