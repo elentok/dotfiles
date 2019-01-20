@@ -70,6 +70,7 @@ Plug 'vim-scripts/yaml.vim',              { 'for': 'yaml' } " syntax highlightin
 Plug 'avakhov/vim-yaml',                  { 'for': 'yaml' } " indentation
 Plug 'tpope/vim-haml',                    { 'for': 'haml' }
 Plug 'leafgarland/typescript-vim',        { 'for': 'typescript' }
+Plug 'peitalin/vim-jsx-typescript',       { 'for': 'typescript' }
 Plug 'PProvost/vim-ps1'
 
 if has('nvim')
