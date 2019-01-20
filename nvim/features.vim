@@ -17,7 +17,7 @@ function! TabCdToBufRoot()
 endfunction
 
 " Automatic formatting (prettier) {{{1
-let g:autoformat_filetypes = ['json', 'javascript', 'css', 'scss', 'typescript', 'java', 'markdown']
+let g:autoformat_filetypes = ['json', 'javascript', 'css', 'scss', 'typescript', 'typescript.tsx', 'java', 'markdown']
 
 func! AutoFormat()
   if index(g:autoformat_filetypes, &filetype) != -1
