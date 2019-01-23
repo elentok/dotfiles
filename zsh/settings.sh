@@ -75,7 +75,7 @@ function videos() {
   ag '.' -l --nocolor -g '(mkv|avi|mp4)'
 }
 
-function p() {
+function pl() {
   local filename="$(videos | fzf)"
   if [ -n "$filename" ]; then
     open "$filename"
