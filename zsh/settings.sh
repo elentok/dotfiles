@@ -57,7 +57,7 @@ if has_command rg; then
     if [ $# -eq 0 ]; then
       rg --files
     else
-      rg --files -g "*$**"
+      rg --files --iglob "*$**"
     fi
   }
 else
