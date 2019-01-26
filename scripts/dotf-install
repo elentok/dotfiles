@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+
+benchmark-start
+
+main() {
+  mkdir -p ~/bin
+
+  cd $DOTF
+
+  git submodule update --init --recursive
+  dotf-plugin tools nodejs git zsh nvim ripgrep tig bash tmux ruby
+
+  if has_command code; then yarn vscode:sync; fi
+
+  gui-plugins
+
+  yarn install
+
+  show-done
+}
+
+gui-plugins() {
+  if is_mac; then
+    dotf-plugin osx-tuning iterm
+  elif is_linux; then
+    if [ "$HAS_GUI" = 'yes' ]; then
+      dotf-plugin linux-gui-apps
+    fi
+  fi
+}
+
+show-done() {
+  echo -e "$GREEN=========================="
+  echo "Done ($(benchmark-stop))"
+  echo -e "==========================$RESET"
+}
+
+
+main "$@"

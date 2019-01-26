@@ -13,8 +13,6 @@
 
 source `dirname $0`/../framework
 
-benchmark-start
-
 main() {
   cmd="${1:-}"
   shift || true
@@ -47,27 +45,11 @@ list_plugins() {
 }
 
 install() {
-  mkdir -p ~/bin
-
-  if [ $# -gt 0 ]; then
+  if [ $# -eq 0 ]; then
+    dotf-install
+  else
     dotf-plugin "$@"
-    return
   fi
-
-  install_all
-}
-
-install_all() {
-  cd $DOTF
-
-  git submodule update --init --recursive
-
-  base_plugins
-  gui_plugins
-
-  yarn install
-
-  show_done
 }
 
 update() {
@@ -91,51 +73,8 @@ update() {
       brew update
     fi
 
-    install
+    dotf-install
   fi
-}
-
-show_done() {
-  echo -e "$GREEN=========================="
-  echo "Done ($(benchmark-stop))"
-  echo -e "==========================$RESET"
-}
-
-base_plugins() {
-  dotf-plugin nodejs
-  dotf-plugin git
-  dotf-plugin zsh
-  dotf-plugin nvim
-  dotf-plugin ripgrep
-  dotf-plugin tig
-  dotf-plugin bash
-  dotf-plugin tmux
-  dotf-plugin ruby
-
-  install_package ncdu
-  install_package wget
-  install_package htop
-  install_package --yum=ImageMagick imagemagick
-
-  if has_command code; then
-    yarn vscode:sync
-  fi
-
-  if is_arch; then
-    pacman_install openssh
-  fi
-}
-
-gui_plugins() {
-  if is_mac; then
-    dotf-plugin osx-tuning
-    dotf-plugin iterm
-  elif is_linux; then
-    if [ "$HAS_GUI" = 'yes' ]; then
-      dotf-plugin linux-gui-apps
-    fi
-  fi
-
 }
 
 export_vim() {
