@@ -47,6 +47,8 @@ list_plugins() {
 }
 
 install() {
+  mkdir -p ~/bin
+
   if [ $# -gt 0 ]; then
     plugins "$@"
     return
