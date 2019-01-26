@@ -127,7 +127,7 @@ install_cli_tools() {
   fi
 
   if is_wsl; then
-    if missing_command win32yank; then
+    if command_missing win32yank; then
       explain_win32yank
       exit 1
     fi
