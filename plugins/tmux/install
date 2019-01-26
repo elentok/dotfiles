@@ -22,7 +22,9 @@ install_tmux() {
 
     brew unlink openssl
   else
-    install_package tmux
+    if command_missing tmux; then
+      PRIMARY=yes $DOTF/plugins/tmux/build
+    fi
   fi
 }
 
