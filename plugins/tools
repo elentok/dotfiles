@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+
+install_package ncdu
+install_package curl
+install_package wget
+install_package htop
+install_package --yum=ImageMagick imagemagick
+
+if is_arch; then
+  pacman_install openssh
+fi
