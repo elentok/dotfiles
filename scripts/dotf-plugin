@@ -28,7 +28,11 @@ install-plugin() {
   fi
 
   header "$1"
+  benchmark-start $1
   $filename
+
+  echo
+  echo "=> plugin '$1' installed in $(benchmark-stop $1)"
 }
 
 find-plugin() {

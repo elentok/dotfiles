@@ -882,12 +882,17 @@ verify-perms() {
 }
 
 # Benchmark {{{1
+
+declare -A BENCHMARKS=()
+
 benchmark-start() {
-  export START_TIME=$SECONDS
+  key=${1:-GLOBAL}
+  BENCHMARKS[$key]=$SECONDS
 }
 
 benchmark-stop() {
-  duration=$((($SECONDS - $START_TIME) * 1000))
+  key=${1:-GLOBAL}
+  duration=$(($SECONDS * 1000 - BENCHMARKS[$key] * 1000))
   if [[ $duration > 1000 ]]; then
     duration=$(($duration / 1000))
     printf '%.2fs' $duration
