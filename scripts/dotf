@@ -50,7 +50,7 @@ install() {
   mkdir -p ~/bin
 
   if [ $# -gt 0 ]; then
-    plugins "$@"
+    dotf-plugin "$@"
     return
   fi
 
@@ -102,15 +102,15 @@ show_done() {
 }
 
 base_plugins() {
-  plugin nodejs
-  plugin git
-  plugin zsh
-  plugin nvim
-  plugin ripgrep
-  plugin tig
-  plugin bash
-  plugin tmux
-  plugin ruby
+  dotf-plugin nodejs
+  dotf-plugin git
+  dotf-plugin zsh
+  dotf-plugin nvim
+  dotf-plugin ripgrep
+  dotf-plugin tig
+  dotf-plugin bash
+  dotf-plugin tmux
+  dotf-plugin ruby
 
   install_package ncdu
   install_package wget
@@ -128,57 +128,14 @@ base_plugins() {
 
 gui_plugins() {
   if is_mac; then
-    plugin osx-tuning
-    plugin iterm
+    dotf-plugin osx-tuning
+    dotf-plugin iterm
   elif is_linux; then
     if [ "$HAS_GUI" = 'yes' ]; then
-      plugin linux-gui-apps
+      dotf-plugin linux-gui-apps
     fi
   fi
 
-}
-
-plugins() {
-  if [ $# -eq 0 ]; then
-    error "No plugins specified"
-    return
-  fi
-
-  while [ $# -gt 0 ]; do
-    plugin $1
-    shift
-  done
-  show_done
-}
-
-plugin() {
-  local filename="$(find_plugin "$1")"
-
-  if [ -z "$filename" ]; then
-    error "Cannot find plugin '$1'"
-    return
-  fi
-
-  $filename
-}
-
-find_plugin() {
-  local filenames=(
-    "$DOTF/$1/install"
-    "$DOTF/plugins/$1/install"
-    "$DOTF/plugins/$1"
-    "$DOTL/plugins/$1/install"
-    "$DOTL/plugins/$1"
-  )
-
-  for filename in ${filenames[@]}; do
-    if [ -x "$filename" ]; then
-      echo "$filename"
-      return 0
-    fi
-  done
-
-  return 1
 }
 
 export_vim() {

@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+#
+# Usage:
+#
+#   dotf-plugin <plugin>...
+#
+
+source $DOTF/framework
+
+main() {
+  if [ $# -eq 0 ]; then
+    usage $0
+    exit 1
+  fi
+
+  while [ $# -gt 0 ]; do
+    install-plugin "$1"
+    shift
+  done
+}
+
+install-plugin() {
+  local filename="$(find-plugin "$1")"
+
+  if [ -z "$filename" ]; then
+    error "Cannot find plugin '$1'"
+    return
+  fi
+
+  $filename
+}
+
+find-plugin() {
+  local filenames=(
+    "$DOTF/$1/install"
+    "$DOTF/plugins/$1/install"
+    "$DOTF/plugins/$1"
+    "$DOTL/plugins/$1/install"
+    "$DOTL/plugins/$1"
+  )
+
+  for filename in ${filenames[@]}; do
+    if [ -x "$filename" ]; then
+      echo "$filename"
+      return 0
+    fi
+  done
+
+  return 1
+}
+
+main "$@"
