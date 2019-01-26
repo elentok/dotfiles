@@ -99,12 +99,14 @@ install_symlinks() {
 
 install_plugins() {
   bullet "Running PlugInstall... "
-  nvim --headless +PlugInstall +UpdateRemotePlugins +qall
+  nvim +PlugInstall +UpdateRemotePlugins +qall
   success "done"
 
   extensions="coc-tsserver coc-tslint coc-eslint coc-prettier coc-json coc-html coc-css"
-  bullet "Running CocInstall... "
-  nvim "+CocInstall $extensions"
+  bullet "Installing Coc extensions... "
+  mkdir -p ~/.config/coc/extensions
+  cd ~/.config/coc/extensions
+  yarn add --ignore-engines $extensions
   success "done"
 }
 

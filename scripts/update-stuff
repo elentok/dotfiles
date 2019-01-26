@@ -15,5 +15,5 @@ done
 
 
 (cd $DOTF/nvim/plugged/coc.nvim && git reset --hard origin/master)
-nvim +PlugUpdate
-nvim +CocUpdate
+nvim +PlugUpdate +qall
+(cd ~/.config/coc/extensions && yarn upgrade --latest --ignore-engines)
