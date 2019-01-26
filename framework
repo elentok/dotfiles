@@ -80,11 +80,11 @@ title() {
 }
 
 header() {
-  echo -e "\n${BLUE}${UNDERLINE}● $*$RESET"
+  echo -e "\n${BLUE}${UNDERLINE}==== ${*^^} ====$RESET"
 }
 
 bullet() {
-  echo -e -n "${YELLOW}➜$RESET $*"
+  echo -e -n "${YELLOW}•$RESET $*"
 }
 
 progress() {
