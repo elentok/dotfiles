@@ -5,8 +5,6 @@ source $DOTF/framework
 VERSION='0.10.0'
 
 main() {
-  header 'Ripgrep'
-
   bullet 'Installing ripgrep...'
   if is_ripgrep_installed; then
     info 'already installed'

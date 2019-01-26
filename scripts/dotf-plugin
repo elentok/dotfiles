@@ -27,6 +27,7 @@ install-plugin() {
     return
   fi
 
+  header "$1"
   $filename
 }
 

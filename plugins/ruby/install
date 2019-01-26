@@ -5,8 +5,6 @@ source $DOTF/framework
 RUBY_VERSION='2.5.1'
 
 main() {
-  header "Ruby"
-
   if is_arch; then
     pacman_install ruby
   elif is_fedora; then

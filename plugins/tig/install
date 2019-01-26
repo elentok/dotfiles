@@ -5,8 +5,6 @@ source $DOTF/framework
 TIG_VERSION=2.3.2
 
 main() {
-  header 'Tig'
-
   if is_arch; then
     pacman_install tig
   elif is_mac; then
