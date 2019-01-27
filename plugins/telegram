@@ -2,14 +2,15 @@
 
 source $DOTF/framework
 
-header 'Telegram'
+APPS_DIR="$HOME/.apps"
+INSTALL_DIR="$APPS_DIR/Telegram"
 
-if [ ! -e ~/Applications/Telegram ]; then
+if [ ! -e "$INSTALL_DIR" ]; then
   curl -L https://telegram.org/dl/desktop/linux -o $TMP/telegram.tar.xz
-  mkdir -p ~/Applications
-  cd ~/Applications
+  mkdir -p $APPS_DIR
+  cd $APPS_DIR
   tar xvf $TMP/telegram.tar.xz
 fi
 
 mkdir -p ~/bin
-symlink "$HOME/Applications/Telegram/Telegram" ~/bin/telegram
+symlink "$INSTALL_DIR/Telegram" ~/bin/telegram
