@@ -19,7 +19,7 @@
   autocrlf = false
 
   # Make the pager quit if the output is less than the screen width
-  pager = less -F -X
+  pager = diff-so-fancy | less --tabs=4 -RFX
 
 [color]
   ui = auto
@@ -94,10 +94,6 @@
 
 [rebase]
   autosquash = true
-
-[pager]
-  show = diff-so-fancy | less --tabs=1,5 -RFX
-  diff = diff-so-fancy | less --tabs=1,5 -RFX
 
 [color "diff-highlight"]
   oldHighlight = red bold 52

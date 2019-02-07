@@ -3,7 +3,7 @@
 source $DOTF/framework
 
 PIP_PKGS="pip neovim neovim-remote httpie"
-NPM_PKGS="npm yarn json"
+NPM_PKGS="npm yarn json diff-so-fancy"
 
 for pkg in $PIP_PKGS; do
   pip3 install $pkg --upgrade --user
