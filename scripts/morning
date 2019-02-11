@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+
+header 'Add ssh key'
+ssh-add
+
+header 'Updating dotlocal'
+cd ~/.dotlocal && git pull
+
+if [ -e $DOTL/scripts/morning-local ]; then
+  $DOTL/scripts/morning-local
+fi
+
+header 'Updating dotfiles'
+dotf update
