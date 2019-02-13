@@ -46,6 +46,8 @@ Plug 'KabbAmine/vCoolor.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'davidbeckingsale/writegood.vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'kassio/neoterm'
+Plug 'neoclide/coc.nvim', {'do': 'yarn install', 'tag': 'v0.0.52' }
 
 " File formats:
 Plug 'vim-scripts/applescript.vim',       { 'for': 'applescript' }
@@ -72,24 +74,6 @@ Plug 'tpope/vim-haml',                    { 'for': 'haml' }
 Plug 'leafgarland/typescript-vim',        { 'for': 'typescript' }
 Plug 'peitalin/vim-jsx-typescript',       { 'for': 'typescript' }
 Plug 'PProvost/vim-ps1'
-
-if has('nvim')
-  " Plug 'w0rp/ale', { 'tag': 'v2.3.0' }
-  Plug 'kassio/neoterm'
-
-  if !exists('g:gui_oni')
-    " Plug 'kristijanhusak/vim-js-file-import', { 'for': 'javascript' }
-
-    " Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
-    " Plug 'autozimu/LanguageClient-neovim', {
-        " \ 'branch': 'next',
-        " \ 'do': 'bash install.sh',
-        " \ }
-    " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    " Plug 'Shougo/neco-vim'
-    Plug 'neoclide/coc.nvim', {'do': 'yarn install' }
-  endif
-endif
 
 if file_readable(expand("~/.dotlocal/plugs.vim"))
   source ~/.dotlocal/plugs.vim
