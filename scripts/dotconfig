@@ -6,6 +6,8 @@
 #
 #   dotconfig exists {key}
 #   dotconfig get {key}
+#   dotconfig get-or-die {key}
+#   dotconfig get-or-ask {key}
 #   dotconfig set {key} {value}
 #   dotconfig remove {key}
 #   dotconfig list
@@ -47,6 +49,16 @@ dotconfig-get-or-die() {
   if [ -z "$(dotconfig-get $1)" ]; then
     echo "Error: Missing dotconfig '$1' (run 'dotconfig set $1 {value}')"
     exit 1
+  fi
+}
+
+dotconfig-get-or-ask() {
+  if [ $# -lt 1 ]; then usage $0; exit 1; fi
+  if [ -z "$(dotconfig-get $1)" ]; then
+    while [ -z "${value:-}" ]; do
+      ask "Enter value for '$1':" value
+    done
+    dotconfig-set $1 $value
   fi
 }
 
