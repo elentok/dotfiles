@@ -5,10 +5,11 @@ source $DOTF/framework
 dotconfig verify telegram_bot_token 'Telegram bot token?'
 dotconfig verify telegram_chat_id 'Telegram chat id?'
 
+export NODE=$(which node)
 export TELEGRAM_BOT_TOKEN=$(dotconfig get telegram_bot_token)
 export TELEGRAM_CHAT_ID=$(dotconfig get telegram_chat_id)
 
 install-service $DOTF/plugins/telegram-proxy/telegram-proxy.service.erb system
 
 systemctl daemon-reload
-systemctl restart telegram-proxy
+systemctl start telegram-proxy

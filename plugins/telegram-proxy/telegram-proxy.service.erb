@@ -8,7 +8,7 @@ Requires=network.target
 User=david
 Environment=TELEGRAM_BOT_TOKEN=<%= ENV['TELEGRAM_BOT_TOKEN'] %>
 Environment=TELEGRAM_CHAT_ID=<%= ENV['TELEGRAM_CHAT_ID'] %>
-ExecStart=<%= ENV['HOME'] %>/.dotfiles/scripts/telegram-proxy
+ExecStart=<%= ENV['NODE'] %> <%= ENV['HOME'] %>/.dotfiles/scripts/telegram-proxy
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=on-failure
 
