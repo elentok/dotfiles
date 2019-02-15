@@ -7,7 +7,7 @@
 #   dotconfig exists {key}
 #   dotconfig get {key}
 #   dotconfig get-or-die {key}
-#   dotconfig get-or-ask {key}
+#   dotconfig get-or-ask {key} [question]
 #   dotconfig set {key} {value}
 #   dotconfig remove {key}
 #   dotconfig list
@@ -55,8 +55,9 @@ dotconfig-get-or-die() {
 dotconfig-get-or-ask() {
   if [ $# -lt 1 ]; then usage $0; exit 1; fi
   if [ -z "$(dotconfig-get $1)" ]; then
+    question="${2:-Enter value for '$1'}"
     while [ -z "${value:-}" ]; do
-      ask "Enter value for '$1':" value
+      ask "$question" value
     done
     dotconfig-set $1 $value
   fi
