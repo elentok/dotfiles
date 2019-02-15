@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+#
+# dotconfig - manages ~/.config/dotfiles/config
+#
+# Usage:
+#
+#   dotconfig exists {key}
+#   dotconfig get {key}
+#   dotconfig set {key} {value}
+#   dotconfig remove {key}
+#   dotconfig list
+#
+
+set -euo pipefail
+
+source $DOTF/framework
+
+CONFIG_DIR=$HOME/.config/dotfiles
+CONFIG_FILE=$CONFIG_DIR/config
+
+if [ ! -e $CONFIG_DIR ]; then mkdir $CONFIG_DIR; fi
+if [ ! -e $CONFIG_FILE ]; then touch $CONFIG_FILE; fi
+
+main() {
+  cmd=dotconfig-${1:-}
+  if has_command $cmd; then
+    shift
+    $cmd "$@"
+  else
+    usage $0
+    exit 1
+  fi
+}
+
+dotconfig-exists() {
+  if [ $# -lt 1 ]; then usage $0; exit 1; fi
+  grep "^$1=" $CONFIG_FILE > /dev/null 2>&1
+}
+
+dotconfig-get() {
+  if [ $# -lt 1 ]; then usage $0; exit 1; fi
+  grep "^$1=" $CONFIG_FILE | cut -d= -f2-
+}
+
+dotconfig-set() {
+  if [ $# -lt 2 ]; then usage $0; exit 1; fi
+  key="$1"
+  value="$2"
+
+  dotconfig-remove $key
+  echo "$key=$value" >> $CONFIG_FILE
+}
+
+dotconfig-remove() {
+  if [ $# -lt 1 ]; then usage $0; exit 1; fi
+  key="$1"
+
+  if dotconfig-exists $key; then
+    sed -i "/^$key=/d" $CONFIG_FILE
+  fi
+}
+
+dotconfig-list() {
+  cat $CONFIG_FILE
+}
+
+main "$@"
