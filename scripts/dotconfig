@@ -42,6 +42,14 @@ dotconfig-get() {
   grep "^$1=" $CONFIG_FILE | cut -d= -f2-
 }
 
+dotconfig-get-or-die() {
+  if [ $# -lt 1 ]; then usage $0; exit 1; fi
+  if [ -z "$(dotconfig-get $1)" ]; then
+    echo "Error: Missing dotconfig '$1' (run 'dotconfig set $1 {value}')"
+    exit 1
+  fi
+}
+
 dotconfig-set() {
   if [ $# -lt 2 ]; then usage $0; exit 1; fi
   key="$1"
