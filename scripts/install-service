@@ -16,6 +16,7 @@ if [ "$mode" == "user" ]; then
   erb "$filename" > "$HOME/.local/share/systemd/user/$name.service"
 elif [ "$mode" == "system" ]; then
   erb "$filename" > /tmp/$name.service
+  sudo mkdir -p /usr/lib/systemd/system
   sudo mv /tmp/$name.service "/usr/lib/systemd/system/$name.service"
 else
   usage "$0"
