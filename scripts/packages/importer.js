@@ -1,5 +1,5 @@
 const OrderRepo = require('./order-repo')
-const { paste } = require('copy-paste')
+const { paste } = require('copy-paste-win32fix')
 
 const STATUSES_TO_IGNORE = ['closed', 'finished']
 
