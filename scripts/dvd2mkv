@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+ffmpeg \
+  -analyzeduration 100M -probesize 100M \
+  -i combined.vob \
+  -map 0:1 -map 0:3 -map 0:4 -map 0:5 -map 0:6 \
+  -metadata:s:a:0 language=eng -metadata:s:a:1 title="English stereo" \
+  -metadata:s:s:0 language=eng -metadata:s:s:1 title="English" \
+  -codec:v libx264 -crf 21 \
+  -codec:a libmp3lame -qscale:a 2 \
+  -codec:s copy \
+  -threads 4 \
+  output.mkv
