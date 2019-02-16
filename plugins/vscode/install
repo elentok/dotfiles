@@ -10,4 +10,4 @@ if is_wsl; then
     $HOME/.config/Code
 fi
 
-yarn vscode:sync
+npx vscode:sync
