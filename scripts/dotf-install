@@ -12,11 +12,11 @@ main() {
   git submodule update --init --recursive
   dotf-plugin tools nodejs git zsh nvim ripgrep tig bash tmux ruby
 
-  if has_command code; then yarn vscode:sync; fi
+  if has_command code; then npx vscode:sync; fi
 
   gui-plugins
 
-  yarn install
+  npm install
 
   show-done
 }
