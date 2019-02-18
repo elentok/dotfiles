@@ -8,7 +8,8 @@
     "vscode:sync": "ts-node plugins/vscode/sync.ts",
     "tslint": "tslint -c tslint.json",
     "ts:build": "tsc",
-    "ts:watch": "tsc --watch"
+    "ts:watch": "tsc --watch",
+    "start": "npm run ts:watch"
   },
   "repository": {
     "type": "git",
