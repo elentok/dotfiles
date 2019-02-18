@@ -47,7 +47,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'davidbeckingsale/writegood.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kassio/neoterm'
-Plug 'neoclide/coc.nvim', {'do': 'yarn install', 'tag': 'v0.0.52' }
+Plug 'neoclide/coc.nvim', {'do': 'yarn install', 'tag': 'v0.0.55' }
 
 " File formats:
 Plug 'vim-scripts/applescript.vim',       { 'for': 'applescript' }
