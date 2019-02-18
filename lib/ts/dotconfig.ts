@@ -1,6 +1,7 @@
 import * as os from 'os'
 import * as path from 'path'
 import * as fs from 'fs'
+import { execSync } from 'child_process'
 import { ask } from './utils'
 
 export const CONFIG_DIR = path.join(os.homedir(), '.config', 'dotfiles')
@@ -60,6 +61,8 @@ export function setConfig(key: string, value: string): void {
 }
 
 function save() {
+  if (!fs.existsSync(CONFIG_DIR)) execSync(`mkdir -p "${CONFIG_DIR}"`)
+
   const body = configLines
     .map(line => (typeof line === 'object' ? `${line.key}=${line.value}` : line))
     .join('\n')
