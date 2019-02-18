@@ -1,4 +1,8 @@
+import chalk from 'chalk'
 import * as readline from 'readline'
+
+const CLEAR_LINE = '\r\x1B[K'
+const HOURGLASS = '⏳ '
 
 export function justifyRight(text: string, width: number, ch: string = ' '): string {
   while (text.length < width) {
@@ -24,4 +28,12 @@ export async function ask(question: string): Promise<string> {
       resolve(answer)
     })
   })
+}
+
+export function clearLine(): void {
+  process.stdout.write(CLEAR_LINE)
+}
+
+export function printProgress(message: string): void {
+  process.stdout.write(`${HOURGLASS} ${chalk.blue(message)}...`)
 }
