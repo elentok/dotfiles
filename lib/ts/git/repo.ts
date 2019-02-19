@@ -1,3 +1,4 @@
+import { flatten } from 'underscore'
 import { IRepo } from './types'
 import { Remote } from './remote'
 import * as shell from 'shelljs'
@@ -25,9 +26,9 @@ export class Repo implements IRepo {
     return Object.values(this._localBranches)
   }
 
-  public remoteBranches(): RemoteBranch[][] {
+  public remoteBranches(): RemoteBranch[] {
     if (this._remoteBranches == null) this.loadBranches()
-    return Object.values(this._remoteBranches)
+    return [].concat(...Object.values(this._remoteBranches))
   }
 
   public findLocalBranchByName(name: string): LocalBranch {
