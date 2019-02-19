@@ -29,7 +29,7 @@ abstract class Branch implements IBranch {
 }
 
 export class LocalBranch extends Branch {
-  private remoteBranches: IBranch[] = []
+  public remoteBranches: RemoteBranch[] = []
 
   public hasRemotes(): boolean {
     return this.remoteBranches.length > 0
@@ -41,7 +41,7 @@ export class LocalBranch extends Branch {
   }
 }
 
-class RemoteBranch extends Branch {
+export class RemoteBranch extends Branch {
   public remoteName: string
 
   constructor(repo: IRepo, name: string) {
@@ -59,11 +59,16 @@ class RemoteBranch extends Branch {
   }
 }
 
-export function parseBranchLine(line: string, repo: IRepo): IBranch {
+export function parseBranchLine(line: string, repo: IRepo): LocalBranch | RemoteBranch {
   line = line.replace(/^\*/g, '').trim()
   if (line.match(/^remotes\//)) {
     return new RemoteBranch(repo, line)
   } else {
     return new LocalBranch(repo, line)
   }
+}
+
+export interface IPair {
+  local: LocalBranch
+  remote: RemoteBranch
 }
