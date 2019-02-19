@@ -1,26 +1,3 @@
 #!/usr/bin/env node
 
-const disks = require("../lib/disks")
-
-const MIN_FREE_GB = 4
-
-function checkFreeSpace() {
-  return disks.free()
-    .filter(disk => shouldWarn(disk))
-    .map(disk =>
-      `Disk "${disk.mount}" has low free space (only ${disk.getFree()})`)
-}
-
-function shouldWarn(disk) {
-  return (disk.freeGB < MIN_FREE_GB) && (
-    (disk.mount === "/") ||
-    (disk.mount.match(/^\/(media|Volumes)/)))
-}
-
-const warnings = checkFreeSpace()
-
-if (warnings.length > 0) {
-  warnings.forEach(warning => {
-    console.info(warning)
-  })
-}
+require('../lib/js/warnings')
