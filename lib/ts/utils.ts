@@ -30,6 +30,12 @@ export async function ask(question: string): Promise<string> {
   })
 }
 
+export async function confirm(question: string): Promise<boolean> {
+  const prettyQuestion = chalk.yellow(`${question} [y/N]? `)
+  const answer = await ask(prettyQuestion)
+  return /^[yY](es)?/.test(answer)
+}
+
 export function clearLine(): void {
   process.stdout.write(CLEAR_LINE)
 }

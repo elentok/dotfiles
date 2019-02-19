@@ -1,9 +1,7 @@
-export interface IGitCommandOptions {
-  silent?: boolean
-}
+import { ExecOptions } from 'shelljs'
 
 export interface IRepo {
-  git(command: string, options?: IGitCommandOptions): string
+  git(command: string, options?: ExecOptions): string
 }
 
 export interface IBranch {
