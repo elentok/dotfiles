@@ -1,6 +1,6 @@
 import { IDisk, free, formatGB } from './disks'
 
-const MIN_FREE_GB = 400
+const MIN_FREE_GB = 4
 
 function checkFreeSpace() {
   return free()
