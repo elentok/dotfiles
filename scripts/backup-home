@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+date=`date +%Y%m%d`
+filename="backup-${HOST}-$date.tar.bz2"
+
+tar cjvf $filename $HOME \
+  --exclude .rvm \
+  --exclude .wine \
+  --exclude .thumbnails \
+  --exclude .cache \
+  --exclude .n \
+  --exclude .npm \
+  --exclude node_modules \
+  --exclude .local/share/Steam
+
+
