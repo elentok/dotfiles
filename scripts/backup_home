@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-date=`date +%Y%m%d`
-filename="backup_${HOST}_$date.tar.bz2"
-
-
-tar cjvf $filename $HOME \
-  --exclude .rvm --exclude .wine --exclude .thumbnails --exclude .cache
-
