@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework
+source `dirname $0`/../framework
 
 benchmark-start
 
@@ -10,6 +10,7 @@ main() {
   cd $DOTF
 
   git submodule update --init --recursive
+  pip3 install pip --upgrade --user
   dotf-plugin tools nodejs git zsh nvim ripgrep tig bash tmux ruby
 
   if has_command code; then npx vscode:sync; fi
