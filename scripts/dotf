@@ -8,7 +8,6 @@
 #   dotf install                      - installs all plugins
 #   dotf install [plugin] [plugin]... - install specific plugins
 #   dotf update                       - pulls from git and reruns install
-#   dotf export-vim                   - exports vim config to .tar.gz
 #
 
 source `dirname $0`/../framework
@@ -17,25 +16,14 @@ main() {
   cmd="${1:-}"
   shift || true
   case "$cmd" in
-  list | l)
-    list_plugins
-    ;;
-  install | i)
-    install "$@"
-    ;;
-  update | u)
-    update
-    ;;
-  export-vim)
-    export_vim
-    ;;
-  *)
-    usage "$0"
-    ;;
+  list | l)    list-plugins ;;
+  install | i) install "$@" ;;
+  update | u)  dotf-update ;;
+  *)           usage "$0" ;;
   esac
 }
 
-list_plugins() {
+list-plugins() {
   (
     echo vim
     echo zsh
@@ -50,39 +38,6 @@ install() {
   else
     dotf-plugin "$@"
   fi
-}
-
-update() {
-  header "Updating dotfiles"
-  cd $DOTF
-
-  bullet "Pulling changes... "
-  old_head=`git rev-parse HEAD`
-  git pull
-  new_head=`git rev-parse HEAD`
-
-  if [ "$old_head" != "$new_head" ]; then
-    echo -e "\nPulled the following changes:"
-    git changelog ${old_head}..${new_head}
-
-    echo -ne "\nPress any key to run the installer..."
-    read -n 1
-
-    if is_mac; then
-      bullet 'Updating brew... '
-      brew update
-    fi
-
-    dotf-install
-  fi
-}
-
-export_vim() {
-  tar czvf vim-$(date +%Y%m%d).tar.gz \
-    --exclude 'YouCompleteMe' \
-    --exclude 'node_modules' \
-    --exclude '.git' \
-    vim framework
 }
 
 main "$@"
