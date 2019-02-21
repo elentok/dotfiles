@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+source `dirname $0`/../framework
+
+header "Updating dotfiles"
+cd $DOTF
+
+bullet "Pulling changes... "
+old_head=`git rev-parse HEAD`
+git pull
+new_head=`git rev-parse HEAD`
+
+if [ "$old_head" != "$new_head" ]; then
+  echo -e "\nPulled the following changes:"
+  git changelog ${old_head}..${new_head}
+
+  echo -ne "\nPress any key to run the installer..."
+  read -n 1
+
+  if is_mac; then
+    bullet 'Updating brew... '
+    brew update
+  fi
+
+  dotf-install
+fi
