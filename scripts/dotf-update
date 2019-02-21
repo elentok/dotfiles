@@ -23,4 +23,5 @@ if [ "$old_head" != "$new_head" ]; then
   fi
 
   dotf-install
+  update-stuff
 fi
