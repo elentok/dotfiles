@@ -255,9 +255,9 @@ mkdir -p $TMUX_TMPDIR
 # without these it throws "ArgumentError: invalid byte sequence in US-ASCII"
 # whenever it finds a gemspec with non-unicode characters
 # (see http://ruckus.tumblr.com/post/18613786601/bundler-install-error-argumenterror-invalid-byte)
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-export LC_CTYPE=en_US.UTF-8
+#export LANG=en_US.UTF-8
+#export LC_ALL=en_US.UTF-8
+#export LC_CTYPE=en_US.UTF-8
 
 # MISC {{{1
 export SSH_TERM=xterm-color
