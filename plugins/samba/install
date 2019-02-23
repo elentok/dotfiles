@@ -26,6 +26,7 @@ main() {
   fi
   init_samba_username
   create_group sambashare
+  add_user_to_group sambashare
   create_system_user
   create_samba_user
   add_to_smbusers

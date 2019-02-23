@@ -705,7 +705,7 @@ user_has_group() {
 
 add_user_to_group() {
   local group="$1"
-  local user="${2}"
+  local user="${2:-}"
   if [ -z "$user" ]; then
     user=$(whoami)
   fi
