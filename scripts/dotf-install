@@ -13,8 +13,6 @@ main() {
   pip3 install pip --upgrade --user
   dotf-plugin tools nodejs git zsh nvim ripgrep tig bash tmux ruby
 
-  if has_command code; then npx vscode:sync; fi
-
   gui-plugins
 
   npm install
