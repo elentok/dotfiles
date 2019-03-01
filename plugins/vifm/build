@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+source $DOTF/scripts/build-helper
+
+prepare_build vifm v0.10 "$*"
+
+if is_debian; then
+  apt_install libncursesw5-dev build-essential
+else
+  echo 'unsupported operation system'
+  exit 1
+fi
+
+git clone --depth 1 --branch $VERSION https://github.com/vifm/vifm
+
+cd vifm
+./configure --prefix=$INSTALL_DIR
+make
+make install
+
+install_symlinks bin/vifm
+install_symlinks bin/vifm-pause
