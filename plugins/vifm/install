@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+
+if command_missing vifm; then
+  PRIMARY=yes $DOTF/plugins/vifm/build
+fi
+
+mkdir -p ~/.vifm
+symlink "$DOTF/plugins/vifm/vifmrc" "$HOME/.vifm/vifmrc"
