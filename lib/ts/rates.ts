@@ -1,9 +1,10 @@
 import axios from 'axios'
 import * as fs from 'fs'
+import * as os from 'os'
 import * as path from 'path'
 import { getConfigOrAsk } from './dotconfig'
 
-const CACHE_FILE = path.join(process.env.HOME, '.cache', 'openex.json')
+const CACHE_FILE = path.join(os.homedir(), '.cache', 'openex.json')
 const CACHE_MAX_AGE_IN_HOURS = 12
 
 const MAPPINGS: { [key: string]: string } = {

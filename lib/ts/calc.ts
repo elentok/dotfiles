@@ -1,9 +1,10 @@
-import * as repl from 'repl'
-import * as path from 'path'
 import chalk from 'chalk'
-import { convert, IMoney, getOpenExchangeAppId } from './rates'
+import * as os from 'os'
+import * as path from 'path'
+import * as repl from 'repl'
+import { convert, getOpenExchangeAppId, IMoney } from './rates'
 
-const REPL_HISTORY_FILE = path.join(process.env.HOME, '.cache', 'calc')
+const REPL_HISTORY_FILE = path.join(os.homedir(), '.cache', 'calc')
 
 async function main(): Promise<void> {
   await getOpenExchangeAppId()
