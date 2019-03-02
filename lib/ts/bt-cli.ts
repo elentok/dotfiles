@@ -1,13 +1,17 @@
-import { BtClient } from './bt'
-import { formatTorrent } from './torrent'
-import { getConfigOrAsk } from './dotconfig'
 import * as program from 'commander'
+import { BtClient } from './bt'
+import { getConfigOrAsk } from './dotconfig'
+import { formatTorrent } from './torrent'
 
 let client: BtClient
 
 async function main() {
   program.command('ls').action(async () => {
     const torrents = await (await getClient()).list()
+    if (torrents.length === 0) {
+      console.info('no torrents')
+      return
+    }
     torrents.forEach(t => console.info(formatTorrent(t)))
   })
 
