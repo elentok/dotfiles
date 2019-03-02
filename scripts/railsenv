@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-tmux new-session -d -n "server" "bash -c 'rails server'"
-tmux new-window -n "guard" "bash -c 'bundle exec guard -n false'"
-tmux new-window -n "spork" "bash -c 'spork'"
-tmux new-window -n "spork-cu" "bash -c 'spork cucumber'"
-tmux new-window -n "rails console" "bash -c 'rails c'"
-tmux attach
