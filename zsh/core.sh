@@ -200,6 +200,7 @@ done
 PATH="$PATH:\
 $HOME/.rbenv/bin:\
 $HOME/.rbenv/shims:\
+/snap/bin:\
 /usr/local/share/npm/bin:\
 /usr/local/bin:\
 /usr/local/sbin:\
