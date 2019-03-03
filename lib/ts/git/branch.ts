@@ -16,7 +16,7 @@ abstract class Branch implements IBranch {
   }
 
   public resetHash(): void {
-    this.cachedHash = null
+    this.cachedHash = undefined
   }
 
   public toString(): string {

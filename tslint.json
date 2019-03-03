@@ -10,7 +10,8 @@
     "trailing-comma": [true, { "multiline": "never", "singleline": "never" }],
     "object-literal-sort-keys": false,
     "curly": [true, "ignore-same-line"],
-    "max-classes-per-file": false
+    "max-classes-per-file": false,
+    "ordered-imports": false
   },
   "rulesDirectory": []
 }

@@ -43,3 +43,7 @@ export function clearLine(): void {
 export function printProgress(message: string): void {
   process.stdout.write(`${HOURGLASS} ${chalk.blue(message)}...`)
 }
+
+export function notUndefined<T>(x: T | undefined): x is T {
+  return x !== undefined
+}

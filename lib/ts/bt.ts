@@ -23,7 +23,7 @@ export class BtClient {
       baseURL: `http://${host}:${port}`,
       auth: options.auth
     }
-    const headers = {}
+    const headers: { [key: string]: string } = {}
     headers[SESSION_ID_HEADER] = await getSessionId(reqConfig)
 
     return new BtClient({ ...reqConfig, headers })

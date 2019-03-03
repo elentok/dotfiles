@@ -1,4 +1,5 @@
 import { execSync } from 'child_process'
+import { notUndefined } from './utils'
 
 export interface IDisk {
   device: string
@@ -10,10 +11,15 @@ export interface IDisk {
   mount: string
 }
 
-function parseDfLine(line: string) {
+function parseDfLine(line: string): IDisk | undefined {
   const column = '([^\\s]+)\\s+'
   const re = new RegExp(`^${column}${column}${column}${column}${column}(.*)$`)
   const match = line.match(re)
+
+  if (match == null) {
+    console.warn(`Failed to parse [${line}]`)
+    return
+  }
 
   return {
     device: match[1],
@@ -33,6 +39,7 @@ export function free(): IDisk[] {
     .split('\n')
     .slice(1)
     .map(line => parseDfLine(line))
+    .filter(notUndefined)
 }
 
 export function formatGB(gb: number): string {

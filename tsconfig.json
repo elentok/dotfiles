@@ -3,7 +3,8 @@
     "target": "es6",
     "module": "commonjs",
     "lib": ["es2016"],
-    "outDir": "./lib/js"
+    "outDir": "./lib/js",
+    "strict": true
   },
   "include": ["lib/ts/**/*.ts"]
 }
