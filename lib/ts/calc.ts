@@ -32,11 +32,16 @@ async function main(): Promise<void> {
 
 async function calculate(expr: string): Promise<string> {
   const c = parseCurrencyExpression(expr)
-  if (c != null) {
+  if (c != null && c.toCurrency != null) {
     const result = await convert(c.from, c.toCurrency)
+    if (result == null) {
+      throw new Error(`failed converting "${c.from}" to "${c.toCurrency}"`)
+    }
+
     return `${result.value.toFixed(2)} ${result.currency}`
   }
 
+  /* tslint:disable-next-line:no-eval */
   return Promise.resolve(eval(expr))
 }
 
@@ -45,10 +50,10 @@ interface ICurrencyExpression {
   toCurrency?: string
 }
 
-function parseCurrencyExpression(expr: string): ICurrencyExpression {
+function parseCurrencyExpression(expr: string): ICurrencyExpression | undefined {
   const match = expr.match(/([\d.]+)\s*([a-zA-Z$]+)(\s+to\s+([a-zA-Z$]+))?/)
 
-  if (match == null) return null
+  if (match == null) return
 
   // "123.45 nis to usd"
   if (match.length === 5) {
@@ -65,7 +70,7 @@ function parseCurrencyExpression(expr: string): ICurrencyExpression {
     }
   }
 
-  return null
+  return
 }
 
 main()

@@ -1,57 +1,45 @@
-import { flatten } from 'underscore'
-import { IRepo } from './types'
-import { Remote } from './remote'
 import * as shell from 'shelljs'
-import { IPair, parseBranchLine, LocalBranch, RemoteBranch } from './branch'
+import { IPair, LocalBranch, parseBranchLine, RemoteBranch } from './branch'
+import { Remote } from './remote'
+import { IRepo } from './types'
 
 export class Repo implements IRepo {
-  private _remotes: Remote[]
-  private _localBranches: { [key: string]: LocalBranch }
-  private _remoteBranches: { [key: string]: RemoteBranch[] }
+  public remotes: Remote[]
+  public localBranchesByName: { [key: string]: LocalBranch } = {}
+  public remoteBranchesByName: { [key: string]: RemoteBranch[] } = {}
 
-  constructor(public root: string) {}
-
-  public remotes(): Remote[] {
-    if (this._remotes == null) {
-      this._remotes = this.git('remote', { silent: true })
-        .split('\n')
-        .map(name => new Remote(this, name))
-    }
-
-    return this._remotes
+  constructor(public root: string) {
+    this.remotes = this.loadRemotes()
+    this.loadBranches()
   }
 
   public localBranches(): LocalBranch[] {
-    if (this._localBranches == null) this.loadBranches()
-    return Object.values(this._localBranches)
+    return Object.values(this.localBranchesByName)
   }
 
   public remoteBranches(): RemoteBranch[] {
-    if (this._remoteBranches == null) this.loadBranches()
-    return [].concat(...Object.values(this._remoteBranches))
+    return ([] as RemoteBranch[]).concat(...Object.values(this.remoteBranchesByName))
   }
 
   public findLocalBranchByName(name: string): LocalBranch {
-    if (this._localBranches == null) this.loadBranches()
-    return this._localBranches[name]
+    if (this.localBranchesByName == null) this.loadBranches()
+    return this.localBranchesByName[name]
   }
 
   public findRemoteBranchesByName(name: string): RemoteBranch[] {
-    if (this._remoteBranches == null) this.loadBranches()
-    return this._remoteBranches[name]
+    if (this.remoteBranchesByName == null) this.loadBranches()
+    return this.remoteBranchesByName[name]
   }
 
   public fetchRemotes(): void {
-    this.remotes()
-      .filter(r => r.name !== 'review')
-      .forEach(r => {
-        r.fetch()
-        r.prune()
-      })
+    this.remotes.filter(r => r.name !== 'review').forEach(r => {
+      r.fetch()
+      r.prune()
+    })
   }
 
   public unsyncedBranches(): IPair[] {
-    const pairs = []
+    const pairs: IPair[] = []
 
     this.localBranches().forEach(local => {
       local.remoteBranches.forEach(remote => {
@@ -75,10 +63,13 @@ export class Repo implements IRepo {
     return result.stdout.toString().trim()
   }
 
-  private loadBranches(): void {
-    this._localBranches = {}
-    this._remoteBranches = {}
+  private loadRemotes(): Remote[] {
+    return this.git('remote', { silent: true })
+      .split('\n')
+      .map(name => new Remote(this, name))
+  }
 
+  private loadBranches(): void {
     this.git('branch --all', { silent: true })
       .split('\n')
       .forEach(line => {
@@ -86,12 +77,12 @@ export class Repo implements IRepo {
         if (branch.name === 'HEAD') return
 
         if (branch instanceof RemoteBranch) {
-          if (this._remoteBranches[branch.name] == null) {
-            this._remoteBranches[branch.name] = []
+          if (this.remoteBranchesByName[branch.name] == null) {
+            this.remoteBranchesByName[branch.name] = []
           }
-          this._remoteBranches[branch.name].push(branch)
+          this.remoteBranchesByName[branch.name].push(branch)
         } else {
-          this._localBranches[branch.name] = branch
+          this.localBranchesByName[branch.name] = branch
         }
       })
 
@@ -99,9 +90,9 @@ export class Repo implements IRepo {
   }
 
   private addRemotesToLocalBranches(): void {
-    Object.keys(this._remoteBranches).forEach(name => {
-      this._remoteBranches[name].forEach(remoteBranch => {
-        const localBranch = this._localBranches[name]
+    Object.keys(this.remoteBranchesByName).forEach(name => {
+      this.remoteBranchesByName[name].forEach(remoteBranch => {
+        const localBranch = this.localBranchesByName[name]
         if (localBranch != null) {
           localBranch.remoteBranches.push(remoteBranch)
         }

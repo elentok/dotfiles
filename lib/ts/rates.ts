@@ -26,9 +26,13 @@ export interface IMoney {
 export class Rates {
   constructor(private data: IRatesData) {}
 
-  public convert(from: IMoney, toCurrency?: string): IMoney {
+  public convert(from: IMoney, toCurrency?: string): IMoney | undefined {
     const fromCurrency = this.normalize(from.currency)
+    if (fromCurrency == null) return
+
     toCurrency = this.normalize(toCurrency) || this.getDefaultTo(fromCurrency)
+    if (toCurrency == null) return
+
     const fromRate = this.data.rates[fromCurrency]
     const toRate = this.data.rates[toCurrency]
 
@@ -63,7 +67,7 @@ export class Rates {
 
 let rates: Rates
 
-export async function convert(from: IMoney, toCurrency: string): Promise<IMoney> {
+export async function convert(from: IMoney, toCurrency: string): Promise<IMoney | undefined> {
   return (await getRates()).convert(from, toCurrency)
 }
 
@@ -105,5 +109,7 @@ async function fetchRates(): Promise<Rates> {
 }
 
 export async function getOpenExchangeAppId(): Promise<string> {
-  return getConfigOrAsk('open_exchange_app_id', 'OpenExchange app id? ')
+  const id = await getConfigOrAsk('open_exchange_app_id', 'OpenExchange app id? ')
+  if (id == null) throw new Error('Missing OpenExchange App ID')
+  return id
 }

@@ -1,7 +1,7 @@
-import { Repo } from './repo'
-import { RemoteBranch, LocalBranch } from './branch'
 import chalk from 'chalk'
 import { confirm } from '../utils'
+import { LocalBranch, RemoteBranch } from './branch'
+import { Repo } from './repo'
 
 const USAGE = `
 Deletes branch from local and remote
@@ -29,7 +29,7 @@ async function destroy(branchNames: string[]) {
   branchNames.forEach(async branchName => {
     console.info(chalk.blue(`* Destroying branch ${branchName}...`))
     const localBranch = repo.findLocalBranchByName(branchName)
-    let remoteBranches: RemoteBranch[] = null
+    let remoteBranches: RemoteBranch[]
     if (localBranch == null) {
       console.info(`  No local branch named ${branchName}`)
       remoteBranches = repo.findRemoteBranchesByName(branchName)

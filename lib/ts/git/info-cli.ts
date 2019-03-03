@@ -1,8 +1,8 @@
 import * as program from 'commander'
-import { Repo } from './repo'
 import { LocalBranch } from './branch'
+import { Repo } from './repo'
 
-let repo: Repo = null
+let repo: Repo
 
 function getRepo() {
   if (repo == null) {

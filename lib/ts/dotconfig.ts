@@ -1,8 +1,8 @@
+import * as fs from 'fs'
 import * as os from 'os'
 import * as path from 'path'
-import * as fs from 'fs'
-import { execSync } from 'child_process'
 import { ask } from './utils'
+import { execSync } from 'child_process'
 
 export const CONFIG_DIR = path.join(os.homedir(), '.config', 'dotfiles')
 export const CONFIG_FILE = path.join(CONFIG_DIR, 'config')
@@ -69,11 +69,11 @@ function save() {
   fs.writeFileSync(CONFIG_FILE, body)
 }
 
-export async function getConfigOrAsk(key: string, question: string): Promise<string | undefined> {
+export async function getConfigOrAsk(key: string, question: string): Promise<string> {
   const item = findItem(key)
   if (item != null) return item.value
 
-  let value: string
+  let value: string | undefined
   while (value == null) {
     value = await ask(question)
   }
