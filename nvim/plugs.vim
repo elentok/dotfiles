@@ -2,7 +2,7 @@ set nocompatible " disable vi compatibility
 filetype off
 filetype plugin indent off
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim-plugins')
 
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'AndrewRadev/sideways.vim'
