@@ -20,7 +20,7 @@ for pkg in $NPM_PKGS; do
 done
 
 header 'Neovim: PlugUpdate'
-(cd $DOTF/nvim/plugged/coc.nvim && git reset --hard origin/master)
+(cd ~/.config/nvim-plugins/coc.nvim && git reset --hard origin/master)
 nvim +PlugUpdate +qall
 
 header 'Neovim: CocUpdateSync'
