@@ -31,6 +31,8 @@
   ap = add -p
   b = branch
   bd = branch -d
+  bD = branch -D
+  bdd = !git destroy `git all-branches | fzf`
   bv = branch -vv
   c = commit
   cm = commit -m
