@@ -2,13 +2,7 @@
 
 source $DOTF/framework
 
-if is_mac; then
-  brew_install ranger atool
-elif is_arch; then
-  pacman_install ranger
-elif is_debian; then
-  apt_install ranger
-fi
+pip3_install ranger-fm
 
 mkdir -p ~/.config/ranger
 symlink $DOTF/plugins/ranger/rc.conf ~/.config/ranger/rc.conf
