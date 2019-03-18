@@ -3,9 +3,14 @@
 source $DOTF/framework
 
 pip3_install ranger-fm
+pip3_install python-bidi
 
 mkdir -p ~/.config/ranger
 symlink $DOTF/plugins/ranger/rc.conf ~/.config/ranger/rc.conf
+
+if is_debian; then
+  apt_install atool w3m
+fi
 
 #brew_install atool # archive tool (for als)
 #brew_install w3c
