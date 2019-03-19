@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+
+const fs = require('fs')
+
+if (!fs.existsSync('package-lock.json')) {
+  console.error('No package-lock.json file')
+  process.exit(1)
+}
+
+const packageLock = JSON.parse(fs.readFileSync('./package-lock.json').toString())
+const deps = Object.values(packageLock.dependencies)
+const devDeps = deps.filter(pkg => pkg.dev).length
+
+console.info('Dependencies:')
+console.info('-------------')
+console.info(`Total: ${deps.length}`)
+console.info(`Dev:   ${devDeps}`)
+console.info(`Prod:  ${deps.length - devDeps}`)
