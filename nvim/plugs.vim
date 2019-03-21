@@ -47,7 +47,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'davidbeckingsale/writegood.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kassio/neoterm'
-Plug 'neoclide/coc.nvim', {'do': 'yarn install' }
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile' }
 
 " File formats:
 Plug 'vim-scripts/applescript.vim',       { 'for': 'applescript' }
