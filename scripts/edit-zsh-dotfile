@@ -11,8 +11,8 @@ select-file() {
 }
 
 list-files() {
-  ls -1 $DOTF/zsh/*.zsh
-  ls -1 $DOTL/zsh/*.zsh
+  ls -1 $DOTF/zsh/*.{z,}sh
+  ls -1 $DOTL/zsh/*.{z,}zsh
 }
 
 main
