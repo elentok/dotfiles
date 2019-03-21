@@ -61,6 +61,7 @@
   pullff = pull --ff-only
   r = reset
   reyarn = !git reset HEAD yarn.lock && git checkout yarn.lock && yarn install && git add yarn.lock
+  renpm = !git reset HEAD package-lock.json && git checkout package-lock.json && npm install && git add package-lock.json
   rp = reset --patch
   rb = rebase
   rbc = rebase --continue
