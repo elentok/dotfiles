@@ -32,7 +32,6 @@ if g:os == 'windows'
   let $delimiter='\\'
   let $defaultfont="Consolas:h12:cANSI"
   let $alternatefont="Courier_New:h12:cHEBREW"
-  let g:ruby_path='C:/ruby187'
   set grepprg="findstr /nI"
   let $opener='start'
   " PowerShell doesn't work well with fzf:
@@ -83,6 +82,7 @@ endif
 
 source $vimfiles/plugs.vim
 source $vimfiles/settings.vim
+source $vimfiles/coc.vim
 source $vimfiles/functions.vim
 source $vimfiles/keys.vim
 source $vimfiles/autocmds.vim
