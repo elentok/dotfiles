@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source `dirname $0`/../framework
+
+main() {
+  install-spacevim
+  symlink "$DOTF/spacevim" ~/.SpaceVim.d
+}
+
+install-spacevim() {
+  bullet 'Installing SpaceVim... '
+
+  if [ -d ~/.SpaceVim ]; then
+    info 'already installed'
+  else
+    curl -sLf https://spacevim.org/install.sh | bash
+    show_result
+  fi
+}
+
+main "$@"
