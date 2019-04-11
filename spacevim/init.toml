@@ -23,6 +23,8 @@
     buffer_index_type = 4
     enable_tabline_filetype_icon = true
     enable_statusline_mode = false
+    autocomplete_method = "coc"
+    relative_number = false
 
 # Enable autocomplete layer
 [[layers]]
@@ -34,3 +36,10 @@ auto-completion-tab-key-behavior = "smart"
 name = 'shell'
 default_position = 'top'
 default_height = 30
+
+[[layers]]
+name = 'fzf'
+
+# [[layers]]
+# name = 'lsp'
+# filetypes = ['typescript', 'javascript', 'bash', 'html', 'markdown', 'css']
