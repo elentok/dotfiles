@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+echo -e "\e[3mTHIS SHOULD BE IN ITALIC\e[23m"

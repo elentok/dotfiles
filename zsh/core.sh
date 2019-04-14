@@ -244,7 +244,7 @@ export GIT_EDITOR=$EDITOR
 
 # TMUX {{{1
 # so tmux will allow 256 colors:
-if [[ "$TERM" != "screen-256color" ]]; then
+if [[ "$TERM" != "screen-256color" && "$TERM" != "tmux" ]]; then
   export TERM=xterm-256color
 fi
 
