@@ -94,13 +94,13 @@ if (has("termguicolors"))
 endif
 
 if !exists('g:gui_oni')
+  set background=dark
   let g:one_allow_italics = 1
   silent! colorscheme one
-  set background=dark
-  " call one#highlight('Normal', '', '1a1a1a', '')
   silent! call one#highlight('Folded', '555555', '111111', '')
   silent! call one#highlight('VertSplit', '', '5c6370', 'none')
-  hi TabLine gui=none
+  silent! call one#highlight('StatusLine', '000000', '696c77', '')
+
   let g:elentok_colors_initialized = 1
 endif
 
@@ -112,9 +112,9 @@ set smartcase   " ignore case if search pattern is all lowercase, case-sensitive
 set hlsearch    " highlight search terms
 set wrapscan    " wrap around when searching
 
-" Highlight Current Line (disabled) {{{1
-"set cursorline
-"highlight CursorLine guibg=black cterm=none term=none ctermbg=black
+" Highlight Current Line {{{1
+set cursorline
+" highlight CursorLine guibg=black cterm=none term=none ctermbg=black
 
 " Backup {{{1
 set backup writebackup
