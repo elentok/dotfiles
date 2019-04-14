@@ -64,11 +64,11 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
+nmap <space>cr <Plug>(coc-rename)
 
 " Remap for format selected region
-vmap <leader>F  <Plug>(coc-format-selected)
-nmap <leader>F  <Plug>(coc-format-selected)
+vmap <space>cf  <Plug>(coc-format-selected)
+nmap <space>cf  <Plug>(coc-format-selected)
 
 augroup COC_Config
   autocmd!
@@ -79,13 +79,13 @@ augroup COC_Config
 augroup end
 
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-vmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+vnoremap <space>ca  <Plug>(coc-codeaction-selected)
+nnoremap <space>ca  <Plug>(coc-codeaction-selected)
 
 " Remap for do codeAction of current line
-nmap <leader>ac  <Plug>(coc-codeaction)
+nnoremap <space>ca  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
-nmap <leader>qf  <Plug>(coc-fix-current)
+nnoremap <space>cF  <Plug>(coc-fix-current)
 
 " Use `:Format` for format current buffer
 command! -nargs=0 Format :call CocAction('format')
@@ -109,4 +109,4 @@ nnoremap <silent> <space>cn  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <space>cp  :<C-u>CocPrev<CR>
 " Resume latest coc list
-nnoremap <silent> <space>cr  :<C-u>CocListResume<CR>
+nnoremap <silent> <space>cl  :<C-u>CocListResume<CR>
