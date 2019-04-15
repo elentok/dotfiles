@@ -1,5 +1,4 @@
 {
-  "coc.preferences.diagnostic.enable": true,
   "coc.preferences.formatOnType": false,
   "coc.preferences.formatOnSaveFiletypes": [
     "typescript",

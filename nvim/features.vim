@@ -23,7 +23,7 @@ let g:autoformat_filetypes = [
 
 func! AutoFormat()
   if index(g:autoformat_filetypes, &filetype) != -1
-    CocCommand prettier.formatFile
+    call CocAction('format')
   endif
 endfunc
 
