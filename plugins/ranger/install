@@ -10,7 +10,7 @@ symlink $DOTF/plugins/ranger/rc.conf ~/.config/ranger/rc.conf
 symlink $DOTF/plugins/ranger/commands.py ~/.config/ranger/commands.py
 
 if is_debian; then
-  apt_install atool w3m
+  apt_install atool w3m highlight
 fi
 
 #brew_install atool # archive tool (for als)
