@@ -286,6 +286,21 @@ let g:NERDSpaceDelims = 1
 " Plugin: fatih/vim-go {{{1
 let g:go_fmt_command = "goimports"
 
+" Plugin: jamessan/vim-gnupg {{{1
+
+" See http://www.futurile.net/2017/05/14/editing-encrypting-files-with-gnupg-vim/
+
+" Armor files
+let g:GPGPreferArmor=1
+let g:GPGDefaultRecipients=["3david@gmail.com"]
+
+" Lock file after 12 seconds of no use
+augroup GPG
+    autocmd!
+    autocmd BufRead,BufEnter *.\(gpg\|asc\|pgp\) setlocal updatetime=12000
+    autocmd CursorHold *.\(gpg\|asc\|pgp\) quit
+augroup END
+
 " Plugin: mhinz/vim-grepper {{{1
 let g:grepper = {
   \ 'tools':  ['rg'],
