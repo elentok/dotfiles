@@ -4,8 +4,6 @@ set -euo pipefail
 
 source `dirname $0`/../framework
 
-NEOVIM_VERSION='v0.3.4'
-
 main() {
   install_requirements
   install_neovim
