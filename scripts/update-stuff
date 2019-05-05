@@ -6,7 +6,7 @@ PIP_PKGS="pip neovim neovim-remote httpie"
 NPM_PKGS="npm yarn json diff-so-fancy"
 
 header 'Updating NodeJS'
-n latest
+n 11
 
 
 header 'Updating pip packages'

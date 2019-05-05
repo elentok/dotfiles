@@ -13,7 +13,7 @@ main() {
 
 install_node() {
   if [[ ! "$(n ls)" =~ 'ο' ]]; then
-    n latest
+    n 11
   fi
 }
 
