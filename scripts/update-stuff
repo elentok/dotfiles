@@ -2,7 +2,7 @@
 
 source $DOTF/framework
 
-PIP_PKGS="pip neovim neovim-remote httpie"
+PIP_PKGS="pip neovim neovim-remote httpie ranger"
 NPM_PKGS="npm yarn json diff-so-fancy"
 
 header 'Updating NodeJS'
