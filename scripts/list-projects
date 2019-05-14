@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
 
-grep -E -v '^(#|\s*$)' ~/.projects | while read line; do
+grep -E -v '^(#|\s*$)' ~/.config/dotfiles/projects | while read line; do
   ls -d ${~line} | sed "s#$HOME#~#"
 done
