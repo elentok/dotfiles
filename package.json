@@ -46,7 +46,6 @@
     "tslint": "^5.12.1",
     "typescript": "^3.3.3",
     "uglify-es": "^3.1.6",
-    "uglify-js": "^3.1.6",
     "underscore": "^1.8.3",
     "weather-js": "^2.0.0"
   },
