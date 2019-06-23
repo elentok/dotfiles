@@ -19,6 +19,10 @@ set shortmess+=c
 " always show signcolumns
 set signcolumn=yes
 
+" disable vim-go :GoDef short cut (gd)
+" this is handled by Coc
+let g:go_def_mapping_enabled = 0
+
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
@@ -76,6 +80,9 @@ augroup COC_Config
   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+  " Disable Coc for go (use vim-go instead)
+  " autocmd FileType go let b:coc_suggest_disable = 1
 augroup end
 
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
