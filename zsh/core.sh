@@ -183,7 +183,10 @@ $HOME/bin:\
 $HOME/scripts:\
 $HOME/.local/bin"
 
-[ -n "$BREW_HOME" ] && PATH=$PATH:$BREW_HOME/bin:$BREW_HOME/sbin
+if [ -n "$BREW_HOME" ]; then
+  PATH=$PATH:$BREW_HOME/bin:$BREW_HOME/sbin:$BREW_HOME/opt/coreutils/libexec/gnubin
+fi
+
 [ -n "$GOROOT" ] && PATH=$PATH:$GOROOT/bin:$MAIN_GOPATH/bin
 for ver in 3.6 3.7; do
   [ -d $HOME/Library/Python/$ver/bin ] && PATH=$PATH:$HOME/Library/Python/$ver/bin

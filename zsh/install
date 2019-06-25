@@ -54,10 +54,10 @@ install_requirements() {
 
 install_gnu_utils() {
   brew_install coreutils
-  brew_install findutils --with-default-names
+  brew_install findutils
   brew_install fasd
   brew_install gnu-sed
-  brew_install grep --with-default-names
+  brew_install grep
 }
 
 install_fzf() {
