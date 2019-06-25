@@ -21,7 +21,7 @@ main() {
 }
 
 update-pip() {
-  if missing_command pip3; then
+  if command_missing pip3; then
     if is_debian; then
       apt_install python3 python3-pip
     elif is_mac; then
