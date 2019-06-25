@@ -22,7 +22,9 @@ main() {
 
 update-pip() {
   if missing_command pip3; then
-    if is_mac; then
+    if is_debian; then
+      apt_install python3 python3-pip
+    else is_mac; then
       brew_install python3
     else
       echo 'TODO: support installing pip3'
