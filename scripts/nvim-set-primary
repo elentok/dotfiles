@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+cd ~/bin
+
+version=$(/bin/ls -1 nvim-* | fzf)
+
+echo "Setting primary version to $version"
+
+rm nvim
+cp -s $version nvim
