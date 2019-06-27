@@ -4,7 +4,7 @@ source $DOTF/framework
 
 header "GUI Apps"
 
-COMMON="vlc feh gimp qalculate-gtk gnome-screenshot"
+COMMON="vlc feh gimp qalculate-gtk flameshot"
 
 if is_arch; then
   pacman_install $COMMON gvfs gvfs-smb 
