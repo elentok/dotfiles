@@ -124,6 +124,9 @@ noremap <Leader>e"' :s/"/'/g<cr>
 noremap <Leader>e'" :s/'/"/g<cr>
 noremap <Leader>rws :%s/\s\+$//<cr>
 
+nnoremap <c-s> :w<cr>
+inoremap <c-s> <c-o>:w<cr>
+
 vnoremap <silent> <Enter> :EasyAlign<Enter>
 
 " add symbols to the end of the lines:
