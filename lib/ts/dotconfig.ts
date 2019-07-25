@@ -45,6 +45,17 @@ function findItemIndex(key: string): number {
   return configLines.findIndex(l => typeof l === 'object' && l.key === key)
 }
 
+export function getConfigOrDie(key: string): string {
+  const value = getConfig(key)
+  if (value != null) return value
+
+  console.error(`Missing config "${key}", please set a value:\n\n  dotconfig set ${key} {value}`)
+  process.exit(1)
+
+  // to satisfy typescript:
+  throw new Error(`Missing config "${key}"`)
+}
+
 export function getConfig(key: string): string | undefined {
   const item = findItem(key)
   if (item != null) return item.value
