@@ -1,32 +1,39 @@
-Command Line Tips
-==================
+# Command Line Tips
 
 ## Find
 
 ### delete all files named 'rc.conf':
+
     find . -name "rc.conf" -exec rm '{}' \;
 
 ### delete all empty directories:
+
     find . -empty -exec rmdir '{}' \;
 
 ### run a command on all of the regular files:
+
     find . -type f -exec clean '{}' \;
 
 ## Encryption
 
 ### 7z with password:
+
     7z u -p{password} -mhe target.7z files
 
 ### gpg - generate key
+
     gpg --gen-key
 
 ### gpg - export the public key
+
     gpg --export --armor {email} > gpg-public-key.txt
 
 ### gpg -import key
+
     gpg --import gpg-public-key.txt
 
 ### gpg - encrypt using public key
+
     gpg --encrypt --output encrypted.gpg --recipient {email} {file-to-encrypt}
 
 ### gpg - verify sig file
@@ -38,43 +45,53 @@ Command Line Tips
 ## Git
 
 ### git undo commit
+
     git reset --soft HEAD\^
 
 ### git revert all changes
+
     git checkout -f
     or
     git reset --HARD
-    
+
 ### git point master to origin/master
+
     git reset --hard origin/master
 
 ### git show specific version of file
-    git show {branch/tag/commit}:{path/to/file/from/repo/root}   
+
+    git show {branch/tag/commit}:{path/to/file/from/repo/root}
 
     example:
       git show master:dir1/dir2/file.txt
 
 ### git show orphaned commites
+
     git reflog --all
     git fsck --lost-found
 
 ### git abort merge/cherry-pick
+
     git reset --merge
 
 ### git remove file from repo history
-    git filter-branch \ 
+
+    git filter-branch \
       --index-filter 'git rm --cached --ignore-unmatch path/to/file' \
       {from}..{to}
 
 ### git delete branch
+
     git branch -d {branch}
     git push --delete origin {branch}
 
 ### git delete tag
+
     git tag -d {tag}
     git push origin :refs/tags/{tag}
 
 ### git remove untracked files
+
     git clean -f            (all untracked files)
     git clean -f -n         (dry run)
     git clean -f -n {path}  (dry run on files in path)
@@ -110,8 +127,8 @@ Command Line Tips
 2. Delete the section from .git/config
 3. Run
 
-    git rm --cached path/to/submodule
-    rm -rf .git/modules/submodule
+   git rm --cached path/to/submodule
+   rm -rf .git/modules/submodule
 
 4. Commit the change
 5. Delete the now untracked submodule files (`rm -rf path/to/submodule`).
@@ -124,52 +141,65 @@ git am < {file.patch}
 ## ImageMagick
 
 ### ImageMagick resize
+
     convert --sample 50% input.png output.jpg
 
 ### ImageMagick convert to 2 colors (2bit, 2-bit)
+
     convert -colors 2 input.png output.png
+
 ### ImageMagick create pdf
+
     convert file1.png file2.png output.pdf
     convert -page {width}x{height} file1.png file2.png output.pdf
 
 ### ImageMagick split pdf to png
+
     convert -density 200 input.pdf output.png
 
 ### ImageMagick flip images
+
     convert arrow-left.png -flop arrow-right.gif
     convert arrow-up.png   -flip arrow-down.gif
-
 
 ## Awk
 
 ### awk - get second column
-    awk '{ print $2 }' 
+
+    awk '{ print $2 }'
 
 ### awk - sum values of 6th column:
+
     awk '{s+=$6} END { print s }'
 
 ### awk - format number with thousand commas (1,000,000)
-    awk '{ printf "%''d\n", $1 }' 
-    awk "{ printf \"%'d\n\", $1 }" 
+
+    awk '{ printf "%''d\n", $1 }'
+    awk "{ printf \"%'d\n\", $1 }"
 
 ## Zsh
 
 ### zsh remove extension
+
     name='file.ext'
     echo ${name:r} # => outputs 'file'
 
 ### zsh basename
+
     fullpath='/path/to/file.ext'
     echo ${fullpath:t} # => outputs 'file.ext'
 
 ### zsh regexp
+
     name='file-bob.txt'
     echo ${name:s/bob/joe} # => outputs 'file-joe.txt'
 
 ### zsh rebuild (reindex) autocomplete
+
     compinit
 
 ### zsh read file line by line
+
     cat $filename | while read line; do echo $line; done
 
     # to avoid the subshell (so you can access variables outside the loop) you
@@ -182,16 +212,20 @@ git am < {file.patch}
 ## Mac
 
 ### Fix "There is no connected camera" macbook air problem
+
     sudo killall VDCAssistant
     (see https://discussions.apple.com/thread/4158054?start=0&tstart=0)
 
 ### mac - clear dns cache
+
     dscacheutil -flushcache
 
 ### kext - show loaded modules
+
     kextstat
 
 ### kext - unload module
+
     sudo kextunload -v -b {bundle-id}
 
     e.g.
@@ -204,10 +238,10 @@ git am < {file.patch}
 
     (e.g. for amethyst)
 
-
 ## SQL
 
 ### psql show all tables
+
     psql -h {host} -p {port} -U {username} {database}
     \? - show help (all commands)
     \l - show all databases
@@ -220,9 +254,11 @@ git am < {file.patch}
 ## Curl
 
 ### curl with cookie
+
     curl --cookie "cookie_name=cookie_value" http://...
 
 ### curl follow redirects
+
     curl -L http://...
 
 ## Google Cloud (gsutil)
@@ -259,7 +295,7 @@ Every 30 minutes:
 
 Debugging native compilations:
 
-* use "-x" to printout the build flags (e.g. `go get -x {package}`)
+- use "-x" to printout the build flags (e.g. `go get -x {package}`)
 
 ## Markdown
 
@@ -272,68 +308,91 @@ This is a link to [Something][1]
 ## Nix
 
 ### update (like apt-get update)
+
     nix-channel --update
 
 ### upgrade (like apt-get upgrade)
+
     nix-env -u
 
 ### install package
+
     nix-env -i {package}
 
 ### remove package
+
     nix-env -e {package}
 
 ### find packages
+
     nix-env -qaP '.*{name}.*'
 
 ### show package info
+
     nix-env -qa --description '.*{name}.*'
 
 ## dpkg
 
 ### list all packages
+
     dpkg -l
 
 ### search for a package
+
     dpkg -l '*qt*'
 
 ### list files in package
+
     dpkg -L 'package-name'
 
 ## Misc
 
+### sudo - open shell as other user
+
+    sudo -s -u {user}
+
 ### lsof - show all used ports
+
     lsof -i -n -P
     (use sudo to show processes by all users)
 
 ### cut prefix
+
     echo "hello" | cut -c 3- # will output "llo"
 
 ### reset terminal
+
     ctrl+c reset
     ctrl+c stty sane
 
 ### count number of lines
+
     wc -l
 
 ### format xml
+
     cat file.xml | xmllint --format -
 
 ### hex view
+
     od -xcb {file}
 
 ### irc - register nick
+
     /msg nickserv help
     /msg nickserv register <password> <email-address>
 
 ### bzr - pull repository
+
     bzr branch bzr+ssh://{username}@{hostname}/path/to/repo local_dir_to_create
 
 ### tmux - detach all other clients
+
     tmux attach -d
     tmux attach -d -t specific_session_name
 
 ### which ubuntu version am I running
+
     lsb_release -a
 
 ### diff directories
@@ -357,4 +416,3 @@ This is a link to [Something][1]
 ### set chrome as the default mailto handler
 
     xdg-mime default google-chrome.desktop x-scheme-handler/mailto
-
