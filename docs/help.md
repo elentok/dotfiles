@@ -416,3 +416,11 @@ This is a link to [Something][1]
 ### set chrome as the default mailto handler
 
     xdg-mime default google-chrome.desktop x-scheme-handler/mailto
+
+## Ranger
+
+    dd - cut
+    pp - paste
+    gn - new tab
+    gt - next tab
+    w - task view
