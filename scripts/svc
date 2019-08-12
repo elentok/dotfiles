@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+main() {
+  case "$1" in
+    list)
+      list-services
+      ;;
+    *)
+      service-menu
+      ;;
+  esac
+}
+
+service-menu() {
+  local service="$(list-services | fzf --height=50%)"
+
+  echo "Status: $(systemctl is-enabled $service)"
+
+  local action="$(echo -e "start\nstop\nreload\nrestart\nenable\ndisable" | fzf --height=10)"
+
+  echo "Running 'systemctl $action $service'..."
+  sudo systemctl $action $service
+}
+
+list-services() {
+  systemctl list-unit-files --type=service | \
+    grep -v 'unit files listed' | \
+    grep -v '^UNIT' | \
+    grep -v '^\s*$' | \
+    awk '{ print $1 }'
+}
+
+main "$@"
