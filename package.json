@@ -29,6 +29,7 @@
     "copy-paste-win32fix": "^1.4.0",
     "easy-table": "^1.0.0",
     "express": "^4.17.1",
+    "fast-glob": "^3.0.4",
     "fetch-plus": "^3.10.4",
     "html-to-text": "^3.2.0",
     "js-yaml": "^3.13.1",
