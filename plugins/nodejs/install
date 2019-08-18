@@ -24,6 +24,8 @@ install_packages() {
   npm_install eslint
   npm_install typescript
   npm_install tslint
+  npm_install prettier
+  npm_install gtop
 }
 
 main "$@"
