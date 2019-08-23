@@ -12,7 +12,7 @@ main() {
   install_dtach
   install_cli_tools
 
-  (cd $DOTF/nvim && ./ctags-build)
+  (cd $DOTF/nvim/ctags && ./build)
 }
 
 install_requirements() {
