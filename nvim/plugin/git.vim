@@ -22,3 +22,4 @@ function! GitLog()
 endfunction
 
 command! GitLog call GitLog()
+command! Gca Gcommit --amend

@@ -1,5 +1,9 @@
 " vim: foldmethod=marker
 
+if !has('nvim')
+  finish
+endif
+
 " Exit insert mode {{{1
 tnoremap <c-\><c-\> <c-\><c-n>
 tnoremap <c-_> <c-\><c-n>
