@@ -76,8 +76,8 @@ endif
 
 " }}}1
 
-if file_readable(expand("~/.dotlocal/before.vim"))
-  source ~/.dotlocal/before.vim
+if file_readable(expand("~/.dotlocal/nvim"))
+  let &runtimepath.=',~/.dotlocal/nvim'
 endif
 
 source $vimfiles/plugs.vim
@@ -87,19 +87,9 @@ source $vimfiles/functions.vim
 source $vimfiles/keys.vim
 source $vimfiles/autocmds.vim
 source $vimfiles/abbr.vim
-source $vimfiles/git.vim
-source $vimfiles/features.vim
-
-if has('nvim')
-  source $vimfiles/terminal.vim
-endif
 
 if file_readable(expand("~/.vimstate"))
   source ~/.vimstate
-endif
-
-if file_readable(expand("~/.dotlocal/after.vim"))
-  source ~/.dotlocal/after.vim
 endif
 
 let g:vimrc_time=float2nr(str2float(reltimestr(reltime(start))) * 1000)
