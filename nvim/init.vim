@@ -82,7 +82,6 @@ endif
 
 source $vimfiles/plugs.vim
 source $vimfiles/settings.vim
-source $vimfiles/coc.vim
 source $vimfiles/functions.vim
 source $vimfiles/keys.vim
 source $vimfiles/autocmds.vim
