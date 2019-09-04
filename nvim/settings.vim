@@ -102,6 +102,8 @@ if !exists('g:gui_oni')
   " silent! call one#highlight('StatusLine', '000000', '696c77', '')
   silent! colorscheme challenger_deep
 
+  hi Folded guibg=#524458
+
   let g:elentok_colors_initialized = 1
 endif
 
