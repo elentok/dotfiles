@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-dconf write /org/gnome/libgnomekbd/keyboard/layouts "['us', 'il']"
-dconf write /org/gnome/libgnomekbd/keyboard/options "['caps\tcaps:ctrl_modifier', 'grp\tgrp:alt_shift_toggle']"
-dconf read /org/gnome/libgnomekbd/keyboard/layouts
-dconf read /org/gnome/libgnomekbd/keyboard/options
