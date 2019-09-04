@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+#
+# Usage:
+#
+#   plugins/cinnamon/conf (backup|restore|list)
+
+source $DOTF/framework
+
+BACKUPS=$DOTF/plugins/cinnamon/backups
+
+PATHS=(
+  org/gnome/libgnomekbd/keyboard
+  org/cinnamon/settings-daemon/plugins/xsettings
+  org/cinnamon/desktop/interface
+)
+
+
+function main() {
+  case "${1:-}" in
+    backup) backup ;;
+    restore) restore ;;
+    list) list ;;
+    *) usage $0
+  esac
+}
+
+function backup() {
+  for path in "${PATHS[@]}"; do
+    echo "Backing up /$path/"
+    filename=$(path-to-file $path)
+    dconf dump /$path/ > $BACKUPS/$filename
+  done
+}
+
+function restore() {
+  for path in "${PATHS[@]}"; do
+    echo "Restoring /$path/"
+    filename=$(path-to-file $path)
+    dconf load /$path/ < $BACKUPS/$filename
+  done
+}
+
+function list() {
+  for path in "${PATHS[@]}"; do
+    echo
+    echo "--- /$path/ ---"
+    filename=$(path-to-file $path)
+    cat $BACKUPS/$filename
+  done
+}
+
+
+function path-to-file() {
+  echo $1.conf | sed 's#/#__#g'
+}
+
+
+main "$@"
