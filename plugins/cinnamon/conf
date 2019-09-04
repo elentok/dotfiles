@@ -12,8 +12,12 @@ PATHS=(
   org/gnome/libgnomekbd/keyboard
   org/cinnamon/settings-daemon/plugins/xsettings
   org/cinnamon/desktop/interface
-)
 
+  # fonts
+  org/gnome/desktop/interface
+  org/nemo/desktop
+  org/cinnamon/desktop/wm/preferences
+)
 
 function main() {
   case "${1:-}" in
