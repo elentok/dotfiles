@@ -25,7 +25,9 @@ async function main(): Promise<void> {
       return '= ' + chalk.green(output) + '\n'
     }
   })
-  ;(server as any).setupHistory(REPL_HISTORY_FILE, (err: Error) => {
+
+  const anyServer = server as any
+  anyServer.setupHistory(REPL_HISTORY_FILE, (err: Error) => {
     if (err != null) console.error('Error writing history', err)
   })
 }
