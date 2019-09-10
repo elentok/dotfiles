@@ -3,12 +3,7 @@ augroup Elentok_Misc
   autocmd VimEnter * set t_vb=
   autocmd VimEnter * echomsg printf("Took %dms to load", g:vimrc_time)
 
-  autocmd BufRead,BufEnter *.applescript setlocal filetype=applescript
-  autocmd BufRead,BufEnter *.rxls        setlocal filetype=ruby
   autocmd BufRead,BufEnter *.ino         setlocal filetype=arduino
-  autocmd BufRead,BufEnter *.hamlc       setlocal filetype=haml
-  autocmd BufRead,BufEnter *.hamljs      setlocal filetype=haml
-  autocmd BufRead,BufEnter *.es6         setlocal filetype=javascript
   autocmd BufRead,BufEnter .babelrc      setlocal filetype=json
 
   autocmd FileType arduino    setlocal cindent
@@ -28,8 +23,6 @@ augroup Elentok_Misc
   autocmd FileType gitcommit  setlocal comments=fb:-,fb:* colorcolumn=72 textwidth=72
   autocmd FileType markdown   setlocal textwidth=80
   autocmd FileType vim setlocal nobomb
-
-  autocmd FileType coffee,yaml        FoldByIndent
 
   " RestoreCursorPosition:
   "
