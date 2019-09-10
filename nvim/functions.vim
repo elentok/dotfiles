@@ -6,28 +6,16 @@ command! W :w
 
 command! Eautocmds  edit ~/.dotfiles/nvim/autocmds.vim
 command! Eplugs     edit ~/.dotfiles/nvim/plugs.vim
-command! Efunctions edit ~/.dotfiles/nvim/functions.vim
-command! Ekeys      edit ~/.dotfiles/nvim/keys.vim
-command! Efeatures  edit ~/.dotfiles/nvim/features.vim
-command! Eterminal  edit ~/.dotfiles/nvim/terminal.vim
 command! Esettings  edit ~/.dotfiles/nvim/settings.vim
 command! Eabbr      edit ~/.dotfiles/nvim/abbr.vim
 command! Ealiases   edit ~/.dotfiles/zsh/aliases.sh
 
 command! -nargs=+ Ewhich     exec "edit " . system("which <args>")
 
-command! FoldByIndent setlocal foldmethod=expr nofoldenable
-  \ foldexpr=IndentFoldExpr(v:lnum)
-
 command! -range=% NumberLines call NumberLines()
 command! CSScomb call CSScomb()
 command! -nargs=+ CSScolor call CSScolor("<args>")
 
-command! PowderRestart QuickShell echo 'Restarting pow...' && powder restart
-command! NginxRestart QuickShell echo 'Restarting nginx...' && sudoo nginx -s reload
-command! -nargs=* Bundle QuickShell bundle <args>
-command! -nargs=* Cap QuickShell bundle exec cap <args>
-command! Pkgs QuickShell pkgs status
 command! SudoWrite :w !sudo tee %
 command! BufClean :call DeleteHiddenBuffers()
 
@@ -122,7 +110,7 @@ function! FixNERDTreeWidth()
   endif
 endfunc
 
-" confirm hazardus command()
+" confirm hazardus command() {{{1
 function! Confirm(message, command)
   let yesno = confirm(a:message, "&Yes\n&No", 2)
   if (yesno == 1)
@@ -141,32 +129,10 @@ func! RevertFile()
   end
 endfunc
 
-" format ruby object {{{1
-func! FormatRubyObject()
-  while stridx(getline('.'), ',') != -1
-    exec "normal! 0f,lr\<cr>"
-  endwhile
-endfunc
-
-command! -range FormatRubyObject call FormatRubyObject()
 
 " preview sass colors {{{1
 command! PreviewSassColors !preview_sass_colors % && open preview.html
 
-" js2coffee {{{1
-func! Js2Coffee()
-  silent! %s/\s\+$//
-  silent! %s/; *$//
-  silent! %s/\v[A-Za-z_]+\.prototype\.([a-zA-Z_]+) *\= *function\s*\(\) *\{/\1: ->/gc
-  silent! %s/\v[A-Za-z_]+\.prototype\.([a-zA-Z_]+) *\= *function\s*(\(.*\)) *\{/\1: \2 ->/gc
-  silent! %s/\v\s*function\s*\(\) *\{/\1 ->/gc
-  silent! %s/\v\s*function\s*(\([^\)]*\)) *\{/\1 ->/gc
-  silent! %s/this\./@/gc
-  silent! %s/var //gc
-  silent! %s/var //gc
-  silent! %g/var //gc
-  silent! %g/^\s*}\s*$/d
-endfunc
 
 " Scriptify {{{1
 let g:hash_tags = {
@@ -200,60 +166,6 @@ func! EscapeRegisterForQuery(register)
   return EscapeForQuery(getreg(a:register))
 endfunc
 
-" FocusMode {{{1
-function! ToggleFocusMode()
-  if (&foldcolumn != 12)
-    set laststatus=0
-    set numberwidth=10
-    set foldcolumn=12
-    set noruler
-    hi FoldColumn ctermbg=none
-    hi LineNr ctermfg=0 ctermbg=none
-    hi NonText ctermfg=0
-  else
-    set laststatus=2
-    set numberwidth=4
-    set foldcolumn=0
-    set ruler
-    execute 'colorscheme ' . g:colors_name
-  endif
-endfunc
-nnoremap <Leader>td :call ToggleFocusMode()<cr>
-
-" IndentFoldExpr {{{1
-function! IndentFoldExpr(lnum)
-  let line = getline(a:lnum)
-  if line =~ '\v^ *$'
-    return '='
-  endif
-
-  let expr = '='
-  let level = strlen(matchstr(line, '\v^ *'))
-
-  let next_lnum = GetNextNonEmptyLine(a:lnum)
-  if next_lnum != -1
-    let next_line = getline(next_lnum)
-    let next_level = strlen(matchstr(next_line, '\v^ *'))
-    if next_level > level
-      let expr = 'a' . (next_level - level) / &tabstop
-    elseif level > next_level
-      let expr = 's' . (level - next_level) / &tabstop
-    endif
-  endif
-  return expr
-endfunc
-
-function! GetNextNonEmptyLine(lnum)
-  let lnum = a:lnum
-  while lnum < line('$')
-    let lnum = lnum + 1
-    let line = getline(lnum)
-    if line !~ '\v^ *$'
-      return lnum
-    endif
-  endwhile
-  return -1
-endfunc
 
 " Background {{{1
 function! ToggleBackground()
@@ -429,14 +341,4 @@ function! EscapeCurrentFileDir()
   let path = expand("%:p:h")
   let path = substitute(path, ' ', '\\ ', 'g')
   return path
-endfunction
-
-function! Coffee2JS()
-  silent exec '%s/@\([a-zA-Z0-9]\+\):  *\(([^)]\+)\) ->/static \1\2 {'
-  silent exec '%s/\([a-zA-Z0-9]\+\):  *\(([^)]\+)\) ->/\1\2 {'
-  silent exec '%s/@\([a-zA-Z0-9_]\+\)/this.\1'
-  silent exec '%s/\([a-zA-Z0-9_]\+\)\.\.\./... \1'
-  silent exec '%s/"\([^"]*\)#\([^"]*\)"/`\1$\2`'
-  silent exec '%s/: ->/() {'
-  silent exec '%s/:$/: {'
 endfunction
