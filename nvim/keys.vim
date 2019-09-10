@@ -232,15 +232,6 @@ noremap <Leader>te :SyntasticToggleMode<cr>:redraw!<cr>
 noremap <Leader>tn :NERDTreeToggle<cr>
 noremap <Leader>tb :call ToggleBackground()<cr>
 
-
-" MS-Windows {{{1
-if g:os == 'windows'
-  noremap <m-space> :simalt ~<cr>
-  inoremap <m-space> <c-o>:simalt ~<cr>
-  noremap <m-f10> :simalt ~x<cr>
-  noremap <m-s-f10> :simalt ~r<cr>
-endif
-
 " Post Startup {{{1
 func! PostStartupKeys()
   vnoremap <tab> >gv
