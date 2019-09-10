@@ -11,9 +11,6 @@ command! Eabbr      edit ~/.dotfiles/nvim/abbr.vim
 command! Ealiases   edit ~/.dotfiles/zsh/aliases.sh
 
 command! -nargs=+ Ewhich     exec "edit " . system("which <args>")
-
-command! -range=% NumberLines call NumberLines()
-command! CSScomb call CSScomb()
 command! -nargs=+ CSScolor call CSScolor("<args>")
 
 command! SudoWrite :w !sudo tee %
@@ -40,48 +37,12 @@ command! FZFGitChanged call fzf#run({
       \ "options": "--prompt 'Git Changed>'",
       \ "sink": "e"})
 
-" Hebrew {{{1
-func! ToggleHebrew()
-  if &rl
-    set norl
-    set keymap=
-  else
-    set rl
-    set keymap=hebrew
-  end
-endfunc
-
 " Remap <cr> in quickfix buffers {{{1
 func! RemapCrInQuickFixBuffers()
   if &buftype == 'quickfix'
     nnoremap <buffer> <cr> <cr>
   end
 endfunc
-
-" Autocompile coffeescript
-func! CoffeeMake()
-  if getline(1) =~ 'autocompile'
-    silent make
-    redraw!
-    cw
-  end
-endfunc
-
-
-" My Folding Expression {{{1
-function! MyFoldingExpr(lnum)
-    let line=getline(a:lnum)
-    if line[0] == '*'
-        if line[1] == '*'
-            return '>2'
-        else
-            return '>1'
-        endif
-    else
-        return '='
-    endif
-endfunction
-
 
 " Google Search {{{1
 
@@ -177,20 +138,8 @@ function! ToggleBackground()
   call writefile(["set background=" . &background], expand("~/.vimstate"))
 endfunc
 
-" Number Lines {{{1
-function! NumberLines()
-  let i = line('.') - a:firstline + 1
-  exec "s/^/" . i .". /"
-endfunc
 
-" CSSComb {{{1
-
-function! CSScomb()
-  let csscomb_root = $BREW_HOME . '/lib/node_modules/csscomb'
-  let config = csscomb_root . '/config/zen.json'
-  execute "silent !csscomb -c " . config . " " . expand('%')
-  redraw!
-endfunction
+" CSSColor {{{1
 
 function! CSScolor(color)
   let format="sass"
@@ -287,54 +236,6 @@ function! Markserv()
   exec 'silent !o "http://localhost:8642/%"'
 endfunction
 command! Markserv call Markserv()
-
-" TabLine {{{1
-function! Elentok_TabLine()
-  let s = ''
-  let current_tab = tabpagenr() - 1
-  for index in range(tabpagenr('$'))
-    if index == current_tab
-      let s .= '%#TabLineSel# '
-    else
-      let s .= '%#TabLine# '
-    endif
-    let s .= index . Elentok_TabText(index) . ' '
-  endfor
-  let s .= '%#TabLineFill#%T'
-  return s
-endfunction
-
-function! Elentok_TabText(index)
-  let buffers = tabpagebuflist(a:index + 1)
-  let name = bufname(buffers[0])
-
-  let text = ''
-  if len(name) > 0
-    let text .= ' ' . fnamemodify(name, ":t")
-  endif
-
-  if Elentok_IsTabModified(a:index)
-    let text .= ' (+)'
-  endif
-
-  if len(text) > 0
-    let text = ':' . text
-  endif
-
-  return text
-endfunction
-
-function! Elentok_IsTabModified(index)
-  let buffers = tabpagebuflist(a:index + 1)
-  for bufnr in buffers
-    if getbufvar(bufnr, "&modified")
-      return 1
-    endif
-  endfor
-  return 0
-endfunction
-
-set tabline=%!Elentok_TabLine()
 
 " Misc {{{1
 function! EscapeCurrentFileDir()
