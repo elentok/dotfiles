@@ -251,13 +251,7 @@ nnoremap <silent> ,t- :call neoterm#close()<cr>
 nnoremap <silent> ,t0 :call neoterm#clear()<cr>
 
 " Misc {{{1
-
-noremap <Leader>co0 :CSScolor '<c-r>0'<cr>
-noremap <Leader>co* :CSScolor '<c-r>*'<cr>
-
 vnoremap ,s :!sort<cr>
-
-nnoremap <Leader>nf :Neoformat<cr>
 
 " Tabs {{{1
 noremap <m-.> gt
