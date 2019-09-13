@@ -7,20 +7,11 @@ command! W :w
 command! Eautocmds  edit ~/.dotfiles/nvim/autocmds.vim
 command! Eplugs     edit ~/.dotfiles/nvim/plugs.vim
 command! Esettings  edit ~/.dotfiles/nvim/settings.vim
-command! Eabbr      edit ~/.dotfiles/nvim/abbr.vim
 command! Ealiases   edit ~/.dotfiles/zsh/aliases.sh
 
 command! -nargs=+ Ewhich     exec "edit " . system("which <args>")
-command! -nargs=+ CSScolor call CSScolor("<args>")
 
 command! SudoWrite :w !sudo tee %
-
-" Remap <cr> in quickfix buffers {{{1
-func! RemapCrInQuickFixBuffers()
-  if &buftype == 'quickfix'
-    nnoremap <buffer> <cr> <cr>
-  end
-endfunc
 
 " Google Search {{{1
 
@@ -38,15 +29,6 @@ func! Browse(url)
   else
     call system($opener . " '" . a:url . "' &")
   end
-endfunc
-
-
-" fix nerdtree width {{{1
-function! FixNERDTreeWidth()
-  let winwidth = winwidth(".")
-  if winwidth < g:NERDTreeWinSize
-    exec("silent vertical resize " . g:NERDTreeWinSize)
-  endif
 endfunc
 
 " confirm hazardus command() {{{1
@@ -93,19 +75,6 @@ function! ToggleBackground()
   endif
   call writefile(["set background=" . &background], expand("~/.vimstate"))
 endfunc
-
-
-" CSSColor {{{1
-
-function! CSScolor(color)
-  let format="sass"
-  if &filetype == "less"
-    let format="less"
-  endif
-  let css=system("color2css.py " . a:color . " --format " . format)
-  let @c=css
-  normal "cp
-endfunction
 
 " Exec {{{1
 if has('nvim')
