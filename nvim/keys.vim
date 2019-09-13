@@ -111,9 +111,6 @@ noremap <Leader>ey "*Y"+Y
 vnoremap <Leader>ey "*ygv"+y
 noremap <Leader>ep "*p
 
-noremap <Leader>ef :e <C-R>=EscapeCurrentFileDir() . $delimiter <cr>
-noremap <Leader>et :tabe <C-R>=EscapeCurrentFileDir() . $delimiter <cr>
-noremap <Leader>rf :read <C-R>=EscapeCurrentFileDir() . $delimiter <cr>
 noremap <Leader>ew :w<cr>
 noremap <Leader>ww :w<cr>
 noremap <Leader>wq :wq<cr>
