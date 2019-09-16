@@ -3,7 +3,7 @@
 source $DOTF/framework
 source $DOTF/scripts/build-helper
 
-prepare_build neovim v0.3.7 "$*"
+prepare_build neovim v0.4.2 "$*"
 
 if is_debian; then
   apt_install ninja-build gettext libtool libtool-bin autoconf \
