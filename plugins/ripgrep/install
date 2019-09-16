@@ -2,7 +2,7 @@
 
 source $DOTF/framework
 
-VERSION='0.10.0'
+VERSION='11.0.2'
 
 main() {
   bullet 'Installing ripgrep...'
