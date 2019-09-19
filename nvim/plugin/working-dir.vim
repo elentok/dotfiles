@@ -12,6 +12,10 @@ function! SetBufferWorkingDirectory()
     return
   endif
 
+  if &filetype == 'fugitiveblame'
+    return
+  end
+
   if &buftype ==# 'terminal'
     return
   end
