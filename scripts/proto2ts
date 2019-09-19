@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+
+sed 's/\s*=.*$//' | \
+  sed -E 's/^\t+/  /' | \
+  sed 's/^message /export interface I/' | \
+  sed -E 's/optional ([^ ]+) (.+)$/\2?: \1/' | \
+  sed -E 's/repeated ([^ ]+) (.+)$/\2?: \1[]/' | \
+  sed -E '/^\s*$/d'
