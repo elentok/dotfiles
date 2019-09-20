@@ -5,5 +5,10 @@ sed 's/\s*=.*$//' | \
   sed -E 's/^\t+/  /' | \
   sed 's/^message /export interface I/' | \
   sed -E 's/optional ([^ ]+) (.+)$/\2?: \1/' | \
+  sed -E 's/required ([^ ]+) (.+)$/\2: \1/' | \
   sed -E 's/repeated ([^ ]+) (.+)$/\2?: \1[]/' | \
-  sed -E '/^\s*$/d'
+  sed -E '/^\s*$/d' | \
+  sed -E 's/_([a-z])/\u\1/g' | \
+  sed -E 's/: bool$/: boolean/' | \
+  sed -E 's/: (int32|int64|float|double)/: number/' | \
+  sed -E 's/: ([A-Z])/: I\1/'
