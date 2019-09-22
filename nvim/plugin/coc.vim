@@ -117,3 +117,4 @@ nnoremap <silent> <space>cn  :<C-u>CocNext<CR>
 nnoremap <silent> <space>cp  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>cl  :<C-u>CocListResume<CR>
+nnoremap <silent> <space>cm  :<C-u>CocList mru<cr>
