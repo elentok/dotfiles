@@ -7,12 +7,9 @@ function main() {
 
   header "Generating ctags for ${ROOT}"
 
-  build_exclude_args
-
-  bullet 'Generating... '
-
-  ctags $EXCLUDE_ARGS -R --c++-kinds=+p --fields=+ilaS --extra=+q \
-    --exclude=@$DOTF/nvim/ctagsignore \
+  ctags -R --c++-kinds=+p --fields=+ilaS --extra=+q \
+    --exclude=@$DOTF/nvim/ctags/ignore \
+    $(project-exclude-arg $ROOT) \
     -f $ROOT/tags $ROOT
   if [ $? -eq 0 ]; then
     success "done (generated $(count-ctags) tags)."
@@ -21,17 +18,12 @@ function main() {
   fi
 }
 
-function build_exclude_args() {
-  EXCLUDE_ARGS=""
+function project-exclude-arg() {
+  local root=$1
 
-  if [ -e "$DOTF/nvim/ctagsignore" ]; then
-    bullet "Loading $DOTF/nvim/ctagsignore\n"
-    EXCLUDE_ARGS="--exclude=@$DOTF/nvim/ctagsignore"
-  fi
-
-  if [ -e "$ROOT/.ctagsignore" ]; then
-    bullet "Loading $ROOT/.ctagsignore\n"
-    EXCLUDE_ARGS="$EXCLUDE_ARGS --exclude=@$ROOT/.ctagsignore"
+  if [ -e "$root/.ctagsignore" ]; then
+    bullet "Loading $root/.ctagsignore\n" >&2
+    echo "--exclude=@$root/.ctagsignore"
   fi
 }
 
