@@ -1,10 +1,9 @@
 if exists('*nvim_create_buf')
-  let $FZF_DEFAULT_OPTS='--layout=reverse'
+  let $FZF_DEFAULT_OPTS='--layout=reverse --margin=1,2,1,2'
   let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
   function! FloatingFZF()
     let buf = nvim_create_buf(v:false, v:true)
-    call setbufvar(buf, '&signcolumn', 'no')
 
     let height = &lines / 2
     let width = float2nr(&columns - (&columns * 2 / 4))
@@ -18,6 +17,7 @@ if exists('*nvim_create_buf')
           \ 'height': height
           \ }
 
-    call nvim_open_win(buf, v:true, opts)
+    let win = nvim_open_win(buf, v:true, opts)
+    call setwinvar(win, '&signcolumn', 'no')
   endfunction
 endif
