@@ -64,13 +64,6 @@ if has('cryptv')
   set cryptmethod=blowfish
 endif
 
-if executable("rg")
-  set grepprg=rg\ --vimgrep\ --no-heading
-  set grepformat=%f:%l:%c:%m,%f:%l:%m
-elseif executable("ag")
-  set grepprg=ag\ --nogroup\ --nocolor
-endif
-
 " Netrw {{{1
 
 " Based on https://shapeshed.com/vim-netrw/
