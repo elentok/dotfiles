@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-MONITOR='DP-2'
+MONITOR='DP-1'
 WIDTH=1920
 HEIGHT=1200
 REFRESH=50.0Hz
