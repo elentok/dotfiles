@@ -16,6 +16,10 @@ find "$DOTF/plugins/fonts" -name '*.[o,t]tf' -type f | \
     copy_to_dir "$file" "$font_dir"
   done
 
+if [ ! -e "$font_dir/Cascadia.ttf" ]; then
+  curl -L https://github.com/microsoft/cascadia-code/releases/download/v1909.16/Cascadia.ttf > $font_dir/Cascadia.ttf
+fi
+
 # For linux
 if is_linux; then
   bullet "Updating font cache"
