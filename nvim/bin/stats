@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 echo "Plugins:      $(grep '^\s*Plug ' plugs.vim | wc -l)"
-echo "Keybindings:  $(grep -E '^\s*[invt]?(nore)?map ' *.vim | wc -l)"
-echo "Autocommands: $(grep '^\s*autocmd ' *.vim | wc -l)"
-echo "Functions:    $(grep '^\s*func' *.vim | wc -l)"
-echo "Commands:     $(grep '^\s*command' *.vim | wc -l)"
+echo "Keybindings:  $(grep -E '^\s*[invt]?(nore)?map ' **/*.vim | wc -l)"
+echo "Autocommands: $(grep '^\s*autocmd ' **/*.vim | wc -l)"
+echo "Functions:    $(grep '^\s*func' **/*.vim | wc -l)"
+echo "Commands:     $(grep '^\s*command' **/*.vim | wc -l)"
