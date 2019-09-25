@@ -245,10 +245,6 @@ nnoremap <leader>jm :JavaImpl<cr>
 nnoremap <leader>jg :JavaGet<cr>
 nnoremap <leader>js :JavaGetSet<cr>
 
-" Plugin: neoterm {{{1
-
-nnoremap <silent> ,t- :call neoterm#close()<cr>
-nnoremap <silent> ,t0 :call neoterm#clear()<cr>
 
 " Misc {{{1
 vnoremap ,s :!sort<cr>
