@@ -6,7 +6,7 @@ if exists('*nvim_create_buf')
     let buf = nvim_create_buf(v:false, v:true)
 
     let height = &lines / 2
-    let width = float2nr(&columns - (&columns * 2 / 4))
+    let width = float2nr(&columns - (&columns * 1 / 4))
     let col = float2nr((&columns - width) / 2)
 
     let opts = {
