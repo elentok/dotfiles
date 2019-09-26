@@ -231,9 +231,9 @@ cdd() {
 }
 
 vp() {
-  local plugin="$(cd $HOME/.vim/plugged && /bin/ls -1 | fzf --ansi --exit-0)"
+  local plugin="$(cd $HOME/.local/share/nvim-plugins && /bin/ls -1 | fzf --ansi --exit-0)"
   if [ -n "$plugin" ]; then
-    cd "$HOME/.vim/plugged/$plugin"
+    cd "$HOME/.local/share/nvim-plugins/$plugin"
   fi
 }
 
