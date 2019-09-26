@@ -297,14 +297,6 @@ augroup GPG
     autocmd CursorHold *.\(gpg\|asc\|pgp\) quit
 augroup END
 
-" Plugin: mhinz/vim-grepper {{{1
-let g:grepper = {
-  \ 'tools':  ['rg'],
-  \ 'open':   1,
-  \ 'switch': 0,
-  \ 'jump':   1
-\ }
-
 " Plugin: ludovicchabant/vim-gutentags {{{1
 let g:gutentags_ctags_exclude = [
   \ 'node_modules', 'bower_components', 'logs', 'tmp', 'public', 'vendor' ]
@@ -314,16 +306,4 @@ let loaded_matchparen=1 " do not show highlight matching parenthesis automatical
 
 if !exists('$DOTF')
   let $DOTF = expand('~/.dotfiles')
-endif
-
-if !exists('$RIPGREP_CONFIG_PATH')
-  let $RIPGREP_CONFIG_PATH = $DOTF . '/plugins/ripgrep/ripgreprc'
-endif
-
-if !exists('$FZF_DEFAULT_COMMAND')
-  if g:os == 'windows'
-    let $FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules}/*"'
-  else
-    let $FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
-  endif
 endif

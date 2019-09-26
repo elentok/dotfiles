@@ -13,6 +13,11 @@ noremap <Leader>fc :Grepper<cr>
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
 
+" Ripgrep: set config path {{{1
+if !exists('$RIPGREP_CONFIG_PATH')
+  let $RIPGREP_CONFIG_PATH = $DOTF . '/plugins/ripgrep/ripgreprc'
+endif
+
 " Escape functions {{{1
 func! EscapeForQuery(text)
   let text = substitute(a:text, '\v(\[|\]|\$|\^)', '\\\1', 'g')

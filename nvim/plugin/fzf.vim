@@ -1,3 +1,11 @@
+if !exists('$FZF_DEFAULT_COMMAND')
+  if g:os == 'windows'
+    let $FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules}/*"'
+  else
+    let $FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+  endif
+endif
+
 command! FZFMru call fzf#run({
       \  "source":  v:oldfiles,
       \  "sink":    "e",
