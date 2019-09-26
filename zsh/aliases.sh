@@ -188,15 +188,6 @@ npr() {
   fi
 }
 
-t() {
-  log="$(tailr --list | tr " " "\n" | fzf --exit-0)"
-  if [ -n "$log" ]; then
-    echo "Tailing $log..."
-    print -s "tailr $log"
-    tailr $log
-  fi
-}
-
 ss() {
   server="$(pick-ssh-server)"
   if [ -n "$server" ]; then
