@@ -81,26 +81,6 @@ if has("nvim")
   set inccommand=nosplit
 endif
 
-" Colors {{{1
-if (has("termguicolors"))
-  set termguicolors
-endif
-
-if !exists('g:gui_oni')
-  set background=dark
-  let g:one_allow_italics = 1
-  " silent! colorscheme one
-  " silent! call one#highlight('Folded', '555555', '111111', '')
-  " silent! call one#highlight('VertSplit', '', '5c6370', 'none')
-  " silent! call one#highlight('StatusLine', '000000', '696c77', '')
-  silent! colorscheme challenger_deep
-
-  hi Folded guibg=#524458
-
-  let g:elentok_colors_initialized = 1
-endif
-
-
 " Search {{{1
 set incsearch   " incremental search
 set ignorecase  " ignore case when search
@@ -111,19 +91,6 @@ set wrapscan    " wrap around when searching
 " Highlight Current Line {{{1
 set cursorline
 " highlight CursorLine guibg=black cterm=none term=none ctermbg=black
-
-" Backup {{{1
-set backup writebackup
-set backupdir=$HOME/.local/share/vim-backup
-set dir=$HOME/.local/share/vim-swap
-
-if !isdirectory(&backupdir)
-  call mkdir(&backupdir, "p")
-end
-
-if !isdirectory(&dir)
-  call mkdir(&dir, "p")
-end
 
 " store undo history even after closing a file
 " (disabled because it's annoying)
@@ -169,17 +136,6 @@ if g:os == "mac"
   let &t_EI .= s:xterm_block  " Solid block cursor when in normal mode]]"
 endif
 
-" Statusline {{{1
-set statusline=
-set statusline+=%f " Path to the file in the buffer, as typed or relative to current directory
-set statusline+=%< " Where to truncate line
-set statusline+=%{&modified?'\ +':''}
-set statusline+=%{&readonly?'\ ':''}
-set statusline+=%= " Separation point between left and right aligned items
-" set statusline+=%{gutentags#statusline()}
-set statusline+=\ [%{''!=#&filetype?&filetype:'none'}]
-set statusline+=\ %l:%v " Line number + column number
-
 " Plugin: pangloss/vim-javascript {{{1
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_flow = 1
@@ -189,9 +145,6 @@ let g:gitgutter_eager = 0
 
 " Plugin: jtratner/vim-flavored-markdown {{{1
 let g:markdown_fold_style = 'nested'
-
-" Plugin: Shougo/deoplete.nvim {{{1
-let g:deoplete#enable_at_startup = 1
 
 " Plugin: junegunn/vim-easy-align {{{1
 let g:easy_align_delimiters = {
@@ -219,16 +172,6 @@ let g:easy_align_delimiters = {
       \ '\': { 'pattern': '[\\]', 'ignore_groups': [] }
       \ }
 
-" Plugin: scrooloose/nerdtree {{{1
-let NERDTreeIgnore=['\.zeus\.sock$', '\~$', '^node_modules$']
-let NERDTreeHijackNetrw = 0
-
-if !empty($DISABLE_UNICODE)
-  let g:NERDTreeDirArrows = 1
-  let g:NERDTreeDirArrowCollapsible = 'v'
-  let g:NERDTreeDirArrowExpandable = '>'
-endif
-
 " Plugin: scrooloose/nerdcommenter {{{1
 let g:NERDCustomDelimiters = {
     \ 'scss': { 'left': '//' }
@@ -238,21 +181,6 @@ let g:NERDSpaceDelims = 1
 
 " Plugin: fatih/vim-go {{{1
 let g:go_fmt_command = "goimports"
-
-" Plugin: jamessan/vim-gnupg {{{1
-
-" See http://www.futurile.net/2017/05/14/editing-encrypting-files-with-gnupg-vim/
-
-" Armor files
-let g:GPGPreferArmor=1
-let g:GPGDefaultRecipients=["3david@gmail.com"]
-
-" Lock file after 30 seconds of no use
-augroup GPG
-    autocmd!
-    autocmd BufRead,BufEnter *.\(gpg\|asc\|pgp\) setlocal updatetime=30000
-    autocmd CursorHold *.\(gpg\|asc\|pgp\) quit
-augroup END
 
 " Plugin: ludovicchabant/vim-gutentags {{{1
 let g:gutentags_ctags_exclude = [
