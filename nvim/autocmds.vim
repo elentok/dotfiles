@@ -22,7 +22,7 @@ augroup Elentok_Misc
   autocmd FileType gitcommit,markdown setlocal spell spellcapcheck=
   autocmd FileType gitcommit  setlocal comments=fb:-,fb:* colorcolumn=72 textwidth=72
   autocmd FileType markdown   setlocal textwidth=80
-  autocmd FileType vim setlocal nobomb
+  autocmd FileType vim        setlocal nobomb foldmethod=marker
 
   autocmd VimEnter * call PostStartupKeys()
 augroup END
