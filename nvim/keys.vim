@@ -16,9 +16,6 @@ inoremap <c-e> <c-o>$
 " Find {{{1
 nnoremap <cr> :nohls<cr><cr>
 
-noremap <Leader>ff :Grepper -query '<c-r>=EscapeForQuery(expand("<cword>"))<cr>'<cr>
-vnoremap <Leader>ff "9y:Grepper -query '<c-r>=EscapeRegisterForQuery(9)<cr>'<cr>
-noremap <Leader>fc :Grepper<cr>
 noremap <Leader>fg :call WebSearch("https://google.com/search?q=%query%")<cr>
 noremap <Leader>fo :call WebSearch("http://stackoverflow.com/search?q=%query%")<cr>
 vnoremap <Leader>fg "9y:call Browse("https://google.com/search?q=<c-r>9")<cr>

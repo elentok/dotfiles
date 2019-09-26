@@ -54,18 +54,6 @@ endfunc
 " preview sass colors {{{1
 command! PreviewSassColors !preview_sass_colors % && open preview.html
 
-" Escaped search {{{1
-func! EscapeForQuery(text)
-  let text = substitute(a:text, '\v(\[|\]|\$|\^)', '\\\1', 'g')
-  let text = substitute(text, "'", "''", 'g')
-  return text
-endfunc
-
-func! EscapeRegisterForQuery(register)
-  return EscapeForQuery(getreg(a:register))
-endfunc
-
-
 " Background {{{1
 function! ToggleBackground()
   if &background == "dark"

@@ -305,9 +305,6 @@ let g:grepper = {
   \ 'jump':   1
 \ }
 
-nmap gs <plug>(GrepperOperator)
-xmap gs <plug>(GrepperOperator)
-
 " Plugin: ludovicchabant/vim-gutentags {{{1
 let g:gutentags_ctags_exclude = [
   \ 'node_modules', 'bower_components', 'logs', 'tmp', 'public', 'vendor' ]
