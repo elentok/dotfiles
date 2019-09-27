@@ -25,6 +25,8 @@ function main(): void {
     sendToTelegram(req.body.message).then(() => res.send('OK'))
   })
   app.listen(10000, () => console.info('Telegram proxy listening on port 10000'))
+
+  sendToTelegram('Telegram Proxy Started')
 }
 
 async function sendToTelegram(message: string): Promise<void | AxiosResponse<any>> {
