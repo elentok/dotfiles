@@ -308,17 +308,17 @@ gem_install_single() {
     info "already installed"
   else
     sudo /usr/bin/gem install $*
-    rm -f /tmp/gem_cache
+    rm -f $TMP/gem_cache
   fi
 }
 
-rm -f /tmp/gem_cache
+rm -f $TMP/gem_cache
 
 gem_cache() {
-  if [ ! -e /tmp/gem_cache ]; then
-    /usr/bin/gem list > /tmp/gem_cache
+  if [ ! -e $TMP/gem_cache ]; then
+    /usr/bin/gem list > $TMP/gem_cache
   fi
-  cat /tmp/gem_cache
+  cat $TMP/gem_cache
 }
 
 # Homebrew {{{1
@@ -504,11 +504,11 @@ apt_install_single() {
     info " already installed"
   else
     sudo apt-get install -y ${1}
-    rm -f /tmp/apt-cache
+    rm -f $TMP/apt-cache
   fi
 }
 
-rm -f /tmp/apt_cache || sudo rm -f /tmp/apt_cache
+rm -f $TMP/apt_cache || sudo rm -f $TMP/apt_cache
 
 has_apt_package() {
   local name="$(echo "$1" | sed 's/+/\\+/g')"
@@ -516,17 +516,17 @@ has_apt_package() {
 }
 
 apt_cache() {
-  if [ ! -e /tmp/apt_cache ]; then
-    dpkg --get-selections | grep '\<install' | awk '{print $1}' 2>/dev/null > /tmp/apt_cache
+  if [ ! -e $TMP/apt_cache ]; then
+    dpkg --get-selections | grep '\<install' | awk '{print $1}' 2>/dev/null > $TMP/apt_cache
   fi
-  cat /tmp/apt_cache
+  cat $TMP/apt_cache
 }
 
 # Apt: Update {{{1
 apt_update() {
   bullet "Updating apt..."
   sudo apt-get update
-  rm /tmp/apt_cache
+  rm $TMP/apt_cache
 }
 
 # Apt: Add Repo {{{1
@@ -606,9 +606,9 @@ install_deb() {
   if [ "$has" != "" ]; then
     info " already installed"
   else
-    wget $2 -O /tmp/$1.deb
-    sudo dpkg -i /tmp/$1.deb
-    rm -f /tmp/apt-cache
+    wget $2 -O $TMP/$1.deb
+    sudo dpkg -i $TMP/$1.deb
+    rm -f $TMP/apt-cache
   fi
 }
 
