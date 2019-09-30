@@ -16,7 +16,9 @@ main() {
 }
 
 install_requirements() {
-  if is_mac; then
+  if is_termux; then
+    apt_install clang
+  elif is_mac; then
     brew_install python
   elif is_arch; then
     pacman_install python python-pip
