@@ -26,10 +26,10 @@ install_zsh() {
 
     zsh_bin="$(which zsh)"
     bullet "Changing user's shell to $zsh_bin... "
-    if [[ "$SHELL" =~ /zsh ]]; then
+    if is_zsh; then
       info 'already set'
     else
-      sudo usermod -s $zsh_bin $(whoami)
+      chsh -s $zsh_bin
     fi
   fi
 }

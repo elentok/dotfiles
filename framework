@@ -503,12 +503,17 @@ apt_install_single() {
   if has_apt_package "$1"; then
     info " already installed"
   else
-    sudo apt-get install -y ${1}
+    if is_termux; then
+      apt install -y ${1}
+    else
+      sudo apt install -y ${1}
+    fi
+
     rm -f $TMP/apt-cache
   fi
 }
 
-rm -f $TMP/apt_cache || sudo rm -f $TMP/apt_cache
+rm -f $TMP/apt_cache || rm -f $TMP/apt_cache
 
 has_apt_package() {
   local name="$(echo "$1" | sed 's/+/\\+/g')"
