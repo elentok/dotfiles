@@ -1,7 +1,7 @@
 export DOTF=~/.dotfiles
 export DOTL=~/.dotlocal
 
-# OS {{{1
+# Identify OS {{{1
 if [ "`uname -s`" = "Darwin" ]; then
   export OS=mac
 else
@@ -15,12 +15,44 @@ is_linux() {
   [ "$OS" = "linux" ]
 }
 
-# WSL {{{1
+# Identify Linux Distro {{{1
+export DISTRO=''
+if is_linux; then
+  if [[ "$HOME" =~ termux ]]; then
+    export DISTRO=termux
+  elif [ -f /etc/arch-release ]; then
+    export DISTRO=arch
+  elif [[ "$(cat /proc/version)" =~ "fedora" ]]; then
+    export DISTRO=fedora
+  else
+    export DISTRO=debian
+  fi
+fi
+
+is_arch() {
+  [ "$DISTRO" = "arch" ]
+}
+
+is_termux() {
+  [ "$DISTRO" = "termux" ]
+}
+
+is_debian() {
+  [ "$DISTRO" = "debian" ]
+}
+
+is_fedora() {
+  [ "$DISTRO" = "fedora" ]
+}
+
+# Identify WSL {{{1
 export IS_WSL=no
 
 if is_linux; then
-  if [[ "$(cat /proc/version)" =~ 'Microsoft' ]]; then
-    export IS_WSL=yes
+  if ! is_termux; then
+    if [[ "$(cat /proc/version)" =~ 'Microsoft' ]]; then
+      export IS_WSL=yes
+    fi
   fi
 fi
 
@@ -74,35 +106,6 @@ is_running() {
   ps cax | grep "$1" > /dev/null 2>&1
 }
 
-# Identify Linux Distro {{{1
-export DISTRO=''
-if is_linux; then
-  if has_command pacman; then
-    export DISTRO=arch
-  elif [[ "$HOME" =~ termux ]]; then
-    export DISTRO=termux
-  elif [[ "$(cat /proc/version)" =~ "fedora" ]]; then
-    export DISTRO=fedora
-  else
-    export DISTRO=debian
-  fi
-fi
-
-is_arch() {
-  [ "$DISTRO" = "arch" ]
-}
-
-is_termux() {
-  [ "$DISTRO" = "termux" ]
-}
-
-is_debian() {
-  [ "$DISTRO" = "debian" ]
-}
-
-is_fedora() {
-  [ "$DISTRO" = "fedora" ]
-}
 
 # TMP
 export TMP=/tmp
