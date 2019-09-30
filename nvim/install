@@ -34,6 +34,8 @@ install_requirements() {
 install_neovim() {
   if is_arch; then
     pacman_install neovim
+  elif is_termux; then
+    apt_install neovim
   elif command_missing nvim; then
     if is_mac; then
       install_neovim_mac

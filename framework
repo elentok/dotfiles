@@ -272,7 +272,7 @@ npm_install() {
 }
 
 npm_install_single() {
-  bullet "Installing ${1}..."
+  bullet "Installing npm package ${1}..."
 
   if ! has_command npm; then
     error "npm is not installed, skipping"
