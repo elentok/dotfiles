@@ -5,8 +5,12 @@ set -euo pipefail
 source `dirname $0`/../../framework
 
 main() {
-  git_clone https://github.com/tj/n $N_PREFIX
-  install_node
+  if is_termux; then
+    apt_install nodejs
+  else
+    git_clone https://github.com/tj/n $N_PREFIX
+    install_node
+  fi
 
   install_packages
 }
