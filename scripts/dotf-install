@@ -22,7 +22,9 @@ main() {
 
 update-pip() {
   if command_missing pip3; then
-    if is_debian; then
+    if is_termux; then
+      apt_install python
+    elif is_debian; then
       apt_install python3 python3-pip
     elif is_mac; then
       brew_install python3

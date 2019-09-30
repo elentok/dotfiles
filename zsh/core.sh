@@ -180,14 +180,15 @@ fi
 PATH="$DOTF/scripts:\
 $DOTL/scripts:\
 $HOME/.yarn/bin:\
-$N_PREFIX/bin"
-
-
-PATH="$PATH:\
+$N_PREFIX/bin:\
 $HOME/.fzf/bin:\
 $HOME/bin:\
 $HOME/scripts:\
 $HOME/.local/bin"
+
+if is_termux; then
+  PATH=$PATH:/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets
+fi
 
 if [ -n "$BREW_HOME" ]; then
   PATH=$PATH:$BREW_HOME/bin:$BREW_HOME/sbin:$BREW_HOME/opt/coreutils/libexec/gnubin
@@ -220,10 +221,6 @@ $HOME/.rbenv/shims:\
 
 if [ -e /usr/lib/cinnamon-settings-daemon ]; then
   PATH=$PATH:/usr/lib/cinnamon-settings-daemon
-fi
-
-if is_termux; then
-  PATH=$PATH:/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets
 fi
 
 if is_wsl; then
