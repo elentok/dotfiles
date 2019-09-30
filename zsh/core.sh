@@ -2,14 +2,10 @@ export DOTF=~/.dotfiles
 export DOTL=~/.dotlocal
 
 # OS {{{1
-export IS_WSL=no
 if [ "`uname -s`" = "Darwin" ]; then
   export OS=mac
 else
   export OS=linux
-  if [[ "$(cat /proc/version)" =~ 'Microsoft' ]]; then
-    export IS_WSL=yes
-  fi
 fi
 
 is_mac() {
@@ -18,11 +14,18 @@ is_mac() {
 is_linux() {
   [ "$OS" = "linux" ]
 }
+
+# WSL {{{1
+export IS_WSL=no
+
+if is_linux; then
+  if [[ "$(cat /proc/version)" =~ 'Microsoft' ]]; then
+    export IS_WSL=yes
+  fi
+fi
+
 is_wsl() {
   [ "$IS_WSL" = "yes" ]
-}
-is_in_neovim() {
-  [ -n "${NVIM_LISTEN_ADDRESS:-}" ]
 }
 
 # Shell {{{1
@@ -254,14 +257,10 @@ fi
 export TMUX_TMPDIR="$TMP/$(whoami)"
 mkdir -p $TMUX_TMPDIR
 
-# LOCALE {{{1
-# required for bundler to work correctly
-# without these it throws "ArgumentError: invalid byte sequence in US-ASCII"
-# whenever it finds a gemspec with non-unicode characters
-# (see http://ruckus.tumblr.com/post/18613786601/bundler-install-error-argumenterror-invalid-byte)
-#export LANG=en_US.UTF-8
-#export LC_ALL=en_US.UTF-8
-#export LC_CTYPE=en_US.UTF-8
+# Neovim Terminal {{{1
+is_in_neovim() {
+  [ -n "${NVIM_LISTEN_ADDRESS:-}" ]
+}
 
 # MISC {{{1
 export SSH_TERM=xterm-color
@@ -270,13 +269,6 @@ export RIPGREP_CONFIG_PATH="$DOTF/plugins/ripgrep/ripgreprc"
 
 if is_mac; then
   export JAVA_HOME="$(/usr/libexec/java_home 2> /dev/null)"
-fi
-
-# vim: foldmethod=marker
-# Nix Package Manager {{{1
-if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
-  source $HOME/.nix-profile/etc/profile.d/nix.sh;
-  export MANPATH=$HOME/.nix-profile/share/man:$MANPATH
 fi
 
 # DOTLOCAL {{{1
