@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# based on https://gist.github.com/jamesknelson/caa15ba30c8ca7d2bfaebdf442101dc4
+
+if [ $# -eq 0 ]; then
+  echo 'Usage:'
+  echo
+  echo '  togif {filename}'
+  echo
+  echo 'Environment Variables:'
+  echo
+  echo '  WIDTH (default: 700)'
+  echo '  FPS   (default: 12)'
+  exit 1
+fi
+
+FILENAME="$1"
+WIDTH=${WIDTH:-700}
+FPS=${FPS:-12}
+ffmpeg -i "$FILENAME" -filter_complex "[0:v] fps=$FPS,scale=$WIDTH:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse" $FILENAME.gif
