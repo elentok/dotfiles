@@ -419,6 +419,7 @@ This is a link to [Something][1]
 
 ## Ranger
 
+    dc - calculate total size of selected items
     dd - cut
     pp - paste
     gn - new tab
