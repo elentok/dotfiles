@@ -26,7 +26,7 @@ install_zsh() {
 
     zsh_bin="$(which zsh)"
     bullet "Changing user's shell to $zsh_bin... "
-    if is_zsh; then
+    if [[ "$SHELL" =~ /zsh ]]; then
       info 'already set'
     else
       chsh -s $zsh_bin
