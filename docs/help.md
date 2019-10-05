@@ -425,3 +425,8 @@ This is a link to [Something][1]
     gn - new tab
     gt - next tab
     w - task view
+    zz - filter
+    .c - clear filter
+    ! - :shell
+    @ - :shell %s (run on selected items)
+
