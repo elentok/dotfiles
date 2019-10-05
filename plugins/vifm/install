@@ -7,4 +7,5 @@ if command_missing vifm; then
 fi
 
 mkdir -p ~/.vifm
-symlink "$DOTF/plugins/vifm/vifmrc" "$HOME/.config/vifm/vifmrc"
+symlink "$DOTF/plugins/vifm/vifmrc" "$HOME/.vifm/vifmrc"
+symlink "$DOTF/plugins/vifm/gruvbox.vifm" "$HOME/.vifm/colors/gruvbox.vifm"

@@ -2,3 +2,5 @@ set vicmd=nvim
 
 " faster copies and support progress
 set syscalls
+
+color gruvbox
