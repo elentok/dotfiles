@@ -6,6 +6,6 @@ if command_missing vifm; then
   PRIMARY=yes $DOTF/plugins/vifm/build
 fi
 
-mkdir -p ~/.vifm
+mkdir -p ~/.vifm/colors
 symlink "$DOTF/plugins/vifm/vifmrc" "$HOME/.vifm/vifmrc"
 symlink "$DOTF/plugins/vifm/gruvbox.vifm" "$HOME/.vifm/colors/gruvbox.vifm"
