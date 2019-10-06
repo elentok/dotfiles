@@ -1,6 +1,7 @@
 set vicmd=nvim
-
-" faster copies and support progress
-set syscalls
+set incsearch
+set syscalls " faster copies and support progress
 
 color gruvbox
+
+" vim: syntax=vim

@@ -430,3 +430,7 @@ This is a link to [Something][1]
     ! - :shell
     @ - :shell %s (run on selected items)
 
+## vifm
+
+    ={pattern} - filter file list
+
