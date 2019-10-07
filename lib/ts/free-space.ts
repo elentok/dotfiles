@@ -34,8 +34,7 @@ function parseDfLine(line: string): IDisk | undefined {
   const mount = parts[parts.length - 1]
 
   if (device === 'Filesystem') return
-
-  if (mount !== '/' && !/\/(Volumes|media)/.test(mount)) return
+  if (!RELEVANT_MOUNT_POINT.test(mount)) return
 
   return {
     device,
@@ -49,6 +48,8 @@ function parseDfLine(line: string): IDisk | undefined {
     state: calculateState(capacity)
   }
 }
+
+const RELEVANT_MOUNT_POINT = new RegExp('/($|Volumes|media|usr)')
 
 function sizeToGB(value: string): string {
   return (parseFloat(value) / 1024 / 1024).toFixed(1)
