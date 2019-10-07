@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+source $DOTF/scripts/build-helper
+
+prepare_build tig 2.4.1 "$*"
+
+if is_debian; then
+  apt_install libncursesw5-dev build-essential
+elif is_fedora; then
+  yum_install ncurses-devel
+fi
+
+BASENAME=tig-$VERSION
+FILENAME=$BASENAME.tar.gz
+
+curl -O -L https://github.com/jonas/tig/releases/download/$BASENAME/$FILENAME
+tar xzvf $FILENAME
+
+cd $BASENAME
+
+./configure
+make prefix=$INSTALL_DIR
+make install prefix=$INSTALL_DIR
+
+install_symlinks bin/tig
