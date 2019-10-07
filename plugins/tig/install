@@ -8,7 +8,7 @@ main() {
   elif is_mac; then
     brew_install tig
   elif command_missing tig; then
-    $DOTF/plugins/tig/build
+    PRIMARY=yes $DOTF/plugins/tig/build
   fi
 
   symlink "$DOTF/plugins/tig/tigrc" ~/.tigrc
