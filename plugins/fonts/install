@@ -17,7 +17,7 @@ find "$DOTF/plugins/fonts" -name '*.[o,t]tf' -type f | \
   done
 
 if [ ! -e "$font_dir/Cascadia.ttf" ]; then
-  curl -L https://github.com/microsoft/cascadia-code/releases/download/v1909.16/Cascadia.ttf > $font_dir/Cascadia.ttf
+  $DOTF/plugins/fonts/install-cascadia
 fi
 
 # For linux
