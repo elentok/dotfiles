@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+VERSION=1910.04
+
+fonts_dir=$HOME/.fonts
+
+rm -f $fonts_dir/Cascadia.ttf
+curl -L https://github.com/microsoft/cascadia-code/releases/download/v1910.04/Cascadia.ttf \
+     -o $fonts_dir/Cascadia.ttf
+
+fc-cache -v -f $fonts_dir
