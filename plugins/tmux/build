@@ -5,7 +5,7 @@ set -euo pipefail
 source $DOTF/framework
 source $DOTF/scripts/build-helper
 
-prepare_build tmux 2.8 "$*"
+prepare_build tmux 2.9 "$*"
 
 if is_debian; then
   apt_install libevent-dev libncurses5-dev libncursesw5-dev build-essential
