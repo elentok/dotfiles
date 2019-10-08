@@ -22,4 +22,9 @@ function! GitLog()
 endfunction
 
 command! GitLog call GitLog()
-command! Gca Gcommit --amend
+
+cabbr Gca Gcommit --amend
+cabbr Gps Git --paginate push
+cabbr Gpl Git --paginate pull
+cabbr Gap Git add -p
+cabbr Gam Gcommit --amend
