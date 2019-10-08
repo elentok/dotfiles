@@ -52,8 +52,8 @@ function! FindWorkingDirectory()
   return getcwd()
 endfunction
 
-augroup Elentok_AutoWorkingDirectory
-  autocmd!
-  autocmd BufRead * call SetBufferWorkingDirectory()
-  autocmd WinEnter * call SetBufferWorkingDirectory()
-augroup END
+" augroup Elentok_AutoWorkingDirectory
+  " autocmd!
+  " autocmd BufRead * call SetBufferWorkingDirectory()
+  " autocmd WinEnter * call SetBufferWorkingDirectory()
+" augroup END
