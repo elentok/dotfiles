@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+
+declare -A version_ranges=(
+  ["tig"]=">=2.4.1"
+  ["tmux"]=">=2.9"
+  ["nvim"]=">=0.4.2"
+  ["rg"]=">=11.0.2"
+  ["vifm"]=">=0.10.1"
+)
+
+function main() {
+  for app in "${!version_ranges[@]}"; do
+    if has_command $app; then
+      version=$(${app}-version)
+      range=${version_ranges[$app]}
+
+      if is-valid-version $range $version; then
+        success "$app:\t$version ($range)"
+      else
+        error "$app:\t$version ($range)"
+      fi
+    else
+      error "$app:\tnot installed"
+    fi
+  done
+}
+
+function tig-version() {
+  tig -v | grep 'tig version' | cut -d' ' -f3
+}
+
+function tmux-version() {
+  tmux -V | cut -d' ' -f2
+}
+
+function nvim-version() {
+  nvim -v | head -1 | cut -d' ' -f2 | sed 's/^v//'
+}
+
+function rg-version() {
+  rg --version | head -1 | cut -d' ' -f2
+}
+
+function vifm-version() {
+  vifm -v | head -1 | sed 's/Version: //'
+}
+
+main "$@"

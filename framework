@@ -886,6 +886,13 @@ verify-perms() {
   fi
 }
 
+# Versions {{{1
+function is-valid-version() {
+  local range="$1"
+  local version="$2"
+  [ -n "$(semver --coerce --range "$range" "$version")" ]
+}
+
 # Benchmark {{{1
 
 if [[ "$BASH_VERSION" =~ ^3.* ]]; then
