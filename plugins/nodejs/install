@@ -30,6 +30,7 @@ install_packages() {
   npm_install tslint
   npm_install prettier
   npm_install gtop
+  npm_install semver
 }
 
 main "$@"
