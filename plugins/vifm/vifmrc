@@ -6,6 +6,10 @@ set syscalls " faster copies and support progress
 set dotfiles
 set dotdirs
 
+" smart case sensitivity
+set ignorecase
+set smartcase
+
 color gruvbox
 
 " vim: syntax=vim
