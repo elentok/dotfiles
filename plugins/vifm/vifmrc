@@ -2,6 +2,10 @@ set vicmd=nvim
 set incsearch
 set syscalls " faster copies and support progress
 
+" show hidden files and directories
+set dotfiles
+set dotdirs
+
 color gruvbox
 
 " vim: syntax=vim
