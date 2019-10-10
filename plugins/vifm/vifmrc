@@ -29,6 +29,7 @@ fileviewer *.7z 7z l %c
 fileviewer *.ts,*.js,*.yml,*.json,*.rb,*.sh,*.vim
          \ highlight -O ansi %c 
 
+filetype *.png,*.jpg,*.jpeg,*.gif fim %c
 filetype * xdg-open
 
 " Keybindings {{{1
