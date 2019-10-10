@@ -12,4 +12,7 @@ set smartcase
 
 color gruvbox
 
+" file viewers
+fileviewer *.zip,*.jar,*.war,*.ear zip -sf %c, echo "No zip to preview:"
+
 " vim: syntax=vim
