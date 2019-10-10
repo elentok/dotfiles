@@ -15,4 +15,6 @@ color gruvbox
 " file viewers
 fileviewer *.zip,*.jar,*.war,*.ear zip -sf %c, echo "No zip to preview:"
 
+filetype * xdg-open
+
 " vim: syntax=vim
