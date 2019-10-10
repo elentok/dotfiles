@@ -433,4 +433,5 @@ This is a link to [Something][1]
 ## vifm
 
     ={pattern} - filter file list
+    zr         - clear filter
 
