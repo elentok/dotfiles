@@ -6,6 +6,10 @@ if command_missing vifm; then
   PRIMARY=yes $DOTF/plugins/vifm/build
 fi
 
+if is_debian; then
+  apt_install fim
+fi
+
 mkdir -p ~/.vifm/colors
 symlink "$DOTF/plugins/vifm/vifmrc" "$HOME/.vifm/vifmrc"
 symlink "$DOTF/plugins/vifm/gruvbox.vifm" "$HOME/.vifm/colors/gruvbox.vifm"
