@@ -33,3 +33,15 @@ function install_symlinks() {
     symlink $INSTALL_DIR/$path_to_binary $BIN_DIR/$target_name
   fi
 }
+
+function validate-sha256() {
+  local filename=$1
+  local sha256sum=$2
+
+  if [ "$(sha256sum $filename | awk '{print $1}')" == "$sha256sum" ]; then
+    success "SHA256 of $filename is valid"
+  else
+    error "SHA256 of $filename doesn't match"
+    exit 1
+  fi
+}

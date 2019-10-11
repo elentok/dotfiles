@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+source $DOTF/scripts/build-helper
+
+SHA256='14728ccc6b8e053d01526ebbd0822ca4eb0235e6487e832ec1d0d22f1395430e'
+
+prepare_build fish 3.0.2 "$*"
+
+filename=fish-$VERSION.tar.gz
+
+curl -L -O \
+  https://github.com/fish-shell/fish-shell/releases/download/$VERSION/$filename
+
+validate-sha256 $filename $SHA256
+
+tar xzvf fish-$VERSION.tar.gz
+cd fish-$VERSION/
+
+./configure --prefix=/opt/fish
+make
+sudo make install

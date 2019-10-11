@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+
+function main() {
+  if command_missing fish; then
+    apt_install fish
+    # $DOTF/plugins/fish/build
+  fi
+
+  symlink "$DOTF/plugins/fish" "$HOME/.config/fish"
+}
+
+main "$@"
+
