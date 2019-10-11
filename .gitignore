@@ -10,3 +10,4 @@ nvim/.netrwhist
 nvim/spell
 tmp
 node_modules
+plugins/fish/fish_variables

@@ -72,6 +72,7 @@ Plug 'tpope/vim-haml',                    { 'for': 'haml' }
 Plug 'leafgarland/typescript-vim',        { 'for': 'typescript' }
 Plug 'peitalin/vim-jsx-typescript',       { 'for': 'typescript' }
 Plug 'PProvost/vim-ps1'
+Plug 'dag/vim-fish'
 
 if file_readable(expand("~/.dotlocal/plugs.vim"))
   source ~/.dotlocal/plugs.vim
