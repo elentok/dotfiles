@@ -44,7 +44,7 @@ set whichwrap=<,>,[,]
 set wildignore=*.swp,*.bak,*.pyc,*.class,*.o,*.obj
 set wildignorecase
 set wildmenu
-set wildmode=list:longest,full
+set wildmode=full
 set winwidth=84                " makes sure the active window will always be at least 80 characters
 
 if !exists('g:gui_oni')
