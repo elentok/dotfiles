@@ -432,6 +432,15 @@ This is a link to [Something][1]
 
 ## vifm
 
+    t          - tag (select) current file
+
     ={pattern} - filter file list
     zr         - clear filter
 
+    <c-w>o     - show only one pane (also :only)
+    <c-w>v     - show two panes (vertical split)
+    <c-w>s     - show two panes (horizontal split)
+
+    :copy &    - copy in background
+    :move &    - move in background
+    :jobs      - show background jobs
