@@ -7,7 +7,7 @@ if command_missing vifm; then
 fi
 
 if is_debian; then
-  apt_install fim
+  apt_install fim ffmpeg
 fi
 
 mkdir -p ~/.vifm/colors
