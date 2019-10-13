@@ -34,6 +34,8 @@ filetype * xdg-open
 
 " Keybindings {{{1
 
+noremap W :!watched %"f<cr>
+
 " Mappings for faster renaming
 nnoremap I cw<c-a>
 nnoremap cc cw<c-u>
