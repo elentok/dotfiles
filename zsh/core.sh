@@ -240,7 +240,7 @@ elif [ ! -z "${VSCODE_IPC_HOOK:-}" ]; then
   # integrated terminal
 	export EDITOR="code -w"
 elif has_command nvim; then
-  export EDITOR=nvim
+  export EDITOR=$(which nvim)
 else
   export EDITOR=vim
 fi
