@@ -1,3 +1,12 @@
+# Start fish shell on interactive shells
+if [ -e ~/.try-fish ]; then
+  if [[ $- = *i* && -z $WHICH_FISH ]] && WHICH_FISH=$(which fish); then
+    export WHICH_FISH
+    exec "$WHICH_FISH" -i
+    return
+  fi
+fi
+
 typeset -F SECONDS=0
 export START_TIME=$SECONDS
 
