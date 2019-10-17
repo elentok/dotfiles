@@ -4,7 +4,13 @@ alias f 'vifm'
 alias g 'git'
 alias gp 'cd (list-projects | fzf | sed "s#~#$HOME#")'
 alias se 'sudoedit'
-alias tm 'DISPLAY=${DISPLAY:-:0} tmux -u'
 alias ts 'tig status'
 alias v 'nvim'
 alias vi 'nvim'
+
+function tm
+  if test -z "DISPLAY"
+    set DISPLAY ':0'
+  end
+  tmux -u $argv
+end
