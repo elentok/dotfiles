@@ -1,29 +1,10 @@
+alias dotfi 'cd $DOTF'
+alias dotl 'cd $DOTL'
+alias f 'vifm'
 alias g 'git'
+alias gp 'cd (list-projects | fzf | sed "s#~#$HOME#")'
+alias se 'sudoedit'
+alias tm 'DISPLAY=${DISPLAY:-:0} tmux -u'
+alias ts 'tig status'
 alias v 'nvim'
-
-set user_and_host "$USER at" (hostname)
-
-function fish_prompt
-  echo
-
-  set_color 555
-  echo "$user_and_host" (date +\(%H:%M:%S\))
-
-  set_color 3b78ff
-  printf (pwd)
-
-  set branch (git my-branch 2> /dev/null)
-  if test -n "$branch"
-    set_color fff
-    printf ' at '
-
-    set_color 14c60d
-    echo "$branch"
-  else
-    echo
-  end
-
-  set_color 14c60d
-  printf '› '
-  set_color normal
-end
+alias vi 'nvim'
