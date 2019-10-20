@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+GROUP=sambashare
+
+cat /etc/samba/smb.conf \
+  | grep -E '^\s*path =' \
+  | grep -vE '=\s*/var' \
+  | sed 's/path\s*=\s*//' \
+  | while read dir; do
+
+  echo -n "* ${dir}: "
+
+  group=$(stat -c%G ${dir})
+  if [ "$group" == "$GROUP" ]; then
+    echo -n 'ok'
+  else
+    echo -n "wrong group: $group (should be $GROUP)"
+  fi
+
+  echo
+done
+
