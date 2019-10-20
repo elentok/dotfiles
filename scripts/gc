@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+function list-files() {
+  cat $DOTF/docs/config-files.txt |
+    while read file; do
+      if [ -e "$file" ]; then echo $file; fi
+    done
+}
+
+file=$(list-files | fzf)
+
+if [[ "$file" =~ ^/etc ]]; then
+  sudoedit "$file"
+else
+  $EDITOR "$file"
+fi
