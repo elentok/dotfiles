@@ -19,3 +19,7 @@ function fish_user_key_bindings
   # make ctrl-c clear the command line (to prevent breaking the prompt)
   bind \cc 'commandline ""'
 end
+
+if test -e "$DOTL/config.fish"
+  source "$DOTL/config.fish"
+end
