@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+
+header 'Scripts'
+head -1 --quiet scripts/* 2>&1 | grep -v 'Is a directory' | sort | uniq -c | sort -nr
+
