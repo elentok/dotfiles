@@ -12,7 +12,7 @@ new_head=`git rev-parse HEAD`
 
 if [ "$old_head" != "$new_head" ]; then
   echo -e "\nPulled the following changes:"
-  git changelog ${old_head}..${new_head}
+  git log --pretty=%s ${old_head}..${new_head} | sed 's/^/- /'
 
   echo -ne "\nPress any key to run the installer..."
   read -n 1
