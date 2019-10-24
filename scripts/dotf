@@ -19,6 +19,7 @@ main() {
   list | l)    list-plugins ;;
   install | i) install "$@" ;;
   update | u)  dotf-update ;;
+  stats | s)   dotf-stats ;;
   *)           usage "$0" ;;
   esac
 }
