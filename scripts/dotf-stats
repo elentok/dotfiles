@@ -2,6 +2,11 @@
 
 source $DOTF/framework
 
+header 'General'
+echo "Plugins: $(command ls -1 $DOTF/plugins | wc -l)"
+
 header 'Scripts'
-head -1 --quiet scripts/* 2>&1 | grep -v 'Is a directory' | sort | uniq -c | sort -nr
+find $DOTF/scripts -maxdepth 1 -type f \
+  | xargs head -1 --quiet \
+  | sort | uniq -c | sort -nr
 
