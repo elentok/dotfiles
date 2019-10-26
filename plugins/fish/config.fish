@@ -1,3 +1,5 @@
+export SSH_AUTH_SOCK="$HOME/.ssh/active-agent"
+
 alias dotfi 'cd $DOTF'
 alias dotl 'cd $DOTL'
 alias f 'vifm'
