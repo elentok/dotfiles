@@ -17,6 +17,14 @@ function tm
   tmux -u $argv
 end
 
+function ff
+  if count $argv > /dev/null
+    rg --files --iglob "*$argv*"
+  else
+    rg --files
+  end
+end
+
 function fish_user_key_bindings
   # make ctrl-c clear the command line (to prevent breaking the prompt)
   bind \cc 'commandline ""'
