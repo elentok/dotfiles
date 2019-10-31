@@ -8,6 +8,10 @@
 
 source $DOTF/zsh/core.sh
 
+if [ -z "$DISPLAY" ]; then
+  export DISPLAY=":0"
+fi
+
 main() {
   case "$1" in
     c|copy) copy;;
@@ -21,10 +25,10 @@ copy() {
     win32yank -i
   elif has_command pbcopy; then
     pbcopy
-  elif has_command xclip; then
-    xclip -selection clipboard -in
   elif has_command xsel; then
     xsel --clipboard --input
+  elif has_command xclip; then
+    xclip -selection clipboard -in
   else
     echo 'Error: missing copy command (pbcopy, xclip or xsel)'
   fi
