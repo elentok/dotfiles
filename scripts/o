@@ -9,9 +9,7 @@
 source $DOTF/zsh/core.sh
 
 if is_wsl; then
-  filepath=$(echo $@ | sed -E 's#/mnt/([a-z])#\1:#' | tr '/' '\\')
-  echo "Running: powershell.exe Start $filepath"
-  powershell.exe "Start $filepath"
+  explorer.exe "$@"
 elif is_linux; then
   xdg-open "$@"
 elif is_mac; then
