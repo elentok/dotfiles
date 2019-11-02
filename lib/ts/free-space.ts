@@ -49,7 +49,7 @@ function parseDfLine(line: string): IDisk | undefined {
   }
 }
 
-const RELEVANT_MOUNT_POINT = new RegExp('/($|Volumes|media|usr)')
+const RELEVANT_MOUNT_POINT = new RegExp('/($|Volumes|media|usr|mnt)')
 
 function sizeToGB(value: string): string {
   return (parseFloat(value) / 1024 / 1024).toFixed(1)
