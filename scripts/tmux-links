@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+TMP_FILE=$TMP/tmux-buffer.txt
+
+case "$1" in
+  open)
+    tmux capture-pane -pS -1000000 > $TMP_FILE
+    tmux new-window 'tmux-links open-interactive'
+    ;;
+  copy)
+    tmux capture-pane -pS -1000000 > $TMP_FILE
+    tmux new-window 'tmux-links copy-interactive'
+    ;;
+  open-interactive)
+    selection="$(find-links $TMP_FILE | fzf)"
+    tmux run-shell "xdg-open "$selection""
+    ;;
+  copy-interactive)
+    selection="$(find-links $TMP_FILE | fzf)"
+    echo -n "$selection" | clip copy
+    ;;
+esac
