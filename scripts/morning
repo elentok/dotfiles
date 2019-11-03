@@ -2,6 +2,9 @@
 
 source $DOTF/framework
 
+header 'Setting up ssh agent'
+agent setup
+
 header 'Add ssh key'
 ssh-add
 
