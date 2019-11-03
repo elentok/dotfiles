@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+#
+# Usage:
+#
+#   yank-osc52 {file}    - yank file to clipboard
+#   yank-osc52 -         - yank stdin to clipboard
+
+# based on
+# https://www.freecodecamp.org/news/tmux-in-practice-integration-with-system-clipboard-bcd72c62ff7b/
+
+buf=$(cat "$@")
+len=$( printf %s "$buf" | wc -c )
+maxlen=74994
+
+if [[ $buflen -gt $maxlen ]]; then
+  printf "input is %d bytes too long" "$(( buflen - maxlen ))" >&2
+  exit 1
+fi
+
+esc="\033]52;c;$( printf %s "$buf" | head -c $maxlen | base64 | tr -d '\r\n' )\a"
+
+pane_active_tty=$(tmux list-panes -F "#{pane_active} #{pane_tty}" | awk '$1=="1" { print $2 }')
+
+printf "$esc" > "$pane_active_tty"
+
