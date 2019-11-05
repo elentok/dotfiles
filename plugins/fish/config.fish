@@ -9,6 +9,7 @@ alias se 'sudoedit'
 alias ts 'tig status'
 alias v 'nvim'
 alias vi 'nvim'
+alias psg='ps -a -x -o user,pid,command | grep'
 
 function tm
   if test -z "DISPLAY"
@@ -22,6 +23,14 @@ function ff
     rg --files --iglob "*$argv*"
   else
     rg --files
+  end
+end
+
+function f
+  if count $argv > /dev/null
+    vifm $argv
+  else
+    vifm .
   end
 end
 
