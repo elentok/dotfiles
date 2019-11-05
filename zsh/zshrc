@@ -1,7 +1,9 @@
 # Start fish shell on interactive shells
 if [ -e ~/.try-fish ]; then
-  if [[ $- = *i* && -z $WHICH_FISH ]] && WHICH_FISH=$(which fish); then
-    export WHICH_FISH
+  if [[ $- = *i* ]]; then
+    if [ -z "$WHICH_FISH" ]; then
+      export WHICH_FISH="$(which fish)"
+    fi
     exec "$WHICH_FISH" -i
     return
   fi
