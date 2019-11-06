@@ -21,6 +21,7 @@
   "private": true,
   "dependencies": {
     "@types/shelljs": "^0.8.0",
+    "@typescript-eslint/eslint-plugin": "^2.6.1",
     "axios": "^0.19.0",
     "body-parser": "^1.18.2",
     "chalk": "^2.4.2",
@@ -28,6 +29,7 @@
     "commander": "^2.19.0",
     "copy-paste-win32fix": "^1.4.0",
     "easy-table": "^1.0.0",
+    "eslint": "^6.6.0",
     "express": "^4.17.1",
     "fast-glob": "^3.0.4",
     "fetch-plus": "^3.10.4",
@@ -43,8 +45,7 @@
     "pug": "^2.0.3",
     "shelljs": "^0.7.4",
     "ts-node": "^6.0.5",
-    "tslint": "^5.12.1",
-    "typescript": "^3.5.3",
+    "typescript": "^3.7.0",
     "uglify-es": "^3.1.6",
     "underscore": "^1.8.3",
     "weather-js": "^2.0.0"
