@@ -107,9 +107,7 @@ class Order {
   }
 
   track() {
-    return Promise.all(
-      this._getTrackable().map(tn => tn.track())
-    ).then(results => {
+    return Promise.all(this._getTrackable().map(tn => tn.track())).then(results => {
       const newStatus = this._identifyNewStatus(results)
       const changed = this.status.name !== newStatus.name
       if (changed) this.status = newStatus

@@ -4,21 +4,21 @@ import * as readline from 'readline'
 const CLEAR_LINE = '\r\x1B[K'
 const HOURGLASS = '⏳ '
 
-export function justifyRight(text: string, width: number, ch: string = ' '): string {
+export function justifyRight(text: string, width: number, ch = ' '): string {
   if (text.length >= width) return text
 
   const leftPad = width - text.length
   return `${ch.repeat(leftPad)}${text}`
 }
 
-export function justifyLeft(text: string, width: number, ch: string = ' '): string {
+export function justifyLeft(text: string, width: number, ch = ' '): string {
   if (text.length >= width) return text
 
   const rightPad = width - text.length
   return `${text}${ch.repeat(rightPad)}`
 }
 
-export function center(text: string, width: number, ch: string = ' '): string {
+export function center(text: string, width: number, ch = ' '): string {
   if (text.length >= width) return text
 
   const leftPad = Math.floor((width - text.length) / 2)

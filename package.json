@@ -6,7 +6,7 @@
   "scripts": {
     "format": "prettier --write '**/*.js' '**/*.css'",
     "vscode:sync": "ts-node plugins/vscode/sync.ts",
-    "tslint": "tslint -c tslint.json",
+    "eslint": "eslint .",
     "ts:build": "tsc",
     "ts:watch": "tsc --watch",
     "start": "npm run ts:watch"
@@ -22,6 +22,7 @@
   "dependencies": {
     "@types/shelljs": "^0.8.0",
     "@typescript-eslint/eslint-plugin": "^2.6.1",
+    "@typescript-eslint/parser": "^2.6.1",
     "axios": "^0.19.0",
     "body-parser": "^1.18.2",
     "chalk": "^2.4.2",
@@ -30,6 +31,8 @@
     "copy-paste-win32fix": "^1.4.0",
     "easy-table": "^1.0.0",
     "eslint": "^6.6.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-prettier": "^3.1.1",
     "express": "^4.17.1",
     "fast-glob": "^3.0.4",
     "fetch-plus": "^3.10.4",
@@ -40,7 +43,7 @@
     "mqtt": "^3.0.0",
     "node-fetch": "^1.6.3",
     "nodemon": "^1.18.10",
-    "prettier": "^1.16.4",
+    "prettier": "^1.18.2",
     "prompt": "^1.0.0",
     "pug": "^2.0.3",
     "shelljs": "^0.7.4",

@@ -9,9 +9,7 @@ function findTotal() {
 }
 
 function findPrice(regex) {
-  const tds = arrayify(
-    document.querySelectorAll('#subtotals-marketplace-table td')
-  )
+  const tds = arrayify(document.querySelectorAll('#subtotals-marketplace-table td'))
 
   const index = tds.findIndex(td => td.innerText.match(regex))
   return parsePrice(tds[index + 1].innerText)
@@ -22,10 +20,7 @@ class Item {
     this.el = el
     this.title = el.querySelector('.asin-title').innerText
     this.price = parsePrice(el.querySelector('.a-color-price').innerText)
-    this.quantity = parseInt(
-      el.querySelector('.quantity-display').innerText,
-      10
-    )
+    this.quantity = parseInt(el.querySelector('.quantity-display').innerText, 10)
 
     this.totalPrice = this.price * this.quantity
     this.infoContainer = this.el.querySelector('.a-column:last-child')
@@ -52,16 +47,13 @@ function createPriceEl(title, priceInDollars, style = {}) {
   Object.assign(div.style, style)
 
   div.innerText =
-    `${title}: $${priceInDollars.toFixed(2)}` +
-    ` (ILS ${(priceInDollars * DOLLAR).toFixed(2)})`
+    `${title}: $${priceInDollars.toFixed(2)}` + ` (ILS ${(priceInDollars * DOLLAR).toFixed(2)})`
 
   return div
 }
 
 function findItems() {
-  return arrayify(
-    document.querySelectorAll('.shipping-group > .a-row > .a-column > .a-row')
-  )
+  return arrayify(document.querySelectorAll('.shipping-group > .a-row > .a-column > .a-row'))
     .filter(el => el.querySelector('.asin-title'))
     .map(el => new Item(el))
 }

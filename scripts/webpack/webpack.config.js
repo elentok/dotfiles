@@ -83,12 +83,8 @@ const config = {
   plugins: [
     new ExtractTextPlugin({ filename: cssFilename }),
     new webpack.ProvidePlugin({
-      fetch:
-        'imports-loader?' +
-        'this=>global!exports-loader?global.fetch!whatwg-fetch',
-      Promise:
-        'imports-loader?' +
-        'this=>global!exports-loader?global.Promise!es6-promise'
+      fetch: 'imports-loader?' + 'this=>global!exports-loader?global.fetch!whatwg-fetch',
+      Promise: 'imports-loader?' + 'this=>global!exports-loader?global.Promise!es6-promise'
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src/index.pug'),

@@ -88,9 +88,7 @@ class Order {
   }
 
   track() {
-    Promise.all(
-      this.trackingNumbers.map(number => number.track())
-    ).then(results => {
+    Promise.all(this.trackingNumbers.map(number => number.track())).then(results => {
       let finalStatus = null
 
       results.forEach(result => {
@@ -102,10 +100,7 @@ class Order {
       })
 
       if (finalStatus != null) {
-        this.el.parentElement.insertBefore(
-          this.el,
-          this.el.parentElement.childNodes[0]
-        )
+        this.el.parentElement.insertBefore(this.el, this.el.parentElement.childNodes[0])
       }
     })
   }
@@ -123,9 +118,7 @@ class App {
       this.track()
     })
 
-    this.orders = Array.from(document.querySelectorAll('.o-order')).map(
-      el => new Order(el)
-    )
+    this.orders = Array.from(document.querySelectorAll('.o-order')).map(el => new Order(el))
   }
 
   track() {

@@ -56,10 +56,7 @@ const IsraelPost = {
   },
 
   _isDelivered(text) {
-    return (
-      /Delivered to addressee/.test(text) ||
-      /postal item was delivered/.test(text)
-    )
+    return /Delivered to addressee/.test(text) || /postal item was delivered/.test(text)
   },
 
   _getUrl(number) {
