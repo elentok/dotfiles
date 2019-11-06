@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosBasicCredentials, AxiosResponse } from 'axios'
-import { ITorrent, isComplete } from './torrent'
+import { Torrent, isComplete } from './torrent'
 
 export interface IBtOptions {
   host: string
@@ -33,12 +33,12 @@ export class BtClient {
     log('BtClient initialized', reqConfig)
   }
 
-  public async list(): Promise<ITorrent[]> {
+  public async list(): Promise<Torrent[]> {
     const response = await this.rpcCall('torrent-get', {
       fields: 'id name status percentDone rateDownload magnetLink error errorString'.split(' ')
     })
 
-    return response.data.arguments.torrents as ITorrent[]
+    return response.data.arguments.torrents as Torrent[]
   }
 
   public async addMagnet(link: string, options: { paused?: boolean } = {}): Promise<any> {
@@ -50,7 +50,7 @@ export class BtClient {
     return response.data.arguments
   }
 
-  public async removeComplete(): Promise<ITorrent[]> {
+  public async removeComplete(): Promise<Torrent[]> {
     const completeTorrents = (await this.list()).filter(isComplete)
     await this.remove(completeTorrents.map(t => t.id))
     return completeTorrents

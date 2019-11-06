@@ -10,7 +10,7 @@ export enum TorrentStatus {
   SEED // 6  Seeding
 }
 
-export interface ITorrent {
+export interface Torrent {
   id: string
   name: string
   status: number
@@ -21,19 +21,29 @@ export interface ITorrent {
   errorString: string
 }
 
-export function isComplete(torrent: ITorrent): boolean {
+export function isComplete(torrent: Torrent): boolean {
   return torrent.status === TorrentStatus.SEED || torrent.status === TorrentStatus.SEED_WAIT
 }
 
-export function isFailed(t: ITorrent): boolean {
+export function isFailed(t: Torrent): boolean {
   return t.error !== 0
 }
 
-export function getError(t: ITorrent): string | undefined {
+export function getError(t: Torrent): string | undefined {
   return isFailed(t) ? t.errorString : undefined
 }
 
-export function formatTorrent(t: ITorrent): string {
+function formatPercentDone(t: Torrent): string {
+  return `${Math.floor(t.percentDone * 100)}%`
+}
+
+function formatDownloadRate(t: Torrent): string {
+  if (isComplete(t)) return ''
+
+  return `${t.rateDownload / 1000}kb/s`
+}
+
+export function formatTorrent(t: Torrent): string {
   return [
     justifyLeft(TorrentStatus[t.status], 13),
     justifyRight(formatPercentDone(t), 4),
@@ -42,17 +52,3 @@ export function formatTorrent(t: ITorrent): string {
     getError(t)
   ].join(' ')
 }
-
-function formatPercentDone(t: ITorrent): string {
-  return `${Math.floor(t.percentDone * 100)}%`
-}
-
-function formatDownloadRate(t: ITorrent): string {
-  if (isComplete(t)) return ''
-
-  return `${t.rateDownload / 1000}kb/s`
-}
-
-// def percent_s
-// "#{(@percent * 100).to_i}%"
-// end

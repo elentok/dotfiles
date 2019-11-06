@@ -79,9 +79,9 @@ function elentokAliExpressExporter() {
     document.execCommand('copy')
   }
 
-  const orders = (window.orders = Array.from(
-    document.querySelectorAll('.order-item-wraper')
-  ).map(parseOrder))
+  const orders = (window.orders = Array.from(document.querySelectorAll('.order-item-wraper')).map(
+    parseOrder
+  ))
 
   const json = JSON.stringify(orders, null, 2)
   showPopup(json)

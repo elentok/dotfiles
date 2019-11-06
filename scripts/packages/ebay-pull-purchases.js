@@ -1,5 +1,5 @@
-function parseOrder(index, row) {
-  var $row = $(row)
+function parseOrder(_index, row) {
+  const $row = $(row)
 
   return {
     date: parseDate($row.find('.row-date').text()),
@@ -16,8 +16,8 @@ function parseOrder(index, row) {
   }
 }
 
-function parseItem(index, item) {
-  var $item = $(item)
+function parseItem(_index, item) {
+  const $item = $(item)
   return {
     title: $item.find('.item-title').text(),
     id: $item
@@ -31,17 +31,15 @@ function parseDate(date) {
   return new Date(date).toISOString().split('T')[0]
 }
 
-var orders = $('.order-r')
+const orders = $('.order-r')
   .map(parseOrder)
   .toArray()
 
-var packages = []
-orders.forEach(function(order, i) {
-  order.items.forEach(function(item, i) {
-    var args = [JSON.stringify(item.title)]
-    ;['date', 'id', 'estimated', 'tracking', 'estimated'].forEach(function(
-      field
-    ) {
+const packages = []
+orders.forEach(function(order) {
+  order.items.forEach(function(item) {
+    const args = [JSON.stringify(item.title)]
+    ;['date', 'id', 'estimated', 'tracking', 'estimated'].forEach(function(field) {
       if (order[field].length > 0) {
         args.push(field + ': ' + JSON.stringify(order[field]))
       }

@@ -32,10 +32,7 @@ class Diff {
   }
 
   compare(db1, db2) {
-    this._compareGroups(
-      db1.getKdbx().getDefaultGroup(),
-      db2.getKdbx().getDefaultGroup()
-    )
+    this._compareGroups(db1.getKdbx().getDefaultGroup(), db2.getKdbx().getDefaultGroup())
   }
 
   _compareGroups(group1, group2) {
@@ -76,9 +73,7 @@ class Diff {
       }
     })
 
-    Object.values(entry2byUuid).forEach(entry2 =>
-      this.db1missingEntries.push(entry2)
-    )
+    Object.values(entry2byUuid).forEach(entry2 => this.db1missingEntries.push(entry2))
   }
 
   _compareSameEntry(entry1, entry2) {
@@ -102,10 +97,7 @@ class Diff {
   }
 
   _sameValue(value1, value2) {
-    if (
-      value1 instanceof kdbxweb.ProtectedValue &&
-      value2 instanceof kdbxweb.ProtectedValue
-    ) {
+    if (value1 instanceof kdbxweb.ProtectedValue && value2 instanceof kdbxweb.ProtectedValue) {
       return value1.getText() === value2.getText()
     }
 

@@ -21,9 +21,7 @@ class Status {
 
     if (name == null) name = 'unknown'
     if (typeof name !== 'string') {
-      throw new Error(
-        `Trying to identify non-string status ${JSON.stringify(name)}`
-      )
+      throw new Error(`Trying to identify non-string status ${JSON.stringify(name)}`)
     }
     name = this.normalizeName(name)
     let status = this._byName[name]

@@ -9,9 +9,7 @@ class OrdersFile {
   load() {
     if (!fs.existsSync(this.filename)) return []
 
-    return JSON.parse(fs.readFileSync(this.filename)).map(
-      order => new Order(order)
-    )
+    return JSON.parse(fs.readFileSync(this.filename)).map(order => new Order(order))
   }
 
   save(orders) {

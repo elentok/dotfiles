@@ -32,22 +32,10 @@ class Database {
 
     const arrayBuffer = fs.readFileSync(filename).buffer
 
-    return kdbxweb.Kdbx.load(arrayBuffer, creds).then(
-      kdbx => new Database(filename, kdbx)
-    )
+    return kdbxweb.Kdbx.load(arrayBuffer, creds).then(kdbx => new Database(filename, kdbx))
   }
 
-  addEntry({
-    title,
-    username,
-    password,
-    notes,
-    url,
-    createdAt,
-    updatedAt,
-    binaries,
-    trashed
-  }) {
+  addEntry({ title, username, password, notes, url, createdAt, updatedAt, binaries, trashed }) {
     let parentGroup = this._kdbx.getDefaultGroup()
     if (trashed) {
       parentGroup = this._kdbx.getGroup(this._kdbx.meta.recycleBinUuid)
@@ -68,9 +56,7 @@ class Database {
     }
 
     Object.keys(binaries || []).forEach(filename => {
-      entry.binaries[filename] = kdbxweb.ProtectedValue.fromBinary(
-        binaries[filename]
-      )
+      entry.binaries[filename] = kdbxweb.ProtectedValue.fromBinary(binaries[filename])
     })
 
     return entry
