@@ -17,6 +17,6 @@ case "$1" in
     ;;
   copy-interactive)
     selection="$(find-links $TMP_FILE | fzf)"
-    echo -n "$selection" | clip copy
+    echo -n "$selection" | yank-osc52
     ;;
 esac
