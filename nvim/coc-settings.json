@@ -9,7 +9,7 @@
     "html",
     "json"
   ],
-  "eslint.filetypes": ["javascript", "javascriptreact", "typescript"],
+  "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "languageserver": {
     "golang": {
       "command": "gopls",
