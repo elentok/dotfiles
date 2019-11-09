@@ -47,6 +47,7 @@
     "prompt": "^1.0.0",
     "pug": "^2.0.3",
     "shelljs": "^0.7.4",
+    "source-map-support": "^0.5.16",
     "ts-node": "^6.0.5",
     "typescript": "^3.7.0",
     "uglify-es": "^3.1.6",

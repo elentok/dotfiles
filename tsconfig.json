@@ -4,7 +4,8 @@
     "module": "commonjs",
     "lib": ["es2016"],
     "outDir": "./lib/js",
-    "strict": true
+    "strict": true,
+    "sourceMap": true
   },
   "include": ["lib/ts/**/*.ts"]
 }
