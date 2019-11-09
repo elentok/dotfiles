@@ -3,6 +3,7 @@ import chalk from 'chalk'
 import * as os from 'os'
 import * as path from 'path'
 import * as repl from 'repl'
+import { notUndefined } from './utils'
 import { convert, getOpenExchangeAppId, IMoney } from './rates'
 
 import { runInContext, createContext } from 'vm'
@@ -63,8 +64,10 @@ function parseCurrencyExpression(expr: string): ICurrencyExpression | undefined 
 
   if (match == null) return
 
+  const matches = match.filter(notUndefined)
+
   // "123.45 nis to usd"
-  if (match.length === 5) {
+  if (matches.length === 5) {
     return {
       from: { value: parseFloat(match[1]), currency: match[2] },
       toCurrency: match[4]
@@ -72,9 +75,12 @@ function parseCurrencyExpression(expr: string): ICurrencyExpression | undefined 
   }
 
   // "123.45 nis"
-  if (match.length === 3) {
+  if (matches.length === 3) {
+    const currency = match[2]
+    const toCurrency = ['nis', 'ils'].includes(currency.toLowerCase()) ? '$' : 'nis'
     return {
-      from: { value: parseFloat(match[1]), currency: match[2] }
+      from: { value: parseFloat(match[1]), currency },
+      toCurrency
     }
   }
 
