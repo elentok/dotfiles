@@ -5,6 +5,10 @@ import * as path from 'path'
 import * as repl from 'repl'
 import { convert, getOpenExchangeAppId, IMoney } from './rates'
 
+import { runInContext, createContext } from 'vm'
+
+const context = createContext()
+
 const REPL_HISTORY_FILE = path.join(os.homedir(), '.cache', 'calc')
 
 async function main(): Promise<void> {
@@ -44,8 +48,9 @@ async function calculate(expr: string): Promise<string> {
     return `${result.value.toFixed(2)} ${result.currency}`
   }
 
-  /* tslint:disable-next-line:no-eval */
-  return Promise.resolve(eval(expr))
+  const value = runInContext(expr, context)
+
+  return Promise.resolve(value)
 }
 
 interface ICurrencyExpression {
