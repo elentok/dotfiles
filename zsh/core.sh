@@ -208,6 +208,7 @@ for pkg in coreutils findutils gnu-sed; do
 done
 
 PATH="$PATH:\
+$HOME/.cargo/bin:\
 $HOME/.rbenv/bin:\
 $HOME/.rbenv/shims:\
 /snap/bin:\
