@@ -50,8 +50,7 @@ async function calculate(expr: string): Promise<string> {
   }
 
   const value = runInContext(expr, context)
-
-  return Promise.resolve(value)
+  return value
 }
 
 interface ICurrencyExpression {
