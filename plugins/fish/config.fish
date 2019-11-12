@@ -11,6 +11,7 @@ alias v 'nvim'
 alias vi 'nvim'
 alias psg='ps -a -x -o user,pid,command | grep'
 alias cdl 'cd (lerna-select-package)'
+alias cdr 'cd (git-root)'
 
 function tm
   if test -z "DISPLAY"
