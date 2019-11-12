@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+cd "$(git-root)"
+pkg="$(command ls -1 packages/ | fzf)"
+echo "$PWD/packages/$pkg"

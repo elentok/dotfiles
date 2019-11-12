@@ -10,6 +10,7 @@ alias ts 'tig status'
 alias v 'nvim'
 alias vi 'nvim'
 alias psg='ps -a -x -o user,pid,command | grep'
+alias cdl 'cd (lerna-select-package)'
 
 function tm
   if test -z "DISPLAY"
