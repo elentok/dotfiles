@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-source $DOTF/framework
-
-find-parent-with .git Gemfile project.json bower.json
