@@ -2,7 +2,9 @@
 
 set -euo pipefail
 
-source `dirname $0`/../framework
+source $DOTF/framework
+
+VERSION=0.4.3
 
 main() {
   install_requirements
@@ -34,17 +36,23 @@ install_requirements() {
 }
 
 install_neovim() {
-  if is_arch; then
-    pacman_install neovim
-  elif is_termux; then
+  if is_termux; then
     apt_install neovim
-  elif command_missing nvim; then
-    if is_mac; then
-      install_neovim_mac
-    else
-      PRIMARY=yes $DOTF/nvim/install-binary
-    fi
+    return
   fi
+
+  if nvim-is-outdated; then
+    PRIMARY=yes VERSION=v$VERSION $DOTF/nvim/install-binary
+  fi
+}
+
+function nvim-is-outdated() {
+  if command_missing nvim; then
+    return 0
+  fi
+
+  current_version=$(nvim -v | head -1 | cut -d' ' -f2 | sed 's/^v//')
+  is-valid-version "<$VERSION" "$current_version"
 }
 
 install_neovim_mac() {
