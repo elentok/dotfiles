@@ -5,7 +5,7 @@ source $DOTF/framework
 declare -A version_ranges=(
   ["tig"]=">=2.4.1"
   ["tmux"]=">=2.9"
-  ["nvim"]=">=0.4.2"
+  ["nvim"]=">=0.4.3"
   ["rg"]=">=11.0.2"
   ["vifm"]=">=0.10.1"
 )

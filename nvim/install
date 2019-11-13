@@ -42,7 +42,7 @@ install_neovim() {
     if is_mac; then
       install_neovim_mac
     else
-      PRIMARY=yes $DOTF/nvim/build
+      PRIMARY=yes $DOTF/nvim/install-binary
     fi
   fi
 }
