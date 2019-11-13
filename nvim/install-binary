@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-VERSION=v0.4.2
+VERSION=v0.4.3
 
 source $DOTF/framework
 source $DOTF/scripts/build-helper
