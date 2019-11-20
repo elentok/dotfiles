@@ -2,28 +2,20 @@
 
 source $DOTF/framework
 
-VERSION=0.3.3
+export VERSION=0.4.0-rc2
 
 main() {
   if command_missing alacritty; then
-    if is_debian; then
-      install-on-debian
+    if is_linux; then
+      PRIMARY=yes $DOTF/plugins/alacritty/install-binary
     else
-      echo "Error: I've only setup alacritty installer for debian"
+      echo "Error: I've only setup alacritty installer for linux"
       exit 1
     fi
   fi
 
   mkdir -p ~/.config/alacritty
   symlink $DOTF/plugins/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
-}
-
-install-on-debian() {
-  filename=Alacritty-v${VERSION}-ubuntu_18_04_amd64.deb
-  cd $TMP/
-  curl -L -O https://github.com/jwilm/alacritty/releases/download/v${VERSION}/${filename}
-
-  sudo dpkg -i $filename
 }
 
 main "$@"
