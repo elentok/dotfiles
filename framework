@@ -876,6 +876,10 @@ verify-perms() {
   local file="$2"
 
   printf "* Verifying '$file' has permissions '$expected'... "
+  if [ ! -e "$file" ]; then
+    info 'skipping, file is missing'
+    return
+  fi
 
   local actual="$(stat --format=%a $file)"
   if [ "$actual" == "$expected" ]; then
