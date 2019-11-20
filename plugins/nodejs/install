@@ -31,6 +31,7 @@ install_packages() {
   npm_install prettier
   npm_install gtop
   npm_install semver
+  npm_install cloc
 }
 
 main "$@"
