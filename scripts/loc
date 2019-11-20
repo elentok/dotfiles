@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+cloc \
+  --exclude-dir=node_modules,tmp,build,dist \
+  --not-match-f='^package-lock.json$' \
+  "$@"
+
