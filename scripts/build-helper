@@ -34,6 +34,18 @@ function install_symlinks() {
   fi
 }
 
+function install_desktop_entry() {
+  local path_to_binary=$1
+  local title=$2
+  local target_name=$(basename $path_to_binary)
+
+  add-desktop-entry $target_name-$VERSION "$title $VERSION" $BIN_DIR/$target_name-$VERSION
+
+  if [ "${PRIMARY:-}" == 'yes' ]; then
+    add-desktop-entry $target_name "$title" $BIN_DIR/$target_name
+  fi
+}
+
 function validate-sha256() {
   local filename=$1
   local sha256sum=$2

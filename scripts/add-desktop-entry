@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+#
+# Usage:
+#
+#   add-desktop-entry {basename} {name} {command}
+#
+
+function main() {
+  if [ $# -lt 3 ]; then
+    usage $0
+    exit 1
+  fi
+
+  basename="$1"
+
+  mkdir -p ~/.local/share/applications
+  build-content "$@" > ~/.local/share/applications/$basename.desktop
+  xdg-desktop-menu forceupdate
+}
+
+function build-content() {
+  cat<<EOF
+[Desktop Entry]
+Version=1.0
+Name=$2
+Exec=$3
+Type=Application
+EOF
+}
+
+main "$@"
