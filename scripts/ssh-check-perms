@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+
+cd
+verify-perms 700 .ssh
+verify-perms 600 .ssh/config
+verify-perms 600 .ssh/authorized_keys
+verify-perms 600 .ssh/id_rsa
+verify-perms 600 .ssh/id_rsa.pub
+verify-perms 600 .ssh/id_dsa
+verify-perms 600 .ssh/id_dsa.pub
