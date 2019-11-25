@@ -3,6 +3,10 @@ let g:autoformat_filetypes = [
       \ 'java', 'markdown', 'yaml']
 
 func! AutoFormat()
+  if exists('g:autoformat_disable')
+    return
+  endif
+
   if index(g:autoformat_filetypes, &filetype) != -1
     call CocAction('format')
   endif
