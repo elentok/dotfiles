@@ -76,7 +76,7 @@ endif
 
 " }}}1
 
-if file_readable(expand("~/.dotlocal/nvim"))
+if isdirectory(expand("~/.dotlocal/nvim"))
   let &runtimepath.=',~/.dotlocal/nvim'
 endif
 
