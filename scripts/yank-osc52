@@ -8,25 +8,35 @@
 # based on
 # https://www.freecodecamp.org/news/tmux-in-practice-integration-with-system-clipboard-bcd72c62ff7b/
 
-buf=$(cat "$@")
 buflen=$(printf %s "$buf" | wc -c)
-maxlen=74994
 
-if [[ $buflen -gt $maxlen ]]; then
-  printf "input is %d bytes too long" "$(( buflen - maxlen ))" >&2
-  exit 1
-fi
+function main() {
+  BUF=$(cat "$@")
+  validate-input-length
+  print-osc52-codes > $(identify-target-tty)
+  echo "$BUF"
+}
 
-esc="\033]52;c;$( printf %s "$buf" | head -c $maxlen | base64 | tr -d '\r\n' )\a"
+function validate-input-length() {
+  maxlen=74994
+  if [[ $buflen -gt $maxlen ]]; then
+    printf "input is %d bytes too long" "$(( buflen - maxlen ))" >&2
+    exit 1
+  fi
+}
 
-if [ -n "$SSH_TTY" ]; then
-  printf "$esc" > "$SSH_TTY"
-elif [ -n "$TMUX_PANE" ]; then
-  pane_active_tty=$(tmux list-panes -F "#{pane_active} #{pane_tty}" | awk '$1=="1" { print $2 }')
-  echo $pane_active_tty
-  printf "$esc" > "$pane_active_tty"
-else
-  printf "$esc"
-fi
+function print-osc52-codes() {
+  printf "\033]52;c;$( printf %s "$BUF" | base64 | tr -d '\r\n' )\a"
+}
 
-echo "$buf"
+function identify-target-tty() {
+  if [ -n "$SSH_TTY" ]; then
+    echo "$SSH_TTY"
+  elif [ -n "$TMUX_PANE" ]; then
+    tmux list-panes -F "#{pane_active} #{pane_tty}" | awk '$1=="1" { print $2 }'
+  else
+    echo '&1'
+  fi
+}
+
+main "$@"
