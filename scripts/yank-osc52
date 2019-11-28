@@ -9,7 +9,7 @@
 # https://www.freecodecamp.org/news/tmux-in-practice-integration-with-system-clipboard-bcd72c62ff7b/
 
 buf=$(cat "$@")
-len=$( printf %s "$buf" | wc -c )
+buflen=$(printf %s "$buf" | wc -c)
 maxlen=74994
 
 if [[ $buflen -gt $maxlen ]]; then
@@ -19,8 +19,14 @@ fi
 
 esc="\033]52;c;$( printf %s "$buf" | head -c $maxlen | base64 | tr -d '\r\n' )\a"
 
-pane_active_tty=$(tmux list-panes -F "#{pane_active} #{pane_tty}" | awk '$1=="1" { print $2 }')
-
-printf "$esc" > "$pane_active_tty"
+if [ -n "$SSH_TTY" ]; then
+  printf "$esc" > "$SSH_TTY"
+elif [ -n "$TMUX_PANE" ]; then
+  pane_active_tty=$(tmux list-panes -F "#{pane_active} #{pane_tty}" | awk '$1=="1" { print $2 }')
+  echo $pane_active_tty
+  printf "$esc" > "$pane_active_tty"
+else
+  printf "$esc"
+fi
 
 echo "$buf"
