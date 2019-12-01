@@ -8,16 +8,26 @@
 # based on
 # https://www.freecodecamp.org/news/tmux-in-practice-integration-with-system-clipboard-bcd72c62ff7b/
 
-buflen=$(printf %s "$buf" | wc -c)
+set -euo pipefail
 
 function main() {
   BUF=$(cat "$@")
   validate-input-length
-  print-osc52-codes > $(identify-target-tty)
+
+  OSC52="\033]52;c;$( printf %s "$BUF" | base64 | tr -d '\r\n' )\a"
+
+  # for regular terminal
+  printf "$OSC52"
+
+  ssh-yank
+  tmux-yank
+
+  # allow piping "yank-osc52" to other commands
   echo "$BUF"
 }
 
 function validate-input-length() {
+  buflen=$(printf %s "$BUF" | wc -c)
   maxlen=74994
   if [[ $buflen -gt $maxlen ]]; then
     printf "input is %d bytes too long" "$(( buflen - maxlen ))" >&2
@@ -25,18 +35,18 @@ function validate-input-length() {
   fi
 }
 
-function print-osc52-codes() {
-  printf "\033]52;c;$( printf %s "$BUF" | base64 | tr -d '\r\n' )\a"
-}
-
-function identify-target-tty() {
-  if [ -n "$SSH_TTY" ]; then
-    echo "$SSH_TTY"
-  elif [ -n "$TMUX_PANE" ]; then
-    tmux list-panes -F "#{pane_active} #{pane_tty}" | awk '$1=="1" { print $2 }'
-  else
-    echo '&1'
+function ssh-yank() {
+  if [ -n "${SSH_TTY:-}" -a -w "${SSH_TTY:-}" ]; then
+    printf "$OSC52" > $SSH_TTY;
   fi
 }
+
+function tmux-yank() {
+  if [ -z "$TMUX_PANE" ]; then return; fi
+
+  tty=$(tmux list-panes -F "#{pane_active} #{pane_tty}" | awk '$1=="1" { print $2 }')
+  printf "\033Ptmux;\033$OSC52\033\\" > $tty
+}
+
 
 main "$@"
