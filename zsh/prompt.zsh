@@ -70,9 +70,15 @@ fi
 
 # Full prompt {{{1
 
-PROMPT="
-$user_and_host $time
-$directory$git_status
+PROMPT="$directory$git_status
 $exit_code"
+
+if [ ! -e ~/.miniprompt ]; then
+  PROMPT="$user_and_host $time
+$PROMPT"
+fi
+
+PROMPT="
+$PROMPT"
 
 # vim: filetype=zsh foldmethod=marker
