@@ -30,8 +30,10 @@ if has_command rbenv; then
 fi
 
 if has_command fasd; then
-  with_cache fasd source fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install \
-    zsh-wcomp zsh-wcomp-install
+  if is_zsh; then
+    with_cache fasd source fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install \
+      zsh-wcomp zsh-wcomp-install
+  fi
 fi
 # Mac Specific {{{1
 
