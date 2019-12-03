@@ -62,11 +62,11 @@ is_wsl() {
 
 # Shell {{{1
 function is_zsh() {
-  [ -n "$(ps -p $$ | grep zsh)" ]
+  [ -n "$ZSH_VERSION" ]
 }
 
 function is_bash() {
-  [ -n "$(ps -p $$ | grep bash)" ]
+  [ -n "$BASH_VERSION" ]
 }
 
 # Helper functions {{{1
