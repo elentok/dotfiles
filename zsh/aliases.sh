@@ -72,6 +72,7 @@ alias tm='DISPLAY=${DISPLAY:-:0} tmux -u'
 alias tma='tm a'
 alias tot='awk "{ s+=\$1 } END { printf(\"%''d\n\", s) }"'
 alias total='awk "{ s+=\$1 } END { print s }"'
+alias treee='tree -I "node_modules|dist|build"'
 alias ts='tig status'
 alias vz='file="$(edit-zsh-dotfile)" && source $file'
 alias x=exit
