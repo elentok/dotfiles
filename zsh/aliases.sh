@@ -33,7 +33,6 @@ alias dotfi='cd $DOTF'
 alias dotl='cd $DOTL'
 alias du='du -kh'
 alias eslint-debug='DEBUG=eslint:cli-engine eslint'
-alias f='vifm'
 alias fliph='convert -flop'
 alias flipv='convert -flip'
 alias g='git'
@@ -228,6 +227,15 @@ vp() {
   local plugin="$(cd $HOME/.local/share/nvim-plugins && /bin/ls -1 | fzf --ansi --exit-0)"
   if [ -n "$plugin" ]; then
     cd "$HOME/.local/share/nvim-plugins/$plugin"
+  fi
+}
+
+unalias f
+f() {
+  if [ $# -eq 0 ]; then
+    vifm .
+  else
+    vifm "$@"
   fi
 }
 
