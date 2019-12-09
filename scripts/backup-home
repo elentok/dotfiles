@@ -1,16 +1,27 @@
 #!/usr/bin/env bash
 
 date=`date +%Y%m%d`
-filename="backup-${HOST}-$date.tar.bz2"
+filename="$(pwd)/backup-${HOST}-$date.tar.bz2"
 
-tar cjvf $filename $HOME \
-  --exclude .rvm \
-  --exclude .wine \
-  --exclude .thumbnails \
-  --exclude .cache \
-  --exclude .n \
-  --exclude .npm \
+cd $HOME
+tar cjvf $filename \
+  --one-file-system \
+  --exclude './Downloads' \
+  --exclude './.rvm' \
+  --exclude './.wine' \
+  --exclude './.thumbnails' \
+  --exclude './.cache' \
+  --exclude './.n' \
+  --exclude './.npm' \
+  --exclude './.local/lib' \
+  --exclude './.node-gyp' \
+  --exclude './.bundle' \
+  --exclude './.apps' \
+  --exclude './bin' \
+  --exclude './go' \
+  --exclude './.local/share/Trash' \
+  --exclude './.local/share/.com.google.*' \
+  --exclude './.local/share/Steam' \
+  --exclude '*.log' \
   --exclude node_modules \
-  --exclude .local/share/Steam
-
-
+  .
