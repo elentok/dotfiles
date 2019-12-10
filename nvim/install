@@ -162,6 +162,7 @@ install_cli_tools() {
   npm_install css-langserver
   npm_install eslint-server
   npm_install tslint-server
+  npm_install bash-language-server
   pip3_install pylint
   pip3_install yamllint
 
