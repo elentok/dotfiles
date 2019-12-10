@@ -5,9 +5,9 @@
 inoremap jk <esc>
 
 " Navigation {{{1
-noremap <space> 20j
-vnoremap <space> 20j
-noremap - 20k
+" noremap <space> 20j
+" vnoremap <space> 20j
+" noremap - 20k
 inoremap <c-l> <right>
 "inoremap <c-k> <up>
 "inoremap <c-j> <down>
