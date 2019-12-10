@@ -16,11 +16,15 @@ function main() {
 
   OSC52="\033]52;c;$( printf %s "$BUF" | base64 | tr -d '\r\n' )\a"
 
-  # for regular terminal
-  printf "$OSC52"
 
   ssh-yank
-  tmux-yank
+
+  if [ -z "${TMUX:-}" ]; then
+    # for regular terminal
+    printf "$OSC52"
+  else
+    tmux-yank
+  fi
 
   # allow piping "yank-osc52" to other commands
   echo "$BUF"
@@ -42,8 +46,6 @@ function ssh-yank() {
 }
 
 function tmux-yank() {
-  if [ -z "${TMUX:-}" ]; then return; fi
-
   tty=$(tmux list-panes -F "#{pane_active} #{pane_tty}" | awk '$1=="1" { print $2 }')
   printf "\033Ptmux;\033$OSC52\033\\" > $tty
 }
