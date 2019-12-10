@@ -5,10 +5,11 @@ set -euo pipefail
 source $DOTF/framework
 source $DOTF/scripts/build-helper
 
-prepare_build tmux 3.0 "$*"
+prepare_build tmux 3.0a "$*"
 
 if is_debian; then
-  apt_install libevent-dev libncurses5-dev libncursesw5-dev build-essential
+  apt_install libevent-dev libncurses5-dev libncursesw5-dev build-essential \
+    pkg-config byacc
 elif is_mac; then
   echo 'Unsupported platform'
   exit 1
