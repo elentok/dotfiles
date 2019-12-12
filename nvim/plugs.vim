@@ -46,6 +46,7 @@ Plug 'KabbAmine/vCoolor.vim'
 Plug 'davidbeckingsale/writegood.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile' }
+Plug 'cocopon/vaffle.vim'
 
 " File formats:
 Plug 'vim-scripts/applescript.vim',       { 'for': 'applescript' }
