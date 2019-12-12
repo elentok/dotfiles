@@ -1,2 +1,5 @@
 [ui]
 paginate = never
+
+[alias]
+s = status
