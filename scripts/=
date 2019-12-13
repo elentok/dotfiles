@@ -31,7 +31,7 @@ if [[ -n $(command -v rofi) ]]; then
 elif [[ -n $(command -v dmenu) ]]; then
     menu="$(command -v dmenu)"
 else
-    echo >&2 "Rofi or dmenu not found"
+    echo "$@" | bc -l
     exit
 fi
 
