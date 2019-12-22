@@ -2,7 +2,7 @@
 
 source `dirname $0`/../framework
 
-main() {
+function main() {
   install_requirements
   install_zsh
   install_symlinks
@@ -13,7 +13,7 @@ main() {
   chmod -R g-w $DOTF/zsh/vendor/zsh-completions
 }
 
-install_zsh() {
+function install_zsh() {
   if is_mac; then
     my_shell=$(echo $SHELL | rev | cut -d/ -f1 | rev)
     if [ "$my_shell" != "zsh" ]; then
@@ -34,13 +34,13 @@ install_zsh() {
   fi
 }
 
-install_symlinks() {
+function install_symlinks() {
   symlink "$DOTF/zsh" ~/.zsh
   symlink "$DOTF/zsh/zshrc" ~/.zshrc
   symlink "$DOTF/zsh/zshenv" ~/.zshenv
 }
 
-install_requirements() {
+function install_requirements() {
   if is_arch; then
     pacman_install fasd
   elif is_debian; then
@@ -52,7 +52,7 @@ install_requirements() {
   fi
 }
 
-install_gnu_utils() {
+function install_gnu_utils() {
   brew_install coreutils
   brew_install findutils
   brew_install fasd
@@ -60,7 +60,7 @@ install_gnu_utils() {
   brew_install grep
 }
 
-install_fzf() {
+function install_fzf() {
   bullet 'Installing FZF... '
   if [ -e ~/.fzf ]; then
     info 'already installed.'
