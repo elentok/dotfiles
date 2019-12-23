@@ -8,7 +8,7 @@ func! AutoFormat()
   endif
 
   if index(g:autoformat_filetypes, &filetype) != -1
-    call CocAction('format')
+    Neoformat
   endif
 endfunc
 
