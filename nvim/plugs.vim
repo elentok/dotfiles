@@ -44,9 +44,14 @@ Plug 'challenger-deep-theme/vim'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'davidbeckingsale/writegood.vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile' }
 Plug 'cocopon/vaffle.vim'
 Plug 'sbdchd/neoformat'
+
+if has("nvim-0.5")
+  Plug 'neovim/nvim-lsp'
+else
+  Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile' }
+endif
 
 " File formats:
 Plug 'vim-scripts/applescript.vim',       { 'for': 'applescript' }
