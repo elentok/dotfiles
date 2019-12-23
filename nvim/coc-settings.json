@@ -1,14 +1,6 @@
 {
   "coc.preferences.formatOnType": false,
-  "coc.preferences.formatOnSaveFiletypes": [
-    "typescript",
-    "javascript",
-    "css",
-    "scss",
-    "markdown",
-    "html",
-    "json"
-  ],
+  "coc.preferences.formatOnSaveFiletypes": [],
   "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "languageserver": {
     "golang": {

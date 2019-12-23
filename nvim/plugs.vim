@@ -46,6 +46,7 @@ Plug 'davidbeckingsale/writegood.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile' }
 Plug 'cocopon/vaffle.vim'
+Plug 'sbdchd/neoformat'
 
 " File formats:
 Plug 'vim-scripts/applescript.vim',       { 'for': 'applescript' }
