@@ -7,7 +7,7 @@ export interface IBtOptions {
   auth?: AxiosBasicCredentials
 }
 
-function log(...args: any[]) {
+function log(...args: any[]): void {
   if (process.env.DEBUG === 'yes') {
     console.debug(...args)
   }
@@ -16,7 +16,7 @@ function log(...args: any[]) {
 const SESSION_ID_HEADER = 'x-transmission-session-id'
 
 export class BtClient {
-  public static async create(options: Partial<IBtOptions> = {}) {
+  public static async create(options: Partial<IBtOptions> = {}): Promise<BtClient> {
     const host = options.host || 'localhost'
     const port = options.port || 9091
     const reqConfig: AxiosRequestConfig = {
