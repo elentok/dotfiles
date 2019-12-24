@@ -11,6 +11,7 @@ main() {
   install_neovim
   install_symlinks
   install_plugins
+  install_coc_plugins
   install_dtach
   install_cli_tools
 
@@ -111,15 +112,16 @@ install_plugins() {
   bullet "Running PlugInstall... "
   nvim +PlugInstall +UpdateRemotePlugins +qall
   success "done"
+}
 
-  extensions="coc-tsserver coc-eslint coc-prettier coc-json coc-html"
-  extensions="$extensions coc-css coc-lists coc-git coc-yank coc-vimlsp"
+install_coc_plugins() {
+  extensions=(coc-tsserver coc-eslint coc-prettier coc-json coc-html
+    coc-css coc-lists coc-git coc-yank coc-vimlsp)
 
   bullet "Installing Coc extensions... "
-  nvim -c "CocInstall -sync $extensions|q"
-  # mkdir -p ~/.config/coc/extensions
-  # cd ~/.config/coc/extensions
-  # yarn add --ignore-engines $extensions
+  mkdir -p ~/.config/coc/extensions
+  cd ~/.config/coc/extensions
+  yarn add --ignore-engines ${extensions[@]}
   success "done"
 }
 
