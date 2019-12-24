@@ -1,6 +1,5 @@
 require: rubocop-rspec
 
-
 # The following three overrides allow writing code like this:
 #
 #   it { should eq 'one two three' \

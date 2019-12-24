@@ -7,7 +7,8 @@
     "scss",
     "markdown",
     "html",
-    "json"
+    "json",
+    "yaml"
   ],
   "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "languageserver": {
