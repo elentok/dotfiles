@@ -45,7 +45,6 @@ Plug 'KabbAmine/vCoolor.vim'
 Plug 'davidbeckingsale/writegood.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'cocopon/vaffle.vim'
-Plug 'sbdchd/neoformat'
 
 if has("nvim-0.5")
   Plug 'neovim/nvim-lsp'
