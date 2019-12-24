@@ -32,10 +32,12 @@ export class Repo implements IRepo {
   }
 
   public fetchRemotes(): void {
-    this.remotes.filter(r => r.name !== 'review').forEach(r => {
-      r.fetch()
-      r.prune()
-    })
+    this.remotes
+      .filter(r => r.name !== 'review')
+      .forEach(r => {
+        r.fetch()
+        r.prune()
+      })
   }
 
   public unsyncedBranches(): IPair[] {

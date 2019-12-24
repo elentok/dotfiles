@@ -37,7 +37,7 @@ export class Rates {
     const toRate = this.data.rates[toCurrency]
 
     return {
-      value: from.value * toRate / fromRate,
+      value: (from.value * toRate) / fromRate,
       currency: toCurrency
     }
   }

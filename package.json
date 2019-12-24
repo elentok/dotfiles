@@ -6,7 +6,7 @@
   "scripts": {
     "format": "prettier --write '**/*.js' '**/*.css'",
     "vscode:sync": "ts-node plugins/vscode/sync.ts",
-    "eslint": "eslint .",
+    "eslint": "eslint --ext .js,.ts .",
     "ts:build": "tsc",
     "ts:watch": "tsc --watch",
     "start": "npm run ts:watch"
