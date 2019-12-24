@@ -4,7 +4,7 @@ import { Repo } from './repo'
 
 let repo: Repo
 
-function getRepo() {
+function getRepo(): Repo {
   if (repo == null) {
     repo = new Repo(process.cwd())
     if (program.quick == null) repo.fetchRemotes()
@@ -12,20 +12,20 @@ function getRepo() {
   return repo
 }
 
-function remoteless() {
+function printRemotelessBranches(): void {
   getRepo()
     .localBranches()
     .filter(branch => !branch.hasRemotes() && isSafe(branch))
     .forEach(branch => console.info(branch.gitName))
 }
 
-function isSafe(branch: LocalBranch) {
+function isSafe(branch: LocalBranch): boolean {
   if (program.safe == null) return true
 
   return !['master', 'develop'].includes(branch.gitName)
 }
 
-function allInfo() {
+function printAllInfo(): void {
   console.info('Local branches:')
   getRepo()
     .localBranches()
@@ -55,9 +55,9 @@ program
   .parse(process.argv)
 
 if (program.remoteless) {
-  remoteless()
+  printRemotelessBranches()
 } else if (program.all) {
-  allInfo()
+  printAllInfo()
 } else {
   program.outputHelp()
 }

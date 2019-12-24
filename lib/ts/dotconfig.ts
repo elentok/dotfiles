@@ -16,7 +16,7 @@ type ConfigLine = string | IConfigItem
 
 let configLines: ConfigLine[] = []
 
-function initialize() {
+function initialize(): void {
   if (!fs.existsSync(CONFIG_FILE)) return
 
   configLines = fs
@@ -51,9 +51,6 @@ export function getConfigOrDie(key: string): string {
 
   console.error(`Missing config "${key}", please set a value:\n\n  dotconfig set ${key} {value}`)
   process.exit(1)
-
-  // to satisfy typescript:
-  throw new Error(`Missing config "${key}"`)
 }
 
 export function getConfig(key: string): string | undefined {
@@ -71,7 +68,7 @@ export function setConfig(key: string, value: string): void {
   save()
 }
 
-function save() {
+function save(): void {
   if (!fs.existsSync(CONFIG_DIR)) execSync(`mkdir -p "${CONFIG_DIR}"`)
 
   const body = configLines

@@ -19,18 +19,17 @@ ask the user what to do about:
 */
 
 export default class ExtensionSyncer {
-  private configPath: string
   private dotfilesFilepath: string
   private dotfiles: Extensions
   private installed: Extensions
 
-  constructor(configPath: string) {
+  constructor() {
     this.dotfilesFilepath = join(__dirname, 'extensions.txt')
     this.dotfiles = Extensions.fromTextFile(this.dotfilesFilepath)
     this.installed = Extensions.fromVSCode()
   }
 
-  public run() {
+  public run(): void {
     if (this.installed.count() === 0) {
       this.dotfiles.all().forEach(name => Extensions.install(name))
       return
@@ -45,7 +44,7 @@ export default class ExtensionSyncer {
     })
   }
 
-  private runAction(extension: string, action: string) {
+  private runAction(extension: string, action: string): void {
     switch (action) {
       case 'i':
         Extensions.install(extension)
@@ -64,7 +63,7 @@ export default class ExtensionSyncer {
 
   private analyze(): Promise<IAnswers> {
     return new Promise<IAnswers>(resolve => {
-      prompt.get(this.createQuestions(), (err, result) => {
+      prompt.get(this.createQuestions(), (err: Error, result: IAnswers) => {
         if (err != null) {
           console.error(err)
           process.exit(1)

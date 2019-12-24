@@ -1,5 +1,5 @@
 import { copyFileSync, existsSync, readFileSync, statSync } from 'fs'
-import { join, resolve } from 'path'
+import { join } from 'path'
 import { exec } from 'shelljs'
 import ExtensionSyncer from './extension_syncer'
 

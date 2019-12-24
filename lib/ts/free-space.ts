@@ -2,7 +2,7 @@ import { execSync } from 'child_process'
 import { notUndefined, justifyLeft, justifyRight } from './utils'
 import chalk from 'chalk'
 
-function main() {
+function main(): void {
   printDisks(loadDisks())
 }
 

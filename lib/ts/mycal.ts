@@ -7,7 +7,7 @@ const FRIDAY = 5
 const SATURDAY = 6
 const TODAY = moment()
 
-function main() {
+function main(): void {
   const date = process.argv.length > 2 ? moment(process.argv[2]) : moment()
   const month = new Month(date)
   console.info()

@@ -2,7 +2,7 @@ import * as program from 'commander'
 import { findRenameables } from './renameable'
 import { confirm } from './utils'
 
-function main() {
+function main(): void {
   program
     .arguments('<pattern> <replacement> <file...>')
     .option('-y, --yes', "Don't ask for confirmation")
