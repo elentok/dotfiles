@@ -87,4 +87,3 @@ function! Markserv()
   exec 'silent !o "http://localhost:8642/%"'
 endfunction
 command! Markserv call Markserv()
-
