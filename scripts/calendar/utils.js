@@ -1,4 +1,4 @@
-/* globals document */
+/* globals document window */
 
 function div(className, content = null) {
   const el = document.createElement('div')
@@ -31,3 +31,5 @@ function addSingle(parent, child) {
 
   parent.appendChild(child)
 }
+
+window.div = div

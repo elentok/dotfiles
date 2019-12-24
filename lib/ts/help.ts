@@ -7,7 +7,7 @@ import * as fg from 'fast-glob'
 const HELP_FILENAME = path.join(process.env.DOTF || '', 'docs', 'help.md')
 const LOCAL_HELP_GLOB = path.join(process.env.DOTL || '', 'docs', '*.md')
 
-export function help() {
+export function help(): void {
   const query = process.argv[2]
 
   if (query === 'e') {
@@ -21,7 +21,7 @@ export function help() {
   }
 }
 
-function findSections(filename: string, query?: string) {
+function findSections(filename: string, query?: string): string[] {
   const sections: string[] = []
   let sectionLines: string[] = []
 
@@ -46,7 +46,7 @@ function isBeginningOfSection(line: string): boolean {
   return /^#/.test(line)
 }
 
-function addSection(sections: string[], section: string, query?: string) {
+function addSection(sections: string[], section: string, query?: string): void {
   if (/^\s*$/.test(section)) return
 
   if (query == null) {

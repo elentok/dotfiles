@@ -1,5 +1,4 @@
 import { readFileSync, writeFileSync } from 'fs'
-import { resolve } from 'path'
 import { exec } from 'shelljs'
 
 export default class Extensions {

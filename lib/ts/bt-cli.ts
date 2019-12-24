@@ -5,7 +5,7 @@ import { formatTorrent } from './torrent'
 
 let client: BtClient
 
-async function main() {
+async function main(): Promise<void> {
   program.command('ls').action(async () => {
     const torrents = await (await getClient()).list()
     if (torrents.length === 0) {

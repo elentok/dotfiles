@@ -6,13 +6,13 @@ export class Remote {
     this.name = name
   }
 
-  fetch() {
+  public fetch(): void {
     printProgress(`Fetching remote '${this.name}'`)
     this.repo.git(`fetch ${this.name}`)
     clearLine()
   }
 
-  prune() {
+  public prune(): void {
     printProgress(`Removing dead branches from '${this.name}'`)
     this.repo.git(`remote prune ${this.name}`)
     clearLine()

@@ -42,7 +42,7 @@ export class Rates {
     }
   }
 
-  private getDefaultTo(from: string) {
+  private getDefaultTo(from: string): string {
     for (let i = 0; i < DEFAULTS.length; i++) {
       if (DEFAULTS[i] !== from) {
         return DEFAULTS[i]

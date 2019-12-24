@@ -12,7 +12,7 @@ Usage:
 
 `
 
-async function main() {
+async function main(): Promise<void> {
   const branches = process.argv.splice(2)
 
   if (branches.length === 0) {
@@ -23,7 +23,7 @@ async function main() {
   destroy(branches)
 }
 
-async function destroy(branchNames: string[]) {
+async function destroy(branchNames: string[]): Promise<void> {
   const repo = new Repo(process.cwd())
 
   branchNames.forEach(async branchName => {
@@ -52,7 +52,7 @@ async function destroy(branchNames: string[]) {
   })
 }
 
-async function destroyLocal(localBranch: LocalBranch) {
+async function destroyLocal(localBranch: LocalBranch): Promise<void> {
   try {
     localBranch.destroy()
   } catch (err) {
