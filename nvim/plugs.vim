@@ -49,7 +49,7 @@ Plug 'cocopon/vaffle.vim'
 if has("nvim-0.5")
   Plug 'neovim/nvim-lsp'
 else
-  Plug 'neoclide/coc.nvim', { 'branch': 'release', 'do': 'yarn install --frozen-lockfile' }
+  Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 endif
 
 " File formats:
