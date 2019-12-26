@@ -116,12 +116,12 @@ install_plugins() {
 
 install_coc_plugins() {
   extensions=(coc-tsserver coc-eslint coc-prettier coc-json coc-html
-    coc-css coc-lists coc-git coc-yank coc-vimlsp)
+    coc-css coc-lists coc-git coc-yank coc-vimlsp coc-python)
 
   bullet "Installing Coc extensions... "
   mkdir -p ~/.config/coc/extensions
   cd ~/.config/coc/extensions
-  yarn add --ignore-engines ${extensions[@]}
+  npm install --save --ignore-engines ${extensions[@]}
   success "done"
 }
 
@@ -168,6 +168,7 @@ install_cli_tools() {
   npm_install bash-language-server
   pip3_install pylint
   pip3_install yamllint
+  pip3_install jedi
 
   is_fedora && yum_install redhat-rpm-config
   pip3_install neovim-remote
