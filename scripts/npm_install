@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+
+# NPM {{{1
+main() {
+  for pkg in $*; do
+    npm_install_single $pkg
+  done
+}
+
+npm_install_single() {
+  bullet "Installing npm package ${1}..."
+
+  if ! has_command npm; then
+    error "npm is not installed, skipping"
+    return
+  fi
+
+  node_modules="$(cd "$(dirname $(which node))/../lib/node_modules" && pwd)"
+
+  if [ -d "$node_modules/$1" ]; then
+    info " already installed"
+  else
+    npm="npm"
+    if ! is_user_nodejs; then npm="sudo npm"; fi
+    $npm install -g $*
+  fi
+}
+
+is_user_nodejs() {
+  [ "$(file-owner $(which node))" = "$(whoami)" ]
+}
+
+main "$@"
