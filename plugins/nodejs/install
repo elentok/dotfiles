@@ -22,16 +22,12 @@ install_node() {
 }
 
 install_packages() {
-  npm_install yarn
-  npm_install json
-  npm_install live-server
-  npm_install eslint
-  npm_install typescript
-  npm_install tslint
-  npm_install prettier
-  npm_install gtop
-  npm_install semver
-  npm_install cloc
+  npm_install yarn json live-server eslint typescript tslint prettier \
+    semver cloc
+
+  if ! is_termux; then
+    npm_install gtop
+  fi
 }
 
 main "$@"

@@ -2,33 +2,42 @@
 
 source $DOTF/framework
 
-# NPM {{{1
-main() {
+NODE_MODULES="$(cd "$(dirname $(which node))/../lib/node_modules" && pwd)"
+
+function main() {
+  bullet "Installing npm packages: $@..."
+  die-if-npm-missing
+
+  local missing=$(find-missing-packages "$@")
+  if [ -z "$missing" ]; then
+    info " already installed."
+  else
+    install $missing
+  fi
+}
+
+function die-if-npm-missing() {
+  if ! has_command npm; then
+    error "npm is not installed, skipping"
+    exit 1
+  fi
+}
+
+function find-missing-packages() {
   for pkg in $*; do
-    npm_install_single $pkg
+    if [ ! -d "$NODE_MODULES/$pkg" ]; then
+      printf "$pkg "
+    fi
   done
 }
 
-npm_install_single() {
-  bullet "Installing npm package ${1}..."
-
-  if ! has_command npm; then
-    error "npm is not installed, skipping"
-    return
-  fi
-
-  node_modules="$(cd "$(dirname $(which node))/../lib/node_modules" && pwd)"
-
-  if [ -d "$node_modules/$1" ]; then
-    info " already installed"
-  else
-    npm="npm"
-    if ! is_user_nodejs; then npm="sudo npm"; fi
-    $npm install -g $*
-  fi
+install() {
+  npm="npm"
+  if ! is-user-nodejs; then npm="sudo npm"; fi
+  $npm install -g $*
 }
 
-is_user_nodejs() {
+is-user-nodejs() {
   [ "$(file-owner $(which node))" = "$(whoami)" ]
 }
 
