@@ -147,25 +147,11 @@ install_cli_tools() {
     fi
   fi
 
-  npm_install markserv
-  npm_install htmlhint
-  npm_install marked
-  npm_install name-that-color
-  npm_install livedown
-  npm_install coffeelint
-  npm_install eslint
-  npm_install prettier
-  npm_install jsonlint
-  npm_install sass-lint
-  npm_install javascript-typescript-langserver
+  npm_install markserv htmlhint marked name-that-color livedown coffeelint \
+  eslint prettier jsonlint sass-lint javascript-typescript-langserver \
+  typescript vscode-html-languageserver-bin vscode-json-languageserver \
+  css-langserver eslint-server tslint-server bash-language-server
 
-  npm_install typescript
-  npm_install vscode-html-languageserver-bin
-  npm_install vscode-json-languageserver
-  npm_install css-langserver
-  npm_install eslint-server
-  npm_install tslint-server
-  npm_install bash-language-server
   pip3_install pylint
   pip3_install yamllint
   pip3_install jedi
