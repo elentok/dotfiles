@@ -121,7 +121,7 @@ install_coc_plugins() {
   bullet "Installing Coc extensions... "
   mkdir -p ~/.config/coc/extensions
   cd ~/.config/coc/extensions
-  NPM_ARGS='--save --ignore-engines' npm-fast-install --local ${extensions[@]}
+  npm-fast-install --local -save --ignore-engines ${extensions[@]}
   success "done"
 }
 

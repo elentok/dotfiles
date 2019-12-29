@@ -2,34 +2,47 @@
 
 source $DOTF/framework
 
-if [ "${1:-}" == "--local" ]; then
+LOCAL=no
+NPM=npm
+NPM_ARGS=''
+
+while [[ "${1:-}" =~ ^- ]]; do
+  if [ "$1" == "--local" ]; then
+    LOCAL=yes
+  else
+    NPM_ARGS="$NPM_ARGS $1"
+  fi
   shift
-  NODE_MODULES="$(pwd)/node_modules"
-
-  function install() {
-    npm install $NPM_ARGS $*
-  }
-else
-  NODE_MODULES="$(cd "$(dirname $(which node))/../lib/node_modules" && pwd)"
-
-  function install() {
-    if is-user-nodejs; then
-      sudo npm install -g $NPM_ARGS $*
-    else
-      npm install -g $NPM_ARGS$ *
-    fi
-  }
-fi
+done
 
 function main() {
   bullet "Installing npm packages: $@..."
   die-if-npm-missing
+  find-node-modules
+  set-npm-command
 
   local missing=$(find-missing-packages "$@")
   if [ -z "$missing" ]; then
     info " already installed."
   else
-    install $missing
+    $NPM install $NPM_ARGS $missing
+  fi
+}
+
+function find-node-modules() {
+  if [ "$LOCAL" == 'yes' ]; then
+    NODE_MODULES="$(pwd)/node_modules"
+  else
+    NODE_MODULES="$(cd "$(dirname $(which node))/../lib/node_modules" && pwd)"
+  fi
+}
+
+function set-npm-command() {
+  if [ "$LOCAL" == 'no' ]; then
+    NPM_ARGS="$NPM_ARGS -g"
+    if is-user-nodejs; then
+      NPM='sudo npm'
+    fi
   fi
 }
 
