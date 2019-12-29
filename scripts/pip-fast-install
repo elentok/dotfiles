@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+
+main() {
+  bullet "Installing pip3 packages $*... "
+
+  die-if-pip-missing
+  INSTALLED="$(pip3 list)"
+
+  local missing=$(find-missing-packages "$@")
+
+  if [ -z "$missing" ]; then
+    info " already installed."
+  else
+    echo
+    bullet "Installing $missing..."
+    pip3 install $missing --user $*
+  fi
+}
+
+function die-if-pip-missing() {
+  if ! has_command pip3; then
+    error "pip is not installed, skipping"
+    exit 1
+  fi
+}
+
+function find-missing-packages() {
+  for pkg in $*; do
+    if ! has-package $pkg; then
+      printf "$pkg "
+    fi
+  done
+}
+
+function has-package() {
+  echo "$INSTALLED" | grep "^$1\b" > /dev/null
+}
+
+main "$@"

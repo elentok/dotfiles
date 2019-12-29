@@ -353,67 +353,6 @@ has_brew_cask_package() {
   [ "`brew cask list | grep \"^$1\$\"`" != "" ]
 }
 
-# Python {{{1
-
-export PIP2="pip"
-if has_command "pip2"; then
-  export PIP2="pip2"
-fi
-
-pip2_is_installed() {
-  if command_missing $PIP2; then
-    bullet "Installing $PIP2... "
-
-    if is_linux; then
-      if is_debian; then
-        apt_install python-pip
-      else
-        pacman -S python2-pip python-pip
-      fi
-    else
-      if command_missing easy_install; then
-        error "easy_install is missing, skipping"
-        false
-      else
-        sudo easy_install pip
-      fi
-    fi
-  fi
-}
-
-pip2_install() {
-  pip2_is_installed || return
-  bullet "Installing ${1}... "
-  if has_pip2_package "$1"; then
-    info " already installed"
-  else
-    $PIP2 install --user $1
-  fi
-}
-
-has_pip2_package() {
-  [ "`$PIP2 list | grep \"^$1\b\"`" != "" ]
-}
-
-# Pip3 {{{1
-export PIP3="pip"
-if has_command "pip3"; then
-  export PIP3="pip3"
-fi
-
-pip3_install() {
-  bullet "Installing pip3 package ${1}... "
-  if has_pip3_package "$1"; then
-    info " already installed"
-  else
-    $PIP3 install --user $1
-  fi
-}
-
-has_pip3_package() {
-  [ "`$PIP3 list | grep \"^$1\b\"`" != "" ]
-}
-
 # Git {{{1
 git_clone() {
   origin=$1
