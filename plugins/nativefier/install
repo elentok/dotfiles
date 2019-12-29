@@ -6,7 +6,7 @@ BUILD_DIR="$HOME/tmp"
 APPS_ROOT="$HOME/Applications/Web"
 
 main() {
-  npm_install nativefier
+  npm-fast-install nativefier
 
   mkdir -p "$APPS_ROOT"
 

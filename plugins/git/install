@@ -10,7 +10,7 @@ main() {
   fi
   install_gitconfig
   setup_git_user
-  install_diff_so_fancy
+  npm-fast-install diff-so-fancy
 }
 
 install_git() {
@@ -55,16 +55,6 @@ write_to_gitconfig() {
   fi
   echo "[include]" >> $GITCONFIG
   echo "  path = $DOTF/plugins/git/gitconfig" >> $GITCONFIG
-}
-
-install_diff_so_fancy() {
-  if is_mac; then
-    brew_install diff-so-fancy
-  elif is_arch; then
-    pacman_install diff-so-fancy
-  else
-    npm_install diff-so-fancy
-  fi
 }
 
 setup_git_user() {

@@ -22,11 +22,11 @@ install_node() {
 }
 
 install_packages() {
-  npm_install yarn json live-server eslint typescript tslint prettier \
+  npm-fast-install yarn json live-server eslint typescript tslint prettier \
     semver cloc
 
   if ! is_termux; then
-    npm_install gtop
+    npm-fast-install gtop
   fi
 }
 

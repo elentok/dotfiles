@@ -31,7 +31,7 @@ install_requirements() {
     yum_install python3-devel gcc
   fi
 
-  npm_install neovim
+  npm-fast-install neovim
   pip3_install neovim
   pip3_install neovim-remote
 }
@@ -121,7 +121,7 @@ install_coc_plugins() {
   bullet "Installing Coc extensions... "
   mkdir -p ~/.config/coc/extensions
   cd ~/.config/coc/extensions
-  NPM_ARGS='--save --ignore-engines' npm_install --local ${extensions[@]}
+  NPM_ARGS='--save --ignore-engines' npm-fast-install --local ${extensions[@]}
   success "done"
 }
 
@@ -147,10 +147,10 @@ install_cli_tools() {
     fi
   fi
 
-  npm_install markserv htmlhint marked name-that-color livedown coffeelint \
-  eslint prettier jsonlint sass-lint javascript-typescript-langserver \
-  typescript vscode-html-languageserver-bin vscode-json-languageserver \
-  css-langserver eslint-server tslint-server bash-language-server
+  npm-fast-install markserv htmlhint marked name-that-color \
+    eslint prettier jsonlint sass-lint javascript-typescript-langserver \
+    typescript vscode-html-languageserver-bin vscode-json-languageserver \
+    css-langserver eslint-server tslint-server bash-language-server
 
   pip3_install pylint
   pip3_install yamllint
