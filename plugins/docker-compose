@@ -2,5 +2,4 @@
 
 source $DOTF/framework
 
-pip3_install setuptools
-pip3_install docker-compose
+pip-fast-install setuptools docker-compose

@@ -32,8 +32,6 @@ install_requirements() {
   fi
 
   npm-fast-install neovim
-  pip3_install neovim
-  pip3_install neovim-remote
 }
 
 install_neovim() {
@@ -152,12 +150,9 @@ install_cli_tools() {
     typescript vscode-html-languageserver-bin vscode-json-languageserver \
     css-langserver eslint-server tslint-server bash-language-server
 
-  pip3_install pylint
-  pip3_install yamllint
-  pip3_install jedi
+  pip-fast-install pylint yamllint jedi neovim-remote neovim
 
   is_fedora && yum_install redhat-rpm-config
-  pip3_install neovim-remote
 }
 
 explain_win32yank() {
