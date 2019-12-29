@@ -6,5 +6,5 @@ source $DOTF/framework
 mkdir -p ~/.config/oni
 symlink "$DOTF/plugins/oni/config.tsx" ~/.config/oni/config.tsx
 
-# npm_install typescript
-# npm_install ts-server
+# npm-fast-install typescript
+# npm-fast-install ts-server
