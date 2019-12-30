@@ -25,6 +25,8 @@ function main() {
   if [ -z "$missing" ]; then
     info " already installed."
   else
+    echo
+    bullet `Installing $missing...`
     $NPM install $NPM_ARGS $missing
   fi
 }
@@ -40,7 +42,7 @@ function find-node-modules() {
 function set-npm-command() {
   if [ "$LOCAL" == 'no' ]; then
     NPM_ARGS="$NPM_ARGS -g"
-    if is-user-nodejs; then
+    if ! is-user-nodejs; then
       NPM='sudo npm'
     fi
   fi
