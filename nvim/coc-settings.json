@@ -8,9 +8,11 @@
     "markdown",
     "html",
     "json",
-    "yaml"
+    "yaml",
+    "java"
   ],
   "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "java.format.enabled": true,
   "languageserver": {
     "golang": {
       "command": "gopls",
