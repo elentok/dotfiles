@@ -9,6 +9,7 @@
     "html",
     "json",
     "yaml",
+    "python",
     "java"
   ],
   "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],

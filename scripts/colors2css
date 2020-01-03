@@ -1,8 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-import sys, re, color2css
-
-#color2css = imp.load_source("color2css", os.path.dirname(__file__))
+import sys
+import re
+import color2css
 
 COLORS = {}
 LINES = []
@@ -24,12 +24,11 @@ for line in sys.stdin:
     else:
         LINES.append(line.strip())
 
-print "// colors:"
-for color in COLORS.keys():
-    print "$%s: %s;" % (COLORS[color], color)
+print("// colors:")
+for color in COLORS:
+    print(f'${COLORS[color]}: {color};')
 
-print
-print "// variables:"
+print()
+print("// variables:")
 for line in LINES:
-    print line
-
+    print(line)
