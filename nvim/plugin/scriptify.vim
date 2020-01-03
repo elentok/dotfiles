@@ -1,5 +1,5 @@
 let g:hash_tags = {
-  \ 'python': '#!/usr/bin/env python',
+  \ 'python': '#!/usr/bin/env python3',
   \ 'ruby': '#!/usr/bin/env ruby',
   \ 'bash': '#!/usr/bin/env bash',
   \ 'node': '#!/usr/bin/env node'

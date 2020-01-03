@@ -1,6 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import sys
+
 
 def main():
     if len(sys.argv) < 2:
@@ -8,15 +9,19 @@ def main():
     else:
         hex2rgb(sys.argv[1])
 
+
 def usage():
-    print "Usage: \n"
-    print "  hex2rgb abcdef"
+    print(("Usage:"
+           ""
+           "  hex2rgb abcdef"))
+
 
 def hex2rgb(hex_value):
     red = int(hex_value[0:2], 16)
     green = int(hex_value[2:4], 16)
     blue = int(hex_value[4:6], 16)
-    print "(%d,%d,%d)" % (red, green, blue)
+    print(f'({red},{green},{blue})')
+
 
 if __name__ == "__main__":
     main()
