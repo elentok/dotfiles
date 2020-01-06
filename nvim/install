@@ -151,8 +151,6 @@ install_cli_tools() {
     css-langserver eslint-server tslint-server bash-language-server
 
   pip-fast-install pylint yamllint jedi neovim-remote neovim
-
-  is_fedora && yum_install redhat-rpm-config
 }
 
 explain_win32yank() {
