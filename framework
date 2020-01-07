@@ -513,15 +513,16 @@ yaourt_install_single() {
 
 # Deb packages {{{1
 install_deb() {
-  bullet "Installing ${1}..."
+  local name="$1"
+  local url="$2"
 
-  has=`apt_cache | grep "^$1$"`
+  bullet "Installing ${name}..."
 
-  if [ "$has" != "" ]; then
+  if apt_cache | grep "^${name}$" > /dev/null; then
     info " already installed"
   else
-    wget $2 -O $TMP/$1.deb
-    sudo dpkg -i $TMP/$1.deb
+    wget "$url" -O $TMP/${name}.deb
+    sudo dpkg -i $TMP/${name}.deb
     rm -f $TMP/apt-cache
   fi
 }
