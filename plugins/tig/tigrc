@@ -83,4 +83,4 @@ bind generic ca !?@git commit --amend --no-edit
 bind generic K view-help
 bind generic <C-w><C-w> view-next
 
-source ~/.dotlocal/tigrc
+source -q ~/.dotlocal/tigrc
