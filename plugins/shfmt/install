@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+
+bullet 'Installing shfmt...'
+if has_command shfmt; then
+  info 'already installed.'
+else
+  $DOTF/plugins/shfmt/install-binary 
+fi
