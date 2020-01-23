@@ -25,7 +25,11 @@ function prepare_build() {
 
 function install_symlinks() {
   local path_to_binary=$1
-  local target_name=$(basename $path_to_binary)
+  if [ $# -ge 2 ]; then
+    local target_name="$2"
+  else
+    local target_name=$(basename $path_to_binary)
+  fi
 
   symlink $INSTALL_DIR/$path_to_binary $BIN_DIR/$target_name-$VERSION
 
