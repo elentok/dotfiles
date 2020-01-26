@@ -45,7 +45,7 @@ function findItemIndex(key: string): number {
   return configLines.findIndex(l => typeof l === 'object' && l.key === key)
 }
 
-export function getConfigOrDie(key: string): string {
+export function getConfigOrDie(key: string): string | never {
   const value = getConfig(key)
   if (value != null) return value
 
