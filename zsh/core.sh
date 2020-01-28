@@ -267,10 +267,13 @@ is_in_neovim() {
 export SSH_TERM=xterm-color
 export LESS="--RAW-CONTROL-CHARS"
 export RIPGREP_CONFIG_PATH="$DOTF/plugins/ripgrep/ripgreprc"
+export SHELLCHECK_OPTS="-e SC1090"
+
 
 if is_mac; then
   export JAVA_HOME="$(/usr/libexec/java_home 2> /dev/null)"
 fi
+
 
 # DOTLOCAL {{{1
 source_if_exists "$DOTL/zsh/core.zsh"
