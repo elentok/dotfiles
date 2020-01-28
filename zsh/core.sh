@@ -267,7 +267,11 @@ is_in_neovim() {
 export SSH_TERM=xterm-color
 export LESS="--RAW-CONTROL-CHARS"
 export RIPGREP_CONFIG_PATH="$DOTF/plugins/ripgrep/ripgreprc"
-export SHELLCHECK_OPTS="-e SC1090"
+
+# - Don't follow non-constant sources
+#   (https://github.com/koalaman/shellcheck/wiki/SC1090)
+# - Source file not found (https://github.com/koalaman/shellcheck/wiki/SC1091)
+export SHELLCHECK_OPTS="-e SC1090,SC1091"
 
 
 if is_mac; then
