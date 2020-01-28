@@ -114,7 +114,7 @@ install_plugins() {
 
 install_coc_plugins() {
   extensions=(coc-tsserver coc-eslint coc-prettier coc-json coc-html
-    coc-css coc-lists coc-git coc-yank coc-vimlsp coc-python)
+    coc-css coc-lists coc-git coc-yank coc-vimlsp coc-python coc-diagnostic)
 
   bullet "Installing Coc extensions... "
   mkdir -p ~/.config/coc/extensions
