@@ -131,7 +131,7 @@ install_cli_tools() {
   if is_arch; then
     pacman_install ctags tidy
   elif is_debian; then
-    apt_install exuberant-ctags
+    apt_install exuberant-ctags shellcheck
   elif is_fedora; then
     yum_install ctags
   else
