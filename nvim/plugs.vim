@@ -45,6 +45,7 @@ Plug 'KabbAmine/vCoolor.vim'
 Plug 'davidbeckingsale/writegood.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'cocopon/vaffle.vim'
+Plug 'bogado/file-line'
 Plug 'yuki-ycino/fzf-preview.vim'
 
 if has("nvim-0.5")
