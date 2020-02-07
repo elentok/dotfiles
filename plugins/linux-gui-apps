@@ -2,6 +2,4 @@
 
 source "$DOTF/framework"
 
-header "GUI Apps"
-
 apt-fast-install vlc feh gimp qalculate-gtk flameshot xsel
