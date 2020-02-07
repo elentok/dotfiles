@@ -27,8 +27,6 @@ install_requirements() {
     pacman_install python python-pip
   elif is_debian; then
     apt-fast-install python-dev python-pip python3-dev python3-pip
-  elif is_fedora; then
-    yum_install python3-devel gcc
   fi
 
   npm-fast-install neovim
@@ -132,8 +130,6 @@ install_cli_tools() {
     pacman_install ctags tidy
   elif is_debian; then
     apt-fast-install exuberant-ctags shellcheck
-  elif is_fedora; then
-    yum_install ctags
   else
     brew_install ctags
   fi

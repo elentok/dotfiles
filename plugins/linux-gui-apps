@@ -10,6 +10,4 @@ if is_arch; then
   pacman_install $COMMON gvfs gvfs-smb 
 elif is_debian; then
   apt-fast-install $COMMON
-elif is_fedora; then
-  yum_install $COMMON
 fi

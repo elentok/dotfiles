@@ -7,8 +7,6 @@ prepare_build tig 2.4.1 "$*"
 
 if is_debian; then
   apt-fast-install libncursesw5-dev build-essential
-elif is_fedora; then
-  yum_install ncurses-devel
 fi
 
 BASENAME=tig-$VERSION

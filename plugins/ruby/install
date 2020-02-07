@@ -7,8 +7,6 @@ RUBY_VERSION='2.5.1'
 main() {
   if is_arch; then
     pacman_install ruby
-  elif is_fedora; then
-    yum_install ruby
   else
     install_requirements
     install_rbenv
