@@ -1,0 +1,13 @@
+{
+  "$schema": "./dotf-pkgs.schema.json",
+  "packages": [
+    {
+      "githubRepo": "ogham/exa",
+      "version": "0.9.0",
+      "filenames": {
+        "linux": "exa-linux-x86_64-{version}.zip",
+        "mac": "exa-macos-x86_64-{version}.zip"
+      }
+    }
+  ]
+}
