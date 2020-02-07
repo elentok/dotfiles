@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-source $DOTF/framework
-
-pacman_install xfce4
-pacman_install xfce4-notifyd
-yaourt_install xfce4-volumed-pulse

@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-source $DOTF/framework
-
-pacman_install cronie
-systemctl enable cronie
-systemctl start cronie

@@ -25,9 +25,7 @@ is_ripgrep_installed() {
 }
 
 install_ripgrep() {
-  if is_arch; then
-    pacman_install ripgrep
-  elif is_debian; then
+  if is_debian; then
     PLATFORM='x86_64-unknown-linux-musl'
     install_ripgrep_tgz
   elif is_mac; then

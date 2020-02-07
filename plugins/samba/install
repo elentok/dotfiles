@@ -12,18 +12,8 @@ main() {
 
   header "Samba sharing"
 
-  if is_arch; then
-    pacman_install samba
-    if [ ! -e /etc/samba/smb.conf ]; then
-      bullet "Creating /etc/samba/smb.conf (sudo)... "
-      sudo cp /etc/samba/smb.conf{.default,}
-      show_result die_on_error
-    fi
-    systemctl enable smb.service
-    systemctl enable nmb.service
-  else
-    apt-fast-install samba
-  fi
+  apt-fast-install samba
+
   init_samba_username
   create_group sambashare
   add_user_to_group sambashare

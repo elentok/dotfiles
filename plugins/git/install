@@ -16,8 +16,6 @@ main() {
 install_git() {
   if is_mac; then
     brew_install git
-  elif is_arch; then
-    pacman_install git
   else
     apt-fast-install git
   fi

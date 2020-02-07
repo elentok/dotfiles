@@ -10,8 +10,6 @@ main() {
 
   if is_debian; then
     apt-fast-install pandoc
-  elif is_arch; then
-    pacman_install pandoc
   elif is_mac; then
     PRIMARY=yes install_on_mac
   fi
