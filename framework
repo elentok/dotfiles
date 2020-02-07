@@ -216,12 +216,11 @@ symlink() {
   fi
 }
 
-# Install Brew/Apt/Yum package {{{1
+# Install Brew/Apt package {{{1
 install_package() {
   APT=''
   BREW=''
   PACMAN=''
-  YUM=''
 
   while extract_flag "${1:-}"; do shift; done
 
@@ -229,8 +228,6 @@ install_package() {
     brew_install "${BREW:-$1}"
   elif is_arch; then
     pacman_install "${PACMAN:-$1}"
-  elif is_fedora; then
-    yum_install "${YUM:-$1}"
   else
     apt-fast-install "${APT:-$1}"
   fi
@@ -412,25 +409,6 @@ add_ppa() {
     sudo add-apt-repository -y ppa:${1}
     sudo apt-get update
   fi
-}
-
-# Yum (Fedora): Install {{{1
-yum_install() {
-  for pkg in $*; do yum_install_single $pkg; done
-}
-
-yum_install_single() {
-  bullet "Installing ${1}..."
-
-  if has_yum_package "$1"; then
-    info " already installed"
-  else
-    sudo yum install -y ${1}
-  fi
-}
-
-has_yum_package() {
-  yum list installed "$@" >/dev/null 2>&1
 }
 
 # Pacman: Install {{{1

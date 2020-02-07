@@ -6,7 +6,7 @@ install_package ncdu
 install_package curl
 install_package wget
 install_package htop
-install_package --yum=ImageMagick imagemagick
+install_package imagemagick
 
 if is_arch; then
   pacman_install openssh
