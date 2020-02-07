@@ -41,13 +41,9 @@ function install_symlinks() {
 }
 
 function install_requirements() {
-  if is_arch; then
-    pacman_install fasd
-  elif is_debian; then
+  if is_debian; then
     apt-fast-install fasd
-  fi
-
-  if is_mac; then
+  elif is_mac; then
     install_gnu_utils
   fi
 }

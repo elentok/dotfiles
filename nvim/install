@@ -23,8 +23,6 @@ install_requirements() {
     apt-fast-install clang
   elif is_mac; then
     brew_install python
-  elif is_arch; then
-    pacman_install python python-pip
   elif is_debian; then
     apt-fast-install python-dev python-pip python3-dev python3-pip
   fi
@@ -126,9 +124,7 @@ install_dtach() {
 }
 
 install_cli_tools() {
-  if is_arch; then
-    pacman_install ctags tidy
-  elif is_debian; then
+  if is_debian; then
     apt-fast-install exuberant-ctags shellcheck
   else
     brew_install ctags

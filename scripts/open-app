@@ -10,7 +10,7 @@ source $DOTF/framework
 
 main() {
   if command_missing wmctrl; then
-    pacman_install wmctrl
+    apt-fast-install wmctrl
   fi
 
   if [ $# -lt 2 ]; then

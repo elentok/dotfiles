@@ -5,10 +5,12 @@ source $DOTF/framework
 SWAY="$DOTF/plugins/sway"
 
 main() {
-  if is_arch; then
-    pacman_install sway termite
-    yaourt_install sway-dmenu-desktop
-  fi
+  echo "ERROR: sway installer not implemented"
+  exit 1
+  # if is_arch; then
+    # pacman_install sway termite
+    # yaourt_install sway-dmenu-desktop
+  # fi
 
   symlink "$SWAY" "$HOME/.config/sway"
 

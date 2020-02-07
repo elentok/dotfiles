@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-source $DOTF/framework
-
-pacman_install tlp
-
-sudo systemctl enable tlp.service
-sudo systemctl enable tlp-sleep.service
-sudo systemctl disable systemd-rfkill.service

@@ -220,14 +220,11 @@ symlink() {
 install_package() {
   APT=''
   BREW=''
-  PACMAN=''
 
   while extract_flag "${1:-}"; do shift; done
 
   if is_mac; then
     brew_install "${BREW:-$1}"
-  elif is_arch; then
-    pacman_install "${PACMAN:-$1}"
   else
     apt-fast-install "${APT:-$1}"
   fi
@@ -408,40 +405,6 @@ add_ppa() {
     apt-fast-install software-properties-common
     sudo add-apt-repository -y ppa:${1}
     sudo apt-get update
-  fi
-}
-
-# Pacman: Install {{{1
-pacman_install() {
-  for pkg in $*; do
-    pacman_install_single $pkg
-  done
-}
-
-pacman_install_single() {
-  bullet "Installing ${1}..."
-
-  if pacman -Q "$1" > /dev/null 2>&1; then
-    info " already installed"
-  else
-    sudo pacman -S --noconfirm ${1}
-  fi
-}
-
-# Yaourt: Install {{{1
-yaourt_install() {
-  for pkg in $*; do
-    yaourt_install_single $pkg
-  done
-}
-
-yaourt_install_single() {
-  bullet "Installing ${1}..."
-
-  if yaourt -Q "$1" > /dev/null 2>&1; then
-    info " already installed"
-  else
-    yaourt -S --noconfirm ${1}
   fi
 }
 

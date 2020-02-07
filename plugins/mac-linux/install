@@ -7,8 +7,10 @@ X11_TOUCHPAD=/etc/X11/xorg.conf.d/30-touchpad.conf
 
 main() {
   install-touchpad-conf
-  pacman_install xorg-xbacklight
-  yaourt_install kbdlight
+  echo "ERROR: not implemented"
+  exit 1
+  # pacman_install xorg-xbacklight
+  # yaourt_install kbdlight
 }
 
 install-touchpad-conf() {

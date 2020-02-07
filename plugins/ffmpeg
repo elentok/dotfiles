@@ -7,12 +7,9 @@ VERSION=3.4.1
 main() {
   header 'ffmpeg'
 
-  if is_arch; then
-    pacman_install ffmpeg
-  elif is_mac; then
+  if is_mac; then
     brew_install ffmpeg
-  else
-  # elif command_missing ffmpeg; then
+  elif command_missing ffmpeg; then
     install_ffmpeg_binaries
   fi
 }
