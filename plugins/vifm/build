@@ -6,7 +6,7 @@ source $DOTF/scripts/build-helper
 prepare_build vifm v0.10.1 "$*"
 
 if is_debian; then
-  apt_install libncursesw5-dev build-essential dh-autoreconf
+  apt-fast-install libncursesw5-dev build-essential dh-autoreconf
 else
   echo 'unsupported operation system'
   exit 1

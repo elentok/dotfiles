@@ -67,7 +67,7 @@ install_utils() {
       adapta-gtk-theme gksu qt5-styleplugins ristretto xfce4-screenshooter \
       xfce4-clipman
   else
-    apt_install pavucontrol xscreensaver \
+    apt-fast-install pavucontrol xscreensaver \
       light-locker gksu lightdm-gtk-greeter-settings \
       xfce4 xfce4-screenshooter ristretto xfce4-clipman
   fi

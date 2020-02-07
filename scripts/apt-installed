@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+dpkg --get-selections  | grep '\<install' | awk '{print $1}' | sed 's/:amd64//'

@@ -232,7 +232,7 @@ install_package() {
   elif is_fedora; then
     yum_install "${YUM:-$1}"
   else
-    apt_install "${APT:-$1}"
+    apt-fast-install "${APT:-$1}"
   fi
 }
 
@@ -399,50 +399,6 @@ go_get() {
   fi
 }
 
-# Apt: Install {{{1
-apt_install() {
-  for pkg in $*; do
-    apt_install_single $pkg
-  done
-}
-
-apt_install_single() {
-  bullet "Installing ${1}..."
-
-  if has_apt_package "$1"; then
-    info " already installed"
-  else
-    if is_termux; then
-      apt install -y ${1}
-    else
-      sudo apt install -y ${1}
-    fi
-
-    rm -f $TMP/apt-cache
-  fi
-}
-
-rm -f $TMP/apt_cache || rm -f $TMP/apt_cache
-
-has_apt_package() {
-  local name="$(echo "$1" | sed 's/+/\\+/g')"
-  apt_cache | grep -E "^$name(:amd64)?$" > /dev/null
-}
-
-apt_cache() {
-  if [ ! -e $TMP/apt_cache ]; then
-    dpkg --get-selections | grep '\<install' | awk '{print $1}' 2>/dev/null > $TMP/apt_cache
-  fi
-  cat $TMP/apt_cache
-}
-
-# Apt: Update {{{1
-apt_update() {
-  bullet "Updating apt..."
-  sudo apt-get update
-  rm $TMP/apt_cache
-}
-
 # Apt: Add Repo {{{1
 add_ppa() {
 
@@ -452,7 +408,7 @@ add_ppa() {
     info " already installed"
   else
     # required for add-apt-repository
-    apt_install software-properties-common
+    apt-fast-install software-properties-common
     sudo add-apt-repository -y ppa:${1}
     sudo apt-get update
   fi

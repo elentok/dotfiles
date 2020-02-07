@@ -6,7 +6,7 @@ source $DOTF/scripts/build-helper
 prepare_build neovim-qt master "$*"
 
 # if is_debian; then
-  # apt_install libtool-bin autoconf automake cmake g++ pkg-config \
+  # apt-fast-install libtool-bin autoconf automake cmake g++ pkg-config \
     # python-pip python-dev unzip
 # fi
 

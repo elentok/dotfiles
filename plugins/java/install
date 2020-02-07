@@ -11,7 +11,7 @@ main() {
   header 'Oracle Java'
 
   add_ppa webupd8team/java
-  apt_install oracle-java8-installer
+  apt-fast-install oracle-java8-installer
 }
 
 main "$@"

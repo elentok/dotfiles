@@ -5,7 +5,7 @@ source $DOTF/framework
 VERSION=5.3.0
 
 if command_missing ulauncher; then
-  apt_install python3-distutils-extra python3-levenshtein python3-websocket
+  apt-fast-install python3-distutils-extra python3-levenshtein python3-websocket
 
   cd $TMP
   curl -L -O https://github.com/Ulauncher/Ulauncher/releases/download/${VERSION}/ulauncher_${VERSION}_all.deb

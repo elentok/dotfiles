@@ -2,6 +2,6 @@
 
 source $DOTF/framework
 
-apt_install snapd
+apt-fast-install snapd
 systemctl enable snapd
 systemctl start snapd

@@ -6,7 +6,7 @@ source $DOTF/scripts/build-helper
 prepare_build tig 2.4.1 "$*"
 
 if is_debian; then
-  apt_install libncursesw5-dev build-essential
+  apt-fast-install libncursesw5-dev build-essential
 elif is_fedora; then
   yum_install ncurses-devel
 fi
