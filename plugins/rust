@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+source "$DOTF/framework"
+
+bullet 'Installing rust...'
+if has_command rustc; then
+  info 'already installed.'
+else
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o /tmp/rustup-init
+  sh /tmp/rustup-init --no-modify-path -y
+fi
+
+if command_missing exa; then
+  cargo install exa
+fi

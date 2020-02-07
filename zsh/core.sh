@@ -230,6 +230,10 @@ fi
 
 export PATH
 
+# Rust {{{1
+if [ -e ~/.cargo/env ]; then
+  source ~/.cargo/env
+fi
 
 # EDITOR {{{1
 
