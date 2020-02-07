@@ -78,14 +78,12 @@ nnoremap coq :cclose<cr>
 
 
 " Go to {{{1
-noremap <c-p> :FZF<cr>
-noremap <Leader>b :Buffers<cr>
+noremap <c-p> :FzfPreviewProjectFiles<cr>
+noremap <Leader>b :FzfPreviewBuffers<cr>
 noremap <Leader>gb :Buffers<cr>
 noremap <Leader>gd :cd <C-R>=expand("%:p:h")<cr>
 noremap <Leader>gg :NERDTreeFocus<cr>
-noremap <Leader>gs :FZFGitStaged<cr>
-noremap <Leader>gu :FZFGitUnstaged<cr>
-noremap <Leader>gM :FZFGitChanged<cr>
+noremap <Leader>gs :FzfPreviewGitStatus<cr>
 noremap <Leader>gm :CocList mru<cr>
 noremap <Leader>gn :NERDTreeFind<cr>
 noremap <Leader>go :call GotoAlternateFile()<cr>
