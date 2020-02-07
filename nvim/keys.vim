@@ -82,7 +82,7 @@ noremap <c-p> :FzfPreviewProjectFiles<cr>
 noremap <Leader>b :FzfPreviewBuffers<cr>
 noremap <Leader>gb :Buffers<cr>
 noremap <Leader>gd :cd <C-R>=expand("%:p:h")<cr>
-noremap <Leader>gg :NERDTreeFocus<cr>
+noremap <Leader>gg :FzfPreviewProjectGrep<cr>
 noremap <Leader>gs :FzfPreviewGitStatus<cr>
 noremap <Leader>gm :CocList mru<cr>
 noremap <Leader>gn :NERDTreeFind<cr>
