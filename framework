@@ -41,16 +41,16 @@ escape_variable() {
 
 
 # Colors {{{1
-export BLACK="\033[30m"
-export GRAY="\033[1;30m"
-export RED="\033[31m"
-export GREEN="\033[32m"
-export YELLOW="\033[33m"
-export BLUE="\033[34m"
-export CYAN="\033[36m"
-export UNDERLINE="\033[4m"
-export RESET="\033[0m"
-export CLEAR_LINE="\r\033[K"
+export BLACK="\\033[30m"
+export GRAY="\\033[1;30m"
+export RED="\\033[31m"
+export GREEN="\\033[32m"
+export YELLOW="\\033[33m"
+export BLUE="\\033[34m"
+export CYAN="\\033[36m"
+export UNDERLINE="\\033[4m"
+export RESET="\\033[0m"
+export CLEAR_LINE="\\r\\033[K"
 
 # Special Characters {{{1
 
@@ -706,7 +706,7 @@ function is-valid-version() {
 
 # Benchmark {{{1
 
-if [[ "$BASH_VERSION" =~ ^3.* ]]; then
+if [[ "${BASH_VERSION:-}" =~ ^3.* ]]; then
   benchmark-start() {
     echo
   }
