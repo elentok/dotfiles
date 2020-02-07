@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+source "$DOTF/framework"
+
+main() {
+  bullet "Installing apt packages $*... "
+  missing=$(find-missing-packages "$@")
+
+  if [ -z "$missing" ]; then
+    info " already installed."
+  else
+    echo
+    bullet "Installing missing packages: $missing...\\n"
+
+    if is_termux; then
+      # shellcheck disable=SC2086
+      apt install $missing
+    else
+      # shellcheck disable=SC2086
+      sudo apt install $missing
+    fi
+  fi
+}
+
+function find-missing-packages() {
+  already_installed="$(mktemp)"
+  find-already-installed "$@" > "$already_installed"
+
+  diff="$(echo "$*" | tr ' ' '\n' | sort | (diff "$already_installed" - || true))"
+
+  if [ -n "$diff" ]; then
+    echo "$diff" | grep '^>' | sed 's/^> //' | xargs
+  fi
+}
+
+function find-already-installed() {
+  regexp="^($(echo "$@" | sed -E 's/\s+/|/g'))$"
+  all-installed-packages | grep -E "$regexp" | sort
+}
+
+function all-installed-packages() {
+  dpkg --get-selections  | grep '\<install' | awk '{print $1}' | sed 's/:amd64//'
+}
+
+main "$@"

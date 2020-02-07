@@ -7,7 +7,7 @@ if command_missing vifm; then
 fi
 
 if is_debian; then
-  apt_install fim ffmpeg
+  apt-fast-install fim ffmpeg
   pip-fast-install visidata
 fi
 

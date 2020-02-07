@@ -20,13 +20,13 @@ main() {
 
 install_requirements() {
   if is_termux; then
-    apt_install clang
+    apt-fast-install clang
   elif is_mac; then
     brew_install python
   elif is_arch; then
     pacman_install python python-pip
   elif is_debian; then
-    apt_install python-dev python-pip python3-dev python3-pip
+    apt-fast-install python-dev python-pip python3-dev python3-pip
   elif is_fedora; then
     yum_install python3-devel gcc
   fi
@@ -36,7 +36,7 @@ install_requirements() {
 
 install_neovim() {
   if is_termux; then
-    apt_install neovim
+    apt-fast-install neovim
     return
   fi
 
@@ -131,7 +131,7 @@ install_cli_tools() {
   if is_arch; then
     pacman_install ctags tidy
   elif is_debian; then
-    apt_install exuberant-ctags shellcheck
+    apt-fast-install exuberant-ctags shellcheck
   elif is_fedora; then
     yum_install ctags
   else

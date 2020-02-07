@@ -8,7 +8,7 @@ main() {
     if is_arch; then
       pacman_install openssh
     else
-      apt_install openssh-server
+      apt-fast-install openssh-server
     fi
   fi
 

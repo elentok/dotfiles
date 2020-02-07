@@ -9,7 +9,7 @@ main() {
   if has_command pandoc; then return; fi
 
   if is_debian; then
-    apt_install pandoc
+    apt-fast-install pandoc
   elif is_arch; then
     pacman_install pandoc
   elif is_mac; then

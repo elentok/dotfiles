@@ -19,7 +19,7 @@ install_git() {
   elif is_arch; then
     pacman_install git
   else
-    apt_install git
+    apt-fast-install git
   fi
 }
 

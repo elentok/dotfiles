@@ -6,7 +6,7 @@ source $DOTF/scripts/build-helper
 prepare_build neovim v0.4.2 "$*"
 
 if is_debian; then
-  apt_install ninja-build gettext libtool libtool-bin autoconf \
+  apt-fast-install ninja-build gettext libtool libtool-bin autoconf \
     automake cmake g++ pkg-config unzip
 elif is_mac; then
   brew_install ninja
@@ -17,7 +17,7 @@ elif is_mac; then
   brew_install gettext
 fi
 
-git clone --depth 1 --branch $VERSION https://github.com/neovim/neovim.git
+git clone --depth 1 --branch "$VERSION" https://github.com/neovim/neovim.git
 
 cd neovim
 make \

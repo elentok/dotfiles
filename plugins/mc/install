@@ -8,7 +8,7 @@ main() {
   if is_mac; then
     brew_install mc
   else
-    apt_install mc
+    apt-fast-install mc
   fi
 
   make_dir ~/.config/mc

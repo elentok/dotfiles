@@ -22,7 +22,7 @@ main() {
     systemctl enable smb.service
     systemctl enable nmb.service
   else
-    apt_install samba
+    apt-fast-install samba
   fi
   init_samba_username
   create_group sambashare

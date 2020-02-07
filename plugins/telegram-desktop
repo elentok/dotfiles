@@ -2,7 +2,7 @@
 
 source $DOTF/framework
 
-apt_install telegram-desktop
+apt-fast-install telegram-desktop
 
 # APPS_DIR="$HOME/.apps"
 # INSTALL_DIR="$APPS_DIR/Telegram"

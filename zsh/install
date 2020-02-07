@@ -44,7 +44,7 @@ function install_requirements() {
   if is_arch; then
     pacman_install fasd
   elif is_debian; then
-    apt_install fasd
+    apt-fast-install fasd
   fi
 
   if is_mac; then
