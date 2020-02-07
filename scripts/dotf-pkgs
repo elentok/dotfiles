@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+
+import json
+import os
+from typing import List
+from dataclasses import dataclass
+
+import IPython
+
+
+@dataclass
+class Package:
+    github_repo: str
+    version: str
+    filenames: List[str]
+
+    def __init__(self, raw):
+        self.github_repo = raw['githubRepo']
+        self.version = raw['version']
+        self.filenames = raw['filenames']
+
+
+@dataclass
+class Config:
+    packages: List[Package]
+
+    def __init__(self, filename):
+        raw = json.load(open(filename))
+        self.packages = list(map(Package, raw['packages']))
+
+
+DOTF = os.path.join(os.path.dirname(__file__), '..')
+CONFIG_FILENAME = os.path.join(DOTF, 'config', 'dotf-pkgs.json')
+CONFIG = Config(CONFIG_FILENAME)
+
+print(CONFIG)
+
+IPython.embed()
