@@ -212,9 +212,9 @@ xnoremap <silent><space> f oT o
 xnoremap <silent>a<space> f oF o
 xnoremap <silent>i<space> t oT o
 " Testing {{{1
-"noremap <Leader>tt :call RunLastSpec()<cr>
+noremap <Leader>tt :TestLast<cr>
 "noremap <Leader>tl :call RunSpecLine()<cr>
-"noremap <Leader>tf :call RunSpecFile()<cr>
+noremap <Leader>tf :TestFile<cr>
 
 " Toggle stuff {{{1
 noremap <Leader>ti :IndentGuidesToggle<cr>

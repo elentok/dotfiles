@@ -47,6 +47,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'cocopon/vaffle.vim'
 Plug 'bogado/file-line'
 Plug 'yuki-ycino/fzf-preview.vim'
+Plug 'janko/vim-test'
 
 if has("nvim-0.5")
   Plug 'neovim/nvim-lsp'
