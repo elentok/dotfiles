@@ -11,7 +11,7 @@ main() {
 
   git submodule update --init --recursive
   update-pip
-  dotf-plugin tools nodejs git zsh nvim ripgrep tig bash tmux vifm bat
+  dotf-plugin tools python nodejs git zsh nvim ripgrep tig bash tmux vifm bat
 
   gui-plugins
 
