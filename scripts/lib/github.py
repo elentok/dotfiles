@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List, Union
+from typing import List, Optional
 
 import requests
 
@@ -37,7 +37,7 @@ def fetch_releases(repo: str) -> List[Release]:
     return list(map(Release, data))
 
 
-def fetch_latest_release(repo: str) -> Union[Release, None]:
+def fetch_latest_release(repo: str) -> Optional[Release]:
     releases = fetch_releases(repo)
     for release in releases:
         if not release.prerelease:

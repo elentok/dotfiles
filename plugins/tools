@@ -2,8 +2,12 @@
 
 source $DOTF/framework
 
-install_package ncdu
-install_package curl
-install_package wget
-install_package htop
-install_package imagemagick
+if is_linux; then
+  apt-fast-install ncdu curl wget htop imagemagick
+elif is_mac; then
+  brew_install ncdu
+  brew_install curl
+  brew_install wget
+  brew_install htop
+  brew_install imagemagick
+fi
