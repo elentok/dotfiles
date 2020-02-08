@@ -2,7 +2,17 @@
   "$schema": "./dotf-pkgs.schema.json",
   "packages": [
     {
-      "githubRepo": "ogham/exa",
+      "name": "neovim",
+      "github_repo": "neovim/neovim",
+      "version": "0.4.3",
+      "filenames": {
+        "linux": "nvim-linux64.tar.gz",
+        "mac": "nvim-macos.tar.gz"
+      }
+    },
+    {
+      "name": "exa",
+      "github_repo": "ogham/exa",
       "version": "0.9.0",
       "filenames": {
         "linux": "exa-linux-x86_64-{version}.zip",
