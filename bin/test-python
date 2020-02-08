@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+python3 -m unittest discover \
+  --start-directory scripts \
+  --pattern '*_test.py' \
+  --verbose

@@ -1,7 +1,10 @@
+import re
 from dataclasses import dataclass
 from typing import List, Optional
 
 import requests
+
+LINUX_RE = re.compile('.*linux.*')
 
 
 @dataclass
@@ -12,6 +15,9 @@ class Asset:
     def __init__(self, raw):
         self.name = raw['name']
         self.browser_download_url = raw['browser_download_url']
+
+    def is_linux(self) -> bool:
+        return LINUX_RE.search(self.name) is not None
 
 
 @dataclass
