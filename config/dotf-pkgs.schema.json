@@ -16,14 +16,24 @@
           "version": {
             "type": "string"
           },
-          "filenames": {
+          "platforms": {
             "type": "object",
             "properties": {
               "linux": {
-                "type": "string"
+                "type": "object",
+                "properties": {
+                  "bin": {
+                    "type": "string"
+                  }
+                }
               },
-              "mac": {
-                "type": "string"
+              "darwin": {
+                "type": "object",
+                "properties": {
+                  "bin": {
+                    "type": "string"
+                  }
+                }
               }
             }
           }
