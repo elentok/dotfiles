@@ -11,7 +11,11 @@
 set -euo pipefail
 
 function main() {
-  BUF=$(cat "$@")
+  # preserve trailing new lines
+  # See https://wiki.bash-hackers.org/syntax/expansion/cmdsubst#examples
+  BUF="$(cat "$@"; echo x)"
+  BUF="${BUF%x}"
+
   validate-input-length
 
   OSC52="\033]52;c;$( printf %s "$BUF" | base64 | tr -d '\r\n' )\a"
@@ -27,7 +31,7 @@ function main() {
   fi
 
   # allow piping "yank-osc52" to other commands
-  echo "$BUF"
+  printf %s "$BUF"
 }
 
 function validate-input-length() {
