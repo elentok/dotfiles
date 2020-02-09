@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 
-python3 -m unittest discover \
-  --start-directory scripts \
-  --pattern '*_test.py' \
-  --verbose
+case "$1" in
+  -w|--watch)
+    command ls scripts/lib/*.py | entr bin/test-python
+    ;;
+  *)
+    python3 -m unittest discover \
+      --start-directory scripts \
+      --pattern '*_test.py' \
+      --verbose
+    ;;
+esac
