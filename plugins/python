@@ -2,4 +2,4 @@
 
 source "$DOTF/framework"
 
-pip-fast-install pylama mypy ipython
+pip-fast-install pylama mypy ipython requests
