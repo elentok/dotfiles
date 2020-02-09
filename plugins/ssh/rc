@@ -6,3 +6,5 @@ if [ -n "$SSH_AUTH_SOCK" ]; then
   echo "SSH: Setting agent to $SSH_AUTH_SOCK"
   $HOME/.dotfiles/scripts/agent set "$SSH_AUTH_SOCK" >> ~/.ssh/ssh.log 2>&1
 fi
+
+term-title "$(hostname)"
