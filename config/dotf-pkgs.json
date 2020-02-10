@@ -7,10 +7,12 @@
       "version": "0.4.3",
       "platforms": {
         "linux": {
-          "bin": "bin/nvim"
+          "bin": "bin/nvim",
+          "asset_regexp": "nvim-linux64.tar.gz"
         },
         "darwin": {
-          "bin": "bin/nvim"
+          "bin": "bin/nvim",
+          "asset_regexp": "nvim-macos.tar.gz"
         }
       }
     },
@@ -20,10 +22,12 @@
       "version": "0.9.0",
       "platforms": {
         "linux": {
-          "bin": "exa-linux-x86_64"
+          "bin": "exa-linux-x86_64",
+          "asset_regexp": "exa-linux-x86_64.*"
         },
         "darwin": {
-          "bin": "exa-macos-x86_64"
+          "bin": "exa-macos-x86_64",
+          "asset_regexp": "exa-macos-x86_64.*"
         }
       }
     }

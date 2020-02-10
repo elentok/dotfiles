@@ -24,6 +24,9 @@
                 "properties": {
                   "bin": {
                     "type": "string"
+                  },
+                  "asset_regexp": {
+                    "type": "string"
                   }
                 }
               },
@@ -31,6 +34,9 @@
                 "type": "object",
                 "properties": {
                   "bin": {
+                    "type": "string"
+                  },
+                  "asset_regexp": {
                     "type": "string"
                   }
                 }

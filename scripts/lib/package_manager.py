@@ -1,11 +1,12 @@
 import json
 import os
+import re
 import sys
 from dataclasses import dataclass
 from os import path
-from typing import List, Mapping
+from typing import Tuple, List, Mapping, Optional
 
-from . import github
+from . import github, download
 
 APPS_ROOT = path.expanduser('~/.apps')
 DOTF = path.join(path.dirname(__file__), '..', '..')
@@ -15,9 +16,11 @@ CONFIG_FILENAME = path.join(DOTF, 'config', 'dotf-pkgs.json')
 @dataclass
 class Platform:
     bin: str
+    asset_regexp: re.Pattern
 
     def __init__(self, raw):
         self.bin = raw['bin']
+        self.asset_regexp = re.compile(raw['asset_regexp'])
 
 
 @dataclass
@@ -55,6 +58,22 @@ class Package:
     def is_release_installed(self, release: github.Release) -> bool:
         return release.tag_name in self.installed_versions()
 
+    def platform(self) -> Platform:
+        return self.platforms[sys.platform]
+
+    def install(self):
+        release = github.fetch_latest_release(self.github_repo)
+        if release is None:
+            raise "Error: could not find release for package %s" % self.name
+
+        asset = release.find_asset(self.platform().asset_regexp)
+        if asset is None:
+            raise "Error: Could not find asset for package %s" % self.name
+
+        root = path.join(APPS_ROOT, 'all', self.name, release.tag_name)
+        asset_filename = path.join(root, asset.name)
+        download.download(asset.browser_download_url, asset_filename)
+
 
 @dataclass
 class Config:
@@ -80,4 +99,4 @@ class PackageManager:
         for pkg in self.config.packages:
             print(pkg.name)
             print(pkg.installed_versions())
-            print(github.fetch_latest_release(pkg.github_repo))
+            print(pkg.install())

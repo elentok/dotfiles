@@ -5,6 +5,7 @@ from typing import List, Optional
 import requests
 
 LINUX_RE = re.compile('.*linux.*')
+MAC_RE = re.compile('.*(mac).*')
 
 
 @dataclass
@@ -34,6 +35,13 @@ class Release:
         self.prerelease = raw['prerelease']
         self.published_at = raw['published_at']
         self.assets = list(map(Asset, raw['assets']))
+
+    def find_asset(self, regexp: re.Pattern) -> Optional[Asset]:
+        for asset in self.assets:
+            if regexp.match(asset.name):
+                return asset
+
+        return None
 
 
 def fetch_releases(repo: str) -> List[Release]:
