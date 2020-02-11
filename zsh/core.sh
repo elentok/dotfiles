@@ -182,6 +182,7 @@ $DOTL/scripts:\
 $HOME/.yarn/bin:\
 $N_PREFIX/bin:\
 $HOME/.fzf/bin:\
+$HOME/.apps/bin:\
 $HOME/bin:\
 $HOME/scripts:\
 $HOME/.local/bin"
