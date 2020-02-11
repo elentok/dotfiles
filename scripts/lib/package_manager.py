@@ -21,32 +21,33 @@ class Platform:
     asset_regexp: re.Pattern
 
     def __init__(self, raw):
-        self.bin = raw['bin']
+        self.bin_source = raw['bin_source']
         self.asset_regexp = re.compile(raw['asset_regexp'])
 
 
-@dataclass
 class Package:
     name: str
     github_repo: str
-    version: str
     platforms: Mapping[str, Platform]
+    bin_target: str
+    strip_components: int
 
     def __init__(self, raw):
         self.name = raw['name']
         self.github_repo = raw['github_repo']
-        self.version = raw['version']
+        self.bin_target = raw['bin_target']
         self.platforms = {k: Platform(v) for k, v in raw['platforms'].items()}
         self.path = path.join(APPS_ALL, self.name)
+        self.strip_components = raw.get('strip_components', 0)
 
-    def bin(self) -> str:
-        return self.platforms[sys.platform].bin
+    def bin_source(self) -> str:
+        return self.platforms[sys.platform].bin_source
 
-    def installed_bin_path(self) -> str:
-        return path.join(APPS_BIN, path.basename(self.bin()))
+    def full_bin_target(self) -> str:
+        return path.join(APPS_BIN, self.bin_target)
 
     def is_installed(self) -> bool:
-        return path.exists(self.installed_bin_path())
+        return path.exists(self.full_bin_target())
 
     def installed_versions(self) -> List[str]:
         if not path.exists(self.path):
@@ -79,18 +80,18 @@ class Package:
             print("  * downloading...")
             helpers.download(asset.browser_download_url, asset_filename)
         print("  * extracting...")
-        helpers.extract(asset_filename)
+        helpers.extract(asset_filename, self.strip_components)
         print("  * linking...")
         self.link(release_dirname)
         print("  * done.")
 
     def link(self, release_dirname: str):
         helpers.mkdirp(APPS_BIN)
-        bin_source = path.join(release_dirname, self.platform().bin)
-        bin_target = path.join(APPS_BIN, path.basename(bin_source))
-        if path.lexists(bin_target):
-            os.remove(bin_target)
-        os.symlink(bin_source, bin_target)
+        bin_source = path.join(release_dirname, self.platform().bin_source)
+        full_bin_target = self.full_bin_target()
+        if path.lexists(full_bin_target):
+            os.remove(full_bin_target)
+        os.symlink(bin_source, full_bin_target)
 
 
 @dataclass

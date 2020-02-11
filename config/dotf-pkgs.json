@@ -4,14 +4,14 @@
     {
       "name": "neovim",
       "github_repo": "neovim/neovim",
-      "version": "0.4.3",
+      "bin_target": "nvim",
       "platforms": {
         "linux": {
-          "bin": "nvim-linux64/bin/nvim",
+          "bin_source": "nvim-linux64/bin/nvim",
           "asset_regexp": "nvim-linux64.tar.gz"
         },
         "darwin": {
-          "bin": "nvim-macos/bin/nvim",
+          "bin_source": "nvim-macos/bin/nvim",
           "asset_regexp": "nvim-macos.tar.gz"
         }
       }
@@ -19,15 +19,31 @@
     {
       "name": "exa",
       "github_repo": "ogham/exa",
-      "version": "0.9.0",
+      "bin_target": "exa",
       "platforms": {
         "linux": {
-          "bin": "exa-linux-x86_64",
+          "bin_source": "exa-linux-x86_64",
           "asset_regexp": "exa-linux-x86_64.*"
         },
         "darwin": {
-          "bin": "exa-macos-x86_64",
+          "bin_source": "exa-macos-x86_64",
           "asset_regexp": "exa-macos-x86_64.*"
+        }
+      }
+    },
+    {
+      "name": "ripgrep",
+      "github_repo": "BurntSushi/ripgrep",
+      "bin_target": "rg",
+      "strip_components": 1,
+      "platforms": {
+        "linux": {
+          "bin_source": "rg",
+          "asset_regexp": "ripgrep-.*-x86_64-unknown-linux.*"
+        },
+        "mac": {
+          "bin_source": "rg",
+          "asset_regexp": "ripgrep-.*-x86_64-apple-darwin.*"
         }
       }
     }

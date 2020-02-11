@@ -13,8 +13,11 @@
           "github_repo": {
             "type": "string"
           },
-          "version": {
+          "bin_target": {
             "type": "string"
+          },
+          "strip_components": {
+            "type": "number"
           },
           "platforms": {
             "type": "object",
@@ -22,7 +25,7 @@
               "linux": {
                 "type": "object",
                 "properties": {
-                  "bin": {
+                  "bin_source": {
                     "type": "string"
                   },
                   "asset_regexp": {
@@ -33,7 +36,7 @@
               "darwin": {
                 "type": "object",
                 "properties": {
-                  "bin": {
+                  "bin_source": {
                     "type": "string"
                   },
                   "asset_regexp": {
