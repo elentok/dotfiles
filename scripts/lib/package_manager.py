@@ -4,7 +4,7 @@ import re
 import sys
 from dataclasses import dataclass
 from os import path
-from typing import List, Mapping
+from typing import List, Mapping, Optional
 
 from . import github, helpers
 
@@ -17,11 +17,11 @@ CONFIG_FILENAME = path.join(DOTF, 'config', 'dotf-pkgs.json')
 
 @dataclass
 class Platform:
-    bin: str
+    bin_source: Optional[str]
     asset_regexp: re.Pattern
 
     def __init__(self, raw):
-        self.bin_source = raw['bin_source']
+        self.bin_source = raw.get('bin_source')
         self.asset_regexp = re.compile(raw['asset_regexp'])
 
 
@@ -36,14 +36,14 @@ class Package:
     def __init__(self, raw):
         self.name = raw['name']
         self.github_repo = raw['github_repo']
-        self.bin_target = raw['bin_target']
+        self.bin_target = raw.get('bin_target', self.name)
         self.platforms = {k: Platform(v) for k, v in raw['platforms'].items()}
         self.path = path.join(APPS_ALL, self.name)
         self.strip_components = raw.get('strip_components', 0)
         self.prerelease = raw.get('prerelease', False)
 
     def bin_source(self) -> str:
-        return self.platforms[sys.platform].bin_source
+        return self.platforms[sys.platform].bin_source or self.bin_target
 
     def full_bin_target(self) -> str:
         return path.join(APPS_BIN, self.bin_target)
