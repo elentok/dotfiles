@@ -46,6 +46,22 @@
           "asset_regexp": "ripgrep-.*-x86_64-apple-darwin.*"
         }
       }
+    },
+    {
+      "name": "gron",
+      "github_repo": "tomnomnom/gron",
+      "bin_target": "gron",
+      "prerelease": true,
+      "platforms": {
+        "linux": {
+          "bin_source": "gron",
+          "asset_regexp": "gron-linux-amd64.*"
+        },
+        "mac": {
+          "bin_source": "gron",
+          "asset_regexp": "gron-darwin-amd64.*"
+        }
+      }
     }
   ]
 }
