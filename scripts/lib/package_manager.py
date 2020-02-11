@@ -31,6 +31,7 @@ class Package:
     platforms: Mapping[str, Platform]
     bin_target: str
     strip_components: int
+    prerelease: bool
 
     def __init__(self, raw):
         self.name = raw['name']
@@ -39,6 +40,7 @@ class Package:
         self.platforms = {k: Platform(v) for k, v in raw['platforms'].items()}
         self.path = path.join(APPS_ALL, self.name)
         self.strip_components = raw.get('strip_components', 0)
+        self.prerelease = raw.get('prerelease', False)
 
     def bin_source(self) -> str:
         return self.platforms[sys.platform].bin_source
@@ -66,13 +68,14 @@ class Package:
     def install(self):
         print("Installing %s..." % self.name)
         print('  * fetching latest release...')
-        release = github.fetch_latest_release(self.github_repo)
+        release = github.fetch_latest_release(
+            self.github_repo, self.prerelease)
         if release is None:
-            raise "Error: could not find release for package %s" % self.name
+            raise Exception(f"Could not find release for package {self.name}")
 
         asset = release.find_asset(self.platform().asset_regexp)
         if asset is None:
-            raise "Error: Could not find asset for package %s" % self.name
+            raise Exception(f"Could not find asset for package {self.name}")
 
         release_dirname = path.join(APPS_ALL, self.name, release.tag_name)
         asset_filename = path.join(release_dirname, asset.name)

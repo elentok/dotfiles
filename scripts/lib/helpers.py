@@ -30,7 +30,7 @@ def extract(filename: str, strip_components: int = 0):
 
 
 def _extract_command(filename: str, strip_components: int) -> str:
-    if filename.endswith('.tar.gz'):
+    if filename.endswith('.tar.gz') or filename.endswith('.tgz'):
         return f'tar --strip-components {strip_components} -xzf {filename}'
 
     if filename.endswith('.zip'):

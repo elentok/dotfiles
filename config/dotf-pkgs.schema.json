@@ -16,6 +16,9 @@
           "bin_target": {
             "type": "string"
           },
+          "prerelease": {
+            "type": "boolean"
+          },
           "strip_components": {
             "type": "number"
           },
