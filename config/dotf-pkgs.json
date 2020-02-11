@@ -7,11 +7,11 @@
       "version": "0.4.3",
       "platforms": {
         "linux": {
-          "bin": "bin/nvim",
+          "bin": "nvim-linux64/bin/nvim",
           "asset_regexp": "nvim-linux64.tar.gz"
         },
         "darwin": {
-          "bin": "bin/nvim",
+          "bin": "nvim-macos/bin/nvim",
           "asset_regexp": "nvim-macos.tar.gz"
         }
       }

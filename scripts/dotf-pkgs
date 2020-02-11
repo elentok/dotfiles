@@ -9,9 +9,11 @@ def main():
     manager = package_manager.PackageManager()
 
     command = sys.argv[1] if len(sys.argv) > 1 else 'list'
-    if command == 'list':
+    if command in ['l', 'list']:
         manager.list()
-    elif command == 'update':
+    elif command in ['i', 'install']:
+        manager.install()
+    elif command in ['u', 'update']:
         manager.update()
     else:
         print('Usage: dotf-pkgs <list|update>')
