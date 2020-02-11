@@ -4,7 +4,7 @@ import re
 import sys
 from dataclasses import dataclass
 from os import path
-from typing import Tuple, List, Mapping, Optional
+from typing import List, Mapping
 
 from . import github, helpers
 
