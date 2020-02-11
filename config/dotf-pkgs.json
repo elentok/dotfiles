@@ -2,16 +2,16 @@
   "$schema": "./dotf-pkgs.schema.json",
   "packages": [
     {
-      "name": "neovim",
+      "name": "nvim",
       "github_repo": "neovim/neovim",
-      "bin_target": "nvim",
+      "strip_components": 1,
       "platforms": {
         "linux": {
-          "bin_source": "nvim-linux64/bin/nvim",
+          "bin_source": "bin/nvim",
           "asset_regexp": "nvim-linux64.tar.gz"
         },
         "darwin": {
-          "bin_source": "nvim-macos/bin/nvim",
+          "bin_source": "bin/nvim",
           "asset_regexp": "nvim-macos.tar.gz"
         }
       }
