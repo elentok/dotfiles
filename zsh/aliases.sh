@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # vim: foldmethod=marker
 
 if is_mac; then
@@ -9,17 +10,9 @@ fi
 # All Aliases {{{1
 alias ..='cd ..'
 alias ba='bt add-magnet "$(pbp)"'
-alias bdr='bin/docker/run'
-alias bdb='bin/docker/build'
 alias be='bundle exec'
 alias bl='tr ":" "\n"'
 alias bytes='stat --format=%s'
-alias c1='awk "{ print \$1 }"'
-alias c2='awk "{ print \$2 }"'
-alias c3='awk "{ print \$3 }"'
-alias c4='awk "{ print \$4 }"'
-alias c5='awk "{ print \$5 }"'
-alias c6='awk "{ print \$6 }"'
 alias c='clip copy'
 alias C=calc
 alias cl=clear
@@ -42,11 +35,9 @@ alias gdestroy='git destroy `git all-branches | fzf`'
 alias gsp='gsutil acl ch -u AllUsers:R'
 alias hex='od -xcb'
 alias hh='history'
-alias most-used-commands="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
 alias k='less $DOTF/docs/keys.md'
 alias kb='xkeyboard'
 alias ke='vim $DOTF/docs/keys.md'
-alias kk='kill `ps aux | fzf | awk ''{print $2 }''`'
 alias ls='command ls --color=always -XFhs --group-directories-first --time-style=long-iso'
 alias ll='exa --group-directories-first -F --long --grid --time-style=long-iso --git'
 alias lss='command ls -1 -s'
@@ -63,13 +54,10 @@ alias qless='less --chop-long-lines --RAW-CONTROL-CHARS --quit-if-one-screen --n
 alias rr='ranger'
 alias rgf='noglob rg --files -g'
 alias ssh='TERM=$SSH_TERM ssh'
-alias summ='awk "{ s+=\$1 } END { print s }"'
 alias sub='subliminal download -l en -s'
 alias se='sudoedit'
 alias tm='DISPLAY=${DISPLAY:-:0} tmux -u'
 alias tma='tm a'
-alias tot='awk "{ s+=\$1 } END { printf(\"%''d\n\", s) }"'
-alias total='awk "{ s+=\$1 } END { print s }"'
 alias treee='tree -I "node_modules|dist|build"'
 alias ts='tig status'
 alias vz='file="$(edit-zsh-dotfile)" && source $file'
@@ -78,6 +66,30 @@ alias ports='sudo echo && (sudo lsof -i -n -P | fzf --header-lines=1)'
 
 alias ew='whichx $EDITOR'
 alias cw='whichx cat'
+
+# Awk {{{1
+function col1() { awk '{ print $1 }'; }
+function col2() { awk '{ print $2 }'; }
+function col3() { awk '{ print $3 }'; }
+function col4() { awk '{ print $4 }'; }
+function col5() { awk '{ print $5 }'; }
+function col6() { awk '{ print $6 }'; }
+
+function total() {
+  awk '{ s+=$1 } END { print s }'
+}
+
+# Misc Functions {{{1
+function most-used-commands() {
+  history 0 | awk '{print $2}' | sort | uniq -c | sort -n -r | head
+}
+
+function kk() {
+  pid="$(ps aux | fzf | awk '{print $2 }')"
+  if [ -n "$pid" ]; then
+    kill "$@" "$pid"
+  fi
+}
 
 # Neovim {{{1
 if has_command nvim; then
@@ -110,7 +122,7 @@ alias rm='rm -i'
 # iOS Simulator {{{1
 alias iosroot='cd `ios root`'
 function iosapp() {
-  cd "$(ios app-root "$*")"
+  cd "$(ios app-root "$*")" || return 1
 }
 
 # Mac/Linux {{{1
@@ -142,7 +154,7 @@ dr() {
   # calling "print -s" adds the command to zsh history
 
   if [ $# -gt 0 ]; then
-    docker-compose run $@
+    docker-compose run "$@"
     return $?
   fi
 
@@ -151,7 +163,7 @@ dr() {
   if [ -n "$cmd" ]; then
     print -s "docker-compose run $cmd" && \
       echo "> docker-compose run $cmd" && \
-      docker-compose run $cmd
+      docker-compose run "$cmd"
   fi
 }
 
@@ -159,7 +171,7 @@ yr() {
   # calling "print -s" adds the command to zsh history
 
   if [ $# -gt 0 ]; then
-    yarn run $@
+    yarn run "$@"
     exit $?
   fi
 
@@ -168,7 +180,7 @@ yr() {
   if [ -n "$cmd" ]; then
     print -s "yarn run $cmd" && \
       echo "> yarn run $cmd" && \
-      yarn run $cmd
+      yarn run "$cmd"
   fi
 }
 
@@ -176,7 +188,7 @@ npr() {
   # calling "print -s" adds the command to zsh history
 
   if [ $# -gt 0 ]; then
-    npm run $@
+    npm run "$@"
     exit $?
   fi
 
@@ -185,7 +197,7 @@ npr() {
   if [ -n "$cmd" ]; then
     print -s "npm run $cmd" && \
       echo "> npm run $cmd" && \
-      npm run $cmd
+      npm run "$cmd"
   fi
 }
 
@@ -194,38 +206,29 @@ ss() {
   if [ -n "$server" ]; then
     echo "Connecting to $server..."
     print -s "ssh $server"
-    ssh $server
-  fi
-}
-
-capd() {
-  stage="$(cd config/capistrano/stages && /bin/ls -1 | sed 's/.rb//' | fzf --exit-0)"
-  if [ -n "$stage" ]; then
-    echo "Deploying to $stage..."
-    print -s "be cap $stage deploy"
-    bundle exec cap $stage deploy
+    ssh "$server"
   fi
 }
 
 de() {
-  local file="$(cd $DOTF && ag -l --ignore 'zsh/vendor' | fzf --exit-0)"
+  file="$(cd "$DOTF" && rg -l --ignore 'zsh/vendor' | fzf --exit-0)"
   if [ -n "$file" ]; then
     print -s "$EDITOR $file"
-    $EDITOR $DOTF/$file
+    $EDITOR "$DOTF/$file"
   fi
 }
 
 cdd() {
-  local dir="$(dff | fzf --ansi --exit-0 | awk '{print $6}')"
+  dir="$(dff | fzf --ansi --exit-0 | awk '{print $6}')"
   if [ -n "$dir" ]; then
-    cd "$dir"
+    cd "$dir" || return 1
   fi
 }
 
 vp() {
-  local plugin="$(cd $HOME/.local/share/nvim-plugins && /bin/ls -1 | fzf --ansi --exit-0)"
+  plugin="$(cd "$HOME/.local/share/nvim-plugins" && /bin/ls -1 | fzf --ansi --exit-0)"
   if [ -n "$plugin" ]; then
-    cd "$HOME/.local/share/nvim-plugins/$plugin"
+    cd "$HOME/.local/share/nvim-plugins/$plugin" || return 1
   fi
 }
 
