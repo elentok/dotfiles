@@ -26,6 +26,7 @@ class Platform:
 
 
 class Package:
+    # fields from dotf-pkgs.json:
     name: str
     github_repo: str
     platforms: Mapping[str, Platform]
@@ -33,6 +34,11 @@ class Package:
     strip_components: int
     prerelease: bool
     extract: bool
+
+    # calculated fields:
+    bin_source: str
+    full_bin_target: str
+    platform: Platform
 
     def __init__(self, raw):
         self.name = raw['name']
@@ -44,14 +50,12 @@ class Package:
         self.prerelease = raw.get('prerelease', False)
         self.extract = raw.get('extract', True)
 
-    def bin_source(self) -> str:
-        return self.platforms[sys.platform].bin_source or self.bin_target
-
-    def full_bin_target(self) -> str:
-        return path.join(APPS_BIN, self.bin_target)
+        self.bin_source = self.platforms[sys.platform].bin_source or self.bin_target
+        self.full_bin_target = path.join(APPS_BIN, self.bin_target)
+        self.platform = self.platforms[sys.platform]
 
     def is_installed(self) -> bool:
-        return path.exists(self.full_bin_target())
+        return path.exists(self.full_bin_target)
 
     def installed_versions(self) -> List[str]:
         if not path.exists(self.path):
@@ -64,9 +68,6 @@ class Package:
     def is_release_installed(self, release: github.Release) -> bool:
         return release.tag_name in self.installed_versions()
 
-    def platform(self) -> Platform:
-        return self.platforms[sys.platform]
-
     def install(self):
         print("Installing %s..." % self.name)
         print('  * fetching latest release...')
@@ -75,7 +76,7 @@ class Package:
         if release is None:
             raise Exception(f"Could not find release for package {self.name}")
 
-        asset = release.find_asset(self.platform().asset_regexp)
+        asset = release.find_asset(self.platform.asset_regexp)
         if asset is None:
             raise Exception(f"Could not find asset for package {self.name}")
 
@@ -95,11 +96,10 @@ class Package:
 
     def link(self, release_dirname: str):
         helpers.mkdirp(APPS_BIN)
-        bin_source = path.join(release_dirname, self.bin_source())
-        full_bin_target = self.full_bin_target()
-        if path.lexists(full_bin_target):
-            os.remove(full_bin_target)
-        os.symlink(bin_source, full_bin_target)
+        full_bin_source = path.join(release_dirname, self.bin_source)
+        if path.lexists(self.full_bin_target):
+            os.remove(self.full_bin_target)
+        os.symlink(full_bin_source, self.full_bin_target)
 
 
 @dataclass
