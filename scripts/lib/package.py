@@ -23,7 +23,6 @@ class Platform:
 
 
 class Package:
-    # fields from dotf-pkgs.json:
     name: str
     github_repo: str
     platforms: Mapping[str, Platform]
@@ -31,11 +30,9 @@ class Package:
     strip_components: int
     prerelease: bool
     extract: bool
-
-    # calculated fields:
-    bin_source: str
-    full_bin_target: str
     platform: Platform
+
+    full_bin_target: str
 
     def __init__(self, raw):
         self.name = raw['name']
@@ -46,13 +43,8 @@ class Package:
         self.strip_components = raw.get('strip_components', 0)
         self.prerelease = raw.get('prerelease', False)
         self.extract = raw.get('extract', True)
-
-        self.bin_source = self.platforms[sys.platform].bin_source or self.bin_target
-        self.full_bin_target = path.join(APPS_BIN, self.bin_target)
         self.platform = self.platforms[sys.platform]
-
-    def is_installed(self) -> bool:
-        return path.exists(self.full_bin_target)
+        self.full_bin_target = path.join(APPS_BIN, self.bin_target)
 
     def installed_versions(self) -> List[str]:
         if not path.exists(self.path):
@@ -65,35 +57,85 @@ class Package:
     def is_release_installed(self, release: github.Release) -> bool:
         return release.tag_name in self.installed_versions()
 
+    def is_installed(self) -> bool:
+        return path.exists(self.full_bin_target)
+
+
+class Installer:
+    package: Package
+
+    def __init__(self, package: Package):
+        self.package = package
+
     def install(self):
-        print("Installing %s..." % self.name)
+        print(f'Installing {self.package.name}...')
+
+        asset = self.fetch_latest_asset()
+        AssetInstaller(self.package, asset).install()
+
+    def fetch_latest_asset(self) -> github.Asset:
+        pkg = self.package
+
         print('  * fetching latest release...')
-        release = github.fetch_latest_release(
-            self.github_repo, self.prerelease)
+        release = github.fetch_latest_release(pkg.github_repo, pkg.prerelease)
         if release is None:
-            raise Exception(f"Could not find release for package {self.name}")
+            raise Exception(f"Could not find release for package {pkg.name}")
 
-        asset = release.find_asset(self.platform.asset_regexp)
+        asset = release.find_asset(pkg.platform.asset_regexp)
         if asset is None:
-            raise Exception(f"Could not find asset for package {self.name}")
+            raise Exception(f"Could not find asset for package {pkg.name}")
 
-        release_dirname = path.join(APPS_ALL, self.name, release.tag_name)
-        asset_filename = path.join(release_dirname, f'{self.name}{asset.ext}')
-        if not path.exists(asset_filename):
-            print("  * downloading...")
-            helpers.download(asset.browser_download_url, asset_filename)
-        if self.extract:
-            print("  * extracting...")
-            helpers.extract(asset_filename, self.strip_components)
+        return asset
+
+
+class AssetInstaller:
+    package: Package
+    asset: github.Asset
+    release_dirname: str
+    asset_filename: str
+    bin_source: str
+
+    def __init__(self, package: Package, asset: github.Asset):
+        self.package = package
+        self.asset = asset
+        self.release_dirname = path.join(
+            APPS_ALL, package.name, asset.release.tag_name)
+        self.asset_filename = path.join(
+            self.release_dirname, f'{package.name}{asset.ext}')
+        self.bin_source = package.platform.bin_source or package.bin_target
+
+    def install(self):
+        self.download()
+
+        if self.package.extract:
+            self.extract()
         else:
-            os.system(f'chmod u+x {asset_filename}')
-        print("  * linking...")
-        self.link(release_dirname)
+            self.make_executable()
+
+        self.link()
+
         print("  * done.")
 
-    def link(self, release_dirname: str):
+    def download(self):
+        if path.exists(self.asset_filename):
+            return
+
+        print("  * downloading...")
+        helpers.download(self.asset.browser_download_url, self.asset_filename)
+
+    def extract(self):
+        print("  * extracting...")
+        helpers.extract(self.asset_filename, self.package.strip_components)
+
+    def make_executable(self):
+        print('  * making {self.asset_filename} executable ...')
+        os.system(f'chmod u+x {self.asset_filename}')
+
+    def link(self):
+        print("  * linking...")
+
         helpers.mkdirp(APPS_BIN)
-        full_bin_source = path.join(release_dirname, self.bin_source)
-        if path.lexists(self.full_bin_target):
-            os.remove(self.full_bin_target)
-        os.symlink(full_bin_source, self.full_bin_target)
+        full_bin_source = path.join(self.release_dirname, self.bin_source)
+        if path.lexists(self.package.full_bin_target):
+            os.remove(self.package.full_bin_target)
+        os.symlink(full_bin_source, self.package.full_bin_target)
