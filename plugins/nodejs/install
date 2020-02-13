@@ -6,7 +6,7 @@ source `dirname $0`/../../framework
 
 main() {
   if is_termux; then
-    apt-fast-install nodejs
+    apt-fast-install nodejs-lts
   else
     git_clone https://github.com/tj/n $N_PREFIX
     install_node
@@ -22,8 +22,8 @@ install_node() {
 }
 
 install_packages() {
-  npm-fast-install yarn json live-server eslint typescript tslint prettier \
-    semver cloc fx
+  npm-fast-install yarn json live-server eslint typescript prettier \
+    semver cloc fx bash-language-server
 
   if ! is_termux; then
     npm-fast-install gtop
