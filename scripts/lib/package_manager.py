@@ -32,6 +32,7 @@ class Package:
     bin_target: str
     strip_components: int
     prerelease: bool
+    extract: bool
 
     def __init__(self, raw):
         self.name = raw['name']
@@ -41,6 +42,7 @@ class Package:
         self.path = path.join(APPS_ALL, self.name)
         self.strip_components = raw.get('strip_components', 0)
         self.prerelease = raw.get('prerelease', False)
+        self.extract = raw.get('extract', True)
 
     def bin_source(self) -> str:
         return self.platforms[sys.platform].bin_source or self.bin_target
@@ -78,19 +80,22 @@ class Package:
             raise Exception(f"Could not find asset for package {self.name}")
 
         release_dirname = path.join(APPS_ALL, self.name, release.tag_name)
-        asset_filename = path.join(release_dirname, asset.name)
+        asset_filename = path.join(release_dirname, f'{self.name}{asset.ext}')
         if not path.exists(asset_filename):
             print("  * downloading...")
             helpers.download(asset.browser_download_url, asset_filename)
-        print("  * extracting...")
-        helpers.extract(asset_filename, self.strip_components)
+        if self.extract:
+            print("  * extracting...")
+            helpers.extract(asset_filename, self.strip_components)
+        else:
+            os.system(f'chmod u+x {asset_filename}')
         print("  * linking...")
         self.link(release_dirname)
         print("  * done.")
 
     def link(self, release_dirname: str):
         helpers.mkdirp(APPS_BIN)
-        bin_source = path.join(release_dirname, self.platform().bin_source)
+        bin_source = path.join(release_dirname, self.bin_source())
         full_bin_target = self.full_bin_target()
         if path.lexists(full_bin_target):
             os.remove(full_bin_target)
