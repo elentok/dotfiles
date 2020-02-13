@@ -98,11 +98,11 @@ if has_command nvim; then
     alias vv='nvr -O'
 
     function nvim-set-workdir() {
-      nvr --remote-send "<c-\><c-n>:call TermSetWorkDir('$PWD')<cr>i"
+      nvr --remote-send "<c-\\><c-n>:call TermSetWorkDir('$PWD')<cr>i"
     }
 
     function cd() {
-      builtin cd "$@"
+      builtin cd "$@" || return 1
       nvim-set-workdir
     }
   else
