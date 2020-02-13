@@ -10,11 +10,14 @@ MAC_RE = re.compile('.*(mac).*')
 
 @dataclass
 class Asset:
+    release: 'Release'
+
     name: str
     browser_download_url: str
     ext: Optional[str]
 
-    def __init__(self, raw):
+    def __init__(self, release: 'Release', raw):
+        self.release = release
         self.name = raw['name']
         self.browser_download_url = raw['browser_download_url']
         self.ext = identify_extension(self.name)
