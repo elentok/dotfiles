@@ -2,13 +2,13 @@
 
 set -euo pipefail
 
-source `dirname $0`/../../framework
+source "$(dirname "$0")/../../framework"
 
 main() {
   if is_termux; then
     apt-fast-install nodejs-lts
   else
-    git_clone https://github.com/tj/n $N_PREFIX
+    git_clone https://github.com/tj/n "$N_PREFIX"
     install_node
   fi
 
