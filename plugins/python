@@ -2,5 +2,10 @@
 
 source "$DOTF/framework"
 
-apt-fast-install entr
+if is_debian; then
+  if ! is_termux; then
+    apt-fast-install entr
+  fi
+fi
+
 pip-fast-install pylama mypy ipython requests
