@@ -56,6 +56,19 @@
           "asset_regexp": "gron-darwin-amd64.*"
         }
       }
+    },
+    {
+      "name": "shfmt",
+      "github_repo": "mvdan/sh",
+      "extract": false,
+      "platforms": {
+        "linux": {
+          "asset_regexp": "shfmt_.*_linux_amd64.*"
+        },
+        "mac": {
+          "asset_regexp": "shfmt_.*_darwin_amd64.*"
+        }
+      }
     }
   ]
 }

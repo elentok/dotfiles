@@ -12,13 +12,28 @@ MAC_RE = re.compile('.*(mac).*')
 class Asset:
     name: str
     browser_download_url: str
+    ext: Optional[str]
 
     def __init__(self, raw):
         self.name = raw['name']
         self.browser_download_url = raw['browser_download_url']
+        self.ext = identify_extension(self.name)
 
     def is_linux(self) -> bool:
         return LINUX_RE.search(self.name) is not None
+
+
+def identify_extension(filename: str) -> str:
+    if filename.endswith('.tar.gz'):
+        return '.tar.gz'
+
+    if filename.endswith('.tgz'):
+        return '.tgz'
+
+    if filename.endswith('.zip'):
+        return '.zip'
+
+    return ''
 
 
 @dataclass
