@@ -3,7 +3,8 @@ from dataclasses import dataclass
 from os import path
 from typing import List
 
-from . import package
+from .package import Package
+from .package_installer import PackageInstaller
 
 DOTF = path.join(path.dirname(__file__), '..', '..')
 CONFIG_FILENAME = path.join(DOTF, 'config', 'dotf-pkgs.json')
@@ -11,11 +12,11 @@ CONFIG_FILENAME = path.join(DOTF, 'config', 'dotf-pkgs.json')
 
 @dataclass
 class Config:
-    packages: List[package.Package]
+    packages: List[Package]
 
     def __init__(self, filename):
         raw = json.load(open(filename))
-        self.packages = list(map(package.Package, raw['packages']))
+        self.packages = list(map(Package, raw['packages']))
 
 
 class PackageManager:
@@ -31,13 +32,8 @@ class PackageManager:
 
     def update(self):
         for pkg in self.config.packages:
-            print(pkg.name)
-            print(pkg.installed_versions())
-            print(pkg.install())
+            PackageInstaller(pkg).update()
 
     def install(self):
         for pkg in self.config.packages:
-            if pkg.is_installed():
-                print(f'* {pkg.name} is already installed')
-            else:
-                print(pkg.install())
+            PackageInstaller(pkg).install()
