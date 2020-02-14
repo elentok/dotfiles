@@ -52,7 +52,7 @@ class Release:
         self.name = raw['name']
         self.prerelease = raw['prerelease']
         self.published_at = raw['published_at']
-        self.assets = list(map(Asset, raw['assets']))
+        self.assets = list(map(lambda a: Asset(self, a), raw['assets']))
 
     def find_asset(self, regexp: re.Pattern) -> Optional[Asset]:
         for asset in self.assets:
