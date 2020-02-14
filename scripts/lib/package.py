@@ -60,6 +60,9 @@ class Package:
     def is_installed(self) -> bool:
         return path.exists(self.full_bin_target)
 
+    def install(self):
+        Installer(self).install()
+
 
 class Installer:
     package: Package
