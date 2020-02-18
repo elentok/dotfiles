@@ -11,7 +11,8 @@
             "type": "string"
           },
           "github_repo": {
-            "type": "string"
+            "type": "string",
+            "description": "Github repository ('{username}/{repo-name}')"
           },
           "bin_target": {
             "type": "string"
