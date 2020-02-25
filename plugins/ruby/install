@@ -2,7 +2,7 @@
 
 source $DOTF/framework
 
-RUBY_VERSION='2.5.1'
+RUBY_VERSION='2.5.0'
 
 main() {
   install_requirements
@@ -16,7 +16,8 @@ install_requirements() {
   if is_debian; then
     # As instructed in https://github.com/rbenv/ruby-build/wiki
     apt-fast-install autoconf bison build-essential libssl-dev libyaml-dev \
-      libreadline-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev
+      libreadline-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev \
+      ruby-dev liblzma-dev
     # libgdbm5 libreadline6-dev 
   fi
 }
