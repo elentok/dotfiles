@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # vim: foldmethod=marker
 
 if [ -e ~/.config/machine ]; then
@@ -106,6 +107,9 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules
 # SSH {{{1
 export SSH_AUTH_SOCK="$HOME/.ssh/active-agent"
 agent setup > /dev/null
+
+# Terminal Title {{{1
+term-title
 
 # GCloud SDK {{{1
 

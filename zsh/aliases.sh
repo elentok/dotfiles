@@ -53,7 +53,6 @@ alias pth='echo $PATH | tr ":" "\n"'
 alias qless='less --chop-long-lines --RAW-CONTROL-CHARS --quit-if-one-screen --no-init'
 alias rr='ranger'
 alias rgf='noglob rg --files -g'
-alias ssh='TERM=$SSH_TERM ssh'
 alias sub='subliminal download -l en -s'
 alias se='sudoedit'
 alias tm='DISPLAY=${DISPLAY:-:0} tmux -u'
@@ -66,6 +65,15 @@ alias ports='sudo echo && (sudo lsof -i -n -P | fzf --header-lines=1)'
 
 alias ew='whichx $EDITOR'
 alias cw='whichx cat'
+
+# SSH {{{1
+function ssh() {
+  term-title "SSH $*"
+  TERM=$SSH_TERM command ssh "$@"
+  exitcode=$?
+  term-title
+  return $exitcode
+}
 
 # Awk {{{1
 function col1() { awk '{ print $1 }'; }
