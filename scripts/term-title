@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
-termcode="\033]0;$*\007"
-printf "$termcode"
+title="${*:-$(pretty-hostname)}"
+
+termcode="\033]0;${title}\007"
+echo -ne "$termcode"
 
 if [ -n "${TMUX:-}" ]; then
   tty=$(tmux list-panes -F "#{pane_active} #{pane_tty}" | awk '$1=="1" { print $2 }')
-  printf "\033Ptmux;\033$termcode\033\\" > $tty
+  echo -ne "\033Ptmux;\033$termcode\033\\" > "$tty"
 fi
