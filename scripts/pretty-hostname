@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 hostname="$(hostname)"
 
-if [ -e "$DOTL/pretty-hostnames" ]; then
-  grep "^${hostname}:" "$DOTL/pretty-hostnames" | cut -d: -f2
-else
-  echo "$hostname"
-fi
+grep "^${hostname}:" "$DOTL/pretty-hostnames" \
+  | cut -d: -f2 \
+  || echo "$hostname"
