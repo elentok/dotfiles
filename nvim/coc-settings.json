@@ -2,6 +2,7 @@
   "coc.preferences.formatOnType": false,
   "coc.preferences.formatOnSaveFiletypes": [
     "typescript",
+    "typescriptreact",
     "javascript",
     "css",
     "scss",
