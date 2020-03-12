@@ -4,19 +4,42 @@ import sys
 
 from lib import package_manager
 
+USAGE = """
+Usage:
+
+  dotf-pkgs list
+  dotf-pkgs update
+  dotf-pkgs install [-p|--force-prerelease] <name>
+
+"""
+
 
 def main():
     manager = package_manager.PackageManager()
 
-    command = sys.argv[1] if len(sys.argv) > 1 else 'list'
+    if len(sys.argv) <= 1:
+        print(USAGE)
+        sys.exit(1)
+
+    args = sys.argv[1:]
+    command = args.pop(0)
+    options = []
+    while len(args) > 0 and args[0][0] == '-':
+        options.append(args.pop(0))
+
     if command in ['l', 'list']:
         manager.list()
     elif command in ['i', 'install']:
-        manager.install()
+        if len(args) > 0:
+            force_prerelease = '-p' in options or '--force-prerelease' in options
+            manager.install_single(args[0], force_prerelease)
+        else:
+            manager.install()
     elif command in ['u', 'update']:
         manager.update()
     else:
-        print('Usage: dotf-pkgs <list|update>')
+        print(USAGE)
+        sys.exit(1)
 
 
 main()

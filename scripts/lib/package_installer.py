@@ -12,19 +12,21 @@ APPS_BIN = path.join(APPS_ROOT, 'bin')
 
 class PackageInstaller:
     package: Package
+    force_prerelease: bool
 
-    def __init__(self, package: Package):
+    def __init__(self, package: Package, force_prerelease: bool):
         self.package = package
+        self.force_prerelease = force_prerelease
 
     def install(self):
-        if is_installed(self.package):
+        if not self.force_prerelease and is_installed(self.package):
             print(f'* {self.package.name} is already installed')
             return
 
         print(f'* Installing {self.package.name}...')
 
         asset = self.fetch_latest_asset()
-        AssetInstaller(self.package, asset).install()
+        AssetInstaller(self.package, asset, self.force_prerelease).install()
 
     def update(self):
         print(f'* Updating {self.package.name}...')
@@ -45,10 +47,10 @@ class PackageInstaller:
 
     def fetch_latest_asset(self) -> github.Asset:
         package = self.package
+        prerelease = True if self.force_prerelease else package.prerelease
 
         print('  * fetching latest release...')
-        release = github.fetch_latest_release(
-            package.github_repo, package.prerelease)
+        release = github.fetch_latest_release(package.github_repo, prerelease)
         if release is None:
             raise Exception(
                 f"Could not find release for package {package.name}")
@@ -66,8 +68,9 @@ class AssetInstaller:
     release_dirname: str
     asset_filename: str
     bin_source: str
+    force_prerelease: bool
 
-    def __init__(self, package: Package, asset: github.Asset):
+    def __init__(self, package: Package, asset: github.Asset, force_prerelease=False):
         self.package = package
         self.asset = asset
         self.release_dirname = path.join(
@@ -75,6 +78,7 @@ class AssetInstaller:
         self.asset_filename = path.join(
             self.release_dirname, f'{package.name}{asset.ext}')
         self.bin_source = package.platform.bin_source or package.bin_target
+        self.force_prerelease = force_prerelease
 
     def install(self):
         self.download()
@@ -108,6 +112,9 @@ class AssetInstaller:
 
         helpers.mkdirp(APPS_BIN)
         full_bin_target = bin_symlink(self.package)
+        if self.force_prerelease:
+            full_bin_target = f'{full_bin_target}-pre'
+
         full_bin_source = path.join(self.release_dirname, self.bin_source)
         if path.lexists(full_bin_target):
             os.remove(full_bin_target)
