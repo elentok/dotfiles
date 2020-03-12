@@ -26,9 +26,6 @@ class PackageManager:
     def list(self):
         for pkg in self.config.packages:
             print('Name: ', pkg.name)
-            print('Installed versions: ', pkg.installed_versions())
-            print('Is installed?', pkg.is_installed())
-            print()
 
     def update(self):
         for pkg in self.config.packages:
@@ -37,3 +34,8 @@ class PackageManager:
     def install(self):
         for pkg in self.config.packages:
             PackageInstaller(pkg).install()
+
+    def install_single(self, name: str, force_prerelease=False):
+        pkgs = [pkg for pkg in self.config.packages if pkg.name == name]
+        for pkg in pkgs:
+            PackageInstaller(pkg, force_prerelease).install()
