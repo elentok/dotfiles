@@ -14,7 +14,7 @@ class PackageInstaller:
     package: Package
     force_prerelease: bool
 
-    def __init__(self, package: Package, force_prerelease: bool):
+    def __init__(self, package: Package, force_prerelease = False):
         self.package = package
         self.force_prerelease = force_prerelease
 
