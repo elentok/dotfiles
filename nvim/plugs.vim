@@ -1,6 +1,6 @@
-set nocompatible " disable vi compatibility
-filetype off
-filetype plugin indent off
+" set nocompatible " disable vi compatibility
+" filetype off
+" filetype plugin indent off
 
 call plug#begin('~/.local/share/nvim-plugins')
 
@@ -87,6 +87,6 @@ if file_readable(expand("~/.dotlocal/plugs.vim"))
   source ~/.dotlocal/plugs.vim
 endif
 
-filetype plugin indent on
-syntax on
+" filetype plugin indent on
+" syntax on
 call plug#end()
