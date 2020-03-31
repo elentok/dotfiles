@@ -85,7 +85,7 @@ noremap <Leader>gd :cd <C-R>=expand("%:p:h")<cr>
 noremap <Leader>gg :FzfPreviewProjectGrep<cr>
 noremap <Leader>gs :FzfPreviewGitStatus<cr>
 noremap <Leader>gm :CocList mru<cr>
-noremap <Leader>gn :NERDTreeFind<cr>
+noremap <Leader>gf :NERDTreeFind<cr>
 noremap <Leader>go :call GotoAlternateFile()<cr>
 noremap <Leader>gt :Tags<cr>
 noremap <Leader>gv :tabe $vimrc<cr>
@@ -219,7 +219,7 @@ noremap <Leader>tf :TestFile<cr>
 " Toggle stuff {{{1
 noremap <Leader>ti :IndentGuidesToggle<cr>
 noremap <Leader>te :SyntasticToggleMode<cr>:redraw!<cr>
-noremap <Leader>tn :NERDTreeToggle<cr>
+noremap <Leader>ts :NERDTreeToggle<cr>
 noremap <Leader>tb :call ToggleBackground()<cr>
 
 " Post Startup {{{1
