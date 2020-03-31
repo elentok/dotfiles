@@ -19,6 +19,9 @@ for pkg in $NPM_PKGS; do
   npm install -g $pkg
 done
 
+header 'Neovim: PlugUpgrade'
+nvim +PlugUpgrade +qall
+
 header 'Neovim: PlugUpdate'
 (cd ~/.local/share/nvim-plugins/coc.nvim && git reset --hard origin/master)
 nvim +PlugUpdate +qall
