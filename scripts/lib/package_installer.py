@@ -96,7 +96,7 @@ class AssetInstaller:
         if path.exists(self.asset_filename):
             return
 
-        print("  * downloading...")
+        print(f'  * downloading {self.asset_filename}...')
         helpers.download(self.asset.browser_download_url, self.asset_filename)
 
     def extract(self):
