@@ -10,3 +10,8 @@ nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
 
 set omnifunc=v:lua.vim.lsp.omnifunc
+
+lua << EOF
+require'nvim_lsp'.pyls.setup{}
+require'nvim_lsp'.tsserver.setup{}
+EOF
