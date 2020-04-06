@@ -78,7 +78,7 @@ nnoremap coq :cclose<cr>
 
 
 " Go to {{{1
-noremap <c-p> :FzfPreviewProjectFiles<cr>
+noremap <c-p> :Files<cr>
 noremap <Leader>b :FzfPreviewBuffers<cr>
 noremap <Leader>gb :Buffers<cr>
 noremap <Leader>gd :cd <C-R>=expand("%:p:h")<cr>
