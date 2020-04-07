@@ -46,6 +46,10 @@ Plug 'cocopon/vaffle.vim'
 Plug 'bogado/file-line'
 Plug 'yuki-ycino/fzf-preview.vim'
 Plug 'janko/vim-test'
+Plug 'fatih/vim-go',                      { 'for': 'go' }
+
+" a collection of language packs for vim:
+Plug 'sheerun/vim-polyglot'
 
 " color scheme:
 Plug 'jacoborus/tender.vim'
@@ -58,35 +62,6 @@ else
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'ncm2/float-preview.nvim'
 endif
-
-" File formats:
-" Plug 'vim-scripts/applescript.vim',       { 'for': 'applescript' }
-" Plug 'vim-scripts/Arduino-syntax-file',   { 'for': 'ino' }
-" Plug 'jplaut/vim-arduino-ino',            { 'for': 'ino' }
-" Plug 'asymmetric/upstart.vim',            { 'for': 'upstart' }
-" Plug 'digitaltoad/vim-jade',              { 'for': 'jade', 'commit': '319cba1ee5313e8b50fd912d10dfe40a171f0312' }
-" Plug 'digitaltoad/vim-pug',               { 'for': 'pug' }
-Plug 'elentok/notes.vim',                 { 'for': 'notes' }
-Plug 'elentok/todo.vim',                  { 'for': 'todo' }
-Plug 'elentok/vim-markdown-folding',      { 'for': 'markdown' }
-Plug 'tpope/vim-markdown',                { 'for': 'markdown' }
-Plug 'jtratner/vim-flavored-markdown',    { 'for': 'markdown' } " add-on to tpope's markdown plugin (git flavored markdown)
-Plug 'chr4/nginx.vim',                    { 'for': 'nginx' }
-Plug 'fatih/vim-go',                      { 'for': 'go' }
-Plug 'groenewege/vim-less',               { 'for': 'less' }
-" Plug 'pangloss/vim-javascript',           { 'for': 'javascript' }
-" Plug 'MaxMEllon/vim-jsx-pretty',          { 'for': 'javascript' }
-Plug 'vim-ruby/vim-ruby',                 { 'for': 'ruby' }
-" Plug 'vim-scripts/yaml.vim',              { 'for': 'yaml' } " syntax highlighting
-" Plug 'avakhov/vim-yaml',                  { 'for': 'yaml' } " indentation
-" Plug 'tpope/vim-haml',                    { 'for': 'haml' }
-" Plug 'leafgarland/typescript-vim',        { 'for': 'typescript' }
-" Plug 'peitalin/vim-jsx-typescript',       { 'for': 'typescript' }
-Plug 'PProvost/vim-ps1'
-Plug 'dag/vim-fish'
-Plug 'mustache/vim-mustache-handlebars'
-
-Plug 'sheerun/vim-polyglot'
 
 if file_readable(expand("~/.dotlocal/plugs.vim"))
   source ~/.dotlocal/plugs.vim
