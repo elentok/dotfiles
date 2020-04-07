@@ -434,6 +434,7 @@ This is a link to [Something][1]
 
     t          - tag (select) current file
     ga         - directory size
+    w          - toggle preview pane
 
     ={pattern} - filter file list
     zr         - clear filter
