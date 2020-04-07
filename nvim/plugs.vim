@@ -52,7 +52,7 @@ Plug 'fatih/vim-go',                      { 'for': 'go' }
 Plug 'sheerun/vim-polyglot'
 
 " color scheme:
-Plug 'jacoborus/tender.vim'
+Plug 'danilo-augusto/vim-afterglow'
 
 if has("nvim-0.5")
   Plug 'neovim/nvim-lsp'

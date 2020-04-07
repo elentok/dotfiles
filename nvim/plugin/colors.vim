@@ -4,9 +4,7 @@ endif
 
 if !exists('g:gui_oni')
   set background=dark
-  silent! colorscheme tender
-
-  hi Folded guibg=#524458
-
-  let g:elentok_colors_initialized = 1
+  let g:afterglow_italic_comments=1
+  silent! colorscheme afterglow
+  hi Folded guibg=black
 endif
