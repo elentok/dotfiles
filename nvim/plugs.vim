@@ -60,12 +60,12 @@ else
 endif
 
 " File formats:
-Plug 'vim-scripts/applescript.vim',       { 'for': 'applescript' }
-Plug 'vim-scripts/Arduino-syntax-file',   { 'for': 'ino' }
-Plug 'jplaut/vim-arduino-ino',            { 'for': 'ino' }
-Plug 'asymmetric/upstart.vim',            { 'for': 'upstart' }
-Plug 'digitaltoad/vim-jade',              { 'for': 'jade', 'commit': '319cba1ee5313e8b50fd912d10dfe40a171f0312' }
-Plug 'digitaltoad/vim-pug',               { 'for': 'pug' }
+" Plug 'vim-scripts/applescript.vim',       { 'for': 'applescript' }
+" Plug 'vim-scripts/Arduino-syntax-file',   { 'for': 'ino' }
+" Plug 'jplaut/vim-arduino-ino',            { 'for': 'ino' }
+" Plug 'asymmetric/upstart.vim',            { 'for': 'upstart' }
+" Plug 'digitaltoad/vim-jade',              { 'for': 'jade', 'commit': '319cba1ee5313e8b50fd912d10dfe40a171f0312' }
+" Plug 'digitaltoad/vim-pug',               { 'for': 'pug' }
 Plug 'elentok/notes.vim',                 { 'for': 'notes' }
 Plug 'elentok/todo.vim',                  { 'for': 'todo' }
 Plug 'elentok/vim-markdown-folding',      { 'for': 'markdown' }
@@ -74,18 +74,19 @@ Plug 'jtratner/vim-flavored-markdown',    { 'for': 'markdown' } " add-on to tpop
 Plug 'chr4/nginx.vim',                    { 'for': 'nginx' }
 Plug 'fatih/vim-go',                      { 'for': 'go' }
 Plug 'groenewege/vim-less',               { 'for': 'less' }
-Plug 'pangloss/vim-javascript',           { 'for': 'javascript' }
-Plug 'MaxMEllon/vim-jsx-pretty',          { 'for': 'javascript' }
-Plug 'kchmck/vim-coffee-script',          { 'for': 'coffee' }
+" Plug 'pangloss/vim-javascript',           { 'for': 'javascript' }
+" Plug 'MaxMEllon/vim-jsx-pretty',          { 'for': 'javascript' }
 Plug 'vim-ruby/vim-ruby',                 { 'for': 'ruby' }
-Plug 'vim-scripts/yaml.vim',              { 'for': 'yaml' } " syntax highlighting
-Plug 'avakhov/vim-yaml',                  { 'for': 'yaml' } " indentation
-Plug 'tpope/vim-haml',                    { 'for': 'haml' }
-Plug 'leafgarland/typescript-vim',        { 'for': 'typescript' }
-Plug 'peitalin/vim-jsx-typescript',       { 'for': 'typescript' }
+" Plug 'vim-scripts/yaml.vim',              { 'for': 'yaml' } " syntax highlighting
+" Plug 'avakhov/vim-yaml',                  { 'for': 'yaml' } " indentation
+" Plug 'tpope/vim-haml',                    { 'for': 'haml' }
+" Plug 'leafgarland/typescript-vim',        { 'for': 'typescript' }
+" Plug 'peitalin/vim-jsx-typescript',       { 'for': 'typescript' }
 Plug 'PProvost/vim-ps1'
 Plug 'dag/vim-fish'
 Plug 'mustache/vim-mustache-handlebars'
+
+Plug 'sheerun/vim-polyglot'
 
 if file_readable(expand("~/.dotlocal/plugs.vim"))
   source ~/.dotlocal/plugs.vim
