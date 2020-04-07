@@ -3,9 +3,10 @@
 VERSION=1911.21
 
 fonts_dir=$HOME/.fonts
+filename="CascadiaMonoPL.ttf"
 
-rm -f "$fonts_dir/Cascadia.ttf"
-curl -L https://github.com/microsoft/cascadia-code/releases/download/v${VERSION}/Cascadia.ttf \
-     -o "$fonts_dir/Cascadia.ttf"
+rm -f "${fonts_dir}/${filename}"
+curl -L https://github.com/microsoft/cascadia-code/releases/download/v${VERSION}/${filename} \
+     -o "${fonts_dir}/${filename}"
 
 fc-cache -v -f "$fonts_dir"
