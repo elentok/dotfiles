@@ -7,7 +7,9 @@ let g:ale_linters = {
       \ }
 
 let g:ale_fixers = {
-      \ 'typescript': ['prettier']}
+      \ 'typescript': ['prettier'],
+      \ 'scss': ['prettier']
+      \ }
 
 set omnifunc=ale#completion#OmniFunc
 
