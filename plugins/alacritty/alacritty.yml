@@ -88,7 +88,7 @@ tabspaces: 8
 # Font configuration (changes require restart)
 font:
   normal:
-    family: "Cascadia Code"
+    family: "Cascadia Mono PL"
   # Normal (roman) font face
   #normal:
   # Font family
