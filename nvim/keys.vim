@@ -84,7 +84,7 @@ noremap <Leader>gb :Buffers<cr>
 noremap <Leader>gd :cd <C-R>=expand("%:p:h")<cr>
 noremap <Leader>gg :FzfPreviewProjectGrep<cr>
 noremap <Leader>gs :FzfPreviewGitStatus<cr>
-noremap <Leader>gm :CocList mru<cr>
+noremap <Leader>gm :FZFMru<cr>
 noremap <Leader>gf :NERDTreeFind<cr>
 noremap <Leader>go :call GotoAlternateFile()<cr>
 noremap <Leader>gt :Tags<cr>
