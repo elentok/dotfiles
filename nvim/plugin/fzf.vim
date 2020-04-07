@@ -6,13 +6,6 @@ if !exists('$FZF_DEFAULT_COMMAND')
   endif
 endif
 
-command! FZFMru call fzf#run({
-      \  "source":  v:oldfiles,
-      \  "sink":    "e",
-      \  "window": "call FloatingFZF()",
-      \  "options": "-m -x +s",
-      \  "down":    "40%"})
-
 command! FZFGitStaged call fzf#run({
       \ "source": "git diff --name-only --cached",
       \ "options": "--prompt 'Git Staged>'",
