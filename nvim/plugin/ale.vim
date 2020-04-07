@@ -13,5 +13,7 @@ let g:ale_fixers = {
 
 set omnifunc=ale#completion#OmniFunc
 
+nnoremap <leader>rn :ALERename<cr>
+nnoremap gr :ALEFindReferences<cr>
 nnoremap gd :ALEGoToDefinition<cr>
 nnoremap K :ALEHover<cr>
