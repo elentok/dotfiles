@@ -4,12 +4,7 @@ endif
 
 if !exists('g:gui_oni')
   set background=dark
-  let g:one_allow_italics = 1
-  " silent! colorscheme one
-  " silent! call one#highlight('Folded', '555555', '111111', '')
-  " silent! call one#highlight('VertSplit', '', '5c6370', 'none')
-  " silent! call one#highlight('StatusLine', '000000', '696c77', '')
-  silent! colorscheme challenger_deep
+  silent! colorscheme tender
 
   hi Folded guibg=#524458
 

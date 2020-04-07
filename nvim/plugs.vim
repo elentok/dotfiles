@@ -39,8 +39,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'xolox/vim-misc'
-" Plug 'rakr/vim-one'
-Plug 'challenger-deep-theme/vim'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'davidbeckingsale/writegood.vim'
 Plug 'christoomey/vim-tmux-navigator'
@@ -48,6 +46,9 @@ Plug 'cocopon/vaffle.vim'
 Plug 'bogado/file-line'
 Plug 'yuki-ycino/fzf-preview.vim'
 Plug 'janko/vim-test'
+
+" color scheme:
+Plug 'jacoborus/tender.vim'
 
 if has("nvim-0.5")
   Plug 'neovim/nvim-lsp'
