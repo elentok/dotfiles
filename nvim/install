@@ -142,7 +142,7 @@ install_cli_tools() {
     typescript vscode-html-languageserver-bin vscode-json-languageserver \
     css-langserver eslint-server tslint-server bash-language-server
 
-  pip-fast-install pylint yamllint jedi neovim-remote neovim python-language-server
+  pip-fast-install flake8 pylint yamllint jedi neovim-remote neovim python-language-server
 }
 
 explain_win32yank() {
