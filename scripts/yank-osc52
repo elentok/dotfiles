@@ -25,7 +25,7 @@ function main() {
 
   if [ -z "${TMUX:-}" ]; then
     # for regular terminal
-    printf "$OSC52"
+    printf %s "$OSC52"
   else
     tmux-yank
   fi
@@ -44,14 +44,14 @@ function validate-input-length() {
 }
 
 function ssh-yank() {
-  if [ -n "${SSH_TTY:-}" -a -w "${SSH_TTY:-}" ]; then
-    printf "$OSC52" > $SSH_TTY;
+  if [ -n "${SSH_TTY:-}" ] && [ -w "${SSH_TTY:-}" ]; then
+    print "$OSC52" > "$SSH_TTY";
   fi
 }
 
 function tmux-yank() {
   tty=$(tmux list-panes -F "#{pane_active} #{pane_tty}" | awk '$1=="1" { print $2 }')
-  printf "\033Ptmux;\033$OSC52\033\\" > $tty
+  print "\033Ptmux;\033$OSC52\033\\" > "$tty"
 }
 
 
