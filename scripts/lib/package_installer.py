@@ -14,7 +14,7 @@ class PackageInstaller:
     package: Package
     force_prerelease: bool
 
-    def __init__(self, package: Package, force_prerelease = False):
+    def __init__(self, package: Package, force_prerelease=False):
         self.package = package
         self.force_prerelease = force_prerelease
 
@@ -119,19 +119,6 @@ class AssetInstaller:
         if path.lexists(full_bin_target):
             os.remove(full_bin_target)
         os.symlink(full_bin_source, full_bin_target)
-
-    #  def installed_versions(self) -> List[str]:
-        #  if not path.exists(self.path):
-        #  return []
-
-        #  versions = os.listdir(self.path)
-        #  versions.sort(reverse=True)
-        #  return versions
-
-    #  def is_release_installed(self, release: github.Release) -> bool:
-        #  return release.tag_name in self.installed_versions()
-        #
-        #
 
 
 def bin_symlink(package: Package) -> str:
