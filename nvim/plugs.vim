@@ -58,9 +58,13 @@ Plug 'danilo-augusto/vim-afterglow'
 if has("nvim-0.5")
   Plug 'neovim/nvim-lsp'
 else
-  Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+  " Plug 'neoclide/coc.nvim', { 'branch': 'release' }
   " Plug 'dense-analysis/ale'
-  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'autozimu/LanguageClient-neovim', {
+      \ 'branch': 'next',
+      \ 'do': 'bash install.sh',
+      \ }
   " Plug 'deoplete-plugins/deoplete-jedi'
   " Plug 'davidhalter/jedi-vim'
   " Plug 'ncm2/float-preview.nvim'

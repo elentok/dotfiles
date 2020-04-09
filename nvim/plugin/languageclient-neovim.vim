@@ -1,0 +1,15 @@
+let g:LanguageClient_serverCommands = {
+  \ 'python': ['pyls'],
+  \ 'bash': ['bash-language-server'],
+  \ 'javascript': ['javascript-typescript-stdio'],
+  \ 'typescript': ['javascript-typescript-stdio'],
+  \ 'javascript.jsx': ['javascript-typescript-stdio'],
+  \ 'typescript.tsx': ['javascript-typescript-stdio'],
+  \ }
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
+nnoremap <silent> <leader>rn :call LanguageClient#textDocument_rename()<CR>
+nnoremap <silent> <leader>gs :call LanguageClient#textDocument_documentSymbol()<CR>
