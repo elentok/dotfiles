@@ -15,7 +15,6 @@ augroup Elentok_Misc
     \ completefunc=eclim#java#complete#CodeComplete
   autocmd FileType javascript setlocal nocindent smartindent foldmethod=syntax
   autocmd FileType typescript setlocal foldmethod=syntax textwidth=100
-  autocmd FileType python     setlocal omnifunc=pythoncomplete#Complete
   autocmd FileType ruby       setlocal omnifunc=
   autocmd FileType xml        setlocal foldmethod=syntax
   autocmd Filetype python     setlocal ts=4 softtabstop=4 shiftwidth=4
