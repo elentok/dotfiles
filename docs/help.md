@@ -433,6 +433,7 @@ This is a link to [Something][1]
 ## vifm
 
     t          - tag (select) current file
+    ga         - directory size
 
     ={pattern} - filter file list
     zr         - clear filter
@@ -444,3 +445,7 @@ This is a link to [Something][1]
     :copy &    - copy in background
     :move &    - move in background
     :jobs      - show background jobs
+
+    :trashes   - list trash directories (one per partition)
+    :lstrash   - list each trashed file
+    :empty     - empty trash
