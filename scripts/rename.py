@@ -2,8 +2,8 @@
 
 import argparse
 import re
-from typing import List
 from os import path
+from typing import List
 
 
 def main():
@@ -11,8 +11,10 @@ def main():
     parser.add_argument('pattern')
     parser.add_argument('replacement')
     parser.add_argument('files', nargs='+')
-    parser.add_argument(
-        '-y', '--yes', help="Don't ask for confirmation", action='store_true')
+    parser.add_argument('-y',
+                        '--yes',
+                        help="Don't ask for confirmation",
+                        action='store_true')
     args = parser.parse_args()
     renameables = find_renameables(args.pattern, args.replacement, args.files)
     for renameable in renameables:
@@ -47,7 +49,8 @@ class Renameable:
         return text
 
 
-def find_renameables(pattern: str, replacement: str, files: List[str]) -> List[Renameable]:
+def find_renameables(pattern: str, replacement: str,
+                     files: List[str]) -> List[Renameable]:
     regex = re.compile(pattern, re.I)
     matches: List[Renameable] = []
     for filename in files:
