@@ -13,3 +13,5 @@ nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
 nnoremap <silent> <leader>rn :call LanguageClient#textDocument_rename()<CR>
 nnoremap <silent> <leader>gs :call LanguageClient#textDocument_documentSymbol()<CR>
+
+command! Format call LanguageClient#textDocument_formatting_sync()
