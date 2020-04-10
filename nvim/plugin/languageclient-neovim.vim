@@ -1,6 +1,6 @@
 let g:LanguageClient_serverCommands = {
   \ 'python': ['pyls'],
-  \ 'bash': ['bash-language-server'],
+  \ 'sh': ['bash-language-server', 'start'],
   \ 'javascript': ['javascript-typescript-stdio'],
   \ 'typescript': ['javascript-typescript-stdio'],
   \ 'javascript.jsx': ['javascript-typescript-stdio'],
