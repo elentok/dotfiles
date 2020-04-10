@@ -4,6 +4,6 @@ set -euo pipefail
 
 hostname="$(hostname)"
 
-grep "^${hostname}:" "$DOTL/pretty-hostnames" \
+grep --no-messages "^${hostname}:" "$DOTL/pretty-hostnames" \
   | cut -d: -f2 \
   || echo "$hostname"
