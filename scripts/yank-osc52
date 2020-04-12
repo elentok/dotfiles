@@ -45,13 +45,13 @@ function validate-input-length() {
 
 function ssh-yank() {
   if [ -n "${SSH_TTY:-}" ] && [ -w "${SSH_TTY:-}" ]; then
-    print "$OSC52" > "$SSH_TTY";
+    printf "$OSC52" > "$SSH_TTY"
   fi
 }
 
 function tmux-yank() {
   tty=$(tmux list-panes -F "#{pane_active} #{pane_tty}" | awk '$1=="1" { print $2 }')
-  print "\033Ptmux;\033$OSC52\033\\" > "$tty"
+  printf "\033Ptmux;\033$OSC52\033\\" > "$tty"
 }
 
 
