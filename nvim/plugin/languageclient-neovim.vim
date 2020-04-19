@@ -5,6 +5,7 @@ let g:LanguageClient_serverCommands = {
   \ 'typescript': ['javascript-typescript-stdio'],
   \ 'javascript.jsx': ['javascript-typescript-stdio'],
   \ 'typescript.tsx': ['javascript-typescript-stdio'],
+  \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
   \ }
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
