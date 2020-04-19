@@ -1,4 +1,6 @@
-finish
+if g:lsp_mode != 'coc'
+  finish
+endif
 " based on https://github.com/neoclide/coc.nvim#example-vim-configuration
 
 " if hidden is not set, TextEdit might fail.

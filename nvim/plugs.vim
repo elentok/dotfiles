@@ -55,19 +55,16 @@ Plug 'sheerun/vim-polyglot'
 " color scheme:
 Plug 'danilo-augusto/vim-afterglow'
 
-if has("nvim-0.5")
-  Plug 'neovim/nvim-lsp'
-else
-  " Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-  " Plug 'dense-analysis/ale'
+if g:lsp_mode == 'coc'
+  Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+elseif g:lsp_mode == 'langclient'
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'autozimu/LanguageClient-neovim', {
       \ 'branch': 'next',
       \ 'do': 'bash install.sh',
       \ }
-  " Plug 'deoplete-plugins/deoplete-jedi'
-  " Plug 'davidhalter/jedi-vim'
-  " Plug 'ncm2/float-preview.nvim'
+else
+  Plug 'neovim/nvim-lsp'
 endif
 
 if file_readable(expand("~/.dotlocal/plugs.vim"))

@@ -1,3 +1,7 @@
+if g:lsp_mode != 'langclient'
+  finish
+endif
+
 let g:deoplete#enable_at_startup = 1
 
 function! s:check_back_space() abort
