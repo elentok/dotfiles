@@ -80,6 +80,9 @@ if isdirectory(expand("~/.dotlocal/nvim"))
   let &runtimepath.=',~/.dotlocal/nvim'
 endif
 
+" options: 'coc' or 'langclient'
+let g:lsp_mode='coc'
+
 source $vimfiles/plugs.vim
 source $vimfiles/settings.vim
 source $vimfiles/functions.vim

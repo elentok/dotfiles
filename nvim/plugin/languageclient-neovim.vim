@@ -1,3 +1,7 @@
+if g:lsp_mode != 'langclient'
+  finish
+endif
+
 let g:LanguageClient_serverCommands = {
   \ 'python': ['pyls'],
   \ 'sh': ['bash-language-server', 'start'],
