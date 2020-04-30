@@ -1,7 +1,7 @@
 let g:hash_tags = {
   \ 'python': '#!/usr/bin/env python3',
   \ 'ruby': '#!/usr/bin/env ruby',
-  \ 'bash': '#!/usr/bin/env bash',
+  \ 'bash': "#!/usr/bin/env bash\n\nset -euo pipefail",
   \ 'node': '#!/usr/bin/env node'
   \}
 
