@@ -19,7 +19,12 @@
   autocrlf = false
 
   # Make the pager quit if the output is less than the screen width
-  pager = diff-so-fancy | less --tabs=4 -RFX
+  ; pager = diff-so-fancy | less --tabs=4 -RFX
+
+  pager = delta --plus-color="#012800" --minus-color="#340001" --theme='Monokai Extended'
+
+[interactive]
+  diffFilter = delta --color-only
 
 [color]
   ui = auto

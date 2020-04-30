@@ -69,6 +69,19 @@
           "asset_regexp": "shfmt_.*_darwin_amd64.*"
         }
       }
+    },
+    {
+      "name": "delta",
+      "github_repo": "dandavison/delta",
+      "strip_components": 1,
+      "platforms": {
+        "linux": {
+          "asset_regexp": "delta-.*-x86_64-unknown-linux-musl.*"
+        },
+        "mac": {
+          "asset_regexp": "delta-.*-x86_64-apple-darwin.*"
+        }
+      }
     }
   ]
 }
