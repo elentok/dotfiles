@@ -25,6 +25,7 @@ nvim +PlugUpgrade +qall
 header 'Neovim: PlugUpdate'
 (cd ~/.local/share/nvim-plugins/coc.nvim && git reset --hard origin/master)
 nvim +PlugUpdate +qall
+nvim +PlugClean! +PlugInstall +qall
 
 header 'Neovim: CocUpdateSync'
 nvim +CocUpdateSync +qall
