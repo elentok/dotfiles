@@ -82,6 +82,16 @@
           "asset_regexp": "delta-.*-x86_64-apple-darwin.*"
         }
       }
+    },
+    {
+      "name": "browsh",
+      "github_repo": "browsh-org/browsh",
+      "extract": false,
+      "platforms": {
+        "linux": {
+          "asset_regexp": "browsh_.*_linux_amd64.*"
+        }
+      }
     }
   ]
 }
