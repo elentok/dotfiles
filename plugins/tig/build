@@ -3,7 +3,7 @@
 source $DOTF/framework
 source $DOTF/scripts/build-helper
 
-prepare_build tig 2.4.1 "$*"
+prepare_build tig 2.5.1 "$*"
 
 if is_debian; then
   apt-fast-install libncursesw5-dev build-essential
