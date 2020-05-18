@@ -95,6 +95,19 @@
           "asset_regexp": "browsh_.*_linux_amd64.*"
         }
       }
+    },
+    {
+      "name": "bat",
+      "github_repo": "sharkdp/bat",
+      "strip_components": 1,
+      "platforms": {
+        "x86_64": {
+          "asset_regexp": "bat-.*-x86_64-unknown-linux-musl.*"
+        },
+        "armv7l": {
+          "asset_regexp": "bat-.*-arm-.*"
+        }
+      }
     }
   ]
 }
