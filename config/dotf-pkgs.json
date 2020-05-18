@@ -6,7 +6,7 @@
       "github_repo": "neovim/neovim",
       "strip_components": 1,
       "platforms": {
-        "linux": {
+        "x86_64": {
           "bin_source": "bin/nvim",
           "asset_regexp": "nvim-linux64.tar.gz"
         },
@@ -20,7 +20,7 @@
       "name": "exa",
       "github_repo": "ogham/exa",
       "platforms": {
-        "linux": {
+        "x86_64": {
           "bin_source": "exa-linux-x86_64",
           "asset_regexp": "exa-linux-x86_64.*"
         },
@@ -36,11 +36,14 @@
       "bin_target": "rg",
       "strip_components": 1,
       "platforms": {
-        "linux": {
+        "x86_64": {
           "asset_regexp": "ripgrep-.*-x86_64-unknown-linux.*"
         },
         "mac": {
           "asset_regexp": "ripgrep-.*-x86_64-apple-darwin.*"
+        },
+        "armv7l": {
+          "asset_regexp": "ripgrep-.*arm-unknown-linux-.*"
         }
       }
     },
@@ -49,7 +52,7 @@
       "github_repo": "tomnomnom/gron",
       "prerelease": true,
       "platforms": {
-        "linux": {
+        "x86_64": {
           "asset_regexp": "gron-linux-amd64.*"
         },
         "mac": {
@@ -62,7 +65,7 @@
       "github_repo": "mvdan/sh",
       "extract": false,
       "platforms": {
-        "linux": {
+        "x86_64": {
           "asset_regexp": "shfmt_.*_linux_amd64.*"
         },
         "mac": {
@@ -75,7 +78,7 @@
       "github_repo": "dandavison/delta",
       "strip_components": 1,
       "platforms": {
-        "linux": {
+        "x86_64": {
           "asset_regexp": "delta-.*-x86_64-unknown-linux-musl.*"
         },
         "mac": {
@@ -88,7 +91,7 @@
       "github_repo": "browsh-org/browsh",
       "extract": false,
       "platforms": {
-        "linux": {
+        "x86_64": {
           "asset_regexp": "browsh_.*_linux_amd64.*"
         }
       }

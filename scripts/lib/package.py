@@ -1,10 +1,13 @@
 import re
 import sys
+import platform
 from dataclasses import dataclass
 from typing import Optional
 
+MACHINE = platform.machine()
 
-@dataclass
+
+#  @dataclass
 class Package:
     name: str
     github_repo: str
@@ -12,7 +15,7 @@ class Package:
     strip_components: int
     prerelease: bool
     extract: bool
-    platform: 'Platform'
+    platform: Optional['Platform']
 
     def __init__(self, raw):
         self.name = raw['name']
@@ -21,7 +24,11 @@ class Package:
         self.strip_components = raw.get('strip_components', 0)
         self.prerelease = raw.get('prerelease', False)
         self.extract = raw.get('extract', True)
-        self.platform = Platform(raw['platforms'][sys.platform])
+
+        self.platform = None
+        platform = raw['platforms'].get(MACHINE)
+        if platform:
+            self.platform = Platform(platform)
 
 
 @dataclass

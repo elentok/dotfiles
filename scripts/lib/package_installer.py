@@ -23,6 +23,10 @@ class PackageInstaller:
             print(f'* {self.package.name} is already installed')
             return
 
+        if self.package.platform is None:
+            print(f'* {self.package.name} is not supported on this platform')
+            return
+
         print(f'* Installing {self.package.name}...')
 
         asset = self.fetch_latest_asset()
