@@ -49,5 +49,6 @@
     }
   },
   "python.linting.pylamaEnabled": true,
-  "python.linting.mypyEnabled": true
+  "python.linting.mypyEnabled": true,
+  "python.formatting.provider": "black"
 }
