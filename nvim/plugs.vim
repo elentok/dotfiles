@@ -63,8 +63,8 @@ else
   Plug 'neovim/nvim-lsp'
 endif
 
-if file_readable(expand("~/.dotlocal/plugs.vim"))
-  source ~/.dotlocal/plugs.vim
+if file_readable(expand("~/.dotlocal/nvim/plugs.vim"))
+  source ~/.dotlocal/nvim/plugs.vim
 endif
 
 call plug#end()
