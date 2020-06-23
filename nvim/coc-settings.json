@@ -1,18 +1,6 @@
 {
   "coc.preferences.formatOnType": false,
-  "coc.preferences.formatOnSaveFiletypes": [
-    "typescript",
-    "typescriptreact",
-    "javascript",
-    "css",
-    "scss",
-    "markdown",
-    "html",
-    "json",
-    "yaml",
-    "python",
-    "java"
-  ],
+  "coc.preferences.formatOnSaveFiletypes": [],
   "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "java.format.enabled": true,
   "languageserver": {
