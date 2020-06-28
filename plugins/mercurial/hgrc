@@ -3,3 +3,4 @@ paginate = never
 
 [alias]
 s = status
+d = !$HG diff "$@" | delta
