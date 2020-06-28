@@ -1,4 +1,4 @@
-if !has('nvim-0.5')
+if g:lsp_mode != 'native'
   finish
 endif
 
