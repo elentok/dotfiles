@@ -1,7 +1,3 @@
-if g:lsp_mode != 'langclient'
-  finish
-endif
-
 let g:autoformat_filetypes = [
       \ 'json', 'javascript', 'css', 'scss', 'typescript', 'typescript.tsx',
       \ 'java', 'markdown', 'yaml', 'python']
