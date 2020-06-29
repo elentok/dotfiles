@@ -12,7 +12,7 @@
 set -euo pipefail
 
 function main() {
-  if [ "$1" == "-s" ]; then
+  if [ "${1:-}" == "-s" ]; then
     BUF="$2"
   else
     # preserve trailing new lines
