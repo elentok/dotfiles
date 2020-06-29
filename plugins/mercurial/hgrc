@@ -4,3 +4,5 @@ paginate = never
 [alias]
 s = status
 d = !$HG diff "$@" | delta
+c = commit --interactive
+ca = commit --amend --interactive
