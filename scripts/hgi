@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+#
+# Mercurial interactive UI helper
+#
+
+set -euo pipefail
+
+source "$DOTF/framework"
+
+function main() {
+  command="${1:-status}"
+
+  case "$command" in
+    s|status)
+      hg status --change "$(pick-commit)"
+      ;;
+    c|copy)
+      pick-commit | yank-osc52
+      ;;
+    d|diff)
+      hg diff --change "$(pick-commit)" | delta
+      ;;
+  esac
+}
+
+function pick-commit() {
+  list-commits | fzf --exit-0 --select-1 --ansi | awk '{print $1}'
+}
+
+function list-commits() {
+  hg log -r smart --template "${BLUE}{node|short} ${GREEN}a={author|user} ${YELLOW}{date|age}${RESET} {desc|firstline}\n" \
+    | grep a="$USER"
+}
+
+main "$@"
