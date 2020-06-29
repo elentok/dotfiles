@@ -2,8 +2,9 @@
 #
 # Usage:
 #
-#   yank-osc52 {file}    - yank file to clipboard
-#   yank-osc52 -         - yank stdin to clipboard
+#   yank-osc52 {file}      - yank file to clipboard
+#   yank-osc52 -           - yank stdin to clipboard
+#   yank-osc52 -s {string} - yank string to clipboard
 
 # based on
 # https://www.freecodecamp.org/news/tmux-in-practice-integration-with-system-clipboard-bcd72c62ff7b/
@@ -11,10 +12,14 @@
 set -euo pipefail
 
 function main() {
-  # preserve trailing new lines
-  # See https://wiki.bash-hackers.org/syntax/expansion/cmdsubst#examples
-  BUF="$(cat "$@"; echo x)"
-  BUF="${BUF%x}"
+  if [ "$1" == "-s" ]; then
+    BUF="$2"
+  else
+    # preserve trailing new lines
+    # See https://wiki.bash-hackers.org/syntax/expansion/cmdsubst#examples
+    BUF="$(cat "$@"; echo x)"
+    BUF="${BUF%x}"
+  fi
 
   validate-input-length
 
