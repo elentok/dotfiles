@@ -108,6 +108,16 @@
           "asset_regexp": "bat-.*-arm-.*"
         }
       }
+    },
+    {
+      "name": "verco",
+      "github_repo": "matheuslessarodrigues/verco",
+      "extract": false,
+      "platforms": {
+        "x86_64": {
+          "asset_regexp": "verco-linux-x86_64"
+        }
+      }
     }
   ]
 }
