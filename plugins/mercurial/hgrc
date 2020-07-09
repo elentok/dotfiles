@@ -5,4 +5,5 @@ paginate = never
 s = status
 d = !$HG diff "$@" | delta
 c = commit --interactive
-ca = commit --amend --interactive
+ca = commit --amend
+cia = commit --interactive --amend
