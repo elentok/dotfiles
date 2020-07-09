@@ -49,7 +49,7 @@ Plug 'fatih/vim-go',                      { 'for': 'go' }
 Plug 'sheerun/vim-polyglot'
 
 " color scheme:
-Plug 'danilo-augusto/vim-afterglow'
+Plug 'skbolton/embark'
 
 if g:lsp_mode == 'coc'
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
