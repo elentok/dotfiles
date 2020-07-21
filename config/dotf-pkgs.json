@@ -17,6 +17,15 @@
       }
     },
     {
+      "name": "alacritty",
+      "github_repo": "alacritty/alacritty",
+      "platforms": {
+        "x86_64": {
+          "asset_regexp": "Alacritty-.*-ubuntu_18_04_amd64.tar.gz"
+        }
+      }
+    },
+    {
       "name": "exa",
       "github_repo": "ogham/exa",
       "platforms": {

@@ -72,23 +72,10 @@ scrolling:
   # Specifying '0' will disable scrolling.
   history: 10000
 
-  #
-  # Scroll to the bottom when new text is written to the terminal.
-  auto_scroll: false
-
-# Spaces per Tab (changes require restart)
-#
-# This setting defines the width of a tab in cells.
-#
-# Some applications, like Emacs, rely on knowing about the width of a tab.
-# To prevent unexpected behavior in these applications, it's also required to
-# change the `it` value in terminfo when altering this setting.
-tabspaces: 8
-
 # Font configuration (changes require restart)
 font:
   normal:
-    family: "Cascadia Mono PL"
+    family: 'Cascadia Mono PL'
   # Normal (roman) font face
   #normal:
   # Font family
@@ -163,8 +150,8 @@ draw_bold_text_with_bright_colors: true
 colors:
   # Default colors
   primary:
-    background: "0x000000"
-    foreground: "0xeaeaea"
+    background: '0x000000'
+    foreground: '0xeaeaea'
 
     # Bright and dim foreground colors
     #
@@ -193,25 +180,25 @@ colors:
 
   # Normal colors
   normal:
-    black: "0x000000"
-    red: "0xd54e53"
-    green: "0xb9ca4a"
-    yellow: "0xe6c547"
-    blue: "0x7aa6da"
-    magenta: "0xc397d8"
-    cyan: "0x70c0ba"
-    white: "0xeaeaea"
+    black: '0x000000'
+    red: '0xd54e53'
+    green: '0xb9ca4a'
+    yellow: '0xe6c547'
+    blue: '0x7aa6da'
+    magenta: '0xc397d8'
+    cyan: '0x70c0ba'
+    white: '0xeaeaea'
 
   # Bright colors
   bright:
-    black: "0x666666"
-    red: "0xff3334"
-    green: "0x9ec400"
-    yellow: "0xe7c547"
-    blue: "0x7aa6da"
-    magenta: "0xb77ee0"
-    cyan: "0x54ced6"
-    white: "0xffffff"
+    black: '0x666666'
+    red: '0xff3334'
+    green: '0x9ec400'
+    yellow: '0xe7c547'
+    blue: '0x7aa6da'
+    magenta: '0xb77ee0'
+    cyan: '0x54ced6'
+    white: '0xffffff'
 
   # Dim colors
   #
@@ -261,7 +248,7 @@ colors:
 visual_bell:
   animation: EaseOutExpo
   duration: 0
-  color: "0xffffff"
+  color: '0xffffff'
 
 # Background opacity
 #

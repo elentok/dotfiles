@@ -7,14 +7,14 @@
 
 function main() {
   if [ $# -lt 3 ]; then
-    usage $0
+    usage "$0"
     exit 1
   fi
 
   basename="$1"
 
   mkdir -p ~/.local/share/applications
-  build-content "$@" > ~/.local/share/applications/$basename.desktop
+  build-content "$@" > "$HOME/.local/share/applications/$basename.desktop"
   xdg-desktop-menu forceupdate
 }
 

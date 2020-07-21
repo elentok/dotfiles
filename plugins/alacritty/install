@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework
-
-export VERSION=0.4.0
+source "$DOTF/framework"
 
 main() {
   if command_missing alacritty; then
     if is_linux; then
-      PRIMARY=yes $DOTF/plugins/alacritty/install-binary
+      dotf-pkgs install alacritty
+      # PRIMARY=yes $DOTF/plugins/alacritty/install-binary
     else
       echo "Error: I've only setup alacritty installer for linux"
       exit 1
@@ -15,7 +14,10 @@ main() {
   fi
 
   mkdir -p ~/.config/alacritty
-  symlink $DOTF/plugins/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
+  symlink "$DOTF/plugins/alacritty/alacritty.yml" ~/.config/alacritty/alacritty.yml
+
+
+  add-desktop-entry alacritty Alacritty "$HOME/.apps/bin/alacritty"
 }
 
 main "$@"
