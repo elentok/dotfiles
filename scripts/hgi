@@ -11,6 +11,9 @@ function main() {
   command="${1:-status}"
 
   case "$command" in
+    l|list)
+      list-commits
+      ;;
     s|status)
       hg status --change "$(pick-commit)"
       ;;
@@ -20,6 +23,8 @@ function main() {
     d|diff)
       hg diff --change "$(pick-commit)" | delta
       ;;
+    r|revert)
+      pick-files-to-revert | xargs hg revert
   esac
 }
 
