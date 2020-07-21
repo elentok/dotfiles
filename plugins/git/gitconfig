@@ -59,6 +59,7 @@
   mffo = merge --ff-only
   pl = pull
   plr = pull --rebase
+  spl = !git stash push && git pull && git stash pop
   ps = push
   psa = push noreview production master --tags
   psm = push noreview master --tags
