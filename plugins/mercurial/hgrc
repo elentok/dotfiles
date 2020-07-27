@@ -7,3 +7,6 @@ d = !$HG diff "$@" | delta
 c = commit --interactive
 ca = commit --amend
 cia = commit --interactive --amend
+he = histedit
+
+%include ~/.dotlocal/hgrc

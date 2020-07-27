@@ -37,4 +37,8 @@ function list-commits() {
     | grep a="$USER"
 }
 
+function pick-files-to-revert() {
+  hg status | fzf --exit-0 --ansi | awk '{print $2}'
+}
+
 main "$@"
