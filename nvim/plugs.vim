@@ -41,7 +41,6 @@ Plug 'davidbeckingsale/writegood.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'cocopon/vaffle.vim'
 Plug 'bogado/file-line'
-Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
 Plug 'janko/vim-test'
 Plug 'fatih/vim-go',                      { 'for': 'go' }
 

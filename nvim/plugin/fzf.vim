@@ -1,3 +1,6 @@
+" disable the preview window (I don't look it and it sometimes slows me down).
+let g:fzf_preview_window = ''
+
 if !exists('$FZF_DEFAULT_COMMAND')
   if g:os == 'windows'
     let $FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules}/*"'
@@ -23,3 +26,9 @@ command! FZFGitChanged call fzf#run({
       \ "options": "--prompt 'Git Changed>'",
       \ "window": "call FloatingFZF()",
       \ "sink": "e"})
+
+noremap <c-p> :Files<cr>
+noremap <Leader>b :Buffers<cr>
+noremap <Leader>gm :FZFMru<cr>
+noremap <Leader>gt :Tags<cr>
+noremap `` :BTags<cr>
