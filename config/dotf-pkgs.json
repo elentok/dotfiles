@@ -92,6 +92,9 @@
         },
         "mac": {
           "asset_regexp": "delta-.*-x86_64-apple-darwin.*"
+        },
+        "armv7l": {
+          "asset_regexp": "delta-.*-arm-unknown-linux.*"
         }
       }
     },
