@@ -11,17 +11,14 @@ main() {
 install_tmux() {
   if is_mac; then
     brew_install tmux
-
-    if is_mac; then
-      brew_install reattach-to-user-namespace
-      # for more info, see:
-      #   http://robots.thoughtbot.com/post/19398560514/how-to-copy-and-paste-with-tmux-on-mac-os-x
-    fi
+    brew_install reattach-to-user-namespace
+    # for more info, see:
+    #   http://robots.thoughtbot.com/post/19398560514/how-to-copy-and-paste-with-tmux-on-mac-os-x
 
     brew unlink openssl
   else
     if command_missing tmux; then
-      PRIMARY=yes $DOTF/plugins/tmux/build
+      PRIMARY=yes "$DOTF/plugins/tmux/build"
     fi
   fi
 }
