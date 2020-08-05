@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework
-source $DOTF/scripts/build-helper
+set -euo pipefail
 
-prepare_build neovim v0.4.2 "$*"
+source "$DOTF/framework"
+source "$DOTF/scripts/build-helper"
+
+prepare_build neovim v0.4.4 "$*"
 
 if is_debian; then
   apt-fast-install ninja-build gettext libtool libtool-bin autoconf \
