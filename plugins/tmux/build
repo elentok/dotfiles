@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-source $DOTF/framework
-source $DOTF/scripts/build-helper
+source "$DOTF/framework"
+source "$DOTF/scripts/build-helper"
 
 prepare_build tmux 3.1b "$*"
 
@@ -15,12 +15,12 @@ elif is_mac; then
   exit 1
 fi
 
-git clone --depth 1 --branch $VERSION https://github.com/tmux/tmux.git
+git clone --depth 1 --branch "$VERSION" https://github.com/tmux/tmux.git
 
 cd tmux
 sh autogen.sh
 ./configure
-make prefix=$INSTALL_DIR
-make install prefix=$INSTALL_DIR
+make prefix="$INSTALL_DIR"
+make install prefix="$INSTALL_DIR"
 
 install_symlinks bin/tmux
