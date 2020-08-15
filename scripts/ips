@@ -1,15 +1,9 @@
 #!/usr/bin/env bash
 
-ips-linux-arch() {
-  ip addr show | grep 'inet ' | awk '{print $2}' | sed -E 's#/[0-9]+##'
-}
+source "$DOTF/framework"
 
-ips-mac-() {
-  ifconfig | grep 'inet ' | awk '{print $2}'
-}
-
-ips() {
-  ips-$OS-$DISTRO
-}
-
-ips
+ip addr \
+  | grep -E '(^[0-9]|inet |inet6 )' \
+  | sed -E "s/^([0-9]: [^:]*).*/$(color-blue)\\1$(color-reset)/" \
+  | sed -E "s/(inet [^ ]+).*/$(color-green)\\1$(color-reset)/" \
+  | sed -E 's/(inet6 [^ ]+).*/\1/' \
