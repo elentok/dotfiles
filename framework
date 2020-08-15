@@ -52,6 +52,18 @@ export UNDERLINE="\\033[4m"
 export RESET="\\033[0m"
 export CLEAR_LINE="\\r\\033[K"
 
+function color-green() {
+  echo -e "$GREEN"
+}
+
+function color-blue() {
+  echo -e "$BLUE"
+}
+
+function color-reset() {
+  echo -e "$RESET"
+}
+
 # Special Characters {{{1
 
 export HOURGLASS="⏳ "
