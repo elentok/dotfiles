@@ -14,6 +14,9 @@ function main() {
     l|list)
       list-commits
       ;;
+    a|add)
+      add-files
+      ;;
     s|status)
       hg status --change "$(pick-commit)"
       ;;
@@ -39,6 +42,14 @@ function list-commits() {
 
 function pick-files-to-revert() {
   hg status | fzf --exit-0 --ansi | awk '{print $2}'
+}
+
+function add-files() {
+  list-untracked-files | fzf --multi --exit-0 | xargs --no-run-if-empty hg add
+}
+
+function list-untracked-files() {
+  hg status --unknown --no-status
 }
 
 main "$@"
