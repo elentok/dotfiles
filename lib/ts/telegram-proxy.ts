@@ -26,7 +26,7 @@ function main(): void {
   })
   app.listen(10000, () => console.info('Telegram proxy listening on port 10000'))
 
-  sendToTelegram('Telegram Proxy Started')
+  sendToTelegram('*Telegram Proxy Started*')
 }
 
 async function sendToTelegram(message: string): Promise<void | AxiosResponse<any>> {
@@ -35,6 +35,7 @@ async function sendToTelegram(message: string): Promise<void | AxiosResponse<any
   const body = new URLSearchParams()
   body.set('chat_id', CHAT_ID)
   body.set('text', message)
+  body.set('parse_mode', 'MarkdownV2')
 
   console.info('Making request to', url, 'with', body.toString())
   return axios.post(url, body.toString()).catch(err => {
@@ -43,3 +44,4 @@ async function sendToTelegram(message: string): Promise<void | AxiosResponse<any
 }
 
 main()
+
