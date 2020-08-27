@@ -1,0 +1,50 @@
+#!/usr/bin/env python3
+
+import sys
+import datetime
+
+WEEKDAYS = [
+    "Sundays",
+    "Mondays",
+    "Tuesdays",
+    "Wednesdays",
+    "Thursdays",
+    "Fridays",
+    "Saturdays",
+]
+
+
+def main():
+    if len(sys.argv) < 2:
+        print("Usage: countdown [date]")
+        sys.exit(1)
+
+    target_date = datetime.datetime.fromisoformat(sys.argv[1])
+    print(f"Target:        {target_date}")
+
+    print()
+
+    diff = target_date - datetime.datetime.now()
+    print(f"Days left:     {diff.days}")
+
+    calculate_weekdays_left(target_date)
+
+
+def calculate_weekdays_left(target_date):
+    weekdays_left = {}
+    for day in range(7):
+        weekdays_left[day] = 0
+
+    date = datetime.datetime.now()
+    while date < target_date:
+        weekday = date.isoweekday() % 7
+        weekdays_left[weekday] += 1
+        date += datetime.timedelta(days=1)
+
+    for i, weekday in enumerate(WEEKDAYS, start=0):
+        label = f"{WEEKDAYS[i]}:"
+        print(f"  {label:12} {weekdays_left[i]}")
+
+
+if __name__ == "__main__":
+    main()
