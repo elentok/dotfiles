@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 
+# Crontab example (every night at 07:00):
+# 0 7 * * * \
+#   zsh -c "countdown '2020-01-01 08:00:00' | forward_to_telegram --code" \
+#   >> /tmp/cron.log 2>&1
+
 import sys
 import datetime
 
@@ -16,7 +21,7 @@ WEEKDAYS = [
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: countdown [date]")
+        print("Usage: countdown <date>")
         sys.exit(1)
 
     target_date = datetime.datetime.fromisoformat(sys.argv[1])
