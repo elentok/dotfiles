@@ -12,21 +12,23 @@ https://www.npmjs.com/package/name-that-color
 
 def main():
     parser = argparse.ArgumentParser(description=HELP)
-    parser.add_argument('colors',
-                        metavar='COLOR',
-                        nargs='*',
-                        help='colors to convert to css')
-    parser.add_argument('-f', '--format',
-                        default='sass',
-                        choices=['sass', 'less'],
-                        nargs='?',
-                        help='variable format')
-    parser.add_argument('-t', '--test', action='store_true',
-                        help='run tests')
+    parser.add_argument(
+        "colors", metavar="COLOR", nargs="*", help="colors to convert to css"
+    )
+    parser.add_argument(
+        "-f",
+        "--format",
+        default="sass",
+        choices=["sass", "less"],
+        nargs="?",
+        help="variable format",
+    )
+    parser.add_argument("-t", "--test", action="store_true", help="run tests")
 
     args = parser.parse_args()
     if args.test:
         import doctest
+
         doctest.testmod(verbose=True)
         return
 
@@ -38,7 +40,7 @@ def convert(color, var_format):
     prefix = __find_prefix(var_format)
     color = normalize_color(color)
     name = find_name(color)
-    print(f'{prefix}{name}: ${color};')
+    print(f"{prefix}{name}: ${color};")
 
 
 def find_name(color):
