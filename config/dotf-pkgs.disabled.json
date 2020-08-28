@@ -1,0 +1,14 @@
+{
+  "$schema": "./dotf-pkgs.schema.json",
+  "packages": [
+    {
+      "name": "alacritty",
+      "github_repo": "alacritty/alacritty",
+      "platforms": {
+        "x86_64": {
+          "asset_regexp": "Alacritty-.*-ubuntu_18_04_amd64.tar.gz"
+        }
+      }
+    }
+  ]
+}

@@ -5,6 +5,7 @@
       "name": "nvim",
       "github_repo": "neovim/neovim",
       "strip_components": 1,
+      "prerelease": true,
       "platforms": {
         "x86_64": {
           "bin_source": "bin/nvim",
@@ -13,15 +14,6 @@
         "darwin": {
           "bin_source": "bin/nvim",
           "asset_regexp": "nvim-macos.tar.gz"
-        }
-      }
-    },
-    {
-      "name": "alacritty",
-      "github_repo": "alacritty/alacritty",
-      "platforms": {
-        "x86_64": {
-          "asset_regexp": "Alacritty-.*-ubuntu_18_04_amd64.tar.gz"
         }
       }
     },
