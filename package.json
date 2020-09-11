@@ -41,7 +41,7 @@
     "kdbxweb": "^1.5.8",
     "moment": "^2.24.0",
     "mqtt": "^3.0.0",
-    "node-fetch": "^1.6.3",
+    "node-fetch": "^2.6.1",
     "nodemon": "^2.0.2",
     "prettier": "^1.18.2",
     "prompt": "^1.0.0",
