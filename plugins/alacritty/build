@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+VERSION=0.5.0
+
+source "$DOTF/framework"
+source "$DOTF/scripts/build-helper"
+
+apt-fast-install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev python3
+
+prepare_build alacritty $VERSION "$*"
+
+cd "$INSTALL_DIR"
+FILENAME=v$VERSION.tar.gz
+
+curl -L -O https://github.com/alacritty/alacritty/archive/$FILENAME
+tar xzvf $FILENAME
+
+cargo build --release
+
+# install_symlinks alacritty
+# install_desktop_entry alacritty Alacritty
