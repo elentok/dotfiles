@@ -58,7 +58,7 @@ elseif g:lsp_mode == 'langclient'
       \ 'branch': 'next',
       \ 'do': 'bash install.sh',
       \ }
-else
+elseif g:lsp_mode == 'native'
   Plug 'neovim/nvim-lsp'
 endif
 
