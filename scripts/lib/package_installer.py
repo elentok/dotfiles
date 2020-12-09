@@ -1,5 +1,5 @@
 import os
-from os import path
+from os import path, remove
 from typing import Optional
 
 from . import github, helpers
@@ -36,11 +36,20 @@ class PackageInstaller:
         print(f"* Updating {self.package.name}...")
         asset = self.fetch_latest_asset()
 
-        installed_tag_name = self.installed_tag_name()
-        if installed_tag_name == asset.release.tag_name:
-            print(f"  * already up to date ({installed_tag_name}), skipping.")
-        else:
+        if self.should_update(asset):
             AssetInstaller(self.package, asset).install()
+
+    def should_update(self, asset: github.Asset):
+        installed_tag_name = self.installed_tag_name()
+        if installed_tag_name == "nightly":
+            print("  * using nightly build, so updating anyway.")
+            return True
+
+        if installed_tag_name != asset.release.tag_name:
+            return True
+
+        print(f"  * already up to date ({installed_tag_name}), skipping.")
+        return False
 
     def installed_tag_name(self) -> Optional[str]:
         if not is_installed(self.package):
@@ -60,6 +69,8 @@ class PackageInstaller:
         release = github.fetch_latest_release(package.github_repo, prerelease)
         if release is None:
             raise Exception(f"Could not find release for package {package.name}")
+
+        print(f"  * latest release is: {release.name} (tag={release.tag_name})")
 
         if package.platform is None:
             raise Exception(f"Could not find platform for package {package.name}")
@@ -105,7 +116,7 @@ class AssetInstaller:
 
     def download(self):
         if path.exists(self.asset_filename):
-            return
+            os.remove(self.asset_filename)
 
         print(f"  * downloading {self.asset_filename}...")
         helpers.download(self.asset.browser_download_url, self.asset_filename)
