@@ -105,8 +105,11 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules
 [ -n "${NVIM_LISTEN_ADDRESS:-}" ] && export FZF_DEFAULT_OPTS='--no-height'
 
 # SSH {{{1
-export SSH_AUTH_SOCK="$HOME/.ssh/active-agent"
-agent setup > /dev/null
+if ! [[ "$SSH_AUTH_SOCK" =~ "chromoting" ]]; then
+
+  export SSH_AUTH_SOCK="$HOME/.ssh/active-agent"
+  agent setup > /dev/null
+fi
 
 # Terminal Title {{{1
 term-title
