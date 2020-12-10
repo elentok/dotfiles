@@ -14,10 +14,10 @@ main() {
 
     if is_termux; then
       # shellcheck disable=SC2086
-      apt install $missing
+      apt install -y $missing
     else
       # shellcheck disable=SC2086
-      sudo apt install $missing
+      sudo apt install -y $missing
     fi
   fi
 }
