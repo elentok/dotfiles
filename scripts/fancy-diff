@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-git diff --color "$@" | diff-so-fancy
