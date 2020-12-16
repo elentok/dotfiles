@@ -9,7 +9,7 @@ prepare_build tmux 3.1b "$*"
 
 if is_debian; then
   apt-fast-install libevent-dev libncurses5-dev libncursesw5-dev build-essential \
-    pkg-config byacc
+    pkg-config byacc autotools-dev automake
 elif is_mac; then
   echo 'Unsupported platform'
   exit 1
