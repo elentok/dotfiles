@@ -12,6 +12,18 @@ nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
 set omnifunc=v:lua.vim.lsp.omnifunc
 
 lua << EOF
-require'nvim_lsp'.pyls.setup{}
-require'nvim_lsp'.tsserver.setup{}
+require'lspconfig'.pyls.setup{}
+require'lspconfig'.tsserver.setup{}
+require'lspconfig'.bashls.setup{}
 EOF
+
+augroup ElentokLspConfig
+  autocmd BufEnter * lua require'completion'.on_attach()
+augroup END
+
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Avoid showing message extra message when using completion
+set shortmess+=c"

@@ -59,7 +59,8 @@ elseif g:lsp_mode == 'langclient'
       \ 'do': 'bash install.sh',
       \ }
 elseif g:lsp_mode == 'native'
-  Plug 'neovim/nvim-lsp'
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'nvim-lua/completion-nvim'
 endif
 
 if file_readable(expand("~/.dotlocal/nvim/plugs.vim"))
