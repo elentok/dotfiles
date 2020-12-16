@@ -144,7 +144,8 @@ install_cli_tools() {
 
   pip-fast-install \
     neovim-remote neovim \
-    black pylint yamllint jedi python-language-server mypy pyls-mypy pyls-isort
+    black pylint yamllint jedi python-language-server \
+    mypy pyls-mypy pyls-isort pyls-black
 }
 
 explain_win32yank() {
