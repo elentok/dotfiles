@@ -10,7 +10,6 @@ main() {
   fi
   install_gitconfig
   setup_git_user
-  npm-fast-install diff-so-fancy
 }
 
 install_git() {
