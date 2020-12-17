@@ -8,11 +8,7 @@ func! AutoFormat()
   endif
 
   if index(g:autoformat_filetypes, &filetype) != -1
-    if g:lsp_mode == 'coc'
-      Format
-    elseif g:lsp_mode == 'native'
-      lua vim.lsp.buf.formatting_sync()
-    endif
+    Format
   endif
 endfunc
 
