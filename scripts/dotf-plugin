@@ -24,7 +24,7 @@ install-plugin() {
 
   if [ -z "$filename" ]; then
     error "Cannot find plugin '$1'"
-    return
+    exit 1
   fi
 
   header "$1"

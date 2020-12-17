@@ -19,6 +19,9 @@ for pkg in $NPM_PKGS; do
   npm install -g "$pkg"
 done
 
+header 'Neovim: Upgrade'
+dotf-pkgs u -p nvim
+
 header 'Neovim: PlugUpgrade'
 nvim +PlugUpgrade +qall
 

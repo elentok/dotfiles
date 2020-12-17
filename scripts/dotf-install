@@ -15,7 +15,7 @@ main() {
   update-pip
   dotf-plugin tools python
   dotf-pkgs install
-  dotf-plugin nodejs git zsh nvim ripgrep tig bash tmux vifm bat
+  dotf-plugin nodejs git zsh nvim ripgrep tig bash tmux vifm
 
   gui-plugins
 
