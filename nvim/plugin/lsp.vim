@@ -14,9 +14,15 @@ nnoremap <silent> [g    <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 set omnifunc=v:lua.vim.lsp.omnifunc
 
 lua << EOF
-require'lspconfig'.pyls.setup{}
-require'lspconfig'.tsserver.setup{}
-require'lspconfig'.bashls.setup{}
+lspconfig = require'lspconfig'
+
+lspconfig.pyls.setup{}
+lspconfig.tsserver.setup{}
+lspconfig.bashls.setup{}
+lspconfig.vimls.setup{}
+lspconfig.yamlls.setup{}
+lspconfig.jsonls.setup{}
+lspconfig.html.setup{}
 EOF
 
 augroup ElentokLspConfig
@@ -29,3 +35,5 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Avoid showing message extra message when using completion
 set shortmess+=c"
+
+command! Format lua vim.lsp.buf.formatting_sync(nil, 1000)
