@@ -50,7 +50,7 @@ export IS_WSL=no
 
 if is_linux; then
   if ! is_termux; then
-    if [[ "$(cat /proc/version)" =~ 'Microsoft' ]]; then
+    if [[ "$(cat /proc/version)" =~ 'microsoft' ]]; then
       export IS_WSL=yes
     fi
   fi
