@@ -66,3 +66,4 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 set shortmess+=c"
 
 command! Format lua vim.lsp.buf.formatting_sync(nil, 1000)
+command! LspInfo lua print(vim.inspect(vim.lsp.buf_get_clients()))
