@@ -13,7 +13,7 @@ alias ba='bt add-magnet "$(pbp)"'
 alias be='bundle exec'
 alias bl='tr ":" "\n"'
 alias bytes='stat --format=%s'
-alias c='clip copy'
+alias y='clip copy'
 alias C=calc
 alias cl=clear
 alias cdl='cd "$(lerna-select-package)"'
@@ -248,6 +248,30 @@ f() {
   else
     vifm "$@"
   fi
+}
+
+# Fuzzy cd {{{1
+
+alias c='cd $(pick-directory)'
+
+pick-directory() {
+  # calling "print -s" adds the command to zsh history
+
+  if [ $# -gt 0 ]; then
+    cd "$@"
+    exit $?
+  fi
+
+  dir="$(list-dirs | fzf --ansi --exit-0 | awk '{print $1}')"
+
+  if [ -n "$dir" ]; then
+    print -s "cd $dir" && \
+      echo "$dir"
+  fi
+}
+
+list-dirs() {
+  command ls -d -1 -- */ | sed 's#/$##'
 }
 
 # DOTLOCAL {{{1
