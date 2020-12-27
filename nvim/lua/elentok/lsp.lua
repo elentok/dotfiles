@@ -1,15 +1,7 @@
-function safeRequire (name)
-  status, module = pcall(require, name)
-  if(status) then
-    return module
-  else
-    print(string.format('WARNING: lua module "%s" is missing', name))
-    return nil
-  end
-end
+local util = require('elentok/util')
 
-function lspConfigSetup ()
-  lspconfig = safeRequire('lspconfig')
+local function lspConfigSetup ()
+  local lspconfig = util.safe_require('lspconfig')
   if not lspconfig then
     return
   end
@@ -25,21 +17,41 @@ function lspConfigSetup ()
   lspconfig.sumneko_lua.setup{
     settings = {
       Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua you're using (LuaJIT in the case of Neovim)
+          version = 'LuaJIT',
+          -- Setup your lua path
+          path = vim.split(package.path, ';'),
+        },
         diagnostics = {
-          globals = {'vim'}
-        }
-      }
+          -- Get the language server to recognize the `vim` global
+          globals = {'vim'},
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = {
+            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+            [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+          },
+        },
+      },
     }
   }
 end
 
-function lspCompletionOnAttach ()
-  completion = safeRequire('completion')
+function LspCompletionOnAttach ()
+  local completion = util.safe_require('completion')
   if not completion then
     return
   end
 
   completion.on_attach()
+end
+
+function LspInfo ()
+  local info = vim.inspect(vim.lsp.buf_get_clients())
+  local lines = vim.split(info, "\n", true)
+  util.open_window('LSP INFO', lines)
 end
 
 lspConfigSetup()
