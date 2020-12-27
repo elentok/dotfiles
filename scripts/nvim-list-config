@@ -3,3 +3,4 @@
 cd $DOTF/nvim
 
 find -name '*.vim' | sed 's/^\.\///'
+find -name '*.lua' | sed 's/^\.\///'
