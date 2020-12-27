@@ -12,8 +12,9 @@ main() {
   install_symlinks
   install_plugins
   install_coc_plugins
-  install_dtach
+  install_lsp_tools
   install_cli_tools
+  install_dtach
 
   (cd $DOTF/nvim/ctags && ./build)
 }
@@ -121,6 +122,12 @@ install_coc_plugins() {
 
 install_dtach() {
   install_package dtach
+}
+
+install_lsp_tools() {
+  bullet "Installing LSP tools... "
+  nvim +LspInstall sumneko_lua +qall
+  success "done"
 }
 
 install_cli_tools() {

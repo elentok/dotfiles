@@ -13,46 +13,7 @@ nnoremap <silent> [g    <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 
 set omnifunc=v:lua.vim.lsp.omnifunc
 
-lua << EOF
-
-function safeRequire (name)
-  status, module = pcall(require, name)
-  if(status) then
-    return module
-  else
-    print(string.format('WARNING: lua module "%s" is missing', name))
-    return nil
-  end
-end
-
-function lspConfigSetup ()
-  lspconfig = safeRequire('lspconfig')
-  if not lspconfig then
-    return
-  end
-
-  lspconfig = require'lspconfig'
-  lspconfig.pyls.setup{}
-  lspconfig.tsserver.setup{}
-  lspconfig.bashls.setup{}
-  lspconfig.vimls.setup{}
-  lspconfig.yamlls.setup{}
-  lspconfig.jsonls.setup{}
-  lspconfig.html.setup{}
-end
-
-function lspCompletionOnAttach ()
-  completion = safeRequire('completion')
-  if not completion then
-    return
-  end
-
-  completion.on_attach()
-end
-
-lspConfigSetup()
-
-EOF
+lua require('elentok/lsp')
 
 augroup ElentokLspConfig
   autocmd BufEnter * lua lspCompletionOnAttach()
