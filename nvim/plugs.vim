@@ -45,9 +45,7 @@ Plug 'janko/vim-test'
 Plug 'fatih/vim-go',                      { 'for': 'go' }
 
 " a collection of language packs for vim:
-if $NVIM_SKIP_POLYGLOT != "yes"
-  Plug 'sheerun/vim-polyglot'
-endif
+Plug 'sheerun/vim-polyglot'
 
 " color scheme:
 Plug 'skbolton/embark'

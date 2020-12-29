@@ -172,6 +172,9 @@ let g:go_fmt_command = "goimports"
 let g:gutentags_ctags_exclude = [
   \ 'node_modules', 'bower_components', 'logs', 'tmp', 'public', 'vendor' ]
 
+" Plugin: polyglot {{{1
+let g:polyglot_is_disabled = { 'jsx': 1 }
+
 " Temp (stuff I'm not sure about) {{{1
 let loaded_matchparen=1 " do not show highlight matching parenthesis automatically
 
