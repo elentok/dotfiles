@@ -2,7 +2,7 @@ export DOTF=~/.dotfiles
 export DOTL=~/.dotlocal
 
 # Identify OS {{{1
-if [ "`uname -s`" = "Darwin" ]; then
+if [ "$(uname -s)" = "Darwin" ]; then
   export OS=mac
 else
   export OS=linux
@@ -105,7 +105,6 @@ command_missing() {
 is_running() {
   ps cax | grep "$1" > /dev/null 2>&1
 }
-
 
 # TMP
 export TMP=/tmp
@@ -244,7 +243,7 @@ if [ -n "${NVIM_LISTEN_ADDRESS:-}" ]; then
 elif [ ! -z "${VSCODE_IPC_HOOK:-}" ]; then
   # Use vscode as the editor for things like Git when run from within vscode's
   # integrated terminal
-	export EDITOR="code -w"
+  export EDITOR="code -w"
 elif has_command nvim; then
   export EDITOR=$(which nvim)
 else
@@ -278,11 +277,9 @@ export RIPGREP_CONFIG_PATH="$DOTF/plugins/ripgrep/ripgreprc"
 # - Source file not found (https://github.com/koalaman/shellcheck/wiki/SC1091)
 export SHELLCHECK_OPTS="-e SC1090,SC1091"
 
-
 if is_mac; then
   export JAVA_HOME="$(/usr/libexec/java_home 2> /dev/null)"
 fi
-
 
 # DOTLOCAL {{{1
 source_if_exists "$DOTL/zsh/core.zsh"
