@@ -262,7 +262,7 @@ pick-directory() {
     exit $?
   fi
 
-  dir="$(list-dirs | fzf --ansi --exit-0 | awk '{print $1}')"
+  dir="$(list-dirs | fzf --ansi --exit-0 --select-1 | awk '{print $1}')"
 
   if [ -n "$dir" ]; then
     print -s "cd $dir" && \
