@@ -42,10 +42,11 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'cocopon/vaffle.vim'
 Plug 'bogado/file-line'
 Plug 'janko/vim-test'
-Plug 'fatih/vim-go',                      { 'for': 'go' }
+Plug 'fatih/vim-go',                    { 'for': 'go' }
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 
 " a collection of language packs for vim:
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 
 " color scheme:
 Plug 'skbolton/embark'

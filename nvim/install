@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-source $DOTF/framework
+source "$DOTF/framework"
 
 VERSION=0.4.3
 
@@ -16,7 +16,7 @@ main() {
   install_cli_tools
   install_dtach
 
-  (cd $DOTF/nvim/ctags && ./build)
+  (cd "$DOTF/nvim/ctags" && ./build)
 }
 
 install_requirements() {
@@ -38,7 +38,7 @@ install_neovim() {
   fi
 
   if nvim-is-outdated; then
-    PRIMARY=yes VERSION=v$VERSION $DOTF/nvim/install-binary
+    PRIMARY=yes VERSION=v$VERSION "$DOTF/nvim/install-binary"
   fi
 }
 
@@ -57,7 +57,7 @@ install_neovim_mac() {
 
   if [ ! -e ~/Applications/nvim-osx64 ]; then
     bullet 'Downloading Neovim for Mac... '
-    curl -L https://github.com/neovim/neovim/releases/download/$NEOVIM_VERSION/nvim-macos.tar.gz \
+    curl -L "https://github.com/neovim/neovim/releases/download/$NEOVIM_VERSION/nvim-macos.tar.gz" \
       -o /tmp/nvim-macos.tar.gz
     show_result
 
@@ -74,16 +74,16 @@ install_neovim_appimage() {
 
   local filename="nvim-$NEOVIM_VERSION.AppImage"
 
-  if [ ! -e $filename ]; then
+  if [ ! -e "$filename" ]; then
     bullet 'Downloading Neovim AppImage... '
-    curl -L https://github.com/neovim/neovim/releases/download/$NEOVIM_VERSION/nvim.appimage \
-      -o $filename
+    curl -L "https://github.com/neovim/neovim/releases/download/$NEOVIM_VERSION/nvim.appimage" \
+      -o "$filename"
     show_result
 
-    chmod +x $filename
+    chmod +x "$filename"
   fi
 
-  symlink $filename nvim.AppImage
+  symlink "$filename" nvim.AppImage
 
   mkdir -p ~/bin
   symlink ~/Applications/nvim.AppImage ~/bin/nvim
