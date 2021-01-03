@@ -28,3 +28,4 @@ set shortmess+=c"
 command! Format lua vim.lsp.buf.formatting_sync(nil, 1000)
 command! LspInfo lua LspInfo()
 command! LspRename lua LspRename()
+command! LspReset lua LspReset()
