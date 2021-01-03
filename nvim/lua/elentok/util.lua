@@ -48,9 +48,13 @@ local function open_window(title, lines)
   return win
 end
 
+local function current_word()
+  return api.nvim_call_function('expand', {'<cword>'})
+end
 
 return {
   safe_require = safe_require,
   open_window = open_window,
+  current_word = current_word,
 }
 

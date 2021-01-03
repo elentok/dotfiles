@@ -10,10 +10,9 @@ nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> ]g    <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <silent> [g    <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <silent> <leader>rn <cmd>lua LspRename()<CR>
 
 set omnifunc=v:lua.vim.lsp.omnifunc
-
-lua require('elentok/lsp')
 
 augroup ElentokLspConfig
   autocmd BufEnter * lua LspCompletionOnAttach()
@@ -28,3 +27,4 @@ set shortmess+=c"
 
 command! Format lua vim.lsp.buf.formatting_sync(nil, 1000)
 command! LspInfo lua LspInfo()
+command! LspRename lua LspRename()

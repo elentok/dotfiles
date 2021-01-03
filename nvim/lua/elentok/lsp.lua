@@ -1,6 +1,7 @@
 local util = require('elentok/util')
+local a = vim.api
 
-local function lspConfigSetup ()
+local function lsp_config_setup ()
   local lspconfig = util.safe_require('lspconfig')
   if not lspconfig then
     return
@@ -88,10 +89,19 @@ function LspCompletionOnAttach ()
   completion.on_attach()
 end
 
+function LspRename ()
+  local old_name = util.current_word()
+  local new_name = a.nvim_call_function('input', {'New name: ', old_name})
+  if new_name then
+    print('\nRenaming')
+    vim.lsp.buf.rename(new_name)
+  end
+end
+
 function LspInfo ()
   local info = vim.inspect(vim.lsp.buf_get_clients())
   local lines = vim.split(info, "\n", true)
   util.open_window('LSP INFO', lines)
 end
 
-lspConfigSetup()
+lsp_config_setup()
