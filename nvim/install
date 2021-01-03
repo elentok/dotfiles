@@ -20,12 +20,13 @@ main() {
 }
 
 install_requirements() {
+  # clang - required for building sumneko lua language server
   if is_termux; then
     apt-fast-install clang
   elif is_mac; then
     brew_install python
   elif is_debian; then
-    apt-fast-install python-dev python3-dev python3-pip
+    apt-fast-install python-dev python3-dev python3-pip clang
   fi
 
   npm-fast-install neovim
@@ -151,7 +152,7 @@ install_cli_tools() {
     vscode-json-languageserver \
     yaml-language-server \
     css-langserver eslint-server tslint-server bash-language-server \
-    vim-language-server
+    vim-language-server diagnostic-languageserver
 
   pip-fast-install \
     neovim-remote neovim \
