@@ -98,6 +98,11 @@ function LspRename ()
   end
 end
 
+function LspReset ()
+  vim.lsp.stop_client(vim.lsp.get_active_clients())
+  vim.api.nvim_command('edit')
+end
+
 function LspInfo ()
   local info = vim.inspect(vim.lsp.buf_get_clients())
   local lines = vim.split(info, "\n", true)
