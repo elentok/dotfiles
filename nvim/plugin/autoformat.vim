@@ -8,7 +8,12 @@ func! AutoFormat()
   endif
 
   if index(g:autoformat_filetypes, &filetype) != -1
-    Format
+
+    if exists(':DotLocalFormat')
+      DotLocalFormat
+    else
+      Format
+    endif
   endif
 endfunc
 
