@@ -1,3 +1,7 @@
+if vim.g.lsp_mode ~= 'native' then
+  return
+end
+
 local util = require('elentok/util')
 local a = vim.api
 

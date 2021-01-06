@@ -111,7 +111,7 @@ install_plugins() {
 }
 
 install_coc_plugins() {
-  extensions=(coc-tsserver coc-eslint coc-prettier coc-json coc-html
+  extensions=(coc-tsserver coc-eslint coc-prettier coc-json coc-html coc-lua
     coc-css coc-lists coc-git coc-yank coc-vimlsp coc-python coc-diagnostic)
 
   bullet "Installing Coc extensions... "

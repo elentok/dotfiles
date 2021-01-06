@@ -81,7 +81,7 @@ if isdirectory(expand("~/.dotlocal/nvim"))
 endif
 
 " options: 'coc', 'langclient', 'native' or 'none'
-let g:lsp_mode='native'
+let g:lsp_mode='coc'
 
 source $vimfiles/plugs.vim
 source $vimfiles/settings.vim
