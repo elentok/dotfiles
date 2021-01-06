@@ -23,6 +23,7 @@ augroup END
 " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 imap <tab> <Plug>(completion_smart_tab)
 imap <s-tab> <Plug>(completion_smart_s_tab)
+imap <silent> <c-space> <Plug>(completion_trigger)
 
 " Avoid showing message extra message when using completion
 set shortmess+=c"
