@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 
-cd $DOTF/nvim
+cd
 
-find -name '*.vim' | sed 's/^\.\///'
-find -name '*.lua' | sed 's/^\.\///'
+for dir in .dotfiles/nvim .dotlocal/nvim; do
+  if [ ! -e "$dir" ]; then
+    continue
+  fi
+
+  find "$dir" -name '*.vim' | sed 's/^\.\///'
+  find "$dir" -name '*.lua' | sed 's/^\.\///'
+done

@@ -1,5 +1,5 @@
 function! GoToConfig(file)
-  exec "e $DOTF/nvim/" . a:file
+  exec "e ~/" . a:file
 endfunction
 
 command! -complete=dir -nargs=+ GoToConfig call GoToConfig("<args>")
