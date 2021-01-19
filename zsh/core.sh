@@ -184,6 +184,7 @@ $HOME/.fzf/bin:\
 $HOME/.apps/bin:\
 $HOME/bin:\
 $HOME/scripts:\
+$HOME/.lua/bin:\
 $HOME/.local/bin"
 
 if is_termux; then

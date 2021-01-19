@@ -2,8 +2,56 @@
 
 source `dirname $0`/../../framework
 
-if is_mac; then
-  brew_install luarocks
-  brew_install libyaml
-  luarocks install lyaml YAML_DIR=$BREW_HOME
-fi
+LUA_ROOT="$HOME/.lua"
+LUA_VERSION=5.4.2
+LUAROCKS_VERSION=3.3.1
+
+function main() {
+  if command_missing lua; then
+    install-lua
+  fi
+
+  if command_missing luarocks; then
+    install-luarocks
+  fi
+
+  luarocks install --local formatter
+}
+
+function install-lua() {
+  create-and-open-build-dir lua
+
+  curl -R -O http://www.lua.org/ftp/lua-$LUA_VERSION.tar.gz
+  tar zxf lua-$LUA_VERSION.tar.gz
+  cd lua-$LUA_VERSION
+  make all test
+
+  mkdir -p "$LUA_ROOT"
+  make install INSTALL_TOP="$LUA_ROOT"
+}
+
+function install-luarocks() {
+  apt-fast-install libreadline-dev
+
+  create-and-open-build-dir luarocks
+
+  wget https://luarocks.org/releases/luarocks-$LUAROCKS_VERSION.tar.gz
+  tar zxpf luarocks-$LUAROCKS_VERSION.tar.gz
+  cd luarocks-$LUAROCKS_VERSION
+  ./configure --prefix="$LUA_ROOT" --with-lua-include="$LUA_ROOT/include"
+  make
+
+  make install
+}
+
+function create-and-open-build-dir() {
+  local name="$1"
+
+  cd $TMP
+  rm -rf "build/$name"
+  mkdir -p "build/$name"
+  cd "build/$name"
+}
+
+
+main "$@"
