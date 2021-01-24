@@ -16,5 +16,9 @@ function! Elentok_StatusLineFileName()
   let filename = expand('%:t')
   let path = substitute(expand('%:p:h'), getcwd(), '.', '')
 
+  if path == '.'
+    return filename
+  endif
+
   return filename . ' (' . path . ')'
 endfunction
