@@ -15,7 +15,7 @@ function main() {
     install-luarocks
   fi
 
-  luarocks install --local formatter
+  luarocks install --local luacheck
 }
 
 function install-lua() {

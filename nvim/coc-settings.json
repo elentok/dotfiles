@@ -16,24 +16,24 @@
       "ignoredRootPaths": ["~"]
     }
   },
+  "diagnostic-languageserver.mergeConfig": true,
+  "diagnostic-languageserver.trace.server": "verbose",
   "diagnostic-languageserver.filetypes": {
-    // lint `sh` (includes `bash`) files
-    "sh": "shellcheck"
+    "sh": "shellcheck",
+    "lua": "luacheck"
   },
   "diagnostic-languageserver.formatFiletypes": {
-    // format `sh` (includes `bash`) files using formatter defined below
-    "sh": "shfmt"
+    "sh": "shfmt",
+    "lua": "luafmt"
   },
   "diagnostic-languageserver.formatters": {
-    // define our formatter so that we can reference it from
-    // `diagnostic-languageserver.formatFiletypes`
-    "shfmt": {
-      "command": "shfmt",
-      // all the below args are entirely optional
-      // primarily listed here to call out that flags which take an
-      // argument (such as `-i <num-spaces>` for specifying indentation)
-      // should be split into two strings, the flag and then the value
-      "args": ["-i", "2", "-bn", "-ci", "-sr"]
+    "luafmt": {
+      "command": "luafmt --stdin"
+    }
+  },
+  "diagnostic-languageserver.linters": {
+    "luacheck": {
+      "command": "luacheck"
     }
   },
   "python.linting.pylamaEnabled": true,

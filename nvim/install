@@ -152,7 +152,8 @@ install_cli_tools() {
     vscode-json-languageserver \
     yaml-language-server \
     css-langserver eslint-server tslint-server bash-language-server \
-    vim-language-server diagnostic-languageserver
+    vim-language-server diagnostic-languageserver \
+    lua-fmt
 
   pip-fast-install \
     neovim-remote neovim \
