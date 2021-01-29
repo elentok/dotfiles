@@ -38,5 +38,6 @@
   },
   "python.linting.pylamaEnabled": true,
   "python.linting.mypyEnabled": true,
-  "python.formatting.provider": "black"
+  "python.formatting.provider": "black",
+  "Lua.diagnostics.globals": ["vim", "use"]
 }
