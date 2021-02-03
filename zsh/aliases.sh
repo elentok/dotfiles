@@ -267,11 +267,13 @@ pick-directory() {
   if [ -n "$dir" ]; then
     print -s "cd $dir" && \
       echo "$dir"
+  else
+    echo .
   fi
 }
 
 list-dirs() {
-  command ls -d -1 -- */ | sed 's#/$##'
+  find . -maxdepth 1 -type d | sed 's#^\.\/##' | grep -v '^\.$' || true
 }
 
 # DOTLOCAL {{{1
