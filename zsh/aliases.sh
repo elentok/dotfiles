@@ -254,7 +254,7 @@ f() {
 
 alias c='cd $(pick-directory)'
 
-pick-directory() {
+function pick-directory() {
   # calling "print -s" adds the command to zsh history
 
   if [ $# -gt 0 ]; then
@@ -272,8 +272,28 @@ pick-directory() {
   fi
 }
 
-list-dirs() {
+function list-dirs() {
   find . -maxdepth 1 -type d | sed 's#^\.\/##' | grep -v '^\.$' || true
+}
+
+# Fuzzy vi {{{1
+
+alias v='$(run-on-file nvim)'
+
+function run-on-file() {
+  # calling "print -s" adds the command to zsh history
+
+  file="$(list-files | fzf --ansi --exit-0 | awk '{print $1}')"
+
+  if [ -n "$file" ]; then
+    cmd="$* $file"
+    print -s "$cmd" && \
+      echo "$cmd"
+  fi
+}
+
+function list-files() {
+  find . -maxdepth 1 -type f | sed 's/^\.\///' | sort
 }
 
 # DOTLOCAL {{{1
