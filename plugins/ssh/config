@@ -1,0 +1,14 @@
+# vim: syntax=sshconfig
+
+Include ~/.dotlocal/ssh.conf
+Include ~/.ssh/machine.config
+
+Host *
+  # Always use SSH2.
+  Protocol 2
+  # Use a shared channel for all sessions to the same host,
+  # instead of always opening a new one. This leads to much
+  # quicker connection times.
+  ControlMaster auto
+  ControlPath ~/.ssh/master-%r@%h:%p
+  ControlPersist yes
