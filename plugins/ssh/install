@@ -9,6 +9,7 @@ main() {
 
 install_symlinks() {
   symlink "$DOTF/plugins/ssh/rc" ~/.ssh/rc
+  symlink "$DOTF/plugins/ssh/config" ~/.ssh/config
 }
 
 main "$@"
