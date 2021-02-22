@@ -44,6 +44,7 @@ Plug 'bogado/file-line'
 Plug 'janko/vim-test'
 Plug 'fatih/vim-go',                    { 'for': 'go' }
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+Plug 'voldikss/vim-floaterm'
 
 " a collection of language packs for vim:
 " Plug 'sheerun/vim-polyglot'
