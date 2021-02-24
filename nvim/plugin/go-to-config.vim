@@ -4,10 +4,6 @@ endfunction
 
 command! -complete=dir -nargs=+ GoToConfig call GoToConfig("<args>")
 
-command! FZFConfig call fzf#run({
-      \ "source": "nvim-list-config",
-      \ "window": "call FloatingFZF()",
-      \ "options": "--prompt 'Config> '",
-      \ "sink": 'GoToConfig'})
+command! FZFConfig call FZFEdit('Config', 'nvim-list-config', 'GoToConfig')
 
 noremap <Leader>gc :FZFConfig<cr>
