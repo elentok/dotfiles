@@ -4,7 +4,7 @@ endif
 
 if !exists('g:gui_oni')
   set background=dark
-  let g:afterglow_italic_comments=1
+  let g:embark_terminal_italics = 1
   silent! colorscheme embark
   hi Folded guibg=black
 endif

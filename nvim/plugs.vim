@@ -50,7 +50,7 @@ Plug 'voldikss/vim-floaterm'
 " Plug 'sheerun/vim-polyglot'
 
 " color scheme:
-Plug 'skbolton/embark'
+Plug 'embark-theme/vim', { 'as': 'embark' }
 
 if g:lsp_mode == 'coc'
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
