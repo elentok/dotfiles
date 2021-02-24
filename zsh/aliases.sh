@@ -253,6 +253,14 @@ f() {
 # Fuzzy cd {{{1
 
 alias c='cd $(pick-directory)'
+alias d='cd $(vifm --choose-dir - --on-choose echo .)'
+
+function vv() {
+  files="$(vifm --choose-files - --on-choose echo .)"
+  if [ -n "$files" ]; then
+    echo "$files" | xargs nvim
+  fi
+}
 
 function pick-directory() {
   # calling "print -s" adds the command to zsh history
