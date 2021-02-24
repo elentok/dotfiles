@@ -11,23 +11,30 @@ if !exists('$FZF_DEFAULT_COMMAND')
   endif
 endif
 
-command! FZFGitStaged call fzf#run({
-      \ "source": "git diff --name-only --cached",
-      \ "options": "--prompt 'Git Staged>'",
-      \ "sink": "e"})
+function! FZFEdit(prompt, source, ...)
+  let sink = get(a:, 1, 'e')
 
-command! FZFGitUnstaged call fzf#run({
-      \ "source": "git diff --name-only",
-      \ "options": "--prompt 'Git Unstaged>'",
-      \ "sink": "e"})
+  call fzf#run({
+    \ "source": a:source,
+    \ "window": g:fzf_layout['window'],
+    \ "options": "--prompt '" . a:prompt . ">'",
+    \ "sink": sink})
+endfunction
 
-command! FZFGitChanged call fzf#run({
-      \ "source": "git diff --name-only HEAD",
-      \ "options": "--prompt 'Git Changed>'",
-      \ "sink": "e"})
+command! FZFGitStaged call FZFEdit('Git Staged', 'git diff --name-only --cached')
+command! FZFGitUnstaged call FZFEdit('Git Unstaged', 'git diff --name-only')
+command! FZFGitChanged call FZFEdit('Git Changed', 'git diff --name-only HEAD')
+
+command! FZFHgModified call FZFEdit('Hg Modified', 'hg status --no-status')
+command! FZFHgUnresolved call FZFEdit('Hg Unresolved', "hg resolve --no-status --list 'set:unresolved()'")
 
 noremap <c-p> :Files<cr>
 noremap <Leader>b :Buffers<cr>
 noremap <Leader>gm :FZFMru<cr>
 noremap <Leader>gt :Tags<cr>
 noremap `` :BTags<cr>
+
+noremap <Leader>vm :FZFGitChanged<cr>
+
+nnoremap <Leader>hm :FZFHgModified<cr>
+nnoremap <Leader>hu :FZFHgUnresolved<cr>
