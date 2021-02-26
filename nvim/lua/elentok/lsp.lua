@@ -2,12 +2,11 @@ if vim.g.lsp_mode ~= 'native' then
   return
 end
 
-
 local util = require('elentok/util')
-local a = vim.api
 
 local lspconfig = util.safe_require('lspconfig')
 if not lspconfig then
+  print('Warning: lspconfig not found, skipping initialization.')
   return
 end
 
@@ -15,36 +14,35 @@ vim.g.completion_matching = {'fuzzy', 'substring', 'exact', 'all'}
 vim.g.completion_matching_smart_case = 1
 
 function on_attach(client, bufnr)
-  print('on attach!')
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
-  local opts = { noremap=true, silent=true }
-  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'gO', '<Cmd>Telescope lsp_document_symbols<CR>', opts)
-  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  nnoremap = util.create_buf_map_func(bufnr, 'n')
+  nnoremap('gD', 'vim.lsp.buf.declaration()')
+  nnoremap('gd', 'vim.lsp.buf.definition()')
+  nnoremap('gO', 'require("telescope.builtin").lsp_document_symbols()')
+  nnoremap('K', 'vim.lsp.buf.hover()')
+  nnoremap('gi', 'vim.lsp.buf.implementation()')
+  nnoremap('<C-k>', 'vim.lsp.buf.signature_help()')
+  nnoremap('<space>wa', 'vim.lsp.buf.add_workspace_folder()')
+  nnoremap('<space>wr', 'vim.lsp.buf.remove_workspace_folder()')
+  nnoremap('<space>wl', 'print(vim.inspect(vim.lsp.buf.list_workspace_folders()))')
+  nnoremap('<space>D', 'vim.lsp.buf.type_definition()')
+  nnoremap('<space>rn', 'vim.lsp.buf.rename()')
+  nnoremap('gr', 'vim.lsp.buf.references()')
+  nnoremap('gR', 'require("telescope.builtin").lsp_references()')
+  nnoremap('<space>e', 'vim.lsp.diagnostic.show_line_diagnostics()')
+  nnoremap('[d', 'vim.lsp.diagnostic.goto_prev()')
+  nnoremap(']d', 'vim.lsp.diagnostic.goto_next()')
+  nnoremap('<space>q', 'vim.lsp.diagnostic.set_loclist()')
 
   -- Set some keybinds conditional on server capabilities
   if client.resolved_capabilities.document_formatting then
-    buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+    nnoremap("<space>f", "lua vim.lsp.buf.formatting()")
   elseif client.resolved_capabilities.document_range_formatting then
-    buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+    nnoremap("<space>f", "lsp.buf.range_formatting()")
   end
 
   -- Set autocommands conditional on server_capabilities
@@ -142,7 +140,7 @@ lspconfig.diagnosticls.setup{
 
 function LspRename ()
   local old_name = util.current_word()
-  local new_name = a.nvim_call_function('input', {'New name: ', old_name})
+  local new_name = vim.api.nvim_call_function('input', {'New name: ', old_name})
   if new_name then
     print('\nRenaming')
     vim.lsp.buf.rename(new_name)
