@@ -52,9 +52,21 @@ local function current_word()
   return api.nvim_call_function('expand', {'<cword>'})
 end
 
+function create_buf_map_func(bufnr, mode, opts)
+  if opts == nil then opts = {} end
+  if opts.noremap == nil then opts.noremap = true end
+  if opts.silent == nil then opts.silent = true end
+
+  return function(lhs, lua_code)
+    local rhs = string.format('<Cmd>lua %s<cr>', lua_code)
+    api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
+  end
+end
+
 return {
   safe_require = safe_require,
   open_window = open_window,
   current_word = current_word,
+  create_buf_map_func = create_buf_map_func,
 }
 
