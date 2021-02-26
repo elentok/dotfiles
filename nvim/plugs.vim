@@ -45,6 +45,9 @@ Plug 'janko/vim-test'
 Plug 'fatih/vim-go',                    { 'for': 'go' }
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'voldikss/vim-floaterm'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 " a collection of language packs for vim:
 " Plug 'sheerun/vim-polyglot'
@@ -63,6 +66,7 @@ elseif g:lsp_mode == 'langclient'
 elseif g:lsp_mode == 'native'
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/completion-nvim'
+  Plug 'anott03/nvim-lspinstall'
 endif
 
 if file_readable(expand("~/.dotlocal/nvim/plugs.vim"))

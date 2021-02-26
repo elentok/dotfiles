@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-source `dirname $0`/../../framework
+set -euo pipefail
+
+source "$(dirname "$0")/../../framework"
 
 LUA_ROOT="$HOME/.lua"
 LUA_VERSION=5.4.2
@@ -13,6 +15,10 @@ function main() {
 
   if command_missing luarocks; then
     install-luarocks
+  fi
+
+  if command_missing lua-language-server; then
+    install-language-server
   fi
 
   luarocks install --local formatter
@@ -44,10 +50,23 @@ function install-luarocks() {
   make install
 }
 
+function install-language-server() {
+  create-and-open-build-dir lua-language-server
+
+  git clone https://github.com/sumneko/lua-language-server
+  cd lua-language-server
+  git submodule update --init --recursive
+
+  cd 3rd/luamake
+  ninja -f ninja/linux.ninja
+  cd ../..
+  ./3rd/luamake/luamake rebuild
+}
+
 function create-and-open-build-dir() {
   local name="$1"
 
-  cd $TMP
+  cd "$TMP"
   rm -rf "build/$name"
   mkdir -p "build/$name"
   cd "build/$name"
