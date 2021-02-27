@@ -28,10 +28,10 @@ command! FZFGitChanged call FZFEdit('Git Changed', 'git diff --name-only HEAD')
 command! FZFHgModified call FZFEdit('Hg Modified', 'hg status --no-status')
 command! FZFHgUnresolved call FZFEdit('Hg Unresolved', "hg resolve --no-status --list 'set:unresolved()'")
 
-noremap <c-p> :Files<cr>
-noremap <Leader>b :Buffers<cr>
-noremap <Leader>gm :FZFMru<cr>
-noremap <Leader>gt :Tags<cr>
+" noremap <c-p> :Files<cr>
+" noremap <Leader>b :Buffers<cr>
+" noremap <Leader>gm :FZFMru<cr>
+" noremap <Leader>gt :Tags<cr>
 noremap `` :BTags<cr>
 
 noremap <Leader>vm :FZFGitChanged<cr>
