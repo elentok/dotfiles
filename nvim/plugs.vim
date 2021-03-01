@@ -57,12 +57,6 @@ Plug 'embark-theme/vim', { 'as': 'embark' }
 
 if g:lsp_mode == 'coc'
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-elseif g:lsp_mode == 'langclient'
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'autozimu/LanguageClient-neovim', {
-      \ 'branch': 'next',
-      \ 'do': 'bash install.sh',
-      \ }
 elseif g:lsp_mode == 'native'
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/completion-nvim'
