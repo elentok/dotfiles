@@ -14,7 +14,6 @@ augroup Elentok_Misc
   autocmd FileType java       setlocal omnifunc=eclim#java#complete#CodeComplete
     \ completefunc=eclim#java#complete#CodeComplete
   autocmd FileType javascript setlocal foldmethod=expr
-  autocmd FileType typescript setlocal textwidth=100
   autocmd FileType ruby       setlocal omnifunc=
   autocmd Filetype python     setlocal ts=4 softtabstop=4 shiftwidth=4
   autocmd FileType gitcommit,markdown setlocal spell spellcapcheck=
