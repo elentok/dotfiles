@@ -19,10 +19,10 @@ call Elentok_AddPathShortener($HOME, '~')
 
 function! Elentok_StatusLineFileName()
   if exists('b:vaffle')
-    return 'DIR: ' . b:vaffle['dir']
-  endif
+    let short_path = statusline#shorten(b:vaffle['dir'])
 
-  let filename = expand('%:t')
+    return 'DIR: ' . short_path
+  endif
 
   " Temporary solution
   if exists('g:statusline_shorteners_updated')
@@ -32,13 +32,22 @@ function! Elentok_StatusLineFileName()
     endif
   endif
 
-  if !exists('b:short_path')
-    let b:short_path = expand('%:p:h')
 
-    for [full, short] in g:statusline_shorteners
-      let b:short_path = substitute(b:short_path, full . '\(/\|$\)', short . '\1', '')
-    endfor
+  let filename = expand('%:t')
+
+  if !exists('b:short_path')
+    let b:short_path = statusline#shorten(expand('%:p:h'))
   endif
 
   return filename . ' (' . b:short_path . ')'
+endfunction
+
+function statusline#shorten(path)
+  let path = a:path
+
+  for [full, short] in g:statusline_shorteners
+    let path = substitute(path, full . '\(/\|$\)', short . '\1', '')
+  endfor
+
+  return path
 endfunction
