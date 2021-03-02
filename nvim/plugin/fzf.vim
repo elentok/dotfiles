@@ -30,7 +30,7 @@ command! FZFHgUnresolved call FZFEdit('Hg Unresolved', "hg resolve --no-status -
 
 " noremap <c-p> :Files<cr>
 " noremap <Leader>b :Buffers<cr>
-" noremap <Leader>gm :FZFMru<cr>
+noremap <Leader>gm :FZFMru<cr>
 " noremap <Leader>gt :Tags<cr>
 noremap `` :BTags<cr>
 
