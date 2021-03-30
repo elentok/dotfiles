@@ -7,6 +7,7 @@ end
 
 require'nvim-treesitter.configs'.setup{
   ensure_installed = "maintained",
+  ignore_install = { "nix", "erlang", "ocamllex", "devicetree", "gdscript", "supercollider", "ledger" },
   highlight = {
     enable = true
   },
