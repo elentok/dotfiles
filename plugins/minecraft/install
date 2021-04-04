@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTF/framework"
+
+JAR_FILENAME="minecraft_server.1.16.5.jar"
+JAR_URL="https://launcher.mojang.com/v1/objects/1b557e7b033b583cd9f66746b7a9ab1ec1673ced/server.jar"
+
+main() {
+  create_group minecraft
+  create-minecraft-user
+  install-server
+  copy-server-properties
+  setup-service
+}
+
+create-minecraft-user() {
+  bullet 'Creating minecraft user... '
+  if user_exists minecraft; then
+    info 'already exists.'
+    return
+  else
+    sudo useradd minecraft --create-home -g minecraft && success 'done'
+  fi
+}
+
+install-server() {
+  sudo --login -u minecraft curl "$JAR_URL" -o "$JAR_FILENAME"
+  sudo --login -u minecraft "sed -i s/eula=.*/eula=TRUE/g"
+}
+
+copy-server-properties() {
+  sudo cp -f $DOTF/plugins/minecraft/server.properties /home/minecraft/
+  sudo chown minecraft /home/minecraft/server.properties
+}
+
+setup-service() {
+  install-service $DOTF/plugins/minecraft/minecraft.service.erb system
+
+  systemctl daemon-reload
+  systemctl start minecraft
+}
+
+main "$@"
