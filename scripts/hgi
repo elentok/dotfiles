@@ -36,7 +36,8 @@ function pick-commit() {
 }
 
 function list-commits() {
-  hg log -r smart --template "${BLUE}{node|short} ${GREEN}a={author|user} ${YELLOW}{date|age}${RESET} {desc|firstline}\n" \
+  hg log-for-hgi \
+    --template "${BLUE}{node|short} ${GREEN}a={author|user} ${YELLOW}{date|age}${RESET} {desc|firstline}\n" \
     | grep a="$USER"
 }
 

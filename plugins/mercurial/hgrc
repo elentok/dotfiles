@@ -9,4 +9,10 @@ ca = commit --amend
 cia = commit --interactive --amend
 he = histedit
 
+# hgi related aliases:
+log-for-hgi = log -r smart
+dd = !hgi diff
+lg = !hgi list
+ss = !hgi status
+
 %include ~/.dotlocal/hgrc
