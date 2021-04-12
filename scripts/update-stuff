@@ -3,7 +3,7 @@
 source "$DOTF/framework"
 
 PIP_PKGS="pip neovim neovim-remote httpie ranger pynvim jedi python-language-server pyls-black black"
-NPM_PKGS="npm yarn json"
+NPM_PKGS="npm yarn json neovim"
 
 header 'Updating NodeJS'
 n 14
