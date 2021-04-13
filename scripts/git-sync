@@ -26,8 +26,9 @@ commit-if-needed() {
 commit() {
   bullet "Commiting changes...\n"
   date=$(date +%Y-%m-%d\ %H:%M)
+  host=$(short-hostname)
   git add --all
-  git commit -m "Update $date"
+  git commit -m "Update $date ($host)"
   echo
 }
 
