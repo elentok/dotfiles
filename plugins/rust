@@ -13,3 +13,8 @@ fi
 if command_missing exa; then
   cargo install exa
 fi
+
+if command_missing alacritty; then
+  apt-fast-install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev python3
+  cargo install alacritty
+fi
