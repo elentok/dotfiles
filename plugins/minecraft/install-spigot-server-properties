@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+sudo cp -f $DOTF/plugins/minecraft/server.properties /home/minecraft/spigot
+sudo chown minecraft:minecraft /home/minecraft/spigot/server.properties

@@ -1,0 +1,16 @@
+# Put this file in /usr/lib/systemd/system
+
+[Unit]
+Description=Spigot Minecraft Server
+Requires=network.target
+
+[Service]
+User=minecraft
+WorkingDirectory=/home/minecraft
+ExecStart=/home/minecraft/spigot/start
+
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

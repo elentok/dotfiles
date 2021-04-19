@@ -7,12 +7,23 @@ source "$DOTF/framework"
 JAR_FILENAME="minecraft_server.1.16.5.jar"
 JAR_URL="https://launcher.mojang.com/v1/objects/1b557e7b033b583cd9f66746b7a9ab1ec1673ced/server.jar"
 
+SPIGOT_ROOT="/home/minecraft/spigot"
+SPIGOT_REV="1.16.5"
+SPIGOT_JAR_FILENAME="spigot-${SPIGOT_REV}.jar"
+SPIGOT_JAR_URL="https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar"
+
 main() {
   create_group minecraft
+  add_user_to_group minecraft
   create-minecraft-user
-  install-server
-  copy-server-properties
-  setup-service
+
+  if ! is-spigot-server-installed; then
+    install-spigot-server
+  fi
+
+  # install-server
+  # copy-server-properties
+  # setup-service
 }
 
 create-minecraft-user() {
@@ -25,14 +36,55 @@ create-minecraft-user() {
   fi
 }
 
+is-spigot-server-installed() {
+  [ -e "/home/minecraft/spigot/${SPIGOT_JAR_FILENAME}" ]
+}
+
+install-spigot-server() {
+  build-spigot-server
+
+  bullet 'Installing spigot server...'
+  as-minecraft mkdir -p "$SPIGOT_ROOT"
+  sudo cp "$TMP/spigot/${SPIGOT_JAR_FILENAME}" "$SPIGOT_ROOT/"
+  sudo cp "$DOTF/plugins/minecraft/spigot-start" "$SPIGOT_ROOT/start"
+  sudo bash -c "chown minecraft:minecraft ${SPIGOT_ROOT}/*"
+  sudo chmod 750 "${SPIGOT_ROOT}/start"
+
+  install-service $DOTF/plugins/minecraft/spigotmc.service.erb system
+
+  "$DOTF/plugins/minecraft/install-spigot-server-properties"
+}
+
+build-spigot-server() {
+  bullet 'Building spigot server...'
+
+  # Build it
+  mkdir -p "$TMP/spigot"
+  cd "$TMP/spigot"
+
+  if [ ! -e BuildTools.jar ]; then
+    curl "$SPIGOT_JAR_URL" -o BuildTools.jar
+  fi
+
+  if [ ! -e "$SPIGOT_JAR_FILENAME" ]; then
+    java -jar BuildTools.jar --rev "${SPIGOT_REV}"
+  fi
+
+  success 'done.'
+}
+
 install-server() {
   sudo --login -u minecraft curl "$JAR_URL" -o "$JAR_FILENAME"
   sudo --login -u minecraft "sed -i s/eula=.*/eula=TRUE/g"
 }
 
+as-minecraft() {
+  sudo --login -u minecraft "$@"
+}
+
 copy-server-properties() {
   sudo cp -f $DOTF/plugins/minecraft/server.properties /home/minecraft/
-  sudo chown minecraft /home/minecraft/server.properties
+  sudo chown minecraft:minecraft /home/minecraft/server.properties
 }
 
 setup-service() {
