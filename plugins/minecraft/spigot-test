@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#
+# This script runs Spigot as the "minecraft" user (allows viewing the output).
+
+set -euo pipefail
+
+sudo --login -u minecraft bash -c "cd /home/minecraft/spigot && ./start"

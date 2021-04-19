@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+RAM=4096M
+java -Xmx${RAM} -Xms${RAM} -jar spigot-1.16.5.jar nogui
