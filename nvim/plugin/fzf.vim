@@ -25,9 +25,6 @@ command! FZFGitStaged call FZFEdit('Git Staged', 'git diff --name-only --cached'
 command! FZFGitUnstaged call FZFEdit('Git Unstaged', 'git diff --name-only')
 command! FZFGitChanged call FZFEdit('Git Changed', 'git diff --name-only HEAD')
 
-command! FZFHgModified call FZFEdit('Hg Modified', 'hg status --no-status')
-command! FZFHgUnresolved call FZFEdit('Hg Unresolved', "hg resolve --no-status --list 'set:unresolved()'")
-
 " noremap <c-p> :Files<cr>
 " noremap <Leader>b :Buffers<cr>
 noremap <Leader>gm :FZFMru<cr>
@@ -35,6 +32,3 @@ noremap <Leader>gm :FZFMru<cr>
 noremap `` :BTags<cr>
 
 noremap <Leader>vm :FZFGitChanged<cr>
-
-nnoremap <Leader>hm :FZFHgModified<cr>
-nnoremap <Leader>hu :FZFHgUnresolved<cr>

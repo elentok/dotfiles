@@ -8,6 +8,8 @@ c = commit --interactive
 ca = commit --amend
 cia = commit --interactive --amend
 he = histedit
+rbc = rebase --continue
+res = resolve --mark
 
 # hgi related aliases:
 log-for-hgi = log -r smart
