@@ -26,7 +26,7 @@ install_requirements() {
   elif is_mac; then
     brew_install python
   elif is_debian; then
-    apt-fast-install python-dev python3-dev python3-pip clang ninja-build
+    apt-fast-install python3-dev python3-pip clang ninja-build
   fi
 
   npm-fast-install neovim
