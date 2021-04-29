@@ -252,7 +252,7 @@ f() {
 
 # Fuzzy cd {{{1
 
-alias c='cd $(pick-directory)'
+alias c='cd "$(pick-directory)"'
 alias d='cd $(vifm --choose-dir - --on-choose echo .)'
 
 function vv() {
@@ -270,10 +270,10 @@ function pick-directory() {
     exit $?
   fi
 
-  dir="$(list-dirs | fzf --ansi --exit-0 --select-1 | awk '{print $1}')"
+  dir="$(list-dirs | fzf --ansi --exit-0 --select-1)"
 
   if [ -n "$dir" ]; then
-    print -s "cd $dir" && \
+    print -s "cd ""$dir""" && \
       echo "$dir"
   else
     echo .
