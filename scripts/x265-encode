@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [ $# -lt 1 ]; then
+  echo "Usage: x265-encode <video-file>"
+  exit 1
+fi
+
+input_file_path="$1"
+output_mkv_file_path="${input_file_path}-x265.mkv"
+
+ffmpeg \
+  -hide_banner \
+  -i "${input_file_path}" \
+  -codec:v libx265 \
+  -crf 32 \
+  -preset medium \
+  -pix_fmt yuv420p10le \
+  -x265-params bframes=8:psy-rd=1:aq-mode=3:aq-strength=0.8:deblock=1,1 \
+  -codec:a copy \
+  -codec:s copy \
+  -n "${output_mkv_file_path}" \
+  "$@"
