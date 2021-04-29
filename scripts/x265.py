@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 
-import argparse
+import glob
 import os
 import shlex
 import sys
 
 
 def main():
-    for file in sys.argv[1:]:
-        convert(file)
+    for arg in sys.argv[1:]:
+        for file in glob.glob(arg):
+            convert(file)
 
 
 def convert(input_filename):
@@ -17,7 +18,7 @@ def convert(input_filename):
     args = [
         "-hide_banner",
         "-i",
-        shlex.quote(input_filename),
+        f'"{input_filename}"',
         "-codec:v",
         "libx265",
         "-crf",
@@ -39,7 +40,7 @@ def convert(input_filename):
         [
             "ffmpeg",
             *args,
-            shlex.quote(output_filename),
+            f'"{output_filename}"',
         ]
     )
 
