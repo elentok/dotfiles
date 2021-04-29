@@ -8,13 +8,17 @@ if [ $# -lt 1 ]; then
 fi
 
 input_file_path="$1"
+shift
+
 output_mkv_file_path="${input_file_path}-x265.mkv"
+
+set -x
 
 ffmpeg \
   -hide_banner \
   -i "${input_file_path}" \
   -codec:v libx265 \
-  -crf 32 \
+  -crf 26 \
   -preset medium \
   -pix_fmt yuv420p10le \
   -x265-params bframes=8:psy-rd=1:aq-mode=3:aq-strength=0.8:deblock=1,1 \
