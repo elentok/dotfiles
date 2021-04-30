@@ -13,7 +13,7 @@ def main():
 
 
 def convert(input_filename):
-    output_filename = f"{input_filename}.123-x265.mkv"
+    output_filename = f"{input_filename}.x265.mkv"
     print(f"Converting {input_filename}")
     args = [
         "-hide_banner",
@@ -35,7 +35,7 @@ def convert(input_filename):
         "copy",
         "-n",
     ]
-    args.extend(["-vf", "scale=1920:1080"])
+    #  args.extend(["-vf", "scale=1920:1080"])
     command = " ".join(
         [
             "ffmpeg",
