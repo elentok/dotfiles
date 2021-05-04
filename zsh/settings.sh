@@ -97,6 +97,9 @@ fi
 
 # FZF {{{1
 
+# make FZF a little bit prettier
+export FZF_DEFAULT_OPTS='--border --margin=3'
+
 # make FZF respect .gitignore
 # export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
