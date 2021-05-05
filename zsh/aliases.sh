@@ -252,7 +252,7 @@ f() {
 
 # Fuzzy cd {{{1
 
-alias c='cd "$(pick-directory)"'
+alias c='cd "$(pick-directory-recursive)"'
 alias d='cd $(vifm --choose-dir - --on-choose echo .)'
 
 function vv() {
@@ -265,23 +265,40 @@ function vv() {
 function pick-directory() {
   # calling "print -s" adds the command to zsh history
 
-  if [ $# -gt 0 ]; then
-    cd "$@"
-    exit $?
-  fi
-
   dir="$(list-dirs | fzf --ansi --exit-0 --select-1)"
 
   if [ -n "$dir" ]; then
-    print -s "cd ""$dir""" && \
-      echo "$dir"
+    print -s "cd ""$dir""" && echo "$dir"
   else
     echo .
   fi
 }
 
+function pick-directory-recursive() {
+  full_dir="."
+
+  dir="$(list-dirs | fzf --ansi --exit-0)"
+  while [ -n "$dir" ]; do
+    full_dir="$full_dir/$dir"
+    dir="$(list-dirs "$full_dir" | fzf --ansi --exit-0)"
+  done
+
+  if [ -n "$full_dir" ]; then
+    print -s "cd ""$full_dir""" && echo "$full_dir"
+  else
+    echo .
+  fi
+}
+
+# Usage: list-dirs [optional: root]
 function list-dirs() {
-  find . -maxdepth 1 -type d | sed 's#^\.\/##' | grep -v '^\.$' || true
+  if [ $# -gt 0 ]; then
+    root="$1"
+  else
+    root="$(pwd)"
+  fi
+
+  (cd "$root" && find . -maxdepth 1 -type d) | sed 's#^\.\/##' | grep -v '^\.$' || true
 }
 
 # Fuzzy vi {{{1
