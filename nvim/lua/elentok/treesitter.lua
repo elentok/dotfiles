@@ -20,9 +20,9 @@ require'nvim-treesitter.configs'.setup{
       node_decremental = "grm",
     },
   },
-  indent = {
-    enable = true
-  },
+  -- disable python and typescript indentation until fixed:
+  --   https://github.com/nvim-treesitter/nvim-treesitter/issues/1167#issue-853914044
+  indent = {enable = true, disable = {"python", "typescript"}},
 }
 
 vim.api.nvim_set_option('foldmethod', 'expr')
