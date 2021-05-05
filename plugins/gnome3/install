@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
 
-$DOTF/plugins/gnome3/one-dark.sh
+# $DOTF/plugins/gnome3/one-dark.sh
+
+# Makes Alt+Tab switch only between windows in the current workspace.
+gsettings set org.gnome.shell.app-switcher current-workspace-only true
+
