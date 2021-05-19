@@ -33,5 +33,7 @@ fi
 nvim +PlugUpdate +qall
 nvim +PlugClean! +PlugInstall +qall
 
+nvim +PlugUpdate +qall
+
 header 'Neovim: CocUpdateSync'
 nvim +CocUpdateSync +qall

@@ -106,7 +106,7 @@ install_symlinks() {
 
 install_plugins() {
   bullet "Running PlugInstall... "
-  nvim +PlugClean! +PlugInstall +UpdateRemotePlugins +qall
+  nvim +PlugClean! +PlugInstall +PackerInstall +UpdateRemotePlugins +qall
   success "done"
 }
 
