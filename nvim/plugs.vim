@@ -52,9 +52,6 @@ Plug 'nvim-telescope/telescope.nvim'
 " a collection of language packs for vim:
 " Plug 'sheerun/vim-polyglot'
 
-" color scheme:
-Plug 'embark-theme/vim', { 'as': 'embark' }
-
 if g:lsp_mode == 'coc'
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 elseif g:lsp_mode == 'native'
