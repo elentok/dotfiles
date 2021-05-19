@@ -12,3 +12,6 @@ tmp
 node_modules
 plugins/fish/fish_variables
 .mypy_cache
+
+# The auto-generated compiled version of packer.
+nvim/plugin/packer_compiled.vim
