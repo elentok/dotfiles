@@ -4,3 +4,5 @@ require'elentok/packer-bootstrap'
 require'elentok/plugins'
 require'elentok/lsp'
 require'elentok/treesitter'
+
+require('nvim-autopairs').setup()

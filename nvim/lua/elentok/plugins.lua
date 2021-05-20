@@ -16,6 +16,9 @@ return require('packer').startup(function()
   use {'tpope/vim-surround'}
   use {'tpope/vim-unimpaired'}
 
+  -- Automatically close bracket and tag pairs
+  use {'windwp/nvim-autopairs'}
+
 end, {
   display = {
     open_fn = require('packer.util').float,
