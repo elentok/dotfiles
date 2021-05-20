@@ -3,7 +3,6 @@ call plug#begin('~/.local/share/nvim-plugins')
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'AndrewRadev/sideways.vim'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'Raimondi/delimitMate'
 Plug 'elentok/replace-all.vim', { 'on': ['FindAll', 'ReplaceAll'] }
 Plug 'elentok/run.vim'
 Plug 'elentok/togglr.vim'
