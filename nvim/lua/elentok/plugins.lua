@@ -1,5 +1,3 @@
--- vim.cmd [[packadd packer.nvim]]
-
 return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
@@ -21,6 +19,9 @@ return require('packer').startup(function()
 
   -- Automatically close bracket and tag pairs
   use 'windwp/nvim-autopairs'
+
+  -- Move arguments to the left and right.
+  use 'AndrewRadev/sideways.vim'
 
 end, {
   display = {
