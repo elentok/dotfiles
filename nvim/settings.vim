@@ -158,13 +158,6 @@ let g:easy_align_delimiters = {
       \ '\': { 'pattern': '[\\]', 'ignore_groups': [] }
       \ }
 
-" Plugin: scrooloose/nerdcommenter {{{1
-let g:NERDCustomDelimiters = {
-    \ 'scss': { 'left': '//' }
-\ }
-
-let g:NERDSpaceDelims = 1
-
 " Plugin: fatih/vim-go {{{1
 let g:go_fmt_command = "goimports"
 

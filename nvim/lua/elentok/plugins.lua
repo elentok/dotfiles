@@ -7,9 +7,11 @@ return require('packer').startup(function()
   -- Color scheme.
   use {'embark-theme/vim', as = 'embark'}
 
+  -- File manager.
   use 'cocopon/vaffle.vim'
 
   use 'tpope/vim-abolish'
+  use 'tpope/vim-commentary'
   use 'tpope/vim-dispatch'
   use 'tpope/vim-eunuch'
   use 'tpope/vim-fugitive'
