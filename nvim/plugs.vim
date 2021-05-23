@@ -41,14 +41,6 @@ Plug 'nvim-telescope/telescope.nvim'
 " a collection of language packs for vim:
 " Plug 'sheerun/vim-polyglot'
 
-if g:lsp_mode == 'coc'
-  Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-elseif g:lsp_mode == 'native'
-  Plug 'neovim/nvim-lspconfig'
-  Plug 'nvim-lua/completion-nvim'
-  Plug 'anott03/nvim-lspinstall'
-endif
-
 if file_readable(expand("~/.dotlocal/nvim/plugs.vim"))
   source ~/.dotlocal/nvim/plugs.vim
 endif

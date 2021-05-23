@@ -59,7 +59,7 @@ function on_attach(client, bufnr)
     ]], false)
   end
 
-  -- setup completion
+  -- Setup completion.
   require('completion').on_attach()
 end
 
