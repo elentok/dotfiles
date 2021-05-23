@@ -11,6 +11,9 @@ require'nvim-treesitter.configs'.setup{
   highlight = {
     enable = true
   },
+  autopairs = {
+    enable = true
+  },
   incremental_selection = {
     enable = true,
     keymaps = {
