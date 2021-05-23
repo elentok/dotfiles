@@ -30,6 +30,33 @@ return require('packer').startup(function()
   use 'nvim-lua/completion-nvim'
   use 'anott03/nvim-lspinstall'
 
+  -- Allows running "nvim {filename}:{line-number}".
+  use 'bogado/file-line'
+
+  -- FZF.
+  use 'junegunn/fzf.vim'
+  use 'pbogut/fzf-mru.vim'
+
+  -- Misc.
+  use 'junegunn/vim-easy-align'
+  use 'mhinz/vim-signify'
+  use 'mhinz/vim-grepper'
+  use 'michaeljsmith/vim-indent-object'
+  use 'nathanaelkane/vim-indent-guides'
+  use 'nelstrom/vim-visual-star-search'
+  use 'roxma/vim-tmux-clipboard'
+  use 'christoomey/vim-tmux-navigator'
+  use 'voldikss/vim-floaterm'
+  use 'nvim-lua/popup.nvim'
+  use 'nvim-lua/plenary.nvim'
+  use 'nvim-telescope/telescope.nvim'
+  use 'AndrewRadev/splitjoin.vim'
+  use 'elentok/run.vim'
+  use 'elentok/togglr.vim'
+  use 'jamessan/vim-gnupg'
+  use 'davidbeckingsale/writegood.vim'
+  use 'janko/vim-test'
+
 end, {
   display = {
     open_fn = require('packer.util').float,
