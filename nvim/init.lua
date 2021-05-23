@@ -1,3 +1,3 @@
 vim.api.nvim_command('source $DOTF/nvim/init-legacy.vim')
 
-require('nvim-autopairs').setup()
+require'elentok'
