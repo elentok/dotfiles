@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+function main() {
+  cmd="${1:-}"
+  shift
+
+  case "$cmd" in
+    find)
+      common-prefix-find
+      ;;
+    remove)
+      common-prefix-remove "$@"
+      ;;
+    *)
+      usage "$@"
+      ;;
+  esac
+}
+
+function common-prefix-find() {
+  sed -e 'N;s/^\(.*\).*\n\1.*$/\1\n\1/;D'
+}
+
+function common-prefix-remove() {
+  local prefix="$1"
+
+}
+
+main "$@"
