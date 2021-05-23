@@ -23,6 +23,11 @@ return require('packer').startup(function()
   -- Move arguments to the left and right.
   use 'AndrewRadev/sideways.vim'
 
+  -- LSP.
+  use 'neovim/nvim-lspconfig'
+  use 'nvim-lua/completion-nvim'
+  use 'anott03/nvim-lspinstall'
+
 end, {
   display = {
     open_fn = require('packer.util').float,
