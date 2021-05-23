@@ -2,7 +2,6 @@ call plug#begin('~/.local/share/nvim-plugins')
 
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'elentok/replace-all.vim', { 'on': ['FindAll', 'ReplaceAll'] }
-Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 Plug 'itchyny/calendar.vim', { 'on': 'Calendar' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " dark/zen room, no distraction mode
