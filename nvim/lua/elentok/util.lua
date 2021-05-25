@@ -5,7 +5,7 @@ local function safe_require (name)
   if(status) then
     return module
   else
-    print(string.format('WARNING: lua module "%s" is missing', name))
+    print(string.format('WARNING: error loading lua module "%s"', name))
     return nil
   end
 end
