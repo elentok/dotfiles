@@ -1,6 +1,6 @@
 call plug#begin('~/.local/share/nvim-plugins')
 
-Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'elentok/replace-all.vim', { 'on': ['FindAll', 'ReplaceAll'] }
 Plug 'itchyny/calendar.vim', { 'on': 'Calendar' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
