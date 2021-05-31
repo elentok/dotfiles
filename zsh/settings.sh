@@ -98,7 +98,8 @@ fi
 # FZF {{{1
 
 # make FZF a little bit prettier
-# export FZF_DEFAULT_OPTS='--border --margin=3'
+export FZF_DEFAULT_OPTS=''
+# export FZF_DEFAULT_OPTS='--border --margin=0'
 
 # make FZF respect .gitignore
 # export FZF_DEFAULT_COMMAND='ag -g ""'
