@@ -8,5 +8,5 @@ func! ToggleHebrew()
   end
 endfunc
 
-noremap <c-_> :call ToggleHebrew()<cr>
-inoremap <c-_> <c-o>:call ToggleHebrew()<cr>
+" noremap <c-_> :call ToggleHebrew()<cr>
+" inoremap <c-_> <c-o>:call ToggleHebrew()<cr>
