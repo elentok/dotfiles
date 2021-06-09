@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework
+source "$DOTF/framework"
 
 LOCAL=no
 NPM=npm
@@ -16,12 +16,12 @@ while [[ "${1:-}" =~ ^- ]]; do
 done
 
 function main() {
-  bullet "Installing npm packages: $@..."
+  bullet "Installing npm packages: $*..."
   die-if-npm-missing
   find-node-modules
   set-npm-command
 
-  local missing=$(find-missing-packages "$@")
+  missing=$(find-missing-packages "$@")
   if [ -z "$missing" ]; then
     info " already installed."
   else
@@ -35,8 +35,20 @@ function find-node-modules() {
   if [ "$LOCAL" == 'yes' ]; then
     NODE_MODULES="$(pwd)/node_modules"
   else
-    NODE_MODULES="$(cd "$(dirname $(which node))/../lib/node_modules" && pwd)"
+    if is-global-node; then
+      NODE_MODULES="/usr/local/lib/node_modules"
+    else
+      NODE_MODULES="$(cd "$(node-bin-dir)/../lib/node_modules" && pwd)"
+    fi
   fi
+}
+
+function node-bin-dir() {
+  dirname "$(which node)"
+}
+
+function is-global-node() {
+  [ "$(node-bin-dir)" = "/usr/bin" ]
 }
 
 function set-npm-command() {

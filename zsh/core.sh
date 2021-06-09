@@ -1,6 +1,16 @@
 export DOTF=~/.dotfiles
 export DOTL=~/.dotlocal
 
+# Helper: Source If Exists {{{1
+source_if_exists() {
+  if [ -e "$1" ]; then source $1; fi
+}
+
+# Load Configuration {{{1
+source "$DOTF/zsh/config.sh"
+source_if_exists "$DOTL/zsh/config.sh"
+
+
 # Identify OS {{{1
 if [ "$(uname -s)" = "Darwin" ]; then
   export OS=mac
@@ -70,9 +80,6 @@ function is_bash() {
 }
 
 # Helper functions {{{1
-source_if_exists() {
-  if [ -e "$1" ]; then source $1; fi
-}
 
 DOTF_CACHE_ROOT="$HOME/.cache/dotfiles"
 
@@ -154,7 +161,9 @@ if [ -e "$BREW_HOME" ]; then
 fi
 
 # NodeJS {{{1
-export N_PREFIX=$HOME/.n
+if [ "$DOTF_CONFIG_NODE_PROVIDER" = "n" ]; then
+  export N_PREFIX=$HOME/.n
+fi
 
 # Go {{{1
 if [ -e $HOME/.apps/go ]; then
@@ -177,10 +186,13 @@ fi
 
 # PATH {{{1
 PATH="$DOTF/scripts:\
-$DOTL/scripts:\
-$HOME/.yarn/bin:\
-$N_PREFIX/bin:\
-$HOME/.fzf/bin:\
+$DOTL/scripts"
+
+if [ "$DOTF_CONFIG_NODE_PROVIDER" = "n" ]; then
+  PATH="$PATH:$N_PREFIX/bin"
+fi
+
+PATH="$PATH:$HOME/.fzf/bin:\
 $HOME/.apps/bin:\
 $HOME/bin:\
 $HOME/scripts:\
