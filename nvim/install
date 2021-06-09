@@ -11,7 +11,6 @@ main() {
   install_neovim
   install_symlinks
   install_plugins
-  install_coc_plugins
   install_lsp_tools
   install_cli_tools
   install_dtach
@@ -109,17 +108,6 @@ install_plugins() {
   nvim +PlugClean! +PlugInstall +PackerInstall +UpdateRemotePlugins +qall
   bullet "Running PackerInstall... "
   nvim-packer-sync
-  success "done"
-}
-
-install_coc_plugins() {
-  extensions=(coc-tsserver coc-eslint coc-prettier coc-json coc-html coc-lua
-    coc-css coc-lists coc-git coc-yank coc-vimlsp coc-python coc-diagnostic)
-
-  bullet "Installing Coc extensions... "
-  mkdir -p ~/.config/coc/extensions
-  cd ~/.config/coc/extensions
-  npm-fast-install --local -save --ignore-engines ${extensions[@]}
   success "done"
 }
 
