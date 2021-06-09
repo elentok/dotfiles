@@ -7,9 +7,11 @@ source "$(dirname "$0")/../../framework"
 main() {
   if is_termux; then
     apt-fast-install nodejs-lts
-  else
+  elif [ "$DOTF_CONFIG_NODE_PROVIDER" = "n" ]; then
     git_clone https://github.com/tj/n "$N_PREFIX"
     install_node
+  else
+    apt-fast-install nodejs npm
   fi
 
   install_packages
