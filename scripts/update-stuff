@@ -5,35 +5,61 @@ source "$DOTF/framework"
 PIP_PKGS="pip neovim neovim-remote httpie ranger pynvim jedi python-language-server pyls-black black"
 NPM_PKGS="npm yarn json neovim"
 
-header 'Updating NodeJS'
-n 14
+function main() {
+  update-node
+  update-pip-stuff
+  update-npm-stuff
+  update-neovim-stuff
+}
+
+function update-node() {
+  if is-n-providing-node; then
+    header 'Updating NodeJS'
+    n 14
+  fi
+}
+
+function is-n-providing-node() {
+  [ "$DOTF_CONFIG_NODE_PROVIDER" == "n" ];
+}
+
+function update-pip-stuff() {
+  header 'Updating pip packages'
+  for pkg in $PIP_PKGS; do
+    pip3 install "$pkg" --upgrade --user
+  done
+}
+
+function update-npm-stuff() {
+  if is-n-providing-node; then
+    npm="npm"
+  else
+    npm="sudo npm"
+  fi
 
 
-header 'Updating pip packages'
-for pkg in $PIP_PKGS; do
-  pip3 install "$pkg" --upgrade --user
-done
+  header 'Updating npm packages'
+  for pkg in $NPM_PKGS; do
+    $npm install -g "$pkg"
+  done
+}
 
-header 'Updating npm packages'
-for pkg in $NPM_PKGS; do
-  npm install -g "$pkg"
-done
+function update-neovim-stuff() {
+  header 'Neovim: Upgrade'
+  dotf-pkgs u -p nvim
 
-header 'Neovim: Upgrade'
-dotf-pkgs u -p nvim
+  header 'Neovim: PlugUpgrade'
+  nvim +PlugUpgrade +qall
 
-header 'Neovim: PlugUpgrade'
-nvim +PlugUpgrade +qall
+  header 'Neovim: PlugUpdate'
+  if [ -e ~/.local/share/nvim-plugins/coc.nvim ]; then
+    (cd ~/.local/share/nvim-plugins/coc.nvim && git reset --hard origin/master)
+  fi
 
-header 'Neovim: PlugUpdate'
-if [ -e ~/.local/share/nvim-plugins/coc.nvim ]; then
-  (cd ~/.local/share/nvim-plugins/coc.nvim && git reset --hard origin/master)
-fi
+  nvim +PlugUpdate +qall
+  nvim +PlugClean! +PlugInstall +qall
 
-nvim +PlugUpdate +qall
-nvim +PlugClean! +PlugInstall +qall
+  nvim-packer-sync
+}
 
-nvim-packer-sync
-
-header 'Neovim: CocUpdateSync'
-nvim +CocUpdateSync +qall
+main "$@"
