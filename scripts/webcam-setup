@@ -4,4 +4,4 @@ set -euo pipefail
 
 DEV=/dev/video2
 
-v4l2-ctl -d "$DEV" --set-ctrl zoom_absolute=130,pan_absolute=-3600,sharpness=160
+v4l2-ctl -d "$DEV" --set-ctrl zoom_absolute=160,pan_absolute=0,sharpness=160
