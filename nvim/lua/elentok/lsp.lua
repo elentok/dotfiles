@@ -60,7 +60,7 @@ function on_attach(client, bufnr)
 end
 
 lspconfig = require'lspconfig'
-lspconfig.pyls.setup{ on_attach = on_attach }
+lspconfig.pyright.setup{ on_attach = on_attach }
 lspconfig.tsserver.setup{ on_attach = on_attach }
 lspconfig.bashls.setup{ on_attach = on_attach }
 lspconfig.vimls.setup{ on_attach = on_attach }
@@ -148,10 +148,12 @@ function LspReset ()
   vim.api.nvim_command('edit')
 end
 
-function LspInfo ()
-  local info = vim.inspect(vim.lsp.buf_get_clients())
-  local lines = vim.split(info, "\n", true)
-  util.open_window('LSP INFO', lines)
-end
+vim.cmd('command! Format lua vim.lsp.buf.formatting_sync()')
+
+vim.cmd([[
+  inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  imap <silent> <c-space> <Plug>(completion_trigger)
+]])
 
 return { on_attach = on_attach }
