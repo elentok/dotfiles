@@ -148,7 +148,7 @@ function LspReset ()
   vim.api.nvim_command('edit')
 end
 
-vim.cmd('command! Format lua vim.lsp.buf.formatting_sync()')
+vim.cmd('command! Format lua vim.lsp.buf.formatting_seq_sync()')
 
 vim.cmd([[
   inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
