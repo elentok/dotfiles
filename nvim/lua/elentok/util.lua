@@ -52,6 +52,22 @@ local function current_word()
   return api.nvim_call_function('expand', {'<cword>'})
 end
 
+local function global_extend(name, values)
+  array = api.nvim_get_var(name)
+  if array == nil then
+    array = values
+  else
+    vim.list_extend(array, values)
+  end
+
+  api.nvim_set_var(name, array)
+end
+
+function buf_get_filetype(bufnr)
+  bufnr = bufnr or 0
+  return api.nvim_buf_get_option(bufnr, 'filetype')
+end
+
 function create_buf_map_func(bufnr, mode, opts)
   if opts == nil then opts = {} end
   if opts.noremap == nil then opts.noremap = true end
@@ -63,10 +79,17 @@ function create_buf_map_func(bufnr, mode, opts)
   end
 end
 
+function exists (expr)
+  return api.nvim_eval(string.format('exists("%s")', expr))
+end
+
 return {
-  safe_require = safe_require,
-  open_window = open_window,
-  current_word = current_word,
+  buf_get_filetype = buf_get_filetype,
   create_buf_map_func = create_buf_map_func,
+  current_word = current_word,
+  exists = exists,
+  global_extend = global_extend,
+  open_window = open_window,
+  safe_require = safe_require,
 }
 
