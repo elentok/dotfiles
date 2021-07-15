@@ -80,7 +80,7 @@ function create_buf_map_func(bufnr, mode, opts)
 end
 
 function exists (expr)
-  return api.nvim_eval(string.format('exists("%s")', expr))
+  return api.nvim_eval(string.format('exists("%s")', expr)) ~= 0
 end
 
 return {
