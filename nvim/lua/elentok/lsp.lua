@@ -67,7 +67,12 @@ lspconfig.vimls.setup{ on_attach = on_attach }
 lspconfig.yamlls.setup{ on_attach = on_attach }
 lspconfig.jsonls.setup{ on_attach = on_attach }
 lspconfig.html.setup{ on_attach = on_attach }
+
+local lua_lsp_root_path = vim.fn.expand("~/.apps/all/lua-language-server")
+local lua_lsp_bin_path = lua_lsp_root_path .. "/bin/Linux/lua-language-server"
+local lua_lsp_main_lua = lua_lsp_root_path .. "/main.lua"
 lspconfig.sumneko_lua.setup{
+  cmd = {lua_lsp_bin_path, "-E", lua_lsp_main_lua},
   on_attach = on_attach,
   settings = {
     Lua = {
