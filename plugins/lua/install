@@ -4,73 +4,36 @@ set -euo pipefail
 
 source "$(dirname "$0")/../../framework"
 
-LUA_ROOT="$HOME/.lua"
-LUA_VERSION=5.4.2
-LUAROCKS_VERSION=3.3.1
+ALL_APPS="${HOME}/.apps/all"
+LSP_ROOT="${ALL_APPS}/lua-language-server"
 
 function main() {
-  if command_missing lua; then
-    install-lua
-  fi
+  apt-fast-install lua5.1 luarocks
 
-  if command_missing luarocks; then
-    install-luarocks
-  fi
-
-  if command_missing lua-language-server; then
+  if [ ! -e "$LSP_ROOT/bin/Linux/lua-language-server" ]; then
     install-language-server
   fi
 
   luarocks install --local formatter
 }
 
-function install-lua() {
-  create-and-open-build-dir lua
-
-  curl -R -O http://www.lua.org/ftp/lua-$LUA_VERSION.tar.gz
-  tar zxf lua-$LUA_VERSION.tar.gz
-  cd lua-$LUA_VERSION
-  make all test
-
-  mkdir -p "$LUA_ROOT"
-  make install INSTALL_TOP="$LUA_ROOT"
-}
-
-function install-luarocks() {
-  apt-fast-install libreadline-dev
-
-  create-and-open-build-dir luarocks
-
-  wget https://luarocks.org/releases/luarocks-$LUAROCKS_VERSION.tar.gz
-  tar zxpf luarocks-$LUAROCKS_VERSION.tar.gz
-  cd luarocks-$LUAROCKS_VERSION
-  ./configure --prefix="$LUA_ROOT" --with-lua-include="$LUA_ROOT/include"
-  make
-
-  make install
-}
-
 function install-language-server() {
-  create-and-open-build-dir lua-language-server
+  if [ -e "$LSP_ROOT" ]; then
+    rm -rf "${LSP_ROOT}.old"
+    mv "$LSP_ROOT" "${LSP_ROOT}.old"
+  fi
+
+  mkdir -p "$ALL_APPS"
+  cd "$ALL_APPS"
 
   git clone https://github.com/sumneko/lua-language-server
   cd lua-language-server
   git submodule update --init --recursive
 
   cd 3rd/luamake
-  ninja -f ninja/linux.ninja
+  compile/install.sh
   cd ../..
   ./3rd/luamake/luamake rebuild
 }
-
-function create-and-open-build-dir() {
-  local name="$1"
-
-  cd "$TMP"
-  rm -rf "build/$name"
-  mkdir -p "build/$name"
-  cd "build/$name"
-}
-
 
 main "$@"
