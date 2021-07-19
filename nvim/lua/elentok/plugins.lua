@@ -37,6 +37,10 @@ return require('packer').startup(function()
   use 'junegunn/fzf.vim'
   use 'pbogut/fzf-mru.vim'
 
+  -- Telescope
+  use 'nvim-telescope/telescope.nvim'
+  use 'nvim-telescope/telescope-fzy-native.nvim'
+
   -- Misc.
   use 'junegunn/vim-easy-align'
   use 'mhinz/vim-signify'
@@ -49,7 +53,6 @@ return require('packer').startup(function()
   use 'voldikss/vim-floaterm'
   use 'nvim-lua/popup.nvim'
   use 'nvim-lua/plenary.nvim'
-  use 'nvim-telescope/telescope.nvim'
   use 'AndrewRadev/splitjoin.vim'
   use 'elentok/run.vim'
   use 'elentok/togglr.vim'
