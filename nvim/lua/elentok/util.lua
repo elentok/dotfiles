@@ -68,6 +68,17 @@ function buf_get_filetype(bufnr)
   return api.nvim_buf_get_option(bufnr, 'filetype')
 end
 
+function create_map_func(mode, opts)
+  if opts == nil then opts = {} end
+  if opts.noremap == nil then opts.noremap = true end
+  if opts.silent == nil then opts.silent = true end
+
+  return function(lhs, lua_code)
+    local rhs = string.format('<Cmd>lua %s<cr>', lua_code)
+    api.nvim_set_keymap(mode, lhs, rhs, opts)
+  end
+end
+
 function create_buf_map_func(bufnr, mode, opts)
   if opts == nil then opts = {} end
   if opts.noremap == nil then opts.noremap = true end
@@ -85,6 +96,7 @@ end
 
 return {
   buf_get_filetype = buf_get_filetype,
+  create_map_func = create_map_func,
   create_buf_map_func = create_buf_map_func,
   current_word = current_word,
   exists = exists,
