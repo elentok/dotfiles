@@ -79,13 +79,10 @@ nnoremap coq :cclose<cr>
 
 " Go to {{{1
 noremap <Leader>gd :cd <C-R>=expand("%:p:h")<cr>
-noremap <Leader>gf :NERDTreeFind<cr>
 noremap <Leader>go :call GotoAlternateFile()<cr>
 inoremap <c-s> <c-o>:w<cr>
 
 noremap <Leader>oc :Calendar -view=year -split=vertical -width=27<cr>
-
-noremap <silent> <C-\> :NERDTreeFind<cr>:vertical res 30<cr>
 
 " Editing {{{1
 noremap <Leader>ehs :SplitjoinSplit<cr>
@@ -207,7 +204,6 @@ noremap <Leader>tf :TestFile<cr>
 " Toggle stuff {{{1
 noremap <Leader>ti :IndentGuidesToggle<cr>
 noremap <Leader>te :SyntasticToggleMode<cr>:redraw!<cr>
-noremap <Leader>ts :NERDTreeToggle<cr>
 noremap <Leader>tb :call ToggleBackground()<cr>
 
 " Post Startup {{{1
