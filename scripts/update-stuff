@@ -47,18 +47,6 @@ function update-npm-stuff() {
 function update-neovim-stuff() {
   header 'Neovim: Upgrade'
   dotf-pkgs u -p nvim
-
-  header 'Neovim: PlugUpgrade'
-  nvim +PlugUpgrade +qall
-
-  header 'Neovim: PlugUpdate'
-  if [ -e ~/.local/share/nvim-plugins/coc.nvim ]; then
-    (cd ~/.local/share/nvim-plugins/coc.nvim && git reset --hard origin/master)
-  fi
-
-  nvim +PlugUpdate +qall
-  nvim +PlugClean! +PlugInstall +qall
-
   nvim-packer-sync
 }
 

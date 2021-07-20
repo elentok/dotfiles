@@ -80,7 +80,6 @@ if isdirectory(expand("~/.dotlocal/nvim"))
   let &runtimepath.=',~/.dotlocal/nvim'
 endif
 
-source $vimfiles/plugs.vim
 source $vimfiles/settings.vim
 source $vimfiles/functions.vim
 source $vimfiles/keys.vim
