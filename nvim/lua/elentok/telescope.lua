@@ -33,3 +33,6 @@ nnoremap('<Leader>fe', 'require("telescope.builtin").file_browser{ cwd = vim.fn.
 
 nnoremap('<Leader>ff', 'require("telescope.builtin").grep_string{ search = vim.fn.input("Grep for?") }')
 nnoremap('<Leader>fw', 'require("telescope.builtin").grep_string{ search = vim.fn.expand("<cword>") }')
+
+nnoremap('gO', 'require("telescope.builtin").lsp_document_symbols{ symbols = {"function", "method", "interface", "class"} }')
+nnoremap('gR', 'require("telescope.builtin").lsp_references()')
