@@ -21,14 +21,4 @@ function! FZFEdit(prompt, source, ...)
     \ "sink": sink})
 endfunction
 
-command! FZFGitStaged call FZFEdit('Git Staged', 'git diff --name-only --cached')
-command! FZFGitUnstaged call FZFEdit('Git Unstaged', 'git diff --name-only')
-command! FZFGitChanged call FZFEdit('Git Changed', 'git diff --name-only HEAD')
-
-" noremap <c-p> :Files<cr>
-" noremap <Leader>b :Buffers<cr>
-noremap <Leader>gm :FZFMru<cr>
-" noremap <Leader>gt :Tags<cr>
 noremap `` :BTags<cr>
-
-noremap <Leader>vm :FZFGitChanged<cr>

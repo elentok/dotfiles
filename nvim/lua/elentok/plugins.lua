@@ -35,7 +35,6 @@ return require('packer').startup(function()
 
   -- FZF.
   use 'junegunn/fzf.vim'
-  use 'pbogut/fzf-mru.vim'
 
   -- Telescope
   use 'nvim-telescope/telescope.nvim'
