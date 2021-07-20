@@ -40,6 +40,9 @@ return require('packer').startup(function()
   use 'nvim-telescope/telescope.nvim'
   use 'nvim-telescope/telescope-fzy-native.nvim'
 
+  -- Treesitter
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+
   -- Misc.
   use 'junegunn/vim-easy-align'
   use 'mhinz/vim-signify'
@@ -47,7 +50,7 @@ return require('packer').startup(function()
   use 'michaeljsmith/vim-indent-object'
   use 'nathanaelkane/vim-indent-guides'
   use 'nelstrom/vim-visual-star-search'
-  use 'roxma/vim-tmux-clipboard'
+  use 'roxma/vim-tmux-clipboard' 
   use 'christoomey/vim-tmux-navigator'
   use 'voldikss/vim-floaterm'
   use 'nvim-lua/popup.nvim'
@@ -55,9 +58,15 @@ return require('packer').startup(function()
   use 'AndrewRadev/splitjoin.vim'
   use 'elentok/run.vim'
   use 'elentok/togglr.vim'
+  use 'elentok/replace-all.vim'
   use 'jamessan/vim-gnupg'
   use 'davidbeckingsale/writegood.vim'
   use 'janko/vim-test'
+
+  -- Lazy
+  use { 'itchyny/calendar.vim', opt = true, cmd = 'Calendar' }
+  -- dark/zen room, no distraction mode
+  use { 'junegunn/goyo.vim', opt = true, cmd = 'Goyo' }
 
 end, {
   display = {
