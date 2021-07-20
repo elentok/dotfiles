@@ -104,8 +104,6 @@ install_symlinks() {
 }
 
 install_plugins() {
-  bullet "Running PlugInstall... "
-  nvim +PlugClean! +PlugInstall +PackerInstall +UpdateRemotePlugins +qall
   bullet "Running PackerInstall... "
   nvim-packer-sync
   success "done"

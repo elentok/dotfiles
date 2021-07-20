@@ -34,6 +34,7 @@ return require('packer').startup(function()
   use 'bogado/file-line'
 
   -- FZF.
+  use 'junegunn/fzf'
   use 'junegunn/fzf.vim'
 
   -- Telescope
