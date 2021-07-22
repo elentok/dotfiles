@@ -8,10 +8,19 @@ main() {
     exit 1
   fi
 
-  header 'Oracle Java'
+  header 'Java 16'
 
-  add_ppa webupd8team/java
-  apt-fast-install oracle-java8-installer
+  if [ -z "$(find /etc/apt/trusted.gpg.d -name '*adoptopenjdk*')" ]; then
+    bullet 'Installing jfrog key'
+    wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -
+  fi
+  add_ppa https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
+  apt-fast-install adoptopenjdk-16-hotspot
+
+  # header 'Oracle Java'
+
+  # add_ppa webupd8team/java
+  # apt-fast-install oracle-java8-installer
 }
 
 main "$@"
