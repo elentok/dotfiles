@@ -414,7 +414,7 @@ add_ppa() {
     info " already installed"
   else
     # required for add-apt-repository
-    apt-fast-install software-properties-common
+    apt-fast-install software-properties-common apt-transport-https gnupg wget
     sudo add-apt-repository -y ppa:${1}
     sudo apt-get update
   fi
