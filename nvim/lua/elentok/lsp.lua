@@ -6,9 +6,6 @@ if not lspconfig then
   return
 end
 
-vim.g.completion_matching = {'fuzzy', 'substring', 'exact', 'all'}
-vim.g.completion_matching_smart_case = 1
-
 function on_attach(client, bufnr)
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -52,9 +49,6 @@ function on_attach(client, bufnr)
       augroup END
     ]], false)
   end
-
-  -- Setup completion.
-  require('completion').on_attach()
 end
 
 lspconfig = require'lspconfig'
@@ -152,11 +146,5 @@ function LspReset ()
 end
 
 vim.cmd('command! Format lua vim.lsp.buf.formatting_seq_sync()')
-
-vim.cmd([[
-  inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-  imap <silent> <c-space> <Plug>(completion_trigger)
-]])
 
 return { on_attach = on_attach }
