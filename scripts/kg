@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+#
+# Kill Grep
+#
+# Kills processes matching a given regular expression.
+#
+# Usage:
+#
+#   kg [options] <pattern>
+#
+# Options:
+#
+#   -s,--sudo               Use "sudo kill".
+#   -e,--exclude <pattern>  Keep processes matching the pattern alive.
+#
+
+set -euo pipefail
+
+source "$DOTF/framework"
+
+PATTERN=""
+KILL_CMD="kill -9"
+EXCLUDE=""
+PROCS=""
+
+function main() {
+  while [[ "${1:-}" =~ ^- ]]; do
+    case "$1" in
+      -s | --sudo)
+        KILL_CMD="sudo ${KILL_CMD}"
+        shift
+        ;;
+      -e | --exclude)
+        shift
+        if [ -z "$1" ]; then
+          echo "Error: Missing value for exclude flag."
+          exit 1
+        fi
+        EXCLUDE="$1"
+        ;;
+      *)
+        echo "Error: Unknown option '$1'"
+        exit 1
+        ;;
+    esac
+  done
+
+  if [ $# -eq 0 ]; then
+    usage "$0"
+    exit 1
+  fi
+
+  PATTERN="$1"
+  find-procs
+
+  if [ -z "$PROCS" ]; then
+    echo "No matching processes."
+    exit 1
+  fi
+
+  header "Processes:"
+  echo "$PROCS"
+
+  count="$(echo "$PROCS" | wc -l)"
+
+  echo
+  if confirm "Kill ${count} processes?"; then
+    echo "$PROCS" | awk '{print $1}' | xargs "$KILL_CMD"
+  fi
+}
+
+function find-procs() {
+  pid="$$"
+  PROCS="$(pgrep -af "$PATTERN")"
+
+  # This is separate from the pgrep command because if added it creates another
+  # process that I can't filter out (I don't know its pid).
+  PROCS="$(echo "$PROCS" | grep -v "^$pid ")"
+
+  if [ -n "$EXCLUDE" ]; then
+    PROCS="$(echo "$PROCS" | grep -vE "$EXCLUDE" || true)"
+  fi
+}
+
+function filter-excludes() {
+  if [ -z "$EXCLUDE" ]; then
+    cat 
+  else
+    grep -vE "$EXCLUDE"
+  fi
+}
+
+main "$@"
