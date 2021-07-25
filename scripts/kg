@@ -19,7 +19,7 @@ set -euo pipefail
 source "$DOTF/framework"
 
 PATTERN=""
-KILL_CMD="kill -9"
+KILL_CMD=(kill -9)
 EXCLUDE=""
 PROCS=""
 
@@ -27,7 +27,7 @@ function main() {
   while [[ "${1:-}" =~ ^- ]]; do
     case "$1" in
       -s | --sudo)
-        KILL_CMD="sudo ${KILL_CMD}"
+        KILL_CMD=(sudo kill -9)
         shift
         ;;
       -e | --exclude)
@@ -65,7 +65,9 @@ function main() {
 
   echo
   if confirm "Kill ${count} processes?"; then
-    echo "$PROCS" | awk '{print $1}' | xargs "$KILL_CMD"
+    echo "Killing..."
+    echo "$PROCS" | awk '{print $1}' | xargs "${KILL_CMD[@]}"
+    success "done."
   fi
 }
 
