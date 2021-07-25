@@ -27,7 +27,7 @@ return require('packer').startup(function()
 
   -- LSP.
   use 'neovim/nvim-lspconfig'
-  use 'nvim-lua/completion-nvim'
+  use 'hrsh7th/nvim-compe'
   use 'anott03/nvim-lspinstall'
 
   -- Allows running "nvim {filename}:{line-number}".
