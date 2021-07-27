@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework
+source "$DOTF/framework"
 
 header 'General'
-echo "Plugins: $(command ls -1 $DOTF/plugins | wc -l)"
+echo "Dotfiles Plugins: $(command ls -1 "$DOTF/plugins" | wc -l)"
+echo "Neovim Plugins:   $(grep -c " use" "$DOTF/nvim/lua/elentok/plugins.lua")"
 
 header 'Scripts'
-find $DOTF/scripts -maxdepth 1 -type f \
-  | xargs head -1 --quiet \
+find "$DOTF/scripts" -maxdepth 1 -type f -exec head -1 '{}' \; \
   | sort | uniq -c | sort -nr
 
