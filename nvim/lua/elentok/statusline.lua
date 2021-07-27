@@ -1,18 +1,3 @@
-vim.o.statusline = table.concat({
-  -- Path to the file in the buffer, as typed or relative to current directory.
-  '%{Elentok_StatusLineFileName()}',
-  -- Where to truncate line.
-  '%< ',
-  '%{&modified?\' +\':\'\'}',
-  '%{&readonly?\' \':\'\'}',
-  -- Separation point between left and right aligned items.
-  '%= ',
-  -- Filetype.
-  ' [%{\'\'!=#&filetype?&filetype:\'none\'}]',
-  -- Line number + column number.
-  ' %l:%v'
-})
-
 local statusline_shorteners = {}
 local statusline_shorteners_updated = false
 
@@ -56,14 +41,25 @@ end
 add_path_shortener(vim.env.HOME, '~')
 
 vim.cmd([[
-  function! Elentok_AddPathShortener(full, short)
-    lua require('elentok/statusline').add_path_shortener(a:full, a:short)
-  endfunction
-
   function! Elentok_StatusLineFileName()
     return luaeval("require('elentok/statusline').filename()")
   endfunction
 ]])
+
+vim.o.statusline = table.concat({
+  -- Path to the file in the buffer, as typed or relative to current directory.
+  '%{Elentok_StatusLineFileName()}',
+  -- Where to truncate line.
+  '%< ',
+  '%{&modified?\' +\':\'\'}',
+  '%{&readonly?\' \':\'\'}',
+  -- Separation point between left and right aligned items.
+  '%= ',
+  -- Filetype.
+  ' [%{\'\'!=#&filetype?&filetype:\'none\'}]',
+  -- Line number + column number.
+  ' %l:%v'
+})
 
 return {
   add_path_shortener = add_path_shortener,
