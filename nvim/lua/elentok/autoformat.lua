@@ -17,7 +17,7 @@ function Elentok_AutoFormat ()
   end
 end
 
-vim.cmd([[command AutoFormat lua Elentok_AutoFormat()]])
+vim.cmd([[command! AutoFormat lua Elentok_AutoFormat()]])
 
 vim.cmd([[
   augroup Elentok_Autoformat
