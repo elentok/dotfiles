@@ -7,6 +7,7 @@ require'elentok/treesitter'
 require'elentok/keys'
 require'elentok/autoformat'
 require'elentok/telescope'
+require'elentok/statusline'
 
 local util = require'elentok/util'
 util.safe_require('elentok-local')
