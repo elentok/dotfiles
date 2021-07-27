@@ -28,7 +28,6 @@ function main() {
     case "$1" in
       -s | --sudo)
         KILL_CMD=(sudo kill -9)
-        shift
         ;;
       -e | --exclude)
         shift
@@ -43,6 +42,7 @@ function main() {
         exit 1
         ;;
     esac
+    shift
   done
 
   if [ $# -eq 0 ]; then
@@ -77,18 +77,10 @@ function find-procs() {
 
   # This is separate from the pgrep command because if added it creates another
   # process that I can't filter out (I don't know its pid).
-  PROCS="$(echo "$PROCS" | grep -v "^$pid ")"
+  PROCS="$(echo "$PROCS" | grep -v "^$pid " || true)"
 
   if [ -n "$EXCLUDE" ]; then
     PROCS="$(echo "$PROCS" | grep -vE "$EXCLUDE" || true)"
-  fi
-}
-
-function filter-excludes() {
-  if [ -z "$EXCLUDE" ]; then
-    cat 
-  else
-    grep -vE "$EXCLUDE"
   fi
 }
 
