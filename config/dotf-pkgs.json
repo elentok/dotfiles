@@ -5,7 +5,7 @@
       "name": "nvim",
       "github_repo": "neovim/neovim",
       "strip_components": 1,
-      "prerelease": true,
+      "prerelease": false,
       "platforms": {
         "x86_64": {
           "bin_source": "bin/nvim",
