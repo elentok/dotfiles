@@ -51,7 +51,6 @@ return require('packer').startup(function()
   use 'michaeljsmith/vim-indent-object'
   use 'nathanaelkane/vim-indent-guides'
   use 'nelstrom/vim-visual-star-search'
-  use 'roxma/vim-tmux-clipboard' 
   use 'christoomey/vim-tmux-navigator'
   use 'voldikss/vim-floaterm'
   use 'nvim-lua/popup.nvim'
