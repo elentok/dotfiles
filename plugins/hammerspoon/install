@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-source $DOTF/framework
-
-symlink "$DOTF/plugins/hammerspoon" "$HOME/.hammerspoon"
-
-if [ ! -e /Applications/Hammerspoon.app ]; then
-  brew cask install hammerspoon
-fi

@@ -1,9 +1,0 @@
-{
-  "mod1": [ "option", "shift" ],
-  "mod2": [ "control", "option", "shift" ],
-  "floating": [
-    "com.kapeli.dash",
-    "com.apple.iphonesimulator",
-    "com.agilebits.onepassword4"
-  ]
-}
