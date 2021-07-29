@@ -406,17 +406,21 @@ go_get() {
 }
 
 # Apt: Add Repo {{{1
-add_ppa() {
+apt-fast-add-repo() {
 
   bullet "Adding repository ${1}..."
   sources="/etc/apt/sources.list /etc/apt/sources.list.d/*.list"
-  if [ "`grep ppa.launchpad.net/$1 $sources`" != "" ]; then
+  if [ "`grep "$1" $sources`" != "" ]; then
     info " already installed"
   else
     # required for add-apt-repository
+    bullet "[Add PPA]: Installing prerequisits..."
     apt-fast-install software-properties-common apt-transport-https gnupg wget
-    sudo add-apt-repository -y ppa:${1}
+    bullet "[Add PPA]: Calling add-apt-repository ..."
+    sudo add-apt-repository -y "${1}"
+    bullet "[Add PPA]: Calling apt-get update..."
     sudo apt-get update
+    bullet "[Add PPA]: Done."
   fi
 }
 

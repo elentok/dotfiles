@@ -2,5 +2,6 @@
 
 set -euo pipefail
 
+VERSION="$(cat VERSION)"
 RAM=4096M
-java -Xmx${RAM} -Xms${RAM} -jar spigot-1.16.5.jar nogui
+java -Xmx${RAM} -Xms${RAM} -jar spigot-${VERSION}.jar nogui

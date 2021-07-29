@@ -4,13 +4,11 @@ set -euo pipefail
 
 source "$DOTF/framework"
 
-JAR_FILENAME="minecraft_server.1.16.5.jar"
-JAR_URL="https://launcher.mojang.com/v1/objects/1b557e7b033b583cd9f66746b7a9ab1ec1673ced/server.jar"
-
 SPIGOT_ROOT="/home/minecraft/spigot"
-SPIGOT_REV="1.16.5"
+SPIGOT_REV="$(cat "$DOTF/plugins/minecraft/VERSION")"
 SPIGOT_JAR_FILENAME="spigot-${SPIGOT_REV}.jar"
 SPIGOT_JAR_URL="https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar"
+SPIGOT_TMP="$TMP/spigot-${SPIGOT_REV}"
 
 main() {
   create_group minecraft
@@ -45,7 +43,8 @@ install-spigot-server() {
 
   bullet 'Installing spigot server...'
   as-minecraft mkdir -p "$SPIGOT_ROOT"
-  sudo cp "$TMP/spigot/${SPIGOT_JAR_FILENAME}" "$SPIGOT_ROOT/"
+  sudo cp "${SPIGOT_TMP}/${SPIGOT_JAR_FILENAME}" "$SPIGOT_ROOT/"
+  sudo cp "$DOTF/plugins/minecraft/VERSION" "$SPIGOT_ROOT/VERSION"
   sudo cp "$DOTF/plugins/minecraft/spigot-start" "$SPIGOT_ROOT/start"
   sudo bash -c "chown minecraft:minecraft ${SPIGOT_ROOT}/*"
   sudo chmod 750 "${SPIGOT_ROOT}/start"
@@ -59,8 +58,8 @@ build-spigot-server() {
   bullet 'Building spigot server...'
 
   # Build it
-  mkdir -p "$TMP/spigot"
-  cd "$TMP/spigot"
+  mkdir -p "${SPIGOT_TMP}"
+  cd "${SPIGOT_TMP}"
 
   if [ ! -e BuildTools.jar ]; then
     curl "$SPIGOT_JAR_URL" -o BuildTools.jar
