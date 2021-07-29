@@ -8,9 +8,9 @@
 
 source $DOTF/zsh/core.sh
 
-if [ -z "$DISPLAY" ]; then
-  export DISPLAY=":0"
-fi
+# if [ -z "$DISPLAY" ]; then
+#   export DISPLAY=":0"
+# fi
 
 main() {
   case "$1" in
