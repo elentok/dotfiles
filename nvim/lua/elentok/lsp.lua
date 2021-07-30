@@ -58,7 +58,20 @@ lspconfig.bashls.setup{ on_attach = on_attach }
 lspconfig.vimls.setup{ on_attach = on_attach }
 lspconfig.yamlls.setup{ on_attach = on_attach }
 lspconfig.jsonls.setup{ on_attach = on_attach }
-lspconfig.html.setup{ on_attach = on_attach }
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+lspconfig.html.setup{
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+lspconfig.cssls.setup{
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
 
 local lua_lsp_root_path = vim.fn.expand("~/.apps/all/lua-language-server")
 local lua_lsp_bin_path = lua_lsp_root_path .. "/bin/Linux/lua-language-server"
