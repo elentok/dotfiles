@@ -63,6 +63,23 @@ local function global_extend(name, values)
   api.nvim_set_var(name, array)
 end
 
+local function restore_cursor(buffer, cursor)
+  rows_count = api.nvim_buf_line_count(buffer)
+  row = cursor[1]
+  if row >= rows_count then
+    row = rows_count - 1
+  end
+
+  col = cursor[2]
+  line = api.nvim_buf_get_lines(buffer, row - 1, row, true)[1]
+  col_count = string.len(line)
+  if col >= col_count then
+    col = col_count - 1
+  end
+
+  api.nvim_win_set_cursor(buffer, {row, col})
+end
+
 function buf_get_filetype(bufnr)
   bufnr = bufnr or 0
   return api.nvim_buf_get_option(bufnr, 'filetype')
@@ -102,6 +119,7 @@ return {
   exists = exists,
   global_extend = global_extend,
   open_window = open_window,
+  restore_cursor = restore_cursor,
   safe_require = safe_require,
 }
 

@@ -145,6 +145,4 @@ function LspReset ()
   vim.api.nvim_command('edit')
 end
 
-vim.cmd('command! Format lua vim.lsp.buf.formatting_seq_sync()')
-
 return { on_attach = on_attach }
