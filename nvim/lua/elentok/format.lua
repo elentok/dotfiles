@@ -3,9 +3,9 @@ local util = require('elentok/util')
 
 local formatters = {
   css = "prettier",
-  javascript = "clang",
-  typescript = "clang",
-  typescriptreact = "clang",
+  javascript = "prettier",
+  typescript = "prettier",
+  typescriptreact = "prettier",
   html = "prettier",
 }
 

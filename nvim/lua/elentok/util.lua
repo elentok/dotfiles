@@ -64,14 +64,18 @@ local function global_extend(name, values)
 end
 
 local function restore_cursor(buffer, cursor)
-  rows_count = api.nvim_buf_line_count(buffer)
+  -- row is 1-based
   row = cursor[1]
-  if row >= rows_count then
+  -- col is 0-based
+  col = cursor[2]
+
+  rows_count = api.nvim_buf_line_count(buffer)
+  if row > rows_count then
     row = rows_count - 1
   end
 
-  col = cursor[2]
-  line = api.nvim_buf_get_lines(buffer, row - 1, row, true)[1]
+  lines = api.nvim_buf_get_lines(buffer, row - 1, row, true)
+  line = lines[1]
   col_count = string.len(line)
   if col >= col_count then
     col = col_count - 1
