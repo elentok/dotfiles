@@ -1,7 +1,7 @@
 local util = require'elentok/util'
 
 vim.g.autoformat_filetypes = { 'json', 'javascript', 'css', 'scss', 'lua',
-  'typescript', 'typescript.tsx', 'java', 'markdown', 'yaml', 'python', 'html' }
+  'typescript', 'typescriptreact', 'java', 'markdown', 'yaml', 'python', 'html' }
 
 function Elentok_AutoFormat ()
   if vim.g.autoformat_disable then
