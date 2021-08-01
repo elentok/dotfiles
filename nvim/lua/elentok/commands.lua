@@ -10,6 +10,8 @@ end
 
 vim.cmd([[
   command! DotReload lua require('elentok/commands').dot_reload()
+  command! LogEnable lua require('elentok/util').set_log(true)
+  command! LogDisable lua require('elentok/util').set_log(false)
 ]])
 
 return {
