@@ -8,6 +8,7 @@ local formatters = {
   typescript = "prettier",
   typescriptreact = "prettier",
   html = "prettier",
+  markdown = "prettier",
 }
 
 -- Enable or disable automatic formatting.
