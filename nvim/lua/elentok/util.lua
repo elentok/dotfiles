@@ -1,5 +1,17 @@
 local api = vim.api
 
+local log_enabled = false
+
+local function set_log(enabled)
+  log_enabled = enabled
+end
+
+local function log(message)
+  if log_enabled then
+    print(message)
+  end
+end
+
 local function safe_require (name)
   local status, module = pcall(require, name)
   if(status) then
@@ -122,8 +134,10 @@ return {
   current_word = current_word,
   exists = exists,
   global_extend = global_extend,
+  log = log,
   open_window = open_window,
   restore_cursor = restore_cursor,
   safe_require = safe_require,
+  set_log = set_log,
 }
 
