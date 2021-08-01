@@ -46,7 +46,7 @@ function update-npm-stuff() {
 
 function update-neovim-stuff() {
   header 'Neovim: Upgrade'
-  dotf-pkgs u -p nvim
+  dotf-pkgs u nvim
   nvim-packer-sync
 }
 
