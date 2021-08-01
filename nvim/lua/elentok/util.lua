@@ -77,20 +77,28 @@ end
 
 local function restore_cursor(buffer, cursor)
   -- row is 1-based
-  row = cursor[1]
+  local row = cursor[1]
   -- col is 0-based
-  col = cursor[2]
+  local col = cursor[2]
 
-  rows_count = api.nvim_buf_line_count(buffer)
+  local rows_count = api.nvim_buf_line_count(buffer)
   if row > rows_count then
     row = rows_count - 1
+    log('[restore_cursor] fixed row to ' .. row)
   end
 
-  lines = api.nvim_buf_get_lines(buffer, row - 1, row, true)
-  line = lines[1]
-  col_count = string.len(line)
+  local lines = api.nvim_buf_get_lines(buffer, row - 1, row, true)
+  local line = lines[1]
+  log('[restore_cursor] line #' .. row .. ' = [[[' .. line .. ']]]')
+  local col_count = string.len(line)
+  log('[restore_cursor] line #' .. row .. ' columns = ' .. col_count)
   if col >= col_count then
-    col = col_count - 1
+    if col_count == 0 then
+      col = 0
+    else
+      col = col_count - 1
+    end
+    log('[restore_cursor] fixed column to ' .. col)
   end
 
   api.nvim_win_set_cursor(buffer, {row, col})
@@ -129,8 +137,8 @@ end
 
 return {
   buf_get_filetype = buf_get_filetype,
-  create_map_func = create_map_func,
   create_buf_map_func = create_buf_map_func,
+  create_map_func = create_map_func,
   current_word = current_word,
   exists = exists,
   global_extend = global_extend,
