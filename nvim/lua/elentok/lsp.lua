@@ -11,24 +11,6 @@ function on_attach(client, bufnr)
 
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- Mappings.
-  nnoremap = util.create_buf_map_func(bufnr, 'n')
-  nnoremap('gD', 'vim.lsp.buf.declaration()')
-  nnoremap('gd', 'vim.lsp.buf.definition()')
-  nnoremap('K', 'vim.lsp.buf.hover()')
-  nnoremap('gi', 'vim.lsp.buf.implementation()')
-  nnoremap('<space>k', 'vim.lsp.buf.signature_help()')
-  nnoremap('<leader>wa', 'vim.lsp.buf.add_workspace_folder()')
-  nnoremap('<leader>wr', 'vim.lsp.buf.remove_workspace_folder()')
-  nnoremap('<leader>wl', 'print(vim.inspect(vim.lsp.buf.list_workspace_folders()))')
-  nnoremap('gD', 'vim.lsp.buf.type_definition()')
-  nnoremap('<leader>rn', 'vim.lsp.buf.rename()')
-  nnoremap('gr', 'vim.lsp.buf.references()')
-  nnoremap('<space>e', 'vim.lsp.diagnostic.show_line_diagnostics()')
-  nnoremap('[d', 'vim.lsp.diagnostic.goto_prev()')
-  nnoremap(']d', 'vim.lsp.diagnostic.goto_next()')
-  nnoremap('<space>q', 'vim.lsp.diagnostic.set_loclist()')
-
   -- Set some keybinds conditional on server capabilities
   if client.resolved_capabilities.document_formatting then
     nnoremap("<space>f", "lua vim.lsp.buf.formatting()")
