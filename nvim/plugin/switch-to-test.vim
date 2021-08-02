@@ -10,6 +10,14 @@ function! ToggleBetweenCodeAndTest()
 endfunction
 
 function! FindAlternateFile()
+  if !exists('b:alternate_file')
+    let b:alternate_file = ForceFindAlternateFile()
+  endif
+
+  return b:alternate_file
+endfunction
+
+function! ForceFindAlternateFile()
   let filename = expand("%")
   if matchstr(filename, '\v[._](test|spec)\.') != ''
     let alternate = substitute(filename, '\v[._](test|spec)\.', '.', '')
