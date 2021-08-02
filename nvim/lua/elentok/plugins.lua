@@ -1,9 +1,6 @@
 return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
-  -- Helper functions for writing vimrc in lua.
-  use 'svermeulen/vimpeccable'
-
   -- Color scheme.
   use {'embark-theme/vim', as = 'embark'}
 
@@ -56,15 +53,14 @@ return require('packer').startup(function()
   use 'nvim-lua/popup.nvim'
   use 'nvim-lua/plenary.nvim'
   use 'AndrewRadev/splitjoin.vim'
-  use 'elentok/run.vim'
-  use 'elentok/togglr.vim'
+  use 'elentok/togglr.vim' -- Toggles words (e.g. true/false, top/bottom)
   use 'elentok/replace-all.vim'
   use 'jamessan/vim-gnupg'
   use 'davidbeckingsale/writegood.vim'
-  use 'janko/vim-test'
 
   -- Lazy
   use { 'itchyny/calendar.vim', opt = true, cmd = 'Calendar' }
+
   -- dark/zen room, no distraction mode
   use { 'junegunn/goyo.vim', opt = true, cmd = 'Goyo' }
 
