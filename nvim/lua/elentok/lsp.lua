@@ -1,4 +1,5 @@
 local util = require('elentok/util')
+local map = require('elentok/map')
 
 local lspconfig = util.safe_require('lspconfig')
 if not lspconfig then
@@ -13,9 +14,9 @@ function on_attach(client, bufnr)
 
   -- Set some keybinds conditional on server capabilities
   if client.resolved_capabilities.document_formatting then
-    nnoremap("<space>f", "lua vim.lsp.buf.formatting()")
+    map.normal("<space>f", map.lua("vim.lsp.buf.formatting()"))
   elseif client.resolved_capabilities.document_range_formatting then
-    nnoremap("<space>f", "lsp.buf.range_formatting()")
+    map.normal("<space>f", map.lua("vim.lsp.buf.range_formatting()"))
   end
 
   -- Set autocommands conditional on server_capabilities
