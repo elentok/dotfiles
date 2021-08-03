@@ -2,10 +2,7 @@
 *.pyc
 tags
 .DS_Store
-nvim/plugged
 nvim/sessions
-nvim/eclim
-nvim/plugin/eclim.vim
 nvim/.netrwhist
 nvim/spell
 tmp
@@ -14,4 +11,4 @@ plugins/fish/fish_variables
 .mypy_cache
 
 # The auto-generated compiled version of packer.
-nvim/plugin/packer_compiled.vim
+nvim/plugin/packer_compiled.lua
