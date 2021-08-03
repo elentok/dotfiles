@@ -21,4 +21,6 @@ function! FZFEdit(prompt, source, ...)
     \ "sink": sink})
 endfunction
 
+command! FZFHgModified call FZFEdit('Hg Modified', 'hg status --no-status')
+
 noremap `` :BTags<cr>

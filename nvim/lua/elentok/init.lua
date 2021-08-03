@@ -9,6 +9,7 @@ require'elentok/format'
 require'elentok/telescope'
 require'elentok/statusline'
 require'elentok/commands'
+require'elentok/cindex'
 
 local util = require'elentok/util'
 util.safe_require('elentok-local')

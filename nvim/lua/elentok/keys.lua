@@ -34,7 +34,8 @@ end
 map.normal('<c-p>', call_telescope('find_files{}'))
 map.normal('<Leader>b', call_telescope('buffers{}'))
 map.normal('<Leader>gt', call_telescope('tags{}'))
-map.normal('<Leader>gs', call_telescope('git_status{}'))
+map.normal('<Leader>gg', call_telescope('git_status{}'))
+map.normal('<Leader>gs', map.lua("require('elentok/cindex').goto_symbol()"))
 map.normal('<Leader>gh', call_telescope('help_tags{}'))
 map.normal('<Leader>gm', call_telescope('oldfiles{ previewer = false}'))
 map.normal('<Leader>fe', call_telescope('file_browser{ cwd = vim.fn.expand("%:p:h") }'))
@@ -44,3 +45,4 @@ map.normal('<Leader>fw', call_telescope('grep_string{ search = vim.fn.expand("<c
 
 map.normal('gO', call_telescope('lsp_document_symbols{ symbols = {"function", "method", "interface", "class"} }'))
 map.normal('gR', call_telescope('lsp_references()'))
+
