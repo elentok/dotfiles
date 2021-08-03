@@ -4,8 +4,12 @@ from typing import Optional
 from collections.abc import Callable
 import subprocess
 import re
+import os
 import sys
 from dataclasses import dataclass
+
+SYMBOLS_FILE = os.path.expanduser("~/.local/share/cindex-full.csv")
+SYMBOLS_NAMES_FILE = os.path.expanduser("~/.local/share/cindex-names.txt")
 
 
 def main():
@@ -16,33 +20,71 @@ def main():
     cmd = sys.argv[1]
     if cmd == "index":
         index()
+    elif cmd == "list":
+        show_list()
+    elif cmd == "names":
+        names()
+    elif cmd == "show":
+        show()
+    elif cmd == "pick":
+        pick()
     else:
         usage()
         sys.exit(1)
 
 
 def usage():
-    print("\nUsage: cindex (index)\n")
+    print(
+        """
+Usage:
+
+  cindex names
+  cindex show <name>
+  cindex index <dir>...
+"""
+    )
 
 
 def index():
-    index_code()
-    index_protos()
+    dirs = sys.argv[2:]
+    symbols = []
+    for dir in dirs:
+        symbols.extend(index_dir(dir))
+
+    names = [symbol.name for symbol in symbols]
+    names.sort()
+    with open(SYMBOLS_NAMES_FILE, "w") as f:
+        f.write("\n".join(names))
+
+    lines = [str(symbol) for symbol in symbols]
+    lines.sort()
+    with open(SYMBOLS_FILE, "w") as f:
+        f.write("\n".join(lines))
 
 
-def index_code():
+def index_dir(dir):
+    absdir = os.path.abspath(dir)
+    symbols = index_code(absdir)
+    symbols.extend(index_protos(absdir))
+    return symbols
+
+
+def index_code(dir):
     lines = run(
-        'rg --no-heading --line-number -tts -tjs "^(interface|class|enum|export) "'
+        f'rg --no-heading --line-number -tts -tjs "^(interface|class|enum|export) " "{dir}"'
     )
+    symbols = []
     for line in lines:
         symbol = parse_line(line, extract_code_symbol)
         if symbol:
-            symbol.print()
+            symbols.append(symbol)
+    return symbols
 
 
-def index_protos():
+def index_protos(dir):
+    symbols = []
     packages_by_filename = {}
-    lines = run('rg --no-heading --line-number -tproto "^(package|message) "')
+    lines = run(f'rg --no-heading --line-number -tproto "^(package|message) " "{dir}"')
     for line in lines:
         symbol = parse_line(line, extract_proto_symbol)
 
@@ -50,16 +92,24 @@ def index_protos():
             if symbol.type == "package":
                 packages_by_filename[symbol.filename] = symbol.name
             elif symbol.type == "message":
-                package = packages_by_filename[symbol.filename]
+                package = packages_by_filename.get(symbol.filename)
+                if package is None:
+                    sys.stderr.write(
+                        f"Error in {symbol.filename}: No package specified.\n"
+                    )
+                    continue
                 symbol.name = ".".join([package, symbol.name])
-                symbol.print()
+                symbols.append(symbol)
+    return symbols
 
 
 def parse_line(line: str, symbol_extractor: Callable[[str], Optional[tuple[str, str]]]):
     filename, number, text = line.split(":", 2)
     symbol = symbol_extractor(text)
     if symbol is None:
-        sys.stderr.write(f'Error: unable to extract proto symbol from "{text}"')
+        sys.stderr.write(
+            f'Error in {filename}: unable to extract proto symbol from "{text}"\n'
+        )
         return None
 
     symbol_type, symbol_name = symbol
@@ -85,6 +135,46 @@ def extract_proto_symbol(line: str) -> Optional[tuple[str, str]]:
         return (match.group(1), match.group(2))
 
 
+def names():
+    print(get_names())
+
+
+def get_names():
+    with open(SYMBOLS_NAMES_FILE, "r") as f:
+        return f.read()
+
+
+def show_list():
+    with open(SYMBOLS_FILE, "r") as f:
+        print(f.read())
+
+
+def show():
+    symbol_name = sys.argv[2]
+    filename, line = find_symbol_location(symbol_name)
+    print(f"{filename}:{line}")
+
+
+def find_symbol_location(name):
+    line = run(f"rg '^{name},' '{SYMBOLS_FILE}' ")[0]
+    _, _, filename, line = line.split(",")
+    return (filename, line)
+
+
+def pick():
+    p = subprocess.Popen(
+        "fzf", shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE
+    )
+    if p.stdin:
+        p.stdin.write(get_names().encode())
+    if p.stdout is None:
+        raise Exception(f"Failed to run fzf")
+
+    symbol_name = p.stdout.read().decode().strip()
+    filename, line = find_symbol_location(symbol_name)
+    print(f"{filename}:{line}")
+
+
 def run(cmd):
     p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
     if p.stdout is None:
@@ -100,8 +190,8 @@ class Symbol:
     filename: str
     line: str
 
-    def print(self):
-        print(",".join([self.name, self.type, self.filename, self.line]))
+    def __str__(self):
+        return ",".join([self.name, self.type, self.filename, self.line])
 
 
 if __name__ == "__main__":
