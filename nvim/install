@@ -139,12 +139,12 @@ install_cli_tools() {
     yaml-language-server \
     css-langserver eslint-server tslint-server bash-language-server \
     vim-language-server diagnostic-languageserver \
-    vscode-langservers-extracted clang-format
+    vscode-langservers-extracted clang-format pyright
 
   pip-fast-install \
     neovim-remote neovim \
-    black pylint yamllint jedi python-language-server \
-    mypy pyls-mypy pyls-isort pyls-black
+    black pylint yamllint # jedi python-language-server \
+    # mypy pyls-mypy pyls-isort pyls-black
 }
 
 explain_win32yank() {

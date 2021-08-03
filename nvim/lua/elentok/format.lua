@@ -1,14 +1,25 @@
 local api = vim.api
 local util = require('elentok/util')
 
+-- Formatter commands.
+local formatter_cmds = {
+  black = 'black --quiet --stdin-filename % -',
+  prettier = 'prettier --stdin-filepath %',
+  clang = 'clang-format --style=Google --assume-filename %',
+  lsp = function()
+    vim.lsp.buf.formatting_seq_sync()
+  end,
+}
+
 -- Matches filetype to formatter.
-local formatters = {
+local formatter_by_filetype = {
   css = "prettier",
   javascript = "prettier",
   typescript = "prettier",
   typescriptreact = "prettier",
   html = "prettier",
   markdown = "prettier",
+  python = "black",
 }
 
 -- Enable or disable automatic formatting.
@@ -27,30 +38,25 @@ local format_on_save_by_filetype = {
  html = true,
 }
 
-local function prettier()
+local function run_formatter(cmd)
+  util.log("[run_formatter] cmd = " .. cmd)
   local cursor = api.nvim_win_get_cursor(0)
-  api.nvim_exec('%!prettier --stdin-filepath %', true)
-  util.restore_cursor(0, cursor)
-end
-
-local function clang()
-  local cursor = api.nvim_win_get_cursor(0)
-  api.nvim_exec('%!clang-format --style=Google --assume-filename %', true)
+  api.nvim_exec('%!' .. cmd, true)
   util.restore_cursor(0, cursor)
 end
 
 local function format(formatter)
-  formatter = formatter or formatters[util.buf_get_filetype()]
+  if formatter == nil or formatter == '' then
+    formatter = formatter_by_filetype[util.buf_get_filetype()] or 'lsp'
+  end
 
-  if formatter == 'clang' then
-    util.log('Formatting with clang.')
-    clang()
-  elseif formatter == 'prettier' then
-    util.log('Formatting with prettier.')
-    prettier()
+  util.log('Formatting with ' .. formatter)
+  local cmd = formatter_cmds[formatter]
+
+  if type(cmd) == 'function' then
+    cmd()
   else
-    util.log('Formatting with LSP.')
-    vim.lsp.buf.formatting_seq_sync()
+    run_formatter(cmd)
   end
 end
 
@@ -60,8 +66,12 @@ local function format_on_save()
   end
 end
 
+local function set_formatter_cmd(formatter, cmd)
+  formatter_cmds[formatter] = cmd
+end
+
 local function set_formatter(filetype, formatter)
-  formatters[filetype] = formatter
+  formatter_by_filetype[filetype] = formatter
 end
 
 local function set_format_on_save(filetype, enabled)
@@ -70,9 +80,9 @@ local function set_format_on_save(filetype, enabled)
 end
 
 vim.cmd([[
-  command! Prettier lua require('elentok/format').prettier()
-  command! ClangFormat lua require('elentok/format').clang()
-  command! Format lua require('elentok/format').format()
+  command! -nargs=? Format lua require('elentok/format').format('<args>')
+  command! Prettier Format prettier
+  command! ClangFormat Format clang
 ]])
 
 vim.cmd([[
@@ -83,10 +93,9 @@ vim.cmd([[
 ]])
 
 return {
-  clang = clang,
   format = format,
   format_on_save = format_on_save,
-  prettier = prettier,
+  set_formatter_cmd = set_formatter_cmd,
   set_formatter = set_formatter,
   set_format_on_save = set_format_on_save,
 }
