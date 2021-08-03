@@ -75,6 +75,14 @@ local function global_extend(name, values)
   api.nvim_set_var(name, array)
 end
 
+-- "index" is 1-based
+local function buf_get_line(buffer, index)
+  if index < 1 then
+    error('buf_get_line got index ' .. vim.inspect(index) .. ', must be 1 or higher')
+  end
+  return api.nvim_buf_get_lines(buffer, index - 1, index, true)[1]
+end
+
 local function restore_cursor(buffer, cursor)
   -- row is 1-based
   local row = cursor[1]
@@ -84,11 +92,11 @@ local function restore_cursor(buffer, cursor)
   local rows_count = api.nvim_buf_line_count(buffer)
   if row > rows_count then
     row = rows_count - 1
+    if row < 1 then row = 1; end
     log('[restore_cursor] fixed row to ' .. row)
   end
 
-  local lines = api.nvim_buf_get_lines(buffer, row - 1, row, true)
-  local line = lines[1]
+  local line = buf_get_line(buffer, row)
   log('[restore_cursor] line #' .. row .. ' = [[[' .. line .. ']]]')
   local col_count = string.len(line)
   log('[restore_cursor] line #' .. row .. ' columns = ' .. col_count)
@@ -115,6 +123,7 @@ end
 
 return {
   buf_get_filetype = buf_get_filetype,
+  buf_get_line = buf_get_line,
   current_word = current_word,
   exists = exists,
   global_extend = global_extend,
