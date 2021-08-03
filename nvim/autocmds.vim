@@ -16,8 +16,9 @@ augroup Elentok_Misc
   autocmd FileType javascript setlocal foldmethod=expr
   autocmd FileType ruby       setlocal omnifunc=
   autocmd Filetype python     setlocal ts=4 softtabstop=4 shiftwidth=4
-  autocmd FileType gitcommit,markdown setlocal spell spellcapcheck=
-  autocmd FileType gitcommit  setlocal comments=fb:-,fb:* colorcolumn=72 textwidth=72
+  autocmd FileType gitcommit,hgcommit,markdown setlocal spell spellcapcheck=
+  autocmd FileType gitcommitsetlocal comments=fb:-,fb:* colorcolumn=72 textwidth=72
+  autocmd FileType gitcommit,hgcommit  setlocal comments=fb:-,fb:* colorcolumn=80 textwidth=80
   autocmd FileType markdown   setlocal textwidth=80
   autocmd FileType vim        setlocal nobomb
 
