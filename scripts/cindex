@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 
+from typing import Optional
+from collections.abc import Callable
 import subprocess
 import re
 import sys
+from dataclasses import dataclass
 
 
 def main():
@@ -23,35 +26,82 @@ def usage():
 
 
 def index():
-    cmd = 'rg --no-heading --line-number -tts -tjs "^(interface|class|enum|export) "'
-    p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
-    if p.stdout is not None:
-        entries = p.stdout.read().decode().splitlines()
-        for entry in entries:
-            parsed_entry = parse_entry(entry)
-            if parsed_entry:
-                print(",".join(parsed_entry))
+    index_code()
+    index_protos()
 
 
-def parse_entry(entry: str):
-    filename, linenumber, line = entry.split(":", 2)
-    symbol = extract_symbol(line)
+def index_code():
+    lines = run(
+        'rg --no-heading --line-number -tts -tjs "^(interface|class|enum|export) "'
+    )
+    for line in lines:
+        symbol = parse_line(line, extract_code_symbol)
+        if symbol:
+            symbol.print()
+
+
+def index_protos():
+    packages_by_filename = {}
+    lines = run('rg --no-heading --line-number -tproto "^(package|message) "')
+    for line in lines:
+        symbol = parse_line(line, extract_proto_symbol)
+
+        if symbol:
+            if symbol.type == "package":
+                packages_by_filename[symbol.filename] = symbol.name
+            elif symbol.type == "message":
+                package = packages_by_filename[symbol.filename]
+                symbol.name = ".".join([package, symbol.name])
+                symbol.print()
+
+
+def parse_line(line: str, symbol_extractor: Callable[[str], Optional[tuple[str, str]]]):
+    filename, number, text = line.split(":", 2)
+    symbol = symbol_extractor(text)
     if symbol is None:
-        sys.stderr.write(f'Error: unable to extract symbol from "{line}"')
+        sys.stderr.write(f'Error: unable to extract proto symbol from "{text}"')
         return None
 
     symbol_type, symbol_name = symbol
 
-    return [symbol_name, symbol_type, filename, linenumber]
+    return Symbol(symbol_name, symbol_type, filename, number)
 
 
-RE = re.compile("^(export )?(async )?(class|const|enum|interface|function) ([^ :(]+)")
+PROTO_RE = re.compile("^(message|package) ([^ ;]+)")
+CODE_RE = re.compile(
+    "^(export )?(async )?(class|const|enum|interface|function) ([^ :(]+)"
+)
 
 
-def extract_symbol(line: str):
-    match = RE.match(line)
+def extract_code_symbol(line: str) -> Optional[tuple[str, str]]:
+    match = CODE_RE.match(line)
     if match:
         return (match.group(3), match.group(4))
+
+
+def extract_proto_symbol(line: str) -> Optional[tuple[str, str]]:
+    match = PROTO_RE.match(line)
+    if match:
+        return (match.group(1), match.group(2))
+
+
+def run(cmd):
+    p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
+    if p.stdout is None:
+        raise Exception(f"Failed to run command: {cmd}")
+
+    return p.stdout.read().decode().splitlines()
+
+
+@dataclass
+class Symbol:
+    name: str
+    type: str
+    filename: str
+    line: str
+
+    def print(self):
+        print(",".join([self.name, self.type, self.filename, self.line]))
 
 
 if __name__ == "__main__":
