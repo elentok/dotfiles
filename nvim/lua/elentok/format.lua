@@ -3,7 +3,7 @@ local util = require('elentok/util')
 
 -- Formatter commands.
 local formatter_cmds = {
-  black = 'black --quiet --stdin-filename % -',
+  black = 'black --quiet --stdin-filename % - 2>/dev/null',
   prettier = 'prettier --stdin-filepath %',
   clang = 'clang-format --style=Google --assume-filename %',
   lsp = function()
