@@ -1,3 +1,4 @@
+local map = require('elentok/map')
 local actions = require('telescope/actions')
 local utils = require('telescope.utils')
 local finders = require('telescope.finders')
@@ -54,6 +55,24 @@ local function command_picker(opts)
     }
   }):find()
 end
+
+-- Keys
+
+local function call_telescope(expr)
+  return map.lua('require("telescope.builtin").' .. expr)
+end
+
+map.normal('<c-p>', call_telescope('find_files{}'))
+map.normal('<Leader>b', call_telescope('buffers{}'))
+map.normal('<Leader>gt', call_telescope('tags{}'))
+map.normal('<Leader>gg', call_telescope('git_status{}'))
+map.normal('<Leader>gh', call_telescope('help_tags{}'))
+map.normal('<Leader>gm', call_telescope('oldfiles{ previewer = false}'))
+map.normal('<Leader>fe', call_telescope('file_browser{ cwd = vim.fn.expand("%:p:h") }'))
+map.normal('<Leader>ff', call_telescope('grep_string{ search = vim.fn.input("Grep for?") }'))
+map.normal('<Leader>fw', call_telescope('grep_string{ search = vim.fn.expand("<cword>") }'))
+map.normal('gO', call_telescope('lsp_document_symbols{ symbols = {"function", "method", "interface", "class"} }'))
+map.normal('gR', call_telescope('lsp_references()'))
 
 return {
   command_picker = command_picker,
