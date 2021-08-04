@@ -15,7 +15,7 @@ end
 
 local function goto_symbol()
   telescope.command_picker({
-    cmd = {'cindex', 'list'},
+    cmd = {'symbols', 'list'},
     parse_line = function(line)
       local parts = vim.split(line, ",")
       return {
@@ -28,7 +28,7 @@ local function goto_symbol()
 end
 
 -- Keys
-map.normal('<Leader>gs', map.lua("require('elentok/cindex').goto_symbol()"))
+map.normal('<Leader>gs', map.lua("require('elentok/symbols').goto_symbol()"))
 
 return {
   index = index,

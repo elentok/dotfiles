@@ -8,8 +8,11 @@ import os
 import sys
 from dataclasses import dataclass
 
-SYMBOLS_FILE = os.path.expanduser("~/.local/share/cindex-full.csv")
-SYMBOLS_NAMES_FILE = os.path.expanduser("~/.local/share/cindex-names.txt")
+ROOT = os.path.expanduser("~/.cache/symbols")
+os.makedirs(ROOT, exist_ok=True)
+
+SYMBOLS_FILE = os.path.join(ROOT, "symbols.csv")
+SYMBOLS_NAMES_FILE = os.path.join(ROOT, "symbol-names.txt")
 
 
 def main():
@@ -38,9 +41,9 @@ def usage():
         """
 Usage:
 
-  cindex names
-  cindex show <name>
-  cindex index <dir>...
+  symbols names
+  symbols show <name>
+  symbols index <dir>...
 """
     )
 
