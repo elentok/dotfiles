@@ -46,3 +46,6 @@ map.normal('<Leader>fw', call_telescope('grep_string{ search = vim.fn.expand("<c
 map.normal('gO', call_telescope('lsp_document_symbols{ symbols = {"function", "method", "interface", "class"} }'))
 map.normal('gR', call_telescope('lsp_references()'))
 
+
+-- Misc
+map.normal('<Leader>td', ':ToggleDone<cr>')
