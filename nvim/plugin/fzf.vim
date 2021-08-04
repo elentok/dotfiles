@@ -22,5 +22,3 @@ function! FZFEdit(prompt, source, ...)
 endfunction
 
 command! FZFHgModified call FZFEdit('Hg Modified', 'hg status --no-status')
-
-noremap `` :BTags<cr>
