@@ -186,6 +186,7 @@ fi
 
 # LUA {{{1
 export LUA_ROOT="$HOME/.apps/all/lua/default"
+export LUAROCKS_ROOT="$HOME/.apps/all/luarocks/default"
 
 # PATH {{{1
 PATH="$DOTF/scripts:\
@@ -199,7 +200,9 @@ PATH="$PATH:$HOME/.fzf/bin:\
 $HOME/.apps/bin:\
 $HOME/bin:\
 $HOME/scripts:\
+$HOME/.luarocks/bin:\
 $LUA_ROOT/bin:\
+$LUAROCKS_ROOT/bin:\
 $HOME/.lua/bin:\
 $HOME/.local/bin"
 

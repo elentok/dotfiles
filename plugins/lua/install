@@ -5,30 +5,36 @@ set -euo pipefail
 source "$(dirname "$0")/../../framework"
 
 LUA_VERSION=5.3.5
+LUAROCKS_VERSION=3.3.1
 
 ALL_APPS="${HOME}/.apps/all"
+LUA_ROOT="$(app-dir lua ${LUA_VERSION})"
 LSP_ROOT="${ALL_APPS}/lua-language-server"
 
 function main() {
-  if command_missing lua; then
+  if ! app-exists lua ${LUA_VERSION}; then
     build-lua
-    app-set-default lua ${LUA_VERSION}
   fi
-  # apt-fast-install lua5.1 luarocks
+  app-set-default lua ${LUA_VERSION}
+
+  if ! app-exists luarocks ${LUAROCKS_VERSION}; then
+    build-luarocks
+  fi
+  app-set-default luarocks ${LUAROCKS_VERSION}
 
   if [ ! -e "$LSP_ROOT/bin/Linux/lua-language-server" ]; then
     install-language-server
   fi
 
-  luarocks install --local formatter
+
+  if command_missing lua-format; then
+    luarocks install --local --server=https://luarocks.org/dev luaformatter
+  fi
 }
 
 function build-lua() {
   build_dir="$(app-prepare-build-dir lua)"
   app_dir="$(app-prepare-dir lua $LUA_VERSION)"
-
-  echo "BUILD_DIR=${build_dir}"
-  echo "APP_DIR=${app_dir}"
 
   cd "$build_dir"
   curl -R -O http://www.lua.org/ftp/lua-${LUA_VERSION}.tar.gz
@@ -36,6 +42,20 @@ function build-lua() {
   cd lua-${LUA_VERSION}
   make linux test
   make install INSTALL_TOP="$app_dir"
+}
+
+function build-luarocks() {
+  build_dir="$(app-prepare-build-dir luarocks)"
+  app_dir="$(app-prepare-dir luarocks $LUAROCKS_VERSION)"
+
+  cd "$build_dir"
+  wget https://luarocks.org/releases/luarocks-${LUAROCKS_VERSION}.tar.gz
+  tar zxpf luarocks-${LUAROCKS_VERSION}.tar.gz
+  cd luarocks-${LUAROCKS_VERSION}
+
+  ./configure --with-lua="${LUA_ROOT}" --prefix="${app_dir}"
+  make
+  make install
 }
 
 function install-language-server() {

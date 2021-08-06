@@ -748,11 +748,21 @@ function prepare-directory() {
   echo -n "$dir"
 }
 
+function app-exists() {
+  [ -e "$(app-dir "$@")" ]
+}
+
+function app-dir() {
+  local name="$1"
+  local version="$2"
+  echo -n "$HOME/.apps/all/$name/$version"
+}
+
 function app-set-default() {
   local name="$1"
   local version="$2"
-  local target="$HOME/.apps/all/$name/default"
-  local source="$HOME/.apps/all/$name/$version"
+  target="$(app-dir "$name" default)"
+  source="$(app-dir "$name" "$version")"
   if [ ! -e "$source" ]; then
     echo "Error: no directory '${source}'"
     return 1

@@ -4,8 +4,9 @@ local util = require('elentok/util')
 -- Formatter commands.
 local formatter_cmds = {
   black = 'black --quiet --stdin-filename % - 2>/dev/null',
-  prettier = 'prettier --stdin-filepath %',
   clang = 'clang-format --style=Google --assume-filename %',
+  luaformat = 'lua-format',
+  prettier = 'prettier --stdin-filepath %',
   lsp = function()
     vim.lsp.buf.formatting_seq_sync()
   end,
@@ -14,12 +15,13 @@ local formatter_cmds = {
 -- Matches filetype to formatter.
 local formatter_by_filetype = {
   css = "prettier",
-  javascript = "prettier",
-  typescript = "prettier",
-  typescriptreact = "prettier",
   html = "prettier",
+  javascript = "prettier",
+  lua = "luaformat",
   markdown = "prettier",
   python = "black",
+  typescript = "prettier",
+  typescriptreact = "prettier",
 }
 
 -- Enable or disable automatic formatting.
