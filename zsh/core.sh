@@ -184,6 +184,9 @@ if is_mac; then
   export CGO_LDFLAGS="-L $BREW_HOME/lib"
 fi
 
+# LUA {{{1
+export LUA_ROOT="$HOME/.apps/all/lua/default"
+
 # PATH {{{1
 PATH="$DOTF/scripts:\
 $DOTL/scripts"
@@ -196,6 +199,7 @@ PATH="$PATH:$HOME/.fzf/bin:\
 $HOME/.apps/bin:\
 $HOME/bin:\
 $HOME/scripts:\
+$LUA_ROOT/bin:\
 $HOME/.lua/bin:\
 $HOME/.local/bin"
 

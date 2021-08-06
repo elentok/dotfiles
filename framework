@@ -720,6 +720,47 @@ function is-valid-version() {
   [ -n "$(semver --coerce --range "$range" "$version")" ]
 }
 
+# App Builder {{{1
+function app-prepare-build-dir() {
+  local name="$1"
+  prepare-directory "$TMP/build/$name"
+}
+
+function app-prepare-dir() {
+  local name="$1"
+  local version="$2"
+  prepare-directory "$HOME/.apps/all/$name/$version"
+}
+
+function prepare-directory() {
+  local dir="$1"
+
+  if [ -e "$dir" ]; then
+    if [ "${CLEAN:-}" == "no" ]; then
+      return
+    fi
+
+    rm -rf "$dir"
+  fi
+
+  mkdir -p "$dir"
+
+  echo -n "$dir"
+}
+
+function app-set-default() {
+  local name="$1"
+  local version="$2"
+  local target="$HOME/.apps/all/$name/default"
+  local source="$HOME/.apps/all/$name/$version"
+  if [ ! -e "$source" ]; then
+    echo "Error: no directory '${source}'"
+    return 1
+  fi
+
+  symlink "$source" "$target"
+}
+
 # Benchmark {{{1
 
 if [[ "${BASH_VERSION:-}" =~ ^3.* ]]; then
