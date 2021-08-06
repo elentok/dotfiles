@@ -2,19 +2,13 @@ local api = vim.api
 
 local log_enabled = false
 
-local function set_log(enabled)
-  log_enabled = enabled
-end
+local function set_log(enabled) log_enabled = enabled end
 
-local function log(message)
-  if log_enabled then
-    print(message)
-  end
-end
+local function log(message) if log_enabled then print(message) end end
 
-local function safe_require (name)
+local function safe_require(name)
   local status, module = pcall(require, name)
-  if(status) then
+  if (status) then
     return module
   else
     print(string.format('WARNING: error loading lua module "%s"', name))
@@ -45,7 +39,7 @@ local function open_window(title, lines)
     width = win_width,
     height = win_height,
     row = row,
-    col = col,
+    col = col
   }
 
   -- Insert contents
@@ -65,7 +59,7 @@ local function current_word()
 end
 
 local function global_extend(name, values)
-  array = api.nvim_get_var(name)
+  local array = api.nvim_get_var(name)
   if array == nil then
     array = values
   else
@@ -78,7 +72,8 @@ end
 -- "index" is 1-based
 local function buf_get_line(buffer, index)
   if index < 1 then
-    error('buf_get_line got index ' .. vim.inspect(index) .. ', must be 1 or higher')
+    error('buf_get_line got index ' .. vim.inspect(index) ..
+              ', must be 1 or higher')
   end
   return api.nvim_buf_get_lines(buffer, index - 1, index, true)[1]
 end
@@ -112,12 +107,12 @@ local function restore_cursor(buffer, cursor)
   api.nvim_win_set_cursor(buffer, {row, col})
 end
 
-function buf_get_filetype(bufnr)
+local function buf_get_filetype(bufnr)
   bufnr = bufnr or 0
   return api.nvim_buf_get_option(bufnr, 'filetype')
 end
 
-function exists (expr)
+local function exists(expr)
   return api.nvim_eval(string.format('exists("%s")', expr)) ~= 0
 end
 
@@ -131,6 +126,6 @@ return {
   open_window = open_window,
   restore_cursor = restore_cursor,
   safe_require = safe_require,
-  set_log = set_log,
+  set_log = set_log
 }
 

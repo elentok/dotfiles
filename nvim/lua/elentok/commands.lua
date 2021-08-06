@@ -14,7 +14,5 @@ vim.cmd([[
   command! LogDisable lua require('elentok/util').set_log(false)
 ]])
 
-return {
-  dot_reload = dot_reload,
-}
+return {dot_reload = dot_reload}
 
