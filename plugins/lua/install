@@ -4,17 +4,38 @@ set -euo pipefail
 
 source "$(dirname "$0")/../../framework"
 
+LUA_VERSION=5.3.5
+
 ALL_APPS="${HOME}/.apps/all"
 LSP_ROOT="${ALL_APPS}/lua-language-server"
 
 function main() {
-  apt-fast-install lua5.1 luarocks
+  if command_missing lua; then
+    build-lua
+    app-set-default lua ${LUA_VERSION}
+  fi
+  # apt-fast-install lua5.1 luarocks
 
   if [ ! -e "$LSP_ROOT/bin/Linux/lua-language-server" ]; then
     install-language-server
   fi
 
   luarocks install --local formatter
+}
+
+function build-lua() {
+  build_dir="$(app-prepare-build-dir lua)"
+  app_dir="$(app-prepare-dir lua $LUA_VERSION)"
+
+  echo "BUILD_DIR=${build_dir}"
+  echo "APP_DIR=${app_dir}"
+
+  cd "$build_dir"
+  curl -R -O http://www.lua.org/ftp/lua-${LUA_VERSION}.tar.gz
+  tar -zxf lua-${LUA_VERSION}.tar.gz
+  cd lua-${LUA_VERSION}
+  make linux test
+  make install INSTALL_TOP="$app_dir"
 }
 
 function install-language-server() {
