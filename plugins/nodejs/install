@@ -25,7 +25,7 @@ install_node() {
 
 install_packages() {
   npm-fast-install yarn json live-server eslint typescript prettier \
-    semver cloc fx bash-language-server
+    semver cloc fx
 
   if ! is_termux; then
     npm-fast-install gtop
