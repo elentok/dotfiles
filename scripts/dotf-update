@@ -12,7 +12,9 @@ old_head=$(git rev-parse HEAD)
 git pull
 new_head=$(git rev-parse HEAD)
 
-if [ "$old_head" != "$new_head" ]; then
+if [ "$old_head" == "$new_head" ]; then
+  echo -e "\\nUp to date."
+else
   echo -e "\\nPulled the following changes:"
   git log --pretty=%s "${old_head}..${new_head}" | sed 's/^/- /'
 
