@@ -26,18 +26,19 @@ local formatter_by_filetype = {
 
 -- Enable or disable automatic formatting.
 local format_on_save_by_filetype = {
- json = true,
- javascript = true,
  css = true,
- scss = true,
+ html = true,
+ java = true,
+ javascript = true,
+ json = true,
  lua = true,
+ markdown = true,
+ python = true,
+ scss = true,
+ sh = true,
  typescript = true,
  typescriptreact = true,
- java = true,
- markdown = true,
  yaml = true,
- python = true,
- html = true,
 }
 
 local function run_formatter(cmd)
