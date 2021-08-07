@@ -7,10 +7,12 @@ local formatter_cmds = {
   clang = 'clang-format --style=Google --assume-filename %',
   luaformat = 'lua-format',
   prettier = 'prettier --stdin-filepath %',
-  lsp = function()
-    vim.lsp.buf.formatting_seq_sync()
-  end,
+  lsp = function() vim.lsp.buf.formatting_seq_sync() end
 }
+
+-- TODO:
+-- verify formatter commands are executable.
+-- for formatter, cmd in pairs(formatter_cmds) do print(formatter) end
 
 -- Matches filetype to formatter.
 local formatter_by_filetype = {
@@ -21,24 +23,24 @@ local formatter_by_filetype = {
   markdown = "prettier",
   python = "black",
   typescript = "prettier",
-  typescriptreact = "prettier",
+  typescriptreact = "prettier"
 }
 
 -- Enable or disable automatic formatting.
 local format_on_save_by_filetype = {
- css = true,
- html = true,
- java = true,
- javascript = true,
- json = true,
- lua = true,
- markdown = true,
- python = true,
- scss = true,
- sh = true,
- typescript = true,
- typescriptreact = true,
- yaml = true,
+  css = true,
+  html = true,
+  java = true,
+  javascript = true,
+  json = true,
+  lua = true,
+  markdown = true,
+  python = true,
+  scss = true,
+  sh = true,
+  typescript = true,
+  typescriptreact = true,
+  yaml = true
 }
 
 local function run_formatter(cmd)
@@ -64,14 +66,10 @@ local function format(formatter)
 end
 
 local function format_on_save()
-  if format_on_save_by_filetype[util.buf_get_filetype()] then
-    format()
-  end
+  if format_on_save_by_filetype[util.buf_get_filetype()] then format() end
 end
 
-local function set_formatter_cmd(formatter, cmd)
-  formatter_cmds[formatter] = cmd
-end
+local function set_formatter_cmd(formatter, cmd) formatter_cmds[formatter] = cmd end
 
 local function set_formatter(filetype, formatter)
   formatter_by_filetype[filetype] = formatter
@@ -100,5 +98,5 @@ return {
   format_on_save = format_on_save,
   set_formatter_cmd = set_formatter_cmd,
   set_formatter = set_formatter,
-  set_format_on_save = set_format_on_save,
+  set_format_on_save = set_format_on_save
 }
