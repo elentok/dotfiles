@@ -1,21 +1,23 @@
 #!/usr/bin/env bash
 
-source `dirname $0`/../framework
+set -euo pipefail
+
+source "$DOTF/framework"
 
 header "Updating dotfiles"
-cd $DOTF
+cd "$DOTF"
 
 bullet "Pulling changes... "
-old_head=`git rev-parse HEAD`
+old_head=$(git rev-parse HEAD)
 git pull
-new_head=`git rev-parse HEAD`
+new_head=$(git rev-parse HEAD)
 
 if [ "$old_head" != "$new_head" ]; then
-  echo -e "\nPulled the following changes:"
-  git log --pretty=%s ${old_head}..${new_head} | sed 's/^/- /'
+  echo -e "\\nPulled the following changes:"
+  git log --pretty=%s "${old_head}..${new_head}" | sed 's/^/- /'
 
-  echo -ne "\nPress any key to run the installer..."
-  read -n 1
+  echo -ne "\\nPress any key to run the installer..."
+  read -r -n 1
 
   if is_mac; then
     bullet 'Updating brew... '
