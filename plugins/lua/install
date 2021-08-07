@@ -5,13 +5,15 @@ set -euo pipefail
 source "$(dirname "$0")/../../framework"
 
 LUA_VERSION=5.3.5
-LUAROCKS_VERSION=3.3.1
+LUAROCKS_VERSION=3.7.0
 
 ALL_APPS="${HOME}/.apps/all"
 LUA_ROOT="$(app-dir lua ${LUA_VERSION})"
 LSP_ROOT="${ALL_APPS}/lua-language-server"
 
 function main() {
+  apt-fast-install build-essential libreadline-dev cmake
+
   if ! app-exists lua ${LUA_VERSION}; then
     build-lua
   fi
@@ -25,7 +27,6 @@ function main() {
   if [ ! -e "$LSP_ROOT/bin/Linux/lua-language-server" ]; then
     install-language-server
   fi
-
 
   if command_missing lua-format; then
     luarocks install --local --server=https://luarocks.org/dev luaformatter
