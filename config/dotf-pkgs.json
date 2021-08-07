@@ -122,6 +122,15 @@
           "asset_regexp": "verco-linux-x86_64"
         }
       }
+    },
+    {
+      "name": "glow",
+      "github_repo": "charmbracelet/glow",
+      "platforms": {
+        "x86_64": {
+          "asset_regexp": "glow_.*_linux_x86_64.*"
+        }
+      }
     }
   ]
 }
