@@ -7,7 +7,7 @@ from .package import Package
 from .package_installer import PackageInstaller
 
 DOTF = path.join(path.dirname(__file__), "..", "..")
-CONFIG_FILENAME = path.join(DOTF, "config", "dotf-pkgs.json")
+CONFIG_FILENAME = path.join(DOTF, "config", "dotf-github.json")
 
 
 @dataclass
