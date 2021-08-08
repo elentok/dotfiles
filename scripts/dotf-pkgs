@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+#
+# Install and upgrades packages via npm, pip, apt, ...
+
+set -euo pipefail
+
+source "$DOTF/framework"
+
+CONFIG_FILE="$DOTF/config/packages.cfg"
+
+function main() {
+  case "$1" in
+    install)
+      install-pkgs
+      ;;
+    upgrade)
+      upgrade-pkgs
+      ;;
+    *)
+      usage "$0"
+      exit 1
+      ;;
+  esac
+}
+
+function install-pkgs() {
+  if is_linux; then
+    apt-fast-install "$(get-pkgs apt)"
+  elif is_mac; then
+    for pkg in $(get-pkgs brew); do
+      brew_install "$pkg"
+    done
+  fi
+  pip-fast-install "$(get-pkgs pip)"
+  npm-fast-install "$(get-pkgs npm)"
+}
+
+function upgrade-pkgs() {
+  header 'Updating pip packages'
+  # shellcheck disable=SC2046
+  pip3 install --upgrade --user $(get-pkgs pip)
+
+  header 'Updating npm packages'
+  if is-n-providing-node; then
+    npm="npm"
+  else
+    npm="sudo npm"
+  fi
+  # shellcheck disable=SC2046
+  $npm install -g $(get-pkgs npm)
+}
+
+function get-pkgs() {
+  local prefix="$1"
+  grep "^${prefix}: " "$CONFIG_FILE" | awk '{print $2}' | xargs
+}
+
+main "$@"
