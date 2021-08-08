@@ -11,9 +11,7 @@ main() {
   install_neovim
   install_symlinks
   install_plugins
-  install_lsp_tools
   install_cli_tools
-  install_dtach
 
   (cd "$DOTF/nvim/ctags" && ./build)
 }
@@ -109,16 +107,6 @@ install_plugins() {
   success "done"
 }
 
-install_dtach() {
-  install_package dtach
-}
-
-install_lsp_tools() {
-  bullet "Installing LSP tools... "
-  nvim +LspInstall sumneko_lua +qall
-  success "done"
-}
-
 install_cli_tools() {
   if is_debian; then
     apt-fast-install exuberant-ctags shellcheck
@@ -143,8 +131,7 @@ install_cli_tools() {
 
   pip-fast-install \
     neovim-remote neovim \
-    black pylint yamllint # jedi python-language-server \
-    # mypy pyls-mypy pyls-isort pyls-black
+    black pylint yamllint
 }
 
 explain_win32yank() {
