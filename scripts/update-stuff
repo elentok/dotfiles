@@ -20,7 +20,7 @@ function update-node() {
 }
 
 function is-n-providing-node() {
-  [ "$DOTF_CONFIG_NODE_PROVIDER" == "n" ];
+  [ "$DOTF_CONFIG_NODE_PROVIDER" == "n" ]
 }
 
 function update-pip-stuff() {
@@ -37,7 +37,6 @@ function update-npm-stuff() {
     npm="sudo npm"
   fi
 
-
   header 'Updating npm packages'
   for pkg in $NPM_PKGS; do
     $npm install -g "$pkg"
@@ -46,7 +45,7 @@ function update-npm-stuff() {
 
 function update-neovim-stuff() {
   header 'Neovim: Upgrade'
-  dotf-pkgs u nvim
+  dotf-github u nvim
   nvim-packer-sync
 }
 

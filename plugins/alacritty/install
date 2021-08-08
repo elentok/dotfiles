@@ -5,7 +5,7 @@ source "$DOTF/framework"
 main() {
   if command_missing alacritty; then
     if is_linux; then
-      dotf-pkgs install alacritty
+      dotf-github install alacritty
       # PRIMARY=yes $DOTF/plugins/alacritty/install-binary
     else
       echo "Error: I've only setup alacritty installer for linux"
@@ -15,7 +15,6 @@ main() {
 
   mkdir -p ~/.config/alacritty
   symlink "$DOTF/plugins/alacritty/alacritty.yml" ~/.config/alacritty/alacritty.yml
-
 
   add-desktop-entry alacritty Alacritty "$HOME/.apps/bin/alacritty"
 }

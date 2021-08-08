@@ -5,11 +5,13 @@ import sys
 from lib import package_manager
 
 USAGE = """
+Installs binaries from github.
+
 Usage:
 
-  dotf-pkgs list
-  dotf-pkgs update
-  dotf-pkgs install [-p|--force-prerelease] <name>
+  dotf-github list
+  dotf-github update
+  dotf-github install [-p|--force-prerelease] <name>
 
 """
 
