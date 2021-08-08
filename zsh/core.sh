@@ -10,7 +10,6 @@ source_if_exists() {
 source "$DOTF/zsh/config.sh"
 source_if_exists "$DOTL/zsh/config.sh"
 
-
 # Identify OS {{{1
 if [ "$(uname -s)" = "Darwin" ]; then
   export OS=mac
@@ -161,7 +160,11 @@ if [ -e "$BREW_HOME" ]; then
 fi
 
 # NodeJS {{{1
-if [ "$DOTF_CONFIG_NODE_PROVIDER" = "n" ]; then
+function is-n-providing-node() {
+  [ "$DOTF_CONFIG_NODE_PROVIDER" = "n" ]
+}
+
+if is-n-providing-node; then
   export N_PREFIX=$HOME/.n
 fi
 

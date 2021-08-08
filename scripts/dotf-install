@@ -1,21 +1,21 @@
 #!/usr/bin/env bash
 
-source $(dirname $0)/../framework
+set -euo pipefail
+
+source "$(dirname "$0")/../framework"
 
 benchmark-start
 
 main() {
-  mkdir -p ~/bin
-
-  cd $DOTF
+  cd "$DOTF"
 
   install-prerequisits
 
   git submodule update --init --recursive
   update-pip
-  dotf-plugin tools python
+  dotf-pkgs install
   dotf-github install
-  dotf-plugin nodejs git zsh nvim ripgrep tig bash tmux vifm
+  dotf-plugin nodejs git zsh nvim ripgrep tig bash tmux vifm lua
 
   gui-plugins
 

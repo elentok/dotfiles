@@ -5,11 +5,10 @@ set -euo pipefail
 
 # DOTF directory {{{1
 
-DOTF=`dirname ${BASH_SOURCE[0]-$0}`
-export DOTF=`cd $DOTF && pwd`
+DOTF=$(dirname ${BASH_SOURCE[0]-$0})
+export DOTF=$(cd $DOTF && pwd)
 
 source $DOTF/zsh/core.sh
-
 
 # Machine varibles {{{1
 MACHINE_VARFILE=$HOME/.config/machine
@@ -38,7 +37,6 @@ store_variable() {
 escape_variable() {
   echo -n "$1" | sed 's/''/\\''/g'
 }
-
 
 # Colors {{{1
 export BLACK="\\033[30m"
@@ -82,7 +80,6 @@ to_uppercase() {
     awk '{print toupper($0)}'
   fi
 }
-
 
 # display methods (header/bullet/info/success/error) {{{1
 title() {
@@ -280,7 +277,7 @@ gem_install() {
 
 gem_install_single() {
   bullet "Installing gem ${1}... [sudo] "
-  if [ "`gem_cache | grep \"^$1\\b\"`" != "" ]; then
+  if [ "$(gem_cache | grep \"^$1\b\")" != "" ]; then
     info "already installed"
   else
     sudo /usr/bin/gem install $*
@@ -322,7 +319,7 @@ brew_install_url() {
 }
 
 has_brew_package() {
-  [ "`brew ls -1 | grep \"^$1\$\"`" != "" ]
+  [ "$(brew ls -1 | grep \"^$1$\")" != "" ]
 }
 
 brew_tap() {
@@ -356,7 +353,7 @@ brew_cask_install() {
 }
 
 has_brew_cask_package() {
-  [ "`brew cask list | grep \"^$1\$\"`" != "" ]
+  [ "$(brew cask list | grep \"^$1$\")" != "" ]
 }
 
 # Git {{{1
@@ -367,7 +364,7 @@ git_clone() {
   bullet "Cloning $origin => ${target}..."
   if [ -d $target ]; then
     if [ -d $target/.git ]; then
-      current_origin=`cd $target && git_get_origin`
+      current_origin=$(cd $target && git_get_origin)
       if [ "$current_origin" == "$origin" ]; then
 
         if [ "$option" == "--update" ]; then
@@ -410,7 +407,7 @@ apt-fast-add-repo() {
 
   bullet "Adding repository ${1}..."
   sources="/etc/apt/sources.list /etc/apt/sources.list.d/*.list"
-  if [ "`grep "$1" $sources`" != "" ]; then
+  if [ "$(grep "$1" $sources)" != "" ]; then
     info " already installed"
   else
     # required for add-apt-repository
@@ -641,7 +638,10 @@ run_command() {
 function find-parent-with() {
   local path=''
   while [ 1 ]; do
-    local abspath=$(cd ./$path; pwd)
+    local abspath=$(
+      cd ./$path
+      pwd
+    )
     if [ "$abspath" == "/" ]; then
       return 1
     fi
@@ -783,12 +783,12 @@ if [[ "${BASH_VERSION:-}" =~ ^3.* ]]; then
   }
 else
   declare -A BENCHMARKS=()
-  
+
   benchmark-start() {
     key=${1:-GLOBAL}
     BENCHMARKS[$key]=$SECONDS
   }
-  
+
   benchmark-stop() {
     key=${1:-GLOBAL}
     duration=$(($SECONDS * 1000 - BENCHMARKS[$key] * 1000))
@@ -800,4 +800,3 @@ else
     fi
   }
 fi
-
