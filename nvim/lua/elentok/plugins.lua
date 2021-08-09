@@ -36,10 +36,10 @@ return require('packer').startup(function()
 
   -- Telescope
   use 'nvim-telescope/telescope.nvim'
-  use 'nvim-telescope/telescope-fzy-native.nvim'
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
 
   -- Treesitter
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
   -- Misc.
   use 'junegunn/vim-easy-align'
@@ -59,13 +59,9 @@ return require('packer').startup(function()
   use 'davidbeckingsale/writegood.vim'
 
   -- Lazy
-  use { 'itchyny/calendar.vim', opt = true, cmd = 'Calendar' }
+  use {'itchyny/calendar.vim', opt = true, cmd = 'Calendar'}
 
   -- dark/zen room, no distraction mode
-  use { 'junegunn/goyo.vim', opt = true, cmd = 'Goyo' }
+  use {'junegunn/goyo.vim', opt = true, cmd = 'Goyo'}
 
-end, {
-  display = {
-    open_fn = require('packer.util').float,
-  }
-})
+end, {display = {open_fn = require('packer.util').float}})
