@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-source $DOTF/framework
-
-brew_install pebble/pebble-sdk/pebble-sdk

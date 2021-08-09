@@ -4,6 +4,7 @@ source "$DOTF/framework"
 
 function main() {
   update-node
+  dotf-github update
   dotf-pkgs upgrade
   update-neovim-stuff
 }

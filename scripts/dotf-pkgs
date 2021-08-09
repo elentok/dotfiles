@@ -26,6 +26,10 @@ function main() {
 function install-pkgs() {
   if is_linux; then
     apt-fast-install "$(get-pkgs apt)"
+
+    if [ "$HAS_GUI" = 'yes' ]; then
+      apt-fast-install "$(get-pkgs apt-gui)"
+    fi
   elif is_mac; then
     for pkg in $(get-pkgs brew); do
       brew_install "$pkg"
@@ -35,6 +39,7 @@ function install-pkgs() {
   fi
   pip-fast-install "$(get-pkgs pip)"
   npm-fast-install "$(get-pkgs npm)"
+
 }
 
 function upgrade-pkgs() {
