@@ -30,6 +30,8 @@ function install-pkgs() {
     for pkg in $(get-pkgs brew); do
       brew_install "$pkg"
     done
+  elif is_termux; then
+    apt-fast-install "$(get-pkgs termux)"
   fi
   pip-fast-install "$(get-pkgs pip)"
   npm-fast-install "$(get-pkgs npm)"
