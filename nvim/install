@@ -4,87 +4,11 @@ set -euo pipefail
 
 source "$DOTF/framework"
 
-VERSION=0.4.3
-
 main() {
-  install_requirements
-  install_neovim
   install_symlinks
-  install_plugins
-  install_cli_tools
+  install_packer_plugins
 
   (cd "$DOTF/nvim/ctags" && ./build)
-}
-
-install_requirements() {
-  # clang - required for building sumneko lua language server
-  if is_termux; then
-    apt-fast-install clang
-  elif is_mac; then
-    brew_install python
-  elif is_debian; then
-    apt-fast-install python3-dev python3-pip clang ninja-build
-  fi
-
-  npm-fast-install neovim
-}
-
-install_neovim() {
-  if is_termux; then
-    apt-fast-install neovim
-    return
-  fi
-
-  if nvim-is-outdated; then
-    PRIMARY=yes VERSION=v$VERSION "$DOTF/nvim/install-binary"
-  fi
-}
-
-function nvim-is-outdated() {
-  if command_missing nvim; then
-    return 0
-  fi
-
-  current_version=$(nvim -v | head -1 | cut -d' ' -f2 | sed 's/^v//')
-  is-valid-version "<$VERSION" "$current_version"
-}
-
-install_neovim_mac() {
-  mkdir -p ~/Applications
-  cd ~/Applications
-
-  if [ ! -e ~/Applications/nvim-osx64 ]; then
-    bullet 'Downloading Neovim for Mac... '
-    curl -L "https://github.com/neovim/neovim/releases/download/$NEOVIM_VERSION/nvim-macos.tar.gz" \
-      -o /tmp/nvim-macos.tar.gz
-    show_result
-
-    tar xzvf /tmp/nvim-macos.tar.gz
-  fi
-
-  mkdir -p ~/bin
-  symlink ~/Applications/nvim-osx64/bin/nvim ~/bin/nvim
-}
-
-install_neovim_appimage() {
-  mkdir -p ~/Applications
-  cd ~/Applications
-
-  local filename="nvim-$NEOVIM_VERSION.AppImage"
-
-  if [ ! -e "$filename" ]; then
-    bullet 'Downloading Neovim AppImage... '
-    curl -L "https://github.com/neovim/neovim/releases/download/$NEOVIM_VERSION/nvim.appimage" \
-      -o "$filename"
-    show_result
-
-    chmod +x "$filename"
-  fi
-
-  symlink "$filename" nvim.AppImage
-
-  mkdir -p ~/bin
-  symlink ~/Applications/nvim.AppImage ~/bin/nvim
 }
 
 install_symlinks() {
@@ -94,54 +18,12 @@ install_symlinks() {
   symlink "$DOTF/nvim/pylintrc" ~/.pylintrc
   mkdir -p ~/.config/yamllint
   symlink "$DOTF/nvim/yamllint-config" ~/.config/yamllint/config
-  symlink "$DOTF/nvim/tern-config" ~/.tern-config
-
-  # vim backwards compatibility
-  symlink "$DOTF/nvim/init.vim" ~/.vimrc
-  symlink "$DOTF/nvim" ~/.vim
 }
 
-install_plugins() {
+install_packer_plugins() {
   bullet "Running PackerInstall... "
   nvim-packer-sync
   success "done"
 }
 
-install_cli_tools() {
-  if is_debian; then
-    apt-fast-install exuberant-ctags shellcheck
-  else
-    brew_install ctags
-  fi
-
-  if is_wsl; then
-    if command_missing win32yank; then
-      explain_win32yank
-    fi
-  fi
-
-  npm-fast-install markserv htmlhint marked name-that-color \
-    eslint prettier jsonlint sass-lint typescript-language-server \
-    typescript \
-    vscode-json-languageserver \
-    yaml-language-server \
-    css-langserver eslint-server tslint-server bash-language-server \
-    vim-language-server diagnostic-languageserver \
-    vscode-langservers-extracted clang-format pyright
-
-  pip-fast-install \
-    neovim-remote neovim \
-    black pylint yamllint
-}
-
-explain_win32yank() {
-  echo '=================================='
-  echo 'Missing win32yank!'
-  echo
-  echo '1. Download latest release from https://github.com/equalsraf/win32yank/releases'
-  echo '2. Extract win32yank.exe to C:/Windows/System32'
-  echo '3. In WSL symlink win32yank.exe to ~/bin/win32yank'
-  echo '=================================='
-}
-
-main $@
+main "$@"
