@@ -17,7 +17,9 @@ main() {
   dotf-github install
   dotf-plugin nodejs git zsh nvim ripgrep tig bash tmux vifm lua
 
-  gui-plugins
+  if is_mac; then
+    dotf-plugin osx-tuning iterm
+  fi
 
   header 'npm install'
   npm install
@@ -46,16 +48,6 @@ update-pip() {
   fi
 
   pip3 install pip --upgrade --user
-}
-
-gui-plugins() {
-  if is_mac; then
-    dotf-plugin osx-tuning iterm
-  elif is_linux; then
-    if [ "$HAS_GUI" = 'yes' ]; then
-      dotf-plugin linux-gui-apps
-    fi
-  fi
 }
 
 show-done() {

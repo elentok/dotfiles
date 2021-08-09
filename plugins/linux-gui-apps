@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-source "$DOTF/framework"
-
-apt-fast-install vlc feh gimp qalculate-gtk flameshot xsel playerctl
