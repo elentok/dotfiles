@@ -60,6 +60,12 @@ function build-luarocks() {
 }
 
 function install-language-server() {
+  gcc_version=$(gcc --version | head -1 | awk '{print $NF}' | cut -d. -f1)
+  if [ "$gcc_version" -lt 10 ]; then
+    echo "WARNING: The lua language server requires gcc-10 at least."
+    return
+  fi
+
   if [ -e "$LSP_ROOT" ]; then
     rm -rf "${LSP_ROOT}.old"
     mv "$LSP_ROOT" "${LSP_ROOT}.old"
