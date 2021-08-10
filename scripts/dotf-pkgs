@@ -10,10 +10,10 @@ CONFIG_FILE="$DOTF/config/packages.cfg"
 
 function main() {
   case "$1" in
-    install)
+    i | install)
       install-pkgs
       ;;
-    upgrade)
+    u | upgrade)
       upgrade-pkgs
       ;;
     *)
