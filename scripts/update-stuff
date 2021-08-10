@@ -12,7 +12,7 @@ function main() {
 function update-node() {
   if is-n-providing-node; then
     header 'Updating NodeJS'
-    n 14
+    n --preserve lts # Preserve npm (don't downgrade to lts version)
   fi
 }
 

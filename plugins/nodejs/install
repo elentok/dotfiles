@@ -19,7 +19,8 @@ main() {
 
 install_node() {
   if [[ ! "$(n ls)" =~ 'ο' ]]; then
-    n 14
+    n lts
+    npm install -g npm # Upgrade to the latest npm
   fi
 }
 
