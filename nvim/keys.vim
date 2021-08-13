@@ -29,9 +29,6 @@ nnoremap <Leader>qq :confirm qall<cr>
 noremap <Leader>wo :WinOnly<cr>
 noremap <Leader>tq :tabc<cr>
 
-" using yadr's window killer instead of a simple :q
-"noremap Q :q<cr>
-
 nnoremap <silent> <Leader>12 :exe "vertical resize " . (&columns * 1/2)<CR>
 nnoremap <silent> <Leader>13 :exe "vertical resize " . (&columns * 1/3)<CR>
 nnoremap <silent> <Leader>14 :exe "vertical resize " . (&columns * 1/4)<CR>
@@ -128,23 +125,15 @@ map <Leader>< ysiw<
 vmap <Leader>> c<<C-R>"><ESC>
 vmap <Leader>< c<<C-R>"><ESC>
 
-" Run {{{1
-noremap <Leader>rr :w<cr>:call RunCurrentFile()<cr>
-noremap <Leader>rm :MarkdownPreview<cr>
-vnoremap <Leader>rl "xy:call netrw#NetrwBrowseX(@x, 0)<cr>
-vnoremap <Leader>rs "9y:<c-r>9<cr>
-noremap <Leader>rt :QuickShell build-ctags<cr>
-
 " Git (v = version control) {{{1
 noremap <Leader>tg :FloatermNew --width=0.8 --height=0.8 --autoclose=1 tig<cr>
-noremap <Leader>ts :FloatermNew --width=0.8 --height=0.8 --autoclose=1 tig status<cr>
+noremap <Leader>ts :QuickShell tig status<cr>
 
 noremap <Leader>vrf :call Confirm("Revert current file?", "!git co %")<cr>
 noremap <Leader>vrp :Git co -p %<cr>
 noremap <Leader>vdf  :Git diff %<cr>
 noremap <Leader>vdc  :Git diff --cached<cr>
 noremap <Leader>vaf :Git add %<cr>
-noremap <Leader>vap :Git add -p %<cr>
 noremap <Leader>vh :Q tig %<cr>
 noremap <Leader>vc :Gcommit<cr>
 
@@ -152,14 +141,9 @@ noremap <Leader>vc :Gcommit<cr>
 xnoremap <silent><space> f oT o
 xnoremap <silent>a<space> f oF o
 xnoremap <silent>i<space> t oT o
-" Testing {{{1
-noremap <Leader>tt :TestLast<cr>
-"noremap <Leader>tl :call RunSpecLine()<cr>
-noremap <Leader>tf :TestFile<cr>
 
 " Toggle stuff {{{1
 noremap <Leader>ti :IndentGuidesToggle<cr>
-noremap <Leader>te :SyntasticToggleMode<cr>:redraw!<cr>
 noremap <Leader>tb :call ToggleBackground()<cr>
 
 " Post Startup {{{1
@@ -174,27 +158,5 @@ endfunc
 nnoremap <silent> <leader>PP :exe ":profile start profile.log"<cr>:exe ":profile func *"<cr>:exe ":profile file *"<cr>
 nnoremap <silent> <leader>PQ :exe ":profile pause"<cr>:noautocmd qall!<cr>
 
-" Java {{{1
-nnoremap <leader>ji :JavaImport<cr>
-nnoremap <leader>jm :JavaImpl<cr>
-nnoremap <leader>jg :JavaGet<cr>
-nnoremap <leader>js :JavaGetSet<cr>
-
-
 " Misc {{{1
-vnoremap ,s :!sort<cr>
-
-" Tabs {{{1
-noremap <m-.> gt
-inoremap <m-.> <c-o>gt
-tnoremap <m-.> <c-\><c-n>gt
-
-noremap <m-,> gT
-inoremap <m-,> <c-o>gT
-tnoremap <m-,> <c-\><c-n>gT
-
-" Oni {{{1
-
-if exists('g:gui_oni')
-  nnoremap Y 0vjy
-end
+vnoremap ,s :sort<cr>

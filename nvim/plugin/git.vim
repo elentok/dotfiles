@@ -24,7 +24,8 @@ endfunction
 command! GitLog call GitLog()
 
 cabbr Gca Gcommit --amend
-cabbr Gps Git --paginate push
-cabbr Gpl Git --paginate pull
-cabbr Gap Git add -p
 cabbr Gam Gcommit --amend
+
+command! Gps FloatermNew echo "Running git push..." && git --paginate push
+command! Gpl FloatermNew echo "Running git pull..." && git --paginate pull
+command! -nargs=* Gap FloatermNew --width=0.8 --height=0.8 git add -p <args>
