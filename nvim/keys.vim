@@ -5,13 +5,7 @@
 inoremap jk <esc>
 
 " Navigation {{{1
-" noremap <space> 20j
-" vnoremap <space> 20j
-" noremap - 20k
 inoremap <c-l> <right>
-"inoremap <c-k> <up>
-"inoremap <c-j> <down>
-inoremap <c-e> <c-o>$
 
 " Find {{{1
 nnoremap <cr> :nohls<cr><cr>
@@ -20,14 +14,6 @@ noremap <Leader>fg :call WebSearch("https://google.com/search?q=%query%")<cr>
 noremap <Leader>fo :call WebSearch("http://stackoverflow.com/search?q=%query%")<cr>
 vnoremap <Leader>fg "9y:call Browse("https://google.com/search?q=<c-r>9")<cr>
 vnoremap <Leader>fo "9y:call Browse("http://stackoverflow.com/search?q=<c-r>9")<cr>
-
-"nnoremap / /\v
-"vnoremap / /\v
-
-" Documentation {{{1
-nnoremap <Leader>dm :call Browse("https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet")<cr>
-nnoremap <Leader>dj :call Browse("https://github.com/visionmedia/jade#readme")<cr>
-nnoremap <Leader>dk :e $DOTF/docs/keys.md<cr>
 
 " Window management {{{1
 nnoremap <silent> <c-h> <c-w>h
@@ -60,23 +46,6 @@ nnoremap <silent> \23 :exe "resize " . (&lines * 2/3)<CR>
 nnoremap <silent> \34 :exe "resize " . (&lines * 3/4)<CR>
 nnoremap <silent> \11 :exe "resize " . &lines<CR>
 
-" resize windows
-" these are difficult to type, so I use the following iTerm mappings:
-"
-"   Control-Cmd-h => Esc-<
-"   Control-Cmd-j => Esc--
-"   Control-Cmd-k => Esc-+
-"   Control-Cmd-l => Esc->
-
-" TODO: try to get these working again:
-" nnoremap _ <c-w>-
-" nnoremap + <c-w>+
-" nnoremap > <c-w>>
-" nnoremap < <c-w><
-
-nnoremap coq :cclose<cr>
-
-
 " Go to {{{1
 noremap <Leader>gd :cd <C-R>=expand("%:p:h")<cr>
 noremap <Leader>go :call GotoAlternateFile()<cr>
@@ -89,17 +58,10 @@ noremap <Leader>ehs :SplitjoinSplit<cr>
 noremap <Leader>ehj :SplitjoinJoin<cr>
 noremap <backspace> zc
 
-" super yank (yank to * and + registers)
-noremap <Leader>ey "*Y"+Y
-vnoremap <Leader>ey "*ygv"+y
-noremap <Leader>ep "*p
-
-noremap <Leader>ew :w<cr>
 noremap <Leader>ww :w<cr>
 noremap <Leader>wq :wq<cr>
 noremap <Leader>er :call RevertFile()<cr>
-noremap <Leader>e"' :s/"/'/g<cr>
-noremap <Leader>e'" :s/'/"/g<cr>
+" remove whitespace
 noremap <Leader>rws :%s/\s\+$//<cr>
 
 nnoremap <c-s> :w<cr>
@@ -122,10 +84,6 @@ inoremap <C-\> <c-o>ma<c-o>A;<c-o>`a
 " command in visual mode so that it doesn't overwrite
 " whatever is in your paste buffer.
 vnoremap p "_dP
-
-"let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<tab>"
-"let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 noremap ,ya :%y+<cr>
 
@@ -177,12 +135,10 @@ vnoremap <Leader>rl "xy:call netrw#NetrwBrowseX(@x, 0)<cr>
 vnoremap <Leader>rs "9y:<c-r>9<cr>
 noremap <Leader>rt :QuickShell build-ctags<cr>
 
-
-
-
 " Git (v = version control) {{{1
-noremap <Leader>vt :QuickShell tig<cr>
-noremap <Leader>vs :QuickShell tig status<cr>
+noremap <Leader>tg :FloatermNew --width=0.8 --height=0.8 --autoclose=1 tig<cr>
+noremap <Leader>ts :FloatermNew --width=0.8 --height=0.8 --autoclose=1 tig status<cr>
+
 noremap <Leader>vrf :call Confirm("Revert current file?", "!git co %")<cr>
 noremap <Leader>vrp :Git co -p %<cr>
 noremap <Leader>vdf  :Git diff %<cr>
