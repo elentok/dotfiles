@@ -1,7 +1,7 @@
 local function dot_reload()
   for filename in pairs(package.loaded) do
     if filename:match('^elentok') then
-      print('Reloading ' .. filename)
+      -- print('Reloading ' .. filename)
       package.loaded[filename] = nil
       require(filename)
     end
