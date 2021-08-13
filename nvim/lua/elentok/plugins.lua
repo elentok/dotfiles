@@ -41,9 +41,11 @@ return require('packer').startup(function()
   -- Treesitter
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
+  -- Show git signs
+  use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}}
+
   -- Misc.
   use 'junegunn/vim-easy-align'
-  use 'mhinz/vim-signify'
   use 'mhinz/vim-grepper'
   use 'michaeljsmith/vim-indent-object'
   use 'nathanaelkane/vim-indent-guides'
