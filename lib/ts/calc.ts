@@ -1,5 +1,5 @@
 import 'source-map-support/register'
-import chalk from 'chalk'
+import * as chalk from 'chalk'
 import * as os from 'os'
 import * as path from 'path'
 import * as repl from 'repl'
@@ -20,16 +20,16 @@ async function main(): Promise<void> {
 
     eval(cmd: string, _context: any, _filename: string, callback: any) {
       calculate(cmd)
-        .catch(err => {
+        .catch((err) => {
           console.error('Error evaluating: ', err)
           callback(err)
         })
-        .then(result => callback(null, result))
+        .then((result) => callback(null, result))
     },
 
     writer(output: string) {
       return '= ' + chalk.green(output) + '\n'
-    }
+    },
   })
 
   const anyServer = server as any
@@ -69,7 +69,7 @@ function parseCurrencyExpression(expr: string): ICurrencyExpression | undefined 
   if (matches.length === 5) {
     return {
       from: { value: parseFloat(match[1]), currency: match[2] },
-      toCurrency: match[4]
+      toCurrency: match[4],
     }
   }
 
@@ -79,7 +79,7 @@ function parseCurrencyExpression(expr: string): ICurrencyExpression | undefined 
     const toCurrency = ['nis', 'ils'].includes(currency.toLowerCase()) ? '$' : 'nis'
     return {
       from: { value: parseFloat(match[1]), currency },
-      toCurrency
+      toCurrency,
     }
   }
 

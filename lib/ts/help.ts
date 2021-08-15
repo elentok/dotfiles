@@ -1,6 +1,6 @@
 import * as path from 'path'
 import * as fs from 'fs'
-import chalk from 'chalk'
+import * as chalk from 'chalk'
 import { execSync } from 'child_process'
 import * as fg from 'fast-glob'
 
@@ -15,7 +15,7 @@ export function help(): void {
   } else {
     console.info(findSections(HELP_FILENAME, query).join('\n'))
 
-    fg.sync(LOCAL_HELP_GLOB).forEach(filename => {
+    fg.sync(LOCAL_HELP_GLOB).forEach((filename) => {
       console.info(findSections(filename, query).join('\n'))
     })
   }
@@ -28,7 +28,7 @@ function findSections(filename: string, query?: string): string[] {
   fs.readFileSync(filename)
     .toString()
     .split('\n')
-    .forEach(line => {
+    .forEach((line) => {
       if (isBeginningOfSection(line)) {
         addSection(sections, sectionLines.join('\n'), query)
         sectionLines = [line]

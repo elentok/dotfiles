@@ -1,6 +1,6 @@
 import { execSync } from 'child_process'
 import { notUndefined, justifyLeft, justifyRight } from './utils'
-import chalk from 'chalk'
+import * as chalk from 'chalk'
 
 function main(): void {
   printDisks(loadDisks())
@@ -9,7 +9,7 @@ function main(): void {
 enum State {
   OK = 'OK',
   GOOD = 'GOOD',
-  BAD = 'BAD'
+  BAD = 'BAD',
 }
 
 interface IDisk {
@@ -45,7 +45,7 @@ function parseDfLine(line: string): IDisk | undefined {
     availableGB: sizeToGB(available),
     sizeGB: sizeToGB(size),
     mount,
-    state: calculateState(capacity)
+    state: calculateState(capacity),
   }
 }
 
@@ -63,16 +63,12 @@ function calculateState(capacity: string): State {
 }
 
 function loadDisks(): IDisk[] {
-  return execSync('df')
-    .toString()
-    .split('\n')
-    .map(parseDfLine)
-    .filter(notUndefined)
+  return execSync('df').toString().split('\n').map(parseDfLine).filter(notUndefined)
 }
 
 function printDisks(disks: IDisk[]): void {
   const columnWidths = calculateColumnWidths(disks)
-  disks.forEach(disk => console.info(stringifyDisk(disk, columnWidths)))
+  disks.forEach((disk) => console.info(stringifyDisk(disk, columnWidths)))
 }
 
 function stringifyDisk(disk: IDisk, widths: IColumnWidths): string {
@@ -82,7 +78,7 @@ function stringifyDisk(disk: IDisk, widths: IColumnWidths): string {
     justifyRight(availableGB, widths.availableGB) + 'G',
     'free (of',
     justifyRight(sizeGB, widths.sizeGB) + 'G)',
-    justifyLeft(mount, widths.mount)
+    justifyLeft(mount, widths.mount),
   ].join(' ')
   switch (disk.state) {
     case State.GOOD:
@@ -101,8 +97,8 @@ function stringifyDisk(disk: IDisk, widths: IColumnWidths): string {
 
 function calculateColumnWidths(disks: IDisk[]): IColumnWidths {
   const widths: IColumnWidths = {}
-  disks.forEach(disk => {
-    Object.keys(disk).forEach(key => {
+  disks.forEach((disk) => {
+    Object.keys(disk).forEach((key) => {
       const width = widths[key] || 0
       const value = (disk as any)[key].toString()
       widths[key] = Math.max(width, value.length)

@@ -1,8 +1,10 @@
-import * as program from 'commander'
+import { Command } from 'commander'
 import { findRenameables } from './renameable'
 import { confirm } from './utils'
 
 function main(): void {
+  const program = new Command()
+
   program
     .arguments('<pattern> <replacement> <file...>')
     .option('-y, --yes', "Don't ask for confirmation")
@@ -13,10 +15,10 @@ function main(): void {
         return
       }
 
-      renameables.forEach(r => r.print('   '))
+      renameables.forEach((r) => r.print('   '))
 
       if (args.yes || (await confirm('Rename?'))) {
-        renameables.forEach(r => {
+        renameables.forEach((r) => {
           r.print('Renaming ')
           r.rename()
         })

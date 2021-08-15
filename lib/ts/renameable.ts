@@ -1,5 +1,5 @@
 import * as path from 'path'
-import chalk from 'chalk'
+import * as chalk from 'chalk'
 import { execSync } from 'child_process'
 import { mv } from 'shelljs'
 
@@ -11,7 +11,7 @@ export function findRenameables(
   const re = new RegExp(pattern, 'ig')
   const matches: Renameable[] = []
 
-  files.forEach(filename => {
+  files.forEach((filename) => {
     const basename = path.basename(filename)
     const newBasename = basename.replace(re, replacement)
 

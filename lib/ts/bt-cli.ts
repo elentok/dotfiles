@@ -1,4 +1,4 @@
-import * as program from 'commander'
+import { Command } from 'commander'
 import { BtClient } from './bt'
 import { getConfigOrAsk } from './dotconfig'
 import { formatTorrent } from './torrent'
@@ -6,13 +6,15 @@ import { formatTorrent } from './torrent'
 let client: BtClient
 
 async function main(): Promise<void> {
+  const program = new Command()
+
   program.command('ls').action(async () => {
     const torrents = await (await getClient()).list()
     if (torrents.length === 0) {
       console.info('no torrents')
       return
     }
-    torrents.forEach(t => console.info(formatTorrent(t)))
+    torrents.forEach((t) => console.info(formatTorrent(t)))
   })
 
   program.command('remove-complete').action(async () => {
@@ -21,7 +23,7 @@ async function main(): Promise<void> {
       console.info('No complete torrents to remove')
     } else {
       console.info(`Removed ${torrents.length} torrents:`)
-      torrents.forEach(t => console.info(formatTorrent(t)))
+      torrents.forEach((t) => console.info(formatTorrent(t)))
     }
   })
 
