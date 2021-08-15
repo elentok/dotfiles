@@ -70,13 +70,19 @@ def fetch_releases(repo: str) -> List[Release]:
     return list(map(Release, data))
 
 
-def fetch_latest_release(repo: str, prerelease=False) -> Optional[Release]:
+def fetch_release(repo: str, version="latest") -> Optional[Release]:
     releases = fetch_releases(repo)
-    if prerelease:
+    if version == "prerelease":
         prereleases = [r for r in releases if r.prerelease]
         return prereleases[0]
 
+    if version == "latest":
+        for release in releases:
+            if not release.prerelease:
+                return release
+
     for release in releases:
-        if not release.prerelease:
+        if release.name == version:
             return release
+
     return None
