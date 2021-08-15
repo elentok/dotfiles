@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import * as chalk from 'chalk'
 import * as readline from 'readline'
 
 const CLEAR_LINE = '\r\x1B[K'
@@ -28,9 +28,9 @@ export function center(text: string, width: number, ch = ' '): string {
 }
 
 export async function ask(question: string): Promise<string> {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
-    rl.question(question, answer => {
+    rl.question(question, (answer) => {
       rl.close()
       resolve(answer)
     })

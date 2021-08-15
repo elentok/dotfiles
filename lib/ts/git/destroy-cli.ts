@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import * as chalk from 'chalk'
 import { confirm } from '../utils'
 import { LocalBranch, RemoteBranch } from './branch'
 import { Repo } from './repo'
@@ -26,7 +26,7 @@ async function main(): Promise<void> {
 async function destroy(branchNames: string[]): Promise<void> {
   const repo = new Repo(process.cwd())
 
-  branchNames.forEach(async branchName => {
+  branchNames.forEach(async (branchName) => {
     console.info(chalk.blue(`* Destroying branch ${branchName}...`))
     const localBranch = repo.findLocalBranchByName(branchName)
     let remoteBranches: RemoteBranch[]
@@ -43,7 +43,7 @@ async function destroy(branchNames: string[]): Promise<void> {
     if (remoteBranches == null || remoteBranches.length === 0) {
       console.info(`  No remote branches named ${branchName}`)
     } else {
-      remoteBranches.forEach(async remoteBranch => {
+      remoteBranches.forEach(async (remoteBranch) => {
         if (await confirm(`Destroy remote branch ${branchName}`)) {
           remoteBranch.destroy()
         }

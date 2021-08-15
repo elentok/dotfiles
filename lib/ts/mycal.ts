@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import * as chalk from 'chalk'
 import { justifyLeft, center } from './utils'
 import * as moment from 'moment'
 import { Moment } from 'moment'
@@ -28,7 +28,7 @@ class Month {
   public print(): void {
     console.info(chalk.green(center(this.start.format('MMM YYYY'), 27)))
     console.info('Sun Mon Tue Wed Thu Fri Sat')
-    this.weeks.forEach(week => console.info(week.pretty()))
+    this.weeks.forEach((week) => console.info(week.pretty()))
     console.info()
   }
 
@@ -71,7 +71,7 @@ class Week {
 
   public pretty(): string {
     return this.days
-      .map(day => {
+      .map((day) => {
         if (day == null) return '   '
         return day.pretty()
       })
