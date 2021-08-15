@@ -24,6 +24,7 @@ class Package:
         self.strip_components = raw.get("strip_components", 0)
         self.prerelease = raw.get("prerelease", False)
         self.extract = raw.get("extract", True)
+        self.version = raw.get("version", "latest")
 
         self.platform = None
         platform = raw["platforms"].get(MACHINE)

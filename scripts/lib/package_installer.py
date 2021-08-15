@@ -63,10 +63,10 @@ class PackageInstaller:
 
     def fetch_latest_asset(self) -> github.Asset:
         package = self.package
-        prerelease = True if self.force_prerelease else package.prerelease
+        version = "prerelease" if self.force_prerelease else package.version
 
-        print("  * fetching latest release...")
-        release = github.fetch_latest_release(package.github_repo, prerelease)
+        print(f"  * fetching release {version}...")
+        release = github.fetch_release(package.github_repo, version)
         if release is None:
             raise Exception(f"Could not find release for package {package.name}")
 
