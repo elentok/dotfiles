@@ -2,7 +2,7 @@
 
 set -e
 
-source $DOTF/framework
+source "$DOTF/framework"
 
 main() {
   title 'Git Sync'
@@ -24,7 +24,7 @@ commit-if-needed() {
 }
 
 commit() {
-  bullet "Commiting changes...\n"
+  bullet "Commiting changes...\\n"
   date=$(date +%Y-%m-%d\ %H:%M)
   host=$(short-hostname)
   git add --all
