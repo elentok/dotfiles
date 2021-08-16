@@ -41,6 +41,9 @@ return require('packer').startup(function()
   -- Treesitter
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
+  -- Syntax.
+  use 'aklt/plantuml-syntax'
+
   -- Misc.
   use 'junegunn/vim-easy-align'
   use 'mhinz/vim-signify'
