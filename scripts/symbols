@@ -122,7 +122,7 @@ def parse_line(line: str, symbol_extractor: Callable[[str], Optional[tuple[str, 
 
 PROTO_RE = re.compile("^(message|package) ([^ ;]+)")
 CODE_RE = re.compile(
-    "^(export )?(async )?(class|const|enum|interface|function) ([^ :(]+)"
+    "^(export )?(async )?(class|const|enum|interface|type|function) ([^ :(]+)"
 )
 
 
