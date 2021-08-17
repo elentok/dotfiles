@@ -80,10 +80,10 @@ local function set_format_on_save(filetype, enabled)
     format_on_save_by_filetype[filetype] = enabled
 end
 
-local function save_cursor() vim.b.last_cursor = api.nvim_win_get_cursor(0) end
+local function save_cursor() vim.w.last_cursor = api.nvim_win_get_cursor(0) end
 
 local function restore_cursor()
-    if (vim.b.last_cursor) then util.restore_cursor(0, vim.b.last_cursor) end
+    if (vim.w.last_cursor) then util.restore_cursor(0, vim.w.last_cursor) end
 end
 
 vim.cmd([[
@@ -96,8 +96,8 @@ vim.cmd([[
   augroup Elentok_Format
     autocmd!
     autocmd BufWritePre * lua require('elentok/format').format_on_save()
-    autocmd FileChangedShell * lua require('elentok/format').save_cursor()
-    autocmd FileChangedShellPost * lua require('elentok/format').restore_cursor()
+    autocmd BufReadPre * lua require('elentok/format').save_cursor()
+    autocmd BufReadPost * lua require('elentok/format').restore_cursor()
   augroup END
 ]])
 
