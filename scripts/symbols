@@ -6,13 +6,25 @@ import subprocess
 import re
 import os
 import sys
+from pathlib import Path
 from dataclasses import dataclass
 
-ROOT = os.path.expanduser("~/.cache/symbols")
-os.makedirs(ROOT, exist_ok=True)
 
-SYMBOLS_FILE = os.path.join(ROOT, "symbols.csv")
-SYMBOLS_NAMES_FILE = os.path.join(ROOT, "symbol-names.txt")
+def find_root():
+    path = Path.cwd()
+    while True:
+        strpath = str(path)
+        if strpath == path.root:
+            return strpath
+        if (path / ".git").exists() or (path / ".hg").exists():
+            return strpath
+
+        path = path.parent
+
+
+CACHE_ROOT = os.path.expanduser("~/.cache/symbols")
+os.makedirs(CACHE_ROOT, exist_ok=True)
+CACHE_FILE = os.path.join(CACHE_ROOT, find_root().replace("/", "-")[1:] + ".csv")
 
 
 def main():
@@ -54,14 +66,9 @@ def index():
     for dir in dirs:
         symbols.extend(index_dir(dir))
 
-    names = [symbol.name for symbol in symbols]
-    names.sort()
-    with open(SYMBOLS_NAMES_FILE, "w") as f:
-        f.write("\n".join(names))
-
     lines = [str(symbol) for symbol in symbols]
     lines.sort()
-    with open(SYMBOLS_FILE, "w") as f:
+    with open(CACHE_FILE, "w") as f:
         f.write("\n".join(lines))
 
 
@@ -143,13 +150,11 @@ def names():
 
 
 def get_names():
-    with open(SYMBOLS_NAMES_FILE, "r") as f:
-        return f.read()
+    os.system(f"cut -d, -f1 {CACHE_FILE}")
 
 
 def show_list():
-    with open(SYMBOLS_FILE, "r") as f:
-        print(f.read())
+    os.system(f"cat {CACHE_FILE}")
 
 
 def show():
@@ -159,7 +164,7 @@ def show():
 
 
 def find_symbol_location(name):
-    line = run(f"rg '^{name},' '{SYMBOLS_FILE}' ")[0]
+    line = run(f"rg '^{name},' '{CACHE_FILE}' ")[0]
     _, _, filename, line = line.split(",")
     return (filename, line)
 
