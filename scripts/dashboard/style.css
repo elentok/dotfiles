@@ -1,7 +1,7 @@
 body {
   background-color: black;
   color: white;
-  font-family: 'Kreon', serif;
+  font-family: "Kreon", serif;
 }
 
 body.is-night {

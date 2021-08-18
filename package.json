@@ -4,7 +4,7 @@
   "description": "elentok's dotfiles",
   "main": "framework.js",
   "scripts": {
-    "format": "prettier --write '**/*.js' '**/*.css'",
+    "format": "prettier --write '**/*.js' '**/*.ts' '**/*.css'",
     "vscode:sync": "ts-node plugins/vscode/sync.ts",
     "eslint": "eslint --ext .js,.ts .",
     "ts:build": "tsc",
