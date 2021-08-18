@@ -1,5 +1,5 @@
 body {
-  font-family: 'Roboto Condensed', serif;
+  font-family: "Roboto Condensed", serif;
 }
 
 * {
@@ -19,8 +19,6 @@ body {
   padding: 2px 4px;
   font-size: 50px;
 }
-
-
 
 .key strong {
   font-size: 120%;

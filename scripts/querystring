@@ -23,9 +23,9 @@ function parseQueryString(str) {
   // let url = null;
 
   // if (str.includes("?")) {
-    // const m = str.match(/^([^\?]+)\?(.*)$/);
-    // url = m[1];
-    // str = m[2];
+  // const m = str.match(/^([^\?]+)\?(.*)$/);
+  // url = m[1];
+  // str = m[2];
   // }
 
   const u = url.parse(str);
