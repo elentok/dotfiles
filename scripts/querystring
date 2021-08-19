@@ -1,44 +1,27 @@
 #!/usr/bin/env node
 
-const util = require("util");
-const querystring = require("querystring");
-const url = require("url");
+const fs = require("fs");
 
-process.stdin.setEncoding("utf8");
-
-const chunks = [];
-
-process.stdin.on("readable", () => {
-  const chunk = process.stdin.read();
-  if (chunk != null) {
-    chunks.push(chunk);
+function parse(str) {
+  let url;
+  try {
+    url = new URL(str);
+  } catch {
+    return new URLSearchParams(str);
   }
-});
 
-process.stdin.on("end", () => {
-  parseQueryString(chunks.join(""));
-});
+  return url.searchParams;
+}
 
 function parseQueryString(str) {
-  // let url = null;
-
-  // if (str.includes("?")) {
-  // const m = str.match(/^([^\?]+)\?(.*)$/);
-  // url = m[1];
-  // str = m[2];
-  // }
-
-  const u = url.parse(str);
-
-  const vars = querystring.parse(u.query);
+  const params = parse(str);
 
   if (process.argv.length > 2) {
     const key = process.argv[2];
-    console.info(vars[key]);
+    console.info(params.getAll(key));
   } else {
-    if (url != null) {
-      console.info(`URL: ${url}\n`);
-    }
-    console.info(util.inspect(vars, { colors: true }));
+    console.info(params);
   }
 }
+
+parseQueryString(fs.readFileSync(0).toString());
