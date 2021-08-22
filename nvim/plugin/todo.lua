@@ -1,8 +1,6 @@
 local map = require("elentok/map")
 
-local M = {}
-
-function M.toggle_done()
+function _G.TodoToggleDone()
   local line = vim.fn.getline(".")
   if line:match("✔") then
     line = line:gsub("✔", "☐")
@@ -12,7 +10,7 @@ function M.toggle_done()
   vim.fn.setline(".", line)
 end
 
-function M.next_state()
+function _G.TodoNextState()
   local line = vim.fn.getline(".")
   if line:match("✔") then
     line = line:gsub("✔", "☐")
@@ -26,7 +24,7 @@ function M.next_state()
   vim.fn.setline(".", line)
 end
 
-function M.prev_state()
+function _G.TodoPrevState()
   local line = vim.fn.getline(".")
   if line:match("✔") then
     line = line:gsub("✔", "(waiting)")
@@ -40,13 +38,11 @@ function M.prev_state()
   vim.fn.setline(".", line)
 end
 
-map.normal("<Leader>td", map.lua("require(\"elentok/todo\").toggle_done()"))
-map.normal("<Leader>tp", map.lua("require(\"elentok/todo\").prev_state()"))
-map.normal("<Leader>tn", map.lua("require(\"elentok/todo\").next_state()"))
+map.normal("<Leader>td", map.lua("TodoToggleDone()"))
+map.normal("<Leader>tp", map.lua("TodoPrevState()"))
+map.normal("<Leader>tn", map.lua("TodoNextState()"))
 
 vim.cmd([[
   iabbr #todo ☐
   iabbr #done ✔
 ]])
-
-return M
