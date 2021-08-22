@@ -2,15 +2,14 @@ local util = require('elentok/util')
 local M = {}
 
 M.foldexpr = function(lnum)
-  local line = vim.fn.getline(lnum)
+    local line = vim.fn.getline(lnum)
 
-  print(line)
-  local match = line:match("^#+")
-  if match then
-    return '>' .. string.len(match)
-  else
-    return '='
-  end
+    local match = line:match("^#+")
+    if match then
+        return '>' .. string.len(match)
+    else
+        return '='
+    end
 end
 
 vim.cmd([[
