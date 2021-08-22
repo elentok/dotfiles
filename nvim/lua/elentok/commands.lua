@@ -1,11 +1,19 @@
 local function dot_reload()
-  for filename in pairs(package.loaded) do
-    if filename:match('^elentok') then
-      -- print('Reloading ' .. filename)
-      package.loaded[filename] = nil
-      require(filename)
+    for filename in pairs(package.loaded) do
+        if filename:match('^elentok/') then
+            -- print('Reloading ' .. filename)
+            package.loaded[filename] = nil
+            require(filename)
+        end
     end
-  end
+
+    for filename in pairs(package.loaded) do
+        if filename:match('^elentok-local/') then
+            -- print('Reloading ' .. filename)
+            package.loaded[filename] = nil
+            require(filename)
+        end
+    end
 end
 
 vim.cmd([[

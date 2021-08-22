@@ -12,6 +12,7 @@ require 'elentok/symbols'
 require 'elentok/telescope'
 require 'elentok/todo'
 require 'elentok/treesitter'
+require 'elentok/markdown'
 
 local util = require 'elentok/util'
 util.safe_require('elentok-local')
