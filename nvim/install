@@ -7,7 +7,7 @@ source "$DOTF/framework"
 main() {
   install-symlinks
   install-packer-plugins
-  "$DOTF/install-lua"
+  "$DOTF/nvim/install-lua"
 
   (cd "$DOTF/nvim/ctags" && ./build)
 }
