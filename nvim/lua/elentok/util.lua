@@ -4,11 +4,15 @@ local log_enabled = false
 
 local M = {}
 
-M.set_log = function(enabled) log_enabled = enabled end
+function M.set_log(enabled)
+  log_enabled = enabled
+end
 
-M.log = function(message) if log_enabled then print(message) end end
+function M.log(message)
+  if log_enabled then print(message) end
+end
 
-M.safe_require = function(name)
+function M.safe_require(name)
   local status, module = pcall(require, name)
   if (status) then
     return module
@@ -18,7 +22,7 @@ M.safe_require = function(name)
   end
 end
 
-M.open_window = function(title, lines)
+function M.open_window(title, lines)
   local buf = api.nvim_create_buf(false, true)
   api.nvim_buf_set_option(buf, 'bufhidden', 'wipe')
 
@@ -56,10 +60,11 @@ M.open_window = function(title, lines)
   return win
 end
 
-M.current_word =
-    function() return api.nvim_call_function('expand', {'<cword>'}) end
+function M.current_word()
+  return api.nvim_call_function('expand', {'<cword>'})
+end
 
-M.global_extend = function(name, values)
+function M.global_extend(name, values)
   local array = api.nvim_get_var(name)
   if array == nil then
     array = values
@@ -71,7 +76,7 @@ M.global_extend = function(name, values)
 end
 
 -- "index" is 1-based
-M.buf_get_line = function(buffer, index)
+function M.buf_get_line(buffer, index)
   if index < 1 then
     error('buf_get_line got index ' .. vim.inspect(index) ..
               ', must be 1 or higher')
@@ -79,7 +84,7 @@ M.buf_get_line = function(buffer, index)
   return api.nvim_buf_get_lines(buffer, index - 1, index, true)[1]
 end
 
-M.restore_cursor = function(buffer, cursor)
+function M.restore_cursor(buffer, cursor)
   -- row is 1-based
   local row = cursor[1]
   -- col is 0-based
@@ -108,16 +113,16 @@ M.restore_cursor = function(buffer, cursor)
   api.nvim_win_set_cursor(buffer, {row, col})
 end
 
-M.buf_get_filetype = function(bufnr)
+function M.buf_get_filetype(bufnr)
   bufnr = bufnr or 0
   return api.nvim_buf_get_option(bufnr, 'filetype')
 end
 
-M.exists = function(expr)
+function M.exists(expr)
   return api.nvim_eval(string.format('exists("%s")', expr)) ~= 0
 end
 
-M.augroup = function(name, content)
+function M.augroup(name, content)
   vim.cmd(string.format([[
     augroup Elentok_%s
       autocmd!
