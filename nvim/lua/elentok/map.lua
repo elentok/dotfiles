@@ -1,19 +1,21 @@
-local api = vim.api
+local M = {}
 
-local function lua(code) return string.format('<Cmd>lua %s<cr>', code) end
+function M.lua(code)
+  return string.format('<Cmd>lua %s<cr>', code)
+end
 
-local function create_map_func(mode, opts)
+function M.create_map_func(mode, opts)
   if opts == nil then opts = {} end
   if opts.noremap == nil then opts.noremap = true end
   if opts.silent == nil then opts.silent = true end
 
-  return function(lhs, rhs) api.nvim_set_keymap(mode, lhs, rhs, opts) end
+  return function(lhs, rhs)
+    vim.api.nvim_set_keymap(mode, lhs, rhs, opts)
+  end
 end
 
-return {
-  lua = lua,
-  create_map_func = create_map_func,
-  normal = create_map_func('n'),
-  visual = create_map_func('v'),
-  insert = create_map_func('i')
-}
+M.normal = M.create_map_func('n')
+M.visual = M.create_map_func('v')
+M.insert = M.create_map_func('i')
+
+return M

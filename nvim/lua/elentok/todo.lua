@@ -1,6 +1,8 @@
 local map = require('elentok/map')
 
-local function toggle_done()
+local M = {}
+
+function M.toggle_done()
   local line = vim.fn.getline('.')
   if line:match("✔") then
     line = line:gsub("✔", "☐")
@@ -10,7 +12,7 @@ local function toggle_done()
   vim.fn.setline('.', line)
 end
 
-local function next_state()
+function M.next_state()
   local line = vim.fn.getline('.')
   if line:match("✔") then
     line = line:gsub("✔", "☐")
@@ -24,7 +26,7 @@ local function next_state()
   vim.fn.setline('.', line)
 end
 
-local function prev_state()
+function M.prev_state()
   local line = vim.fn.getline('.')
   if line:match("✔") then
     line = line:gsub("✔", "(waiting)")
@@ -47,8 +49,4 @@ vim.cmd([[
   iabbr #done ✔
 ]])
 
-return {
-  next_state = next_state,
-  prev_state = prev_state,
-  toggle_done = toggle_done
-}
+return M

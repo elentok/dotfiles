@@ -7,8 +7,10 @@ if not lspconfig then
   return
 end
 
-function on_attach(client, bufnr)
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+local function on_attach(client, bufnr)
+  local function buf_set_option(...)
+    vim.api.nvim_buf_set_option(bufnr, ...)
+  end
 
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -118,15 +120,6 @@ lspconfig.diagnosticls.setup {
     }
   }
 }
-
-function LspRename()
-  local old_name = util.current_word()
-  local new_name = vim.api.nvim_call_function('input', {'New name: ', old_name})
-  if new_name then
-    print('\nRenaming')
-    vim.lsp.buf.rename(new_name)
-  end
-end
 
 function LspReset()
   vim.lsp.stop_client(vim.lsp.get_active_clients())

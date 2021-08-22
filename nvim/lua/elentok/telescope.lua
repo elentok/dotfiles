@@ -47,8 +47,9 @@ local function command_picker(opts, picker_opts)
     sorter = opts.sorter or conf.file_sorter({}),
     finder = finders.new_table {
       results = results,
-      entry_maker = opts.entry_maker or
-          function(line) return create_entry(opts.parse_line(line)) end
+      entry_maker = opts.entry_maker or function(line)
+        return create_entry(opts.parse_line(line))
+      end
     }
   }):find()
 end

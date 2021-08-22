@@ -1,12 +1,14 @@
 local statusline_shorteners = {}
 local statusline_shorteners_updated = false
 
-local function add_path_shortener(full, short)
+local M = {}
+
+function M.add_path_shortener(full, short)
   table.insert(statusline_shorteners, {full, short})
   statusline_shorteners_updated = true
 end
 
-local function shorten(path)
+function M.shorten(path)
   for _, item in ipairs(statusline_shorteners) do
     local full, short = unpack(item)
     path = path:gsub(full .. '/', short .. '/')
@@ -15,9 +17,9 @@ local function shorten(path)
   return path
 end
 
-local function filename()
+function M.filename()
   if vim.b.vaffle ~= nil then
-    local short_path = shorten(vim.b.vaffle['dir'])
+    local short_path = M.shorten(vim.b.vaffle['dir'])
     return 'DIR: ' .. short_path
   end
 
@@ -30,23 +32,19 @@ local function filename()
   local name = vim.fn.expand('%:t')
 
   if vim.b.short_path == nil then
-    vim.b.short_path = shorten(vim.fn.expand('%:p:h'))
+    vim.b.short_path = M.shorten(vim.fn.expand('%:p:h'))
   end
 
   return string.format('%s (%s)', name, vim.b.short_path)
 end
 
-add_path_shortener(vim.env.HOME, '~')
+M.add_path_shortener(vim.env.HOME, '~')
 
-vim.cmd([[
-  function! Elentok_StatusLineFileName()
-    return luaeval("require('elentok/statusline').filename()")
-  endfunction
-]])
+_G.StatusLineFileName = M.filename
 
 vim.o.statusline = table.concat({
   -- Path to the file in the buffer, as typed or relative to current directory.
-  '%{Elentok_StatusLineFileName()}', -- Where to truncate line.
+  '%{v:lua.StatusLineFileName()}', -- Where to truncate line.
   '%< ', '%{&modified?\' +\':\'\'}', '%{&readonly?\' \':\'\'}',
   -- Separation point between left and right aligned items.
   '%= ', -- Filetype.
@@ -54,8 +52,4 @@ vim.o.statusline = table.concat({
   ' %l:%v'
 })
 
-return {
-  add_path_shortener = add_path_shortener,
-  filename = filename,
-  shorten = shorten
-}
+return M
