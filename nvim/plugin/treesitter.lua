@@ -5,7 +5,7 @@ if not treesitter_configs then
   return
 end
 
-require"nvim-treesitter.configs".setup {
+require("nvim-treesitter.configs").setup {
   ensure_installed = "maintained",
   ignore_install = {
     "nix", "erlang", "ocamllex", "devicetree", "gdscript", "supercollider",
@@ -27,6 +27,18 @@ require"nvim-treesitter.configs".setup {
   indent = {enable = true, disable = {"python", "typescript", "javascript"}}
 }
 
+local exclude_from_folding = {markdown = true}
+
+function _G.TreesitterSetupFolding()
+  local filetype = util.buf_get_filetype(0)
+  if exclude_from_folding[filetype] then
+    return
+  end
+
+  vim.wo.foldmethod = "expr"
+  vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+end
+
 util.augroup("Treesitter", [[
-  autocmd FileType * setlocal foldmethod=expr foldexpr=nvim_treesitter#foldexpr()
+  autocmd FileType * lua TreesitterSetupFolding()
 ]])
