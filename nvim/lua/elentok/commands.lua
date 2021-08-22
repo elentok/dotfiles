@@ -1,4 +1,4 @@
-local function dot_reload()
+function _G.DotReload()
   for filename in pairs(package.loaded) do
     if filename:match('^elentok/') then
       -- print('Reloading ' .. filename)
@@ -17,10 +17,8 @@ local function dot_reload()
 end
 
 vim.cmd([[
-  command! DotReload lua require('elentok/commands').dot_reload()
+  command! DotReload lua DotReload()
   command! LogEnable lua require('elentok/util').set_log(true)
   command! LogDisable lua require('elentok/util').set_log(false)
 ]])
-
-return {dot_reload = dot_reload}
 

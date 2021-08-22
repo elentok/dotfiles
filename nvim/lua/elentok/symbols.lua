@@ -4,14 +4,18 @@ local util = require('lspconfig/util')
 
 local root_finder = util.root_pattern('.git', '.hg')
 
-local function set_root_finder(func) root_finder = func end
+local M = {}
 
-local function index()
-  root_dir = root_finder(vim.fn.expand('%:p')) or vim.loop.os_homedir()
+function M.set_root_finder(func)
+  root_finder = func
+end
+
+function M.index()
+  local root_dir = root_finder(vim.fn.expand('%:p')) or vim.loop.os_homedir()
   print('TODO: index' .. root_dir)
 end
 
-local function goto_symbol()
+function M.goto_symbol()
   telescope.command_picker({
     cmd = {'symbols', 'list'},
     parse_line = function(line)
@@ -24,8 +28,4 @@ end
 -- Keys
 map.normal('<Leader>gs', map.lua("require('elentok/symbols').goto_symbol()"))
 
-return {
-  index = index,
-  goto_symbol = goto_symbol,
-  set_root_finder = set_root_finder
-}
+return M

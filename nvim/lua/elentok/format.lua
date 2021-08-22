@@ -9,7 +9,9 @@ local formatter_cmds = {
   clang = 'clang-format --style=Google --assume-filename %',
   luaformat = 'lua-format --config=$HOME/.lua-format',
   prettier = 'prettier --stdin-filepath %',
-  lsp = function() vim.lsp.buf.formatting_seq_sync() end
+  lsp = function()
+    vim.lsp.buf.formatting_seq_sync()
+  end
 }
 
 -- TODO:
@@ -45,14 +47,14 @@ local format_on_save_by_filetype = {
   yaml = true
 }
 
-M.run_formatter = function(cmd)
+local function run_formatter(cmd)
   util.log("[run_formatter] cmd = " .. cmd)
   local cursor = api.nvim_win_get_cursor(0)
   api.nvim_exec('%!' .. cmd, true)
   util.restore_cursor(0, cursor)
 end
 
-M.format = function(formatter)
+function M.format(formatter)
   if formatter == nil or formatter == '' then
     formatter = formatter_by_filetype[util.buf_get_filetype()] or 'lsp'
   end
@@ -63,30 +65,25 @@ M.format = function(formatter)
   if type(cmd) == 'function' then
     cmd()
   else
-    M.run_formatter(cmd)
+    run_formatter(cmd)
   end
 end
 
-M.format_on_save = function()
+function M.format_on_save()
   if format_on_save_by_filetype[util.buf_get_filetype()] then M.format() end
 end
 
-M.set_formatter_cmd =
-    function(formatter, cmd) formatter_cmds[formatter] = cmd end
+function M.set_formatter_cmd(formatter, cmd)
+  formatter_cmds[formatter] = cmd
+end
 
-M.set_formatter = function(filetype, formatter)
+function M.set_formatter(filetype, formatter)
   formatter_by_filetype[filetype] = formatter
 end
 
-M.set_format_on_save = function(filetype, enabled)
+function M.set_format_on_save(filetype, enabled)
   if enabled == nil then enabled = true end
   format_on_save_by_filetype[filetype] = enabled
-end
-
-M.save_cursor = function() vim.w.last_cursor = api.nvim_win_get_cursor(0) end
-
-M.restore_cursor = function()
-  if (vim.w.last_cursor) then util.restore_cursor(0, vim.w.last_cursor) end
 end
 
 vim.cmd([[
@@ -97,8 +94,6 @@ vim.cmd([[
 
 util.augroup('Format', [[
   autocmd BufWritePre * lua require('elentok/format').format_on_save()
-  autocmd BufReadPre * lua require('elentok/format').save_cursor()
-  autocmd BufReadPost * lua require('elentok/format').restore_cursor()
 ]])
 
 return M
