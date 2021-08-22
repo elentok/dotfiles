@@ -1,67 +1,34 @@
-local util = require("elentok/util")
+-- vim: foldmethod=marker
+local lspconfig = require("lspconfig")
 local map = require("elentok/map")
 
-local lspconfig = util.safe_require("lspconfig")
-if not lspconfig then
-  print("Warning: lspconfig not found, skipping initialization.")
-  return
-end
+-- Simple LSPs {{{1
+lspconfig.pyright.setup {}
+lspconfig.bashls.setup {}
+lspconfig.vimls.setup {}
+lspconfig.yamlls.setup {}
+lspconfig.jsonls.setup {}
 
-local function on_attach(client, bufnr)
-  local function buf_set_option(...)
-    vim.api.nvim_buf_set_option(bufnr, ...)
-  end
-
-  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-
-  -- Set some keybinds conditional on server capabilities
-  if client.resolved_capabilities.document_formatting then
-    map.normal("<space>f", map.lua("vim.lsp.buf.formatting()"))
-  elseif client.resolved_capabilities.document_range_formatting then
-    map.normal("<space>f", map.lua("vim.lsp.buf.range_formatting()"))
-  end
-
-  -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_exec([[
-      hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-      hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-      hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]], false)
-  end
-end
-
-lspconfig = require "lspconfig"
-lspconfig.pyright.setup {on_attach = on_attach}
 lspconfig.tsserver.setup {
   on_attach = function(client)
     -- Disable tsserver formatting (using prettier instead)
     client.resolved_capabilities.document_formatting = false
-    on_attach(client)
   end
 }
-lspconfig.bashls.setup {on_attach = on_attach}
-lspconfig.vimls.setup {on_attach = on_attach}
-lspconfig.yamlls.setup {on_attach = on_attach}
-lspconfig.jsonls.setup {on_attach = on_attach}
 
+-- HTML + CSS (Enable snippet support) {{{1
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-lspconfig.html.setup {capabilities = capabilities, on_attach = on_attach}
-lspconfig.cssls.setup {capabilities = capabilities, on_attach = on_attach}
+lspconfig.html.setup {capabilities = capabilities}
+lspconfig.cssls.setup {capabilities = capabilities}
 
+-- Lua {{{1
 local lua_lsp_root_path = vim.fn.expand(
                               "~/.apps/all/lua-language-server/default")
 local lua_lsp_bin_path = lua_lsp_root_path .. "/bin/Linux/lua-language-server"
 local lua_lsp_main_lua = lua_lsp_root_path .. "/main.lua"
 lspconfig.sumneko_lua.setup {
   cmd = {lua_lsp_bin_path, "-E", lua_lsp_main_lua},
-  on_attach = on_attach,
   settings = {
     Lua = {
       runtime = {
@@ -85,8 +52,8 @@ lspconfig.sumneko_lua.setup {
   }
 }
 
+-- DiagnosticLS {{{1
 lspconfig.diagnosticls.setup {
-  on_attach = on_attach,
   filetypes = {"sh"},
   init_options = {
     filetypes = {sh = "shellcheck"},
@@ -119,12 +86,7 @@ lspconfig.diagnosticls.setup {
   }
 }
 
-function LspReset()
-  vim.lsp.stop_client(vim.lsp.get_active_clients())
-  vim.api.nvim_command("edit")
-end
-
--- Keys
+-- Keys {{{1
 map.normal("gD", map.lua("vim.lsp.buf.declaration()"))
 map.normal("gd", map.lua("vim.lsp.buf.definition()"))
 map.normal("K", map.lua("vim.lsp.buf.hover()"))
@@ -141,5 +103,3 @@ map.normal("<space>e", map.lua("vim.lsp.diagnostic.show_line_diagnostics()"))
 map.normal("[d", map.lua("vim.lsp.diagnostic.goto_prev()"))
 map.normal("]d", map.lua("vim.lsp.diagnostic.goto_next()"))
 map.normal("<space>q", map.lua("vim.lsp.diagnostic.set_loclist()"))
-
-return {on_attach = on_attach}
