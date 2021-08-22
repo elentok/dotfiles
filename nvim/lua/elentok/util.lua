@@ -117,4 +117,13 @@ M.exists = function(expr)
   return api.nvim_eval(string.format('exists("%s")', expr)) ~= 0
 end
 
+M.augroup = function(name, content)
+  vim.cmd(string.format([[
+    augroup Elentok_%s
+      autocmd!
+      %s
+    augroup END
+  ]], name, content))
+end
+
 return M
