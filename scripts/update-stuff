@@ -11,6 +11,9 @@ function main() {
 
 function update-node() {
   if is-n-providing-node; then
+    header 'Updating N'
+    (cd "$N_PREFIX" && git pull)
+
     header 'Updating NodeJS'
     n --preserve lts # Preserve npm (don't downgrade to lts version)
   fi
