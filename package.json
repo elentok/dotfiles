@@ -5,6 +5,7 @@
   "main": "framework.js",
   "scripts": {
     "format": "prettier --write '**/*.js' '**/*.ts' '**/*.css'",
+    "format:lua": "find -name '*.lua' | xargs lua-format -i",
     "vscode:sync": "ts-node plugins/vscode/sync.ts",
     "eslint": "eslint --ext .js,.ts .",
     "ts:build": "tsc",

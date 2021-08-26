@@ -24,9 +24,7 @@ local function filename()
   -- Temporary solution
   if statusline_shorteners_updated then
     statusline_shorteners_updated = false
-    if vim.b.short_path ~= nil then
-      vim.b.short_path = nil
-    end
+    if vim.b.short_path ~= nil then vim.b.short_path = nil end
   end
 
   local name = vim.fn.expand('%:t')
@@ -48,21 +46,16 @@ vim.cmd([[
 
 vim.o.statusline = table.concat({
   -- Path to the file in the buffer, as typed or relative to current directory.
-  '%{Elentok_StatusLineFileName()}',
-  -- Where to truncate line.
-  '%< ',
-  '%{&modified?\' +\':\'\'}',
-  '%{&readonly?\' \':\'\'}',
+  '%{Elentok_StatusLineFileName()}', -- Where to truncate line.
+  '%< ', '%{&modified?\' +\':\'\'}', '%{&readonly?\' \':\'\'}',
   -- Separation point between left and right aligned items.
-  '%= ',
-  -- Filetype.
-  ' [%{\'\'!=#&filetype?&filetype:\'none\'}]',
-  -- Line number + column number.
+  '%= ', -- Filetype.
+  ' [%{\'\'!=#&filetype?&filetype:\'none\'}]', -- Line number + column number.
   ' %l:%v'
 })
 
 return {
   add_path_shortener = add_path_shortener,
   filename = filename,
-  shorten = shorten,
+  shorten = shorten
 }
