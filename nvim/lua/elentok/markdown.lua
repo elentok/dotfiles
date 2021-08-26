@@ -13,7 +13,9 @@ M.setup_buffer = function()
 
     -- Automatic word wrapping.
     vim.bo.textwidth = 80
-    vim.bo.formatoptions = vim.bo.formatoptions .. 'a'
+    -- n = recognize numbered lists
+    -- b = auto wrap only if not already longer than textwidth
+    vim.bo.formatoptions = vim.bo.formatoptions .. 'nb'
 end
 
 M.foldexpr = function(lnum)
