@@ -14,15 +14,8 @@ LSP_ROOT="${ALL_APPS}/lua-language-server"
 function main() {
   apt-fast-install build-essential libreadline-dev cmake
 
-  if ! app-exists lua ${LUA_VERSION}; then
-    build-lua
-  fi
-  app-set-default lua ${LUA_VERSION}
-
-  if ! app-exists luarocks ${LUAROCKS_VERSION}; then
-    build-luarocks
-  fi
-  app-set-default luarocks ${LUAROCKS_VERSION}
+  install-lua
+  install-luarocks
 
   if [ ! -e "$LSP_ROOT/bin/Linux/lua-language-server" ]; then
     install-language-server
@@ -31,6 +24,22 @@ function main() {
   if command_missing lua-format; then
     luarocks install --local --server=https://luarocks.org/dev luaformatter
   fi
+
+  symlink "$DOTF/.lua-format" "$HOME/.lua-format"
+}
+
+function install-lua() {
+  if ! app-exists lua ${LUA_VERSION}; then
+    build-lua
+  fi
+  app-set-default lua ${LUA_VERSION}
+}
+
+function install-luarocks() {
+  if ! app-exists luarocks ${LUAROCKS_VERSION}; then
+    build-luarocks
+  fi
+  app-set-default luarocks ${LUAROCKS_VERSION}
 }
 
 function build-lua() {
