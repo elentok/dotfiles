@@ -7,7 +7,7 @@ local M = {}
 local formatter_cmds = {
   black = 'black --quiet --stdin-filename % - 2>/dev/null',
   clang = 'clang-format --style=Google --assume-filename %',
-  luaformat = 'lua-format',
+  luaformat = 'lua-format --config=$HOME/.lua-format',
   prettier = 'prettier --stdin-filepath %',
   lsp = function() vim.lsp.buf.formatting_seq_sync() end
 }
