@@ -11,7 +11,6 @@ augroup Elentok_Misc
   autocmd FileType java       setlocal omnifunc=eclim#java#complete#CodeComplete
     \ completefunc=eclim#java#complete#CodeComplete
   autocmd Filetype python     setlocal ts=4 softtabstop=4 shiftwidth=4
-  autocmd Filetype lua        setlocal ts=4 softtabstop=4 shiftwidth=4
   autocmd FileType gitcommit,hgcommit setlocal spell spellcapcheck=
   autocmd FileType gitcommitsetlocal comments=fb:-,fb:* colorcolumn=72 textwidth=72
   autocmd FileType gitcommit,hgcommit  setlocal comments=fb:-,fb:* colorcolumn=80 textwidth=80
