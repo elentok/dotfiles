@@ -53,12 +53,10 @@ lspconfig.jsonls.setup {on_attach = on_attach}
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 lspconfig.html.setup {capabilities = capabilities, on_attach = on_attach}
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
 lspconfig.cssls.setup {capabilities = capabilities, on_attach = on_attach}
 
-local lua_lsp_root_path = vim.fn.expand("~/.apps/all/lua-language-server")
+local lua_lsp_root_path = vim.fn.expand(
+                              "~/.apps/all/lua-language-server/default")
 local lua_lsp_bin_path = lua_lsp_root_path .. "/bin/Linux/lua-language-server"
 local lua_lsp_main_lua = lua_lsp_root_path .. "/main.lua"
 lspconfig.sumneko_lua.setup {

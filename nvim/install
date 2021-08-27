@@ -5,13 +5,14 @@ set -euo pipefail
 source "$DOTF/framework"
 
 main() {
-  install_symlinks
-  install_packer_plugins
+  install-symlinks
+  install-packer-plugins
+  "$DOTF/install-lua"
 
   (cd "$DOTF/nvim/ctags" && ./build)
 }
 
-install_symlinks() {
+install-symlinks() {
   mkdir -p ~/.config
   symlink "$DOTF/nvim" ~/.config/nvim
 
@@ -20,7 +21,7 @@ install_symlinks() {
   symlink "$DOTF/nvim/yamllint-config" ~/.config/yamllint/config
 }
 
-install_packer_plugins() {
+install-packer-plugins() {
   bullet "Running PackerInstall... "
   nvim-packer-sync
   success "done"

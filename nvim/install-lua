@@ -2,24 +2,20 @@
 
 set -euo pipefail
 
-source "$(dirname "$0")/../../framework"
+source "$DOTF/framework"
 
 LUA_VERSION=5.3.5
 LUAROCKS_VERSION=3.7.0
+LSP_VERSION=master
 
-ALL_APPS="${HOME}/.apps/all"
 LUA_ROOT="$(app-dir lua ${LUA_VERSION})"
-LSP_ROOT="${ALL_APPS}/lua-language-server"
 
 function main() {
   apt-fast-install build-essential libreadline-dev cmake
 
   install-lua
   install-luarocks
-
-  if [ ! -e "$LSP_ROOT/bin/Linux/lua-language-server" ]; then
-    install-language-server
-  fi
+  install-lua-language-server
 
   if command_missing lua-format; then
     luarocks install --local --server=https://luarocks.org/dev luaformatter
@@ -43,6 +39,7 @@ function install-luarocks() {
 }
 
 function build-lua() {
+  header 'Building Lua'
   build_dir="$(app-prepare-build-dir lua)"
   app_dir="$(app-prepare-dir lua $LUA_VERSION)"
 
@@ -55,6 +52,7 @@ function build-lua() {
 }
 
 function build-luarocks() {
+  header 'Building Lua Rocks'
   build_dir="$(app-prepare-build-dir luarocks)"
   app_dir="$(app-prepare-dir luarocks $LUAROCKS_VERSION)"
 
@@ -68,29 +66,38 @@ function build-luarocks() {
   make install
 }
 
-function install-language-server() {
-  gcc_version=$(gcc --version | head -1 | awk '{print $NF}' | cut -d. -f1)
-  if [ "$gcc_version" -lt 10 ]; then
-    echo "WARNING: The lua language server requires gcc-10 at least."
-    return
+function install-lua-language-server() {
+  if ! app-exists lua-language-server $LSP_VERSION; then
+    build-lua-language-server
   fi
 
-  if [ -e "$LSP_ROOT" ]; then
-    rm -rf "${LSP_ROOT}.old"
-    mv "$LSP_ROOT" "${LSP_ROOT}.old"
-  fi
+  app-set-default lua-language-server $LSP_VERSION
+}
 
-  mkdir -p "$ALL_APPS"
-  cd "$ALL_APPS"
+function build-lua-language-server() {
+  header 'Building Lua Language Server'
 
-  git clone https://github.com/sumneko/lua-language-server
-  cd lua-language-server
+  die-unless-gcc-10
+
+  app_dir="$(app-prepare-dir lua-language-server $LSP_VERSION)"
+
+  cd "$app_dir/.."
+  git clone https://github.com/sumneko/lua-language-server $LSP_VERSION
+  cd $LSP_VERSION
   git submodule update --init --recursive
 
   cd 3rd/luamake
   compile/install.sh
   cd ../..
   ./3rd/luamake/luamake rebuild
+}
+
+function die-unless-gcc-10() {
+  gcc_version=$(gcc --version | head -1 | awk '{print $NF}' | cut -d. -f1)
+  if [ "$gcc_version" -lt 10 ]; then
+    echo "WARNING: The lua language server requires gcc-10 at least."
+    return
+  fi
 }
 
 main "$@"
