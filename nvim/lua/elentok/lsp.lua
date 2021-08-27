@@ -1,9 +1,9 @@
-local util = require('elentok/util')
-local map = require('elentok/map')
+local util = require("elentok/util")
+local map = require("elentok/map")
 
-local lspconfig = util.safe_require('lspconfig')
+local lspconfig = util.safe_require("lspconfig")
 if not lspconfig then
-  print('Warning: lspconfig not found, skipping initialization.')
+  print("Warning: lspconfig not found, skipping initialization.")
   return
 end
 
@@ -12,7 +12,7 @@ local function on_attach(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, ...)
   end
 
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
   -- Set some keybinds conditional on server capabilities
   if client.resolved_capabilities.document_formatting then
@@ -36,7 +36,7 @@ local function on_attach(client, bufnr)
   end
 end
 
-lspconfig = require 'lspconfig'
+lspconfig = require "lspconfig"
 lspconfig.pyright.setup {on_attach = on_attach}
 lspconfig.tsserver.setup {
   on_attach = function(client)
@@ -66,19 +66,19 @@ lspconfig.sumneko_lua.setup {
     Lua = {
       runtime = {
         -- Tell the language server which version of Lua you're using (LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
+        version = "LuaJIT",
         -- Setup your lua path
-        path = vim.split(package.path, ';')
+        path = vim.split(package.path, ";")
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = {'vim', 'use'}
+        globals = {"vim", "use"}
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
         library = {
-          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
+          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+          [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
         }
       }
     }
@@ -121,25 +121,25 @@ lspconfig.diagnosticls.setup {
 
 function LspReset()
   vim.lsp.stop_client(vim.lsp.get_active_clients())
-  vim.api.nvim_command('edit')
+  vim.api.nvim_command("edit")
 end
 
 -- Keys
-map.normal('gD', map.lua('vim.lsp.buf.declaration()'))
-map.normal('gd', map.lua('vim.lsp.buf.definition()'))
-map.normal('K', map.lua('vim.lsp.buf.hover()'))
-map.normal('gi', map.lua('vim.lsp.buf.implementation()'))
-map.normal('<space>k', map.lua('vim.lsp.buf.signature_help()'))
-map.normal('<leader>wa', map.lua('vim.lsp.buf.add_workspace_folder()'))
-map.normal('<leader>wr', map.lua('vim.lsp.buf.remove_workspace_folder()'))
-map.normal('<leader>wl',
-           map.lua('print(vim.inspect(vim.lsp.buf.list_workspace_folders()))'))
-map.normal('gD', map.lua('vim.lsp.buf.type_definition()'))
-map.normal('<leader>rn', map.lua('vim.lsp.buf.rename()'))
-map.normal('gr', map.lua('vim.lsp.buf.references()'))
-map.normal('<space>e', map.lua('vim.lsp.diagnostic.show_line_diagnostics()'))
-map.normal('[d', map.lua('vim.lsp.diagnostic.goto_prev()'))
-map.normal(']d', map.lua('vim.lsp.diagnostic.goto_next()'))
-map.normal('<space>q', map.lua('vim.lsp.diagnostic.set_loclist()'))
+map.normal("gD", map.lua("vim.lsp.buf.declaration()"))
+map.normal("gd", map.lua("vim.lsp.buf.definition()"))
+map.normal("K", map.lua("vim.lsp.buf.hover()"))
+map.normal("gi", map.lua("vim.lsp.buf.implementation()"))
+map.normal("<space>k", map.lua("vim.lsp.buf.signature_help()"))
+map.normal("<leader>wa", map.lua("vim.lsp.buf.add_workspace_folder()"))
+map.normal("<leader>wr", map.lua("vim.lsp.buf.remove_workspace_folder()"))
+map.normal("<leader>wl",
+           map.lua("print(vim.inspect(vim.lsp.buf.list_workspace_folders()))"))
+map.normal("gD", map.lua("vim.lsp.buf.type_definition()"))
+map.normal("<leader>rn", map.lua("vim.lsp.buf.rename()"))
+map.normal("gr", map.lua("vim.lsp.buf.references()"))
+map.normal("<space>e", map.lua("vim.lsp.diagnostic.show_line_diagnostics()"))
+map.normal("[d", map.lua("vim.lsp.diagnostic.goto_prev()"))
+map.normal("]d", map.lua("vim.lsp.diagnostic.goto_next()"))
+map.normal("<space>q", map.lua("vim.lsp.diagnostic.set_loclist()"))
 
 return {on_attach = on_attach}

@@ -1,21 +1,21 @@
-local util = require('elentok/util')
+local util = require("elentok/util")
 local M = {}
 
 M.setup_buffer = function()
   -- Spell checking
   vim.wo.spell = true
-  vim.bo.spellcapcheck = ''
+  vim.bo.spellcapcheck = ""
 
   -- Setup folding by headings.
   vim.wo.foldlevel = 1
-  vim.wo.foldmethod = 'expr'
-  vim.wo.foldexpr = 'ElentokMarkdownFoldExpr(v:lnum)'
+  vim.wo.foldmethod = "expr"
+  vim.wo.foldexpr = "ElentokMarkdownFoldExpr(v:lnum)"
 
   -- Automatic word wrapping.
   vim.bo.textwidth = 80
   -- n = recognize numbered lists
   -- b = auto wrap only if not already longer than textwidth
-  vim.bo.formatoptions = vim.bo.formatoptions .. 'nb'
+  vim.bo.formatoptions = vim.bo.formatoptions .. "nb"
 end
 
 M.foldexpr = function(lnum)
@@ -23,9 +23,9 @@ M.foldexpr = function(lnum)
 
   local match = line:match("^#+")
   if match then
-    return '>' .. string.len(match)
+    return ">" .. string.len(match)
   else
-    return '='
+    return "="
   end
 end
 
@@ -35,7 +35,7 @@ vim.cmd([[
   endfunction
 ]])
 
-util.augroup('Markdown', [[
+util.augroup("Markdown", [[
   autocmd FileType markdown lua require("elentok/markdown").setup_buffer()
 ]])
 

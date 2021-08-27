@@ -5,8 +5,8 @@ local t = function(str)
 end
 
 local check_back_space = function()
-  local col = vim.fn.col('.') - 1
-  return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
+  local col = vim.fn.col(".") - 1
+  return col == 0 or vim.fn.getline("."):sub(col, col):match("%s") ~= nil
 end
 
 -- Use (s-)tab to:
@@ -20,7 +20,7 @@ _G.tab_complete = function()
   elseif check_back_space() then
     return t "<Tab>"
   else
-    return vim.fn['compe#complete']()
+    return vim.fn["compe#complete"]()
   end
 end
 _G.s_tab_complete = function()

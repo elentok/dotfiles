@@ -1,6 +1,6 @@
 function _G.DotReload()
   for filename in pairs(package.loaded) do
-    if filename:match('^elentok/') then
+    if filename:match("^elentok/") then
       -- print('Reloading ' .. filename)
       package.loaded[filename] = nil
       require(filename)
@@ -8,7 +8,7 @@ function _G.DotReload()
   end
 
   for filename in pairs(package.loaded) do
-    if filename:match('^elentok-local/') then
+    if filename:match("^elentok-local/") then
       -- print('Reloading ' .. filename)
       package.loaded[filename] = nil
       require(filename)

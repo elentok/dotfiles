@@ -1,14 +1,14 @@
 local api = vim.api
-local util = require('elentok/util')
+local util = require("elentok/util")
 
 local M = {}
 
 -- Formatter commands.
 local formatter_cmds = {
-  black = 'black --quiet --stdin-filename % - 2>/dev/null',
-  clang = 'clang-format --style=Google --assume-filename %',
-  luaformat = 'lua-format --config=$HOME/.lua-format',
-  prettier = 'prettier --stdin-filepath %',
+  black = "black --quiet --stdin-filename % - 2>/dev/null",
+  clang = "clang-format --style=Google --assume-filename %",
+  luaformat = "lua-format --config=$HOME/.lua-format",
+  prettier = "prettier --stdin-filepath %",
   lsp = function()
     vim.lsp.buf.formatting_seq_sync()
   end
@@ -50,19 +50,19 @@ local format_on_save_by_filetype = {
 local function run_formatter(cmd)
   util.log("[run_formatter] cmd = " .. cmd)
   local cursor = api.nvim_win_get_cursor(0)
-  api.nvim_exec('%!' .. cmd, true)
+  api.nvim_exec("%!" .. cmd, true)
   util.restore_cursor(0, cursor)
 end
 
 function M.format(formatter)
-  if formatter == nil or formatter == '' then
-    formatter = formatter_by_filetype[util.buf_get_filetype()] or 'lsp'
+  if formatter == nil or formatter == "" then
+    formatter = formatter_by_filetype[util.buf_get_filetype()] or "lsp"
   end
 
-  util.log('Formatting with ' .. formatter)
+  util.log("Formatting with " .. formatter)
   local cmd = formatter_cmds[formatter]
 
-  if type(cmd) == 'function' then
+  if type(cmd) == "function" then
     cmd()
   else
     run_formatter(cmd)
@@ -70,7 +70,9 @@ function M.format(formatter)
 end
 
 function M.format_on_save()
-  if format_on_save_by_filetype[util.buf_get_filetype()] then M.format() end
+  if format_on_save_by_filetype[util.buf_get_filetype()] then
+    M.format()
+  end
 end
 
 function M.set_formatter_cmd(formatter, cmd)
@@ -82,7 +84,9 @@ function M.set_formatter(filetype, formatter)
 end
 
 function M.set_format_on_save(filetype, enabled)
-  if enabled == nil then enabled = true end
+  if enabled == nil then
+    enabled = true
+  end
   format_on_save_by_filetype[filetype] = enabled
 end
 
@@ -92,7 +96,7 @@ vim.cmd([[
   command! ClangFormat Format clang
 ]])
 
-util.augroup('Format', [[
+util.augroup("Format", [[
   autocmd BufWritePre * lua require('elentok/format').format_on_save()
 ]])
 
