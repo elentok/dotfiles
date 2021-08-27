@@ -1,9 +1,11 @@
-local util = require('elentok/util')
+local util = require("elentok/util")
 
-local treesitter_configs = util.safe_require('nvim-treesitter.configs')
-if not treesitter_configs then return end
+local treesitter_configs = util.safe_require("nvim-treesitter.configs")
+if not treesitter_configs then
+  return
+end
 
-require'nvim-treesitter.configs'.setup {
+require"nvim-treesitter.configs".setup {
   ensure_installed = "maintained",
   ignore_install = {
     "nix", "erlang", "ocamllex", "devicetree", "gdscript", "supercollider",
@@ -25,6 +27,6 @@ require'nvim-treesitter.configs'.setup {
   indent = {enable = true, disable = {"python", "typescript", "javascript"}}
 }
 
-util.augroup('Treesitter', [[
+util.augroup("Treesitter", [[
   autocmd FileType * setlocal foldmethod=expr foldexpr=nvim_treesitter#foldexpr()
 ]])

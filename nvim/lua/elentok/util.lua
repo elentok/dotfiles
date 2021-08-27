@@ -9,7 +9,9 @@ function M.set_log(enabled)
 end
 
 function M.log(message)
-  if log_enabled then print(message) end
+  if log_enabled then
+    print(message)
+  end
 end
 
 function M.safe_require(name)
@@ -17,14 +19,14 @@ function M.safe_require(name)
   if (status) then
     return module
   else
-    print(string.format('WARNING: error loading lua module "%s"', name))
+    print(string.format("WARNING: error loading lua module \"%s\"", name))
     return nil
   end
 end
 
 function M.open_window(title, lines)
   local buf = api.nvim_create_buf(false, true)
-  api.nvim_buf_set_option(buf, 'bufhidden', 'wipe')
+  api.nvim_buf_set_option(buf, "bufhidden", "wipe")
 
   -- get total dimensions
   local width = api.nvim_get_option("columns")
@@ -49,10 +51,10 @@ function M.open_window(title, lines)
   }
 
   -- Insert contents
-  api.nvim_buf_set_lines(buf, 0, 0, true, {title, '(press enter to close)', ''})
+  api.nvim_buf_set_lines(buf, 0, 0, true, {title, "(press enter to close)", ""})
   api.nvim_buf_set_lines(buf, 3, 3, true, lines)
 
-  api.nvim_buf_set_keymap(buf, 'n', '<cr>', ':q<cr>', {noremap = true})
+  api.nvim_buf_set_keymap(buf, "n", "<cr>", ":q<cr>", {noremap = true})
 
   -- create floating window with the buffer attached
   local win = api.nvim_open_win(buf, true, opts)
@@ -61,7 +63,7 @@ function M.open_window(title, lines)
 end
 
 function M.current_word()
-  return api.nvim_call_function('expand', {'<cword>'})
+  return api.nvim_call_function("expand", {"<cword>"})
 end
 
 function M.global_extend(name, values)
@@ -78,8 +80,8 @@ end
 -- "index" is 1-based
 function M.buf_get_line(buffer, index)
   if index < 1 then
-    error('buf_get_line got index ' .. vim.inspect(index) ..
-              ', must be 1 or higher')
+    error("buf_get_line got index " .. vim.inspect(index) ..
+              ", must be 1 or higher")
   end
   return api.nvim_buf_get_lines(buffer, index - 1, index, true)[1]
 end
@@ -93,21 +95,23 @@ function M.restore_cursor(buffer, cursor)
   local rows_count = api.nvim_buf_line_count(buffer)
   if row > rows_count then
     row = rows_count - 1
-    if row < 1 then row = 1; end
-    M.log('[restore_cursor] fixed row to ' .. row)
+    if row < 1 then
+      row = 1;
+    end
+    M.log("[restore_cursor] fixed row to " .. row)
   end
 
   local line = M.buf_get_line(buffer, row)
-  M.log('[restore_cursor] line #' .. row .. ' = [[[' .. line .. ']]]')
+  M.log("[restore_cursor] line #" .. row .. " = [[[" .. line .. "]]]")
   local col_count = string.len(line)
-  M.log('[restore_cursor] line #' .. row .. ' columns = ' .. col_count)
+  M.log("[restore_cursor] line #" .. row .. " columns = " .. col_count)
   if col >= col_count then
     if col_count == 0 then
       col = 0
     else
       col = col_count - 1
     end
-    M.log('[restore_cursor] fixed column to ' .. col)
+    M.log("[restore_cursor] fixed column to " .. col)
   end
 
   api.nvim_win_set_cursor(buffer, {row, col})
@@ -115,11 +119,11 @@ end
 
 function M.buf_get_filetype(bufnr)
   bufnr = bufnr or 0
-  return api.nvim_buf_get_option(bufnr, 'filetype')
+  return api.nvim_buf_get_option(bufnr, "filetype")
 end
 
 function M.exists(expr)
-  return api.nvim_eval(string.format('exists("%s")', expr)) ~= 0
+  return api.nvim_eval(string.format("exists(\"%s\")", expr)) ~= 0
 end
 
 function M.augroup(name, content)
