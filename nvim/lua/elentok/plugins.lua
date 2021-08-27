@@ -2,7 +2,7 @@ return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
   -- Color scheme.
-  use {'embark-theme/vim', as = 'embark'}
+  use 'sainnhe/sonokai'
 
   -- File manager.
   use 'cocopon/vaffle.vim'
