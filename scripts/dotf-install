@@ -15,7 +15,7 @@ main() {
   update-pip
   dotf-pkgs install
   dotf-github install
-  dotf-plugin nodejs git zsh nvim ripgrep tig bash tmux vifm lua
+  dotf-plugin nodejs git zsh nvim ripgrep tig bash tmux vifm
 
   if is_mac; then
     dotf-plugin osx-tuning iterm
