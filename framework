@@ -5,37 +5,38 @@ set -euo pipefail
 
 # DOTF directory {{{1
 
-DOTF=$(dirname ${BASH_SOURCE[0]-$0})
-export DOTF=$(cd $DOTF && pwd)
+DOTF="$(dirname "${BASH_SOURCE[0]-$0}")"
+DOTF="$(cd "$DOTF" && pwd)"
+export DOTF
 
-source $DOTF/zsh/core.sh
+source "$DOTF/zsh/core.sh"
 
 # Machine varibles {{{1
 MACHINE_VARFILE=$HOME/.config/machine
 
-if [ -e $MACHINE_VARFILE ]; then
-  source $MACHINE_VARFILE
+if [ -e "$MACHINE_VARFILE" ]; then
+  source "$MACHINE_VARFILE"
 fi
 
 store_variable() {
   local key="$1"
   local value="$2"
 
-  mkdir -p $HOME/.config
-  if [ ! -e $MACHINE_VARFILE ]; then touch $MACHINE_VARFILE; fi
+  mkdir -p "$HOME/.config"
+  if [ ! -e "$MACHINE_VARFILE" ]; then touch "$MACHINE_VARFILE"; fi
 
   (
-    grep -v "export $key=" $MACHINE_VARFILE
+    grep -v "export $key=" "$MACHINE_VARFILE"
     echo "export $key='$(escape_variable "$value")'"
   ) > tmpfile
-  mv -f tmpfile $MACHINE_VARFILE
-  chmod 600 $MACHINE_VARFILE
+  mv -f tmpfile "$MACHINE_VARFILE"
+  chmod 600 "$MACHINE_VARFILE"
 
   eval "export $key='$(escape_variable "$value")'"
 }
 
 escape_variable() {
-  echo -n "$1" | sed 's/''/\\''/g'
+  echo -n "$1" | sed "s/'/\\\\'/g"
 }
 
 # Colors {{{1
@@ -83,25 +84,22 @@ to_uppercase() {
 
 # display methods (header/bullet/info/success/error) {{{1
 title() {
-  echo -e "\n${BLUE}$*"
-  echo "$*" | sed 's/./=/g'
-  echo -e $RESET
+  echo -e "\\n${BLUE}$*"
+  # replace all characters with "="
+  echo "${*//?/=}"
+  echo -e "$RESET"
 }
 
 header() {
-  echo -e "\n${BLUE}${UNDERLINE}==== ${*^^} ====$RESET"
+  echo -e "\\n${BLUE}${UNDERLINE}==== ${*^^} ====$RESET"
 }
 
 bullet() {
   echo -e -n "${YELLOW}•$RESET $*"
 }
 
-progress() {
-  printf "${BLUE}${HOURGLASS} ${PROGRESS_PREFIX}$*..."
-}
-
 clear_line() {
-  printf "$CLEAR_LINE"
+  echo -e -n "$CLEAR_LINE"
 }
 
 info() {
@@ -109,7 +107,7 @@ info() {
 }
 
 success() {
-  printf "${GREEN}✔ $*$RESET\n"
+  echo -e "${GREEN}✔ $*$RESET"
 }
 
 error() {
