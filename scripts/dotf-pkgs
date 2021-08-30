@@ -30,6 +30,10 @@ function install-pkgs() {
     if [ "$HAS_GUI" = 'yes' ]; then
       apt-fast-install "$(get-pkgs apt-gui)"
     fi
+
+    if [ "${KDE:-}" = 'yes' ]; then
+      apt-fast-install "$(get-pkgs apt-kde)"
+    fi
   elif is_mac; then
     for pkg in $(get-pkgs brew); do
       brew_install "$pkg"
