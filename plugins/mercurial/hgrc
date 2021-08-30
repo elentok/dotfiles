@@ -17,4 +17,7 @@ dd = !hgi diff
 lg = !hgi list
 ss = !hgi status
 
+lll = log --template "{node|short} {date|isodate} {author|user} {cl}{desc|firstline}\n" .
+
+
 %include ~/.dotlocal/hgrc
