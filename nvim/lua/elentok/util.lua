@@ -1,6 +1,6 @@
 local api = vim.api
 
-local log_enabled = false
+local log_enabled = vim.env.NVIM_LOG == "true"
 
 local M = {}
 
