@@ -47,6 +47,7 @@ filetype * nvim
 " Keybindings {{{1
 
 noremap W :!watched %"f<cr>
+nnoremap q :q<cr>
 
 " Mappings for faster renaming
 nnoremap I cw<c-a>
