@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+
+import os
+
+
+def main():
+    local_branches = os.popen("git branch | cut -c 3-").read().splitlines()
+    remote_branches = (
+        os.popen("git branch --remote | cut -c 3- | grep -v '/HEAD'")
+        .read()
+        .splitlines()
+    )
+
+    remote_only_branches = []
+    for branch in remote_branches:
+        _, branch_name = branch.split("/", 1)
+        if not branch_name in local_branches:
+            remote_only_branches.append(branch)
+
+    branches = []
+    branches.extend(local_branches)
+    branches.extend(remote_only_branches)
+    branches = "\n".join(branches)
+
+    branch = (
+        os.popen(
+            f"echo \"{branches}\" | fzf --preview 'git log --color=always {{1}} | head -50'"
+        )
+        .read()
+        .strip()
+    )
+    print(branch)
+
+    if len(branch) == 0:
+        return
+
+    if branch in remote_only_branches:
+        print(
+            f"The branch '{branch}' is not checked out locally, "
+            "creating a local branch..."
+        )
+        _, branch_name = branch.split("/", 1)
+        os.system(f"git checkout -b {branch_name} {branch}")
+    else:
+        os.system(f"git checkout {branch}")
+
+
+if __name__ == "__main__":
+    main()
