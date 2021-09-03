@@ -28,6 +28,10 @@ return require("packer").startup(function()
   use "anott03/nvim-lspinstall"
   use "glepnir/lspsaga.nvim"
 
+  -- Snippets
+  use "L3MON4D3/LuaSnip"
+  use "rafamadriz/friendly-snippets" -- collection of snippets for all langs
+
   -- Allows running "nvim {filename}:{line-number}".
   use "bogado/file-line"
 
