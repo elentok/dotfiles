@@ -61,10 +61,17 @@ return require("packer").startup(function()
   use "nvim-lua/popup.nvim"
   use "nvim-lua/plenary.nvim"
   use "AndrewRadev/splitjoin.vim"
-  use "elentok/togglr.vim" -- Toggles words (e.g. true/false, top/bottom)
   use "elentok/replace-all.vim"
   use "jamessan/vim-gnupg"
   use "davidbeckingsale/writegood.vim"
+
+  -- Toggles words (e.g. true/false, top/bottom)
+  use {
+    "elentok/togglr.vim",
+    config = function()
+      require("togglr").setup()
+    end
+  }
 
   -- Lazy
   use {"itchyny/calendar.vim", opt = true, cmd = "Calendar"}
