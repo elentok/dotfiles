@@ -19,9 +19,6 @@ return require("packer").startup(function()
   -- Automatically close bracket and tag pairs
   use "windwp/nvim-autopairs"
 
-  -- Move arguments to the left and right.
-  use "AndrewRadev/sideways.vim"
-
   -- LSP.
   use "neovim/nvim-lspconfig"
   use "hrsh7th/nvim-compe"
@@ -45,6 +42,7 @@ return require("packer").startup(function()
 
   -- Treesitter
   use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+  use {"nvim-treesitter/nvim-treesitter-textobjects"}
 
   -- Syntax.
   use "aklt/plantuml-syntax"
