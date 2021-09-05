@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework
+source "$DOTF/framework"
 
 header 'Setting up ssh agent'
 agent setup
@@ -8,8 +8,8 @@ agent setup
 header 'Add ssh key'
 ssh-add
 
-if [ -e $DOTL/scripts/morning-local ]; then
-  $DOTL/scripts/morning-local
+if [ -e "$DOTL/scripts/morning-local" ]; then
+  "$DOTL/scripts/morning-local"
 fi
 
 header 'Updating dotlocal'
@@ -17,3 +17,8 @@ cd ~/.dotlocal && git pull
 
 header 'Updating dotfiles'
 dotf update
+
+if [ -e "$HOME/notes" ]; then
+  header 'Syncing notes'
+  (cd ~/notes && git sync)
+fi
