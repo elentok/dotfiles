@@ -7,10 +7,11 @@ local M = {}
 local formatter_cmds = {
   black = "black --quiet --stdin-filename % - 2>/dev/null",
   clang = "clang-format --style=Google --assume-filename %",
-  luaformat = vim.fn.expand("lua-format --config=$HOME/.lua-format"),
+  luaformat = "lua-format --config=$HOME/.lua-format",
   prettier = "prettier --stdin-filepath %",
-  lsp = function()
+  lsp = function(done)
     vim.lsp.buf.formatting_seq_sync()
+    done()
   end
 }
 
@@ -47,9 +48,41 @@ local format_on_save_by_filetype = {
   yaml = true
 }
 
+local function save_views(bufnr)
+  local active_windhandle = vim.api.nvim_tabpage_get_win(0)
+  for _, winhandle in ipairs(vim.fn.win_findbuf(bufnr)) do
+    local winnr = vim.api.nvim_win_get_number(winhandle)
+    vim.cmd(winnr .. "wincmd w")
+    vim.w.last_view = vim.fn.winsaveview()
+
+    if active_windhandle ~= winhandle then
+      vim.cmd("wincmd p")
+    end
+  end
+end
+
+local function restore_views(bufnr)
+  local active_windhandle = vim.api.nvim_tabpage_get_win(0)
+  for _, winhandle in ipairs(vim.fn.win_findbuf(bufnr)) do
+    local winnr = vim.api.nvim_win_get_number(winhandle)
+    vim.cmd(winnr .. "wincmd w")
+    vim.fn.winrestview(vim.w.last_view)
+
+    if active_windhandle ~= winhandle then
+      vim.cmd("wincmd p")
+    end
+  end
+end
+
+local function post_format()
+  vim.cmd("write")
+  vim.b.is_formatting = false
+  restore_views(vim.fn.bufnr())
+end
+
 local function run_formatter(cmd)
-  util.log("[run_formatter] cmd = ", cmd)
-  local cursor = vim.fn.getpos(".")
+  util.log("[run_formatter] cmd = ", vim.fn.expand(cmd))
+  save_views(vim.fn.bufnr())
 
   local lines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
   util.shell(cmd, {
@@ -58,19 +91,24 @@ local function run_formatter(cmd)
       if exitcode ~= 0 then
         put("Error formatting:", stderr[1])
         message.show("Formatting Error", stderr, {mode = "error"})
+        vim.b.is_formatting = false
       else
-        put("Formatted successfuly.")
+        util.log("[run_formatter] formatted successfully")
         message.close()
 
         vim.api.nvim_buf_set_lines(0, 0, -1, false, stdin)
-        vim.cmd("noautocmd w")
-        vim.fn.setpos(".", cursor)
+        post_format()
       end
     end
   })
 end
 
 function M.format(formatter)
+  if vim.b.is_formatting then
+    return
+  end
+  vim.b.is_formatting = true
+
   if formatter == nil or formatter == "" then
     formatter = formatter_by_filetype[util.buf_get_filetype()] or "lsp"
   end
@@ -79,7 +117,7 @@ function M.format(formatter)
   local cmd = formatter_cmds[formatter]
 
   if type(cmd) == "function" then
-    cmd()
+    cmd(post_format)
   else
     run_formatter(cmd)
   end
