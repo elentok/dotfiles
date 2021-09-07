@@ -86,37 +86,6 @@ function M.buf_get_line(buffer, index)
   return api.nvim_buf_get_lines(buffer, index - 1, index, true)[1]
 end
 
-function M.restore_cursor(buffer, cursor)
-  -- row is 1-based
-  local row = cursor[1]
-  -- col is 0-based
-  local col = cursor[2]
-
-  local rows_count = api.nvim_buf_line_count(buffer)
-  if row > rows_count then
-    row = rows_count - 1
-    if row < 1 then
-      row = 1;
-    end
-    M.log("[restore_cursor] fixed row to " .. row)
-  end
-
-  local line = M.buf_get_line(buffer, row)
-  M.log("[restore_cursor] line #" .. row .. " = [[[" .. line .. "]]]")
-  local col_count = string.len(line)
-  M.log("[restore_cursor] line #" .. row .. " columns = " .. col_count)
-  if col >= col_count then
-    if col_count == 0 then
-      col = 0
-    else
-      col = col_count - 1
-    end
-    M.log("[restore_cursor] fixed column to " .. col)
-  end
-
-  api.nvim_win_set_cursor(buffer, {row, col})
-end
-
 function M.buf_get_filetype(bufnr)
   bufnr = bufnr or 0
   return api.nvim_buf_get_option(bufnr, "filetype")
@@ -148,7 +117,7 @@ function M.put(...)
 end
 
 function M.shell(cmd, opts)
-  opts = vim.tbl_extend("force", { stdin = nil, callback = nil }, opts or {})
+  opts = vim.tbl_extend("force", {stdin = nil, callback = nil}, opts or {})
 
   local stderr = nil
   local stdout = nil
@@ -165,7 +134,7 @@ function M.shell(cmd, opts)
       if opts.callback then
         opts.callback(exitcode, stdout, stderr)
       end
-    end,
+    end
   })
 
   if opts.stdin then
@@ -187,3 +156,4 @@ end
 _G.put = M.put
 
 return M
+
