@@ -135,4 +135,18 @@ function M.augroup(name, content)
   ]], name, content))
 end
 
+-- From https://github.com/nanotee/nvim-lua-guide
+function M.put(...)
+  local objects = {}
+  for i = 1, select("#", ...) do
+    local v = select(i, ...)
+    table.insert(objects, vim.inspect(v))
+  end
+
+  print(table.concat(objects, "\n"))
+  return ...
+end
+
+_G.put = M.put
+
 return M
