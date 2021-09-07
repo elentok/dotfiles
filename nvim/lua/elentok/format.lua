@@ -1,5 +1,5 @@
-local api = vim.api
 local util = require("elentok/util")
+local message = require("elentok/message")
 
 local M = {}
 
@@ -7,7 +7,7 @@ local M = {}
 local formatter_cmds = {
   black = "black --quiet --stdin-filename % - 2>/dev/null",
   clang = "clang-format --style=Google --assume-filename %",
-  luaformat = "lua-format --config=$HOME/.lua-format",
+  luaformat = vim.fn.expand("lua-format --config=$HOME/.lua-format"),
   prettier = "prettier --stdin-filepath %",
   lsp = function()
     vim.lsp.buf.formatting_seq_sync()
@@ -48,10 +48,26 @@ local format_on_save_by_filetype = {
 }
 
 local function run_formatter(cmd)
-  util.log("[run_formatter] cmd = " .. cmd)
-  local cursor = api.nvim_win_get_cursor(0)
-  api.nvim_exec("%!" .. cmd, true)
-  util.restore_cursor(0, cursor)
+  util.log("[run_formatter] cmd = ", cmd)
+  local cursor = vim.fn.getpos(".")
+
+  local lines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
+  util.shell(cmd, {
+    stdin = lines,
+    callback = function(exitcode, stdin, stderr)
+      if exitcode ~= 0 then
+        put("Error formatting:", stderr[1])
+        message.show("Formatting Error", stderr, {mode = "error"})
+      else
+        put("Formatted successfuly.")
+        message.close()
+
+        vim.api.nvim_buf_set_lines(0, 0, -1, false, stdin)
+        vim.cmd("noautocmd w")
+        vim.fn.setpos(".", cursor)
+      end
+    end
+  })
 end
 
 function M.format(formatter)
@@ -97,7 +113,8 @@ vim.cmd([[
 ]])
 
 util.augroup("Format", [[
-  autocmd BufWritePre * lua require('elentok/format').format_on_save()
+  autocmd BufWritePost * lua require('elentok/format').format_on_save()
 ]])
 
 return M
+
