@@ -8,9 +8,9 @@ function M.set_log(enabled)
   log_enabled = enabled
 end
 
-function M.log(message)
+function M.log(...)
   if log_enabled then
-    print(message)
+    put(...)
   end
 end
 
@@ -143,10 +143,47 @@ function M.put(...)
     table.insert(objects, vim.inspect(v))
   end
 
-  print(table.concat(objects, "\n"))
+  print(table.concat(objects, " "))
   return ...
 end
 
+function M.shell(cmd, opts)
+  opts = vim.tbl_extend("force", { stdin = nil, callback = nil }, opts or {})
+
+  local stderr = nil
+  local stdout = nil
+  local job_id = vim.fn.jobstart(cmd, {
+    stdout_buffered = true,
+    stderr_buffered = true,
+    on_stderr = function(_, data, _)
+      stderr = data
+    end,
+    on_stdout = function(_, data, _)
+      stdout = data
+    end,
+    on_exit = function(_, exitcode, _)
+      if opts.callback then
+        opts.callback(exitcode, stdout, stderr)
+      end
+    end,
+  })
+
+  if opts.stdin then
+    vim.fn.chansend(job_id, opts.stdin)
+    vim.fn.chanclose(job_id, "stdin")
+  end
+end
+
+function M.tabpage_get_buf_win_number(tabnr, bufnr)
+  for _, winhandle in ipairs(api.nvim_tabpage_list_wins(tabnr)) do
+    -- winnr = api.nvim_win_get_number(winhandle)
+    if bufnr == api.nvim_win_get_buf(winhandle) then
+      return api.nvim_win_get_number(winhandle)
+    end
+  end
+
+  return nil
+end
 _G.put = M.put
 
 return M
