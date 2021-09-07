@@ -8,7 +8,10 @@ local formatter_cmds = {
   black = "black --quiet --stdin-filename % - 2>/dev/null",
   clang = "clang-format --style=Google --assume-filename %",
   luaformat = "lua-format --config=$HOME/.lua-format",
-  prettier = "prettier --stdin-filepath %",
+  -- Using "prettierd" instead of "prettier" because it runs as a daemon so its
+  -- faster, to use regular prettier replace this with:
+  --   "prettier --stdin-filepath %",
+  prettier = "prettierd %",
   lsp = function(done)
     vim.lsp.buf.formatting_seq_sync()
     done()
@@ -81,22 +84,32 @@ local function post_format()
 end
 
 local function run_formatter(cmd)
-  util.log("[run_formatter] cmd = ", vim.fn.expand(cmd))
+  -- replace "%" in the commands with the current file path.
+  cmd = cmd:gsub("%%", vim.fn.expand("%"))
+
+  util.log("[run_formatter] cmd = ", cmd)
   save_views(vim.fn.bufnr())
 
   local lines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
   util.shell(cmd, {
     stdin = lines,
-    callback = function(exitcode, stdin, stderr)
+    callback = function(exitcode, stdout, stderr)
       if exitcode ~= 0 then
         put("Error formatting:", stderr[1])
-        message.show("Formatting Error", stderr, {mode = "error"})
+        message.show("Formatting Error", vim.list_extend(stderr, stdout),
+                     {mode = "error"})
         vim.b.is_formatting = false
       else
         util.log("[run_formatter] formatted successfully")
         message.close()
 
-        vim.api.nvim_buf_set_lines(0, 0, -1, false, stdin)
+        -- Remove blank line at the end.
+        local length = table.getn(stdout)
+        if stdout[length] == "" then
+          table.remove(stdout, length)
+        end
+
+        vim.api.nvim_buf_set_lines(0, 0, -1, false, stdout)
         post_format()
       end
     end
