@@ -7,6 +7,9 @@ return require("packer").startup(function()
   -- File manager.
   use "cocopon/vaffle.vim"
 
+  -- Git
+  use {"TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim"}
+
   use "tpope/vim-abolish"
   use "tpope/vim-commentary"
   use "tpope/vim-dispatch"
