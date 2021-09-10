@@ -14,7 +14,7 @@ local formatter_cmds = {
   prettier = "prettierd %",
   lsp = function(done)
     vim.lsp.buf.formatting_seq_sync()
-    done()
+    done(true)
   end
 }
 
@@ -52,35 +52,43 @@ local format_on_save_by_filetype = {
 }
 
 local function save_views(bufnr)
-  local active_windhandle = vim.api.nvim_tabpage_get_win(0)
+  local active_winhandle = vim.api.nvim_tabpage_get_win(0)
   for _, winhandle in ipairs(vim.fn.win_findbuf(bufnr)) do
     local winnr = vim.api.nvim_win_get_number(winhandle)
     vim.cmd(winnr .. "wincmd w")
     vim.w.last_view = vim.fn.winsaveview()
 
-    if active_windhandle ~= winhandle then
+    if active_winhandle ~= winhandle then
       vim.cmd("wincmd p")
     end
   end
 end
 
 local function restore_views(bufnr)
-  local active_windhandle = vim.api.nvim_tabpage_get_win(0)
+  local active_winhandle = vim.api.nvim_tabpage_get_win(0)
   for _, winhandle in ipairs(vim.fn.win_findbuf(bufnr)) do
     local winnr = vim.api.nvim_win_get_number(winhandle)
     vim.cmd(winnr .. "wincmd w")
-    vim.fn.winrestview(vim.w.last_view)
+    if vim.w.last_view then
+      vim.fn.winrestview(vim.w.last_view)
+    else
+      put(
+          "Warning: missing window view setting: bufnr=" .. bufnr .. ", winnr=" ..
+              winnr)
+    end
 
-    if active_windhandle ~= winhandle then
+    if active_winhandle ~= winhandle then
       vim.cmd("wincmd p")
     end
   end
 end
 
-local function post_format()
-  vim.cmd("write")
+local function post_format(success)
+  if success then
+    vim.cmd("write")
+    restore_views(vim.fn.bufnr())
+  end
   vim.b.is_formatting = false
-  restore_views(vim.fn.bufnr())
 end
 
 local function run_formatter(cmd)
@@ -88,7 +96,6 @@ local function run_formatter(cmd)
   cmd = cmd:gsub("%%", vim.fn.expand("%"))
 
   util.log("[run_formatter] cmd = ", cmd)
-  save_views(vim.fn.bufnr())
 
   local lines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
   util.shell(cmd, {
@@ -98,7 +105,7 @@ local function run_formatter(cmd)
         put("Error formatting:", stderr[1])
         message.show("Formatting Error", vim.list_extend(stderr, stdout),
                      {mode = "error"})
-        vim.b.is_formatting = false
+        post_format(false)
       else
         util.log("[run_formatter] formatted successfully")
         message.close()
@@ -110,7 +117,7 @@ local function run_formatter(cmd)
         end
 
         vim.api.nvim_buf_set_lines(0, 0, -1, false, stdout)
-        post_format()
+        post_format(true)
       end
     end
   })
@@ -128,6 +135,14 @@ function M.format(formatter)
 
   util.log("Formatting with " .. formatter)
   local cmd = formatter_cmds[formatter]
+
+  if cmd == nil then
+    print("Error: missing formatter " .. formatter)
+    post_format(false)
+    return
+  end
+
+  save_views(vim.fn.bufnr())
 
   if type(cmd) == "function" then
     cmd(post_format)
@@ -159,6 +174,7 @@ end
 
 vim.cmd([[
   command! -nargs=? Format lua require('elentok/format').format('<args>')
+  command! ResetFormatter lua vim.b.is_formatting = false
   command! Prettier Format prettier
   command! ClangFormat Format clang
 ]])
