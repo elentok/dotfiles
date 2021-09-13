@@ -1,5 +1,6 @@
 -- vim: foldmethod=marker
 local lspconfig = require("lspconfig")
+local config = require("elentok/config")
 local map = require("elentok/map")
 
 -- Simple LSPs {{{1
@@ -9,12 +10,14 @@ lspconfig.vimls.setup {}
 lspconfig.yamlls.setup {}
 lspconfig.jsonls.setup {}
 
-lspconfig.tsserver.setup {
-  on_attach = function(client)
-    -- Disable tsserver formatting (using prettier instead)
-    client.resolved_capabilities.document_formatting = false
-  end
-}
+if config.enable_tsserver then
+  lspconfig.tsserver.setup {
+    on_attach = function(client)
+      -- Disable tsserver formatting (using prettier instead)
+      client.resolved_capabilities.document_formatting = false
+    end
+  }
+end
 
 -- HTML + CSS (Enable snippet support) {{{1
 local capabilities = vim.lsp.protocol.make_client_capabilities()
