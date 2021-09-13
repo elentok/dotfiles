@@ -87,9 +87,9 @@ map.normal("<Leader>ff", call_telescope(
                "grep_string{ search = vim.fn.input(\"Grep for? \") }"))
 map.normal("<Leader>fw",
            call_telescope("grep_string{ search = vim.fn.expand(\"<cword>\") }"))
-map.normal("gO", call_telescope(
+map.normal("gf", call_telescope(
                "lsp_document_symbols{ symbols = {\"function\", \"method\", \"interface\", \"class\"} }"))
-map.normal("gR", call_telescope("lsp_references()"))
+map.normal("gr", call_telescope("lsp_references()"))
 map.normal("``", map.lua("require(\"elentok/telescope\").buf_tags_picker()"))
 
 return {command_picker = command_picker, buf_tags_picker = buf_tags_picker}

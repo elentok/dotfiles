@@ -101,7 +101,7 @@ map.normal("<leader>wl",
            map.lua("print(vim.inspect(vim.lsp.buf.list_workspace_folders()))"))
 map.normal("gD", map.lua("vim.lsp.buf.type_definition()"))
 -- map.normal("<leader>rn", map.lua("vim.lsp.buf.rename()"))
-map.normal("gr", map.lua("vim.lsp.buf.references()"))
+-- map.normal("gr", map.lua("vim.lsp.buf.references()"))
 -- map.normal("<space>e", map.lua("vim.lsp.diagnostic.show_line_diagnostics()"))
 -- map.normal("[d", map.lua("vim.lsp.diagnostic.goto_prev()"))
 -- map.normal("]d", map.lua("vim.lsp.diagnostic.goto_next()"))
