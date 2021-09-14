@@ -7,7 +7,9 @@
 #   playground new [name]
 #   playground watch
 
-source $DOTF/framework
+set -euo pipefail
+
+source "$DOTF/framework"
 
 main() {
   cmd="$1"
@@ -18,9 +20,9 @@ main() {
   fi
 
   case "$cmd" in
-    new)   new-playground "$@" ;;
+    new) new-playground "$@" ;;
     watch) watch-playground ;;
-    *)     usage "$0" ;;
+    *) usage "$0" ;;
   esac
 }
 
@@ -31,10 +33,10 @@ new-playground() {
   fi
 
   bullet 'Creating directories... '
-  mkdir -p $root
-  mkdir -p $root/src
-  mkdir -p $root/build
-  cd $root
+  mkdir -p "$root"
+  mkdir -p "$root/src"
+  mkdir -p "$root/build"
+  cd "$root"
   success 'done'
 
   bullet 'Creating files... '
@@ -50,7 +52,7 @@ new-playground() {
 }
 
 create-index-jade() {
-  cat > src/index.jade <<EOF
+  cat > src/index.jade << EOF
 doctype html
 html
   head
@@ -70,13 +72,13 @@ EOF
 }
 
 create-app-coffee() {
-  cat > src/app.coffee <<EOF
+  cat > src/app.coffee << EOF
 console.log 'Playground loaded'
 EOF
 }
 
 create-app-scss() {
-  cat > src/app.scss <<EOF
+  cat > src/app.scss << EOF
 body {
   font-family: 'Open Sans', sans-serif;
 }
