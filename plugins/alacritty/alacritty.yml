@@ -75,7 +75,8 @@ scrolling:
 # Font configuration (changes require restart)
 font:
   normal:
-    family: 'Cascadia Mono PL'
+    family: 'agave Nerd Font'
+    # family: 'Cascadia Mono PL'
   # Normal (roman) font face
   #normal:
   # Font family
