@@ -14,12 +14,15 @@ function M.log(...)
   end
 end
 
-function M.safe_require(name)
+function M.safe_require(name, opts)
+  opts = vim.tbl_extend("force", {silent = false}, opts or {})
   local status, module = pcall(require, name)
   if (status) then
     return module
   else
-    print(string.format("WARNING: error loading lua module \"%s\"", name))
+    if not opts.silent then
+      print(string.format("WARNING: error loading lua module \"%s\"", name))
+    end
     return nil
   end
 end
@@ -156,4 +159,3 @@ end
 _G.put = M.put
 
 return M
-
