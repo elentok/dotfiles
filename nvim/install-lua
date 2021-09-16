@@ -77,6 +77,11 @@ function install-lua-language-server() {
 function build-lua-language-server() {
   header 'Building Lua Language Server'
 
+  if ! has-gcc-10; then
+    echo "WARNING: The lua language server requires gcc-10 at least, skipping."
+    return
+  fi
+
   die-unless-gcc-10
 
   app_dir="$(app-prepare-dir lua-language-server $LSP_VERSION)"
@@ -92,12 +97,9 @@ function build-lua-language-server() {
   ./3rd/luamake/luamake rebuild
 }
 
-function die-unless-gcc-10() {
+function has-gcc-10() {
   gcc_version=$(gcc --version | head -1 | awk '{print $NF}' | cut -d. -f1)
-  if [ "$gcc_version" -lt 10 ]; then
-    echo "WARNING: The lua language server requires gcc-10 at least."
-    return
-  fi
+  [ "$gcc_version" -ge 10 ]
 }
 
 main "$@"
