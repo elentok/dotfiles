@@ -7,6 +7,6 @@ require "elentok/symbols"
 require "elentok/telescope"
 
 local util = require "elentok/util"
-util.safe_require("elentok-local")
+util.safe_require("elentok-local", {silent = true})
 
 require("nvim-autopairs").setup()
