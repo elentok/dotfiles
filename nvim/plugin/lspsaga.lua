@@ -4,8 +4,8 @@ local map = require("elentok/map")
 saga.init_lsp_saga()
 
 map.normal("gh", ":Lspsaga lsp_finder<cr>")
-map.normal("ca", ":Lspsaga code_action<cr>")
-map.visual("ca", ":<c-u>Lspsaga code_action<cr>")
+map.normal("<Leader>ca", ":Lspsaga code_action<cr>")
+map.visual("<Leader>ca", ":<c-u>Lspsaga code_action<cr>")
 map.normal("K", ":Lspsaga hover_doc<cr>")
 map.normal("gss", ":Lspsaga signature_help<cr>")
 map.normal("<Leader>rn", ":Lspsaga rename<cr>")
@@ -19,4 +19,3 @@ map.normal("<c-f>",
 -- scroll up hover doc
 map.normal("<c-b>",
            map.lua([[require('lspsaga.action').smart_scroll_with_saga(-1)]]))
-
