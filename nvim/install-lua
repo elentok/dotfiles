@@ -82,8 +82,6 @@ function build-lua-language-server() {
     return
   fi
 
-  die-unless-gcc-10
-
   app_dir="$(app-prepare-dir lua-language-server $LSP_VERSION)"
 
   cd "$app_dir/.."
