@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+for font in /usr/share/figlet/*.[tf]lf; do
+  font=$(basename "$font")
+  echo "========================="
+  echo "Font = ${font}"
+  toilet -f "$font" "Hello World"
+done

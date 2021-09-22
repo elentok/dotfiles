@@ -80,4 +80,7 @@ return require("packer").startup(function()
   -- dark/zen room, no distraction mode
   use {"junegunn/goyo.vim", opt = true, cmd = "Goyo"}
 
+  -- Presentation tool
+  use {"sotte/presenting.vim"}
+
 end, {display = {open_fn = require("packer.util").float}})
