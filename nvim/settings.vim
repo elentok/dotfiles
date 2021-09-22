@@ -14,7 +14,6 @@ set clipboard=unnamed,unnamedplus
 set colorcolumn=+0
 set completeopt=menuone,noinsert,noselect
 set expandtab
-set formatoptions=qroc         " see ':help fo-table' for more info
 set guioptions=gt              " use 'e' for gui tabs
 set history=300                " remember 300 commands
 set iskeyword=@,48-57,_,192-255,$,#,-

@@ -4,11 +4,6 @@ command! AutoWrap set formatoptions+=c formatoptions+=t
 command! AutoWrapOff set formatoptions-=c formatoptions-=t
 command! W :w
 
-command! Eautocmds  edit ~/.dotfiles/nvim/autocmds.vim
-command! Eplugs     edit ~/.dotfiles/nvim/plugs.vim
-command! Esettings  edit ~/.dotfiles/nvim/settings.vim
-command! Ealiases   edit ~/.dotfiles/zsh/aliases.sh
-
 command! -nargs=+ Ewhich     exec "edit " . system("which <args>")
 
 command! SudoWrite :w !sudo tee %
@@ -64,21 +59,17 @@ function! ToggleBackground()
   call writefile(["set background=" . &background], expand("~/.vimstate"))
 endfunc
 
-" Exec {{{1
-if has('nvim')
-  function! QuickShell(cmd)
-    if bufname('%') != ''
-      tabe %
-    else
-      tabe
-    endif
-    execute 'terminal' a:cmd
-  endfunction
+" QuickShell {{{1
+function! QuickShell(cmd)
+  if bufname('%') != ''
+    tabe %
+  else
+    tabe
+  endif
+  execute 'terminal' a:cmd
+endfunction
 
-  command! -nargs=+ QuickShell call QuickShell("<args>")
-else
-  command! -nargs=+ QuickShell !<args>
-end
+command! -nargs=+ QuickShell call QuickShell("<args>")
 
 " Markserv {{{1
 function! Markserv()

@@ -146,12 +146,8 @@ xnoremap <silent>i<space> t oT o
 noremap <Leader>ti :IndentGuidesToggle<cr>
 noremap <Leader>tb :call ToggleBackground()<cr>
 
-" Post Startup {{{1
-func! PostStartupKeys()
-  vnoremap <tab> >gv
-  vnoremap <s-tab> <gv
-  vnoremap <space> 20j
-endfunc
+vnoremap <tab> >gv
+vnoremap <s-tab> <gv
 
 " Profiling {{{1
 
