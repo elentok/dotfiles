@@ -16,9 +16,16 @@ function _G.DotReload()
   end
 end
 
+function _G.CacheBust()
+  vim.cmd([[
+    LuaCacheClear
+    PackerCompile
+  ]])
+end
+
 vim.cmd([[
   command! DotReload lua DotReload()
   command! LogEnable lua require('elentok/util').set_log(true)
   command! LogDisable lua require('elentok/util').set_log(false)
+  command! CacheBust lua CacheBust()
 ]])
-
