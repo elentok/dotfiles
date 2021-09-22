@@ -1,7 +1,9 @@
 require("elentok/loadtime")
-require("impatient")
+local util = require("elentok/util")
+util.safe_require("impatient")
 
 vim.api.nvim_command("source $DOTF/nvim/init-legacy.vim")
 
 require("elentok")
-require("packer_compiled")
+-- disable for now (https://github.com/wbthomason/packer.nvim/issues/201)
+-- require("packer_compiled")
