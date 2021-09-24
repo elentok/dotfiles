@@ -6,7 +6,7 @@ return require("packer").startup({
     use {"lewis6991/impatient.nvim"}
 
     -- Color scheme.
-    use {"adisen99/codeschool.nvim", requires = {"rktjmp/lush.nvim"}}
+    use "navarasu/onedark.nvim"
 
     -- File manager.
     use "cocopon/vaffle.vim"
