@@ -4,13 +4,17 @@ end
 
 vim.o.background = "dark"
 
--- Sonokai colorscheme
-vim.g.sonokai_style = "andromeda"
-vim.cmd("silent! colorscheme sonokai")
+local lush = require("lush")
+local colors = require("codeschool").setup({
+  plugins = {
+    "fzf", "lsp", "lspsaga", "neogit", "signify", "telescope", "treesitter"
+  }
+})
+lush(colors)
 
 -- Status + vertical split colors
 vim.cmd([[
-  hi StatusLine guibg=#126888
-  hi StatusLineNC guibg=#003455
+  hi StatusLine guibg=#126888 guifg=white gui=NONE
   hi VertSplit guifg=#126888
 ]])
+-- hi StatusLineNC guibg=#003455
