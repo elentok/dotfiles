@@ -1,5 +1,5 @@
 require "elentok/packer-bootstrap"
-require "elentok/plugins"
+require "elentok/packer-plugins"
 
 require "elentok/format"
 require "elentok/statusline"
