@@ -11,6 +11,7 @@ vim.cmd("colorscheme onedark")
 -- Status + vertical split colors
 vim.cmd([[
   hi StatusLine guibg=#126888 guifg=white gui=NONE
+  hi StatusLineNC guibg=#003455 gui=NONE
   hi VertSplit guifg=#126888
   hi Floaterm guibg=#1a1b1c
   hi FloatermBorder guibg=#1a1b1c
@@ -23,4 +24,3 @@ vim.cmd([[
   hi TelescopeResultsBorder guibg=#1a1b1c
   hi TelescopePreviewBorder guibg=#1a1b1c
 ]])
--- hi StatusLineNC guibg=#003455
