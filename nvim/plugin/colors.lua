@@ -4,13 +4,9 @@ end
 
 vim.o.background = "dark"
 
-local lush = require("lush")
-local colors = require("codeschool").setup({
-  plugins = {
-    "fzf", "lsp", "lspsaga", "neogit", "signify", "telescope", "treesitter"
-  }
-})
-lush(colors)
+vim.g.onedark_style = "warm"
+require("onedark").setup()
+vim.cmd("colorscheme onedark")
 
 -- Status + vertical split colors
 vim.cmd([[
