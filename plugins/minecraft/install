@@ -11,6 +11,11 @@ SPIGOT_JAR_URL="https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBu
 SPIGOT_TMP="$TMP/spigot-${SPIGOT_REV}"
 
 main() {
+  if [ "${1:-}" == "update" ]; then
+    update-spigot
+    return
+  fi
+
   create_group minecraft
   add_user_to_group minecraft
   create-minecraft-user
@@ -52,6 +57,13 @@ install-spigot-server() {
   install-service $DOTF/plugins/minecraft/spigotmc.service.erb system
 
   "$DOTF/plugins/minecraft/install-spigot-server-properties"
+}
+
+update-spigot() {
+  bullet 'Updating spigot server...'
+  rm -rf "${SPIGOT_TMP}"
+  build-spigot-server
+  sudo cp "${SPIGOT_TMP}/${SPIGOT_JAR_FILENAME}" "$SPIGOT_ROOT/"
 }
 
 build-spigot-server() {
