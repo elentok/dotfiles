@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+SERVER_ROOT="/home/minecraft/bedrock"
+VERSION="1.17.11.01"
+URL="https://minecraft.azureedge.net/bin-linux/bedrock-server-${VERSION}.zip"
+
+main() {
+  VER_ROOT="${SERVER_ROOT}/versions/${VERSION}"
+  as-minecraft mkdir -p "${VER_ROOT}"
+  as-minecraft curl -o "${VER_ROOT}/bedrock-server.zip" "$URL"
+  as-minecraft bash -c "cd ${VER_ROOT} && unzip bedrock-server.zip"
+  as-minecraft bash -c "echo ${VERSION} > ${SERVER_ROOT}/VERSION"
+
+  # Install start script
+  sudo cp "$DOTF/plugins/minecraft/bedrock-start" "${SERVER_ROOT}/start"
+  sudo chown minecraft:minecraft "${SERVER_ROOT}/start"
+  sudo chmod 750 "${SERVER_ROOT}/start"
+}
+
+as-minecraft() {
+  sudo --login -u minecraft "$@"
+}
+
+main "$@"

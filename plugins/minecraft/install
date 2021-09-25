@@ -9,6 +9,8 @@ SPIGOT_REV="$(cat "$DOTF/plugins/minecraft/VERSION")"
 SPIGOT_JAR_FILENAME="spigot-${SPIGOT_REV}.jar"
 SPIGOT_JAR_URL="https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar"
 SPIGOT_TMP="$TMP/spigot-${SPIGOT_REV}"
+GEYSER_ROOT="/home/minecraft/geyser"
+GEYSER_JAR_URL="https://ci.opencollab.dev//job/GeyserMC/job/Geyser/job/master/lastSuccessfulBuild/artifact/bootstrap/spigot/target/Geyser-Spigot.jar/*view*/"
 
 main() {
   if [ "${1:-}" == "update" ]; then
@@ -22,6 +24,10 @@ main() {
 
   if ! is-spigot-server-installed; then
     install-spigot-server
+  fi
+
+  if ! is-geyser-installed; then
+    install-geyser-plugin
   fi
 
   # install-server
@@ -82,6 +88,16 @@ build-spigot-server() {
   fi
 
   success 'done.'
+}
+
+is-geyser-installed() {
+  [ -e "$SPIGOT_ROOT/plugins/geyser.jar" ]
+}
+
+install-geyser-plugin() {
+  bullet 'Insetalling geyser plugin...'
+  as-minecraft mkdir -p "$SPIGOT_ROOT/plugins"
+  as-minecraft curl -o "$SPIGOT_ROOT/plugins/geyser.jar" "$GEYSER_JAR_URL"
 }
 
 install-server() {

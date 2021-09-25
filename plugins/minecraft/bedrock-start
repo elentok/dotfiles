@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+VERSION="$(cat VERSION)"
+cd "versions/$VERSION"
+LD_LIBRARY_PATH=. ./bedrock_server
