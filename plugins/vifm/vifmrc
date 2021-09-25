@@ -30,8 +30,8 @@ fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
          \ identify %f
 fileviewer *.7z 7z l %c
 fileviewer *.md glow -s dark %c
-fileviewer */ tree %c
-fileviewer .*/ tree %c
+fileviewer */ tree -L 1 %c
+fileviewer .*/ tree -L 1 %c
 fileviewer * bat --color=always --plain %c
 fileviewer .* bat --color=always --plain %c
 
