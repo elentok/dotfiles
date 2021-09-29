@@ -4,14 +4,13 @@ end
 
 vim.o.background = "dark"
 
-vim.g.onedark_style = "warm"
-require("onedark").setup()
-vim.cmd("colorscheme onedark")
+require("monokai")
+vim.cmd("colorscheme monokai_pro")
 
 -- Status + vertical split colors
 vim.cmd([[
   hi StatusLine guibg=#126888 guifg=white gui=NONE
-  hi StatusLineNC guibg=#003455 gui=NONE
+  hi StatusLineNC guibg=#0d4b61 guifg=#999999 gui=NONE
   hi VertSplit guifg=#126888
   hi Floaterm guibg=#1a1b1c
   hi FloatermBorder guibg=#1a1b1c
