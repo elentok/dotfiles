@@ -1,6 +1,7 @@
 require "elentok/packer-bootstrap"
 require "elentok/packer-plugins"
 
+require "elentok/colors"
 require "elentok/format"
 require "elentok/statusline"
 require "elentok/symbols"
