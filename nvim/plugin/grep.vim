@@ -10,8 +10,8 @@ let g:grepper = {
 " noremap <Leader>ff :Grepper -query '<c-r>=EscapeForQuery(expand("<cword>"))<cr>'<cr>
 " vnoremap <Leader>ff "9y:Grepper -query '<c-r>=EscapeRegisterForQuery(9)<cr>'<cr>
 noremap <Leader>fc :Grepper<cr>
-nmap gs <plug>(GrepperOperator)
-xmap gs <plug>(GrepperOperator)
+" nmap gs <plug>(GrepperOperator)
+" xmap gs <plug>(GrepperOperator)
 
 " Ripgrep: set config path {{{1
 if !exists('$RIPGREP_CONFIG_PATH')
