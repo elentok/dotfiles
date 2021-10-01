@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTF/framework"
+
+export N_PREFIX=/opt/n
+export PATH=$N_PREFIX/bin:$PATH
+
+main() {
+  install-n
+}
+
+install-n() {
+  create_group nodejs
+  add_user_to_group nodejs
+
+  if [ -e "$N_PREFIX" ]; then
+    echo "N is already installed"
+    return
+  fi
+
+  sudo git clone https://github.com/tj/n "$N_PREFIX"
+
+  sudo N_PREFIX=$N_PREFIX /opt/n/bin/n lts
+  sudo N_PREFIX=$N_PREFIX /opt/n/bin/n exec lts npm install -g npm
+
+  sudo chgrp -R nodejs "$N_PREFIX"
+  sudo chmod -R 755 "$N_PREFIX"
+}
+
+main "$@"
