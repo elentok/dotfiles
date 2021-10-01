@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+#
+# Usage:
+#
+#   appserver-add-app <name> <user> <cmd>
+
+set -euo pipefail
+
+source "$DOTF/framework"
+
+main() {
+  if [ $# -lt 3 ]; then
+    usage "$0"
+    exit 1
+  fi
+
+  export NAME="$1"
+  export USER="$2"
+  export CMD="$3"
+
+  export GROUP="$USER"
+
+  appserver-setup
+
+  create_group "$GROUP"
+  if ! user_exists "$USER"; then
+    sudo useradd "$USER" --create-home -g "$GROUP"
+  fi
+  add_user_to_group "$GROUP" # add my own user to the group
+
+  create-user-bashrc
+  create-service-file
+
+  systemctl daemon-reload
+}
+
+create-user-bashrc() {
+  print-user-bashrc > "/tmp/${NAME}.bashrc"
+  sudo mkdir -p "/home/${NAME}"
+  sudo mv -f "/tmp/${NAME}.bashrc" "/home/${NAME}/.bashrc"
+  sudo chown ${USER} -R "/home/${NAME}"
+  sudo chmod 700 "/home/${NAME}/.bashrc"
+}
+
+print-user-bashrc() {
+  cat << EOF
+export N_PREFIX=/opt/n
+export PATH=$N_PREFIX/bin:$PATH
+EOF
+}
+
+create-service-file() {
+  rm -f "/tmp/${NAME}.service"
+  print-service-file > "/tmp/${NAME}.service"
+  sudo mkdir -p /usr/lib/systemd/system
+  sudo mv -f "/tmp/${NAME}.service" "/usr/lib/systemd/system/${NAME}.service"
+}
+
+print-service-file() {
+  cat << EOF
+[Unit]
+Description=${NAME} app service
+Requires=network.target
+
+[Service]
+User=${USER}
+ExecStart=${CMD}
+ExecReload=/bin/kill -HUP \$MAINPID
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+EOF
+}
+
+main "$@"

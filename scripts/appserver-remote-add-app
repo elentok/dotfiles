@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+#
+# Usage:
+#
+#   appserver-add-app <host> <name> <user> <cmd>
+
+set -euo pipefail
+
+main() {
+  if [ $# -lt 3 ]; then
+    usage "$0"
+    exit 1
+  fi
+
+  export HOST="$1"
+  export NAME="$2"
+  export USER="$3"
+  export CMD="$4"
+
+  ssh -t "$HOST" "appserver-setup"
+  ssh -t "$HOST" appserver-add-app "$NAME" "$USER" "$CMD"
+}
+
+main "$@"
