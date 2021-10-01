@@ -38,14 +38,14 @@ create-user-bashrc() {
   print-user-bashrc > "/tmp/${NAME}.bashrc"
   sudo mkdir -p "/home/${NAME}"
   sudo mv -f "/tmp/${NAME}.bashrc" "/home/${NAME}/.bashrc"
-  sudo chown ${USER} -R "/home/${NAME}"
+  sudo chown "${USER}" -R "/home/${NAME}"
   sudo chmod 700 "/home/${NAME}/.bashrc"
 }
 
 print-user-bashrc() {
   cat << EOF
 export N_PREFIX=/opt/n
-export PATH=$N_PREFIX/bin:$PATH
+export PATH=\$N_PREFIX/bin:\$PATH
 EOF
 }
 
