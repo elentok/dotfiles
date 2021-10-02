@@ -8,7 +8,7 @@ function main() {
   header "Generating ctags for ${ROOT}"
 
   ctags -R --c++-kinds=+p --fields=+ilaS --extra=+q \
-    --exclude=@$DOTF/nvim/ctags/ignore \
+    --exclude=@$DOTF/core/nvim/ctags/ignore \
     $(project-exclude-arg $ROOT) \
     -f $ROOT/tags $ROOT
   if [ $? -eq 0 ]; then
