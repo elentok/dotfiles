@@ -2,7 +2,7 @@
 
 import sys
 
-from lib import package_manager
+from github_packages import package_manager
 
 USAGE = """
 Installs binaries from github.
