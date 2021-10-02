@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const F = require("../framework.js");
+const F = require("./lib/framework.js");
 const _ = require("underscore");
 const program = require("commander");
 const axios = require("axios");
@@ -40,7 +40,7 @@ const StationRepo = {
     if (this._stations != null) return Promise.resolve(this._stations);
 
     F.printProgress("Fetching stations");
-    return this._loadFromServer().then(stations => {
+    return this._loadFromServer().then((stations) => {
       F.clearLine();
       this._stations = stations;
       this._saveToCache();
@@ -49,8 +49,8 @@ const StationRepo = {
   },
 
   findByName(name) {
-    this.fetch().then(stations => {
-      return stations.find(s => s.name === name);
+    this.fetch().then((stations) => {
+      return stations.find((s) => s.name === name);
     });
   },
 
@@ -61,36 +61,31 @@ const StationRepo = {
       return null;
     }
 
-    return JSON.parse(fs.readFileSync(this._cacheFilename)).map(
-      attribs => new Station(attribs)
-    );
+    return JSON.parse(fs.readFileSync(this._cacheFilename)).map((attribs) => new Station(attribs));
   },
 
   _saveToCache() {
     const cacheDir = path.dirname(this._cacheFilename);
     shell.mkdir("-p", cacheDir);
 
-    fs.writeFileSync(
-      this._cacheFilename,
-      JSON.stringify(this._stations, null, 2)
-    );
+    fs.writeFileSync(this._cacheFilename, JSON.stringify(this._stations, null, 2));
   },
 
   _loadFromServer() {
-    return axios.get("https://www.rail.co.il").then(response => {
+    return axios.get("https://www.rail.co.il").then((response) => {
       const match = response.data.match(/var stationSegRes=(.*);var/);
       if (match == null) throw new Error("Can't load stations");
 
       const raw = JSON.parse(match[1]);
-      return raw.Data.Data.CustomPropertys.map(rawStation => {
+      return raw.Data.Data.CustomPropertys.map((rawStation) => {
         return new Station({
           id: rawStation.Id,
           title: rawStation.Eng.join(", "),
-          hebTitle: rawStation.Heb.join(", ")
+          hebTitle: rawStation.Heb.join(", "),
         });
       });
     });
-  }
+  },
 };
 
 class Train {
@@ -124,10 +119,10 @@ const TrainRepo = {
           TId: destId,
           Date: departure.format("YYYYMMDD"),
           Hour: departure.format("HHMM"),
-          isGoing: true
-        }
+          isGoing: true,
+        },
       })
-      .then(response => {
+      .then((response) => {
         F.clearLine();
         // Uncomment this line to debug the parser
         // fs.writeFileSync("trains.json", JSON.stringify(response.data))
@@ -136,7 +131,7 @@ const TrainRepo = {
   },
 
   parse(rawData) {
-    return rawData.Data.Routes.map(route => {
+    return rawData.Data.Routes.map((route) => {
       const firstTrain = route.Train[0];
       const lastTrain = route.Train[route.Train.length - 1];
 
@@ -144,7 +139,7 @@ const TrainRepo = {
         duration: route.EstTime.replace(":00", ""),
         arrival: firstTrain.ArrivalTime.replace(":00", "").split(" ")[1],
         departure: lastTrain.DepartureTime.replace(":00", "").split(" ")[1],
-        hasExchange: route.IsExchange
+        hasExchange: route.IsExchange,
       });
     });
   },
@@ -161,30 +156,30 @@ const TrainRepo = {
     }
 
     return null;
-  }
+  },
 };
 
 const CLI = {
   fetchTrains(origin, dest, time) {
     StationRepo.fetch()
-      .then(stations => {
-        const originId = stations.find(s => s.name === origin).id;
-        const destId = stations.find(s => s.name === dest).id;
+      .then((stations) => {
+        const originId = stations.find((s) => s.name === origin).id;
+        const destId = stations.find((s) => s.name === dest).id;
 
-        return TrainRepo.fetch(originId, destId, time).then(trains => {
+        return TrainRepo.fetch(originId, destId, time).then((trains) => {
           console.info(`Found ${trains.length} trains:\n`);
-          trains.forEach(t => t.print());
+          trains.forEach((t) => t.print());
         });
       })
-      .catch(e => console.error(e));
+      .catch((e) => console.error(e));
   },
 
   listStations() {
-    return StationRepo.fetch().then(stations => {
+    return StationRepo.fetch().then((stations) => {
       stations = _(stations).sortBy("title");
-      stations.forEach(station => station.print());
+      stations.forEach((station) => station.print());
     });
-  }
+  },
 };
 
 program
@@ -194,5 +189,5 @@ program
   .parse(process.argv);
 
 if (program.list) {
-  CLI.listStations().catch(e => console.error(e));
+  CLI.listStations().catch((e) => console.error(e));
 }
