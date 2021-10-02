@@ -1,4 +1,9 @@
-local luasnip = require("luasnip")
+local util = require("elentok/util")
+local luasnip = util.safe_require("luasnip")
+
+if luasnip == nil then
+  return
+end
 
 require("luasnip/loaders/from_vscode").lazy_load()
 
