@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require "#{ENV['DOTF']}/framework.rb"
+require "#{ENV['DOTF']}/scripts/lib/framework.rb"
 require 'fileutils'
 
 DEFAULT_FIT = '1500x1500'

@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+# This script no longer works, it's only here so I can one day convert it to
+# python or typescript.
+
 require "#{ENV['DOTF']}/framework.rb"
 require 'ostruct'
 require 'date'

@@ -1,4 +1,4 @@
-require "#{ENV['DOTF']}/framework.rb"
+require "#{ENV['DOTF']}/scripts/lib/framework.rb"
 require 'English' # for $CHILD_STATUS
 
 class Repo

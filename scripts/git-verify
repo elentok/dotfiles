@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require "#{ENV['DOTF']}/lib/git.rb"
+require "#{ENV['DOTF']}/scripts/lib/git.rb"
 
 class CLI < OptionsCLI
   desc 'Verify local git repo is synced with remotes'
