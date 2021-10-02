@@ -17,25 +17,25 @@ let client;
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         const program = new commander_1.Command();
-        program.command('ls').action(() => __awaiter(this, void 0, void 0, function* () {
+        program.command("ls").action(() => __awaiter(this, void 0, void 0, function* () {
             const torrents = yield (yield getClient()).list();
             if (torrents.length === 0) {
-                console.info('no torrents');
+                console.info("no torrents");
                 return;
             }
             torrents.forEach((t) => console.info(torrent_1.formatTorrent(t)));
         }));
-        program.command('remove-complete').action(() => __awaiter(this, void 0, void 0, function* () {
+        program.command("remove-complete").action(() => __awaiter(this, void 0, void 0, function* () {
             const torrents = yield (yield getClient()).removeComplete();
             if (torrents.length === 0) {
-                console.info('No complete torrents to remove');
+                console.info("No complete torrents to remove");
             }
             else {
                 console.info(`Removed ${torrents.length} torrents:`);
                 torrents.forEach((t) => console.info(torrent_1.formatTorrent(t)));
             }
         }));
-        program.command('add-magnet <link>').action((link) => __awaiter(this, void 0, void 0, function* () {
+        program.command("add-magnet <link>").action((link) => __awaiter(this, void 0, void 0, function* () {
             const result = yield (yield getClient()).addMagnet(link);
             console.info(result);
         }));
@@ -47,10 +47,10 @@ function main() {
 function getClient() {
     return __awaiter(this, void 0, void 0, function* () {
         if (client == null) {
-            const host = yield dotconfig_1.getConfigOrAsk('transmission_host', 'Transmission host? ');
-            const port = Number(yield dotconfig_1.getConfigOrAsk('transmission_port', 'Transmission port? '));
-            const username = yield dotconfig_1.getConfigOrAsk('transmission_username', 'Transmission username? ');
-            const password = yield dotconfig_1.getConfigOrAsk('transmission_password', 'Transmission password? ');
+            const host = yield dotconfig_1.getConfigOrAsk("transmission_host", "Transmission host? ");
+            const port = Number(yield dotconfig_1.getConfigOrAsk("transmission_port", "Transmission port? "));
+            const username = yield dotconfig_1.getConfigOrAsk("transmission_username", "Transmission username? ");
+            const password = yield dotconfig_1.getConfigOrAsk("transmission_password", "Transmission password? ");
             client = yield bt_1.BtClient.create({ host, port, auth: { username, password } });
         }
         return client;

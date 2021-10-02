@@ -6,7 +6,7 @@ const chalk = require("chalk");
 const child_process_1 = require("child_process");
 const shelljs_1 = require("shelljs");
 function findRenameables(pattern, replacement, files) {
-    const re = new RegExp(pattern, 'ig');
+    const re = new RegExp(pattern, "ig");
     const matches = [];
     files.forEach((filename) => {
         const basename = path.basename(filename);
@@ -25,7 +25,7 @@ class Renameable {
         this.fromBasename = path.basename(fromFullpath);
         this.toFullpath = path.join(this.fromDirname, toBasename);
     }
-    print(prefix = '') {
+    print(prefix = "") {
         console.info(`${prefix}${chalk.gray(this.fromDirname)}/${this.fromBasename}`);
         console.info(`${this.indent(prefix)} => ${chalk.blue(this.toBasename)}`);
     }
@@ -38,10 +38,10 @@ class Renameable {
         }
     }
     indent(prefix) {
-        let text = '';
+        let text = "";
         const indentWidth = Math.max(prefix.length + this.fromDirname.length - 3, 0);
         while (text.length < indentWidth)
-            text += ' ';
+            text += " ";
         return text;
     }
     isInGitRepo() {

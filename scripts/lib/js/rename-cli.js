@@ -15,18 +15,18 @@ const utils_1 = require("./utils");
 function main() {
     const program = new commander_1.Command();
     program
-        .arguments('<pattern> <replacement> <file...>')
-        .option('-y, --yes', "Don't ask for confirmation")
+        .arguments("<pattern> <replacement> <file...>")
+        .option("-y, --yes", "Don't ask for confirmation")
         .action((pattern, replacement, files, args) => __awaiter(this, void 0, void 0, function* () {
         const renameables = renameable_1.findRenameables(pattern, replacement, files);
         if (renameables.length === 0) {
-            console.info('No files to rename');
+            console.info("No files to rename");
             return;
         }
-        renameables.forEach((r) => r.print('   '));
-        if (args.yes || (yield utils_1.confirm('Rename?'))) {
+        renameables.forEach((r) => r.print("   "));
+        if (args.yes || (yield utils_1.confirm("Rename?"))) {
             renameables.forEach((r) => {
-                r.print('Renaming ');
+                r.print("Renaming ");
                 r.rename();
             });
         }

@@ -13,23 +13,23 @@ exports.BtClient = void 0;
 const axios_1 = require("axios");
 const torrent_1 = require("./torrent");
 function log(...args) {
-    if (process.env.DEBUG === 'yes') {
+    if (process.env.DEBUG === "yes") {
         console.debug(...args);
     }
 }
-const SESSION_ID_HEADER = 'x-transmission-session-id';
+const SESSION_ID_HEADER = "x-transmission-session-id";
 class BtClient {
     constructor(reqConfig) {
         this.reqConfig = reqConfig;
-        log('BtClient initialized', reqConfig);
+        log("BtClient initialized", reqConfig);
     }
     static create(options = {}) {
         return __awaiter(this, void 0, void 0, function* () {
-            const host = options.host || 'localhost';
+            const host = options.host || "localhost";
             const port = options.port || 9091;
             const reqConfig = {
                 baseURL: `http://${host}:${port}`,
-                auth: options.auth
+                auth: options.auth,
             };
             const headers = {};
             headers[SESSION_ID_HEADER] = yield getSessionId(reqConfig);
@@ -38,8 +38,8 @@ class BtClient {
     }
     list() {
         return __awaiter(this, void 0, void 0, function* () {
-            const response = yield this.rpcCall('torrent-get', {
-                fields: 'id name status percentDone rateDownload magnetLink error errorString'.split(' ')
+            const response = yield this.rpcCall("torrent-get", {
+                fields: "id name status percentDone rateDownload magnetLink error errorString".split(" "),
             });
             return response.data.arguments.torrents;
         });
@@ -47,9 +47,9 @@ class BtClient {
     addMagnet(link, options = {}) {
         return __awaiter(this, void 0, void 0, function* () {
             options = Object.assign({ paused: false }, options);
-            const response = yield this.rpcCall('torrent-add', {
+            const response = yield this.rpcCall("torrent-add", {
                 paused: options.paused,
-                filename: link
+                filename: link,
             });
             return response.data.arguments;
         });
@@ -57,25 +57,25 @@ class BtClient {
     removeComplete() {
         return __awaiter(this, void 0, void 0, function* () {
             const completeTorrents = (yield this.list()).filter(torrent_1.isComplete);
-            yield this.remove(completeTorrents.map(t => t.id));
+            yield this.remove(completeTorrents.map((t) => t.id));
             return completeTorrents;
         });
     }
     remove(ids) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.rpcCall('torrent-remove', { ids });
+            yield this.rpcCall("torrent-remove", { ids });
         });
     }
     rpcCall(method, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield axios_1.default.post('/transmission/rpc', { method, arguments: args }, this.reqConfig);
+            return yield axios_1.default.post("/transmission/rpc", { method, arguments: args }, this.reqConfig);
         });
     }
 }
 exports.BtClient = BtClient;
 function getSessionId(reqConfig) {
     return __awaiter(this, void 0, void 0, function* () {
-        log('Getting settion id...');
+        log("Getting settion id...");
         let id;
         try {
             const response = yield axios_1.default.get(`/transmission/rpc`, reqConfig);

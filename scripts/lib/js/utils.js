@@ -12,23 +12,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.stringifyDateOnly = exports.notUndefined = exports.printProgress = exports.clearLine = exports.confirm = exports.ask = exports.center = exports.justifyLeft = exports.justifyRight = void 0;
 const chalk = require("chalk");
 const readline = require("readline");
-const CLEAR_LINE = '\r\x1B[K';
-const HOURGLASS = '⏳ ';
-function justifyRight(text, width, ch = ' ') {
+const CLEAR_LINE = "\r\x1B[K";
+const HOURGLASS = "⏳ ";
+function justifyRight(text, width, ch = " ") {
     if (text.length >= width)
         return text;
     const leftPad = width - text.length;
     return `${ch.repeat(leftPad)}${text}`;
 }
 exports.justifyRight = justifyRight;
-function justifyLeft(text, width, ch = ' ') {
+function justifyLeft(text, width, ch = " ") {
     if (text.length >= width)
         return text;
     const rightPad = width - text.length;
     return `${text}${ch.repeat(rightPad)}`;
 }
 exports.justifyLeft = justifyLeft;
-function center(text, width, ch = ' ') {
+function center(text, width, ch = " ") {
     if (text.length >= width)
         return text;
     const leftPad = Math.floor((width - text.length) / 2);
@@ -69,8 +69,8 @@ function notUndefined(x) {
 }
 exports.notUndefined = notUndefined;
 function stringifyDateOnly(date) {
-    const month = justifyLeft(date.getMonth().toString(), 2, '0');
-    const day = justifyLeft(date.getDate().toString(), 2, '0');
+    const month = justifyLeft(date.getMonth().toString(), 2, "0");
+    const day = justifyLeft(date.getDate().toString(), 2, "0");
     return `${date.getFullYear()}-${month}-${day}`;
 }
 exports.stringifyDateOnly = stringifyDateOnly;

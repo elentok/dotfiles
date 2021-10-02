@@ -6,17 +6,17 @@ const fs = require("fs");
 const chalk = require("chalk");
 const child_process_1 = require("child_process");
 const fg = require("fast-glob");
-const HELP_FILENAME = path.join(process.env.DOTF || '', 'docs', 'help.md');
-const LOCAL_HELP_GLOB = path.join(process.env.DOTL || '', 'docs', '*.md');
+const HELP_FILENAME = path.join(process.env.DOTF || "", "docs", "help.md");
+const LOCAL_HELP_GLOB = path.join(process.env.DOTL || "", "docs", "*.md");
 function help() {
     const query = process.argv[2];
-    if (query === 'e') {
-        child_process_1.execSync(`nvim ${HELP_FILENAME}`, { stdio: 'inherit' });
+    if (query === "e") {
+        child_process_1.execSync(`nvim ${HELP_FILENAME}`, { stdio: "inherit" });
     }
     else {
-        console.info(findSections(HELP_FILENAME, query).join('\n'));
+        console.info(findSections(HELP_FILENAME, query).join("\n"));
         fg.sync(LOCAL_HELP_GLOB).forEach((filename) => {
-            console.info(findSections(filename, query).join('\n'));
+            console.info(findSections(filename, query).join("\n"));
         });
     }
 }
@@ -26,17 +26,17 @@ function findSections(filename, query) {
     let sectionLines = [];
     fs.readFileSync(filename)
         .toString()
-        .split('\n')
+        .split("\n")
         .forEach((line) => {
         if (isBeginningOfSection(line)) {
-            addSection(sections, sectionLines.join('\n'), query);
+            addSection(sections, sectionLines.join("\n"), query);
             sectionLines = [line];
         }
         else {
             sectionLines.push(line);
         }
     });
-    addSection(sections, sectionLines.join('\n'), query);
+    addSection(sections, sectionLines.join("\n"), query);
     return sections;
 }
 function isBeginningOfSection(line) {
@@ -53,10 +53,10 @@ function addSection(sections, section, query) {
     }
 }
 function isMatch(section, query) {
-    return new RegExp(query, 'i').test(section);
+    return new RegExp(query, "i").test(section);
 }
 function highlightQuery(section, query) {
     const highlight = chalk.bold.green(query);
-    return section.replace(new RegExp(query, 'ig'), highlight);
+    return section.replace(new RegExp(query, "ig"), highlight);
 }
 //# sourceMappingURL=help.js.map

@@ -67,7 +67,7 @@ function destroyLocal(localBranch) {
         }
         catch (err) {
             console.error(`\nError while trying to destroy local branch ${localBranch.name}`);
-            if (yield utils_1.confirm('force')) {
+            if (yield utils_1.confirm("force")) {
                 localBranch.destroy({ force: true });
             }
         }

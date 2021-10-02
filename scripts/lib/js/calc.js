@@ -18,28 +18,28 @@ const utils_1 = require("./utils");
 const rates_1 = require("./rates");
 const vm_1 = require("vm");
 const context = vm_1.createContext();
-const REPL_HISTORY_FILE = path.join(os.homedir(), '.cache', 'calc');
+const REPL_HISTORY_FILE = path.join(os.homedir(), ".cache", "calc");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         yield rates_1.getOpenExchangeAppId();
         const server = repl.start({
-            prompt: '> ',
+            prompt: "> ",
             eval(cmd, _context, _filename, callback) {
                 calculate(cmd)
                     .catch((err) => {
-                    console.error('Error evaluating: ', err);
+                    console.error("Error evaluating: ", err);
                     callback(err);
                 })
                     .then((result) => callback(null, result));
             },
             writer(output) {
-                return '= ' + chalk.green(output) + '\n';
+                return "= " + chalk.green(output) + "\n";
             },
         });
         const anyServer = server;
         anyServer.setupHistory(REPL_HISTORY_FILE, (err) => {
             if (err != null)
-                console.error('Error writing history', err);
+                console.error("Error writing history", err);
         });
     });
 }
@@ -72,7 +72,7 @@ function parseCurrencyExpression(expr) {
     // "123.45 nis"
     if (matches.length === 3) {
         const currency = match[2];
-        const toCurrency = ['nis', 'ils'].includes(currency.toLowerCase()) ? '$' : 'nis';
+        const toCurrency = ["nis", "ils"].includes(currency.toLowerCase()) ? "$" : "nis";
         return {
             from: { value: parseFloat(match[1]), currency },
             toCurrency,

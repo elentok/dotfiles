@@ -15,35 +15,30 @@ const os = require("os");
 const path = require("path");
 const utils_1 = require("./utils");
 const child_process_1 = require("child_process");
-exports.CONFIG_DIR = path.join(os.homedir(), '.config', 'dotfiles');
-exports.CONFIG_FILE = path.join(exports.CONFIG_DIR, 'config');
+exports.CONFIG_DIR = path.join(os.homedir(), ".config", "dotfiles");
+exports.CONFIG_FILE = path.join(exports.CONFIG_DIR, "config");
 let configLines = [];
 function initialize() {
     if (!fs.existsSync(exports.CONFIG_FILE))
         return;
-    configLines = fs
-        .readFileSync(exports.CONFIG_FILE)
-        .toString()
-        .trim()
-        .split('\n')
-        .map(parseLine);
+    configLines = fs.readFileSync(exports.CONFIG_FILE).toString().trim().split("\n").map(parseLine);
 }
 function parseLine(line) {
     if (/^[#\s]/.test(line))
         return line;
-    const index = line.indexOf('=');
+    const index = line.indexOf("=");
     if (index === -1)
         return line;
     return {
         key: line.substring(0, index),
-        value: line.substring(index + 1)
+        value: line.substring(index + 1),
     };
 }
 function findItem(key) {
-    return configLines.find(l => typeof l === 'object' && l.key === key);
+    return configLines.find((l) => typeof l === "object" && l.key === key);
 }
 function findItemIndex(key) {
-    return configLines.findIndex(l => typeof l === 'object' && l.key === key);
+    return configLines.findIndex((l) => typeof l === "object" && l.key === key);
 }
 function getConfigOrDie(key) {
     const value = getConfig(key);
@@ -74,8 +69,8 @@ function save() {
     if (!fs.existsSync(exports.CONFIG_DIR))
         child_process_1.execSync(`mkdir -p "${exports.CONFIG_DIR}"`);
     const body = configLines
-        .map(line => (typeof line === 'object' ? `${line.key}=${line.value}` : line))
-        .join('\n');
+        .map((line) => (typeof line === "object" ? `${line.key}=${line.value}` : line))
+        .join("\n");
     fs.writeFileSync(exports.CONFIG_FILE, body);
 }
 function getConfigOrAsk(key, question) {

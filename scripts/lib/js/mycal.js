@@ -17,27 +17,27 @@ function main() {
 class Month {
     constructor(date) {
         this.weeks = [];
-        this.start = date.clone().startOf('month');
+        this.start = date.clone().startOf("month");
         this.buildWeeks();
     }
     print() {
-        console.info(chalk.green(utils_1.center(this.start.format('MMM YYYY'), 27)));
-        console.info('Sun Mon Tue Wed Thu Fri Sat');
+        console.info(chalk.green(utils_1.center(this.start.format("MMM YYYY"), 27)));
+        console.info("Sun Mon Tue Wed Thu Fri Sat");
         this.weeks.forEach((week) => console.info(week.pretty()));
         console.info();
     }
     next() {
-        return new Month(this.start.clone().add(1, 'month'));
+        return new Month(this.start.clone().add(1, "month"));
     }
     prev() {
-        return new Month(this.start.clone().subtract(1, 'month'));
+        return new Month(this.start.clone().subtract(1, "month"));
     }
     buildWeeks() {
         let week = new Week();
-        const date = this.start.clone().startOf('week');
+        const date = this.start.clone().startOf("week");
         while (date < this.start) {
             week.days.push(undefined);
-            date.add(1, 'day');
+            date.add(1, "day");
         }
         while (date.month() === this.start.month()) {
             week.days.push(new Day(date));
@@ -45,7 +45,7 @@ class Month {
                 this.weeks.push(week);
                 week = new Week();
             }
-            date.add(1, 'day');
+            date.add(1, "day");
         }
         if (week.days.length > 0) {
             this.weeks.push(week);
@@ -60,10 +60,10 @@ class Week {
         return this.days
             .map((day) => {
             if (day == null)
-                return '   ';
+                return "   ";
             return day.pretty();
         })
-            .join(' ');
+            .join(" ");
     }
 }
 class Day {
@@ -80,7 +80,7 @@ class Day {
         return this.text();
     }
     isToday() {
-        return this.date.isSame(TODAY, 'day');
+        return this.date.isSame(TODAY, "day");
     }
     isWeekend() {
         return this.date.weekday() >= FRIDAY;

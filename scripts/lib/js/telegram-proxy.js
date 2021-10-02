@@ -14,9 +14,9 @@ const mqtt = require("mqtt");
 const express = require("express");
 const bodyParser = require("body-parser");
 const dotconfig_1 = require("./dotconfig");
-const MQTT_HOST = dotconfig_1.getConfig('telegram_mqtt_host') || 'localhost';
-const BOT_TOKEN = dotconfig_1.getConfigOrDie('telegram_bot_token');
-const CHAT_ID = dotconfig_1.getConfigOrDie('telegram_chat_id');
+const MQTT_HOST = dotconfig_1.getConfig("telegram_mqtt_host") || "localhost";
+const BOT_TOKEN = dotconfig_1.getConfigOrDie("telegram_bot_token");
+const CHAT_ID = dotconfig_1.getConfigOrDie("telegram_chat_id");
 var ParseMode;
 (function (ParseMode) {
     ParseMode["HTML"] = "HTML";
@@ -24,21 +24,21 @@ var ParseMode;
 })(ParseMode || (ParseMode = {}));
 function main() {
     const client = mqtt.connect(`mqtt://${MQTT_HOST}`);
-    client.on('connect', () => client.subscribe('telegram:send'));
-    client.on('message', (topic, message) => {
-        if (topic === 'telegram:send') {
+    client.on("connect", () => client.subscribe("telegram:send"));
+    client.on("message", (topic, message) => {
+        if (topic === "telegram:send") {
             sendToTelegram(message.toString(), ParseMode.HTML);
         }
     });
     const app = express();
     app.use(bodyParser.urlencoded({ extended: true }));
-    app.post('/send', (req, res) => {
+    app.post("/send", (req, res) => {
         const parseMode = parseParseMode(req.body.parseMode);
         console.info(`Sending message ${req.body.message} with parse mode ${parseMode}`);
-        sendToTelegram(req.body.message, parseMode).then(() => res.send('OK'));
+        sendToTelegram(req.body.message, parseMode).then(() => res.send("OK"));
     });
-    app.listen(10000, () => console.info('Telegram proxy listening on port 10000'));
-    sendToTelegram('*Telegram Proxy Started*', ParseMode.MarkdownV2);
+    app.listen(10000, () => console.info("Telegram proxy listening on port 10000"));
+    sendToTelegram("*Telegram Proxy Started*", ParseMode.MarkdownV2);
 }
 function sendToTelegram(message, parseMode = ParseMode.HTML) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -48,11 +48,11 @@ function sendToTelegram(message, parseMode = ParseMode.HTML) {
             chat_id: CHAT_ID,
             text: message,
             // eslint-disable-next-line @typescript-eslint/camelcase
-            parse_mode: parseMode
+            parse_mode: parseMode,
         };
-        console.info('Making request to', url, 'with', JSON.stringify(body));
-        return axios_1.default.post(url, body).catch(err => {
-            console.error('Error sending message:', err.message);
+        console.info("Making request to", url, "with", JSON.stringify(body));
+        return axios_1.default.post(url, body).catch((err) => {
+            console.error("Error sending message:", err.message);
         });
     });
 }
