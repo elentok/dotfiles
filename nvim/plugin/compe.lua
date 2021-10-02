@@ -1,5 +1,11 @@
+local util = require("elentok/util")
+local compe = util.safe_require("compe")
+if compe == nil then
+  return
+end
+
 -- Configuration for the https://github.com/hrsh7th/nvim-compe plugin.
-require"compe".setup {
+compe.setup {
   enabled = true,
   autocomplete = true,
   debug = false,
