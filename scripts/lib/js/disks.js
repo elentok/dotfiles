@@ -4,7 +4,7 @@ exports.formatDisk = exports.formatGB = exports.free = void 0;
 const child_process_1 = require("child_process");
 const utils_1 = require("./utils");
 function parseDfLine(line) {
-    const column = '([^\\s]+)\\s+';
+    const column = "([^\\s]+)\\s+";
     const re = new RegExp(`^${column}${column}${column}${column}${column}(.*)$`);
     const match = line.match(re);
     if (match == null) {
@@ -18,16 +18,16 @@ function parseDfLine(line) {
         freeKB: parseInt(match[4], 10),
         freeGB: parseInt(match[4], 10) / 1024 / 1024,
         capacity: parseInt(match[5], 10) / 100,
-        mount: match[6]
+        mount: match[6],
     };
 }
 function free() {
-    return child_process_1.execSync('df')
+    return child_process_1.execSync("df")
         .toString()
         .trim()
-        .split('\n')
+        .split("\n")
         .slice(1)
-        .map(line => parseDfLine(line))
+        .map((line) => parseDfLine(line))
         .filter(utils_1.notUndefined);
 }
 exports.free = free;

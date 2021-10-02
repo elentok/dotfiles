@@ -20,7 +20,7 @@ class Branch {
         return this.gitName;
     }
     isProtected() {
-        return ['master', 'develop', 'protected'].indexOf(this.name) !== null;
+        return ["master", "develop", "protected"].indexOf(this.name) !== null;
     }
 }
 class LocalBranch extends Branch {
@@ -32,7 +32,7 @@ class LocalBranch extends Branch {
         return this.remoteBranches.length > 0;
     }
     destroy({ force = false } = {}) {
-        const arg = force ? '-D' : '-d';
+        const arg = force ? "-D" : "-d";
         return this.repo.git(`branch ${arg} ${this.name}`);
     }
 }
@@ -40,8 +40,8 @@ exports.LocalBranch = LocalBranch;
 class RemoteBranch extends Branch {
     constructor(repo, name) {
         super(repo, name);
-        name = name.replace(/ ->.*/g, '');
-        const parts = name.split('/', 3);
+        name = name.replace(/ ->.*/g, "");
+        const parts = name.split("/", 3);
         this.remoteName = parts[1];
         this.name = parts[2];
         this.gitName = `${this.remoteName}/${this.name}`;
@@ -52,7 +52,7 @@ class RemoteBranch extends Branch {
 }
 exports.RemoteBranch = RemoteBranch;
 function parseBranchLine(line, repo) {
-    line = line.replace(/^\*/g, '').trim();
+    line = line.replace(/^\*/g, "").trim();
     if (line.match(/^remotes\//)) {
         return new RemoteBranch(repo, line);
     }

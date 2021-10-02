@@ -7,7 +7,7 @@ const program = new commander_1.Command();
 function getRepo() {
     if (repo == null) {
         repo = new repo_1.Repo(process.cwd());
-        if (program.getOptionValue('quick') == null)
+        if (program.getOptionValue("quick") == null)
             repo.fetchRemotes();
     }
     return repo;
@@ -19,37 +19,37 @@ function printRemotelessBranches() {
         .forEach((branch) => console.info(branch.gitName));
 }
 function isSafe(branch) {
-    if (program.getOptionValue('safe') == null)
+    if (program.getOptionValue("safe") == null)
         return true;
-    return !['master', 'develop'].includes(branch.gitName);
+    return !["master", "develop"].includes(branch.gitName);
 }
 function printAllInfo() {
-    console.info('Local branches:');
+    console.info("Local branches:");
     getRepo()
         .localBranches()
         .forEach((branch) => {
-        console.info(`- ${branch.gitName} (${branch.hash()})${branch.hasRemotes() ? '' : ' (NO REMOTE)'}`);
+        console.info(`- ${branch.gitName} (${branch.hash()})${branch.hasRemotes() ? "" : " (NO REMOTE)"}`);
     });
-    console.info('\nRemote branches:');
+    console.info("\nRemote branches:");
     getRepo()
         .remoteBranches()
         .forEach((branch) => console.info(`- ${branch.gitName} (${branch.hash()})`));
     const unsyncedBranches = getRepo().unsyncedBranches();
     if (unsyncedBranches.length > 0) {
-        console.info('\nUnsynched branches:');
+        console.info("\nUnsynched branches:");
         unsyncedBranches.forEach((pair) => console.info(`- ${pair.local.gitName}`));
     }
 }
 program
-    .option('-q, --quick', "Don't fetch")
-    .option('-s, --safe', 'Exclude "develop" and "master" branches')
-    .option('-r, --remoteless', 'show remoteless remote branches')
-    .option('-a, --all')
+    .option("-q, --quick", "Don't fetch")
+    .option("-s, --safe", 'Exclude "develop" and "master" branches')
+    .option("-r, --remoteless", "show remoteless remote branches")
+    .option("-a, --all")
     .parse(process.argv);
-if (program.getOptionValue('remoteless')) {
+if (program.getOptionValue("remoteless")) {
     printRemotelessBranches();
 }
-else if (program.getOptionValue('all')) {
+else if (program.getOptionValue("all")) {
     printAllInfo();
 }
 else {

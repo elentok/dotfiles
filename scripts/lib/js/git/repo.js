@@ -30,16 +30,16 @@ class Repo {
     }
     fetchRemotes() {
         this.remotes
-            .filter(r => r.name !== 'review')
-            .forEach(r => {
+            .filter((r) => r.name !== "review")
+            .forEach((r) => {
             r.fetch();
             r.prune();
         });
     }
     unsyncedBranches() {
         const pairs = [];
-        this.localBranches().forEach(local => {
-            local.remoteBranches.forEach(remote => {
+        this.localBranches().forEach((local) => {
+            local.remoteBranches.forEach((remote) => {
                 if (local.hash() !== remote.hash()) {
                     pairs.push({ local, remote });
                 }
@@ -56,16 +56,16 @@ class Repo {
         return result.stdout.toString().trim();
     }
     loadRemotes() {
-        return this.git('remote', { silent: true })
-            .split('\n')
-            .map(name => new remote_1.Remote(this, name));
+        return this.git("remote", { silent: true })
+            .split("\n")
+            .map((name) => new remote_1.Remote(this, name));
     }
     loadBranches() {
-        this.git('branch --all', { silent: true })
-            .split('\n')
-            .forEach(line => {
+        this.git("branch --all", { silent: true })
+            .split("\n")
+            .forEach((line) => {
             const branch = branch_1.parseBranchLine(line, this);
-            if (branch.name === 'HEAD')
+            if (branch.name === "HEAD")
                 return;
             if (branch instanceof branch_1.RemoteBranch) {
                 if (this.remoteBranchesByName[branch.name] == null) {
@@ -80,8 +80,8 @@ class Repo {
         this.addRemotesToLocalBranches();
     }
     addRemotesToLocalBranches() {
-        Object.keys(this.remoteBranchesByName).forEach(name => {
-            this.remoteBranchesByName[name].forEach(remoteBranch => {
+        Object.keys(this.remoteBranchesByName).forEach((name) => {
+            this.remoteBranchesByName[name].forEach((remoteBranch) => {
                 const localBranch = this.localBranchesByName[name];
                 if (localBranch != null) {
                     localBranch.remoteBranches.push(remoteBranch);

@@ -15,13 +15,13 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 const dotconfig_1 = require("./dotconfig");
-const CACHE_FILE = path.join(os.homedir(), '.cache', 'openex.json');
+const CACHE_FILE = path.join(os.homedir(), ".cache", "openex.json");
 const CACHE_MAX_AGE_IN_HOURS = 12;
 const MAPPINGS = {
-    $: 'USD',
-    NIS: 'ILS'
+    $: "USD",
+    NIS: "ILS",
 };
-const DEFAULTS = ['ILS', 'USD'];
+const DEFAULTS = ["ILS", "USD"];
 class Rates {
     constructor(data) {
         this.data = data;
@@ -37,7 +37,7 @@ class Rates {
         const toRate = this.data.rates[toCurrency];
         return {
             value: (from.value * toRate) / fromRate,
-            currency: toCurrency
+            currency: toCurrency,
         };
     }
     getDefaultTo(from) {
@@ -97,7 +97,7 @@ function fetchRates() {
     return __awaiter(this, void 0, void 0, function* () {
         const appId = yield getOpenExchangeAppId();
         const url = `https://openexchangerates.org/api/latest.json?app_id=${appId}`;
-        return axios_1.default.get(url).then(response => {
+        return axios_1.default.get(url).then((response) => {
             fs.writeFileSync(CACHE_FILE, JSON.stringify(response.data, null, 2));
             return new Rates(response.data);
         });
@@ -105,9 +105,9 @@ function fetchRates() {
 }
 function getOpenExchangeAppId() {
     return __awaiter(this, void 0, void 0, function* () {
-        const id = yield dotconfig_1.getConfigOrAsk('open_exchange_app_id', 'OpenExchange app id? ');
+        const id = yield dotconfig_1.getConfigOrAsk("open_exchange_app_id", "OpenExchange app id? ");
         if (id == null)
-            throw new Error('Missing OpenExchange App ID');
+            throw new Error("Missing OpenExchange App ID");
         return id;
     });
 }

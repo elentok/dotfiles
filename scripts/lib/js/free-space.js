@@ -16,7 +16,7 @@ function parseDfLine(line) {
     const parts = line.trim().split(/\s+/);
     const [device, size, used, available, capacity] = parts;
     const mount = parts[parts.length - 1];
-    if (device === 'Filesystem')
+    if (device === "Filesystem")
         return;
     if (!RELEVANT_MOUNT_POINT.test(mount))
         return;
@@ -32,7 +32,7 @@ function parseDfLine(line) {
         state: calculateState(capacity),
     };
 }
-const RELEVANT_MOUNT_POINT = new RegExp('/($|Volumes|media|usr|mnt)');
+const RELEVANT_MOUNT_POINT = new RegExp("/($|Volumes|media|usr|mnt)");
 function sizeToGB(value) {
     return (parseFloat(value) / 1024 / 1024).toFixed(1);
 }
@@ -45,7 +45,7 @@ function calculateState(capacity) {
     return State.GOOD;
 }
 function loadDisks() {
-    return child_process_1.execSync('df').toString().split('\n').map(parseDfLine).filter(utils_1.notUndefined);
+    return child_process_1.execSync("df").toString().split("\n").map(parseDfLine).filter(utils_1.notUndefined);
 }
 function printDisks(disks) {
     const columnWidths = calculateColumnWidths(disks);
@@ -55,11 +55,11 @@ function stringifyDisk(disk, widths) {
     const { capacity, availableGB, sizeGB, mount, device } = disk;
     let part1 = [
         utils_1.justifyRight(capacity, widths.capacity),
-        utils_1.justifyRight(availableGB, widths.availableGB) + 'G',
-        'free (of',
-        utils_1.justifyRight(sizeGB, widths.sizeGB) + 'G)',
+        utils_1.justifyRight(availableGB, widths.availableGB) + "G",
+        "free (of",
+        utils_1.justifyRight(sizeGB, widths.sizeGB) + "G)",
         utils_1.justifyLeft(mount, widths.mount),
-    ].join(' ');
+    ].join(" ");
     switch (disk.state) {
         case State.GOOD:
             part1 = chalk.green(part1);
@@ -71,7 +71,7 @@ function stringifyDisk(disk, widths) {
             part1 = chalk.red(part1);
             break;
     }
-    return [part1, chalk.grey(`(${device})`)].join(' ');
+    return [part1, chalk.grey(`(${device})`)].join(" ");
 }
 function calculateColumnWidths(disks) {
     const widths = {};
