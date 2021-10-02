@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 cd
 
-for dir in .dotfiles/nvim .dotlocal/nvim; do
+for dir in .dotfiles/core/nvim .dotlocal/nvim; do
   if [ ! -e "$dir" ]; then
     continue
   fi
