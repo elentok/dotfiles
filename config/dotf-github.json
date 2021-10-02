@@ -21,11 +21,11 @@
       "github_repo": "ogham/exa",
       "platforms": {
         "x86_64": {
-          "bin_source": "exa-linux-x86_64",
+          "bin_source": "bin/exa",
           "asset_regexp": "exa-linux-x86_64.*"
         },
         "darwin": {
-          "bin_source": "exa-macos-x86_64",
+          "bin_source": "bin/exa",
           "asset_regexp": "exa-macos-x86_64.*"
         }
       }
