@@ -1,11 +1,14 @@
+local util = require("elentok/util")
+
 if vim.fn.has("termguicolors") then
   vim.o.termguicolors = true
 end
 
 vim.o.background = "dark"
 
-require("monokai")
-vim.cmd("colorscheme monokai_pro")
+if util.safe_require("monokai") then
+  vim.cmd("colorscheme monokai_pro")
+end
 
 -- Status + vertical split colors
 vim.cmd([[
