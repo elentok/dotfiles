@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source `dirname $0`/../framework
+source "$DOTF/framework"
 
 function main() {
   install_requirements
@@ -10,14 +10,14 @@ function main() {
   reset_completion_cache
 
   # fix premissions issue
-  chmod -R g-w $DOTF/zsh/vendor/zsh-completions
+  chmod -R g-w "$DOTF/core/zsh/vendor/zsh-completions"
 }
 
 function install_zsh() {
   if is_mac; then
-    my_shell=$(echo $SHELL | rev | cut -d/ -f1 | rev)
+    my_shell=$(echo "$SHELL" | rev | cut -d/ -f1 | rev)
     if [ "$my_shell" != "zsh" ]; then
-      zsh_bin="$(which zsh)"
+      zsh_bin="$(whih zsh)"
       bullet "Changing shell to ${zsh_bin}... "
       chsh -s "$zsh_bin"
     fi
@@ -29,15 +29,15 @@ function install_zsh() {
     if [[ "$SHELL" =~ /zsh ]]; then
       info 'already set'
     else
-      chsh -s $zsh_bin
+      chsh -s "$zsh_bin"
     fi
   fi
 }
 
 function install_symlinks() {
-  symlink "$DOTF/zsh" ~/.zsh
-  symlink "$DOTF/zsh/zshrc" ~/.zshrc
-  symlink "$DOTF/zsh/zshenv" ~/.zshenv
+  symlink "$DOTF/core/zsh" ~/.zsh
+  symlink "$DOTF/core/zsh/zshrc" ~/.zshrc
+  symlink "$DOTF/core/zsh/zshenv" ~/.zshenv
 }
 
 function install_requirements() {

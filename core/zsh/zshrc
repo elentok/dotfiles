@@ -13,21 +13,21 @@ typeset -F SECONDS=0
 export START_TIME=$SECONDS
 
 if [ -e ~/.profiling ]; then
-  source $DOTF/zsh/profiling.zsh
+  source $DOTF/core/zsh/profiling.zsh
 fi
 
-source $DOTF/zsh/core.sh
+source $DOTF/core/zsh/core.sh
 source_if_exists ~/.dotlocal/zsh/before.zsh
-source $DOTF/zsh/zsh.zsh
-source $DOTF/zsh/settings.sh
-source $DOTF/zsh/dircolors/dircolors.sh
-source $DOTF/zsh/widgets.zsh
-source $DOTF/zsh/aliases.sh
-source $DOTF/zsh/completion.zsh
-source $DOTF/zsh/keybindings.zsh
-source $DOTF/zsh/fzf-git.sh	
-source $DOTF/zsh/vendor/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $DOTF/zsh/prompt.zsh
+source $DOTF/core/zsh/zsh.zsh
+source $DOTF/core/zsh/settings.sh
+source $DOTF/core/zsh/dircolors/dircolors.sh
+source $DOTF/core/zsh/widgets.zsh
+source $DOTF/core/zsh/aliases.sh
+source $DOTF/core/zsh/completion.zsh
+source $DOTF/core/zsh/keybindings.zsh
+source $DOTF/core/zsh/fzf-git.sh	
+source $DOTF/core/zsh/vendor/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $DOTF/core/zsh/prompt.zsh
 if [ -e ~/.fzf.zsh ]; then
   source ~/.fzf.zsh
 fi

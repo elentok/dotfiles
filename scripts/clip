@@ -6,7 +6,7 @@
 #   clip paste
 #
 
-source $DOTF/zsh/core.sh
+source $DOTF/core/zsh/core.sh
 
 # if [ -z "$DISPLAY" ]; then
 #   export DISPLAY=":0"

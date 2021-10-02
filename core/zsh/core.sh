@@ -7,7 +7,7 @@ source_if_exists() {
 }
 
 # Load Configuration {{{1
-source "$DOTF/zsh/config.sh"
+source "$DOTF/core/zsh/config.sh"
 source_if_exists "$DOTL/zsh/config.sh"
 
 # Identify OS {{{1

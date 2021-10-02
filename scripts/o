@@ -6,7 +6,7 @@
 #   o <file-or-directory>
 #
 
-source $DOTF/zsh/core.sh
+source $DOTF/core/zsh/core.sh
 
 if is_wsl; then
   explorer.exe "$@"

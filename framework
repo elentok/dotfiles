@@ -9,7 +9,7 @@ DOTF="$(dirname "${BASH_SOURCE[0]-$0}")"
 DOTF="$(cd "$DOTF" && pwd)"
 export DOTF
 
-source "$DOTF/zsh/core.sh"
+source "$DOTF/core/zsh/core.sh"
 
 # Machine varibles {{{1
 MACHINE_VARFILE=$HOME/.config/machine

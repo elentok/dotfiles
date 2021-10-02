@@ -15,7 +15,7 @@ fpath=($BREW_HOME/lib/node_modules/tailr/completions $fpath)
 fpath=(/usr/local/share/npm/lib/node_modules/tailr/completions $fpath)
 fpath=(/usr/local/share/npm/lib/node_modules/dns-switcher/completions $fpath)
 fpath=($HOME/.rbenv/versions/2.0.0-p247/lib/ruby/gems/2.0.0/gems/shaft-0.8.8/completions $fpath)
-fpath=($DOTF/zsh/vendor/zsh-completions/src $fpath)
+fpath=($DOTF/core/zsh/vendor/zsh-completions/src $fpath)
 
 # Pebble {{{1
 export PEBBLE_SDKS="$HOME/Library/Application Support/Pebble SDK/SDKs"
@@ -37,9 +37,6 @@ if has_command fasd; then
   fi
 fi
 # Mac Specific {{{1
-
-
-
 
 # Functions {{{1
 
@@ -68,7 +65,6 @@ else
     find . -iname "*$**"
   }
 fi
-
 
 function find-exec {
   find . -type f -iname "*${1:-}*" -exec "${2:-file}" '{}' \;
@@ -130,4 +126,3 @@ if [ -e "$gcloud_path" ]; then
   # Disabling this for now, it seems to cause some sort of delay on OSX
   # source "$gcloud_path/completion.zsh.inc"
 fi
-
