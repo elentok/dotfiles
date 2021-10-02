@@ -1,5 +1,10 @@
-local saga = require("lspsaga")
+local util = require("elentok/util")
 local map = require("elentok/map")
+local saga = util.safe_require("lspsaga")
+
+if saga == nil then
+  return
+end
 
 saga.init_lsp_saga()
 
