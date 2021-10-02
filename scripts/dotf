@@ -4,32 +4,33 @@
 #
 # Usage:
 #
-#   dotf list                         - lists all plugins
-#   dotf install                      - installs all plugins
-#   dotf install [plugin] [plugin]... - install specific plugins
-#   dotf update                       - pulls from git and reruns install
+#   dotf list                               - lists components
+#   dotf install                            - installs all components
+#   dotf install [component] [component]... - install specific components
+#   dotf update                             - pulls from git and reruns install
 #
 
-source `dirname $0`/../framework
+source "$DOTF/framework"
 
 main() {
   cmd="${1:-}"
   shift || true
   case "$cmd" in
-  list | l)    list-plugins ;;
-  install | i) install "$@" ;;
-  update | u)  dotf-update ;;
-  stats | s)   dotf-stats ;;
-  *)           usage "$0" ;;
+    list | l) list-components ;;
+    install | i) install "$@" ;;
+    update | u) dotf-update ;;
+    stats | s) dotf-stats ;;
+    *) usage "$0" ;;
   esac
 }
 
-list-plugins() {
+list-components() {
   (
     echo vim
     echo zsh
-    /bin/ls -1 $DOTF/plugins
-    /bin/ls -1 $DOTL/plugins 2>/dev/null
+    /bin/ls -1 "$DOTF/core"
+    /bin/ls -1 "$DOTF/extra"
+    /bin/ls -1 "$DOTL/plugins" 2> /dev/null
   ) | sort
 }
 
@@ -37,7 +38,7 @@ install() {
   if [ $# -eq 0 ]; then
     dotf-install
   else
-    dotf-plugin "$@"
+    dotf-component "$@"
   fi
 }
 

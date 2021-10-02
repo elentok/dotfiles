@@ -2,7 +2,7 @@
 #
 # Usage:
 #
-#   dotf-plugin <plugin>...
+#   dotf-component <component>...
 #
 
 source "$DOTF/framework"
@@ -14,17 +14,17 @@ main() {
   fi
 
   while [ $# -gt 0 ]; do
-    install-plugin "$1"
+    install-component "$1"
     shift
   done
 }
 
-install-plugin() {
+install-component() {
   local filename
-  filename="$(find-plugin "$1")"
+  filename="$(find-component "$1")"
 
   if [ -z "$filename" ]; then
-    error "Cannot find plugin '$1'"
+    error "Cannot find component '$1'"
     exit 1
   fi
 
@@ -33,16 +33,16 @@ install-plugin() {
   $filename
 
   echo
-  echo "=> plugin '$1' installed in $(benchmark-stop "$1")"
+  echo "=> component '$1' installed in $(benchmark-stop "$1")"
 }
 
-find-plugin() {
+find-component() {
   local filenames=(
     "$DOTF/$1/install"
     "$DOTF/core/$1/install"
     "$DOTF/core/$1"
-    "$DOTF/plugins/$1/install"
-    "$DOTF/plugins/$1"
+    "$DOTF/extra/$1/install"
+    "$DOTF/extra/$1"
     "$DOTL/plugins/$1/install"
     "$DOTL/plugins/$1"
   )
