@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source `dirname $0`/../../framework
+source $(dirname $0)/../../framework
 
 main() {
   install_tmux
@@ -18,13 +18,13 @@ install_tmux() {
     brew unlink openssl
   else
     if command_missing tmux; then
-      PRIMARY=yes "$DOTF/plugins/tmux/build"
+      PRIMARY=yes "$DOTF/cocre/tmux/build"
     fi
   fi
 }
 
 install_symlinks() {
-  symlink "$DOTF/plugins/tmux/tmux.conf" ~/.tmux.conf
+  symlink "$DOTF/core/tmux/tmux.conf" ~/.tmux.conf
 }
 
 install_plugins() {

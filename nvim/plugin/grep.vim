@@ -15,7 +15,7 @@ noremap <Leader>fc :Grepper<cr>
 
 " Ripgrep: set config path {{{1
 if !exists('$RIPGREP_CONFIG_PATH')
-  let $RIPGREP_CONFIG_PATH = $DOTF . '/plugins/ripgrep/ripgreprc'
+  let $RIPGREP_CONFIG_PATH = $DOTF . '/core/ripgrep/ripgreprc'
 endif
 
 " Escape functions {{{1

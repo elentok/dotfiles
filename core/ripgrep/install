@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+source "$DOTF/framework"
+
+symlink "$DOTF/core/ripgrep/rgignore" "$HOME/.rgignore"

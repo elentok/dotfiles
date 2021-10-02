@@ -293,7 +293,7 @@ is_in_neovim() {
 # MISC {{{1
 export SSH_TERM=xterm-color
 export LESS="--RAW-CONTROL-CHARS"
-export RIPGREP_CONFIG_PATH="$DOTF/plugins/ripgrep/ripgreprc"
+export RIPGREP_CONFIG_PATH="$DOTF/core/ripgrep/ripgreprc"
 
 # - Don't follow non-constant sources
 #   (https://github.com/koalaman/shellcheck/wiki/SC1090)
@@ -301,7 +301,8 @@ export RIPGREP_CONFIG_PATH="$DOTF/plugins/ripgrep/ripgreprc"
 export SHELLCHECK_OPTS="-e SC1090,SC1091"
 
 if is_mac; then
-  export JAVA_HOME="$(/usr/libexec/java_home 2> /dev/null)"
+  JAVA_HOME="$(/usr/libexec/java_home 2> /dev/null)"
+  export JAVA_HOME
 fi
 
 # DOTLOCAL {{{1
