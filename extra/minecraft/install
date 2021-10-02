@@ -1,0 +1,108 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTF/framework"
+
+SPIGOT_ROOT="/home/minecraft/spigot"
+SPIGOT_REV="$(cat "$DOTF/extra/minecraft/VERSION")"
+SPIGOT_JAR_FILENAME="spigot-${SPIGOT_REV}.jar"
+SPIGOT_JAR_URL="https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar"
+SPIGOT_TMP="$TMP/spigot-${SPIGOT_REV}"
+
+main() {
+  if [ "${1:-}" == "update" ]; then
+    update-spigot
+    return
+  fi
+
+  create_group minecraft
+  add_user_to_group minecraft
+  create-minecraft-user
+
+  if ! is-spigot-server-installed; then
+    install-spigot-server
+  fi
+
+  # install-server
+  # copy-server-properties
+  # setup-service
+}
+
+create-minecraft-user() {
+  bullet 'Creating minecraft user... '
+  if user_exists minecraft; then
+    info 'already exists.'
+    return
+  else
+    sudo useradd minecraft --create-home -g minecraft && success 'done'
+  fi
+}
+
+is-spigot-server-installed() {
+  [ -e "/home/minecraft/spigot/${SPIGOT_JAR_FILENAME}" ]
+}
+
+install-spigot-server() {
+  build-spigot-server
+
+  bullet 'Installing spigot server...'
+  as-minecraft mkdir -p "$SPIGOT_ROOT"
+  sudo cp "${SPIGOT_TMP}/${SPIGOT_JAR_FILENAME}" "$SPIGOT_ROOT/"
+  sudo cp "$DOTF/extra/minecraft/VERSION" "$SPIGOT_ROOT/VERSION"
+  sudo cp "$DOTF/extra/minecraft/spigot-start" "$SPIGOT_ROOT/start"
+  sudo bash -c "chown minecraft:minecraft ${SPIGOT_ROOT}/*"
+  sudo chmod 750 "${SPIGOT_ROOT}/start"
+
+  install-service $DOTF/extra/minecraft/spigotmc.service.erb system
+
+  "$DOTF/extra/minecraft/install-spigot-server-properties"
+}
+
+update-spigot() {
+  bullet 'Updating spigot server...'
+  rm -rf "${SPIGOT_TMP}"
+  build-spigot-server
+  sudo cp "${SPIGOT_TMP}/${SPIGOT_JAR_FILENAME}" "$SPIGOT_ROOT/"
+}
+
+build-spigot-server() {
+  bullet 'Building spigot server...'
+
+  # Build it
+  mkdir -p "${SPIGOT_TMP}"
+  cd "${SPIGOT_TMP}"
+
+  if [ ! -e BuildTools.jar ]; then
+    curl "$SPIGOT_JAR_URL" -o BuildTools.jar
+  fi
+
+  if [ ! -e "$SPIGOT_JAR_FILENAME" ]; then
+    java -jar BuildTools.jar --rev "${SPIGOT_REV}"
+  fi
+
+  success 'done.'
+}
+
+install-server() {
+  sudo --login -u minecraft curl "$JAR_URL" -o "$JAR_FILENAME"
+  sudo --login -u minecraft "sed -i s/eula=.*/eula=TRUE/g"
+}
+
+as-minecraft() {
+  sudo --login -u minecraft "$@"
+}
+
+copy-server-properties() {
+  sudo cp -f $DOTF/extra/minecraft/server.properties /home/minecraft/
+  sudo chown minecraft:minecraft /home/minecraft/server.properties
+}
+
+setup-service() {
+  install-service $DOTF/extra/minecraft/minecraft.service.erb system
+
+  systemctl daemon-reload
+  systemctl start minecraft
+}
+
+main "$@"

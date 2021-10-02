@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-source $DOTF/framework
-
-symlink $DOTF/plugins/mercurial/hgrc $HOME/.hgrc

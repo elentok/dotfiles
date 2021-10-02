@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+
+ROOT=$DOTF/extra/vscode
+
+if is_wsl; then
+  symlink \
+    $(wslpath $(wsl-get-env USERPROFILE))/AppData/Roaming/Code \
+    $HOME/.config/Code
+fi
+
+npx vscode:sync

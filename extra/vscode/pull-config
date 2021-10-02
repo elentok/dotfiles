@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+
+ROOT=$DOTF/extra/vscode
+CODE_CONFIG="$(vscode-config-path)"
+
+cp -f "$CODE_CONFIG/User/settings.json" "$ROOT/settings.json"
+cp -f "$CODE_CONFIG/User/keybindings.json" "$ROOT/keybindings.json"

@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+
+source $DOTF/framework
+
+I3="$DOTF/extra/i3"
+
+header "i3 Window Manager"
+
+main() {
+  install_i3
+  install_symlinks
+  install_session_file
+  install_utils
+
+  install_package compton
+
+  disable_dunst_ctrl_grave
+
+  # sudo_copy "$I3/cinnamon/cinnamon-i3" "/usr/bin/cinnamon-i3"
+  # sudo_copy "$I3/cinnamon/cinnamon-i3-session" "/usr/bin/cinnamon-i3-session"
+  # sudo_copy "$I3/cinnamon/i3.session" "/usr/share/cinnamon-session/sessions/i3.session"
+  # sudo_copy "$I3/cinnamon/xsession.desktop" "/usr/share/xsessions/cinnamon-i3.desktop"
+  # sudo_copy "$I3/cinnamon/app.desktop" "/usr/share/applications/cinnamon-i3.desktop"
+
+  update-desktop-database -q
+}
+
+install_i3() {
+  apt-fast-install i3 rofi dmenu
+}
+
+install_symlinks() {
+  mkdir -p ~/.i3
+  symlink "$I3/config" "$HOME/.i3/config"
+  symlink "$I3/i3status.conf" "$HOME/.i3/i3status.conf"
+  symlink "$I3/i3-session" "$HOME/.i3/i3-session"
+  symlink "$I3/Xresources" "$HOME/.Xresources"
+}
+
+install_session_file() {
+  bullet "Installing i3-session.desktop... "
+  local tmpfile=/tmp/i3-session.desktop
+  local targetfile=/usr/share/xsessions/i3-session.desktop
+
+  rm -f $tmpfile
+  sed "s#{HOME}#$HOME#" $I3/i3-session.desktop > $tmpfile
+
+  if diff $tmpfile $targetfile > /dev/null; then
+    info 'already installed'
+  else
+    sudo mv -f $tmpfile $targetfile
+    show_result die_on_error
+  fi
+}
+
+fix_nemo_desktop() {
+  # Make nemo (cinnamon's nautilus) not show desktop icons
+  gsettings set org.nemo.desktop show-desktop-icons false
+}
+
+install_utils() {
+  apt-fast-install pavucontrol xscreensaver \
+    light-locker gksu lightdm-gtk-greeter-settings \
+    xfce4 xfce4-screenshooter ristretto xfce4-clipman
+}
+
+disable_dunst_ctrl_grave() {
+  if [ -e ~/.config/dunst/dunstrc ]; then return; fi
+
+  mkdir -p ~/.config/dunst
+
+  cat /etc/xdg/dunst/dunstrc | sed 's/history = ctrl+grave/# &/' > ~/.config/dunst/dunstrc
+}
+
+main "$@"
