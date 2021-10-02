@@ -13,7 +13,7 @@
   path = ~/.dotlocal/gitconfig
 
 [core]
-  excludesfile = ~/.dotfiles/plugins/git/gitignore
+  excludesfile = ~/.dotfiles/core/git/gitignore
 
   # Always use linux line endings
   autocrlf = false
