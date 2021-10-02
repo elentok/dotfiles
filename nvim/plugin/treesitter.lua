@@ -6,10 +6,11 @@ if not treesitter_configs then
 end
 
 require("nvim-treesitter.configs").setup {
-  ensure_installed = "maintained",
-  ignore_install = {
-    "nix", "erlang", "ocamllex", "devicetree", "gdscript", "supercollider",
-    "ledger"
+  ensure_installed = {
+    "bash", "c", "c_sharp", "cmake", "comment", "cpp", "css", "dot", "go",
+    "html", "java", "javascript", "jsdoc", "json", "json5", "jsonc", "lua",
+    "python", "regex", "rst", "ruby", "scss", "toml", "tsx", "typescript",
+    "vim", "yaml"
   },
   highlight = {enable = true},
   autopairs = {enable = true},
