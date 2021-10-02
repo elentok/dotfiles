@@ -2,10 +2,14 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "lib": ["es2016"],
-    "outDir": "./lib/js",
+    "lib": [
+      "es2016"
+    ],
+    "outDir": "./scripts/lib/js",
     "strict": true,
     "sourceMap": true
   },
-  "include": ["lib/ts/**/*.ts"]
+  "include": [
+    "scripts/lib/ts/**/*.ts"
+  ]
 }

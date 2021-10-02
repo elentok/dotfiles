@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-require('../lib/js/git/info-cli')
+require('./lib/js/git/info-cli')
