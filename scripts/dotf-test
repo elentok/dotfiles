@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
-case "$1" in
-  -w|--watch)
+set -euo pipefail
+
+cd "$DOTF"
+
+case "${1:-}" in
+  -w | --watch)
     command ls scripts/lib/*.py | entr bin/test-python
     ;;
   *)
