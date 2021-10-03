@@ -5,19 +5,8 @@ source "$DOTF/framework"
 GITCONFIG="$HOME/.gitconfig"
 
 main() {
-  if ! has_command git; then
-    install_git
-  fi
   install_gitconfig
   setup_git_user
-}
-
-install_git() {
-  if is_mac; then
-    brew_install git
-  else
-    apt-fast-install git
-  fi
 }
 
 install_gitconfig() {
