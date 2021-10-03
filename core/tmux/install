@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $(dirname $0)/../../framework
+source "$(dirname "$0")/../../framework"
 
 main() {
   install_tmux
@@ -9,17 +9,8 @@ main() {
 }
 
 install_tmux() {
-  if is_mac; then
-    brew_install tmux
-    brew_install reattach-to-user-namespace
-    # for more info, see:
-    #   http://robots.thoughtbot.com/post/19398560514/how-to-copy-and-paste-with-tmux-on-mac-os-x
-
-    brew unlink openssl
-  else
-    if command_missing tmux; then
-      PRIMARY=yes "$DOTF/cocre/tmux/build"
-    fi
+  if command_missing tmux; then
+    PRIMARY=yes "$DOTF/core/tmux/build"
   fi
 }
 
@@ -32,4 +23,4 @@ install_plugins() {
   git_clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 }
 
-main $*
+main "$@"

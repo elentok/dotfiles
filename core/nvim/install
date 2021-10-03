@@ -5,6 +5,10 @@ set -euo pipefail
 source "$DOTF/framework"
 
 main() {
+  if is_arm; then
+    PRIMARY=yes "$DOTF/core/nvim/build"
+  fi
+
   install-symlinks
   install-packer-plugins
   "$DOTF/core/nvim/install-lua"

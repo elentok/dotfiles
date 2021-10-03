@@ -69,6 +69,12 @@ is_wsl() {
   [ "$IS_WSL" = "yes" ]
 }
 
+# Identify ARM {{{1
+
+is_arm() {
+  [ "$(dpkg --print-architecture)" == "armhf" ]
+}
+
 # Shell {{{1
 function is_zsh() {
   [ -n "$ZSH_VERSION" ]
