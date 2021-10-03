@@ -9,12 +9,15 @@ source "$DOTF/framework"
 CONFIG_FILE="$DOTF/config/packages.cfg"
 
 function main() {
-  case "$1" in
+  cmd="${1:-}"
+  shift || true
+
+  case "$cmd" in
     i | install)
-      install-pkgs
+      install-pkgs "$@"
       ;;
     u | upgrade)
-      upgrade-pkgs
+      upgrade-pkgs "$@"
       ;;
     *)
       usage "$0"
@@ -24,26 +27,35 @@ function main() {
 }
 
 function install-pkgs() {
-  if is_linux; then
-    apt-fast-install "$(get-pkgs apt)"
+  case "$1" in
+    apt)
+      if is_linux; then
+        apt-fast-install "$(get-pkgs apt)"
 
-    if [ "$HAS_GUI" = 'yes' ]; then
-      apt-fast-install "$(get-pkgs apt-gui)"
-    fi
+        if [ "$HAS_GUI" = 'yes' ]; then
+          apt-fast-install "$(get-pkgs apt-gui)"
+        fi
 
-    if [ "${KDE:-}" = 'yes' ]; then
-      apt-fast-install "$(get-pkgs apt-kde)"
-    fi
-  elif is_mac; then
-    for pkg in $(get-pkgs brew); do
-      brew_install "$pkg"
-    done
-  elif is_termux; then
-    apt-fast-install "$(get-pkgs termux)"
-  fi
-  pip-fast-install "$(get-pkgs pip)"
-  npm-fast-install "$(get-pkgs npm)"
+        if [ "${KDE:-}" = 'yes' ]; then
+          apt-fast-install "$(get-pkgs apt-kde)"
+        fi
+      elif is_mac; then
+        for pkg in $(get-pkgs brew); do
+          brew_install "$pkg"
+        done
+      elif is_termux; then
+        apt-fast-install "$(get-pkgs termux)"
+      fi
+      ;;
 
+    pip)
+      pip-fast-install "$(get-pkgs pip)"
+      ;;
+
+    npm)
+      npm-fast-install "$(get-pkgs npm)"
+      ;;
+  esac
 }
 
 function upgrade-pkgs() {
