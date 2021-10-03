@@ -13,23 +13,12 @@ main() {
   else
     apt-fast-install nodejs npm
   fi
-
-  install_packages
 }
 
 install_node() {
   if [ -z "$(n ls)" ]; then
     n lts
     npm install -g npm # Upgrade to the latest npm
-  fi
-}
-
-install_packages() {
-  npm-fast-install yarn json live-server eslint typescript prettier \
-    semver cloc fx
-
-  if ! is_termux; then
-    npm-fast-install gtop
   fi
 }
 
