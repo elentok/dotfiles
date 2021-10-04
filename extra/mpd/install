@@ -54,7 +54,7 @@ create_symlinks() {
   ln -sf "$DOTF/extra/mpd/ncmpcpp-config" ~/.ncmpcpp/config
   ln -sf "$DOTF/extra/mpd/ncmpcpp-bindings" ~/.ncmpcpp/bindings
 
-  success "done"
+  dotf-success "done"
 }
 
 build_config() {

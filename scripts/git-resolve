@@ -8,7 +8,7 @@ main() {
   REMAINING=$(git-conflicts-count)
 
   if [ "$REMAINING" = "0" ]; then
-    success 'There are no conflicts :-)'
+    dotf-success 'There are no conflicts :-)'
   else
     resolve-all
   fi

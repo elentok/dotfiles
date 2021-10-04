@@ -27,7 +27,7 @@ delete-song() {
   mkdir -p "$DELETED"
 
   cd "$ROOT"
-  mv "$song_filename" "$DELETED" && success 'done'
+  mv "$song_filename" "$DELETED" && dotf-success 'done'
 }
 
 main

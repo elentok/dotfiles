@@ -57,7 +57,7 @@ function validate-sha256() {
   local sha256sum=$2
 
   if [ "$(sha256sum "$filename" | awk '{print $1}')" == "$sha256sum" ]; then
-    success "SHA256 of $filename is valid"
+    dotf-success "SHA256 of $filename is valid"
   else
     error "SHA256 of $filename doesn't match"
     exit 1

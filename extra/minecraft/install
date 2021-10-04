@@ -35,7 +35,7 @@ create-minecraft-user() {
     dotf-info 'already exists.'
     return
   else
-    sudo useradd minecraft --create-home -g minecraft && success 'done'
+    sudo useradd minecraft --create-home -g minecraft && dotf-success 'done'
   fi
 }
 
@@ -81,7 +81,7 @@ build-spigot-server() {
     java -jar BuildTools.jar --rev "${SPIGOT_REV}"
   fi
 
-  success 'done.'
+  dotf-success 'done.'
 }
 
 install-server() {

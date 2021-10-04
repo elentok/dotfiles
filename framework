@@ -96,7 +96,7 @@ symlink() {
     fi
   fi
   if [ $? == 0 ]; then
-    success "done"
+    dotf-success "done"
   fi
 }
 
@@ -320,7 +320,7 @@ make_dir() {
   else
     mkdir -p $1
     if [ $? == 0 ]; then
-      success "created"
+      dotf-success "created"
     else
       dotf-info "  trying with sudo:"
       sudo mkdir -p $1
@@ -383,7 +383,7 @@ copy_to_dir() {
       error 'FAILED'
       exit 1
     else
-      success 'done'
+      dotf-success 'done'
     fi
   fi
 }
@@ -495,7 +495,7 @@ run_command() {
 
     if [ "$BG" == 'yes' ]; then
       $cmd "$@" &
-      success '(started in background)'
+      dotf-success '(started in background)'
     else
       $cmd "$@"
       show_result

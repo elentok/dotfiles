@@ -67,7 +67,7 @@ function main() {
   if confirm "Kill ${count} processes?"; then
     echo "Killing..."
     echo "$PROCS" | awk '{print $1}' | xargs "${KILL_CMD[@]}"
-    success "done."
+    dotf-success "done."
   fi
 }
 

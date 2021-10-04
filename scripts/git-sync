@@ -10,7 +10,7 @@ main() {
   commit-if-needed
   pull
   push
-  success 'done'
+  dotf-success 'done'
 }
 
 commit-if-needed() {

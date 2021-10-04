@@ -101,12 +101,12 @@ dotf-info() {
   echo -e "${CYAN}$*$RESET"
 }
 
-clear_line() {
-  echo -e -n "$CLEAR_LINE"
+dotf-success() {
+  echo -e "${GREEN}✔ $*$RESET"
 }
 
-success() {
-  echo -e "${GREEN}✔ $*$RESET"
+clear_line() {
+  echo -e -n "$CLEAR_LINE"
 }
 
 error() {
@@ -115,7 +115,7 @@ error() {
 
 show_result() {
   if [ $? -eq 0 ]; then
-    success 'done'
+    dotf-success 'done'
   else
     error 'FAIL'
     if [ "$1" = "die_on_error" ]; then

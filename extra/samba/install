@@ -33,7 +33,7 @@ create_system_user() {
     dotf-info 'already exists.'
     return
   else
-    sudo useradd $SAMBA_USERNAME -g sambashare && success 'done'
+    sudo useradd $SAMBA_USERNAME -g sambashare && dotf-success 'done'
   fi
 }
 
@@ -42,7 +42,7 @@ create_samba_user() {
   if smb_user_exists $SAMBA_USERNAME; then
     dotf-info 'already exists.'
   else
-    sudo smbpasswd -a $SAMBA_USERNAME && success 'done'
+    sudo smbpasswd -a $SAMBA_USERNAME && dotf-success 'done'
   fi
 }
 
@@ -53,7 +53,7 @@ add_to_smbusers() {
   else
     line="$SAMBA_USERNAME = $SAMBA_USERNAME"
     sudo sh -c "echo '$line' >> /etc/samba/smbusers" &
-    success 'done'
+    dotf-success 'done'
   fi
 }
 

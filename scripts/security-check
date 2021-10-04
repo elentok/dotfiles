@@ -13,7 +13,7 @@ check_sudo() {
   check_sudo_group_in_sudoers
 
   if user_has_group sudo; then
-    success "User $(whoami) has group 'sudo'"
+    dotf-success "User $(whoami) has group 'sudo'"
   else
     if confirm "Add $(whoami) to 'sudo' group?"; then
       add_user_to_group sudo
@@ -23,7 +23,7 @@ check_sudo() {
 
 check_sudo_group_in_sudoers() {
   if is_sudo_group_in_sudoers; then
-    success 'Sudoers include the sudo group'
+    dotf-success 'Sudoers include the sudo group'
   else
     error 'Sudoers do not include the sudo group'
     echo '  Run "visudo" and add the following line:'
@@ -47,7 +47,7 @@ check_sshd() {
 
 check_sshd_root_login() {
   if [ "$(get_sshd_setting PermitRootLogin)" == 'no' ]; then
-    success 'Root login is disabled'
+    dotf-success 'Root login is disabled'
   else
     error 'Root login is enabled'
     echo '  Edit /etc/ssh/sshd_config,'
@@ -58,7 +58,7 @@ check_sshd_root_login() {
 
 check_sshd_password_auth() {
   if [ "$(get_sshd_setting PasswordAuthentication)" == 'no' ]; then
-    success 'Password authentication is disabled'
+    dotf-success 'Password authentication is disabled'
   else
     error 'Password authentication is enabled'
     echo '  Edit /etc/ssh/sshd_config,'
@@ -74,7 +74,7 @@ is_sshd_password_auth() {
 check_sshd_port() {
   port="$(get_sshd_setting Port)"
   if [ -n "$port" -a "$port" != '22' ]; then
-    success "Not using port 22 (using $port)"
+    dotf-success "Not using port 22 (using $port)"
   else
     error 'Using port 22 for ssh'
     echo '  Edit /etc/ssh/sshd_config,'

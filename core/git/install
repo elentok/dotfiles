@@ -15,7 +15,7 @@ install_gitconfig() {
     fix_existing_gitconfig
   else
     write_to_gitconfig
-    success 'done'
+    dotf-success 'done'
   fi
 }
 
@@ -23,14 +23,14 @@ fix_existing_gitconfig() {
   if [ -h "$GITCONFIG" ]; then
     backup "$GITCONFIG"
     write_to_gitconfig
-    success 'done'
+    dotf-success 'done'
   else
     if [ -n "$(grep "path = $DOTF/core/git/gitconfig" "$GITCONFIG")" ]; then
       dotf-info 'already installed'
     else
       echo >> "$GITCONFIG"
       write_to_gitconfig
-      success 'done'
+      dotf-success 'done'
     fi
   fi
 }

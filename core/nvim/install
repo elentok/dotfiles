@@ -33,7 +33,7 @@ install-symlinks() {
 install-packer-plugins() {
   dotf-bullet "Running PackerInstall... "
   nvim-packer-sync
-  success "done"
+  dotf-success "done"
 }
 
 main "$@"

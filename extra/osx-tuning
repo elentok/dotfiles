@@ -136,9 +136,9 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
   OpenWith -bool true \
   Privileges -bool true
 
-success 'done'
+dotf-success 'done'
 
 dotf-bullet 'Killing apps'
 kilall Dock > /dev/null 2>&1
 kilall Finder > /dev/null 2>&1
-success 'done'
+dotf-success 'done'

@@ -17,7 +17,7 @@ function main() {
       range=${version_ranges[$app]}
 
       if is-valid-version $range $version; then
-        success "$app:\t$version ($range)"
+        dotf-success "$app:\t$version ($range)"
       else
         error "$app:\t$version ($range)"
       fi

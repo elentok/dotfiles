@@ -12,7 +12,7 @@ function main() {
     $(project-exclude-arg $ROOT) \
     -f $ROOT/tags $ROOT
   if [ $? -eq 0 ]; then
-    success "done (generated $(count-ctags) tags)."
+    dotf-success "done (generated $(count-ctags) tags)."
   else
     error 'FAILED.'
   fi

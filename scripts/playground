@@ -37,13 +37,13 @@ new-playground() {
   mkdir -p "$root/src"
   mkdir -p "$root/build"
   cd "$root"
-  success 'done'
+  dotf-success 'done'
 
   dotf-bullet 'Creating files... '
   create-index-jade
   create-app-coffee
   create-app-scss
-  success 'done'
+  dotf-success 'done'
   echo
 
   if confirm 'Start watching?'; then

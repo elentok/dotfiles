@@ -78,7 +78,7 @@ optimize() {
   local kb=$((optimized_size / 1024))
   local percentage_of_original=$(($optimized_size * 100 / $original_size))
 
-  success "done (${kb}kb, ${percentage_of_original}% of original)."
+  dotf-success "done (${kb}kb, ${percentage_of_original}% of original)."
 }
 
 optimized-filename-for() {

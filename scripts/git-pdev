@@ -23,4 +23,4 @@ echo -e "${BLUE}➜ Switching back to ${branch} branch...$RESET"
 git checkout $branch
 echo
 
-success 'DONE'
+dotf-success 'DONE'

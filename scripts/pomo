@@ -35,7 +35,7 @@ green() {
 pomo_bg() {
   log "session started"
   local min=$ITERATION_MINUTES
-  while (( $min > 5 )); do
+  while (($min > 5)); do
     while [ -e $PAUSE_FILE ]; do sleep 10; done
     echo "$min minutes remaining"
     echo $min > $STATUS_FILE
@@ -55,7 +55,7 @@ pomo_bg() {
 }
 
 log() {
-  echo "`now` $*" >> $LOG_FILE
+  echo "$(now) $*" >> $LOG_FILE
 }
 
 yell() {
@@ -75,7 +75,7 @@ pomo_start() {
 
 pomo_status() {
   if [ -e $STATUS_FILE ]; then
-    minutes=`cat $STATUS_FILE`
+    minutes=$(cat $STATUS_FILE)
     if [ "$1" != "--silent" ]; then
       green "$minutes minutes remaining"
       [ -e $PAUSE_FILE ] && red "Paused"
@@ -163,6 +163,5 @@ usage() {
   echo "Usage: $0 <start|stop|status>"
   echo " "
 }
-
 
 main $*
