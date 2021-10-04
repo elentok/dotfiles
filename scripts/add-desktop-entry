@@ -15,11 +15,12 @@ function main() {
 
   mkdir -p ~/.local/share/applications
   build-content "$@" > "$HOME/.local/share/applications/$basename.desktop"
+  update-desktop-database "$HOME/.local/share/applications"
   xdg-desktop-menu forceupdate
 }
 
 function build-content() {
-  cat<<EOF
+  cat << EOF
 [Desktop Entry]
 Version=1.0
 Name=$2

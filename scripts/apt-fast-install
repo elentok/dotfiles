@@ -10,7 +10,8 @@ main() {
     dotf-info " already installed."
   else
     echo
-    dotf-bullet "Installing missing packages: $missing...\\n"
+    dotf-bullet "Installing missing packages: $missing..."
+    echo
 
     if is_termux; then
       # shellcheck disable=SC2086
