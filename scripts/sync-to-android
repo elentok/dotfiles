@@ -94,7 +94,7 @@ remove_old_backups() {
 backups_to_delete() {
   adb shell ls $backup/ | sort -r | tail -n+$((BACKUPS_TO_KEEP + 1)) | tr -d '\r'
   if [ $? -ne 0 ]; then
-    error "Error getting backups to delete"
+    dotf-error "Error getting backups to delete"
     exit 1
   fi
 }
@@ -129,11 +129,11 @@ adb_shell() {
 
 show_adb_error() {
   echo
-  error "======================"
-  error "Exit code: $exitcode"
-  error "Error output:"
+  dotf-error "======================"
+  dotf-error "Exit code: $exitcode"
+  dotf-error "Error output:"
   adb shell cat $ANDROID_LOG
-  error "======================"
+  dotf-error "======================"
 }
 
 main $*

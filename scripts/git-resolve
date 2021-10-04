@@ -54,7 +54,7 @@ resolve-first() {
 
   if [ $? -eq 0 ]; then
     if has-conflicts "$first"; then
-      error "File $first still has error markers"
+      dotf-error "File $first still has error markers"
       echo
     else
       if confirm "Mark $first as resolved?"; then

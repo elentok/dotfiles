@@ -19,10 +19,10 @@ function main() {
       if is-valid-version $range $version; then
         dotf-success "$app:\t$version ($range)"
       else
-        error "$app:\t$version ($range)"
+        dotf-error "$app:\t$version ($range)"
       fi
     else
-      error "$app:\tnot installed"
+      dotf-error "$app:\tnot installed"
     fi
   done
 }

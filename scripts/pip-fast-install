@@ -21,7 +21,7 @@ main() {
 
 function die-if-pip-missing() {
   if ! has_command pip3; then
-    error "pip is not installed, skipping"
+    dotf-error "pip is not installed, skipping"
     exit 1
   fi
 }

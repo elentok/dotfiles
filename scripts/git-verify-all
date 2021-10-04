@@ -18,7 +18,7 @@ for repo in ${repos[@]}; do
 
   (cd $repo && git verify)
   if [ $? -ne 0 ]; then
-    error "ERROR: Verification failed"
+    dotf-error "ERROR: Verification failed"
     exit 2
   fi
 done

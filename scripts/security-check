@@ -25,7 +25,7 @@ check_sudo_group_in_sudoers() {
   if is_sudo_group_in_sudoers; then
     dotf-success 'Sudoers include the sudo group'
   else
-    error 'Sudoers do not include the sudo group'
+    dotf-error 'Sudoers do not include the sudo group'
     echo '  Run "visudo" and add the following line:'
     echo
     echo '    %sudo ALL=(ALL:ALL) ALL'
@@ -49,7 +49,7 @@ check_sshd_root_login() {
   if [ "$(get_sshd_setting PermitRootLogin)" == 'no' ]; then
     dotf-success 'Root login is disabled'
   else
-    error 'Root login is enabled'
+    dotf-error 'Root login is enabled'
     echo '  Edit /etc/ssh/sshd_config,'
     echo '  And add "PermitRootLogin no"'
     echo '  (only do this after verifying your user can sudo)'
@@ -60,7 +60,7 @@ check_sshd_password_auth() {
   if [ "$(get_sshd_setting PasswordAuthentication)" == 'no' ]; then
     dotf-success 'Password authentication is disabled'
   else
-    error 'Password authentication is enabled'
+    dotf-error 'Password authentication is enabled'
     echo '  Edit /etc/ssh/sshd_config,'
     echo '  And add "PasswordAuthentication no"'
     echo '  (only do this after verifying your user can sudo)'
@@ -76,7 +76,7 @@ check_sshd_port() {
   if [ -n "$port" -a "$port" != '22' ]; then
     dotf-success "Not using port 22 (using $port)"
   else
-    error 'Using port 22 for ssh'
+    dotf-error 'Using port 22 for ssh'
     echo '  Edit /etc/ssh/sshd_config,'
     echo '  Change the line "Port 22" to "Port {my-random-port}"'
   fi

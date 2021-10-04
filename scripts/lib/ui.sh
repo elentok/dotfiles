@@ -14,7 +14,15 @@ export RESET="\\033[0m"
 export CLEAR_LINE="\\r\\033[K"
 
 function dotf-color() {
-  case "$1" in
+  if [ $# -lt 1 ]; then
+    echo "Usage: dotf-color <color> [optional: text]"
+    return 1
+  fi
+
+  color="$1"
+  shift
+
+  case "$color" in
     black) echo -ne "\\033[30m" ;;
     gray) echo -ne "\\033[1;30m" ;;
     red) echo -ne "\\033[31m" ;;
@@ -26,6 +34,11 @@ function dotf-color() {
     underline) echo -ne "\\033[4m" ;;
     reset) echo -ne "\\033[0m" ;;
   esac
+
+  if [ $# -gt 0 ]; then
+    echo -n "$@"
+    dotf-color reset
+  fi
 }
 
 # Special Characters {{{1
@@ -94,23 +107,26 @@ function dotf-header() {
 }
 
 dotf-bullet() {
-  echo -e -n "${YELLOW}•$RESET $*"
+  echo "$(dotf-color yellow •) $*"
 }
 
 dotf-info() {
-  echo -e "${CYAN}$*$RESET"
+  dotf-color cyan "$@"
+  echo
 }
 
 dotf-success() {
-  echo -e "${GREEN}✔ $*$RESET"
+  dotf-color green "✔ $*"
+  echo
+}
+
+dotf-error() {
+  dotf-color red "✔ $*"
+  echo
 }
 
 clear_line() {
   echo -e -n "$CLEAR_LINE"
-}
-
-error() {
-  echo -e "${RED}✘ $*$RESET"
 }
 
 show_result() {

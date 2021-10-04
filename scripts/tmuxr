@@ -37,7 +37,7 @@ list() {
   if [ -d ~/.tmuxr ]; then
     /bin/ls -1 ~/.tmuxr/
   else
-    error "~/.tmuxr directory doesn't exist"
+    dotf-error "~/.tmuxr directory doesn't exist"
   fi
 }
 
@@ -52,7 +52,7 @@ start() {
   fi
 
   if [ ! -e "$filename" ]; then
-    error "Cannot find template by name '$1'"
+    dotf-error "Cannot find template by name '$1'"
     exit 1
   fi
 

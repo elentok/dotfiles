@@ -54,7 +54,7 @@ show-active-agent() {
 choose-agent() {
   local agent=$(list-agents | fzf | cut -d' ' -f1)
   if [ -z "$agent" ]; then
-    error 'User aborted'
+    dotf-error 'User aborted'
     exit 1
   fi
 

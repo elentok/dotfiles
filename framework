@@ -64,7 +64,7 @@ backup() {
   dotf-info "  trying with sudo:"
   sudo mv -f "$1" "${1}.backup"
   if [ $? != 0 ]; then
-    error "FAILED"
+    dotf-error "FAILED"
     exit 1
   fi
 }
@@ -91,7 +91,7 @@ symlink() {
     dotf-info "  Can't create link, trying with sudo:"
     sudo ln -sf "$source" "$target"
     if [ $? != 0 ]; then
-      error "failed"
+      dotf-error "failed"
       exit 1
     fi
   fi
@@ -325,7 +325,7 @@ make_dir() {
       dotf-info "  trying with sudo:"
       sudo mkdir -p $1
       if [ $? != 0 ]; then
-        error "FAILED"
+        dotf-error "FAILED"
         exit 1
       fi
     fi
@@ -380,7 +380,7 @@ copy_to_dir() {
   else
     cp "$source" "$target_dir"
     if [ $? != 0 ]; then
-      error 'FAILED'
+      dotf-error 'FAILED'
       exit 1
     else
       dotf-success 'done'

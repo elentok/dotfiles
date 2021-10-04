@@ -14,7 +14,7 @@ function main() {
   if [ $? -eq 0 ]; then
     dotf-success "done (generated $(count-ctags) tags)."
   else
-    error 'FAILED.'
+    dotf-error 'FAILED.'
   fi
 }
 

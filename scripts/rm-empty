@@ -26,7 +26,7 @@ empty-directories() {
   find "$1" ! -path "$1" -type d | while read dir; do
     if is-empty "$dir"; then
       dotf-bullet "Deleting ${dir}... "
-      rmdir "$dir" && dotf-success 'done.' || error 'failed!'
+      rmdir "$dir" && dotf-success 'done.' || dotf-error 'failed!'
     fi
   done
 }

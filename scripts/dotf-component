@@ -25,7 +25,7 @@ install-component() {
   filename="$(find-component "$name")"
 
   if [ -z "$filename" ]; then
-    error "Cannot find component '$name'"
+    dotf-error "Cannot find component '$name'"
     exit 1
   fi
 
