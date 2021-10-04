@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
-source `dirname $0`/../../framework
+source "$DOTF/framework"
 
 main() {
-  header "SSH Server"
   if is_linux; then
     apt-fast-install openssh-server
   fi

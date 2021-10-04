@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-cli=/Applications/Karabiner.app/Contents/Library/bin/karabiner
-
-$cli export > settings

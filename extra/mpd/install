@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
-source `dirname $0`/../../framework
+source $(dirname $0)/../../framework
 
 main() {
-  header "Music Player Daemon"
-
   setup_vars
 
   if is_mac; then
@@ -42,8 +40,8 @@ install_on_linux() {
   sudo update-rc.d -f mpd remove
 
   linux-add-to-startup --name="Music Player Daemon" \
-                       --file="mpd" \
-                       --exec="mpd"
+    --file="mpd" \
+    --exec="mpd"
 }
 
 create_symlinks() {

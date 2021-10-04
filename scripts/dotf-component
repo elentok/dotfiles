@@ -20,31 +20,32 @@ main() {
 }
 
 install-component() {
+  local name="$1"
   local filename
-  filename="$(find-component "$1")"
+  filename="$(find-component "$name")"
 
   if [ -z "$filename" ]; then
-    error "Cannot find component '$1'"
+    error "Cannot find component '$name'"
     exit 1
   fi
 
-  dotf-header h2 "$1"
-  benchmark-start "$1"
+  dotf-header h2 "Setting up component: $name..."
+  benchmark-start "$name"
   $filename
 
   echo
-  echo "=> component '$1' installed in $(benchmark-stop "$1")"
+  echo "=> component '$name' installed in $(benchmark-stop "$name")"
 }
 
 find-component() {
   local filenames=(
-    "$DOTF/$1/install"
-    "$DOTF/core/$1/install"
-    "$DOTF/core/$1"
-    "$DOTF/extra/$1/install"
-    "$DOTF/extra/$1"
-    "$DOTL/plugins/$1/install"
-    "$DOTL/plugins/$1"
+    "$DOTF/$name/install"
+    "$DOTF/core/$name/install"
+    "$DOTF/core/$name"
+    "$DOTF/extra/$name/install"
+    "$DOTF/extra/$name"
+    "$DOTL/plugins/$name/install"
+    "$DOTL/plugins/$name"
   )
 
   for filename in "${filenames[@]}"; do

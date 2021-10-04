@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-source `dirname $0`/../../framework
-
-header 'Arduino'
+source $(dirname $0)/../../framework
 
 # Install the Arduino command line toolkit (http://inotool.org/)
 #pip2_install ino
@@ -12,4 +10,3 @@ python -c "$(curl -fsSL https://raw.githubusercontent.com/ivankravets/platformio
 
 # Install a dumb-terminal emulator (https://code.google.com/p/picocom/)
 brew_install picocom
-

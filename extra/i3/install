@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework
+source "$DOTF/framework"
 
 I3="$DOTF/extra/i3"
 
-header "i3 Window Manager"
-
 main() {
+  dotf-header h2 "i3 Window Manager"
+
   install_i3
   install_symlinks
   install_session_file

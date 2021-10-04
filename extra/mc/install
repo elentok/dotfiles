@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework
+source "$DOTF/framework"
 
 main() {
-  header 'Midnight Commander'
-
   if is_mac; then
     brew_install mc
   else

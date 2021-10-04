@@ -1,27 +1,25 @@
 #!/usr/bin/env bash
 
-source `dirname $0`/../../framework
-
-header 'Installing fonts'
+source "$DOTF/framework"
 
 if is_mac; then
   font_dir="$HOME/Library/Fonts"
 else
   font_dir="$HOME/.fonts"
-  mkdir -p $font_dir
+  mkdir -p "$font_dir"
 fi
 
-find "$DOTF/extra/fonts" -name '*.[o,t]tf' -type f | \
-  while read file; do
+find "$DOTF/extra/fonts" -name '*.[o,t]tf' -type f \
+  | while read file; do
     copy_to_dir "$file" "$font_dir"
   done
 
 if [ ! -e "$font_dir/CascadiaMonoPL.ttf" ]; then
-  $DOTF/extra/fonts/install-cascadia
+  "$DOTF/extra/fonts/install-cascadia"
 fi
 
 # For linux
 if is_linux; then
   dotf-bullet "Updating font cache"
-  fc-cache -v -f $font_dir
+  fc-cache -v -f "$font_dir"
 fi
