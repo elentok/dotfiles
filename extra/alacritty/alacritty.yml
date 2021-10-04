@@ -75,7 +75,8 @@ scrolling:
 # Font configuration (changes require restart)
 font:
   normal:
-    family: 'agave Nerd Font'
+    # run "fc-list : family style" to find the font name
+    family: 'agave Nerd Font Mono'
     # family: 'Cascadia Mono PL'
   # Normal (roman) font face
   #normal:
@@ -113,7 +114,7 @@ font:
   #style: Italic
 
   # Point size
-  size: 9.0
+  size: 11.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
