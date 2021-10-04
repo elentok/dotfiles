@@ -19,7 +19,7 @@ commit-if-needed() {
     echo
     commit
   else
-    info 'no changes'
+    dotf-info 'no changes'
   fi
 }
 

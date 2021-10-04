@@ -8,8 +8,8 @@ main() {
   echo "ERROR: sway installer not implemented"
   exit 1
   # if is_arch; then
-    # pacman_install sway termite
-    # yaourt_install sway-dmenu-desktop
+  # pacman_install sway termite
+  # yaourt_install sway-dmenu-desktop
   # fi
 
   symlink "$SWAY" "$HOME/.config/sway"
@@ -26,7 +26,7 @@ install_session_file() {
   sed "s#{ROOT}#$SWAY#" $SWAY/sway-custom.desktop > $tmpfile
 
   if diff $tmpfile $targetfile > /dev/null 2>&1; then
-    info 'already installed'
+    dotf-info 'already installed'
   else
     sudo mv -f $tmpfile $targetfile
     show_result die_on_error

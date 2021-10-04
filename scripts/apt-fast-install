@@ -7,7 +7,7 @@ main() {
   missing=$(find-missing-packages "$@")
 
   if [ -z "$missing" ]; then
-    info " already installed."
+    dotf-info " already installed."
   else
     echo
     dotf-bullet "Installing missing packages: $missing...\\n"

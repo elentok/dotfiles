@@ -13,7 +13,7 @@ main() {
 setup_authorized_keys() {
   dotf-bullet 'Creating ~/.ssh/authorized_keys... '
   if [ -e ~/.ssh/authorized_keys ]; then
-    info 'already exists'
+    dotf-info 'already exists'
   else
     mkdir -p ~/.ssh
     touch ~/.ssh/authorized_keys

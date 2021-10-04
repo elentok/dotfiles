@@ -25,12 +25,12 @@ fix-commit() {
 
     dotf-bullet "Creating fixup commit... "
     git commit --fixup $rev
-    info "done."
+    dotf-info "done."
 
     if confirm "Autosquash" yes; then
       dotf-bullet "Autosquashing... "
       git rebase -i --autosquash $rev~1
-      info "done."
+      dotf-info "done."
     fi
   fi
 }

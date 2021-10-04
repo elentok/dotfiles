@@ -31,7 +31,7 @@ main() {
 
   dotf-bullet "Creating ${filename}..."
   if [ -e "$filename" ]; then
-    info 'already exists'
+    dotf-info 'already exists'
     exit 0
   fi
 

@@ -57,11 +57,11 @@ to_uppercase() {
 
 # backup {{{1
 backup() {
-  info "\n  backing up to ${1}.backup"
+  dotf-info "\n  backing up to ${1}.backup"
   mv -f "$1" "${1}.backup"
   if [ $? == 0 ]; then return; fi
 
-  info "  trying with sudo:"
+  dotf-info "  trying with sudo:"
   sudo mv -f "$1" "${1}.backup"
   if [ $? != 0 ]; then
     error "FAILED"
@@ -78,7 +78,7 @@ symlink() {
   if [ -e "$target" ]; then
     if [ -h "$target" ]; then
       if [ "$source" == "$(readlink "$target")" ]; then
-        info " already exists"
+        dotf-info " already exists"
         return
       fi
     fi
@@ -88,7 +88,7 @@ symlink() {
 
   ln -sf "$source" "$target"
   if [ $? != 0 ]; then
-    info "  Can't create link, trying with sudo:"
+    dotf-info "  Can't create link, trying with sudo:"
     sudo ln -sf "$source" "$target"
     if [ $? != 0 ]; then
       error "failed"
@@ -153,7 +153,7 @@ gem_install() {
 gem_install_single() {
   dotf-bullet "Installing gem ${1}... [sudo] "
   if [ "$(gem_cache | grep \"^$1\b\")" != "" ]; then
-    info "already installed"
+    dotf-info "already installed"
   else
     sudo /usr/bin/gem install $*
     rm -f $TMP/gem_cache
@@ -175,7 +175,7 @@ brew_install() {
 
   #if [ "`brew ls -1 | grep \"^$1\$\"`" != "" ]; then
   if has_brew_package "$1"; then
-    info "already installed"
+    dotf-info "already installed"
   else
     brew install $*
   fi
@@ -187,7 +187,7 @@ brew_install_url() {
 
   dotf-bullet "Installing ${name}... "
   if has_brew_package "$name"; then
-    info "already installed"
+    dotf-info "already installed"
   else
     brew install $*
   fi
@@ -201,7 +201,7 @@ brew_tap() {
   repo=$1
   dotf-bullet "Tapping brew repository ${repo}... "
   if has_brew_tap "$repo"; then
-    info "already installed"
+    dotf-info "already installed"
   else
     brew tap $*
   fi
@@ -221,7 +221,7 @@ brew_cask_install() {
   dotf-bullet "Installing ${1}... "
 
   if has_brew_cask_package "$1"; then
-    info "already installed"
+    dotf-info "already installed"
   else
     brew cask install $*
   fi
@@ -243,10 +243,10 @@ git_clone() {
       if [ "$current_origin" == "$origin" ]; then
 
         if [ "$option" == "--update" ]; then
-          info " already cloned, just updating"
+          dotf-info " already cloned, just updating"
           (cd "$target" && git pull)
         else
-          info " already cloned"
+          dotf-info " already cloned"
         fi
         return
       fi
@@ -270,9 +270,9 @@ go_get() {
   pkg="$1"
   dotf-bullet "Installing Go package '$pkg'..."
   if [ -e "$GOPATH/src/$pkg" ]; then
-    info " already installed"
+    dotf-info " already installed"
   else
-    info ""
+    dotf-info ""
     go get -u "$pkg"
   fi
 }
@@ -283,7 +283,7 @@ apt-fast-add-repo() {
   dotf-bullet "Adding repository ${1}..."
   sources="/etc/apt/sources.list /etc/apt/sources.list.d/*.list"
   if [ "$(grep "$1" $sources)" != "" ]; then
-    info " already installed"
+    dotf-info " already installed"
   else
     # required for add-apt-repository
     dotf-bullet "[Add PPA]: Installing prerequisits..."
@@ -304,7 +304,7 @@ install_deb() {
   dotf-bullet "Installing ${name}..."
 
   if apt_cache | grep "^${name}$" > /dev/null; then
-    info " already installed"
+    dotf-info " already installed"
   else
     wget "$url" -O $TMP/${name}.deb
     sudo dpkg -i $TMP/${name}.deb
@@ -316,13 +316,13 @@ install_deb() {
 make_dir() {
   dotf-bullet "Creating directory ${1}... "
   if [ -e $1 ]; then
-    info "already exists"
+    dotf-info "already exists"
   else
     mkdir -p $1
     if [ $? == 0 ]; then
       success "created"
     else
-      info "  trying with sudo:"
+      dotf-info "  trying with sudo:"
       sudo mkdir -p $1
       if [ $? != 0 ]; then
         error "FAILED"
@@ -344,7 +344,7 @@ sudo_copy() {
     sudo cp -f "$1" "$2"
     show_result die_on_error
   else
-    info 'already exists'
+    dotf-info 'already exists'
   fi
 }
 
@@ -376,7 +376,7 @@ copy_to_dir() {
 
   dotf-bullet "Copying '$basename' to '$target_dir'... "
   if [ -e "$target_dir$basename" ]; then
-    info 'already exists.'
+    dotf-info 'already exists.'
   else
     cp "$source" "$target_dir"
     if [ $? != 0 ]; then
@@ -413,7 +413,7 @@ add_user_to_group() {
   dotf-bullet "Adding '$user' to group '$group'... "
 
   if user_has_group $group $user; then
-    info 'already exists.'
+    dotf-info 'already exists.'
   else
     sudo usermod -a -G $group $user
     show_result die_on_error
@@ -430,7 +430,7 @@ create_group() {
 
   dotf-bullet "Creating group '$group'... "
   if group_exists "$group"; then
-    info 'already exists.'
+    dotf-info 'already exists.'
   else
     sudo groupadd "$group"
     show_result die_on_error
@@ -486,7 +486,7 @@ run_command() {
 
   dotf-bullet "Starting ${name}... "
   if is_running "$1"; then
-    info 'Already running.'
+    dotf-info 'Already running.'
   else
     cmd='sh -c'
     if [ "$SUDO" == 'yes' ]; then
@@ -575,13 +575,13 @@ verify-perms() {
 
   printf "* Verifying '$file' has permissions '$expected'... "
   if [ ! -e "$file" ]; then
-    info 'skipping, file is missing'
+    dotf-info 'skipping, file is missing'
     return
   fi
 
   local actual="$(stat --format=%a $file)"
   if [ "$actual" == "$expected" ]; then
-    info 'ok'
+    dotf-info 'ok'
   else
     ${CHMOD:-chmod} $expected "$file"
     show_result

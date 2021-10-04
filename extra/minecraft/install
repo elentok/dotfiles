@@ -32,7 +32,7 @@ main() {
 create-minecraft-user() {
   dotf-bullet 'Creating minecraft user... '
   if user_exists minecraft; then
-    info 'already exists.'
+    dotf-info 'already exists.'
     return
   else
     sudo useradd minecraft --create-home -g minecraft && success 'done'

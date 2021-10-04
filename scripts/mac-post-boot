@@ -12,7 +12,7 @@ main() {
 run_app() {
   dotf-bullet "Starting $1... "
   if is_running "$1"; then
-    info 'already started.'
+    dotf-info 'already started.'
   else
     open /Applications/$1.app
   fi
@@ -21,7 +21,7 @@ run_app() {
 start_mpd() {
   dotf-bullet 'Starting Music Player Daemon... '
   if is_running mpd; then
-    info 'Already running.'
+    dotf-info 'Already running.'
   else
     echo '(running in background...)'
     mpd &
@@ -37,7 +37,7 @@ add_ssh_key() {
   if [ -z "$(ssh-add -l | grep '\.ssh/id_')" ]; then
     ssh-add
   else
-    info 'already added.'
+    dotf-info 'already added.'
   fi
 }
 

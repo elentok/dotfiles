@@ -46,7 +46,7 @@ install_session_file() {
   sed "s#{HOME}#$HOME#" $I3/i3-session.desktop > $tmpfile
 
   if diff $tmpfile $targetfile > /dev/null; then
-    info 'already installed'
+    dotf-info 'already installed'
   else
     sudo mv -f $tmpfile $targetfile
     show_result die_on_error

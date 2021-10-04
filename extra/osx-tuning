@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source `dirname $0`/../framework
+source $(dirname $0)/../framework
 
 # These are some of the settings from
 # https://github.com/mathiasbynens/dotfiles/blob/master/.osx
@@ -35,7 +35,6 @@ defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 # Speed up Mission Control animations
 defaults write com.apple.dock expose-animation-duration -int 0
 
-
 # Don’t animate opening applications from the Dock
 defaults write com.apple.dock launchanim -bool false
 
@@ -47,7 +46,7 @@ defaults write com.apple.dock launchanim -bool false
 defaults write com.apple.finder DisableAllAnimations -bool true
 
 # Set Desktop as the default location for new Finder windows
- # For other paths, use `PfLo` and `file:///full/path/here/`
+# For other paths, use `PfLo` and `file:///full/path/here/`
 defaults write com.apple.finder NewWindowTarget -string "PfDe"
 defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desktop/"
 
@@ -143,4 +142,3 @@ dotf-bullet 'Killing apps'
 kilall Dock > /dev/null 2>&1
 kilall Finder > /dev/null 2>&1
 success 'done'
-

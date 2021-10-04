@@ -24,7 +24,7 @@ function set_zsh_as_default_shell() {
     zsh_bin="$(which zsh)"
     dotf-bullet "Changing user's shell to $zsh_bin... "
     if [[ "$SHELL" =~ /zsh ]]; then
-      info 'already set'
+      dotf-info 'already set'
     else
       chsh -s "$zsh_bin"
     fi
@@ -40,7 +40,7 @@ function install_symlinks() {
 function install_fzf() {
   dotf-bullet 'Installing FZF... '
   if [ -e ~/.fzf ]; then
-    info 'already installed.'
+    dotf-info 'already installed.'
   else
     git_clone https://github.com/junegunn/fzf.git ~/.fzf --depth 1
     ~/.fzf/install --completion --key-bindings --no-update-rc

@@ -97,12 +97,12 @@ dotf-bullet() {
   echo -e -n "${YELLOW}•$RESET $*"
 }
 
-clear_line() {
-  echo -e -n "$CLEAR_LINE"
+dotf-info() {
+  echo -e "${CYAN}$*$RESET"
 }
 
-info() {
-  echo -e "${CYAN}$*$RESET"
+clear_line() {
+  echo -e -n "$CLEAR_LINE"
 }
 
 success() {

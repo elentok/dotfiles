@@ -43,7 +43,7 @@ sync() {
 create_backup_dir() {
   dotf-bullet "Creating $BLUE$backup$RESET directory... "
   if android_is_dir $backup; then
-    info "already exists."
+    dotf-info "already exists."
   else
     adb shell mkdir -p $backup
     success "done."
@@ -72,7 +72,7 @@ backup() {
       exit 1
     fi
   else
-    info "doesn't exist, not necessary."
+    dotf-info "doesn't exist, not necessary."
   fi
 }
 
@@ -101,7 +101,7 @@ backups_to_delete() {
 
 push_to_android() {
   dotf-bullet "Copying files to $BLUE$target$RESET... "
-  info ""
+  dotf-info ""
 
   adb push $source $target > /tmp/push-to-android 2>&1
   tail -2 /tmp/push-to-android

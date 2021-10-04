@@ -44,9 +44,9 @@ resolve-first() {
 
   if has-conflicts "$first"; then
     conflicts=$(file-conflict-markers-count "$first")
-    info "it has $conflicts conflict marker(s)"
+    dotf-info "it has $conflicts conflict marker(s)"
   else
-    info 'no conflicts'
+    dotf-info 'no conflicts'
   fi
 
   pause 'Press any key to edit...'

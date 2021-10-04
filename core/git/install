@@ -26,7 +26,7 @@ fix_existing_gitconfig() {
     success 'done'
   else
     if [ -n "$(grep "path = $DOTF/core/git/gitconfig" "$GITCONFIG")" ]; then
-      info 'already installed'
+      dotf-info 'already installed'
     else
       echo >> "$GITCONFIG"
       write_to_gitconfig
