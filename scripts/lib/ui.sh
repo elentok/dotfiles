@@ -90,6 +90,7 @@ function dotf-header() {
   local level="$1"
   shift
 
+  echo
   case "$level" in
     h1) dotf-border padded yellow "   $*   " ;;
     h2) dotf-border normal blue "  $*  " ;;
