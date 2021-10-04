@@ -22,6 +22,6 @@ fi
 
 # For linux
 if is_linux; then
-  bullet "Updating font cache"
+  dotf-bullet "Updating font cache"
   fc-cache -v -f $font_dir
 fi

@@ -32,14 +32,14 @@ new-playground() {
     root="$root/$1"
   fi
 
-  bullet 'Creating directories... '
+  dotf-bullet 'Creating directories... '
   mkdir -p "$root"
   mkdir -p "$root/src"
   mkdir -p "$root/build"
   cd "$root"
   success 'done'
 
-  bullet 'Creating files... '
+  dotf-bullet 'Creating files... '
   create-index-jade
   create-app-coffee
   create-app-scss

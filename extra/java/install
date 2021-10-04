@@ -11,7 +11,7 @@ main() {
   header 'Java 16'
 
   if ! apt-key list | grep AdoptOpenJDK > /dev/null 2>&1; then
-    bullet 'Installing jfrog key...'
+    dotf-bullet 'Installing jfrog key...'
     wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -
   fi
   echo

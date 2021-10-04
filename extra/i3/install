@@ -38,7 +38,7 @@ install_symlinks() {
 }
 
 install_session_file() {
-  bullet "Installing i3-session.desktop... "
+  dotf-bullet "Installing i3-session.desktop... "
   local tmpfile=/tmp/i3-session.desktop
   local targetfile=/usr/share/xsessions/i3-session.desktop
 

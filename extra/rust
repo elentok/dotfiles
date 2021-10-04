@@ -2,7 +2,7 @@
 
 source "$DOTF/framework"
 
-bullet 'Installing rust...'
+dotf-bullet 'Installing rust...'
 if has_command rustc; then
   info 'already installed.'
 else

@@ -74,7 +74,7 @@ symlink() {
   source=$1
   target=$2
 
-  bullet "Linking $source\n      ==> ${target}... "
+  dotf-bullet "Linking $source\n      ==> ${target}... "
   if [ -e "$target" ]; then
     if [ -h "$target" ]; then
       if [ "$source" == "$(readlink "$target")" ]; then
@@ -151,7 +151,7 @@ gem_install() {
 }
 
 gem_install_single() {
-  bullet "Installing gem ${1}... [sudo] "
+  dotf-bullet "Installing gem ${1}... [sudo] "
   if [ "$(gem_cache | grep \"^$1\b\")" != "" ]; then
     info "already installed"
   else
@@ -171,7 +171,7 @@ gem_cache() {
 
 # Homebrew {{{1
 brew_install() {
-  bullet "Installing ${1}... "
+  dotf-bullet "Installing ${1}... "
 
   #if [ "`brew ls -1 | grep \"^$1\$\"`" != "" ]; then
   if has_brew_package "$1"; then
@@ -185,7 +185,7 @@ brew_install_url() {
   name=$1
   shift
 
-  bullet "Installing ${name}... "
+  dotf-bullet "Installing ${name}... "
   if has_brew_package "$name"; then
     info "already installed"
   else
@@ -199,7 +199,7 @@ has_brew_package() {
 
 brew_tap() {
   repo=$1
-  bullet "Tapping brew repository ${repo}... "
+  dotf-bullet "Tapping brew repository ${repo}... "
   if has_brew_tap "$repo"; then
     info "already installed"
   else
@@ -218,7 +218,7 @@ brew_list_taps() {
 # Homebrew Cask {{{1
 
 brew_cask_install() {
-  bullet "Installing ${1}... "
+  dotf-bullet "Installing ${1}... "
 
   if has_brew_cask_package "$1"; then
     info "already installed"
@@ -236,7 +236,7 @@ git_clone() {
   origin=$1
   target=$2
   option=${3:-}
-  bullet "Cloning $origin => ${target}..."
+  dotf-bullet "Cloning $origin => ${target}..."
   if [ -d $target ]; then
     if [ -d $target/.git ]; then
       current_origin=$(cd $target && git_get_origin)
@@ -268,7 +268,7 @@ git-repo-is-dirty() {
 # Go Get {{{1
 go_get() {
   pkg="$1"
-  bullet "Installing Go package '$pkg'..."
+  dotf-bullet "Installing Go package '$pkg'..."
   if [ -e "$GOPATH/src/$pkg" ]; then
     info " already installed"
   else
@@ -280,19 +280,19 @@ go_get() {
 # Apt: Add Repo {{{1
 apt-fast-add-repo() {
 
-  bullet "Adding repository ${1}..."
+  dotf-bullet "Adding repository ${1}..."
   sources="/etc/apt/sources.list /etc/apt/sources.list.d/*.list"
   if [ "$(grep "$1" $sources)" != "" ]; then
     info " already installed"
   else
     # required for add-apt-repository
-    bullet "[Add PPA]: Installing prerequisits..."
+    dotf-bullet "[Add PPA]: Installing prerequisits..."
     apt-fast-install software-properties-common apt-transport-https gnupg wget
-    bullet "[Add PPA]: Calling add-apt-repository ..."
+    dotf-bullet "[Add PPA]: Calling add-apt-repository ..."
     sudo add-apt-repository -y "${1}"
-    bullet "[Add PPA]: Calling apt-get update..."
+    dotf-bullet "[Add PPA]: Calling apt-get update..."
     sudo apt-get update
-    bullet "[Add PPA]: Done."
+    dotf-bullet "[Add PPA]: Done."
   fi
 }
 
@@ -301,7 +301,7 @@ install_deb() {
   local name="$1"
   local url="$2"
 
-  bullet "Installing ${name}..."
+  dotf-bullet "Installing ${name}..."
 
   if apt_cache | grep "^${name}$" > /dev/null; then
     info " already installed"
@@ -314,7 +314,7 @@ install_deb() {
 
 # make_dir {{{1
 make_dir() {
-  bullet "Creating directory ${1}... "
+  dotf-bullet "Creating directory ${1}... "
   if [ -e $1 ]; then
     info "already exists"
   else
@@ -334,7 +334,7 @@ make_dir() {
 
 # sudo_copy {{{1
 sudo_copy() {
-  bullet "Copying $(basename $1) to $2 (with sudo)... "
+  dotf-bullet "Copying $(basename $1) to $2 (with sudo)... "
 
   if should_sudo_copy "$1" "$2"; then
     if [ -e "$2.backup" ]; then
@@ -374,7 +374,7 @@ copy_to_dir() {
 
   basename="$(basename "$source")"
 
-  bullet "Copying '$basename' to '$target_dir'... "
+  dotf-bullet "Copying '$basename' to '$target_dir'... "
   if [ -e "$target_dir$basename" ]; then
     info 'already exists.'
   else
@@ -410,7 +410,7 @@ add_user_to_group() {
     user=$(whoami)
   fi
 
-  bullet "Adding '$user' to group '$group'... "
+  dotf-bullet "Adding '$user' to group '$group'... "
 
   if user_has_group $group $user; then
     info 'already exists.'
@@ -428,7 +428,7 @@ group_exists() {
 create_group() {
   local group="$1"
 
-  bullet "Creating group '$group'... "
+  dotf-bullet "Creating group '$group'... "
   if group_exists "$group"; then
     info 'already exists.'
   else
@@ -484,7 +484,7 @@ run_command() {
   name="$1"
   shift
 
-  bullet "Starting ${name}... "
+  dotf-bullet "Starting ${name}... "
   if is_running "$1"; then
     info 'Already running.'
   else
@@ -549,7 +549,7 @@ filesize() {
 
 # Services {{{1
 service-start() {
-  bullet "Starting service $1... "
+  dotf-bullet "Starting service $1... "
   if is_arch; then
     sudo systemctl start $1
   else
@@ -559,7 +559,7 @@ service-start() {
 }
 
 service-stop() {
-  bullet "Stopping service $1... "
+  dotf-bullet "Stopping service $1... "
   if is_arch; then
     sudo systemctl stop $1
   else

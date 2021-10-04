@@ -28,7 +28,7 @@ init_samba_username() {
 }
 
 create_system_user() {
-  bullet 'Creating system user... '
+  dotf-bullet 'Creating system user... '
   if user_exists $SAMBA_USERNAME; then
     info 'already exists.'
     return
@@ -38,7 +38,7 @@ create_system_user() {
 }
 
 create_samba_user() {
-  bullet 'Creating samba user... '
+  dotf-bullet 'Creating samba user... '
   if smb_user_exists $SAMBA_USERNAME; then
     info 'already exists.'
   else
@@ -47,7 +47,7 @@ create_samba_user() {
 }
 
 add_to_smbusers() {
-  bullet 'Adding user to /etc/samba/smbusers... '
+  dotf-bullet 'Adding user to /etc/samba/smbusers... '
   if is_in_smbusers; then
     info 'already exists.'
   else

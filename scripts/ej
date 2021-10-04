@@ -13,7 +13,7 @@ main() {
   local mountpoint="$(echo $disk | awk '{print $1}')"
 
   if confirm "Eject $device (mounted at $mountpoint)?" yes; then
-    bullet "Ejecting..."
+    dotf-bullet "Ejecting..."
     eject-$OS "$mountpoint"
     show_result
   fi

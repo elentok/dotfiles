@@ -41,7 +41,7 @@ sync() {
 }
 
 create_backup_dir() {
-  bullet "Creating $BLUE$backup$RESET directory... "
+  dotf-bullet "Creating $BLUE$backup$RESET directory... "
   if android_is_dir $backup; then
     info "already exists."
   else
@@ -51,7 +51,7 @@ create_backup_dir() {
 }
 
 backup() {
-  bullet "Backing up $BLUE$target$RESET\n"
+  dotf-bullet "Backing up $BLUE$target$RESET\n"
   date=$(date +%Y-%m-%d_%H%M)
   suffix=""
 
@@ -77,9 +77,9 @@ backup() {
 }
 
 remove_old_backups() {
-  bullet "Deleting old backups...\n"
+  dotf-bullet "Deleting old backups...\n"
   backups_to_delete | while read name; do
-    bullet "Deleting $BLUE${name}$RESET... "
+    dotf-bullet "Deleting $BLUE${name}$RESET... "
 
     if adb_shell rm -rf $backup/$name; then
       success "done"
@@ -92,7 +92,7 @@ remove_old_backups() {
 }
 
 backups_to_delete() {
-  adb shell ls $backup/ | sort -r | tail -n+$((BACKUPS_TO_KEEP+1)) | tr -d '\r'
+  adb shell ls $backup/ | sort -r | tail -n+$((BACKUPS_TO_KEEP + 1)) | tr -d '\r'
   if [ $? -ne 0 ]; then
     error "Error getting backups to delete"
     exit 1
@@ -100,7 +100,7 @@ backups_to_delete() {
 }
 
 push_to_android() {
-  bullet "Copying files to $BLUE$target$RESET... "
+  dotf-bullet "Copying files to $BLUE$target$RESET... "
   info ""
 
   adb push $source $target > /tmp/push-to-android 2>&1

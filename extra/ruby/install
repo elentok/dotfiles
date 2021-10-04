@@ -36,7 +36,7 @@ install_rbenv() {
 }
 
 install_ruby() {
-  bullet "Installing ruby $RUBY_VERSION... "
+  dotf-bullet "Installing ruby $RUBY_VERSION... "
   if [ "`rbenv versions | grep $RUBY_VERSION`" == "" ]; then
     PATH="$(path_without_linuxbrew)" rbenv install $RUBY_VERSION
     rbenv global $RUBY_VERSION

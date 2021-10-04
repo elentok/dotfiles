@@ -93,7 +93,7 @@ function dotf-header() {
   esac
 }
 
-bullet() {
+dotf-bullet() {
   echo -e -n "${YELLOW}•$RESET $*"
 }
 

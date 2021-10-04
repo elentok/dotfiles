@@ -3,7 +3,7 @@
 source $DOTF/framework
 
 main() {
-  bullet "Installing pip3 packages $*... "
+  dotf-bullet "Installing pip3 packages $*... "
 
   die-if-pip-missing
   INSTALLED="$(pip3 list)"
@@ -14,7 +14,7 @@ main() {
     info " already installed."
   else
     echo
-    bullet "Installing $missing..."
+    dotf-bullet "Installing $missing..."
     pip3 install $missing --user $*
   fi
 }

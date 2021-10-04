@@ -10,7 +10,7 @@ main() {
 }
 
 install_gitconfig() {
-  bullet "Installing $GITCONFIG... "
+  dotf-bullet "Installing $GITCONFIG... "
   if [ -e "$GITCONFIG" ] || [ -h "$GITCONFIG" ]; then
     fix_existing_gitconfig
   else

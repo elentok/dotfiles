@@ -14,7 +14,7 @@ main() {
 }
 
 commit-if-needed() {
-  bullet 'Checking for changes... '
+  dotf-bullet 'Checking for changes... '
   if git-repo-is-dirty; then
     echo
     commit
@@ -24,7 +24,7 @@ commit-if-needed() {
 }
 
 commit() {
-  bullet "Commiting changes...\\n"
+  dotf-bullet "Commiting changes...\\n"
   date=$(date +%Y-%m-%d\ %H:%M)
   host=$(short-hostname)
   git add --all
@@ -33,12 +33,12 @@ commit() {
 }
 
 pull() {
-  bullet "Pulling changes... "
+  dotf-bullet "Pulling changes... "
   git pull --rebase
 }
 
 push() {
-  bullet "Pushing changes... "
+  dotf-bullet "Pushing changes... "
   git push
 }
 

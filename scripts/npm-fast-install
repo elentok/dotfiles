@@ -16,7 +16,7 @@ while [[ "${1:-}" =~ ^- ]]; do
 done
 
 function main() {
-  bullet "Installing npm packages: $*..."
+  dotf-bullet "Installing npm packages: $*..."
   die-if-npm-missing
   find-node-modules
   set-npm-command
@@ -26,7 +26,7 @@ function main() {
     info " already installed."
   else
     echo
-    bullet "Installing $missing..."
+    dotf-bullet "Installing $missing..."
     $NPM install $NPM_ARGS $missing
   fi
 }

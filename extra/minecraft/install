@@ -30,7 +30,7 @@ main() {
 }
 
 create-minecraft-user() {
-  bullet 'Creating minecraft user... '
+  dotf-bullet 'Creating minecraft user... '
   if user_exists minecraft; then
     info 'already exists.'
     return
@@ -46,7 +46,7 @@ is-spigot-server-installed() {
 install-spigot-server() {
   build-spigot-server
 
-  bullet 'Installing spigot server...'
+  dotf-bullet 'Installing spigot server...'
   as-minecraft mkdir -p "$SPIGOT_ROOT"
   sudo cp "${SPIGOT_TMP}/${SPIGOT_JAR_FILENAME}" "$SPIGOT_ROOT/"
   sudo cp "$DOTF/extra/minecraft/VERSION" "$SPIGOT_ROOT/VERSION"
@@ -60,14 +60,14 @@ install-spigot-server() {
 }
 
 update-spigot() {
-  bullet 'Updating spigot server...'
+  dotf-bullet 'Updating spigot server...'
   rm -rf "${SPIGOT_TMP}"
   build-spigot-server
   sudo cp "${SPIGOT_TMP}/${SPIGOT_JAR_FILENAME}" "$SPIGOT_ROOT/"
 }
 
 build-spigot-server() {
-  bullet 'Building spigot server...'
+  dotf-bullet 'Building spigot server...'
 
   # Build it
   mkdir -p "${SPIGOT_TMP}"

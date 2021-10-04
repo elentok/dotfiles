@@ -19,10 +19,10 @@ main() {
 
   dotf-header h2 "Install pip packages..."
 
-  bullet "Updating pip..."
+  dotf-bullet "Updating pip..."
   update-pip
 
-  bullet "Installing pip packages..."
+  dotf-bullet "Installing pip packages..."
   dotf-pkgs install pip
 
   dotf-header h2 "Installing Github packages..."

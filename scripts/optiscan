@@ -54,7 +54,7 @@ optimize() {
   local tmpfile1="$TMPDIR/optiscan1.$ext"
   local tmpfile2="$TMPDIR/optiscan2.$ext"
 
-  bullet "Optimizing $file... "
+  dotf-bullet "Optimizing $file... "
 
   if [ -e "$output" ]; then
     if ! confirm 'Output file exists, overwrite?'; then

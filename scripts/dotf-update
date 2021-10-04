@@ -22,7 +22,7 @@ else
   read -r -n 1
 
   if is_mac; then
-    bullet 'Updating brew... '
+    dotf-bullet 'Updating brew... '
     brew update
   fi
 

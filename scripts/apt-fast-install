@@ -3,14 +3,14 @@
 source "$DOTF/framework"
 
 main() {
-  bullet "Installing apt packages $*... "
+  dotf-bullet "Installing apt packages $*... "
   missing=$(find-missing-packages "$@")
 
   if [ -z "$missing" ]; then
     info " already installed."
   else
     echo
-    bullet "Installing missing packages: $missing...\\n"
+    dotf-bullet "Installing missing packages: $missing...\\n"
 
     if is_termux; then
       # shellcheck disable=SC2086
@@ -39,7 +39,7 @@ function find-already-installed() {
 }
 
 function all-installed-packages() {
-  dpkg --get-selections  | grep '\<install' | awk '{print $1}' | sed 's/:amd64//'
+  dpkg --get-selections | grep '\<install' | awk '{print $1}' | sed 's/:amd64//'
 }
 
 main "$@"

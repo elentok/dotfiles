@@ -22,7 +22,7 @@ function project-exclude-arg() {
   local root=$1
 
   if [ -e "$root/.ctagsignore" ]; then
-    bullet "Loading $root/.ctagsignore\n" >&2
+    dotf-bullet "Loading $root/.ctagsignore\n" >&2
     echo "--exclude=@$root/.ctagsignore"
   fi
 }

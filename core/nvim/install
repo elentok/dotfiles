@@ -31,7 +31,7 @@ install-symlinks() {
 }
 
 install-packer-plugins() {
-  bullet "Running PackerInstall... "
+  dotf-bullet "Running PackerInstall... "
   nvim-packer-sync
   success "done"
 }

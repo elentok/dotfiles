@@ -37,10 +37,10 @@ upload_single() {
   echo -e "${BLUE}Uploading ${local_file}...$RESET"
   s3cmd put "$local_file" "s3://$BUCKET_PATH/$name"
 
-  bullet "Setting Public ACL on ${local_file}..."
+  dotf-bullet "Setting Public ACL on ${local_file}..."
   s3cmd setacl "s3://$BUCKET_PATH/$name" --acl-public --verbose
 
-  bullet "Setting max-age to $MAX_AGE Public ACL on ${local_file}..."
+  dotf-bullet "Setting max-age to $MAX_AGE Public ACL on ${local_file}..."
   s3cmd modify "s3://$BUCKET_PATH/$name" --add-header=Cache-Control:max-age=$MAX_AGE
 }
 

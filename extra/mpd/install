@@ -35,10 +35,10 @@ install_on_mac() {
 }
 
 install_on_linux() {
-  bullet "Installing mpd + clients"
+  dotf-bullet "Installing mpd + clients"
   apt-fast-install mpd mpc ncmpcpp
 
-  bullet "Remove mpd from update-rc.d"
+  dotf-bullet "Remove mpd from update-rc.d"
   sudo update-rc.d -f mpd remove
 
   linux-add-to-startup --name="Music Player Daemon" \
@@ -47,7 +47,7 @@ install_on_linux() {
 }
 
 create_symlinks() {
-  bullet "Creating symlinks... "
+  dotf-bullet "Creating symlinks... "
   mkdir -p ~/.mpd/playlists/
   mkdir -p ~/.mpd/var/
   touch ~/.mpd/var/tag_cache
@@ -60,7 +60,7 @@ create_symlinks() {
 }
 
 build_config() {
-  bullet 'Building config file... '
+  dotf-bullet 'Building config file... '
   if [ -e ~/.mpd/mpd.conf ]; then
     backup ~/.mpd/mpd.conf
   fi

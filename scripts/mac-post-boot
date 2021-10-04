@@ -10,7 +10,7 @@ main() {
 }
 
 run_app() {
-  bullet "Starting $1... "
+  dotf-bullet "Starting $1... "
   if is_running "$1"; then
     info 'already started.'
   else
@@ -19,7 +19,7 @@ run_app() {
 }
 
 start_mpd() {
-  bullet 'Starting Music Player Daemon... '
+  dotf-bullet 'Starting Music Player Daemon... '
   if is_running mpd; then
     info 'Already running.'
   else
@@ -33,7 +33,7 @@ start_mpd() {
 }
 
 add_ssh_key() {
-  bullet "Add ssh key... "
+  dotf-bullet "Add ssh key... "
   if [ -z "$(ssh-add -l | grep '\.ssh/id_')" ]; then
     ssh-add
   else

@@ -29,13 +29,13 @@ main() {
 
   local filename="$AUTOSTART/${FILE}.desktop"
 
-  bullet "Creating ${filename}..."
+  dotf-bullet "Creating ${filename}..."
   if [ -e "$filename" ]; then
     info 'already exists'
     exit 0
   fi
 
-  cat > "${filename}" <<EOF
+  cat > "${filename}" << EOF
 [Desktop Entry]
 Encoding=UTF-8
 Type=Application

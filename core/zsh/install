@@ -17,12 +17,12 @@ function set_zsh_as_default_shell() {
     my_shell=$(echo "$SHELL" | rev | cut -d/ -f1 | rev)
     if [ "$my_shell" != "zsh" ]; then
       zsh_bin="$(which zsh)"
-      bullet "Changing shell to ${zsh_bin}... "
+      dotf-bullet "Changing shell to ${zsh_bin}... "
       chsh -s "$zsh_bin"
     fi
   else
     zsh_bin="$(which zsh)"
-    bullet "Changing user's shell to $zsh_bin... "
+    dotf-bullet "Changing user's shell to $zsh_bin... "
     if [[ "$SHELL" =~ /zsh ]]; then
       info 'already set'
     else
@@ -38,7 +38,7 @@ function install_symlinks() {
 }
 
 function install_fzf() {
-  bullet 'Installing FZF... '
+  dotf-bullet 'Installing FZF... '
   if [ -e ~/.fzf ]; then
     info 'already installed.'
   else
@@ -48,7 +48,7 @@ function install_fzf() {
 }
 
 reset_completion_cache() {
-  bullet 'Resetting completion cache...'
+  dotf-bullet 'Resetting completion cache...'
   rm -rf ~/.zcompcache
   rm -rf ~/.local/share/zcompcache
   rm -f ~/.zcompdump

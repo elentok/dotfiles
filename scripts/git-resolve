@@ -40,7 +40,7 @@ resolve-all() {
 resolve-first() {
   local first=$(git-conflicts | head -1)
 
-  bullet "Resolving ${YELLOW}$first${RESET}... "
+  dotf-bullet "Resolving ${YELLOW}$first${RESET}... "
 
   if has-conflicts "$first"; then
     conflicts=$(file-conflict-markers-count "$first")
