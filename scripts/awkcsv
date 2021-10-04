@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+sed 's/^\s*"//'  | sed 's/"\s*$//' | awk -F "\"*,\"*" "$@"
