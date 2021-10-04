@@ -57,7 +57,8 @@ to_uppercase() {
 
 # backup {{{1
 backup() {
-  dotf-info "\n  backing up to ${1}.backup"
+  echo
+  dotf-info "  backing up to ${1}.backup"
   mv -f "$1" "${1}.backup"
   if [ $? == 0 ]; then return; fi
 
@@ -74,7 +75,8 @@ symlink() {
   source=$1
   target=$2
 
-  dotf-bullet "Linking $source\n      ==> ${target}... "
+  dotf-bullet "Linking $source"
+  echo -ne "\n      ==> ${target}... "
   if [ -e "$target" ]; then
     if [ -h "$target" ]; then
       if [ "$source" == "$(readlink "$target")" ]; then
