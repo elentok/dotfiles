@@ -84,14 +84,38 @@ to_uppercase() {
 
 # display methods (header/bullet/info/success/error) {{{1
 title() {
-  echo -e "\\n${BLUE}$*"
-  # replace all characters with "="
-  echo "${*//?/=}"
+  echo -e "$YELLOW"
+  print-padded-border "$@"
   echo -e "$RESET"
 }
 
 header() {
-  echo -e "\\n${BLUE}${UNDERLINE}==== ${*^^} ====$RESET"
+  echo -e "$BLUE"
+  print-border "$@"
+  echo -e "$RESET"
+}
+
+print-padded-border() {
+  local text="$*"
+  # replace all characters with "="
+  local lines="${text//?/─}"
+  local spaces="${text//?/ }"
+
+  echo "┌───${lines}───┐"
+  echo "│   ${spaces}   │"
+  echo "│   ${text}   │"
+  echo "│   ${spaces}   │"
+  echo "└───${lines}───┘"
+}
+
+print-border() {
+  local text="$*"
+  # replace all characters with "="
+  local lines="${text//?/─}"
+
+  echo "┌─${lines}─┐"
+  echo "│ ${text} │"
+  echo "└─${lines}─┘"
 }
 
 bullet() {

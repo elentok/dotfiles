@@ -9,13 +9,25 @@ benchmark-start
 main() {
   cd "$DOTF"
 
-  install-prerequisits
+  title "Starting DOTF INSTALL"
 
-  git submodule update --init --recursive
-  update-pip
+  header "Installing apt packages..."
   dotf-pkgs install apt
+
+  header "Updating git submodules..."
+  git submodule update --init --recursive
+
+  header "Install pip packages..."
+
+  bullet "Updating pip..."
+  update-pip
+
+  bullet "Installing pip packages..."
   dotf-pkgs install pip
+
+  header "Installing Github packages..."
   dotf-github install
+
   dotf-component nodejs
   dotf-pkgs install npm
   dotf-component git zsh nvim ripgrep tig bash tmux vifm
@@ -28,12 +40,6 @@ main() {
   npm install
 
   show-done
-}
-
-install-prerequisits() {
-  if is_debian; then
-    apt-fast-install unzip build-essential
-  fi
 }
 
 update-pip() {
