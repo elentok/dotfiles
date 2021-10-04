@@ -67,6 +67,13 @@ function build-luarocks() {
 }
 
 function install-lua-language-server() {
+  header 'Installing Lua Language Server'
+
+  if ! has-gcc-10; then
+    echo "WARNING: The lua language server requires gcc-10 at least, skipping."
+    return
+  fi
+
   if ! app-exists lua-language-server $LSP_VERSION; then
     build-lua-language-server
   fi
@@ -76,11 +83,6 @@ function install-lua-language-server() {
 
 function build-lua-language-server() {
   header 'Building Lua Language Server'
-
-  if ! has-gcc-10; then
-    echo "WARNING: The lua language server requires gcc-10 at least, skipping."
-    return
-  fi
 
   app_dir="$(app-prepare-dir lua-language-server $LSP_VERSION)"
 
