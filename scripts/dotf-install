@@ -9,15 +9,15 @@ benchmark-start
 main() {
   cd "$DOTF"
 
-  title "Starting DOTF INSTALL"
+  dotf-header h1 "Setting up dotfiles..."
 
-  header "Installing apt packages..."
+  dotf-header h2 "Installing apt packages..."
   dotf-pkgs install apt
 
-  header "Updating git submodules..."
+  dotf-header h2 "Updating git submodules..."
   git submodule update --init --recursive
 
-  header "Install pip packages..."
+  dotf-header h2 "Install pip packages..."
 
   bullet "Updating pip..."
   update-pip
@@ -25,7 +25,7 @@ main() {
   bullet "Installing pip packages..."
   dotf-pkgs install pip
 
-  header "Installing Github packages..."
+  dotf-header h2 "Installing Github packages..."
   dotf-github install
 
   dotf-component nodejs
@@ -36,7 +36,7 @@ main() {
     dotf-component osx-tuning iterm
   fi
 
-  header 'npm install'
+  dotf-header h2 'Running npm install...'
   npm install
 
   show-done

@@ -4,10 +4,10 @@ set -euo pipefail
 
 source "$DOTF/framework"
 
-header "Updating dotfiles"
+dotf-header h1 "Updating dotfiles..."
 cd "$DOTF"
 
-bullet "Pulling changes... "
+dotf-header h2 "Pulling changes... "
 old_head=$(git rev-parse HEAD)
 git pull
 new_head=$(git rev-parse HEAD)

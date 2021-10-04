@@ -5,7 +5,7 @@ set -e
 source "$DOTF/framework"
 
 main() {
-  title 'Git Sync'
+  dotf-header h1 'Git Sync'
 
   commit-if-needed
   pull

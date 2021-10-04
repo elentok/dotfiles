@@ -2,23 +2,27 @@
 
 source "$DOTF/framework"
 
-header 'Setting up ssh agent'
+dotf-header h1 'Good morning :-)'
+
+dotf-header h2 'Setting up ssh agent...'
 agent setup
 
-header 'Add ssh key'
+dotf-header h2 'Add ssh key...'
 ssh-add
 
 if [ -e "$DOTL/scripts/morning-local" ]; then
   "$DOTL/scripts/morning-local"
 fi
 
-header 'Updating dotlocal'
+dotf-header h2 'Updating dotlocal...'
 cd ~/.dotlocal && git pull
 
-header 'Updating dotfiles'
+dotf-header h2 'Updating dotfiles...'
 dotf update
 
 if [ -e "$HOME/notes" ]; then
-  header 'Syncing notes'
+  dotf-header h2 'Syncing notes...'
   (cd ~/notes && git sync)
 fi
+
+dotf-header h1 'Have a wonderful day :-)'

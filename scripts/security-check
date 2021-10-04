@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework
+source "$DOTF/framework"
 
 main() {
+  dotf-header h1 'Security check'
   check_sudo
   check_sshd
 }
 
 check_sudo() {
-  title 'Sudo'
+  dotf-header h2 'Checking sudo...'
   check_sudo_group_in_sudoers
 
   if user_has_group sudo; then
@@ -25,7 +26,7 @@ check_sudo_group_in_sudoers() {
     success 'Sudoers include the sudo group'
   else
     error 'Sudoers do not include the sudo group'
-    echo '  Run `visudo` and add the following line:'
+    echo '  Run "visudo" and add the following line:'
     echo
     echo '    %sudo ALL=(ALL:ALL) ALL'
     echo
@@ -37,7 +38,7 @@ is_sudo_group_in_sudoers() {
 }
 
 check_sshd() {
-  title 'SSH Server'
+  dotf-header h2 'Checking SSH Server...'
 
   check_sshd_port
   check_sshd_root_login
@@ -83,8 +84,8 @@ check_sshd_port() {
 
 get_sshd_setting() {
   local pattern="^$1[[:space:]]+"
-  grep -E "$pattern" /etc/ssh/sshd_config | sed -E "s/$pattern//" | \
-    sed -E "s/[[:space:]]+$//"
+  grep -E "$pattern" /etc/ssh/sshd_config | sed -E "s/$pattern//" \
+    | sed -E "s/[[:space:]]+$//"
 }
 
 main "$@"

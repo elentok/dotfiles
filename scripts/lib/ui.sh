@@ -13,56 +13,84 @@ export UNDERLINE="\\033[4m"
 export RESET="\\033[0m"
 export CLEAR_LINE="\\r\\033[K"
 
-function color-green() {
-  echo -e "$GREEN"
-}
-
-function color-blue() {
-  echo -e "$BLUE"
-}
-
-function color-reset() {
-  echo -e "$RESET"
+function dotf-color() {
+  case "$1" in
+    black) echo -ne "\\033[30m" ;;
+    gray) echo -ne "\\033[1;30m" ;;
+    red) echo -ne "\\033[31m" ;;
+    green) echo -ne "\\033[32m" ;;
+    yellow) echo -ne "\\033[33m" ;;
+    blue) echo -ne "\\033[34m" ;;
+    purple) echo -ne "\\033[35m" ;;
+    cyan) echo -ne "\\033[36m" ;;
+    underline) echo -ne "\\033[4m" ;;
+    reset) echo -ne "\\033[0m" ;;
+  esac
 }
 
 # Special Characters {{{1
 
 export HOURGLASS="⏳ "
 
-# Display methods (header/bullet/info/success/error) {{{1
-title() {
-  echo -e "$YELLOW"
-  print-padded-border "$@"
-  echo -e "$RESET"
-}
+# Border {{{1
 
-header() {
-  echo -e "$BLUE"
-  print-border "$@"
-  echo -e "$RESET"
-}
+function dotf-border() {
+  if [ $# -lt 3 ]; then
+    echo "Usage: dotf-border <normal|padded> <color> <text>"
+    return 1
+  fi
+  local type="$1"
+  local color="$2"
+  shift 2
 
-print-padded-border() {
+  dotf-color "$color"
+
   local text="$*"
-  # replace all characters with "="
-  local lines="${text//?/─}"
-  local spaces="${text//?/ }"
 
-  echo "┌───${lines}───┐"
-  echo "│   ${spaces}   │"
-  echo "│   ${text}   │"
-  echo "│   ${spaces}   │"
-  echo "└───${lines}───┘"
+  if [ "$type" = 'padded' ]; then
+    text="    ${text}    "
+    local lines="${text//?/─}"
+    local spaces="${text//?/ }"
+    echo "┌─${lines}─┐"
+    echo "│ ${spaces} │"
+    echo "│ ${text} │"
+    echo "│ ${spaces} │"
+    echo "└─${lines}─┘"
+  else
+    text="  ${text}  "
+    local lines="${text//?/─}"
+    echo "┌─${lines}─┐"
+    echo "│ ${text} │"
+    echo "└─${lines}─┘"
+  fi
+
+  dotf-color reset
 }
 
-print-border() {
-  local text="$*"
-  # replace all characters with "="
-  local lines="${text//?/─}"
+# Print {{{1
+function dotf-header() {
+  if [ $# -lt 1 ]; then
+    echo "Usage: dotf-header <h1|h2|h3> <text>"
+    return 1
+  fi
 
-  echo "┌─${lines}─┐"
-  echo "│ ${text} │"
-  echo "└─${lines}─┘"
+  local level="$1"
+  shift
+
+  case "$level" in
+    h1) dotf-border padded yellow "   $*   " ;;
+    h2) dotf-border normal blue "  $*  " ;;
+    h3) dotf-border normal purple "$@" ;;
+    demo)
+      dotf-header h1 "Header 1"
+      dotf-header h2 "Header 2"
+      dotf-header h3 "Header 3"
+      ;;
+    *)
+      echo "ERROR: Invalid header argument '$level' for dotf-header"
+      return 1
+      ;;
+  esac
 }
 
 bullet() {

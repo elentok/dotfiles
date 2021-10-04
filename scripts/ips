@@ -4,6 +4,6 @@ source "$DOTF/framework"
 
 ip addr \
   | grep -E '(^[0-9]|inet |inet6 )' \
-  | sed -E "s/^([0-9]: [^:]*).*/$(color-blue)\\1$(color-reset)/" \
-  | sed -E "s/(inet [^ ]+).*/$(color-green)\\1$(color-reset)/" \
-  | sed -E 's/(inet6 [^ ]+).*/\1/' \
+  | sed -E "s/^([0-9]: [^:]*).*/$(dotf-color blue)\\1$(dotf-color reset)/" \
+  | sed -E "s/(inet [^ ]+).*/$(dotf-color green)\\1$(dotf-color reset)/" \
+  | sed -E 's/(inet6 [^ ]+).*/\1/'

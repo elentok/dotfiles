@@ -2,10 +2,12 @@
 
 source "$DOTF/framework"
 
-header 'General'
-echo "Dotfiles Plugins: $(command ls -1 "$DOTF/plugins" | wc -l)"
-echo "Neovim Plugins:   $(grep -c " use" "$DOTF/core/nvim/lua/elentok/plugins.lua")"
+dotf-header h1 'Dotfiles Stats'
 
-header 'Scripts'
+dotf-header h2 'General'
+echo "Dotfiles Plugins: $(command ls -1 "$DOTF/plugins" | wc -l)"
+echo "Neovim Plugins:   $(grep -c " use" "$DOTF/core/nvim/lua/elentok/packer-plugins.lua")"
+
+dotf-header h2 'Scripts'
 find "$DOTF/scripts" -maxdepth 1 -type f -exec head -1 '{}' \; \
   | sort | uniq -c | sort -nr

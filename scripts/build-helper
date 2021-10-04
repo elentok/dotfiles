@@ -13,7 +13,7 @@ function prepare_build() {
   BUILD_DIR=$TMP/build/$NAME
   INSTALL_DIR=$INSTALL_ROOT/$NAME/$VERSION
 
-  header "Building $NAME $VERSION"
+  dotf-header h2 "Building $NAME $VERSION..."
 
   mkdir -p "$INSTALL_DIR"
 

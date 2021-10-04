@@ -5,7 +5,7 @@ source $DOTF/framework
 function main() {
   ROOT=$(find-parent-with .git tags Gemfile)
 
-  header "Generating ctags for ${ROOT}"
+  dotf-header h2 "Generating ctags for ${ROOT}"
 
   ctags -R --c++-kinds=+p --fields=+ilaS --extra=+q \
     --exclude=@$DOTF/core/nvim/ctags/ignore \

@@ -30,40 +30,49 @@ function install-pkgs() {
   case "$1" in
     apt)
       if is_linux; then
+        dotf-header h2 'Installing apt packages...'
         apt-fast-install "$(get-pkgs apt)"
 
         if [ "$HAS_GUI" = 'yes' ]; then
+          dotf-header h2 'Installing apt-gui packages...'
           apt-fast-install "$(get-pkgs apt-gui)"
         fi
 
         if [ "${KDE:-}" = 'yes' ]; then
+          dotf-header h2 'Installing apt-kde packages...'
           apt-fast-install "$(get-pkgs apt-kde)"
         fi
       elif is_mac; then
+        dotf-header h2 'Installing brew packages...'
         for pkg in $(get-pkgs brew); do
           brew_install "$pkg"
         done
       elif is_termux; then
+        dotf-header h2 'Installing termux packages...'
         apt-fast-install "$(get-pkgs termux)"
       fi
       ;;
 
     pip)
+      dotf-header h2 'Installing pip packages...'
       pip-fast-install "$(get-pkgs pip)"
       ;;
 
     npm)
+      dotf-header h2 'Installing npm packages...'
       npm-fast-install "$(get-pkgs npm)"
       ;;
   esac
 }
 
 function upgrade-pkgs() {
-  header 'Updating pip packages'
+  dotf-header h2 'Updating packages...'
+
+  dotf-header h3 'Updating pip packages...'
   # shellcheck disable=SC2046
   pip3 install --upgrade --user $(get-pkgs pip)
 
-  header 'Updating npm packages'
+  dotf-header h3 'Updating npm packages...'
   if is-n-providing-node; then
     npm="npm"
   else

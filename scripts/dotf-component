@@ -28,7 +28,7 @@ install-component() {
     exit 1
   fi
 
-  title "$1"
+  dotf-header h2 "$1"
   benchmark-start "$1"
   $filename
 
