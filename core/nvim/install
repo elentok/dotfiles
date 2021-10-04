@@ -5,8 +5,13 @@ set -euo pipefail
 source "$DOTF/framework"
 
 main() {
-  if is_arm; then
-    PRIMARY=yes "$DOTF/core/nvim/build"
+  if command_missing nvim; then
+    if is_arm; then
+      PRIMARY=yes "$DOTF/core/nvim/build"
+    else
+      echo "ERROR: The 'nvim' command is missing,"
+      echo "       it was supposed to be installed by dotf-github"
+    fi
   fi
 
   install-symlinks
