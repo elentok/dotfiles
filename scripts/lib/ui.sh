@@ -107,7 +107,7 @@ function dotf-header() {
 }
 
 dotf-bullet() {
-  echo "$(dotf-color yellow •) $*"
+  echo -n "$(dotf-color yellow •) $*"
 }
 
 dotf-info() {
