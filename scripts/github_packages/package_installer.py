@@ -1,5 +1,5 @@
 import os
-from os import path, remove
+from os import path
 from typing import Optional
 
 from . import github, helpers
@@ -33,11 +33,16 @@ class PackageInstaller:
         AssetInstaller(self.package, asset, self.force_prerelease).install()
 
     def update(self):
-        print(f"* Updating {self.package.name}...")
+        package = self.package
+        print(f"* Updating {package.name}...")
+        if package.platform is None:
+            print(f"* {package.name} is not supported on this platform, skipping")
+            return
+
         asset = self.fetch_latest_asset()
 
         if self.should_update(asset):
-            AssetInstaller(self.package, asset).install()
+            AssetInstaller(package, asset).install()
 
     def should_update(self, asset: github.Asset):
         installed_tag_name = self.installed_tag_name()
