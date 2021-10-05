@@ -11,23 +11,29 @@ function main() {
   command="${1:-status}"
 
   case "$command" in
-    l|list)
+    ls)
       list-commits
       ;;
-    a|add)
+    a | add)
       add-files
       ;;
-    s|status)
+    s | status)
       hg status --change "$(pick-commit)"
       ;;
-    c|copy)
+    c | copy)
       pick-commit | yank-osc52
       ;;
-    d|diff)
+    l | log)
+      while true; do
+        hg diff --change "$(pick-commit)" | delta
+      done
+      ;;
+    d | diff)
       hg diff --change "$(pick-commit)" | delta
       ;;
-    r|revert)
+    r | revert)
       pick-files-to-revert | xargs hg revert
+      ;;
   esac
 }
 
