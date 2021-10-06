@@ -6,7 +6,7 @@ if saga == nil then
   return
 end
 
-saga.init_lsp_saga()
+saga.init_lsp_saga({code_action_prompt = {enable = false}})
 
 map.normal("gh", ":Lspsaga lsp_finder<cr>")
 map.normal("<Leader>ca", ":Lspsaga code_action<cr>")
