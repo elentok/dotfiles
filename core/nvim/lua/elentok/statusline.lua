@@ -42,6 +42,15 @@ end
 
 M.add_path_shortener(vim.env.HOME, "~")
 
+function M.set_in_progress(text)
+  vim.b.statusline_in_progress = text
+  vim.o.statusline = vim.o.statusline -- force redraw of the statusline.
+end
+
+function _G.StatusLineInProgress()
+  return vim.b.statusline_in_progress or ""
+end
+
 _G.StatusLineFileName = M.filename
 
 vim.o.statusline = table.concat({
@@ -50,6 +59,7 @@ vim.o.statusline = table.concat({
   "%< ", "%{&modified?' +':''}", "%{&readonly?' ':''}",
   -- Separation point between left and right aligned items.
   "%= ", -- Filetype.
+  " %{v:lua.StatusLineInProgress()}", -- Operation in progress (e.g. formatting)
   " [%{''!=#&filetype?&filetype:'none'}]", -- Line number + column number.
   " %l:%v"
 })

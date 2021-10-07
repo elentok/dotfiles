@@ -1,5 +1,6 @@
 local util = require("elentok/util")
 local message = require("elentok/message")
+local statusline = require("elentok/statusline")
 
 local M = {}
 
@@ -89,6 +90,7 @@ local function post_format(success)
     restore_views(vim.fn.bufnr())
   end
   vim.b.is_formatting = false
+  statusline.set_in_progress("")
 end
 
 local function run_formatter(cmd)
@@ -132,6 +134,8 @@ function M.format(formatter)
   if formatter == nil or formatter == "" then
     formatter = formatter_by_filetype[util.buf_get_filetype()] or "lsp"
   end
+
+  statusline.set_in_progress("[FORMATTING (" .. formatter .. ")...]")
 
   util.log("Formatting with " .. formatter)
   local cmd = formatter_cmds[formatter]
