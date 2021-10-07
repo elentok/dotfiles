@@ -104,7 +104,11 @@ local function run_formatter(cmd)
     stdin = lines,
     callback = function(exitcode, stdout, stderr)
       if exitcode ~= 0 then
-        put("Error formatting:", stderr[1])
+        if stderr then
+          put("Error formatting:", stderr[1])
+        else
+          put("Error formatting: no stderr")
+        end
         message.show("Formatting Error", vim.list_extend(stderr, stdout),
                      {mode = "error"})
         post_format(false)
