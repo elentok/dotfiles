@@ -1,6 +1,7 @@
 vim.g.markdown_folding = true
 
 vim.opt.foldlevel = 1
+vim.opt.relativenumber = true
 
 vim.opt.formatoptions = table.concat({
   "b", -- Auto-wrap only if not already longer than text width
