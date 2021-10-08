@@ -53,11 +53,12 @@ function unpack() {
   if [ -e "$name" ]; then
     rm -rf "$name.old"
     mv "$name" "$name.old"
-    mkdir "$name"
-    cd "$name"
-    tar xzvf "$tgz_file"
-    npm install --production
   fi
+
+  mkdir "$name"
+  cd "$name"
+  tar xzvf "$tgz_file"
+  npm install --production
 }
 
 main "$@"
