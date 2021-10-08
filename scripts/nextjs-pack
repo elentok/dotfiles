@@ -44,7 +44,7 @@ function pack() {
 }
 
 function unpack() {
-  local tgz_file="$(realpath 1)"
+  local tgz_file="$(realpath "$1")"
   local tgz_basename="$(basename "$tgz_file")"
   local name="${tgz_basename/.tar.gz/}"
 
