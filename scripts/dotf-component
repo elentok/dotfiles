@@ -29,7 +29,7 @@ install-component() {
     exit 1
   fi
 
-  dotf-header h2 "Setting up component: $name..."
+  dotf-header h2 "[dotf-component] Setting up: $name..."
   benchmark-start "$name"
   $filename
 

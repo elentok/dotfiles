@@ -11,7 +11,7 @@ LSP_VERSION=master
 LUA_ROOT="$(app-dir lua ${LUA_VERSION})"
 
 function main() {
-  dotf-header h2 'Installing Lua (for neovim)...'
+  dotf-header h2 '[nvim-lua] Installing Lua...'
 
   install-lua
   install-luarocks
@@ -39,7 +39,7 @@ function install-luarocks() {
 }
 
 function build-lua() {
-  dotf-header h3 'Building Lua...'
+  dotf-header h3 '[nvim-lua] Building Lua...'
   build_dir="$(app-prepare-build-dir lua)"
   app_dir="$(app-prepare-dir lua $LUA_VERSION)"
 
@@ -52,7 +52,7 @@ function build-lua() {
 }
 
 function build-luarocks() {
-  dotf-header h3 'Building Lua Rocks...'
+  dotf-header h3 '[nvim-lua] Building Lua Rocks...'
   build_dir="$(app-prepare-build-dir luarocks)"
   app_dir="$(app-prepare-dir luarocks $LUAROCKS_VERSION)"
 
@@ -67,7 +67,7 @@ function build-luarocks() {
 }
 
 function install-lua-language-server() {
-  dotf-header h3 'Installing Lua Language Server...'
+  dotf-header h3 '[nvim-lua] Installing Lua Language Server...'
 
   if ! has-gcc-10; then
     echo "WARNING: The lua language server requires gcc-10 at least, skipping."
@@ -82,7 +82,7 @@ function install-lua-language-server() {
 }
 
 function build-lua-language-server() {
-  dotf-header h3 'Building Lua Language Server...'
+  dotf-header h3 '[nvim-lua] Building Lua Language Server...'
 
   app_dir="$(app-prepare-dir lua-language-server $LSP_VERSION)"
 
