@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+#
+# Usage:
+#
+#   nextjs-pack pack
+#   nextjs-pack unpack <file.tar.gz>
+
+set -euo pipefail
+
+NEXT_APPS_ROOT="$HOME/.next-apps"
+
+function main() {
+  local cmd="${1:-}"
+  shift || true
+
+  case "$cmd" in
+    pack)
+      pack "$@"
+      ;;
+    unpack)
+      unpack "$@"
+      ;;
+    *)
+      usage "$0"
+      ;;
+  esac
+
+}
+
+function pack() {
+  local name
+  name="$(basename "$PWD")"
+
+  npm run build
+
+  tgz_file="$name.tar.gz"
+  if [ -e "$tgz_file" ]; then
+    rm -rf "$tgz_file"
+  fi
+  tar czvf "$tgz_file" package.json package-lock.json .next
+
+  echo
+  echo "Created $tgz_file."
+}
+
+function unpack() {
+  local tgz_file="$1"
+  local tgz_basename="$(basename "$tgz_file")"
+  local name="${tgz_basename/.tar.gz/}"
+
+  mkdir -p "$NEXT_APPS_ROOT"
+  cd "$NEXT_APPS_ROOT"
+  if [ -e "$name" ]; then
+    rm -rf "$name.old"
+    mv "$name" "$name.old"
+    mkdir "$name"
+    cd "$name"
+    tar xzvf "$tgz_file"
+    npm install --production
+  fi
+}
+
+main "$@"
