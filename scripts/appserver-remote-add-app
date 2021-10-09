@@ -2,7 +2,7 @@
 #
 # Usage:
 #
-#   appserver-add-app <host> <name> <user> <cmd>
+#   appserver-add-app <host> <name> <user> <workdir> <cmd>
 
 set -euo pipefail
 

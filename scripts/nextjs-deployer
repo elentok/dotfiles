@@ -18,13 +18,13 @@ function main() {
 
   case "$cmd" in
     deploy)
-      deploy "$@"
+      nextjs-deploy "$@"
       ;;
     pack)
-      pack "$@"
+      nextjs-pack "$@"
       ;;
     unpack)
-      unpack "$@"
+      nextjs-unpack "$@"
       ;;
     *)
       usage "$0"
@@ -32,23 +32,22 @@ function main() {
   esac
 }
 
-
-function deploy() {
+function nextjs-deploy() {
   local name="$1"
   local host="$2"
 
   # 1. Pack
-  # pack "$name"
+  nextjs-pack "$name"
 
   # 2. Upload
-  # ssh -t "$host" sudo rm -f "/tmp/${name}.tar.gz"
-  # scp "${name}.tar.gz" "${host}:/tmp"
+  ssh -t "$host" sudo rm -f "/tmp/${name}.tar.gz"
+  scp "${name}.tar.gz" "${host}:/tmp"
 
   # 3. Unpack
   ssh -t "$host" nextjs-deployer unpack "/tmp/${name}.tar.gz"
 }
 
-function pack() {
+function nextjs-pack() {
   local name
   if [ $# -gt 0 ]; then
     name="$1"
@@ -68,7 +67,7 @@ function pack() {
   echo "Created $tgz_file."
 }
 
-function unpack() {
+function nextjs-unpack() {
   local tgz_file
   tgz_file="$(realpath "$1")"
 

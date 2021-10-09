@@ -2,7 +2,7 @@
 #
 # Usage:
 #
-#   appserver-add-app <name> <user> <cmd>
+#   appserver-add-app <name> <user> <workdir> <cmd>
 
 set -euo pipefail
 
@@ -16,7 +16,8 @@ main() {
 
   export NAME="$1"
   export USER="$2"
-  export CMD="$3"
+  export WORKDIR="$3"
+  export CMD="$4"
 
   export GROUP="$USER"
 
@@ -26,6 +27,7 @@ main() {
   if ! user_exists "$USER"; then
     sudo useradd "$USER" --create-home -g "$GROUP"
   fi
+  add_user_to_group "nodejs" "$USER"
   add_user_to_group "$GROUP" # add my own user to the group
 
   create-user-bashrc
@@ -65,6 +67,7 @@ Requires=network.target
 [Service]
 User=${USER}
 ExecStart=${CMD}
+WorkingDirectory=${WORKDIR}
 ExecReload=/bin/kill -HUP \$MAINPID
 Restart=on-failure
 
