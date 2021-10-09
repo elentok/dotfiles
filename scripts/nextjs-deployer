@@ -2,8 +2,9 @@
 #
 # Usage:
 #
-#   nextjs-pack pack
-#   nextjs-pack unpack <file.tar.gz>
+#   nextjs-deployer deploy <appname> <host>
+#   nextjs-deployer pack [optional: appname]
+#   nextjs-deployer unpack <file.tar.gz>
 
 set -euo pipefail
 
@@ -16,6 +17,9 @@ function main() {
   shift || true
 
   case "$cmd" in
+    deploy)
+      deploy "$@"
+      ;;
     pack)
       pack "$@"
       ;;
@@ -26,12 +30,31 @@ function main() {
       usage "$0"
       ;;
   esac
+}
 
+
+function deploy() {
+  local name="$1"
+  local host="$2"
+
+  # 1. Pack
+  pack "$name"
+
+  # 2. Upload
+  ssh "$host" rm -f "/tmp/${name}.tar.gz"
+  scp "${name}.tar.gz" "${host}:/tmp"
+
+  # 3. Unpack
+  ssh "$host" nextjs-deployer unpack "/tmp/${name}.tar.gz"
 }
 
 function pack() {
   local name
-  name="$(basename "$PWD")"
+  if [ $# -gt 0 ]; then
+    name="$1"
+  else
+    name="$(basename "$PWD")"
+  fi
 
   npm run build
 
