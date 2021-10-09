@@ -24,7 +24,8 @@ commit-if-needed() {
 }
 
 commit() {
-  dotf-bullet "Commiting changes...\\n"
+  dotf-bullet "Commiting changes..."
+  echo
   date=$(date +%Y-%m-%d\ %H:%M)
   host=$(short-hostname)
   git add --all
