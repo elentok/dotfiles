@@ -67,7 +67,7 @@ Requires=network.target
 
 [Service]
 User=${USER}
-ExecStart=${CMD}
+ExecStart=/bin/bash -l -c "${CMD}"
 WorkingDirectory=${WORKDIR}
 ExecReload=/bin/kill -HUP \$MAINPID
 Restart=on-failure
