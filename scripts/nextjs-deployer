@@ -38,14 +38,14 @@ function deploy() {
   local host="$2"
 
   # 1. Pack
-  pack "$name"
+  # pack "$name"
 
   # 2. Upload
-  ssh "$host" rm -f "/tmp/${name}.tar.gz"
-  scp "${name}.tar.gz" "${host}:/tmp"
+  # ssh -t "$host" sudo rm -f "/tmp/${name}.tar.gz"
+  # scp "${name}.tar.gz" "${host}:/tmp"
 
   # 3. Unpack
-  ssh "$host" nextjs-deployer unpack "/tmp/${name}.tar.gz"
+  ssh -t "$host" nextjs-deployer unpack "/tmp/${name}.tar.gz"
 }
 
 function pack() {
@@ -80,11 +80,11 @@ function unpack() {
   sudo chgrp nodejs "$NEXT_APPS_ROOT"
   cd "$NEXT_APPS_ROOT"
   if [ -e "$name" ]; then
-    rm -rf "$name.old"
-    mv "$name" "$name.old"
+    sudo rm -rf "$name.old"
+    sudo mv "$name" "$name.old"
   fi
 
-  mkdir "$name"
+  sudo mkdir "$name"
   cd "$name"
   sudo tar xzvf "$tgz_file"
   sudo "$NPM" install --production
