@@ -69,7 +69,7 @@ function pack() {
 }
 
 function unpack() {
-  lovsl tgz_file
+  local tgz_file
   tgz_file="$(realpath "$1")"
 
   local tgz_basename
