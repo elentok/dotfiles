@@ -15,10 +15,11 @@ main() {
   export HOST="$1"
   export NAME="$2"
   export USER="$3"
-  export CMD="$4"
+  export WORKDIR="$4"
+  export CMD="$5"
 
   ssh -t "$HOST" "appserver-setup"
-  ssh -t "$HOST" appserver-add-app "$NAME" "$USER" "$CMD"
+  ssh -t "$HOST" appserver-add-app "$NAME" "$USER" "$WORKDIR" "$CMD"
 }
 
 main "$@"

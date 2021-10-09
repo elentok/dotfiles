@@ -17,7 +17,8 @@ main() {
   export NAME="$1"
   export USER="$2"
   export WORKDIR="$3"
-  export CMD="$4"
+  shift 3
+  export CMD="$*"
 
   export GROUP="$USER"
 
