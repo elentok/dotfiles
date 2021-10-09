@@ -75,18 +75,36 @@ function nextjs-unpack() {
   tgz_basename="$(basename "$tgz_file")"
   local name="${tgz_basename/.tar.gz/}"
 
+  # 1. Setup directory
+  nextjs-setup-directory "$name"
+
+  # 2. Extract
+  sudo tar xzvf "$tgz_file"
+
+  # 3. Run npm install
+  sudo bash -c 'PATH="/opt/n/bin:$PATH" && npm install --production'
+
+  # 4. Restart service
+  sudo systemctl restart "$name"
+}
+
+function nextjs-setup-directory() {
+  local name="$1"
+
+  # 1. Prepare root directory
   sudo mkdir -p "$NEXT_APPS_ROOT"
   sudo chgrp nodejs "$NEXT_APPS_ROOT"
   cd "$NEXT_APPS_ROOT"
+
+  # 2. Backup old app directory (if exists)
   if [ -e "$name" ]; then
     sudo rm -rf "$name.old"
     sudo mv "$name" "$name.old"
   fi
 
+  # 3. Create new app directory
   sudo mkdir "$name"
   cd "$name"
-  sudo tar xzvf "$tgz_file"
-  sudo bash -c 'PATH="/opt/n/bin:$PATH" && npm install --production'
 }
 
 main "$@"
