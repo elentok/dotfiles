@@ -7,7 +7,9 @@
 
 set -euo pipefail
 
-NEXT_APPS_ROOT="$HOME/.next-apps"
+NEXT_APPS_ROOT="/opt/next-apps"
+NODE_ROOT="/opt/n"
+NPM="$NODE_ROOT/bin/npm"
 
 function main() {
   local cmd="${1:-}"
@@ -44,11 +46,15 @@ function pack() {
 }
 
 function unpack() {
-  local tgz_file="$(realpath "$1")"
-  local tgz_basename="$(basename "$tgz_file")"
+  lovsl tgz_file
+  tgz_file="$(realpath "$1")"
+
+  local tgz_basename
+  tgz_basename="$(basename "$tgz_file")"
   local name="${tgz_basename/.tar.gz/}"
 
-  mkdir -p "$NEXT_APPS_ROOT"
+  sudo mkdir -p "$NEXT_APPS_ROOT"
+  sudo chgrp nodejs "$NEXT_APPS_ROOT"
   cd "$NEXT_APPS_ROOT"
   if [ -e "$name" ]; then
     rm -rf "$name.old"
@@ -57,8 +63,8 @@ function unpack() {
 
   mkdir "$name"
   cd "$name"
-  tar xzvf "$tgz_file"
-  npm install --production
+  sudo tar xzvf "$tgz_file"
+  sudo "$NPM" install --production
 }
 
 main "$@"
