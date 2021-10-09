@@ -86,7 +86,7 @@ function nextjs-unpack() {
   sudo mkdir "$name"
   cd "$name"
   sudo tar xzvf "$tgz_file"
-  sudo "$NPM" install --production
+  sudo bash -c 'PATH="/opt/n/bin:$PATH" && npm install --production'
 }
 
 main "$@"
