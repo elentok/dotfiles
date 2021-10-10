@@ -1,4 +1,7 @@
 vim.g.markdown_folding = true
+vim.g.markdown_fenced_languages = {
+  "vim", "lua", "typescript", "javascript", "python", "html", "css"
+}
 
 vim.opt.foldlevel = 1
 vim.opt.relativenumber = true
