@@ -1,3 +1,52 @@
 #!/usr/bin/env python3
 
-print("New DOTF script placeholder")
+import sys
+import os
+from lib.paths import find_components
+from pathlib import Path
+
+
+def main():
+    subcommand = sys.argv[1] if len(sys.argv) > 1 else None
+    if subcommand in ["i", "install"]:
+        install()
+    elif subcommand in ["u", "update"]:
+        update()
+    elif subcommand in ["l", "list"]:
+        list_components()
+    else:
+        usage()
+
+
+def install():
+    components = sys.argv[2:]
+    if len(components) == 0:
+        os.system("dotf-install")
+    else:
+        os.system("dotf-component " + " ".join(components))
+
+
+def update():
+    os.system("update")
+
+
+def list_components():
+    for component in find_components():
+        print(component.name)
+
+
+def usage():
+    print(
+        """
+Usage:
+
+    dotf2 list
+    dotf2 install
+    dotf2 update
+
+"""
+    )
+
+
+if __name__ == "__main__":
+    main()
