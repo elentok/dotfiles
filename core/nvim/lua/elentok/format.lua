@@ -6,7 +6,7 @@ local M = {}
 
 -- Formatter commands.
 local formatter_cmds = {
-  black = "black --quiet --stdin-filename % - 2>/dev/null",
+  black = "black --quiet --stdin-filename % -",
   clang = "clang-format --style=Google --assume-filename %",
   luaformat = "lua-format --config=$HOME/.lua-format",
   -- Using "prettierd" instead of "prettier" because it runs as a daemon so its
