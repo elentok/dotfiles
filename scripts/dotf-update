@@ -26,6 +26,8 @@ else
     brew update
   fi
 
+  "$DOTF/bootstrap.sh"
+
   dotf-install
   update-stuff
 fi

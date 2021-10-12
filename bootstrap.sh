@@ -5,6 +5,10 @@
 
 set -euo pipefail
 
+DOTF="$(dirname "${BASH_SOURCE[0]-$0}")"
+DOTF="$(cd "$DOTF" && pwd)"
+export DOTF
+
 function main() {
   echo "=================================================="
   echo "Checking requirements are installed..."
@@ -25,9 +29,9 @@ function main() {
   echo
 
   if [ "${1:-}" = "dotf2" ]; then
-    dotf2 install
+    "$DOTF/core/scripts/dotf2" install
   else
-    dotf install
+    "$DOTF/scripts/dotf" install
   fi
 }
 
