@@ -109,7 +109,8 @@ local function run_formatter(cmd)
         else
           put("Error formatting: no stderr")
         end
-        message.show("Formatting Error", vim.list_extend(stderr, stdout),
+        message.show("Formatting Error",
+                     vim.list_extend(stderr or {}, stdout or {}),
                      {mode = "error"})
         post_format(false)
       else
