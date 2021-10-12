@@ -69,6 +69,8 @@ return require("packer").startup({
     use "elentok/replace-all.vim"
     use "jamessan/vim-gnupg"
     use "davidbeckingsale/writegood.vim"
+    use {"sotte/presenting.vim"} -- Presentation tool
+    use {"hkupty/iron.nvim"} -- REPL
 
     -- Toggles words (e.g. true/false, top/bottom)
     use {
@@ -83,10 +85,6 @@ return require("packer").startup({
 
     -- dark/zen room, no distraction mode
     use {"junegunn/goyo.vim", opt = true, cmd = "Goyo"}
-
-    -- Presentation tool
-    use {"sotte/presenting.vim"}
-
   end,
   config = {
     display = {open_fn = require("packer.util").float}
