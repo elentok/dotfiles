@@ -199,6 +199,7 @@ export LUAROCKS_ROOT="$HOME/.apps/all/luarocks/default"
 
 # PATH {{{1
 PATH="$DOTF/scripts:\
+$DOTF/core/scripts:\
 $DOTL/scripts"
 
 if [ "$DOTF_CONFIG_NODE_PROVIDER" = "n" ]; then
