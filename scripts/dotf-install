@@ -16,9 +16,6 @@ main() {
   dotf-header h2 "[dotf-install] Updating git submodules..."
   git submodule update --init --recursive
 
-  dotf-bullet "Updating pip..."
-  update-pip
-
   dotf-bullet "Installing pip packages..."
   dotf-pkgs install pip
 
@@ -37,23 +34,6 @@ main() {
   npm install
 
   show-done
-}
-
-update-pip() {
-  if command_missing pip3; then
-    if is_termux; then
-      apt-fast-install python
-    elif is_debian; then
-      apt-fast-install python3 python3-pip
-    elif is_mac; then
-      brew_install python3
-    else
-      echo 'TODO: support installing pip3'
-      exit 1
-    fi
-  fi
-
-  pip3 install pip --upgrade --user
 }
 
 show-done() {
