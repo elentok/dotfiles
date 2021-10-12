@@ -2,8 +2,11 @@
 
 import sys
 import os
-from lib.paths import find_components
-from pathlib import Path
+from lib.paths import DOTF, find_components
+from importlib import import_module
+from typing import cast, Any
+
+sys.path.append(str(DOTF))
 
 
 def main():
@@ -23,7 +26,11 @@ def install():
     if len(components) == 0:
         os.system("dotf-install")
     else:
-        os.system("dotf-component " + " ".join(components))
+        for component in components:
+            module = cast(Any, import_module(f"core.{component}.install"))
+            module.install()
+
+        # os.system("dotf-component " + " ".join(components))
 
 
 def update():
