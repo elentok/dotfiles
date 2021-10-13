@@ -57,7 +57,6 @@ return require("packer").startup({
     -- Misc.
     use "junegunn/vim-easy-align"
     use "mhinz/vim-signify"
-    use "mhinz/vim-grepper"
     use "michaeljsmith/vim-indent-object"
     use "nathanaelkane/vim-indent-guides"
     use "nelstrom/vim-visual-star-search"
