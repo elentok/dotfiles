@@ -90,6 +90,7 @@ local function post_format(success)
     restore_views(vim.fn.bufnr())
   end
   vim.b.is_formatting = false
+  vim.bo.modifiable = true
   statusline.set_in_progress("")
 end
 
@@ -99,6 +100,7 @@ local function run_formatter(cmd)
 
   util.log("[run_formatter] cmd = ", cmd)
 
+  vim.bo.modifiable = false -- lock the buffer while formatting in the bg.
   local lines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
   util.shell(cmd, {
     stdin = lines,
@@ -123,6 +125,7 @@ local function run_formatter(cmd)
           table.remove(stdout, length)
         end
 
+        vim.bo.modifiable = true
         vim.api.nvim_buf_set_lines(0, 0, -1, false, stdout)
         post_format(true)
       end
