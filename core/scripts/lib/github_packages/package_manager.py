@@ -6,7 +6,7 @@ from typing import List
 from .package import Package
 from .package_installer import PackageInstaller
 
-DOTF = path.join(path.dirname(__file__), "..", "..")
+DOTF = path.join(path.dirname(__file__), "..", "..", "..", "..")
 CONFIG_FILENAME = path.join(DOTF, "config", "dotf-github.json")
 
 

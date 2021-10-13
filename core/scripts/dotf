@@ -4,34 +4,22 @@
 #
 # Usage:
 #
-#   dotf list                               - lists components
 #   dotf install                            - installs all components
 #   dotf install [component] [component]... - install specific components
 #   dotf update                             - pulls from git and reruns install
 #
 
-source "$(dirname "$0")/../framework"
+source "$(dirname "$0")/../../framework"
 
 main() {
   cmd="${1:-}"
   shift || true
   case "$cmd" in
-    list | l) list-components ;;
     install | i) install "$@" ;;
     update | u) dotf-update ;;
     stats | s) dotf-stats ;;
     *) usage "$0" ;;
   esac
-}
-
-list-components() {
-  (
-    echo vim
-    echo zsh
-    /bin/ls -1 "$DOTF/core"
-    /bin/ls -1 "$DOTF/extra"
-    /bin/ls -1 "$DOTL/plugins" 2> /dev/null
-  ) | sort
 }
 
 install() {
