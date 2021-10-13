@@ -11,6 +11,7 @@ source "$DOTF/core/zsh/config.sh"
 source_if_exists "$DOTL/zsh/config.sh"
 
 source "$DOTF/core/scripts/lib/os.sh"
+source "$DOTF/core/scripts/lib/helpers.sh"
 
 # Shell {{{1
 function is_zsh() {
@@ -39,20 +40,6 @@ with_cache() {
   fi
 
   $cache_command "$cache_file"
-}
-
-# Check if command exists {{{1
-has_command() {
-  type "$1" > /dev/null 2>&1
-}
-
-command_missing() {
-  ! has_command "$1"
-}
-
-# Check if process is running {{{1
-is_running() {
-  ps cax | grep "$1" > /dev/null 2>&1
 }
 
 # TMP
