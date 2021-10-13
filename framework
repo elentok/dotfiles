@@ -10,7 +10,7 @@ DOTF="$(cd "$DOTF" && pwd)"
 export DOTF
 
 source "$DOTF/core/zsh/core.sh"
-source "$DOTF/scripts/lib/ui.sh"
+source "$DOTF/core/scripts/lib/ui.sh"
 
 # Machine varibles {{{1
 MACHINE_VARFILE=$HOME/.config/machine
@@ -552,21 +552,13 @@ filesize() {
 # Services {{{1
 service-start() {
   dotf-bullet "Starting service $1... "
-  if is_arch; then
-    sudo systemctl start $1
-  else
-    sudo service $1 start
-  fi
+  sudo service "$1" start
   show_result
 }
 
 service-stop() {
   dotf-bullet "Stopping service $1... "
-  if is_arch; then
-    sudo systemctl stop $1
-  else
-    sudo service $1 stop
-  fi
+  sudo service "$1" stop
   show_result
 }
 

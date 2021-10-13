@@ -3,25 +3,23 @@
 source $DOTF/framework
 
 main() {
-  if is_arch; then
-    arch-netinfo
-  fi
+  netinfo
 }
 
-arch-netinfo() {
-  arch-devices | while read device; do
+netinfo() {
+  devices | while read device; do
     echo "$device:"
-    echo "  ip:  $(arch-device-ip $device)"
+    echo "  ip:  $(device-ip $device)"
     echo "  mac: $(cat /sys/class/net/$device/address)"
     echo
   done
 }
 
-arch-devices() {
+devices() {
   /bin/ls -1 /sys/class/net
 }
 
-arch-device-ip() {
+device-ip() {
   ip addr show "$1" | grep 'inet ' | awk '{print $2}'
 }
 
