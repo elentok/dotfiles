@@ -98,7 +98,7 @@ install_package() {
   if is_mac; then
     brew_install "${BREW:-$1}"
   else
-    apt-fast-install "${APT:-$1}"
+    dotf-apt "${APT:-$1}"
   fi
 }
 
@@ -275,7 +275,7 @@ apt-fast-add-repo() {
   else
     # required for add-apt-repository
     dotf-bullet "[Add PPA]: Installing prerequisits..."
-    apt-fast-install software-properties-common apt-transport-https gnupg wget
+    dotf-apt software-properties-common apt-transport-https gnupg wget
     dotf-bullet "[Add PPA]: Calling add-apt-repository ..."
     sudo add-apt-repository -y "${1}"
     dotf-bullet "[Add PPA]: Calling apt-get update..."

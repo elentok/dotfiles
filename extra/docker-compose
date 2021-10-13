@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework
+source "$DOTF/framework"
 
-pip-fast-install setuptools docker-compose
+dotf-pip setuptools docker-compose

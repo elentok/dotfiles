@@ -4,4 +4,4 @@ set -euo pipefail
 
 pkgname="$(apt-cache pkgnames | sort | fzf)"
 
-apt-fast-install "$pkgname"
+dotf-apt "$pkgname"

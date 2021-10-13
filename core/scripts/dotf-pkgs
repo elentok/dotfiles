@@ -31,16 +31,16 @@ function install-pkgs() {
     apt)
       if is_linux; then
         dotf-header h2 '[dotf-pkgs] Installing apt packages...'
-        apt-fast-install "$(get-pkgs apt)"
+        dotf-apt "$(get-pkgs apt)"
 
         if has_command X; then
           dotf-header h2 '[dotf-pkgs] Installing apt-gui packages...'
-          apt-fast-install "$(get-pkgs apt-gui)"
+          dotf-apt "$(get-pkgs apt-gui)"
         fi
 
         if [ "${KDE:-}" = 'yes' ]; then
           dotf-header h2 '[dotf-pkgs] Installing apt-kde packages...'
-          apt-fast-install "$(get-pkgs apt-kde)"
+          dotf-apt "$(get-pkgs apt-kde)"
         fi
       elif is_mac; then
         dotf-header h2 '[dotf-pkgs] Installing brew packages...'
@@ -49,18 +49,18 @@ function install-pkgs() {
         done
       elif is_termux; then
         dotf-header h2 '[dotf-pkgs] Installing termux packages...'
-        apt-fast-install "$(get-pkgs termux)"
+        dotf-apt "$(get-pkgs termux)"
       fi
       ;;
 
     pip)
       dotf-header h2 '[dotf-pkgs] Installing pip packages...'
-      pip-fast-install "$(get-pkgs pip)"
+      dotf-pip "$(get-pkgs pip)"
       ;;
 
     npm)
       dotf-header h2 '[dotf-pkgs] Installing npm packages...'
-      npm-fast-install "$(get-pkgs npm)"
+      dotf-npm "$(get-pkgs npm)"
       ;;
   esac
 }

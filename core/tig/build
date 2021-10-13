@@ -8,7 +8,7 @@ source "$DOTF/scripts/build-helper"
 prepare_build tig 2.5.1 "$*"
 
 if is_debian; then
-  apt-fast-install libncursesw5-dev build-essential
+  dotf-apt libncursesw5-dev build-essential
 fi
 
 BASENAME=tig-$VERSION

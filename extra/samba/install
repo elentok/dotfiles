@@ -12,7 +12,7 @@ main() {
 
   dotf-header h2 "Samba sharing"
 
-  apt-fast-install samba
+  dotf-apt samba
 
   init_samba_username
   create_group sambashare

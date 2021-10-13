@@ -15,7 +15,7 @@ main() {
 install_requirements() {
   if is_debian; then
     # As instructed in https://github.com/rbenv/ruby-build/wiki
-    apt-fast-install autoconf bison build-essential libssl-dev libyaml-dev \
+    dotf-apt autoconf bison build-essential libssl-dev libyaml-dev \
       libreadline-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev \
       ruby-dev liblzma-dev
     # libgdbm5 libreadline6-dev

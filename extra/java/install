@@ -17,7 +17,7 @@ main() {
   echo
   apt-fast-add-repo https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
   echo
-  apt-fast-install adoptopenjdk-16-hotspot
+  dotf-apt adoptopenjdk-16-hotspot
 }
 
 main "$@"

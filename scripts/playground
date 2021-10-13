@@ -16,7 +16,7 @@ main() {
   shift
 
   if [ -z "$(which parallelshell)" ]; then
-    npm-fast-install parallelshell
+    dotf-npm parallelshell
   fi
 
   case "$cmd" in

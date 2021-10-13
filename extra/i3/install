@@ -26,7 +26,7 @@ main() {
 }
 
 install_i3() {
-  apt-fast-install i3 rofi dmenu
+  dotf-apt i3 rofi dmenu
 }
 
 install_symlinks() {
@@ -59,7 +59,7 @@ fix_nemo_desktop() {
 }
 
 install_utils() {
-  apt-fast-install pavucontrol xscreensaver \
+  dotf-apt pavucontrol xscreensaver \
     light-locker gksu lightdm-gtk-greeter-settings \
     xfce4 xfce4-screenshooter ristretto xfce4-clipman
 }

@@ -4,7 +4,7 @@ source $DOTF/framework
 
 function main() {
   if command_missing fish; then
-    apt-fast-install fish
+    dotf-apt fish
     # $DOTF/extra/fish/build
   fi
 

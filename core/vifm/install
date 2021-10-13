@@ -6,11 +6,6 @@ if command_missing vifm; then
   PRIMARY=yes "$DOTF/core/vifm/build"
 fi
 
-if is_debian; then
-  apt-fast-install fim ffmpeg
-  pip-fast-install visidata
-fi
-
 mkdir -p ~/.vifm/colors
 symlink "$DOTF/core/vifm/vifmrc" "$HOME/.vifm/vifmrc"
 symlink "$DOTF/core/vifm/gruvbox.vifm" "$HOME/.vifm/colors/gruvbox.vifm"

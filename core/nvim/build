@@ -8,7 +8,7 @@ source "$DOTF/scripts/build-helper"
 prepare_build neovim v0.5.1 "$*"
 
 if is_debian; then
-  apt-fast-install ninja-build gettext libtool libtool-bin autoconf \
+  dotf-apt ninja-build gettext libtool libtool-bin autoconf \
     automake cmake g++ pkg-config unzip
 elif is_mac; then
   brew_install ninja
