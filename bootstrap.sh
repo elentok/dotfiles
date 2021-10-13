@@ -24,15 +24,11 @@ function main() {
   git submodule update --init --recursive
 
   echo
-  echo "All requirements are ready, running dotf install."
+  echo "All requirements are ready, running dotf bootstrap."
   echo "=================================================="
   echo
 
-  if [ "${1:-}" = "dotf2" ]; then
-    "$DOTF/core/scripts/dotf2" install
-  else
-    "$DOTF/scripts/dotf" install
-  fi
+  "$DOTF/core/scripts/dotf" bootstrap
 }
 
 function install-if-missing() {

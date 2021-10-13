@@ -15,19 +15,12 @@ main() {
   cmd="${1:-}"
   shift || true
   case "$cmd" in
-    install | i) install "$@" ;;
+    b | bootstrap) dotf-bootstrap ;;
+    i | install) dotf-component "$@" ;;
     update | u) dotf-update ;;
     stats | s) dotf-stats ;;
     *) usage "$0" ;;
   esac
-}
-
-install() {
-  if [ $# -eq 0 ]; then
-    dotf-install
-  else
-    dotf-component "$@"
-  fi
 }
 
 main "$@"
