@@ -66,7 +66,6 @@ return require("packer").startup({
     use "nvim-lua/popup.nvim"
     use "nvim-lua/plenary.nvim"
     use "AndrewRadev/splitjoin.vim"
-    use "elentok/replace-all.vim"
     use "jamessan/vim-gnupg"
     use "davidbeckingsale/writegood.vim"
     use {"sotte/presenting.vim"} -- Presentation tool
