@@ -28,6 +28,5 @@ else
 
   "$DOTF/bootstrap.sh"
 
-  dotf-install
   update-stuff
 fi

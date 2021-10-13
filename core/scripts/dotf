@@ -4,7 +4,7 @@
 #
 # Usage:
 #
-#   dotf install                            - installs all components
+#   dotf bootstrap                          - installs all components
 #   dotf install [component] [component]... - install specific components
 #   dotf update                             - pulls from git and reruns install
 #
@@ -17,8 +17,8 @@ main() {
   case "$cmd" in
     b | bootstrap) dotf-bootstrap ;;
     i | install) dotf-component "$@" ;;
-    update | u) dotf-update ;;
-    stats | s) dotf-stats ;;
+    u | update) dotf-update ;;
+    s | stats) dotf-stats ;;
     *) usage "$0" ;;
   esac
 }

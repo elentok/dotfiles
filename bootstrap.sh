@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# This scripts makes sure all requirements to run "dotf install"
+# This scripts makes sure all requirements to run "dotf bootstrap"
 # script are installed and then runs it.
 
 set -euo pipefail

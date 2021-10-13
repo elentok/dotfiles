@@ -9,7 +9,7 @@
 cd ~
 
 # mac comes with a built-in git
-if [ "`uname -s`" != "Darwin" ]; then
+if [ "$(uname -s)" != "Darwin" ]; then
   echo "========================================"
   echo "Installing git"
   sudo apt-get install git
@@ -27,4 +27,4 @@ git clone $repo_root .dotfiles
 echo "========================================"
 echo "Installing"
 cd ~/.dotfiles
-./scripts/dotf install
+./bootstrap.sh
