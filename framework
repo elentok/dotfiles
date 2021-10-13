@@ -11,6 +11,7 @@ export DOTF
 
 source "$DOTF/core/zsh/core.sh"
 source "$DOTF/core/scripts/lib/ui.sh"
+source "$DOTF/core/scripts/lib/benchmark.sh"
 
 # Machine varibles {{{1
 MACHINE_VARFILE=$HOME/.config/machine
@@ -38,21 +39,6 @@ store_variable() {
 
 escape_variable() {
   echo -n "$1" | sed "s/'/\\\\'/g"
-}
-
-# Identify OS {{{1
-if command_missing X; then
-  export HAS_GUI=no
-else
-  export HAS_GUI=yes
-fi
-
-to_uppercase() {
-  if [ $# -gt 0 ]; then
-    echo "$@" | awk '{print toupper($0)}'
-  else
-    awk '{print toupper($0)}'
-  fi
 }
 
 # backup {{{1
@@ -535,18 +521,9 @@ function find-parent-with() {
 }
 
 # helpers {{{1
-trim() {
-  sed -E 's/(^\s+|\s+$)//g'
-}
-
 device-for() {
-  mountpoint="$1"
-  diskutil info "$1" | grep 'Device Node' | cut -d: -f2 | trim
-}
-
-# Files {{{1
-filesize() {
-  stat -c%s "$1"
+  local mountpoint="$1"
+  diskutil info "$mountpoint" | grep 'Device Node' | cut -d: -f2 | dotf-trim
 }
 
 # Services {{{1
@@ -639,33 +616,3 @@ function app-set-default() {
 
   symlink "$source" "$target"
 }
-
-# Benchmark {{{1
-
-if [[ "${BASH_VERSION:-}" =~ ^3.* ]]; then
-  benchmark-start() {
-    echo
-  }
-
-  benchmark-stop() {
-    echo
-  }
-else
-  declare -A BENCHMARKS=()
-
-  benchmark-start() {
-    key=${1:-GLOBAL}
-    BENCHMARKS[$key]=$SECONDS
-  }
-
-  benchmark-stop() {
-    key=${1:-GLOBAL}
-    duration=$(($SECONDS * 1000 - BENCHMARKS[$key] * 1000))
-    if [[ $duration > 1000 ]]; then
-      duration=$(($duration / 1000))
-      printf '%.2fs' $duration
-    else
-      printf '%.2fms' $duration
-    fi
-  }
-fi

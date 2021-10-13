@@ -62,7 +62,8 @@ optimize() {
     fi
   fi
 
-  local original_size=$(filesize $file)
+  local original_size
+  original_size=$(dotf-filesize "$file")
 
   if [ "$RESIZE" != "no" ]; then
     convert -resize "$RESIZE"\> "$file" "$tmpfile1"
@@ -73,7 +74,8 @@ optimize() {
   convert -colors $COLORS "$tmpfile1" "$tmpfile2"
   convert -depth $DEPTH "$tmpfile2" "$output"
 
-  local optimized_size=$(filesize $output)
+  local optimized_size
+  optimized_size=$(dotf-filesize "$output")
 
   local kb=$((optimized_size / 1024))
   local percentage_of_original=$(($optimized_size * 100 / $original_size))

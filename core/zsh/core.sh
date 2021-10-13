@@ -3,7 +3,7 @@ export DOTL=~/.dotlocal
 
 # Helper: Source If Exists {{{1
 source_if_exists() {
-  if [ -e "$1" ]; then source $1; fi
+  if [ -e "$1" ]; then source "$1"; fi
 }
 
 # Load Configuration {{{1

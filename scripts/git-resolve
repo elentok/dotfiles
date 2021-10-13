@@ -69,7 +69,7 @@ has-conflicts() {
 }
 
 file-conflict-markers-count() {
-  grep -E '^(<<<<<<<|>>>>>>>|=======)' "$1" | wc -l | trim
+  grep -E '^(<<<<<<<|>>>>>>>|=======)' "$1" | wc -l | dotf-trim
 }
 
 describe-conflicts() {

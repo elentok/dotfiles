@@ -33,7 +33,7 @@ function install-pkgs() {
         dotf-header h2 '[dotf-pkgs] Installing apt packages...'
         apt-fast-install "$(get-pkgs apt)"
 
-        if [ "$HAS_GUI" = 'yes' ]; then
+        if has_command X; then
           dotf-header h2 '[dotf-pkgs] Installing apt-gui packages...'
           apt-fast-install "$(get-pkgs apt-gui)"
         fi
