@@ -19,4 +19,7 @@ end
 
 util.augroup("QuickFix", [[
   autocmd FileType qf silent lua setup_quickfix()
+
+  autocmd QuickFixCmdPost [^l]* cwindow
+  autocmd QuickFixCmdPost l* lwindow
 ]])

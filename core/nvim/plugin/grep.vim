@@ -37,3 +37,4 @@ elseif executable("ag")
   set grepprg=ag\ --nogroup\ --nocolor
 endif
 
+cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
