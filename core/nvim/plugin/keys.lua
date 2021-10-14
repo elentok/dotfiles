@@ -14,3 +14,6 @@ map.normal("<Leader>ym",
 -- Signify
 map.normal("<Leader>vl", ":SignifyHunkDiff<cr>")
 map.normal("<Leader>vt", ":SignifyToggleHighlight<cr>")
+
+-- Misc
+map.normal("<Leader>tm", ":set modifiable!<cr>:set modifiable?<cr>")
