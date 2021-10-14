@@ -58,7 +58,7 @@ function file-owner() {
 }
 
 function is-gnu-stat() {
-  if is_mac; then
+  if dotf-is-mac; then
     [[ "$(which stat)" =~ /gnubin/ ]]
   else
     return 0
@@ -112,7 +112,7 @@ if [ -d "$BREW_HOME/share/app-engine-go-64/goroot" ]; then
   export GOPATH=$GOPATH:$BREW_HOME/share/app-engine-go-64/goroot
 fi
 
-if is_mac; then
+if dotf-is-mac; then
   export CGO_CPPFLAGS="-I $BREW_HOME/include"
   export CGO_LDFLAGS="-L $BREW_HOME/lib"
 fi
@@ -231,7 +231,7 @@ export RIPGREP_CONFIG_PATH="$DOTF/core/ripgrep/ripgreprc"
 # - Source file not found (https://github.com/koalaman/shellcheck/wiki/SC1091)
 export SHELLCHECK_OPTS="-e SC1090,SC1091"
 
-if is_mac; then
+if dotf-is-mac; then
   JAVA_HOME="$(/usr/libexec/java_home 2> /dev/null)"
   export JAVA_HOME
 fi

@@ -6,7 +6,7 @@ available-versions() {
   rbenv install --list | grep -v 'Available versions' | sed -E 's/^\s+//'
 }
 
-if is_mac; then
+if dotf-is-mac; then
   brew upgrade rbenv ruby-build || true
 else
   echo 'Updating rbenv...'

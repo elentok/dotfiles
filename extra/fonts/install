@@ -2,7 +2,7 @@
 
 source "$DOTF/framework"
 
-if is_mac; then
+if dotf-is-mac; then
   font_dir="$HOME/Library/Fonts"
 else
   font_dir="$HOME/.fonts"
@@ -19,7 +19,7 @@ if [ ! -e "$font_dir/CascadiaMonoPL.ttf" ]; then
 fi
 
 # For linux
-if is_linux; then
+if dotf-is-linux; then
   dotf-bullet "Updating font cache"
   fc-cache -v -f "$font_dir"
 fi

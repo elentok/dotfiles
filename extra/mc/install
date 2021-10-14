@@ -3,7 +3,7 @@
 source "$DOTF/framework"
 
 main() {
-  if is_mac; then
+  if dotf-is-mac; then
     brew_install mc
   else
     dotf-apt mc

@@ -11,16 +11,17 @@ else
   export OS=linux
 fi
 
-is_mac() {
+dotf-is-mac() {
   [ "$OS" = "mac" ]
 }
-is_linux() {
+
+dotf-is-linux() {
   [ "$OS" = "linux" ]
 }
 
 # Identify Linux Distro {{{1
 export DISTRO=''
-if is_linux; then
+if dotf-is-linux; then
   if [[ "$HOME" =~ termux ]]; then
     export DISTRO=termux
   elif [ -f /etc/arch-release ]; then
@@ -47,7 +48,7 @@ is_debian() {
 # Identify WSL {{{1
 export IS_WSL=no
 
-if is_linux; then
+if dotf-is-linux; then
   if ! is_termux; then
     if [[ "$(cat /proc/version)" =~ 'microsoft' ]]; then
       export IS_WSL=yes

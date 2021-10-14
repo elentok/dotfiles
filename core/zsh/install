@@ -13,7 +13,7 @@ function main() {
 }
 
 function set_zsh_as_default_shell() {
-  if is_mac; then
+  if dotf-is-mac; then
     my_shell=$(echo "$SHELL" | rev | cut -d/ -f1 | rev)
     if [ "$my_shell" != "zsh" ]; then
       zsh_bin="$(which zsh)"

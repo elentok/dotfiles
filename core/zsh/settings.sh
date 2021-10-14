@@ -85,7 +85,7 @@ if is_wsl; then
   function open() {
     explorer.exe "$@"
   }
-elif is_linux; then
+elif dotf-is-linux; then
   function open() {
     xdg-open "$@"
   }

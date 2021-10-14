@@ -29,7 +29,7 @@ function main() {
 function install-pkgs() {
   case "$1" in
     apt)
-      if is_linux; then
+      if dotf-is-linux; then
         dotf-header h2 '[dotf-pkgs] Installing apt packages...'
         dotf-apt "$(get-pkgs apt)"
 
@@ -42,7 +42,7 @@ function install-pkgs() {
           dotf-header h2 '[dotf-pkgs] Installing apt-kde packages...'
           dotf-apt "$(get-pkgs apt-kde)"
         fi
-      elif is_mac; then
+      elif dotf-is-mac; then
         dotf-header h2 '[dotf-pkgs] Installing brew packages...'
         for pkg in $(get-pkgs brew); do
           brew_install "$pkg"

@@ -95,7 +95,7 @@ install_package() {
 
   while extract_flag "${1:-}"; do shift; done
 
-  if is_mac; then
+  if dotf-is-mac; then
     brew_install "${BREW:-$1}"
   else
     dotf-apt "${APT:-$1}"

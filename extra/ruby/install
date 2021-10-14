@@ -23,7 +23,7 @@ install_requirements() {
 }
 
 install_rbenv() {
-  if is_mac; then
+  if dotf-is-mac; then
     brew_install rbenv
     brew_install ruby-build
   else

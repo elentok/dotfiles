@@ -7,7 +7,7 @@ source "$DOTF/framework"
 VERSION=3.4.1
 
 main() {
-  if is_mac; then
+  if dotf-is-mac; then
     brew_install ffmpeg
   elif command_missing ffmpeg; then
     install_ffmpeg_binaries

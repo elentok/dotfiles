@@ -5,7 +5,7 @@ source $(dirname $0)/../../framework
 main() {
   setup_vars
 
-  if is_mac; then
+  if dotf-is-mac; then
     install_on_mac
   else
     install_on_linux

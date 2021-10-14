@@ -10,9 +10,9 @@ source $DOTF/core/zsh/core.sh
 
 if is_wsl; then
   explorer.exe "$@"
-elif is_linux; then
+elif dotf-is-linux; then
   xdg-open "$@"
-elif is_mac; then
+elif dotf-is-mac; then
   open "$@"
 else
   echo 'ERROR: no idea how to open this file (not linux, mac or wsl)'

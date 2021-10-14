@@ -23,6 +23,11 @@ function main() {
   echo "- Updating git submodules..."
   git submodule update --init --recursive
 
+  if dotf-is-mac; then
+    echo '- Updating brew... '
+    brew update
+  fi
+
   echo
   echo "All requirements are ready, running dotf bootstrap."
   echo "=================================================="

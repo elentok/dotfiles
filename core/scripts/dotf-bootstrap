@@ -26,7 +26,7 @@ main() {
   dotf-pkgs install npm
   dotf-component git zsh nvim ripgrep tig bash tmux vifm
 
-  if is_mac; then
+  if dotf-is-mac; then
     dotf-component osx-tuning iterm
   fi
 

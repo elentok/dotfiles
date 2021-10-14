@@ -3,7 +3,7 @@
 source "$DOTF/framework"
 
 main() {
-  if is_linux; then
+  if dotf-is-linux; then
     dotf-apt openssh-server
   fi
 

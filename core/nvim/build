@@ -10,7 +10,7 @@ prepare_build neovim v0.5.1 "$*"
 if is_debian; then
   dotf-apt ninja-build gettext libtool libtool-bin autoconf \
     automake cmake g++ pkg-config unzip
-elif is_mac; then
+elif dotf-is-mac; then
   brew_install ninja
   brew_install libtool
   brew_install automake

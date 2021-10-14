@@ -21,11 +21,6 @@ else
   echo -ne "\\nPress any key to run the installer..."
   read -r -n 1
 
-  if is_mac; then
-    dotf-bullet 'Updating brew... '
-    brew update
-  fi
-
   "$DOTF/bootstrap.sh"
 
   update-stuff

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # vim: foldmethod=marker
 
-if is_mac; then
+if dotf-is-mac; then
   unalias s
 elif is_wsl; then
   alias code='/mnt/c/Program\ Files/Microsoft\ VS\ Code/code.exe'
@@ -136,7 +136,7 @@ function iosapp() {
 }
 
 # Mac/Linux {{{1
-if is_mac; then
+if dotf-is-mac; then
   alias hda='hdiutil attach'
   alias hdd='hdiutil detach'
   alias hdi='hdiutil info'

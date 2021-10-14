@@ -10,7 +10,7 @@ main() {
 
   if is_debian; then
     dotf-apt pandoc
-  elif is_mac; then
+  elif dotf-is-mac; then
     PRIMARY=yes install_on_mac
   fi
 }
