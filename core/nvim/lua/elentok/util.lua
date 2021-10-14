@@ -180,4 +180,14 @@ function M.tabpage_get_buf_win_number(tabnr, bufnr)
 end
 _G.put = M.put
 
+function M.add_dirs(tbl, dirs)
+  for _, dir in ipairs(dirs) do
+    if vim.fn.isdirectory(dir) == 1 then
+      table.insert(tbl, dir)
+    end
+  end
+
+  return tbl
+end
+
 return M
