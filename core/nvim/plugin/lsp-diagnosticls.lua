@@ -1,10 +1,13 @@
 local lspconfig = require("lspconfig")
+local config = require("elentok/config")
+local filetypes = {"sh", "python", "lua", "css", "html", "markdown"}
+
+if config.enable_jsts_prettier then
+  vim.list_extend(filetypes, {"javascript", "typescript", "typescriptreact"})
+end
 
 lspconfig.diagnosticls.setup {
-  filetypes = {
-    "sh", "python", "lua", "css", "html", "javascript", "markdown",
-    "typescript", "typescriptreact"
-  },
+  filetypes = filetypes,
   init_options = {
     filetypes = {sh = "shellcheck"},
     formatFiletypes = {
