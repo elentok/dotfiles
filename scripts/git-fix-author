@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+#
+# Usage: git-fix-author <name> <new-email> <old-email>
+#
+# More details:
+#
+# - https://stackoverflow.com/questions/58263216/how-to-change-commit-author-for-multiple-commits-using-filter-branch
+# - https://git-scm.com/docs/gitmailmap#_examples
+
+set -euo pipefail
+
+if [ $# -lt 2 ]; then
+  usage "$0"
+  exit 1
+fi
+
+name="$1"
+new_author_email="$2"
+old_author_email="$3"
+
+dotf-pip git-filter-repo
+
+rm -rf "$TMP/mailmap"
+echo "$name <$new_author_email> <$old_author_email>" > "$TMP/mailmap"
+
+git-filter-repo --mailmap "$TMP/mailmap"
+
+# git filter-branch --env-filter "
+#   if [ \"\$GIT_AUTHOR_EMAIL\" = \"$old_author_email\" ]; then
+#     GIT_AUTHOR_EMAIL=$new_author_email
+#   fi
+
+#   if [ \"\$GIT_COMMITTER_EMAIL\" = \"$old_author_email\" ]; then
+#     GIT_COMMITTER_EMAIL=$new_author_email
+#   fi
+# " -- --all
