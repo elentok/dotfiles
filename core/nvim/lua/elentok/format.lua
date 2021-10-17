@@ -184,15 +184,19 @@ function M.set_format_on_save(filetype, enabled)
   format_on_save_by_filetype[filetype] = enabled
 end
 
-vim.cmd([[
-  command! -nargs=? Format lua require('elentok/format').format('<args>')
-  command! ResetFormatter lua vim.b.is_formatting = false
-  command! Prettier Format prettier
-  command! ClangFormat Format clang
-]])
+-- vim.cmd([[
+--   command! -nargs=? Format lua require('elentok/format').format('<args>')
+--   command! ResetFormatter lua vim.b.is_formatting = false
+--   command! Prettier Format prettier
+--   command! ClangFormat Format clang
+-- ]])
+
+-- util.augroup("Format", [[
+--   autocmd BufWritePost * lua require('elentok/format').format_on_save()
+-- ]])
 
 util.augroup("Format", [[
-  autocmd BufWritePost * lua require('elentok/format').format_on_save()
+  autocmd BufWritePre * lua vim.lsp.buf.formatting_seq_sync()
 ]])
 
 return M

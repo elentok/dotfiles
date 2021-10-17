@@ -55,40 +55,6 @@ lspconfig.sumneko_lua.setup {
   }
 }
 
--- DiagnosticLS {{{1
-lspconfig.diagnosticls.setup {
-  filetypes = {"sh"},
-  init_options = {
-    filetypes = {sh = "shellcheck"},
-    formatFiletypes = {sh = "shfmt"},
-    linters = {
-      shellcheck = {
-        command = "shellcheck",
-        debounce = 100,
-        args = {"--format", "json", "-"},
-        sourceName = "shellcheck",
-        parseJson = {
-          line = "line",
-          column = "column",
-          endLine = "endLine",
-          endColumn = "endColumn",
-          message = "${message} [${code}]",
-          security = "level"
-        },
-        securities = {
-          error = "error",
-          warning = "warning",
-          info = "info",
-          style = "hint"
-        }
-      }
-    },
-    formatters = {
-      shfmt = {command = "shfmt", args = {"-i", "2", "-bn", "-ci", "-sr"}}
-    }
-  }
-}
-
 -- Keys {{{1
 map.normal("gD", map.lua("vim.lsp.buf.declaration()"))
 map.normal("gd", map.lua("vim.lsp.buf.definition()"))
@@ -106,3 +72,9 @@ map.normal("gD", map.lua("vim.lsp.buf.type_definition()"))
 -- map.normal("[d", map.lua("vim.lsp.diagnostic.goto_prev()"))
 -- map.normal("]d", map.lua("vim.lsp.diagnostic.goto_next()"))
 map.normal("<space>q", map.lua("vim.lsp.diagnostic.set_loclist()"))
+
+vim.cmd("command! LspLog :tabe " .. vim.lsp.get_log_path())
+vim.cmd([[
+  command! LspDebugOn :lua vim.lsp.set_log_level(1)
+  command! LspDebugOff :lua vim.lsp.set_log_level(3)
+]])
