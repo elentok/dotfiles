@@ -69,6 +69,7 @@ return require("packer").startup({
     use "davidbeckingsale/writegood.vim"
     use {"sotte/presenting.vim"} -- Presentation tool
     use {"hkupty/iron.nvim"} -- REPL
+    use "karb94/neoscroll.nvim" -- Smooth scrolling
 
     -- Toggles words (e.g. true/false, top/bottom)
     use {
