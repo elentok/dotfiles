@@ -30,13 +30,13 @@ end
 function _G.TodoPrevState()
   local line = vim.fn.getline(".")
   if line:match(checked) then
-    line = line:gsub(checked, "(waiting)")
+    line = line:gsub(checked, "[waiting]")
   elseif line:match(unchecked) then
     line = line:gsub(unchecked, checked)
-  elseif line:match("%(inprogress%)") then
-    line = line:gsub("%(inprogress%)", unchecked)
-  elseif line:match("%(waiting%)") then
-    line = line:gsub("%(waiting%)", "(inprogress)")
+  elseif line:match("%[inprogress%]") then
+    line = line:gsub("%[inprogress%]", unchecked)
+  elseif line:match("%[waiting%]") then
+    line = line:gsub("%[waiting%]", "[inprogress]")
   end
   vim.fn.setline(".", line)
 end
