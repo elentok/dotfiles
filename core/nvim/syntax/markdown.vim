@@ -1,4 +1,4 @@
-syntax match TodoDone '✔.*$'
+syntax match TodoDone '\[x\].*$'
 syntax match TodoWaiting '(waiting).*$'
 syntax match TodoInprogress '(inprogress).*$'
 highlight default link TodoDone Comment
