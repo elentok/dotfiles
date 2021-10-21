@@ -18,9 +18,9 @@ function _G.TodoNextState()
   if line:match(checked) then
     line = line:gsub(checked, unchecked)
   elseif line:match(unchecked) then
-    line = line:gsub(unchecked, "(inprogress)")
+    line = line:gsub(unchecked, "[inprogress]")
   elseif line:match("%(inprogress%)") then
-    line = line:gsub("%(inprogress%)", "(waiting)")
+    line = line:gsub("%(inprogress%)", "[waiting]")
   elseif line:match("%(waiting%)") then
     line = line:gsub("%(waiting%)", checked)
   end
