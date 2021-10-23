@@ -6,8 +6,10 @@ end
 
 vim.o.background = "dark"
 
-if util.safe_require("monokai") then
-  vim.cmd("colorscheme monokai_pro")
+local onedarkpro = util.safe_require("onedarkpro")
+if onedarkpro then
+  onedarkpro.setup({styles = {comments = "italic"}})
+  onedarkpro.load()
 end
 
 -- Status + vertical split colors

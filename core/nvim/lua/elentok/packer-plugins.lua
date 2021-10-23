@@ -6,7 +6,7 @@ return require("packer").startup({
     use {"lewis6991/impatient.nvim"}
 
     -- Color scheme.
-    use "tanvirtin/monokai.nvim"
+    use "olimorris/onedarkpro.nvim"
 
     -- File manager.
     use "cocopon/vaffle.vim"
