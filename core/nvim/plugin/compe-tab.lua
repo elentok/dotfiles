@@ -1,6 +1,10 @@
 local util = require("elentok/util")
 local luasnip = util.safe_require("luasnip")
 
+if util.safe_require("comple") == nil then
+  return
+end
+
 if luasnip == nil then
   return
 end

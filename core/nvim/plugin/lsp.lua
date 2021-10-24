@@ -3,12 +3,27 @@ local lspconfig = require("lspconfig")
 local config = require("elentok/config")
 local map = require("elentok/map")
 
+local lsp = require("elentok/lsp")
+
+-- local withSnippetSupport = vim.lsp.protocol.make_client_capabilities()
+-- withSnippetSupport.textDocument.completion.completionItem.snippetSupport = true
+
+lsp.setup({
+  pyright = true,
+  bashls = true,
+  vimls = true,
+  yamlls = true,
+  jsonls = true,
+  html = true,
+  cssls = true
+})
+
 -- Simple LSPs {{{1
-lspconfig.pyright.setup {}
-lspconfig.bashls.setup {}
-lspconfig.vimls.setup {}
-lspconfig.yamlls.setup {}
-lspconfig.jsonls.setup {}
+-- lspconfig["pyright"].setup {}
+-- lspconfig.bashls.setup {}
+-- lspconfig.vimls.setup {}
+-- lspconfig.yamlls.setup {}
+-- lspconfig.jsonls.setup {}
 
 if config.enable_tsserver then
   lspconfig.tsserver.setup {
@@ -20,40 +35,43 @@ if config.enable_tsserver then
 end
 
 -- HTML + CSS (Enable snippet support) {{{1
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-lspconfig.html.setup {capabilities = capabilities}
-lspconfig.cssls.setup {capabilities = capabilities}
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- lspconfig.html.setup {capabilities = capabilities}
+-- lspconfig.cssls.setup {capabilities = capabilities}
 
 -- Lua {{{1
 local lua_lsp_root_path = vim.fn.expand(
                               "~/.apps/all/lua-language-server/default")
 local lua_lsp_bin_path = lua_lsp_root_path .. "/bin/Linux/lua-language-server"
 local lua_lsp_main_lua = lua_lsp_root_path .. "/main.lua"
-lspconfig.sumneko_lua.setup {
-  cmd = {lua_lsp_bin_path, "-E", lua_lsp_main_lua},
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (LuaJIT in the case of Neovim)
-        version = "LuaJIT",
-        -- Setup your lua path
-        path = vim.split(package.path, ";")
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {"vim", "use"}
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = {
-          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-          [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
+-- lspconfig.sumneko_lua.setup {
+lsp.setup({
+  sumneko_lua = {
+    cmd = {lua_lsp_bin_path, "-E", lua_lsp_main_lua},
+    settings = {
+      Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua you're using (LuaJIT in the case of Neovim)
+          version = "LuaJIT",
+          -- Setup your lua path
+          path = vim.split(package.path, ";")
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = {"vim", "use"}
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = {
+            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
+          }
         }
       }
     }
   }
-}
+})
 
 -- Keys {{{1
 map.normal("gD", map.lua("vim.lsp.buf.declaration()"))

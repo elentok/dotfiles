@@ -28,9 +28,14 @@ return require("packer").startup({
 
     -- LSP.
     use "neovim/nvim-lspconfig"
-    use "hrsh7th/nvim-compe"
+    -- use "hrsh7th/nvim-compe"
     use "anott03/nvim-lspinstall"
     use "glepnir/lspsaga.nvim"
+
+    -- Completion.
+    use "hrsh7th/cmp-nvim-lsp"
+    use "hrsh7th/cmp-buffer"
+    use "hrsh7th/nvim-cmp"
 
     -- Snippets
     use "L3MON4D3/LuaSnip"
