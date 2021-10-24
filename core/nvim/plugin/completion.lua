@@ -14,7 +14,9 @@ cmp.setup({
       -- require'snippy'.expand_snippet(args.body) -- For `snippy` users.
     end
   },
-  sources = cmp.config.sources({{name = "nvim_lsp"}, {name = "buffer"}}),
+  sources = cmp.config.sources({
+    {name = "nvim_lsp"}, {name = "luasnip"}, {name = "buffer"}
+  }),
   mapping = {
     ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), {"i", "s"}),
     ["<C-d>"] = cmp.mapping.scroll_docs(-4),

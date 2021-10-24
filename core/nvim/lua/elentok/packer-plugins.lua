@@ -31,6 +31,7 @@ return require("packer").startup({
     -- use "hrsh7th/nvim-compe"
     use "anott03/nvim-lspinstall"
     use "glepnir/lspsaga.nvim"
+    use "ray-x/lsp_signature.nvim"
 
     -- Completion.
     use "hrsh7th/cmp-nvim-lsp"
@@ -39,6 +40,7 @@ return require("packer").startup({
 
     -- Snippets
     use "L3MON4D3/LuaSnip"
+    use "saadparwaiz1/cmp_luasnip"
     use "rafamadriz/friendly-snippets" -- collection of snippets for all langs
 
     -- Allows running "nvim {filename}:{line-number}".

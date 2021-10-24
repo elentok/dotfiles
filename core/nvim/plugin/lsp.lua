@@ -35,6 +35,8 @@ if config.enable_tsserver then
   })
 end
 
+require("lsp_signature").setup()
+
 -- HTML + CSS (Enable snippet support) {{{1
 -- local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- capabilities.textDocument.completion.completionItem.snippetSupport = true
