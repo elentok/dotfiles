@@ -10,15 +10,3 @@ if !exists('$FZF_DEFAULT_COMMAND')
     let $FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
   endif
 endif
-
-function! FZFEdit(prompt, source, ...)
-  let sink = get(a:, 1, 'e')
-
-  call fzf#run({
-    \ "source": a:source,
-    \ "window": g:fzf_layout['window'],
-    \ "options": "--prompt '" . a:prompt . ">'",
-    \ "sink": sink})
-endfunction
-
-command! FZFHgModified call FZFEdit('Hg Modified', 'hg status --no-status')
