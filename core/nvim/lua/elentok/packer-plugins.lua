@@ -74,9 +74,10 @@ return require("packer").startup({
     use "AndrewRadev/splitjoin.vim"
     use "jamessan/vim-gnupg"
     use "davidbeckingsale/writegood.vim"
-    use {"sotte/presenting.vim"} -- Presentation tool
-    use {"hkupty/iron.nvim"} -- REPL
+    use "sotte/presenting.vim" -- Presentation tool
+    use "hkupty/iron.nvim" -- REPL
     use "karb94/neoscroll.nvim" -- Smooth scrolling
+    use "kyazdani42/nvim-web-devicons"
 
     -- Toggles words (e.g. true/false, top/bottom)
     use {
