@@ -5,13 +5,10 @@ set -euo pipefail
 source "$DOTF/framework"
 source "$DOTF/scripts/build-helper"
 
-prepare_build tig 2.5.1 "$*"
+version="$(dotf-trim < "$DOTF/core/tig/VERSION")"
+prepare_build tig "$version" "$*"
 
-if is_debian; then
-  dotf-apt libncursesw5-dev build-essential
-fi
-
-BASENAME=tig-$VERSION
+BASENAME=tig-$version
 FILENAME=$BASENAME.tar.gz
 
 curl -O -L "https://github.com/jonas/tig/releases/download/$BASENAME/$FILENAME"
