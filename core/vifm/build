@@ -1,23 +1,20 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework
-source $DOTF/scripts/build-helper
+set -euo pipefail
 
-prepare_build vifm v0.10.1 "$*"
+source "$DOTF/framework"
+source "$DOTF/scripts/build-helper"
 
-if is_debian; then
-  dotf-apt libncursesw5-dev build-essential dh-autoreconf
-else
-  echo 'unsupported operation system'
-  exit 1
-fi
+version="$(dotf-trim < "$DOTF/core/vifm/VERSION")"
+prepare_build vifm "$version" "$*"
 
-git clone --depth 1 --branch $VERSION https://github.com/vifm/vifm
+git clone --depth 1 --branch "$version" https://github.com/vifm/vifm
 
 cd vifm
+
 # cleanup the directory before starting (to avoid aclocal-1.15 issue)
 autoreconf -f -i
-./configure --prefix=$INSTALL_DIR
+./configure --prefix="$INSTALL_DIR"
 make
 make install
 
