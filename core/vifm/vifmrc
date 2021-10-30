@@ -46,6 +46,12 @@ filetype * nvim
 
 " Keybindings {{{1
 
+nnoremap - :cd ..<cr>
+nnoremap s :cd %d %d<cr>
+nnoremap S :cd %d %c<cr>
+
+nnoremap o :mkdir<space>
+
 noremap W :!watched %"f<cr>
 nnoremap q :q<cr>
 

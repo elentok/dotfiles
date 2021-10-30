@@ -432,21 +432,42 @@ This is a link to [Something][1]
 
 ## vifm
 
-    t          - tag (select) current file
-    ga         - directory size
-    w          - toggle preview pane
+### vifm - File actions
 
-    ={pattern} - filter file list
-    zr         - clear filter
-
-    <c-w>o     - show only one pane (also :only)
-    <c-w>v     - show two panes (vertical split)
-    <c-w>s     - show two panes (horizontal split)
+    dd         - delete files
+    yy         - yank files
+    p          - paste yanked files
+    P          - move yanked files
 
     :copy &    - copy in background
     :move &    - move in background
     :jobs      - show background jobs
 
+    cw         - rename file(s)
+    cW         - rename file(s) without extension
+
+    o          - create directory [custom]
+
+### vifm - Trash
+
     :trashes   - list trash directories (one per partition)
     :lstrash   - list each trashed file
     :empty     - empty trash
+
+### vifm - Window management
+
+    w          - toggle preview pane [custom]
+    <c-w>o     - show only one pane (also :only)
+    <c-w>v     - show two panes (vertical split)
+    <c-w>s     - show two panes (horizontal split)
+
+### vifm - Misc
+
+    ={pattern} - filter file list
+    zr         - clear filter
+
+    t          - tag (select) current file
+    ga         - directory size
+
+    s          - same directory (other pane = current page) [custom]
+    S          - other pane directory = current item [custom]
