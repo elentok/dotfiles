@@ -129,14 +129,14 @@ def parse_line(line: str, symbol_extractor: Callable[[str], Optional[tuple[str, 
 
 PROTO_RE = re.compile("^(message|package) ([^ ;]+)")
 CODE_RE = re.compile(
-    "^(export )?(async )?(class|const|enum|interface|type|function) ([^ :(]+)"
+    "^(export )?(async )?(declare )?(abstract )?(class|const|enum|interface|type|function) ([^ :(]+)"
 )
 
 
 def extract_code_symbol(line: str) -> Optional[tuple[str, str]]:
     match = CODE_RE.match(line)
     if match:
-        return (match.group(3), match.group(4))
+        return (match.group(5), match.group(6))
 
 
 def extract_proto_symbol(line: str) -> Optional[tuple[str, str]]:
