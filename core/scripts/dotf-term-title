@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-title="${*:-$(pretty-hostname)}"
+title="${*:-$(dotf-pretty-hostname)}"
 
 termcode="\033]0;${title}\007"
 echo -ne "$termcode"

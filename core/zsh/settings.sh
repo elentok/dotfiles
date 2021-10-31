@@ -112,7 +112,7 @@ if ! [[ "$SSH_AUTH_SOCK" =~ "chromoting" ]]; then
 fi
 
 # Terminal Title {{{1
-term-title
+dotf-term-title
 
 # GCloud SDK {{{1
 

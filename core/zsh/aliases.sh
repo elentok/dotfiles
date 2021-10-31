@@ -70,10 +70,10 @@ alias cw='whichx cat'
 
 # SSH {{{1
 function ssh() {
-  term-title "SSH $*"
+  dotf-term-title "SSH $*"
   TERM=$SSH_TERM command ssh "$@"
   exitcode=$?
-  term-title
+  dotf-term-title
   return $exitcode
 }
 
@@ -158,7 +158,6 @@ fi
 alias pbc='pbcopy'
 alias pbp='pbpaste'
 
-
 # FZF Shortcuts {{{1
 dr() {
   # calling "print -s" adds the command to zsh history
@@ -171,9 +170,9 @@ dr() {
   cmd="$(docker-compose-services | fzf --ansi --exit-0 | awk '{print $1}')"
 
   if [ -n "$cmd" ]; then
-    print -s "docker-compose run $cmd" && \
-      echo "> docker-compose run $cmd" && \
-      docker-compose run "$cmd"
+    print -s "docker-compose run $cmd" \
+      && echo "> docker-compose run $cmd" \
+      && docker-compose run "$cmd"
   fi
 }
 
@@ -188,9 +187,9 @@ yr() {
   cmd="$(npm-scripts | fzf --ansi --exit-0 | awk '{print $1}')"
 
   if [ -n "$cmd" ]; then
-    print -s "yarn run $cmd" && \
-      echo "> yarn run $cmd" && \
-      yarn run "$cmd"
+    print -s "yarn run $cmd" \
+      && echo "> yarn run $cmd" \
+      && yarn run "$cmd"
   fi
 }
 
@@ -205,9 +204,9 @@ npr() {
   cmd="$(npm-scripts | fzf --ansi --exit-0 | awk '{print $1}')"
 
   if [ -n "$cmd" ]; then
-    print -s "npm run $cmd" && \
-      echo "> npm run $cmd" && \
-      npm run "$cmd"
+    print -s "npm run $cmd" \
+      && echo "> npm run $cmd" \
+      && npm run "$cmd"
   fi
 }
 
@@ -313,8 +312,8 @@ function run-on-file() {
 
   if [ -n "$file" ]; then
     cmd="$* $file"
-    print -s "$cmd" && \
-      echo "$cmd"
+    print -s "$cmd" \
+      && echo "$cmd"
   fi
 }
 
