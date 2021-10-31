@@ -10,6 +10,7 @@ return require("packer").startup({
 
     -- File manager.
     use "cocopon/vaffle.vim"
+    use "vifm/vifm.vim"
 
     -- Git
     use {"TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim"}
