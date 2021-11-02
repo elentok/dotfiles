@@ -253,7 +253,7 @@ f() {
 # Fuzzy cd {{{1
 
 alias c='cd "$(pick-directory-recursive)"'
-alias d='cd $(vifm --choose-dir -)'
+alias d='cd "$(vifm -c view! --choose-dir - .)"'
 
 function vv() {
   files="$(vifm --choose-files - --on-choose echo .)"
