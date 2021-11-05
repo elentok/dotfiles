@@ -1,7 +1,8 @@
 local util = require("elentok/util")
 local cmp = util.safe_require("cmp")
+local lspkind = util.safe_require("lspkind")
 
-if cmp == nil then
+if cmp == nil or lspkind == nil then
   return
 end
 
@@ -24,6 +25,18 @@ cmp.setup({
     ["<C-Space>"] = cmp.mapping.complete(),
     ["<C-e>"] = cmp.mapping.close(),
     ["<CR>"] = cmp.mapping.confirm({select = true})
+  },
+  formatting = {
+    format = lspkind.cmp_format({
+      with_text = true,
+      menu = ({
+        buffer = "[Buffer]",
+        path = "[Path]",
+        nvim_lsp = "[LSP]",
+        luasnip = "[LuaSnip]",
+        nvim_lua = "[Lua]"
+      })
+    })
   }
 })
 
