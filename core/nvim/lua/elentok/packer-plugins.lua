@@ -41,6 +41,7 @@ return require("packer").startup({
     use "hrsh7th/cmp-cmdline"
     use "hrsh7th/nvim-cmp"
     use "onsails/lspkind-nvim"
+    use "lukas-reineke/cmp-rg"
 
     -- Snippets
     use "L3MON4D3/LuaSnip"
