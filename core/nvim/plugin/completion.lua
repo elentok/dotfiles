@@ -36,6 +36,7 @@ cmp.setup({
         path = "[Path]",
         nvim_lsp = "[LSP]",
         luasnip = "[LuaSnip]",
+        cmdline = "[Cmd]",
         rg = "[rg]"
       })
     })
