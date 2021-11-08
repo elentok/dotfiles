@@ -3,7 +3,6 @@
 source "$DOTF/framework"
 
 version="$(dotf-trim < "$DOTF/core/vifm/VERSION")"
-echo "VERSION: [$version]"
 
 dotf-bullet "Installing vifm..."
 

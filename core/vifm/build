@@ -8,7 +8,7 @@ source "$DOTF/scripts/build-helper"
 version="$(dotf-trim < "$DOTF/core/vifm/VERSION")"
 prepare_build vifm "$version" "$*"
 
-git clone --depth 1 --branch "$version" https://github.com/vifm/vifm
+git clone --depth 1 --branch "v$version" https://github.com/vifm/vifm
 
 cd vifm
 
