@@ -2,6 +2,8 @@ return require("packer").startup({
   function()
     use "wbthomason/packer.nvim"
 
+    use "nvim-lua/plenary.nvim" -- Lua helpers library
+
     -- Optimize startup.
     use {"lewis6991/impatient.nvim"}
 
@@ -11,9 +13,6 @@ return require("packer").startup({
     -- File manager.
     use "cocopon/vaffle.vim"
     use "vifm/vifm.vim"
-
-    -- Git
-    use {"TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim"}
 
     use "tpope/vim-abolish"
     use "tpope/vim-commentary"
@@ -83,6 +82,7 @@ return require("packer").startup({
     use "hkupty/iron.nvim" -- REPL
     use "karb94/neoscroll.nvim" -- Smooth scrolling
     use "kyazdani42/nvim-web-devicons"
+    use "TimUntersberger/neogit" -- Git client
 
     -- Toggles words (e.g. true/false, top/bottom)
     use {
