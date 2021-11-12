@@ -19,3 +19,5 @@ vim.opt.formatoptions = table.concat({
 -- vim-signify
 -- vim.g.signify_sign_add = "▊" -- U+258A LEFT THREE QUARTERS BLOCK (1 cell)
 -- vim.g.signify_sign_change = "██" -- U+2588 FULL BLOCK x2 (2 cells)
+
+vim.opt.dictionary = "/usr/share/dict/american-english"

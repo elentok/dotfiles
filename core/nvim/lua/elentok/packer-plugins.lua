@@ -2,8 +2,6 @@ return require("packer").startup({
   function()
     use "wbthomason/packer.nvim"
 
-    use "nvim-lua/plenary.nvim" -- Lua helpers library
-
     -- Optimize startup.
     use {"lewis6991/impatient.nvim"}
 
@@ -41,6 +39,7 @@ return require("packer").startup({
     use "hrsh7th/nvim-cmp"
     use "onsails/lspkind-nvim"
     use "lukas-reineke/cmp-rg"
+    use "uga-rosa/cmp-dictionary"
 
     -- Snippets
     use "L3MON4D3/LuaSnip"
