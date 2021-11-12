@@ -195,8 +195,8 @@ end
 --   autocmd BufWritePost * lua require('elentok/format').format_on_save()
 -- ]])
 
-util.augroup("Format", [[
-  autocmd BufWritePre * lua vim.lsp.buf.formatting_seq_sync()
-]])
+-- util.augroup("Format", [[
+--   autocmd BufWritePre * lua vim.lsp.buf.formatting_seq_sync()
+-- ]])
 
 return M

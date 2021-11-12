@@ -120,10 +120,13 @@ function M.put(...)
 end
 
 function M.shell(cmd, opts)
-  opts = vim.tbl_extend("force", {stdin = nil, callback = nil}, opts or {})
+  opts = vim.tbl_extend("force", {stdin = nil, callback = nil, sync = false},
+                        opts or {})
 
   local stderr = nil
   local stdout = nil
+  local code = nil
+
   local job_id = vim.fn.jobstart(cmd, {
     stdout_buffered = true,
     stderr_buffered = true,
@@ -134,6 +137,7 @@ function M.shell(cmd, opts)
       stdout = data
     end,
     on_exit = function(_, exitcode, _)
+      code = exitcode
       if opts.callback then
         opts.callback(exitcode, stdout, stderr)
       end
@@ -143,6 +147,13 @@ function M.shell(cmd, opts)
   if opts.stdin then
     vim.fn.chansend(job_id, opts.stdin)
     vim.fn.chanclose(job_id, "stdin")
+  end
+
+  if opts.sync then
+    vim.fn.jobwait({job_id})
+    return {code = code, stdout = stdout, stderr = stderr}
+  else
+    return job_id
   end
 end
 

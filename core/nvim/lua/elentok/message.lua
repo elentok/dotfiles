@@ -29,7 +29,7 @@ function M.show(title, lines, opts)
     vim.t.message_bufnr = vim.fn.bufnr()
 
     if opts.mode == "error" then
-      vim.wo.winhighlight = "Normal:IncSearch"
+      vim.wo.winhighlight = "Normal:DiffText"
       vim.wo.cursorline = false
     end
 
