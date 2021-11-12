@@ -104,7 +104,7 @@ function M.format()
 end
 
 vim.cmd([[
-  command! Format lua require("elentok/format2").format()
+  command! Format lua require("elentok/format").format()
 ]])
 
 util.augroup("Format", [[
