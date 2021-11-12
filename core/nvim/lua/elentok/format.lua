@@ -43,8 +43,8 @@ M.add_formatter("lsp", {
 })
 
 local function same_lines(list1, list2)
-  len1 = table.getn(list1)
-  len2 = table.getn(list2)
+  local len1 = table.getn(list1)
+  local len2 = table.getn(list2)
 
   if len1 ~= len2 then
     return false
