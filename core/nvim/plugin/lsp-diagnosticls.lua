@@ -11,7 +11,6 @@ lspconfig.diagnosticls.setup {
   init_options = {
     filetypes = {sh = "shellcheck"},
     formatFiletypes = {
-      sh = "shfmt",
       python = "black",
       lua = "luaformat",
       css = "prettierd",
@@ -44,7 +43,6 @@ lspconfig.diagnosticls.setup {
       }
     },
     formatters = {
-      shfmt = {command = "shfmt", args = {"-i", "2", "-bn", "-ci", "-sr"}},
       black = {command = "black", args = {"--quiet", "-"}},
       luaformat = {
         command = "lua-format",

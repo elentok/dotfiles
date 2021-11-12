@@ -35,11 +35,14 @@ M.add_formatter("prettier", {
   }
 })
 
+M.add_formatter("shfmt",
+                {command = "shfmt -i 2 -bn -ci -sr", filetypes = {"sh"}})
+
 M.add_formatter("lsp", {
   func = function()
     vim.lsp.buf.formatting_seq_sync()
   end,
-  filetypes = {"scss", "sh", "java", "yaml"}
+  filetypes = {"scss", "java", "yaml"}
 })
 
 local function same_lines(list1, list2)
@@ -96,6 +99,7 @@ function M.format()
     return
   end
 
+  util.log("[format] formatter for type", filetype, formatter)
   if formatter.command ~= nil then
     run_formatter(formatter)
   elseif formatter.func ~= nil then
