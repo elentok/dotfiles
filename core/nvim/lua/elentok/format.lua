@@ -3,14 +3,26 @@ local message = require("elentok/message")
 
 local M = {}
 
-M.formatters = {}
-M.formatter_by_filetype = {}
+local formatters = {}
+local formatter_by_filetype = {}
 
 function M.add_formatter(name, formatter)
-  M.formatters[name] = formatter
+  formatters[name] = formatter
 
   for _, filetype in ipairs(formatter.filetypes or {}) do
-    M.formatter_by_filetype[filetype] = formatter
+    formatter_by_filetype[filetype] = formatter
+  end
+end
+
+function M.assign_formatter(name, filetypes)
+  local formatter = formatters[name]
+  if formatter == nil then
+    print("Error: no formatter named " .. name)
+    return
+  end
+
+  for _, filetype in ipairs(filetypes) do
+    formatter_by_filetype[filetype] = formatter
   end
 end
 
@@ -93,7 +105,7 @@ end
 
 function M.format()
   local filetype = util.buf_get_filetype()
-  local formatter = M.formatter_by_filetype[filetype]
+  local formatter = formatter_by_filetype[filetype]
   if formatter == nil then
     util.log("[format] no formatter for type", filetype)
     return

@@ -1,25 +1,9 @@
 local lspconfig = require("lspconfig")
-local config = require("elentok/config")
-local filetypes = {"sh", "python", "lua", "css", "html", "markdown"}
-
-if config.enable_jsts_prettier then
-  vim.list_extend(filetypes, {"javascript", "typescript", "typescriptreact"})
-end
 
 lspconfig.diagnosticls.setup {
-  filetypes = filetypes,
+  filetypes = {"sh"},
   init_options = {
     filetypes = {sh = "shellcheck"},
-    formatFiletypes = {
-      python = "black",
-      lua = "luaformat",
-      css = "prettierd",
-      html = "prettierd",
-      javascript = "prettierd",
-      markdown = "prettierd",
-      typescript = "prettierd",
-      typescriptreact = "prettierd"
-    },
     linters = {
       shellcheck = {
         command = "shellcheck",
@@ -41,14 +25,6 @@ lspconfig.diagnosticls.setup {
           style = "hint"
         }
       }
-    },
-    formatters = {
-      black = {command = "black", args = {"--quiet", "-"}},
-      luaformat = {
-        command = "lua-format",
-        args = {"--config=" .. vim.env.HOME .. "/.lua-format"}
-      },
-      prettierd = {command = "prettierd", args = {"%filename"}}
     }
   }
 }
