@@ -111,4 +111,38 @@ util.augroup("Format", [[
   autocmd BufWritePre * Format
 ]])
 
+-- Keeping these functions here in case I think about bringing this
+-- functionality back soon:
+-- local function save_views(bufnr)
+--   local active_winhandle = vim.api.nvim_tabpage_get_win(0)
+--   for _, winhandle in ipairs(vim.fn.win_findbuf(bufnr)) do
+--     local winnr = vim.api.nvim_win_get_number(winhandle)
+--     vim.cmd(winnr .. "wincmd w")
+--     vim.w.last_view = vim.fn.winsaveview()
+
+--     if active_winhandle ~= winhandle then
+--       vim.cmd("wincmd p")
+--     end
+--   end
+-- end
+
+-- local function restore_views(bufnr)
+--   local active_winhandle = vim.api.nvim_tabpage_get_win(0)
+--   for _, winhandle in ipairs(vim.fn.win_findbuf(bufnr)) do
+--     local winnr = vim.api.nvim_win_get_number(winhandle)
+--     vim.cmd(winnr .. "wincmd w")
+--     if vim.w.last_view then
+--       vim.fn.winrestview(vim.w.last_view)
+--     else
+--       put(
+--           "Warning: missing window view setting: bufnr=" .. bufnr .. ", winnr=" ..
+--               winnr)
+--     end
+
+--     if active_winhandle ~= winhandle then
+--       vim.cmd("wincmd p")
+--     end
+--   end
+-- end
+
 return M
