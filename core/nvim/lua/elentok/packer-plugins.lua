@@ -84,6 +84,7 @@ return require("packer").startup({
     use "kyazdani42/nvim-web-devicons"
     use "TimUntersberger/neogit" -- Git client
     use "nvim-lualine/lualine.nvim" -- Statusline
+    use "ggandor/lightspeed.nvim" -- Move quickly between positions
 
     -- Toggles words (e.g. true/false, top/bottom)
     use {
