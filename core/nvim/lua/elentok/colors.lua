@@ -14,8 +14,6 @@ end
 
 -- Status + vertical split colors
 vim.cmd([[
-  hi StatusLine guibg=#126888 guifg=white gui=NONE
-  hi StatusLineNC guibg=#0d4b61 guifg=#999999 gui=NONE
   hi VertSplit guifg=#126888
   hi Floaterm guibg=#1a1b1c
   hi FloatermBorder guibg=#1a1b1c

@@ -83,6 +83,7 @@ return require("packer").startup({
     use "karb94/neoscroll.nvim" -- Smooth scrolling
     use "kyazdani42/nvim-web-devicons"
     use "TimUntersberger/neogit" -- Git client
+    use "nvim-lualine/lualine.nvim" -- Statusline
 
     -- Toggles words (e.g. true/false, top/bottom)
     use {
