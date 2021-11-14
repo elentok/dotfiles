@@ -1,3 +1,6 @@
+local util = require("elentok/util")
+local gps = util.safe_require("nvim-gps")
+
 local statusline_shorteners = {}
 local statusline_shorteners_updated = false
 
@@ -51,6 +54,19 @@ function _G.StatusLineInProgress()
   return vim.b.statusline_in_progress or ""
 end
 
+function _G.StatusLineGps()
+  local location = ""
+
+  if gps and gps.is_available() then
+    location = gps.get_location()
+    if location ~= "" then
+      location = "[" .. location .. "]"
+    end
+  end
+
+  return location
+end
+
 _G.StatusLineFileName = M.filename
 
 vim.o.statusline = table.concat({
@@ -59,6 +75,7 @@ vim.o.statusline = table.concat({
   "%< ", "%{&modified?' +':''}", "%{&readonly?' ':''}",
   -- Separation point between left and right aligned items.
   "%= ", -- Filetype.
+  " %{v:lua.StatusLineGps()}", -- Which function am I in?
   " %{v:lua.StatusLineInProgress()}", -- Operation in progress (e.g. formatting)
   " [%{''!=#&filetype?&filetype:'none'}]", -- Line number + column number.
   " %l:%v"

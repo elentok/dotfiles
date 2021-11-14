@@ -5,7 +5,14 @@ if not treesitter_configs then
   return
 end
 
-require("nvim-treesitter.configs").setup {
+local gps = util.safe_require("nvim-gps")
+if not gps then
+  return
+end
+
+gps.setup({})
+
+treesitter_configs.setup {
   ensure_installed = {
     "bash", "c", "c_sharp", "cmake", "comment", "cpp", "css", "dot", "go",
     "html", "java", "javascript", "jsdoc", "json", "json5", "jsonc", "lua",
