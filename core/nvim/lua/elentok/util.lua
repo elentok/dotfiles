@@ -201,4 +201,24 @@ function M.add_dirs(tbl, dirs)
   return tbl
 end
 
+function M.create_scratch_buffer(name, options)
+  if options == nil then
+    options = {}
+  end
+
+  vim.cmd([[
+    tabnew
+    noswapfile hide enew
+  ]])
+  vim.cmd("file " .. name)
+  if options.text then
+    vim.fn.setline(1, options.text)
+  end
+
+  vim.bo.buftype = "nofile"
+  vim.bo.bufhidden = "hide"
+
+  return vim.api.nvim_get_current_buf()
+end
+
 return M
