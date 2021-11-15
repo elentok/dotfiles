@@ -74,14 +74,6 @@ local function same_lines(list1, list2)
   return true
 end
 
-local function remove_trailing_blank_line(list)
-  -- Remove blank line at the end.
-  local length = table.getn(list)
-  if list[length] == "" then
-    table.remove(list, length)
-  end
-end
-
 local function run_formatter(formatter)
   local command = formatter.command:gsub("%%", vim.fn.expand("%"))
   util.log("[run_formatter] command", command)
@@ -90,7 +82,7 @@ local function run_formatter(formatter)
   local result = util.shell(command, {stdin = lines, sync = true})
   util.log("[run_formatter} result", result)
   if result.code == 0 then -- success
-    remove_trailing_blank_line(result.stdout)
+    M.remove_trailing_blank_line(result.stdout)
     if same_lines(lines, result.stdout) then
       print("File already formatted.")
     else

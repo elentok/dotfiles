@@ -215,10 +215,23 @@ function M.create_scratch_buffer(name, options)
     vim.fn.setline(1, options.text)
   end
 
+  if options.filetype then
+    vim.bo.filetype = options.filetype
+  end
+
   vim.bo.buftype = "nofile"
   vim.bo.bufhidden = "hide"
+  vim.bo.modifiable = false
 
   return vim.api.nvim_get_current_buf()
+end
+
+function M.remove_trailing_blank_line(list)
+  -- Remove blank line at the end.
+  local length = table.getn(list)
+  if list[length] == "" then
+    table.remove(list, length)
+  end
 end
 
 return M
