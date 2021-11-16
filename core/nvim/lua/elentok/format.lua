@@ -82,7 +82,7 @@ local function run_formatter(formatter)
   local result = util.shell(command, {stdin = lines, sync = true})
   util.log("[run_formatter} result", result)
   if result.code == 0 then -- success
-    M.remove_trailing_blank_line(result.stdout)
+    util.remove_trailing_blank_line(result.stdout)
     if same_lines(lines, result.stdout) then
       print("File already formatted.")
     else
