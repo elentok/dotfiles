@@ -27,42 +27,55 @@ function main() {
 }
 
 function install-pkgs() {
-  case "$1" in
+  case "${1:-}" in
     apt)
-      if dotf-is-linux; then
-        dotf-header h2 '[dotf-pkgs] Installing apt packages...'
-        dotf-apt "$(get-pkgs apt)"
-
-        if has_command X; then
-          dotf-header h2 '[dotf-pkgs] Installing apt-gui packages...'
-          dotf-apt "$(get-pkgs apt-gui)"
-        fi
-
-        if [ "${KDE:-}" = 'yes' ]; then
-          dotf-header h2 '[dotf-pkgs] Installing apt-kde packages...'
-          dotf-apt "$(get-pkgs apt-kde)"
-        fi
-      elif dotf-is-mac; then
-        dotf-header h2 '[dotf-pkgs] Installing brew packages...'
-        for pkg in $(get-pkgs brew); do
-          brew_install "$pkg"
-        done
-      elif is_termux; then
-        dotf-header h2 '[dotf-pkgs] Installing termux packages...'
-        dotf-apt "$(get-pkgs termux)"
-      fi
+      install-apt-pkgs
       ;;
-
     pip)
-      dotf-header h2 '[dotf-pkgs] Installing pip packages...'
-      dotf-pip "$(get-pkgs pip)"
+      install-pip-pkgs
       ;;
-
     npm)
-      dotf-header h2 '[dotf-pkgs] Installing npm packages...'
-      dotf-npm "$(get-pkgs npm)"
+      install-npm-pkgs
+      ;;
+    *)
+      install-apt-pkgs && install-pip-pkgs && install-npm-pkgs
       ;;
   esac
+}
+
+function install-apt-pkgs() {
+  if dotf-is-linux; then
+    dotf-header h2 '[dotf-pkgs] Installing apt packages...'
+    dotf-apt "$(get-pkgs apt)"
+
+    if has_command X; then
+      dotf-header h2 '[dotf-pkgs] Installing apt-gui packages...'
+      dotf-apt "$(get-pkgs apt-gui)"
+    fi
+
+    if [ "${KDE:-}" = 'yes' ]; then
+      dotf-header h2 '[dotf-pkgs] Installing apt-kde packages...'
+      dotf-apt "$(get-pkgs apt-kde)"
+    fi
+  elif dotf-is-mac; then
+    dotf-header h2 '[dotf-pkgs] Installing brew packages...'
+    for pkg in $(get-pkgs brew); do
+      brew_install "$pkg"
+    done
+  elif is_termux; then
+    dotf-header h2 '[dotf-pkgs] Installing termux packages...'
+    dotf-apt "$(get-pkgs termux)"
+  fi
+}
+
+function install-pip-pkgs() {
+  dotf-header h2 '[dotf-pkgs] Installing pip packages...'
+  dotf-pip "$(get-pkgs pip)"
+}
+
+function install-npm-pkgs() {
+  dotf-header h2 '[dotf-pkgs] Installing npm packages...'
+  dotf-npm "$(get-pkgs npm)"
 }
 
 function upgrade-pkgs() {

@@ -12,7 +12,7 @@ sudo sh get-docker.sh
 Add non-root user to the docker group (so that user can execute docker commands):
 
 ```
-sudo usermod -aG docker [user_name]
+sudo usermod -aG docker $(whoami)
 ```
 
 ## Podman
