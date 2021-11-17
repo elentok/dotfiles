@@ -1,5 +1,6 @@
 export DOTF=~/.dotfiles
 export DOTL=~/.dotlocal
+export DOTP=~/.dotprivate
 
 # Helper: Source If Exists {{{1
 source_if_exists() {
@@ -9,6 +10,7 @@ source_if_exists() {
 # Load Configuration {{{1
 source "$DOTF/core/zsh/config.sh"
 source_if_exists "$DOTL/zsh/config.sh"
+source_if_exists "$DOTP/zsh/config.sh"
 
 source "$DOTF/core/scripts/lib/os.sh"
 source "$DOTF/core/scripts/lib/helpers.sh"
@@ -124,6 +126,7 @@ export LUAROCKS_ROOT="$HOME/.apps/all/luarocks/default"
 # PATH {{{1
 PATH="$DOTF/scripts:\
 $DOTF/core/scripts:\
+$DOTP/scripts:\
 $DOTL/scripts"
 
 if [ "$DOTF_CONFIG_NODE_PROVIDER" = "n" ]; then
