@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTF/framework"
+
+CONFIG_DIR="$HOME/.config/i3"
+
+dotf-apt i3 rofi dex
+
+mkdir -p "$CONFIG_DIR"
+symlink "$DOTF/extra/i3/config" "$CONFIG_DIR/config"
