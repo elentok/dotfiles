@@ -206,10 +206,11 @@ function M.create_scratch_buffer(name, options)
     options = {}
   end
 
-  vim.cmd([[
-    tabnew
-    noswapfile hide enew
-  ]])
+  if options.tab then
+    vim.cmd("tabnew")
+  end
+
+  vim.cmd("noswapfile hide enew")
   vim.cmd("file " .. name)
   if options.text then
     vim.fn.setline(1, options.text)
