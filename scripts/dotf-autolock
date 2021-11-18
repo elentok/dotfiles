@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [ -x "$DOTL/scripts/dotl-autolock" ]; then
+  dotl-autolock
+else
+  xautolock -time 1 -locker dotf-lock
+fi

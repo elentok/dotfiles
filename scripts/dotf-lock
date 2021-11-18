@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [ -x "$DOTL/scripts/dotl-lock" ]; then
+  dotl-lock
+else
+  xsecurelock
+fi

@@ -56,6 +56,10 @@ bindsym $mod+Return exec dotf-terminal
 # kill focused window
 bindsym $mod+Shift+q kill
 
+# Screen lock
+bindsym Control+Mod1+L exec dotf-lock
+exec --no-startup-id dotf-autolock
+
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
 bindsym $mod+d exec "rofi -show run"
