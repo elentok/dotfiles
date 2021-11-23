@@ -15,8 +15,8 @@ end
 function M.create_buf_map_func(mode, opts)
   opts = vim.tbl_extend("force", {noremap = true, silent = true}, opts or {})
 
-  return function(lhs, rhs)
-    vim.api.nvim_buf_set_keymap(0, mode, lhs, rhs, opts)
+  return function(bufnr, lhs, rhs)
+    vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
   end
 end
 

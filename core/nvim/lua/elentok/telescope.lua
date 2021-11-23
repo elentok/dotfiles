@@ -23,6 +23,7 @@ require("telescope").setup {
   }
 }
 
+require("telescope").load_extension("aerial")
 require("telescope").load_extension("fzf")
 
 local function create_entry(opts)
@@ -83,9 +84,11 @@ map.normal("<Leader>gh", call_telescope("help_tags{}"))
 map.normal("<Leader>gm", call_telescope("oldfiles{ previewer = false}"))
 map.normal("<Leader>fe",
            call_telescope("file_browser{ cwd = vim.fn.expand(\"%:p:h\") }"))
-map.normal("gs", call_telescope(
-               "lsp_document_symbols{ symbols = {\"function\", \"method\", \"interface\", \"class\"} }"))
+-- map.normal("gs", call_telescope(
+--                "lsp_document_symbols{ symbols = {\"function\", \"method\", \"interface\", \"class\"} }"))
 map.normal("gr", call_telescope("lsp_references()"))
-map.normal("``", map.lua("require(\"elentok/telescope\").buf_tags_picker()"))
+map.normal("``", "<cmd>Telescope aerial<cr>")
+map.normal("gs", "<cmd>Telescope aerial<cr>")
+map.normal("gb", map.lua("require(\"elentok/telescope\").buf_tags_picker()"))
 
 return {command_picker = command_picker, buf_tags_picker = buf_tags_picker}

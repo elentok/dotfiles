@@ -30,6 +30,7 @@ return require("packer").startup({
     use "anott03/nvim-lspinstall"
     use "glepnir/lspsaga.nvim"
     use "ray-x/lsp_signature.nvim"
+    use "stevearc/aerial.nvim"
 
     -- Completion.
     use "hrsh7th/cmp-nvim-lsp"

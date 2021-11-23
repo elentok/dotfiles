@@ -1,11 +1,12 @@
 local lspconfig = require("lspconfig")
 local cmp = require("cmp_nvim_lsp")
+local aerial = require("aerial")
 
 local M = {}
 
 local function on_attach(client, bufnr)
   put("Client", client.name, "attached to", bufnr)
-
+  aerial.on_attach(client, bufnr)
 end
 
 local capabilities = cmp.update_capabilities(vim.lsp.protocol

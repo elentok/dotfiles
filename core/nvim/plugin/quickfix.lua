@@ -11,10 +11,10 @@ function _G.setup_quickfix()
   vim.opt_local.errorformat = "%f\\|%l\\ col\\ %c\\|%m"
 
   -- Map <c-s> to reload the quickfix after changes
-  map.buf_normal("<c-s>", ":cgetbuffer<cr>:setlocal nomodified<cr>")
+  map.buf_normal(0, "<c-s>", ":cgetbuffer<cr>:setlocal nomodified<cr>")
 
   -- Map 'q' to close the quickfix window
-  map.buf_normal("q", ":q<cr>")
+  map.buf_normal(0, "q", ":q<cr>")
 end
 
 util.augroup("QuickFix", [[
