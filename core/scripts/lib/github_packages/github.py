@@ -78,6 +78,8 @@ def fetch_release(repo: str, version="latest") -> Optional[Release]:
 
     if version == "latest":
         for release in releases:
+            if release.tag_name == "stable":
+                continue
             if not release.prerelease:
                 return release
 
