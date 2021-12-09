@@ -80,7 +80,6 @@ return require("packer").startup({
     use "jamessan/vim-gnupg"
     use "davidbeckingsale/writegood.vim"
     use "sotte/presenting.vim" -- Presentation tool
-    use "hkupty/iron.nvim" -- REPL
     use "karb94/neoscroll.nvim" -- Smooth scrolling
     use "kyazdani42/nvim-web-devicons"
     use "TimUntersberger/neogit" -- Git client
