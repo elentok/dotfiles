@@ -3,7 +3,7 @@
 set -euo pipefail
 
 if [ -x "$DOTL/scripts/dotl-autolock" ]; then
-  dotl-autolock
+  exec dotl-autolock
 else
-  xautolock -time 5 -locker dotf-lock
+  exec xautolock -time 5 -locker dotf-lock
 fi
