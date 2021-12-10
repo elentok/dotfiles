@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+EXTERNAL="DP-2-2"
+INTERNAL="eDP-1"
+EXTERNAL_POSITION="left"
+
+function main() {
+  case "${1:-}" in
+    1 | "laptop")
+      external-off
+      restart-compton
+      ;;
+    2 | "multi")
+      external-off
+      external-on
+      restart-compton
+      ;;
+    *)
+      echo "Usage: xdisp <laptop|multi>"
+      ;;
+  esac
+}
+
+function external-off() {
+  xrandr --output "$EXTERNAL" --off
+}
+
+function external-on() {
+  xrandr --output "$EXTERNAL" --primary --auto --$EXTERNAL_POSITION-of "$INTERNAL"
+}
+
+function restart-compton() {
+  killall compton || true
+  compton &
+}
+
+main "$@"
