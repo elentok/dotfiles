@@ -235,4 +235,26 @@ function M.remove_trailing_blank_line(list)
   end
 end
 
+function M.get_visual_selection()
+  local _, line_start, column_start, _ = unpack(vim.fn.getpos("'<"))
+  local _, line_end, column_end, _ = unpack(vim.fn.getpos("'>"))
+
+  local lines = vim.fn.getline(line_start, line_end)
+  local lines_count = table.getn(lines)
+  if lines_count == 0 then
+    return ""
+  end
+
+  local column_offset = 2
+  if vim.o.selection == "inclusive" then
+    column_offset = 1
+  end
+
+  lines[lines_count] = string.sub(lines[lines_count], 0,
+                                  column_end - column_offset)
+  lines[1] = string.sub(lines[1], column_start - 1)
+
+  return table.concat(lines, "\n")
+end
+
 return M
