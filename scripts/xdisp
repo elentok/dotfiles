@@ -8,11 +8,11 @@ EXTERNAL_POSITION="left"
 
 function main() {
   case "${1:-}" in
-    1 | "laptop")
+    l | 1 | "laptop")
       external-off
       restart-compton
       ;;
-    2 | "multi")
+    m | 2 | "multi")
       external-off
       external-on
       restart-compton
