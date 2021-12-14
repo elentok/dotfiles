@@ -46,6 +46,10 @@ cmp.setup({
   }
 })
 
+require("cmp_dictionary").setup({
+  dic = {["*"] = {"/usr/share/dict/american-english"}}
+})
+
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 -- cmp.setup.cmdline("/", {sources = {{name = "buffer"}}})
 
