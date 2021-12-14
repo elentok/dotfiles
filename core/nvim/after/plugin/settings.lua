@@ -24,3 +24,6 @@ vim.opt.dictionary = "/usr/share/dict/american-english"
 
 -- When splitting vertically move the focus to the right window.
 vim.opt.splitright = true
+
+-- Settings for the tversteeg/registers.nvim plugin.
+vim.g.registers_window_border = "single"
