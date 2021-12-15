@@ -39,6 +39,9 @@ exec dex -ae i3
 # Setup keyboard
 exec --no-startup-id xkeyboard
 
+# Setup touchpad
+exec --no-startup-id xtouchpad
+
 # Compton compositer (provides vsync)
 exec --no-startup-id compton
 

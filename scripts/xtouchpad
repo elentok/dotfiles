@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+DEVICE="Synaptics TM3289-021"
+
+if ! xinput list --name-only | grep "$DEVICE" > /dev/null; then
+  echo "Device '${DEVICE}' not found."
+  exit 1
+fi
+
+# Enable tap-to-click (single-tap, double-tap and tripple-tap)
+xinput set-int-prop "$DEVICE" "Synaptics Tap Action" 8 0 0 0 0 1 3 2
