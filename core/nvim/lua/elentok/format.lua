@@ -95,15 +95,25 @@ local function run_formatter(formatter)
   end
 end
 
-function M.format()
+function M.format(formatter_name)
   local filetype = util.buf_get_filetype()
-  local formatter = formatter_by_filetype[filetype]
-  if formatter == nil then
-    util.log("[format] no formatter for type", filetype)
-    return
+  local formatter
+  if formatter_name == nil or formatter_name == "" then
+    formatter = formatter_by_filetype[filetype]
+    if formatter == nil then
+      util.log("[format] no formatter for type", filetype)
+      return
+    end
+    util.log("[format] formatter for type", filetype, formatter)
+  else
+    formatter = formatters[formatter_name]
+    if formatter == nil then
+      print("[format] no formatter named", formatter)
+      return
+    end
+    util.log("[format] formatter by name", formatter_name, formatter)
   end
 
-  util.log("[format] formatter for type", filetype, formatter)
   if formatter.command ~= nil then
     run_formatter(formatter)
   elseif formatter.func ~= nil then
@@ -112,7 +122,7 @@ function M.format()
 end
 
 vim.cmd([[
-  command! Format lua require("elentok/format").format()
+  command! -nargs=? Format lua require("elentok/format").format("<args>")
 ]])
 
 util.augroup("Format", [[
