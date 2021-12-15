@@ -11,3 +11,9 @@ fi
 
 # Enable tap-to-click (single-tap, double-tap and tripple-tap)
 xinput set-int-prop "$DEVICE" "Synaptics Tap Action" 8 0 0 0 0 1 3 2
+
+# Setup palm detection (so I don't click with my palm while typing)
+# (see https://unix.stackexchange.com/questions/28306/looking-for-a-way-to-improve-synaptic-touchpad-palm-detection)
+synclient PalmDetect=1
+synclient PalmMinWidth=5
+synclient PalmMinZ=50
