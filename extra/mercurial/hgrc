@@ -19,5 +19,13 @@ ss = !hgi status
 
 lll = log --template "{node|short} {date|isodate} {author|user} {cl}{desc|firstline}\n" .
 
+[extensions]
+extdiff =
+
+[extdiff]
+
+# use imagemagick to compare image
+cmd.imdiff = sh
+opts.imdiff = -c 'compare $0 $1 compared.png; feh compared.png'
 
 %include ~/.dotlocal/hgrc
