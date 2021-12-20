@@ -55,11 +55,13 @@ map.normal("<leader>wl",
            map.lua("print(vim.inspect(vim.lsp.buf.list_workspace_folders()))"))
 map.normal("gD", map.lua("vim.lsp.buf.type_definition()"))
 map.normal("<leader>rn", map.lua("vim.lsp.buf.rename()"))
--- map.normal("gr", map.lua("vim.lsp.buf.references()"))
--- map.normal("<space>e", map.lua("vim.lsp.diagnostic.show_line_diagnostics()"))
--- map.normal("[d", map.lua("vim.lsp.diagnostic.goto_prev()"))
--- map.normal("]d", map.lua("vim.lsp.diagnostic.goto_next()"))
-map.normal("<space>q", map.lua("vim.lsp.diagnostic.set_loclist()"))
+map.normal("<leader>gr", map.lua("vim.lsp.buf.references()"))
+
+-- Diagnostics:
+map.normal("<space>e", map.lua("vim.diagnostic.open_float()"))
+map.normal("[d", map.lua("vim.diagnostic.goto_prev()"))
+map.normal("]d", map.lua("vim.diagnostic.goto_next()"))
+map.normal("<space>q", map.lua("vim.diagnostic.setqflist()"))
 
 -- Add a border to hover windows {{{1
 vim.lsp.handlers["textDocument/hover"] =
