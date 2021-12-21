@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTF/framework"
+
+BIN="$HOME/.apps/bin/wezterm"
+APPIMAGE_URL="https://github.com/wez/wezterm/releases/download/20211205-192649-672c1cc1/WezTerm-20211205-192649-672c1cc1-Ubuntu18.04.AppImage"
+CONFIG_DIR="$HOME/.config/wezterm"
+
+if [ ! -x "$BIN" ]; then
+  mkdir -p "$(dirname "$BIN")"
+  wget -L -O "$BIN" "$APPIMAGE_URL"
+  chmod +x "$BIN"
+fi
+
+mkdir -p "$CONFIG_DIR"
+symlink "$DOTF/extra/wezterm/wezterm.lua" "$CONFIG_DIR/wezterm.lua"
