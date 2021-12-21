@@ -8,6 +8,7 @@ local formatter_by_filetype = {}
 
 function M.add_formatter(name, formatter)
   formatters[name] = formatter
+  formatter.name = name
 
   for _, filetype in ipairs(formatter.filetypes or {}) do
     formatter_by_filetype[filetype] = formatter
@@ -22,6 +23,7 @@ function M.assign_formatter(name, filetypes)
   end
 
   for _, filetype in ipairs(filetypes) do
+    table.insert(formatter.filetypes, filetype)
     formatter_by_filetype[filetype] = formatter
   end
 end
