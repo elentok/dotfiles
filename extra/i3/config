@@ -83,6 +83,7 @@ bindsym $mod+b exec "rofi -show workspace"
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
+focus_wrapping no
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
