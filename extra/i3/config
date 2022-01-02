@@ -162,8 +162,9 @@ bindsym Print exec "flameshot gui"
 workspace 1 output primary
 workspace 2 output primary
 workspace 3 output primary
-workspace 4 output secondary
+workspace 4 output primary
 workspace 5 output secondary
+workspace $ws10 output secondary
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
