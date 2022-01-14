@@ -55,6 +55,7 @@ return require("packer").startup({
 
     -- Telescope
     use "nvim-telescope/telescope.nvim"
+    use "nvim-telescope/telescope-file-browser.nvim"
     use {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}
 
     -- Treesitter

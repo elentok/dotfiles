@@ -25,6 +25,7 @@ require("telescope").setup {
 
 require("telescope").load_extension("aerial")
 require("telescope").load_extension("fzf")
+require("telescope").load_extension("file_browser")
 
 local function create_entry(opts)
   return {
@@ -82,8 +83,8 @@ map.normal("<Leader>gt", call_telescope("tags{}"))
 map.normal("<Leader>gg", call_telescope("git_status{}"))
 map.normal("<Leader>gh", call_telescope("help_tags{}"))
 map.normal("<Leader>gm", call_telescope("oldfiles{ previewer = false}"))
-map.normal("<Leader>fe",
-           call_telescope("file_browser{ cwd = vim.fn.expand(\"%:p:h\") }"))
+map.normal("<Leader>fe", ":Telescope file_browser path=%:p:h<cr>")
+-- call_telescope("file_browser{ cwd = vim.fn.expand(\"%:p:h\") }"))
 -- map.normal("gs", call_telescope(
 --                "lsp_document_symbols{ symbols = {\"function\", \"method\", \"interface\", \"class\"} }"))
 map.normal("gr", call_telescope("lsp_references()"))
