@@ -1,13 +1,25 @@
 local lsp = require("elentok/lsp")
 
-local lua_lsp_root_path = vim.fn.expand(
-                              "~/.apps/all/lua-language-server/default")
-local lua_lsp_bin_path = lua_lsp_root_path .. "/bin/Linux/lua-language-server"
-local lua_lsp_main_lua = lua_lsp_root_path .. "/main.lua"
+local root_path = vim.fn.expand("~/.apps/all/lua-language-server/default")
+
+bin_paths = {
+  root_path .. "/bin/Linux/lua-language-server",
+  root_path .. "/bin/lua-language-server"
+}
+
+local bin_path
+for _, path in pairs(bin_paths) do
+  if vim.fn.filereadable(path) ~= 0 then
+    bin_path = path
+    break
+  end
+end
+
+local main_lua = root_path .. "/main.lua"
 
 lsp.setup({
   sumneko_lua = {
-    cmd = {lua_lsp_bin_path, "-E", lua_lsp_main_lua},
+    cmd = {bin_path, "-E", main_lua},
     settings = {
       Lua = {
         runtime = {
