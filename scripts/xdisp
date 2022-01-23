@@ -11,11 +11,13 @@ function main() {
     l | 1 | "laptop")
       external-off
       restart-compton
+      setup-wallpaper
       ;;
     m | 2 | "multi")
       external-off
       external-on
       restart-compton
+      setup-wallpaper
       ;;
     *)
       echo "Usage: xdisp <laptop|multi>"
@@ -34,6 +36,12 @@ function external-on() {
 function restart-compton() {
   killall compton || true
   compton &
+}
+
+function setup-wallpaper() {
+  if [ -e ~/.config/wallpaper.jpg ]; then
+    feh --bg-fill ~/.config/wallpaper.jpg
+  fi
 }
 
 main "$@"
