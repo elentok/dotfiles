@@ -2,8 +2,9 @@ return require("packer").startup({
   function()
     use "wbthomason/packer.nvim"
 
-    -- Optimize startup.
-    use {"lewis6991/impatient.nvim"}
+    -- Optimizations.
+    use "lewis6991/impatient.nvim"
+    use "nathom/filetype.nvim"
 
     -- Color scheme.
     use "olimorris/onedarkpro.nvim"
