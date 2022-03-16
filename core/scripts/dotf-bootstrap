@@ -11,7 +11,11 @@ main() {
 
   dotf-header h1 "Setting up dotfiles..."
 
-  dotf-pkgs install apt
+  if dotf-is-mac; then
+    dotf-pkgs install brew
+  else
+    dotf-pkgs install apt
+  fi
 
   dotf-header h2 "[dotf-bootstrap] Updating git submodules..."
   git submodule update --init --recursive
@@ -26,9 +30,9 @@ main() {
   dotf-pkgs install npm
   dotf-component git zsh nvim ripgrep tig bash tmux vifm
 
-  if dotf-is-mac; then
-    dotf-component osx-tuning iterm
-  fi
+  #if dotf-is-mac; then
+  #dotf-component osx-tuning iterm
+  #fi
 
   dotf-header h2 '[dotf-bootstrap] Running npm install...'
   npm install

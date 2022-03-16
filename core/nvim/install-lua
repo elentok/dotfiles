@@ -13,8 +13,10 @@ LUA_ROOT="$(app-dir lua ${LUA_VERSION})"
 function main() {
   dotf-header h2 '[nvim-lua] Installing Lua...'
 
-  install-lua
-  install-luarocks
+  if dotf-is-linux; then
+    install-lua
+    install-luarocks
+  fi
   install-lua-language-server
 
   if command_missing lua-format; then

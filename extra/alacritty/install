@@ -3,15 +3,19 @@
 source "$DOTF/framework"
 
 main() {
-  if command_missing alacritty; then
-    dotf-apt cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev python3 libxkbcommon-dev
-    cargo install alacritty
+  if ! dotf-is-mac; then
+    if command_missing alacritty; then
+      dotf-apt cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev python3 libxkbcommon-dev
+      cargo install alacritty
+    fi
   fi
 
   mkdir -p ~/.config/alacritty
   symlink "$DOTF/extra/alacritty/alacritty.yml" ~/.config/alacritty/alacritty.yml
 
-  add-desktop-entry alacritty Alacritty "$(command -v alacritty)"
+  if dotf-is-linux; then
+    add-desktop-entry alacritty Alacritty "$(command -v alacritty)"
+  fi
 }
 
 main "$@"

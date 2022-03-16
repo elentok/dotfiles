@@ -31,6 +31,9 @@ function install-pkgs() {
     apt)
       install-apt-pkgs
       ;;
+    brew)
+      install-brew-pkgs
+      ;;
     pip)
       install-pip-pkgs
       ;;
@@ -57,15 +60,15 @@ function install-apt-pkgs() {
       dotf-header h2 '[dotf-pkgs] Installing apt-kde packages...'
       dotf-apt "$(get-pkgs apt-kde)"
     fi
-  elif dotf-is-mac; then
-    dotf-header h2 '[dotf-pkgs] Installing brew packages...'
-    for pkg in $(get-pkgs brew); do
-      brew_install "$pkg"
-    done
   elif is_termux; then
     dotf-header h2 '[dotf-pkgs] Installing termux packages...'
     dotf-apt "$(get-pkgs termux)"
   fi
+}
+
+function install-brew-pkgs() {
+  dotf-header h2 '[dotf-pkgs] Installing brew packages...'
+  dotf-brew "$(get-pkgs brew)"
 }
 
 function install-pip-pkgs() {

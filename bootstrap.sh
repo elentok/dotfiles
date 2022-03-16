@@ -9,6 +9,8 @@ DOTF="$(dirname "${BASH_SOURCE[0]-$0}")"
 DOTF="$(cd "$DOTF" && pwd)"
 export DOTF
 
+source "$DOTF/core/scripts/lib/os.sh"
+
 function main() {
   echo "=================================================="
   echo "Checking requirements are installed..."
@@ -24,8 +26,12 @@ function main() {
   git submodule update --init --recursive
 
   if dotf-is-mac; then
-    echo '- Updating brew... '
-    brew update
+    if ! has-command brew; then
+      install-homebrew
+    else
+      echo '- Updating brew... '
+      brew update
+    fi
   fi
 
   echo
@@ -53,6 +59,21 @@ function install-if-missing() {
     fi
   fi
 
+}
+
+function install-homebrew() {
+  export BREW_HOME=~/.homebrew
+
+  git clone https://github.com/Homebrew/brew $BREW_HOME
+
+  export PATH=$BREW_HOME/bin:$PATH
+
+  #sudo xcodebuild -license accept
+  #sudo xcode-select --install
+
+  eval "$($BREW_HOME/bin/brew shellenv)"
+  brew update --force --quiet
+  chmod -R go-w "$(brew --prefix)/share/zsh"
 }
 
 function has-command() {

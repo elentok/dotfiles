@@ -4,16 +4,18 @@ source "$DOTF/framework"
 
 dotf-bullet "Installing tig... "
 
-if command_missing tig; then
-  PRIMARY=yes "$DOTF/core/tig/build" && dotf-success "done."
-else
-  version="$(dotf-trim < "$DOTF/core/tig/VERSION")"
-  current_version="$(tig --version | head -1 | awk '{print $3}')"
-  if [ "$current_version" == "$version" ]; then
-    dotf-info "version $version already installed."
-  else
-    dotf-info "found $current_version, upgrading to $version..."
+if dotf-is-linux; then
+  if command_missing tig; then
     PRIMARY=yes "$DOTF/core/tig/build" && dotf-success "done."
+  else
+    version="$(dotf-trim < "$DOTF/core/tig/VERSION")"
+    current_version="$(tig --version | head -1 | awk '{print $3}')"
+    if [ "$current_version" == "$version" ]; then
+      dotf-info "version $version already installed."
+    else
+      dotf-info "found $current_version, upgrading to $version..."
+      PRIMARY=yes "$DOTF/core/tig/build" && dotf-success "done."
+    fi
   fi
 fi
 

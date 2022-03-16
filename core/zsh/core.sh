@@ -235,8 +235,10 @@ export RIPGREP_CONFIG_PATH="$DOTF/core/ripgrep/ripgreprc"
 export SHELLCHECK_OPTS="-e SC1090,SC1091"
 
 if dotf-is-mac; then
-  JAVA_HOME="$(/usr/libexec/java_home 2> /dev/null)"
-  export JAVA_HOME
+  JAVA_HOME="$(/usr/libexec/java_home 2> /dev/null || true)"
+  if [ -n "$JAVA_HOME" ]; then
+    export JAVA_HOME
+  fi
 fi
 
 # DOTLOCAL {{{1

@@ -63,5 +63,5 @@ is_wsl() {
 # Identify ARM {{{1
 
 is_arm() {
-  [ "$(dpkg --print-architecture)" = "armhf" ]
+  dotf-is-linux && [ "$(dpkg --print-architecture)" = "armhf" ]
 }

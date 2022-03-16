@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Section: 0x700000064
+# Tilde:   0x700000035
+
+hidutil property --set \
+  '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000064,"HIDKeyboardModifierMappingDst":0x700000035}]}'
