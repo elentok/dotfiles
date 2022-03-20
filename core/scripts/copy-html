@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#
+# Based on https://stackoverflow.com/q/11085654
+
+set -euo pipefail
+
+source "$DOTF/core/scripts/lib/os.sh"
+
+if dotf-is-mac; then
+  printf "set the clipboard to «data HTML$(cat $@ | hexdump -ve '1/1 "%.2x"')»" | osascript -
+else
+  xclip -selection clipboard -t text/html
+fi

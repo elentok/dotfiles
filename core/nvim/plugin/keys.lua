@@ -5,11 +5,9 @@ map.normal("<c-_>", ":Commentary<cr>")
 map.visual("<c-_>", ":Commentary<cr>")
 map.insert("<c-_>", "<c-o>:Commentary<cr>")
 
--- Yank Markdown to HTML
-map.visual("<Leader>ym",
-           ":!pandoc --from markdown --to html | xclip -selection clipboard -t text/html<cr>u")
-map.normal("<Leader>ym",
-           ":%!pandoc --from markdown --to html | xclip -selection clipboard -t text/html<cr>u")
+--- Yank Markdown to HTML
+map.visual("<Leader>m", ":!pandoc --from markdown --to html | copy-html<cr>u")
+map.normal("<Leader>m", ":%!pandoc --from markdown --to html | copy-html<cr>u")
 
 -- Signify
 map.normal("<Leader>vl", ":SignifyHunkDiff<cr>")
