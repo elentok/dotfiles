@@ -488,6 +488,8 @@ key_bindings:
   #- { key: Q,      mods: Command,         action: Quit             }
   #- { key: W,      mods: Command,         action: Quit             }
   #- { key: F,      mods: Command|Control, action: ToggleFullscreen }
+  # Fix Ctrl Slash on Mac
+  - { key: Slash,   mods: Control,       chars: "\x1f"                 }
 
   - { key: Paste, action: Paste }
   - { key: Copy, action: Copy }
