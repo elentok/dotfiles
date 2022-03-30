@@ -1,7 +1,7 @@
-syntax match TodoTask '\[ \].*$' contains=TodoContext
-syntax match TodoDone '\[x\].*$' contains=TodoContext
-syntax match TodoWaiting '\[waiting\].*$' contains=TodoContext
-syntax match TodoInprogress '\[inprogress\].*$' contains=TodoContext
+syntax match TodoTask '\[ \].*$' contains=TodoContext containedin=markdownCodeBlock
+syntax match TodoDone '\[x\].*$' contains=TodoContext containedin=markdownCodeBlock
+syntax match TodoWaiting '\[waiting\].*$' contains=TodoContext containedin=markdownCodeBlock
+syntax match TodoInprogress '\[inprogress\].*$' contains=TodoContext containedin=markdownCodeBlock
 syntax match TodoContext '@[^ ]*' contained
 highlight default link TodoDone Comment
 highlight default link TodoWaiting WarningMsg
