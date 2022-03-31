@@ -152,7 +152,7 @@ if [ -n "$BREW_HOME" ]; then
 fi
 
 [ -n "$GOROOT" ] && PATH=$PATH:$GOROOT/bin:$MAIN_GOPATH/bin
-for ver in 3.6 3.7; do
+for ver in 3.6 3.7 3.9; do
   [ -d $HOME/Library/Python/$ver/bin ] && PATH=$PATH:$HOME/Library/Python/$ver/bin
 done
 
