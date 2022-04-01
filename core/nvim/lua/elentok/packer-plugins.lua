@@ -10,8 +10,9 @@ return require("packer").startup({
     use "olimorris/onedarkpro.nvim"
 
     -- File manager.
-    use "cocopon/vaffle.vim"
+    -- use "cocopon/vaffle.vim"
     use "vifm/vifm.vim"
+    use "tamago324/lir.nvim"
 
     use "tpope/vim-abolish"
     use "tpope/vim-commentary"

@@ -1,12 +1,12 @@
-nnoremap - :call Elentok_GoUp()<cr>
+" nnoremap - :call Elentok_GoUp()<cr>
 
 function! Elentok_GoUp()
   if &filetype == 'vaffle'
     call vaffle#open_parent()
   elseif expand('%') == ''
-    Vaffle
+    e .
   else
-    Vaffle %
+    exec "e " . expand("%:p:h")
   endif
 endfunction
 
