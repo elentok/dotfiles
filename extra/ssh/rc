@@ -2,9 +2,12 @@
 
 date '+%Y-%m-%d %H:%M' >> ~/.ssh/ssh.log
 
-if [ -n "$SSH_AUTH_SOCK" ]; then
-  echo "SSH: Setting agent to $SSH_AUTH_SOCK"
-  "$HOME/.dotfiles/scripts/agent" set "$SSH_AUTH_SOCK" >> ~/.ssh/ssh.log 2>&1
-fi
+# Only do this via SSH (not SCP)
+if [ -n "$SSH_TTY" ]; then
+  if [ -n "$SSH_AUTH_SOCK" ]; then
+    echo "SSH: Setting agent to $SSH_AUTH_SOCK"
+    "$HOME/.dotfiles/scripts/agent" set "$SSH_AUTH_SOCK" >> ~/.ssh/ssh.log 2>&1
+  fi
 
-dotf-term-title
+  dotf-term-title
+fi
