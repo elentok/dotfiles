@@ -164,8 +164,10 @@ function M.ishell(cmd, opts)
   local cmd_args = {
     string.format("cd '%s'", cwd),
     "echo '========================================'",
-    string.format("echo '> cd %s'", cwd), string.format("echo '> %s'", cmd),
-    "echo '========================================'", cmd
+    string.format("echo '> cd %s'", cwd),
+    string.format("echo '> %s'", cmd),
+    "echo '========================================'",
+    cmd
   }
 
   local size_arg = ""

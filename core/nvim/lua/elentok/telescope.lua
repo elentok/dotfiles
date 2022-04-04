@@ -62,7 +62,12 @@ local function buf_tags_picker(opts)
   opts = opts or {}
   command_picker({
     cmd = {
-      "ctags", "-f", "-", "--sort=yes", "--excmd=number", vim.fn.bufname("%")
+      "ctags",
+      "-f",
+      "-",
+      "--sort=yes",
+      "--excmd=number",
+      vim.fn.bufname("%")
     },
     title = "Buffer tags",
     entry_maker = make_entry.gen_from_ctags({path_display = "hidden"}),

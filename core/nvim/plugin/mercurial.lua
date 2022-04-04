@@ -8,7 +8,11 @@ end
 function _G.hg_goto_unresolved()
   builtin.find_files({
     find_command = {
-      "hg", "resolve", "--no-status", "--list", "set:unresolved()"
+      "hg",
+      "resolve",
+      "--no-status",
+      "--list",
+      "set:unresolved()"
     }
   })
 end

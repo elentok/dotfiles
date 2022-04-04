@@ -3,7 +3,13 @@ local map = require("elentok/map")
 local util = require("elentok/util")
 
 local find_config_command = {
-  "rg", "-t", "lua", "-t", "vim", "--files", vim.env.DOTF .. "/core/nvim"
+  "rg",
+  "-t",
+  "lua",
+  "-t",
+  "vim",
+  "--files",
+  vim.env.DOTF .. "/core/nvim"
 }
 
 util.add_dirs(find_config_command, {vim.env.DOTL .. "/nvim"})
@@ -13,7 +19,10 @@ function _G.goto_config()
 end
 
 local find_script_command = {
-  "rg", "--files", vim.env.DOTF .. "/core/scripts", vim.env.DOTF .. "/scripts"
+  "rg",
+  "--files",
+  vim.env.DOTF .. "/core/scripts",
+  vim.env.DOTF .. "/scripts"
 }
 
 util.add_dirs(find_script_command, {vim.env.DOTL .. "/scripts"})

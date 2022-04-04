@@ -57,8 +57,19 @@ M.add_formatter("lsp", {
     vim.lsp.buf.formatting_seq_sync()
   end,
   filetypes = {
-    "scss", "java", "yaml", "python", "lua", "css", "html", "javascript",
-    "json", "markdown", "typescript", "typescriptreact", "sh"
+    "scss",
+    "java",
+    "yaml",
+    "python",
+    "lua",
+    "css",
+    "html",
+    "javascript",
+    "json",
+    "markdown",
+    "typescript",
+    "typescriptreact",
+    "sh"
   }
 })
 

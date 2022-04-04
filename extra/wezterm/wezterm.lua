@@ -10,7 +10,8 @@ return {
       key = "V",
       mods = "SUPER|SHIFT",
       action = wezterm.action {PasteFrom = "Clipboard"}
-    }, {
+    },
+    {
       key = "V",
       mods = "CTRL|SHIFT",
       action = wezterm.action {PasteFrom = "PrimarySelection"}
