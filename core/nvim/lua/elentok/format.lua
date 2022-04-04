@@ -28,35 +28,38 @@ function M.assign_formatter(name, filetypes)
   end
 end
 
-M.add_formatter("black", {
-  command = "black --quiet --stdin-filename % -",
-  filetypes = {"python"}
-})
+-- M.add_formatter("black", {
+--   command = "black --quiet --stdin-filename % -",
+--   filetypes = {"python"}
+-- })
 
-M.add_formatter("clang",
-                {command = "clang-format --style=Google --assume-filename %"})
+-- M.add_formatter("clang",
+--                 {command = "clang-format --style=Google --assume-filename %"})
 
-M.add_formatter("luaformat", {
-  command = "lua-format --config=$HOME/.lua-format",
-  filetypes = {"lua"}
-})
+-- M.add_formatter("luaformat", {
+--   command = "lua-format --config=$HOME/.lua-format",
+--   filetypes = {"lua"}
+-- })
 
-M.add_formatter("prettier", {
-  command = "prettierd %",
-  filetypes = {
-    "css", "html", "javascript", "json", "markdown", "typescript",
-    "typescriptreact"
-  }
-})
+-- M.add_formatter("prettier", {
+--   command = "prettierd %",
+--   filetypes = {
+--     "css", "html", "javascript", "json", "markdown", "typescript",
+--     "typescriptreact"
+--   }
+-- })
 
-M.add_formatter("shfmt",
-                {command = "shfmt -i 2 -bn -ci -sr", filetypes = {"sh"}})
+-- M.add_formatter("shfmt",
+--                 {command = "shfmt -i 2 -bn -ci -sr", filetypes = {"sh"}})
 
 M.add_formatter("lsp", {
   func = function()
     vim.lsp.buf.formatting_seq_sync()
   end,
-  filetypes = {"scss", "java", "yaml"}
+  filetypes = {
+    "scss", "java", "yaml", "python", "lua", "css", "html", "javascript",
+    "json", "markdown", "typescript", "typescriptreact", "sh"
+  }
 })
 
 local function same_lines(list1, list2)
