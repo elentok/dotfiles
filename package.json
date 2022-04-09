@@ -39,7 +39,7 @@
     "html-to-text": "^8.0.0",
     "js-yaml": "^4.1.0",
     "kdbxweb": "^2.1.1",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "mqtt": "^4.2.8",
     "node-fetch": "^3.0.0",
     "nodemon": "^2.0.13",
