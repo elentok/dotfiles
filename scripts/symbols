@@ -64,12 +64,18 @@ def index():
     dirs = sys.argv[2:]
     symbols = []
     for dir in dirs:
+        print(f"* Indexing {dir}...")
         symbols.extend(index_dir(dir))
 
+    print("* Sorting...")
     lines = [str(symbol) for symbol in symbols]
     lines.sort()
+
+    print(f"* Writing {CACHE_FILE}...")
     with open(CACHE_FILE, "w") as f:
         f.write("\n".join(lines))
+
+    print(f"Done.")
 
 
 def index_dir(dir):
