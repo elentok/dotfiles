@@ -31,6 +31,8 @@ function main() {
     else
       echo '- Updating brew... '
       brew update
+      # Mac comes with an ancient bash version
+      brew install bash
     fi
   fi
 
