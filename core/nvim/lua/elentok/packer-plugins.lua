@@ -14,8 +14,10 @@ return require("packer").startup({
     use "vifm/vifm.vim"
     use "tamago324/lir.nvim"
 
+    -- Comments
+    use "numToStr/Comment.nvim"
+
     use "tpope/vim-abolish"
-    use "tpope/vim-commentary"
     use "tpope/vim-dispatch"
     use "tpope/vim-eunuch"
     use "tpope/vim-fugitive"
