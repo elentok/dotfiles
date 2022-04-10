@@ -71,9 +71,11 @@ function build-luarocks() {
 function install-lua-language-server() {
   dotf-header h3 '[nvim-lua] Installing Lua Language Server...'
 
-  if ! has-gcc-10; then
-    echo "WARNING: The lua language server requires gcc-10 at least, skipping."
-    return
+  if ! dotf-is-mac; then
+    if ! has-gcc-10; then
+      echo "WARNING: The lua language server requires gcc-10 at least, skipping."
+      return
+    fi
   fi
 
   if ! app-exists lua-language-server $LSP_VERSION; then
