@@ -13,6 +13,9 @@ local sources = {
 
 if config.enable_jsts_prettier then
   table.insert(sources, nullLs.builtins.formatting.prettierd)
+else
+  table.insert(sources, nullLs.builtins.formatting.prettierd
+                   .with({filetypes = {"markdown", "yaml"}}))
 end
 
 nullLs.setup({sources = sources})
