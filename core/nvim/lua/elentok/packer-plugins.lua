@@ -35,6 +35,7 @@ return require("packer").startup({
     use "ray-x/lsp_signature.nvim"
     use "stevearc/aerial.nvim"
     use "jose-elias-alvarez/null-ls.nvim"
+    use {"folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons"}
 
     -- Completion.
     use "hrsh7th/cmp-nvim-lsp"
