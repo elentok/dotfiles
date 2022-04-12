@@ -2,7 +2,7 @@ local lsp = require("elentok/lsp")
 
 local root_path = vim.fn.expand("~/.apps/all/lua-language-server/default")
 
-bin_paths = {
+local bin_paths = {
   root_path .. "/bin/Linux/lua-language-server",
   root_path .. "/bin/lua-language-server"
 }

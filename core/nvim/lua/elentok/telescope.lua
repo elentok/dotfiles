@@ -1,33 +1,13 @@
-local actions = require "telescope/actions"
 local conf = require"telescope.config".values
 local finders = require "telescope.finders"
 local make_entry = require "telescope.make_entry"
-local map = require "elentok/map"
 local pickers = require "telescope.pickers"
 local previewers = require "telescope.previewers"
 local utils = require "telescope.utils"
 
-require("telescope").setup {
-  defaults = {
-    -- file_sorter = require('telescope.sorters').get_fzy_sorter,
-    file_ignore_patterns = {"node_modules/.*", "scuba_goldens/.*"},
-    mappings = {i = {["<C-q>"] = actions.send_to_qflist + actions.open_qflist}}
-  },
-  extensions = {
-    fzf = {
-      fuzzy = true,
-      override_generic_sorter = true,
-      override_file_sorter = true,
-      case_mode = "smart_case"
-    }
-  }
-}
+local M = {}
 
-require("telescope").load_extension("aerial")
-require("telescope").load_extension("fzf")
-require("telescope").load_extension("file_browser")
-
-local function create_entry(opts)
+function M.create_entry(opts)
   return {
     valid = true,
 
@@ -41,7 +21,7 @@ local function create_entry(opts)
   }
 end
 
-local function command_picker(opts, picker_opts)
+function M.command_picker(opts, picker_opts)
   if picker_opts == nil then
     picker_opts = {}
   end
@@ -52,15 +32,15 @@ local function command_picker(opts, picker_opts)
     finder = finders.new_table {
       results = results,
       entry_maker = opts.entry_maker or function(line)
-        return create_entry(opts.parse_line(line))
+        return M.create_entry(opts.parse_line(line))
       end
     }
   }):find()
 end
 
-local function buf_tags_picker(opts)
+function M.buf_tags_picker(opts)
   opts = opts or {}
-  command_picker({
+  M.command_picker({
     cmd = {
       "ctags",
       "-f",
@@ -78,23 +58,4 @@ end
 
 -- Keys
 
-local function call_telescope(expr)
-  return map.lua("require(\"telescope.builtin\")." .. expr)
-end
-
-map.normal("<c-p>", call_telescope("find_files{}"))
-map.normal("<Leader>b", call_telescope("buffers{}"))
-map.normal("<Leader>gt", call_telescope("tags{}"))
-map.normal("<Leader>gg", call_telescope("git_status{}"))
-map.normal("<Leader>gh", call_telescope("help_tags{}"))
-map.normal("<Leader>gm", call_telescope("oldfiles{ previewer = false}"))
-map.normal("<Leader>fe", ":Telescope file_browser path=%:p:h<cr>")
--- call_telescope("file_browser{ cwd = vim.fn.expand(\"%:p:h\") }"))
--- map.normal("gs", call_telescope(
---                "lsp_document_symbols{ symbols = {\"function\", \"method\", \"interface\", \"class\"} }"))
-map.normal("gr", call_telescope("lsp_references()"))
-map.normal("``", "<cmd>Telescope aerial<cr>")
-map.normal("gs", "<cmd>Telescope aerial<cr>")
-map.normal("gb", map.lua("require(\"elentok/telescope\").buf_tags_picker()"))
-
-return {command_picker = command_picker, buf_tags_picker = buf_tags_picker}
+return M

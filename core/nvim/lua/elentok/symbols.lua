@@ -1,4 +1,4 @@
-local telescope = require("elentok/telescope")
+local elentok_telescope = require("elentok/telescope")
 local map = require("elentok/map")
 local util = require("lspconfig/util")
 
@@ -16,7 +16,7 @@ function M.index()
 end
 
 function M.goto_symbol()
-  telescope.command_picker({
+  elentok_telescope.command_picker({
     cmd = {"symbols", "list"},
     parse_line = function(line)
       local parts = vim.split(line, ",")
