@@ -2,7 +2,6 @@
 " Commands {{{1
 command! AutoWrap set formatoptions+=c formatoptions+=t
 command! AutoWrapOff set formatoptions-=c formatoptions-=t
-command! W :w
 
 command! -nargs=+ Ewhich     exec "edit " . system("which <args>")
 
