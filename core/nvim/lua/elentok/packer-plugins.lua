@@ -73,10 +73,9 @@ return require("packer").startup({
     use "aklt/plantuml-syntax"
 
     -- Misc.
-    use "junegunn/vim-easy-align"
+    -- use "junegunn/vim-easy-align"
     use "mhinz/vim-signify"
     use "michaeljsmith/vim-indent-object"
-    use "nathanaelkane/vim-indent-guides"
     use "nelstrom/vim-visual-star-search"
     use "christoomey/vim-tmux-navigator"
     use "voldikss/vim-floaterm"

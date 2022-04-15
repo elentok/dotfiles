@@ -8,7 +8,10 @@ vim.o.background = "dark"
 
 local onedarkpro = util.safe_require("onedarkpro")
 if onedarkpro then
-  onedarkpro.setup({styles = {comments = "italic"}})
+  onedarkpro.setup({
+    styles = {comments = "italic"},
+    options = {cursorline = true}
+  })
   onedarkpro.load()
 end
 

@@ -44,8 +44,3 @@ end
 map.normal("<Leader>td", map.lua("TodoToggleDone()"))
 map.normal("<Leader>tp", map.lua("TodoPrevState()"))
 map.normal("<Leader>tn", map.lua("TodoNextState()"))
-
-vim.cmd([[
-  iabbr #todo ☐
-  iabbr #done ✔
-]])

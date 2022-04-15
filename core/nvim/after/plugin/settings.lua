@@ -33,3 +33,27 @@ vim.opt.splitright = true
 
 -- Settings for the tversteeg/registers.nvim plugin.
 vim.g.registers_window_border = "single"
+
+vim.opt.expandtab = true
+
+vim.opt.clipboard = {"unnamed", "unnamedplus"}
+vim.opt.textwidth = 80
+
+vim.opt.linebreak = true
+vim.opt.breakindent = true
+vim.opt.showbreak = ">>"
+
+vim.opt.list = true
+vim.opt.listchars = "tab:»·,trail:·"
+
+vim.opt.mouse = "a"
+vim.opt.scrolloff = 3
+
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
+vim.opt.tabstop = 2
+
+vim.opt.wildignorecase = true
+
+-- Makes sure the active window will always be at least 80 characters.
+vim.opt.winwidth = 84

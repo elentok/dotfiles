@@ -80,7 +80,11 @@ if isdirectory(expand("~/.dotlocal/nvim"))
   let &runtimepath.=',~/.dotlocal/nvim'
 endif
 
-source $vimfiles/settings.vim
+if !exists('$DOTF')
+  let $DOTF = expand('~/.dotfiles')
+endif
+
+" source $vimfiles/settings.vim
 source $vimfiles/functions.vim
 source $vimfiles/keys.vim
 
