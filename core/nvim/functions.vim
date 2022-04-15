@@ -19,10 +19,15 @@ func! WebSearch(url)
 endfunc
 
 func! Browse(url)
+  let opener='open'
+  if has('linux')
+    let opener='/usr/bin/xdg-open'
+  end
+
   if has('gui_win32')
     call system("start " . a:url)
   else
-    call system($opener . " '" . a:url . "' &")
+    call system(opener . " '" . a:url . "' &")
   end
 endfunc
 

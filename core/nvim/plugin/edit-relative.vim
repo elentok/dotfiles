@@ -1,6 +1,6 @@
-noremap <Leader>ef :e <C-R>=EscapeCurrentFileDir() . $delimiter <cr>
-noremap <Leader>et :tabe <C-R>=EscapeCurrentFileDir() . $delimiter <cr>
-noremap <Leader>rf :read <C-R>=EscapeCurrentFileDir() . $delimiter <cr>
+noremap <Leader>ef :e <C-R>=EscapeCurrentFileDir() . "/" <cr>
+noremap <Leader>et :tabe <C-R>=EscapeCurrentFileDir() . "/" <cr>
+noremap <Leader>rf :read <C-R>=EscapeCurrentFileDir() . "/" <cr>
 
 function! EscapeCurrentFileDir()
   let path = expand("%:p:h")

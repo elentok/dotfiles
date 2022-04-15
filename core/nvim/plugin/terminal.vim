@@ -22,7 +22,7 @@ tnoremap <c-l> <c-\><c-n><c-w>l
 
 " Tmux-like <c-a> mappings {{{1
 
-if g:os == 'windows'
+if has('win32')
   let g:termshell='powershell'
 else
   let g:termshell=''
@@ -30,7 +30,6 @@ endif
 
 command! Term exec 'terminal ' . g:termshell
 
-nnoremap <c-a>r :so $vimrc<cr>
 nnoremap <c-a>c :tabe<cr>:Term<cr>
 tnoremap <c-a>a <c-a>
 tnoremap <c-a>c <c-\><c-n>:tabe<cr>:Term<cr>
