@@ -1,4 +1,5 @@
 local api = vim.api
+local create_cmd = api.nvim_create_user_command
 
 local log_enabled = vim.env.NVIM_LOG == "true"
 
@@ -258,5 +259,13 @@ function M.get_visual_selection()
 
   return table.concat(lines, "\n")
 end
+
+create_cmd("LogEnable", function()
+  M.set_log(true)
+end, {})
+
+create_cmd("LogDisable", function()
+  M.set_log(false)
+end, {})
 
 return M
