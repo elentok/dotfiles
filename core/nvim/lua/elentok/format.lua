@@ -1,4 +1,5 @@
 local util = require("elentok/util")
+local log = require("elentok/log").log
 local message = require("elentok/message")
 
 local M = {}
@@ -92,11 +93,11 @@ end
 
 local function run_formatter(formatter)
   local command = formatter.command:gsub("%%", vim.fn.expand("%"))
-  util.log("[run_formatter] command", command)
+  log("[run_formatter] command", command)
 
   local lines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
   local result = util.shell(command, {stdin = lines, sync = true})
-  util.log("[run_formatter} result", result)
+  log("[run_formatter} result", result)
   if result.code == 0 then -- success
     util.remove_trailing_blank_line(result.stdout)
     if same_lines(lines, result.stdout) then
@@ -117,17 +118,17 @@ function M.format(formatter_name)
   if formatter_name == nil or formatter_name == "" then
     formatter = formatter_by_filetype[filetype]
     if formatter == nil then
-      util.log("[format] no formatter for type", filetype)
+      log("[format] no formatter for type", filetype)
       return
     end
-    util.log("[format] formatter for type", filetype, formatter)
+    log("[format] formatter for type", filetype, formatter)
   else
     formatter = formatters[formatter_name]
     if formatter == nil then
       print("[format] no formatter named", formatter)
       return
     end
-    util.log("[format] formatter by name", formatter_name, formatter)
+    log("[format] formatter by name", formatter_name, formatter)
   end
 
   if formatter.command ~= nil then
