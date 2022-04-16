@@ -57,7 +57,6 @@ noremap <backspace> zc
 
 noremap <Leader>ww :w<cr>
 noremap <Leader>wq :wq<cr>
-noremap <Leader>er :call RevertFile()<cr>
 " remove whitespace
 noremap <Leader>rws :%s/\s\+$//<cr>
 
@@ -127,7 +126,7 @@ vmap <Leader>< c<<C-R>"><ESC>
 
 " Git (v = version control) {{{1
 noremap <Leader>tg :FloatermNew --width=0.8 --height=0.8 --autoclose=1 tig<cr>
-noremap <Leader>ts :QuickShell tig status<cr>
+noremap <Leader>ts :FloatermNew --width=0.8 --height=0.8 --autoclose=1 tig status<cr>
 
 noremap <Leader>vrf :call Confirm("Revert current file?", "!git co %")<cr>
 noremap <Leader>vrp :Git co -p %<cr>
@@ -141,10 +140,6 @@ noremap <Leader>vc :Gcommit<cr>
 xnoremap <silent><space> f oT o
 xnoremap <silent>a<space> f oF o
 xnoremap <silent>i<space> t oT o
-
-" Toggle stuff {{{1
-noremap <Leader>ti :IndentGuidesToggle<cr>
-noremap <Leader>tb :call ToggleBackground()<cr>
 
 vnoremap <tab> >gv
 vnoremap <s-tab> <gv

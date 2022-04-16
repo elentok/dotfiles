@@ -11,8 +11,8 @@ if vim.env.DOTF == nil then
   vim.env.DOTF = vim.fn.expand("~/.dotfiles")
 end
 
-vim.api.nvim_command("source $DOTF/core/nvim/init-legacy.vim")
-
 require("elentok")
+
+vim.api.nvim_command("source $DOTF/core/nvim/init-legacy.vim")
 -- disable for now (https://github.com/wbthomason/packer.nvim/issues/201)
 -- require("packer_compiled")

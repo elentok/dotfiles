@@ -1,12 +1,4 @@
 " vim: foldmethod=marker
-" Commands {{{1
-command! AutoWrap set formatoptions+=c formatoptions+=t
-command! AutoWrapOff set formatoptions-=c formatoptions-=t
-
-command! -nargs=+ Ewhich     exec "edit " . system("which <args>")
-
-command! SudoWrite :w !sudo tee %
-
 " Google Search {{{1
 
 func! WebSearch(url)
@@ -40,40 +32,8 @@ function! Confirm(message, command)
   end
 endfunc
 
-" revert {{{1
-func! RevertFile()
-  if &modified
-    call Confirm("Revert unsaved changes?", "e!")
-  else
-    e!
-  end
-endfunc
-
-
 " preview sass colors {{{1
 command! PreviewSassColors !preview_sass_colors % && open preview.html
-
-" Background {{{1
-function! ToggleBackground()
-  if &background == "dark"
-    set background=light
-  else
-    set background=dark
-  endif
-  call writefile(["set background=" . &background], expand("~/.vimstate"))
-endfunc
-
-" QuickShell {{{1
-function! QuickShell(cmd)
-  if bufname('%') != ''
-    tabe %
-  else
-    tabe
-  endif
-  execute 'terminal' a:cmd
-endfunction
-
-command! -nargs=+ QuickShell call QuickShell("<args>")
 
 " Markserv {{{1
 function! Markserv()

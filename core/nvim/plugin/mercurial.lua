@@ -20,7 +20,7 @@ end
 vim.cmd([[
   command! HgModified lua hg_goto_modified()
   command! HgUnresolved lua hg_goto_unresolved()
-  command! HgResolve QuickShell hg resolve --mark %
+  command! HgResolve FloatermNew hg resolve --mark %
 ]])
 
 map.normal("<Leader>hm", ":HgModified<cr>")
