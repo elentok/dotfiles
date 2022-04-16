@@ -2,7 +2,7 @@
 "
 
 "inoremap <esc> <nop>
-inoremap jk <esc>
+" inoremap jk <esc>
 
 " Navigation {{{1
 inoremap <c-l> <right>
@@ -60,17 +60,14 @@ noremap <Leader>wq :wq<cr>
 " remove whitespace
 noremap <Leader>rws :%s/\s\+$//<cr>
 
-nnoremap <c-s> :w<cr>
-inoremap <c-s> <c-o>:w<cr>
-
-vnoremap <silent> <Enter> :EasyAlign<Enter>
+" vnoremap <silent> <Enter> :EasyAlign<Enter>
 
 " add symbols to the end of the lines:
 noremap <Leader>e1 :exec ":normal A <c-v><esc>" . (79 - strlen(getline("."))) . "A#"<cr>
 noremap <Leader>e2 :exec ":normal A <c-v><esc>" . (69 - strlen(getline("."))) . "A="<cr>
 noremap <Leader>e3 :exec ":normal A <c-v><esc>" . (59 - strlen(getline("."))) . "A-"<cr>
 
-inoremap <C-\> <c-o>ma<c-o>A;<c-o>`a
+" inoremap <C-\> <c-o>ma<c-o>A;<c-o>`a
 
 " From https://github.com/skwp/dotfiles/blob/master/vim/plugin/settings/stop-visual-paste-insanity.vim:
 " If you visually select something and hit paste
@@ -79,7 +76,7 @@ inoremap <C-\> <c-o>ma<c-o>A;<c-o>`a
 " and repeatedly pasting it. This changes the paste
 " command in visual mode so that it doesn't overwrite
 " whatever is in your paste buffer.
-vnoremap p "_dP
+" vnoremap p "_dP
 
 noremap ,ya :%y+<cr>
 
