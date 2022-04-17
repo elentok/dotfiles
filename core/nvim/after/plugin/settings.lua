@@ -57,3 +57,5 @@ vim.opt.wildignorecase = true
 
 -- Makes sure the active window will always be at least 80 characters.
 vim.opt.winwidth = 84
+
+vim.opt.foldtext = "getline(v:foldstart)"
