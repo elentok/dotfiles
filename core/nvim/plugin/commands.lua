@@ -1,4 +1,5 @@
 local create_cmd = vim.api.nvim_create_user_command
+local util = require("elentok/util")
 
 create_cmd("W", ":w", {})
 create_cmd("SudoWrite", ":w !sudo tee %", {})
@@ -28,15 +29,15 @@ create_cmd("CacheBust", function()
   ]])
 end, {})
 
-create_cmd("QuickShell", function(args)
-  if vim.fn.bufname("%") == "" then
-    vim.cmd("tabe")
-    -- tabe
-  else
-    vim.cmd("tabe %")
-    -- tabe %
-  end
-  vim.cmd("terminal " .. args.args)
-  -- execute 'terminal' a:cmd
-
+create_cmd("TermNewTab", function(args)
+  util.terminal_in_new_tab(args.args)
 end, {nargs = "+", desc = "Runs a shell command in a new tab terminal"})
+
+create_cmd("Markserv", function(args)
+  util.terminal_in_new_tab("markserv")
+  vim.cmd("tabprevious")
+  vim.cmd("silent !o \"http://localhost:8642/%\"")
+end, {})
+
+create_cmd("PreviewSassColors", "!preview_sass_colors % && open preview.html",
+           {})

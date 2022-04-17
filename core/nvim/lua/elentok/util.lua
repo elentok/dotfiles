@@ -247,4 +247,13 @@ function M.get_visual_selection()
   return table.concat(lines, "\n")
 end
 
+function M.terminal_in_new_tab(command)
+  if vim.fn.bufname("%") == "" then
+    vim.cmd("tabe")
+  else
+    vim.cmd("tabe %")
+  end
+  vim.cmd("terminal " .. command)
+end
+
 return M

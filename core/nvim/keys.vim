@@ -10,11 +10,6 @@ inoremap <c-l> <right>
 " Find {{{1
 nnoremap <cr> :nohls<cr><cr>
 
-noremap <Leader>fg :call WebSearch("https://google.com/search?q=%query%")<cr>
-noremap <Leader>fo :call WebSearch("http://stackoverflow.com/search?q=%query%")<cr>
-vnoremap <Leader>fg "9y:call Browse("https://google.com/search?q=<c-r>9")<cr>
-vnoremap <Leader>fo "9y:call Browse("http://stackoverflow.com/search?q=<c-r>9")<cr>
-
 " Window management {{{1
 nnoremap <silent> <c-h> <c-w>h
 nnoremap <silent> <c-j> <c-w>j
@@ -125,7 +120,6 @@ vmap <Leader>< c<<C-R>"><ESC>
 noremap <Leader>tg :FloatermNew --width=0.8 --height=0.8 --autoclose=1 tig<cr>
 noremap <Leader>ts :FloatermNew --width=0.8 --height=0.8 --autoclose=1 tig status<cr>
 
-noremap <Leader>vrf :call Confirm("Revert current file?", "!git co %")<cr>
 noremap <Leader>vrp :Git co -p %<cr>
 noremap <Leader>vdf  :Git diff %<cr>
 noremap <Leader>vdc  :Git diff --cached<cr>
