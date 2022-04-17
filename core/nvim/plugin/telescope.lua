@@ -1,6 +1,6 @@
 local telescope = require "telescope"
+local builtin = require "telescope.builtin"
 local actions = require "telescope/actions"
-local map = require "elentok/map"
 
 telescope.setup {
   defaults = {
@@ -22,21 +22,20 @@ telescope.load_extension("aerial")
 telescope.load_extension("fzf")
 telescope.load_extension("file_browser")
 
-local function call_telescope(expr)
-  return map.lua("require(\"telescope.builtin\")." .. expr)
-end
-
-map.normal("<c-p>", call_telescope("find_files{}"))
-map.normal("<Leader>b", call_telescope("buffers{}"))
-map.normal("<Leader>gt", call_telescope("tags{}"))
-map.normal("<Leader>gg", call_telescope("git_status{}"))
-map.normal("<Leader>gh", call_telescope("help_tags{}"))
-map.normal("<Leader>gm", call_telescope("oldfiles{ previewer = false}"))
-map.normal("<Leader>fe", ":Telescope file_browser path=%:p:h<cr>")
--- call_telescope("file_browser{ cwd = vim.fn.expand(\"%:p:h\") }"))
--- map.normal("gs", call_telescope(
---                "lsp_document_symbols{ symbols = {\"function\", \"method\", \"interface\", \"class\"} }"))
-map.normal("gr", call_telescope("lsp_references()"))
-map.normal("``", "<cmd>Telescope aerial<cr>")
-map.normal("gs", "<cmd>Telescope aerial<cr>")
-map.normal("gb", map.lua("require(\"elentok/telescope\").buf_tags_picker()"))
+vim.keymap.set("n", "<c-p>", builtin.find_files)
+vim.keymap.set("n", "<Leader>b", builtin.buffers)
+vim.keymap.set("n", "<Leader>gt", builtin.tags)
+vim.keymap.set("n", "<Leader>gg", builtin.git_status)
+vim.keymap.set("n", "<Leader>gh", builtin.help_tags)
+vim.keymap.set("n", "<Leader>gm", function()
+  builtin.oldfiles {previewer = false}
+end)
+vim.keymap.set("n", "<Leader>fe", function()
+  telescope.extensions.file_browser.file_browser({path = "%:p:h"})
+end)
+vim.keymap.set("n", "gr", builtin.lsp_references)
+vim.keymap.set("n", "``", telescope.extensions.aerial.aerial)
+vim.keymap.set("n", "gs", telescope.extensions.aerial.aerial)
+vim.keymap.set("n", "gb", function()
+  require("elentok/telescope").buf_tags_picker()
+end)

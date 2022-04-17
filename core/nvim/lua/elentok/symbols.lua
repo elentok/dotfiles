@@ -1,5 +1,4 @@
 local elentok_telescope = require("elentok/telescope")
-local map = require("elentok/map")
 local util = require("lspconfig/util")
 
 local root_finder = util.root_pattern(".git", ".hg")
@@ -26,6 +25,6 @@ function M.goto_symbol()
 end
 
 -- Keys
-map.normal("<Leader>gs", map.lua("require('elentok/symbols').goto_symbol()"))
+vim.keymap.set("n", "<Leader>gs", M.goto_symbol)
 
 return M

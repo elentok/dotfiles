@@ -2,10 +2,8 @@ local actions = require "lir.actions"
 local mark_actions = require "lir.mark.actions"
 local clipboard_actions = require "lir.clipboard.actions"
 local float = require "lir.float"
-local map = require "elentok/map"
 
 require("lir").setup({
-
   devicons_enable = true,
   mappings = {
     ["<cr>"] = actions.edit,
@@ -35,11 +33,10 @@ require("lir").setup({
     winblend = 0,
     curdir_window = {enable = true, highlight_dirname = true}
   }
-
 })
 
-function _G.Elentok_GoUp()
+local function go_up()
   float.init()
 end
 
-map.normal("-", map.lua("Elentok_GoUp()"))
+vim.keymap.set("n", "-", go_up)

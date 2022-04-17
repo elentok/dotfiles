@@ -1,5 +1,5 @@
+local create_cmd = vim.api.nvim_create_user_command
 local util = require("elentok/util")
-local map = require("elentok/map")
 
 local repls = {python = "ipython3", javascript = "node"}
 
@@ -10,7 +10,7 @@ local function send_command(command)
   vim.fn.jobsend(vim.t.send_to_term_job_id, command .. "\n")
 end
 
-function _G.TermNew(command)
+local function term_new(command)
   vim.cmd([[vsplit | terminal]])
   vim.t.send_to_term_job_id = vim.b.terminal_job_id
 
@@ -19,26 +19,26 @@ function _G.TermNew(command)
   end
 end
 
-function _G.TermNewRepl()
+local function term_new_repl()
   local filetype = util.buf_get_filetype(0)
   local repl = repls[filetype]
-  TermNew(repl)
+  term_new(repl)
 end
 
-function _G.TermSendLine()
+local function term_send_line()
   send_command(vim.fn.getline("."))
 end
 
-function _G.TermSendBlock()
+local function term_send_block()
   send_command(util.get_visual_selection())
 end
 
-vim.cmd([[
-  command! Tnew lua TermNew()
-  command! Trepl lua TermNewRepl()
-  command! Tline lua TermSendLine()
-  command! -range Tblock lua TermSendBlock()
-]])
+create_cmd("Tnew", function(args)
+  term_new(args.args)
+end, {})
+create_cmd("Trepl", term_new_repl, {})
+create_cmd("Tline", term_send_line, {})
+create_cmd("Tblock", term_send_block, {range = true})
 
-map.normal("\\\\", ":Tline<cr>")
-map.visual("\\\\", ":Tblock<cr>")
+vim.keymap.set("n", "\\\\", ":Tline<cr>")
+vim.keymap.set("v", "\\\\", ":Tblock<cr>")

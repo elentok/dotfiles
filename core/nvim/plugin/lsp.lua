@@ -1,6 +1,6 @@
 -- vim: foldmethod=marker
+local create_cmd = vim.api.nvim_create_user_command
 local config = require("elentok/config")
-local map = require("elentok/map")
 
 local lsp = require("elentok/lsp")
 
@@ -44,24 +44,25 @@ require("lsp_signature").setup()
 -- lspconfig.cssls.setup {capabilities = capabilities}
 
 -- Keys {{{1
-map.normal("gD", map.lua("vim.lsp.buf.declaration()"))
-map.normal("gd", map.lua("vim.lsp.buf.definition()"))
-map.normal("K", map.lua("vim.lsp.buf.hover()"))
-map.normal("gi", map.lua("vim.lsp.buf.implementation()"))
-map.normal("<space>k", map.lua("vim.lsp.buf.signature_help()"))
-map.normal("<leader>wa", map.lua("vim.lsp.buf.add_workspace_folder()"))
-map.normal("<leader>wr", map.lua("vim.lsp.buf.remove_workspace_folder()"))
-map.normal("<leader>wl",
-           map.lua("print(vim.inspect(vim.lsp.buf.list_workspace_folders()))"))
-map.normal("gD", map.lua("vim.lsp.buf.type_definition()"))
-map.normal("<leader>rn", map.lua("vim.lsp.buf.rename()"))
-map.normal("<leader>gr", map.lua("vim.lsp.buf.references()"))
+vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
+vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+vim.keymap.set("n", "K", vim.lsp.buf.hover)
+vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
+vim.keymap.set("n", "<space>k", vim.lsp.buf.signature_help)
+vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder)
+vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder)
+vim.keymap.set("n", "<leader>wl", function()
+  print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+end)
+vim.keymap.set("n", "gD", vim.lsp.buf.type_definition)
+vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
+vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references)
 
 -- Diagnostics:
-map.normal("<space>e", map.lua("vim.diagnostic.open_float()"))
-map.normal("[d", map.lua("vim.diagnostic.goto_prev()"))
-map.normal("]d", map.lua("vim.diagnostic.goto_next()"))
-map.normal("<space>q", map.lua("vim.diagnostic.setqflist()"))
+vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+vim.keymap.set("n", "<space>q", vim.diagnostic.setqflist)
 
 -- Add a border to hover windows {{{1
 vim.lsp.handlers["textDocument/hover"] =
@@ -71,8 +72,10 @@ vim.lsp.handlers["textDocument/hover"] =
     })
 
 -- Helper commands {{{1
-vim.cmd("command! LspLog :tabe " .. vim.lsp.get_log_path())
-vim.cmd([[
-  command! LspDebugOn :lua vim.lsp.set_log_level(1)
-  command! LspDebugOff :lua vim.lsp.set_log_level(3)
-]])
+create_cmd("LspLog", ":tabe " .. vim.lsp.get_log_path(), {})
+create_cmd("LspDebugOn", function()
+  vim.lsp.set_log_level(1)
+end, {})
+create_cmd("LspDebugOff", function()
+  vim.lsp.set_log_level(3)
+end, {})

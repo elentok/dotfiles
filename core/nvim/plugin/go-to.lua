@@ -1,5 +1,4 @@
 local builtin = require("telescope.builtin")
-local map = require("elentok/map")
 local util = require("elentok/util")
 
 local find_config_command = {
@@ -14,7 +13,7 @@ local find_config_command = {
 
 util.add_dirs(find_config_command, {vim.env.DOTL .. "/nvim"})
 
-function _G.goto_config()
+local function goto_config()
   builtin.find_files({find_command = find_config_command})
 end
 
@@ -27,9 +26,9 @@ local find_script_command = {
 
 util.add_dirs(find_script_command, {vim.env.DOTL .. "/scripts"})
 
-function _G.goto_script()
+local function goto_script()
   builtin.find_files({find_command = find_script_command})
 end
 
-map.normal("<Leader>gb", map.lua("goto_script()"))
-map.normal("<Leader>gc", map.lua("goto_config()"))
+vim.keymap.set("n", "<Leader>gb", goto_script)
+vim.keymap.set("n", "<Leader>gc", goto_config)

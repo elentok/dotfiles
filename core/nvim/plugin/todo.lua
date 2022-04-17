@@ -1,9 +1,7 @@
-local map = require("elentok/map")
-
 local unchecked = "%[ %]"
 local checked = "%[x%]"
 
-function _G.TodoToggleDone()
+local function todo_toggle_done()
   local line = vim.fn.getline(".")
   if line:match(checked) then
     line = line:gsub(checked, unchecked)
@@ -13,7 +11,7 @@ function _G.TodoToggleDone()
   vim.fn.setline(".", line)
 end
 
-function _G.TodoNextState()
+local function todo_next_state()
   local line = vim.fn.getline(".")
   if line:match(checked) then
     line = line:gsub(checked, unchecked)
@@ -27,7 +25,7 @@ function _G.TodoNextState()
   vim.fn.setline(".", line)
 end
 
-function _G.TodoPrevState()
+local function todo_prev_state()
   local line = vim.fn.getline(".")
   if line:match(checked) then
     line = line:gsub(checked, "[waiting]")
@@ -41,6 +39,6 @@ function _G.TodoPrevState()
   vim.fn.setline(".", line)
 end
 
-map.normal("<Leader>td", map.lua("TodoToggleDone()"))
-map.normal("<Leader>tp", map.lua("TodoPrevState()"))
-map.normal("<Leader>tn", map.lua("TodoNextState()"))
+vim.keymap.set("n", "<Leader>td", todo_toggle_done)
+vim.keymap.set("n", "<Leader>tp", todo_prev_state)
+vim.keymap.set("n", "<Leader>tn", todo_next_state)

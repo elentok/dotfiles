@@ -1,5 +1,4 @@
 local util = require("elentok/util")
-local map = require("elentok/map")
 
 function _G.setup_quickfix()
   -- Always open quickfix window in full width
@@ -11,10 +10,11 @@ function _G.setup_quickfix()
   vim.opt_local.errorformat = "%f\\|%l\\ col\\ %c\\|%m"
 
   -- Map <c-s> to reload the quickfix after changes
-  map.buf_normal(0, "<c-s>", ":cgetbuffer<cr>:setlocal nomodified<cr>")
+  vim.keymap.set("n", "<c-s>", ":cgetbuffer<cr>:setlocal nomodified<cr>",
+                 {buffer = true})
 
   -- Map 'q' to close the quickfix window
-  map.buf_normal(0, "q", ":q<cr>")
+  vim.keymap.set("n", "q", ":q<cr>", {buffer = true})
 end
 
 util.augroup("QuickFix", [[

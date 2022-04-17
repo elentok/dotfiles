@@ -1,8 +1,7 @@
 local util = require("elentok/util")
-local map = require("elentok/map")
 
 function _G.setup_command_line_buffer()
-  map.buf_normal(0, "q", ":q<cr>")
+  vim.keymap.set("n", "q", ":q<cr>", {buffer = true})
 end
 
 util.augroup("CommandLineBuffer", [[

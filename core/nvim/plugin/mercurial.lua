@@ -1,11 +1,11 @@
+local create_cmd = vim.api.nvim_create_user_command
 local builtin = require("telescope.builtin")
-local map = require("elentok/map")
 
-function _G.hg_goto_modified()
+local function hg_goto_modified()
   builtin.find_files({find_command = {"hg", "status", "--no-status"}})
 end
 
-function _G.hg_goto_unresolved()
+local function hg_goto_unresolved()
   builtin.find_files({
     find_command = {
       "hg",
@@ -17,11 +17,7 @@ function _G.hg_goto_unresolved()
   })
 end
 
-vim.cmd([[
-  command! HgModified lua hg_goto_modified()
-  command! HgUnresolved lua hg_goto_unresolved()
-  command! HgResolve FloatermNew hg resolve --mark %
-]])
+create_cmd("HgResolve", ":FloatermNew hg resolve --mark %", {})
 
-map.normal("<Leader>hm", ":HgModified<cr>")
-map.normal("<Leader>hu", ":HgUnresolved<cr>")
+vim.keymap.set("n", "<Leader>hm", hg_goto_modified)
+vim.keymap.set("n", "<Leader>hu", hg_goto_unresolved)
