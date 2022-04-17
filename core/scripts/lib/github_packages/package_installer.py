@@ -115,6 +115,8 @@ class AssetInstaller:
         else:
             self.make_executable()
 
+        self.make_bin_file_executable()
+
         self.link()
 
         print("  * done.")
@@ -131,8 +133,13 @@ class AssetInstaller:
         helpers.extract(self.asset_filename, self.package.strip_components)
 
     def make_executable(self):
-        print("  * making {self.asset_filename} executable ...")
+        print(f"  * making {self.asset_filename} executable ...")
         os.system(f"chmod u+x {self.asset_filename}")
+
+    def make_bin_file_executable(self):
+        print(f"  * making {self.bin_source} executable ...")
+        full_bin_source = path.join(self.release_dirname, self.bin_source)
+        os.system(f"chmod u+x {full_bin_source}")
 
     def link(self):
         print("  * linking...")
