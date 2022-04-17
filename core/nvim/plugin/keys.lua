@@ -1,8 +1,17 @@
+-- vim: foldmethod=marker
 vim.keymap.set("i", "jk", "<esc>")
 
 vim.keymap.set("n", "<c-s>", ":w<cr>")
 vim.keymap.set("i", "<c-s>", "<c-o>:w<cr>")
 
+-- Remove whitespace.
+vim.keymap.set("n", "<Leader>rws", ":%s/\\s\\+$//<cr>")
+
+-- Go to {{{1
+vim.keymap.set("n", "<Leader>gd", ":cd <C-R>=expand(\"%:p:h\")<cr>")
+vim.keymap.set("n", "<Leader>go", ":call GotoAlternateFile()<cr>")
+
+-- Avoid paste override {{{1
 -- From https://github.com/skwp/dotfiles/blob/master/vim/plugin/settings/stop-visual-paste-insanity.vim:
 -- If you visually select something and hit paste that thing gets yanked into
 -- your buffer. This generally is annoying when you're copying one item and
@@ -10,16 +19,48 @@ vim.keymap.set("i", "<c-s>", "<c-o>:w<cr>")
 -- it doesn't overwrite whatever is in your paste buffer.
 vim.keymap.set("v", "p", "\"_dP")
 
---- Yank Markdown to HTML
+-- Yank Markdown to HTML {{{1
 vim.keymap.set("v", "<Leader>m",
                ":!pandoc --from markdown --to html | copy-html<cr>u")
 vim.keymap.set("n", "<Leader>m",
                ":%!pandoc --from markdown --to html | copy-html<cr>u")
 
--- Signify
+-- Signify {{{1
 vim.keymap.set("n", "<Leader>vl", ":SignifyHunkDiff<cr>")
 vim.keymap.set("n", "<Leader>vt", ":SignifyToggleHighlight<cr>")
 
--- Misc
+-- Version control {{{1
+vim.keymap.set("n", "<Leader>tg",
+               ":FloatermNew --width=0.8 --height=0.8 --autoclose=1 tig<cr>")
+vim.keymap.set("n", "<Leader>ts",
+               ":FloatermNew --width=0.8 --height=0.8 --autoclose=1 tig status<cr>")
+vim.keymap.set("n", "<Leader>vrp", ":Git co -p %<cr>")
+vim.keymap.set("n", "<Leader>vdf", " :Git diff %<cr>")
+vim.keymap.set("n", "<Leader>vdc", " :Git diff --cached<cr>")
+vim.keymap.set("n", "<Leader>vaf", ":Git add %<cr>")
+vim.keymap.set("n", "<Leader>vh",
+               ":FloatermNew --width=0.8 --height=0.8 --autoclose=1 tig %<cr>")
+vim.keymap.set("n", "<Leader>vc", ":Gcommit<cr>")
+
+-- Spaces text object {{{1
+vim.keymap.set("x", "<space>", "f oT o", {silent = true})
+vim.keymap.set("x", "a<space>", "f oF o", {silent = true})
+vim.keymap.set("x", "i<space>", "t oT o", {silent = true})
+
+-- Misc {{{1
 vim.keymap.set("n", "<Leader>tm", ":set modifiable!<cr>:set modifiable?<cr>")
 vim.keymap.set("n", "_", ":Vifm<cr>")
+
+vim.keymap.set("n", "<cr>", ":nohls<cr><cr>")
+vim.keymap.set("n", "<Leader><Leader>", ":silent !tput clear<cr>:redraw!<cr>")
+
+vim.keymap.set("v", "<tab>", ">gv")
+vim.keymap.set("v", "<s-tab>", "<gv")
+
+vim.keymap.set("v", "<Leader>s", ":sort<cr>")
+vim.keymap.set("n", "<Leader>ya", ":%y+<cr>")
+
+vim.keymap.set("n", "<Leader>oc",
+               ":Calendar -view=year -split=vertical -width=27<cr>")
+
+vim.keymap.set("n", "<backspace>", "zc")
