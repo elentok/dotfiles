@@ -70,8 +70,8 @@ M.add_formatter("lsp", {
     "markdown",
     "typescript",
     "typescriptreact",
-    "sh"
-  }
+    "sh",
+  },
 })
 
 local function same_lines(list1, list2)
@@ -96,7 +96,7 @@ local function run_formatter(formatter)
   log("[run_formatter] command", command)
 
   local lines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
-  local result = util.shell(command, {stdin = lines, sync = true})
+  local result = util.shell(command, { stdin = lines, sync = true })
   log("[run_formatter} result", result)
   if result.code == 0 then -- success
     util.remove_trailing_blank_line(result.stdout)
@@ -108,7 +108,7 @@ local function run_formatter(formatter)
     message.close()
   else -- error
     local body = vim.list_extend(result.stderr or {}, result.stdout or {})
-    message.show("Formatting Error", body, {mode = "error"})
+    message.show("Formatting Error", body, { mode = "error" })
   end
 end
 
@@ -142,9 +142,12 @@ vim.cmd([[
   command! -nargs=? Format lua require("elentok/format").format("<args>")
 ]])
 
-util.augroup("Format", [[
+util.augroup(
+  "Format",
+  [[
   autocmd BufWritePre * Format
-]])
+]]
+)
 
 -- Keeping these functions here in case I think about bringing this
 -- functionality back soon:

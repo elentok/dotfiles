@@ -1,7 +1,7 @@
-local actions = require "lir.actions"
-local mark_actions = require "lir.mark.actions"
-local clipboard_actions = require "lir.clipboard.actions"
-local float = require "lir.float"
+local actions = require("lir.actions")
+local mark_actions = require("lir.mark.actions")
+local clipboard_actions = require("lir.clipboard.actions")
+local float = require("lir.float")
 
 require("lir").setup({
   devicons_enable = true,
@@ -26,13 +26,13 @@ require("lir").setup({
     end,
     ["C"] = clipboard_actions.copy,
     ["X"] = clipboard_actions.cut,
-    ["P"] = clipboard_actions.paste
+    ["P"] = clipboard_actions.paste,
   },
 
   float = {
     winblend = 0,
-    curdir_window = {enable = true, highlight_dirname = true}
-  }
+    curdir_window = { enable = true, highlight_dirname = true },
+  },
 })
 
 local function go_up()

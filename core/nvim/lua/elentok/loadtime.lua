@@ -5,5 +5,4 @@ local function show_load_time()
   print(string.format("Loaded in %dms", elapsed_millisec))
 end
 
-vim.api.nvim_create_autocmd({"VimEnter"},
-                            {pattern = "*", callback = show_load_time})
+vim.api.nvim_create_autocmd({ "VimEnter" }, { pattern = "*", callback = show_load_time })

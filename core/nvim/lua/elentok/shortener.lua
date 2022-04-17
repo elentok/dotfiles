@@ -4,7 +4,7 @@ local statusline_shorteners_updated = false
 local M = {}
 
 function M.add_path_shortener(full, short)
-  table.insert(statusline_shorteners, {full, short})
+  table.insert(statusline_shorteners, { full, short })
   statusline_shorteners_updated = true
 end
 

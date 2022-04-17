@@ -3,13 +3,13 @@ local api = vim.api
 local M = {}
 
 function M.safe_require(name, opts)
-  opts = vim.tbl_extend("force", {silent = false}, opts or {})
+  opts = vim.tbl_extend("force", { silent = false }, opts or {})
   local status, module = pcall(require, name)
-  if (status) then
+  if status then
     return module
   else
     if not opts.silent then
-      print(string.format("WARNING: error loading lua module \"%s\"", name))
+      print(string.format('WARNING: error loading lua module "%s"', name))
     end
     return nil
   end
@@ -38,14 +38,14 @@ function M.open_window(title, lines)
     width = win_width,
     height = win_height,
     row = row,
-    col = col
+    col = col,
   }
 
   -- Insert contents
-  api.nvim_buf_set_lines(buf, 0, 0, true, {title, "(press enter to close)", ""})
+  api.nvim_buf_set_lines(buf, 0, 0, true, { title, "(press enter to close)", "" })
   api.nvim_buf_set_lines(buf, 3, 3, true, lines)
 
-  api.nvim_buf_set_keymap(buf, "n", "<cr>", ":q<cr>", {noremap = true})
+  api.nvim_buf_set_keymap(buf, "n", "<cr>", ":q<cr>", { noremap = true })
 
   -- create floating window with the buffer attached
   local win = api.nvim_open_win(buf, true, opts)
@@ -54,7 +54,7 @@ function M.open_window(title, lines)
 end
 
 function M.current_word()
-  return api.nvim_call_function("expand", {"<cword>"})
+  return api.nvim_call_function("expand", { "<cword>" })
 end
 
 function M.global_extend(name, values)
@@ -71,8 +71,7 @@ end
 -- "index" is 1-based
 function M.buf_get_line(buffer, index)
   if index < 1 then
-    error("buf_get_line got index " .. vim.inspect(index) ..
-              ", must be 1 or higher")
+    error("buf_get_line got index " .. vim.inspect(index) .. ", must be 1 or higher")
   end
   return api.nvim_buf_get_lines(buffer, index - 1, index, true)[1]
 end
@@ -83,16 +82,20 @@ function M.buf_get_filetype(bufnr)
 end
 
 function M.exists(expr)
-  return api.nvim_eval(string.format("exists(\"%s\")", expr)) ~= 0
+  return api.nvim_eval(string.format('exists("%s")', expr)) ~= 0
 end
 
 function M.augroup(name, content)
-  vim.cmd(string.format([[
+  vim.cmd(string.format(
+    [[
     augroup Elentok_%s
       autocmd!
       %s
     augroup END
-  ]], name, content))
+  ]],
+    name,
+    content
+  ))
 end
 
 -- From https://github.com/nanotee/nvim-lua-guide
@@ -108,8 +111,7 @@ function M.put(...)
 end
 
 function M.shell(cmd, opts)
-  opts = vim.tbl_extend("force", {stdin = nil, callback = nil, sync = false},
-                        opts or {})
+  opts = vim.tbl_extend("force", { stdin = nil, callback = nil, sync = false }, opts or {})
 
   local stderr = nil
   local stdout = nil
@@ -129,7 +131,7 @@ function M.shell(cmd, opts)
       if opts.callback then
         opts.callback(exitcode, stdout, stderr)
       end
-    end
+    end,
   })
 
   if opts.stdin then
@@ -138,15 +140,15 @@ function M.shell(cmd, opts)
   end
 
   if opts.sync then
-    vim.fn.jobwait({job_id})
-    return {code = code, stdout = stdout, stderr = stderr}
+    vim.fn.jobwait({ job_id })
+    return { code = code, stdout = stdout, stderr = stderr }
   else
     return job_id
   end
 end
 
 function M.ishell(cmd, opts)
-  opts = vim.tbl_extend("force", {large = false}, opts or {})
+  opts = vim.tbl_extend("force", { large = false }, opts or {})
   local cwd = vim.fn.expand("%:p:h")
 
   local cmd_args = {
@@ -155,7 +157,7 @@ function M.ishell(cmd, opts)
     string.format("echo '> cd %s'", cwd),
     string.format("echo '> %s'", cmd),
     "echo '========================================'",
-    cmd
+    cmd,
   }
 
   local size_arg = ""
@@ -163,7 +165,7 @@ function M.ishell(cmd, opts)
     size_arg = "--width=0.8 --height=0.8"
   end
 
-  local args = {size_arg, table.concat(cmd_args, "&&")}
+  local args = { size_arg, table.concat(cmd_args, "&&") }
 
   local vimcmd = "FloatermNew " .. table.concat(args, " ")
   vim.cmd(vimcmd)
@@ -240,8 +242,7 @@ function M.get_visual_selection()
     column_offset = 1
   end
 
-  lines[lines_count] = string.sub(lines[lines_count], 0,
-                                  column_end - column_offset)
+  lines[lines_count] = string.sub(lines[lines_count], 0, column_end - column_offset)
   lines[1] = string.sub(lines[1], column_start - 1)
 
   return table.concat(lines, "\n")

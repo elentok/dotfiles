@@ -13,7 +13,7 @@ vim.cmd([[
 
 -- Grep with ":grep" (allows passing custom args)
 local function grep()
-  vim.ui.input({prompt = ":grep? "}, function(query)
+  vim.ui.input({ prompt = ":grep? " }, function(query)
     if query ~= nil then
       vim.cmd("silent grep " .. query)
     end
@@ -23,9 +23,9 @@ end
 -- Grep with telescope (can't pass ripgrep arguments but includes preview and
 -- filtering).
 local function telescope_grep()
-  vim.ui.input({prompt = "Grep for? "}, function(query)
+  vim.ui.input({ prompt = "Grep for? " }, function(query)
     if query ~= nil then
-      builtin.grep_string {search = query, regex = true}
+      builtin.grep_string({ search = query, regex = true })
     end
   end)
 end

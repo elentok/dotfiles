@@ -4,14 +4,14 @@ local shortener = require("elentok/shortener")
 local lualine = require("lualine")
 
 lualine.setup({
-  options = {theme = "onedark"},
+  options = { theme = "onedark" },
   sections = {
-    lualine_a = {"filename"},
-    lualine_b = {{shortener.dir, icon = ""}},
+    lualine_a = { "filename" },
+    lualine_b = { { shortener.dir, icon = "" } },
     lualine_c = {},
-    lualine_x = {{gps.get_location, cond = gps.is_available}},
-    lualine_y = {"filetype"}
-  }
+    lualine_x = { { gps.get_location, cond = gps.is_available } },
+    lualine_y = { "filetype" },
+  },
 })
 
 -- local M = {}

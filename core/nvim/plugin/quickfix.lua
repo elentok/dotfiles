@@ -10,16 +10,18 @@ function _G.setup_quickfix()
   vim.opt_local.errorformat = "%f\\|%l\\ col\\ %c\\|%m"
 
   -- Map <c-s> to reload the quickfix after changes
-  vim.keymap.set("n", "<c-s>", ":cgetbuffer<cr>:setlocal nomodified<cr>",
-                 {buffer = true})
+  vim.keymap.set("n", "<c-s>", ":cgetbuffer<cr>:setlocal nomodified<cr>", { buffer = true })
 
   -- Map 'q' to close the quickfix window
-  vim.keymap.set("n", "q", ":q<cr>", {buffer = true})
+  vim.keymap.set("n", "q", ":q<cr>", { buffer = true })
 end
 
-util.augroup("QuickFix", [[
+util.augroup(
+  "QuickFix",
+  [[
   autocmd FileType qf silent lua setup_quickfix()
 
   autocmd QuickFixCmdPost [^l]* cwindow
   autocmd QuickFixCmdPost l* lwindow
-]])
+]]
+)

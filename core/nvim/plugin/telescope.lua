@@ -1,22 +1,24 @@
-local telescope = require "telescope"
-local builtin = require "telescope.builtin"
-local actions = require "telescope/actions"
+local telescope = require("telescope")
+local builtin = require("telescope.builtin")
+local actions = require("telescope/actions")
 
-telescope.setup {
+telescope.setup({
   defaults = {
     -- file_sorter = require('telescope.sorters').get_fzy_sorter,
-    file_ignore_patterns = {"node_modules/.*", "scuba_goldens/.*"},
-    mappings = {i = {["<C-q>"] = actions.send_to_qflist + actions.open_qflist}}
+    file_ignore_patterns = { "node_modules/.*", "scuba_goldens/.*" },
+    mappings = {
+      i = { ["<C-q>"] = actions.send_to_qflist + actions.open_qflist },
+    },
   },
   extensions = {
     fzf = {
       fuzzy = true,
       override_generic_sorter = true,
       override_file_sorter = true,
-      case_mode = "smart_case"
-    }
-  }
-}
+      case_mode = "smart_case",
+    },
+  },
+})
 
 telescope.load_extension("aerial")
 telescope.load_extension("fzf")
@@ -28,10 +30,10 @@ vim.keymap.set("n", "<Leader>gt", builtin.tags)
 vim.keymap.set("n", "<Leader>gg", builtin.git_status)
 vim.keymap.set("n", "<Leader>gh", builtin.help_tags)
 vim.keymap.set("n", "<Leader>gm", function()
-  builtin.oldfiles {previewer = false}
+  builtin.oldfiles({ previewer = false })
 end)
 vim.keymap.set("n", "<Leader>fe", function()
-  telescope.extensions.file_browser.file_browser({path = "%:p:h"})
+  telescope.extensions.file_browser.file_browser({ path = "%:p:h" })
 end)
 vim.keymap.set("n", "gr", builtin.lsp_references)
 vim.keymap.set("n", "``", telescope.extensions.aerial.aerial)

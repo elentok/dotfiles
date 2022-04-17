@@ -5,7 +5,7 @@ local M = {}
 -- Opts:
 --   mode = 'normal' or 'error' (defaults to 'normal')
 function M.show(title, lines, opts)
-  opts = vim.tbl_extend("force", {mode = "normal"}, opts or {})
+  opts = vim.tbl_extend("force", { mode = "normal" }, opts or {})
 
   if vim.t.message_bufnr then
     local winnr = util.tabpage_get_buf_win_number(0, vim.t.message_bufnr)
@@ -33,8 +33,7 @@ function M.show(title, lines, opts)
       vim.wo.cursorline = false
     end
 
-    vim.api.nvim_buf_set_keymap(0, "n", "q", ":close<cr>",
-                                {noremap = true, silent = true})
+    vim.api.nvim_buf_set_keymap(0, "n", "q", ":close<cr>", { noremap = true, silent = true })
   end
   vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
   vim.cmd([[wincmd p]])

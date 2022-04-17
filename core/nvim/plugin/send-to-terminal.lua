@@ -1,7 +1,7 @@
 local create_cmd = vim.api.nvim_create_user_command
 local util = require("elentok/util")
 
-local repls = {python = "ipython3", javascript = "node"}
+local repls = { python = "ipython3", javascript = "node" }
 
 local function send_command(command)
   if vim.t.send_to_term_job_id == nil then
@@ -38,7 +38,7 @@ create_cmd("Tnew", function(args)
 end, {})
 create_cmd("Trepl", term_new_repl, {})
 create_cmd("Tline", term_send_line, {})
-create_cmd("Tblock", term_send_block, {range = true})
+create_cmd("Tblock", term_send_block, { range = true })
 
 vim.keymap.set("n", "\\\\", ":Tline<cr>")
 vim.keymap.set("v", "\\\\", ":Tblock<cr>")

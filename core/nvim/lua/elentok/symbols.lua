@@ -16,11 +16,11 @@ end
 
 function M.goto_symbol()
   elentok_telescope.command_picker({
-    cmd = {"symbols", "list"},
+    cmd = { "symbols", "list" },
     parse_line = function(line)
       local parts = vim.split(line, ",")
-      return {text = parts[1], filename = parts[3], lnum = parts[4]}
-    end
+      return { text = parts[1], filename = parts[3], lnum = parts[4] }
+    end,
   })
 end
 

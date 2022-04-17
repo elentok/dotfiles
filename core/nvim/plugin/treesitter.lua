@@ -12,7 +12,7 @@ end
 
 gps.setup({})
 
-treesitter_configs.setup {
+treesitter_configs.setup({
   ensure_installed = {
     "bash",
     "c",
@@ -40,22 +40,25 @@ treesitter_configs.setup {
     "tsx",
     "typescript",
     "vim",
-    "yaml"
+    "yaml",
   },
-  highlight = {enable = true},
-  autopairs = {enable = true},
+  highlight = { enable = true },
+  autopairs = { enable = true },
   incremental_selection = {
     enable = true,
     keymaps = {
       init_selection = "gnn",
       node_incremental = "grn",
       scope_incremental = "grc",
-      node_decremental = "grm"
-    }
+      node_decremental = "grm",
+    },
   },
   -- disable python and typescript indentation until fixed:
   --   https://github.com/nvim-treesitter/nvim-treesitter/issues/1167#issue-853914044
-  indent = {enable = true, disable = {"python", "typescript", "javascript"}},
+  indent = {
+    enable = true,
+    disable = { "python", "typescript", "javascript" },
+  },
   textobjects = {
     select = {
       enable = true,
@@ -67,24 +70,24 @@ treesitter_configs.setup {
         ["af"] = "@function.outer",
         ["if"] = "@function.inner",
         ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner"
-      }
+        ["ic"] = "@class.inner",
+      },
     },
     swap = {
       enable = true,
-      swap_next = {["<leader>a"] = "@parameter.inner"},
-      swap_previous = {["<leader>A"] = "@parameter.inner"}
+      swap_next = { ["<leader>a"] = "@parameter.inner" },
+      swap_previous = { ["<leader>A"] = "@parameter.inner" },
     },
     move = {
       enable = true,
       set_jumps = true, -- whether to set jumps in the jumplist
-      goto_next_start = {["]]"] = "@function.outer"},
-      goto_previous_start = {["[["] = "@function.outer"}
-    }
-  }
-}
+      goto_next_start = { ["]]"] = "@function.outer" },
+      goto_previous_start = { ["[["] = "@function.outer" },
+    },
+  },
+})
 
-local exclude_from_folding = {markdown = true}
+local exclude_from_folding = { markdown = true }
 
 function _G.TreesitterSetupFolding()
   local filetype = util.buf_get_filetype(0)
@@ -96,6 +99,9 @@ function _G.TreesitterSetupFolding()
   vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 end
 
-util.augroup("Treesitter", [[
+util.augroup(
+  "Treesitter",
+  [[
   autocmd FileType * lua TreesitterSetupFolding()
-]])
+]]
+)

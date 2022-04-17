@@ -14,7 +14,7 @@ lsp.setup({
   yamlls = true,
   jsonls = true,
   html = true,
-  cssls = true
+  cssls = true,
 })
 
 -- Simple LSPs {{{1
@@ -30,8 +30,8 @@ if config.enable_tsserver then
       on_attach = function(client)
         -- Disable tsserver formatting (using prettier instead)
         client.resolved_capabilities.document_formatting = false
-      end
-    }
+      end,
+    },
   })
 end
 
@@ -65,11 +65,10 @@ vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 vim.keymap.set("n", "<space>q", vim.diagnostic.setqflist)
 
 -- Add a border to hover windows {{{1
-vim.lsp.handlers["textDocument/hover"] =
-    vim.lsp.with(vim.lsp.handlers.hover, {
-      -- Use a sharp border with `FloatBorder` highlights
-      border = "single"
-    })
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  -- Use a sharp border with `FloatBorder` highlights
+  border = "single",
+})
 
 -- Helper commands {{{1
 create_cmd("LspLog", ":tabe " .. vim.lsp.get_log_path(), {})

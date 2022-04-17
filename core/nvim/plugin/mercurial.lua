@@ -2,7 +2,7 @@ local create_cmd = vim.api.nvim_create_user_command
 local builtin = require("telescope.builtin")
 
 local function hg_goto_modified()
-  builtin.find_files({find_command = {"hg", "status", "--no-status"}})
+  builtin.find_files({ find_command = { "hg", "status", "--no-status" } })
 end
 
 local function hg_goto_unresolved()
@@ -12,8 +12,8 @@ local function hg_goto_unresolved()
       "resolve",
       "--no-status",
       "--list",
-      "set:unresolved()"
-    }
+      "set:unresolved()",
+    },
   })
 end
 

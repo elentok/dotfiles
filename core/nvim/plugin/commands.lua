@@ -31,13 +31,12 @@ end, {})
 
 create_cmd("TermNewTab", function(args)
   util.terminal_in_new_tab(args.args)
-end, {nargs = "+", desc = "Runs a shell command in a new tab terminal"})
+end, { nargs = "+", desc = "Runs a shell command in a new tab terminal" })
 
 create_cmd("Markserv", function(args)
   util.terminal_in_new_tab("markserv")
   vim.cmd("tabprevious")
-  vim.cmd("silent !o \"http://localhost:8642/%\"")
+  vim.cmd('silent !o "http://localhost:8642/%"')
 end, {})
 
-create_cmd("PreviewSassColors", "!preview_sass_colors % && open preview.html",
-           {})
+create_cmd("PreviewSassColors", "!preview_sass_colors % && open preview.html", {})

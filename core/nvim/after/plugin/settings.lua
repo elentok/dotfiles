@@ -6,7 +6,7 @@ vim.g.markdown_fenced_languages = {
   "javascript",
   "python",
   "html",
-  "css"
+  "css",
 }
 
 vim.opt.foldlevel = 1
@@ -19,7 +19,7 @@ vim.opt.formatoptions = table.concat({
   "q", -- Allow formatting of comments with "gq"
   "r", -- Automatically insert comment leader after hitting <Enter>
   "o", -- Automatically insert comment leader after hitting 'o' or 'O'
-  "n" -- Recognize numbered lists
+  "n", -- Recognize numbered lists
 })
 
 -- vim-signify
@@ -36,7 +36,7 @@ vim.g.registers_window_border = "single"
 
 vim.opt.expandtab = true
 
-vim.opt.clipboard = {"unnamed", "unnamedplus"}
+vim.opt.clipboard = { "unnamed", "unnamedplus" }
 vim.opt.textwidth = 80
 
 vim.opt.linebreak = true

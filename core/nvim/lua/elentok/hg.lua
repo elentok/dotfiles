@@ -15,7 +15,7 @@ function M.log()
     stdout_buffered = true,
     on_stdout = function(_, data, _)
       vim.api.nvim_buf_set_lines(0, 0, #data, false, data)
-    end
+    end,
   })
 end
 

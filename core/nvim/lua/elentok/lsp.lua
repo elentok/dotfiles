@@ -9,8 +9,7 @@ local function on_attach(client, bufnr)
   aerial.on_attach(client, bufnr)
 end
 
-local capabilities = cmp.update_capabilities(vim.lsp.protocol
-                                                 .make_client_capabilities())
+local capabilities = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 function M.setup(servers)
   for server, config in pairs(servers) do
