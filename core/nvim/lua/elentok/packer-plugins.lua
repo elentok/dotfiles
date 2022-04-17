@@ -26,12 +26,17 @@ return require("packer").startup({
     use "tpope/vim-unimpaired"
 
     -- Automatically close bracket and tag pairs
-    use "windwp/nvim-autopairs"
+    use {
+      "windwp/nvim-autopairs",
+      config = function()
+        require("nvim-autopairs").setup()
+      end
+    }
 
     -- LSP.
     use "neovim/nvim-lspconfig"
     -- use "hrsh7th/nvim-compe"
-    use "anott03/nvim-lspinstall"
+    -- use "anott03/nvim-lspinstall"
     use "ray-x/lsp_signature.nvim"
     use "stevearc/aerial.nvim"
     use "jose-elias-alvarez/null-ls.nvim"

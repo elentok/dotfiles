@@ -10,5 +10,3 @@ require "elentok/format"
 
 local util = require "elentok/util"
 util.safe_require("elentok-local", {silent = true})
-
-require("nvim-autopairs").setup()
