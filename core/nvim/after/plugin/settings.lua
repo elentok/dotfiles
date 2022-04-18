@@ -1,3 +1,5 @@
+vim.opt.wrap = false
+
 vim.g.markdown_folding = true
 vim.g.markdown_fenced_languages = {
   "vim",
@@ -53,6 +55,7 @@ vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.tabstop = 2
 
+vim.opt.smartcase = true
 vim.opt.wildignorecase = true
 
 -- Makes sure the active window will always be at least 80 characters.
