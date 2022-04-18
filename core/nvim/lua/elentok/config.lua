@@ -1,6 +1,6 @@
 local util = require("elentok/util")
 
-local config = { enable_tsserver = true, enable_jsts_prettier = true }
+local config = { enable_tsserver = true }
 
 local local_config = util.safe_require("elentok-local/config", { silent = true })
 if local_config then
