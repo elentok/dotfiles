@@ -12,6 +12,7 @@ vim.g.markdown_fenced_languages = {
 }
 
 vim.opt.foldlevel = 1
+vim.opt.number = true
 vim.opt.relativenumber = true
 
 vim.opt.formatoptions = table.concat({
