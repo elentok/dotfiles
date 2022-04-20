@@ -32,6 +32,14 @@ require("lir").setup({
   float = {
     winblend = 0,
     curdir_window = { enable = true, highlight_dirname = true },
+    win_opts = function()
+      local width = math.floor(vim.o.columns * 0.7)
+      local height = math.floor(vim.o.lines * 0.7)
+      return {
+        width = width,
+        height = height,
+      }
+    end,
   },
 })
 
