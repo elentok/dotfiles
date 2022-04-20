@@ -5,9 +5,31 @@ source "$(dirname "$0")/../../framework"
 main() {
   if dotf-is-linux; then
     install_tmux
+  elif dotf-is-mac; then
+    install-tmux-256color-terminfo
   fi
   install_symlinks
   install_plugins
+}
+
+# This function is based on https://github.com/tmux/tmux/issues/1257#issuecomment-581378716
+install-tmux-256color-terminfo() {
+  dotf-bullet "Setting up tmux-256color terminfo... "
+
+  if has-tmux-256color-terminfo; then
+    dotf-info "already set up, skipping."
+  else
+    dotf-brew ncurses
+    $BREW_HOME/opt/ncurses/bin/infocmp tmux-256color > /tmp/tmux-256color.info
+    tic -xe tmux-256color /tmp/tmux-256color.info
+    # This creates a complied entry in ~/.terminfo
+    # infocmp tmux-256color | head
+    has-tmux-256color-terminfo && dotf-success "done." || dotf-error "Error"
+  fi
+}
+
+has-tmux-256color-terminfo() {
+  infocmp tmux-256color > /dev/null 2>&1
 }
 
 install_tmux() {

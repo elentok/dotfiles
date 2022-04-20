@@ -1,9 +1,19 @@
 #!/usr/bin/env bash
+#
+# Usage:
+#
+#   dotf-brew <package>...
+#
 
 set -euo pipefail
 source "$DOTF/framework"
 
 main() {
+  if [ $# -eq 0 ]; then
+    usage "$0"
+    exit 1
+  fi
+
   dotf-bullet "Installing brew packages $*... "
   missing=$(find-missing-packages "$@")
 
