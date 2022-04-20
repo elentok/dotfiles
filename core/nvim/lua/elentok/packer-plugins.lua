@@ -79,16 +79,16 @@ return require("packer").startup({
 
     -- Misc.
     -- use "junegunn/vim-easy-align"
-    use({
-      "stevearc/dressing.nvim",
-      config = function()
-        require("dressing").setup({
-          input = {
-            relative = "win", -- center the input prompt
-          },
-        })
-      end,
-    })
+    -- use({
+    --   "stevearc/dressing.nvim",
+    --   config = function()
+    --     require("dressing").setup({
+    --       input = {
+    --         relative = "win", -- center the input prompt
+    --       },
+    --     })
+    --   end,
+    -- })
     use("mhinz/vim-signify")
     use("michaeljsmith/vim-indent-object")
     use("nelstrom/vim-visual-star-search")
