@@ -61,6 +61,11 @@ alias tm='tmux -u'
 alias tma='tm a'
 alias treee='tree -I "node_modules|dist|build"'
 alias ts='tig status'
+if dotf-is-mac; then
+  # For some reason tig on mac looks wierd inside tmux.
+  alias tig='TERM=xterm-256color tig'
+  alias ts='TERM=xterm-256color tig status'
+fi
 alias vz='file="$(edit-zsh-dotfile)" && source $file'
 alias x=exit
 alias ports='sudo echo && (sudo lsof -i -n -P | fzf --header-lines=1)'
