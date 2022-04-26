@@ -31,7 +31,7 @@ exit_code="%(?.$success.$error) "
 directory="%F{blue}%~%f"
 
 # User and host {{{1
-user_and_host="%{\$fg_bold[black]%}$USERNAME at $(hostname)%f"
+user_and_host="%{\$fg_bold[cyan]%}$USERNAME at $(hostname)%f"
 
 # Time {{{1
 if [ "$ZSH_VERSION" = "5.0.5" ]; then
@@ -39,7 +39,7 @@ if [ "$ZSH_VERSION" = "5.0.5" ]; then
 else
   time="%D{%H:%M:%S.%.}"
 fi
-time="%{\$fg_bold[black]%}($time)%f"
+time="%{\$fg_bold[cyan]%}($time)%f"
 
 # Git {{{1
 
