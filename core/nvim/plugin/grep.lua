@@ -29,6 +29,10 @@ local function split_args(args)
     return {}
   end
 
+  if args:sub(1, 1) == "\\" then
+    return { args:sub(2) }
+  end
+
   return vim.split(args, " ", { plain = true, trimempty = true })
 end
 
