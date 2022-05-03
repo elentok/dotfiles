@@ -258,7 +258,7 @@ f() {
 # Fuzzy cd {{{1
 
 alias c='cd "$(pick-directory-recursive)"'
-alias d='cd "$(vifm -c view! --choose-dir - .)"'
+alias d='cd "$(pick-directory)"'
 
 function vv() {
   files="$(vifm --choose-files - --on-choose echo .)"
@@ -270,7 +270,7 @@ function vv() {
 function pick-directory() {
   # calling "print -s" adds the command to zsh history
 
-  dir="$(list-dirs | fzf --ansi --exit-0 --select-1)"
+  dir="$(list-dirs -maxdepth 6 | fzf --ansi --exit-0 --select-1)"
 
   if [ -n "$dir" ]; then
     print -s "cd ""$dir""" && echo "$dir"
@@ -297,13 +297,21 @@ function pick-directory-recursive() {
 
 # Usage: list-dirs [optional: root]
 function list-dirs() {
+  max_depth=1
+
+  if [ "${1:-}" = "-maxdepth" ]; then
+    max_depth="$2"
+    shift
+    shift
+  fi
+
   if [ $# -gt 0 ]; then
     root="$1"
   else
     root="$(pwd)"
   fi
 
-  (cd "$root" && find . -maxdepth 1 -type d) | sed 's#^\.\/##' | grep -v '^\.$' || true
+  (cd "$root" && find . -maxdepth $max_depth -type d) | sed 's#^\.\/##' | grep -v '^\.$' || true
 }
 
 # Fuzzy vi {{{1
