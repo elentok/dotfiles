@@ -9,7 +9,6 @@ vim.keymap.set("n", "<Leader>rws", ":%s/\\s\\+$//<cr>")
 
 -- Go to {{{1
 vim.keymap.set("n", "<Leader>gd", ':cd <C-R>=expand("%:p:h")<cr>')
-vim.keymap.set("n", "<Leader>go", ":call GotoAlternateFile()<cr>")
 
 -- Avoid paste override {{{1
 -- From https://github.com/skwp/dotfiles/blob/master/vim/plugin/settings/stop-visual-paste-insanity.vim:
