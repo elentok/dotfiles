@@ -1,3 +1,8 @@
 #!/usr/bin/env bash
 
-curl -d 'message=hello' 'http://localhost:10000/send'
+host="localhost"
+if [ $# -gt 0 ]; then
+  host="$1"
+fi
+
+curl -d 'message=hello' "http://$host:10000/send"
