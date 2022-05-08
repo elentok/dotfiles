@@ -132,6 +132,7 @@ return require("packer").startup({
   end,
   config = {
     display = { open_fn = require("packer.util").float },
+    max_jobs = 10,
     -- disable for now (https://github.com/wbthomason/packer.nvim/issues/201)
     -- Move to lua dir so impatient.nvim can cache it
     -- compile_path = vim.fn.stdpath("cache") .. "/lua/packer_compiled.lua",
