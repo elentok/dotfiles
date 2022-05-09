@@ -1,3 +1,9 @@
+local ok, _ = pcall(require, "lir")
+
+if not ok then
+  return
+end
+
 local actions = require("lir.actions")
 local mark_actions = require("lir.mark.actions")
 local clipboard_actions = require("lir.clipboard.actions")
@@ -36,6 +42,16 @@ require("lir").setup({
       local width = math.floor(vim.o.columns * 0.7)
       local height = math.floor(vim.o.lines * 0.7)
       return {
+        border = {
+          "╭",
+          "─",
+          "╮",
+          "│",
+          "╯",
+          "─",
+          "╰",
+          "│",
+        },
         width = width,
         height = height,
       }
