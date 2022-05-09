@@ -11,6 +11,8 @@ vim.g.markdown_fenced_languages = {
   "css",
 }
 
+vim.opt.cursorline = true
+
 vim.opt.foldlevel = 1
 vim.opt.number = true
 vim.opt.relativenumber = true

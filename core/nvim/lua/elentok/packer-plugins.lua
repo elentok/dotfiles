@@ -7,7 +7,7 @@ return require("packer").startup({
     use("nathom/filetype.nvim")
 
     -- Color scheme.
-    use("olimorris/onedarkpro.nvim")
+    use("rmehri01/onenord.nvim")
 
     -- File manager.
     -- use "cocopon/vaffle.vim"
