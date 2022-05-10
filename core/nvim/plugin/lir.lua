@@ -24,6 +24,7 @@ require("lir").setup({
     ["@"] = actions.cd,
     ["Y"] = actions.yank_path,
     ["."] = actions.toggle_show_hidden,
+    ["dd"] = actions.delete,
     ["D"] = actions.delete,
 
     ["J"] = function()
