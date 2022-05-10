@@ -94,6 +94,7 @@ return require("packer").startup({
     use("nelstrom/vim-visual-star-search")
     use("christoomey/vim-tmux-navigator")
     use("voldikss/vim-floaterm")
+    use("numToStr/FTerm.nvim")
     use("nvim-lua/popup.nvim")
     use("nvim-lua/plenary.nvim")
     use("AndrewRadev/splitjoin.vim")
