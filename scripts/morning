@@ -20,9 +20,13 @@ cd ~/.dotlocal && git pull
 dotf-header h2 'Updating dotfiles...'
 dotf update
 
-if [ -e "$HOME/notes" ]; then
-  dotf-header h2 'Syncing notes...'
-  (cd ~/notes && git sync)
-fi
+note_dirs=(~/notes ~/notes/home ~/notes/work)
+
+for dir in "${note_dirs[@]}"; do
+  if [ -e "$dir/.git" ]; then
+    dotf-header h2 "Syncing ${dir}..."
+    (cd "$dir" && git sync)
+  fi
+done
 
 dotf-header h1 'Have a wonderful day :-)'
