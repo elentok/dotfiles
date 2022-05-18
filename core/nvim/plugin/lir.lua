@@ -21,6 +21,7 @@ require("lir").setup({
     ["o"] = actions.mkdir,
     ["i"] = actions.newfile,
     ["r"] = actions.rename,
+    ["cw"] = actions.rename,
     ["@"] = actions.cd,
     ["Y"] = actions.yank_path,
     ["."] = actions.toggle_show_hidden,
