@@ -64,6 +64,22 @@ vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 vim.keymap.set("n", "<space>q", vim.diagnostic.setqflist)
 
+-- Toggle diagnostics:
+local diagnostic_visible = true
+local function toggle_diagnostic()
+  if diagnostic_visible then
+    vim.diagnostic.hide()
+    diagnostic_visible = false
+    print("Diagnostics: hidden")
+  else
+    vim.diagnostic.show()
+    diagnostic_visible = true
+    print("Diagnostics: visible")
+  end
+end
+
+vim.keymap.set("n", "<Leader>te", toggle_diagnostic)
+
 -- Add a border to hover windows {{{1
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
   -- Use a sharp border with `FloatBorder` highlights
