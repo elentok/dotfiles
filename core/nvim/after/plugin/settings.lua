@@ -1,4 +1,5 @@
 vim.opt.wrap = false
+vim.opt.laststatus = 3
 
 vim.g.markdown_folding = true
 vim.g.markdown_fenced_languages = {
