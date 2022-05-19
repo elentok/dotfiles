@@ -13,6 +13,6 @@ incline.setup({
 })
 
 vim.cmd([[
-  highlight InclineNormal guifg=202020
-  highlight InclineNormalNC guifg=707070
+  highlight InclineNormal guibg=#202020
+  highlight InclineNormalNC guibg=#404040
 ]])
