@@ -2,8 +2,8 @@
 #
 # Usage:
 #
-#   clip copy
-#   clip paste
+#   dotf-clipboard copy
+#   dotf-clipboard paste
 #
 
 source $DOTF/core/zsh/core.sh
@@ -16,7 +16,7 @@ main() {
   case "$1" in
     c|copy) copy;;
     p|paste) paste;;
-    *) usage $DOTF/scripts/clip
+    *) usage "$DOTF/core/scripts/dotf-clipboard"
   esac
 }
 
