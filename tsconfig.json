@@ -5,11 +5,11 @@
     "lib": [
       "es2016"
     ],
-    "outDir": "./scripts/lib/js",
+    "outDir": "./extra/scripts/lib/js",
     "strict": true,
     "sourceMap": true
   },
   "include": [
-    "scripts/lib/ts/**/*.ts"
+    "extra/scripts/lib/ts/**/*.ts"
   ]
 }
