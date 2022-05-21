@@ -40,6 +40,12 @@ return require("packer").startup({
     use("ray-x/lsp_signature.nvim")
     use("stevearc/aerial.nvim")
     use("jose-elias-alvarez/null-ls.nvim")
+    use({
+      "j-hui/fidget.nvim",
+      config = function()
+        require("fidget").setup()
+      end,
+    })
     use({ "folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons" })
 
     -- Completion.
