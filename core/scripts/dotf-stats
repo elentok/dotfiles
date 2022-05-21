@@ -15,5 +15,5 @@ find "$DOTF/core/scripts" -maxdepth 1 -type f -exec head -1 '{}' \; \
   | sort | uniq -c | sort -nr
 
 dotf-header h2 'Extra Scripts:'
-find "$DOTF/scripts" -maxdepth 1 -type f -exec head -1 '{}' \; \
+find "$DOTF/extra/scripts" -maxdepth 1 -type f -exec head -1 '{}' \; \
   | sort | uniq -c | sort -nr
