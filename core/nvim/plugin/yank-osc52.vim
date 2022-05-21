@@ -10,5 +10,5 @@ function YankOsc52()
     let contents = contents . "\n"
   endif
 
-  call system('yank-osc52', contents)
+  call system('dotf-yank-osc52', contents)
 endfunction

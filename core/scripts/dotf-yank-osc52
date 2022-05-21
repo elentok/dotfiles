@@ -2,9 +2,9 @@
 #
 # Usage:
 #
-#   yank-osc52 {file}      - yank file to clipboard
-#   yank-osc52 -           - yank stdin to clipboard
-#   yank-osc52 -s {string} - yank string to clipboard
+#   dotf-yank-osc52 {file}      - yank file to clipboard
+#   dotf-yank-osc52 -           - yank stdin to clipboard
+#   dotf-yank-osc52 -s {string} - yank string to clipboard
 
 # based on
 # https://www.freecodecamp.org/news/tmux-in-practice-integration-with-system-clipboard-bcd72c62ff7b/
@@ -17,14 +17,16 @@ function main() {
   else
     # preserve trailing new lines
     # See https://wiki.bash-hackers.org/syntax/expansion/cmdsubst#examples
-    BUF="$(cat "$@"; echo x)"
+    BUF="$(
+      cat "$@"
+      echo x
+    )"
     BUF="${BUF%x}"
   fi
 
   validate-input-length
 
-  OSC52="\033]52;c;$( printf %s "$BUF" | base64 | tr -d '\r\n' )\a"
-
+  OSC52="\033]52;c;$(printf %s "$BUF" | base64 | tr -d '\r\n')\a"
 
   ssh-yank
 
@@ -35,7 +37,7 @@ function main() {
     tmux-yank
   fi
 
-  # allow piping "yank-osc52" to other commands
+  # allow piping "dotf-yank-osc52" to other commands
   printf %s "$BUF"
 }
 
@@ -43,7 +45,7 @@ function validate-input-length() {
   buflen=$(printf %s "$BUF" | wc -c)
   maxlen=74994
   if [[ $buflen -gt $maxlen ]]; then
-    printf "input is %d bytes too long" "$(( buflen - maxlen ))" >&2
+    printf "input is %d bytes too long" "$((buflen - maxlen))" >&2
     exit 1
   fi
 }
@@ -57,8 +59,7 @@ function ssh-yank() {
 function tmux-yank() {
   tty=$(tmux list-panes -F "#{pane_active} #{pane_tty}" | awk '$1=="1" { print $2 }')
   tmux_osc52="\033Ptmux;\033$OSC52\033\\"
-  printf %b "${tmux_osc52}"  > "$tty"
+  printf %b "${tmux_osc52}" > "$tty"
 }
-
 
 main "$@"

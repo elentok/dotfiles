@@ -21,7 +21,7 @@ function main() {
       hg status --change "$(pick-commit)"
       ;;
     c | copy)
-      pick-commit | yank-osc52
+      pick-commit | dotf-yank-osc52
       ;;
     l | log)
       while true; do
