@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 source $DOTF/framework
-source $DOTF/scripts/build-helper
+source $DOTF/core/scripts/lib/build-helper.sh
 
 MAC_VERSION=2.2.2.1
 
@@ -19,7 +19,7 @@ install_on_mac() {
   prepare_build pandoc $MAC_VERSION "$*"
 
   url="https://github.com/jgm/pandoc/releases/download/$VERSION/pandoc-$VERSION-macOS.zip"
-  curl -L "$url" -o $BUILD_DIR/pandoc.zip  
+  curl -L "$url" -o $BUILD_DIR/pandoc.zip
 
   cd $INSTALL_DIR
   unzip $BUILD_DIR/pandoc.zip

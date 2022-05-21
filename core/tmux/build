@@ -3,7 +3,7 @@
 set -euo pipefail
 
 source "$DOTF/framework"
-source "$DOTF/scripts/build-helper"
+source "$DOTF/core/scripts/lib/build-helper.sh"
 
 version="$(dotf-trim < "$DOTF/core/tmux/VERSION")"
 prepare_build tmux "$version" "$*"

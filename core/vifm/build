@@ -3,7 +3,7 @@
 set -euo pipefail
 
 source "$DOTF/framework"
-source "$DOTF/scripts/build-helper"
+source "$DOTF/core/scripts/lib/build-helper.sh"
 
 version="$(dotf-trim < "$DOTF/core/vifm/VERSION")"
 prepare_build vifm "$version" "$*"

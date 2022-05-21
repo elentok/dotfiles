@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 source $DOTF/framework
-source $DOTF/scripts/build-helper
+source $DOTF/core/scripts/lib/build-helper.sh
 
 prepare_build neovim-qt master "$*"
 
