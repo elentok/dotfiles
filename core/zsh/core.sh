@@ -124,8 +124,8 @@ export LUA_ROOT="$HOME/.apps/all/lua/default"
 export LUAROCKS_ROOT="$HOME/.apps/all/luarocks/default"
 
 # PATH {{{1
-PATH="$DOTF/scripts:\
-$DOTF/core/scripts:\
+PATH="$DOTF/core/scripts:\
+$DOTF/extra/scripts:\
 $DOTP/scripts:\
 $DOTL/scripts"
 
