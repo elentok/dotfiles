@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+
+RESET = "\033[0m"
+
+colors = {
+    "black": 30,
+    "red": 31,
+    "green": 32,
+    "yellow": 33,
+    "blue": 34,
+    "purple": 35,
+    "cyan": 36,
+    "white": 37,
+}
+
+
+def main():
+    print(RESET)
+    for name, value in colors.items():
+        show_color(name, value)
+        show_color(name, value, True)
+        show_color(name, value, False, True)
+
+
+def show_color(name: str, value: int, bold=False, background=False):
+    mode = 1 if bold else 0
+    if bold:
+        name = f"bold {name}"
+
+    if background:
+        code = f"\033[{value+10};{37}m"
+        display = f"\\033[{value+10};{37}m"
+    else:
+        code = f"\033[{mode};{value}m"
+        display = f"\\033[{mode};{value}m"
+
+    print(f"{code}{display}\t{name}{RESET}")
+
+
+if __name__ == "__main__":
+    main()
