@@ -56,9 +56,6 @@ alias rr='ranger'
 alias rgf='noglob rg --files -g'
 alias sub='subliminal download -l en -s'
 alias se='sudoedit'
-alias tm='tmux -u'
-# alias tm='DISPLAY=${DISPLAY:-:0} tmux -u'
-alias tma='tm a'
 alias treee='tree -I "node_modules|dist|build"'
 alias ts='tig status'
 if dotf-is-mac; then
@@ -332,6 +329,17 @@ function run-on-file() {
 
 function list-files() {
   find . -maxdepth 1 -type f | sed 's/^\.\///' | sort
+}
+
+# Tmux {{{1
+
+# If a tmux session exists, attach to it, otherwise create a new one.
+function tm() {
+  if [ -n "$(tmux list-sessions)" ]; then
+    tmux attach
+  else
+    tmux -u
+  fi
 }
 
 # DOTLOCAL {{{1
