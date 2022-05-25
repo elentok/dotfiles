@@ -335,9 +335,13 @@ function list-files() {
 
 # If a tmux session exists, attach to it, otherwise create a new one.
 function tm() {
-  if [ -n "$(tmux list-sessions)" ]; then
+  if [ -n "${TMUX:-}" ]; then
+    echo "Error: already inside a tmux session!"
+  elif [ -n "$(tmux list-sessions 2> /dev/null)" ]; then
+    echo "Attaching to existing tmux session..."
     tmux attach
   else
+    echo "No existing tmux session found, creating new session..."
     tmux -u
   fi
 }
