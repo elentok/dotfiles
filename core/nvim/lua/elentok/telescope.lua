@@ -13,8 +13,9 @@ function M.create_entry(opts)
 
     value = opts.text,
     ordinal = opts.text, -- used for the sorting order
-    display = opts.text,
+    display = opts.display or opts.text,
 
+    display_filename = opts.display_filename,
     filename = opts.filename,
     lnum = tonumber(opts.lnum),
     col = 0,

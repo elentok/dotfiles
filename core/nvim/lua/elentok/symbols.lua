@@ -25,6 +25,6 @@ function M.goto_symbol()
 end
 
 -- Keys
-vim.keymap.set("n", "<Leader>gs", M.goto_symbol)
+-- vim.keymap.set("n", "<Leader>gs", M.goto_symbol)
 
 return M
