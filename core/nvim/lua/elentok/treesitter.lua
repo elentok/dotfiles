@@ -9,20 +9,25 @@ function M.get_logger_prefix()
     return nil
   end
 
-  local parts = {}
-
   local container = nil
   local name = nil
 
   for _, part in pairs(data) do
     if part.type == "function-name" then
-      container = vim.fn.expand("%:t")
       name = part.text
     elseif part.type == "method-name" then
       name = part.text
     elseif part.type == "class-name" then
       container = part.text
     end
+  end
+
+  if container == nil then
+    container = vim.fn.expand("%:t")
+  end
+
+  if name == nil then
+    return container
   end
 
   return container .. " > " .. name .. "()"
