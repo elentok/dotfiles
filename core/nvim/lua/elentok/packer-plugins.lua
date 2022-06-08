@@ -80,6 +80,12 @@ return require("packer").startup({
     use("nvim-treesitter/nvim-treesitter-textobjects")
     use("SmiteshP/nvim-gps")
     use("folke/twilight.nvim") -- focus active code block
+    use({
+      "lewis6991/spellsitter.nvim",
+      config = function()
+        require("spellsitter").setup()
+      end,
+    })
 
     -- Syntax.
     use("aklt/plantuml-syntax")
