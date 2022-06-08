@@ -79,6 +79,7 @@ return require("packer").startup({
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
     use("nvim-treesitter/nvim-treesitter-textobjects")
     use("SmiteshP/nvim-gps")
+    use("folke/twilight.nvim") -- focus active code block
 
     -- Syntax.
     use("aklt/plantuml-syntax")

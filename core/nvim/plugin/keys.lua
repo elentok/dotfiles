@@ -52,6 +52,7 @@ vim.keymap.set("x", "i<space>", "t oT o", { silent = true })
 
 -- Misc {{{1
 vim.keymap.set("n", "<Leader>tm", ":set modifiable!<cr>:set modifiable?<cr>")
+vim.keymap.set("n", "<Leader>tt", ":Twilight<cr>")
 vim.keymap.set("n", "_", ":Vifm<cr>")
 
 vim.keymap.set("n", "<cr>", ":nohls<cr><cr>")
