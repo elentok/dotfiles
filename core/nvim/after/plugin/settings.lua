@@ -34,6 +34,9 @@ vim.opt.formatoptions = table.concat({
 
 vim.opt.dictionary = "/usr/share/dict/american-english"
 
+-- With the spellsitter plugin the spellchecker can always be enabled.
+vim.opt.spell = true
+
 -- When splitting vertically move the focus to the right window.
 vim.opt.splitright = true
 
