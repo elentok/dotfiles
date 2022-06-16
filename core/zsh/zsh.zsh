@@ -4,7 +4,11 @@
 bindkey -v
 
 # Make <esc> switch quickly to normal mode
-export KEYTIMEOUT=1
+# export KEYTIMEOUT=1
+
+# Make jk go to normal mode
+export KEYTIMEOUT=20
+bindkey -M viins 'jk' vi-cmd-mode
 
 bindkey '^R' history-incremental-pattern-search-backward
 bindkey '^F' history-incremental-pattern-search-forward
