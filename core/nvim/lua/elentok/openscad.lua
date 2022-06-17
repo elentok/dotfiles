@@ -3,6 +3,14 @@ local helpers = require("null-ls.helpers")
 
 local M = {}
 
+local severities = {
+  F = helpers.diagnostics.severities["error"],
+  E = helpers.diagnostics.severities["error"],
+  W = helpers.diagnostics.severities["warning"],
+  I = helpers.diagnostics.severities["information"],
+  D = helpers.diagnostics.severities["warning"], -- D=deprecated
+}
+
 M.diagnostics = {
   name = "SCA2D",
   method = null_ls.methods.DIAGNOSTICS,
@@ -18,13 +26,13 @@ M.diagnostics = {
         return nil
       end
 
-      put(columns)
       local code = vim.trim(columns[4])
       local data = {
         row = columns[2],
         col = columns[3],
         code = code,
         message = columns[5] .. " (" .. code .. ")",
+        severity = severities[code:sub(1, 1)],
       }
       put(data)
       return data
