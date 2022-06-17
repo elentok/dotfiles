@@ -120,6 +120,12 @@ return require("packer").startup({
     use("nvim-lualine/lualine.nvim") -- Statusline
     use("tversteeg/registers.nvim") -- Shows registers contents when using them
     use("b0o/incline.nvim") -- Shows buffer names on windows
+    use({
+      "salkin-mada/openscad.nvim",
+      config = function()
+        pcall(require, "openscad")
+      end,
+    })
 
     -- use "ggandor/lightspeed.nvim" -- Move quickly between positions
 

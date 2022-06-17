@@ -5,4 +5,5 @@ augroup Elentok_FileTypes
   autocmd FileType gitcommit,hgcommit,markdown setlocal spell spellcapcheck=
   autocmd FileType gitcommit,hgcommit setlocal comments=fb:-,fb:* textwidth=80
   autocmd FileType vim setlocal nobomb
+  autocmd BufRead,BufNewFile *.scad set filetype=openscad
 augroup END
