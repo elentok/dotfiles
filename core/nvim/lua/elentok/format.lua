@@ -71,12 +71,14 @@ M.add_formatter("lsp", {
     "typescript",
     "typescriptreact",
     "sh",
+    "scad",
+    "openscad",
   },
 })
 
 local function same_lines(list1, list2)
-  local len1 = table.getn(list1)
-  local len2 = table.getn(list2)
+  local len1 = #list1
+  local len2 = #list2
 
   if len1 ~= len2 then
     return false

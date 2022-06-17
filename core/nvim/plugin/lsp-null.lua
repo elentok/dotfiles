@@ -30,6 +30,17 @@ local sca2d_diagnostics_source = {
   }),
 }
 
+local openscad_format_source = {
+  name = "OpenSCAD Format",
+  method = null_ls.methods.FORMATTING,
+  filetypes = { "scad", "openscad" },
+  generator = helpers.formatter_factory({
+    command = "openscad-format",
+    args = { "--dry" },
+    to_stdin = true,
+  }),
+}
+
 null_ls.setup({
   debug = true,
   sources = {
@@ -47,5 +58,6 @@ null_ls.setup({
       extra_args = { "-i", "2", "-bn", "-ci", "-sr" },
     }),
     sca2d_diagnostics_source,
+    openscad_format_source,
   },
 })
