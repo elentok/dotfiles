@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTF/framework"
+
+WIN_USERNAME="$(wsl-get-env USERNAME)"
+WIN_HOME="/mnt/c/Users/$WIN_USERNAME"
+
+echo "Username: $WIN_USERNAME"
+symlink "$WIN_HOME" ~/winhome
+symlink "$WIN_HOME/Documents" ~/Documents
+symlink "$WIN_HOME/Downloads" ~/Downloads
