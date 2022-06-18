@@ -34,7 +34,6 @@ M.diagnostics = {
         message = columns[5] .. " (" .. code .. ")",
         severity = severities[code:sub(1, 1)],
       }
-      put(data)
       return data
     end,
   }),
