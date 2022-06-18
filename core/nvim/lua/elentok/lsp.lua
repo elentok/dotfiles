@@ -1,6 +1,10 @@
-local lspconfig = require("lspconfig")
-local cmp = require("cmp_nvim_lsp")
-local aerial = require("aerial")
+local has_lspconfig, lspconfig = pcall(require, "lspconfig")
+local has_cmp, cmp = pcall(require, "cmp_nvim_lsp")
+local has_aerial, aerial = pcall(require, "aerial")
+
+if not (has_lspconfig and has_cmp and has_aerial) then
+  return
+end
 
 local M = {}
 

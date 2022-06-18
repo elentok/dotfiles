@@ -1,5 +1,9 @@
 local elentok_telescope = require("elentok/telescope")
-local util = require("lspconfig/util")
+local has_util, util = pcall(require, "lspconfig/util")
+
+if not has_util then
+  return
+end
 
 local root_finder = util.root_pattern(".git", ".hg")
 

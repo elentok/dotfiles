@@ -1,4 +1,7 @@
-local aerial = require("aerial")
+local ok, aerial = pcall(require, "aerial")
+if not ok then
+  return
+end
 
 aerial.setup({
   on_attach = function(bufnr)

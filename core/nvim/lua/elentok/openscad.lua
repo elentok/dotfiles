@@ -1,4 +1,8 @@
-local null_ls = require("null-ls")
+local ok, null_ls = pcall(require, "null-ls")
+if not ok then
+  return
+end
+
 local helpers = require("null-ls.helpers")
 
 local M = {}

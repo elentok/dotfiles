@@ -1,5 +1,9 @@
-local gps = require("nvim-gps")
+local has_gps = pcall(require, "nvim-gps")
 local util = require("elentok/util")
+
+if not has_gps then
+  return
+end
 
 local M = {}
 

@@ -1,7 +1,11 @@
 local util = require("elentok/util")
-local gps = util.safe_require("nvim-gps")
 local shortener = require("elentok/shortener")
-local lualine = require("lualine")
+
+local has_gps, gps = pcall(require, "nvim-gps")
+local has_lualine, lualine = pcall(require, "lualine")
+if not has_gps or not has_lualine then
+  return
+end
 
 lualine.setup({
   options = { theme = "onedark" },
