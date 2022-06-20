@@ -3,9 +3,6 @@ local util = require("elentok/util")
 local has_treesitter, treesitter_configs = pcall(require, "nvim-treesitter.configs")
 local has_gps, gps = pcall(require, "nvim-gps")
 
-put("HAS_TREESITTER", has_treesitter)
-put("HAS_GPS", has_gps)
-
 if not (has_treesitter and has_gps) then
   return
 end
