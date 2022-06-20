@@ -1,12 +1,12 @@
 local util = require("elentok/util")
 
-local treesitter_configs = util.safe_require("nvim-treesitter.configs")
-if not treesitter_configs then
-  return
-end
+local has_treesitter, treesitter_configs = pcall(require, "nvim-treesitter.configs")
+local has_gps, gps = pcall(require, "nvim-gps")
 
-local gps = util.safe_require("nvim-gps")
-if not gps then
+put("HAS_TREESITTER", has_treesitter)
+put("HAS_GPS", has_gps)
+
+if not (has_treesitter and has_gps) then
   return
 end
 
