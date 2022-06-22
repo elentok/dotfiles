@@ -15,6 +15,7 @@ lsp.setup({
   jsonls = true,
   html = true,
   cssls = true,
+  openscad_ls = true,
 })
 
 -- Simple LSPs {{{1
