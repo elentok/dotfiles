@@ -312,8 +312,13 @@ function list-dirs() {
 }
 
 # Fuzzy vi {{{1
-
-alias v='$(run-on-file nvim)'
+function v() {
+  if [ $# -eq 0 ]; then
+    run-on-file nvim
+  else
+    nvim "$@"
+  fi
+}
 
 function run-on-file() {
   # calling "print -s" adds the command to zsh history
@@ -323,7 +328,7 @@ function run-on-file() {
   if [ -n "$file" ]; then
     cmd="$* $file"
     print -s "$cmd" \
-      && echo "$cmd"
+      && bash -c "$cmd"
   fi
 }
 
