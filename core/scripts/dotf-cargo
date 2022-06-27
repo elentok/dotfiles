@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTF/framework"
+
+main() {
+  dotf-bullet "Installing cargo packages $*... "
+  missing=$(find-missing-packages "$@")
+
+  if [ -z "$missing" ]; then
+    dotf-info " already installed."
+  else
+    echo
+    dotf-bullet "Installing missing packages: $missing..."
+    echo
+
+    exit 1
+
+    # shellcheck disable=SC2086
+    cargo install $missing
+  fi
+}
+
+function find-missing-packages() {
+  already_installed="$(mktemp)"
+  find-already-installed "$@" > "$already_installed"
+
+  diff="$(echo "$*" | tr ' ' '\n' | sort | (diff "$already_installed" - || true))"
+
+  if [ -n "$diff" ]; then
+    echo "$diff" | grep '^>' | sed 's/^> //' | xargs
+  fi
+}
+
+function find-already-installed() {
+  regexp="^($(echo "$@" | sed -E 's/\s+/|/g'))$"
+  all-installed-packages | grep -E "$regexp" | sort
+}
+
+function all-installed-packages() {
+  cargo install --list --offline | grep -E '^\S' | awk '{print $1}'
+}
+
+main "$@"

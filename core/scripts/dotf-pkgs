@@ -40,6 +40,9 @@ function install-pkgs() {
     npm)
       install-npm-pkgs
       ;;
+    cargo)
+      install-cargo-pkgs
+      ;;
     *)
       install-apt-pkgs && install-pip-pkgs && install-npm-pkgs
       ;;
@@ -79,6 +82,11 @@ function install-pip-pkgs() {
 function install-npm-pkgs() {
   dotf-header h2 '[dotf-pkgs] Installing npm packages...'
   dotf-npm "$(get-pkgs npm)"
+}
+
+function install-cargo-pkgs() {
+  dotf-header h2 '[dotf-pkgs] Installing cargo packages...'
+  dotf-cargo "$(get-pkgs cargo)"
 }
 
 function upgrade-pkgs() {
