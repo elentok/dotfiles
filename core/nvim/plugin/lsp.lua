@@ -36,7 +36,10 @@ if config.enable_tsserver then
   })
 end
 
-require("lsp_signature").setup()
+local has_lsp_signature, lsp_signature = pcall(require, "lsp_signature")
+if has_lsp_signature then
+  lsp_signature.setup()
+end
 
 -- HTML + CSS (Enable snippet support) {{{1
 -- local capabilities = vim.lsp.protocol.make_client_capabilities()
