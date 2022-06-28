@@ -1,5 +1,8 @@
-local create_cmd = vim.api.nvim_create_user_command
-local builtin = require("telescope.builtin")
+local ok, builtin = pcall(require, "telescope.builtin")
+if not ok then
+  return
+end
+
 local _, fterm = pcall(require, "FTerm")
 
 local function hg_goto_modified()

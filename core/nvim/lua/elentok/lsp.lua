@@ -3,7 +3,11 @@ local has_cmp, cmp = pcall(require, "cmp_nvim_lsp")
 local has_aerial, aerial = pcall(require, "aerial")
 
 if not (has_lspconfig and has_cmp and has_aerial) then
-  return
+  return {
+    setup = function()
+      print("Warning: LSP not loaded, missing plugins.")
+    end,
+  }
 end
 
 local M = {}

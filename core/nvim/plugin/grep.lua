@@ -1,3 +1,8 @@
+local ok, _ = pcall(require, "telescope")
+if not ok then
+  return
+end
+
 local builtin = require("telescope/builtin")
 local conf = require("telescope/config").values
 local finders = require("telescope/finders")
