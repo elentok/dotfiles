@@ -15,6 +15,8 @@ local severities = {
   D = helpers.diagnostics.severities["warning"], -- D=deprecated
 }
 
+local SCA2D_CODES_TO_IGNORE = { "I0004" }
+
 M.diagnostics = {
   name = "SCA2D",
   method = null_ls.methods.DIAGNOSTICS,
@@ -31,6 +33,10 @@ M.diagnostics = {
       end
 
       local code = vim.trim(columns[4])
+      if vim.tbl_contains(SCA2D_CODES_TO_IGNORE, code) then
+        return nil
+      end
+
       local data = {
         row = columns[2],
         col = columns[3],
