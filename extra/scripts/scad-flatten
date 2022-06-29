@@ -1,0 +1,42 @@
+#!/usr/bin/env python3
+
+import argparse
+from typing import List
+from pathlib import Path
+from os.path import dirname, join
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("input", help="The input scad file")
+    parser.add_argument("output", help="The output (flat) scad file")
+    args = parser.parse_args()
+
+    lines = flatten(args.input)
+    with open(args.output, "w") as f:
+        f.writelines(lines)
+
+
+def flatten(input_file) -> List[str]:
+    with open(input_file, "r") as f:
+        lines = f.readlines()
+
+    flat_lines = []
+
+    for line in lines:
+        if line.startswith("use "):
+            dependency_path = resolve_use_path(input_file, line)
+            lines = flatten(dependency_path)
+            flat_lines.extend(lines)
+        else:
+            flat_lines.append(line)
+
+    return flat_lines
+
+
+def resolve_use_path(input_file, line):
+    relative_path = line[5:-2]
+    return Path(join(dirname(input_file)), relative_path).resolve(strict=True)
+
+
+main()
