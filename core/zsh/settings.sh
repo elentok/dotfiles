@@ -102,7 +102,7 @@ export FZF_DEFAULT_OPTS=''
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
 
 # https://github.com/junegunn/fzf/issues/809
-[ -n "${NVIM_LISTEN_ADDRESS:-}" ] && export FZF_DEFAULT_OPTS='--no-height'
+[ -n "${NVIM:-}" ] && export FZF_DEFAULT_OPTS='--no-height'
 
 # SSH {{{1
 if ! [[ "$SSH_AUTH_SOCK" =~ "chromoting" ]]; then

@@ -18,7 +18,7 @@ function random_animal {
 }
 
 # Only support on Mac and outside of neovim
-# if [ "$(uname -s)" = "Darwin" -a -z "$NVIM_LISTEN_ADDRESS" ]; then
+# if [ "$(uname -s)" = "Darwin" -a -z "$NVIM" ]; then
 #   random_animal="$(random_animal)  "
 # fi
 
