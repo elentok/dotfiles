@@ -15,8 +15,6 @@ main() {
     dotf-bullet "Installing missing packages: $missing..."
     echo
 
-    exit 1
-
     # shellcheck disable=SC2086
     cargo install $missing
   fi
