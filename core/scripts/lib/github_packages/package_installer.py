@@ -101,9 +101,8 @@ class AssetInstaller:
         self.package = package
         self.asset = asset
         self.release_dirname = path.join(APPS_ALL, package.name, asset.release.tag_name)
-        self.asset_filename = path.join(
-            self.release_dirname, f"{package.name}{asset.ext}"
-        )
+        ext = asset.ext or path.splitext(asset.name)[1]
+        self.asset_filename = path.join(self.release_dirname, f"{package.name}{ext}")
         self.bin_source = package.platform.bin_source or package.bin_target
         self.force_prerelease = force_prerelease
 

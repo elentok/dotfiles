@@ -38,4 +38,7 @@ def _extract_command(filename: str, strip_components: int) -> str:
         # "-o" - overwrites file without confirmation
         return f"unzip -o {filename}"
 
+    if filename.endswith(".gz"):
+        return f"gunzip {filename}"
+
     raise Exception(f"Can't extract {filename}, extension not supported")

@@ -2,14 +2,26 @@
 
 source "$DOTF/framework"
 
-dotf-bullet 'Installing rust...'
-if has_command rustc; then
-  dotf-info 'already installed.'
-else
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o /tmp/rustup-init
-  sh /tmp/rustup-init --no-modify-path -y
-fi
+function main() {
+  install-rust
 
-if command_missing exa; then
-  cargo install exa
-fi
+  # Install rust sources (required by the LSP)
+  # Based on https://rust-analyzer.github.io/manual.html#installation
+  rustup component add rust-src
+
+  if command_missing exa; then
+    dotf-cargo exa
+  fi
+}
+
+function install-rust() {
+  dotf-bullet 'Installing rust...'
+  if has_command rustc; then
+    dotf-info 'already installed.'
+  else
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o /tmp/rustup-init
+    sh /tmp/rustup-init --no-modify-path -y
+  fi
+}
+
+main "$@"

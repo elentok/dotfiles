@@ -16,6 +16,7 @@ lsp.setup({
   html = true,
   cssls = true,
   openscad_ls = true,
+  rust_analyzer = true,
 })
 
 -- Simple LSPs {{{1
