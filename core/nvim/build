@@ -5,18 +5,13 @@ set -euo pipefail
 source "$DOTF/framework"
 source "$DOTF/core/scripts/lib/build-helper.sh"
 
-prepare_build neovim v0.5.1 "$*"
+prepare_build neovim master "$*"
 
 if is_debian; then
   dotf-apt ninja-build gettext libtool libtool-bin autoconf \
     automake cmake g++ pkg-config unzip
 elif dotf-is-mac; then
-  brew_install ninja
-  brew_install libtool
-  brew_install automake
-  brew_install cmake
-  brew_install pkg-config
-  brew_install gettext
+  dotf-brew ninja libtool automake cmake pkg-config gettext
 fi
 
 git clone --depth 1 --branch "$VERSION" https://github.com/neovim/neovim.git
