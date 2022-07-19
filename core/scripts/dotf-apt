@@ -35,8 +35,12 @@ function find-missing-packages() {
 }
 
 function find-already-installed() {
-  regexp="^($(echo "$@" | sed -E 's/\s+/|/g'))$"
+  regexp="^($(echo "$@" | escape-package-name))$"
   all-installed-packages | grep -E "$regexp" | sort
+}
+
+function escape-package-name() {
+  sed -E 's/\s+/|/g' | sed -E 's/\+/\\+/g'
 }
 
 function all-installed-packages() {
