@@ -47,17 +47,17 @@ return require("packer").startup({
       end,
     })
     use({ "folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons" })
-    use({
-      "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-      config = function()
-        require("lsp_lines").setup()
-
-        -- Disable virtual_text since it's redundant due to lsp_lines.
-        vim.diagnostic.config({
-          virtual_text = false,
-        })
-      end,
-    })
+    -- use({
+    --   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    --   config = function()
+    --     require("lsp_lines").setup()
+    --
+    --     -- Disable virtual_text since it's redundant due to lsp_lines.
+    --     vim.diagnostic.config({
+    --       virtual_text = false,
+    --     })
+    --   end,
+    -- })
 
     -- Completion.
     use("hrsh7th/cmp-nvim-lsp")
