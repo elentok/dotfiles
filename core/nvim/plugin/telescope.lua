@@ -29,6 +29,7 @@ telescope.load_extension("fzf")
 telescope.load_extension("file_browser")
 
 vim.keymap.set("n", "<c-p>", builtin.find_files)
+vim.keymap.set("n", "z=", builtin.spell_suggest)
 vim.keymap.set("n", "<Leader>b", builtin.buffers)
 vim.keymap.set("n", "<Leader>gt", builtin.tags)
 vim.keymap.set("n", "<Leader>gg", builtin.git_status)
