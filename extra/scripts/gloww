@@ -1,0 +1,45 @@
+#!/usr/bin/env node
+
+const fs = require("fs");
+const { spawn } = require("child_process");
+
+function main() {
+  const mdfile = process.argv[2];
+  if (mdfile == null) {
+    usage();
+    process.exit(1);
+  }
+
+  render(mdfile);
+  watch(mdfile);
+}
+
+// On OSX only "rename" is sent.
+const EVENTS = ["change", "rename"];
+
+function watch(filename) {
+  let timeoutId = null;
+
+  fs.watch(".", (event, filename) => {
+    if (EVENTS.includes(event) && filename === filename) {
+      if (timeoutId != null) clearTimeout(timeoutId);
+
+      timeoutId = setTimeout(() => {
+        console.info(`- Detected change in ${filename}`);
+        timeoutId = null;
+        render(filename);
+      }, 300);
+    }
+  });
+}
+
+function usage() {
+  console.info("Usage: gloww <file.md>");
+}
+
+function render(filename) {
+  console.clear();
+  spawn("glow", [filename], { stdio: "inherit" });
+}
+
+main();
