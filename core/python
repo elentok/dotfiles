@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTF/framework"
+
+function main() {
+  install-poetry
+}
+
+function install-poetry() {
+  dotf-bullet "Installing poetry... "
+  if command_missing poetry; then
+    curl -sSL https://install.python-poetry.org | python3 -
+    dotf-success "done"
+  else
+    dotf-info "already installed."
+
+  fi
+}
+
+main "$@"
