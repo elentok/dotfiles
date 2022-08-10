@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+#
+# Setup repositories (clone or pull changes)
+#
+# Usage:
+#
+#   dotf-repos <config-file>...
+#
+# Example config file:
+#
+#   git@github.com:elentok/dotfiles=~/.dotfiles
+#
+
+set -euo pipefail
+
+source "$DOTF/framework"
+
+function main() {
+  if [ $# -eq 0 ]; then
+    usage "$0"
+    exit 1
+  fi
+
+  while [ $# -gt 0 ]; do
+    setup-repos "$1"
+    shift
+  done
+
+  dotf-header h2 "Done setting up repositories :-)"
+}
+
+function setup-repos {
+  local filename="$1"
+  dotf-header h1 "Setting up repos from $filename"
+  grep -vE "^(#|\s*$)" "$filename" | while read -r line; do
+    url="$(echo "$line" | cut -d= -f1 | dotf-trim)"
+    dir="$(echo "$line" | cut -d= -f2 | dotf-trim | sed "s#~#$HOME#")"
+    setup-repo "$url" "$dir"
+  done
+}
+
+function setup-repo() {
+  local url="$1"
+  local dir="$2"
+
+  dotf-header h2 "Setting up $url => $dir"
+
+  if [ -e "$dir" ]; then
+    if [ -d "$dir" ]; then
+      echo "File exists, pulling"
+      (cd "$dir" && git pull --rebase)
+    else
+      echo "SKIPPED: File exists in '$dir' and it's not a directory"
+    fi
+  else
+    echo "Cloing..."
+    parent="$(dirname "$dir")"
+    mkdir -p "$parent"
+    git clone "$url" "$dir"
+  fi
+}
+
+main "$@"
