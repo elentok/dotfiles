@@ -246,9 +246,9 @@ vp() {
 unalias f
 f() {
   if [ $# -eq 0 ]; then
-    vifm .
+    TERM=xterm-256color vifm .
   else
-    vifm "$@"
+    TERM=xterm-256color vifm "$@"
   fi
 }
 
