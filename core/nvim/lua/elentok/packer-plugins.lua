@@ -131,6 +131,7 @@ return require("packer").startup({
     use("nvim-lualine/lualine.nvim") -- Statusline
     use("tversteeg/registers.nvim") -- Shows registers contents when using them
     use("b0o/incline.nvim") -- Shows buffer names on windows
+    use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" })
     use({
       "salkin-mada/openscad.nvim",
       config = function()

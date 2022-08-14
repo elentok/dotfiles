@@ -22,6 +22,12 @@ end
 
 local capabilities = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+-- For nvim-ufo
+capabilities.textDocument.foldingRange = {
+  dynamicRegistration = false,
+  lineFoldingOnly = true,
+}
+
 function M.setup(servers)
   for server, config in pairs(servers) do
     if config == true then
