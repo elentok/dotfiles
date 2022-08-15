@@ -11,7 +11,7 @@ function main() {
     if dotf-is-mac; then
       dotf-brew wezterm
     else
-      echo "TODO: Support installing wezterm on other platforms"
+      install_deb "wezterm" "https://github.com/wez/wezterm/releases/download/20220807-113146-c2fee766/wezterm-20220807-113146-c2fee766.Debian11.deb"
     fi
   fi
 
