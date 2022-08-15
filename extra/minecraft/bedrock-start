@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+BEDROCK_VERSION="$(cat "$DOTF/extra/minecraft/BEDROCK_VERSION")"
+
+sudo --login -u minecraft bash -c "cd /home/minecraft/bedrock/${BEDROCK_VERSION} && LD_LIBRARY_PATH=. ./bedrock_server"

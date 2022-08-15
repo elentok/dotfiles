@@ -10,6 +10,11 @@ SPIGOT_JAR_FILENAME="spigot-${SPIGOT_REV}.jar"
 SPIGOT_JAR_URL="https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar"
 SPIGOT_TMP="$TMP/spigot-${SPIGOT_REV}"
 
+BEDROCK_VERSION="$(cat "$DOTF/extra/minecraft/BEDROCK_VERSION")"
+BEDROCK_SERVER_ZIP_URL="https://minecraft.azureedge.net/bin-linux/bedrock-server-${BEDROCK_VERSION}.zip"
+BEDROCK_ROOT="/home/minecraft/bedrock"
+BEDROCK_VERSION_DIR="${BEDROCK_ROOT}/${BEDROCK_VERSION}"
+
 main() {
   if [ "${1:-}" == "update" ]; then
     update-spigot
@@ -24,8 +29,12 @@ main() {
     install-spigot-server
   fi
 
+  if ! is-bedrock-server-installed; then
+    install-bedrock-server
+  fi
+
   # install-server
-  # copy-server-properties
+  copy-server-properties
   # setup-service
 }
 
@@ -57,6 +66,21 @@ install-spigot-server() {
   install-service $DOTF/extra/minecraft/spigotmc.service.erb system
 
   "$DOTF/extra/minecraft/install-spigot-server-properties"
+}
+
+is-bedrock-server-installed() {
+  [ -e "${BEDROCK_VERSION_DIR}/bedrock_server" ]
+}
+
+install-bedrock-server() {
+  dotf-bullet 'Installing bedrock server...'
+  as-minecraft mkdir -p "$BEDROCK_ROOT"
+  cd "${BEDROCK_ROOT}"
+  sudo wget "${BEDROCK_SERVER_ZIP_URL}" -O "${BEDROCK_VERSION}.zip"
+  sudo mkdir -p "${BEDROCK_VERSION}/"
+  cd "${BEDROCK_VERSION}"
+  sudo unzip "../${BEDROCK_VERSION}.zip"
+  sudo chown -R minecraft:minecraft "${BEDROCK_ROOT}/${BEDROCK_VERSION}"
 }
 
 update-spigot() {
@@ -94,8 +118,8 @@ as-minecraft() {
 }
 
 copy-server-properties() {
-  sudo cp -f $DOTF/extra/minecraft/server.properties /home/minecraft/
-  sudo chown minecraft:minecraft /home/minecraft/server.properties
+  sudo cp -f $DOTF/extra/minecraft/server.properties "${BEDROCK_VERSION_DIR}"
+  sudo chown minecraft:minecraft "${BEDROCK_VERSION_DIR}/server.properties"
 }
 
 setup-service() {
