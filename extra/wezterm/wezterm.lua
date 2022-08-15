@@ -3,6 +3,12 @@ local act = wezterm.action
 
 return {
   font = wezterm.font("agave Nerd Font Mono"),
+  font_rules = {
+    {
+      italic = true,
+      font = wezterm.font("Operator Mono", { weight = 325, italic = true }),
+    },
+  },
   line_height = 1.2,
   font_size = 17.0,
   color_scheme = "MaterialDarker",
