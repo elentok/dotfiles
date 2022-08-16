@@ -1,7 +1,9 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
 
-return {
+local local_config_dir = os.getenv("HOME") .. "/.dotlocal/wezterm"
+
+local config = {
   font = wezterm.font("agave Nerd Font Mono"),
   font_rules = {
     {
@@ -15,6 +17,9 @@ return {
   audible_bell = "Disabled",
   keys = {
     { key = "r", mods = "CMD|SHIFT", action = act.ReloadConfiguration },
+
+    { key = "r", mods = "LEADER", action = act.ShowLauncher },
+    { key = "d", mods = "LEADER", action = act.DetachDomain("CurrentPaneDomain") },
 
     -- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
     { key = "a", mods = "LEADER|CTRL", action = act.SendString("\x01") },
@@ -52,12 +57,12 @@ return {
     { key = "X", mods = "LEADER|SHIFT", action = act.CloseCurrentTab({ confirm = true }) },
     { key = "x", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
   },
-  key_tables = {
-    copy_mode = {
-      { key = "u", mods = "CTRL", action = act.CopyMode("PageUp") },
-      { key = "d", mods = "CTRL", action = act.CopyMode("PageDown") },
-    },
-  },
+  -- key_tables = {
+  --   copy_mode = {
+  --     { key = "u", mods = "CTRL", action = act.CopyMode("PageUp") },
+  --     { key = "d", mods = "CTRL", action = act.CopyMode("PageDown") },
+  --   },
+  -- },
   leader = { key = "a", mods = "CTRL" },
 
   -- Work like tmux locally
@@ -67,3 +72,10 @@ return {
 
   default_gui_startup_args = { "connect", "unix" },
 }
+
+for _, file in ipairs(wezterm.glob(local_config_dir .. "/*.lua")) do
+  local config_fn = dofile(file)
+  config_fn(config)
+end
+
+return config
