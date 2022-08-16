@@ -13,7 +13,7 @@
 set -euo pipefail
 
 LIFE_HOURS=48
-LIFE_SECONDS=$(( $LIFE_HOURS * 60 * 60 ))
+LIFE_SECONDS=$(($LIFE_HOURS * 60 * 60))
 ACTIVE_AGENT="$HOME/.ssh/active-agent"
 LOCAL_AGENT="$HOME/.ssh/local-agent"
 LOCAL_AGENT_PIDFILE="$HOME/.ssh/local-agent-pid"
@@ -25,13 +25,13 @@ main() {
   [ $# -gt 0 ] && shift
 
   case "$cmd" in
-    list   | l) list-agents ;;
-    status | w) show-status;;
-    choose | c) choose-agent;;
-    set    | s) set-agent "$@";;
-    setup  | f) setup;;
-    stop)       stop-local-agent;;
-    *)          usage "$0";;
+    list | l) list-agents ;;
+    status | w) show-status ;;
+    choose | c) choose-agent ;;
+    set | s) set-agent "$@" ;;
+    setup | f) setup ;;
+    stop) stop-local-agent ;;
+    *) usage "$0" ;;
   esac
 }
 
@@ -54,7 +54,7 @@ show-active-agent() {
 choose-agent() {
   local agent=$(list-agents | fzf | cut -d' ' -f1)
   if [ -z "$agent" ]; then
-    dotf-error 'User aborted'
+    echo 'ERROR: User aborted'
     exit 1
   fi
 
@@ -118,9 +118,9 @@ show-status() {
     echo "Agent:        $active_agent"
     echo "Type:         local"
     echo "PID:          $(cat $LOCAL_AGENT_PIDFILE)"
-    is-local-agent-running && \
-      echo "Status:       running" || \
-      echo "Status:       not running"
+    is-local-agent-running \
+      && echo "Status:       running" \
+      || echo "Status:       not running"
   else
     echo "Agent: $active_agent"
     echo "Type:  Forwarded"
