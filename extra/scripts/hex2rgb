@@ -4,23 +4,31 @@ import sys
 
 
 def main():
-    if len(sys.argv) < 2:
-        usage()
+    args = sys.argv[1:]
+    if len(args) == 1:
+        hex2rgb(args[0])
+    elif len(args) == 3:
+        rgb2hex(*args)
     else:
-        hex2rgb(sys.argv[1])
+        usage()
 
 
 def usage():
-    print(("Usage:"
-           ""
-           "  hex2rgb abcdef"))
+    print(("Usage:\n\n  hex2rgb abcdef\n  hex2rgb 20 30 40"))
 
 
 def hex2rgb(hex_value):
     red = int(hex_value[0:2], 16)
     green = int(hex_value[2:4], 16)
     blue = int(hex_value[4:6], 16)
-    print(f'({red},{green},{blue})')
+    print(f"({red},{green},{blue})")
+
+
+def rgb2hex(red, green, blue):
+    red = "%0.2X" % int(red)
+    green = "%0.2X" % int(green)
+    blue = "%0.2X" % int(blue)
+    print(f"{red}{green}{blue}".lower())
 
 
 if __name__ == "__main__":
