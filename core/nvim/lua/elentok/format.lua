@@ -55,7 +55,7 @@ end
 
 M.add_formatter("lsp", {
   func = function()
-    vim.lsp.buf.formatting_seq_sync()
+    vim.lsp.buf.formatting_seq_sync({}, 2000)
   end,
   filetypes = {
     "scss",
