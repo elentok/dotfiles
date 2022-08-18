@@ -138,6 +138,7 @@ return require("packer").startup({
         pcall(require, "openscad")
       end,
     })
+    use({ "phaazon/hop.nvim", branch = "v2" })
 
     -- use "ggandor/lightspeed.nvim" -- Move quickly between positions
 
