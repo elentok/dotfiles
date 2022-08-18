@@ -6,9 +6,16 @@ if not ok then
   return
 end
 
+local is_in_tmux = os.getenv("TMUX") ~= nil
+
 onenord.setup({
   styles = {
     comments = "italic",
+  },
+  disable = {
+    -- Disable the background when inside tmux
+    -- (to allow setting the background of the active window)
+    background = is_in_tmux,
   },
 })
 
