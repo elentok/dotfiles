@@ -5,5 +5,5 @@ syntax match TodoInprogress '\[inprogress\].*$' contains=TodoContext containedin
 syntax match TodoContext '@[^ ]*' contained
 highlight default link TodoDone Comment
 highlight default link TodoWaiting WarningMsg
-highlight default link TodoInprogress Directory
+highlight default link TodoInprogress CommandMode
 highlight default link TodoContext Statement
