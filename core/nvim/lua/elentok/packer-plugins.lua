@@ -141,6 +141,7 @@ return require("packer").startup({
       end,
     })
     use({ "phaazon/hop.nvim", branch = "v2" })
+    use("mizlan/iswap.nvim")
     use({
       "williamboman/mason.nvim",
       config = function()
