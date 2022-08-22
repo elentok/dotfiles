@@ -132,6 +132,7 @@ return require("packer").startup({
     use("tversteeg/registers.nvim") -- Shows registers contents when using them
     use("b0o/incline.nvim") -- Shows buffer names on windows
     use("ThePrimeagen/harpoon")
+    use("ThePrimeagen/refactoring.nvim")
     use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" })
     use({
       "salkin-mada/openscad.nvim",
