@@ -12,3 +12,13 @@ telescope.load_extension("refactoring")
 vim.keymap.set("v", "<space>rr", function()
   telescope.extensions.refactoring.refactors()
 end)
+
+vim.keymap.set("n", "<space>rv", function()
+  refactoring.debug.print_var({ normal = true })
+end)
+
+vim.keymap.set("n", "<space>rp", function()
+  refactoring.debug.printf()
+end)
+
+vim.keymap.set("n", "<space>rc", refactoring.debug.cleanup)
