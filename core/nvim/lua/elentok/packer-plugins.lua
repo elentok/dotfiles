@@ -141,6 +141,12 @@ return require("packer").startup({
       end,
     })
     use({ "phaazon/hop.nvim", branch = "v2" })
+    use({
+      "williamboman/mason.nvim",
+      config = function()
+        require("mason").setup()
+      end,
+    })
 
     -- use "ggandor/lightspeed.nvim" -- Move quickly between positions
 
