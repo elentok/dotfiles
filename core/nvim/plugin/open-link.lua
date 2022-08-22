@@ -1,11 +1,13 @@
-local http_prefix_regex = vim.regex("^https?://")
+local function is_http_link(link)
+  return vim.startswith(link, "http://") or vim.startswith(link, "https://")
+end
 
 local function open_link(link)
   if link == nil then
     link = vim.fn.expand("<cfile>")
   end
 
-  if not http_prefix_regex:match_str(link) then
+  if not is_http_link(link) then
     link = "http://" .. link
   end
 
