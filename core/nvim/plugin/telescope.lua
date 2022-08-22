@@ -11,7 +11,14 @@ telescope.setup({
     -- file_sorter = require('telescope.sorters').get_fzy_sorter,
     file_ignore_patterns = { "node_modules/.*", "scuba_goldens/.*" },
     mappings = {
-      i = { ["<C-q>"] = actions.send_to_qflist + actions.open_qflist },
+      i = {
+        ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+        ["<C-r"] = actions.delete_buffer,
+      },
+      n = {
+        ["q"] = actions.close,
+        ["x"] = actions.delete_buffer,
+      },
     },
   },
   extensions = {

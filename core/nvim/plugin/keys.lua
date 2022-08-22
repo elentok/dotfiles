@@ -1,6 +1,9 @@
 -- vim: foldmethod=marker
 vim.keymap.set("i", "jk", "<esc>")
 
+-- Switch to alternate file
+vim.keymap.set("n", "<space><space>", "<c-^>")
+
 vim.keymap.set("n", "<c-s>", ":w<cr>")
 vim.keymap.set("i", "<c-s>", "<c-o>:w<cr>")
 
