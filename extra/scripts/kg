@@ -73,7 +73,10 @@ function main() {
 
 function find-procs() {
   pid="$$"
-  PROCS="$(pgrep -af "$PATTERN")"
+  # a = include process ancestors
+  # l = long (short process name)
+  # f = match against full argument list
+  PROCS="$(pgrep -alf "$PATTERN")"
 
   # This is separate from the pgrep command because if added it creates another
   # process that I can't filter out (I don't know its pid).
