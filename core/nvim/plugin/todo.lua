@@ -43,5 +43,5 @@ vim.keymap.set("n", "<Leader>td", todo_toggle_done)
 vim.keymap.set("n", "<Leader>tp", todo_prev_state)
 vim.keymap.set("n", "<Leader>tn", todo_next_state)
 
-vim.keymap.set("n", "<space>,", todo_prev_state)
-vim.keymap.set("n", "<space>.", todo_next_state)
+vim.keymap.set("n", "[t", todo_prev_state)
+vim.keymap.set("n", "]t", todo_next_state)
