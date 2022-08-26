@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 #
 # Install and upgrades packages via npm, pip, apt, ...
+#
+# Usage:
+#
+#   dotf-pkgs i <source>
+#   dotf-pkgs u <source>
+#
+# Sources: apt, brew, pip, npm, cargo
 
 set -euo pipefail
 
