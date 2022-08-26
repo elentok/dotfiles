@@ -6,39 +6,32 @@ if not ok then
   return
 end
 
-local is_in_tmux = os.getenv("TMUX") ~= nil
-
 onenord.setup({
   styles = {
     comments = "italic",
   },
-  disable = {
-    -- Disable the background when inside tmux
-    -- (to allow setting the background of the active window)
-    background = is_in_tmux,
+  custom_colors = {
+    bg = "#232730",
   },
 })
 
--- local onedarkpro = util.safe_require("onedarkpro")
--- if onedarkpro then
---   onedarkpro.setup({
---     styles = { comments = "italic" },
---     options = { cursorline = true },
---   })
---   onedarkpro.load()
--- end
---
--- Status + vertical split colors
--- vim.cmd([[
---   hi VertSplit guifg=#126888
---   hi Floaterm guibg=#1a1b1c
---   hi FloatermBorder guibg=#1a1b1c
---
---   hi TelescopeNormal guibg=#1a1b1c
---   hi TelescopePreviewNormal guibg=#1a1b1c
---
---   hi TelescopeBorder guibg=#1a1b1c
---   hi TelescopePromptBorder guibg=#1a1b1c
---   hi TelescopeResultsBorder guibg=#1a1b1c
---   hi TelescopePreviewBorder guibg=#1a1b1c
--- ]])
+----------------------------------------------------
+-- Set different background for active windows
+
+vim.cmd([[
+  hi NormalNC guibg=#171b20
+  hi VertSplit guibg=#171b20
+]])
+
+-- Tmux support (requires "focus-events" to be on in tmux.conf)
+vim.api.nvim_create_autocmd({ "FocusGained" }, {
+  callback = function()
+    vim.cmd("hi Normal guibg=#232730")
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "FocusLost" }, {
+  callback = function()
+    vim.cmd("hi Normal guibg=#171b20")
+  end,
+})
