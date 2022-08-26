@@ -45,7 +45,11 @@ vim.keymap.set(
 -- " :Git diff %<cr>")
 vim.keymap.set("n", "<Leader>vdc", " :Git diff --cached<cr>")
 vim.keymap.set("n", "<Leader>vaf", ":Git add %<cr>")
-vim.keymap.set("n", "<Leader>vh", ":FloatermNew --width=0.8 --height=0.8 --autoclose=1 tig %<cr>")
+vim.keymap.set(
+  "n",
+  "<Leader>vh",
+  ":FloatermNew --width=0.8 --height=0.8 --autoclose=1 tig --follow %<cr>"
+)
 vim.keymap.set("n", "<Leader>vc", ":Gcommit<cr>")
 
 -- Spaces text object {{{1
