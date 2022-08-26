@@ -8,6 +8,9 @@ import re
 from rich.table import Table
 from rich.console import Console
 
+RELEVANT_MOUNT_POINT_RE = re.compile("/($|Volumes|media|usr|mnt)")
+SPACES_RE = re.compile("\\s+")
+
 
 class State(Enum):
     OK = "OK"
@@ -37,23 +40,32 @@ class Disk:
             return State.OK
         return State.GOOD
 
+    def style(self) -> str:
+        state = self.state()
+        if state == State.BAD:
+            return "red"
+        elif state == State.OK:
+            return "orange"
+        return "green"
+
 
 def main():
     disks = load_disks()
     table = Table(title="Free Space")
+    table.add_column("Mount")
     table.add_column("Usage", justify="right")
     table.add_column("Free (GB)", justify="right")
     table.add_column("Size (GB)", justify="right")
-    table.add_column("Mount")
     table.add_column("Device")
 
     for disk in disks:
         table.add_row(
+            disk.mount,
             f"{disk.used_percentage}%",
             disk.available_gb(),
             disk.size_gb(),
-            disk.mount,
             disk.device,
+            style=disk.style(),
         )
 
     console = Console()
@@ -64,31 +76,30 @@ def main():
 def load_disks() -> List[Disk]:
     lines = subprocess.check_output(["df"]).decode("utf-8").splitlines()[1:]
     disks = map(parse_df_line, lines)
-    disks = [disk for disk in disks if disk is not None]
+    disks = [
+        disk
+        for disk in disks
+        if disk is not None and RELEVANT_MOUNT_POINT_RE.match(disk.mount)
+    ]
     return disks
 
 
 def parse_df_line(line: str) -> Optional[Disk]:
-    print(re.compile("\\s+").split(line.strip()))
-    device, size, used, available, used_percentage, mount = re.compile("\s+").split(
+    *device, size, used, available, used_percentage, mount = SPACES_RE.split(
         line.strip()
     )
     return Disk(
-        device=device,
+        device=" ".join(device),
         used=used,
         used_percentage=int(used_percentage[:-1]),
         size=int(size),
         available=int(available),
         mount=mount,
-        state=State.OK,
     )
 
 
 def size_to_gb(value: int) -> str:
     return "%.1f" % (value / 1024 / 1024)
-
-
-# return execSync("df").toString().split("\n").map(parseDfLine).filter(notUndefined);
 
 
 if __name__ == "__main__":
