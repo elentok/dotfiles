@@ -50,8 +50,11 @@ class Disk:
 
 
 def main():
-    disks = load_disks()
-    table = Table(title="Free Space")
+    render_disks(load_disks())
+
+
+def render_disks(disks: List[Disk]):
+    table = Table(title="Free Space", border_style="#666666")
     table.add_column("Mount")
     table.add_column("Usage", justify="right")
     table.add_column("Free (GB)", justify="right")
@@ -70,7 +73,6 @@ def main():
 
     console = Console()
     console.print(table)
-    # print(load_disks())
 
 
 def load_disks() -> List[Disk]:
@@ -99,7 +101,7 @@ def parse_df_line(line: str) -> Optional[Disk]:
 
 
 def size_to_gb(value: int) -> str:
-    return "%.1f" % (value / 1024 / 1024)
+    return "%.1f G" % (value / 1024 / 1024)
 
 
 if __name__ == "__main__":
