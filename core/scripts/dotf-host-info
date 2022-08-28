@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+#
+# Usage:
+#
+#   dotf-host-info <pretty-name|tmux-color>
+#
+
+set -euo pipefail
+
+function main() {
+  cmd="${1:-}"
+  shift
+
+  case "$cmd" in
+    "pretty-name")
+      get-host-field 2
+      ;;
+    "tmux-color")
+      get-host-field 3
+      ;;
+    *)
+      usage "$0"
+      exit 1
+      ;;
+  esac
+}
+
+function get-host-field() {
+  local index="$1"
+
+  hostname="$(hostname)"
+  grep --no-messages "^${hostname}:" "$DOTL/pretty-hostnames" \
+    | cut -d: "-f$index" \
+    || echo "$hostname"
+}
+
+main "$@"
