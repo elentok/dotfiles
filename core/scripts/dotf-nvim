@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [ -e pyproject.toml ]; then
+  poetry run nvim "$@"
+else
+  nvim "$@"
+fi

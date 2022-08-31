@@ -44,7 +44,6 @@ alias lss='command ls -1 -s'
 alias m='hgi'
 alias mod='stat --format=%a'
 alias ngx='sudoo nginx -s reload'
-alias nv='nvim'
 alias npd='npm run dev'
 alias p='dotf-clipboard paste'
 alias pio='platformio'
@@ -118,11 +117,12 @@ if has_command nvim; then
       nvim-set-workdir
     }
   else
-    alias vi=nvim
+    alias vi=dotf-nvim
   fi
 else
   alias vi=vim
 fi
+
 alias vcd='nvr --remote-send "<c-\><c-n>:tcd $PWD<cr>i"'
 alias vl='vim "+OpenSession! last"'
 
@@ -260,7 +260,7 @@ alias d='cd "$(pick-directory)"'
 function vv() {
   files="$(vifm --choose-files - --on-choose echo .)"
   if [ -n "$files" ]; then
-    echo "$files" | xargs nvim
+    echo "$files" | xargs dotf-nvim
   fi
 }
 
@@ -314,9 +314,9 @@ function list-dirs() {
 # Fuzzy vi {{{1
 function v() {
   if [ $# -eq 0 ]; then
-    run-on-file nvim
+    run-on-file dotf-nvim
   else
-    nvim "$@"
+    dotf-nvim "$@"
   fi
 }
 
