@@ -28,8 +28,22 @@ function main() {
 function get-host-field() {
   local index="$1"
 
+  local file=""
+  local files=("$DOTL/pretty-hostnames" "$DOTL/hosts-info" "$DOTP/hosts-info")
+  for file in "${files[@]}"; do
+    if [ -e "$file" ]; then
+      break
+    fi
+  done
+
+  if [ ! -e "$file" ]; then
+    echo >&2 "Error: hosts info file not found"
+    echo "ERROR"
+    return
+  fi
+
   hostname="$(hostname)"
-  grep --no-messages "^${hostname}:" "$DOTL/pretty-hostnames" \
+  grep --no-messages "^${hostname}:" "$file" \
     | cut -d: "-f$index" \
     || echo "$hostname"
 }
