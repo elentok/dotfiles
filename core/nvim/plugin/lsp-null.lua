@@ -3,8 +3,6 @@ if not ok then
   return
 end
 
-local openscad = require("elentok/openscad")
-
 null_ls.setup({
   debug = true,
   sources = {
@@ -21,7 +19,5 @@ null_ls.setup({
     null_ls.builtins.formatting.shfmt.with({
       extra_args = { "-i", "2", "-bn", "-ci", "-sr" },
     }),
-    openscad.diagnostics,
-    openscad.formatter,
   },
 })
