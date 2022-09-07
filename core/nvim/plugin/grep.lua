@@ -42,35 +42,44 @@ local function split_args(args)
 end
 
 -- Grep with telescope.
-local function telescope_grep()
-  vim.ui.input({ prompt = "Grep for? " }, function(query)
-    if query ~= nil then
-      builtin.grep_string({ search = query, regex = true })
-    end
-  end)
+local function telescope_grep(query, opts)
+  opts = opts or {}
+  opts.entry_maker = opts.entry_maker or make_entry.gen_from_vimgrep(opts)
+
+  local command = vim.tbl_flatten({ conf.vimgrep_arguments, query })
+
+  if query == nil then
+    return
+  end
+
+  if vim.tbl_islist(query) then
+    query = vim.fn.join(query, " ")
+  end
+
+  pickers
+    .new(opts, {
+      prompt_title = "Grep for [" .. query .. "]",
+      finder = finders.new_oneshot_job(command, opts),
+      previewer = conf.grep_previewer(opts),
+      sorter = conf.generic_sorter(opts),
+    })
+    :find()
 end
 
-local function new_grep(opts)
+-- Grep with telescope (prompt for query).
+local function telescope_grep_with_prompt(opts)
   opts = opts or {}
   opts.entry_maker = opts.entry_maker or make_entry.gen_from_vimgrep(opts)
 
   vim.ui.input({ prompt = "Grep for? " }, function(query)
-    local command = vim.tbl_flatten({ conf.vimgrep_arguments, split_args(query) })
-
-    put(command)
-
-    if query ~= nil then
-      pickers.new(opts, {
-        prompt_title = "Grep for [" .. query .. "]",
-        finder = finders.new_oneshot_job(command, opts),
-        previewer = conf.grep_previewer(opts),
-        sorter = conf.generic_sorter(opts),
-      }):find()
-    end
+    telescope_grep(split_args(query))
   end)
 end
 
 vim.keymap.set("n", "<Leader>ff", function()
-  new_grep()
+  telescope_grep_with_prompt()
+end)
+vim.keymap.set("n", "<Leader>fw", function()
+  telescope_grep(vim.fn.expand("<cword>"))
 end)
 vim.keymap.set("n", "<Leader>fq", grep)
