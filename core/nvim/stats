@@ -5,8 +5,8 @@ set -euo pipefail
 function main() {
   echo "FILES  LINES  DIR"
   find . -maxdepth 1 -type d | while read -r dir; do
-    files="$(find "$dir" -type f -name '*.lua' | wc -l)"
-    lines="$(count_loc "$dir" Lua)"
+    files="$(count_files "$dir")"
+    lines="$(count_loc "$dir")"
     if [ -n "$lines" ]; then
       printf %5d "$files"
       echo -n "  "
@@ -18,8 +18,12 @@ function main() {
 
 function count_loc() {
   local dir="$1"
-  local lang="$2"
-  (cloc "$dir" | grep "^$lang" || true) | awk '{print $5}'
+  (cloc --not-match-f="packer_compiled.lua" "$dir" | grep "^Lua" || true) | awk '{print $5}'
+}
+
+function count_files() {
+  local dir="$1"
+  find "$dir" -type f -name '*.lua' | grep -cv packer_compiled.lua || true
 }
 
 main "$@"
