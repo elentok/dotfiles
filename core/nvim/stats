@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+function main() {
+  cd "$DOTF/core/nvim"
+  echo "FILES  LINES  DIR"
+  find . -maxdepth 1 -type d | while read -r dir; do
+    files="$(find "$dir" -type f -name '*.lua' | wc -l)"
+    lines="$(count_loc "$dir" Lua)"
+    if [ -n "$lines" ]; then
+      printf %5d "$files"
+      echo -n "  "
+      printf %5d "$lines"
+      echo "  $dir"
+    fi
+  done
+}
+
+function count_loc() {
+  local dir="$1"
+  local lang="$2"
+  (cloc "$dir" | grep "^$lang" || true) | awk '{print $5}'
+}
+
+main "$@"
