@@ -12,7 +12,9 @@ local function open_link(link)
   end
 
   local command = "xdg-open"
-  if vim.fn.has("macunix") == 1 then
+  if vim.fn.has("wsl") == 1 then
+    command = "explorer.exe"
+  elseif vim.fn.has("macunix") == 1 then
     command = "open"
   end
 
