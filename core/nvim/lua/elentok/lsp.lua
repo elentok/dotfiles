@@ -20,15 +20,15 @@ local function on_attach(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
 end
 
-local capabilities = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+M.capabilities = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- For nvim-ufo
-capabilities.textDocument.foldingRange = {
+M.capabilities.textDocument.foldingRange = {
   dynamicRegistration = false,
   lineFoldingOnly = true,
 }
 
-function M.setup(servers)
+function M.setup(servers, capabilities)
   for server, config in pairs(servers) do
     if config == true then
       config = {}
@@ -36,7 +36,7 @@ function M.setup(servers)
       goto continue
     end
 
-    config.capabilities = capabilities
+    config.capabilities = capabilities or M.capabilities
 
     local original_on_attach
     if config.on_attach then
