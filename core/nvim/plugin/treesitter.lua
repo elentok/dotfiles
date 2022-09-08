@@ -22,7 +22,18 @@ parser_configs.markdown = {
   filetype = "markdown",
 }
 
+parser_configs.markdown_inline = {
+  install_info = {
+    url = "https://github.com/MDeiml/tree-sitter-markdown",
+    location = "tree-sitter-markdown-inline",
+    files = { "src/parser.c", "src/scanner.cc" },
+    branch = "main",
+  },
+  filetype = "markdown",
+}
+
 treesitter_configs.setup({
+  additional_vim_regex_highlighting = true,
   ensure_installed = {
     "bash",
     "c",
@@ -42,6 +53,7 @@ treesitter_configs.setup({
     "jsonc",
     "lua",
     "markdown",
+    "markdown_inline",
     "python",
     "regex",
     "rst",
