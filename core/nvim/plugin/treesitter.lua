@@ -7,7 +7,20 @@ if not (has_treesitter and has_gps) then
   return
 end
 
+local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
+
 gps.setup({})
+
+-- Install markdown parser
+parser_configs.markdown = {
+  install_info = {
+    url = "https://github.com/MDeiml/tree-sitter-markdown",
+    location = "tree-sitter-markdown",
+    files = { "src/parser.c", "src/scanner.cc" },
+    branch = "main",
+  },
+  filetype = "markdown",
+}
 
 treesitter_configs.setup({
   ensure_installed = {
@@ -28,6 +41,7 @@ treesitter_configs.setup({
     "json5",
     "jsonc",
     "lua",
+    "markdown",
     "python",
     "regex",
     "rst",
@@ -86,9 +100,10 @@ treesitter_configs.setup({
   },
 })
 
-local exclude_from_folding = { markdown = true }
+local exclude_from_folding = {}
+-- local exclude_from_folding = { markdown = true }
 
-function _G.TreesitterSetupFolding()
+local function setupFolding()
   local filetype = util.buf_get_filetype(0)
   if exclude_from_folding[filetype] then
     return
@@ -98,9 +113,8 @@ function _G.TreesitterSetupFolding()
   vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 end
 
-util.augroup(
-  "Treesitter",
-  [[
-  autocmd FileType * lua TreesitterSetupFolding()
-]]
+local group_id = vim.api.nvim_create_augroup("Elentok_Treesitter", {})
+vim.api.nvim_create_autocmd(
+  { "FileType" },
+  { pattern = "*", group = group_id, callback = setupFolding }
 )
