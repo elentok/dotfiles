@@ -34,6 +34,8 @@ return require("packer").startup({
     })
 
     -- LSP.
+    use("williamboman/mason.nvim")
+    use("williamboman/mason-lspconfig.nvim")
     use("neovim/nvim-lspconfig")
     -- use "hrsh7th/nvim-compe"
     -- use "anott03/nvim-lspinstall"
@@ -142,12 +144,6 @@ return require("packer").startup({
     })
     use({ "phaazon/hop.nvim", branch = "v2" })
     use("mizlan/iswap.nvim")
-    use({
-      "williamboman/mason.nvim",
-      config = function()
-        require("mason").setup()
-      end,
-    })
 
     -- use "ggandor/lightspeed.nvim" -- Move quickly between positions
 
