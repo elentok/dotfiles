@@ -2,35 +2,47 @@
 #
 # Usage:
 #
-#   dotf-clipboard copy
+#   dotf-clipboard copy|yank
 #   dotf-clipboard paste
 #
 
 source $DOTF/core/zsh/core.sh
 
-# if [ -z "$DISPLAY" ]; then
-#   export DISPLAY=":0"
-# fi
-
 main() {
-  case "$1" in
-    c|copy) copy;;
+  cmd="${1:-}"
+  shift
+  case "$cmd" in
+    c|copy|y|yank) copy "$@";;
     p|paste) paste;;
     *) usage "$DOTF/core/scripts/dotf-clipboard"
   esac
 }
 
 copy() {
-  if is_wsl; then
-    win32yank -i
-  elif has_command pbcopy; then
-    pbcopy
-  elif has_command xsel; then
-    xsel --clipboard --input
-  elif has_command xclip; then
-    xclip -selection clipboard -in
+  if [ $# -eq 0 ]; then
+    input="$(cat)"
   else
-    echo 'Error: missing copy command (pbcopy, xclip or xsel)'
+    input="$@"
+  fi
+
+  input() { printf %s "$input"; }
+
+  # input | dotf-yank-osc52
+
+  # if [ -n "$TMUX" ]; then
+  #   input | tmux load-buffer -
+  # fi
+
+  if is_wsl; then
+    input | clip.exe
+  elif has_command pbcopy; then
+    input | pbcopy
+  elif [ -n "$DISPLAY" ]; then
+    if has_command xsel; then
+      input | xsel --clipboard --input 2>&1
+    elif has_command xclip; then
+      input | xclip -selection clipboard -in 2>&1
+    fi
   fi
 }
 
