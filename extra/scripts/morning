@@ -14,8 +14,15 @@ if [ -e "$DOTL/scripts/morning-local" ]; then
   "$DOTL/scripts/morning-local"
 fi
 
-dotf-header h2 'Updating dotlocal...'
-cd ~/.dotlocal && git pull
+if [ -e ~/.dotlocal ]; then
+  dotf-header h2 'Updating dotlocal...'
+  cd ~/.dotlocal && git pull
+fi
+
+if [ -e ~/.dotprivate ]; then
+  dotf-header h2 'Updating dotprivate...'
+  cd ~/.dotprivate && git pull
+fi
 
 dotf-header h2 'Updating dotfiles...'
 dotf update
