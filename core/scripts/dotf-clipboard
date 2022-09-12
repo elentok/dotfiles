@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 #
 # Usage:
 #
@@ -6,43 +6,32 @@
 #   dotf-clipboard paste
 #
 
-source $DOTF/core/zsh/core.sh
+source "$DOTF/core/zsh/core.sh"
 
 main() {
   cmd="${1:-}"
   shift
   case "$cmd" in
-    c|copy|y|yank) copy "$@";;
-    p|paste) paste;;
-    *) usage "$DOTF/core/scripts/dotf-clipboard"
+    c | copy | y | yank) copy ;;
+    p | paste) paste ;;
+    *) usage "$DOTF/core/scripts/dotf-clipboard" ;;
   esac
 }
 
 copy() {
-  if [ $# -eq 0 ]; then
-    input="$(cat)"
-  else
-    input="$@"
-  fi
-
-  input() { printf %s "$input"; }
-
-  # input | dotf-yank-osc52
-
-  # if [ -n "$TMUX" ]; then
-  #   input | tmux load-buffer -
-  # fi
-
   if is_wsl; then
-    input | clip.exe
-  elif has_command pbcopy; then
-    input | pbcopy
-  elif [ -n "$DISPLAY" ]; then
-    if has_command xsel; then
-      input | xsel --clipboard --input 2>&1
-    elif has_command xclip; then
-      input | xclip -selection clipboard -in 2>&1
-    fi
+    clip.exe
+  else
+    dotf-yank-osc52
+    # if has_command pbcopy; then
+    #    pbcopy
+    # elif [ -n "$DISPLAY" ]; then
+    #   if has_command xsel; then
+    #      xsel --clipboard --input 2>&1
+    #   elif has_command xclip; then
+    #      xclip -selection clipboard -in 2>&1
+    #   fi
+    # fi
   fi
 }
 
