@@ -14,6 +14,14 @@
 
     find . -type f -exec clean '{}' \;
 
+## Grep
+
+### Grep all '@context' phrases
+
+```sh
+grep -Eo '@[^ ?]+' home/todo.md | sort -u
+```
+
 ## Encryption
 
 ### 7z with password:
@@ -127,16 +135,14 @@
 2. Delete the section from .git/config
 3. Run
 
-   git rm --cached path/to/submodule
-   rm -rf .git/modules/submodule
+   git rm --cached path/to/submodule rm -rf .git/modules/submodule
 
 4. Commit the change
 5. Delete the now untracked submodule files (`rm -rf path/to/submodule`).
 
 ### git export and import patch
 
-git format-patch -1 {hash}
-git am < {file.patch}
+git format-patch -1 {hash} git am < {file.patch}
 
 ## ImageMagick
 
