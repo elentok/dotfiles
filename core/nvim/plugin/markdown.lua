@@ -8,6 +8,8 @@ local function setup()
   vim.api.nvim_set_hl(0, "TodoWaiting", { fg = "#EBCB8B" })
   vim.api.nvim_set_hl(0, "TodoDone", { fg = "#6C7A96" })
   vim.api.nvim_set_hl(0, "TodoContext", { fg = "#88c0d0", italic = true })
+
+  vim.wo.foldmethod = "indent"
 end
 
 local group_id = vim.api.nvim_create_augroup("Elentok_Markdown", {})
