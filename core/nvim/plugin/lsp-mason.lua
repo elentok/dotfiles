@@ -6,5 +6,5 @@ end
 
 mason.setup({})
 mason_lspconfig.setup({
-  ensure_installed = { "marksman" },
+  ensure_installed = { "marksman", "lua-language-server" },
 })
