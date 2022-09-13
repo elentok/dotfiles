@@ -18,3 +18,10 @@ vim.api.nvim_create_autocmd(
   { "BufRead", "WinNew" },
   { pattern = "*.md", group = group_id, callback = setup }
 )
+
+local has_builtin, builtin = pcall(require, "telescope.builtin")
+if has_builtin then
+  vim.keymap.set("n", "<Leader>gt", function()
+    builtin.grep_string({ search = "[ ]", search_dirs = { vim.fn.expand("%") } })
+  end)
+end
