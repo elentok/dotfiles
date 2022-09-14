@@ -74,3 +74,21 @@ vim.keymap.set("n", "<Leader>ya", ":%y+<cr>")
 vim.keymap.set("n", "<Leader>oc", ":Calendar -view=year -split=vertical -width=27<cr>")
 
 vim.keymap.set("n", "<backspace>", "zc")
+
+-- -- Use 'zz' to place cursor at top third of window
+local function move_to_top_third()
+  local window_lines = vim.fn.winheight(0)
+  local one_sixth = math.floor(window_lines / 6)
+  vim.cmd(":normal! zz")
+
+  -- move the cursor down one-sixth of the screen
+  vim.cmd(":normal! " .. one_sixth .. "j")
+
+  -- recenter
+  vim.cmd(":normal! zz")
+
+  -- move cursor up one-sixth of the screen
+  vim.cmd(":normal! " .. one_sixth .. "k")
+end
+
+vim.keymap.set("n", "zz", move_to_top_third)
