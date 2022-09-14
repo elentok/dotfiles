@@ -10,7 +10,7 @@ local mark = require("harpoon.mark")
 harpoon.setup()
 
 vim.keymap.set("n", "<space>a", mark.add_file)
-vim.keymap.set("n", "<c-e>", ui.toggle_quick_menu)
+vim.keymap.set("n", "<space>e", ui.toggle_quick_menu)
 vim.keymap.set("n", "<space>1", function()
   ui.nav_file(1)
 end)
