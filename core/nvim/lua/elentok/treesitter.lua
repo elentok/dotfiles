@@ -5,9 +5,11 @@ if not has_gps then
   return
 end
 
-local M = {}
+local M = {
+  prefix = "[" .. vim.env.USER .. "]",
+}
 
-function M.get_logger_prefix()
+function M.get_logger_context()
   local data = gps.get_data()
   if data == "" then
     return nil
@@ -38,16 +40,18 @@ function M.get_logger_prefix()
 end
 
 function M.get_logger_line()
-  local prefix = M.get_logger_prefix()
-  if prefix == nil then
+  local context = M.get_logger_context()
+  if context == nil then
     return ""
   end
 
+  context = "[" .. context .. "]"
+
   local filetype = util.buf_get_filetype()
   if filetype == "typescript" or filetype == "javascript" then
-    return "console.log('[" .. prefix .. "]');"
+    return "console.log('" .. M.prefix .. " " .. context .. "');"
   elseif filetype == "lua" then
-    return "put('[" .. prefix .. "]');"
+    return "put('" .. M.prefix .. " " .. context .. "');"
   else
     return ""
   end
