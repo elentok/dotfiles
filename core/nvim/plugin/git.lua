@@ -7,3 +7,8 @@ vim.cmd([[
   command! Gsync GG sync
   command! -nargs=* Gap lua require('elentok/util').ishell('git add -p <args>', { large = true })
 ]])
+
+local ok, git_conflict = pcall(require, "git-conflict")
+if ok then
+  git_conflict.setup()
+end
