@@ -4,7 +4,7 @@
 #
 # Usage:
 #
-#   dotf-repos <config-file>...
+#   dotf-repos setup <config-file>...
 #
 # Example config file:
 #
@@ -16,6 +16,21 @@ set -euo pipefail
 source "$DOTF/framework"
 
 function main() {
+  local cmd="${1:-}"
+  shift || true
+
+  case "$cmd" in
+    setup)
+      setup-repos
+      ;;
+    *)
+      usage "$0"
+      exit 1
+      ;;
+  esac
+}
+
+function setup-repos() {
   if [ $# -eq 0 ]; then
     usage "$0"
     exit 1
@@ -29,7 +44,7 @@ function main() {
   dotf-header h2 "Done setting up repositories :-)"
 }
 
-function setup-repos {
+function setup-repos-in-config {
   local filename="$1"
   dotf-header h1 "Setting up repos from $filename"
   grep -vE "^(#|\s*$)" "$filename" | while read -r line; do
