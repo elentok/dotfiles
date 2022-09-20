@@ -137,6 +137,7 @@ return require("packer").startup({
     use("ThePrimeagen/harpoon")
     use("ThePrimeagen/refactoring.nvim")
     use("ziontee113/color-picker.nvim")
+    use("ojroques/nvim-osc52")
     use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" })
     use({
       "salkin-mada/openscad.nvim",
