@@ -14,6 +14,8 @@ if [ -e "$DOTL/scripts/morning-local" ]; then
   "$DOTL/scripts/morning-local"
 fi
 
+dotf-repos setup
+
 if [ -e ~/.dotlocal ]; then
   dotf-header h2 'Updating dotlocal...'
   cd ~/.dotlocal && git pull
