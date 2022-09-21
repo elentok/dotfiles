@@ -4,7 +4,13 @@
 #
 # Usage:
 #
-#   dotf-repos setup <config-file>...
+#   dotf-repos setup
+#
+# Will look for config files in:
+#
+#   $DOTF/config/repos.cfg
+#   $DOTL/config/repos.cfg
+#   ~/.config/dotfiles/repos.cfg
 #
 # Example config file:
 #
@@ -15,13 +21,25 @@ set -euo pipefail
 
 source "$DOTF/framework"
 
+CONFIG_FILES=(
+  "$DOTF/config/repos.cfg"
+  "$DOTL/config/repos.cfg"
+  "$HOME/.config/dotfiles/repos.cfg"
+)
+
 function main() {
   local cmd="${1:-}"
   shift || true
 
   case "$cmd" in
+    list)
+      list-repos
+      ;;
     setup)
       setup-repos
+      ;;
+    quick-status)
+      quick-status
       ;;
     *)
       usage "$0"
@@ -30,15 +48,65 @@ function main() {
   esac
 }
 
-function setup-repos() {
-  if [ $# -eq 0 ]; then
-    usage "$0"
-    exit 1
+function list-repos() {
+  for config_file in "${CONFIG_FILES[@]}"; do
+    if [ -e "$config_file" ]; then
+      get-entries "$config_file"
+    fi
+  done | sort
+}
+
+function quick-status() {
+  for config_file in "${CONFIG_FILES[@]}"; do
+    if [ -e "$config_file" ]; then
+      get-entries "$config_file" | extract-dir | while read -r dir; do
+        repo-quick-status "$dir"
+      done
+    fi
+  done | sort
+}
+
+function repo-quick-status() {
+  local dir="$1"
+
+  local ok=yes
+  local text="- "
+
+  if dotf-git-repo-is-dirty "$dir"; then
+    text="${text}DIRTY "
+    ok=no
+  else
+    text="${text}clean "
   fi
 
-  while [ $# -gt 0 ]; do
-    setup-repos "$1"
-    shift
+  if has-unpushed-commits "$dir"; then
+    text="${text}UNPUSHED "
+    ok=no
+  else
+    text="${text}pushed   "
+  fi
+
+  if [ "$ok" == "yes" ]; then
+    echo "${text}$dir"
+  else
+    echo "$(dotf-color red)${text}$dir$(dotf-color reset)"
+  fi
+}
+
+function has-unpushed-commits() {
+  local dir="$1"
+
+  local branch
+  branch="$(git branch --show-current)"
+
+  [ -n "$(git log "origin/$branch..$branch")" ]
+}
+
+function setup-repos() {
+  dotf-header h2 "Done setting up repositories :-)"
+
+  for config_file in "${CONFIG_FILES[@]}"; do
+    setup-repos-in-config "$config_file"
   done
 
   dotf-header h2 "Done setting up repositories :-)"
@@ -47,11 +115,24 @@ function setup-repos() {
 function setup-repos-in-config {
   local filename="$1"
   dotf-header h1 "Setting up repos from $filename"
-  grep -vE "^(#|\s*$)" "$filename" | while read -r line; do
-    url="$(echo "$line" | cut -d= -f1 | dotf-trim)"
-    dir="$(echo "$line" | cut -d= -f2 | dotf-trim | sed "s#~#$HOME#")"
+  get-entries "$filename" | while read -r line; do
+    url="$(echo "$line" | extract-url)"
+    dir="$(echo "$line" | extract-dir)"
     setup-repo "$url" "$dir"
   done
+}
+
+function get-entries() {
+  local filename="$1"
+  grep -vE "^(#|\s*$)" "$filename"
+}
+
+function extract-url() {
+  cut -d= -f1 | dotf-trim
+}
+
+function extract-dir() {
+  cut -d= -f2 | dotf-trim | sed "s#~#$HOME#"
 }
 
 function setup-repo() {

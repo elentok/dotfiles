@@ -15,7 +15,7 @@ main() {
 
 commit-if-needed() {
   dotf-bullet 'Checking for changes... '
-  if git-repo-is-dirty; then
+  if dotf-git-repo-is-dirty .; then
     echo
     commit
   else

@@ -11,6 +11,7 @@ export DOTF
 
 source "$DOTF/core/zsh/core.sh"
 source "$DOTF/core/scripts/lib/ui.sh"
+source "$DOTF/core/scripts/lib/git.sh"
 source "$DOTF/core/scripts/lib/benchmark.sh"
 
 # Machine varibles {{{1
@@ -247,10 +248,6 @@ git_clone() {
 
 git_get_origin() {
   git remote -v | grep fetch | awk '{print $2}'
-}
-
-git-repo-is-dirty() {
-  [ "$(git status --porcelain)" != "" ]
 }
 
 # Go Get {{{1
