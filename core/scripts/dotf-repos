@@ -38,7 +38,7 @@ function main() {
     setup)
       setup-repos
       ;;
-    quick-status)
+    qs | quick-status)
       quick-status
       ;;
     *)
@@ -63,7 +63,7 @@ function quick-status() {
         repo-quick-status "$dir"
       done
     fi
-  done | sort
+  done
 }
 
 function repo-quick-status() {
@@ -97,9 +97,9 @@ function has-unpushed-commits() {
   local dir="$1"
 
   local branch
-  branch="$(git branch --show-current)"
+  branch="$(cd "$dir" && git branch --show-current)"
 
-  [ -n "$(git log "origin/$branch..$branch")" ]
+  [ -n "$(cd "$dir" && git log "origin/$branch..$branch")" ]
 }
 
 function setup-repos() {
