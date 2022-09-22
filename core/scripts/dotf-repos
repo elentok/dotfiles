@@ -106,7 +106,9 @@ function setup-repos() {
   dotf-header h2 "Done setting up repositories :-)"
 
   for config_file in "${CONFIG_FILES[@]}"; do
-    setup-repos-in-config "$config_file"
+    if [ -e "$config_file" ]; then
+      setup-repos-in-config "$config_file"
+    fi
   done
 
   dotf-header h2 "Done setting up repositories :-)"
