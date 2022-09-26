@@ -68,7 +68,9 @@ vim.keymap.set("n", "<Leader><Leader>", ":silent !tput clear<cr>:redraw!<cr>")
 vim.keymap.set("v", "<tab>", ">gv")
 vim.keymap.set("v", "<s-tab>", "<gv")
 
-vim.keymap.set("v", "<Leader>s", ":sort<cr>")
+vim.keymap.set("v", "<Leader>ss", ":sort<cr>")
+vim.keymap.set("v", "<Leader>st", ":!todo-sort<cr>")
+vim.keymap.set("n", "<Leader>st", ":%!todo-sort<cr>")
 vim.keymap.set("n", "<Leader>ya", ":%y+<cr>")
 
 vim.keymap.set("n", "<Leader>oc", ":Calendar -view=year -split=vertical -width=27<cr>")
