@@ -65,10 +65,10 @@ vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
 vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references)
 
 -- Diagnostics:
-vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
+vim.keymap.set("n", "<space>dd", vim.diagnostic.open_float)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-vim.keymap.set("n", "<space>q", vim.diagnostic.setqflist)
+vim.keymap.set("n", "<space>dq", vim.diagnostic.setqflist)
 
 -- Toggle diagnostics:
 local diagnostic_visible = true
