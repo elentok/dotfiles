@@ -16,3 +16,10 @@ lualine.setup({
     lualine_y = { "filetype" },
   },
 })
+
+if vim.fn.has("nvim-0.8") == 1 then
+  vim.o.laststatus = 3
+  vim.o.winbar = "%=%t"
+  -- vim.api.nvim_set_hl(0, "WinBar", {})
+  -- vim.api.nvim_set_hl(0, "WinBarNC", {})
+end
