@@ -15,11 +15,24 @@ lualine.setup({
     lualine_x = { { gps.get_location, cond = gps.is_available } },
     lualine_y = { "filetype" },
   },
+  winbar = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = { { shortener.dir, icon = "" } },
+    lualine_z = { "filename" },
+  },
+  inactive_winbar = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = { { shortener.dir, icon = "" } },
+    lualine_z = { "filename" },
+  },
 })
 
 if vim.fn.has("nvim-0.8") == 1 then
   vim.o.laststatus = 3
-  vim.o.winbar = "%=%t"
-  -- vim.api.nvim_set_hl(0, "WinBar", {})
-  -- vim.api.nvim_set_hl(0, "WinBarNC", {})
 end
