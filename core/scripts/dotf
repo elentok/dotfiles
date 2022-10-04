@@ -15,10 +15,11 @@ main() {
   cmd="${1:-}"
   shift || true
   case "$cmd" in
-    b | bootstrap) dotf-bootstrap ;;
+    b | bootstrap) "$DOTF/bootstrap.sh" ;;
     i | install) dotf-component "$@" ;;
-    u | update) dotf-update ;;
-    s | stats) dotf-stats ;;
+    u | update) dotf-update "$@" ;;
+    st | stats) dotf-stats "$@" ;;
+    setup) dotf-setup "$@" ;;
     *) usage "$0" ;;
   esac
 }

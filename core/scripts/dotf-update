@@ -4,22 +4,50 @@ set -euo pipefail
 
 source "$DOTF/framework"
 
-dotf-header h1 "Updating dotfiles..."
-cd "$DOTF"
+function main() {
+  dotf-header h1 "Updating environment..."
+  cd "$DOTF"
 
-dotf-header h2 "Pulling changes... "
-old_head=$(git rev-parse HEAD)
-git pull
-new_head=$(git rev-parse HEAD)
-
-if [ "$old_head" == "$new_head" ]; then
-  echo -e "\\nUp to date."
-else
-  echo -e "\\nPulled the following changes:"
-  git log --pretty=%s "${old_head}..${new_head}" | sed 's/^/- /'
-
-  echo -ne "\\nPress any key to run the installer..."
-  read -r -n 1
+  if [ "${1:-}" != "--no-pull" ]; then
+    pull-dotfiles
+  fi
 
   "$DOTF/bootstrap.sh"
-fi
+
+  update-node
+  dotf-github update
+  dotf-pkgs upgrade
+  update-neovim-stuff
+}
+
+function pull-dotfiles() {
+  dotf-header h2 "Pulling changes... "
+  old_head=$(git rev-parse HEAD)
+  git pull
+  new_head=$(git rev-parse HEAD)
+
+  if [ "$old_head" == "$new_head" ]; then
+    echo -e "\\nUp to date."
+  else
+    echo -e "\\nPulled the following changes:"
+    git log --pretty=%s "${old_head}..${new_head}" | sed 's/^/- /'
+  fi
+}
+
+function update-node() {
+  if is-n-providing-node; then
+    dotf-header h2 'Updating N...'
+    (cd "$N_PREFIX" && git pull)
+
+    dotf-header h2 'Updating NodeJS...'
+    n --preserve lts # Preserve npm (don't downgrade to lts version)
+  fi
+}
+
+function update-neovim-stuff() {
+  dotf-header h2 'Neovim: Upgrade'
+  dotf-github u nvim
+  nvim-packer-sync
+}
+
+main "$@"

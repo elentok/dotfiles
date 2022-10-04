@@ -17,13 +17,13 @@ main() {
     dotf-pkgs install apt
   fi
 
-  dotf-header h2 "[dotf-bootstrap] Updating git submodules..."
+  dotf-header h2 "[dotf-setup] Updating git submodules..."
   git submodule update --init --recursive
 
   dotf-bullet "Installing pip packages..."
   dotf-pkgs install pip
 
-  dotf-header h2 "[dotf-bootstrap] Installing Github packages..."
+  dotf-header h2 "[dotf-setup] Installing Github packages..."
   dotf-github install
 
   dotf-component nodejs
@@ -34,7 +34,7 @@ main() {
   #dotf-component osx-tuning iterm
   #fi
 
-  dotf-header h2 '[dotf-bootstrap] Running npm install...'
+  dotf-header h2 '[dotf-setup] Running npm install...'
   npm install
 
   show-done

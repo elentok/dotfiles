@@ -37,11 +37,11 @@ function main() {
   fi
 
   echo
-  echo "All requirements are ready, running dotf bootstrap."
+  echo "All requirements are ready, running dotf setup."
   echo "=================================================="
   echo
 
-  "$DOTF/core/scripts/dotf" bootstrap
+  "$DOTF/core/scripts/dotf" setup
 }
 
 function install-if-missing() {

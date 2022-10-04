@@ -14,8 +14,6 @@ if [ -e "$DOTL/scripts/morning-local" ]; then
   "$DOTL/scripts/morning-local"
 fi
 
-dotf-repos setup
-
 if [ -e ~/.dotlocal ]; then
   dotf-header h2 'Updating dotlocal...'
   cd ~/.dotlocal && git pull
@@ -29,6 +27,8 @@ fi
 dotf-header h2 'Updating dotfiles...'
 dotf update
 
+dotf-repos setup
+
 note_dirs=(~/notes ~/notes/home ~/notes/work)
 
 for dir in "${note_dirs[@]}"; do
@@ -37,7 +37,5 @@ for dir in "${note_dirs[@]}"; do
     (cd "$dir" && git sync)
   fi
 done
-
-update-stuff
 
 dotf-header h1 'Have a wonderful day :-)'
