@@ -22,6 +22,4 @@ else
   read -r -n 1
 
   "$DOTF/bootstrap.sh"
-
-  update-stuff
 fi

@@ -38,4 +38,6 @@ for dir in "${note_dirs[@]}"; do
   fi
 done
 
+update-stuff
+
 dotf-header h1 'Have a wonderful day :-)'
