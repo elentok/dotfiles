@@ -4,8 +4,4 @@ if not ok then
   return
 end
 
-comment.setup({
-  mappings = {
-    extended = true,
-  },
-})
+comment.setup()
