@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+function main() {
+  to-c-includes | clang-format | to-openscad-includes
+}
+
+function to-c-includes() {
+  sed -E "s/^\s*(use|include)\s*<(.*)>(.*)$/#include <\1\/\2>\3/"
+}
+
+function to-openscad-includes() {
+  sed -E "s/^\s*#include\s*<(use|include)\/(.*)>(.*)$/\1 <\2>\3/"
+}
+
+main "$@"

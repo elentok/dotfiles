@@ -49,12 +49,11 @@ local helpers = require("null-ls.helpers")
 -- }
 
 local openscad_formatter = {
-  name = "OpenSCAD Format",
+  name = "My Custom OpenSCAD Formatter",
   method = null_ls.methods.FORMATTING,
   filetypes = { "scad", "openscad" },
   generator = helpers.formatter_factory({
-    command = "openscad-format",
-    args = { "--dry" },
+    command = "dotf-openscad-format",
     to_stdin = true,
   }),
 }
