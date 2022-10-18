@@ -20,7 +20,7 @@ local function on_attach(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
 end
 
-M.capabilities = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+M.capabilities = cmp.default_capabilities()
 
 -- For nvim-ufo
 M.capabilities.textDocument.foldingRange = {
