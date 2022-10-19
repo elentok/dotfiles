@@ -23,7 +23,7 @@ function M.enable(filetype)
 end
 
 function M.format()
-  vim.lsp.buf.formatting_seq_sync({}, 2000)
+  vim.lsp.buf.format({ timeout_ms = 2000 })
 end
 
 vim.api.nvim_create_autocmd({ "BufWritePre" }, { pattern = "*", callback = M.format })
