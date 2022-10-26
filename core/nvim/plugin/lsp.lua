@@ -32,7 +32,7 @@ if config.enable_tsserver then
     tsserver = {
       on_attach = function(client)
         -- Disable tsserver formatting (using prettier instead)
-        client.resolved_capabilities.document_formatting = false
+        client.server_capabilities.document_formatting = false
       end,
     },
   })
