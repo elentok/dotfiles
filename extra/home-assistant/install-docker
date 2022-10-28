@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#
+# Based on instructions at
+# https://www.home-assistant.io/installation/linux#install-home-assistant-container
+
+set -euo pipefail
+
+timezone="$(cat /etc/timezone)"
+
+docker run -d \
+  --name homeassistant \
+  --privileged \
+  --restart=unless-stopped \
+  -e "TZ=$timezone" \
+  -v "$DOTL/config/home-assistant":/config \
+  --network=host \
+  ghcr.io/home-assistant/home-assistant:stable
