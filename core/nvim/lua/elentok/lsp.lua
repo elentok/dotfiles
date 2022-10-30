@@ -14,10 +14,9 @@ local M = {}
 
 local function on_attach(client, bufnr)
   put("Client", client.name, "attached to", bufnr)
-  aerial.on_attach(client, bufnr)
 
   -- Use <c-]> to go to definition
-  vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
+  -- vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
 end
 
 M.capabilities = cmp.default_capabilities()
