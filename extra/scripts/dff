@@ -45,7 +45,7 @@ class Disk:
         if state == State.BAD:
             return "red"
         elif state == State.OK:
-            return "orange"
+            return "yellow"
         return "green"
 
 
