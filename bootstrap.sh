@@ -18,6 +18,8 @@ function main() {
 
   install-if-missing python3 python3
   install-if-missing pip3 python3-pip
+  
+  mkdir -p ~/.config
 
   echo "- Upgrading pip3..."
   pip3 install pip --upgrade --user
