@@ -74,6 +74,7 @@ class BtClient {
 }
 exports.BtClient = BtClient;
 function getSessionId(reqConfig) {
+    var _a;
     return __awaiter(this, void 0, void 0, function* () {
         log("Getting settion id...");
         let id;
@@ -82,7 +83,14 @@ function getSessionId(reqConfig) {
             id = response.headers[SESSION_ID_HEADER];
         }
         catch (err) {
-            id = err.response.headers[SESSION_ID_HEADER];
+            if (err instanceof axios_1.AxiosError) {
+                if (err.response == null)
+                    throw err;
+                id = (_a = err.response) === null || _a === void 0 ? void 0 : _a.headers[SESSION_ID_HEADER];
+            }
+            else {
+                throw err;
+            }
         }
         log(`Got session id: ${id}`);
         return id;

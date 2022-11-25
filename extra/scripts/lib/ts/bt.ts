@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosBasicCredentials, AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosRequestConfig, AxiosBasicCredentials, AxiosResponse } from "axios";
 import { Torrent, isComplete } from "./torrent";
 
 export interface IBtOptions {
@@ -72,7 +72,13 @@ async function getSessionId(reqConfig: AxiosRequestConfig): Promise<string> {
     const response = await axios.get(`/transmission/rpc`, reqConfig);
     id = response.headers[SESSION_ID_HEADER];
   } catch (err) {
-    id = err.response.headers[SESSION_ID_HEADER];
+    if (err instanceof AxiosError) {
+      if (err.response == null) throw err;
+
+      id = err.response?.headers[SESSION_ID_HEADER];
+    } else {
+      throw err;
+    }
   }
 
   log(`Got session id: ${id}`);

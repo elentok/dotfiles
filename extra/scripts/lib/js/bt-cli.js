@@ -23,7 +23,7 @@ function main() {
                 console.info("no torrents");
                 return;
             }
-            torrents.forEach((t) => console.info(torrent_1.formatTorrent(t)));
+            torrents.forEach((t) => console.info((0, torrent_1.formatTorrent)(t)));
         }));
         program.command("remove-complete").action(() => __awaiter(this, void 0, void 0, function* () {
             const torrents = yield (yield getClient()).removeComplete();
@@ -32,7 +32,7 @@ function main() {
             }
             else {
                 console.info(`Removed ${torrents.length} torrents:`);
-                torrents.forEach((t) => console.info(torrent_1.formatTorrent(t)));
+                torrents.forEach((t) => console.info((0, torrent_1.formatTorrent)(t)));
             }
         }));
         program.command("add-magnet <link>").action((link) => __awaiter(this, void 0, void 0, function* () {
@@ -47,10 +47,10 @@ function main() {
 function getClient() {
     return __awaiter(this, void 0, void 0, function* () {
         if (client == null) {
-            const host = yield dotconfig_1.getConfigOrAsk("transmission_host", "Transmission host? ");
-            const port = Number(yield dotconfig_1.getConfigOrAsk("transmission_port", "Transmission port? "));
-            const username = yield dotconfig_1.getConfigOrAsk("transmission_username", "Transmission username? ");
-            const password = yield dotconfig_1.getConfigOrAsk("transmission_password", "Transmission password? ");
+            const host = yield (0, dotconfig_1.getConfigOrAsk)("transmission_host", "Transmission host? ");
+            const port = Number(yield (0, dotconfig_1.getConfigOrAsk)("transmission_port", "Transmission port? "));
+            const username = yield (0, dotconfig_1.getConfigOrAsk)("transmission_username", "Transmission username? ");
+            const password = yield (0, dotconfig_1.getConfigOrAsk)("transmission_password", "Transmission password? ");
             client = yield bt_1.BtClient.create({ host, port, auth: { username, password } });
         }
         return client;
