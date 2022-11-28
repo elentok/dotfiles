@@ -21,7 +21,7 @@ class Month {
         this.buildWeeks();
     }
     print() {
-        console.info(chalk.green(utils_1.center(this.start.format("MMM YYYY"), 27)));
+        console.info(chalk.green((0, utils_1.center)(this.start.format("MMM YYYY"), 27)));
         console.info("Sun Mon Tue Wed Thu Fri Sat");
         this.weeks.forEach((week) => console.info(week.pretty()));
         console.info();
@@ -86,7 +86,7 @@ class Day {
         return this.date.weekday() >= FRIDAY;
     }
     text() {
-        return utils_1.justifyLeft(this.date.date().toString(), 3);
+        return (0, utils_1.justifyLeft)(this.date.date().toString(), 3);
     }
 }
 main();

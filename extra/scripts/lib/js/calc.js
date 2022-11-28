@@ -17,11 +17,11 @@ const repl = require("repl");
 const utils_1 = require("./utils");
 const rates_1 = require("./rates");
 const vm_1 = require("vm");
-const context = vm_1.createContext();
+const context = (0, vm_1.createContext)();
 const REPL_HISTORY_FILE = path.join(os.homedir(), ".cache", "calc");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        yield rates_1.getOpenExchangeAppId();
+        yield (0, rates_1.getOpenExchangeAppId)();
         const server = repl.start({
             prompt: "> ",
             eval(cmd, _context, _filename, callback) {
@@ -47,13 +47,13 @@ function calculate(expr) {
     return __awaiter(this, void 0, void 0, function* () {
         const c = parseCurrencyExpression(expr);
         if (c != null && c.toCurrency != null) {
-            const result = yield rates_1.convert(c.from, c.toCurrency);
+            const result = yield (0, rates_1.convert)(c.from, c.toCurrency);
             if (result == null) {
                 throw new Error(`failed converting "${c.from}" to "${c.toCurrency}"`);
             }
             return `${result.value.toFixed(2)} ${result.currency}`;
         }
-        const value = vm_1.runInContext(expr, context);
+        const value = (0, vm_1.runInContext)(expr, context);
         return value;
     });
 }

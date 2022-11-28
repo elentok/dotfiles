@@ -11,7 +11,7 @@ const LOCAL_HELP_GLOB = path.join(process.env.DOTL || "", "docs", "*.md");
 function help() {
     const query = process.argv[2];
     if (query === "e") {
-        child_process_1.execSync(`nvim ${HELP_FILENAME}`, { stdio: "inherit" });
+        (0, child_process_1.execSync)(`nvim ${HELP_FILENAME}`, { stdio: "inherit" });
     }
     else {
         console.info(findSections(HELP_FILENAME, query).join("\n"));

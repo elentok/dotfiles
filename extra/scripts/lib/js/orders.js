@@ -4,7 +4,7 @@ const path_1 = require("path");
 const os_1 = require("os");
 const fs_1 = require("fs");
 const underscore_1 = require("underscore");
-const ORDERS_FILENAME = path_1.join(os_1.homedir(), "notes", "orders.md");
+const ORDERS_FILENAME = (0, path_1.join)((0, os_1.homedir)(), "notes", "orders.md");
 function main() {
     const byMonth = getOrdersByMonth();
     const months = Object.keys(byMonth).sort().reverse();
@@ -16,10 +16,10 @@ function main() {
 }
 function getOrdersByMonth() {
     const allOrders = findOrders(ORDERS_FILENAME);
-    return underscore_1.groupBy(allOrders, (o) => o.month);
+    return (0, underscore_1.groupBy)(allOrders, (o) => o.month);
 }
 function getStoresStats(orders) {
-    const byStore = underscore_1.groupBy(orders, (o) => o.store);
+    const byStore = (0, underscore_1.groupBy)(orders, (o) => o.store);
     return Object.keys(byStore)
         .map((store) => {
         const storeOrders = byStore[store];
@@ -39,7 +39,7 @@ var OrderStatus;
     OrderStatus["DELIVERED"] = "DELIVERED";
 })(OrderStatus || (OrderStatus = {}));
 function findOrders(filename) {
-    return fs_1.readFileSync(filename).toString().split("\n").filter(isTableLine).map(parseOrderLine);
+    return (0, fs_1.readFileSync)(filename).toString().split("\n").filter(isTableLine).map(parseOrderLine);
 }
 function isTableLine(line) {
     if (line.charAt(0) !== "|")

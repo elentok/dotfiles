@@ -42,7 +42,7 @@ function destroy(branchNames) {
                 remoteBranches = repo.findRemoteBranchesByName(branchName);
             }
             else {
-                if (yield utils_1.confirm(`Destroy local branch ${branchName}`)) {
+                if (yield (0, utils_1.confirm)(`Destroy local branch ${branchName}`)) {
                     yield destroyLocal(localBranch);
                 }
                 remoteBranches = localBranch.remoteBranches;
@@ -52,7 +52,7 @@ function destroy(branchNames) {
             }
             else {
                 remoteBranches.forEach((remoteBranch) => __awaiter(this, void 0, void 0, function* () {
-                    if (yield utils_1.confirm(`Destroy remote branch ${branchName}`)) {
+                    if (yield (0, utils_1.confirm)(`Destroy remote branch ${branchName}`)) {
                         remoteBranch.destroy();
                     }
                 }));
@@ -67,7 +67,7 @@ function destroyLocal(localBranch) {
         }
         catch (err) {
             console.error(`\nError while trying to destroy local branch ${localBranch.name}`);
-            if (yield utils_1.confirm("force")) {
+            if (yield (0, utils_1.confirm)("force")) {
                 localBranch.destroy({ force: true });
             }
         }

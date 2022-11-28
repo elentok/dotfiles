@@ -67,7 +67,7 @@ function setConfig(key, value) {
 exports.setConfig = setConfig;
 function save() {
     if (!fs.existsSync(exports.CONFIG_DIR))
-        child_process_1.execSync(`mkdir -p "${exports.CONFIG_DIR}"`);
+        (0, child_process_1.execSync)(`mkdir -p "${exports.CONFIG_DIR}"`);
     const body = configLines
         .map((line) => (typeof line === "object" ? `${line.key}=${line.value}` : line))
         .join("\n");
@@ -80,7 +80,7 @@ function getConfigOrAsk(key, question) {
             return item.value;
         let value;
         while (value == null) {
-            value = yield utils_1.ask(question);
+            value = yield (0, utils_1.ask)(question);
         }
         setConfig(key, value);
         return value;

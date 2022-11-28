@@ -31,10 +31,10 @@ class Renameable {
     }
     rename() {
         if (this.isInGitRepo()) {
-            child_process_1.execSync(`git mv '${this.fromFullpath}' '${this.toFullpath}'`);
+            (0, child_process_1.execSync)(`git mv '${this.fromFullpath}' '${this.toFullpath}'`);
         }
         else {
-            shelljs_1.mv(this.fromFullpath, this.toFullpath);
+            (0, shelljs_1.mv)(this.fromFullpath, this.toFullpath);
         }
     }
     indent(prefix) {
@@ -46,7 +46,7 @@ class Renameable {
     }
     isInGitRepo() {
         try {
-            child_process_1.execSync(`git ls-files --error-unmatch ${this.fromFullpath} > /dev/null 2>&1`);
+            (0, child_process_1.execSync)(`git ls-files --error-unmatch ${this.fromFullpath} > /dev/null 2>&1`);
             return true;
         }
         catch (error) {

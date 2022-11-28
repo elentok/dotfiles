@@ -64,7 +64,7 @@ class Repo {
         this.git("branch --all", { silent: true })
             .split("\n")
             .forEach((line) => {
-            const branch = branch_1.parseBranchLine(line, this);
+            const branch = (0, branch_1.parseBranchLine)(line, this);
             if (branch.name === "HEAD")
                 return;
             if (branch instanceof branch_1.RemoteBranch) {

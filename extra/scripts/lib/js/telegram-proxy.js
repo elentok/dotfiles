@@ -14,9 +14,9 @@ const mqtt = require("mqtt");
 const express = require("express");
 const bodyParser = require("body-parser");
 const dotconfig_1 = require("./dotconfig");
-const MQTT_HOST = dotconfig_1.getConfig("telegram_mqtt_host") || "localhost";
-const BOT_TOKEN = dotconfig_1.getConfigOrDie("telegram_bot_token");
-const CHAT_ID = dotconfig_1.getConfigOrDie("telegram_chat_id");
+const MQTT_HOST = (0, dotconfig_1.getConfig)("telegram_mqtt_host") || "localhost";
+const BOT_TOKEN = (0, dotconfig_1.getConfigOrDie)("telegram_bot_token");
+const CHAT_ID = (0, dotconfig_1.getConfigOrDie)("telegram_chat_id");
 var ParseMode;
 (function (ParseMode) {
     ParseMode["HTML"] = "HTML";

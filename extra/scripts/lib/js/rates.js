@@ -105,7 +105,7 @@ function fetchRates() {
 }
 function getOpenExchangeAppId() {
     return __awaiter(this, void 0, void 0, function* () {
-        const id = yield dotconfig_1.getConfigOrAsk("open_exchange_app_id", "OpenExchange app id? ");
+        const id = yield (0, dotconfig_1.getConfigOrAsk)("open_exchange_app_id", "OpenExchange app id? ");
         if (id == null)
             throw new Error("Missing OpenExchange App ID");
         return id;

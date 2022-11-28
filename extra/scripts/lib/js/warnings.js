@@ -7,9 +7,9 @@ function shouldWarn(disk) {
         (disk.mount === "/" || disk.mount.match(/^\/(media|Volumes)/) != null));
 }
 function checkFreeSpace() {
-    return disks_1.free()
+    return (0, disks_1.free)()
         .filter((disk) => shouldWarn(disk))
-        .map((disk) => `Disk "${disk.mount}" has low free space (only ${disks_1.formatGB(disk.freeGB)})`);
+        .map((disk) => `Disk "${disk.mount}" has low free space (only ${(0, disks_1.formatGB)(disk.freeGB)})`);
 }
 const warnings = checkFreeSpace();
 if (warnings.length > 0) {

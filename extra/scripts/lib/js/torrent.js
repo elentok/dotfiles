@@ -34,9 +34,9 @@ function formatDownloadRate(t) {
 }
 function formatTorrent(t) {
     return [
-        utils_1.justifyLeft(TorrentStatus[t.status], 13),
-        utils_1.justifyRight(formatPercentDone(t), 4),
-        utils_1.justifyRight(formatDownloadRate(t), 8),
+        (0, utils_1.justifyLeft)(TorrentStatus[t.status], 13),
+        (0, utils_1.justifyRight)(formatPercentDone(t), 4),
+        (0, utils_1.justifyRight)(formatDownloadRate(t), 8),
         t.name,
         getError(t),
     ].join(" ");

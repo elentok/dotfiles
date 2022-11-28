@@ -22,7 +22,7 @@ function parseDfLine(line) {
     };
 }
 function free() {
-    return child_process_1.execSync("df")
+    return (0, child_process_1.execSync)("df")
         .toString()
         .trim()
         .split("\n")
