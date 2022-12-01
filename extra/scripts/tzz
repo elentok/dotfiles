@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+#
+# Usage:
+#
+#   tzz from {tz} {date}
+#   tzz to {tz} {date}
+#
+
+set -euo pipefail
+
+FORMAT='%b %d, %Y, %H:%M %Z %z'
+
+function main() {
+  if [ $# -lt 3 ]; then
+    usage "$0"
+    exit 1
+  fi
+
+  local cmd="$1"
+  local timezone="$2"
+  local date="$3"
+
+  case $timezone in
+    pdt)
+      timezone="America/Los_Angeles"
+      ;;
+    ist)
+      timezone="Asia/Jerusalem"
+      ;;
+  esac
+
+  case $cmd in
+    from)
+      echo "Timezone: ${timezone}"
+      date --date="TZ=\"${timezone}\" ${date}" +"${FORMAT}"
+      ;;
+
+    to)
+      local_tz="$(readlink /etc/localtime | sed 's/^.*zoneinfo\///')"
+      echo "Timezone: $local_tz"
+      TZ="${timezone}" date -d "TZ=\"${local_tz}\" $date" +"${FORMAT}"
+      ;;
+
+    *)
+      usage "$0" exit 1
+      ;;
+  esac
+}
+
+main "$@"
