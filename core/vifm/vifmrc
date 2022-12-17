@@ -69,4 +69,16 @@ vnoremap w :view<cr>gv
 
 vnoremap M :move &<cr>
 
+" yank current directory path into the clipboard
+nnoremap yd :!echo -n %d | dotf-yank-osc52<cr>:echo expand('%"d') "is yanked to clipboard"<cr>
+
+" yank current file path into the clipboard
+nnoremap yf :!echo -n %c:p | dotf-yank-osc52<cr>:echo expand('%"c:p') "is yanked to clipboard"<cr>
+
+  " yank current filename without path into the clipboard
+  nnoremap yn :!echo -n %c | dotf-yank-osc52<cr>:echo expand('%"c') "is yanked to clipboard"<cr>
+
+" yank root of current file's name into the clipboard
+nnoremap yr :!echo -n %c:r | dotf-yank-osc52<cr>:echo expand('%"c:r') "is yanked to clipboard"<cr>
+
 " vim: syntax=vim foldmethod=marker
