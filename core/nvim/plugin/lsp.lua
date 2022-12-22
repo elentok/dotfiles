@@ -15,7 +15,9 @@ lsp.setup({
   jsonls = true,
   html = true,
   cssls = true,
-  openscad_ls = true,
+  openscad_ls = {
+    cmd = { "openscad-lsp", "--stdio" },
+  },
   rust_analyzer = true,
   marksman = true,
 })
