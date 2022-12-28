@@ -11,4 +11,4 @@ plugins/fish/fish_variables
 .mypy_cache
 
 # The auto-generated compiled version of packer.
-core/nvim/plugin/packer_compiled.lua
+packer_compiled.lua

@@ -1,1 +1,1 @@
-print("Hello from Lua")
+require("elentok")
