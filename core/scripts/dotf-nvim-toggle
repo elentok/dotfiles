@@ -21,4 +21,13 @@ echo "Current Target: ${current_target}"
 if confirm "Switch to ${next_target}?"; then
   rm -f ~/.config/nvim
   ln -sf "$DOTF/core/${next_target}" ~/.config/nvim
+
+  if [ "${current_target}" == "nvim" ]; then
+    mv ~/.local/share/nvim{,.old}
+    mkdir -p ~/.local/share/nvim.new
+    mv ~/.local/share/nvim{.new,}
+  else
+    mv ~/.local/share/nvim{,.new}
+    mv ~/.local/share/nvim{.old,}
+  fi
 fi
