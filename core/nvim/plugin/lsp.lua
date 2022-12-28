@@ -16,7 +16,7 @@ lsp.setup({
   html = true,
   cssls = true,
   openscad_ls = {
-    cmd = { "openscad-lsp", "--stdio" },
+    cmd = { "openscad-lsp", "--stdio", "--fmt-exe", "Google" },
   },
   rust_analyzer = true,
   marksman = true,
