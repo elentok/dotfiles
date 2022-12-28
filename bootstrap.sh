@@ -18,7 +18,7 @@ function main() {
 
   install-if-missing python3 python3
   install-if-missing pip3 python3-pip
-  
+
   mkdir -p ~/.config
 
   echo "- Upgrading pip3..."
@@ -33,8 +33,11 @@ function main() {
     else
       echo '- Updating brew... '
       brew update
+
       # Mac comes with an ancient bash version
-      brew install bash
+      if ! has-bash5; then
+        brew install bash
+      fi
     fi
   fi
 
@@ -44,6 +47,10 @@ function main() {
   echo
 
   "$DOTF/core/scripts/dotf" setup
+}
+
+function has-bash5() {
+  bash --version | grep 'GNU bash, version 5\.[0-9]' > /dev/null
 }
 
 function install-if-missing() {
