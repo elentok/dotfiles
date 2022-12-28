@@ -6,4 +6,6 @@ return require("packer").startup(function(use)
     tag = "0.1.0",
     requires = { { "nvim-lua/plenary.nvim" } },
   })
+
+  use 'rmehri01/onenord.nvim'
 end)
