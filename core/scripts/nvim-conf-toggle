@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTF/framework"
+
+if [ -e ~/.config/nvim ]; then
+  current_target="$(basename "$(readlink ~/.config/nvim)")"
+  if [ "$current_target" == "nvim" ]; then
+    next_target=nvim.new
+  else
+    next_target=nvim
+  fi
+else
+  current_target=None
+  next_target=nvim
+fi
+
+echo "Current Target: ${current_target}"
+
+if confirm "Switch to ${next_target}?"; then
+  rm -f ~/.config/nvim
+  ln -sf "$DOTF/core/${next_target}" ~/.config/nvim
+fi
