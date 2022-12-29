@@ -27,4 +27,3 @@ vim.api.nvim_create_autocmd({ "FocusLost" }, {
     vim.cmd("hi Normal guibg=#171b20")
   end,
 })
-

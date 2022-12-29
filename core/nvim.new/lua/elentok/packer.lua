@@ -8,14 +8,14 @@ return require("packer").startup(function(use)
   })
 
   use({
-    'nvim-treesitter/nvim-treesitter',
+    "nvim-treesitter/nvim-treesitter",
     run = function()
-      local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+      local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
       ts_update()
     end,
   })
 
-  use 'rmehri01/onenord.nvim'
-  use 'mbbill/undotree'
-  use 'aserowy/tmux.nvim'
+  use("rmehri01/onenord.nvim")
+  use("mbbill/undotree")
+  use("aserowy/tmux.nvim")
 end)
