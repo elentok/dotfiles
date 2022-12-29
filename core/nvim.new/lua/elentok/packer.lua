@@ -9,4 +9,5 @@ return require("packer").startup(function(use)
 
   use 'rmehri01/onenord.nvim'
   use 'mbbill/undotree'
+  use 'aserowy/tmux.nvim'
 end)
