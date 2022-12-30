@@ -37,6 +37,14 @@ return require("packer").startup(function(use)
     },
   })
 
+  use({
+    "tamago324/lir.nvim",
+    requires = {
+      { "nvim-lua/plenary.nvim" },
+      { "kyazdani42/nvim-web-devicons" },
+    },
+  })
+
   use("jose-elias-alvarez/null-ls.nvim")
 
   use("rmehri01/onenord.nvim")
