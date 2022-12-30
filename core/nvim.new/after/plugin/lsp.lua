@@ -11,11 +11,17 @@ lsp.nvim_workspace()
 
 lsp.setup()
 
+-- Format ----------------------------------------
+
+local function format()
+  vim.lsp.buf.format({ timeout_ms = 2000 })
+end
+
 local grp_id = vim.api.nvim_create_augroup("ElentokLsp", {})
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = "*",
   group = grp_id,
-  callback = function()
-    vim.lsp.buf.format({ timeout_ms = 2000 })
-  end,
+  callback = format,
 })
+
+vim.api.nvim_create_user_command("Format", format, {})
