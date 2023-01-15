@@ -5,7 +5,9 @@ local clipboard_actions = require("lir.clipboard.actions")
 local float = require("lir.float")
 
 require("lir").setup({
-  devicons_enable = true,
+  devicons = {
+    enable = true,
+  },
   mappings = {
     ["<cr>"] = actions.edit,
     ["l"] = actions.edit,
