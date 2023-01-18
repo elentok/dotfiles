@@ -46,8 +46,12 @@ function update-node() {
 
 function update-neovim-stuff() {
   dotf-header h2 'Neovim: Upgrade'
-  dotf-github u nvim
-  nvim-packer-sync
+  if dotf-is-mac; then
+    brew upgrade neovim
+  else
+    dotf-github u nvim
+  fi
+  dotf-nvim-packer-sync
 }
 
 main "$@"

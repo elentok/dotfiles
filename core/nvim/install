@@ -16,7 +16,7 @@ main() {
 
   install-packer
   install-symlinks
-  install-packer-plugins
+  dotf-nvim-packer-sync
   "$DOTF/core/nvim/install-lua"
 
   (cd "$DOTF/core/nvim/ctags" && ./build)
@@ -37,12 +37,6 @@ install-packer() {
     git clone --depth 1 https://github.com/wbthomason/packer.nvim \
       ~/.local/share/nvim/site/pack/packer/start/packer.nvim
   fi
-}
-
-install-packer-plugins() {
-  dotf-bullet "Running PackerSync... "
-  nvim --noplugin -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-  dotf-success "done"
 }
 
 main "$@"
