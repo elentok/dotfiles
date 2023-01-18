@@ -1,4 +1,4 @@
-local shortener = require("elentok/shortener")
+local shortener = require("elentok/lib/shortener")
 
 local has_gps, gps = pcall(require, "nvim-gps")
 local has_lualine, lualine = pcall(require, "lualine")
