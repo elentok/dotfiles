@@ -1,4 +1,4 @@
-require("elentok/packer-plugins")
+require("elentok/packer")
 
 require("elentok/core-settings")
 require("elentok/colors")

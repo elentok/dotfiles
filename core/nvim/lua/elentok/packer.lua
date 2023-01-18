@@ -139,6 +139,7 @@ return require("packer").startup({
     use("TimUntersberger/neogit") -- Git client
     use({ "akinsho/git-conflict.nvim", tag = "v1.0.0" })
     use("nvim-lualine/lualine.nvim") -- Statusline
+
     use("tversteeg/registers.nvim") -- Shows registers contents when using them
     use("b0o/incline.nvim") -- Shows buffer names on windows
     use("ThePrimeagen/harpoon")
