@@ -1,3 +1,11 @@
+-- Without this my abbreviations break.
+vim.opt.iskeyword = "@,48-57,_,192-255,$,#,-"
+
+-- Do not show highlight matching parenthesis automatically.
+vim.g.loaded_matchparen = true
+
+vim.g.mapleader = ","
+
 vim.opt.wrap = false
 vim.opt.laststatus = 3
 
@@ -39,9 +47,6 @@ vim.opt.spell = true
 
 -- When splitting vertically move the focus to the right window.
 vim.opt.splitright = true
-
--- Settings for the tversteeg/registers.nvim plugin.
-vim.g.registers_window_border = "single"
 
 vim.opt.expandtab = true
 

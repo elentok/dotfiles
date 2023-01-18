@@ -1,6 +1,6 @@
 require("elentok/packer")
 
-require("elentok/core-settings")
+require("elentok/set")
 require("elentok/colors")
 require("elentok/statusline")
 require("elentok/symbols")
