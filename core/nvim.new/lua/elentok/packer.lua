@@ -49,5 +49,10 @@ return require("packer").startup(function(use)
 
   use("rmehri01/onenord.nvim")
   use("mbbill/undotree")
-  use("aserowy/tmux.nvim")
+  use({
+    "aserowy/tmux.nvim",
+    config = function()
+      return require("tmux").setup()
+    end,
+  })
 end)

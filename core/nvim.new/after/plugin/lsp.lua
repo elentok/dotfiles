@@ -5,6 +5,13 @@ lsp.ensure_installed({
   "tsserver",
   "marksman",
   "sumneko_lua",
+  "bashls",
+  "pyright",
+  "yamlls",
+  "jsonls",
+  "html",
+  "cssls",
+  "rust_analyzer",
 })
 
 lsp.nvim_workspace()

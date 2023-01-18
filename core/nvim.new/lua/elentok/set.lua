@@ -17,3 +17,6 @@ vim.opt.expandtab = true
 vim.opt.wrap = false
 
 vim.opt.colorcolumn = "80"
+
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
