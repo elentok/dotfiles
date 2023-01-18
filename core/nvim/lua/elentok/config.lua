@@ -19,6 +19,9 @@ local config = {
     "scad",
     "openscad",
   },
+  path_shorteners = {
+    [vim.env.HOME] = "~",
+  },
 }
 
 local local_config = util.safe_require("elentok-local/config", { silent = true })
@@ -28,6 +31,8 @@ if local_config then
   end
 
   vim.list_extend(config.format_on_save, local_config.format_on_save or {})
+  config.path_shorteners =
+    vim.tbl_extend("force", config.path_shorteners, local_config.path_shorteners or {})
 end
 
 return config
