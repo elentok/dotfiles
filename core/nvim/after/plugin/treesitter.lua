@@ -130,3 +130,12 @@ vim.api.nvim_create_autocmd(
   { "FileType" },
   { pattern = "*", group = group_id, callback = setupFolding }
 )
+
+-- After saving a buffer run "zv" to make sure current line isn't folded.
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  pattern = "*",
+  group = group_id,
+  callback = function()
+    vim.fn.feedkeys("zv", "n")
+  end,
+})
