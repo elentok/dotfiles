@@ -33,6 +33,4 @@ lualine.setup({
   },
 })
 
-if vim.fn.has("nvim-0.8") == 1 then
-  vim.o.laststatus = 3
-end
+vim.o.laststatus = 3

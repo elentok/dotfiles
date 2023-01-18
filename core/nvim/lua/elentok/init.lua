@@ -3,7 +3,6 @@ require("elentok/packer")
 require("elentok/set")
 require("elentok/colors")
 require("elentok/statusline")
-require("elentok/symbols")
 require("elentok/telescope")
 require("elentok/format-on-save")
 
