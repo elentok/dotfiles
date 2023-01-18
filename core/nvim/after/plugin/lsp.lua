@@ -2,7 +2,7 @@
 local create_cmd = vim.api.nvim_create_user_command
 local config = require("elentok/config")
 
-local lsp = require("elentok/lsp")
+local lsp = require("elentok/lib/lsp")
 
 -- local withSnippetSupport = vim.lsp.protocol.make_client_capabilities()
 -- withSnippetSupport.textDocument.completion.completionItem.snippetSupport = true
@@ -20,6 +20,29 @@ lsp.setup({
   },
   rust_analyzer = true,
   marksman = true,
+  sumneko_lua = {
+    settings = {
+      Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua you're using (LuaJIT in the case of Neovim)
+          version = "LuaJIT",
+          -- Setup your lua path
+          path = vim.split(package.path, ";"),
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = { "vim", "use" },
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = {
+            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+          },
+        },
+      },
+    },
+  },
 })
 
 -- Simple LSPs {{{1
