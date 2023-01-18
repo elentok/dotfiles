@@ -14,6 +14,7 @@ main() {
     fi
   fi
 
+  install-packer
   install-symlinks
   install-packer-plugins
   "$DOTF/core/nvim/install-lua"
@@ -30,9 +31,17 @@ install-symlinks() {
   symlink "$DOTF/core/nvim/yamllint-config" ~/.config/yamllint/config
 }
 
+install-packer() {
+  if [ ! -e ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then
+    dotf-bullet "Cloning packer..."
+    git clone --depth 1 https://github.com/wbthomason/packer.nvim \
+      ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+  fi
+}
+
 install-packer-plugins() {
-  dotf-bullet "Running PackerInstall... "
-  nvim-packer-sync
+  dotf-bullet "Running PackerSync... "
+  nvim --noplugin -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
   dotf-success "done"
 }
 

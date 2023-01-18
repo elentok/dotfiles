@@ -1,4 +1,3 @@
-require("elentok/packer-bootstrap")
 require("elentok/packer-plugins")
 
 require("elentok/core-settings")

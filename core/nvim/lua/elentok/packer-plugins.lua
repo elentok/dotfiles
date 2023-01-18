@@ -89,7 +89,14 @@ return require("packer").startup({
     use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
     -- Treesitter
-    use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+    use({
+      "nvim-treesitter/nvim-treesitter",
+      run = function()
+        local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
+        ts_update()
+      end,
+    })
+
     use("nvim-treesitter/nvim-treesitter-textobjects")
     use("SmiteshP/nvim-gps")
     use("folke/twilight.nvim") -- focus active code block
