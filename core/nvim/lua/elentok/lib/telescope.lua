@@ -33,17 +33,17 @@ function M.command_picker(opts, picker_opts)
   end
   local results = utils.get_os_command_output(opts.cmd)
   pickers
-    .new(picker_opts, {
-      prompt_title = opts.title,
-      sorter = opts.sorter or conf.file_sorter({}),
-      finder = finders.new_table({
-        results = results,
-        entry_maker = opts.entry_maker or function(line)
-          return M.create_entry(opts.parse_line(line))
-        end,
-      }),
-    })
-    :find()
+      .new(picker_opts, {
+        prompt_title = opts.title,
+        sorter = opts.sorter or conf.file_sorter({}),
+        finder = finders.new_table({
+          results = results,
+          entry_maker = opts.entry_maker or function(line)
+            return M.create_entry(opts.parse_line(line))
+          end,
+        }),
+      })
+      :find()
 end
 
 function M.buf_tags_picker(opts)
@@ -63,7 +63,5 @@ function M.buf_tags_picker(opts)
     sorter = conf.generic_sorter(opts),
   })
 end
-
--- Keys
 
 return M
