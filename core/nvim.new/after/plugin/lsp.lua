@@ -14,6 +14,14 @@ lsp.ensure_installed({
   "rust_analyzer",
 })
 
+lsp.configure("sumneko_lua", {
+  settings = {
+    Lua = {
+      diagnostics = { "vim" },
+    },
+  },
+})
+
 lsp.nvim_workspace()
 
 lsp.setup()
