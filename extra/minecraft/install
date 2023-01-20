@@ -88,6 +88,7 @@ update-spigot() {
   rm -rf "${SPIGOT_TMP}"
   build-spigot-server
   sudo cp "${SPIGOT_TMP}/${SPIGOT_JAR_FILENAME}" "$SPIGOT_ROOT/"
+  sudo cp "$DOTF/extra/minecraft/VERSION" "$SPIGOT_ROOT/VERSION"
 }
 
 build-spigot-server() {
