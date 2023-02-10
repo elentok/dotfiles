@@ -15,6 +15,7 @@ lsp.ensure_installed({
   "cssls",
   "rust_analyzer",
   "openscad_lsp",
+  "svelte",
 })
 
 -- (Optional) Configure lua language server for neovim

@@ -59,6 +59,7 @@ treesitter_configs.setup({
     "rst",
     "ruby",
     "scss",
+    "svelte",
     "toml",
     "tsx",
     "typescript",
