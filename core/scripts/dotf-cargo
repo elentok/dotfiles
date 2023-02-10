@@ -5,6 +5,12 @@ set -euo pipefail
 source "$DOTF/framework"
 
 main() {
+  local install_cmd=install
+  if [ "${1:-}" == "--binary" ] || [ "${1:-}" == "-b" ]; then
+    install_cmd=binstall
+    shift
+  fi
+
   dotf-bullet "Installing cargo packages $*... "
   missing=$(find-missing-packages "$@")
 
@@ -16,7 +22,7 @@ main() {
     echo
 
     # shellcheck disable=SC2086
-    cargo install $missing
+    cargo $install_cmd $missing
   fi
 }
 

@@ -5,13 +5,17 @@ source "$DOTF/framework"
 function main() {
   install-rust
 
+  if command_missing cargo-binstall; then
+    cargo install cargo-binstall
+  fi
+
   # Install rust sources (required by the LSP)
   # Based on https://rust-analyzer.github.io/manual.html#installation
   rustup component add rust-src
 
-  if command_missing exa; then
-    dotf-cargo exa
-  fi
+  # if command_missing exa; then
+  #   dotf-cargo exa
+  # fi
 }
 
 function install-rust() {
