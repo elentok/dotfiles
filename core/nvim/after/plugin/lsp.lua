@@ -6,7 +6,7 @@ lsp.preset("recommended")
 lsp.ensure_installed({
   "tsserver",
   "marksman",
-  "sumneko_lua",
+  "lua_ls",
   "bashls",
   "pyright",
   "yamlls",
@@ -16,6 +16,8 @@ lsp.ensure_installed({
   "rust_analyzer",
   "openscad_lsp",
   "svelte",
+  "lua_ls",
+  "tailwindcss",
 })
 
 -- (Optional) Configure lua language server for neovim
