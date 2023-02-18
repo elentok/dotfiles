@@ -59,4 +59,4 @@ local openscad_formatter = {
 }
 
 -- null_ls.register(sca2d_diagnostics)
-null_ls.register(openscad_formatter)
+-- null_ls.register(openscad_formatter)

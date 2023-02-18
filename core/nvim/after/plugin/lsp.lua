@@ -32,6 +32,10 @@ if config.enable_tsserver then
   })
 end
 
+lsp.configure("openscad_lsp", {
+  cmd = { "openscad-lsp", "--stdio", "--fmt-style", "Google" },
+})
+
 lsp.setup()
 
 vim.diagnostic.config({ virtual_text = true })
