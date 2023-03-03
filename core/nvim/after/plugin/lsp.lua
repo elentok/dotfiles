@@ -8,6 +8,7 @@ lsp.ensure_installed({
   "marksman",
   "lua_ls",
   "bashls",
+  "denols",
   "pyright",
   "yamlls",
   "jsonls",
