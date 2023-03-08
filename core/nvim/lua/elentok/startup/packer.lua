@@ -38,20 +38,20 @@ return require("packer").startup({
       branch = "v1.x",
       requires = {
         -- LSP Support
-        { "neovim/nvim-lspconfig" }, -- Required
-        { "williamboman/mason.nvim" }, -- Optional
+        { "neovim/nvim-lspconfig" },             -- Required
+        { "williamboman/mason.nvim" },           -- Optional
         { "williamboman/mason-lspconfig.nvim" }, -- Optional
 
         -- Autocompletion
-        { "hrsh7th/nvim-cmp" }, -- Required
-        { "hrsh7th/cmp-nvim-lsp" }, -- Required
-        { "hrsh7th/cmp-buffer" }, -- Optional
-        { "hrsh7th/cmp-path" }, -- Optional
+        { "hrsh7th/nvim-cmp" },         -- Required
+        { "hrsh7th/cmp-nvim-lsp" },     -- Required
+        { "hrsh7th/cmp-buffer" },       -- Optional
+        { "hrsh7th/cmp-path" },         -- Optional
         { "saadparwaiz1/cmp_luasnip" }, -- Optional
-        { "hrsh7th/cmp-nvim-lua" }, -- Optional
+        { "hrsh7th/cmp-nvim-lua" },     -- Optional
 
         -- Snippets
-        { "L3MON4D3/LuaSnip" }, -- Required
+        { "L3MON4D3/LuaSnip" },             -- Required
         { "rafamadriz/friendly-snippets" }, -- Optional
       },
     })
@@ -156,15 +156,15 @@ return require("packer").startup({
     use("AndrewRadev/splitjoin.vim")
     use("jamessan/vim-gnupg")
     use("davidbeckingsale/writegood.vim")
-    use("sotte/presenting.vim") -- Presentation tool
-    use("karb94/neoscroll.nvim") -- Smooth scrolling
+    use("sotte/presenting.vim")      -- Presentation tool
+    use("karb94/neoscroll.nvim")     -- Smooth scrolling
     use("kyazdani42/nvim-web-devicons")
-    use("TimUntersberger/neogit") -- Git client
+    use("TimUntersberger/neogit")    -- Git client
     use({ "akinsho/git-conflict.nvim", tag = "v1.0.0" })
     use("nvim-lualine/lualine.nvim") -- Statusline
 
-    use("tversteeg/registers.nvim") -- Shows registers contents when using them
-    use("b0o/incline.nvim") -- Shows buffer names on windows
+    use("tversteeg/registers.nvim")  -- Shows registers contents when using them
+    use("b0o/incline.nvim")          -- Shows buffer names on windows
     use("ThePrimeagen/harpoon")
     use("ThePrimeagen/refactoring.nvim")
     use("ziontee113/color-picker.nvim")
@@ -194,6 +194,9 @@ return require("packer").startup({
 
     -- dark/zen room, no distraction mode
     use({ "junegunn/goyo.vim", opt = true, cmd = "Goyo" })
+
+    -- Make vim.ui.input and vim.ui.select prettier
+    use({ "stevearc/dressing.nvim" })
 
     -- use {
     --   "nvim-neo-tree/neo-tree.nvim",
