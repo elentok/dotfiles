@@ -198,6 +198,9 @@ return require("packer").startup({
     -- Make vim.ui.input and vim.ui.select prettier
     use({ "stevearc/dressing.nvim" })
 
+    -- Improve neovim lua development (better completion, help, etc...)
+    use("folke/neodev.nvim")
+
     -- use {
     --   "nvim-neo-tree/neo-tree.nvim",
     --   branch = "v2.x",
