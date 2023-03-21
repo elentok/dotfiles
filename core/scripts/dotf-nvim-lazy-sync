@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+source "$DOTF/framework"
+
+dotf-bullet "Running Lazy! sync... "
+nvim --headless "+Lazy! sync" +qa
+dotf-success "done"

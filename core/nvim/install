@@ -14,9 +14,10 @@ main() {
     fi
   fi
 
-  install-packer
+  # install-packer
   install-symlinks
-  dotf-nvim-packer-sync
+  dotf-nvim-lazy-sync
+  # dotf-nvim-packer-sync
   # "$DOTF/core/nvim/install-lua"
 
   (cd "$DOTF/core/nvim/ctags" && ./build)

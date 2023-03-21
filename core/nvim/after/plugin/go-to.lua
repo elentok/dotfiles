@@ -1,9 +1,4 @@
-local ok, builtin = pcall(require, "telescope.builtin")
-
-if not ok then
-  return
-end
-
+local builtin = require("telescope.builtin")
 local util = require("elentok/util")
 
 -- Configuration -------------------------------------------

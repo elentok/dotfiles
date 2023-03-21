@@ -1,12 +1,6 @@
-local ok, _ = pcall(require, "telescope")
-if not ok then
-  return
-end
-
-local builtin = require("telescope/builtin")
 local conf = require("telescope/config").values
 local finders = require("telescope/finders")
-local make_entry = require("telescope.make_entry")
+local make_entry = require("telescope/make_entry")
 local pickers = require("telescope/pickers")
 
 -- Use "ripgrep" for the :grep command when available.
@@ -57,13 +51,13 @@ local function telescope_grep(query, opts)
   end
 
   pickers
-    .new(opts, {
-      prompt_title = "Grep for [" .. query .. "]",
-      finder = finders.new_oneshot_job(command, opts),
-      previewer = conf.grep_previewer(opts),
-      sorter = conf.generic_sorter(opts),
-    })
-    :find()
+      .new(opts, {
+        prompt_title = "Grep for [" .. query .. "]",
+        finder = finders.new_oneshot_job(command, opts),
+        previewer = conf.grep_previewer(opts),
+        sorter = conf.generic_sorter(opts),
+      })
+      :find()
 end
 
 -- Grep with telescope (prompt for query).
