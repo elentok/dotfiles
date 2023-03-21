@@ -25,10 +25,6 @@ vim.keymap.set("v", "p", '"_dP')
 vim.keymap.set("v", "<Leader>m", ":!pandoc --from markdown --to html | copy-html<cr>u")
 vim.keymap.set("n", "<Leader>m", ":%!pandoc --from markdown --to html | copy-html<cr>u")
 
--- Signify {{{1
-vim.keymap.set("n", "<Leader>vl", ":SignifyHunkDiff<cr>")
-vim.keymap.set("n", "<Leader>vt", ":SignifyToggleHighlight<cr>")
-
 -- Version control {{{1
 vim.keymap.set("n", "<Leader>tg", ":FloatermNew --width=0.8 --height=0.8 --autoclose=1 tig<cr>")
 vim.keymap.set(

@@ -90,7 +90,7 @@ return {
   "SmiteshP/nvim-gps",
   "folke/twilight.nvim", -- focus active code block
   "aklt/plantuml-syntax",
-  "mhinz/vim-signify",
+  "lewis6991/gitsigns.nvim",
   "michaeljsmith/vim-indent-object",
   "nelstrom/vim-visual-star-search",
   "christoomey/vim-tmux-navigator",
