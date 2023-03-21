@@ -11,33 +11,11 @@ local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
 
 gps.setup({})
 
--- Install markdown parser
-parser_configs.markdown = {
-  install_info = {
-    url = "https://github.com/MDeiml/tree-sitter-markdown",
-    location = "tree-sitter-markdown",
-    files = { "src/parser.c", "src/scanner.cc" },
-    branch = "main",
-  },
-  filetype = "markdown",
-}
-
-parser_configs.markdown_inline = {
-  install_info = {
-    url = "https://github.com/MDeiml/tree-sitter-markdown",
-    location = "tree-sitter-markdown-inline",
-    files = { "src/parser.c", "src/scanner.cc" },
-    branch = "main",
-  },
-  filetype = "markdown",
-}
-
 treesitter_configs.setup({
   additional_vim_regex_highlighting = true,
   ensure_installed = {
     "bash",
     "c",
-    "c_sharp",
     "cmake",
     "comment",
     "cpp",
@@ -88,7 +66,6 @@ treesitter_configs.setup({
       enable = true,
       -- Automatically jump forward to textobj, similar to targets.vim
       lookahead = true,
-
       keymaps = {
         -- You can use the capture groups defined in textobjects.scm
         ["af"] = "@function.outer",
