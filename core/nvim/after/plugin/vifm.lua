@@ -1,4 +1,4 @@
-local FTerm = require("fterm")
+local FTerm = require("FTerm")
 
 local function vifm()
   local t = FTerm:new({
