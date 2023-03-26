@@ -126,6 +126,7 @@ require("lsp_signature").setup()
 -- vim.keymap.set("n", "gD", vim.lsp.buf.type_definition)
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
 vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references)
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
 --
 -- -- Diagnostics:
 -- vim.keymap.set("n", "<space>dd", vim.diagnostic.open_float)
