@@ -6,12 +6,19 @@
 #
 #   pdfdecrypt {input} {output}
 
-source $DOTF/framework
+source "$DOTF/framework"
 
 if [ $# -lt 2 ]; then
-  usage $0
+  usage "$0"
   exit 1
 fi
 
 ask_password 'Enter pdf password:' pass
-pdftk "$1" input_pw "$pass" output "$2"
+
+if has_command pdftk; then
+  pdftk "$1" input_pw "$pass" output "$2"
+elif has_command qpdf; then
+  qpdf --password="$pass" --decrypt "$1" "$2"
+else
+  echo "Please install either pdftk or qpdf"
+fi
