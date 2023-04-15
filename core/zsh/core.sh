@@ -76,7 +76,7 @@ function is-gnu-stat() {
 
 # Homebrew {{{1
 BREW_HOME=''
-for dir in ~/.linuxbrew ~/.homebrew /usr/local; do
+for dir in /opt/homebrew ~/.linuxbrew ~/.homebrew /usr/local; do
   if [ -e "$dir/bin/brew" ]; then
     export BREW_HOME=$dir
     break

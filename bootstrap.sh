@@ -73,18 +73,10 @@ function install-if-missing() {
 }
 
 function install-homebrew() {
-  export BREW_HOME=~/.homebrew
+  sudo xcodebuild -license accept
+  sudo xcode-select --install
 
-  git clone https://github.com/Homebrew/brew $BREW_HOME
-
-  export PATH=$BREW_HOME/bin:$PATH
-
-  #sudo xcodebuild -license accept
-  #sudo xcode-select --install
-
-  eval "$($BREW_HOME/bin/brew shellenv)"
-  brew update --force --quiet
-  chmod -R go-w "$(brew --prefix)/share/zsh"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
 
 function has-command() {
