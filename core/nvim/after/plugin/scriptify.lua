@@ -15,7 +15,10 @@ local function scriptify(lang)
     return
   end
 
-  vim.api.nvim_buf_set_lines(0, 0, 0, true, { hashtag, "" })
+  header_lines = vim.split(hashtag, "\n")
+  table.insert(header_lines, "")
+
+  vim.api.nvim_buf_set_lines(0, 0, 0, true, header_lines)
   vim.cmd("write")
   vim.fn.system("chmod u+x " .. vim.fn.shellescape(vim.fn.expand("%")))
   vim.cmd("e!")
