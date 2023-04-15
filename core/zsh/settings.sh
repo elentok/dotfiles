@@ -11,32 +11,7 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/build-tools/23.0.0
 
 # Completions {{{1
-fpath=($BREW_HOME/lib/node_modules/tailr/completions $fpath)
-fpath=(/usr/local/share/npm/lib/node_modules/tailr/completions $fpath)
-fpath=(/usr/local/share/npm/lib/node_modules/dns-switcher/completions $fpath)
-fpath=($HOME/.rbenv/versions/2.0.0-p247/lib/ruby/gems/2.0.0/gems/shaft-0.8.8/completions $fpath)
 fpath=($DOTF/core/zsh/vendor/zsh-completions/src $fpath)
-
-# Pebble {{{1
-export PEBBLE_SDKS="$HOME/Library/Application Support/Pebble SDK/SDKs"
-export PEBBLE_SDK_VERSION='3.8.2'
-export PEBBLE_SDK_DEVICE='basalt'
-export PEBBLE_INCLUDE="$PEBBLE_SDKS/$PEBBLE_SDK_VERSION/sdk-core/pebble/$PEBBLE_SDK_DEVICE/include"
-export CPATH="$PEBBLE_INCLUDE"
-
-# 3rd party {{{1
-
-if has_command rbenv; then
-  with_cache rbenv source rbenv init --no-rehash -
-fi
-
-if has_command fasd; then
-  if is_zsh; then
-    with_cache fasd source fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install \
-      zsh-wcomp zsh-wcomp-install
-  fi
-fi
-# Mac Specific {{{1
 
 # Functions {{{1
 
@@ -46,10 +21,6 @@ function encrypt() {
 
 function decrypt() {
   openssl des3 -salt -d -in $* -out $*.plain
-}
-
-function j() {
-  cd "$(fasd -l -d "$@" | fzf -1 --no-sort --tac)"
 }
 
 if has_command rg; then

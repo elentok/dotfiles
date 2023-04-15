@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 # vim: foldmethod=marker
 
-if dotf-is-mac; then
-  unalias s
-elif is_wsl; then
+if is_wsl; then
   alias code='/mnt/c/Program\ Files/Microsoft\ VS\ Code/code.exe'
 fi
 
@@ -246,7 +244,6 @@ vp() {
   fi
 }
 
-unalias f
 f() {
   if [ $# -eq 0 ]; then
     TERM=xterm-256color vifm .
