@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+source "$DOTF/framework"
+
+dotf-brew ncurses
+$BREW_HOME/opt/ncurses/bin/infocmp tmux-256color > /tmp/tmux-256color.info
+
+# This creates a complied entry in ~/.terminfo
+tic -xe tmux-256color /tmp/tmux-256color.info
+
+if infocmp tmux-256color > /dev/null 2>&1; then
+  dotf-success "done."
+else
+  dotf-error "Error"
+fi

@@ -19,12 +19,7 @@ install-tmux-256color-terminfo() {
   if has-tmux-256color-terminfo; then
     dotf-info "already set up, skipping."
   else
-    dotf-brew ncurses
-    $BREW_HOME/opt/ncurses/bin/infocmp tmux-256color > /tmp/tmux-256color.info
-    tic -xe tmux-256color /tmp/tmux-256color.info
-    # This creates a complied entry in ~/.terminfo
-    # infocmp tmux-256color | head
-    has-tmux-256color-terminfo && dotf-success "done." || dotf-error "Error"
+    "$DOTF/core/tmux/install-tmux-256color"
   fi
 }
 
