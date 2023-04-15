@@ -73,3 +73,5 @@ vim.opt.wildignorecase = true
 vim.opt.winwidth = 84
 
 vim.opt.foldtext = "getline(v:foldstart)"
+
+vim.opt.undofile = true

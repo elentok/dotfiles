@@ -142,4 +142,6 @@ return {
   -- Improve neovim lua development (better completion, help, etc...)
   "folke/neodev.nvim",
   "jose-elias-alvarez/typescript.nvim",
+
+  "mbbill/undotree",
 }
