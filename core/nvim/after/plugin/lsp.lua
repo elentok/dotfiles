@@ -1,7 +1,34 @@
 local create_cmd = vim.api.nvim_create_user_command
 local config = require("elentok/config")
-local lsp = require("lsp-zero")
-lsp.preset("recommended")
+local lsp = require("lsp-zero").preset({})
+local cmp = require("cmp")
+local cmp_action = require("lsp-zero").cmp_action()
+
+require("luasnip.loaders.from_vscode").lazy_load()
+
+lsp.on_attach(function(client, bufnr)
+  lsp.default_keymaps({ buffer = bufnr })
+end)
+
+cmp.setup({
+  sources = {
+    { name = "path" },
+    { name = "nvim_lsp" },
+    { name = "buffer",  keyword_length = 3 },
+    { name = "luasnip", keyword_length = 2 },
+  },
+  mapping = {
+    ["<C-f>"] = cmp_action.luasnip_jump_forward(),
+    ["<C-b>"] = cmp_action.luasnip_jump_backward(),
+    ["<Tab>"] = cmp_action.luasnip_supertab(),
+    ["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
+    ["<C-Space>"] = cmp.mapping.complete(),
+  },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
+})
 
 lsp.ensure_installed({
   "tsserver",
@@ -35,6 +62,11 @@ end
 
 lsp.configure("openscad_lsp", {
   cmd = { "openscad-lsp", "--stdio", "--fmt-style", "Google" },
+  capabilities = {
+    textDocument = {
+      completion = false,
+    },
+  },
 })
 
 lsp.setup()
