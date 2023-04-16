@@ -87,7 +87,7 @@ return {
     end,
   },
   "nvim-treesitter/nvim-treesitter-textobjects",
-  "SmiteshP/nvim-gps",
+  "SmiteshP/nvim-navic",
   "folke/twilight.nvim", -- focus active code block
   "aklt/plantuml-syntax",
   "lewis6991/gitsigns.nvim",

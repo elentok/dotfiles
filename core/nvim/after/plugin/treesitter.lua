@@ -1,15 +1,8 @@
 local util = require("elentok/util")
 
-local has_treesitter, treesitter_configs = pcall(require, "nvim-treesitter.configs")
-local has_gps, gps = pcall(require, "nvim-gps")
-
-if not (has_treesitter and has_gps) then
-  return
-end
+local treesitter_configs = require("nvim-treesitter.configs")
 
 local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
-
-gps.setup({})
 
 treesitter_configs.setup({
   additional_vim_regex_highlighting = true,

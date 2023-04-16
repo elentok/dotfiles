@@ -1,9 +1,14 @@
 local shortener = require("elentok/lib/shortener")
 
-local has_gps, gps = pcall(require, "nvim-gps")
-local has_lualine, lualine = pcall(require, "lualine")
-if not has_gps or not has_lualine then
-  return
+local navic = require("nvim-navic")
+local lualine = require("lualine")
+
+local function navic_get_location()
+  return navic.get_location()
+end
+
+local function navic_is_available()
+  return navic.is_available()
 end
 
 lualine.setup({
@@ -12,7 +17,7 @@ lualine.setup({
     lualine_a = { "filename" },
     lualine_b = { { shortener.dir, icon = "" } },
     lualine_c = {},
-    lualine_x = { { gps.get_location, cond = gps.is_available } },
+    lualine_x = { { navic_get_location, cond = navic_is_available } },
     lualine_y = { "filetype" },
   },
   winbar = {
