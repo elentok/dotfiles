@@ -16,6 +16,7 @@ cmp.setup({
     { name = "nvim_lsp" },
     { name = "buffer",  keyword_length = 3 },
     { name = "luasnip", keyword_length = 2 },
+    { name = "rg" },
   },
   mapping = {
     ["<C-f>"] = cmp_action.luasnip_jump_forward(),
