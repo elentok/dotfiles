@@ -190,3 +190,10 @@ end, {})
 create_cmd("LspDebugOff", function()
   vim.lsp.set_log_level(3)
 end, {})
+
+vim.diagnostic.config({
+  virtual_text = {
+    source = "if_many",
+    prefix = "●",
+  },
+})
