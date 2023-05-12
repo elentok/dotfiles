@@ -149,4 +149,5 @@ return {
   "jose-elias-alvarez/typescript.nvim",
 
   "mbbill/undotree",
+  "Wansmer/sibling-swap.nvim",
 }
