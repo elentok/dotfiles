@@ -24,6 +24,7 @@ cmp.setup({
     ["<Tab>"] = cmp_action.luasnip_supertab(),
     ["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
     ["<C-Space>"] = cmp.mapping.complete(),
+    ["<CR>"] = cmp.mapping.confirm({ select = false }),
   },
   window = {
     completion = cmp.config.window.bordered(),
