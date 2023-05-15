@@ -15,6 +15,7 @@ treesitter_configs.setup({
     "css",
     "dot",
     "go",
+    "hcl", -- terraform
     "html",
     "java",
     "javascript",
