@@ -9,9 +9,6 @@
 # git config --local user.email '3david@gmail.com'
 # git config --local github.user 'elentok'
 
-[include]
-  path = ~/.dotlocal/gitconfig
-
 [core]
   excludesfile = ~/.dotfiles/core/git/gitignore
 
@@ -122,4 +119,6 @@
 ;[credential]
   ;helper = osxkeychain
 
-; vim: filetype=gitconfig
+[include]
+  path = ~/.dotlocal/gitconfig
+
