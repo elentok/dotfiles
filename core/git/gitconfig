@@ -122,3 +122,6 @@
 [include]
   path = ~/.dotlocal/gitconfig
 
+[include]
+  path = ~/.dotprivate/gitconfig
+

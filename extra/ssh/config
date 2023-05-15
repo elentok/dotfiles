@@ -1,6 +1,7 @@
 # vim: syntax=sshconfig
 
 Include ~/.dotlocal/ssh.conf
+Include ~/.dotprivate/ssh.conf
 Include ~/.ssh/machine.config
 
 Host *
