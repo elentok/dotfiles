@@ -17,6 +17,7 @@ local config = {
     "scad",
     "scss",
     "sh",
+    "terraform",
     "typescript",
     "typescriptreact",
     "yaml",
@@ -38,7 +39,7 @@ if local_config then
 
   vim.list_extend(config.format_on_save, local_config.format_on_save or {})
   config.path_shorteners =
-  vim.tbl_extend("force", config.path_shorteners, local_config.path_shorteners or {})
+      vim.tbl_extend("force", config.path_shorteners, local_config.path_shorteners or {})
 end
 
 return config
