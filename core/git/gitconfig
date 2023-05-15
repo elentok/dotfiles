@@ -119,6 +119,10 @@
 ;[credential]
   ;helper = osxkeychain
 
+[init]
+  ; Set the default branch of new repositories to "main"
+  defaultBranch = main
+
 [include]
   path = ~/.dotlocal/gitconfig
 
