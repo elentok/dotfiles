@@ -6,6 +6,9 @@ local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
 
 treesitter_configs.setup({
   additional_vim_regex_highlighting = true,
+  playground = {
+    enable = true,
+  },
   ensure_installed = {
     "bash",
     "c",

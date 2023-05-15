@@ -49,6 +49,7 @@
   "onenord.nvim": { "branch": "main", "commit": "7b2b23e6af16430be3d0364c7ced34522ce88124" },
   "openscad.nvim": { "branch": "main", "commit": "2b9263d16fde830133a513a12f968f78c533e5ee" },
   "plantuml-syntax": { "branch": "master", "commit": "845abb56dcd3f12afa6eb47684ef5ba3055802b8" },
+  "playground": { "branch": "master", "commit": "2b81a018a49f8e476341dfcb228b7b808baba68b" },
   "plenary.nvim": { "branch": "master", "commit": "9ac3e9541bbabd9d73663d757e4fe48a675bb054" },
   "popup.nvim": { "branch": "master", "commit": "b7404d35d5d3548a82149238289fa71f7f6de4ac" },
   "presenting.vim": { "branch": "master", "commit": "e960e204d8e4526d2650c23eaea908317c6becb9" },

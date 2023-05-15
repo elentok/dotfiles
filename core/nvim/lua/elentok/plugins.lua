@@ -91,6 +91,7 @@ return {
       ts_update()
     end,
   },
+  "nvim-treesitter/playground",
   "nvim-treesitter/nvim-treesitter-textobjects",
   "SmiteshP/nvim-navic",
   "folke/twilight.nvim", -- focus active code block
