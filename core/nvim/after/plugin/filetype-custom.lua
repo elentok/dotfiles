@@ -3,4 +3,7 @@ vim.filetype.add({
     scad = "openscad",
     tf = "terraform",
   },
+  filename = {
+    ["gitconfig"] = "gitconfig",
+  },
 })
