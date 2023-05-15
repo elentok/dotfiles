@@ -5,5 +5,6 @@ vim.filetype.add({
   },
   filename = {
     ["gitconfig"] = "gitconfig",
+    ["ssh.conf"] = "sshconfig",
   },
 })
