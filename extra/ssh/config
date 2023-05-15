@@ -4,12 +4,15 @@ Include ~/.dotlocal/ssh.conf
 Include ~/.dotprivate/ssh.conf
 Include ~/.ssh/machine.config
 
-Host *
-  # Always use SSH2.
-  Protocol 2
-  # Use a shared channel for all sessions to the same host,
-  # instead of always opening a new one. This leads to much
-  # quicker connection times.
-  ControlMaster auto
-  ControlPath ~/.ssh/master-%r@%h:%p
-  ControlPersist yes
+# This is causing issues when using the multiple git accounts with custom 
+# ~/.ssh/config hostnames so I'm disabling it for now.
+#
+# Host *
+#   # Always use SSH2.
+#   Protocol 2
+#   # Use a shared channel for all sessions to the same host,
+#   # instead of always opening a new one. This leads to much
+#   # quicker connection times.
+#   ControlMaster auto
+#   ControlPath ~/.ssh/master-%r@%h:%p
+#   ControlPersist yes
