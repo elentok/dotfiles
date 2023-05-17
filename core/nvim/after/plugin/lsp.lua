@@ -54,7 +54,7 @@ lsp.ensure_installed({
 -- (Optional) Configure lua language server for neovim
 lsp.nvim_workspace()
 
-if config.enable_tsserver then
+if config.enable_tsserver and config.enable_prettier then
   lsp.configure("tsserver", {
     capabilities = {
       -- Disable tsserver formatting (using prettier instead)
