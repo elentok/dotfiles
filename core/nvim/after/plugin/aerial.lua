@@ -13,6 +13,12 @@ aerial.setup({
     vim.keymap.set("n", "[[", "<cmd>AerialPrev<cr>", { buffer = bufnr })
     vim.keymap.set("n", "]]", "<cmd>AerialNext<cr>", { buffer = bufnr })
   end,
+  nav = {
+    keymaps = {
+      ["?"] = "actions.help",
+      ["q"] = "actions.close",
+    },
+  },
 })
 
 vim.cmd([[hi link AerialLine DiffAdd]])
