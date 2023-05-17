@@ -40,11 +40,6 @@ local function extend_config(new_config)
   end
 end
 
-local ok, local_config = pcall(require, "elentok-local/config")
-if ok then
-  extend_config(local_config)
-end
-
 local ok, private_config = pcall(require, "elentok-private/config")
 if ok then
   extend_config(private_config)
@@ -53,7 +48,7 @@ end
 local git_dir = vim.fn.finddir(".git")
 if git_dir then
   local git_root =
-      vim.fn.fnamemodify(vim.fn.fnamemodify(gitdir, ":h"), ":p"):gsub(vim.env.HOME .. "/", "~/")
+      vim.fn.fnamemodify(vim.fn.fnamemodify(git_dir, ":h"), ":p"):gsub(vim.env.HOME .. "/", "~/")
   local path_specific_config = config.path_specific_config[git_root]
   if path_specific_config ~= nil then
     extend_config(path_specific_config)

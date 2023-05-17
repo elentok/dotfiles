@@ -1,4 +1,6 @@
 return {
+  { dir = "~/.dotprivate/nvim" },
+
   -- Optimizations.
   "lewis6991/impatient.nvim",
 
