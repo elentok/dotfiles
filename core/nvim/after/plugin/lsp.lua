@@ -54,14 +54,13 @@ lsp.ensure_installed({
 -- (Optional) Configure lua language server for neovim
 lsp.nvim_workspace()
 
-if config.enable_tsserver and config.enable_prettier then
-  lsp.configure("tsserver", {
-    capabilities = {
-      -- Disable tsserver formatting (using prettier instead)
-      document_formatting = false,
-    },
-  })
-end
+-- Prefer to format with prettierd or eslint_d
+lsp.configure("tsserver", {
+  capabilities = {
+    -- Disable tsserver formatting (using prettier/eslint instead)
+    document_formatting = false,
+  },
+})
 
 lsp.configure("openscad_lsp", {
   cmd = { "openscad-lsp", "--stdio", "--fmt-style", "Google" },
