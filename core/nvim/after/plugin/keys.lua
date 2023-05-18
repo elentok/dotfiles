@@ -90,3 +90,5 @@ local function move_to_top_third()
 end
 
 vim.keymap.set("n", "zz", move_to_top_third)
+
+vim.keymap.set("v", "<space>p", ":!prettierd %<cr>")
