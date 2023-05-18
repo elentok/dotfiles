@@ -45,7 +45,7 @@ if ok then
   extend_config(private_config)
 end
 
-local git_dir = vim.fn.finddir(".git")
+local git_dir = vim.fn.finddir(".git", ";.")
 if git_dir then
   local git_root =
       vim.fn.fnamemodify(vim.fn.fnamemodify(git_dir, ":h"), ":p"):gsub(vim.env.HOME .. "/", "~/")
