@@ -163,4 +163,6 @@ return {
       require("gitlinker").setup()
     end,
   },
+
+  { "kevinhwang91/nvim-bqf", ft = "qf" },
 }
