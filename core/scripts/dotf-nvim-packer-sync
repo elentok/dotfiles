@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-set -euo pipefail
-
-source "$DOTF/framework"
-
-dotf-bullet "Running PackerSync... "
-nvim --noplugin -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-dotf-success "done"

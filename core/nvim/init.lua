@@ -7,6 +7,3 @@ if vim.env.DOTF == nil then
 end
 
 require("elentok/startup")
-
--- disable for now (https://github.com/wbthomason/packer.nvim/issues/201)
--- require("packer_compiled")

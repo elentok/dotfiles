@@ -25,7 +25,6 @@ end, {})
 create_cmd("CacheBust", function()
   vim.cmd([[
     LuaCacheClear
-    PackerCompile
   ]])
 end, {})
 

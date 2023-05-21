@@ -51,7 +51,7 @@ function update-neovim-stuff() {
   else
     dotf-github u nvim
   fi
-  dotf-nvim-packer-sync
+  dotf-nvim-lazy-sync
 }
 
 main "$@"
