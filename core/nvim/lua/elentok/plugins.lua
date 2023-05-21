@@ -151,4 +151,16 @@ return {
 
   "mbbill/undotree",
   "Wansmer/sibling-swap.nvim",
+  {
+    "axieax/urlview.nvim",
+    config = function()
+      require("urlview").setup()
+    end,
+  },
+  {
+    "ruifm/gitlinker.nvim",
+    config = function()
+      require("gitlinker").setup()
+    end,
+  },
 }
