@@ -8,6 +8,17 @@ aerial.setup({
     ["_"] = { "lsp", "treesitter" },
     markdown = { "markdown" },
   },
+  filter_kind = {
+    "Class",
+    "Constructor",
+    "Enum",
+    "Function",
+    "Interface",
+    "Module",
+    "Method",
+    "Struct",
+    "Constant",
+  },
   on_attach = function(bufnr)
     vim.keymap.set("n", "<Leader>ta", "<cmd>AerialToggle!<cr>", { buffer = bufnr })
     vim.keymap.set("n", "[[", "<cmd>AerialPrev<cr>", { buffer = bufnr })
