@@ -34,8 +34,8 @@ main() {
   #dotf-component osx-tuning iterm
   #fi
 
-  dotf-header h2 '[dotf-setup] Running npm install...'
-  npm install
+  dotf-header h2 '[dotf-setup] Running yarn install...'
+  yarn install
 
   show-done
 }

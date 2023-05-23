@@ -12,3 +12,12 @@ plugins/fish/fish_variables
 
 # The auto-generated compiled version of packer.
 packer_compiled.lua
+
+# Yarn related stuff
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
