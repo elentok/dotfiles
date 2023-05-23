@@ -1,3 +1,5 @@
+local config = require("elentok/config")
+
 local function is_http_link(link)
   return vim.startswith(link, "http://") or vim.startswith(link, "https://")
 end
@@ -7,7 +9,14 @@ local function open_link(link)
     link = vim.fn.expand("<cfile>")
   end
 
-  if not is_http_link(link) then
+  local parsed_link = nil
+  if config.link_parser ~= nil then
+    parsed_link = config.link_parser(link)
+  end
+
+  if parsed_link ~= nil then
+    link = parsed_link
+  elseif not is_http_link(link) then
     link = "http://" .. link
   end
 

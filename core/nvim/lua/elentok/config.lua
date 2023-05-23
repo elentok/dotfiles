@@ -26,8 +26,11 @@ local config = {
   },
   -- Config specific to root paths in which Neovim was opened.
   path_specific_config = {},
-}
 
+  -- Allows dotprivate configs to parse links (should return the new URL if
+  -- recognized or nil otherwise).
+  link_parser = nil,
+}
 
 local ok, private_config = pcall(require, "elentok-private/config")
 if ok then
