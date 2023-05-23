@@ -1,3 +1,6 @@
+gui:
+  showCommandLog: false
+  showIcons: true
 keybinding:
   universal:
     return: "q"
