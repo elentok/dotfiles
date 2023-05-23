@@ -40,7 +40,7 @@ function update-node() {
     (cd "$N_PREFIX" && git pull)
 
     dotf-header h2 'Updating NodeJS...'
-    n --preserve lts # Preserve npm (don't downgrade to lts version)
+    n --preserve "$(dotf-node-version)" # Preserve npm (don't downgrade to lts version)
   fi
 }
 

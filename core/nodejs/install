@@ -17,7 +17,7 @@ main() {
 
 install_node() {
   if [ -z "$(n ls)" ]; then
-    n lts
+    n "$(dotf-node-version)"
     npm install -g npm # Upgrade to the latest npm
   fi
 }

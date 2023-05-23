@@ -11,6 +11,7 @@ export DOTF
 
 source "$DOTF/core/zsh/core.sh"
 source "$DOTF/core/scripts/lib/ui.sh"
+source "$DOTF/core/scripts/lib/node.sh"
 source "$DOTF/core/scripts/lib/git.sh"
 source "$DOTF/core/scripts/lib/benchmark.sh"
 
