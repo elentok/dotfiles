@@ -7,6 +7,7 @@ GITCONFIG="$HOME/.gitconfig"
 main() {
   install_gitconfig
   setup_git_user
+  setup_lazygit
 }
 
 install_gitconfig() {
@@ -53,6 +54,17 @@ setup_git_user() {
     ask 'Git email?' git_email '3david@gmail.com'
     git config --global user.email "$git_email"
   fi
+}
+
+function setup_lazygit() {
+  local config_path="$HOME/.config/lazygit/config.yml"
+  if dotf-is-mac; then
+    config_path="$HOME/Library/Application Support/lazygit/config.yml"
+  fi
+
+  # mkdir -p "$(dirname "$config_path))"
+
+  symlink "$DOTF/core/git/lazygit.yml" "$config_path"
 }
 
 main "$@"
