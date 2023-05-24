@@ -62,7 +62,7 @@ function setup_lazygit() {
     config_path="$HOME/Library/Application Support/lazygit/config.yml"
   fi
 
-  # mkdir -p "$(dirname "$config_path))"
+  mkdir -p "$(dirname "$config_path")"
 
   symlink "$DOTF/core/git/lazygit.yml" "$config_path"
 }
