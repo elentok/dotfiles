@@ -1,6 +1,11 @@
 gui:
   showCommandLog: false
   showIcons: true
+  theme:
+    selectedLineBgColor:
+      - black
+    selectedRangeBgColor:
+      - black
 keybinding:
   universal:
     return: "q"
