@@ -107,10 +107,11 @@ return {
   "AndrewRadev/splitjoin.vim",
   "jamessan/vim-gnupg",
   "davidbeckingsale/writegood.vim",
-  "sotte/presenting.vim",      -- Presentation tool
-  "karb94/neoscroll.nvim",     -- Smooth scrolling
+  "sotte/presenting.vim",  -- Presentation tool
+  "karb94/neoscroll.nvim", -- Smooth scrolling
   "kyazdani42/nvim-web-devicons",
-  "TimUntersberger/neogit",    -- Git client
+  --"TimUntersberger/neogit",    -- Git client
+  "kdheepak/lazygit.nvim",
   { "akinsho/git-conflict.nvim",                version = "v1.0.0" },
   "nvim-lualine/lualine.nvim", -- Statusline
   "tversteeg/registers.nvim",  -- Shows registers contents when using them

@@ -23,6 +23,7 @@ aerial.setup({
     vim.keymap.set("n", "<Leader>ta", "<cmd>AerialToggle!<cr>", { buffer = bufnr })
     vim.keymap.set("n", "[[", "<cmd>AerialPrev<cr>", { buffer = bufnr })
     vim.keymap.set("n", "]]", "<cmd>AerialNext<cr>", { buffer = bufnr })
+    vim.keymap.set("n", "<Leader>ga", "<cmd>AerialNavOpen<cr>", { buffer = bufnr })
   end,
   nav = {
     keymaps = {

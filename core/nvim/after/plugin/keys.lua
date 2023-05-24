@@ -92,3 +92,4 @@ end
 vim.keymap.set("n", "zz", move_to_top_third)
 
 vim.keymap.set("v", "<space>p", ":!prettierd %<cr>")
+vim.keymap.set("n", "<leader>lg", ":LazyGit<cr>")

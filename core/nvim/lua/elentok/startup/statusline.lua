@@ -16,7 +16,7 @@ lualine.setup({
   sections = {
     lualine_a = { "filename" },
     lualine_b = { { shortener.dir, icon = "" } },
-    lualine_c = {},
+    lualine_c = { "branch" },
     lualine_x = { { navic_get_location, cond = navic_is_available } },
     lualine_y = { "filetype" },
   },
