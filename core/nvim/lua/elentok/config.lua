@@ -1,6 +1,7 @@
 local deep_merge = require("elentok/deep-merge")
 
 local config = {
+  enable_eslint_formatter = false,
   prettierd_disabled_filetypes = {},
   format_on_save = {
     "css",
