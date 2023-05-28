@@ -49,6 +49,7 @@ lsp.ensure_installed({
   "lua_ls",
   "tailwindcss",
   "terraformls",
+  "graphql",
 })
 
 -- (Optional) Configure lua language server for neovim
