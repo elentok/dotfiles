@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+#
+# Git Pull & Rebase against main/master
+#
+# Usage:
+#
+#   git plo <branch>
+
+source "$DOTF/framework"
+set -euo pipefail
+
+branch="${1:-}"
+
+if [ -z "$branch" ]; then
+  if [ -n "$(git branch -l master)" ]; then
+    branch="master"
+  elif [ -n "$(git branch -l main)" ]; then
+    branch="main"
+  else
+    echo "ERROR: Can't find either a 'master' or 'main' branch"
+    usage "$0"
+    exit 1
+  fi
+
+fi
+
+dotf-header h2 "Checking out '${branch}'"
+git checkout "$branch"
+dotf-header h2 "Pulling changes from '${branch}'"
+git pull
+dotf-header h2 "Checking out previous branch"
+git checkout -
+dotf-header h2 "Rebasing '${branch}'"
+git rebase "$branch"
+dotf-header h2 "Done."
