@@ -198,6 +198,22 @@ yr() {
   fi
 }
 
+# Go to yarn package
+yp() {
+  local root
+  root="$(git-root)"
+  if [ ! -d "$root/packages" ]; then
+    echo "No packages/ directory in project root"
+    return 1
+  fi
+
+  local package
+  package="$(cd "$root/packages" || return && command ls -1 | fzf --exit-0)"
+  if [ -n "$package" ]; then
+    cd "$root/packages/$package" || return 1
+  fi
+}
+
 npr() {
   # calling "print -s" adds the command to zsh history
 
