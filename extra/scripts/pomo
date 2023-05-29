@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#
+# Based on - https://www.youtube.com/watch?v=GfQjJBtO-8Y
+
+set -euo pipefail
+
+# timer 2s && terminal-notifier -message 'Pomodoro' -title 'Work Timer is up! Take a Break' && say 'Take a break'
+timer 25m \
+  && terminal-notifier \
+    -message 'Pomodoro' \
+    -title 'Work Timer is up! Take a Break' \
+  && say 'Take a break'
