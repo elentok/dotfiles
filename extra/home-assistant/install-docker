@@ -5,13 +5,20 @@
 
 set -euo pipefail
 
+name="homeassistant"
 timezone="$(cat /etc/timezone)"
+image="ghcr.io/home-assistant/home-assistant:stable"
+
+if [ "${1:-}" == "upgrade" ]; then
+  docker stop "$name"
+  docker pull "$image"
+fi
 
 docker run -d \
-  --name homeassistant \
+  --name "$name" \
   --privileged \
   --restart=unless-stopped \
   -e "TZ=$timezone" \
   -v "$DOTL/config/home-assistant":/config \
   --network=host \
-  ghcr.io/home-assistant/home-assistant:stable
+  "$image"
