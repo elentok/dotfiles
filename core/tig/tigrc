@@ -81,6 +81,10 @@ bind generic cc !@dotf-tmux-smart-split "git commit"
 bind generic co !git checkout %(commit)
 bind generic ca !?@git commit --amend --no-edit
 
+bind generic p none
+bind main ps !git ps
+bind main pl !git pl
+
 bind generic K view-help
 bind generic <C-w><C-w> view-next
 
