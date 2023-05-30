@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTF/core/scripts/lib/ui.sh"
+
+cmd="rm -f /tmp/tmux-nvim-exitcode; nvim $*; echo \$? > /tmp/tmux-nvim-exitcode; tmux wait -S tmux-nvim-wait"
+
+dotf-tmux-smart-split "$cmd"
+
+echo "Waiting for neovim to close..."
+tmux wait tmux-nvim-wait
+
+if [ ! -e /tmp/tmux-nvim-exitcode ]; then
+  exit 1
+fi
+
+exitcode="$(cat /tmp/tmux-nvim-exitcode)"
+rm -f /tmp/tmux-nvim-exitcode
+
+if [ "$exitcode" != "0" ]; then
+  dotf-error "Neovim exited with code $exitcode"
+fi
+
+exit "$exitcode"

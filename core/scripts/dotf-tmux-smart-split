@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+#
+# Usage:
+#
+#   dotf-tmux-smart-split [cmd]
+
+set -euo pipefail
+
+if [ -z "${TMUX:-}" ]; then
+  echo "WARNING: Not inside tmux, running command directly"
+  "$@"
+  return $?
+fi
+
+size="$(tmux display -d 0 -p '#{pane_width}x#{pane_height}')"
+width="${size/x[0-9]*/}"
+height="${size/[0-9]*x/}"
+
+if [ "$width" -gt "$((height * 3))" ]; then
+  split_arg="-h"
+else
+  split_arg="-v"
+fi
+
+if [ $# -gt 0 ]; then
+  tmux split "$split_arg" "$*"
+else
+  tmux split "$split_arg"
+fi

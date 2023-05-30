@@ -77,7 +77,7 @@ bind generic @+ :toggle diff-context +1
 # bind generic us stage-split-chunk
 
 bind generic c  none
-bind generic cc !git commit
+bind generic cc !@dotf-tmux-smart-split "git commit"
 bind generic co !git checkout %(commit)
 bind generic ca !?@git commit --amend --no-edit
 
