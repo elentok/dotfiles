@@ -92,6 +92,9 @@ local exclude_from_folding = {}
 -- local exclude_from_folding = { markdown = true }
 
 local function setupFolding()
+  if vim.wo.diff then
+    return
+  end
   local filetype = util.buf_get_filetype(0)
   if exclude_from_folding[filetype] then
     return
