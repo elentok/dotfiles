@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+function main() {
+  if [ "$1" == "left" ]; then
+    status-left
+  else
+    status-right
+  fi
+}
+
+function status-left() {
+  pretty-host
+}
+
+function status-right() {
+  echo -n "#{pomodoro_status}"
+  item fg=yellow "$(~/.dotfiles/extra/scripts/bat-left)"
+}
+
+function item() {
+  local style="$1"
+  local text="$2"
+  echo -n "#[${style}]${text}#[default]"
+}
+
+function pretty-host() {
+  item "bg=$(dotf-host-info tmux-color),fg=black" " $(dotf-host-info pretty-name) "
+  echo -n " (#S)"
+}
+
+main "$@"
+
+# echo '#[bg=orange,fg=black]WOOT#[default] bla'
+# set -g @status_host '#[bg=#(dotf-host-info tmux-color),fg=black] (#S) #(dotf-host-info pretty-name) #[default]'
