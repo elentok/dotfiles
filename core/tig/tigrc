@@ -1,3 +1,4 @@
+# vim: filetype=config
 color cursor black green
 bind generic P !git add -p %(file)
 

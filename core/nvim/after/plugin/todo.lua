@@ -3,16 +3,37 @@ local checked = "%[x%]"
 
 local DONE_COLOR = "#6C7A96"
 
+local config = {
+  statuses = {
+    inprogress = {
+      hl = { bg = "#EBCB8B", fg = "#000000" },
+    },
+    waiting = {
+      hl = { fg = "#EBCB8B" },
+    },
+    codereview = {
+      hl = { fg = "#9369DB" },
+    },
+    done = {
+      text = "x",
+      hl = { fg = DONE_COLOR },
+    },
+  },
+}
+
 local function setup()
-  vim.fn.matchadd("TodoInprogress", "\\[inprogress\\].*$")
-  vim.fn.matchadd("TodoWaiting", "\\[waiting\\].*$")
-  vim.fn.matchadd("TodoDone", "\\[x\\].*$")
+  for status_name, status_opts in pairs(config.statuses) do
+    local capitalized_name = status_name:sub(1, 1):upper() .. status_name:sub(2)
+    local group = "Todo" .. capitalized_name
+    local text = status_opts.text or status_name
+
+    vim.fn.matchadd(group, "\\[" .. text .. "\\].*$")
+    vim.api.nvim_set_hl(0, group, status_opts.hl)
+  end
+
   vim.fn.matchadd("TodoContext", "@[^ ]*")
   vim.fn.matchadd("TodoImportant", " !.*$")
 
-  vim.api.nvim_set_hl(0, "TodoInprogress", { bg = "#EBCB8B", fg = "#000000" })
-  vim.api.nvim_set_hl(0, "TodoWaiting", { fg = "#EBCB8B" })
-  vim.api.nvim_set_hl(0, "TodoDone", { fg = DONE_COLOR })
   vim.api.nvim_set_hl(0, "TodoContext", { fg = "#88c0d0", italic = true })
   vim.api.nvim_set_hl(0, "TodoImportant", { fg = "#d57780" })
 
