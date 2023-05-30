@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+#
+# Git push feature
+
+set -euo pipefail
+
+source "$DOTF/framework"
+
+branch="$(git-my-branch)"
+
+if [ -z "$branch" ] || [[ ! "$branch" =~ ^feature/ ]]; then
+  echo "Not in a feature branch"
+  exit 1
+fi
+
+dotf-header h1 "Pushing ${branch}"
+
+if ! git push origin "$branch"; then
+  echo
+  if confirm "Failed to push branch, push with force?"; then
+    git push -f origin "$branch"
+  fi
+fi
