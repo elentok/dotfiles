@@ -23,7 +23,7 @@ else
 fi
 
 if [ $# -gt 0 ]; then
-  tmux split "$split_arg" "$*"
+  tmux split "$split_arg" bash -c "$@"
 else
   tmux split "$split_arg"
 fi
