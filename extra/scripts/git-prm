@@ -21,15 +21,16 @@ if [ -z "$branch" ]; then
     usage "$0"
     exit 1
   fi
-
 fi
+
+last_branch="$(git my-branch)"
 
 dotf-header h2 "Checking out '${branch}'"
 git checkout "$branch"
 dotf-header h2 "Pulling changes from '${branch}'"
 git pull
-dotf-header h2 "Checking out previous branch"
-git checkout -
+dotf-header h2 "Checking out previous branch (${last_branch})"
+git checkout "$last_branch"
 dotf-header h2 "Rebasing '${branch}'"
 git rebase "$branch"
 dotf-header h2 "Done."
