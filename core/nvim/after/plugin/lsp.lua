@@ -47,7 +47,7 @@ lsp.ensure_installed({
   "openscad_lsp",
   "svelte",
   "lua_ls",
-  "tailwindcss",
+  -- "tailwindcss",
   "terraformls",
   "graphql",
 })
