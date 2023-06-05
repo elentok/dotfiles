@@ -12,9 +12,11 @@ if [ -z "${TMUX:-}" ]; then
   return $?
 fi
 
-size="$(tmux display -d 0 -p '#{pane_width}x#{pane_height}')"
-width="${size/x[0-9]*/}"
-height="${size/[0-9]*x/}"
+# size="$(tmux display -d 0 -p '#{pane_width}x#{pane_height}')"
+# width="${size/x[0-9]*/}"
+# height="${size/[0-9]*x/}"
+width="$(tput cols)"
+height="$(tput lines)"
 
 if [ "$width" -gt "$((height * 3))" ]; then
   split_arg="-h"
