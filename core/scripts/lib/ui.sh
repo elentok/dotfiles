@@ -122,7 +122,7 @@ dotf-success() {
 }
 
 dotf-error() {
-  dotf-color red "✔ $*"
+  dotf-color red "✘ $*"
   echo
 }
 
