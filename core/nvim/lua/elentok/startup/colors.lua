@@ -26,12 +26,12 @@ vim.cmd([[
 -- Tmux support (requires "focus-events" to be on in tmux.conf)
 vim.api.nvim_create_autocmd({ "FocusGained" }, {
   callback = function()
-    vim.cmd("hi Normal guibg=#232730")
+    vim.api.nvim_set_hl(0, "Normal", { bg = "#232730" })
   end,
 })
 
 vim.api.nvim_create_autocmd({ "FocusLost" }, {
   callback = function()
-    vim.cmd("hi Normal guibg=#171b20")
+    vim.api.nvim_set_hl(0, "Normal", { bg = "#171b20" })
   end,
 })
