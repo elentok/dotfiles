@@ -147,9 +147,21 @@ function M.shell(cmd, opts)
   end
 end
 
+local function extract_fugitive_path(path)
+  if string.match(path, "^fugitive://") then
+    path = string.gsub(path, "^fugitive://", "")
+
+    if vim.fn.fnamemodify(path, ":t") == ".git" then
+      path = vim.fn.fnamemodify(path, ":h")
+    end
+  end
+
+  return path
+end
+
 function M.ishell(cmd, opts)
   opts = vim.tbl_extend("force", { large = false }, opts or {})
-  local cwd = vim.fn.expand("%:p:h")
+  local cwd = extract_fugitive_path(vim.fn.expand("%:p:h"))
 
   local cmd_args = {
     string.format("cd '%s'", cwd),
@@ -181,6 +193,7 @@ function M.tabpage_get_buf_win_number(tabnr, bufnr)
 
   return nil
 end
+
 _G.put = M.put
 
 function M.add_dirs(tbl, dirs)
