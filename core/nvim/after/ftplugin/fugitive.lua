@@ -9,7 +9,7 @@ local commands = {
   ["Pull and rebase main"] = "Git prm",
 }
 
-vim.keymap.set("n", "q", ":q<cr>")
+vim.keymap.set("n", "q", ":q<cr>", { buffer = true })
 vim.keymap.set("n", "@", function()
   vim.ui.select(vim.tbl_keys(commands), {
     prompt = "Select command:",
@@ -19,4 +19,4 @@ vim.keymap.set("n", "@", function()
       util.ishell(cmd)
     end
   end)
-end)
+end, { buffer = true })
