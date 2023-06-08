@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+YARN_CHECKSUM_BEHAVIOR=update CACHE_CHECKSUM_MISMATCH=update yarn
