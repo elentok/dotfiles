@@ -96,8 +96,18 @@ function is-n-providing-node() {
   [ "$DOTF_CONFIG_NODE_PROVIDER" = "n" ]
 }
 
+function is-nvm-providing-node() {
+  [ "$DOTF_CONFIG_NODE_PROVIDER" = "nvm" ]
+}
+
 if is-n-providing-node; then
   export N_PREFIX=$HOME/.n
+fi
+
+if is-nvm-providing-node; then
+  export NVM_DIR=$HOME/.nvm
+  source_if_exists "$NVM_DIR/nvm.sh"
+  source_if_exists "$NVM_DIR/bash_completion"
 fi
 
 # Go {{{1

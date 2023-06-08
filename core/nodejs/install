@@ -7,11 +7,27 @@ source "$(dirname "$0")/../../framework"
 main() {
   if is_termux; then
     dotf-apt nodejs-lts
+  elif [ "$DOTF_CONFIG_NODE_PROVIDER" = "nvm" ]; then
+    install_nvm
   elif [ "$DOTF_CONFIG_NODE_PROVIDER" = "n" ]; then
     git_clone https://github.com/tj/n "$N_PREFIX"
-    install_node
+    install_node_with_n
   else
     dotf-apt nodejs npm
+  fi
+}
+
+install_nvm() {
+  if [ ! -e "$NVM_DIR" ]; then
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+  fi
+  install_node_with_nvm
+}
+
+install_node_with_nvm() {
+  if ! nvm ls node > /dev/null; then
+    nvm install "$(dotf-node-version)"
+    npm install -g npm # Upgrade to the latest npm
   fi
 }
 
