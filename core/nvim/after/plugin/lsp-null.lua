@@ -6,8 +6,6 @@ end
 
 local sources = {
   null_ls.builtins.diagnostics.shellcheck,
-  null_ls.builtins.diagnostics.eslint_d,
-  null_ls.builtins.code_actions.eslint_d,
   null_ls.builtins.code_actions.shellcheck,
   null_ls.builtins.formatting.prettierd.with({
     disabled_filetypes = config.prettierd_disabled_filetypes,
@@ -25,8 +23,17 @@ local sources = {
   require("typescript.extensions.null-ls.code-actions"),
 }
 
-if config.enable_eslint_formatter then
-  table.insert(sources, null_ls.builtins.formatting.eslint_d)
+local function has_eslintrc()
+  return vim.fn.findfile(".eslintrc", ";.") ~= ""
+end
+
+if has_eslintrc() then
+  table.insert(sources, null_ls.builtins.diagnostics.eslint_d)
+  table.insert(sources, null_ls.builtins.code_actions.eslint_d)
+
+  if config.enable_eslint_formatter then
+    table.insert(sources, null_ls.builtins.formatting.eslint_d)
+  end
 end
 
 null_ls.setup({
