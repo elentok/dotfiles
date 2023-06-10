@@ -43,7 +43,7 @@ function main() {
   cat > .prettierrc << EOF
   {
   "\$schema": "http://json.schemastore.org/prettierrc",
-  "semi": true,
+  "semi": false,
   "printWidth": 100
 }
 EOF
@@ -51,6 +51,11 @@ EOF
   git add .prettierrc
   git commit -m "chore(*): add prettier configuration"
 
+  # Setup dummy source files and build command
+  mkdir src dist
+  echo 'console.log("Hello World")' >> src/index.ts
+
+  npm pkg set 'scripts.dev'='swc -w src/index.ts --out-file dist/index.js'
 }
 
 main "$@"
