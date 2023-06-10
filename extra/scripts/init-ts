@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+#
+# Initialize new Typescript project with Yarn 2 (PnP enabled), swc, prettier and
+# eslint
+#
+# Usage:
+#
+#   init-ts <project-name>
+#
+
+set -euo pipefail
+
+function main() {
+  if [ $# -eq 0 ]; then
+    usage "$0"
+    exit 1
+  fi
+
+  local name="$1"
+
+  mkdir "$name"
+  cd "$name"
+  git init
+
+  # Install Yarn
+  yarn init -2
+  git add .
+  git commit -m "initial commit (yarn)"
+
+  # Install Swc, Prettier and eslint
+  yarn add -D @swc/cli @swc/core chokidar typescript @yarnpkg/sdks \
+    typescript prettier eslint
+
+  git add .
+  git commit -m "chore(*): add base dependencies"
+
+  # Setup editor support for Yarn PnP (add "vscode" to support vscode)
+  yarn sdks base
+
+  git add .
+  git commit -m "chore(*): add editor support (run 'yarn sdks base')"
+
+  cat > .prettierrc << EOF
+  {
+  "\$schema": "http://json.schemastore.org/prettierrc",
+  "semi": true,
+  "printWidth": 100
+}
+EOF
+
+  git add .prettierrc
+  git commit -m "chore(*): add prettier configuration"
+
+}
+
+main "$@"
