@@ -49,16 +49,13 @@ lspconfig.lua_ls.setup({
   },
 })
 
--- (Optional) Configure lua language server for neovim
--- lsp.nvim_workspace()
-
--- lsp.configure("openscad_lsp", {
---   cmd = { "openscad-lsp", "--stdio", "--fmt-style", "Google" },
---   -- Disabling the OpenSCAD LSP's completion because it's very very slow
---   on_attach = function(client)
---     client.server_capabilities.completionProvider = false
---   end,
--- })
+lspconfig.openscad_lsp.setup({
+  cmd = { "openscad-lsp", "--stdio", "--fmt-style", "Google" },
+  -- Disabling the OpenSCAD LSP's completion because it's very very slow
+  on_attach = function(client)
+    client.server_capabilities.completionProvider = false
+  end,
+})
 --
 -- lsp.setup()
 
