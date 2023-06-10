@@ -20,6 +20,7 @@ color gruvbox
 
 " File Viewers {{{1
 fileviewer *.zip,*.jar,*.war,*.ear zip -sf %c, echo "No zip to preview:"
+fileviewer *.tar.gz tar -tzvf %c, echo "No tar.gz to preview:"
 fileviewer *.pdf pdftotext -nopgbrk %c -
 fileviewer *.deb dpkg -c %c
 fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
