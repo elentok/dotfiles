@@ -106,8 +106,7 @@ fi
 
 if is-nvm-providing-node; then
   export NVM_DIR=$HOME/.nvm
-  source_if_exists "$NVM_DIR/nvm.sh"
-  source_if_exists "$NVM_DIR/bash_completion"
+  [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh" --no-use
 fi
 
 # Go {{{1
