@@ -4,7 +4,7 @@ vim.diagnostic.config({
     prefix = "●",
   },
   float = {
-    border = "single",
+    border = "rounded",
   },
 })
 

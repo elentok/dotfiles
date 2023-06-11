@@ -4,6 +4,11 @@ local create_cmd = vim.api.nvim_create_user_command
 
 require("lsp_signature").setup()
 
+-- add border to hover floats (when pressing K)
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = "rounded",
+})
+
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
 vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references)
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
