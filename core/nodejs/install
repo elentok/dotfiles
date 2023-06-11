@@ -31,7 +31,7 @@ install_node_with_nvm() {
   fi
 }
 
-install_node() {
+install_node_with_n() {
   if [ -z "$(n ls)" ]; then
     n "$(dotf-node-version)"
     npm install -g npm # Upgrade to the latest npm
