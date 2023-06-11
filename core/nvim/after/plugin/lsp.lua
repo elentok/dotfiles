@@ -1,3 +1,4 @@
+local config = require("elentok/config")
 local lspconfig = require("lspconfig")
 local create_cmd = vim.api.nvim_create_user_command
 
@@ -56,6 +57,15 @@ lspconfig.openscad_lsp.setup({
     client.server_capabilities.completionProvider = false
   end,
 })
+
+if config.enable_tsserver then
+  lspconfig.tsserver.setup({
+    on_attach = function(client)
+      -- Disable tsserver formatting (using prettier instead)
+      client.server_capabilities.document_formatting = false
+    end,
+  })
+end
 --
 -- lsp.setup()
 
