@@ -2,7 +2,6 @@ local config = require("elentok/config")
 local lspconfig = require("lspconfig")
 local create_cmd = vim.api.nvim_create_user_command
 
-vim.diagnostic.config({ virtual_text = true })
 require("lsp_signature").setup()
 
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)

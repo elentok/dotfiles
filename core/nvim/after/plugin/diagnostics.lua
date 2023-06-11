@@ -3,8 +3,12 @@ vim.diagnostic.config({
     source = "if_many",
     prefix = "●",
   },
+  float = {
+    border = "single",
+  },
 })
 
+vim.keymap.set("n", "gl", vim.diagnostic.open_float)
 vim.keymap.set("n", "<space>dd", vim.diagnostic.open_float)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
