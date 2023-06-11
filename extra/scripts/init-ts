@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Initialize new Typescript project with Yarn 2 (PnP enabled), swc, prettier and
+# Initialize new Typescript project with NPM, swc, prettier and
 # eslint
 #
 # Usage:
@@ -22,23 +22,24 @@ function main() {
   cd "$name"
   git init
 
-  # Install Yarn
-  yarn init -2
+  # NPM Init
+  npm init
+  echo node_modules/ > .gitignore
   git add .
   git commit -m "initial commit (yarn)"
 
   # Install Swc, Prettier and eslint
-  yarn add -D @swc/cli @swc/core chokidar typescript @yarnpkg/sdks \
+  npm install --save-dev @swc/cli @swc/core chokidar typescript \
     typescript prettier eslint
 
   git add .
   git commit -m "chore(*): add base dependencies"
 
   # Setup editor support for Yarn PnP (add "vscode" to support vscode)
-  yarn sdks base
+  # yarn sdks base
 
-  git add .
-  git commit -m "chore(*): add editor support (run 'yarn sdks base')"
+  # git add .
+  # git commit -m "chore(*): add editor support (run 'yarn sdks base')"
 
   cat > .prettierrc << EOF
   {
@@ -56,6 +57,7 @@ EOF
   echo 'console.log("Hello World")' >> src/index.ts
 
   npm pkg set 'scripts.dev'='swc -w src/index.ts --out-file dist/index.js'
+  npm pkg set 'type'='module'
 }
 
 main "$@"
