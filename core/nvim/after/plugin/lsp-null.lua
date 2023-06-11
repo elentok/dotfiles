@@ -24,7 +24,7 @@ local sources = {
 }
 
 local function has_eslintrc()
-  return vim.fn.findfile(".eslintrc", ";.") ~= ""
+  return vim.fn.findfile("eslintrc.js", ";.") ~= "" or vim.fn.findfile(".eslintrc", ";.") ~= ""
 end
 
 if has_eslintrc() then
