@@ -59,6 +59,7 @@ return {
   { "folke/trouble.nvim", dependencies = { "kyazdani42/nvim-web-devicons" } },
   {
     "j-hui/fidget.nvim", -- Shows LSP init progress
+    tag = "legacy",
     config = function()
       require("fidget").setup()
     end,
