@@ -1,17 +1,36 @@
-local function toggle_focused_test()
-  local line = vim.api.nvim_get_current_line()
-
+local function toggle_test_line(line)
   if line:match("%f[%a]describe%(") then
-    line = line:gsub("%f[%a]describe%(", "describe.only(")
+    return line:gsub("%f[%a]describe%(", "describe.only(")
   elseif line:match("%f[%a]describe.only%(") then
-    line = line:gsub("%f[%a]describe.only%(", "describe(")
+    return line:gsub("%f[%a]describe.only%(", "describe(")
   elseif line:match("%f[%a]it%(") then
-    line = line:gsub("%f[%a]it%(", "it.only(")
+    return line:gsub("%f[%a]it%(", "it.only(")
   elseif line:match("%f[%a]it.only%(") then
-    line = line:gsub("%f[%a]it.only%(", "it(")
+    return line:gsub("%f[%a]it.only%(", "it(")
+  elseif line:match("%f[%a]test%(") then
+    return line:gsub("%f[%a]test%(", "test.only(")
+  elseif line:match("%f[%a]test.only%(") then
+    return line:gsub("%f[%a]test.only%(", "test(")
   end
 
-  vim.api.nvim_set_current_line(line)
+  return nil
+end
+
+local function toggle_focused_test()
+  local line
+  local line_index = vim.api.nvim_win_get_cursor(0)[1]
+  while line_index > 0 do
+    line = toggle_test_line(vim.fn.getline(line_index))
+
+    if line ~= nil then
+      vim.api.nvim_buf_set_lines(0, line_index - 1, line_index, false, { line })
+      return
+    end
+
+    line_index = line_index - 1
+  end
+
+  print("No test found")
 end
 
 vim.keymap.set("n", "<space>tt", toggle_focused_test)
