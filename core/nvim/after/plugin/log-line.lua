@@ -2,6 +2,7 @@ local navic = require("nvim-navic")
 local util = require("elentok/util")
 
 local prefix = "[" .. vim.env.USER .. "]"
+local max_context_width = 30
 
 local function get_logger_context()
   local data = navic.get_data()
@@ -39,10 +40,14 @@ local function get_logger_line()
     return ""
   end
 
+  context = context:gsub("'", "\\'")
+  if context:len() > max_context_width then
+    context = context:sub(0, max_context_width + 1) .. "..."
+  end
   context = "[" .. context .. "]"
 
   local filetype = util.buf_get_filetype()
-  if filetype == "typescript" or filetype == "javascript" then
+  if filetype == "typescript" or filetype == "typescriptreact" or filetype == "javascript" then
     return "console.log('" .. prefix .. " " .. context .. "');"
   elseif filetype == "lua" then
     return "put('" .. prefix .. " " .. context .. "');"
