@@ -32,4 +32,5 @@ local function telescope_git_last_commit_files()
 end
 
 vim.api.nvim_create_user_command("Glast", telescope_git_last_commit_files, {})
-vim.keymap.set("n", "<leader>gl", telescope_git_last_commit_files)
+vim.keymap.set("n", "<space>gl", telescope_git_last_commit_files)
+vim.keymap.set("n", "<space>gg", ":G<cr>")
