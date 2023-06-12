@@ -26,7 +26,16 @@ local function setup_fugitive()
   vim.keymap.set("n", "@", command_pallete, { buffer = true })
 end
 
+local function setup_fugitive_blame()
+  vim.keymap.set("n", "q", ":q<cr>", { buffer = true })
+end
+
 vim.api.nvim_create_autocmd(
   { "Filetype" },
   { pattern = "fugitive", callback = setup_fugitive, group = group_id }
+)
+
+vim.api.nvim_create_autocmd(
+  { "Filetype" },
+  { pattern = "fugitiveblame", callback = setup_fugitive_blame, group = group_id }
 )
