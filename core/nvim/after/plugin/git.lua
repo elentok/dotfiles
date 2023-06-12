@@ -34,3 +34,4 @@ end
 vim.api.nvim_create_user_command("Glast", telescope_git_last_commit_files, {})
 vim.keymap.set("n", "<space>gl", telescope_git_last_commit_files)
 vim.keymap.set("n", "<space>gg", ":G<cr>")
+vim.keymap.set("n", "<space>gb", ":G blame<cr>")
