@@ -1,3 +1,6 @@
+-- Separate column for git signs so it doesn't override the line numbers
+vim.opt.signcolumn = "yes"
+
 require("gitsigns").setup({})
 
 vim.keymap.set("n", "<space>b", ":Gitsigns blame_line<cr>")
