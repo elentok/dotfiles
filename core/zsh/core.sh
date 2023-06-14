@@ -107,6 +107,10 @@ fi
 if is-nvm-providing-node; then
   export NVM_DIR=$HOME/.nvm
   [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh" --no-use
+
+  node_version="$(cat "$DOTF/config/node-version")"
+  DOTF_NVM_DEFAULT_PATH="$(find "$NVM_DIR/versions/node" -maxdepth 1 -type d | grep "/v$node_version" | sort -n | head -1)"
+  export DOTF_NVM_DEFAULT_PATH
 fi
 
 # Go {{{1
@@ -138,8 +142,10 @@ $DOTF/extra/scripts:\
 $DOTP/scripts:\
 $DOTL/scripts"
 
-if [ "$DOTF_CONFIG_NODE_PROVIDER" = "n" ]; then
+if is-n-providing-node; then
   PATH="$PATH:$N_PREFIX/bin"
+elif is-nvm-providing-node; then
+  PATH="$PATH:${DOTF_NVM_DEFAULT_PATH}/bin"
 fi
 
 PATH="$PATH:$HOME/.fzf/bin:\
