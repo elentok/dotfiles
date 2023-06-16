@@ -2,7 +2,35 @@ local config = require("elentok/config")
 local lspconfig = require("lspconfig")
 local create_cmd = vim.api.nvim_create_user_command
 
+require("mason").setup({
+  ui = {
+    border = "rounded",
+  },
+})
+
+require("mason-lspconfig").setup({
+  ensure_installed = {
+    "tsserver",
+    "marksman",
+    "lua_ls",
+    "bashls",
+    -- "denols",
+    "pyright",
+    "yamlls",
+    "jsonls",
+    "html",
+    "cssls",
+    "rust_analyzer",
+    "openscad_lsp",
+    "svelte",
+    -- "tailwindcss",
+    "terraformls",
+    "graphql",
+  },
+})
+
 require("lsp_signature").setup()
+require("neodev").setup()
 
 -- add border to hover floats (when pressing K)
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
