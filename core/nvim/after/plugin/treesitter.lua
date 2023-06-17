@@ -87,10 +87,10 @@ treesitter_configs.setup({
     },
   },
 })
-
+--
 -- local exclude_from_folding = {}
--- local exclude_from_folding = { markdown = true }
-
+-- -- local exclude_from_folding = { markdown = true }
+--
 -- local function setupFolding()
 --   if vim.wo.diff then
 --     return
@@ -111,10 +111,10 @@ treesitter_configs.setup({
 -- )
 
 -- After saving a buffer run "zv" to make sure current line isn't folded.
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-  pattern = "*",
-  group = group_id,
-  callback = function()
-    vim.fn.feedkeys("zv", "n")
-  end,
-})
+-- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+--   pattern = "*",
+--   group = group_id,
+--   callback = function()
+--     vim.fn.feedkeys("zv", "n")
+--   end,
+-- })

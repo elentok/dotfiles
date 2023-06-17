@@ -1,9 +1,9 @@
-local function lsp_hover_or_peek_into_fold()
-  local winid = require("ufo").peekFoldedLinesUnderCursor()
-  if not winid then
-    vim.lsp.buf.hover()
-  end
-end
+-- local function lsp_hover_or_peek_into_fold()
+--   local winid = require("ufo").peekFoldedLinesUnderCursor()
+--   if not winid then
+--     vim.lsp.buf.hover()
+--   end
+-- end
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("Elentok_LspConfig", {}),
@@ -19,7 +19,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
     vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "K", lsp_hover_or_peek_into_fold, opts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
     vim.keymap.set("n", "<space>k", vim.lsp.buf.signature_help, opts)
     vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
