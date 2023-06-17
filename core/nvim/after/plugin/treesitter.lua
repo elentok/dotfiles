@@ -88,27 +88,27 @@ treesitter_configs.setup({
   },
 })
 
-local exclude_from_folding = {}
+-- local exclude_from_folding = {}
 -- local exclude_from_folding = { markdown = true }
 
-local function setupFolding()
-  if vim.wo.diff then
-    return
-  end
-  local filetype = util.buf_get_filetype(0)
-  if exclude_from_folding[filetype] then
-    return
-  end
+-- local function setupFolding()
+--   if vim.wo.diff then
+--     return
+--   end
+--   local filetype = util.buf_get_filetype(0)
+--   if exclude_from_folding[filetype] then
+--     return
+--   end
+--
+--   vim.wo.foldmethod = "expr"
+--   vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+-- end
 
-  vim.wo.foldmethod = "expr"
-  vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
-end
-
-local group_id = vim.api.nvim_create_augroup("Elentok_Treesitter", {})
-vim.api.nvim_create_autocmd(
-  { "FileType" },
-  { pattern = "*", group = group_id, callback = setupFolding }
-)
+-- local group_id = vim.api.nvim_create_augroup("Elentok_Treesitter", {})
+-- vim.api.nvim_create_autocmd(
+--   { "FileType" },
+--   { pattern = "*", group = group_id, callback = setupFolding }
+-- )
 
 -- After saving a buffer run "zv" to make sure current line isn't folded.
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
