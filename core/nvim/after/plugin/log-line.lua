@@ -2,7 +2,7 @@ local navic = require("nvim-navic")
 local util = require("elentok/util")
 
 local prefix = "[" .. vim.env.USER .. "]"
-local max_context_width = 30
+local max_context_width = 50
 
 local function get_logger_context()
   local data = navic.get_data()
