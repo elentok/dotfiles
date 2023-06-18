@@ -14,6 +14,20 @@
 
     find . -type f -exec clean '{}' \;
 
+## Ripgrep
+
+### Exclude
+
+Use `-g` or `--glob`
+
+rg {pattern-in-file} -g '!{pattern-to-exclude-in-filename}'
+
+### Only list filenames
+
+Use `-l` or `--files-with-matches`
+
+rg -l {pattern-in-files}
+
 ## Grep
 
 ### Grep all '@context' phrases
