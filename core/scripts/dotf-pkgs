@@ -106,6 +106,8 @@ function upgrade-pkgs() {
   dotf-header h3 '[dotf-pkgs] Updating npm packages...'
   if is-n-providing-node; then
     npm="npm"
+  elif is-nvm-providing-node; then
+    npm="npm"
   else
     npm="sudo npm"
   fi
