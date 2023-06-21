@@ -9,5 +9,4 @@ require("mason-lspconfig").setup({
 })
 
 require("lsp_signature").setup()
-require("neodev").setup()
 require("trouble").setup()

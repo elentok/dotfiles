@@ -1,6 +1,9 @@
 -- This file is under plugin/ instead of after/plugin/
 -- so the LSP servers are already configured when we reach after/plugin/lsp
 
+-- Neodev must be setup before the Lua language server
+require("neodev").setup()
+
 local lspconfig = require("lspconfig")
 
 -- Add border to hover floats (when pressing K)
