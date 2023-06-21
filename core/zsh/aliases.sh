@@ -12,6 +12,7 @@ alias be='bundle exec'
 alias bl='tr ":" "\n"'
 alias bytes='stat --format=%s'
 alias y='dotf-clipboard copy'
+alias yt='yarn test'
 alias C=calc
 alias cl=clear
 alias cdl='cd "$(lerna-select-package)"'
