@@ -2,55 +2,81 @@ local navic = require("nvim-navic")
 local util = require("elentok/util")
 
 local prefix = "[" .. vim.env.USER .. "]"
-local max_context_width = 50
+
+local config = {
+  types = { "Function", "Method", "Class", "Constant" },
+  max_part_width = 20,
+  max_parts = 3,
+  max_context_width = 50,
+}
+
+local function ellipsis_one(name)
+  if name:len() > config.max_part_width then
+    return name:sub(0, config.max_part_width + 1) .. "..."
+  end
+
+  return name
+end
+
+local function cleanup(name)
+  name = name:gsub("'", "")
+
+  if name:match("^describe[%(.]") then
+    name = name:gsub("^describe[^%(]*%(", "")
+  elseif name:match("^it[%(.]") then
+    name = name:gsub("^it[^%(]*%(", "")
+  elseif name:match("^test[%(.]") then
+    name = name:gsub("^test[^%(]*%(", "")
+  end
+
+  name = name:gsub("%) callback", "")
+
+  return name
+end
 
 local function get_logger_context()
   local data = navic.get_data()
-  if data == "" then
+  if data == "" or data == nil then
     return nil
   end
 
-  local container = nil
-  local name = nil
-
+  local parts = {}
   for _, part in pairs(data) do
-    if part.type == "Function" then
-      name = part.name
-    elseif part.type == "Method" then
-      name = part.name
-    elseif part.type == "Class" then
-      container = part.name
+    if vim.tbl_contains(config.types, part.type) then
+      table.insert(parts, ellipsis_one(cleanup(part.name)))
     end
   end
 
-  if container == nil then
-    container = vim.fn.expand("%:t")
+  if #parts == 0 then
+    return nil
   end
 
-  if name == nil then
-    return container
+  if #parts > config.max_parts then
+    parts[2] = "..."
+    while #parts > config.max_parts do
+      table.remove(parts, 3)
+    end
   end
 
-  return container .. " > " .. name .. "()"
+  return table.concat(parts, " > ")
 end
 
 local function get_logger_line()
   local context = get_logger_context()
+
   if context == nil then
-    return ""
+    context = "L" .. vim.fn.line(".")
   end
 
-  context = context:gsub("'", "\\'")
-  if context:len() > max_context_width then
-    context = context:sub(0, max_context_width + 1) .. "..."
-  end
-  context = "[" .. context .. "]"
+  local filename = vim.fn.expand("%:t")
+
+  local log = prefix .. " [" .. filename .. "] " .. context
 
   local filetype = util.buf_get_filetype()
   if filetype == "typescript" or filetype == "typescriptreact" or filetype == "javascript" then
-    return "console.log('" .. prefix .. " " .. context .. "');"
+    return "console.log('" .. log .. "')"
   elseif filetype == "lua" then
-    return "put('" .. prefix .. " " .. context .. "');"
+    return "put('" .. log .. "')"
   else
     return ""
   end
@@ -62,5 +88,5 @@ end
 
 vim.keymap.set("i", "<c-l>", function()
   vim.api.nvim_put({ get_logger_line() }, "c", true, true)
-  feedkeys("<Left><Left>")
+  feedkeys("<Left>")
 end)
