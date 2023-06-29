@@ -2,7 +2,7 @@
 .DS_Store
 .DS_Store?
 npm-debug.log
-.vscode
+#.vscode
 TODO
 tags
 .vim
