@@ -3,10 +3,10 @@
 set -euo pipefail
 
 LOG=$HOME/.local/share/internet-status.log
-INTERVAL_SECONDS=60
 ONLINE_INTERVAL=60
 OFFLINE_INTERVAL=20
 TRIES=3
+STATUS="down"
 
 DOMAINS="www.google.com
 www.kan.org.il
@@ -25,7 +25,11 @@ function main() {
 
   while true; do
     test-connection
-    sleep "$INTERVAL_SECONDS"
+    if [ "$STATUS" == "up" ]; then
+      sleep "$ONLINE_INTERVAL"
+    else
+      sleep "$OFFLINE_INTERVAL"
+    fi
   done
 }
 
@@ -40,7 +44,10 @@ function test-connection() {
     domain="$(pick-random-domain)"
     if curl --silent -I "https://$domain" | head -1 | grep -E '([23]0[0-9])' > /dev/null; then
       echo "$(timestamp),ONLINE,$domain" >> "$LOG"
-      INTERVAL_SECONDS="$ONLINE_INTERVAL"
+      if [ "$STATUS" == "down" ]; then
+        notify-internet-restored
+      fi
+      STATUS="up"
       return 0
     else
       failed_domains+=("$domain")
@@ -49,8 +56,14 @@ function test-connection() {
   done
 
   echo "$(timestamp),OFFLINE,${failed_domains[*]}" >> "$LOG"
-  INTERVAL_SECONDS="$OFFLINE_INTERVAL"
+  STATUS="down"
   return 1
+}
+
+function notify-internet-restored() {
+  last_online="$(grep ",ONLINE," "$LOG" | tail -1)"
+  curl -d "message=Internet down time from ${last_online} to $(timestamp)" \
+    "http://localhost:10000/send"
 }
 
 function timestamp() {
