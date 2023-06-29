@@ -9,3 +9,6 @@ vim.keymap.set("n", "<space>gp", ":Gitsigns preview_hunk<cr>")
 vim.keymap.set("n", "<space>gi", ":Gitsigns preview_hunk_inline<cr>")
 vim.keymap.set("n", "[c", ":Gitsigns prev_hunk<cr>")
 vim.keymap.set("n", "]c", ":Gitsigns next_hunk<cr>")
+
+-- Text object
+vim.keymap.set({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
