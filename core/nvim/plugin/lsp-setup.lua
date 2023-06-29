@@ -81,7 +81,7 @@ setup("lua_ls", {
 setup("openscad_lsp", {
   cmd = { "openscad-lsp", "--stdio", "--fmt-style", "Google" },
   -- Disabling the OpenSCAD LSP's completion because it's very very slow
-  on_attach = function(client)
-    client.server_capabilities.completionProvider = false
-  end,
+  -- on_attach = function(client)
+  --   client.server_capabilities.completionProvider = false
+  -- end,
 })
