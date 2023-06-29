@@ -34,6 +34,14 @@ local function cleanup(name)
   return name
 end
 
+local function show_part(part)
+  if not vim.tbl_contains(config.types, part.type) then
+    return false
+  end
+
+  return part.name ~= "<function>"
+end
+
 local function get_logger_context()
   local data = navic.get_data()
   if data == "" or data == nil then
@@ -42,7 +50,7 @@ local function get_logger_context()
 
   local parts = {}
   for _, part in pairs(data) do
-    if vim.tbl_contains(config.types, part.type) then
+    if show_part(part) then
       table.insert(parts, ellipsis_one(cleanup(part.name)))
     end
   end
