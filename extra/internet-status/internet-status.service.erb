@@ -1,0 +1,16 @@
+# Put this file in /usr/lib/systemd/system
+
+[Unit]
+Description=Internet Status Checker
+Requires=network.target
+
+[Service]
+User=<%= ENV['USER'] %>
+WorkingDirectory=<%= ENV['HOME'] %>
+ExecStart=<%= ENV['DOTF']/extra/internet-status/monitor
+
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

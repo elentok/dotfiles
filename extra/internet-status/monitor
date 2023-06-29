@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+LOG=$HOME/.local/share/internet-status.log
+INTERVAL_SECONDS=60
+ONLINE_INTERVAL=60
+OFFLINE_INTERVAL=20
+TRIES=3
+
+DOMAINS="www.google.com
+www.kan.org.il
+www.youtube.com
+www.cnn.com
+www.bbc.com
+www.microsoft.com
+www.ynet.co.il
+www.bing.com
+www.yahoo.com
+www.twitter.com"
+
+function main() {
+  mkdir -p "$(dirname "$LOG")"
+  echo "Monitoring internet connection..." >> "$LOG"
+
+  while true; do
+    test-connection
+    sleep "$INTERVAL_SECONDS"
+  done
+}
+
+function pick-random-domain() {
+  echo "$DOMAINS" | shuf -n 1
+}
+
+function test-connection() {
+  try=0
+  failed_domains=()
+  while [ $try -lt $TRIES ]; do
+    domain="$(pick-random-domain)"
+    if curl --silent -I "https://$domain" | head -1 | grep -E '([23]0[0-9])' > /dev/null; then
+      echo "$(timestamp),ONLINE,$domain" >> "$LOG"
+      INTERVAL_SECONDS="$ONLINE_INTERVAL"
+      return 0
+    else
+      failed_domains+=("$domain")
+      try=$((try + 1))
+    fi
+  done
+
+  echo "$(timestamp),OFFLINE,${failed_domains[*]}" >> "$LOG"
+  INTERVAL_SECONDS="$OFFLINE_INTERVAL"
+  return 1
+}
+
+function timestamp() {
+  date +%Y-%m-%d\ %H:%M:%S
+}
+
+main "$@"
