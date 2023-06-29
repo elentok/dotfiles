@@ -7,7 +7,7 @@ Requires=network.target
 [Service]
 User=<%= ENV['USER'] %>
 WorkingDirectory=<%= ENV['HOME'] %>
-ExecStart=<%= ENV['DOTF']/extra/internet-status/monitor
+ExecStart=<%= ENV['DOTF'] %>/extra/internet-status/monitor
 
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=on-failure
