@@ -2,4 +2,4 @@
 
 set -euo pipefail
 
-install-service $DOTF/extra/internet-status/internet-status.service.erb system
+install-service "$DOTF/extra/internet-status/internet-status.service" system

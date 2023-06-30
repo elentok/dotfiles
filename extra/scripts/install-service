@@ -29,7 +29,8 @@ function fill-in-vars() {
   if [[ "$filename" =~ .erb$ ]]; then
     erb "$filename"
   else
-    envsubst < "$filename"
+    MAINPID="\$MAINPID" \
+      envsubst < "$filename"
   fi
 }
 

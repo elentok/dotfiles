@@ -5,9 +5,9 @@ Description=Internet Status Checker
 Requires=network.target
 
 [Service]
-User=<%= ENV['USER'] %>
-WorkingDirectory=<%= ENV['HOME'] %>
-ExecStart=<%= ENV['DOTF'] %>/extra/internet-status/monitor
+User=$USER
+WorkingDirectory=$HOME
+ExecStart=$DOTF/extra/internet-status/monitor
 
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=on-failure
