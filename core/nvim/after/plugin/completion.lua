@@ -47,6 +47,10 @@ local cmp_mapping = {
 
 -- Setup CMP
 cmp.setup({
+  performance = {
+    debounce = 150,
+    async_budget = 30,
+  },
   snippet = {
     expand = function(args)
       require("luasnip").lsp_expand(args.body)
