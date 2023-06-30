@@ -61,10 +61,10 @@ function install-apt-pkgs() {
     dotf-header h2 '[dotf-pkgs] Installing apt packages...'
     dotf-apt "$(get-pkgs apt)"
 
-    if has_command X; then
-      dotf-header h2 '[dotf-pkgs] Installing apt-gui packages...'
-      dotf-apt "$(get-pkgs apt-gui)"
-    fi
+    #if has_command X; then
+    #  dotf-header h2 '[dotf-pkgs] Installing apt-gui packages...'
+    #  dotf-apt "$(get-pkgs apt-gui)"
+    #fi
 
     if [ "${KDE:-}" = 'yes' ]; then
       dotf-header h2 '[dotf-pkgs] Installing apt-kde packages...'
