@@ -7,7 +7,7 @@ SHORT_LOG=$HOME/.local/share/internet-status.short.log
 ONLINE_INTERVAL=60
 OFFLINE_INTERVAL=20
 TRIES=3
-STATUS="down"
+STATUS="unknown"
 
 DOMAINS="www.google.com
 www.kan.org.il
@@ -20,9 +20,13 @@ www.bing.com
 www.yahoo.com
 www.twitter.com"
 
+LINE_COUNTER=0
+MAX_LINES=10000
+LINES_TO_KEEP=100
+
 function main() {
   mkdir -p "$(dirname "$LOG")"
-  echo "Monitoring internet connection..." >> "$LOG"
+  log ",Monitoring internet connection..."
 
   while true; do
     test-connection
@@ -43,8 +47,9 @@ function test-connection() {
   failed_domains=()
   while [ $try -lt $TRIES ]; do
     domain="$(pick-random-domain)"
+    echo "$(timestamp) Pinging {domain}"
     if curl --silent -I "https://$domain" | head -1 | grep -E '([23]0[0-9])' > /dev/null; then
-      echo "$(timestamp),ONLINE,$domain" >> "$LOG"
+      log "ONLINE,$domain"
       if [ "$STATUS" == "down" ]; then
         on-first-online
       fi
@@ -56,9 +61,9 @@ function test-connection() {
     fi
   done
 
-  echo "$(timestamp),OFFLINE,${failed_domains[*]}" >> "$LOG"
+  log "OFFLINE,${failed_domains[*]}"
 
-  if [ "$STATUS" == "down" ]; then
+  if [ "$STATUS" != "up" ]; then
     on-first-offline
   else
     STATUS="down"
@@ -79,6 +84,21 @@ function notify-internet-restored() {
   last_online="$(grep ",ONLINE," "$LOG" | tail -1)"
   curl -d "message=Internet down time from ${last_online} to $(timestamp)" \
     "http://localhost:10000/send"
+}
+
+function log() {
+  if [ "$LINE_COUNTER" -ge "$MAX_LINES" ]; then
+    rotate-log
+  fi
+
+  echo "$(timestamp),$*" >> "$LOG"
+  LINE_COUNTER=$((LINE_COUNTER+1))
+}
+
+function rotate-log() {
+  LINE_COUNTER=0
+  mv -f "$LOG" "$LOG.old"
+  tail -$LINES_TO_KEEP "$LOG.old" > "$LOG"
 }
 
 function timestamp() {
