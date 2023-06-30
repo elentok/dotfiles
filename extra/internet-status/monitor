@@ -3,6 +3,7 @@
 set -euo pipefail
 
 LOG=$HOME/.local/share/internet-status.log
+SHORT_LOG=$HOME/.local/share/internet-status.short.log
 ONLINE_INTERVAL=60
 OFFLINE_INTERVAL=20
 TRIES=3
@@ -45,7 +46,7 @@ function test-connection() {
     if curl --silent -I "https://$domain" | head -1 | grep -E '([23]0[0-9])' > /dev/null; then
       echo "$(timestamp),ONLINE,$domain" >> "$LOG"
       if [ "$STATUS" == "down" ]; then
-        notify-internet-restored
+        on-first-online
       fi
       STATUS="up"
       return 0
@@ -56,8 +57,22 @@ function test-connection() {
   done
 
   echo "$(timestamp),OFFLINE,${failed_domains[*]}" >> "$LOG"
-  STATUS="down"
+
+  if [ "$STATUS" == "down" ]; then
+    on-first-offline
+  else
+    STATUS="down"
+  fi
   return 1
+}
+
+function on-first-online() {
+  echo "$(timestamp),ONLINE" >> "$SHORT_LOG"
+  notify-internet-restored
+}
+
+function on-first-offline() {
+  echo "$(timestamp),OFFLINE" >> "$SHORT_LOG"
 }
 
 function notify-internet-restored() {
