@@ -13,10 +13,14 @@ function main() {
 
   case "$cmd" in
     "pretty-name")
-      get-host-field 2
+      if ! get-host-field 2; then
+        hostname
+      fi
       ;;
     "tmux-color")
-      get-host-field 3
+      if ! get-host-field 3; then
+        echo "blue"
+      fi
       ;;
     *)
       usage "$0"
@@ -38,8 +42,7 @@ function get-host-field() {
 
   if [ ! -e "$file" ]; then
     echo >&2 "Error: hosts info file not found"
-    echo "ERROR"
-    return
+    return 1
   fi
 
   hostname="$(hostname)"
