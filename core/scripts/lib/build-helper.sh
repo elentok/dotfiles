@@ -33,6 +33,7 @@ function install_symlinks() {
     target_name="$(basename "$path_to_binary")"
   fi
 
+  mkdir -p "$BIN_DIR"
   symlink "$INSTALL_DIR/$path_to_binary" "$BIN_DIR/$target_name-$VERSION"
 
   if [ "${PRIMARY:-}" == 'yes' ]; then
