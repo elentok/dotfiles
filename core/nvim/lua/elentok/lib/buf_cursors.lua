@@ -38,14 +38,8 @@ function M.restore_buf_cursors()
   local current_buf = vim.api.nvim_get_current_buf()
 
   for win, cursor in pairs(win_cursor_cache_by_buf[current_buf] or {}) do
-    local line = cursor[1]
-    local col = cursor[2]
-
-    line = math.min(line, vim.api.nvim_buf_line_count(0))
-    put("LINE", line)
-    -- col = math.min(col, vim.api.nvim_buf_get_lines(row))
-
-    vim.api.nvim_win_set_cursor(win, { line, col })
+    cursor[1] = math.min(cursor[1], vim.api.nvim_buf_line_count(0))
+    vim.api.nvim_win_set_cursor(win, cursor)
   end
 end
 
