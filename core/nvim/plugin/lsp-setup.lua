@@ -41,7 +41,10 @@ setup("terraformls")
 setup("graphql")
 
 -- Setup: TypeScript
-setup("tsserver", {
+require("typescript").setup({
+  server = {
+    capabilities = capabilities,
+  },
   on_attach = function(client)
     -- Disable tsserver formatting (using prettier instead)
     client.server_capabilities.document_formatting = false
