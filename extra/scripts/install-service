@@ -2,23 +2,35 @@
 #
 # install-service {service-filename-erb} [user|system]
 
+
 filename="$1"
 mode="$2"
+name="$(basename "$filename" | sed -E 's/\.service(\.erb)?$//')"
 
-name="$(basename $filename | sed 's/\.service\.erb$//')"
+function main() {
+  if [ ! -e "$filename" ]; then
+    usage "$0"
+    exit 1
+  fi
 
-if [ ! -e "$filename" ]; then
-  usage "$0"
-  exit 1
-fi
+  if [ "$mode" == "user" ]; then
+    fill-in-vars "$filename" > "$HOME/.local/share/systemd/user/$name.service"
+  elif [ "$mode" == "system" ]; then
+    fill-in-vars "$filename" > "/tmp/$name.service"
+    sudo mkdir -p /usr/lib/systemd/system
+    sudo mv -f "/tmp/$name.service" "/usr/lib/systemd/system/$name.service"
+  else
+    usage "$0"
+    exit 1
+  fi
+}
 
-if [ "$mode" == "user" ]; then
-  erb "$filename" > "$HOME/.local/share/systemd/user/$name.service"
-elif [ "$mode" == "system" ]; then
-  erb "$filename" > /tmp/$name.service
-  sudo mkdir -p /usr/lib/systemd/system
-  sudo mv /tmp/$name.service "/usr/lib/systemd/system/$name.service"
-else
-  usage "$0"
-  exit 1
-fi
+function fill-in-vars() {
+  if [[ "$filename" =~ .erb$ ]]; then
+    erb "$filename"
+  else
+    envsubst < "$filename"
+  fi
+}
+
+main "$@"
