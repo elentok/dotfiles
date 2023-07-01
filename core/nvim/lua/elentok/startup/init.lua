@@ -1,5 +1,6 @@
 vim.g.mapleader = ","
 
+require("elentok/startup/put")
 require("elentok/startup/lazy")
 require("elentok/startup/set")
 require("elentok/startup/colors")

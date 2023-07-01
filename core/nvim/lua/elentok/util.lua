@@ -98,18 +98,6 @@ function M.augroup(name, content)
   ))
 end
 
--- From https://github.com/nanotee/nvim-lua-guide
-function M.put(...)
-  local objects = {}
-  for i = 1, select("#", ...) do
-    local v = select(i, ...)
-    table.insert(objects, vim.inspect(v))
-  end
-
-  print(table.concat(objects, " "))
-  return ...
-end
-
 function M.shell(cmd, opts)
   opts = vim.tbl_extend("force", { stdin = nil, callback = nil, sync = false }, opts or {})
 
@@ -193,8 +181,6 @@ function M.tabpage_get_buf_win_number(tabnr, bufnr)
 
   return nil
 end
-
-_G.put = M.put
 
 function M.add_dirs(tbl, dirs)
   for _, dir in ipairs(dirs) do
