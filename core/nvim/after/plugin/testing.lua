@@ -1,3 +1,5 @@
+local telescope = require("telescope")
+
 local function toggle_test_line(line)
   if line:match("%f[%a]describe%(") then
     return line:gsub("%f[%a]describe%(", "describe.only(")
@@ -34,3 +36,10 @@ local function toggle_focused_test()
 end
 
 vim.keymap.set("n", "<space>tt", toggle_focused_test)
+
+vim.keymap.set("n", "<space>tf", function()
+  telescope.extensions.live_grep_args.live_grep_args({
+    search_dirs = { "%" },
+    default_text = "'(it|test|describe).(only|skip)'",
+  })
+end, { desc = "Find focused and skipped tests" })
