@@ -1,8 +1,6 @@
-local ok, telescope = pcall(require, "telescope")
-if not ok then
-  return
-end
-
+local telescope = require("telescope")
+local lga_actions = require("telescope-live-grep-args.actions")
+local lga_shortcuts = require("telescope-live-grep-args.shortcuts")
 local builtin = require("telescope.builtin")
 local actions = require("telescope/actions")
 
@@ -29,6 +27,17 @@ telescope.setup({
       override_file_sorter = true,
       case_mode = "smart_case",
     },
+    live_grep_args = {
+      auto_quoting = true,
+      mappings = {
+        -- extend mappings
+        i = {
+          ["<C-k>"] = lga_actions.quote_prompt(),
+          ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+          ["<C-t>"] = lga_actions.quote_prompt({ postfix = " --t " }),
+        },
+      },
+    },
   },
 })
 
@@ -52,6 +61,24 @@ end)
 vim.keymap.set("n", "<Leader>fe", function()
   telescope.extensions.file_browser.file_browser({ path = "%:p:h" })
 end)
+vim.keymap.set("n", "<Leader>ff", function()
+  telescope.extensions.live_grep_args.live_grep_args()
+end)
+vim.keymap.set(
+  "n",
+  "<Leader>fw",
+  lga_shortcuts.grep_word_under_cursor,
+  { desc = "Grep word under cursor" }
+)
+vim.keymap.set(
+  "v",
+  "<Leader>fw",
+  lga_shortcuts.grep_visual_selection,
+  { desc = "Grep visual selection" }
+)
+vim.keymap.set("n", "<Leader>fe", function()
+  telescope.extensions.file_browser.file_browser({ path = "%:p:h" })
+end)
 -- vim.keymap.set("n", "gl", builtin.current_buffer_fuzzy_find)
 vim.keymap.set("n", "gr", builtin.lsp_references)
 vim.keymap.set("n", "``", builtin.resume)
@@ -59,3 +86,5 @@ vim.keymap.set("n", "gs", telescope.extensions.aerial.aerial)
 vim.keymap.set("n", "gb", function()
   require("elentok/lib/telescope").buf_tags_picker()
 end)
+
+vim.api.nvim_create_user_command("Maps", builtin.keymaps, {})
