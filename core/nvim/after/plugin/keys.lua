@@ -68,6 +68,7 @@ vim.keymap.set("v", "<Leader>ss", ":sort<cr>")
 vim.keymap.set("v", "<Leader>st", ":!todo-sort<cr>")
 vim.keymap.set("n", "<Leader>st", ":%!todo-sort<cr>")
 vim.keymap.set("n", "<Leader>ya", ":%y+<cr>")
+vim.keymap.set("n", "<Leader>yf", ':let @+ = expand("%")<cr>', { desc = "Yank current filename" })
 
 vim.keymap.set("n", "<Leader>oc", ":Calendar -view=year -split=vertical -width=27<cr>")
 
