@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+function main() {
+  mkdir -p cache
+  touch changes-log
+
+  while true; do
+    check-links
+    sleep 60
+  done
+}
+
+function check-links() {
+  rm -rf new
+  mkdir -p new
+
+  while read -r line; do
+    id="${line//,*/}"
+    url="${line//*,/}"
+
+    check-link "$id" "$url"
+
+  done < links.csv
+}
+
+function check-link() {
+  local id="$1"
+  local url="$2"
+
+  local new_file="new/${id}.html"
+  local cached_file="cache/${id}.html"
+
+  echo "- ${id} (${url})..."
+  curl --silent -L "${url}" -o "$new_file"
+
+  if [ ! -e "$cached_file" ]; then
+    echo "  not in cache yet."
+    mv "$new_file" "$cached_file"
+    return
+  fi
+
+  if diff "$cached_file" "$new_file" > /dev/null; then
+    echo "  CHANGED!"
+    mv -f "$new_file" "$cached_file"
+    echo "$(timestamp) URL ${id} has changed" >> changes.log
+    curl -d "message=URL ${id} has changed - ${url}" \
+      "http://localhost:10000/send"
+  else
+    echo "  no change."
+  fi
+}
+
+function timestamp() {
+  date +%Y-%m-%d\ %H:%M:%S
+}
+
+main "$@"
