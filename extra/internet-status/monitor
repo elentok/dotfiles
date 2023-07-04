@@ -47,14 +47,14 @@ function test-connection() {
   failed_domains=()
   while [ $try -lt $TRIES ]; do
     domain="$(pick-random-domain)"
-    echo "$(timestamp) Pinging {domain}"
+    echo "$(timestamp) Pinging ${domain}"
     if curl --silent -I "https://$domain" | head -1 | grep -E '([23]0[0-9])' > /dev/null; then
       log "ONLINE,$domain"
-      if [ "$STATUS" == "down" ]; then
+      if [ "$STATUS" != "up" ]; then
+        STATUS="up"
         on-first-online
       fi
-      STATUS="up"
-      return 0
+      # return 0
     else
       failed_domains+=("$domain")
       try=$((try + 1))
@@ -63,12 +63,11 @@ function test-connection() {
 
   log "OFFLINE,${failed_domains[*]}"
 
-  if [ "$STATUS" != "up" ]; then
-    on-first-offline
-  else
+  if [ "$STATUS" != "down" ]; then
     STATUS="down"
+    on-first-offline
   fi
-  return 1
+  # return 1
 }
 
 function on-first-online() {
