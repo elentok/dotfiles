@@ -94,3 +94,20 @@ vim.keymap.set("n", "zz", move_to_top_third)
 
 vim.keymap.set("v", "<space>p", ":!prettierd %<cr>")
 vim.keymap.set("n", "<leader>lg", ":LazyGit<cr>")
+
+vim.keymap.set(
+  "n",
+  "j",
+  "v:count ? (v:count > 1 ? \"m'\" . v:count : '') . 'j' : 'gj'",
+  { expr = true }
+)
+
+vim.keymap.set(
+  "n",
+  "k",
+  "v:count ? (v:count > 1 ? \"m'\" . v:count : '') . 'k' : 'gk'",
+  { expr = true }
+)
+
+-- nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+-- nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
