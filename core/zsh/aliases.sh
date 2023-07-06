@@ -7,6 +7,8 @@ fi
 
 # All Aliases {{{1
 alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
 alias ba='bt add-magnet "$(pbp)"'
 alias be='bundle exec'
 alias bl='tr ":" "\n"'
@@ -188,7 +190,7 @@ yr() {
 
   if [ $# -gt 0 ]; then
     yarn run "$@"
-    exit $?
+    return $?
   fi
 
   cmd="$(npm-scripts | fzf --ansi --exit-0 | awk '{print $1}')"
