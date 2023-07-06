@@ -50,6 +50,9 @@ require("typescript").setup({
   server = {
     capabilities = capabilities,
   },
+  init_options = {
+    maxTsServerMemory = 4096,
+  },
   on_attach = function(client)
     -- Disable tsserver formatting (using prettier instead)
     client.server_capabilities.document_formatting = false
