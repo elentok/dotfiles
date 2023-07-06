@@ -3,6 +3,22 @@ local buf_cursors = require("elentok/lib/buf_cursors")
 
 local enabled = true
 
+local ignore_patterns = {
+  "/node_modules/",
+}
+
+local function should_ignore()
+  local path = vim.fn.expand("%:p")
+  for _, pattern in ipairs(ignore_patterns) do
+    if vim.fn.match(path, pattern) ~= -1 then
+      print("Skipping format-on-save because file matches ignore pattern")
+      return true
+    end
+  end
+
+  return false
+end
+
 local function format()
   if not enabled then
     print("Format-on-save is disabled, use :FormatOn to enable")
@@ -12,7 +28,7 @@ local function format()
   buf_cursors.save_buf_cursors()
   local filetype = vim.api.nvim_buf_get_option(0, "filetype")
   local opts = config.format_on_save[filetype]
-  if opts == nil then
+  if opts == nil or should_ignore() then
     return
   end
 
