@@ -26,11 +26,16 @@ local function format()
   vim.lsp.buf.format({ timeout_ms = 4000, filter = filter })
 end
 
-vim.api.nvim_create_autocmd({ "BufWritePre" }, { pattern = "*", callback = format })
+local augroup_id = vim.api.nvim_create_augroup("Elentok_FormatOnSave", {})
+vim.api.nvim_create_autocmd(
+  { "BufWritePre" },
+  { pattern = "*", callback = format, group = augroup_id }
+)
 vim.api.nvim_create_autocmd(
   { "BufWritePost" },
-  { pattern = "*", callback = buf_cursors.restore_buf_cursors }
+  { pattern = "*", callback = buf_cursors.restore_buf_cursors, group = augroup_id }
 )
+
 vim.api.nvim_create_user_command("Format", format, {})
 vim.api.nvim_create_user_command("FormatOn", function()
   enabled = true
