@@ -73,3 +73,5 @@ vim.opt.wildignorecase = true
 vim.opt.winwidth = 84
 
 vim.opt.undofile = true
+
+vim.opt.diffopt:append({ "linematch:60", "algorithm:patience" })
