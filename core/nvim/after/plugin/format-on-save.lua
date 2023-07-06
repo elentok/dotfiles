@@ -1,7 +1,14 @@
 local config = require("elentok/config")
 local buf_cursors = require("elentok/lib/buf_cursors")
 
+local enabled = true
+
 local function format()
+  if not enabled then
+    print("Format-on-save is disabled, use :FormatOn to enable")
+    return
+  end
+
   buf_cursors.save_buf_cursors()
   local filetype = vim.api.nvim_buf_get_option(0, "filetype")
   local opts = config.format_on_save[filetype]
@@ -25,3 +32,9 @@ vim.api.nvim_create_autocmd(
   { pattern = "*", callback = buf_cursors.restore_buf_cursors }
 )
 vim.api.nvim_create_user_command("Format", format, {})
+vim.api.nvim_create_user_command("FormatOn", function()
+  enabled = true
+end, {})
+vim.api.nvim_create_user_command("FormatOff", function()
+  enabled = false
+end, {})
