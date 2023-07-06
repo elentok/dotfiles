@@ -145,7 +145,7 @@ $DOTL/scripts"
 if is-n-providing-node; then
   PATH="$PATH:$N_PREFIX/bin"
 elif is-nvm-providing-node; then
-  if [ -e "$NVM_BIN" ]; then
+  if [ -n "${NVM_BIN:-}" ] && [ -e "$NVM_BIN" ]; then
     PATH="$PATH:${NVM_BIN}"
   else
     PATH="$PATH:${DOTF_NVM_DEFAULT_PATH}/bin"
