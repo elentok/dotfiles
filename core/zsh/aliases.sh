@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # vim: foldmethod=marker
 
+source "$DOTF/core/nvim/aliases.sh"
+
 if is_wsl; then
   alias code='/mnt/c/Program\ Files/Microsoft\ VS\ Code/code.exe'
 fi
@@ -110,25 +112,6 @@ function kk() {
 }
 
 # Neovim {{{1
-if has_command nvim; then
-  if is_in_neovim; then
-    alias vi='nvr -o'
-    alias vv='nvr -O'
-
-    function nvim-set-workdir() {
-      nvr --remote-send "<c-\\><c-n>:call TermSetWorkDir('$PWD')<cr>i"
-    }
-
-    function cd() {
-      builtin cd "$@" || return 1
-      nvim-set-workdir
-    }
-  else
-    alias vi=dotf-nvim
-  fi
-else
-  alias vi=vim
-fi
 
 alias vcd='nvr --remote-send "<c-\><c-n>:tcd $PWD<cr>i"'
 alias vl='vim "+OpenSession! last"'
@@ -168,6 +151,7 @@ alias pbc='pbcopy'
 alias pbp='pbpaste'
 
 # FZF Shortcuts {{{1
+
 dr() {
   # calling "print -s" adds the command to zsh history
 
@@ -259,13 +243,6 @@ cdd() {
   fi
 }
 
-vp() {
-  plugin="$(cd "$HOME/.local/share/nvim-plugins" && /bin/ls -1 | fzf --ansi --exit-0)"
-  if [ -n "$plugin" ]; then
-    cd "$HOME/.local/share/nvim-plugins/$plugin" || return 1
-  fi
-}
-
 f() {
   if [ $# -eq 0 ]; then
     TERM=xterm-256color vifm .
@@ -278,13 +255,6 @@ f() {
 
 alias c='cd "$(pick-directory-recursive)"'
 alias d='cd "$(pick-directory)"'
-
-function vv() {
-  files="$(vifm --choose-files - --on-choose echo .)"
-  if [ -n "$files" ]; then
-    echo "$files" | xargs dotf-nvim
-  fi
-}
 
 function pick-directory() {
   # calling "print -s" adds the command to zsh history
@@ -334,29 +304,6 @@ function list-dirs() {
 }
 
 # Fuzzy vi {{{1
-function v() {
-  if [ $# -eq 0 ]; then
-    run-on-file dotf-nvim
-  else
-    dotf-nvim "$@"
-  fi
-}
-
-function run-on-file() {
-  # calling "print -s" adds the command to zsh history
-
-  file="$(list-files | fzf --ansi --exit-0 | awk '{print $1}')"
-
-  if [ -n "$file" ]; then
-    cmd="$* $file"
-    print -s "$cmd" \
-      && bash -c "$cmd"
-  fi
-}
-
-function list-files() {
-  find . -maxdepth 1 -type f | sed 's/^\.\///' | sort
-}
 
 # Tmux {{{1
 
