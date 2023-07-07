@@ -1,0 +1,14 @@
+# Put this file in /usr/lib/systemd/system
+
+[Unit]
+Description=Web Diff Monitor
+Requires=network.target
+
+[Service]
+User=david
+ExecStart=${NODE} ${HOME}/.dotfiles/extra/scripts/web-diff-monitor
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

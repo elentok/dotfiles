@@ -15,6 +15,9 @@ function main() {
   mkdir -p "$CACHE_DIR"
   touch changes-log
 
+  curl -d "message=Web Diff Monitor started" \
+    "http://localhost:10000/send"
+
   while true; do
     check-links
     sleep 60

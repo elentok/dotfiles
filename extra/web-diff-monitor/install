@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+source "$DOTF/framework"
+
+install-service "$DOTF/extra/web-diff-monitor/web-diff-monitor.service" system
+
+systemctl daemon-reload
+systemctl start telegram-proxy
