@@ -57,9 +57,16 @@ vim.keymap.set(
 vim.keymap.set("n", "<space>gg", ":G<cr><c-w>L", { desc = "Git status" })
 vim.keymap.set("n", "<space>gb", ":G blame<cr>", { desc = "Git blame" })
 
-vim.keymap.set("n", "<space>gh", function()
-  terminal.run({ "tig", "--follow", vim.fn.expand("%") })
-end, { desc = "Git history" })
+local function git_history()
+  local filename = vim.fn.expand("%")
+  if filename == "" or filename:match("^fugitive:") then
+    terminal.run({ "tig" })
+  else
+    terminal.run({ "tig", "--follow", filename })
+  end
+end
+
+vim.keymap.set("n", "<space>gh", git_history, { desc = "Git history" })
 
 vim.keymap.set("n", "<space>gd", function()
   terminal.run({ "git", "diff", vim.fn.expand("%") })
