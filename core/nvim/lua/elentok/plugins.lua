@@ -117,7 +117,6 @@ return {
   "tversteeg/registers.nvim",
   "b0o/incline.nvim", -- Shows buffer names on windows
   "ThePrimeagen/harpoon",
-  "ThePrimeagen/refactoring.nvim",
   "ziontee113/color-picker.nvim",
   "ojroques/nvim-osc52",
   "mizlan/iswap.nvim",
@@ -128,8 +127,6 @@ return {
       require("openscad")
     end,
   },
-  { "phaazon/hop.nvim", branch = "v2" },
-  "ggandor/leap.nvim",
 
   -- Toggles words (e.g. true/false, top/bottom)
   {
@@ -156,15 +153,10 @@ return {
   {
     "axieax/urlview.nvim",
     config = function()
-      require("urlview").setup()
+      require("urlview").setup({})
     end,
   },
-  {
-    "ruifm/gitlinker.nvim",
-    config = function()
-      require("gitlinker").setup()
-    end,
-  },
+  "ruifm/gitlinker.nvim",
 
   { "kevinhwang91/nvim-bqf", ft = "qf" },
 
@@ -182,30 +174,30 @@ return {
         end,
         desc = "Flash",
       },
-      {
-        "S",
-        mode = { "n", "o", "x" },
-        function()
-          require("flash").treesitter()
-        end,
-        desc = "Flash Treesitter",
-      },
-      {
-        "r",
-        mode = "o",
-        function()
-          require("flash").remote()
-        end,
-        desc = "Remote Flash",
-      },
-      {
-        "R",
-        mode = { "o", "x" },
-        function()
-          require("flash").treesitter_search()
-        end,
-        desc = "Flash Treesitter Search",
-      },
+      -- {
+      --   "S",
+      --   mode = { "n", "o", "x" },
+      --   function()
+      --     require("flash").treesitter()
+      --   end,
+      --   desc = "Flash Treesitter",
+      -- },
+      -- {
+      --   "r",
+      --   mode = "o",
+      --   function()
+      --     require("flash").remote()
+      --   end,
+      --   desc = "Remote Flash",
+      -- },
+      -- {
+      --   "R",
+      --   mode = { "o", "x" },
+      --   function()
+      --     require("flash").treesitter_search()
+      --   end,
+      --   desc = "Flash Treesitter Search",
+      -- },
       {
         "<Leader>fs",
         mode = { "c" },

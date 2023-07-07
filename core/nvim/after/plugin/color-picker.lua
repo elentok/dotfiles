@@ -1,8 +1,3 @@
-local ok, color_picker = pcall(require, "color-picker")
-
-if not ok then
-  return
-end
-
+local color_picker = require("color-picker")
 color_picker.setup()
 vim.keymap.set("n", "<space>c", "<cmd>PickColor<cr>")

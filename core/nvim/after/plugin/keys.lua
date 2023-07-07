@@ -26,27 +26,21 @@ vim.keymap.set("v", "<Leader>m", ":!pandoc --from markdown --to html | copy-html
 vim.keymap.set("n", "<Leader>m", ":%!pandoc --from markdown --to html | copy-html<cr>u")
 
 -- Version control {{{1
-vim.keymap.set("n", "<Leader>tg", ":FloatermNew --width=0.8 --height=0.8 --autoclose=1 tig<cr>")
-vim.keymap.set(
-  "n",
-  "<Leader>ts",
-  ":FloatermNew --width=0.8 --height=0.8 --autoclose=1 tig status<cr>"
-)
-vim.keymap.set("n", "<Leader>vrp", ":Git co -p %<cr>")
-vim.keymap.set(
-  "n",
-  "<Leader>vdf",
-  ":FloatermNew --width=0.8 --height=0.8 --autoclose=0 git diff %<cr>"
-)
+-- vim.keymap.set("n", "<Leader>tg", ":FloatermNew --width=0.8 --height=0.8 --autoclose=1 tig<cr>")
+-- vim.keymap.set(
+--   "n",
+--   "<Leader>ts",
+--   ":FloatermNew --width=0.8 --height=0.8 --autoclose=1 tig status<cr>"
+-- )
+-- vim.keymap.set("n", "<Leader>vrp", ":Git co -p %<cr>")
+-- vim.keymap.set(
+--   "n",
+--   "<Leader>vdf",
+--   ":FloatermNew --width=0.8 --height=0.8 --autoclose=0 git diff %<cr>"
+-- )
 -- " :Git diff %<cr>")
-vim.keymap.set("n", "<Leader>vdc", " :Git diff --cached<cr>")
-vim.keymap.set("n", "<Leader>vaf", ":Git add %<cr>")
-vim.keymap.set(
-  "n",
-  "<Leader>vh",
-  ":FloatermNew --width=0.8 --height=0.8 --autoclose=1 tig --follow %<cr>"
-)
-vim.keymap.set("n", "<Leader>vc", ":Gcommit<cr>")
+-- vim.keymap.set("n", "<Leader>vdc", " :Git diff --cached<cr>")
+-- vim.keymap.set("n", "<Leader>vaf", ":Git add %<cr>")
 
 -- Spaces text object {{{1
 vim.keymap.set("x", "<space>", "f oT o", { silent = true })
@@ -72,7 +66,7 @@ vim.keymap.set("n", "<Leader>yf", ':let @+ = expand("%")<cr>', { desc = "Yank cu
 
 vim.keymap.set("n", "<Leader>oc", ":Calendar -view=year -split=vertical -width=27<cr>")
 
-vim.keymap.set("n", "<backspace>", "zc")
+-- vim.keymap.set("n", "<backspace>", "zc")
 
 -- -- Use 'zz' to place cursor at top third of window
 local function move_to_top_third()
