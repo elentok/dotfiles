@@ -5,6 +5,7 @@ set -euo pipefail
 CACHE_DIR="$HOME/.local/cache/web-diff"
 LINKS_FILE="$HOME/.config/web-diff.csv"
 NEW_DIR="$TMP/web-diff"
+DELAY=300 # seconds
 
 function main() {
   if [ ! -e "$LINKS_FILE" ]; then
@@ -20,7 +21,7 @@ function main() {
 
   while true; do
     check-links
-    sleep 60
+    sleep $DELAY
   done
 }
 
@@ -33,6 +34,8 @@ function check-links() {
     url="${line//*,/}"
 
     check-link "$id" "$url"
+
+    sleep 1
 
   done < "$LINKS_FILE"
 }

@@ -5,4 +5,5 @@ source "$DOTF/framework"
 install-service "$DOTF/extra/web-diff-monitor/web-diff-monitor.service" system
 
 systemctl daemon-reload
-systemctl start telegram-proxy
+systemctl enable web-diff-monitor
+systemctl start web-diff-monitor
