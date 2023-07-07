@@ -3,6 +3,7 @@
 set -euo pipefail
 
 CACHE_DIR="$HOME/.local/cache/web-diff"
+LOG_FILE="$CACHE_DIR/web-diff.log"
 LINKS_FILE="$HOME/.config/web-diff.csv"
 NEW_DIR="$TMP/web-diff"
 DELAY=300 # seconds
@@ -14,7 +15,7 @@ function main() {
   fi
 
   mkdir -p "$CACHE_DIR"
-  touch changes-log
+  touch "$LOG_FILE"
 
   curl -d "message=Web Diff Monitor started" \
     "http://localhost:10000/send"
@@ -59,7 +60,7 @@ function check-link() {
   if diff "$cached_file" "$new_file" > /dev/null; then
     echo "  CHANGED!"
     mv -f "$new_file" "$cached_file"
-    echo "$(timestamp) URL ${id} has changed" >> changes.log
+    echo "$(timestamp) URL ${id} has changed" >> "$LOG_FILE"
     curl -d "message=URL ${id} has changed - ${url}" \
       "http://localhost:10000/send"
   else
