@@ -17,7 +17,7 @@ util.add_dirs(script_dirs, { vim.env.DOTL .. "/scripts" })
 
 -- Functions -----------------------------------------------
 
-local function goto_config()
+local function jump_to_config()
   builtin.find_files({
     find_command = { "rg", "-t", "lua", "-t", "vim", "--files" },
     cwd = vim.env.HOME,
@@ -25,7 +25,7 @@ local function goto_config()
   })
 end
 
-local function goto_script()
+local function jump_to_script()
   builtin.find_files({
     find_command = { "rg", "--files" },
     cwd = vim.env.HOME,
@@ -33,7 +33,7 @@ local function goto_script()
   })
 end
 
-local function goto_note()
+local function jump_to_note()
   builtin.find_files({
     find_command = { "rg", "-t", "md", "--files" },
     cwd = vim.env.HOME .. "/notes",
@@ -42,6 +42,6 @@ end
 
 -- Keys ----------------------------------------------------
 
-vim.keymap.set("n", "<Leader>gb", goto_script)
-vim.keymap.set("n", "<Leader>gc", goto_config)
-vim.keymap.set("n", "<Leader>gn", goto_note)
+vim.keymap.set("n", "<space>js", jump_to_script, { desc = "Jump to script" })
+vim.keymap.set("n", "<space>jc", jump_to_config, { desc = "Jump to config" })
+vim.keymap.set("n", "<space>jn", jump_to_note, { desc = "Jump to note" })

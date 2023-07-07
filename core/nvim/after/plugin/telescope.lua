@@ -52,41 +52,42 @@ vim.keymap.set("n", "<Leader>b", function()
 end)
 -- vim.keymap.set("n", "<Leader>gt", builtin.tags)
 vim.keymap.set("n", "<Leader>gg", builtin.git_status)
-vim.keymap.set("n", "<Leader>gj", builtin.jumplist)
-vim.keymap.set("n", "<Leader>gh", builtin.help_tags)
-vim.keymap.set("n", "<Leader>gm", function()
+vim.keymap.set("n", "<space>jj", builtin.jumplist, { desc = "Jump to jumplist" })
+vim.keymap.set("n", "<space>jh", builtin.help_tags, { desc = "Jump to help" })
+vim.keymap.set("n", "<space>jm", function()
   builtin.oldfiles({ previewer = false, only_cwd = true })
-end)
-vim.keymap.set("n", "<Leader>gM", function()
+end, { desc = "Jump to MRU (locally)" })
+vim.keymap.set("n", "<space>jM", function()
   builtin.oldfiles({ previewer = false })
-end)
+end, { desc = "Jump to MRU (globally)" })
+
 vim.keymap.set("n", "<Leader>fe", function()
   telescope.extensions.file_browser.file_browser({ path = "%:p:h" })
 end)
-vim.keymap.set("n", "<Leader>ff", function()
+
+vim.keymap.set("n", "<space>ff", function()
   telescope.extensions.live_grep_args.live_grep_args()
-end)
+end, { desc = "Live grep (args)" })
+
 vim.keymap.set(
   "n",
-  "<Leader>fw",
+  "<space>fw",
   lga_shortcuts.grep_word_under_cursor,
   { desc = "Grep word under cursor" }
 )
+
 vim.keymap.set(
   "v",
-  "<Leader>fw",
+  "<space>fw",
   lga_shortcuts.grep_visual_selection,
   { desc = "Grep visual selection" }
 )
+
 vim.keymap.set("n", "<Leader>fe", function()
   telescope.extensions.file_browser.file_browser({ path = "%:p:h" })
 end)
--- vim.keymap.set("n", "gl", builtin.current_buffer_fuzzy_find)
-vim.keymap.set("n", "gr", builtin.lsp_references)
-vim.keymap.set("n", "``", builtin.resume)
-vim.keymap.set("n", "gs", telescope.extensions.aerial.aerial)
-vim.keymap.set("n", "gb", function()
-  require("elentok/lib/telescope").buf_tags_picker()
-end)
+vim.keymap.set("n", "gr", builtin.lsp_references, { desc = "Goto reference (LSP)" })
+vim.keymap.set("n", "``", builtin.resume, { desc = "Resume last telescope search" })
+vim.keymap.set("n", "gs", telescope.extensions.aerial.aerial, { desc = "Goto symbol" })
 
 vim.api.nvim_create_user_command("Maps", builtin.keymaps, {})
