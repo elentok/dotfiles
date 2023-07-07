@@ -2,8 +2,17 @@
 
 set -euo pipefail
 
+CACHE_DIR="$HOME/.local/cache/web-diff"
+LINKS_FILE="$HOME/.config/web-diff.csv"
+NEW_DIR="$TMP/web-diff"
+
 function main() {
-  mkdir -p cache
+  if [ ! -e "$LINKS_FILE" ]; then
+    echo "Error: No config file in $LINKS_FILE"
+    exit 1
+  fi
+
+  mkdir -p "$CACHE_DIR"
   touch changes-log
 
   while true; do
@@ -13,8 +22,8 @@ function main() {
 }
 
 function check-links() {
-  rm -rf new
-  mkdir -p new
+  rm -rf "$NEW_DIR"
+  mkdir -p "$NEW_DIR"
 
   while read -r line; do
     id="${line//,*/}"
@@ -22,15 +31,15 @@ function check-links() {
 
     check-link "$id" "$url"
 
-  done < links.csv
+  done < "$LINKS_FILE"
 }
 
 function check-link() {
   local id="$1"
   local url="$2"
 
-  local new_file="new/${id}.html"
-  local cached_file="cache/${id}.html"
+  local new_file="$NEW_DIR/${id}.html"
+  local cached_file="$CACHE_DIR/${id}.html"
 
   echo "- ${id} (${url})..."
   curl --silent -L "${url}" -o "$new_file"
