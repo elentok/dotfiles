@@ -35,11 +35,11 @@ local function toggle_focused_test()
   print("No test found")
 end
 
-vim.keymap.set("n", "<space>tt", toggle_focused_test)
+vim.keymap.set("n", "<space>tf", toggle_focused_test, { desc = "Toggle focused test" })
 
-vim.keymap.set("n", "<space>tf", function()
+vim.keymap.set("n", "<space>jf", function()
   telescope.extensions.live_grep_args.live_grep_args({
     search_dirs = { "%" },
     default_text = "'(it|test|describe).(only|skip)'",
   })
-end, { desc = "Find focused and skipped tests" })
+end, { desc = "Jump to focused/skipped tests" })

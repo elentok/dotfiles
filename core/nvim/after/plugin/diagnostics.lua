@@ -28,4 +28,4 @@ local function toggle_diagnostic()
   end
 end
 
-vim.keymap.set("n", "<Leader>te", toggle_diagnostic)
+vim.api.nvim_create_user_command("ToggleDiagnostics", toggle_diagnostic, {})
