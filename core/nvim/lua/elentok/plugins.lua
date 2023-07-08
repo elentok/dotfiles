@@ -52,7 +52,7 @@ return {
   { "rafamadriz/friendly-snippets" },
 
   -- Extra LSP plugins
-  -- "ray-x/lsp_signature.nvim",
+  { "ray-x/lsp_signature.nvim", opts = {} },
   "stevearc/aerial.nvim",
   "jose-elias-alvarez/null-ls.nvim",
   "onsails/lspkind-nvim",
@@ -61,13 +61,11 @@ return {
     "folke/trouble.nvim",
     dependencies = { "kyazdani42/nvim-web-devicons" },
   },
-  -- {
-  --   "j-hui/fidget.nvim", -- Shows LSP init progress
-  --   tag = "legacy",
-  --   config = function()
-  --     require("fidget").setup()
-  --   end,
-  -- },
+  {
+    "j-hui/fidget.nvim", -- Shows LSP init progress
+    tag = "legacy",
+    opts = {},
+  },
 
   -- Allows running "nvim {filename}:{line-number}".
   "bogado/file-line",
@@ -143,7 +141,7 @@ return {
   { "junegunn/goyo.vim", cmd = "Goyo" },
 
   -- Make vim.ui.input and vim.ui.select prettier
-  "stevearc/dressing.nvim",
+  { "stevearc/dressing.nvim", opts = {} },
 
   -- Improve neovim lua development (better completion, help, etc...)
   "folke/neodev.nvim",
@@ -225,24 +223,24 @@ return {
   },
 
   -- lazy.nvim
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    opts = {
-      presets = {
-        lsp_doc_border = true,
-      },
-      messages = {
-        enabled = false,
-      },
-    },
-    dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
-      "rcarriga/nvim-notify",
-    },
-  },
+  -- {
+  --   "folke/noice.nvim",
+  --   event = "VeryLazy",
+  --   opts = {
+  --     presets = {
+  --       lsp_doc_border = true,
+  --     },
+  --     messages = {
+  --       enabled = false,
+  --     },
+  --   },
+  --   dependencies = {
+  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+  --     "MunifTanjim/nui.nvim",
+  --     -- OPTIONAL:
+  --     --   `nvim-notify` is only needed, if you want to use the notification view.
+  --     --   If not available, we use `mini` as the fallback
+  --     "rcarriga/nvim-notify",
+  --   },
+  -- },
 }

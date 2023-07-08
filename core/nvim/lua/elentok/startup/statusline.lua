@@ -19,11 +19,6 @@ lualine.setup({
     lualine_c = { "branch" },
     lualine_x = {
       { navic_get_location, cond = navic_is_available },
-      {
-        require("noice").api.status.search.get,
-        cond = require("noice").api.status.search.has,
-        color = { fg = "#ff9e64" },
-      },
     },
     lualine_y = { "filetype" },
   },
