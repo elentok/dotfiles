@@ -60,6 +60,7 @@ return {
   {
     "folke/trouble.nvim",
     dependencies = { "kyazdani42/nvim-web-devicons" },
+    cmd = { "Trouble" },
   },
   {
     "j-hui/fidget.nvim", -- Shows LSP init progress
@@ -71,8 +72,8 @@ return {
   "bogado/file-line",
 
   -- FZF.
-  "junegunn/fzf",
-  "junegunn/fzf.vim",
+  -- "junegunn/fzf",
+  -- "junegunn/fzf.vim",
 
   -- Telescope
   { "nvim-telescope/telescope.nvim", tag = "0.1.2" },
@@ -109,11 +110,11 @@ return {
   -- Smooth scrolling
   "karb94/neoscroll.nvim",
   "kyazdani42/nvim-web-devicons",
-  "kdheepak/lazygit.nvim",
+  -- "kdheepak/lazygit.nvim",
   { "akinsho/git-conflict.nvim", version = "v1.1.2" },
   "nvim-lualine/lualine.nvim",
   -- Shows registers contents when using them
-  "tversteeg/registers.nvim",
+  -- "tversteeg/registers.nvim",
   "b0o/incline.nvim", -- Shows buffer names on windows
   "ThePrimeagen/harpoon",
   {

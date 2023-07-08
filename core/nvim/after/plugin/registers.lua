@@ -1,3 +1,3 @@
-require("registers").setup({
-  window = { border = "single" },
-})
+-- require("registers").setup({
+--   window = { border = "single" },
+-- })

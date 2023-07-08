@@ -1,7 +1,4 @@
-local ok, aerial = pcall(require, "aerial")
-if not ok then
-  return
-end
+local aerial = require("aerial")
 
 aerial.setup({
   backends = {
@@ -23,7 +20,12 @@ aerial.setup({
     vim.keymap.set("n", "<Leader>ta", "<cmd>AerialToggle!<cr>", { buffer = bufnr })
     vim.keymap.set("n", "[[", "<cmd>AerialPrev<cr>", { buffer = bufnr })
     vim.keymap.set("n", "]]", "<cmd>AerialNext<cr>", { buffer = bufnr })
-    vim.keymap.set("n", "<Leader>ga", "<cmd>AerialNavOpen<cr>", { buffer = bufnr })
+    vim.keymap.set(
+      "n",
+      "<space>oa",
+      "<cmd>AerialNavOpen<cr>",
+      { buffer = bufnr, desc = "Open Aerial navigation" }
+    )
   end,
   nav = {
     keymaps = {
