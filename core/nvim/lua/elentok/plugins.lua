@@ -19,8 +19,21 @@ return {
   "tpope/vim-eunuch",
   "tpope/vim-fugitive",
   "tpope/vim-repeat",
-  "tpope/vim-surround",
+  -- "tpope/vim-surround",
   "tpope/vim-unimpaired",
+
+  -- Surround
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    opts = {},
+    -- config = function()
+    --   require("nvim-surround").setup({
+    --     -- Configuration here, or leave empty to use defaults
+    --   })
+    -- end
+  },
 
   -- Automatically close bracket and tag pairs
   {
@@ -51,7 +64,7 @@ return {
   { "rafamadriz/friendly-snippets" },
 
   -- Extra LSP plugins
-  { "ray-x/lsp_signature.nvim", opts = {} },
+  { "ray-x/lsp_signature.nvim",    opts = {} },
   "stevearc/aerial.nvim",
   "jose-elias-alvarez/null-ls.nvim",
   "onsails/lspkind-nvim",
@@ -76,7 +89,7 @@ return {
   -- "junegunn/fzf.vim",
 
   -- Telescope
-  { "nvim-telescope/telescope.nvim", tag = "0.1.2" },
+  { "nvim-telescope/telescope.nvim",            tag = "0.1.2" },
   "nvim-telescope/telescope-file-browser.nvim",
   "nvim-telescope/telescope-live-grep-args.nvim",
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -177,7 +190,7 @@ return {
   },
 
   "ojroques/nvim-osc52",
-  { "kevinhwang91/nvim-ufo", dependencies = { "kevinhwang91/promise-async" } },
+  { "kevinhwang91/nvim-ufo",     dependencies = { "kevinhwang91/promise-async" } },
 
   {
     "salkin-mada/openscad.nvim",
@@ -205,7 +218,7 @@ return {
   },
 
   -- dark/zen room, no distraction mode
-  { "junegunn/goyo.vim", cmd = "Goyo" },
+  { "junegunn/goyo.vim",      cmd = "Goyo" },
 
   -- Make vim.ui.input and vim.ui.select prettier
   { "stevearc/dressing.nvim", opts = {} },
