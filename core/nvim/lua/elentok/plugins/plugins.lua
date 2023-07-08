@@ -1,9 +1,6 @@
 return {
   { dir = "~/.dotprivate/nvim" },
 
-  -- Optimizations.
-  "lewis6991/impatient.nvim",
-
   -- Color scheme.
   "rmehri01/onenord.nvim",
 
