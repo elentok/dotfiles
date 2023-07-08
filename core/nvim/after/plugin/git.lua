@@ -51,7 +51,7 @@ vim.keymap.set(
   telescope_git_last_commit_files,
   { desc = "Jump to files in last commit" }
 )
-vim.keymap.set("n", "<space>gg", "<cmd>G<cr><c-w>L", { desc = "Git status" })
+vim.keymap.set("n", "<space>gg", "<cmd>G<cr><c-w>H", { desc = "Git status" })
 vim.keymap.set("n", "<space>gb", "<cmd>G blame<cr>", { desc = "Git blame" })
 
 local function git_history()

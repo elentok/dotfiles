@@ -49,9 +49,9 @@ vim.api.nvim_create_autocmd(
 
 local has_builtin, builtin = pcall(require, "telescope.builtin")
 if has_builtin then
-  vim.keymap.set("n", "<Leader>gt", function()
+  vim.keymap.set("n", "<space>jt", function()
     builtin.grep_string({ search = "[ ]", search_dirs = { vim.fn.expand("%") } })
-  end)
+  end, { desc = "Jump to open task" })
 end
 
 local function todo_toggle_done()
