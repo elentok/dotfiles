@@ -30,12 +30,11 @@ return {
     end,
   },
 
-  -- LSP.
+  -- LSP
   "neovim/nvim-lspconfig",
-  {
-    "williamboman/mason.nvim",
-    build = ":MasonUpdate",
-  }, -- Optional
+
+  -- Mason
+  { "williamboman/mason.nvim", build = ":MasonUpdate" },
   "williamboman/mason-lspconfig.nvim",
 
   -- Autocompletion
@@ -43,9 +42,9 @@ return {
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-buffer",
   "hrsh7th/cmp-path",
-  "saadparwaiz1/cmp_luasnip",
   "hrsh7th/cmp-nvim-lua",
   "hrsh7th/cmp-cmdline",
+  "saadparwaiz1/cmp_luasnip",
 
   -- Snippets
   { "L3MON4D3/LuaSnip" },
@@ -59,6 +58,7 @@ return {
   "lukas-reineke/cmp-rg",
   {
     "folke/trouble.nvim",
+    opts = {},
     dependencies = { "kyazdani42/nvim-web-devicons" },
     cmd = { "Trouble" },
   },
@@ -116,7 +116,58 @@ return {
   -- Shows registers contents when using them
   -- "tversteeg/registers.nvim",
   "b0o/incline.nvim", -- Shows buffer names on windows
-  "ThePrimeagen/harpoon",
+
+  -- Harpoon
+  {
+    "ThePrimeagen/harpoon",
+    opts = {},
+    keys = {
+      {
+        "<space>a",
+        function()
+          require("harpoon.mark").add_file()
+        end,
+        desc = "Harpoon add file",
+      },
+      {
+        "<space>e",
+        function()
+          require("harpoon.ui").toggle_quick_menu()
+        end,
+        desc = "Harpoon menu",
+      },
+      {
+        "<space>1",
+        function()
+          require("harpoon.ui").nav_file(1)
+        end,
+        desc = "Harpoon jump to #1",
+      },
+      {
+        "<space>2",
+        function()
+          require("harpoon.ui").nav_file(2)
+        end,
+        desc = "Harpoon jump to #2",
+      },
+      {
+        "<space>3",
+        function()
+          require("harpoon.ui").nav_file(3)
+        end,
+        desc = "Harpoon jump to #3",
+      },
+      {
+        "<space>4",
+        function()
+          require("harpoon.ui").nav_file(4)
+        end,
+        desc = "Harpoon jump o #4",
+      },
+    },
+  },
+
+  -- Color Picker
   {
     "ziontee113/color-picker.nvim",
     opts = {},
@@ -124,10 +175,13 @@ return {
       { "<space>cp", "<cmd>PickColor<cr>", mode = "n", desc = "Color picker" },
     },
   },
+
   "ojroques/nvim-osc52",
   { "kevinhwang91/nvim-ufo", dependencies = { "kevinhwang91/promise-async" } },
+
   {
     "salkin-mada/openscad.nvim",
+    ft = { "openscad" },
     config = function()
       require("openscad")
     end,
@@ -136,9 +190,18 @@ return {
   -- Toggles words (e.g. true/false, top/bottom)
   {
     "elentok/togglr.vim",
-    config = function()
-      require("togglr").setup()
-    end,
+    opts = {
+      key = false,
+    },
+    keys = {
+      {
+        "<space>tw",
+        function()
+          require("togglr").toggle_word()
+        end,
+        desc = "Toggle word",
+      },
+    },
   },
 
   -- dark/zen room, no distraction mode

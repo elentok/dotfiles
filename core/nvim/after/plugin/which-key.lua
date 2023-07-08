@@ -10,4 +10,10 @@ wk.register({
   g = {
     name = "git",
   },
+  o = {
+    name = "open",
+  },
+  t = {
+    name = "toggle/test",
+  },
 }, { prefix = "<space>" })

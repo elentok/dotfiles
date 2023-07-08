@@ -1,15 +1,10 @@
-local ok, _ = pcall(require, "lir")
-
-if not ok then
-  return
-end
-
+local lir = require("lir")
 local actions = require("lir.actions")
 local mark_actions = require("lir.mark.actions")
 local clipboard_actions = require("lir.clipboard.actions")
 local float = require("lir.float")
 
-require("lir").setup({
+lir.setup({
   devicons = {
     enable = true,
   },
@@ -19,7 +14,6 @@ require("lir").setup({
     ["h"] = actions.up,
     ["-"] = actions.up,
     ["q"] = actions.quit,
-
     ["o"] = actions.mkdir,
     ["i"] = actions.newfile,
     ["r"] = actions.rename,
@@ -29,16 +23,14 @@ require("lir").setup({
     ["."] = actions.toggle_show_hidden,
     ["dd"] = actions.delete,
     ["D"] = actions.delete,
-
     ["J"] = function()
-      mark_actions.toggle_mark()
+      mark_actions.toggle_mark("n")
       vim.cmd("normal! j")
     end,
     ["C"] = clipboard_actions.copy,
     ["X"] = clipboard_actions.cut,
     ["P"] = clipboard_actions.paste,
   },
-
   float = {
     winblend = 0,
     curdir_window = { enable = true, highlight_dirname = true },

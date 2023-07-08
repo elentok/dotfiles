@@ -105,4 +105,6 @@ vim.keymap.set(
 
 vim.keymap.set("n", "<space>ov", function()
   term.run({ "vifm", "--select", vim.fn.expand("%") })
-end, { desc = "Vifm" })
+end, { desc = "Open Vifm" })
+
+vim.keymap.set("n", "<space>ol", "<cmd>Lazy<cr>", { desc = "Open Lazy" })
