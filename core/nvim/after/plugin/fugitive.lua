@@ -1,12 +1,12 @@
 local group_id = vim.api.nvim_create_augroup("Elentok_Fugitive", {})
-local util = require("elentok/util")
+local git = require("elentok.lib.git")
 
 local commands = {
-  ["Stash staged changes"] = "Git stash push --staged",
-  ["Push"] = "Git push",
-  ["Pull"] = "Git pull",
-  ["Push feature"] = "Git psf",
-  ["Pull and rebase main"] = "Git prm",
+  ["Stash staged changes"] = { "stash", "push", "--staged" },
+  ["Push"] = { "push" },
+  ["Pull"] = { "pull" },
+  ["Push feature"] = { "psf" },
+  ["Pull and rebase main"] = { "prm" },
 }
 
 local function command_pallete()
@@ -15,7 +15,7 @@ local function command_pallete()
   }, function(choice)
     local cmd = commands[choice]
     if cmd ~= nil then
-      util.ishell(cmd)
+      git.run(cmd)
     end
   end)
 end

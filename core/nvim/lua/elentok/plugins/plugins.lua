@@ -17,6 +17,8 @@ return {
   -- "tpope/vim-surround",
   "tpope/vim-unimpaired",
 
+  "mbbill/undotree",
+
   -- Surround
   {
     "kylechui/nvim-surround",
@@ -36,17 +38,15 @@ return {
   "michaeljsmith/vim-indent-object",
   "bronson/vim-visual-star-search",
   "christoomey/vim-tmux-navigator",
-  "voldikss/vim-floaterm",
+  -- "voldikss/vim-floaterm",
   "numToStr/FTerm.nvim",
-  "nvim-lua/popup.nvim",
+  -- "nvim-lua/popup.nvim",
   "nvim-lua/plenary.nvim",
   "AndrewRadev/splitjoin.vim",
   "jamessan/vim-gnupg",
   "davidbeckingsale/writegood.vim",
   -- Presentation tool
   "sotte/presenting.vim",
-  -- Smooth scrolling
-  "karb94/neoscroll.nvim",
   "kyazdani42/nvim-web-devicons",
   "nvim-lualine/lualine.nvim",
   -- Shows registers contents when using them
@@ -145,7 +145,7 @@ return {
   -- Make vim.ui.input and vim.ui.select prettier
   { "stevearc/dressing.nvim", opts = {} },
 
-  "mbbill/undotree",
+  -- Sibling swap
   {
     "Wansmer/sibling-swap.nvim",
     opts = {
@@ -168,6 +168,8 @@ return {
       },
     },
   },
+
+  -- URLView
   {
     "axieax/urlview.nvim",
     config = function()
@@ -177,6 +179,7 @@ return {
 
   { "kevinhwang91/nvim-bqf", ft = "qf" },
 
+  -- Flash
   {
     "folke/flash.nvim",
     event = "VeryLazy",
@@ -202,6 +205,7 @@ return {
     },
   },
 
+  -- Which Key
   {
     "folke/which-key.nvim",
     event = "VeryLazy",

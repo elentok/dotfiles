@@ -1,4 +1,5 @@
 local api = vim.api
+local term = require("elentok.lib.terminal")
 
 local M = {}
 
@@ -145,30 +146,6 @@ local function extract_fugitive_path(path)
   end
 
   return path
-end
-
-function M.ishell(cmd, opts)
-  opts = vim.tbl_extend("force", { large = false }, opts or {})
-  local cwd = extract_fugitive_path(vim.fn.expand("%:p:h"))
-
-  local cmd_args = {
-    string.format("cd '%s'", cwd),
-    "echo '========================================'",
-    string.format("echo '> cd %s'", cwd),
-    string.format("echo '> %s'", cmd),
-    "echo '========================================'",
-    cmd,
-  }
-
-  local size_arg = ""
-  if opts.large then
-    size_arg = "--width=0.8 --height=0.8"
-  end
-
-  local args = { size_arg, table.concat(cmd_args, "&&") }
-
-  local vimcmd = "FloatermNew " .. table.concat(args, " ")
-  vim.cmd(vimcmd)
 end
 
 function M.tabpage_get_buf_win_number(tabnr, bufnr)

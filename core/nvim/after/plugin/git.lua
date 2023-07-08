@@ -1,24 +1,30 @@
 local conf = require("telescope.config").values
 local finders = require("telescope.finders")
 local pickers = require("telescope.pickers")
-local terminal = require("elentok.lib.terminal")
+local term = require("elentok.lib.terminal")
+local git = require("elentok.lib.git")
 
-vim.cmd([[
-  command! -nargs=+ GG lua require('elentok/util').ishell('git <args>')
-  command! Gps GG push
-  command! Gpl GG pull --rebase
-  command! Gsync GG sync
-  command! -nargs=* Gap lua require('elentok/util').ishell('git add -p <args>', { large = true })
-]])
+vim.api.nvim_create_user_command("GG", function(opts)
+  git.run(opts.fargs)
+end, { nargs = "+" })
+
+vim.api.nvim_create_user_command("Gap", function(opts)
+  local args = vim.list_extend({ "add", "-p" }, opts.fargs)
+  git.run(args)
+end, { nargs = "*" })
+
+vim.api.nvim_create_user_command("Gps", ":GG push", {})
+vim.api.nvim_create_user_command("Gpl", ":GG pull --rebase", {})
+vim.api.nvim_create_user_command("Gsync", ":GG sync", {})
 
 local git_conflict = require("git-conflict")
 git_conflict.setup({})
 
 vim.keymap.set("n", "<space>gc", "<cmd>GitConflictListQf<cr>", { desc = "Git list conflicts" })
-vim.keymap.set("n", "co", "<Plug>(git-conflict-ours)")
-vim.keymap.set("n", "ct", "<Plug>(git-conflict-theirs)")
-vim.keymap.set("n", "cb", "<Plug>(git-conflict-both)")
-vim.keymap.set("n", "c0", "<Plug>(git-conflict-none)")
+vim.keymap.set("n", "<space>co", "<Plug>(git-conflict-ours)")
+vim.keymap.set("n", "<space>ct", "<Plug>(git-conflict-theirs)")
+vim.keymap.set("n", "<space>cb", "<Plug>(git-conflict-both)")
+vim.keymap.set("n", "<space>c0", "<Plug>(git-conflict-none)")
 vim.keymap.set("n", "[m", "<Plug>(git-conflict-prev-conflict)")
 vim.keymap.set("n", "]m", "<Plug>(git-conflict-next-conflict)")
 
@@ -51,17 +57,17 @@ vim.keymap.set("n", "<space>gb", "<cmd>G blame<cr>", { desc = "Git blame" })
 local function git_history()
   local filename = vim.fn.expand("%")
   if filename == "" or filename:match("^fugitive:") then
-    terminal.run({ "tig" })
+    term.run({ "tig" })
   else
-    terminal.run({ "tig", "--follow", filename })
+    term.run({ "tig", "--follow", filename })
   end
 end
 
 vim.keymap.set("n", "<space>gh", git_history, { desc = "Git file history" })
 vim.keymap.set("n", "<space>gt", function()
-  terminal.run({ "tig" })
+  term.run({ "tig" })
 end, { desc = "Tig" })
 
 vim.keymap.set("n", "<space>gd", function()
-  terminal.run({ "git", "diff", vim.fn.expand("%") })
+  term.run({ "git", "diff", vim.fn.expand("%") })
 end, { desc = "Git diff current file" })
