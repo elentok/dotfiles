@@ -8,7 +8,6 @@ return {
   "rmehri01/onenord.nvim",
 
   -- File manager.
-  -- use "cocopon/vaffle.vim"
   "tamago324/lir.nvim",
 
   -- Comments
@@ -17,7 +16,6 @@ return {
   "tpope/vim-abolish",
   "tpope/vim-dispatch",
   "tpope/vim-eunuch",
-  "tpope/vim-fugitive",
   "tpope/vim-repeat",
   -- "tpope/vim-surround",
   "tpope/vim-unimpaired",
@@ -28,88 +26,18 @@ return {
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
     opts = {},
-    -- config = function()
-    --   require("nvim-surround").setup({
-    --     -- Configuration here, or leave empty to use defaults
-    --   })
-    -- end
   },
 
   -- Automatically close bracket and tag pairs
-  {
-    "windwp/nvim-autopairs",
-    config = function()
-      require("nvim-autopairs").setup()
-    end,
-  },
-
-  -- LSP
-  "neovim/nvim-lspconfig",
-
-  -- Mason
-  { "williamboman/mason.nvim", build = ":MasonUpdate" },
-  "williamboman/mason-lspconfig.nvim",
-
-  -- Autocompletion
-  "hrsh7th/nvim-cmp",
-  "hrsh7th/cmp-nvim-lsp",
-  "hrsh7th/cmp-buffer",
-  "hrsh7th/cmp-path",
-  "hrsh7th/cmp-nvim-lua",
-  "hrsh7th/cmp-cmdline",
-  "saadparwaiz1/cmp_luasnip",
-
-  -- Snippets
-  { "L3MON4D3/LuaSnip" },
-  { "rafamadriz/friendly-snippets" },
-
-  -- Extra LSP plugins
-  { "ray-x/lsp_signature.nvim",    opts = {} },
-  "stevearc/aerial.nvim",
-  "jose-elias-alvarez/null-ls.nvim",
-  "onsails/lspkind-nvim",
-  "lukas-reineke/cmp-rg",
-  {
-    "folke/trouble.nvim",
-    opts = {},
-    dependencies = { "kyazdani42/nvim-web-devicons" },
-    cmd = { "Trouble" },
-  },
-  {
-    "j-hui/fidget.nvim", -- Shows LSP init progress
-    tag = "legacy",
-    opts = {},
-  },
+  { "windwp/nvim-autopairs", opts = {} },
 
   -- Allows running "nvim {filename}:{line-number}".
   "bogado/file-line",
 
-  -- FZF.
-  -- "junegunn/fzf",
-  -- "junegunn/fzf.vim",
-
-  -- Telescope
-  { "nvim-telescope/telescope.nvim",            tag = "0.1.2" },
-  "nvim-telescope/telescope-file-browser.nvim",
-  "nvim-telescope/telescope-live-grep-args.nvim",
-  { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-
-  -- Treesitter
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = function()
-      local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
-      ts_update()
-    end,
-  },
-  "nvim-treesitter/playground",
-  "nvim-treesitter/nvim-treesitter-textobjects",
-  "SmiteshP/nvim-navic",
   "folke/twilight.nvim", -- focus active code block
   "aklt/plantuml-syntax",
-  "lewis6991/gitsigns.nvim",
   "michaeljsmith/vim-indent-object",
-  "nelstrom/vim-visual-star-search",
+  "bronson/vim-visual-star-search",
   "christoomey/vim-tmux-navigator",
   "voldikss/vim-floaterm",
   "numToStr/FTerm.nvim",
@@ -123,8 +51,6 @@ return {
   -- Smooth scrolling
   "karb94/neoscroll.nvim",
   "kyazdani42/nvim-web-devicons",
-  -- "kdheepak/lazygit.nvim",
-  { "akinsho/git-conflict.nvim", version = "v1.1.2" },
   "nvim-lualine/lualine.nvim",
   -- Shows registers contents when using them
   -- "tversteeg/registers.nvim",
@@ -190,7 +116,6 @@ return {
   },
 
   "ojroques/nvim-osc52",
-  { "kevinhwang91/nvim-ufo",     dependencies = { "kevinhwang91/promise-async" } },
 
   {
     "salkin-mada/openscad.nvim",
@@ -218,14 +143,10 @@ return {
   },
 
   -- dark/zen room, no distraction mode
-  { "junegunn/goyo.vim",      cmd = "Goyo" },
+  { "junegunn/goyo.vim", cmd = "Goyo" },
 
   -- Make vim.ui.input and vim.ui.select prettier
   { "stevearc/dressing.nvim", opts = {} },
-
-  -- Improve neovim lua development (better completion, help, etc...)
-  "folke/neodev.nvim",
-  "jose-elias-alvarez/typescript.nvim",
 
   "mbbill/undotree",
   {
@@ -256,28 +177,6 @@ return {
       require("urlview").setup({})
     end,
   },
-  {
-    "linrongbin16/gitlinker.nvim",
-    opts = { mappings = "" },
-    keys = {
-      {
-        "<space>gy",
-        function()
-          require("gitlinker").link({ action = require("gitlinker.actions").clipboard })
-        end,
-        mode = { "n", "v" },
-        desc = "Git yank URL",
-      },
-      {
-        "<space>go",
-        function()
-          require("gitlinker").link({ action = require("gitlinker.actions").system })
-        end,
-        mode = { "n", "v" },
-        desc = "Git open in browser",
-      },
-    },
-  },
 
   { "kevinhwang91/nvim-bqf", ft = "qf" },
 
@@ -295,30 +194,6 @@ return {
         end,
         desc = "Flash",
       },
-      -- {
-      --   "S",
-      --   mode = { "n", "o", "x" },
-      --   function()
-      --     require("flash").treesitter()
-      --   end,
-      --   desc = "Flash Treesitter",
-      -- },
-      -- {
-      --   "r",
-      --   mode = "o",
-      --   function()
-      --     require("flash").remote()
-      --   end,
-      --   desc = "Remote Flash",
-      -- },
-      -- {
-      --   "R",
-      --   mode = { "o", "x" },
-      --   function()
-      --     require("flash").treesitter_search()
-      --   end,
-      --   desc = "Flash Treesitter Search",
-      -- },
       {
         "<Leader>fs",
         mode = { "c" },
@@ -337,32 +212,6 @@ return {
       vim.o.timeout = true
       vim.o.timeoutlen = 300
     end,
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    },
+    opts = {},
   },
-
-  -- lazy.nvim
-  -- {
-  --   "folke/noice.nvim",
-  --   event = "VeryLazy",
-  --   opts = {
-  --     presets = {
-  --       lsp_doc_border = true,
-  --     },
-  --     messages = {
-  --       enabled = false,
-  --     },
-  --   },
-  --   dependencies = {
-  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-  --     "MunifTanjim/nui.nvim",
-  --     -- OPTIONAL:
-  --     --   `nvim-notify` is only needed, if you want to use the notification view.
-  --     --   If not available, we use `mini` as the fallback
-  --     "rcarriga/nvim-notify",
-  --   },
-  -- },
 }
