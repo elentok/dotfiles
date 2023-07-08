@@ -1,4 +1,9 @@
 local function messages_buffer()
+  local bufnr = vim.fn.bufnr("^Messages$")
+  if bufnr ~= -1 and vim.api.nvim_buf_is_loaded(bufnr) then
+    vim.cmd("bd " .. bufnr)
+  end
+
   vim.cmd("new")
   vim.cmd("noswapfile hide enew")
   vim.cmd("put = execute('message')")
