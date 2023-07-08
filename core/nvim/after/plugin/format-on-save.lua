@@ -5,6 +5,7 @@ local enabled = true
 
 local ignore_patterns = {
   "/node_modules/",
+  ".local/share/nvim/lazy",
 }
 
 local function should_ignore()

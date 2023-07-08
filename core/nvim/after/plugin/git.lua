@@ -1,16 +1,7 @@
 local conf = require("telescope.config").values
 local finders = require("telescope.finders")
 local pickers = require("telescope.pickers")
-local gitlinker = require("gitlinker")
 local terminal = require("elentok.lib.terminal")
-
-gitlinker.setup({ mappings = nil })
-vim.keymap.set("n", "<space>gy", function()
-  gitlinker.get_buf_range_url("n")
-end, { silent = true, desc = "Git yank URL" })
-vim.keymap.set("v", "<space>gy", function()
-  gitlinker.get_buf_range_url("v")
-end, { silent = true, desc = "Git yank URL" })
 
 vim.cmd([[
   command! -nargs=+ GG lua require('elentok/util').ishell('git <args>')

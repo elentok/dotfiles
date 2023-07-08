@@ -51,3 +51,9 @@ vim.keymap.set(
   "<cmd>e ~/.dotfiles/core/nvim/lua/elentok/plugins.lua<cr>",
   { desc = "Jump to plugins.lua" }
 )
+vim.keymap.set(
+  "n",
+  "<space>jd",
+  ':cd <C-R>=expand("%:p:h")<cr>',
+  { desc = "CD to directory of current file" }
+)

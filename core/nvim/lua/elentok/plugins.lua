@@ -116,9 +116,14 @@ return {
   "tversteeg/registers.nvim",
   "b0o/incline.nvim", -- Shows buffer names on windows
   "ThePrimeagen/harpoon",
-  "ziontee113/color-picker.nvim",
+  {
+    "ziontee113/color-picker.nvim",
+    opts = {},
+    keys = {
+      { "<space>cp", "<cmd>PickColor<cr>", mode = "n", desc = "Color picker" },
+    },
+  },
   "ojroques/nvim-osc52",
-  "mizlan/iswap.nvim",
   { "kevinhwang91/nvim-ufo", dependencies = { "kevinhwang91/promise-async" } },
   {
     "salkin-mada/openscad.nvim",
@@ -135,8 +140,6 @@ return {
     end,
   },
 
-  { "itchyny/calendar.vim", cmd = "Calendar" },
-
   -- dark/zen room, no distraction mode
   { "junegunn/goyo.vim", cmd = "Goyo" },
 
@@ -148,14 +151,56 @@ return {
   "jose-elias-alvarez/typescript.nvim",
 
   "mbbill/undotree",
-  "Wansmer/sibling-swap.nvim",
+  {
+    "Wansmer/sibling-swap.nvim",
+    opts = {
+      use_default_keymaps = false,
+    },
+    keys = {
+      {
+        "]s",
+        function()
+          require("sibling-swap").swap_with_right()
+        end,
+        mode = "n",
+      },
+      {
+        "[s",
+        function()
+          require("sibling-swap").swap_with_left()
+        end,
+        mode = "n",
+      },
+    },
+  },
   {
     "axieax/urlview.nvim",
     config = function()
       require("urlview").setup({})
     end,
   },
-  "ruifm/gitlinker.nvim",
+  {
+    "linrongbin16/gitlinker.nvim",
+    opts = { mappings = "" },
+    keys = {
+      {
+        "<space>gy",
+        function()
+          require("gitlinker").link({ action = require("gitlinker.actions").clipboard })
+        end,
+        mode = { "n", "v" },
+        desc = "Git yank URL",
+      },
+      {
+        "<space>go",
+        function()
+          require("gitlinker").link({ action = require("gitlinker.actions").system })
+        end,
+        mode = { "n", "v" },
+        desc = "Git open in browser",
+      },
+    },
+  },
 
   { "kevinhwang91/nvim-bqf", ft = "qf" },
 

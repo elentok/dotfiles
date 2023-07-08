@@ -1,3 +1,4 @@
+local term = require("elentok/lib/terminal")
 -- vim: foldmethod=marker
 vim.keymap.set("i", "jk", "<esc>")
 
@@ -9,9 +10,6 @@ vim.keymap.set("i", "<c-s>", "<c-o>:w<cr>")
 
 -- Remove whitespace.
 vim.keymap.set("n", "<Leader>rws", "<cmd>%s/\\s\\+$//<cr>")
-
--- Go to {{{1
-vim.keymap.set("n", "<Leader>gd", ':cd <C-R>=expand("%:p:h")<cr>')
 
 -- Avoid paste override {{{1
 -- From https://github.com/skwp/dotfiles/blob/master/vim/plugin/settings/stop-visual-paste-insanity.vim:
@@ -64,7 +62,9 @@ vim.keymap.set("n", "<Leader>st", "<cmd>%!todo-sort<cr>")
 vim.keymap.set("n", "<Leader>ya", "<cmd>%y+<cr>")
 vim.keymap.set("n", "<Leader>yf", ':let @+ = expand("%")<cr>', { desc = "Yank current filename" })
 
-vim.keymap.set("n", "<Leader>oc", "<cmd>Calendar -view=year -split=vertical -width=27<cr>")
+vim.keymap.set("n", "<space>cl", function()
+  term.run("FORCE_COLOR=1 mycal | less", { w = 0.5 })
+end, { desc = "Calendar" })
 
 -- vim.keymap.set("n", "<backspace>", "zc")
 
@@ -102,3 +102,7 @@ vim.keymap.set(
   "v:count ? (v:count > 1 ? \"m'\" . v:count : '') . 'k' : 'gk'",
   { expr = true }
 )
+
+vim.keymap.set("n", "<space>ov", function()
+  term.run({ "vifm", "--select", vim.fn.expand("%") })
+end, { desc = "Vifm" })
