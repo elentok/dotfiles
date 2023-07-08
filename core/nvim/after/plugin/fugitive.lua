@@ -21,13 +21,13 @@ local function command_pallete()
 end
 
 local function setup_fugitive()
-  vim.keymap.set("n", "R", ":e<cr>:echo 'Reloaded'<cr>", { buffer = true })
-  vim.keymap.set("n", "q", ":q<cr>", { buffer = true })
+  vim.keymap.set("n", "R", "<cmd>e<cr><cmd>echo 'Reloaded'<cr>", { buffer = true })
+  vim.keymap.set("n", "q", "<cmd>q<cr>", { buffer = true })
   vim.keymap.set("n", "@", command_pallete, { buffer = true })
 end
 
 local function setup_fugitive_blame()
-  vim.keymap.set("n", "q", ":q<cr>", { buffer = true })
+  vim.keymap.set("n", "q", "<cmd>q<cr>", { buffer = true })
 end
 
 vim.api.nvim_create_autocmd(

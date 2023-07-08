@@ -13,7 +13,7 @@ local function messages_buffer()
   vim.bo.modifiable = false
   vim.cmd("file Messages")
 
-  vim.api.nvim_buf_set_keymap(0, "n", "q", ":bd<cr>", { noremap = true, silent = true })
+  vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>bd<cr>", { noremap = true, silent = true })
 end
 
 vim.api.nvim_create_user_command("Messages", messages_buffer, {})
