@@ -52,7 +52,7 @@ return {
   { "rafamadriz/friendly-snippets" },
 
   -- Extra LSP plugins
-  "ray-x/lsp_signature.nvim",
+  -- "ray-x/lsp_signature.nvim",
   "stevearc/aerial.nvim",
   "jose-elias-alvarez/null-ls.nvim",
   "onsails/lspkind-nvim",
@@ -61,13 +61,13 @@ return {
     "folke/trouble.nvim",
     dependencies = { "kyazdani42/nvim-web-devicons" },
   },
-  {
-    "j-hui/fidget.nvim", -- Shows LSP init progress
-    tag = "legacy",
-    config = function()
-      require("fidget").setup()
-    end,
-  },
+  -- {
+  --   "j-hui/fidget.nvim", -- Shows LSP init progress
+  --   tag = "legacy",
+  --   config = function()
+  --     require("fidget").setup()
+  --   end,
+  -- },
 
   -- Allows running "nvim {filename}:{line-number}".
   "bogado/file-line",
@@ -221,6 +221,25 @@ return {
       -- your configuration comes here
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
+    },
+  },
+
+  -- lazy.nvim
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      presets = {
+        lsp_doc_border = true,
+      },
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
     },
   },
 }

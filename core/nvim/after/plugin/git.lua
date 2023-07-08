@@ -23,7 +23,7 @@ vim.cmd([[
 local git_conflict = require("git-conflict")
 git_conflict.setup({})
 
-vim.keymap.set("n", "<space>gc", ":GitConflictListQf<cr>", { desc = "Git list conflicts" })
+vim.keymap.set("n", "<space>gc", "<cmd>GitConflictListQf<cr>", { desc = "Git list conflicts" })
 vim.keymap.set("n", "co", "<Plug>(git-conflict-ours)")
 vim.keymap.set("n", "ct", "<Plug>(git-conflict-theirs)")
 vim.keymap.set("n", "cb", "<Plug>(git-conflict-both)")
@@ -54,8 +54,8 @@ vim.keymap.set(
   telescope_git_last_commit_files,
   { desc = "Jump to files in last commit" }
 )
-vim.keymap.set("n", "<space>gg", ":G<cr><c-w>L", { desc = "Git status" })
-vim.keymap.set("n", "<space>gb", ":G blame<cr>", { desc = "Git blame" })
+vim.keymap.set("n", "<space>gg", "<cmd>G<cr><c-w>L", { desc = "Git status" })
+vim.keymap.set("n", "<space>gb", "<cmd>G blame<cr>", { desc = "Git blame" })
 
 local function git_history()
   local filename = vim.fn.expand("%")
@@ -66,7 +66,10 @@ local function git_history()
   end
 end
 
-vim.keymap.set("n", "<space>gh", git_history, { desc = "Git history" })
+vim.keymap.set("n", "<space>gh", git_history, { desc = "Git file history" })
+vim.keymap.set("n", "<space>gt", function()
+  terminal.run({ "tig" })
+end, { desc = "Tig" })
 
 vim.keymap.set("n", "<space>gd", function()
   terminal.run({ "git", "diff", vim.fn.expand("%") })
