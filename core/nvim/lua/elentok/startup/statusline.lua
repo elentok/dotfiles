@@ -12,7 +12,10 @@ local function navic_is_available()
 end
 
 lualine.setup({
-  options = { theme = "onedark" },
+  options = {
+    theme = "onedark",
+    section_separators = { left = '', right = '' },
+  },
   sections = {
     lualine_a = { "filename" },
     lualine_b = { { shortener.dir, icon = "" } },
