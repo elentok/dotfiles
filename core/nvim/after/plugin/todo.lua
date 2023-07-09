@@ -110,7 +110,7 @@ local function todo_toggle_done_visible()
 end
 
 vim.keymap.set("n", "<space>td", todo_toggle_done, { desc = "Todo - toggle done" })
-vim.keymap.set("n", "<space>tf", todo_toggle_done_visible, { desc = "Todo - toggle done visible" })
+vim.keymap.set("n", "<space>tv", todo_toggle_done_visible, { desc = "Todo - toggle done visible" })
 
 vim.keymap.set("n", "[t", todo_prev_state, { desc = "Todo - prev state" })
 vim.keymap.set("n", "]t", todo_next_state, { desc = "Todo - next state" })
