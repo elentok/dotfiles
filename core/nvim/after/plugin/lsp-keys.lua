@@ -25,8 +25,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("n", "<space>jD", vim.lsp.buf.type_definition, "Jump to type definition")
     map("n", "<space>ji", vim.lsp.buf.implementation, "Jump to implementation")
 
-    map("n", "<leader>rn", vim.lsp.buf.rename, "Rename symbol")
-    map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code actions")
+    map("n", "<space>rn", vim.lsp.buf.rename, "Rename symbol")
+    map({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, "Code actions")
 
     map("n", "K", vim.lsp.buf.hover, "Hover info")
     map("n", "<space>k", vim.lsp.buf.signature_help, "Signature help")
