@@ -28,7 +28,7 @@ return {
   },
 
   -- Automatically close bracket and tag pairs
-  { "windwp/nvim-autopairs", opts = {} },
+  { "windwp/nvim-autopairs",   opts = {} },
 
   -- Allows running "nvim {filename}:{line-number}".
   "bogado/file-line",
@@ -140,7 +140,7 @@ return {
   },
 
   -- dark/zen room, no distraction mode
-  { "junegunn/goyo.vim", cmd = "Goyo" },
+  { "junegunn/goyo.vim",      cmd = "Goyo" },
 
   -- Make vim.ui.input and vim.ui.select prettier
   { "stevearc/dressing.nvim", opts = {} },
@@ -184,7 +184,11 @@ return {
     "folke/flash.nvim",
     event = "VeryLazy",
     ---@type Flash.Config
-    opts = {},
+    opts = {
+      search = {
+        multi_window = false,
+      },
+    },
     keys = {
       {
         "s",
