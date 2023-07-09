@@ -122,23 +122,6 @@ return {
     end,
   },
 
-  -- Toggles words (e.g. true/false, top/bottom)
-  {
-    "elentok/togglr.vim",
-    opts = {
-      key = false,
-    },
-    keys = {
-      {
-        "<space>tw",
-        function()
-          require("togglr").toggle_word()
-        end,
-        desc = "Toggle word",
-      },
-    },
-  },
-
   -- dark/zen room, no distraction mode
   { "junegunn/goyo.vim",      cmd = "Goyo" },
 

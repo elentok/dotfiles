@@ -48,7 +48,7 @@ vim.keymap.set("n", "<space>jn", jump_to_note, { desc = "Jump to note" })
 vim.keymap.set(
   "n",
   "<space>jp",
-  "<cmd>e ~/.dotfiles/core/nvim/lua/elentok/plugins.lua<cr>",
+  "<cmd>e ~/.dotfiles/core/nvim/lua/elentok/plugins/plugins.lua<cr>",
   { desc = "Jump to plugins.lua" }
 )
 vim.keymap.set(
