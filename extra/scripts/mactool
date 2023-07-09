@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+#
+# Mac CLI tool for various stuff
+#
+# Usage:
+#
+#   mactool mute
+#   mactool unmute
+#   mactool is-muted
+
+set -euo pipefail
+
+function main() {
+  cmd="${1:-}"
+  shift
+
+  case "$cmd" in
+    mute)
+      osascript -e "set volume with output muted"
+      ;;
+
+    unmute)
+      osascript -e "set volume without output muted"
+      ;;
+
+    is-muted)
+      osascript -e "output muted of (get volume settings)"
+      ;;
+    *)
+      usage "$0"
+      exit 1
+      ;;
+  esac
+}
+
+main "$@"
