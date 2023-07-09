@@ -11,12 +11,12 @@ local sources = {
     disabled_filetypes = config.prettierd_disabled_filetypes,
   }),
   null_ls.builtins.formatting.black,
-  null_ls.builtins.formatting.stylua.with({
-    extra_args = {
-      "--config-path",
-      vim.fn.expand("$DOTF/core/nvim/stylua.toml"),
-    },
-  }),
+  -- null_ls.builtins.formatting.stylua.with({
+  --   extra_args = {
+  --     "--config-path",
+  --     vim.fn.expand("$DOTF/core/nvim/stylua.toml"),
+  --   },
+  -- }),
   null_ls.builtins.formatting.shfmt.with({
     extra_args = { "-i", "2", "-bn", "-ci", "-sr" },
   }),
