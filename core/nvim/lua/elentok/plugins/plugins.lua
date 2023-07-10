@@ -166,10 +166,14 @@ return {
   {
     "folke/flash.nvim",
     event = "VeryLazy",
-    ---@type Flash.Config
     opts = {
       search = {
         multi_window = false,
+      },
+      modes = {
+        search = {
+          enabled = false,
+        },
       },
     },
     keys = {
@@ -180,14 +184,6 @@ return {
           require("flash").jump()
         end,
         desc = "Flash",
-      },
-      {
-        "<Leader>fs",
-        mode = { "c" },
-        function()
-          require("flash").toggle()
-        end,
-        desc = "Toggle Flash Search",
       },
     },
   },
