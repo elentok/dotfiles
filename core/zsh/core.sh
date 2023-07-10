@@ -113,6 +113,10 @@ if is-nvm-providing-node; then
   export DOTF_NVM_DEFAULT_PATH
 fi
 
+# Node-gyp doesn't support Python 3.11
+NODE_GYP_FORCE_PYTHON="$(command ls -1 /opt/homebrew/Cellar/python@3.10/*/bin/python3.10 | head)"
+export NODE_GYP_FORCE_PYTHON
+
 # Go {{{1
 if [ -e $HOME/.apps/go ]; then
   export GOROOT=$HOME/.apps/go
