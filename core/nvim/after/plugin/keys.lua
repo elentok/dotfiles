@@ -56,11 +56,11 @@ vim.keymap.set("n", "<Leader><Leader>", "<cmd>silent !tput clear<cr>:redraw!<cr>
 vim.keymap.set("v", "<tab>", ">gv")
 vim.keymap.set("v", "<s-tab>", "<gv")
 
-vim.keymap.set("v", "<Leader>ss", "<cmd>sort<cr>")
-vim.keymap.set("v", "<Leader>st", "<cmd>!todo-sort<cr>")
-vim.keymap.set("n", "<Leader>st", "<cmd>%!todo-sort<cr>")
-vim.keymap.set("n", "<Leader>ya", "<cmd>%y+<cr>")
-vim.keymap.set("n", "<Leader>yf", ':let @+ = expand("%")<cr>', { desc = "Yank current filename" })
+vim.keymap.set("v", "<space>ss", ":sort<cr>", { desc = "Sort" })
+vim.keymap.set("v", "<space>st", ":!todo-sort<cr>", { desc = "Sort (todo)" })
+vim.keymap.set("n", "<space>st", ":%!todo-sort<cr>", { desc = "Sort (todo)" })
+vim.keymap.set("n", "<space>ya", ":%y+<cr>", { desc = "Yank entires file" })
+vim.keymap.set("n", "<space>yf", ':let @+ = expand("%")<cr>', { desc = "Yank current filename" })
 
 vim.keymap.set("n", "<space>cl", function()
   term.run("FORCE_COLOR=1 mycal | less", { w = 0.5 })
