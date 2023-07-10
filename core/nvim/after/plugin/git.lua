@@ -30,18 +30,18 @@ vim.keymap.set("n", "]m", "<Plug>(git-conflict-next-conflict)")
 
 local function telescope_git_last_commit_files()
   pickers
-    .new({}, {
-      finder = finders.new_oneshot_job({
-        "git",
-        "diff-tree",
-        "--no-commit-id",
-        "--name-only",
-        "-r",
-        "HEAD",
-      }, {}),
-      previewer = conf.file_previewer({}),
-    })
-    :find()
+      .new({}, {
+        finder = finders.new_oneshot_job({
+          "git",
+          "diff-tree",
+          "--no-commit-id",
+          "--name-only",
+          "-r",
+          "HEAD",
+        }, {}),
+        previewer = conf.file_previewer({}),
+      })
+      :find()
 end
 
 vim.api.nvim_create_user_command("Glast", telescope_git_last_commit_files, {})
@@ -51,6 +51,7 @@ vim.keymap.set(
   telescope_git_last_commit_files,
   { desc = "Jump to files in last commit" }
 )
+vim.keymap.set("n", "<space>gw", "<cmd>Gwrite<cr>", { desc = "Git write" })
 vim.keymap.set("n", "<space>gg", "<cmd>G<cr><c-w>H", { desc = "Git status" })
 vim.keymap.set("n", "<space>gb", "<cmd>G blame<cr>", { desc = "Git blame" })
 
