@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTF/framework"
+
+if [ ! -d /Applications/Phoenix.app ]; then
+  brew install --cask phoenix
+fi
+
+symlink "$DOTF/extra/phoenix/phoenix.js" ~/.phoenix.js
