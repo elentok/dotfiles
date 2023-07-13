@@ -20,7 +20,7 @@ local sources = {
   null_ls.builtins.formatting.shfmt.with({
     extra_args = { "-i", "2", "-bn", "-ci", "-sr" },
   }),
-  require("typescript.extensions.null-ls.code-actions"),
+  -- require("typescript.extensions.null-ls.code-actions"),
 }
 
 local function has_eslintrc()
