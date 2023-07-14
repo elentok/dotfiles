@@ -10,6 +10,6 @@
     "sourceMap": true
   },
   "include": [
-    "extra/scripts/lib/ts/**/*.ts"
+    "extra/scripts/**/*.ts"
   ]
 }
