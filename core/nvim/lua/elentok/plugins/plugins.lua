@@ -198,4 +198,6 @@ return {
     end,
     opts = {},
   },
+
+  'mfussenegger/nvim-lint'
 }

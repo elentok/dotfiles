@@ -3,6 +3,7 @@ local deep_merge = require("elentok/deep-merge")
 local config = {
   enable_eslint_formatter = false,
   prettierd_disabled_filetypes = {},
+  -- @type {[key: string]: { mode: "lsp" | "formatter", filter?: string }}
   format_on_save = {
     css = true,
     html = true,
@@ -10,16 +11,16 @@ local config = {
     javascript = true,
     json = true,
     lua = true,
-    markdown = "null-ls",
+    markdown = { cmd = { "prettierd", "%" } },
     openscad = true,
-    python = true,
+    python = { cmd = { "black", "--stdin-filename", "%", "--quiet", "-" } },
     rust = true,
     scad = true,
     scss = true,
-    sh = true,
+    sh = { cmd = { "shfmt", "-i", "2", "-bn", "-ci", "-sr" } },
     terraform = true,
-    typescript = "null-ls",
-    typescriptreact = "null-ls",
+    typescript = { cmd = { "prettierd", "%" } },
+    typescriptreact = { cmd = { "prettierd", "%" } },
     yaml = true,
   },
   path_shorteners = {
@@ -27,7 +28,6 @@ local config = {
   },
   -- Config specific to root paths in which Neovim was opened.
   path_specific_config = {},
-
   -- Allows dotprivate configs to parse links (should return the new URL if
   -- recognized or nil otherwise).
   link_parser = nil,
