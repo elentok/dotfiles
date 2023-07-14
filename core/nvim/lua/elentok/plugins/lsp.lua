@@ -4,7 +4,6 @@ return {
   "williamboman/mason-lspconfig.nvim",
   { "ray-x/lsp_signature.nvim", opts = {} },
   "stevearc/aerial.nvim",
-  "jose-elias-alvarez/null-ls.nvim",
   "onsails/lspkind-nvim",
   "SmiteshP/nvim-navic",
   { "kevinhwang91/nvim-ufo", dependencies = { "kevinhwang91/promise-async" } },
@@ -19,7 +18,6 @@ return {
     tag = "legacy",
     opts = {},
   },
-  -- "jose-elias-alvarez/typescript.nvim",
   {
     "pmizio/typescript-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },

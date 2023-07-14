@@ -199,5 +199,5 @@ return {
     opts = {},
   },
 
-  'mfussenegger/nvim-lint'
+  'mfussenegger/nvim-lint',
 }
