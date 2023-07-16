@@ -9,7 +9,7 @@ lint.linters_by_ft = {
   typescriptreact = { 'eslint_d' },
 }
 
-vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
   group = vim.api.nvim_create_augroup("Elentok_Lint", {}),
   callback = function()
     lint.try_lint()
