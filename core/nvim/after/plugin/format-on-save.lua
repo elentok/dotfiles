@@ -6,6 +6,7 @@ format_on_save.setup({
     "/node_modules/",
     ".local/share/nvim/lazy",
   },
+  partial_update = true,
   formatter_by_ft = {
     css = formatters.lsp,
     html = formatters.lsp,
