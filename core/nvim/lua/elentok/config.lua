@@ -41,7 +41,7 @@ end
 local git_dir = vim.fn.finddir(".git", ";.")
 if git_dir then
   local git_root =
-      vim.fn.fnamemodify(vim.fn.fnamemodify(git_dir, ":h"), ":p"):gsub(vim.env.HOME .. "/", "~/")
+    vim.fn.fnamemodify(vim.fn.fnamemodify(git_dir, ":h"), ":p"):gsub(vim.env.HOME .. "/", "~/")
   local path_specific_config = config.path_specific_config[git_root]
   if path_specific_config ~= nil then
     deep_merge(config, path_specific_config or {})

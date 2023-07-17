@@ -110,4 +110,9 @@ end, { desc = "Open Vifm" })
 vim.keymap.set("n", "<space>ol", "<cmd>Lazy<cr>", { desc = "Open Lazy" })
 
 vim.keymap.set("n", "<space>dd", '"3dd', { desc = "Delete line without overwriting register" })
-vim.keymap.set("v", "<space>x", '"3x', { desc = "Delete visual selecting without overwriting register" })
+vim.keymap.set(
+  "v",
+  "<space>x",
+  '"3x',
+  { desc = "Delete visual selecting without overwriting register" }
+)

@@ -24,12 +24,12 @@ local function deep_merge(target, source)
         if not vim.tbl_isempty(target[key]) then
           print(
             "WARNING: deep_merge(): merging key '"
-            .. key
-            .. '" from type "'
-            .. source_type
-            .. '" to "'
-            .. target_type
-            .. '"'
+              .. key
+              .. '" from type "'
+              .. source_type
+              .. '" to "'
+              .. target_type
+              .. '"'
           )
         end
         target[key] = value

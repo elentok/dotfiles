@@ -22,11 +22,11 @@ return {
     "elentok/scriptify.nvim",
     dev = true,
     opts = {},
-    cmd = { "Scriptify" }
+    cmd = { "Scriptify" },
   },
 
   {
     "elentok/format-on-save.nvim",
     dev = true,
-  }
+  },
 }

@@ -13,7 +13,7 @@ format_on_save.setup({
     java = formatters.lsp,
     javascript = formatters.lsp,
     json = formatters.lsp,
-    lua = formatters.lsp,
+    lua = formatters.stylua,
     markdown = formatters.prettierd,
     openscad = formatters.lsp,
     python = formatters.black,

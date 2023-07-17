@@ -14,7 +14,7 @@ end
 lualine.setup({
   options = {
     theme = "onedark",
-    section_separators = { left = '', right = '' },
+    section_separators = { left = "", right = "" },
   },
   sections = {
     lualine_a = { "filename" },

@@ -30,18 +30,18 @@ vim.keymap.set("n", "]m", "<Plug>(git-conflict-next-conflict)")
 
 local function telescope_git_last_commit_files()
   pickers
-      .new({}, {
-        finder = finders.new_oneshot_job({
-          "git",
-          "diff-tree",
-          "--no-commit-id",
-          "--name-only",
-          "-r",
-          "HEAD",
-        }, {}),
-        previewer = conf.file_previewer({}),
-      })
-      :find()
+    .new({}, {
+      finder = finders.new_oneshot_job({
+        "git",
+        "diff-tree",
+        "--no-commit-id",
+        "--name-only",
+        "-r",
+        "HEAD",
+      }, {}),
+      previewer = conf.file_previewer({}),
+    })
+    :find()
 end
 
 vim.api.nvim_create_user_command("Glast", telescope_git_last_commit_files, {})

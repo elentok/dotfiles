@@ -15,5 +15,5 @@ require("lazy").setup("elentok/plugins", {
   concurrency = 10,
   dev = {
     path = "~/dev/nvim",
-  }
+  },
 })
