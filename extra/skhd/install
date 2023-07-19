@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTF/framework"
+
+if ! has_command skhd; then
+  brew install koekeishiya/formulae/skhd
+  skhd --start-service
+fi
+
+mkdir -p ~/.config/skhd
+symlink "$DOTF/extra/skhd/skhdrc" ~/.config/skhd/skhdrc

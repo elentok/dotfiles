@@ -1,0 +1,5 @@
+cmd - return : open /Applications/kitty.app
+cmd - 2 : open "/Applications/Google Chrome.app"
+cmd - 3 : open "/Applications/Slack.app"
+cmd - 9 : open "/Applications/Spotify.app"
+cmd - 0 : skhd --reload && terminal-notifier -message "skhd: reloaded config"
