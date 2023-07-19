@@ -75,3 +75,7 @@ vim.opt.winwidth = 84
 vim.opt.undofile = true
 
 vim.opt.diffopt:append({ "linematch:60", "algorithm:patience" })
+
+-- Prevent netrw from loading
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1

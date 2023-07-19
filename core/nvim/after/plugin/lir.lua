@@ -59,4 +59,24 @@ local function go_up()
   float.init()
 end
 
-vim.keymap.set("n", "-", go_up)
+local function go_up_in_window()
+  if vim.api.nvim_buf_get_option(0, "filetype") == "lir" then
+    vim.cmd.normal("-")
+  else
+    vim.cmd.edit(vim.fn.expand("%:p:h"))
+  end
+end
+
+vim.keymap.set("n", "-", go_up, { desc = "Go up (float)" })
+vim.keymap.set("n", "<space>-", go_up_in_window, { desc = "Go up" })
+
+local group = vim.api.nvim_create_augroup("Elentok_Lir", {})
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "lir" },
+  group = group,
+  callback = function()
+    vim.wo.spell = false
+  end,
+})
+
+vim.api.nvim_create_user_command("E", ":e <args>", { nargs = "*" })
