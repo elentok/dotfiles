@@ -28,9 +28,18 @@
 
 [merge]
   conflictstyle = diff3
+  tool = nvimdiff
+
+[mergetool "nvimdiff"]
+  cmd = nvim -d \"$LOCAL\" \"$MERGED\" \"$REMOTE\" -c \"wincmd l\" -c \"norm ]n\" -c \":UfoDisable\"
+  ; cmd = nvim -d \"$LOCAL\" \"$MERGED\" \"$BASE\" \"$REMOTE\" -c \"wincmd w\" -c \"wincmd J\"
+  ; git config mergetool.nvim.cmd 'nvim -d -c "wincmd l" -c "norm ]c" "$LOCAL" "$MERGED" "$REMOTE"'
+
+
 
 [diff]
   colorMoved = default
+
 
 [color]
   ui = auto
@@ -98,9 +107,6 @@
   ; pretty=format:%C(yellow)%h%Creset -%C(green)%d%Creset %s (%C(blue)%cr by %C(green)%an%Creset)%Creset
   pretty=format:%C(magenta)%h%Creset %C(blue)%>(14)%cr%Creset%C(green)%d%Creset %s (%C(green)%an%Creset)%Creset
 
-[merge]
-  tool = vimdiff
-
 [push]
   default = matching
 
@@ -127,5 +133,5 @@
   path = ~/.dotlocal/gitconfig
 
 [include]
-  path = ~/.dotprivate/gitconfig
+  ; path = ~/.dotprivate/gitconfig
 
