@@ -2,7 +2,8 @@ return {
   { dir = "~/.dotprivate/nvim" },
 
   -- Color scheme.
-  "rmehri01/onenord.nvim",
+  -- "rmehri01/onenord.nvim",
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 
   -- File manager.
   "tamago324/lir.nvim",
@@ -47,11 +48,11 @@ return {
   "davidbeckingsale/writegood.vim",
   -- Presentation tool
   "sotte/presenting.vim",
-  "kyazdani42/nvim-web-devicons",
+  "nvim-tree/nvim-web-devicons",
   "nvim-lualine/lualine.nvim",
   -- Shows registers contents when using them
   -- "tversteeg/registers.nvim",
-  "b0o/incline.nvim", -- Shows buffer names on windows
+  -- "b0o/incline.nvim", -- Shows buffer names on windows
 
   -- Harpoon
   {

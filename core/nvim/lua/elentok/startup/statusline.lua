@@ -13,7 +13,8 @@ end
 
 lualine.setup({
   options = {
-    theme = "onedark",
+    -- theme = "onedark",
+    theme = "catppuccin",
     section_separators = { left = "", right = "" },
   },
   sections = {
@@ -25,22 +26,22 @@ lualine.setup({
     },
     lualine_y = { "filetype" },
   },
-  winbar = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = { { shortener.dir, icon = "" } },
-    lualine_z = { "filename" },
-  },
-  inactive_winbar = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = { { shortener.dir, icon = "" } },
-    lualine_z = { "filename" },
-  },
+  -- winbar = {
+  --   lualine_a = {},
+  --   lualine_b = {},
+  --   lualine_c = {},
+  --   lualine_x = {},
+  --   lualine_y = { { shortener.dir, icon = "" } },
+  --   lualine_z = { "filename" },
+  -- },
+  -- inactive_winbar = {
+  --   lualine_a = {},
+  --   lualine_b = {},
+  --   lualine_c = {},
+  --   lualine_x = {},
+  --   lualine_y = { { shortener.dir, icon = "" } },
+  --   lualine_z = { "filename" },
+  -- },
 })
 
 vim.o.laststatus = 3

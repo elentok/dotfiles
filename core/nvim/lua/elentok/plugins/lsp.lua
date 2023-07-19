@@ -10,7 +10,7 @@ return {
   {
     "folke/trouble.nvim",
     opts = {},
-    dependencies = { "kyazdani42/nvim-web-devicons" },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     cmd = { "Trouble" },
   },
   {
@@ -24,4 +24,17 @@ return {
   },
   -- Improve neovim lua development (better completion, help, etc...)
   "folke/neodev.nvim",
+
+  {
+    "utilyre/barbecue.nvim",
+    name = "barbecue",
+    version = "*",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    opts = {
+      theme = "catppuccin",
+    },
+  },
 }
