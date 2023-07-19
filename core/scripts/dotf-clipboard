@@ -22,16 +22,19 @@ copy() {
   if is_wsl; then
     clip.exe
   else
-    dotf-yank-osc52
-    # if has_command pbcopy; then
-    #    pbcopy
-    # elif [ -n "$DISPLAY" ]; then
-    #   if has_command xsel; then
-    #      xsel --clipboard --input 2>&1
-    #   elif has_command xclip; then
-    #      xclip -selection clipboard -in 2>&1
-    #   fi
-    # fi
+    dotf-yank-osc52 | system-copy
+  fi
+}
+
+function system-copy() {
+  if has_command pbcopy; then
+    pbcopy
+  elif [ -n "$DISPLAY" ]; then
+    if has_command xsel; then
+      xsel --clipboard --input 2>&1
+    elif has_command xclip; then
+      xclip -selection clipboard -in 2>&1
+    fi
   fi
 }
 
