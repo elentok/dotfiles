@@ -1,9 +1,11 @@
-local lspconfig = require("lspconfig")
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 local lspkind = require("lspkind")
 
 require("luasnip.loaders.from_vscode").lazy_load()
+
+-- Show maximum of items in the completion menu
+vim.go.pumheight = 8
 
 -- Helper for tab completion
 local has_words_before = function()
@@ -24,8 +26,8 @@ local cmp_mapping = {
   ["<Tab>"] = cmp.mapping(function(fallback)
     if cmp.visible() then
       cmp.select_next_item()
-      -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-      -- they way you will only jump inside the snippet region
+    -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+    -- they way you will only jump inside the snippet region
     elseif luasnip.expand_or_jumpable() then
       luasnip.expand_or_jump()
     elseif has_words_before() then
