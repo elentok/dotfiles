@@ -1,11 +1,13 @@
 local format_on_save = require("format-on-save")
 local formatters = require("format-on-save.formatters")
+local message_buffer = require("format-on-save.error-notifiers.message-buffer")
 
 format_on_save.setup({
   exclude_path_patterns = {
     "/node_modules/",
     ".local/share/nvim/lazy",
   },
+  error_notifier = message_buffer,
   partial_update = true,
   formatter_by_ft = {
     css = formatters.lsp,
