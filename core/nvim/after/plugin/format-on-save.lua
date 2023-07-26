@@ -1,6 +1,7 @@
 local format_on_save = require("format-on-save")
 local formatters = require("format-on-save.formatters")
 local message_buffer = require("format-on-save.error-notifiers.message-buffer")
+local config = require("elentok.config")
 
 format_on_save.setup({
   exclude_path_patterns = {
@@ -9,11 +10,11 @@ format_on_save.setup({
   },
   error_notifier = message_buffer,
   partial_update = true,
-  formatter_by_ft = {
+  formatter_by_ft = vim.tbl_extend("force", {
     css = formatters.lsp,
     html = formatters.lsp,
     java = formatters.lsp,
-    javascript = formatters.lsp,
+    javascript = formatters.prettierd,
     json = formatters.lsp,
     lua = formatters.stylua,
     markdown = formatters.prettierd,
@@ -27,7 +28,7 @@ format_on_save.setup({
     typescript = formatters.prettierd,
     typescriptreact = formatters.prettierd,
     yaml = formatters.lsp,
-  },
+  }, config.formatter_by_ft),
 })
 
 --
