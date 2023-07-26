@@ -14,9 +14,27 @@ function status-left() {
   pretty-host
 }
 
+function battery-status() {
+  percentage=$(pmset -g batt | grep '%' | sed -E 's/^.*[^0-9]([0-9]+)%.*$/\1/')
+  if [ -z "$percentage" ]; then
+    return
+  fi
+
+  local icon="󱊣" # full
+  if ["$percentage" -lt 80]; then
+    if [ "$percentage" -lt 40]; then
+      icon="󱊡"
+    else
+      icon="󱊢"
+    fi
+  fi
+  echo -n "${icon} ${percentage}%"
+}
+
 function status-right() {
   echo -n "#{pomodoro_status}"
-  item fg=yellow "$(~/.dotfiles/extra/scripts/bat-left)"
+  # item fg=yellow "$(~/.dotfiles/extra/scripts/bat-left)"
+  item fg=yellow "$(battery-status)"
 }
 
 function item() {
