@@ -26,8 +26,9 @@ function item() {
 }
 
 function pretty-host() {
-  item "bg=$(dotf-host-info tmux-color),fg=black" " $(dotf-host-info pretty-name) "
-  echo -n " (#S)"
+  color="$(dotf-host-info tmux-color)"
+  item "bg=$color,fg=black" " $(dotf-host-info pretty-name) "
+  item "fg=$color" " "
 }
 
 main "$@"
