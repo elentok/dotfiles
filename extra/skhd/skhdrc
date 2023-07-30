@@ -4,3 +4,4 @@ cmd - 4 : open "/Applications/Slack.app"
 cmd - 8 : open "/Applications/Notion.app"
 cmd - 9 : open "/Applications/Spotify.app"
 cmd - 0 : skhd --reload && terminal-notifier -message "skhd: reloaded config"
+cmd + shift - p : spot
