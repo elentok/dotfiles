@@ -114,8 +114,10 @@ if is-nvm-providing-node; then
 fi
 
 # Node-gyp doesn't support Python 3.11
-NODE_GYP_FORCE_PYTHON="$(command ls -1 /opt/homebrew/Cellar/python@3.10/*/bin/python3.10 | head)"
-export NODE_GYP_FORCE_PYTHON
+if dotf-is-mac; then
+  NODE_GYP_FORCE_PYTHON="$(command ls -1 /opt/homebrew/Cellar/python@3.10/*/bin/python3.10 | head)"
+  export NODE_GYP_FORCE_PYTHON
+fi
 
 # Go {{{1
 if [ -e $HOME/.apps/go ]; then
