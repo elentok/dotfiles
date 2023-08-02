@@ -28,7 +28,7 @@ error="%F{red}›%f"
 exit_code="%(?.$success.$error) "
 
 # Directory {{{1
-directory="%F{blue}%~%f"
+directory="%F{blue}%f%K{blue}%F{black}%~%k%F{blue}%f"
 
 # User and host {{{1
 user_and_host="%{\$fg_bold[cyan]%}$USERNAME at $(hostname)%f"
