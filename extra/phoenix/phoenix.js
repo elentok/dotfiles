@@ -65,20 +65,20 @@ Key.on("h", CMD_SHIFT, () => {
   }
 });
 
-Key.on("l", ["command", "ctrl"], () => {
-  const window = Window.focused();
-  if (window) {
-    // console.log("Neighbors", window.neighbours("east").length);
-    // const neighbor = window.neighbours("east").find((w) => w.isVisible());
-    // console.log("First visible neighbor", neighbor);
-    const neighbor = findNextVisibleNeighbor(window, "east");
-    if (neighbor) {
-      logWindow(neighbor);
-      neighbor.raise();
-      neighbor.focus();
-    }
-  }
-});
+// Key.on("l", ["command", "ctrl"], () => {
+//   const window = Window.focused();
+//   if (window) {
+//     // console.log("Neighbors", window.neighbours("east").length);
+//     // const neighbor = window.neighbours("east").find((w) => w.isVisible());
+//     // console.log("First visible neighbor", neighbor);
+//     const neighbor = findNextVisibleNeighbor(window, "east");
+//     if (neighbor) {
+//       logWindow(neighbor);
+//       neighbor.raise();
+//       neighbor.focus();
+//     }
+//   }
+// });
 
 function countTime(label, callback) {
   const startTime = Date.now();
@@ -103,19 +103,17 @@ function findNextVisibleNeighbor(window, direction) {
   // console.timeEnd("Find next visible neighbor");
   return neighbor;
 }
-
-Key.on("h", ["command", "ctrl"], () => {
-  const window = Window.focused();
-  if (window) {
-    const neighbor = findNextVisibleNeighbor(window, "west");
-    if (neighbor) {
-      // logWindow(neighbor);
-      neighbor.raise();
-      neighbor.focus();
-    }
-    // window.focusClosestNeighbour("west");
-  }
-});
+//
+// Key.on("h", ["command", "ctrl"], () => {
+//   const window = Window.focused();
+//   if (window) {
+//     const neighbor = findNextVisibleNeighbor(window, "west");
+//     if (neighbor) {
+//       neighbor.raise();
+//       neighbor.focus();
+//     }
+//   }
+// });
 
 function logWindow(window) {
   console.log("========================================");
