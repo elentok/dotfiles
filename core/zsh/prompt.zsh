@@ -23,15 +23,20 @@ function random_animal {
 # fi
 
 # Exit code {{{1
-success="%F{green}›%f"
-error="%F{red}›%f"
+prefix_char=''
+# prefix_char=''
+# prefix_char='󰌕'
+success="%F{green}${prefix_char}%f"
+error="%F{red}${prefix_char}%f"
 exit_code="%(?.$success.$error) "
 
 # Directory {{{1
 directory="%F{blue}%f%K{blue}%F{black}%~%k%F{blue}%f"
-
+# directory="%K{blue} %F{black}%~%k%F{blue}%f"
 # User and host {{{1
-user_and_host="%{\$fg_bold[cyan]%}$USERNAME at $(hostname)%f"
+# user_and_host="%{\$fg_bold[cyan]%}$USERNAME at $(hostname)%f"
+# user_and_host="%{\$fg_bold[gray]%}$USERNAME at $(hostname)%f"
+user_and_host="%F{black}$USERNAME@${SHORT_HOST}%f"
 
 # Time {{{1
 if [ "$ZSH_VERSION" = "5.0.5" ]; then
@@ -39,7 +44,8 @@ if [ "$ZSH_VERSION" = "5.0.5" ]; then
 else
   time="%D{%H:%M:%S.%.}"
 fi
-time="%{\$fg_bold[cyan]%}($time)%f"
+# time="%{\$fg_bold[cyan]%}($time)%f"
+time="%F{black}($time)%f"
 
 # Git {{{1
 

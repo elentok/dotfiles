@@ -253,6 +253,8 @@ is_in_neovim() {
 export SSH_TERM=xterm-color
 export LESS="--RAW-CONTROL-CHARS"
 export RIPGREP_CONFIG_PATH="$DOTF/core/ripgrep/ripgreprc"
+SHORT_HOST="$(dotf-host-info pretty-name || hostname)"
+export SHORT_HOST
 
 # - Don't follow non-constant sources
 #   (https://github.com/koalaman/shellcheck/wiki/SC1090)
