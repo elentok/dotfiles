@@ -30,6 +30,9 @@ require("catppuccin").setup({
     shade = "dark",
   },
   integrations = {
+    barbecue = {
+      alt_background = true,
+    },
     cmp = true,
     gitsigns = true,
     flash = true,
