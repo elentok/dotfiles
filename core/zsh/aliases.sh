@@ -207,7 +207,7 @@ npr() {
 
   if [ $# -gt 0 ]; then
     npm run "$@"
-    exit $?
+    return $?
   fi
 
   cmd="$(npm-scripts | fzf --ansi --exit-0 | awk '{print $1}')"
