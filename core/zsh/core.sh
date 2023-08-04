@@ -2,13 +2,13 @@ export DOTF=~/.dotfiles
 export DOTL=~/.dotlocal
 export DOTP=~/.dotprivate
 
-if dotf-is-core-loaded &> /dev/null; then
-  return
-fi
-
-function dotf-is-core-loaded() {
-  return
-}
+# if dotf-is-core-loaded &> /dev/null; then
+#   return
+# fi
+#
+# function dotf-is-core-loaded() {
+#   return
+# }
 
 # Helper: Source If Exists {{{1
 source_if_exists() {

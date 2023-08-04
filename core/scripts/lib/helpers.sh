@@ -3,7 +3,6 @@
 # Various helper functions.
 #
 if type dotf-has-command &> /dev/null; then
-  echo 'helpers.sh is already loaded'
   return
 fi
 
