@@ -76,18 +76,14 @@ symlink() {
     backup "$target"
   fi
 
-  ln -sf "$source" "$target"
-  if [ $? != 0 ]; then
+  if ! ln -sf "$source" "$target"; then
     dotf-info "  Can't create link, trying with sudo:"
-    sudo ln -sf "$source" "$target"
-    if [ $? != 0 ]; then
+    if ! sudo ln -sf "$source" "$target"; then
       dotf-error "failed"
       exit 1
     fi
   fi
-  if [ $? == 0 ]; then
-    dotf-success "done"
-  fi
+  dotf-success "done"
 }
 
 # Install Brew/Apt package {{{1
