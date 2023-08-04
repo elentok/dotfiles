@@ -23,7 +23,7 @@ function decrypt() {
   openssl des3 -salt -d -in $* -out $*.plain
 }
 
-if has_command rg; then
+if dotf-has-command rg; then
   function ff {
     if [ $# -eq 0 ]; then
       rg --files

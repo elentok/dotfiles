@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 # vim: foldmethod=marker
 
+if type dotf-color &> /dev/null; then
+  return
+fi
+
 # Colors {{{1
 export BLACK="\\033[30m"
 export GRAY="\\033[1;30m"

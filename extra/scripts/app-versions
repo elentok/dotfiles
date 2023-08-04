@@ -12,7 +12,7 @@ declare -A version_ranges=(
 
 function main() {
   for app in "${!version_ranges[@]}"; do
-    if has_command $app; then
+    if dotf-has-command $app; then
       version=$(${app}-version)
       range=${version_ranges[$app]}
 

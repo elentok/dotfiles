@@ -1,0 +1,5 @@
+# The .zprofile file is loaded only by login shells
+# (whereas the .zshrc file is loaded only by interactive shells)
+
+# echo "ZPROFILE"
+# source ~/.dotfiles/core/zsh/core.sh

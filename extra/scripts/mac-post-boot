@@ -11,7 +11,7 @@ main() {
 
 run_app() {
   dotf-bullet "Starting $1... "
-  if is_running "$1"; then
+  if dotf-is-running "$1"; then
     dotf-info 'already started.'
   else
     open /Applications/$1.app
@@ -20,13 +20,13 @@ run_app() {
 
 start_mpd() {
   dotf-bullet 'Starting Music Player Daemon... '
-  if is_running mpd; then
+  if dotf-is-running mpd; then
     dotf-info 'Already running.'
   else
     echo '(running in background...)'
     mpd &
     sleep 1
-    is_running mpd
+    dotf-is-running mpd
     show_result
   fi
   echo

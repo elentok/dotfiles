@@ -402,7 +402,7 @@ extract_flag() {
       local flag_name="$(echo $flag_name | cut -d= -f1)"
     fi
 
-    local flag_name="$(to_uppercase $flag_name)"
+    local flag_name="$(dotf-to-uppercase $flag_name)"
 
     eval "$flag_name=\"$value\""
     return 0
@@ -425,7 +425,7 @@ run_command() {
   shift
 
   dotf-bullet "Starting ${name}... "
-  if is_running "$1"; then
+  if dotf-is-running "$1"; then
     dotf-info 'Already running.'
   else
     cmd='sh -c'

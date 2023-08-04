@@ -6,7 +6,7 @@ source $DOTF/core/scripts/lib/build-helper.sh
 MAC_VERSION=2.2.2.1
 
 main() {
-  if has_command pandoc; then return; fi
+  if dotf-has-command pandoc; then return; fi
 
   if is_debian; then
     dotf-apt pandoc

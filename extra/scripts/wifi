@@ -13,9 +13,9 @@ DEVICE=en0
 main() {
   cmd=${1:-}
   shift
-  if has_command "wifi_${cmd}"; then
+  if dotf-has-command "wifi_${cmd}"; then
     wifi_${cmd} "$@"
-  elif has_command "${OS}_wifi_${cmd}"; then
+  elif dotf-has-command "${OS}_wifi_${cmd}"; then
     ${OS}_wifi_${cmd} "$@"
   else
     usage $0
@@ -79,8 +79,8 @@ linux_wifi_connect() {
 }
 
 linux_pick_accesspoint() {
-  nmcli device wifi list | grep -v 'SSID' | fzf --exit-0 --select-1 | \
-    sed -E 's/^\*?\s*//' | awk '{ print $1 }'
+  nmcli device wifi list | grep -v 'SSID' | fzf --exit-0 --select-1 \
+    | sed -E 's/^\*?\s*//' | awk '{ print $1 }'
 }
 
 mac_wifi_list() {

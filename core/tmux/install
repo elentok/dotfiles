@@ -29,7 +29,7 @@ has-tmux-256color-terminfo() {
 
 install_tmux() {
   dotf-bullet "Installing tmux... "
-  if command_missing tmux; then
+  if dotf-command-missing tmux; then
     PRIMARY=yes "$DOTF/core/tmux/build" && dotf-success "done."
   else
     version="$(dotf-trim < "$DOTF/core/tmux/VERSION")"

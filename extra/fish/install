@@ -3,7 +3,7 @@
 source $DOTF/framework
 
 function main() {
-  if command_missing fish; then
+  if dotf-command-missing fish; then
     dotf-apt fish
     # $DOTF/extra/fish/build
   fi

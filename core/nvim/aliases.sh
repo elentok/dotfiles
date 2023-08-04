@@ -11,7 +11,7 @@ function pick-plugin() {
   fi
 }
 
-if has_command nvim; then
+if dotf-has-command nvim; then
   if is_in_neovim; then
     alias vi='nvr -o'
     alias vv='nvr -O'

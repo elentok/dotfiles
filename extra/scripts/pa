@@ -17,7 +17,7 @@ main() {
   local cmd="$1"
   shift
 
-  if has_command "cmd-$cmd"; then
+  if dotf-has-command "cmd-$cmd"; then
     cmd-$cmd "$@"
   else
     usage "$0"
@@ -45,12 +45,12 @@ cmd-outputs() {
 }
 
 cleanup() {
-  grep -E '(index:|name:|source:|state:|muted:|hdmi-output|alsa.card_name|application.name)' | \
-  sed -e 's/^\s*//' | \
-  sed -re "s/^\*\s*(.*)$/\1 << $(red)ACTIVE$(rcolor)/" | \
-  sed -re 's/^index:/\n&/' | \
-  sed -re 's/ = /: /' | \
-  sed -re "s/^([^:]+:)/$(green)\1$(rcolor)/"
+  grep -E '(index:|name:|source:|state:|muted:|hdmi-output|alsa.card_name|application.name)' \
+    | sed -e 's/^\s*//' \
+    | sed -re "s/^\*\s*(.*)$/\1 << $(red)ACTIVE$(rcolor)/" \
+    | sed -re 's/^index:/\n&/' \
+    | sed -re 's/ = /: /' \
+    | sed -re "s/^([^:]+:)/$(green)\1$(rcolor)/"
 }
 
 main "$@"

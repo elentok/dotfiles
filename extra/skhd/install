@@ -7,7 +7,7 @@ source "$DOTF/framework"
 mkdir -p ~/.config/skhd
 dotf-symlink "$DOTF/extra/skhd/skhdrc" ~/.config/skhd/skhdrc
 
-if ! has_command skhd; then
+if ! dotf-has-command skhd; then
   brew install koekeishiya/formulae/skhd
   skhd --start-service
 fi

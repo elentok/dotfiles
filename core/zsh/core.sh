@@ -2,6 +2,14 @@ export DOTF=~/.dotfiles
 export DOTL=~/.dotlocal
 export DOTP=~/.dotprivate
 
+if dotf-is-core-loaded &> /dev/null; then
+  return
+fi
+
+function dotf-is-core-loaded() {
+  return
+}
+
 # Helper: Source If Exists {{{1
 source_if_exists() {
   if [ -e "$1" ]; then source "$1"; fi
@@ -226,7 +234,7 @@ elif [ ! -z "${VSCODE_IPC_HOOK:-}" ]; then
   # Use vscode as the editor for things like Git when run from within vscode's
   # integrated terminal
   export EDITOR="code -w"
-elif has_command nvim; then
+elif dotf-has-command nvim; then
   export EDITOR=$(which nvim)
 else
   export EDITOR=vim

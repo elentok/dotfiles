@@ -61,7 +61,7 @@ function set-npm-command() {
 }
 
 function die-if-npm-missing() {
-  if ! has_command npm; then
+  if ! dotf-has-command npm; then
     dotf-error "npm is not installed, skipping"
     exit 1
   fi

@@ -1,8 +1,5 @@
 # The .zshenv file is loaded by ALL shells (including non-login shells)
 
-if [ -n "$ZSHENV_LOADED" ]; then return; fi
-export ZSHENV_LOADED='yes'
-
 source ~/.dotfiles/core/zsh/core.sh
 
 # Fix $TERM problem with remote servers

@@ -9,7 +9,7 @@ VERSION=3.4.1
 main() {
   if dotf-is-mac; then
     brew_install ffmpeg
-  elif command_missing ffmpeg; then
+  elif dotf-command-missing ffmpeg; then
     install_ffmpeg_binaries
   fi
 }

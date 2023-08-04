@@ -4,7 +4,7 @@ source "$DOTF/framework"
 
 main() {
   if ! dotf-is-mac; then
-    if command_missing alacritty; then
+    if dotf-command-missing alacritty; then
       dotf-apt cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev python3 libxkbcommon-dev
       cargo install alacritty
     fi

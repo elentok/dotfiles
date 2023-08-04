@@ -27,12 +27,12 @@ copy() {
 }
 
 function system-copy() {
-  if has_command pbcopy; then
+  if dotf-has-command pbcopy; then
     pbcopy
   elif [ -n "$DISPLAY" ]; then
-    if has_command xsel; then
+    if dotf-has-command xsel; then
       xsel --clipboard --input 2>&1
-    elif has_command xclip; then
+    elif dotf-has-command xclip; then
       xclip -selection clipboard -in 2>&1
     fi
   fi
@@ -41,11 +41,11 @@ function system-copy() {
 paste() {
   if is_wsl; then
     win32yank -o
-  elif has_command pbpaste; then
+  elif dotf-has-command pbpaste; then
     pbpaste
-  elif has_command xclip; then
+  elif dotf-has-command xclip; then
     xclip -selection clipboard -out
-  elif has_command xsel; then
+  elif dotf-has-command xsel; then
     xsel --clipboard --output
   else
     echo 'Error: missing copy command (pbpaste, xclip or xsel)'

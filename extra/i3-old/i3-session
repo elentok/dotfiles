@@ -14,17 +14,17 @@
   # xfce4-session &
 
   # Network Management Applet
-  has_command nm-applet && nm-applet &
+  dotf-has-command nm-applet && nm-applet &
 
-  if has_command google-chrome-stable; then
+  if dotf-has-command google-chrome-stable; then
     google-chrome-stable &
-  elif has_command google-chrome; then
+  elif dotf-has-command google-chrome; then
     google-chrome &
   fi
 
-  if has_command x-terminal-emulator; then
+  if dotf-has-command x-terminal-emulator; then
     x-terminal-emulator &
-  elif has_command i3-sensible-terminal; then
+  elif dotf-has-command i3-sensible-terminal; then
     i3-sensible-terminal &
   fi
 

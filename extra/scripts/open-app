@@ -9,7 +9,7 @@
 source $DOTF/framework
 
 main() {
-  if command_missing wmctrl; then
+  if dotf-command-missing wmctrl; then
     dotf-apt wmctrl
   fi
 

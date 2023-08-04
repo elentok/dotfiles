@@ -7,7 +7,7 @@ source "$DOTF/framework"
 CONFIG_DIR="$HOME/.config/wezterm"
 
 function main() {
-  if command_missing wezterm; then
+  if dotf-command-missing wezterm; then
     if dotf-is-mac; then
       dotf-brew wezterm
     else

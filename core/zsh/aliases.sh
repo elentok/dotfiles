@@ -138,10 +138,10 @@ elif is_wsl; then
 else
   alias pbpaste='xclip -selection clipboard -out'
 
-  if has_command xclip; then
+  if dotf-has-command xclip; then
     alias pbcopy='xclip -selection clipboard -in'
     alias pbpaste='xclip -selection clipboard -out'
-  elif has_command xsel; then
+  elif dotf-has-command xsel; then
     alias pbcopy='xsel --clipboard --input'
     alias pbpaste='xsel --clipboard --output'
   fi

@@ -5,7 +5,7 @@ source "$DOTF/framework"
 function main() {
   install-rust
 
-  if command_missing cargo-binstall; then
+  if dotf-command-missing cargo-binstall; then
     cargo install cargo-binstall
   fi
 
@@ -13,14 +13,14 @@ function main() {
   # Based on https://rust-analyzer.github.io/manual.html#installation
   rustup component add rust-src
 
-  # if command_missing exa; then
+  # if dotf-command-missing exa; then
   #   dotf-cargo exa
   # fi
 }
 
 function install-rust() {
   dotf-bullet 'Installing rust...'
-  if has_command rustc; then
+  if dotf-has-command rustc; then
     dotf-info 'already installed.'
   else
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o /tmp/rustup-init

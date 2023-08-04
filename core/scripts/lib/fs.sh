@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+if type dotf-symlink &> /dev/null; then
+  return
+fi
+
 function dotf-symlink() {
   source=$1
   target=$2

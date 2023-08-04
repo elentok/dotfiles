@@ -4,7 +4,7 @@ source $DOTF/framework
 
 VERSION=5.3.0
 
-if command_missing ulauncher; then
+if dotf-command-missing ulauncher; then
   dotf-apt python3-distutils-extra python3-levenshtein python3-websocket
 
   cd $TMP

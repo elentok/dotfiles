@@ -2,20 +2,24 @@
 #
 # Various helper functions.
 #
+if type dotf-has-command &> /dev/null; then
+  echo 'helpers.sh is already loaded'
+  return
+fi
 
-has_command() {
+dotf-has-command() {
   type "$1" > /dev/null 2>&1
 }
 
-command_missing() {
-  ! has_command "$1"
+dotf-command-missing() {
+  ! dotf-has-command "$1"
 }
 
-is_running() {
+dotf-is-running() {
   pgrep "$1" > /dev/null 2>&1
 }
 
-to_uppercase() {
+dotf-to-uppercase() {
   if [ $# -gt 0 ]; then
     echo "$@" | awk '{print toupper($0)}'
   else
