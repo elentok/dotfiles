@@ -1,0 +1,17 @@
+snippet appmain
+	function main() {
+	  local cmd="\${1:-}"
+	  shift || true
+	
+	  case "\$cmd" in
+	    hello)
+	      echo "hello"
+	      ;;
+	    *)
+	      usage "\$0"
+	      exit 1
+	      ;;
+	  esac
+	}
+	
+	main "$@"
