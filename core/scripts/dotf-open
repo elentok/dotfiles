@@ -8,7 +8,7 @@
 
 source $DOTF/core/zsh/core.sh
 
-if is_wsl; then
+if dotf-is-wsl; then
   explorer.exe "$@"
 elif dotf-is-linux; then
   xdg-open "$@"

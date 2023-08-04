@@ -19,7 +19,7 @@ main() {
 }
 
 copy() {
-  if is_wsl; then
+  if dotf-is-wsl; then
     clip.exe
   else
     dotf-yank-osc52 | system-copy
@@ -39,7 +39,7 @@ function system-copy() {
 }
 
 paste() {
-  if is_wsl; then
+  if dotf-is-wsl; then
     win32yank -o
   elif dotf-has-command pbpaste; then
     pbpaste

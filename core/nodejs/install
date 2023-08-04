@@ -5,9 +5,7 @@ set -euo pipefail
 source "$(dirname "$0")/../../framework"
 
 main() {
-  if is_termux; then
-    dotf-apt nodejs-lts
-  elif [ "$DOTF_CONFIG_NODE_PROVIDER" = "nvm" ]; then
+  if [ "$DOTF_CONFIG_NODE_PROVIDER" = "nvm" ]; then
     install_nvm
   elif [ "$DOTF_CONFIG_NODE_PROVIDER" = "n" ]; then
     git_clone https://github.com/tj/n "$N_PREFIX"

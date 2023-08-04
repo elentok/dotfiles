@@ -8,10 +8,10 @@ MAC_VERSION=2.2.2.1
 main() {
   if dotf-has-command pandoc; then return; fi
 
-  if is_debian; then
-    dotf-apt pandoc
-  elif dotf-is-mac; then
+  if dotf-is-mac; then
     PRIMARY=yes install_on_mac
+  else
+    dotf-apt pandoc
   fi
 }
 

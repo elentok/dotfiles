@@ -7,11 +7,11 @@ source "$DOTF/core/scripts/lib/build-helper.sh"
 
 prepare_build neovim master "$*"
 
-if is_debian; then
+if dotf-is-mac; then
+  dotf-brew ninja libtool automake cmake pkg-config gettext
+else
   dotf-apt ninja-build gettext libtool libtool-bin autoconf \
     automake cmake g++ pkg-config unzip
-elif dotf-is-mac; then
-  dotf-brew ninja libtool automake cmake pkg-config gettext
 fi
 
 git clone --depth 1 --branch "$VERSION" https://github.com/neovim/neovim.git

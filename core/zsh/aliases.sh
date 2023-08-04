@@ -3,7 +3,7 @@
 
 source "$DOTF/core/nvim/aliases.sh"
 
-if is_wsl; then
+if dotf-is-wsl; then
   alias code='/mnt/c/Program\ Files/Microsoft\ VS\ Code/code.exe'
 fi
 
@@ -132,7 +132,7 @@ if dotf-is-mac; then
   alias hda='hdiutil attach'
   alias hdd='hdiutil detach'
   alias hdi='hdiutil info'
-elif is_wsl; then
+elif dotf-is-wsl; then
   alias pbpaste='win32yank -o'
   alias pbcopy='win32yank -i'
 else

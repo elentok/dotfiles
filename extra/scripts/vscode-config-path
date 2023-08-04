@@ -2,7 +2,7 @@
 
 source $DOTF/framework
 
-if is_wsl; then
+if dotf-is-wsl; then
   win_home="$(wsl-path2mnt $(wsl-get-env UserProfile))"
   dirs=("$win_home/AppData/Roaming/Code")
 else

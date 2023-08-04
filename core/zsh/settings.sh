@@ -52,7 +52,7 @@ function pl() {
   fi
 }
 
-if is_wsl; then
+if dotf-is-wsl; then
   function open() {
     explorer.exe "$@"
   }

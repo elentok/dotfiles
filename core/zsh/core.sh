@@ -54,9 +54,6 @@ with_cache() {
 
 # TMP
 export TMP=/tmp
-if is_termux; then
-  export TMP=$HOME/tmp
-fi
 
 # File owner
 function file-owner() {
@@ -176,10 +173,6 @@ $LUAROCKS_ROOT/bin:\
 $HOME/.lua/bin:\
 $HOME/.local/bin"
 
-if is_termux; then
-  PATH=$PATH:/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets
-fi
-
 if [ -n "$BREW_HOME" ]; then
   PATH=$PATH:$BREW_HOME/bin:$BREW_HOME/sbin:$BREW_HOME/opt/coreutils/libexec/gnubin
 fi
@@ -214,7 +207,7 @@ if [ -e /usr/lib/cinnamon-settings-daemon ]; then
   PATH=$PATH:/usr/lib/cinnamon-settings-daemon
 fi
 
-if is_wsl; then
+if dotf-is-wsl; then
   PATH=$PATH:/mnt/c/Windows:/mnt/c/Windows/System32:/mnt/c/Windows/System32/WindowsPowerShell/v1.0
 fi
 

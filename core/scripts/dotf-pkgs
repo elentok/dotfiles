@@ -70,9 +70,6 @@ function install-apt-pkgs() {
       dotf-header h2 '[dotf-pkgs] Installing apt-kde packages...'
       dotf-apt "$(get-pkgs apt-kde)"
     fi
-  elif is_termux; then
-    dotf-header h2 '[dotf-pkgs] Installing termux packages...'
-    dotf-apt "$(get-pkgs termux)"
   fi
 }
 

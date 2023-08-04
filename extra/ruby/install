@@ -13,7 +13,7 @@ main() {
 }
 
 install_requirements() {
-  if is_debian; then
+  if dotf-is-linux; then
     # As instructed in https://github.com/rbenv/ruby-build/wiki
     dotf-apt autoconf bison build-essential libssl-dev libyaml-dev \
       libreadline-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev \

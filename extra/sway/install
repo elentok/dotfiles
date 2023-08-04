@@ -7,10 +7,6 @@ SWAY="$DOTF/extra/sway"
 main() {
   echo "ERROR: sway installer not implemented"
   exit 1
-  # if is_arch; then
-  # pacman_install sway termite
-  # yaourt_install sway-dmenu-desktop
-  # fi
 
   dotf-symlink "$SWAY" "$HOME/.config/sway"
 
