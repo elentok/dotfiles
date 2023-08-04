@@ -85,6 +85,8 @@ local function get_logger_line()
     return "console.log('" .. log .. "')"
   elseif filetype == "lua" then
     return "put('" .. log .. "')"
+  elseif filetype == "sh" then
+    return 'echo "' .. log .. '"'
   else
     return ""
   end
