@@ -53,47 +53,49 @@ function dotf-format-number() {
 }
 
 # Exit code {{{1
+# UI Helpers {{{1
+
+function _prompt_right_bubble() {
+  local fg="$1"
+  local bg="${2:-}"
+  if [ -z "$bg" ]; then
+    echo -ne "%F{$fg}%f"
+  else
+    echo -ne "%K{$bg}%F{$fg}%f%k"
+  fi
+}
+
+# Prompt Lines {{{1
+
+function _prompt_line1() {
+  color1=blue
+  color2=cyan
+  color3=blue
+  # user & host
+  echo -n "%K{$color1}%F{black}  $USERNAME@${SHORT_HOST}%k%f"
+  _prompt_right_bubble $color1 $color2
+
+  # git status
+  echo -n "%K{$color2}%F{black}\${vcs_info_msg_0_}%k%f"
+  _prompt_right_bubble $color2 $color3
+
+  # runtime
+  echo -n "%K{$color3}%F{black}  \${_last_cmd_runtime}%k%f"
+  _prompt_right_bubble $color3
+}
+
+function _prompt_line2() {
+  echo -n '%K{yellow}%F{black} %~%f%k'
+  _prompt_right_bubble yellow
+}
+
 # prefix_char=''
-prefix_char=''
-# prefix_char='󰌕'
-success="%F{green}${prefix_char}%f"
-error="%F{red}${prefix_char}%f"
+# prefix_char=''
+prefix_char=''
+success="%K{green} %k%F{green}${prefix_char}%f"
+error="%K{red} %k%F{red}${prefix_char}%f"
 exit_code="%(?.$success.$error) "
-
-function dotf-half-bubble() {
-  local fg="$1"
-  local bg="$2"
-  local text="$3"
-  echo -ne "%K{$bg}%F{$fg}$text%f%k"
-  echo -ne "%F{$bg}%f"
-}
-
-function bubble() {
-  local fg="$1"
-  local bg="$2"
-  local text="$3"
-  echo -ne "%F{$bg}%f"
-  echo -ne "%K{$bg}%F{$fg}$text%f%k"
-  echo -ne "%F{$bg}%f"
-}
-
-# Line 1 (user, host and last runtime) {{{1
-_prompt_user_and_host="$(bubble gray black " $USERNAME@${SHORT_HOST}")"
-_prompt_cmd_runtime="$(bubble gray black ' ${_last_cmd_runtime}')"
-_prompt_line1="${_prompt_user_and_host} ${_prompt_cmd_runtime}"
-
-# Line 2 (Directory) {{{1
-# directory="%F{blue}%f%K{blue}%F{black}%~%k%F{blue}%f"
-directory="$(bubble black blue '%~')"
-# directory="%K{blue} %F{black}%~%k%F{blue}%f"
-# Time {{{1
-if [ "$ZSH_VERSION" = "5.0.5" ]; then
-  time="%D{%H:%M:%S}"
-else
-  time="%D{%H:%M:%S.%.}"
-fi
-# time="%{\$fg_bold[cyan]%}($time)%f"
-time="%F{black}($time)%f"
+_prompt_line3="${exit_code}"
 
 # Git {{{1
 
@@ -107,29 +109,29 @@ add-zsh-hook precmd vcs_info
 
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true # required to show staged/unstaged
-zstyle ':vcs_info:*' use-simple true # faster, but less accurate
+zstyle ':vcs_info:*' use-simple true        # faster, but less accurate
 zstyle ':vcs_info:*' stagedstr ' %F{green}✗%f'
 zstyle ':vcs_info:*' unstagedstr ' %F{red}✗%f'
-zstyle ':vcs_info:*' formats ' at %F{green}%b%f%u%c'
-zstyle ':vcs_info:*' actionformats ' at %F{green}%b%f%u%c (%a)'
+zstyle ':vcs_info:*' formats ' at %b%u%c'
+zstyle ':vcs_info:*' actionformats ' at %b%u%c (%a)'
 
 # To disable the source control part of the prompt (in case of slow downs) use
 # the following command:
 #
 # zstyle ':vcs_info:*' disable-patterns "${(b)HOME}/.zsh(|/*)"
 
-git_status='${vcs_info_msg_0_}'
-
 # Full prompt {{{1
-PROMPT="$directory$git_status
-$exit_code"
+PROMPT="$(_prompt_line2)
+$_prompt_line3"
 
 if [ ! -e ~/.miniprompt ]; then
-  PROMPT="$_prompt_line1
+  PROMPT="$(_prompt_line1)
 $PROMPT"
 fi
 
 PROMPT="
 $PROMPT"
+
+echo PROMPT!
 
 # vim: filetype=zsh foldmethod=marker
