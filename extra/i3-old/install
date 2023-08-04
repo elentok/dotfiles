@@ -31,10 +31,10 @@ install_i3() {
 
 install_symlinks() {
   mkdir -p ~/.i3
-  symlink "$I3/config" "$HOME/.i3/config"
-  symlink "$I3/i3status.conf" "$HOME/.i3/i3status.conf"
-  symlink "$I3/i3-session" "$HOME/.i3/i3-session"
-  symlink "$I3/Xresources" "$HOME/.Xresources"
+  dotf-symlink "$I3/config" "$HOME/.i3/config"
+  dotf-symlink "$I3/i3status.conf" "$HOME/.i3/i3status.conf"
+  dotf-symlink "$I3/i3-session" "$HOME/.i3/i3-session"
+  dotf-symlink "$I3/Xresources" "$HOME/.Xresources"
 }
 
 install_session_file() {

@@ -19,4 +19,4 @@ if dotf-is-linux; then
   fi
 fi
 
-symlink "$DOTF/core/tig/tigrc" ~/.tigrc
+dotf-symlink "$DOTF/core/tig/tigrc" ~/.tigrc

@@ -8,11 +8,11 @@ dotf-apt telegram-desktop
 # INSTALL_DIR="$APPS_DIR/Telegram"
 
 # if [ ! -e "$INSTALL_DIR" ]; then
-  # curl -L https://telegram.org/dl/desktop/linux -o $TMP/telegram.tar.xz
-  # mkdir -p $APPS_DIR
-  # cd $APPS_DIR
-  # tar xvf $TMP/telegram.tar.xz
+# curl -L https://telegram.org/dl/desktop/linux -o $TMP/telegram.tar.xz
+# mkdir -p $APPS_DIR
+# cd $APPS_DIR
+# tar xvf $TMP/telegram.tar.xz
 # fi
 
 # mkdir -p ~/bin
-# symlink "$INSTALL_DIR/Telegram" ~/bin/telegram
+# dotf-symlink "$INSTALL_DIR/Telegram" ~/bin/telegram

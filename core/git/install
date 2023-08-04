@@ -22,7 +22,7 @@ install_gitconfig() {
 
 fix_existing_gitconfig() {
   if [ -h "$GITCONFIG" ]; then
-    backup "$GITCONFIG"
+    dotf-backup "$GITCONFIG"
     write_to_gitconfig
     dotf-success 'done'
   else
@@ -64,7 +64,7 @@ function setup_lazygit() {
 
   mkdir -p "$(dirname "$config_path")"
 
-  symlink "$DOTF/core/git/lazygit.yml" "$config_path"
+  dotf-symlink "$DOTF/core/git/lazygit.yml" "$config_path"
 }
 
 main "$@"

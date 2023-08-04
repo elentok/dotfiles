@@ -2,8 +2,8 @@
 
 source "$DOTF/framework"
 
-symlink "$DOTF/extra/ssh/rc" ~/.ssh/rc
-symlink "$DOTF/extra/ssh/config" ~/.ssh/config
+dotf-symlink "$DOTF/extra/ssh/rc" ~/.ssh/rc
+dotf-symlink "$DOTF/extra/ssh/config" ~/.ssh/config
 
 if [ ! -e ~/.ssh/machine.config ]; then
   echo "# vim: syntax=sshconfig" > ~/.ssh/machine.config

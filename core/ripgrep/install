@@ -2,4 +2,4 @@
 
 source "$DOTF/framework"
 
-symlink "$DOTF/core/ripgrep/rgignore" "$HOME/.rgignore"
+dotf-symlink "$DOTF/core/ripgrep/rgignore" "$HOME/.rgignore"

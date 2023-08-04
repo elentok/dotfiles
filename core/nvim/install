@@ -24,11 +24,11 @@ main() {
 
 install-symlinks() {
   mkdir -p ~/.config
-  symlink "$DOTF/core/nvim" ~/.config/nvim
+  dotf-symlink "$DOTF/core/nvim" ~/.config/nvim
 
-  symlink "$DOTF/core/nvim/pylintrc" ~/.pylintrc
+  dotf-symlink "$DOTF/core/nvim/pylintrc" ~/.pylintrc
   mkdir -p ~/.config/yamllint
-  symlink "$DOTF/core/nvim/yamllint-config" ~/.config/yamllint/config
+  dotf-symlink "$DOTF/core/nvim/yamllint-config" ~/.config/yamllint/config
 }
 
 main "$@"

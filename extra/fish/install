@@ -8,8 +8,7 @@ function main() {
     # $DOTF/extra/fish/build
   fi
 
-  symlink "$DOTF/extra/fish" "$HOME/.config/fish"
+  dotf-symlink "$DOTF/extra/fish" "$HOME/.config/fish"
 }
 
 main "$@"
-

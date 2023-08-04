@@ -8,4 +8,4 @@ if [ ! -d /Applications/Phoenix.app ]; then
   brew install --cask phoenix
 fi
 
-symlink "$DOTF/extra/phoenix/phoenix.js" ~/.phoenix.js
+dotf-symlink "$DOTF/extra/phoenix/phoenix.js" ~/.phoenix.js

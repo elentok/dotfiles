@@ -25,7 +25,7 @@ install_ffmpeg_binaries() {
   cd "$install_dir"
 
   tar --strip-components=1 -xf "$TMP/$filename"
-  symlink "$install_dir/ffmpeg" "$HOME/bin/ffmpeg"
+  dotf-symlink "$install_dir/ffmpeg" "$HOME/bin/ffmpeg"
 }
 
 main "$@"

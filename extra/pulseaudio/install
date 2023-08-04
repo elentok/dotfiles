@@ -7,7 +7,7 @@ source "$DOTF/framework"
 CONFIG_DIR="$HOME/.config/pulse"
 mkdir -p "$CONFIG_DIR"
 
-symlink "$DOTF/extra/pulseaudio/default.pa" "$CONFIG_DIR/default.pa"
+dotf-symlink "$DOTF/extra/pulseaudio/default.pa" "$CONFIG_DIR/default.pa"
 
 echo "Killing pulseaudio"
 pulseaudio -k || true

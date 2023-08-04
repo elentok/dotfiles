@@ -34,10 +34,10 @@ function install_symlinks() {
   fi
 
   mkdir -p "$BIN_DIR"
-  symlink "$INSTALL_DIR/$path_to_binary" "$BIN_DIR/$target_name-$VERSION"
+  dotf-symlink "$INSTALL_DIR/$path_to_binary" "$BIN_DIR/$target_name-$VERSION"
 
   if [ "${PRIMARY:-}" == 'yes' ]; then
-    symlink "$INSTALL_DIR/$path_to_binary" "$BIN_DIR/$target_name"
+    dotf-symlink "$INSTALL_DIR/$path_to_binary" "$BIN_DIR/$target_name"
   fi
 }
 

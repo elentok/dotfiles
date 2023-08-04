@@ -12,7 +12,7 @@ main() {
   # yaourt_install sway-dmenu-desktop
   # fi
 
-  symlink "$SWAY" "$HOME/.config/sway"
+  dotf-symlink "$SWAY" "$HOME/.config/sway"
 
   install_session_file
 }

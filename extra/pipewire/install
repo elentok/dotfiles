@@ -7,7 +7,7 @@ source "$DOTF/framework"
 # Put the alsa-monitor.conf file in place
 CONFIG_DIR="$HOME/.config/pipewire/media-session.d"
 mkdir -p "$CONFIG_DIR"
-symlink "$DOTF/extra/pipewire/alsa-monitor.conf" "$CONFIG_DIR/alsa-monitor.conf"
+dotf-symlink "$DOTF/extra/pipewire/alsa-monitor.conf" "$CONFIG_DIR/alsa-monitor.conf"
 
 # Restart pipewire to reload the config file.
 systemctl --user restart pipewire.service pipewire-pulse.socket

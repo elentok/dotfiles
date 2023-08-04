@@ -5,5 +5,5 @@ set -euo pipefail
 source "$DOTF/framework"
 
 # make_dir ~/.config/kitty
-# symlink "$DOTF/extra/kitty/kitty.conf" ~/.config/kitty/kitty.conf
-symlink "$DOTF/extra/kitty" ~/.config/kitty
+# dotf-symlink "$DOTF/extra/kitty/kitty.conf" ~/.config/kitty/kitty.conf
+dotf-symlink "$DOTF/extra/kitty" ~/.config/kitty

@@ -52,9 +52,9 @@ path_without_linuxbrew() {
 }
 
 create_symlinks() {
-  symlink "$DOTF/extra/ruby/irbrc" ~/.irbrc
-  symlink "$DOTF/extra/ruby/rdebugrc" ~/.rdebugrc
-  symlink "$DOTF/extra/ruby/editrc" ~/.editrc
+  dotf-symlink "$DOTF/extra/ruby/irbrc" ~/.irbrc
+  dotf-symlink "$DOTF/extra/ruby/rdebugrc" ~/.rdebugrc
+  dotf-symlink "$DOTF/extra/ruby/editrc" ~/.editrc
 }
 
 main "$@"

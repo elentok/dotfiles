@@ -2,5 +2,5 @@
 
 source "$DOTF/framework"
 
-symlink "$DOTF/core/bash/bash_profile" ~/.bash_profile
-symlink "$DOTF/core/bash/inputrc" ~/.inputrc
+dotf-symlink "$DOTF/core/bash/bash_profile" ~/.bash_profile
+dotf-symlink "$DOTF/core/bash/inputrc" ~/.inputrc

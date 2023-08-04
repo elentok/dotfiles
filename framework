@@ -11,6 +11,7 @@ export DOTF
 
 source "$DOTF/core/zsh/core.sh"
 source "$DOTF/core/scripts/lib/ui.sh"
+source "$DOTF/core/scripts/lib/fs.sh"
 source "$DOTF/core/scripts/lib/node.sh"
 source "$DOTF/core/scripts/lib/git.sh"
 source "$DOTF/core/scripts/lib/benchmark.sh"
@@ -41,49 +42,6 @@ store_variable() {
 
 escape_variable() {
   echo -n "$1" | sed "s/'/\\\\'/g"
-}
-
-# backup {{{1
-backup() {
-  echo
-  dotf-info "  backing up to ${1}.backup"
-  mv -f "$1" "${1}.backup"
-  if [ $? == 0 ]; then return; fi
-
-  dotf-info "  trying with sudo:"
-  sudo mv -f "$1" "${1}.backup"
-  if [ $? != 0 ]; then
-    dotf-error "FAILED"
-    exit 1
-  fi
-}
-
-# symlink {{{1
-symlink() {
-  source=$1
-  target=$2
-
-  dotf-bullet "Linking $source"
-  echo -ne "\n      ==> ${target}... "
-  if [ -e "$target" ]; then
-    if [ -h "$target" ]; then
-      if [ "$source" == "$(readlink "$target")" ]; then
-        dotf-info " already exists"
-        return
-      fi
-    fi
-
-    backup "$target"
-  fi
-
-  if ! ln -sf "$source" "$target"; then
-    dotf-info "  Can't create link, trying with sudo:"
-    if ! sudo ln -sf "$source" "$target"; then
-      dotf-error "failed"
-      exit 1
-    fi
-  fi
-  dotf-success "done"
 }
 
 # Install Brew/Apt package {{{1
@@ -237,7 +195,7 @@ git_clone() {
         return
       fi
     fi
-    backup $target
+    dotf-backup "$target"
   fi
 
   git clone "$1" "$2"
@@ -608,5 +566,5 @@ function app-set-default() {
     return 1
   fi
 
-  symlink "$source" "$target"
+  dotf-symlink "$source" "$target"
 }

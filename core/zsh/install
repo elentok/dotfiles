@@ -32,9 +32,9 @@ function set_zsh_as_default_shell() {
 }
 
 function install_symlinks() {
-  symlink "$DOTF/core/zsh" ~/.zsh
-  symlink "$DOTF/core/zsh/zshrc" ~/.zshrc
-  symlink "$DOTF/core/zsh/zshenv" ~/.zshenv
+  dotf-symlink "$DOTF/core/zsh" ~/.zsh
+  dotf-symlink "$DOTF/core/zsh/zshrc" ~/.zshrc
+  dotf-symlink "$DOTF/core/zsh/zshenv" ~/.zshenv
 }
 
 function install_fzf() {

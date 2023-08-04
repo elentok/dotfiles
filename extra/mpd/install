@@ -60,7 +60,7 @@ create_symlinks() {
 build_config() {
   dotf-bullet 'Building config file... '
   if [ -e ~/.mpd/mpd.conf ]; then
-    backup ~/.mpd/mpd.conf
+    dotf-backup ~/.mpd/mpd.conf
   fi
   erb $DOTF/extra/mpd/mpd.conf.erb > ~/.mpd/mpd.conf
   show_result

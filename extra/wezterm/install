@@ -16,7 +16,7 @@ function main() {
   fi
 
   mkdir -p "$CONFIG_DIR"
-  symlink "$DOTF/extra/wezterm/wezterm.lua" "$CONFIG_DIR/wezterm.lua"
+  dotf-symlink "$DOTF/extra/wezterm/wezterm.lua" "$CONFIG_DIR/wezterm.lua"
 }
 
 main "$@"

@@ -8,6 +8,6 @@ WIN_USERNAME="$(wsl-get-env USERNAME)"
 WIN_HOME="/mnt/c/Users/$WIN_USERNAME"
 
 echo "Username: $WIN_USERNAME"
-symlink "$WIN_HOME" ~/winhome
-symlink "$WIN_HOME/Documents" ~/Documents
-symlink "$WIN_HOME/Downloads" ~/Downloads
+dotf-symlink "$WIN_HOME" ~/winhome
+dotf-symlink "$WIN_HOME/Documents" ~/Documents
+dotf-symlink "$WIN_HOME/Downloads" ~/Downloads

@@ -11,7 +11,7 @@ main() {
   fi
 
   mkdir -p ~/.config/alacritty
-  symlink "$DOTF/extra/alacritty/alacritty.yml" ~/.config/alacritty/alacritty.yml
+  dotf-symlink "$DOTF/extra/alacritty/alacritty.yml" ~/.config/alacritty/alacritty.yml
 
   if dotf-is-linux; then
     add-desktop-entry alacritty Alacritty "$(command -v alacritty)"

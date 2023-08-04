@@ -2,4 +2,4 @@
 
 source $DOTF/framework
 
-symlink $DOTF/extra/mercurial/hgrc $HOME/.hgrc
+dotf-symlink $DOTF/extra/mercurial/hgrc $HOME/.hgrc

@@ -10,7 +10,7 @@ main() {
   fi
 
   make_dir ~/.config/mc
-  symlink "$DOTF/plugin/mc/ini" ~/.config/mc/ini
+  dotf-symlink "$DOTF/plugin/mc/ini" ~/.config/mc/ini
 }
 
 main "$@"
