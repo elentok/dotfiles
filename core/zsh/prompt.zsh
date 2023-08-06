@@ -85,8 +85,8 @@ function _prompt_line1() {
 }
 
 function _prompt_line2() {
-  echo -n '%K{yellow}%F{black} %~%f%k'
-  _prompt_right_bubble yellow
+  echo -n '%K{blue}%F{black} %~%f%k'
+  _prompt_right_bubble blue
 }
 
 # prefix_char=''
