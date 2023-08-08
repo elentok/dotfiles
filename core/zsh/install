@@ -5,6 +5,7 @@ source "$DOTF/framework"
 function main() {
   set_zsh_as_default_shell
   install_symlinks
+  install_powerlevel10k
   install_fzf
   reset_completion_cache
 
@@ -36,6 +37,7 @@ function install_symlinks() {
   dotf-symlink "$DOTF/core/zsh/zshrc" ~/.zshrc
   dotf-symlink "$DOTF/core/zsh/zshenv" ~/.zshenv
   dotf-symlink "$DOTF/core/zsh/zprofile" ~/.zprofile
+  dotf-symlink "$DOTF/core/zsh/p10k.zsh" ~/.p10k.zsh
 }
 
 function install_fzf() {
@@ -46,6 +48,11 @@ function install_fzf() {
     git_clone https://github.com/junegunn/fzf.git ~/.fzf --depth 1
     ~/.fzf/install --completion --key-bindings --no-update-rc
   fi
+}
+
+function install_powerlevel10k() {
+  git_clone https://github.com/romkatv/powerlevel10k.git ~/.powerlevel10k --depth=1
+  # echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 }
 
 reset_completion_cache() {

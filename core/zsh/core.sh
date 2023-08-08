@@ -77,7 +77,9 @@ function is-gnu-stat() {
 # * https://stackoverflow.com/questions/24623021
 # * https://unix.stackexchange.com/questions/72086
 # * https://unix.stackexchange.com/questions/26676
-[[ $- == *i* ]] && stty -ixon
+if [[ -t 0 && $- = *i* ]]; then
+  stty -ixon
+fi
 
 # Homebrew {{{1
 BREW_HOME=''
