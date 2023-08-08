@@ -58,17 +58,6 @@ setopt EXTENDED_GLOB        # Use extended globbing syntax.
 unsetopt CLOBBER            # Do not overwrite existing files with > and >>.
                             # Use >! and >>! to bypass.
 
-# VI Mode Indicator {{{1
-precmd() { RPROMPT="" }
-function zle-line-init zle-keymap-select {
-   VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
-   RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} ${EPS1:-}"
-   zle reset-prompt
-}
-
-zle -N zle-line-init
-zle -N zle-keymap-select
-
 # Misc {{{1
 
 # don't log to history commands starting with a space

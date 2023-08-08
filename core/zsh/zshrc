@@ -2,7 +2,7 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 
-source "$DOTF/core/zsh/p10k-instant-prompt.zsh"
+# source "$DOTF/core/zsh/p10k-instant-prompt.zsh"
 
 # Start fish shell on interactive shells
 if [ -e ~/.try-fish ]; then
@@ -33,8 +33,8 @@ source $DOTF/core/zsh/completion.zsh
 source $DOTF/core/zsh/keybindings.zsh
 source $DOTF/core/zsh/fzf-git.sh
 source $DOTF/core/zsh/vendor/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.powerlevel10k/powerlevel10k.zsh-theme
-# source $DOTF/core/zsh/prompt.zsh
+# source ~/.powerlevel10k/powerlevel10k.zsh-theme
+source $DOTF/core/zsh/prompt.zsh
 if is-nvm-providing-node; then
   source $DOTF/core/zsh/nvm.zsh
 fi
@@ -51,4 +51,4 @@ unset ZSHENV_LOADED
 # echo "\033[1;30m($(printf '%.2f' $duration)ms)\033[0m"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

@@ -55,6 +55,16 @@ function dotf-format-number() {
 # Exit code {{{1
 # UI Helpers {{{1
 
+function _prompt_left_bubble() {
+  local fg="$1"
+  local bg="${2:-}"
+  if [ -z "$bg" ]; then
+    echo -ne "%F{$fg}%f"
+  else
+    echo -ne "%K{$bg}%F{$fg}%f%k"
+  fi
+}
+
 function _prompt_right_bubble() {
   local fg="$1"
   local bg="${2:-}"
@@ -67,35 +77,58 @@ function _prompt_right_bubble() {
 
 # Prompt Lines {{{1
 
+_same_color_separator="%246F\uE0B1"
+
 function _prompt_line1() {
-  color1=blue
-  color2=cyan
-  color3=blue
+  bg1=237
+  fg1=white
+  bg2=239
+  fg2=white
+  bg3=237
+  fg3=white
+  bg4=239
+  fg4=white
+
+  _prompt_left_bubble $bg1
+
   # user & host
-  echo -n "%K{$color1}%F{black}  $USERNAME@${SHORT_HOST}%k%f"
-  _prompt_right_bubble $color1 $color2
+  echo -n "%K{$bg1}%F{$fg1}$USERNAME@${SHORT_HOST}%k%f"
+  _prompt_right_bubble $bg1 $bg2
+
+  echo -n "%K{$bg2}%F{$fg2} %~%f%k"
+  _prompt_right_bubble $bg2 $bg3
 
   # git status
-  echo -n "%K{$color2}%F{black}\${vcs_info_msg_0_}%k%f"
-  _prompt_right_bubble $color2 $color3
+  echo -n "%K{$bg3}%F{$fg3}\${vcs_info_msg_0_}%k%f"
+  _prompt_right_bubble $bg3 $bg4
 
   # runtime
-  echo -n "%K{$color3}%F{black}  \${_last_cmd_runtime}%k%f"
-  _prompt_right_bubble $color3
+  echo -n "%K{$bg4}%F{$fg4}  \${_last_cmd_runtime}%k%f"
+  _prompt_right_bubble $bg4
 }
 
-function _prompt_line2() {
-  echo -n '%K{blue}%F{black} %~%f%k'
+function _prompt_line2_old() {
+  bg1=black
+  fg1=white
+  bg2=blue
+  fg2=black
+
+  echo -n "%K{$bg1}%F{$fg1} $USERNAME@${SHORT_HOST}%k%f"
+  _prompt_right_bubble $bg1 $bg2
+
+  echo -n "%K{$bg2}%F{$fg2} %~%f%k"
+
   _prompt_right_bubble blue
 }
 
 # prefix_char=''
 # prefix_char=''
 prefix_char=''
-success="%K{green} %k%F{green}${prefix_char}%f"
-error="%K{red} %k%F{red}${prefix_char}%f"
+vi_mode='${${KEYMAP/vicmd/}/main/ }'
+success="%F{green}%f%K{green}%F{black}${vi_mode}%f%k%F{green}${prefix_char}%f"
+error="%F{red}%f%K{red}%F{black}${vi_mode}%f%k%F{red}${prefix_char}%f"
 exit_code="%(?.$success.$error) "
-_prompt_line3="${exit_code}"
+_prompt_line2="${exit_code}"
 
 # Git {{{1
 
@@ -112,8 +145,8 @@ zstyle ':vcs_info:*' check-for-changes true # required to show staged/unstaged
 zstyle ':vcs_info:*' use-simple true        # faster, but less accurate
 zstyle ':vcs_info:*' stagedstr ' %F{green}✗%f'
 zstyle ':vcs_info:*' unstagedstr ' %F{red}✗%f'
-zstyle ':vcs_info:*' formats ' at %b%u%c'
-zstyle ':vcs_info:*' actionformats ' at %b%u%c (%a)'
+zstyle ':vcs_info:*' formats ' %b%u%c'
+zstyle ':vcs_info:*' actionformats ' %b%u%c (%a)'
 
 # To disable the source control part of the prompt (in case of slow downs) use
 # the following command:
@@ -121,17 +154,25 @@ zstyle ':vcs_info:*' actionformats ' at %b%u%c (%a)'
 # zstyle ':vcs_info:*' disable-patterns "${(b)HOME}/.zsh(|/*)"
 
 # Full prompt {{{1
-PROMPT="$(_prompt_line2)
-$_prompt_line3"
+PROMPT="$(_prompt_line1)
+$_prompt_line2"
 
-if [ ! -e ~/.miniprompt ]; then
-  PROMPT="$(_prompt_line1)
-$PROMPT"
-fi
+# if [ ! -e ~/.miniprompt ]; then
+#   PROMPT="$(_prompt_line1)
+# $PROMPT"
+# fi
 
 PROMPT="
 $PROMPT"
 
-echo PROMPT!
+# VI Mode {{{1
+
+# precmd() { RPROMPT="" }
+function zle-line-init zle-keymap-select {
+  zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
 
 # vim: filetype=zsh foldmethod=marker

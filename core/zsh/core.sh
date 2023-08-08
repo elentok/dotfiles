@@ -256,7 +256,10 @@ is_in_neovim() {
 export SSH_TERM=xterm-color
 export LESS="--RAW-CONTROL-CHARS"
 export RIPGREP_CONFIG_PATH="$DOTF/core/ripgrep/ripgreprc"
-SHORT_HOST="$(dotf-host-info pretty-name || hostname)"
+PRETTY_HOST="$(dotf-host-info pretty-name || hostname)"
+SHORT_HOST="${PRETTY_HOST:0:3}"
+SHORT_HOST="${SHORT_HOST:l}"
+export PRETTY_HOST
 export SHORT_HOST
 
 # - Don't follow non-constant sources
