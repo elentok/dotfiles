@@ -6,7 +6,7 @@
 # and arithmetic expansion:
 setopt PROMPT_SUBST
 
-# Execution time {{{1
+# Helpers: Execution time {{{1
 #
 # Here's the basic order of events when a command is executed in Zsh:
 #
@@ -52,94 +52,7 @@ function dotf-format-number() {
   echo -n "${number}${unit}"
 }
 
-# Exit code {{{1
-# UI Helpers {{{1
-
-triangle="\uE0B0"
-
-function _prompt_block() {
-  local bg="$1"
-  local fg="$2"
-  local next_bg="$3"
-  local text="$4"
-
-  echo -ne "%K{$bg}%F{$fg}${text}%k%f"
-  if [ -n "$next_bg" ]; then
-    echo -ne "%K{$next_bg}"
-  fi
-  echo -ne "%F{$bg}${triangle}%f%k"
-}
-
-function _prompt_left_bubble() {
-  local fg="$1"
-  local bg="${2:-}"
-  if [ -z "$bg" ]; then
-    echo -ne "%F{$fg}%f"
-  else
-    echo -ne "%K{$bg}%F{$fg}%f%k"
-  fi
-}
-
-function _prompt_right_separator() {
-  # local separator=""
-  local separator="$triangle"
-  local fg="$1"
-  local bg="${2:-}"
-  if [ -z "$bg" ]; then
-    echo -ne "%F{$fg}${separator}%f"
-  else
-    echo -ne "%K{$bg}%F{$fg}${separator}%f%k"
-  fi
-}
-
-# Prompt Lines {{{1
-
-_same_color_separator="%246F\uE0B1"
-
-function _prompt_line1() {
-  bg1=237
-  fg1=white
-  bg2=239
-  fg2=white
-  bg3=237
-  fg3=white
-  bg4=239
-  fg4=white
-
-  _prompt_block $bg1 $fg1 $bg2 " ${USERNAME}@${SHORT_HOST} "
-  _prompt_block $bg2 $fg2 $bg3 " %~ "
-  _prompt_block $bg3 $fg3 $bg4 '${vcs_info_msg_0_} ' # git status
-  _prompt_block $bg4 $fg4 '' '${_last_cmd_runtime} '
-}
-
-function _prompt_line2_old() {
-  bg1=black
-  fg1=white
-  bg2=blue
-  fg2=black
-
-  echo -n "%K{$bg1}%F{$fg1} $USERNAME@${SHORT_HOST}%k%f"
-  _prompt_right_separator $bg1 $bg2
-
-  echo -n "%K{$bg2}%F{$fg2} %~%f%k"
-
-  _prompt_right_separator blue
-}
-
-# prefix_char=''
-# prefix_char=''
-# prefix_char=''
-prefix_char=''
-vi_mode='${${${KEYMAP:-main}/vicmd/}/main/ }'
-# vi_mode='${KEYMAP:-main}'
-# success="%F{green}%f%K{green}%F{black}${vi_mode}%f%k%F{green}${prefix_char}%f"
-# error="%F{red}%f%K{red}%F{black}${vi_mode}%f%k%F{red}${prefix_char}%f"
-success="%K{green}%F{black} ${vi_mode}%f%k%F{green}${prefix_char}%f"
-error="%K{red}%F{black} ${vi_mode}%f%k%F{red}${prefix_char}%f"
-exit_code="%(?.$success.$error) "
-_prompt_line2="${exit_code}"
-
-# Git {{{1
+# Helpers: Git {{{1
 
 # required zsh modules
 autoload -Uz add-zsh-hook
@@ -162,21 +75,8 @@ zstyle ':vcs_info:*' actionformats ' %b%u%c (%a)'
 #
 # zstyle ':vcs_info:*' disable-patterns "${(b)HOME}/.zsh(|/*)"
 
-# Full prompt {{{1
-PROMPT="$(_prompt_line1)
-$_prompt_line2"
+# Helpers: VI Mode {{{1
 
-# if [ ! -e ~/.miniprompt ]; then
-#   PROMPT="$(_prompt_line1)
-# $PROMPT"
-# fi
-
-PROMPT="
-$PROMPT"
-
-# VI Mode {{{1
-
-# precmd() { RPROMPT="" }
 function zle-line-init {
   zle reset-prompt
 }
@@ -187,5 +87,103 @@ function zle-keymap-select {
 
 zle -N zle-line-init
 zle -N zle-keymap-select
+
+# Helpers: Block {{{1
+
+triangle="\uE0B0"
+
+function _prompt_block() {
+  local bg="$1"
+  local fg="$2"
+  local next_bg="$3"
+  local text="$4"
+
+  echo -ne "%K{$bg}%F{$fg}${text}%k%f"
+  if [ -n "$next_bg" ]; then
+    echo -ne "%K{$next_bg}"
+  fi
+  echo -ne "%F{$bg}${triangle}%f%k"
+}
+
+function _rprompt_block() {
+  local prev_bg="$1"
+  local bg="$2"
+  local fg="$3"
+  local text="$4"
+
+  if [ -n "$prev_bg" ]; then
+    echo -ne "%K{$prev_bg}"
+  fi
+  echo -ne "%F{$bg}%f%k"
+  echo -ne "%K{$bg}%F{$fg}${text}%k%f"
+}
+
+# Helpers: Git {{{1
+
+# required zsh modules
+autoload -Uz add-zsh-hook
+autoload -Uz vcs_info
+autoload -Uz colors && colors
+
+# refresh the git status before every command
+add-zsh-hook precmd vcs_info
+
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' check-for-changes true # required to show staged/unstaged
+zstyle ':vcs_info:*' use-simple true        # faster, but less accurate
+zstyle ':vcs_info:*' stagedstr ' %F{green}✗%f'
+zstyle ':vcs_info:*' unstagedstr ' %F{red}✗%f'
+zstyle ':vcs_info:*' formats ' %b%u%c'
+zstyle ':vcs_info:*' actionformats ' %b%u%c (%a)'
+
+# To disable the source control part of the prompt (in case of slow downs) use
+# the following command:
+#
+# zstyle ':vcs_info:*' disable-patterns "${(b)HOME}/.zsh(|/*)"
+
+# Prompt Line 1 {{{1
+function _prompt_line1() {
+  bg1=237
+  fg1=white
+  bg2=239
+  fg2=white
+  bg3=237
+  fg3=white
+  bg4=239
+  fg4=white
+
+  # _prompt_block $bg1 $fg1 $bg2 " ${USERNAME}@${SHORT_HOST} "
+  _prompt_block $bg1 $fg1 $bg2 " %~ "
+  _prompt_block $bg2 $fg2 '' '${vcs_info_msg_0_} ' # git status
+  # _prompt_block $bg4 $fg4 '' '${_last_cmd_runtime} '
+}
+
+# Prompt Line 2 {{{1
+# prefix_char=''
+# prefix_char=''
+# prefix_char=''
+prefix_char=''
+vi_mode='${${${KEYMAP:-main}/vicmd/}/main/ }'
+success="%K{green}%F{black} ${vi_mode}%f%k%F{green}${prefix_char}%f"
+error="%K{red}%F{black} ${vi_mode}%f%k%F{red}${prefix_char}%f"
+exit_code="%(?.$success.$error) "
+_prompt_line2="${exit_code}"
+
+# Right Prompt {{{1
+function _rprompt() {
+  bg1=237
+  fg1=white
+  bg2=239
+  fg2=white
+  _rprompt_block '' $bg1 $fg1 '${_last_cmd_runtime} '
+  _rprompt_block $bg1 $bg2 $fg2 " ${USERNAME}@${SHORT_HOST} "
+
+}
+RPROMPT="$(_rprompt)"
+
+# Full prompt {{{1
+PROMPT="
+$(_prompt_line1)
+$_prompt_line2"
 
 # vim: filetype=zsh foldmethod=marker

@@ -25,11 +25,11 @@ source "$DOTF/core/scripts/lib/helpers.sh"
 
 # Shell {{{1
 function is_zsh() {
-  [ -n "$ZSH_VERSION" ]
+  [ -n "${ZSH_VERSION:-}" ]
 }
 
 function is_bash() {
-  [ -n "$BASH_VERSION" ]
+  [ -n "${BASH_VERSION:-}" ]
 }
 
 # Helper functions {{{1
