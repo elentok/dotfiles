@@ -24,7 +24,7 @@ function precmd() {
   _last_cmd_runtime=''
   if [ -n "${DOTF_CMD_START_TIME:-}" ]; then
     local runtime=$(($SECONDS - $DOTF_CMD_START_TIME))
-    _last_cmd_runtime=$(dotf-format-seconds ${runtime})
+    _last_cmd_runtime="  $(dotf-format-seconds ${runtime})"
   fi
 }
 
@@ -55,6 +55,21 @@ function dotf-format-number() {
 # Exit code {{{1
 # UI Helpers {{{1
 
+triangle="\uE0B0"
+
+function _prompt_block() {
+  local bg="$1"
+  local fg="$2"
+  local next_bg="$3"
+  local text="$4"
+
+  echo -ne "%K{$bg}%F{$fg}${text}%k%f"
+  if [ -n "$next_bg" ]; then
+    echo -ne "%K{$next_bg}"
+  fi
+  echo -ne "%F{$bg}${triangle}%f%k"
+}
+
 function _prompt_left_bubble() {
   local fg="$1"
   local bg="${2:-}"
@@ -65,13 +80,15 @@ function _prompt_left_bubble() {
   fi
 }
 
-function _prompt_right_bubble() {
+function _prompt_right_separator() {
+  # local separator=""
+  local separator="$triangle"
   local fg="$1"
   local bg="${2:-}"
   if [ -z "$bg" ]; then
-    echo -ne "%F{$fg}%f"
+    echo -ne "%F{$fg}${separator}%f"
   else
-    echo -ne "%K{$bg}%F{$fg}%f%k"
+    echo -ne "%K{$bg}%F{$fg}${separator}%f%k"
   fi
 }
 
@@ -89,22 +106,10 @@ function _prompt_line1() {
   bg4=239
   fg4=white
 
-  _prompt_left_bubble $bg1
-
-  # user & host
-  echo -n "%K{$bg1}%F{$fg1}$USERNAME@${SHORT_HOST}%k%f"
-  _prompt_right_bubble $bg1 $bg2
-
-  echo -n "%K{$bg2}%F{$fg2} %~%f%k"
-  _prompt_right_bubble $bg2 $bg3
-
-  # git status
-  echo -n "%K{$bg3}%F{$fg3}\${vcs_info_msg_0_}%k%f"
-  _prompt_right_bubble $bg3 $bg4
-
-  # runtime
-  echo -n "%K{$bg4}%F{$fg4}  \${_last_cmd_runtime}%k%f"
-  _prompt_right_bubble $bg4
+  _prompt_block $bg1 $fg1 $bg2 " ${USERNAME}@${SHORT_HOST} "
+  _prompt_block $bg2 $fg2 $bg3 " %~ "
+  _prompt_block $bg3 $fg3 $bg4 '${vcs_info_msg_0_} ' # git status
+  _prompt_block $bg4 $fg4 '' '${_last_cmd_runtime} '
 }
 
 function _prompt_line2_old() {
@@ -114,19 +119,23 @@ function _prompt_line2_old() {
   fg2=black
 
   echo -n "%K{$bg1}%F{$fg1} $USERNAME@${SHORT_HOST}%k%f"
-  _prompt_right_bubble $bg1 $bg2
+  _prompt_right_separator $bg1 $bg2
 
   echo -n "%K{$bg2}%F{$fg2} %~%f%k"
 
-  _prompt_right_bubble blue
+  _prompt_right_separator blue
 }
 
 # prefix_char=''
 # prefix_char=''
-prefix_char=''
-vi_mode='${${KEYMAP/vicmd/}/main/ }'
-success="%F{green}%f%K{green}%F{black}${vi_mode}%f%k%F{green}${prefix_char}%f"
-error="%F{red}%f%K{red}%F{black}${vi_mode}%f%k%F{red}${prefix_char}%f"
+# prefix_char=''
+prefix_char=''
+vi_mode='${${${KEYMAP:-main}/vicmd/}/main/ }'
+# vi_mode='${KEYMAP:-main}'
+# success="%F{green}%f%K{green}%F{black}${vi_mode}%f%k%F{green}${prefix_char}%f"
+# error="%F{red}%f%K{red}%F{black}${vi_mode}%f%k%F{red}${prefix_char}%f"
+success="%K{green}%F{black} ${vi_mode}%f%k%F{green}${prefix_char}%f"
+error="%K{red}%F{black} ${vi_mode}%f%k%F{red}${prefix_char}%f"
 exit_code="%(?.$success.$error) "
 _prompt_line2="${exit_code}"
 
@@ -168,7 +177,11 @@ $PROMPT"
 # VI Mode {{{1
 
 # precmd() { RPROMPT="" }
-function zle-line-init zle-keymap-select {
+function zle-line-init {
+  zle reset-prompt
+}
+
+function zle-keymap-select {
   zle reset-prompt
 }
 
