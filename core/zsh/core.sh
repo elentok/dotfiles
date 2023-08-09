@@ -258,7 +258,9 @@ export LESS="--RAW-CONTROL-CHARS"
 export RIPGREP_CONFIG_PATH="$DOTF/core/ripgrep/ripgreprc"
 PRETTY_HOST="$(dotf-host-info pretty-name || hostname)"
 SHORT_HOST="${PRETTY_HOST:0:3}"
-SHORT_HOST="${SHORT_HOST:l}"
+if is_zsh; then
+  SHORT_HOST="${SHORT_HOST:l}"
+fi
 export PRETTY_HOST
 export SHORT_HOST
 
