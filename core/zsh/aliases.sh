@@ -32,9 +32,9 @@ alias eslint-debug='DEBUG=eslint:cli-engine eslint'
 alias fliph='convert -flop'
 alias flipv='convert -flip'
 alias g='git'
-alias gp='cd $(list-projects | fzf | sed "s#~#$HOME#")'
-alias gcoo='git all-branches | fzf | xargs git checkout'
-alias gdestroy='git destroy `git all-branches | fzf`'
+alias gp='cd $(list-projects | fzf-tmux -p | sed "s#~#$HOME#")'
+alias gcoo='git all-branches | fzf-tmux -p | xargs git checkout'
+alias gdestroy='git destroy `git all-branches | fzf-tmux -p`'
 alias gsp='gsutil acl ch -u AllUsers:R'
 alias hex='od -xcb'
 alias hh='history'
@@ -177,7 +177,7 @@ yr() {
     return $?
   fi
 
-  cmd="$(npm-scripts | fzf --ansi --exit-0 | awk '{print $1}')"
+  cmd="$(npm-scripts | fzf-tmux -p --ansi --exit-0 | awk '{print $1}')"
 
   if [ -n "$cmd" ]; then
     print -s "yarn run $cmd" \
@@ -210,7 +210,7 @@ npr() {
     return $?
   fi
 
-  cmd="$(npm-scripts | fzf --ansi --exit-0 | awk '{print $1}')"
+  cmd="$(npm-scripts | fzf-tmux -p --ansi --exit-0 | awk '{print $1}')"
 
   if [ -n "$cmd" ]; then
     print -s "npm run $cmd" \
@@ -237,7 +237,7 @@ de() {
 }
 
 cdd() {
-  dir="$(dff | fzf --ansi --exit-0 | awk '{print $6}')"
+  dir="$(dff | fzf-tmux -p --ansi --exit-0 | awk '{print $6}')"
   if [ -n "$dir" ]; then
     cd "$dir" || return 1
   fi
@@ -271,10 +271,10 @@ function pick-directory() {
 function pick-directory-recursive() {
   full_dir="."
 
-  dir="$(list-dirs | fzf --ansi --exit-0)"
+  dir="$(list-dirs | fzf-tmux -p --ansi --exit-0)"
   while [ -n "$dir" ]; do
     full_dir="$full_dir/$dir"
-    dir="$(list-dirs "$full_dir" | fzf --ansi --exit-0)"
+    dir="$(list-dirs "$full_dir" | fzf-tmux -p --ansi --exit-0)"
   done
 
   if [ -n "$full_dir" ]; then

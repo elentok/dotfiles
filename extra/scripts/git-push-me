@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-remote='noreview'
+remote='origin'
 branch=$(git rev-parse --abbrev-ref HEAD)
 
-read -p "Push $branch to $remote? [Y/n] " yesno
+read -r -p "Push $branch to $remote? [Y/n] " yesno
 
 echo
 
@@ -11,6 +11,5 @@ if [[ "$yesno" =~ [nN] ]]; then
   echo "Aborted."
 else
   echo "Pushing ${branch} to ${remote}..."
-  git push $remote $branch $*
+  git push $remote "$branch" "$@"
 fi
-

@@ -52,7 +52,7 @@
   b = branch
   bd = branch -d
   bD = branch -D
-  bdd = !git destroy `git all-branches | fzf`
+  bdd = !git destroy `git all-branches | fzf-tmux -p`
   bv = branch -vv
   c = commit
   cm = commit -m
