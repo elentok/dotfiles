@@ -60,6 +60,7 @@ vim.keymap.set(
 vim.keymap.set("n", "<space>gw", "<cmd>Gwrite<cr>", { desc = "Git write" })
 vim.keymap.set("n", "<space>gg", "<cmd>G<cr><c-w>H", { desc = "Git status" })
 vim.keymap.set("n", "<space>gb", "<cmd>G blame<cr>", { desc = "Git blame" })
+vim.keymap.set("n", "<space>gl", "<cmd>G log HEAD...master<cr>", { desc = "Git log" })
 
 local function git_history()
   local filename = vim.fn.expand("%")
