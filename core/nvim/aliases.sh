@@ -42,7 +42,7 @@ function v() {
 function run-on-file() {
   # calling "print -s" adds the command to zsh history
 
-  file="$(list-files | fzf --ansi --exit-0 | awk '{print $1}')"
+  file="$(rg --files | fzf-tmux -p --ansi --exit-0 | awk '{print $1}')"
 
   if [ -n "$file" ]; then
     cmd="$* $file"
