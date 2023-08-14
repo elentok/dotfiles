@@ -196,7 +196,7 @@ yp() {
   fi
 
   local package
-  package="$(cd "$root/packages" || return && command ls -1 | fzf --exit-0)"
+  package="$(cd "$root/packages" || return && command ls -1 | fzf-tmux -p --exit-0)"
   if [ -n "$package" ]; then
     cd "$root/packages/$package" || return 1
   fi
