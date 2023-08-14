@@ -9,7 +9,7 @@ format_on_save.setup({
     ".local/share/nvim/lazy",
   },
   error_notifier = message_buffer,
-  partial_update = true,
+  partial_update = "diff",
   formatter_by_ft = vim.tbl_extend("force", {
     css = formatters.lsp,
     html = formatters.lsp,
