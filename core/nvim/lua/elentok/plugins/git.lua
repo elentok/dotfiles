@@ -1,7 +1,7 @@
 return {
   "lewis6991/gitsigns.nvim",
   "tpope/vim-fugitive",
-  -- { "akinsho/git-conflict.nvim", version = "v1.1.2" },
+  { "akinsho/git-conflict.nvim", version = "*" },
   {
     "linrongbin16/gitlinker.nvim",
     opts = { mappings = "" },

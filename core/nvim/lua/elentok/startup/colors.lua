@@ -55,6 +55,13 @@ require("catppuccin").setup({
 
 vim.cmd.colorscheme("catppuccin")
 
+require("git-conflict").setup({
+  highlights = {
+    incoming = "DiffAdd",
+    current = "DiffText",
+  },
+})
+
 -- Tmux support (requires "focus-events" to be on in tmux.conf)
 -- vim.api.nvim_create_autocmd({ "FocusGained" }, {
 --   callback = function()
