@@ -1,12 +1,12 @@
-local util = require("elentok/util")
+local has_cmp, cmp = pcall(require, "cmp")
 
-function _G.setup_command_line_buffer()
-  vim.keymap.set("n", "q", ":q<cr>", { buffer = true })
-end
+vim.api.nvim_create_autocmd("CmdwinEnter", {
+  callback = function()
+    vim.keymap.set("n", "q", ":q<cr>", { buffer = true })
 
-util.augroup(
-  "CommandLineBuffer",
-  [[
-  autocmd CmdwinEnter * lua setup_command_line_buffer()
-]]
-)
+    -- Hide the completion menu so it doesn't cover the command line buffer
+    if has_cmp then
+      cmp.close()
+    end
+  end,
+})
