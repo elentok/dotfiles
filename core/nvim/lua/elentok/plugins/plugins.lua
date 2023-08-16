@@ -34,14 +34,24 @@ return {
   -- Allows running "nvim {filename}:{line-number}".
   "bogado/file-line",
 
-  "folke/twilight.nvim", -- focus active code block
-  "aklt/plantuml-syntax",
+  -- focus active code block
+  -- {
+  --   "folke/twilight.nvim",
+  --   context = 14,
+  --   dimming = {
+  --     alpha = 0.5,
+  --   },
+  --   expand = {
+  --     "function",
+  --     "method",
+  --     "table",
+  --   },
+  -- },
+  -- "aklt/plantuml-syntax",
   "michaeljsmith/vim-indent-object",
   "bronson/vim-visual-star-search",
   "christoomey/vim-tmux-navigator",
-  -- "voldikss/vim-floaterm",
   "numToStr/FTerm.nvim",
-  -- "nvim-lua/popup.nvim",
   "nvim-lua/plenary.nvim",
   "AndrewRadev/splitjoin.vim",
   "jamessan/vim-gnupg",
