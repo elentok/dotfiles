@@ -27,8 +27,21 @@
   # side-by-side = true
 
 [merge]
-  conflictstyle = diff3
-  tool = nvimdiff
+  ; conflictstyle = diff3
+  tool = fugitive
+  ; tool = kdiff3
+  ; tool = nvimdiff
+
+; [mergetool]
+  ; prompt = false
+  ; keepBackup = false
+  ; keepTemporaries = false
+
+[mergetool "kdiff3"]
+  path = kdiff3
+
+[mergetool "fugitive"]
+  cmd = nvim -f -c "Gvdiffsplit!" "$MERGED"
 
 [mergetool "nvimdiff"]
   cmd = nvim -d \"$LOCAL\" \"$MERGED\" \"$REMOTE\" -c \"wincmd l\" -c \"norm ]n\" -c \":UfoDisable\"
