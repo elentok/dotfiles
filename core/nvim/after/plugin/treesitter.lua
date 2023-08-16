@@ -24,8 +24,10 @@ treesitter_configs.setup({
     "json5",
     "jsonc",
     "lua",
-    "markdown",
-    "markdown_inline",
+    -- These are causing Neovim to crash in some specific scenarios,
+    -- not sure why.
+    -- "markdown",
+    -- "markdown_inline",
     "python",
     "regex",
     "rst",
