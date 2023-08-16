@@ -1,4 +1,8 @@
-local lint = require("lint")
+local ok, lint = pcall(require, "lint")
+if not ok then
+  print('Module "lint" not found, skipping setup.')
+  return
+end
 
 -- local function has_eslintrc()
 --   return vim.fn.findfile("eslintrc.js", ";.") ~= "" or vim.fn.findfile(".eslintrc", ";.") ~= ""

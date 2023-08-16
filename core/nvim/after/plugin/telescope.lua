@@ -41,7 +41,11 @@ telescope.setup({
   },
 })
 
-telescope.load_extension("aerial")
+local ok_aerial, _ = pcall(require, "aerial")
+if ok_aerial then
+  telescope.load_extension("aerial")
+  vim.keymap.set("n", "gs", telescope.extensions.aerial.aerial, { desc = "Goto symbol" })
+end
 telescope.load_extension("fzf")
 telescope.load_extension("file_browser")
 
@@ -91,6 +95,5 @@ vim.keymap.set("n", "<Leader>fe", function()
 end)
 vim.keymap.set("n", "gr", builtin.lsp_references, { desc = "Goto reference (LSP)" })
 vim.keymap.set("n", "``", builtin.resume, { desc = "Resume last telescope search" })
-vim.keymap.set("n", "gs", telescope.extensions.aerial.aerial, { desc = "Goto symbol" })
 
 vim.api.nvim_create_user_command("Maps", builtin.keymaps, {})

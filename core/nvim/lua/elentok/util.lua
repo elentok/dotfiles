@@ -1,5 +1,4 @@
 local api = vim.api
-local term = require("elentok.lib.terminal")
 
 local M = {}
 

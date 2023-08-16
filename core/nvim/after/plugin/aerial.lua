@@ -1,4 +1,8 @@
-local aerial = require("aerial")
+local ok, aerial = pcall(require, "aerial")
+if not ok then
+  print('Module "aerial" not found, skipping setup.')
+  return
+end
 
 aerial.setup({
   backends = {

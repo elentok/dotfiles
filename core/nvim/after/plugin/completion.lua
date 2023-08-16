@@ -1,6 +1,12 @@
-local cmp = require("cmp")
-local luasnip = require("luasnip")
-local lspkind = require("lspkind")
+local ok_cmp, cmp = pcall(require, "cmp")
+local ok_luasnip, luasnip = pcall(require, "luasnip")
+local ok_lspkind, lspkind = pcall(require, "lspkind")
+
+local ok = ok_cmp and ok_luasnip and ok_lspkind
+if not ok then
+  print('Module "cmp", "luasnip" or "lspkind" not found, skipping setup.')
+  return
+end
 
 require("luasnip.loaders.from_vscode").lazy_load()
 
