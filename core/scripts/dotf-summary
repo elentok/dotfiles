@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+#
+# Usage:
+#
+#   dotf-summary start
+#   dotf-summary write <category> <description>
+#   dotf-summary print
+#   dotf-summary stop
+
+source "$DOTF/core/scripts/lib/ui.sh"
+
+set -euo pipefail
+
+SUMMARY_FILE="$TMP/summary.txt"
+SUMMARY_LOCKFILE="$TMP/summary.lock"
+
+function main() {
+  local cmd="${1:-}"
+  shift || true
+
+  case "$cmd" in
+    start)
+      summary-start
+      ;;
+    write)
+      summary-write "$@"
+      ;;
+    print)
+      summary-print "$@"
+      ;;
+    stop)
+      summary-stop
+      ;;
+    *)
+      usage "$0"
+      exit 1
+      ;;
+  esac
+}
+
+function summary-start() {
+  if [ -e "$SUMMARY_LOCKFILE" ]; then
+    dotf-error "Summary is already in progress"
+    exit 1
+  fi
+
+  touch "$SUMMARY_LOCKFILE"
+  rm -f "$SUMMARY_FILE"
+  echo "START: $(date +%s)" > "$SUMMARY_FILE"
+}
+
+function summary-write() {
+  echo "$1 $2" >> "$SUMMARY_FILE"
+}
+
+function summary-print() {
+  cat "$SUMMARY_FILE"
+}
+
+function summary-stop() {
+  if [ ! -e "$SUMMARY_LOCKFILE" ]; then
+    dotf-error "No summary in progress"
+    exit 1
+  fi
+
+  summary-print
+
+  rm "$SUMMARY_LOCKFILE"
+}
+
+main "$@"
