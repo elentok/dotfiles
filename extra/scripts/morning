@@ -19,7 +19,7 @@ if [ -e "$DOTP/scripts/morning-private" ]; then
 fi
 
 if [ "$(cd "$DOTF" && git my-branch)" != "main" ]; then
-  (cd "$DOTF" && git checkout --track main origin/main)
+  (cd "$DOTF" && git checkout --track -b main origin/main)
 fi
 
 if [ -e ~/.dotlocal ]; then
