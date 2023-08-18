@@ -18,7 +18,7 @@ if [ -e "$DOTP/scripts/morning-private" ]; then
   "$DOTP/scripts/morning-private"
 fi
 
-if [ "$(cd "$DOTF" && git my-branch)" != "master" ]; then
+if [ "$(cd "$DOTF" && git my-branch)" != "main" ]; then
   (cd "$DOTF" && git checkout --track main origin/main)
 fi
 
