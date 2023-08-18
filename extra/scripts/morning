@@ -18,6 +18,10 @@ if [ -e "$DOTP/scripts/morning-private" ]; then
   "$DOTP/scripts/morning-private"
 fi
 
+if [ "$(cd "$DOTF" && git my-branch)" != "master" ]; then
+  (cd "$DOTF" && git checkout --track main origin/main)
+fi
+
 if [ -e ~/.dotlocal ]; then
   dotf-header h2 'Updating dotlocal...'
   cd ~/.dotlocal && git pull
