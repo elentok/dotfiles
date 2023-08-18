@@ -2,13 +2,15 @@
 
 source "$DOTF/framework"
 
+dotf-summary start
+
 dotf-header h1 'Good morning :-)'
 
 dotf-header h2 'Setting up ssh agent...'
-agent setup
+dotf-summary run 'Setup SSH agent' agent setup
 
 dotf-header h2 'Add ssh key...'
-ssh-add
+dotf-summary run 'Add SSH Key' ssh-add
 
 if [ -e "$DOTL/scripts/morning-local" ]; then
   "$DOTL/scripts/morning-local"
@@ -19,31 +21,33 @@ if [ -e "$DOTP/scripts/morning-private" ]; then
 fi
 
 if [ "$(cd "$DOTF" && git my-branch)" != "main" ]; then
-  (cd "$DOTF" && git checkout --track -b main origin/main)
+  (cd "$DOTF" && dotf-summary run 'Switch to main branch' git checkout --track -b main origin/main)
 fi
 
 if [ -e ~/.dotlocal ]; then
   dotf-header h2 'Updating dotlocal...'
-  cd ~/.dotlocal && git pull
+  cd ~/.dotlocal && dotf-summary run 'Pull ~/.dotlocal' git pull
 fi
 
 if [ -e ~/.dotprivate ]; then
   dotf-header h2 'Updating dotprivate...'
-  cd ~/.dotprivate && git pull
+  cd ~/.dotprivate && dotf-summary run 'Pull ~/.dotprivate' git pull
 fi
 
 dotf-header h2 'Updating dotfiles...'
-dotf update
+dotf update --morning
 
-dotf-repos setup
+dotf-summary run 'Setup repositories' dotf-repos setup
 
 note_dirs=(~/notes ~/notes/home ~/notes/work)
 
 for dir in "${note_dirs[@]}"; do
   if [ -e "$dir/.git" ]; then
     dotf-header h2 "Syncing ${dir}..."
-    (cd "$dir" && git sync)
+    (cd "$dir" && dotf-summary run "Sync notes @${dir}" git sync)
   fi
 done
+
+dotf-summary stop
 
 dotf-header h1 'Have a wonderful day :-)'

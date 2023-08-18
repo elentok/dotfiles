@@ -4,6 +4,7 @@
 #
 #   dotf-summary start
 #   dotf-summary write <category> <description>
+#   dotf-summary run <task> <command...>
 #   dotf-summary print
 #   dotf-summary stop
 
@@ -20,7 +21,10 @@ function main() {
 
   case "$cmd" in
     start)
-      summary-start
+      summary-start "$@"
+      ;;
+    run)
+      summary-run "$@"
       ;;
     write)
       summary-write "$@"
@@ -38,23 +42,43 @@ function main() {
   esac
 }
 
+function has-started() {
+  [ -e "$SUMMARY_LOCKFILE" ]
+}
+
 function summary-start() {
-  if [ -e "$SUMMARY_LOCKFILE" ]; then
-    dotf-error "Summary is already in progress"
-    exit 1
+  if has-started; then
+    if [ "${1:-}" == "-f" ]; then
+      rm "$SUMMARY_LOCKFILE"
+    else
+      dotf-error "Summary is already in progress"
+      exit 1
+    fi
   fi
 
   touch "$SUMMARY_LOCKFILE"
   rm -f "$SUMMARY_FILE"
-  echo "START: $(date +%s)" > "$SUMMARY_FILE"
+  summary-write "START"
+}
+
+function summary-run() {
+  if ! has-started; then
+    summary-start
+  fi
+
+  local task_name="$1"
+  shift
+
+  summary-write "START ${task_name}"
+  if "$@"; then
+    summary-write "PASS ${task_name}"
+  else
+    summary-write "FAIL ${task_name}"
+  fi
 }
 
 function summary-write() {
-  echo "$1 $2" >> "$SUMMARY_FILE"
-}
-
-function summary-print() {
-  cat "$SUMMARY_FILE"
+  echo "$(date +%s) $*" >> "$SUMMARY_FILE"
 }
 
 function summary-stop() {
@@ -66,6 +90,51 @@ function summary-stop() {
   summary-print
 
   rm "$SUMMARY_LOCKFILE"
+}
+
+function summary-print() {
+  if [ ! -e "$SUMMARY_FILE" ]; then
+    echo "Nothing."
+  fi
+
+  dotf-header h2 Summary
+
+  local current_task=""
+  local current_task_starttime=""
+
+  local passed=0
+  local failed=0
+
+  while read -r line; do
+    timestamp=$(echo "$line" | awk '{ print $1 }')
+    tag=$(echo "$line" | awk '{ print $2 }')
+    message=$(echo "$line" | cut -d' ' -f 3-)
+
+    case "$tag" in
+      "START")
+        current_task="$message"
+        current_task_starttime="$timestamp"
+        ;;
+      "FAIL")
+        failed=$((failed + 1))
+        runtime=$((timestamp - current_task_starttime))
+        dotf-error "$current_task (${runtime}s)"
+        ;;
+      "PASS")
+        passed=$((passed + 1))
+        runtime=$((timestamp - current_task_starttime))
+        dotf-success "$current_task (${runtime}s)"
+        ;;
+    esac
+  done < "$SUMMARY_FILE"
+
+  echo
+  if [ "$failed" == "0" ]; then
+    dotf-success "${passed} tasks succeeded"
+  else
+    total=$((passed + failed))
+    dotf-error "${failed} out of ${total} tasks failed"
+  fi
 }
 
 main "$@"

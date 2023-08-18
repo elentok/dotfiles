@@ -4,20 +4,30 @@ set -euo pipefail
 
 source "$DOTF/framework"
 
+MORNING=false
+
 function main() {
+  if [ "${1:-}" == "--morning" ]; then
+    MORNING=true
+  else
+    dotf-summary start
+  fi
+
   dotf-header h1 "Updating environment..."
   cd "$DOTF"
 
-  if [ "${1:-}" != "--no-pull" ]; then
-    pull-dotfiles
-  fi
+  dotf-summary run 'Pull ~/.dotfiles' pull-dotfiles
 
   "$DOTF/bootstrap.sh"
 
-  update-node
-  dotf-github update
-  dotf-pkgs upgrade
-  update-neovim-stuff
+  dotf-summary run 'Update node' update-node
+  dotf-summary run 'Update github packages' dotf-github update
+  dotf-summary run 'Update packages' dotf-pkgs upgrade
+  dotf-summary run 'Update Neovim stuff' update-neovim-stuff
+
+  if [ "$MORNING" == 'false' ]; then
+    dotf-summary stop
+  fi
 }
 
 function pull-dotfiles() {
