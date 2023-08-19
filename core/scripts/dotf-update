@@ -16,7 +16,7 @@ function main() {
   dotf-header h1 "Updating environment..."
   cd "$DOTF"
 
-  dotf-summary run 'Pull ~/.dotfiles' pull-dotfiles
+  pull-dotfiles
 
   "$DOTF/bootstrap.sh"
 
@@ -33,7 +33,7 @@ function main() {
 function pull-dotfiles() {
   dotf-header h2 "Pulling changes... "
   old_head=$(git rev-parse HEAD)
-  git pull
+  dotf-sumary run 'Pull ~/.dotfiles' git pull
   new_head=$(git rev-parse HEAD)
 
   if [ "$old_head" == "$new_head" ]; then
