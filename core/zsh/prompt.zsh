@@ -20,11 +20,12 @@ function preexec() {
 }
 
 # Runs after the command is executed
-function precmd() {
+function precmd_calc_last_cmd_runtime() {
   _last_cmd_runtime=''
   if [ -n "${DOTF_CMD_START_TIME:-}" ]; then
     local runtime=$(($SECONDS - $DOTF_CMD_START_TIME))
     _last_cmd_runtime="  $(dotf-format-seconds ${runtime})"
+    DOTF_CMD_START_TIME=
   fi
 }
 
@@ -60,15 +61,20 @@ autoload -Uz vcs_info
 autoload -Uz colors && colors
 
 # refresh the git status before every command
-add-zsh-hook precmd vcs_info
+# add-zsh-hook precmd vcs_info
+
+function precmd_vcs_info() {
+  vcs_info
+}
+precmd_functions+=(precmd_vcs_info precmd_calc_last_cmd_runtime)
 
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true # required to show staged/unstaged
 zstyle ':vcs_info:*' use-simple true        # faster, but less accurate
 zstyle ':vcs_info:*' stagedstr ' %F{green}✗%f'
 zstyle ':vcs_info:*' unstagedstr ' %F{red}✗%f'
-zstyle ':vcs_info:*' formats ' %b%u%c'
-zstyle ':vcs_info:*' actionformats ' %b%u%c (%a)'
+zstyle ':vcs_info:*' formats ' %b%u%c'
+zstyle ':vcs_info:*' actionformats ' %b%u%c (%a)'
 
 # To disable the source control part of the prompt (in case of slow downs) use
 # the following command:
@@ -126,15 +132,15 @@ autoload -Uz vcs_info
 autoload -Uz colors && colors
 
 # refresh the git status before every command
-add-zsh-hook precmd vcs_info
-
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:*' check-for-changes true # required to show staged/unstaged
-zstyle ':vcs_info:*' use-simple true        # faster, but less accurate
-zstyle ':vcs_info:*' stagedstr ' %F{green}✗%f'
-zstyle ':vcs_info:*' unstagedstr ' %F{red}✗%f'
-zstyle ':vcs_info:*' formats ' %b%u%c'
-zstyle ':vcs_info:*' actionformats ' %b%u%c (%a)'
+# add-zsh-hook precmd vcs_info
+#
+# zstyle ':vcs_info:*' enable git
+# zstyle ':vcs_info:*' check-for-changes true # required to show staged/unstaged
+# zstyle ':vcs_info:*' use-simple true        # faster, but less accurate
+# zstyle ':vcs_info:*' stagedstr ' %F{green}✗%f'
+# zstyle ':vcs_info:*' unstagedstr ' %F{red}✗%f'
+# zstyle ':vcs_info:*' formats ' %b%u%c'
+# zstyle ':vcs_info:*' actionformats ' %b%u%c (%a)'
 
 # To disable the source control part of the prompt (in case of slow downs) use
 # the following command:
@@ -154,7 +160,7 @@ function _prompt_line1() {
 
   # _prompt_block $bg1 $fg1 $bg2 " ${USERNAME}@${SHORT_HOST} "
   _prompt_block $bg1 $fg1 $bg2 " %~ "
-  _prompt_block $bg2 $fg2 '' '${vcs_info_msg_0_} ' # git status
+  _prompt_block $bg2 $fg2 '' ' %F{yellow}${vcs_info_msg_0_}%f ' # git status
   # _prompt_block $bg4 $fg4 '' '${_last_cmd_runtime} '
 }
 
