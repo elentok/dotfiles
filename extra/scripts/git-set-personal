@@ -4,7 +4,7 @@ set -euo pipefail
 
 git config github.user elentok
 git config user.name 'David Elentok'
-git config user.name '3david@gmail.com'
+git config user.email '3david@gmail.com'
 
 origin="$(git config remote.origin.url)"
 if [[ "$origin" =~ github.com: ]]; then
