@@ -1,5 +1,23 @@
 snippet appmain
 	function main() {
+		local cmd="\${1:-}"
+		shift || true
+
+		if type "$1-\${cmd}" > /dev/null 2>&1; then
+			"$1-\${cmd}" "$@"
+		else
+			usage "\$0"
+			exit 1
+		fi
+	}
+	
+	function $1-hello() {
+		echo 'Hello'
+	}
+	
+	main "$@"
+snippet appmain2
+	function main() {
 	  local cmd="\${1:-}"
 	  shift || true
 	
