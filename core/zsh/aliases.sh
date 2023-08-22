@@ -11,15 +11,12 @@ fi
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias ba='bt add-magnet "$(pbp)"'
-alias be='bundle exec'
 alias bl='tr ":" "\n"'
 alias bytes='stat --format=%s'
 alias y='dotf-clipboard copy'
 alias yt='yarn test'
 alias C=calc
 alias cl=clear
-alias cdl='cd "$(lerna-select-package)"'
 alias cdr='cd "$(git-root)"'
 alias cf='/bin/ls -1 | wc -l' # count files
 alias df='df -kh'
@@ -28,12 +25,9 @@ alias dorit='docker run --rm -it'
 alias dotfi='cd $DOTF'
 alias dotl='cd $DOTL'
 alias du='du -kh'
-alias eslint-debug='DEBUG=eslint:cli-engine eslint'
 alias fliph='convert -flop'
 alias flipv='convert -flip'
 alias g='git'
-alias jw='_dir=$(git-wt pick) && cd "$_dir"; unset _dir'
-alias gp='cd $(list-projects | fzf-tmux -p | sed "s#~#$HOME#")'
 alias gcoo='git all-branches | fzf-tmux -p | xargs git checkout'
 alias gdestroy='git destroy `git all-branches | fzf-tmux -p`'
 alias gsp='gsutil acl ch -u AllUsers:R'
@@ -48,22 +42,16 @@ alias ls='command ls --color=always -XFhs --group-directories-first --time-style
 alias lss='command ls -1 -s'
 alias m='hgi'
 alias mod='stat --format=%a'
-alias ngx='sudoo nginx -s reload'
-alias npd='npm run dev'
 alias o='dotf-open'
 alias p='dotf-clipboard paste'
-alias pio='platformio'
-alias pk='pkgs track'
 alias ipy='ipython3'
 alias psg='ps -a -x -o user,pid,command | grep'
 alias pth='echo $PATH | tr ":" "\n"'
 alias qless='less --chop-long-lines --RAW-CONTROL-CHARS --quit-if-one-screen --no-init'
-alias rr='ranger'
 alias rgf='noglob rg --files -g'
 alias rqs='dotf-repos quick-status'
 alias sub='subliminal download -l en -s'
 alias se='sudoedit'
-alias treee='tree -I "node_modules|dist|build"'
 alias ts='tig status'
 alias q='qalc'
 if dotf-is-mac; then
@@ -122,12 +110,6 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 
-# iOS Simulator {{{1
-alias iosroot='cd `ios root`'
-function iosapp() {
-  cd "$(ios app-root "$*")" || return 1
-}
-
 # Mac/Linux {{{1
 if dotf-is-mac; then
   alias hda='hdiutil attach'
@@ -150,6 +132,11 @@ fi
 
 alias pbc='pbcopy'
 alias pbp='pbpaste'
+
+# Jump to {{{1
+
+alias jw='cd $(git-wt pick || pwd)'
+alias jp='cd $(list-projects | fzf-tmux -p | sed "s#~#$HOME#")'
 
 # FZF Shortcuts {{{1
 
@@ -303,8 +290,6 @@ function list-dirs() {
 
   (cd "$root" && find . -maxdepth $max_depth -type d) | sed 's#^\.\/##' | grep -v '^\.$' || true
 }
-
-# Fuzzy vi {{{1
 
 # Tmux {{{1
 

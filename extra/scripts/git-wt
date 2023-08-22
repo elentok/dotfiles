@@ -40,6 +40,8 @@ function git-wt-pick() {
   worktree="$(git-wt-list | fzf-pick-worktree)"
   if [ -n "$worktree" ]; then
     echo "$(git-wt-root)/${worktree}"
+  else
+    exit 1
   fi
 }
 
