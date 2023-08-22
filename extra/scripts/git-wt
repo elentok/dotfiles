@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+function main() {
+  local cmd="${1:-}"
+  shift || true
+
+  if type "git-wt-${cmd}" > /dev/null; then
+    "git-wt-${cmd}" "$@"
+  else
+    usage "$0"
+    exit 1
+  fi
+}
+
+function git-wt-root() {
+  git worktree list | grep '(bare)' | head -1 | awk '{ print $1 }'
+}
+
+function git-wt-preview() {
+  local worktree="$1"
+  cd "$(git-wt-root)/worktrees/${worktree}"
+  git log -1 --color=always --pretty='format:%C(auto)%D%nHash: %h%n%n%s'
+}
+
+function git-wt-list() {
+  cd "$(git-wt-root)/worktrees" && command ls -1
+}
+
+function fzf-pick-worktree() {
+  fzf-tmux -p 70%,50% \
+    --ansi \
+    --prompt='Pick worktree: ' \
+    --preview-window=right:70% \
+    --preview='git-wt preview {}'
+}
+
+function git-wt-pick() {
+  worktree="$(git-wt-list | fzf-pick-worktree)"
+  if [ -n "$worktree" ]; then
+    echo "$(git-wt-root)/worktrees/${worktree}"
+  fi
+}
+
+main "$@"
