@@ -137,6 +137,7 @@ alias pbp='pbpaste'
 
 alias jw='cd $(git-wt pick || pwd)'
 alias jp='cd $(dotf-projects pick || pwd)'
+alias jy='cd $(yarn-pkgs pick || pwd)'
 
 # FZF Shortcuts {{{1
 
@@ -171,22 +172,6 @@ yr() {
     print -s "yarn run $cmd" \
       && echo "> yarn run $cmd" \
       && yarn run "$cmd"
-  fi
-}
-
-# Go to yarn package
-yp() {
-  local root
-  root="$(git-root)"
-  if [ ! -d "$root/packages" ]; then
-    echo "No packages/ directory in project root"
-    return 1
-  fi
-
-  local package
-  package="$(cd "$root/packages" || return && command ls -1 | fzf-tmux -p --exit-0)"
-  if [ -n "$package" ]; then
-    cd "$root/packages/$package" || return 1
   fi
 }
 

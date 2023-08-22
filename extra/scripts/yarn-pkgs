@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+function main() {
+  local cmd="${1:-}"
+  shift || true
+
+  if type "yarn-pkgs-${cmd}" > /dev/null 2>&1; then
+    "yarn-pkgs-${cmd}" "$@"
+  else
+    usage "$0"
+    exit 1
+  fi
+}
+
+function yarn-pkgs-root() {
+  local root
+  root="$(git-root)/packages"
+  if [ ! -d "$root" ]; then
+    echo >&2 "No packages/ directory in project root"
+    exit 1
+  fi
+
+  echo "$root"
+}
+
+function yarn-pkgs-list() {
+  cd "$(yarn-pkgs-root)" || return && command ls -1
+}
+
+function yarn-pkgs-pick() {
+  yarn-pkgs-list | fzf-tmux -p --prompt 'Pick yarn package: ' --exit-0 | sed "s#^#$(yarn-pkgs-root)/#"
+}
+
+main "$@"
