@@ -20,7 +20,7 @@ function git-wt-root() {
 
 function git-wt-preview() {
   local worktree="$1"
-  cd "$(git-wt-root)/worktrees/${worktree}"
+  cd "$(git-wt-root)/${worktree}"
   git log -1 --color=always --pretty='format:%C(auto)%D%nHash: %h%n%n%s'
 }
 
@@ -39,7 +39,7 @@ function fzf-pick-worktree() {
 function git-wt-pick() {
   worktree="$(git-wt-list | fzf-pick-worktree)"
   if [ -n "$worktree" ]; then
-    echo "$(git-wt-root)/worktrees/${worktree}"
+    echo "$(git-wt-root)/${worktree}"
   fi
 }
 
