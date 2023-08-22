@@ -136,7 +136,7 @@ alias pbp='pbpaste'
 # Jump to {{{1
 
 alias jw='cd $(git-wt pick || pwd)'
-alias jp='cd $(list-projects | fzf-tmux -p | sed "s#~#$HOME#")'
+alias jp='cd $(dotf-projects pick || pwd)'
 
 # FZF Shortcuts {{{1
 

@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+CONFIG_FILE=~/.config/dotfiles/projects
+
+function main() {
+  local cmd="${1:-}"
+  shift || true
+
+  if type "dotf-projects-${cmd}" > /dev/null 2>&1; then
+    "dotf-projects-${cmd}" "$@"
+  else
+    usage "$0"
+    exit 1
+  fi
+}
+
+function dotf-projects-list() {
+  grep -E -v '^(#|\s*$)' "$CONFIG_FILE" | while read -r line; do
+    line="${line/\~/$HOME}"
+    compgen -G "$line" || true
+  done | sed "s#$HOME#~#"
+}
+
+function dotf-projects-pick() {
+  dotf-projects-list | fzf-tmux -p | sed "s#~#$HOME#"
+}
+
+main "$@"
