@@ -8,8 +8,11 @@ format_on_save.setup({
     "/node_modules/",
     ".local/share/nvim/lazy",
   },
+  experiments = {
+    partial_update = "diff",
+    disable_restore_cursors = true,
+  },
   error_notifier = message_buffer,
-  partial_update = "diff",
   formatter_by_ft = vim.tbl_extend("force", {
     css = formatters.lsp,
     html = formatters.lsp,
