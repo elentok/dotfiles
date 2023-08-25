@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+function main() {
+  validate-env
+
+  status="$(fetch-status)"
+  echo "$status"
+
+  # state: "PRINTING" | "PAUSED" | "FINISHED" | "STOPPED" | "ERROR"
+  state="$(echo "$status" | fx .printer.state)"
+  echo "STATE: $state"
+}
+
+function fetch-status() {
+  curl --silent --digest -u "${PRUSA_USERNAME}:${PRUSA_PASSWORD}" \
+    "http://${PRUSA_HOST}/api/v1/status"
+}
+
+function validate-env() {
+  local valid=true
+  if [ -z "${PRUSA_HOST:-}" ]; then
+    echo "Missing PRUSA_HOST env variable"
+    valid=false
+  fi
+  if [ -z "${PRUSA_USERNAME:-}" ]; then
+    echo "Missing PRUSA_USERNAME env variable"
+    valid=false
+  fi
+  if [ -z "${PRUSA_PASSWORD:-}" ]; then
+    echo "Missing PRUSA_PASSWORD env variable"
+    valid=false
+  fi
+
+  if [ "$valid" == "false" ]; then
+    exit 1
+  fi
+}
+
+main "$@"
