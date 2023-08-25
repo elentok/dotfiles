@@ -1,9 +1,9 @@
-import { join } from "path";
-import * as prompt from "prompt";
-import Extensions from "./extensions";
+import { join } from "path"
+import * as prompt from "prompt"
+import Extensions from "./extensions"
 
 interface IAnswers {
-  [extension: string]: string;
+  [extension: string]: string
 }
 
 /*
@@ -19,45 +19,45 @@ ask the user what to do about:
 */
 
 export default class ExtensionSyncer {
-  private dotfilesFilepath: string;
-  private dotfiles: Extensions;
-  private installed: Extensions;
+  private dotfilesFilepath: string
+  private dotfiles: Extensions
+  private installed: Extensions
 
   constructor() {
-    this.dotfilesFilepath = join(__dirname, "extensions.txt");
-    this.dotfiles = Extensions.fromTextFile(this.dotfilesFilepath);
-    this.installed = Extensions.fromVSCode();
+    this.dotfilesFilepath = join(__dirname, "extensions.txt")
+    this.dotfiles = Extensions.fromTextFile(this.dotfilesFilepath)
+    this.installed = Extensions.fromVSCode()
   }
 
   public run(): void {
     if (this.installed.count() === 0) {
-      this.dotfiles.all().forEach((name) => Extensions.install(name));
-      return;
+      this.dotfiles.all().forEach((name) => Extensions.install(name))
+      return
     }
 
     this.analyze().then((result) => {
       Object.keys(result).forEach((extension) => {
-        const action = result[extension];
-        this.runAction(extension, action);
-      });
-      this.dotfiles.save(this.dotfilesFilepath);
-    });
+        const action = result[extension]
+        this.runAction(extension, action)
+      })
+      this.dotfiles.save(this.dotfilesFilepath)
+    })
   }
 
   private runAction(extension: string, action: string): void {
     switch (action) {
       case "i":
-        Extensions.install(extension);
-        break;
+        Extensions.install(extension)
+        break
       case "u":
-        Extensions.uninstall(extension);
-        break;
+        Extensions.uninstall(extension)
+        break
       case "a":
-        this.dotfiles.add(extension);
-        break;
+        this.dotfiles.add(extension)
+        break
       case "r":
-        this.dotfiles.remove(extension);
-        break;
+        this.dotfiles.remove(extension)
+        break
     }
   }
 
@@ -65,17 +65,17 @@ export default class ExtensionSyncer {
     return new Promise<IAnswers>((resolve) => {
       prompt.get(this.createQuestions(), (err: Error, result: IAnswers) => {
         if (err != null) {
-          console.error(err);
-          process.exit(1);
+          console.error(err)
+          process.exit(1)
         } else {
-          resolve(result);
+          resolve(result)
         }
-      });
-    });
+      })
+    })
   }
 
   private createQuestions() {
-    return this.createNotInDotfilesQuestions().concat(this.createNotInstalledQuestions());
+    return this.createNotInDotfilesQuestions().concat(this.createNotInstalledQuestions())
   }
 
   private createNotInDotfilesQuestions() {
@@ -87,8 +87,8 @@ export default class ExtensionSyncer {
           description: `${name} is missing from extensions.txt, [a]dd/[u]ninstall?`,
           name,
           pattern: /^[au]$/,
-        };
-      });
+        }
+      })
   }
 
   private createNotInstalledQuestions() {
@@ -100,7 +100,7 @@ export default class ExtensionSyncer {
           description: `${name} is not installed, [i]nstall/[r]emove?`,
           name,
           pattern: /^[ir]$/,
-        };
-      });
+        }
+      })
   }
 }

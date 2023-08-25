@@ -1,19 +1,19 @@
-const path = require("path");
-const webpack = require("webpack");
-const autoprefixer = require("autoprefixer");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path")
+const webpack = require("webpack")
+const autoprefixer = require("autoprefixer")
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
 
-const env = process.env.NODE_ENV || "development";
+const env = process.env.NODE_ENV || "development"
 
-let jsFilename = "[name].js";
-let cssFilename = "[name].css";
-let htmlFilename = "index.html";
+let jsFilename = "[name].js"
+let cssFilename = "[name].css"
+let htmlFilename = "index.html"
 
 if (env === "production") {
-  jsFilename = "[name]-[hash].js";
-  cssFilename = "[name]-[contenthash].css";
-  htmlFilename = "../index.html";
+  jsFilename = "[name]-[hash].js"
+  cssFilename = "[name]-[contenthash].css"
+  htmlFilename = "../index.html"
 }
 
 const config = {
@@ -97,10 +97,10 @@ const config = {
     contentBase: false,
     port: 8081,
   },
-};
-
-if (env === "production") {
-  config.plugins.push(new webpack.optimize.UglifyJsPlugin());
 }
 
-module.exports = config;
+if (env === "production") {
+  config.plugins.push(new webpack.optimize.UglifyJsPlugin())
+}
+
+module.exports = config

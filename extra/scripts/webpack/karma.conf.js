@@ -1,5 +1,5 @@
-process.env.NODE_ENV = "test";
-const webpackConfig = require("./webpack.config.js");
+process.env.NODE_ENV = "test"
+const webpackConfig = require("./webpack.config.js")
 
 module.exports = function (config) {
   config.set({
@@ -19,5 +19,5 @@ module.exports = function (config) {
     browsers: ["PhantomJS"],
     singleRun: false,
     concurrency: Infinity,
-  });
-};
+  })
+}

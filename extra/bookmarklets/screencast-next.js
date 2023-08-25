@@ -1,1 +1,1 @@
-screencast.next();
+screencast.next()

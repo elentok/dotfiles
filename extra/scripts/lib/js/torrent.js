@@ -1,45 +1,49 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.formatTorrent = exports.getError = exports.isFailed = exports.isComplete = exports.TorrentStatus = void 0;
-const utils_1 = require("./utils");
-var TorrentStatus;
-(function (TorrentStatus) {
-    TorrentStatus[TorrentStatus["STOPPED"] = 0] = "STOPPED";
-    TorrentStatus[TorrentStatus["CHECK_WAIT"] = 1] = "CHECK_WAIT";
-    TorrentStatus[TorrentStatus["CHECK"] = 2] = "CHECK";
-    TorrentStatus[TorrentStatus["DOWNLOAD_WAIT"] = 3] = "DOWNLOAD_WAIT";
-    TorrentStatus[TorrentStatus["DOWNLOAD"] = 4] = "DOWNLOAD";
-    TorrentStatus[TorrentStatus["SEED_WAIT"] = 5] = "SEED_WAIT";
-    TorrentStatus[TorrentStatus["SEED"] = 6] = "SEED";
-})(TorrentStatus = exports.TorrentStatus || (exports.TorrentStatus = {}));
+"use strict"
+Object.defineProperty(exports, "__esModule", { value: true })
+exports.formatTorrent =
+  exports.getError =
+  exports.isFailed =
+  exports.isComplete =
+  exports.TorrentStatus =
+    void 0
+const utils_1 = require("./utils")
+var TorrentStatus
+;(function (TorrentStatus) {
+  TorrentStatus[(TorrentStatus["STOPPED"] = 0)] = "STOPPED"
+  TorrentStatus[(TorrentStatus["CHECK_WAIT"] = 1)] = "CHECK_WAIT"
+  TorrentStatus[(TorrentStatus["CHECK"] = 2)] = "CHECK"
+  TorrentStatus[(TorrentStatus["DOWNLOAD_WAIT"] = 3)] = "DOWNLOAD_WAIT"
+  TorrentStatus[(TorrentStatus["DOWNLOAD"] = 4)] = "DOWNLOAD"
+  TorrentStatus[(TorrentStatus["SEED_WAIT"] = 5)] = "SEED_WAIT"
+  TorrentStatus[(TorrentStatus["SEED"] = 6)] = "SEED"
+})((TorrentStatus = exports.TorrentStatus || (exports.TorrentStatus = {})))
 function isComplete(torrent) {
-    return torrent.status === TorrentStatus.SEED || torrent.status === TorrentStatus.SEED_WAIT;
+  return torrent.status === TorrentStatus.SEED || torrent.status === TorrentStatus.SEED_WAIT
 }
-exports.isComplete = isComplete;
+exports.isComplete = isComplete
 function isFailed(t) {
-    return t.error !== 0;
+  return t.error !== 0
 }
-exports.isFailed = isFailed;
+exports.isFailed = isFailed
 function getError(t) {
-    return isFailed(t) ? t.errorString : undefined;
+  return isFailed(t) ? t.errorString : undefined
 }
-exports.getError = getError;
+exports.getError = getError
 function formatPercentDone(t) {
-    return `${Math.floor(t.percentDone * 100)}%`;
+  return `${Math.floor(t.percentDone * 100)}%`
 }
 function formatDownloadRate(t) {
-    if (isComplete(t))
-        return "";
-    return `${t.rateDownload / 1000}kb/s`;
+  if (isComplete(t)) return ""
+  return `${t.rateDownload / 1000}kb/s`
 }
 function formatTorrent(t) {
-    return [
-        (0, utils_1.justifyLeft)(TorrentStatus[t.status], 13),
-        (0, utils_1.justifyRight)(formatPercentDone(t), 4),
-        (0, utils_1.justifyRight)(formatDownloadRate(t), 8),
-        t.name,
-        getError(t),
-    ].join(" ");
+  return [
+    (0, utils_1.justifyLeft)(TorrentStatus[t.status], 13),
+    (0, utils_1.justifyRight)(formatPercentDone(t), 4),
+    (0, utils_1.justifyRight)(formatDownloadRate(t), 8),
+    t.name,
+    getError(t),
+  ].join(" ")
 }
-exports.formatTorrent = formatTorrent;
+exports.formatTorrent = formatTorrent
 //# sourceMappingURL=torrent.js.map

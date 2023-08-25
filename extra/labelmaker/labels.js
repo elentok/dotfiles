@@ -41,4 +41,4 @@ window.labels = [
   { icon: "question-circle", title: "Junk 1" },
   { icon: "question-circle", title: "Junk 2" },
   { icon: "question-circle", title: "Mini-Junk" },
-];
+]

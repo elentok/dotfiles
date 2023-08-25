@@ -1,4 +1,4 @@
-import { justifyRight, justifyLeft } from "./utils";
+import { justifyRight, justifyLeft } from "./utils"
 
 export enum TorrentStatus {
   STOPPED = 0, // 0, Torrent is stopped
@@ -11,36 +11,36 @@ export enum TorrentStatus {
 }
 
 export interface Torrent {
-  id: string;
-  name: string;
-  status: number;
-  percentDone: number;
-  rateDownload: number;
-  magnetLink: number;
-  error: number;
-  errorString: string;
+  id: string
+  name: string
+  status: number
+  percentDone: number
+  rateDownload: number
+  magnetLink: number
+  error: number
+  errorString: string
 }
 
 export function isComplete(torrent: Torrent): boolean {
-  return torrent.status === TorrentStatus.SEED || torrent.status === TorrentStatus.SEED_WAIT;
+  return torrent.status === TorrentStatus.SEED || torrent.status === TorrentStatus.SEED_WAIT
 }
 
 export function isFailed(t: Torrent): boolean {
-  return t.error !== 0;
+  return t.error !== 0
 }
 
 export function getError(t: Torrent): string | undefined {
-  return isFailed(t) ? t.errorString : undefined;
+  return isFailed(t) ? t.errorString : undefined
 }
 
 function formatPercentDone(t: Torrent): string {
-  return `${Math.floor(t.percentDone * 100)}%`;
+  return `${Math.floor(t.percentDone * 100)}%`
 }
 
 function formatDownloadRate(t: Torrent): string {
-  if (isComplete(t)) return "";
+  if (isComplete(t)) return ""
 
-  return `${t.rateDownload / 1000}kb/s`;
+  return `${t.rateDownload / 1000}kb/s`
 }
 
 export function formatTorrent(t: Torrent): string {
@@ -50,5 +50,5 @@ export function formatTorrent(t: Torrent): string {
     justifyRight(formatDownloadRate(t), 8),
     t.name,
     getError(t),
-  ].join(" ");
+  ].join(" ")
 }
