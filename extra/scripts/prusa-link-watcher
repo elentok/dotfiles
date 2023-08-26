@@ -32,7 +32,7 @@ function fetch-and-process-status() {
     else
       if [ "$LAST_PROGRESS" != "$progress" ]; then
         echo "$message"
-        if [ "$((LAST_PROGRESS % 25))" == 0 ]; then
+        if [ "$((progress % 25))" == 0 ]; then
           notify "$message"
         fi
       fi
