@@ -10,7 +10,7 @@ format_on_save.setup({
   },
   experiments = {
     partial_update = "diff",
-    disable_restore_cursors = true,
+    disable_restore_cursors = false,
   },
   error_notifier = message_buffer,
   formatter_by_ft = vim.tbl_extend("force", {
