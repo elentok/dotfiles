@@ -1,16 +1,79 @@
 #!/usr/bin/env bash
+#
+# Uses PrusaLink API to track the print progress and send telegram notifications
+# via the Telegram Proxy server.
 
 set -euo pipefail
 
+INTERVAL=10
+LAST_STATE=""
+LAST_PROGRESS=""
+
 function main() {
   validate-env
+  while true; do
+    fetch-and-process-status
+    sleep $INTERVAL
+  done
+}
 
+function fetch-and-process-status() {
   status="$(fetch-status)"
-  echo "$status"
-
-  # state: "PRINTING" | "PAUSED" | "FINISHED" | "STOPPED" | "ERROR"
   state="$(echo "$status" | fx .printer.state)"
-  echo "STATE: $state"
+  if [ "$state" == 'PRINTING' ]; then
+    time_remaining="$(echo "$status" | fx .job.time_remaining)"
+    # time_printing="$(echo "$status" | fx .job.time_printing)"
+    progress="$(echo "$status" | fx .job.progress)"
+
+    message="Printing: ${progress}% ($(format-seconds "$time_remaining") left)"
+
+    if [ -z "$LAST_PROGRESS" ]; then
+      notify "$message"
+    else
+      if [ "$LAST_PROGRESS" != "$progress" ]; then
+        echo "$message"
+        if [ "$((LAST_PROGRESS % 25))" == 0 ]; then
+          notify "$message"
+        fi
+      fi
+    fi
+
+    LAST_PROGRESS="$progress"
+  elif [ "$state" != "$LAST_STATE" ]; then
+    notify "State changed from ${LAST_STATE} to ${state}"
+  fi
+
+  LAST_STATE="$state"
+}
+
+function notify() {
+  echo "NOTIFY: $*"
+  curl --silent -d "message=PrusaLink: $*" \
+    "http://localhost:10000/send"
+}
+
+function format-seconds() {
+  local seconds="$1"
+  local minutes=0
+  local hours=0
+  if [[ "$seconds" -gt 60 ]]; then
+    minutes=$((seconds / 60))
+    seconds=$((seconds % 60))
+    if [[ "$minutes" -gt 60 ]]; then
+      hours=$((minutes / 60))
+      minutes=$((minutes % 60))
+    fi
+  fi
+
+  if [[ $hours -gt 0 ]]; then
+    echo -n "${hours}h"
+  fi
+  if [[ $minutes -gt 0 ]]; then
+    echo -n "${minutes}m"
+  fi
+  if [[ $seconds -gt 0 ]]; then
+    echo -n "${seconds}s"
+  fi
 }
 
 function fetch-status() {
