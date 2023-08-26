@@ -9,6 +9,10 @@ INTERVAL=10
 LAST_STATE=""
 LAST_PROGRESS=""
 
+PRUSA_HOST="$(dotconfig get-or-die prusa_host)"
+PRUSA_USERNAME="$(dotconfig get-or-die prusa_username)"
+PRUSA_PASSWORD="$(dotconfig get-or-die prusa_password)"
+
 function main() {
   validate-env
   while true; do
@@ -40,7 +44,11 @@ function fetch-and-process-status() {
 
     LAST_PROGRESS="$progress"
   elif [ "$state" != "$LAST_STATE" ]; then
-    notify "State changed from ${LAST_STATE} to ${state}"
+    if [ -n "$LAST_STATE" ]; then
+      notify "State changed from ${LAST_STATE} to ${state}"
+    else
+      notify "Printer state: ${state}"
+    fi
   fi
 
   LAST_STATE="$state"

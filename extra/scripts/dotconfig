@@ -15,94 +15,97 @@
 
 set -euo pipefail
 
-source $DOTF/framework
+source "$DOTF/framework"
 
 CONFIG_DIR=$HOME/.config/dotfiles
 CONFIG_FILE=$CONFIG_DIR/config
 
-if [ ! -e $CONFIG_DIR ]; then mkdir $CONFIG_DIR; fi
-if [ ! -e $CONFIG_FILE ]; then touch $CONFIG_FILE; fi
+if [ ! -e "$CONFIG_DIR" ]; then mkdir "$CONFIG_DIR"; fi
+if [ ! -e "$CONFIG_FILE" ]; then touch "$CONFIG_FILE"; fi
 
 main() {
   cmd=dotconfig-${1:-}
-  if dotf-has-command $cmd; then
+  if dotf-has-command "$cmd"; then
     shift
     $cmd "$@"
   else
-    usage $0
+    usage "$0"
     exit 1
   fi
 }
 
 dotconfig-exists() {
   if [ $# -lt 1 ]; then
-    usage $0
+    usage "$0"
     exit 1
   fi
-  grep "^$1=" $CONFIG_FILE > /dev/null 2>&1
+  grep "^$1=" "$CONFIG_FILE" > /dev/null 2>&1
 }
 
 dotconfig-get() {
   if [ $# -lt 1 ]; then
-    usage $0
+    usage "$0"
     exit 1
   fi
-  grep "^$1=" $CONFIG_FILE | cut -d= -f2-
+  grep "^$1=" "$CONFIG_FILE" | cut -d= -f2-
 }
 
 dotconfig-get-or-die() {
   if [ $# -lt 1 ]; then
-    usage $0
+    usage "$0"
     exit 1
   fi
-  if [ -z "$(dotconfig-get $1)" ]; then
-    echo "Error: Missing dotconfig '$1' (run 'dotconfig set $1 {value}')"
+  value="$(dotconfig-get "$1")"
+  if [ -z "$value" ]; then
+    echo >&2 "Error: Missing dotconfig '$1' (run 'dotconfig set $1 {value}')"
     exit 1
   fi
+
+  echo "$value"
 }
 
 dotconfig-verify() {
   if [ $# -lt 1 ]; then
-    usage $0
+    usage "$0"
     exit 1
   fi
   key="$1"
-  question="${2:-Enter value for '$key':}"
+  question="${2:-Enter value for "$key":}"
 
-  if [ -z "$(dotconfig-get $key)" ]; then
+  if [ -z "$(dotconfig-get "$key")" ]; then
     while [ -z "${value:-}" ]; do
       ask "$question" value
     done
-    dotconfig-set $1 "$value"
+    dotconfig-set "$1" "$value"
   fi
 }
 
 dotconfig-set() {
   if [ $# -lt 2 ]; then
-    usage $0
+    usage "$0"
     exit 1
   fi
   key="$1"
   value="$2"
 
-  dotconfig-remove $key
-  echo "$key=$value" >> $CONFIG_FILE
+  dotconfig-remove "$key"
+  echo "$key=$value" >> "$CONFIG_FILE"
 }
 
 dotconfig-remove() {
   if [ $# -lt 1 ]; then
-    usage $0
+    usage "$0"
     exit 1
   fi
   key="$1"
 
-  if dotconfig-exists $key; then
-    sed -i "/^$key=/d" $CONFIG_FILE
+  if dotconfig-exists "$key"; then
+    sed -i "/^$key=/d" "$CONFIG_FILE"
   fi
 }
 
 dotconfig-list() {
-  cat $CONFIG_FILE
+  cat "$CONFIG_FILE"
 }
 
 main "$@"

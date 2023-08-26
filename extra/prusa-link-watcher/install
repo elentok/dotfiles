@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+source "$DOTF/framework"
+
+SERVICE=prusa-link-watcher
+
+dotconfig verify prusa_host
+dotconfig verify prusa_username
+dotconfig verify prusa_password
+
+install-service "$DOTF/extra/$SERVICE/$SERVICE.service" system
+
+systemctl daemon-reload
+systemctl enable $SERVICE
+systemctl start $SERVICE
