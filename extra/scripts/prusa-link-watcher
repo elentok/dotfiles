@@ -5,9 +5,15 @@
 
 set -euo pipefail
 
+set +x
+
 INTERVAL=10
 LAST_STATE=""
 LAST_PROGRESS=""
+
+source "$DOTF/framework"
+
+echo "$PATH"
 
 PRUSA_HOST="$(dotconfig get-or-die prusa_host)"
 PRUSA_USERNAME="$(dotconfig get-or-die prusa_username)"
@@ -85,8 +91,10 @@ function format-seconds() {
 }
 
 function fetch-status() {
-  curl --silent --digest -u "${PRUSA_USERNAME}:${PRUSA_PASSWORD}" \
-    "http://${PRUSA_HOST}/api/v1/status"
+  if ! curl --silent --digest -u "${PRUSA_USERNAME}:${PRUSA_PASSWORD}" \
+    "http://${PRUSA_HOST}/api/v1/status"; then
+    echo '{"printer":{"state":"REQUEST_ERROR"}}'
+  fi
 }
 
 function validate-env() {

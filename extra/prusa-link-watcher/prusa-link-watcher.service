@@ -1,13 +1,14 @@
 # Put this file in /usr/lib/systemd/system
 
 [Unit]
-Description=Web Diff Monitor
+Description=PrusaLink Watcher
 Requires=network.target
 
 [Service]
 User=david
 Environment=TMP=${TMP}
-ExecStart=${NODE} ${HOME}/.dotfiles/extra/scripts/prusa-link-watcher
+Environment="DOTF=${DOTF}"
+ExecStart=${HOME}/.dotfiles/extra/scripts/prusa-link-watcher
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=on-failure
 
