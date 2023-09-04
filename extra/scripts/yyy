@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTF/core/scripts/lib/ui.sh"
+
+function main() {
+  if [ $# -ne 1 ]; then
+    echo
+    echo "Usage: yyy <package>"
+    echo
+    exit 1
+  fi
+
+  pkg="$1"
+
+  refs="$(find-references "$pkg")"
+
+  echo
+  echo "----------------------------------------"
+  echo "Refs:"
+  echo "$refs"
+  echo "----------------------------------------"
+  echo
+
+  latest_version="$(echo "$refs" | tail -1 | awk '{print $1}')"
+
+  local resolved_version
+  ask "Set resolution to?" resolved_version "$latest_version"
+
+  if [ -n "$resolved_version" ]; then
+    echo set-resolution "$pkg" "$resolved_version" "$refs"
+    set-resolution "$pkg" "$resolved_version" "$refs"
+  fi
+}
+
+function find-references() {
+  local pkg="$1"
+  yarn why "$pkg" | grep " ${pkg}@" | sed "s#^.*${pkg}@##" | sort -n | uniq
+}
+
+function set-resolution() {
+  local pkg="$1"
+  local resolved_version="$2"
+  local refs="$3"
+
+  echo "$refs" | while read -r ref; do
+    version="$(echo "$ref" | awk '{print $1}')"
+    if [ "$resolved_version" == "$version" ]; then
+      continue
+    fi
+
+    # shellcheck disable=SC2001
+    descriptor="$(echo "$ref" | sed 's/^.*(via \(.*\))/\1/')"
+    echo "yarn set resolution $pkg@$descriptor ${resolved_version/npm:/}"
+    yarn set resolution "$pkg@$descriptor" "${resolved_version/npm:/}"
+  done
+}
+
+main "$@"
