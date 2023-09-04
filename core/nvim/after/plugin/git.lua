@@ -22,8 +22,19 @@ vim.keymap.set("n", "<space>g2", "<Plug>(git-conflict-ours)")
 vim.keymap.set("n", "<space>g3", "<Plug>(git-conflict-theirs)")
 -- vim.keymap.set("n", "<space>cb", "<Plug>(git-conflict-both)")
 -- vim.keymap.set("n", "<space>c0", "<Plug>(git-conflict-none)")
-vim.keymap.set("n", "[m", "<Plug>(git-conflict-prev-conflict)")
-vim.keymap.set("n", "]m", "<Plug>(git-conflict-next-conflict)")
+-- vim.keymap.set("n", "[m", "<Plug>(git-conflict-prev-conflict)")
+-- vim.keymap.set("n", "]m", "<Plug>(git-conflict-next-conflict)")
+
+local function next_conflict_marker()
+  vim.fn.search("\\(<<<<<<<\\|=======\\|>>>>>>>\\)")
+end
+
+local function prev_conflict_marker()
+  vim.fn.search("\\(<<<<<<<\\|=======\\|>>>>>>>\\)", "b")
+end
+
+vim.keymap.set({ "n", "v" }, "[m", prev_conflict_marker)
+vim.keymap.set({ "n", "v" }, "]m", next_conflict_marker)
 
 vim.keymap.set({ "n" }, "<space>mw", ":noa wqa<cr>")
 vim.keymap.set({ "n" }, "<space>mL", "ggVG:diffget LOCAL<cr>")
