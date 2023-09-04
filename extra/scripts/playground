@@ -46,7 +46,7 @@ new-playground() {
   dotf-success 'done'
   echo
 
-  if confirm 'Start watching?'; then
+  if dotf-confirm 'Start watching?'; then
     watch-playground
   fi
 }

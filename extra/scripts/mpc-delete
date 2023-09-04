@@ -14,7 +14,7 @@ main() {
   echo -e "  filename: ${YELLOW}$song_filename$RESET"
   echo
 
-  if confirm 'Delete'; then
+  if dotf-confirm 'Delete'; then
     delete-song "$song_filename"
     mpc rm
     mpc update

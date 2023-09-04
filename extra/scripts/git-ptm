@@ -2,12 +2,12 @@
 
 source $DOTF/framework
 
-if confirm 'Merge master into production (ff-only)' yes; then
+if dotf-confirm 'Merge master into production (ff-only)' yes; then
   set -e
   git checkout production
   git merge --ff-only master
 
-  if confirm 'Switch back to master' yes; then
+  if dotf-confirm 'Switch back to master' yes; then
     git checkout master
   fi
 fi

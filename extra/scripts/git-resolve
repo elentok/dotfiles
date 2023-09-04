@@ -14,15 +14,15 @@ main() {
   fi
 
   if is-rebase; then
-    if confirm 'Continue rebase?'; then
+    if dotf-confirm 'Continue rebase?'; then
       git rebase --continue
     fi
   elif is-merge; then
-    if confirm 'Continue merge?'; then
+    if dotf-confirm 'Continue merge?'; then
       git commit
     fi
   elif is-cherry-pick; then
-    if confirm 'Continue cherry pick?'; then
+    if dotf-confirm 'Continue cherry pick?'; then
       git cherry-pick --continue
     fi
   fi
@@ -57,7 +57,7 @@ resolve-first() {
       dotf-error "File $first still has error markers"
       echo
     else
-      if confirm "Mark $first as resolved?"; then
+      if dotf-confirm "Mark $first as resolved?"; then
         git add $first
       fi
     fi

@@ -21,13 +21,13 @@ fix-commit() {
   rev="$1"
   title=$(commit-title $rev)
 
-  if confirm "Fixup $BLUE'$title'$RESET" yes; then
+  if dotf-confirm "Fixup $BLUE'$title'$RESET" yes; then
 
     dotf-bullet "Creating fixup commit... "
     git commit --fixup $rev
     dotf-info "done."
 
-    if confirm "Autosquash" yes; then
+    if dotf-confirm "Autosquash" yes; then
       dotf-bullet "Autosquashing... "
       git rebase -i --autosquash $rev~1
       dotf-info "done."

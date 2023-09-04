@@ -15,7 +15,7 @@ check_sudo() {
   if user_has_group sudo; then
     dotf-success "User $(whoami) has group 'sudo'"
   else
-    if confirm "Add $(whoami) to 'sudo' group?"; then
+    if dotf-confirm "Add $(whoami) to 'sudo' group?"; then
       add_user_to_group sudo
     fi
   fi

@@ -64,7 +64,7 @@ function main() {
   count="$(echo "$PROCS" | wc -l)"
 
   echo
-  if confirm "Kill ${count} processes?"; then
+  if dotf-confirm "Kill ${count} processes?"; then
     echo "Killing..."
     echo "$PROCS" | awk '{print $1}' | xargs "${KILL_CMD[@]}"
     dotf-success "done."

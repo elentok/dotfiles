@@ -24,7 +24,7 @@ confirm-undo() {
   echo -e "$RESET"
   echo
 
-  confirm 'Shall we begin?'
+  dotf-confirm 'Shall we begin?'
 }
 
 git-last-commit() {

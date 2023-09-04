@@ -17,7 +17,7 @@ dotf-header h1 "Pushing ${branch}"
 
 if ! git push origin "$branch"; then
   echo
-  if confirm "Failed to push branch, push with force?"; then
+  if dotf-confirm "Failed to push branch, push with force?"; then
     git push -f origin "$branch"
   fi
 fi

@@ -148,10 +148,11 @@ show_result() {
 }
 
 # Confirm {{{1
-confirm() {
+dotf-confirm() {
   local default=${2:-no}
-  ask "${1} (yes/no)?" yesno $default
-  [ "$yesno" = "yes" -o "$yesno" = "y" ]
+  local yesno
+  ask "${1} (yes/no)?" yesno "$default"
+  [ "$yesno" = "yes" ] || [ "$yesno" = "y" ]
   return $?
 }
 
