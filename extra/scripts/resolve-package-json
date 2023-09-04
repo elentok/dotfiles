@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+last_pkg=""
+
+grep -vE '^(<<<|>>>|===)' | sort -r -n | while read -r line; do
+  pkg="$(echo "$line" | sed 's/^ *\"\(.*\)\":.*$/\1/')"
+
+  if [ "$pkg" != "$last_pkg" ]; then
+    echo "$line"
+    last_pkg="$pkg"
+  fi
+done | sort
