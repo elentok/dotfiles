@@ -29,7 +29,6 @@ function main() {
   ask "Set resolution to?" resolved_version "$latest_version"
 
   if [ -n "$resolved_version" ]; then
-    echo set-resolution "$pkg" "$resolved_version" "$refs"
     set-resolution "$pkg" "$resolved_version" "$refs"
   fi
 }
@@ -51,7 +50,7 @@ function set-resolution() {
     fi
 
     # shellcheck disable=SC2001
-    descriptor="$(echo "$ref" | sed 's/^.*(via \(.*\))/\1/')"
+    descriptor="$(echo "$ref" | sed 's/^.*(via \([^ ]*\).*)/\1/')"
     echo "yarn set resolution $pkg@$descriptor ${resolved_version/npm:/}"
     yarn set resolution "$pkg@$descriptor" "${resolved_version/npm:/}"
   done
