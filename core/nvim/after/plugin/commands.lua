@@ -1,5 +1,6 @@
 local create_cmd = vim.api.nvim_create_user_command
 local util = require("elentok/util")
+local terminal = require("elentok.lib.terminal")
 
 create_cmd("W", ":w", {})
 create_cmd("SudoWrite", ":w !sudo tee %", {})
@@ -31,6 +32,10 @@ end, {})
 create_cmd("TermNewTab", function(args)
   util.terminal_in_new_tab(args.args)
 end, { nargs = "+", desc = "Runs a shell command in a new tab terminal" })
+
+create_cmd("Vifm", function()
+  terminal.run("vifm --select " .. vim.fn.shellescape(vim.fn.expand("%:p")))
+end, {})
 
 create_cmd("Markserv", function(args)
   util.terminal_in_new_tab("markserv")
