@@ -4,8 +4,18 @@ set -euo pipefail
 
 last_pkg=""
 
+function identify-pkg() {
+  local line="$1"
+  pkg="$(echo "$line" | awk '{print $1}')"
+  pkg="${pkg/\"/}"
+  pkg="${pkg/\"/}"
+  pkg="${pkg/\:/}"
+  echo "$pkg"
+}
+
+IFS=''
 grep -vE '^(<<<|>>>|===)' | sort -r -n | while read -r line; do
-  pkg="$(echo "$line" | sed 's/^ *\"\(.*\)\":.*$/\1/')"
+  pkg="$(identify-pkg "$line")"
 
   if [ "$pkg" != "$last_pkg" ]; then
     echo "$line"
