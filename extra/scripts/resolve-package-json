@@ -13,8 +13,17 @@ function identify-pkg() {
   echo "$pkg"
 }
 
+function filter() {
+  if [ -e ~/resolve-exclude.txt ]; then
+    pattern="$(cat ~/resolve-exclude.txt)"
+    grep -v "${pattern}"
+  else
+    cat
+  fi
+}
+
 IFS=''
-grep -vE '^(<<<|>>>|===)' | sort -r -n | while read -r line; do
+grep -vE '^(<<<|>>>|===)' | filter | sort -r -n | while read -r line; do
   pkg="$(identify-pkg "$line")"
 
   if [ "$pkg" != "$last_pkg" ]; then
