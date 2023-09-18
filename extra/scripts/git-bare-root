@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [ "$(git rev-parse --is-bare-repository)" == "true" ]; then
+  # We're in the root of the bare repository
+  pwd
+else
+  root="$(git rev-parse --show-toplevel)"
+  cd "$root"
+
+  if [ "$(git rev-parse --is-inside-work-tree)" == "true" ]; then
+    cd ..
+  fi
+
+  pwd
+fi
