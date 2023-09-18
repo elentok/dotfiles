@@ -8,6 +8,36 @@ return {
   -- File manager.
   "tamago324/lir.nvim",
 
+  {
+    "stevearc/oil.nvim",
+    version = "*",
+    opts = {
+      skip_confirm_for_simple_edits = false,
+      keymaps = {
+        ["<C-h>"] = false,
+        ["<C-l>"] = false,
+        ["<C-c>"] = false,
+        ["<C-s>"] = "actions.save",
+        ["q"] = "actions.close",
+        ["L"] = "actions.select",
+        ["J"] = "actions.select",
+        ["H"] = "actions.parent",
+        ["K"] = "actions.parent",
+      },
+    },
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    keys = {
+      {
+        "-",
+        function()
+          require("oil").open()
+        end,
+        desc = "Open parent directory",
+      },
+    },
+  },
+
   -- Comments
   "numToStr/Comment.nvim",
 
