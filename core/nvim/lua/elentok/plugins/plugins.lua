@@ -23,6 +23,7 @@ return {
         ["J"] = "actions.select",
         ["H"] = "actions.parent",
         ["K"] = "actions.parent",
+        ["R"] = "actions.refresh",
       },
     },
     -- Optional dependencies
