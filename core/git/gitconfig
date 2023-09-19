@@ -114,6 +114,7 @@
   msg = log -1 --pretty=%B
   ls = log --pretty='%h %s'
   lasttag = describe --abbrev=0
+  br = rev-parse --abbrev-ref HEAD
 
 [format]
   ; TODO: Should I use "%cr" or "%ar" for the date?

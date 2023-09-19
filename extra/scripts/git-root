@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 dir="${1:-$PWD}"
 
 if [ ! -d "$dir" ]; then
-  dir="$(dirname $dir)"
+  dir="$(dirname "$dir")"
 fi
 
 cd "$dir"
