@@ -54,7 +54,7 @@ function test-connection() {
         STATUS="up"
         on-first-online
       fi
-      # return 0
+      return 0
     else
       failed_domains+=("$domain")
       try=$((try + 1))
@@ -67,7 +67,7 @@ function test-connection() {
     STATUS="down"
     on-first-offline
   fi
-  # return 1
+  return 1
 }
 
 function on-first-online() {
@@ -91,7 +91,7 @@ function log() {
   fi
 
   echo "$(timestamp),$*" >> "$LOG"
-  LINE_COUNTER=$((LINE_COUNTER+1))
+  LINE_COUNTER=$((LINE_COUNTER + 1))
 }
 
 function rotate-log() {
