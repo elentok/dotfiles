@@ -11,7 +11,8 @@
 --   { group = group_id, pattern = "*", command = "e | normal zv" }
 -- )
 
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- vim.opt.foldmethod = "expr"
+-- vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- vim.opt.foldtext = "getline(v:foldstart)"
+--
 -- vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
-vim.opt.foldtext = "getline(v:foldstart)"
