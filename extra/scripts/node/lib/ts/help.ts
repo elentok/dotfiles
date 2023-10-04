@@ -1,7 +1,7 @@
-import * as path from "path"
-import * as fs from "fs"
+import * as path from "node:path"
+import * as fs from "node:fs"
 import * as chalk from "chalk"
-import { execSync } from "child_process"
+import { execSync } from "node:child_process"
 import * as fg from "fast-glob"
 
 const HELP_FILENAME = path.join(process.env.DOTF || "", "docs", "help.md")
