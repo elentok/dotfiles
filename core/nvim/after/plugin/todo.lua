@@ -3,32 +3,85 @@ local checked = "%[x%]"
 
 local DONE_COLOR = "#6C7A96"
 
-local config = {
-  statuses = {
-    inprogress = {
-      hl = { bg = "#EBCB8B", fg = "#000000" },
-    },
-    waiting = {
-      hl = { fg = "#EBCB8B" },
-    },
-    codereview = {
-      hl = { fg = "#9369DB" },
-    },
-    done = {
-      text = "x",
-      hl = { fg = DONE_COLOR },
-    },
+---@class StatusOptions
+---@field name string
+---@field text? string
+---@field hl? table<string, any>
+
+---@class Status
+---@field name string
+---@field text string
+---@field index integer
+---@field hl? table<string, any>
+
+---@class SetupOptions
+---@field statuses? Status[]
+--
+---@class Config
+---@field statuses Status[]
+
+local default_statuses = {
+  {
+    name = "open",
+    text = " ",
+  },
+  {
+    name = "inprogress",
+    hl = { bg = "#EBCB8B", fg = "#000000" },
+  },
+  {
+    name = "waiting",
+    hl = { fg = "#EBCB8B" },
+  },
+  {
+    name = "codereview",
+    hl = { fg = "#9369DB" },
+  },
+  {
+    name = "done",
+    text = "x",
+    hl = { fg = DONE_COLOR },
   },
 }
 
-local function setup()
-  for status_name, status_opts in pairs(config.statuses) do
-    local capitalized_name = status_name:sub(1, 1):upper() .. status_name:sub(2)
-    local group = "Todo" .. capitalized_name
-    local text = status_opts.text or status_name
+---@param options StatusOptions[]
+---@return Status[]
+local function build_statuses(options)
+  ---@type Status[]
+  local statuses = {}
 
-    vim.fn.matchadd(group, "\\[" .. text .. "\\].*$")
-    vim.api.nvim_set_hl(0, group, status_opts.hl)
+  for index, status_options in ipairs(options) do
+    table.insert(statuses, {
+      name = status_options.name,
+      text = status_options.text or status_options.name,
+      hl = status_options.hl,
+      index = index,
+    })
+  end
+
+  return statuses
+end
+
+---@type Config
+local config = {
+  statuses = build_statuses(default_statuses),
+}
+
+---@param status Status
+local function add_highlight(status)
+  local capitalized_name = status.name:sub(1, 1):upper() .. status.name:sub(2)
+  local group = "Todo" .. capitalized_name
+  local text = status.text or status.name
+
+  vim.fn.matchadd(group, "\\[" .. text .. "\\].*$")
+  vim.api.nvim_set_hl(0, group, status.hl)
+end
+
+local function setup_buffer()
+  for _, status in ipairs(config.statuses) do
+    if status.hl ~= nil then
+      add_highlight(status)
+    end
   end
 
   vim.fn.matchadd("TodoContext", "@[^ ]*")
@@ -37,14 +90,14 @@ local function setup()
   vim.api.nvim_set_hl(0, "TodoContext", { fg = "#88c0d0", italic = true })
   vim.api.nvim_set_hl(0, "TodoImportant", { fg = "#d57780" })
 
-  vim.wo.foldmethod = "indent"
+  -- vim.wo.foldmethod = "indent"
 end
 
 local group_id = vim.api.nvim_create_augroup("Elentok_Markdown", {})
 
 vim.api.nvim_create_autocmd(
   { "BufRead", "WinNew" },
-  { pattern = "*.md", group = group_id, callback = setup }
+  { pattern = "*.md", group = group_id, callback = setup_buffer }
 )
 
 local has_builtin, builtin = pcall(require, "telescope.builtin")
@@ -97,6 +150,11 @@ local function todo_prev_state()
     vim.fn.setline(".", line)
   end
 end
+
+---@return { status: Status, index: integer } | nil
+-- local function todo_get_status(line)
+--   for index, status in ipairs()
+-- end
 
 local function todo_toggle_done_visible()
   local done_fg_color = vim.api.nvim_get_hl_by_name("TodoDone", true).foreground
