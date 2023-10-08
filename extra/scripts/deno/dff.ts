@@ -1,16 +1,38 @@
 #!/usr/bin/env -S deno run --allow-env --allow-read --allow-run
 
-import { Table, printTable } from "npm:console-table-printer"
+import { Table } from "npm:console-table-printer"
 
 const SPACES_REGEX = /\s+/
+const EXCLUDE_MOUNT_POINTS = /^\/(System\/Volumes\/)/
 
 interface Disk {
   device: string
-  used: string
+  used: number
   usedPercentage: number
   size: number
   available: number
   mount: string
+}
+
+function rowColor({ usedPercentage }: Disk): string {
+  if (usedPercentage > 90) {
+    return "red"
+  }
+  if (usedPercentage > 70) {
+    return "yellow"
+  }
+  return "green"
+}
+
+function diskToRow(disk: Disk): Record<string, string> {
+  const { device, usedPercentage, size, available, mount } = disk
+  return {
+    mount,
+    usage: `${usedPercentage}%`,
+    free: prettifyKB(available),
+    size: prettifyKB(size),
+    device,
+  }
 }
 
 function main() {
@@ -19,27 +41,38 @@ function main() {
   const table = new Table({
     columns: [
       {
-        name: "device",
-        title: "Device",
+        name: "mount",
+        title: "Mount",
         alignment: "left",
       },
       {
-        name: "mount",
-        title: "Mountpoint",
+        name: "usage",
+        title: "Usage",
+        alignment: "right",
+      },
+      {
+        name: "free",
+        title: "Free",
+        alignment: "right",
+      },
+      {
+        name: "size",
+        title: "Size",
+        alignment: "right",
+      },
+      {
+        name: "device",
+        title: "Device",
         alignment: "left",
       },
     ],
   })
 
-  table.addRows(disks)
-  table.printTable()
+  for (const disk of disks) {
+    table.addRow(diskToRow(disk), { color: rowColor(disk) })
+  }
 
-  // printTable(disks)
-  // console.table(disks)
-  // for (const disk of ) {
-  //   console.log("abc")
-  //   console.log(disk)
-  // }
+  table.printTable()
 }
 
 function prettifyKB(kb: number): string {
@@ -53,7 +86,7 @@ function parseDisk(line: string): Disk | undefined {
   const [device, size, used, available, usedPercentage, mount] = line.trim().split(SPACES_REGEX)
   return {
     device,
-    used: prettifyKB(Number(used)),
+    used: Number(used),
     usedPercentage: Number(usedPercentage.slice(0, -1)),
     size: Number(size),
     available: Number(available),
@@ -72,7 +105,10 @@ function loadDisks(): Disk[] {
   }
 
   const lines = new TextDecoder().decode(stdout).split("\n")
-  return lines.map(parseDisk).filter(isPresent)
+  return lines
+    .map(parseDisk)
+    .filter(isPresent)
+    .filter((disk) => !EXCLUDE_MOUNT_POINTS.test(disk.mount))
 }
 
 function isPresent<T>(value: T | null | undefined): value is T {
