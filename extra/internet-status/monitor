@@ -80,6 +80,9 @@ function on-first-offline() {
 }
 
 function notify-internet-restored() {
+  if [ "${NOTIFY:-}" == "no" ]; then
+    return
+  fi
   last_online="$(grep ",ONLINE," "$LOG" | tail -1)"
   curl -d "message=Internet down time from ${last_online} to $(timestamp)" \
     "http://localhost:10000/send"
