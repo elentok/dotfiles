@@ -1,6 +1,5 @@
-local will_rename = require("lsp-file-operations.will-rename")
-
 local function rename_file()
+  local will_rename = require("lsp-file-operations.will-rename")
   local source_file = vim.api.nvim_buf_get_name(0)
 
   vim.ui.input({
@@ -22,8 +21,20 @@ local function rename_file()
   end)
 end
 
-vim.api.nvim_create_user_command("LspRename", rename_file, {})
+return {
+  "antosha417/nvim-lsp-file-operations",
+  config = function()
+    vim.api.nvim_create_user_command("LspRename", rename_file, {})
 
-vim.keymap.set("n", "<space>rf", function()
-  rename_file()
-end, { desc = "Rename file (with LSP)" })
+    vim.keymap.set("n", "<space>rf", function()
+      rename_file()
+    end, { desc = "Rename file (with LSP)" })
+  end,
+  keys = {
+    {
+      "<space>rf",
+      rename_file,
+      desc = "Rename file (with LSP)",
+    },
+  },
+}

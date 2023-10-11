@@ -3,7 +3,6 @@ return {
   { "williamboman/mason.nvim", version = "*", build = ":MasonUpdate" },
   { "williamboman/mason-lspconfig.nvim", version = "*" },
   { "ray-x/lsp_signature.nvim", opts = {} },
-  "antosha417/nvim-lsp-file-operations",
   "stevearc/aerial.nvim",
   "onsails/lspkind-nvim",
   "SmiteshP/nvim-navic",
