@@ -25,10 +25,6 @@ return {
   "antosha417/nvim-lsp-file-operations",
   config = function()
     vim.api.nvim_create_user_command("LspRename", rename_file, {})
-
-    vim.keymap.set("n", "<space>rf", function()
-      rename_file()
-    end, { desc = "Rename file (with LSP)" })
   end,
   keys = {
     {
