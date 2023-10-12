@@ -17,7 +17,6 @@ return {
     opts = { automatic_installation = true },
   },
   { "ray-x/lsp_signature.nvim", opts = {} },
-  "stevearc/aerial.nvim",
   "onsails/lspkind-nvim",
   "SmiteshP/nvim-navic",
   {
