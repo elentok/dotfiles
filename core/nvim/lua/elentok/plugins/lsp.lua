@@ -1,7 +1,21 @@
 return {
   "neovim/nvim-lspconfig",
-  { "williamboman/mason.nvim", version = "*", build = ":MasonUpdate" },
-  { "williamboman/mason-lspconfig.nvim", version = "*" },
+  {
+    "williamboman/mason.nvim",
+    version = "*",
+    build = ":MasonUpdate",
+    opts = {
+
+      ui = {
+        border = "rounded",
+      },
+    },
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    version = "*",
+    opts = { automatic_installation = true },
+  },
   { "ray-x/lsp_signature.nvim", opts = {} },
   "stevearc/aerial.nvim",
   "onsails/lspkind-nvim",
