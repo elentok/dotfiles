@@ -7,6 +7,10 @@ vim.g.loaded_matchparen = true
 vim.opt.wrap = false
 vim.opt.laststatus = 3
 
+-- Colors
+vim.o.termguicolors = true
+vim.o.background = "dark"
+
 vim.g.markdown_folding = false
 vim.g.markdown_fenced_languages = {
   "vim",

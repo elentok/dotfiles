@@ -22,7 +22,6 @@ return {
   "nvim-lualine/lualine.nvim",
   "ojroques/nvim-osc52",
 
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   { "junegunn/goyo.vim", cmd = "Goyo" }, -- dark/zen room, no distraction mode
   { "stevearc/dressing.nvim", opts = {} }, -- Make vim.ui.input and vim.ui.select prettier
   { "axieax/urlview.nvim", opts = {} },
