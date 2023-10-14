@@ -215,8 +215,14 @@ if dotf-is-wsl; then
   PATH=$PATH:/mnt/c/Windows:/mnt/c/Windows/System32:/mnt/c/Windows/System32/WindowsPowerShell/v1.0
 fi
 
+if dotf-is-linux; then
+  export DENO_INSTALL=~/.deno
+  PATH=$PATH:$DENO_INSTALL/bin
+fi
+
 export PATH
 
+#
 # Rust {{{1
 if [ -e ~/.cargo/env ]; then
   source ~/.cargo/env
