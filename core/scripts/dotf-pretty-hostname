@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+FILENAME=~/.config/dotfiles/pretty-hostname
+
+if [ $# -gt 0 ]; then
+  echo "$1" > $FILENAME
+else
+  if [ -e $FILENAME ]; then
+    cat $FILENAME
+  else
+    hostname
+  fi
+fi

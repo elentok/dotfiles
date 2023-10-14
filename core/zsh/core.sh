@@ -258,7 +258,7 @@ is_in_neovim() {
 export SSH_TERM=xterm-color
 export LESS="--RAW-CONTROL-CHARS"
 export RIPGREP_CONFIG_PATH="$DOTF/core/ripgrep/ripgreprc"
-PRETTY_HOST="$(dotf-host-info pretty-name || hostname)"
+PRETTY_HOST="$(dotf-pretty-hostname)"
 SHORT_HOST="${PRETTY_HOST:0:3}"
 if is_zsh; then
   SHORT_HOST="${SHORT_HOST:l}"
