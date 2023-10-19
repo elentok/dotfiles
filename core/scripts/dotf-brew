@@ -25,7 +25,7 @@ main() {
     echo
 
     # shellcheck disable=SC2086
-    brew install $missing
+    brew install --force $missing
   fi
 }
 
