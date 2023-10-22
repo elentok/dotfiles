@@ -89,8 +89,6 @@
   plr = pull --rebase
   spl = !git stash push && git pull && git stash pop
   ps = push
-  psa = push noreview production master --tags
-  psm = push noreview master --tags
   pst = push --tags
   pullff = pull --ff-only
   r = reset
