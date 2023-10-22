@@ -70,5 +70,6 @@
   "vim-unimpaired": { "branch": "master", "commit": "6d44a6dc2ec34607c41ec78acf81657248580bf1" },
   "vim-visual-star-search": { "branch": "master", "commit": "7c32edb9e3c85d473d9be4dec721a4c9d5d4d69c" },
   "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" },
-  "writegood.vim": { "branch": "master", "commit": "baaa489708c318109bd74493aa4cb17996932695" }
+  "writegood.vim": { "branch": "master", "commit": "baaa489708c318109bd74493aa4cb17996932695" },
+  "zk-nvim": { "branch": "main", "commit": "e9e5e21dbeacd0e753728c7ea45b7a7582d9080a" }
 }
