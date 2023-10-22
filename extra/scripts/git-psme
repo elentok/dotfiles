@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+#
+# Pushes the current branch
+#
+# If there's more than one remote asks the user to pick
+#
+# Usage:
+#
+#   git psme [remote]
+#
+
+set -euo pipefail
+
+function main() {
+  if [ $# -gt 0 ]; then
+    remote="${1}"
+    shift
+  else
+    remote="$(pick-remote)"
+  fi
+
+  branch="$(git rev-parse --abbrev-ref HEAD)"
+
+  echo "========================================"
+  echo "Pushing branch [$branch] to remote [$remote]"
+  echo "========================================"
+  git push "$remote" "$branch" "$@"
+}
+
+function pick-remote() {
+  remotes="$(git remote)"
+  count="$(echo "$remotes" | wc -l)"
+  if [ "$count" -eq 0 ]; then
+    echo >&2 "Error: No remotes found"
+    exit 1
+  elif [ "$count" -eq 1 ]; then
+    echo "$remotes"
+  else
+    echo "$remotes" | fzf-tmux -p
+  fi
+}
+
+main "$@"
