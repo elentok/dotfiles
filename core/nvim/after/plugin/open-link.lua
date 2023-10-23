@@ -1,4 +1,4 @@
-local config = require("elentok/config")
+local config = require("elentok.config")
 
 local function is_http_link(link)
   return vim.startswith(link, "http://") or vim.startswith(link, "https://")

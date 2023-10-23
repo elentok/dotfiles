@@ -1,4 +1,4 @@
-local deep_merge = require("elentok/deep-merge")
+local deep_merge = require("elentok.deep-merge")
 
 local config = {
   -- enable_eslint_formatter = false,
