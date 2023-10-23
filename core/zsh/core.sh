@@ -151,6 +151,7 @@ export LUAROCKS_ROOT="$HOME/.apps/all/luarocks/default"
 
 # PATH {{{1
 PATH="$DOTF/core/scripts:\
+$DOTF/core/git/scripts:\
 $DOTF/extra/scripts:\
 $DOTF/extra/scripts/deno:\
 $DOTF/extra/scripts/node:\
