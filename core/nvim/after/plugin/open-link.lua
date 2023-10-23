@@ -42,4 +42,4 @@ local function open_link(link)
   })
 end
 
-vim.keymap.set("n", "ge", open_link, { desc = "Open link under cursor" })
+-- vim.keymap.set("n", "ge", open_link, { desc = "Open link under cursor" })
