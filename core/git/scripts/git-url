@@ -20,4 +20,5 @@ fi
 
 # shellcheck disable=SC2001
 echo "$remote_url" \
-  | sed -E "s|git@(.*):(.*)(.git)?|https://\1/\2/tree/${branch}${file_suffix}|"
+  | sed -E "s|git@(.*):(.*)(.git)?|https://\1/\2/tree/${branch}${file_suffix}|" \
+  | sed "s/github.com-[^\/]*/github.com/"
