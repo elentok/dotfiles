@@ -1,18 +1,15 @@
 return {
   "elentok/open-link.nvim",
   dev = true,
-  opts = {
-    addExpanders = {
-      {
-        pattern = "^github-",
-        replacement = "https://github.com/",
+  init = function()
+    local expanders = require("open-link.expanders")
+    require("open-link").setup({
+      expanders = {
+        expanders.github,
+        expanders.github_issue_or_pr("format-on-save", "elentok/format-on-save.nvim"),
       },
-      {
-        pattern = "^format-on-save#",
-        replacement = "https://github.com/elentok/format-on-save.nvim/pull/",
-      },
-    },
-  },
+    })
+  end,
   dependencies = {
     "ojroques/nvim-osc52",
   },
