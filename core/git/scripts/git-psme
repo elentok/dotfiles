@@ -11,6 +11,8 @@
 
 set -euo pipefail
 
+source "$DOTF/core/scripts/lib/ui.sh"
+
 function main() {
   if [ $# -gt 0 ]; then
     remote="${1}"
@@ -21,10 +23,17 @@ function main() {
 
   branch="$(git rev-parse --abbrev-ref HEAD)"
 
-  echo "========================================"
+  echo "============================================================"
   echo "Pushing branch [$branch] to remote [$remote]"
-  echo "========================================"
-  git push "$remote" "$branch" "$@"
+  echo "============================================================"
+  if ! git push "$remote" "$branch" "$@"; then
+    if dotf-confirm "Push failed, use force?"; then
+      echo "============================================================"
+      echo "Pushing branch [$branch] to remote [$remote] with force"
+      echo "============================================================"
+      git push -f "$remote" "$branch" "$@"
+    fi
+  fi
 }
 
 function pick-remote() {
