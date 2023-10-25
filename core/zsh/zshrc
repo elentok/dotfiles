@@ -31,8 +31,9 @@ source $DOTF/core/zsh/completion.zsh
 source $DOTF/core/zsh/keybindings.zsh
 source $DOTF/core/zsh/fzf-git.sh
 source $DOTF/core/zsh/vendor/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# source ~/.powerlevel10k/powerlevel10k.zsh-theme
-source $DOTF/core/zsh/prompt.zsh
+if ! dotf-has-command starship; then
+  source $DOTF/core/zsh/prompt.zsh
+fi
 if is-nvm-providing-node; then
   source $DOTF/core/zsh/nvm.zsh
 fi
@@ -45,5 +46,7 @@ source_if_exists ~/.dotprivate/zsh/after.zsh
 # required so ~/.zshenv will be loaded by sub-processes
 unset ZSHENV_LOADED
 
-# duration=$((($SECONDS - $START_TIME) * 1000))
-# echo "\033[1;30m($(printf '%.2f' $duration)ms)\033[0m"
+eval "$(starship init zsh)"
+
+duration=$((($SECONDS - $START_TIME) * 1000))
+echo "\033[1;30m $(printf '%.2f' $duration)ms\033[0m"
