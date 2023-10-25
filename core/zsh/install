@@ -36,7 +36,6 @@ function install_symlinks() {
   dotf-symlink "$DOTF/core/zsh/zshrc" ~/.zshrc
   dotf-symlink "$DOTF/core/zsh/zshenv" ~/.zshenv
   dotf-symlink "$DOTF/core/zsh/zprofile" ~/.zprofile
-  dotf-symlink "$DOTF/core/zsh/p10k.zsh" ~/.p10k.zsh
 }
 
 function install_fzf() {
