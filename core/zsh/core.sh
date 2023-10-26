@@ -107,6 +107,10 @@ function is-nvm-providing-node() {
   [ "$DOTF_CONFIG_NODE_PROVIDER" = "nvm" ]
 }
 
+function is-fvm-providing-node() {
+  [ "$DOTF_CONFIG_NODE_PROVIDER" = "fnm" ]
+}
+
 if is-n-providing-node; then
   export N_PREFIX=$HOME/.n
 fi
