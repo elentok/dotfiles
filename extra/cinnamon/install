@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-$DOTF/extra/cinnamon/conf restore

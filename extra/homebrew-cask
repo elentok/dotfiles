@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-source `dirname $0`/../framework
-
-brew_tap caskroom/cask
-brew_install brew-cask
