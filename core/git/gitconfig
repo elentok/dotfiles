@@ -114,6 +114,7 @@
   lasttag = describe --abbrev=0
   br = rev-parse --abbrev-ref HEAD
   o = open
+  al = !git-aliases.ts
 
 [format]
   ; TODO: Should I use "%cr" or "%ar" for the date?

@@ -6,3 +6,15 @@ export function center(text: string, width: number, ch = " "): string {
 
   return `${ch.repeat(leftPad)}${text}${ch.repeat(rightPad)}`
 }
+
+export class NonZeroExitCodeError extends Error {}
+
+export function execSync(command: string, options?: Deno.CommandOptions): string {
+  const p = new Deno.Command(command, options)
+  const { code, stdout, stderr } = p.outputSync()
+  if (code !== 0) {
+    throw new NonZeroExitCodeError(`Error occured while running "${command}":\n${stderr}`)
+  }
+
+  return new TextDecoder().decode(stdout)
+}
