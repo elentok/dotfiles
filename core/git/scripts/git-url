@@ -4,25 +4,34 @@ set -euo pipefail
 
 function main() {
   branch="$(git branch --show-current)"
-  remote_url="$(git config --get remote.origin.url)"
-
   if [ "${1:-}" == "-b" ]; then
     shift
     branch="$(git all-branches | fzf-tmux -p --prompt 'Pick branch:')"
   fi
 
-  file_suffix=""
+  file_suffix="$(url-file-suffix "$@")"
+
+  echo "$(repo-base-url)/tree/${branch}${file_suffix}"
+}
+
+function repo-base-url() {
+  git config --get remote.origin.url \
+    | ssh-to-https \
+    | sed "s|github.com-[^/]*|github.com|" \
+    | sed "s|.git$||"
+}
+
+function ssh-to-https() {
+  sed -E 's|git@(.*):(.*)(.git)?|https://\1/\2|'
+}
+
+function url-file-suffix() {
   if [ $# -gt 0 ]; then
     filepath="$(realpath "$1")"
     repo_root="$(git rev-parse --show-toplevel)"
 
-    file_suffix="$(realpath "$filepath" | sed "s|$repo_root||")"
+    realpath "$filepath" | sed "s|$repo_root||"
   fi
-
-  # shellcheck disable=SC2001
-  echo "$remote_url" \
-    | sed -E "s|git@(.*):(.*)(.git)?|https://\1/\2/tree/${branch}${file_suffix}|" \
-    | sed "s/github.com-[^\/]*/github.com/"
 }
 
 main "$@"
