@@ -1,4 +1,4 @@
-import readline from "readline"
+import * as readline from "readline"
 
 const COLORS = {
   black: "\x1B[30m",
@@ -26,7 +26,7 @@ export function clearLine(): void {
 export async function ask(question: string): Promise<string> {
   return new Promise((resolve) => {
     const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
-    rl.question(question, (answer) => {
+    rl.question(question, (answer: string) => {
       rl.close()
       resolve(answer)
     })
@@ -34,14 +34,14 @@ export async function ask(question: string): Promise<string> {
 }
 
 export async function confirm(question: string): Promise<boolean> {
-  const prettyQuestion = `${F.COLORS.yellow} ${question} [y/N]? ${F.RESET}`
-  const answer = await F.ask(prettyQuestion)
+  const prettyQuestion = `${COLORS.yellow} ${question} [y/N]? ${RESET}`
+  const answer = await ask(prettyQuestion)
   return /^[yY](es)?/.test(answer)
 }
 
 type ColorFn = (text: string) => string
 function createColorFn(color: string): ColorFn {
-  return (text: string) => `${color}${text}${F.RESET}`
+  return (text: string) => `${color}${text}${RESET}`
 }
 
 export const black = createColorFn(COLORS.black)
