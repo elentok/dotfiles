@@ -31,6 +31,7 @@ source $DOTF/core/zsh/completion.zsh
 source $DOTF/core/zsh/keybindings.zsh
 source $DOTF/core/zsh/fzf-git.sh
 source $DOTF/core/zsh/vendor/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $DOTF/core/deno/shell-helpers.sh
 if ! dotf-has-command starship; then
   source $DOTF/core/zsh/prompt.zsh
 fi
