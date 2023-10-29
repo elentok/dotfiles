@@ -65,7 +65,7 @@ function dotf-border() {
   local text="$*"
 
   if [ "$type" = 'padded' ]; then
-    text="    ${text}    "
+    text="  ${text}  "
     local lines="${text//?/─}"
     local spaces="${text//?/ }"
     echo "┌─${lines}─┐"
