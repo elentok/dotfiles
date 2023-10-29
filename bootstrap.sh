@@ -28,18 +28,10 @@ function main() {
   git submodule update --init --recursive
 
   if dotf-is-mac; then
-    if ! has-command brew; then
-      install-homebrew
-    else
-      echo '- Updating brew... '
-      brew update
-
-      # Mac comes with an ancient bash version
-      if ! has-bash5; then
-        brew install bash
-      fi
-    fi
+    setup-mac
   fi
+
+  setup-deno
 
   echo
   echo "All requirements are ready, running dotf setup."
@@ -47,6 +39,39 @@ function main() {
   echo
 
   "$DOTF/core/scripts/dotf" setup
+}
+
+function setup-mac() {
+  setup-homebrew
+
+  # Mac comes with an ancient bash version
+  if ! has-bash5; then
+    brew install bash
+  fi
+}
+
+function setup-homebrew() {
+  if ! has-command brew; then
+    install-homebrew
+  else
+    echo '- Updating brew... '
+    brew update
+  fi
+}
+
+function setup-deno() {
+  echo "- Setting up deno..."
+  if has-command deno; then
+    echo "  Deno is already installed."
+    echo
+  else
+    if dotf-is-mac; then
+      brew install deno
+    else
+      curl -fsSL https://deno.land/x/install/install.sh | sh
+    fi
+  fi
+
 }
 
 function has-bash5() {
