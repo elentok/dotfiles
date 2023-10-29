@@ -6,6 +6,12 @@ LOCAL=no
 NPM=npm
 NPM_ARGS=''
 
+which npm
+
+if [ "$DOTF_CONFIG_NODE_PROVIDER" == "fnm" ]; then
+  eval "$(fnm env --use-on-cd)"
+fi
+
 while [[ "${1:-}" =~ ^- ]]; do
   if [ "$1" == "--local" ]; then
     LOCAL=yes
