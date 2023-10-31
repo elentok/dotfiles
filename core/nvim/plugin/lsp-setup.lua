@@ -33,7 +33,7 @@ local function setup(name, opts)
   lspconfig[name].setup(merged_opts)
 end
 
-setup("marksman")
+-- setup("marksman")
 setup("bashls")
 setup("pyright")
 setup("yamlls")
