@@ -8,10 +8,17 @@ end
 --   return vim.fn.findfile("eslintrc.js", ";.") ~= "" or vim.fn.findfile(".eslintrc", ";.") ~= ""
 -- end
 
-lint.linters_by_ft = {
-  typescript = { "eslint_d" },
-  typescriptreact = { "eslint_d" },
-}
+-- Don't load eslint in Deno project
+local is_deno_project = vim.fn.findfile("deno.json", ";.")
+
+if not is_deno_project then
+  lint.linters_by_ft = {
+    typescript = { "eslint_d" },
+    typescriptreact = { "eslint_d" },
+  }
+else
+  lint.linters_by_ft = {}
+end
 
 vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
   group = vim.api.nvim_create_augroup("Elentok_Lint", {}),
