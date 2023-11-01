@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+#
+# Destroy feature (deletes the worktree and the branch)
+#
+# Usage:
+#
+#   git df [worktree-name]
+
+set -euo pipefail
+
+source "$DOTF/framework"
+
+function main() {
+  local worktree="${1:-}"
+  if [ -z "$worktree" ]; then
+    worktree="$(git wt list | grep -vE '(main|master)' | fzf-tmux -p)"
+  fi
+
+  if [ -z "$worktree" ]; then
+    exit 1
+  fi
+
+  if ! dotf-confirm "Delete '$worktree'?" yes; then
+    return
+  fi
+
+  if ! git worktree remove "$worktree"; then
+    if dotf-confirm "Failed to remove the worktree, use force?" yes; then
+      echo "Removing worktree '$worktree'..."
+      if git worktree remove -f "$worktree"; then
+        echo 'Success!'
+      else
+        echo 'Failed :('
+        exit 1
+      fi
+    else
+      exit 1
+    fi
+  fi
+
+  git destroy "$worktree"
+}
+
+main "$@"
