@@ -37,8 +37,6 @@ fi
 dotf-header h2 'Updating dotfiles...'
 dotf update --morning
 
-dotf-summary run 'Setup repositories' dotf-repos setup
-
 note_dirs=(~/notes ~/notes/home ~/notes/work)
 
 for dir in "${note_dirs[@]}"; do

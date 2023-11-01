@@ -18,6 +18,8 @@ function main() {
 
   pull-dotfiles
 
+  dotf-summary run 'Setup repositories' dotf-repos setup
+
   "$DOTF/bootstrap.sh"
 
   update-node
