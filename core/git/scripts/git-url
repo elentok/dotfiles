@@ -15,10 +15,15 @@ function main() {
 }
 
 function repo-base-url() {
-  git config --get remote.origin.url \
+  remote="$(git-pick-remote)"
+  git config --get "remote.$remote.url" \
     | ssh-to-https \
     | sed "s|github.com-[^/]*|github.com|" \
     | sed "s|.git$||"
+}
+
+function git-pick-remote() {
+  git remote | fzf-tmux -p --prompt 'Pick remote:' --select-1
 }
 
 function ssh-to-https() {
