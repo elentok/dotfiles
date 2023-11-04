@@ -14,7 +14,8 @@ return {
       },
       experiments = {
         partial_update = "diff",
-        disable_restore_cursors = false,
+        -- disable_restore_cursors = false,
+        adjust_cursor_position = true,
       },
       error_notifier = message_buffer,
       formatter_by_ft = vim.tbl_extend("force", {
