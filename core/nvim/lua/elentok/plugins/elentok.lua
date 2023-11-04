@@ -24,9 +24,4 @@ return {
     opts = {},
     cmd = { "Scriptify" },
   },
-
-  {
-    "elentok/format-on-save.nvim",
-    dev = true,
-  },
 }
