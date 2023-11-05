@@ -6,9 +6,10 @@ function spot_command() {
 
 case "$1" in
   next)
-    spot_command next track ;;
+    spot_command next track
+    ;;
   *)
-    spot_command playpause ;;
+    spot_command playpause
+    terminal-notifier -message "Spotify toggle"
+    ;;
 esac
-
-
