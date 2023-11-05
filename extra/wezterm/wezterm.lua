@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
 
-local local_config_dir = os.getenv("HOME") .. "/.dotlocal/wezterm"
+local local_config_dir = os.getenv("HOME") .. "/.dotprivate/wezterm"
 
 local config = {
   font = wezterm.font("agave Nerd Font Mono"),
@@ -12,6 +12,7 @@ local config = {
     },
   },
   line_height = 1.2,
+  cell_width = 0.9,
   font_size = 17.0,
   color_scheme = "MaterialDarker",
   audible_bell = "Disabled",
