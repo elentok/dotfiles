@@ -46,6 +46,24 @@ setup("terraformls")
 setup("graphql")
 setup("denols", {
   root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+  settings = {
+    deno = {
+      enable = true,
+      suggest = {
+        imports = {
+          hosts = {
+            ["https://crux.land"] = true,
+            ["https://deno.land"] = true,
+            ["https://x.nest.land"] = true,
+          },
+          autoDiscover = true,
+        },
+        autoImports = true,
+        names = true,
+        completeFunctionCalls = true,
+      },
+    },
+  },
 })
 
 -- Setup: TypeScript
