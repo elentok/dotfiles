@@ -107,7 +107,7 @@ function is-nvm-providing-node() {
   [ "$DOTF_CONFIG_NODE_PROVIDER" = "nvm" ]
 }
 
-function is-fvm-providing-node() {
+function is-fnm-providing-node() {
   [ "$DOTF_CONFIG_NODE_PROVIDER" = "fnm" ]
 }
 

@@ -101,7 +101,10 @@ function upgrade-pkgs() {
   pip3 install --upgrade --user $(get-pkgs pip)
 
   dotf-header h3 '[dotf-pkgs] Updating npm packages...'
-  if is-n-providing-node; then
+  if is-fnm-providing-node; then
+    eval "$(fnm env --use-on-cd)"
+    npm="npm"
+  elif is-n-providing-node; then
     npm="npm"
   elif is-nvm-providing-node; then
     npm="npm"
