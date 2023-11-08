@@ -2,6 +2,9 @@ local term = require("elentok/lib/terminal")
 -- vim: foldmethod=marker
 vim.keymap.set("i", "jk", "<esc>")
 
+vim.keymap.set("n", "<space>wq", "<cmd>wq<cr>")
+vim.keymap.set("n", "<space>ww", "<cmd>w<cr>")
+
 -- Switch to alternate file
 vim.keymap.set("n", "<space><space>", "<c-^>")
 

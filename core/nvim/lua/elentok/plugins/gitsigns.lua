@@ -14,8 +14,8 @@ return {
       desc = "Git blame (current line)",
     },
 
-    { "<space>gs", ":Gitsigns<cr>", desc = "Git signs menu" },
-    { "<space>gp", ":Gitsigns preview_hunk<cr>", desc = "Git preview hunk" },
+    { "<space>gm", ":Gitsigns<cr>", desc = "Git signs menu" },
+    { "<space>gpp", ":Gitsigns preview_hunk<cr>", desc = "Git preview hunk" },
     { "<space>gi", ":Gitsigns preview_hunk_inline<cr>", desc = "Git preview hunk (inline)" },
     { "[c", ":Gitsigns prev_hunk<cr>", desc = "Prev git hunk" },
     { "]c", ":Gitsigns next_hunk<cr>", desc = "Next git hunk" },
