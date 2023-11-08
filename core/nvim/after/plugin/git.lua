@@ -69,6 +69,7 @@ vim.keymap.set("n", "<space>gw", "<cmd>Gwrite<cr>", { desc = "Git write" })
 vim.keymap.set("n", "<space>gg", "<cmd>G<cr><c-w>H", { desc = "Git status" })
 vim.keymap.set("n", "<space>gb", "<cmd>G blame<cr>", { desc = "Git blame" })
 vim.keymap.set("n", "<space>gl", "<cmd>G log HEAD...master<cr>", { desc = "Git log" })
+vim.keymap.set("n", "<space>gn", "<cmd>Gsync<cr>", { desc = "Git sync" })
 
 -- vim.keymap.set("n", "<space>g2", "<cmd>diffget //2<cr>", { desc = "Git resolve conflict from //2" })
 -- vim.keymap.set("n", "<space>g3", "<cmd>diffget //3<cr>", { desc = "Git resolve conflict from //3" })
