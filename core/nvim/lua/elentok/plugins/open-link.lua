@@ -5,6 +5,7 @@ return {
     local expanders = require("open-link.expanders")
     require("open-link").setup({
       expanders = {
+        expanders.homedir(),
         expanders.github,
         expanders.github_issue_or_pr("format-on-save", "elentok/format-on-save.nvim"),
       },
