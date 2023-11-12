@@ -108,6 +108,8 @@ vim.keymap.set(
   { expr = true }
 )
 
+vim.keymap.set("n", "<space>of", "<cmd>!dotf-open %<cr>", { desc = "Open current file" })
+
 vim.keymap.set("n", "<space>ov", function()
   term.run({ "vifm", "--select", vim.fn.expand("%") })
 end, { desc = "Open Vifm" })
