@@ -50,7 +50,7 @@ function set-resolution() {
     fi
 
     # shellcheck disable=SC2001
-    descriptor="$(echo "$ref" | sed 's/^.*(via \([^)]*\).*)/\1/')"
+    descriptor="$(echo "$ref" | sed 's/^.*(via \([^)]*\).*)/\1/' | sed 's/\s*\[[0-9]\+\]//')"
     echo "yarn set resolution $pkg@$descriptor ${resolved_version/npm:/}"
     yarn set resolution "$pkg@$descriptor" "${resolved_version/npm:/}"
   done
