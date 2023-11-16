@@ -47,10 +47,6 @@ source_if_exists ~/.dotprivate/zsh/after.zsh
 # required so ~/.zshenv will be loaded by sub-processes
 unset ZSHENV_LOADED
 
-if is-fnm-providing-node; then
-  eval "$(fnm env --use-on-cd)"
-fi
-
 eval "$(starship init zsh)"
 
 duration=$((($SECONDS - $START_TIME) * 1000))

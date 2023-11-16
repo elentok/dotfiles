@@ -225,6 +225,10 @@ if dotf-is-linux; then
   PATH=$PATH:$DENO_INSTALL/bin
 fi
 
+if is-fnm-providing-node; then
+  eval "$(fnm env --use-on-cd)"
+fi
+
 export PATH
 
 #
