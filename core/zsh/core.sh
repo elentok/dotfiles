@@ -159,6 +159,7 @@ $DOTF/core/git/scripts:\
 $DOTF/extra/scripts:\
 $DOTF/extra/scripts/deno:\
 $DOTF/extra/scripts/node:\
+$HOME/dev/git-helpers/bin:\
 $DOTP/scripts:\
 $DOTL/scripts"
 
