@@ -30,4 +30,4 @@ local function open()
   vim.keymap.set("n", "q", ":wq<cr>", { buffer = true })
 end
 
-vim.keymap.set("n", "<space>os", open)
+vim.keymap.set("n", "<leader>os", open)

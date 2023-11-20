@@ -5,6 +5,6 @@ return {
       picker = "telescope",
     })
 
-    vim.keymap.set("n", "<space>jn", "<cmd>ZkNotes<cr>")
+    vim.keymap.set("n", "<leader>jn", "<cmd>ZkNotes<cr>")
   end,
 }

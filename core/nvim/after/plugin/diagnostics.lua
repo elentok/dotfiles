@@ -9,10 +9,9 @@ vim.diagnostic.config({
 })
 
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Show line diagnostics" })
--- vim.keymap.set("n", "<space>dd", vim.diagnostic.open_float, { desc = "Show diagnostics" })
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Prev diagnostic" })
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
-vim.keymap.set("n", "<space>dq", vim.diagnostic.setqflist, { desc = "Diagnostics to Quickfix" })
+vim.keymap.set("n", "<leader>dq", vim.diagnostic.setqflist, { desc = "Diagnostics to Quickfix" })
 
 -- Toggle diagnostics:
 local diagnostic_visible = true

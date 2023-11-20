@@ -3,42 +3,42 @@ return {
   opts = {},
   keys = {
     {
-      "<space>a",
+      "<leader>a",
       function()
         require("harpoon.mark").add_file()
       end,
       desc = "Harpoon add file",
     },
     {
-      "<space>e",
+      "<leader>e",
       function()
         require("harpoon.ui").toggle_quick_menu()
       end,
       desc = "Harpoon menu",
     },
     {
-      "<space>1",
+      "<leader>1",
       function()
         require("harpoon.ui").nav_file(1)
       end,
       desc = "Harpoon jump to #1",
     },
     {
-      "<space>2",
+      "<leader>2",
       function()
         require("harpoon.ui").nav_file(2)
       end,
       desc = "Harpoon jump to #2",
     },
     {
-      "<space>3",
+      "<leader>3",
       function()
         require("harpoon.ui").nav_file(3)
       end,
       desc = "Harpoon jump to #3",
     },
     {
-      "<space>4",
+      "<leader>4",
       function()
         require("harpoon.ui").nav_file(4)
       end,

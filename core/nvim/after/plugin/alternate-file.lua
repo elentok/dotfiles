@@ -39,4 +39,4 @@ local function goto_alternate_file()
   end
 end
 
-vim.keymap.set("n", "<space>jo", goto_alternate_file, { desc = "Jump between code and test" })
+vim.keymap.set("n", "<leader>jo", goto_alternate_file, { desc = "Jump between code and test" })

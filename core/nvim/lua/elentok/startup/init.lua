@@ -1,4 +1,4 @@
-vim.g.mapleader = ","
+vim.g.mapleader = " "
 
 require("elentok/startup/put")
 require("elentok/startup/lazy")

@@ -72,7 +72,7 @@ return {}
 --     end
 --
 --     -- vim.keymap.set("n", "-", go_up, { desc = "Go up (float)" })
---     vim.keymap.set("n", "<space>-", go_up_in_window, { desc = "Go up" })
+--     vim.keymap.set("n", "<leader>-", go_up_in_window, { desc = "Go up" })
 --
 --     local group = vim.api.nvim_create_augroup("Elentok_Lir", {})
 --     vim.api.nvim_create_autocmd({ "FileType" }, {

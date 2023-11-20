@@ -31,7 +31,7 @@ vim.api.nvim_create_user_command("Lint", function()
   lint.try_lint()
 end, {})
 
-vim.keymap.set("n", "<space>rl", function()
+vim.keymap.set("n", "<leader>rl", function()
   lint.try_lint()
   vim.notify("Ran lint")
 end, { desc = "Run lint" })

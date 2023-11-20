@@ -8,7 +8,7 @@ return {
     },
     keys = {
       {
-        "<space>tw",
+        "<leader>tw",
         function()
           require("togglr").toggle_word()
         end,

@@ -28,7 +28,7 @@ return {
   end,
   keys = {
     {
-      "<space>rf",
+      "<leader>rf",
       rename_file,
       desc = "Rename file (with LSP)",
     },

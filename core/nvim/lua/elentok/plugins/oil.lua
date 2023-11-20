@@ -13,7 +13,7 @@ return {
       ["<C-c>"] = false,
       ["<C-p>"] = false,
       ["<C-s>"] = "actions.save",
-      ["<space>p"] = "actions.preview",
+      ["<leader>p"] = "actions.preview",
       ["q"] = "actions.close",
       ["L"] = "actions.select",
       ["J"] = "actions.select",

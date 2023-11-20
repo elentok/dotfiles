@@ -50,21 +50,22 @@ telescope.load_extension("fzf")
 telescope.load_extension("file_browser")
 
 vim.keymap.set("n", "<c-p>", builtin.find_files)
+vim.keymap.set("n", "<leader>f", builtin.find_files)
 vim.keymap.set("n", "z=", builtin.spell_suggest)
 vim.keymap.set("n", "<Leader>b", function()
   builtin.buffers({ file_ignore_patterns = {} })
 end)
-vim.keymap.set("n", "<space>jb", function()
+vim.keymap.set("n", "<leader>jb", function()
   builtin.buffers({ file_ignore_patterns = {} })
 end)
 -- vim.keymap.set("n", "<Leader>gt", builtin.tags)
-vim.keymap.set("n", "<space>jg", builtin.git_status, { desc = "Jump to git modified" })
-vim.keymap.set("n", "<space>jj", builtin.jumplist, { desc = "Jump to jumplist" })
-vim.keymap.set("n", "<space>jh", builtin.help_tags, { desc = "Jump to help" })
-vim.keymap.set("n", "<space>jm", function()
+vim.keymap.set("n", "<leader>jg", builtin.git_status, { desc = "Jump to git modified" })
+vim.keymap.set("n", "<leader>jj", builtin.jumplist, { desc = "Jump to jumplist" })
+vim.keymap.set("n", "<leader>jh", builtin.help_tags, { desc = "Jump to help" })
+vim.keymap.set("n", "<leader>jm", function()
   builtin.oldfiles({ previewer = false, only_cwd = true })
 end, { desc = "Jump to MRU (locally)" })
-vim.keymap.set("n", "<space>jM", function()
+vim.keymap.set("n", "<leader>jM", function()
   builtin.oldfiles({ previewer = false })
 end, { desc = "Jump to MRU (globally)" })
 
@@ -72,20 +73,20 @@ vim.keymap.set("n", "<Leader>fe", function()
   telescope.extensions.file_browser.file_browser({ path = "%:p:h" })
 end)
 
-vim.keymap.set("n", "<space>ff", function()
+vim.keymap.set("n", "<leader>ff", function()
   telescope.extensions.live_grep_args.live_grep_args()
 end, { desc = "Live grep (args)" })
 
 vim.keymap.set(
   "n",
-  "<space>fw",
+  "<leader>fw",
   lga_shortcuts.grep_word_under_cursor,
   { desc = "Grep word under cursor" }
 )
 
 vim.keymap.set(
   "v",
-  "<space>fw",
+  "<leader>fw",
   lga_shortcuts.grep_visual_selection,
   { desc = "Grep visual selection" }
 )

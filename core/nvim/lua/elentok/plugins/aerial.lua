@@ -18,12 +18,12 @@ return {
       "Constant",
     },
     on_attach = function(bufnr)
-      vim.keymap.set("n", "<space>ta", "<cmd>AerialToggle left<cr>", { buffer = bufnr })
+      vim.keymap.set("n", "<leader>ta", "<cmd>AerialToggle left<cr>", { buffer = bufnr })
       vim.keymap.set("n", "[[", "<cmd>AerialPrev<cr>", { buffer = bufnr })
       vim.keymap.set("n", "]]", "<cmd>AerialNext<cr>", { buffer = bufnr })
       vim.keymap.set(
         "n",
-        "<space>oa",
+        "<leader>oa",
         "<cmd>AerialNavOpen<cr>",
         { buffer = bufnr, desc = "Open Aerial navigation" }
       )

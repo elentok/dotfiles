@@ -102,7 +102,7 @@ vim.api.nvim_create_autocmd(
 
 local has_builtin, builtin = pcall(require, "telescope.builtin")
 if has_builtin then
-  vim.keymap.set("n", "<space>jt", function()
+  vim.keymap.set("n", "<leader>jt", function()
     builtin.grep_string({ search = "[ ]", search_dirs = { vim.fn.expand("%") } })
   end, { desc = "Jump to open task" })
 end
@@ -167,8 +167,8 @@ local function todo_toggle_done_visible()
   end
 end
 
-vim.keymap.set("n", "<space>td", todo_toggle_done, { desc = "Todo - toggle done" })
-vim.keymap.set("n", "<space>tv", todo_toggle_done_visible, { desc = "Todo - toggle done visible" })
+vim.keymap.set("n", "<leader>td", todo_toggle_done, { desc = "Todo - toggle done" })
+vim.keymap.set("n", "<leader>tv", todo_toggle_done_visible, { desc = "Todo - toggle done visible" })
 
 vim.keymap.set("n", "[t", todo_prev_state, { desc = "Todo - prev state" })
 vim.keymap.set("n", "]t", todo_next_state, { desc = "Todo - next state" })

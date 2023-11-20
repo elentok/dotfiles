@@ -39,7 +39,7 @@ return {
     "ziontee113/color-picker.nvim",
     opts = {},
     keys = {
-      { "<space>cp", "<cmd>PickColor<cr>", mode = "n", desc = "Color picker" },
+      { "<leader>cp", "<cmd>PickColor<cr>", mode = "n", desc = "Color picker" },
     },
   },
 

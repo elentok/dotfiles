@@ -23,7 +23,7 @@ return {
       t = {
         name = "toggle/test",
       },
-    }, { prefix = "<space>" })
+    }, { prefix = "<leader>" })
   end,
   opts = {},
 }
