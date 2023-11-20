@@ -50,7 +50,7 @@ telescope.load_extension("fzf")
 telescope.load_extension("file_browser")
 
 vim.keymap.set("n", "<c-p>", builtin.find_files)
-vim.keymap.set("n", "<leader>f", builtin.find_files)
+vim.keymap.set("n", "<leader>p", builtin.find_files)
 vim.keymap.set("n", "z=", builtin.spell_suggest)
 vim.keymap.set("n", "<Leader>b", function()
   builtin.buffers({ file_ignore_patterns = {} })

@@ -133,3 +133,9 @@ vim.keymap.set(
   '"3x',
   { desc = "Delete visual selecting without overwriting register" }
 )
+
+vim.keymap.set("n", "<leader>wh", "<c-w>h", { desc = "Go to window to the left" })
+vim.keymap.set("n", "<leader>wj", "<c-w>j", { desc = "Go to window below" })
+vim.keymap.set("n", "<leader>wk", "<c-w>k", { desc = "Go to window above" })
+vim.keymap.set("n", "<leader>wl", "<c-w>l", { desc = "Go to window to the right" })
+vim.keymap.set({ "n", "v" }, "<leader>vv", "<c-v>", { desc = "Go into block visual mode" })
