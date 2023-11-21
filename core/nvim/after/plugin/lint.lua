@@ -9,7 +9,7 @@ end
 -- end
 
 -- Don't load eslint in Deno project
-local is_deno_project = vim.fn.findfile("deno.json", ";.")
+local is_deno_project = vim.fn.findfile("deno.json", ";.") ~= ""
 
 if not is_deno_project then
   lint.linters_by_ft = {
