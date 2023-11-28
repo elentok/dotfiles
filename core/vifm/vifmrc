@@ -92,4 +92,7 @@ nnoremap yf :!echo -n %c:p | dotf-yank-osc52<cr>:echo expand('%"c:p') "is yanked
 " yank root of current file's name into the clipboard
 nnoremap yr :!echo -n %c:r | dotf-yank-osc52<cr>:echo expand('%"c:r') "is yanked to clipboard"<cr>
 
+" Mac's quicklook preview
+nnoremap <space> :!qlmanage -p %f > /dev/null 2>&1<cr>
+
 " vim: syntax=vim foldmethod=marker
