@@ -13,7 +13,7 @@ return {
         ".local/share/nvim/lazy",
       },
       experiments = {
-        partial_update = "diff",
+        partial_update = "line-by-line",
         -- disable_restore_cursors = false,
         adjust_cursor_position = true,
       },
