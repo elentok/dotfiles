@@ -2,4 +2,22 @@
 
 source "$DOTF/framework"
 
-dotf-symlink "$DOTF/core/ripgrep/rgignore" "$HOME/.rgignore"
+function main() {
+  dotf-symlink "$DOTF/core/ripgrep/rgignore" "$HOME/.rgignore"
+  install-zsh-completion
+}
+
+function install-zsh-completion() {
+  dotf-bullet "Installing ZSH Completion..."
+
+  dir="$HOME/.zsh-complete"
+  mkdir -p "$dir"
+  rg --generate complete-zsh > "$dir/_rg"
+
+  # Reset zsh completion cache
+  rm ~/.zcompdump
+
+  dotf-success "done"
+}
+
+main "$@"

@@ -11,7 +11,7 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/build-tools/23.0.0
 
 # Completions {{{1
-fpath=($DOTF/core/zsh/vendor/zsh-completions/src $fpath)
+fpath=($HOME/.zsh-complete "$DOTF/core/zsh/vendor/zsh-completions/src" $fpath)
 
 # Functions {{{1
 
