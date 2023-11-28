@@ -29,6 +29,8 @@ local cmp_mapping = {
   ["<C-e>"] = cmp.mapping.abort(),
   ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   -- From https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
+  ["<Up>"] = cmp.mapping.select_prev_item(),
+  ["<Down>"] = cmp.mapping.select_next_item(),
   ["<Tab>"] = cmp.mapping(function(fallback)
     if cmp.visible() then
       cmp.select_next_item()
