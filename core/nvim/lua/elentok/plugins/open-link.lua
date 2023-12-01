@@ -14,7 +14,7 @@ return {
   dependencies = {
     "ojroques/nvim-osc52",
   },
-  cmd = { "OpenLink" },
+  cmd = { "OpenLink", "PasteImage" },
   keys = {
     {
       "ge",
@@ -22,6 +22,11 @@ return {
         require("open-link").open()
       end,
       desc = "Open the link under the cursor",
+    },
+    {
+      "<Leader>ip",
+      "<cmd>PasteImage<cr>",
+      desc = "Paste image from clipboard",
     },
   },
 }
