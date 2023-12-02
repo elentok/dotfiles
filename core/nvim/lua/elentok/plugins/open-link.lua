@@ -18,9 +18,7 @@ return {
   keys = {
     {
       "ge",
-      function()
-        require("open-link").open()
-      end,
+      "<cmd>OpenLink<cr>",
       desc = "Open the link under the cursor",
     },
     {
