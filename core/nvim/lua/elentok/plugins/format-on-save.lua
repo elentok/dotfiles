@@ -1,3 +1,11 @@
+---@param name string
+---@return boolean
+local function hasLspClient(name)
+  return #vim.tbl_filter(function(client)
+    return client.name == name
+  end, vim.lsp.buf_get_clients()) > 0
+end
+
 return {
   "elentok/format-on-save.nvim",
   dev = true,
@@ -6,6 +14,14 @@ return {
     local formatters = require("format-on-save.formatters")
     local message_buffer = require("format-on-save.error-notifiers.message-buffer")
     local config = require("elentok.config")
+
+    local function typescript_formatter()
+      if hasLspClient("denols") then
+        return formatters.lsp
+      else
+        return formatters.prettierd
+      end
+    end
 
     format_on_save.setup({
       exclude_path_patterns = {
@@ -33,8 +49,8 @@ return {
         sh = formatters.shfmt,
         zsh = formatters.shfmt,
         terraform = formatters.lsp,
-        typescript = formatters.prettierd,
-        typescriptreact = formatters.prettierd,
+        typescript = typescript_formatter,
+        typescriptreact = typescript_formatter,
         yaml = formatters.lsp,
       }, config.formatter_by_ft),
     })
