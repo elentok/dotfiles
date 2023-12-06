@@ -1,3 +1,4 @@
+local deno = require("elentok.lib.deno")
 local ok, lint = pcall(require, "lint")
 if not ok then
   print('Module "lint" not found, skipping setup.')
@@ -8,10 +9,8 @@ end
 --   return vim.fn.findfile("eslintrc.js", ";.") ~= "" or vim.fn.findfile(".eslintrc", ";.") ~= ""
 -- end
 
--- Don't load eslint in Deno project
-local is_deno_project = vim.fn.findfile("deno.json", ";.") ~= ""
-
-if not is_deno_project then
+print("is_deno_project", deno.isDenoProject())
+if not deno.isDenoProject() then
   lint.linters_by_ft = {
     typescript = { "eslint_d" },
     typescriptreact = { "eslint_d" },
