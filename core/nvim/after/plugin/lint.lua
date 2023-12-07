@@ -9,7 +9,6 @@ end
 --   return vim.fn.findfile("eslintrc.js", ";.") ~= "" or vim.fn.findfile(".eslintrc", ";.") ~= ""
 -- end
 
-print("is_deno_project", deno.isDenoProject())
 if not deno.isDenoProject() then
   lint.linters_by_ft = {
     typescript = { "eslint_d" },
