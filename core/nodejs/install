@@ -16,6 +16,9 @@ main() {
     dotf-apt nodejs npm
   fi
 
+  if dotf-command-missing yarn; then
+    npm install -g yarn
+  fi
   (cd extra/scripts/node && yarn install)
 }
 
