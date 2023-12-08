@@ -41,8 +41,10 @@ function install_symlinks() {
 
 function install_starship() {
   # On Mac starship is installed via Homebrew
-  if dotf-is-linux; then
-    curl -sS https://starship.rs/install.sh | sh
+  if dotf-command-missing starship; then
+    if dotf-is-linux; then
+      curl -sS https://starship.rs/install.sh | sh
+    fi
   fi
 
   mkdir -p ~/.config
