@@ -6,12 +6,14 @@ local DONE_COLOR = "#6C7A96"
 ---@class StatusOptions
 ---@field name string
 ---@field text? string
+---@field conceal? string
 ---@field hl? table<string, any>
 
 ---@class Status
 ---@field name string
 ---@field text string
 ---@field index integer
+---@field conceal? string
 ---@field hl? table<string, any>
 
 ---@class SetupOptions
@@ -24,23 +26,28 @@ local default_statuses = {
   {
     name = "open",
     text = " ",
+    conceal = "☐",
   },
   {
     name = "inprogress",
     hl = { bg = "#EBCB8B", fg = "#000000" },
+    conceal = "🏃",
   },
   {
     name = "waiting",
     hl = { fg = "#EBCB8B" },
+    conceal = "⌛",
   },
   {
     name = "codereview",
     hl = { fg = "#9369DB" },
+    conceal = "📖",
   },
   {
     name = "done",
     text = "x",
     hl = { fg = DONE_COLOR },
+    conceal = "☑",
   },
 }
 
@@ -55,6 +62,7 @@ local function build_statuses(options)
       name = status_options.name,
       text = status_options.text or status_options.name,
       hl = status_options.hl,
+      conceal = status_options.conceal,
       index = index,
     })
   end
@@ -77,10 +85,19 @@ local function add_highlight(status)
   vim.api.nvim_set_hl(0, group, status.hl)
 end
 
+---@param status Status
+local function add_conceal(status)
+  local text = status.text or status.name
+  vim.fn.matchadd("Conceal", "\\[" .. text .. "\\]", 20, -1, { conceal = status.conceal })
+end
+
 local function setup_buffer()
   for _, status in ipairs(config.statuses) do
     if status.hl ~= nil then
       add_highlight(status)
+    end
+    if status.conceal ~= nil then
+      add_conceal(status)
     end
   end
 
