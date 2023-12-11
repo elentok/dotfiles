@@ -63,7 +63,7 @@ vim.keymap.set("x", "i<leader>", "t oT o", { silent = true })
 -- Misc {{{1
 vim.keymap.set("n", "<Leader>tm", "<cmd>set modifiable!<cr>:set modifiable?<cr>")
 vim.keymap.set("n", "<Leader>tt", "<cmd>Twilight<cr>")
-vim.keymap.set("n", "_", "<cmd>Vifm<cr>")
+-- vim.keymap.set("n", "_", "<cmd>Vifm<cr>")
 
 vim.keymap.set("n", "<cr>", "<cmd>nohls<cr><cr>")
 vim.keymap.set("n", "<Leader><Leader>", "<cmd>silent !tput clear<cr>:redraw!<cr>")
