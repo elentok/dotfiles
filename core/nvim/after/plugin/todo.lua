@@ -47,7 +47,7 @@ local default_statuses = {
     name = "done",
     text = "x",
     hl = { fg = DONE_COLOR },
-    conceal = "☑",
+    conceal = "✓",
   },
 }
 
