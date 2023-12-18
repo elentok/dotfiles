@@ -52,7 +52,7 @@ return {
           enable = true,
         },
         ensure_installed = ensure_installed,
-        highlight = { enable = true },
+        highlight = { enable = true, disable = { "markdown", "markdown_inline" } },
         autopairs = { enable = true },
         incremental_selection = {
           enable = true,
