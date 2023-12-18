@@ -35,7 +35,7 @@ return {
       },
       formatter_by_ft = vim.tbl_extend("force", {
         css = formatters.lsp,
-        html = formatters.lsp,
+        html = formatters.prettierd,
         java = formatters.lsp,
         javascript = formatters.prettierd,
         json = formatters.lsp,
