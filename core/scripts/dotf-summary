@@ -50,6 +50,8 @@ function summary-start() {
   if has-started; then
     if [ "${1:-}" == "-f" ]; then
       rm "$SUMMARY_LOCKFILE"
+    elif [ "${1:-}" == "-i" ] && dotf-confirm "Summary lockfile exists, delete it and continue?"; then
+      rm "$SUMMARY_LOCKFILE"
     else
       dotf-error "Summary is already in progress"
       exit 1

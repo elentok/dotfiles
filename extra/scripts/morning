@@ -2,7 +2,7 @@
 
 source "$DOTF/framework"
 
-dotf-summary start
+dotf-summary start -i
 
 dotf-header h1 'Good morning :-)'
 
