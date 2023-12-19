@@ -99,6 +99,7 @@
   rbc = rebase --continue
   rbs = rebase --skip
   rbi = rebase -i
+  rbu = !git remote update && git rebase upstream/main
   rh = reset HEAD
   s = status
   sl = stash list
