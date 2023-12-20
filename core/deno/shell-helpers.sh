@@ -17,6 +17,23 @@ function dt() {
   fi
 }
 
+# Run deno test (with watch)
+function dtw() {
+  if [ $# -gt 0 ]; then
+    deno test --watch "$@"
+    return $?
+  fi
+
+  test="$(fd _test.ts | fzf-tmux -p --prompt 'Pick test: ' --ansi --exit-0 | awk '{print $1}')"
+
+  if [ -n "$test" ]; then
+    print -s "deno test --watch $test" \
+      && echo "> deno test --watch $test" \
+      && deno test --watch "$test"
+  fi
+
+}
+
 function deno-tasks() {
   deno task 2>&1 \
     | grep -v 'Available tasks:' \
