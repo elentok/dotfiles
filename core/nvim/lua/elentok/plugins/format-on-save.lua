@@ -25,7 +25,7 @@ return {
 
     local function markdown_kb_layout_formatter()
       if vim.fn.expand("%:t"):match("layout.md") then
-        return formatters.shell({ cmd = { "qmkmd", "format", "%" } })
+        return formatters.shell({ cmd = { "qmkmd", "format", "%" }, tempfile = "random" })
       end
     end
 
