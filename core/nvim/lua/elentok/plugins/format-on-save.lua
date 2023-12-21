@@ -23,6 +23,12 @@ return {
       end
     end
 
+    local function markdown_kb_layout_formatter()
+      if vim.fn.expand("%:t"):match("layout.md") then
+        return formatters.shell({ cmd = { "qmkmd", "format", "%" } })
+      end
+    end
+
     format_on_save.setup({
       exclude_path_patterns = {
         "/node_modules/",
@@ -40,7 +46,10 @@ return {
         javascript = formatters.prettierd,
         json = formatters.lsp,
         lua = formatters.stylua,
-        markdown = formatters.prettierd,
+        markdown = {
+          formatters.prettierd,
+          markdown_kb_layout_formatter,
+        },
         openscad = formatters.lsp,
         python = formatters.black,
         rust = formatters.lsp,
