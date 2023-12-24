@@ -201,6 +201,10 @@ for pkg in coreutils findutils gnu-sed; do
   fi
 done
 
+if [ -e ~/.local/kitty.app ]; then
+  PATH="$PATH:$HOME/.local/kitty.app/bin"
+fi
+
 PATH="$PATH:\
 $HOME/.cargo/bin:\
 $HOME/.rbenv/bin:\
