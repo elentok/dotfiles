@@ -16,6 +16,13 @@ function main() {
   echo "Checking requirements are installed..."
   echo
 
+  if dotf-is-linux; then
+    if [ -e /usr/lib/python3.11/EXTERNALLY-MANAGED ]; then
+      sudo mv /usr/lib/python3.11/EXTERNALLY-MANAGED{,.disabled}
+    fi
+  fi
+
+  install-if-missing curl curl
   install-if-missing python3 python3
   install-if-missing pip3 python3-pip
 
