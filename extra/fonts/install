@@ -14,9 +14,9 @@ find "$DOTF/extra/fonts" -name '*.[o,t]tf' -type f \
     copy_to_dir "$file" "$font_dir"
   done
 
-if [ ! -e "$font_dir/CascadiaMonoPL.ttf" ]; then
-  "$DOTF/extra/fonts/install-cascadia"
-fi
+# if [ ! -e "$font_dir/CascadiaMonoPL.ttf" ]; then
+#   "$DOTF/extra/fonts/install-cascadia"
+# fi
 
 # For linux
 if dotf-is-linux; then
