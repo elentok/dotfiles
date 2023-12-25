@@ -31,7 +31,7 @@ local default_statuses = {
   {
     name = "inprogress",
     hl = { bg = "#EBCB8B", fg = "#000000" },
-    conceal = "🏃",
+    conceal = "😎",
   },
   {
     name = "waiting",
