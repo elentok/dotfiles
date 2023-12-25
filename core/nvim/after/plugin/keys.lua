@@ -56,9 +56,9 @@ vim.keymap.set(
 -- vim.keymap.set("n", "<Leader>vaf", "<cmd>Git add %<cr>")
 
 -- Spaces text object {{{1
-vim.keymap.set("x", "<leader>", "f oT o", { silent = true })
-vim.keymap.set("x", "a<leader>", "f oF o", { silent = true })
-vim.keymap.set("x", "i<leader>", "t oT o", { silent = true })
+vim.keymap.set("x", "<space>", "f oT o", { silent = true })
+vim.keymap.set("x", "a<space>", "f oF o", { silent = true })
+vim.keymap.set("x", "i<space>", "t oT o", { silent = true })
 
 -- Misc {{{1
 vim.keymap.set("n", "<Leader>tm", "<cmd>set modifiable!<cr>:set modifiable?<cr>")
