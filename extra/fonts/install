@@ -9,10 +9,17 @@ else
   mkdir -p "$font_dir"
 fi
 
-find "$DOTF/extra/fonts" -name '*.[o,t]tf' -type f \
-  | while read file; do
-    copy_to_dir "$file" "$font_dir"
-  done
+function copy-fonts() {
+  find "$1" -name '*.[o,t]tf' -type f \
+    | while read -r file; do
+      copy_to_dir "$file" "$font_dir"
+    done
+}
+
+copy-fonts "$DOTF/extra/fonts"
+if [ -e "$DOTP/fonts" ]; then
+  copy-fonts "$DOTP/fonts"
+fi
 
 # if [ ! -e "$font_dir/CascadiaMonoPL.ttf" ]; then
 #   "$DOTF/extra/fonts/install-cascadia"
