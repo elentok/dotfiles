@@ -5,7 +5,7 @@ source "$DOTF/framework"
 SWAY="$DOTF/extra/sway"
 
 main() {
-  dotf-apt sway
+  dotf-apt sway i3status swaylock swayidle
   dotf-symlink "$SWAY" "$HOME/.config/sway"
 
   # install_session_file
