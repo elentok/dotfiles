@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+dotf-apt linux-tools-generic
+sudo cpupower frequency-set -g powersave
