@@ -40,6 +40,13 @@ function get-host-field() {
     fi
   done
 
+  for plugin in "$DOTP"/*; do
+    if [ -e "$DOTP/$plugin" ]; then
+      file="$DOTP/$plugin"
+      break
+    fi
+  done
+
   if [ ! -e "$file" ]; then
     echo >&2 "Error: hosts info file not found"
     return 1

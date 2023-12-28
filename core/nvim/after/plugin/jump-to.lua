@@ -8,12 +8,19 @@ local config_dirs = {
 }
 util.add_dirs(config_dirs, { vim.env.DOTL .. "/nvim" })
 util.add_dirs(config_dirs, { vim.env.DOTPR .. "/nvim" })
+for _, plugin in ipairs(vim.fn.readdir(vim.env.DOTP)) do
+  util.add_dirs(config_dirs, { vim.env.DOTP .. "/" .. plugin .. "/nvim" })
+end
 
 local script_dirs = {
   vim.env.DOTF .. "/core/scripts",
   vim.env.DOTF .. "/scripts",
 }
 util.add_dirs(script_dirs, { vim.env.DOTL .. "/scripts" })
+
+for _, plugin in ipairs(vim.fn.readdir(vim.env.DOTP)) do
+  util.add_dirs(script_dirs, { vim.env.DOTP .. "/" .. plugin .. "/scripts" })
+end
 
 -- Functions -----------------------------------------------
 

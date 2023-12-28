@@ -1,6 +1,7 @@
 export DOTF=~/.dotfiles
 export DOTL=~/.dotlocal
 export DOTPR=~/.dotprivate
+export DOTP=~/.dotplugins
 
 # if dotf-is-core-loaded &> /dev/null; then
 #   return
@@ -19,6 +20,9 @@ source_if_exists() {
 source "$DOTF/core/zsh/config.sh"
 source_if_exists "$DOTL/zsh/config.sh"
 source_if_exists "$DOTPR/zsh/config.sh"
+for plugin in "$DOTP"/*; do
+  source_if_exists "$DOTP/$plugin/zsh/config.sh"
+done
 
 source "$DOTF/core/scripts/lib/os.sh"
 source "$DOTF/core/scripts/lib/helpers.sh"
@@ -163,6 +167,10 @@ $HOME/dev/git-helpers/bin:\
 $HOME/dev/qmkmd/bin:\
 $DOTPR/scripts:\
 $DOTL/scripts"
+
+for plugin in "$DOTP"/*; do
+  PATH="$PATH:$DOTP/$plugin/scripts"
+done
 
 if is-n-providing-node; then
   PATH="$PATH:$N_PREFIX/bin"
