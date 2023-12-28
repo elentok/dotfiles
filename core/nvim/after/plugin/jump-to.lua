@@ -7,7 +7,6 @@ local config_dirs = {
   vim.env.DOTF .. "/core/nvim",
 }
 util.add_dirs(config_dirs, { vim.env.DOTL .. "/nvim" })
-util.add_dirs(config_dirs, { vim.env.DOTPR .. "/nvim" })
 for _, plugin in ipairs(vim.fn.readdir(vim.env.DOTP)) do
   util.add_dirs(config_dirs, { vim.env.DOTP .. "/" .. plugin .. "/nvim" })
 end

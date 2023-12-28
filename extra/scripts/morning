@@ -16,9 +16,9 @@ if [ -e "$DOTL/scripts/morning-local" ]; then
   "$DOTL/scripts/morning-local"
 fi
 
-if [ -e "$DOTPR/scripts/morning-private" ]; then
-  "$DOTPR/scripts/morning-private"
-fi
+for script in "$DOTP"/scripts/morning-*; do
+  "$script"
+done
 
 if [ "$(cd "$DOTF" && git my-branch)" != "main" ]; then
   (cd "$DOTF" && dotf-summary run 'Switch to main branch' git checkout --track -b main origin/main)

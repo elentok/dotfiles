@@ -2,12 +2,10 @@
 
 dotf-node-version() {
   local node_version_file="$DOTF/config/node-version"
-  local private_node_version_file="$DOTPR/config/node-version"
+  local private_node_version_file=""
 
-  for plugin in "$DOTP"/*; do
-    if [ -e "$DOTP/$plugin/config/node-version" ]; then
-      private_node_version_file="$DOTP/$plugin/config/node-version"
-    fi
+  for version_file in "$DOTP"/*/config/node-version; do
+    private_node_version_file="$version_file"
   done
 
   if [ -e "$private_node_version_file" ]; then

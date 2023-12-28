@@ -9,9 +9,8 @@
 # Will look for config files in:
 #
 #   $DOTF/config/repos.cfg
-#   $DOTL/config/repos.cfg
-#   $DOTPR/config/repos.cfg
 #   ~/.config/dotfiles/repos.cfg
+#   $DOTP/*/config/repos.cfg
 #
 # Example config file:
 #
@@ -24,10 +23,12 @@ source "$DOTF/framework"
 
 CONFIG_FILES=(
   "$DOTF/config/repos.cfg"
-  "$DOTL/config/repos.cfg"
-  "$DOTPR/config/repos.cfg"
   "$HOME/.config/dotfiles/repos.cfg"
 )
+
+for file in "$DOTP"/*/config/repos.cfg; do
+  CONFIG_FILES+=("$file")
+done
 
 function main() {
   local cmd="${1:-}"
