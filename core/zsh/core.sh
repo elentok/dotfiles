@@ -1,6 +1,6 @@
 export DOTF=~/.dotfiles
 export DOTL=~/.dotlocal
-export DOTP=~/.dotprivate
+export DOTPR=~/.dotprivate
 
 # if dotf-is-core-loaded &> /dev/null; then
 #   return
@@ -18,7 +18,7 @@ source_if_exists() {
 # Load Configuration {{{1
 source "$DOTF/core/zsh/config.sh"
 source_if_exists "$DOTL/zsh/config.sh"
-source_if_exists "$DOTP/zsh/config.sh"
+source_if_exists "$DOTPR/zsh/config.sh"
 
 source "$DOTF/core/scripts/lib/os.sh"
 source "$DOTF/core/scripts/lib/helpers.sh"
@@ -161,7 +161,7 @@ $DOTF/extra/scripts/deno:\
 $DOTF/extra/scripts/node:\
 $HOME/dev/git-helpers/bin:\
 $HOME/dev/qmkmd/bin:\
-$DOTP/scripts:\
+$DOTPR/scripts:\
 $DOTL/scripts"
 
 if is-n-providing-node; then

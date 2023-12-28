@@ -17,8 +17,8 @@ function copy-fonts() {
 }
 
 copy-fonts "$DOTF/extra/fonts"
-if [ -e "$DOTP/fonts" ]; then
-  copy-fonts "$DOTP/fonts"
+if [ -e "$DOTPR/fonts" ]; then
+  copy-fonts "$DOTPR/fonts"
 fi
 
 # if [ ! -e "$font_dir/CascadiaMonoPL.ttf" ]; then

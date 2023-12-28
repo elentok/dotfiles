@@ -10,7 +10,7 @@
 #
 #   $DOTF/config/repos.cfg
 #   $DOTL/config/repos.cfg
-#   $DOTP/config/repos.cfg
+#   $DOTPR/config/repos.cfg
 #   ~/.config/dotfiles/repos.cfg
 #
 # Example config file:
@@ -25,7 +25,7 @@ source "$DOTF/framework"
 CONFIG_FILES=(
   "$DOTF/config/repos.cfg"
   "$DOTL/config/repos.cfg"
-  "$DOTP/config/repos.cfg"
+  "$DOTPR/config/repos.cfg"
   "$HOME/.config/dotfiles/repos.cfg"
 )
 

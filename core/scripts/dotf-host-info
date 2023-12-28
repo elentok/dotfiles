@@ -33,7 +33,7 @@ function get-host-field() {
   local index="$1"
 
   local file=""
-  local files=("$DOTL/pretty-hostnames" "$DOTL/hosts-info" "$DOTP/hosts-info")
+  local files=("$DOTL/pretty-hostnames" "$DOTL/hosts-info" "$DOTPR/hosts-info")
   for file in "${files[@]}"; do
     if [ -e "$file" ]; then
       break

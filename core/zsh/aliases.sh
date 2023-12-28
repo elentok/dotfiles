@@ -293,4 +293,4 @@ function tm() {
 
 # DOTLOCAL {{{1
 source_if_exists "$DOTL/zsh/aliases.sh"
-source_if_exists "$DOTP/zsh/aliases.sh"
+source_if_exists "$DOTPR/zsh/aliases.sh"

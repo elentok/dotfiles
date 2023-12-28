@@ -16,8 +16,8 @@ if [ -e "$DOTL/scripts/morning-local" ]; then
   "$DOTL/scripts/morning-local"
 fi
 
-if [ -e "$DOTP/scripts/morning-private" ]; then
-  "$DOTP/scripts/morning-private"
+if [ -e "$DOTPR/scripts/morning-private" ]; then
+  "$DOTPR/scripts/morning-private"
 fi
 
 if [ "$(cd "$DOTF" && git my-branch)" != "main" ]; then
