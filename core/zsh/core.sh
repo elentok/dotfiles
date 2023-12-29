@@ -18,8 +18,8 @@ source_if_exists() {
 # Load Configuration {{{1
 source "$DOTF/core/zsh/config.sh"
 source_if_exists "$DOTL/zsh/config.sh"
-for plugin in "$DOTP"/*; do
-  source_if_exists "$DOTP/$plugin/zsh/config.sh"
+for configfile in "$DOTP"/*/zsh/config.sh(N); do
+  source "$configfile"
 done
 
 source "$DOTF/core/scripts/lib/os.sh"
@@ -164,7 +164,7 @@ $DOTF/extra/scripts/node:\
 $HOME/dev/git-helpers/bin:\
 $HOME/dev/qmkmd/bin"
 
-for dir in "$DOTP"/*/scripts; do
+for dir in "$DOTP"/*/scripts(N); do
   PATH="$PATH:$dir"
 done
 

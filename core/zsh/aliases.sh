@@ -292,6 +292,6 @@ function tm() {
 }
 
 # Plugins {{{1
-for file in "$DOTP"/*/zsh/aliases.sh; do
+for file in "$DOTP"/*/zsh/aliases.sh(N); do
   source "$file"
 done
