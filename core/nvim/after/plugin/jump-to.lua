@@ -6,8 +6,11 @@ local util = require("elentok/util")
 local config_dirs = {
   vim.env.DOTF .. "/core/nvim",
 }
-for _, plugin in ipairs(vim.fn.readdir(vim.env.DOTP)) do
-  util.add_dirs(config_dirs, { vim.env.DOTP .. "/" .. plugin .. "/nvim" })
+
+if vim.fn.isdirectory(vim.env.DOTP) == 1 then
+  for _, plugin in ipairs(vim.fn.readdir(vim.env.DOTP)) do
+    util.add_dirs(config_dirs, { vim.env.DOTP .. "/" .. plugin .. "/nvim" })
+  end
 end
 
 local script_dirs = {
@@ -15,8 +18,10 @@ local script_dirs = {
   vim.env.DOTF .. "/scripts",
 }
 
-for _, plugin in ipairs(vim.fn.readdir(vim.env.DOTP)) do
-  util.add_dirs(script_dirs, { vim.env.DOTP .. "/" .. plugin .. "/scripts" })
+if vim.fn.isdirectory(vim.env.DOTP) == 1 then
+  for _, plugin in ipairs(vim.fn.readdir(vim.env.DOTP)) do
+    util.add_dirs(script_dirs, { vim.env.DOTP .. "/" .. plugin .. "/scripts" })
+  end
 end
 
 -- Functions -----------------------------------------------
