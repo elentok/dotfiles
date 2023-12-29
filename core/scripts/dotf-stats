@@ -8,7 +8,7 @@ dotf-header h2 'General'
 echo "Dotfiles Plugins:"
 echo "  - Core:  $(command ls -1 "$DOTF/core" | wc -l)"
 echo "  - Extra: $(command ls -1 "$DOTF/extra" | wc -l)"
-echo "Neovim Plugins:   $(grep -c " use" "$DOTF/core/nvim/lua/elentok/packer-plugins.lua")"
+# echo "Neovim Plugins:   $(grep -c " use" "$DOTF/core/nvim/lua/elentok/packer-plugins.lua")"
 
 dotf-header h2 'Core Scripts:'
 find "$DOTF/core/scripts" -maxdepth 1 -type f -exec head -1 '{}' \; \
