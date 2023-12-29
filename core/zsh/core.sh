@@ -205,7 +205,7 @@ function dotf-gen-path() {
     fi
   fi
 
-  echo "$new_path:$HOME/.fzf/bin"
+  echo "$HOME/.fzf/bin"
   echo "$HOME/.apps/bin"
   # echo "$HOME/bin"
   # echo "$HOME/scripts"
@@ -262,7 +262,7 @@ function dotf-gen-path() {
     echo "/mnt/c/Windows/System32/WindowsPowerShell/v1.0"
   fi
 
-  if [ -e "$DENO_INSTALL" ]; then
+  if [ -e "${DENO_INSTALL:-}" ]; then
     echo "$DENO_INSTALL/bin"
   fi
 }
