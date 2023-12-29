@@ -15,10 +15,31 @@ source_if_exists() {
   if [ -e "$1" ]; then source "$1"; fi
 }
 
+# Helper: Plugin {{{1
+
+function dotf-plugin-list() {
+  if [ ! -e "$DOTP" ]; then
+    return
+  fi
+
+  (cd "$DOTP" && /usr/bin/ls -1)
+}
+
+function dotf-plugin-list-files() {
+  local filepath="$1"
+
+  dotf-plugin-list | while read -r plugin; do
+    if [ -e "$DOTP/$plugin/$filepath" ]; then
+      echo "$DOTP/$plugin/$filepath"
+    fi
+  done
+}
+
 # Load Configuration {{{1
 source "$DOTF/core/zsh/config.sh"
 source_if_exists "$DOTL/zsh/config.sh"
-for configfile in "$DOTP"/*/zsh/config.sh(N); do
+# for configfile in "$DOTP"/*/zsh/config.sh(N); do
+dotf-plugin-list-files zsh/config.sh | while read -r configfile; do
   source "$configfile"
 done
 
@@ -164,9 +185,7 @@ $DOTF/extra/scripts/node:\
 $HOME/dev/git-helpers/bin:\
 $HOME/dev/qmkmd/bin"
 
-for dir in "$DOTP"/*/scripts(N); do
-  PATH="$PATH:$dir"
-done
+PATH="$(dotf-plugin-list-files scripts | /usr/bin/tr '\n' ':')$PATH"
 
 if is-n-providing-node; then
   PATH="$PATH:$N_PREFIX/bin"
