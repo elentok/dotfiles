@@ -3,7 +3,7 @@
 import { Table } from "npm:console-table-printer"
 
 const SPACES_REGEX = /\s+/
-const EXCLUDE_MOUNT_POINTS = /^\/(System\/Volumes\/)/
+const EXCLUDE_MOUNT_POINTS = /^\/(System\/Volumes|snap)\//
 
 interface Disk {
   device: string
