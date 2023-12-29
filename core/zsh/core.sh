@@ -22,13 +22,13 @@ function dotf-plugin-list() {
     return
   fi
 
-  (cd "$DOTP" && /usr/bin/ls -1)
+  (cd "$DOTP" && command ls -1)
 }
 
 function dotf-plugin-list-files() {
   local filepath="$1"
 
-  dotf-plugin-list | while read -r plugin; do
+  for plugin in $(dotf-plugin-list); do
     if [ -e "$DOTP/$plugin/$filepath" ]; then
       echo "$DOTP/$plugin/$filepath"
     fi
@@ -38,8 +38,7 @@ function dotf-plugin-list-files() {
 # Load Configuration {{{1
 source "$DOTF/core/zsh/config.sh"
 source_if_exists "$DOTL/zsh/config.sh"
-# for configfile in "$DOTP"/*/zsh/config.sh(N); do
-dotf-plugin-list-files zsh/config.sh | while read -r configfile; do
+for configfile in $(dotf-plugin-list-files zsh/config.sh); do
   source "$configfile"
 done
 
@@ -138,6 +137,10 @@ if is-n-providing-node; then
   export N_PREFIX=$HOME/.n
 fi
 
+if is-fnm-providing-node; then
+  eval "$(fnm env --use-on-cd)"
+fi
+
 if is-nvm-providing-node; then
   export NVM_DIR=$HOME/.nvm
   [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh" --no-use
@@ -154,7 +157,7 @@ if dotf-is-mac; then
 fi
 
 # Go {{{1
-if [ -e $HOME/.apps/go ]; then
+if [ -e "$HOME/.apps/go" ]; then
   export GOROOT=$HOME/.apps/go
 else
   export GOROOT=$BREW_HOME/opt/go/libexec
@@ -173,92 +176,102 @@ if dotf-is-mac; then
 fi
 
 # LUA {{{1
-export LUA_ROOT="$HOME/.apps/all/lua/default"
-export LUAROCKS_ROOT="$HOME/.apps/all/luarocks/default"
+# export LUA_ROOT="$HOME/.apps/all/lua/default"
+# export LUAROCKS_ROOT="$HOME/.apps/all/luarocks/default"
 
-# PATH {{{1
-PATH="$DOTF/core/scripts:\
-$DOTF/core/git/scripts:\
-$DOTF/extra/scripts:\
-$DOTF/extra/scripts/deno:\
-$DOTF/extra/scripts/node:\
-$HOME/dev/git-helpers/bin:\
-$HOME/dev/qmkmd/bin"
-
-PATH="$(dotf-plugin-list-files scripts | /usr/bin/tr '\n' ':')$PATH"
-
-if is-n-providing-node; then
-  PATH="$PATH:$N_PREFIX/bin"
-elif is-nvm-providing-node; then
-  if [ -n "${NVM_BIN:-}" ] && [ -e "$NVM_BIN" ]; then
-    PATH="$PATH:${NVM_BIN}"
-  else
-    PATH="$PATH:${DOTF_NVM_DEFAULT_PATH}/bin"
-  fi
-fi
-
-PATH="$PATH:$HOME/.fzf/bin:\
-$HOME/.apps/bin:\
-$HOME/bin:\
-$HOME/scripts:\
-$HOME/.luarocks/bin:\
-$LUA_ROOT/bin:\
-$LUAROCKS_ROOT/bin:\
-$HOME/.lua/bin:\
-$HOME/.local/bin"
-
-if [ -n "$BREW_HOME" ]; then
-  PATH=$PATH:$BREW_HOME/bin:$BREW_HOME/sbin:$BREW_HOME/opt/coreutils/libexec/gnubin
-fi
-
-[ -n "$GOROOT" ] && PATH=$PATH:$GOROOT/bin:$MAIN_GOPATH/bin
-for ver in 3.11 3.10 3.9 3.7 3.6; do
-  [ -d $HOME/Library/Python/$ver/bin ] && PATH=$PATH:$HOME/Library/Python/$ver/bin
-done
-
-# replace bsd binaries with gnu
-for pkg in coreutils findutils gnu-sed; do
-  gnubin="$BREW_HOME/opt/$pkg/libexec/gnubin"
-  if [ -e "$gnubin" ]; then
-    PATH=$PATH:$gnubin
-  fi
-done
-
-if [ -e ~/.local/kitty.app ]; then
-  PATH="$PATH:$HOME/.local/kitty.app/bin"
-fi
-
-PATH="$PATH:\
-$HOME/.cargo/bin:\
-$HOME/.rbenv/bin:\
-$HOME/.rbenv/shims:\
-/snap/bin:\
-/usr/local/share/npm/bin:\
-/usr/local/bin:\
-/usr/local/sbin:\
-/usr/bin:\
-/bin:\
-/usr/sbin:\
-/sbin"
-
-if [ -e /usr/lib/cinnamon-settings-daemon ]; then
-  PATH=$PATH:/usr/lib/cinnamon-settings-daemon
-fi
-
-if dotf-is-wsl; then
-  PATH=$PATH:/mnt/c/Windows:/mnt/c/Windows/System32:/mnt/c/Windows/System32/WindowsPowerShell/v1.0
-fi
-
+# Deno {{{1
 if dotf-is-linux; then
   export DENO_INSTALL=~/.deno
-  PATH=$PATH:$DENO_INSTALL/bin
 fi
 
-if is-fnm-providing-node; then
-  eval "$(fnm env --use-on-cd)"
-fi
+# PATH {{{1
+function dotf-gen-path() {
+  echo "$DOTF/core/scripts"
+  echo "$DOTF/core/git/scripts"
+  echo "$DOTF/extra/scripts"
+  echo "$DOTF/extra/scripts/deno"
+  echo "$DOTF/extra/scripts/node"
+  echo "$HOME/dev/git-helpers/bin"
+  echo "$HOME/dev/qmkmd/bin"
+  dotf-plugin-list-files scripts
 
-export PATH
+  if is-n-providing-node; then
+    echo "$N_PREFIX/bin"
+  elif is-nvm-providing-node; then
+    if [ -n "${NVM_BIN:-}" ] && [ -e "$NVM_BIN" ]; then
+      echo "${NVM_BIN}"
+    else
+      echo "${DOTF_NVM_DEFAULT_PATH}/bin"
+    fi
+  fi
+
+  echo "$new_path:$HOME/.fzf/bin"
+  echo "$HOME/.apps/bin"
+  # echo "$HOME/bin"
+  # echo "$HOME/scripts"
+  # echo "$HOME/.luarocks/bin"
+  # echo "$LUA_ROOT/bin"
+  # echo "$LUAROCKS_ROOT/bin"
+  # echo "$HOME/.lua/bin"
+  echo "$HOME/.local/bin"
+
+  if [ -n "$BREW_HOME" ]; then
+    echo "$BREW_HOME/bin"
+    echo "$BREW_HOME/sbin"
+    echo "$BREW_HOME/opt/coreutils/libexec/gnubin"
+  fi
+
+  if [ -n "$GOROOT" ]; then
+    echo "$GOROOT/bin"
+    echo "$MAIN_GOPATH/bin"
+  fi
+
+  local pyver
+  pyver="$(command ls ~/Library/Python | sort -V | tail -1)"
+  if [ -d "$HOME/Library/Python/$pyver/bin" ]; then
+    echo "$HOME/Library/Python/$pyver/bin"
+  fi
+
+  # replace bsd binaries with gnu
+  for pkg in coreutils findutils gnu-sed; do
+    gnubin="$BREW_HOME/opt/$pkg/libexec/gnubin"
+    if [ -e "$gnubin" ]; then
+      echo "$gnubin"
+    fi
+  done
+
+  if [ -e ~/.local/kitty.app ]; then
+    echo "$HOME/.local/kitty.app/bin"
+  fi
+
+  echo "$HOME/.cargo/bin"
+  # echo "$HOME/.rbenv/bin"
+  # echo "$HOME/.rbenv/shims"
+  echo "/snap/bin"
+  echo "/usr/local/share/npm/bin"
+  echo "/usr/local/bin"
+  echo "/usr/local/sbin"
+  echo "/usr/bin"
+  echo "/bin"
+  echo "/usr/sbin"
+  echo "/sbin"
+
+  if dotf-is-wsl; then
+    echo "/mnt/c/Windows"
+    echo "/mnt/c/Windows/System32"
+    echo "/mnt/c/Windows/System32/WindowsPowerShell/v1.0"
+  fi
+
+  if [ -e "$DENO_INSTALL" ]; then
+    echo "$DENO_INSTALL/bin"
+  fi
+}
+
+new_path="$(dotf-gen-path | tr '\n' ':')"
+# remove last colon
+new_path="${new_path::-1}"
+
+export PATH="$new_path"
 
 #
 # Rust {{{1
@@ -322,8 +335,9 @@ if dotf-is-mac; then
   fi
 fi
 
-# DOTLOCAL {{{1
-source_if_exists "$DOTL/zsh/core.zsh"
-source_if_exists "$DOTL/zsh/core.sh"
+# Plugins {{{1
+for configfile in $(dotf-plugin-list-files zsh/core.sh); do
+  source "$configfile"
+done
 
 # vim: foldmethod=marker

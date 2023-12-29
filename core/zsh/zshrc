@@ -21,7 +21,9 @@ if [ -e ~/.profiling ]; then
 fi
 
 source $DOTF/core/zsh/core.sh
-source_if_exists ~/.dotlocal/zsh/before.zsh
+for script in $(dotf-plugin-list-files zsh/before.zsh); do
+  source "$script"
+done
 source $DOTF/core/zsh/zsh.zsh
 source $DOTF/core/zsh/settings.sh
 source $DOTF/core/zsh/dircolors/dircolors.sh
@@ -41,8 +43,9 @@ fi
 if [ -e ~/.fzf.zsh ]; then
   source ~/.fzf.zsh
 fi
-source_if_exists ~/.dotlocal/zsh/after.zsh
-source_if_exists ~/.dotprivate/zsh/after.zsh
+for script in $(dotf-plugin-list-files zsh/after.zsh); do
+  source "$script"
+done
 
 # required so ~/.zshenv will be loaded by sub-processes
 unset ZSHENV_LOADED
