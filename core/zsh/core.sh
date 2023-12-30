@@ -226,10 +226,12 @@ function dotf-gen-path() {
     echo "$MAIN_GOPATH/bin"
   fi
 
-  local pyver
-  pyver="$(command ls ~/Library/Python | sort -V | tail -1)"
-  if [ -d "$HOME/Library/Python/$pyver/bin" ]; then
-    echo "$HOME/Library/Python/$pyver/bin"
+  if dotf-is-mac; then
+    local pyver
+    pyver="$(command ls ~/Library/Python | sort -V | tail -1)"
+    if [ -d "$HOME/Library/Python/$pyver/bin" ]; then
+      echo "$HOME/Library/Python/$pyver/bin"
+    fi
   fi
 
   # replace bsd binaries with gnu
