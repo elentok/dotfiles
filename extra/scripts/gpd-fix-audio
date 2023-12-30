@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#
+# Based on https://askubuntu.com/a/1294354
+#
+# Discover devices with `lspci -vvv`
+# Find device id with `ls /sys/bus/pci/devices/ | grep 00:1f.3`
+#
+set -euo pipefail
+
+# Disconnect the driver from the device and detaches the device from the
+# tree (it's not unloaded, just disconnected)
+echo 1 > /sys/bus/pci/devices/0000:00:1f.3/remove
+
+# Rescans pci devices
+echo 1 > /sys/bus/pci/rescan
