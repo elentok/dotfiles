@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+start=$SECONDS
+
+if [ "$1" == "-s" ]; then
+  source "$2"
+else
+  "$@"
+fi
+
+result=$?
+echo
+echo
+
+elapsed_ms=$(((SECONDS - start) * 1000))
+echo "Took $(printf '%.2f' $elapsed_ms)ms (exitcode $result)"
