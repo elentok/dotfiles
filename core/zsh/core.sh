@@ -1,14 +1,9 @@
+# vim: foldmethod=marker
+
+_core_start=$SECONDS
 export DOTF=~/.dotfiles
 export DOTL=~/.dotlocal
 export DOTP=~/.dotplugins
-
-# if dotf-is-core-loaded &> /dev/null; then
-#   return
-# fi
-#
-# function dotf-is-core-loaded() {
-#   return
-# }
 
 # Helper: Source If Exists {{{1
 source_if_exists() {
@@ -333,4 +328,7 @@ for configfile in $(dotf-plugin-list-files zsh/core.sh); do
   source "$configfile"
 done
 
-# vim: foldmethod=marker
+_core_elapsed_ms=$(((SECONDS - _core_start) * 1000))
+if [[ $_core_elapsed_ms -gt 10 ]]; then
+  echo "Warning: core.sh took $(printf '%.2f' $_core_elapsed_ms)ms to load"
+fi
