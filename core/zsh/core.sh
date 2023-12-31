@@ -45,15 +45,6 @@ done
 source "$DOTF/core/scripts/lib/os.sh"
 source "$DOTF/core/scripts/lib/helpers.sh"
 
-# Shell {{{1
-function is_zsh() {
-  [ -n "${ZSH_VERSION:-}" ]
-}
-
-function is_bash() {
-  [ -n "${BASH_VERSION:-}" ]
-}
-
 # Helper functions {{{1
 
 DOTF_CACHE_ROOT="$HOME/.cache/dotfiles"
@@ -319,7 +310,7 @@ export LESS="--RAW-CONTROL-CHARS"
 export RIPGREP_CONFIG_PATH="$DOTF/core/ripgrep/ripgreprc"
 PRETTY_HOST="$(dotf-pretty-hostname)"
 SHORT_HOST="${PRETTY_HOST:0:3}"
-if is_zsh; then
+if dotf-is-zsh; then
   SHORT_HOST="${SHORT_HOST:l}"
 fi
 export PRETTY_HOST

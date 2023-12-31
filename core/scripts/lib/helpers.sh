@@ -33,3 +33,11 @@ dotf-trim() {
 dotf-filesize() {
   stat -c%s "$1"
 }
+
+function dotf-is-zsh() {
+  [ -n "${ZSH_VERSION:-}" ]
+}
+
+function dotf-is-bash() {
+  [ -n "${BASH_VERSION:-}" ]
+}

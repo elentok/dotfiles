@@ -45,7 +45,7 @@ gr() {
   cut -d$'\t' -f1
 }
 
-if is_bash; then
+if dotf-is-bash; then
   bind '"\er": redraw-current-line'
   bind '"\C-g\C-f": "$(gf)\e\C-e\er"'
   bind '"\C-g\C-b": "$(gb)\e\C-e\er"'
