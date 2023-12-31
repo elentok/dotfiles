@@ -25,17 +25,18 @@ function dotf-plugin-list() {
     return
   fi
 
-  if dotf-is-zsh; then
-    files=("$DOTP"/*(N))
-    for file in "${files[@]}"; do
-      echo "$file"
-    done
-  else
+  if dotf-is-bash; then
     shopt -s nullglob
     for file in "$DOTP"/*; do
       echo "$file"
     done
     shopt -u nullglob
+  else
+    setopt CSH_NULL_GLOB
+    for file in "$DOTP"/*; do
+      echo "$file"
+    done
+    unsetopt CSH_NULL_GLOB
   fi
 }
 
