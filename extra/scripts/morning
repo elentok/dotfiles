@@ -12,11 +12,7 @@ dotf-summary run 'Setup SSH agent' agent setup
 dotf-header h2 'Add ssh key...'
 dotf-summary run 'Add SSH Key' ssh-add
 
-if [ -e "$DOTL/scripts/morning-local" ]; then
-  "$DOTL/scripts/morning-local"
-fi
-
-for script in "$DOTP"/scripts/morning-*; do
+for script in $(dotf-plugin-list-files scripts/morning); do
   "$script"
 done
 

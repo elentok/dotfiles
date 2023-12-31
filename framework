@@ -10,6 +10,7 @@ DOTF="$(cd "$DOTF" && pwd)"
 export DOTF
 
 source "$DOTF/core/zsh/core.sh"
+source "$DOTF/core/scripts/lib/helpers.sh"
 source "$DOTF/core/scripts/lib/ui.sh"
 source "$DOTF/core/scripts/lib/fs.sh"
 source "$DOTF/core/scripts/lib/node.sh"
