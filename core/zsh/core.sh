@@ -137,10 +137,6 @@ if is-n-providing-node; then
   export N_PREFIX=$HOME/.n
 fi
 
-if is-fnm-providing-node; then
-  eval "$(fnm env --use-on-cd)"
-fi
-
 if is-nvm-providing-node; then
   export NVM_DIR=$HOME/.nvm
   [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh" --no-use
@@ -274,6 +270,10 @@ new_path="$(dotf-gen-path | tr '\n' ':')"
 new_path="${new_path::-1}"
 
 export PATH="$new_path"
+
+if is-fnm-providing-node; then
+  eval "$(fnm env --use-on-cd)"
+fi
 
 #
 # Rust {{{1
