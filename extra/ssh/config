@@ -1,7 +1,6 @@
 # vim: syntax=sshconfig
 
-Include ~/.dotlocal/ssh.conf
-Include ~/.dotprivate/ssh.conf
+Include ~/.dotplugins/*/ssh.conf
 Include ~/.ssh/machine.config
 
 # This is causing issues when using the multiple git accounts with custom 
