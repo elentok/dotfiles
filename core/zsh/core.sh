@@ -253,10 +253,10 @@ done
 
 # Timing checks {{{1
 _core_elapsed_ms=$(((SECONDS - _core_start) * 1000))
-if [[ $_core_elapsed_ms -gt 15 ]]; then
+if [[ $_core_elapsed_ms -gt 25 ]]; then
   echo "Warning: core.sh took $(printf '%.2f' $_core_elapsed_ms)ms to load"
 fi
 
-if [[ $_core_genpath_elapsed_ms -gt 4 ]]; then
+if [[ $_core_genpath_elapsed_ms -gt 5 ]]; then
   echo "Warning: core.sh gen-path took $(printf '%.2f' $_core_genpath_elapsed_ms)ms to load"
 fi
