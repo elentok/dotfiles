@@ -5,80 +5,22 @@ export DOTF=~/.dotfiles
 export DOTL=~/.dotlocal
 export DOTP=~/.dotplugins
 
+source "$DOTF/core/scripts/lib/os.sh"
+source "$DOTF/core/scripts/lib/core-helpers.sh"
+
 # Helper: Source If Exists {{{1
-source_if_exists() {
-  if [ -e "$1" ]; then source "$1"; fi
-}
-
-# Helper: Plugin {{{1
-
-function dotf-plugin-list() {
-  if [ ! -e "$DOTP" ]; then
-    return
-  fi
-
-  (cd "$DOTP" && command ls -1)
-}
-
-function dotf-plugin-list-files() {
-  local filepath="$1"
-
-  for plugin in $(dotf-plugin-list); do
-    if [ -e "$DOTP/$plugin/$filepath" ]; then
-      echo "$DOTP/$plugin/$filepath"
-    fi
-  done
-}
+# source_if_exists() {
+#   if [ -e "$1" ]; then source "$1"; fi
+# }
 
 # Load Configuration {{{1
 source "$DOTF/core/zsh/config.sh"
-source_if_exists "$DOTL/zsh/config.sh"
 for configfile in $(dotf-plugin-list-files zsh/config.sh); do
   source "$configfile"
 done
 
-source "$DOTF/core/scripts/lib/os.sh"
-source "$DOTF/core/scripts/lib/helpers.sh"
-
-# Helper functions {{{1
-
-DOTF_CACHE_ROOT="$HOME/.cache/dotfiles"
-
-with_cache() {
-  local cache_key="$1"
-  local cache_command="$2"
-  local cache_file="$DOTF_CACHE_ROOT/$cache_key"
-  shift
-  shift
-
-  mkdir -p "$DOTF_CACHE_ROOT"
-
-  if [ ! -e "$cache_file" ]; then
-    "$@" > "$cache_file"
-  fi
-
-  $cache_command "$cache_file"
-}
-
 # TMP
 export TMP=/tmp
-
-# File owner
-function file-owner() {
-  if is-gnu-stat; then
-    stat --format=%U "$*"
-  else
-    stat -f '%Su' "$*"
-  fi
-}
-
-function is-gnu-stat() {
-  if dotf-is-mac; then
-    [[ "$(which stat)" =~ /gnubin/ ]]
-  else
-    return 0
-  fi
-}
 
 # Disable <Ctrl-s> lock on interactive shells {{{1
 # see:
@@ -90,19 +32,21 @@ if [[ -t 0 && $- = *i* ]]; then
 fi
 
 # Homebrew {{{1
-BREW_HOME=''
-for dir in /opt/homebrew ~/.linuxbrew ~/.homebrew /usr/local; do
-  if [ -e "$dir/bin/brew" ]; then
-    export BREW_HOME=$dir
-    break
-  fi
-done
+if dotf-is-mac; then
+  BREW_HOME=''
+  for dir in /opt/homebrew ~/.linuxbrew ~/.homebrew /usr/local; do
+    if [ -e "$dir/bin/brew" ]; then
+      export BREW_HOME=$dir
+      break
+    fi
+  done
 
-if [ -e "$BREW_HOME" ]; then
-  if [ -e "$BREW_HOME/Homebrew" ]; then
-    export BREW_ROOT="$BREW_HOME/Homebrew"
-  else
-    export BREW_ROOT="$BREW_HOME"
+  if [ -e "$BREW_HOME" ]; then
+    if [ -e "$BREW_HOME/Homebrew" ]; then
+      export BREW_ROOT="$BREW_HOME/Homebrew"
+    else
+      export BREW_ROOT="$BREW_HOME"
+    fi
   fi
 fi
 
@@ -141,18 +85,18 @@ fi
 # Go {{{1
 if [ -e "$HOME/.apps/go" ]; then
   export GOROOT=$HOME/.apps/go
-else
+elif dotf-is-mac; then
   export GOROOT=$BREW_HOME/opt/go/libexec
 fi
 export MAIN_GOPATH=$HOME/go
 export GOPATH=$MAIN_GOPATH
 export GO15VENDOREXPERIMENT=1
 
-if [ -d "$BREW_HOME/share/app-engine-go-64/goroot" ]; then
-  export GOPATH=$GOPATH:$BREW_HOME/share/app-engine-go-64/goroot
-fi
-
 if dotf-is-mac; then
+  if [ -d "$BREW_HOME/share/app-engine-go-64/goroot" ]; then
+    export GOPATH=$GOPATH:$BREW_HOME/share/app-engine-go-64/goroot
+  fi
+
   export CGO_CPPFLAGS="-I $BREW_HOME/include"
   export CGO_LDFLAGS="-L $BREW_HOME/lib"
 fi
@@ -189,19 +133,7 @@ function dotf-gen-path() {
 
   echo "$HOME/.fzf/bin"
   echo "$HOME/.apps/bin"
-  # echo "$HOME/bin"
-  # echo "$HOME/scripts"
-  # echo "$HOME/.luarocks/bin"
-  # echo "$LUA_ROOT/bin"
-  # echo "$LUAROCKS_ROOT/bin"
-  # echo "$HOME/.lua/bin"
   echo "$HOME/.local/bin"
-
-  if [ -n "$BREW_HOME" ]; then
-    echo "$BREW_HOME/bin"
-    echo "$BREW_HOME/sbin"
-    echo "$BREW_HOME/opt/coreutils/libexec/gnubin"
-  fi
 
   if [ -n "$GOROOT" ]; then
     echo "$GOROOT/bin"
@@ -209,28 +141,32 @@ function dotf-gen-path() {
   fi
 
   if dotf-is-mac; then
+    if [ -n "$BREW_HOME" ]; then
+      echo "$BREW_HOME/bin"
+      echo "$BREW_HOME/sbin"
+      echo "$BREW_HOME/opt/coreutils/libexec/gnubin"
+    fi
+
     local pyver
     pyver="$(command ls ~/Library/Python | sort -V | tail -1)"
     if [ -d "$HOME/Library/Python/$pyver/bin" ]; then
       echo "$HOME/Library/Python/$pyver/bin"
     fi
-  fi
 
-  # replace bsd binaries with gnu
-  for pkg in coreutils findutils gnu-sed; do
-    gnubin="$BREW_HOME/opt/$pkg/libexec/gnubin"
-    if [ -e "$gnubin" ]; then
-      echo "$gnubin"
-    fi
-  done
+    # replace bsd binaries with gnu
+    for pkg in coreutils findutils gnu-sed; do
+      gnubin="$BREW_HOME/opt/$pkg/libexec/gnubin"
+      if [ -e "$gnubin" ]; then
+        echo "$gnubin"
+      fi
+    done
+  fi
 
   if [ -e ~/.local/kitty.app ]; then
     echo "$HOME/.local/kitty.app/bin"
   fi
 
   echo "$HOME/.cargo/bin"
-  # echo "$HOME/.rbenv/bin"
-  # echo "$HOME/.rbenv/shims"
   echo "/snap/bin"
   echo "/usr/local/share/npm/bin"
   echo "/usr/local/bin"
@@ -240,20 +176,22 @@ function dotf-gen-path() {
   echo "/usr/sbin"
   echo "/sbin"
 
-  if dotf-is-wsl; then
-    echo "/mnt/c/Windows"
-    echo "/mnt/c/Windows/System32"
-    echo "/mnt/c/Windows/System32/WindowsPowerShell/v1.0"
-  fi
+  # if dotf-is-wsl; then
+  #   echo "/mnt/c/Windows"
+  #   echo "/mnt/c/Windows/System32"
+  #   echo "/mnt/c/Windows/System32/WindowsPowerShell/v1.0"
+  # fi
 
   if [ -e "${DENO_INSTALL:-}" ]; then
     echo "$DENO_INSTALL/bin"
   fi
 }
 
+_core_genpath_start=$SECONDS
 new_path="$(dotf-gen-path | tr '\n' ':')"
 # remove last colon
 new_path="${new_path::-1}"
+_core_genpath_elapsed_ms=$(((SECONDS - _core_genpath_start) * 1000))
 
 export PATH="$new_path"
 
@@ -261,7 +199,6 @@ if is-fnm-providing-node; then
   eval "$(fnm env --use-on-cd)"
 fi
 
-#
 # Rust {{{1
 if [ -e ~/.cargo/env ]; then
   source ~/.cargo/env
@@ -271,17 +208,14 @@ fi
 
 # TODO: figure this out
 if [ -n "${NVIM:-}" ]; then
-  export EDITOR='nvr -cc split --remote-wait'
-elif [ ! -z "${VSCODE_IPC_HOOK:-}" ]; then
-  # Use vscode as the editor for things like Git when run from within vscode's
-  # integrated terminal
-  export EDITOR="code -w"
+  EDITOR='nvr -cc split --remote-wait'
 elif dotf-has-command nvim; then
-  export EDITOR=$(which nvim)
+  EDITOR=$(which nvim)
 else
-  export EDITOR=vim
+  EDITOR=vim
 fi
 
+export EDITOR
 export VISUAL=$EDITOR
 export GIT_EDITOR=$EDITOR
 
@@ -291,25 +225,14 @@ if [[ "$TERM" != "screen-256color" && "$TERM" != "tmux" && "$TERM" != "tmux-256c
   export TERM=xterm-256color
 fi
 
-export TMUX_TMPDIR="$TMP/$(whoami)"
-mkdir -p $TMUX_TMPDIR
-
-# Neovim Terminal {{{1
-is_in_neovim() {
-  [ -n "${NVIM}" ]
-}
+TMUX_TMPDIR="$HOME/tmp/tmux"
+export TMUX_TMPDIR
+mkdir -p "$TMUX_TMPDIR"
 
 # MISC {{{1
 export SSH_TERM=xterm-color
 export LESS="--RAW-CONTROL-CHARS"
 export RIPGREP_CONFIG_PATH="$DOTF/core/ripgrep/ripgreprc"
-PRETTY_HOST="$(dotf-pretty-hostname)"
-SHORT_HOST="${PRETTY_HOST:0:3}"
-if dotf-is-zsh; then
-  SHORT_HOST="${SHORT_HOST:l}"
-fi
-export PRETTY_HOST
-export SHORT_HOST
 
 # - Don't follow non-constant sources
 #   (https://github.com/koalaman/shellcheck/wiki/SC1090)
@@ -328,7 +251,12 @@ for configfile in $(dotf-plugin-list-files zsh/core.sh); do
   source "$configfile"
 done
 
+# Timing checks {{{1
 _core_elapsed_ms=$(((SECONDS - _core_start) * 1000))
-if [[ $_core_elapsed_ms -gt 10 ]]; then
+if [[ $_core_elapsed_ms -gt 15 ]]; then
   echo "Warning: core.sh took $(printf '%.2f' $_core_elapsed_ms)ms to load"
+fi
+
+if [[ $_core_genpath_elapsed_ms -gt 4 ]]; then
+  echo "Warning: core.sh gen-path took $(printf '%.2f' $_core_genpath_elapsed_ms)ms to load"
 fi

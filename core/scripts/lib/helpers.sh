@@ -2,17 +2,8 @@
 #
 # Various helper functions.
 #
-if type dotf-has-command &> /dev/null; then
-  return
-fi
 
-dotf-has-command() {
-  type "$1" > /dev/null 2>&1
-}
-
-dotf-command-missing() {
-  ! dotf-has-command "$1"
-}
+source "$DOTF/core/scripts/lib/core-helpers.sh"
 
 dotf-is-running() {
   pgrep "$1" > /dev/null 2>&1
@@ -34,10 +25,18 @@ dotf-filesize() {
   stat -c%s "$1"
 }
 
-function dotf-is-zsh() {
-  [ -n "${ZSH_VERSION:-}" ]
+function file-owner() {
+  if is-gnu-stat; then
+    stat --format=%U "$*"
+  else
+    stat -f '%Su' "$*"
+  fi
 }
 
-function dotf-is-bash() {
-  [ -n "${BASH_VERSION:-}" ]
+function is-gnu-stat() {
+  if dotf-is-mac; then
+    [[ "$(which stat)" =~ /gnubin/ ]]
+  else
+    return 0
+  fi
 }

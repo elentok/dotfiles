@@ -182,7 +182,7 @@ function _rprompt() {
   bg2=239
   fg2=white
   _rprompt_block '' $bg1 $fg1 '${_last_cmd_runtime} '
-  _rprompt_block $bg1 $bg2 $fg2 " ${USERNAME}@${SHORT_HOST} "
+  _rprompt_block $bg1 $bg2 $fg2 " ${USERNAME}@${HOST:0:6} "
 
 }
 RPROMPT="$(_rprompt)"
