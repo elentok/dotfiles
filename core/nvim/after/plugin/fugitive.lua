@@ -24,6 +24,8 @@ local function setup_fugitive()
   vim.keymap.set("n", "R", "<cmd>e<cr><cmd>echo 'Reloaded'<cr>", { buffer = true })
   vim.keymap.set("n", "q", "<cmd>q<cr>", { buffer = true })
   vim.keymap.set("n", "@", command_pallete, { buffer = true })
+  vim.keymap.set("n", "zo", "=", { buffer = true, remap = true })
+  vim.keymap.set("n", "zc", "=", { buffer = true, remap = true })
 end
 
 local function setup_fugitive_blame()
