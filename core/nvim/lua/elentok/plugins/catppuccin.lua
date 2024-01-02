@@ -6,10 +6,11 @@ return {
     vim.cmd.colorscheme("catppuccin")
   end,
   opts = {
-    flavour = "macchiato",
+    flavour = "mocha",
     dim_inactive = {
       enabled = true,
       shade = "dark",
+      percentage = 0.15,
     },
     integrations = {
       barbecue = {
