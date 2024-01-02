@@ -7,7 +7,7 @@ fi
 
 # Colors {{{1
 export BLACK="\\033[30m"
-export GRAY="\\033[1;30m"
+export GRAY="\x1b[38;5;241m"
 export RED="\\033[31m"
 export GREEN="\\033[32m"
 export YELLOW="\\033[33m"
@@ -28,7 +28,7 @@ function dotf-color() {
 
   case "$color" in
     black) echo -ne "\\033[30m" ;;
-    gray) echo -ne "\\033[1;30m" ;;
+    gray) echo -ne "\x1b[38;5;241m" ;;
     red) echo -ne "\\033[31m" ;;
     green) echo -ne "\\033[32m" ;;
     yellow) echo -ne "\\033[33m" ;;

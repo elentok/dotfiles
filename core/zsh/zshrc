@@ -53,4 +53,4 @@ unset ZSHENV_LOADED
 eval "$(starship init zsh)"
 
 duration=$((($SECONDS - $START_TIME) * 1000))
-echo "\033[1;30m $(printf '%.2f' $duration)ms\033[0m"
+echo -e "\x1b[38;5;241m $(printf '%.2f' $duration)ms\033[0m"
