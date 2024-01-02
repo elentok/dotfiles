@@ -22,6 +22,7 @@ alias cf='/bin/ls -1 | wc -l' # count files
 alias df='df -kh'
 alias doc='docker-compose'
 alias dorit='docker run --rm -it'
+alias dotfi='cd $DOTF'
 alias dotp='cd $DOTP && cd "$(command ls -1 | fzf-tmux -p --select-1)"'
 alias du='du -kh'
 alias fliph='convert -flop'
