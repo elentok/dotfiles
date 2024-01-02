@@ -3,5 +3,5 @@
 set -euo pipefail
 
 # wget https://github.com/catppuccin/kitty/raw/main/themes/mocha.conf
-# wget https://github.com/dexpota/kitty-themes/raw/master/themes/3024_Night.conf
-wget https://github.com/dexpota/kitty-themes/raw/master/themes/Atom.conf
+wget https://github.com/dexpota/kitty-themes/raw/master/themes/3024_Night.conf
+# wget https://github.com/dexpota/kitty-themes/raw/master/themes/Atom.conf
