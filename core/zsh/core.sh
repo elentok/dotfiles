@@ -135,7 +135,7 @@ function dotf-gen-path() {
   echo "$HOME/.apps/bin"
   echo "$HOME/.local/bin"
 
-  if [ -n "$GOROOT" ]; then
+  if [ -n "${GOROOT:-}" ]; then
     echo "$GOROOT/bin"
     echo "$MAIN_GOPATH/bin"
   fi
