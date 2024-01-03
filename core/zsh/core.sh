@@ -171,6 +171,7 @@ function dotf-gen-path() {
   echo "/usr/local/share/npm/bin"
   echo "/usr/local/bin"
   echo "/usr/local/sbin"
+  echo "/usr/games"
   echo "/usr/bin"
   echo "/bin"
   echo "/usr/sbin"
