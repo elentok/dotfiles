@@ -4,4 +4,8 @@ set -euo pipefail
 
 pkgname="$(apt-cache pkgnames | sort | fzf)"
 
-dotf-apt "$pkgname"
+if [ "${1:-}" == "-i" ]; then
+  apt info "$pkgname"
+else
+  dotf-apt "$pkgname"
+fi
