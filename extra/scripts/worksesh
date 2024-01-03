@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+#
+# Usage: worksesh <minutes>
+
+set -euo pipefail
+
+if [ $# -eq 0 ]; then
+  usage "$0"
+  exit 1
+fi
+
+minutes="$1"
+first=$((minutes - 2))
+
+dotf-notify "Starting $minutes minute work session"
+echo "Sleeping for ${first} minutes..."
+sleep $((minutes * 60))
+
+dotf-notify "2 minutes remaining"
+sleep 1000
+dotf-notify "1 minute remaining"
+sleep 1000
+dotf-notify "Locking in 5 seconds"
+sleep 5
+
+# TODO: support mac
+loginctl lock-session
