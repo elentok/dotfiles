@@ -13,14 +13,20 @@ minutes="$1"
 first=$((minutes - 2))
 
 dotf-notify "Starting $minutes minute work session"
-echo "Sleeping for ${first} minutes..."
-sleep $((minutes * 60))
+
+if [ "$first" -gt 0 ]; then
+  echo "Sleeping for ${first} minutes..."
+  sleep $((first * 60))
+fi
 
 dotf-notify "2 minutes remaining"
-sleep 1000
+echo "Sleeping for 1 minute..."
+sleep 60
 dotf-notify "1 minute remaining"
-sleep 1000
+echo "Sleeping for 1 minute..."
+sleep 60
 dotf-notify "Locking in 5 seconds"
+echo "Sleeping for 5 seconds..."
 sleep 5
 
 # TODO: support mac
