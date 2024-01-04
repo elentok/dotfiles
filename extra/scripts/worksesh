@@ -4,33 +4,46 @@
 
 set -euo pipefail
 
+source "$DOTF/core/scripts/lib/os.sh"
+
 if [ $# -eq 0 ]; then
   usage "$0"
   exit 1
 fi
 
 minutes="$1"
-first=$((minutes - 2))
+remaining=$minutes
 
 dotf-notify "Starting $minutes minute work session"
 
-if [ "$first" -gt 0 ]; then
-  echo "Sleeping for ${first} minutes..."
-  sleep $((first * 60))
-fi
+while [ "$remaining" -gt 0 ]; do
+  if [ "$remaining" -lt 3 ]; then
+    dotf-notify "${remaining} minutes remaining"
+    if dotf-is-mac; then
+      say "${remaining} minute remaining"
+    fi
+  fi
 
+  echo "- ${remaining} minutes remaining"
+  sleep 60
+  remaining=$((remaining - 1))
+done
+
+# if dotf-is-mac; then
+#   say "2 minutes remaining"
+# fi
+# dotf-notify "2 minutes remaining"
+# echo "Sleeping for 1 minute..."
+# sleep 60
+# if dotf-is-mac; then
+#   say "1 minute remaining"
+# fi
+# dotf-notify "1 minute remaining"
+# echo "Sleeping for 1 minute..."
+# sleep 60
 if dotf-is-mac; then
-  say "2 minutes remaining"
+  say "Locking in 5 seconds"
 fi
-dotf-notify "2 minutes remaining"
-echo "Sleeping for 1 minute..."
-sleep 60
-if dotf-is-mac; then
-  say "1 minute remaining"
-fi
-dotf-notify "1 minute remaining"
-echo "Sleeping for 1 minute..."
-sleep 60
 dotf-notify "Locking in 5 seconds"
 echo "Sleeping for 5 seconds..."
 sleep 5
