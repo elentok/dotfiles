@@ -19,9 +19,15 @@ if [ "$first" -gt 0 ]; then
   sleep $((first * 60))
 fi
 
+if dotf-is-mac; then
+  say "2 minutes remaining"
+fi
 dotf-notify "2 minutes remaining"
 echo "Sleeping for 1 minute..."
 sleep 60
+if dotf-is-mac; then
+  say "1 minute remaining"
+fi
 dotf-notify "1 minute remaining"
 echo "Sleeping for 1 minute..."
 sleep 60
@@ -30,4 +36,8 @@ echo "Sleeping for 5 seconds..."
 sleep 5
 
 # TODO: support mac
-loginctl lock-session
+if dotf-is-mac; then
+  pmset displaysleepnow
+else
+  loginctl lock-session
+fi
