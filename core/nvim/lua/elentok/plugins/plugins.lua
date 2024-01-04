@@ -1,5 +1,4 @@
 return {
-  { dir = "~/.dotprivate/nvim" },
   "numToStr/Comment.nvim",
   "tpope/vim-abolish",
   "tpope/vim-dispatch",
