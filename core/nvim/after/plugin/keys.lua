@@ -6,6 +6,7 @@ vim.keymap.set("n", "<leader>wq", "<cmd>wq<cr>", { desc = ":wq" })
 vim.keymap.set("n", "<leader>ww", "<cmd>w<cr>", { desc = ":w" })
 vim.keymap.set("n", "<leader>qq", "<cmd>q<cr>", { desc = ":q" })
 vim.keymap.set("n", "<leader>qa", "<cmd>qa<cr>", { desc = ":qa" })
+vim.keymap.set("n", "<leader>cq", "<cmd>cq<cr>", { desc = ":cq" })
 
 -- Switch to alternate file
 vim.keymap.set("n", "<leader><leader>", "<c-^>")
