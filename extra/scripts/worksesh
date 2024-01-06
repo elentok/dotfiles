@@ -4,53 +4,79 @@
 
 set -euo pipefail
 
+DATA_DIR=~/.local/share/worksesh
+LOG_FILE="$DATA_DIR/sessions.log"
+STATE_FILE="$DATA_DIR/state.txt"
+mkdir -p "$DATA_DIR"
+
+trap handle_ctrl_c INT
+
 source "$DOTF/core/scripts/lib/os.sh"
 
-if [ $# -eq 0 ]; then
-  usage "$0"
-  exit 1
-fi
-
-minutes="$1"
-remaining=$minutes
-
-dotf-notify "Starting $minutes minute work session"
-
-while [ "$remaining" -gt 0 ]; do
-  if [ "$remaining" -lt 3 ]; then
-    dotf-notify "${remaining} minutes remaining"
-    if dotf-is-mac; then
-      say "${remaining} minute remaining"
-    fi
+function main() {
+  if [ $# -eq 0 ]; then
+    usage "$0"
+    exit 1
   fi
 
-  echo "- ${remaining} minutes remaining"
-  sleep 60
-  remaining=$((remaining - 1))
-done
+  if [ "$1" == "?" ]; then
+    if [ -e "$STATE_FILE" ]; then
+      cat "$STATE_FILE"
+    else
+      echo "not running"
+    fi
+    exit
+  fi
 
-# if dotf-is-mac; then
-#   say "2 minutes remaining"
-# fi
-# dotf-notify "2 minutes remaining"
-# echo "Sleeping for 1 minute..."
-# sleep 60
-# if dotf-is-mac; then
-#   say "1 minute remaining"
-# fi
-# dotf-notify "1 minute remaining"
-# echo "Sleeping for 1 minute..."
-# sleep 60
-if dotf-is-mac; then
-  say "Locking in 5 seconds"
-fi
-dotf-notify "Locking in 5 seconds"
-echo "Sleeping for 5 seconds..."
-sleep 5
+  local minutes="$1"
+  local remaining=$minutes
 
-# TODO: support mac
-if dotf-is-mac; then
-  pmset displaysleepnow
-else
-  loginctl lock-session
-fi
+  while [ "$remaining" -gt 0 ]; do
+    echo "$remaining" > $STATE_FILE
+    if [ "$remaining" -lt 3 ]; then
+      notify "${remaining} minutes remaining"
+    else
+      echo "${remaining} minutes remaining"
+    fi
+
+    sleep 60
+    remaining=$((remaining - 1))
+  done
+
+  echo "done" > $STATE_FILE
+
+  write-to-log "complete: ${minutes}m session"
+
+  lock
+}
+
+function notify() {
+  echo "$@"
+  dotf-notify "$@"
+  if dotf-is-mac; then
+    say "$@"
+  fi
+}
+
+function lock() {
+  notify "Locking in 5 seconds"
+  sleep 5
+
+  if dotf-is-mac; then
+    pmset displaysleepnow
+  else
+    loginctl lock-session
+  fi
+}
+
+function handle_ctrl_c() {
+  echo "Work session aborted by user"
+  write-to-log "aborted: ${minutes}m session (${remaining} remaining)"
+  exit 1
+}
+
+function write-to-log() {
+  echo "$(date '+%Y-%m-%d %H:%M') $*" >> "$LOG_FILE"
+}
+
+main "$@"
