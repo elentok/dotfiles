@@ -24,7 +24,7 @@ vim.g.markdown_fenced_languages = {
 
 vim.opt.cursorline = true
 
--- vim.opt.foldlevel = 20
+vim.opt.foldlevel = 20
 vim.opt.number = true
 vim.opt.relativenumber = true
 
