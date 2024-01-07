@@ -2,7 +2,7 @@
 #
 # Usage: worksesh <minutes>
 
-set -euo pipefail
+set -uo pipefail
 
 DATA_DIR=~/.local/share/worksesh
 LOG_FILE="$DATA_DIR/sessions.log"
@@ -53,7 +53,6 @@ function start() {
   done
 
   echo " ✔" > $STATE_FILE
-  # echo "done" > $STATE_FILE
 
   write-to-log "complete: ${minutes}m session"
 
@@ -64,15 +63,6 @@ function status() {
   if [ -e "$STATE_FILE" ]; then
     cat "$STATE_FILE"
   fi
-
-  # state="$(cat "$STATE_FILE")"
-  # if [ "$state" == "done" ]; then
-  #   echo " ✔"
-  # elif [ "$state" == "aborted" ]; then
-  #   echo " ✘"
-  # else
-  #   echo " $state"
-  # fi
 }
 
 function notify() {
@@ -94,12 +84,20 @@ function lock() {
   fi
 }
 
+ctrl_c_max=3
+ctrl_c_count=0
+
 function handle_ctrl_c() {
-  echo "Work session aborted by user"
-  # echo "✘" > $STATE_FILE
-  echo "aborted" > $STATE_FILE
-  write-to-log "aborted: ${minutes}m session (${remaining_mins} remaining)"
-  exit 1
+  ctrl_c_count=$((ctrl_c_count + 1))
+  if [ "$ctrl_c_count" -lt "$ctrl_c_max" ]; then
+    echo
+    echo "To abort, press ctrl+c $((ctrl_c_max - ctrl_c_count)) more time(s)"
+  else
+    echo "Work session aborted by user"
+    echo " ✘" > $STATE_FILE
+    write-to-log "aborted: ${minutes}m session (${remaining_mins} remaining)"
+    exit 1
+  fi
 }
 
 function write-to-log() {
