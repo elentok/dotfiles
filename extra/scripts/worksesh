@@ -19,35 +19,60 @@ function main() {
     exit 1
   fi
 
-  if [ "$1" == "?" ]; then
-    if [ -e "$STATE_FILE" ]; then
-      cat "$STATE_FILE"
-    else
-      echo "not running"
-    fi
-    exit
+  if [ "$1" == "status" ]; then
+    status
+  else
+    start "$@"
   fi
+}
 
+function start() {
   local minutes="$1"
-  local remaining=$minutes
+  local remaining_mins=$minutes
 
-  while [ "$remaining" -gt 0 ]; do
-    echo "$remaining" > $STATE_FILE
-    if [ "$remaining" -lt 3 ]; then
-      notify "${remaining} minutes remaining"
+  # echo "$(date +%s) $minutes" > $STATE_FILE
+
+  while [ "$remaining_mins" -gt 1 ]; do
+    echo " ${remaining_mins}m" > $STATE_FILE
+    if [ "$((remaining_mins % 5))" == 0 ] || [ "$remaining_mins" -lt 3 ]; then
+      notify "${remaining_mins} minutes remaining"
     else
-      echo "${remaining} minutes remaining"
+      echo "${remaining_mins} minutes remaining"
     fi
 
     sleep 60
-    remaining=$((remaining - 1))
+    remaining_mins=$((remaining_mins - 1))
   done
 
-  echo "done" > $STATE_FILE
+  remaining_sec=60
+  while [ "$remaining_sec" -gt 0 ]; do
+    echo " ${remaining_sec}s" > $STATE_FILE
+    notify "${remaining_sec} seconds remaining"
+    sleep 20
+    remaining_sec=$((remaining_sec - 20))
+  done
+
+  echo " ✔" > $STATE_FILE
+  # echo "done" > $STATE_FILE
 
   write-to-log "complete: ${minutes}m session"
 
   lock
+}
+
+function status() {
+  if [ -e "$STATE_FILE" ]; then
+    cat "$STATE_FILE"
+  fi
+
+  # state="$(cat "$STATE_FILE")"
+  # if [ "$state" == "done" ]; then
+  #   echo " ✔"
+  # elif [ "$state" == "aborted" ]; then
+  #   echo " ✘"
+  # else
+  #   echo " $state"
+  # fi
 }
 
 function notify() {
@@ -71,7 +96,9 @@ function lock() {
 
 function handle_ctrl_c() {
   echo "Work session aborted by user"
-  write-to-log "aborted: ${minutes}m session (${remaining} remaining)"
+  # echo "✘" > $STATE_FILE
+  echo "aborted" > $STATE_FILE
+  write-to-log "aborted: ${minutes}m session (${remaining_mins} remaining)"
   exit 1
 }
 
