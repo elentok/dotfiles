@@ -34,7 +34,7 @@ function battery-status() {
 function status-right() {
   echo -n "#{pomodoro_status}"
   # item fg=yellow "$(~/.dotfiles/extra/scripts/bat-left)"
-  item fg=yellow "$(worksesh status)"
+  item fg=yellow "$(worksesh status) "
   item fg=yellow "$(battery-status)"
 }
 
