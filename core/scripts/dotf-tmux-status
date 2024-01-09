@@ -11,7 +11,12 @@ function main() {
 }
 
 function status-left() {
-  pretty-host
+  color1="cyan"
+  color2="#777777"
+  item "bg=$color1,fg=black" " $(dotf-pretty-hostname)"
+  item "bg=$color2,fg=$color1" ""
+  item "bg=$color2,fg=black" " #{session_name}"
+  item "fg=$color2" " "
 }
 
 function battery-status() {
@@ -21,8 +26,8 @@ function battery-status() {
   fi
 
   local icon="󱊣" # full
-  if ["$percentage" -lt 80]; then
-    if [ "$percentage" -lt 40]; then
+  if [ "$percentage" -lt 80 ]; then
+    if [ "$percentage" -lt 40 ]; then
       icon="󱊡"
     else
       icon="󱊢"
@@ -46,7 +51,7 @@ function item() {
 
 function pretty-host() {
   color="cyan"
-  item "bg=$color,fg=black" " $(dotf-pretty-hostname) "
+  item "bg=$color,fg=black" " $(dotf-pretty-hostname) > #{session_name} "
   item "fg=$color" " "
 }
 
