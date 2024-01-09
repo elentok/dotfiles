@@ -5,5 +5,7 @@ set -euo pipefail
 sed 's/  /    /g' \
   | sed -E 's/\[([^]]+)\]\(\.\.[^)]*\)/\1/' \
   | sed -E 's%saas#([0-9]+)%[PR#\1](https://github.com/salto-io/salto_private/pull/\1)%' \
+  | sed -E 's%salto#([0-9]+)%[PR#\1](https://github.com/salto-io/salto/pull/\1)%' \
   | sed -E 's%SAAS-([0-9]+)%[SAAS-\1](https://salto-io.atlassian.net/browse/\1)%' \
+  | sed -E 's%SALTO-([0-9]+)%[SALTO-\1](https://salto-io.atlassian.net/browse/\1)%' \
   | sed -E 's/\[x\]( -)?/✓/'
