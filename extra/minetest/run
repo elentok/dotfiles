@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+WORLD_PATH=~/.local/minetest/worlds/main
+
+mkdir -p $WORLD_PATH
+
+minetest --server --gameid minetest --world $WORLD_PATH

@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+MT_FILE="$HOME/.minetest/worlds/world/world.mt"
+MODS_DIR="$HOME/.minetest/mods"
+mkdir -p "$MODS_DIR"
+
+mods=(
+  # https://github.com/minetest-mods/3d_armor
+  # https://github.com/ElCeejo/animalia
+  # https://github.com/minetest-mods/mesecons
+  # https://codeberg.org/tenplus1/ethereal
+  # https://github.com/minetest-mods/i3
+  # https://github.com/Sokomine/mg_villages
+  # https://github.com/MrRar/edit_skin
+  # https://bitbucket.org/minetest_gamers/x_enchanting
+  # https://gitlab.com/zughy-friends-minetest/enderpearl
+  # https://github.com/theFox6/minetest_mod_weather
+  # https://github.com/mt-mods/homedecor_modpack
+  # https://github.com/Gerold55/ma_pops_furniture
+  # https://github.com/Rotfuchs-von-Vulpes/what_is_this_uwu-minetest
+  # https://codeberg.org/tenplus1/ambience
+  # https://github.com/minetest-mods/moreblocks
+  # https://codeberg.org/tenplus1/sfinv_bags
+  https://github.com/mt-mods/unifieddyes
+  https://github.com/mt-mods/basic_materials
+)
+
+for repo_url in "${mods[@]}"; do
+  name="$(basename "$repo_url")"
+  dir="$MODS_DIR/$name"
+  echo -n "- Installing ${name}... "
+  echo "$dir"
+  if [ -e "$dir" ]; then
+    echo "already cloned."
+  else
+    git clone --depth 1 "$repo_url" "$dir"
+    echo "done."
+  fi
+
+  echo -n "- Enabling ${name}... "
+  if grep -q "load_file_$name" "$MT_FILE"; then
+    echo "already enabled."
+  else
+    echo "load_file_$name = true" >> "$MT_FILE"
+    echo "done."
+  fi
+done

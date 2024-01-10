@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+#
+# https://hub.docker.com/r/linuxserver/minetest
+
+set -euo pipefail
+
+CONF_DIR="$HOME/.minetest"
+# ROOT="$HOME/.minetest"
+# DATA_DIR="$ROOT/data/"
+# CONF_DIR="$DOTF/extra/minetest/conf/"
+
+mkdir -p "$CONF_DIR/games"
+
+if [ ! -e "$CONF_DIR/games/minetest" ]; then
+  git clone --depth 1 https://github.com/minetest/minetest_game "$CONF_DIR/games/minetest"
+fi
+
+docker run \
+  -d --restart=unless-stopped \
+  --name "minetest" \
+  -e PUID="$(id -u)" \
+  -e PGID="$(id -g)" \
+  -e TZ=Etc/UTC \
+  -e CLI_ARGS="--gameid minetest --port 30000" \
+  -v "$CONF_DIR:/config/.minetest/" \
+  -p 30000:30000/udp \
+  lscr.io/linuxserver/minetest:5.8.0
