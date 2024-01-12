@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+function gset() {
+  gsettings set "$1" "$2" "$3"
+  echo -n "$1.$2: "
+  gsettings get "$1" "$2"
+}
+
+gset org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
+gset org.gnome.shell.extensions.dash-to-dock dock-fixed false
+gset org.gnome.desktop.interface show-battery-percentage true
+gset org.gnome.desktop.wm.preferences resize-with-right-button true
