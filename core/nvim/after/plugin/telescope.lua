@@ -12,7 +12,9 @@ telescope.setup({
     mappings = {
       i = {
         ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-        ["<C-r"] = actions.delete_buffer,
+        ["<C-r>"] = actions.delete_buffer,
+        ["<C-d>"] = actions.cycle_history_next,
+        ["<C-u>"] = actions.cycle_history_prev,
       },
       n = {
         ["q"] = actions.close,
