@@ -29,7 +29,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code actions")
 
     map("n", "K", vim.lsp.buf.hover, "Hover info")
-    map("n", "<leader>k", vim.lsp.buf.signature_help, "Signature help")
+    map("n", "<leader>ik", vim.lsp.buf.signature_help, "Signature help")
 
     -- vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
     -- vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)

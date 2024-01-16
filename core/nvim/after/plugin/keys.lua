@@ -1,6 +1,7 @@
 local term = require("elentok/lib/terminal")
 -- vim: foldmethod=marker
 vim.keymap.set("i", "jk", "<esc>")
+vim.keymap.set("n", "<leader>k", ":")
 
 vim.keymap.set("n", "<leader>wq", "<cmd>wq<cr>", { desc = ":wq" })
 vim.keymap.set("n", "<leader>ww", "<cmd>w<cr>", { desc = ":w" })
