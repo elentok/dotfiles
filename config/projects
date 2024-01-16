@@ -1,0 +1,4 @@
+~/.dotfiles
+~/.dotplugins/*
+~/dev/*
+~/dev/nvim/*
