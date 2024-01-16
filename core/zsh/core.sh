@@ -31,8 +31,11 @@ if [[ -t 0 && $- = *i* ]]; then
   stty -ixon
 fi
 
-# Homebrew {{{1
+# Homebrew & ulimit {{{1
 if dotf-is-mac; then
+  # Increase max file limit
+  ulimit -n 4096
+
   BREW_HOME=''
   for dir in /opt/homebrew ~/.linuxbrew ~/.homebrew /usr/local; do
     if [ -e "$dir/bin/brew" ]; then
