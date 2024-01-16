@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+function main() {
+  fix-audio-on-resume
+}
+
+function fix-audio-on-resume() {
+  local script=/lib/systemd/system-sleep/fix-audio
+  sudo cp "$DOTF/extra/gpd/lib-systemd-system-sleep-fix-audio" $script
+
+  sudo chown root:root $script
+  sudo chmod +x $script
+}
+
+main
