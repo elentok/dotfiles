@@ -1,7 +1,8 @@
 local navic = require("nvim-navic")
 local util = require("elentok/util")
 
-local prefix = "[" .. vim.env.USER .. "]"
+-- local prefix = "[" .. vim.env.USER .. "]"
+local prefix = "[bazinga]"
 
 local config = {
   types = { "Function", "Method", "Class", "Constant" },
