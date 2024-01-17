@@ -1,5 +1,5 @@
 return {
-  "mickael-menu/zk-nvim",
+  "zk-org/zk-nvim",
   config = function()
     require("zk").setup({
       picker = "telescope",
