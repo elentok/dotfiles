@@ -1,24 +1,24 @@
 #!/usr/bin/env bash
 #
-# agent - Switches between SSH agents
+# dotf-ssh-agent - Switches between SSH agents
 #
 # Usage:
-#   agent list              - list the available agents
-#   agent status            - show the active agent
-#   agent choose            - choose a active agent (interactive)
-#   agent set [socket-path] - switch to specific agent
-#   agent setup             - attempt to fix a zombie active agent
-#   agent stop              - stop the local ssh agent
+#   dotf-ssh-agent list              - list the available agents
+#   dotf-ssh-agent status            - show the active agent
+#   dotf-ssh-agent choose            - choose a active agent (interactive)
+#   dotf-ssh-agent set [socket-path] - switch to specific agent
+#   dotf-ssh-agent setup             - attempt to fix a zombie active agent
+#   dotf-ssh-agent stop              - stop the local ssh agent
 
 set -euo pipefail
 
-LIFE_HOURS=48
-LIFE_SECONDS=$(($LIFE_HOURS * 60 * 60))
+LIFE_HOURS=72
+LIFE_SECONDS=$((LIFE_HOURS * 60 * 60))
 ACTIVE_AGENT="$HOME/.ssh/active-agent"
 LOCAL_AGENT="$HOME/.ssh/local-agent"
 LOCAL_AGENT_PIDFILE="$HOME/.ssh/local-agent-pid"
 
-mkdir -p $HOME/.ssh
+mkdir -p "$HOME/.ssh"
 
 main() {
   local cmd="${1:-none}"
@@ -43,16 +43,18 @@ list-agents() {
 }
 
 show-active-agent() {
-  if [ -e $ACTIVE_AGENT ]; then
-    local real="$(readlink $ACTIVE_AGENT)"
+  if [ -e "$ACTIVE_AGENT" ]; then
+    local real
+    real="$(readlink "$ACTIVE_AGENT")"
     if [ -e "$real" ]; then
-      echo $real
+      echo "$real"
     fi
   fi
 }
 
 choose-agent() {
-  local agent=$(list-agents | fzf | cut -d' ' -f1)
+  local agent
+  agent="$(list-agents | fzf | cut -d' ' -f1)"
   if [ -z "$agent" ]; then
     echo 'ERROR: User aborted'
     exit 1

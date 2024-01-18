@@ -77,9 +77,8 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules
 
 # SSH {{{1
 if ! [[ "$SSH_AUTH_SOCK" =~ "chromoting" ]]; then
-
   export SSH_AUTH_SOCK="$HOME/.ssh/active-agent"
-  agent setup > /dev/null
+  dotf-ssh-agent setup > /dev/null
 fi
 
 # Terminal Title {{{1
