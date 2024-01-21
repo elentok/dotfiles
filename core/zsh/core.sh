@@ -20,7 +20,8 @@ for configfile in $(dotf-plugin-list-files zsh/config.sh); do
 done
 
 # TMP
-export TMP=/tmp
+export TMP=$HOME/tmp
+mkdir -p "$TMP"
 
 # Disable <Ctrl-s> lock on interactive shells {{{1
 # see:
