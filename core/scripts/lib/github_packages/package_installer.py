@@ -111,6 +111,7 @@ class AssetInstaller:
 
         if self.package.extract:
             self.extract()
+            self.post_extract()
         else:
             self.make_executable()
 
@@ -130,6 +131,16 @@ class AssetInstaller:
     def extract(self):
         print("  * extracting...")
         helpers.extract(self.asset_filename, self.package.strip_components)
+
+    def post_extract(self):
+        if self.package.post_extract is None:
+            return
+
+        print("  * running post-extract command...")
+        curdir = os.curdir
+        os.chdir(self.release_dirname)
+        os.system(self.package.post_extract)
+        os.chdir(curdir)
 
     def make_executable(self):
         print(f"  * making {self.asset_filename} executable ...")

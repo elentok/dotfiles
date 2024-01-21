@@ -34,6 +34,9 @@ def _extract_command(filename: str, strip_components: int) -> str:
     if filename.endswith(".tar.gz") or filename.endswith(".tgz"):
         return f"tar --strip-components {strip_components} -xzf {filename}"
 
+    if filename.endswith(".tar.xz"):
+        return f"tar --strip-components {strip_components} -xf {filename}"
+
     if filename.endswith(".zip"):
         # "-o" - overwrites file without confirmation
         return f"unzip -o {filename}"

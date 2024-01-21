@@ -44,6 +44,7 @@ class Config:
             strip_components=section.getint("strip_components", 0),
             prerelease=section.getboolean("prerelease", False),
             extract=section.getboolean("extract", True),
+            post_extract=section.get("post_extract", None),
             version=section.get("version", "latest"),
         )
 

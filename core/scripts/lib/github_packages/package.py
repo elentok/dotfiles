@@ -12,6 +12,7 @@ class Package:
     prerelease: bool
     extract: bool
     version: str
+    post_extract: Optional["str"] = None
     platform: Optional["Platform"] = None
 
 

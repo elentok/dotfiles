@@ -31,6 +31,9 @@ def identify_extension(filename: str) -> str:
     if filename.endswith(".tar.gz"):
         return ".tar.gz"
 
+    if filename.endswith(".tar.xz"):
+        return ".tar.xz"
+
     if filename.endswith(".tgz"):
         return ".tgz"
 
