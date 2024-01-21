@@ -23,12 +23,12 @@ telescope.setup({
     },
   },
   extensions = {
-    fzf = {
-      fuzzy = true,
-      override_generic_sorter = true,
-      override_file_sorter = true,
-      case_mode = "smart_case",
-    },
+    -- fzf = {
+    --   fuzzy = true,
+    --   override_generic_sorter = true,
+    --   override_file_sorter = true,
+    --   case_mode = "smart_case",
+    -- },
     live_grep_args = {
       auto_quoting = true,
       mappings = {
@@ -48,7 +48,8 @@ if ok_aerial then
   telescope.load_extension("aerial")
   vim.keymap.set("n", "gs", telescope.extensions.aerial.aerial, { desc = "Goto symbol" })
 end
-telescope.load_extension("fzf")
+-- telescope.load_extension("fzf")
+telescope.load_extension("zf-native")
 telescope.load_extension("file_browser")
 
 vim.keymap.set("n", "<c-p>", builtin.find_files)
