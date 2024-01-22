@@ -74,7 +74,7 @@ vim.keymap.set("n", "<leader>go", "<cmd>!git open -b %<cr>", { desc = "Git open 
 
 vim.keymap.set("n", "<leader>gps", "<cmd>Gps<cr>", { desc = "Git push" })
 vim.keymap.set("n", "<leader>gpl", "<cmd>Gpl<cr>", { desc = "Git pull" })
-vim.keymap.set("n", "<leader>gpm", "<cmd>G psme<cr>", { desc = "Git push me" })
+vim.keymap.set("n", "<leader>gpm", "<cmd>GG psme<cr>", { desc = "Git push me" })
 vim.keymap.set("n", "<leader>gs", "<cmd>Gsync<cr>", { desc = "Git sync" })
 
 local function git_history()
