@@ -3,7 +3,7 @@ return {
   opts = { mappings = "" },
   keys = {
     {
-      "<leader>gy",
+      "<leader>gY",
       function()
         require("gitlinker").link({ action = require("gitlinker.actions").clipboard })
       end,
@@ -11,7 +11,7 @@ return {
       desc = "Git yank URL",
     },
     {
-      "<leader>go",
+      "<leader>gO",
       function()
         require("gitlinker").link({ action = require("gitlinker.actions").system })
       end,
