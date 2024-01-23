@@ -7,7 +7,7 @@ dotf-summary start -i
 dotf-header h1 'Good morning :-)'
 
 dotf-header h2 'Setting up ssh agent...'
-dotf-summary run 'Setup SSH agent' agent setup
+dotf-summary run 'Setup SSH agent' dotf-ssh-agent setup
 
 dotf-header h2 'Add ssh key...'
 dotf-summary run 'Add SSH Key' ssh-add
