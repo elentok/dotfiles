@@ -70,7 +70,9 @@ export FZF_DEFAULT_OPTS=''
 
 # make FZF respect .gitignore
 # export FZF_DEFAULT_COMMAND='ag -g ""'
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+# export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+export FZF_DEFAULT_COMMAND='fd --hidden --follow --type f'
+export FZF_CTRL_T_COMMAND='fd --type f'
 
 # https://github.com/junegunn/fzf/issues/809
 [ -n "${NVIM:-}" ] && export FZF_DEFAULT_OPTS='--no-height'
