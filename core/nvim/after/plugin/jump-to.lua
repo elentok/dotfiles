@@ -51,6 +51,7 @@ end
 
 -- Keys ----------------------------------------------------
 
+vim.keymap.set("n", "<leader>ja", "<c-^>", { desc = "Jump to alternate file" })
 vim.keymap.set("n", "<leader>js", jump_to_script, { desc = "Jump to script" })
 vim.keymap.set("n", "<leader>jc", jump_to_config, { desc = "Jump to config" })
 -- vim.keymap.set("n", "<leader>jn", jump_to_note, { desc = "Jump to note" })

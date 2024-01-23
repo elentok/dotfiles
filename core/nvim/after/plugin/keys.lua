@@ -9,6 +9,8 @@ vim.keymap.set("n", "<leader>qq", "<cmd>q<cr>", { desc = ":q" })
 vim.keymap.set("n", "<leader>qa", "<cmd>qa<cr>", { desc = ":qa" })
 vim.keymap.set("n", "<leader>cq", "<cmd>cq<cr>", { desc = ":cq" })
 
+vim.keymap.set("n", "<leader>bd", "<cmd>bd<cr>", { desc = ":bd" })
+
 -- Switch to alternate file
 vim.keymap.set("n", "<leader><leader>", "<c-^>")
 
@@ -140,4 +142,6 @@ vim.keymap.set("n", "<leader>wh", "<c-w>h", { desc = "Go to window to the left" 
 vim.keymap.set("n", "<leader>wj", "<c-w>j", { desc = "Go to window below" })
 vim.keymap.set("n", "<leader>wk", "<c-w>k", { desc = "Go to window above" })
 vim.keymap.set("n", "<leader>wl", "<c-w>l", { desc = "Go to window to the right" })
+vim.keymap.set("n", "<leader>ws", "<c-w>s", { desc = "Split window" })
+vim.keymap.set("n", "<leader>wv", "<c-w>v", { desc = "Split window vertically" })
 vim.keymap.set({ "n", "v" }, "<leader>vv", "<c-v>", { desc = "Go into block visual mode" })
