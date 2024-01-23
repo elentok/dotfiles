@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+function pick-url() {
+  tmux capture-pane -pS -1000000 \
+    | dotf-find-links - \
+    | fzf-tmux -p -w 85% -h 80% --prompt 'Choose URL: '
+}
+
+case "$1" in
+  open)
+    url="$(pick-url)"
+    if [ -n "$url" ]; then
+      dotf-open "$url"
+    fi
+    ;;
+  copy)
+    url="$(pick-url)"
+    if [ -n "$url" ]; then
+      echo -n "$url" | dotf-clipboard copy
+    fi
+    ;;
+esac
