@@ -14,7 +14,6 @@ alias ....='cd ../../..'
 alias bl='tr ":" "\n"'
 alias bytes='stat --format=%s'
 alias y='dotf-clipboard copy'
-alias yt='yarn test'
 alias C=calc
 alias cl=clear
 alias cdr='cd "$(git-root)"'
@@ -174,6 +173,24 @@ yr() {
       && yarn run "$cmd"
   fi
 }
+
+yt() {
+  # calling "print -s" adds the command to zsh history
+
+  if [ $# -gt 0 ]; then
+    yarn test "$@"
+    return $?
+  fi
+
+  file="$(fd .test. | zf | awk '{print $1}')"
+
+  if [ -n "$file" ]; then
+    print -s "yarn test $file" \
+      && echo "> yarn test $file" \
+      && yarn test "$file"
+  fi
+}
+
 
 npr() {
   # calling "print -s" adds the command to zsh history
