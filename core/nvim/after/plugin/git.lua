@@ -67,7 +67,7 @@ vim.keymap.set(
 )
 vim.keymap.set("n", "<leader>gw", "<cmd>Gwrite<cr>", { desc = "Git write" })
 vim.keymap.set("n", "<leader>gg", "<cmd>G<cr><c-w>H", { desc = "Git status" })
-vim.keymap.set("n", "<leader>gb", "<cmd>G blame<cr>", { desc = "Git blame" })
+vim.keymap.set("n", "<leader>gba", "<cmd>G blame<cr>", { desc = "Git blame" })
 vim.keymap.set("n", "<leader>gl", "<cmd>G log HEAD...master<cr>", { desc = "Git log" })
 vim.keymap.set("n", "<leader>gy", "<cmd>!git yank -b %<cr>", { desc = "Git yank URL" })
 vim.keymap.set("n", "<leader>go", "<cmd>!git open -b %<cr>", { desc = "Git open URL" })

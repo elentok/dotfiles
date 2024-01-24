@@ -15,6 +15,13 @@ return {
     },
 
     { "<leader>gm", ":Gitsigns<cr>", desc = "Git signs menu" },
+    {
+      "<leader>gbb",
+      function()
+        require("gitsigns").blame_line({ full = true })
+      end,
+      desc = "Git blame line",
+    },
     { "<leader>gpp", ":Gitsigns preview_hunk<cr>", desc = "Git preview hunk" },
     { "<leader>gi", ":Gitsigns preview_hunk_inline<cr>", desc = "Git preview hunk (inline)" },
     { "[c", ":Gitsigns prev_hunk<cr>", desc = "Prev git hunk" },
