@@ -15,7 +15,7 @@ end, { nargs = "*" })
 
 vim.api.nvim_create_user_command("Gps", ":GG push", {})
 vim.api.nvim_create_user_command("Gpl", ":GG pull --rebase", {})
-vim.api.nvim_create_user_command("Gsync", ":GG sync", {})
+vim.api.nvim_create_user_command("Gsync", ":GG autosync", {})
 
 -- vim.keymap.set("n", "<leader>gc", "<cmd>GitConflictListQf<cr>", { desc = "Git list conflicts" })
 vim.keymap.set("n", "<leader>g2", "<Plug>(git-conflict-ours)")
@@ -75,7 +75,7 @@ vim.keymap.set("n", "<leader>go", "<cmd>!git open -b %<cr>", { desc = "Git open 
 vim.keymap.set("n", "<leader>gps", "<cmd>Gps<cr>", { desc = "Git push" })
 vim.keymap.set("n", "<leader>gpl", "<cmd>Gpl<cr>", { desc = "Git pull" })
 vim.keymap.set("n", "<leader>gpm", "<cmd>GG psme<cr>", { desc = "Git push me" })
-vim.keymap.set("n", "<leader>gs", "<cmd>Gsync<cr>", { desc = "Git sync" })
+vim.keymap.set("n", "<leader>gs", "<cmd>Gsync<cr>", { desc = "Git autosync" })
 
 local function git_history()
   local filename = vim.fn.expand("%")

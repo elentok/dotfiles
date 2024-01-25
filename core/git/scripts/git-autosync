@@ -5,7 +5,7 @@ set -e
 source "$DOTF/framework"
 
 main() {
-  dotf-header h1 'Git Sync'
+  dotf-header h1 'Git Auto Sync'
 
   check-if-autosync-is-enabled
 

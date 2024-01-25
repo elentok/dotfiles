@@ -62,6 +62,7 @@
   a = add
   aa = add --all
   ap = add -p
+  as = autosync
   b = branch
   bd = branch -d
   bD = branch -D
