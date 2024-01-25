@@ -7,10 +7,25 @@ source "$DOTF/framework"
 main() {
   dotf-header h1 'Git Sync'
 
+  check-if-autosync-is-enabled
+
   commit-if-needed
   pull
   push
   dotf-success 'done'
+}
+
+check-if-autosync-is-enabled() {
+  if [ "$(git config --local --get elentok.autosync)" == "true" ]; then
+    return
+  fi
+
+  if dotf-confirm "Autosync is not enabled for this repo, enable?"; then
+    git config --local --add elentok.autosync true
+    return
+  fi
+
+  exit 1
 }
 
 commit-if-needed() {
