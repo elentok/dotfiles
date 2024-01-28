@@ -30,13 +30,16 @@ local default_statuses = {
   },
   {
     name = "inprogress",
-    hl = { bg = "#EBCB8B", fg = "#000000" },
-    conceal = "😎",
+    -- hl = { bg = "#EBCB8B", fg = "#000000" },
+    hl = { fg = "#EBCB8B" },
+    -- conceal = "😎",
+    conceal = "◐",
   },
   {
     name = "waiting",
-    hl = { fg = "#EBCB8B" },
-    conceal = "⌛",
+    hl = { fg = "#C27D00" },
+    -- conceal = "⌛",
+    conceal = "⌚",
   },
   {
     name = "codereview",
