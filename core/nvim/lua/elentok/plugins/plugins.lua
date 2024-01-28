@@ -34,13 +34,13 @@ return {
   },
 
   -- Color Picker
-  {
-    "ziontee113/color-picker.nvim",
-    opts = {},
-    keys = {
-      { "<leader>cp", "<cmd>PickColor<cr>", mode = "n", desc = "Color picker" },
-    },
-  },
+  -- {
+  --   "ziontee113/color-picker.nvim",
+  --   opts = {},
+  --   keys = {
+  --     { "<leader>cp", "<cmd>PickColor<cr>", mode = "n", desc = "Color picker" },
+  --   },
+  -- },
 
   {
     "salkin-mada/openscad.nvim",
