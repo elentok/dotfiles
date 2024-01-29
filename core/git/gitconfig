@@ -102,6 +102,7 @@
   rbi = rebase -i
   rbu = !git remote update && git rebase upstream/main
   rh = reset HEAD
+  rs = restore-file
   s = status
   sl = stash list
   sp = confirm stash pop

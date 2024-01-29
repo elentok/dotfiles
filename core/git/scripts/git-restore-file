@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+#
+# Restores a file to a specific commit.
+#
+# Usage:
+#
+#   git restore <file>
+#
+
+set -euo pipefail
+
+function main() {
+  if [ "$#" -eq 0 ]; then
+    usage "$0"
+    exit 1
+  fi
+
+  commit="$(git log "$1" | fzf-tmux -p | awk '{print $1}')"
+  if [ -z "$commit" ]; then
+    echo "No commit selected"
+    exit 1
+  fi
+
+  git checkout "$commit" -- "$1"
+}
+
+main "$@"
