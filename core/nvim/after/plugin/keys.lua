@@ -143,6 +143,10 @@ vim.keymap.set("n", "<leader>wh", "<c-w>h", { desc = "Go to window to the left" 
 vim.keymap.set("n", "<leader>wj", "<c-w>j", { desc = "Go to window below" })
 vim.keymap.set("n", "<leader>wk", "<c-w>k", { desc = "Go to window above" })
 vim.keymap.set("n", "<leader>wl", "<c-w>l", { desc = "Go to window to the right" })
+vim.keymap.set("n", "<leader>wo", "<c-w>o", { desc = "Only window" })
 vim.keymap.set("n", "<leader>ws", "<c-w>s", { desc = "Split window" })
 vim.keymap.set("n", "<leader>wv", "<c-w>v", { desc = "Split window vertically" })
 vim.keymap.set({ "n", "v" }, "<leader>vv", "<c-v>", { desc = "Go into block visual mode" })
+
+-- Evaluate the current math expression
+vim.keymap.set("v", "<leader>xx", '"mygvA = <c-r>=<c-r>m<cr>', { desc = "Evaluate" })
