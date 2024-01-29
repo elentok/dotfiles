@@ -30,6 +30,9 @@ main() {
   dotf-pkgs install npm
   dotf-component git zsh nvim ripgrep tig bash tmux vifm python
 
+  dotf-header h2 "[dotf-setup] Running deno cache..."
+  (cd extra/scripts/deno && deno cache ./**/*.ts)
+
   #if dotf-is-mac; then
   #dotf-component osx-tuning iterm
   #fi
