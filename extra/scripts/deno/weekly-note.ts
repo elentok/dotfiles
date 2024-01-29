@@ -6,20 +6,22 @@ import { existsSync } from "https://deno.land/std/fs/mod.ts"
 function main() {
   const sunday = findSundayOfCurrentWeek()
   const week = weekOfYear(sunday) + 1
-  console.log(week)
 
   const formatter = new Intl.DateTimeFormat(undefined, { month: "short" })
   const month = formatter.format(sunday)
   const monthLowercase = month.toLowerCase()
+  const year = sunday.getFullYear()
 
   const week2digits = week.toString().padStart(2, "0")
   const filename =
-    `${sunday.getFullYear()}-week-${week2digits}-${monthLowercase}-${sunday.getDate()}.md`
+    `weekly/${year}/${year}-week${week2digits}-${monthLowercase}-${sunday.getDate()}.md`
 
   if (!existsSync(filename)) {
     const title =
       `# Week ${week}, ${sunday.getFullYear()} (${month} ${sunday.getDate()})`
     console.info(title)
+
+    Deno.writeTextFileSync(filename, title)
   }
 
   console.info(filename)
