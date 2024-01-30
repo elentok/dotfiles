@@ -44,6 +44,7 @@ setup("rust_analyzer")
 setup("svelte")
 setup("terraformls")
 setup("graphql")
+setup("vtsls")
 setup("denols", {
   root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
   settings = {
@@ -67,17 +68,17 @@ setup("denols", {
 })
 
 -- Setup: TypeScript
-require("typescript-tools").setup({
-  server = {
-    capabilities = capabilities,
-  },
-  root_dir = lspconfig.util.root_pattern("package.json"),
-  single_file_support = false,
-  on_attach = function(client)
-    -- Disable tsserver formatting (using prettier instead)
-    client.server_capabilities.document_formatting = false
-  end,
-})
+-- require("typescript-tools").setup({
+--   server = {
+--     capabilities = capabilities,
+--   },
+--   root_dir = lspconfig.util.root_pattern("package.json"),
+--   single_file_support = false,
+--   on_attach = function(client)
+--     -- Disable tsserver formatting (using prettier instead)
+--     client.server_capabilities.document_formatting = false
+--   end,
+-- })
 -- require("typescript").setup({
 --   server = {
 --     capabilities = capabilities,

@@ -15,7 +15,7 @@ main() {
   fi
 
   install-symlinks
-  nvim --headless -c "MasonInstall eslint_d prettierd shfmt zk" -c "qall"
+  nvim --headless -c "MasonInstall eslint_d prettierd shfmt zk vtsls" -c "qall"
   dotf-nvim-lazy-sync
   # "$DOTF/core/nvim/install-lua"
 
