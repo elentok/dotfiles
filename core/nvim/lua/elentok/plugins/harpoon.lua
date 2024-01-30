@@ -3,14 +3,14 @@ return {
   opts = {},
   keys = {
     {
-      "<leader>a",
+      "<leader>ea",
       function()
         require("harpoon.mark").add_file()
       end,
       desc = "Harpoon add file",
     },
     {
-      "<leader>e",
+      "<leader>ee",
       function()
         require("harpoon.ui").toggle_quick_menu()
       end,
