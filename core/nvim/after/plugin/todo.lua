@@ -33,13 +33,17 @@ local default_statuses = {
     -- hl = { bg = "#EBCB8B", fg = "#000000" },
     hl = { fg = "#EBCB8B" },
     -- conceal = "😎",
-    conceal = "◐",
+    text = "/",
+    conceal = "◧",
   },
   {
     name = "waiting",
     hl = { fg = "#C27D00" },
+    text = "?",
     -- conceal = "⌛",
-    conceal = "⌚",
+    -- conceal = "⌚",
+    -- conceal = "⌚",
+    conceal = "⏸",
   },
   {
     name = "codereview",
@@ -50,7 +54,8 @@ local default_statuses = {
     name = "done",
     text = "x",
     hl = { fg = DONE_COLOR },
-    conceal = "✓",
+    -- conceal = "✓",
+    conceal = "",
   },
 }
 
@@ -143,11 +148,11 @@ local function todo_next_state()
   if line:match(checked) then
     line = line:gsub(checked, unchecked)
   elseif line:match(unchecked) then
-    line = line:gsub(unchecked, "[inprogress]")
-  elseif line:match("%[inprogress%]") then
-    line = line:gsub("%[inprogress%]", "[waiting]")
-  elseif line:match("%[waiting%]") then
-    line = line:gsub("%[waiting%]", checked)
+    line = line:gsub(unchecked, "[/]")
+  elseif line:match("%[/%]") then
+    line = line:gsub("%[/%]", "[?]")
+  elseif line:match("%[%?%]") then
+    line = line:gsub("%[%?%]", checked)
   end
   if line ~= oldline then
     vim.fn.setline(".", line)
@@ -158,13 +163,13 @@ local function todo_prev_state()
   local oldline = vim.fn.getline(".")
   local line = oldline
   if line:match(checked) then
-    line = line:gsub(checked, "[waiting]")
+    line = line:gsub(checked, "[?]")
   elseif line:match(unchecked) then
     line = line:gsub(unchecked, checked)
-  elseif line:match("%[inprogress%]") then
-    line = line:gsub("%[inprogress%]", unchecked)
-  elseif line:match("%[waiting%]") then
-    line = line:gsub("%[waiting%]", "[inprogress]")
+  elseif line:match("%[/%]") then
+    line = line:gsub("%[/%]", unchecked)
+  elseif line:match("%[%?%]") then
+    line = line:gsub("%[%?%]", "[/]")
   end
   if line ~= oldline then
     vim.fn.setline(".", line)
