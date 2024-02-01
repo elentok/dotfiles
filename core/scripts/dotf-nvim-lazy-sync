@@ -2,6 +2,6 @@
 
 source "$DOTF/framework"
 
-dotf-bullet "Running Lazy! sync... "
-nvim --headless "+Lazy! sync" +qa
+dotf-bullet "Running Lazy! restore... "
+nvim --headless "+Lazy! restore" +qa
 dotf-success "done"
