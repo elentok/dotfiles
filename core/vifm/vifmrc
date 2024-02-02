@@ -81,6 +81,9 @@ vnoremap w :view<cr>gv
 vnoremap M :move &<cr>
 noremap M :move &<cr>
 
+vnoremap cc :copy &<cr>
+noremap cc :copy &<cr>
+
 " yank current directory path into the clipboard
 nnoremap yd :!echo -n %d | dotf-yank-osc52<cr>:echo expand('%"d') "is yanked to clipboard"<cr>
 
