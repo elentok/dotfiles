@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#
+# Usage:
+#
+#   Add cronjob if it doesn't already exist
+#
+
+set -euo pipefail
+
+echo -n "Adding cronjob... "
+if crontab -l | grep --fixed-strings "$1" > /dev/null; then
+  echo "Job already exists, skipping"
+else
+  (crontab -l && echo "$1") | crontab -
+fi

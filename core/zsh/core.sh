@@ -234,8 +234,13 @@ TMUX_TMPDIR="$HOME/tmp/tmux"
 export TMUX_TMPDIR
 mkdir -p "$TMUX_TMPDIR"
 
-# MISC {{{1
+# SSH {{{1
 export SSH_TERM=xterm-color
+export SSH_AUTH_SOCK="$HOME/.ssh/active-agent"
+SSH_AGENT_PID="$([ -e ~/.ssh/local-agent-pid ] && cat ~/.ssh/local-agent-pid)"
+export SSH_AGENT_PID
+
+# MISC {{{1
 export LESS="--RAW-CONTROL-CHARS"
 export RIPGREP_CONFIG_PATH="$DOTF/core/ripgrep/ripgreprc"
 

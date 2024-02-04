@@ -79,7 +79,7 @@ export FZF_CTRL_T_COMMAND='fd --type f'
 
 # SSH {{{1
 if ! [[ "$SSH_AUTH_SOCK" =~ "chromoting" ]]; then
-  export SSH_AUTH_SOCK="$HOME/.ssh/active-agent"
+  # export SSH_AUTH_SOCK="$HOME/.ssh/active-agent"
   dotf-ssh-agent setup > /dev/null
 fi
 

@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+#
+# Usage:
+#
+#   dotf-cronjob-run <job-name> <cmd...>
+
+set -euo pipefail
+
+# This script is run from cronjob, so doesn't have the DOTF environment variable
+source ~/.dotfiles/core/zsh/core.sh
+
+LOGS_DIR=~/.local/share/dotfiles/cron
+
+function main() {
+  mkdir -p "$LOGS_DIR"
+  log "hola"
+
+  if [ $# -lt 2 ]; then
+    log runner "ERROR: dotf-cronjob-run: not enough arguments"
+    usage "$0"
+    exit 1
+  fi
+
+  job_name="$1"
+  shift
+
+  log runner "Running $job_name: $*"
+
+  bash -c "$@" >> "$LOGS_DIR/$job_name.log" 2>&1
+}
+
+function log() {
+  local name="$1"
+  shift
+  echo "$(timestamp) $*" >> "$LOGS_DIR/$name.log"
+}
+
+function timestamp() {
+  date "+[%Y-%m-%d %H:%M]"
+}
+
+main "$@"
