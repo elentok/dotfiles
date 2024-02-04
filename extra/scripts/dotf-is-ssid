@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+#
+# Usage:
+#
+#   dotf-is-ssid <ssid>
+#
+# Exits with 0 exitcode if there's a match
+
+set -euo pipefail
+
+# For mac:
+# /System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -I  | awk -F' SSID: '  '/ SSID: / {print $2}'
+
+source "$DOTF/core/scripts/lib/os.sh"
+
+if [ $# -eq 0 ]; then
+  usage "$0"
+  exit 1
+fi
+
+if dotf-is-linux; then
+  [ "$(iwgetid -r)" == "$1" ]
+else
+  echo "TODO"
+  exit 1
+fi
