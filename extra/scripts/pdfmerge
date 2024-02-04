@@ -14,5 +14,6 @@ else
   done
   echo "  => into $output"
 
-  command gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=$output "$@"
+  qpdf --empty --pages "$@" -- "$output"
+  # command gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=$output "$@"
 fi
