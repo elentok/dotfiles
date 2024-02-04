@@ -1,4 +1,4 @@
-#!/usr/bin/env -S deno run --allow-env --allow-read --allow-run
+#!/usr/bin/env -S deno run --allow-env --allow-read --allow-run --allow-write
 
 import { weekOfYear } from "https://deno.land/std@0.213.0/datetime/mod.ts"
 import { existsSync } from "https://deno.land/std/fs/mod.ts"
@@ -13,8 +13,9 @@ function main() {
   const year = sunday.getFullYear()
 
   const week2digits = week.toString().padStart(2, "0")
+  const day2digits = sunday.getDate().toString().padStart(2, "0")
   const filename =
-    `weekly/${year}/${year}-week${week2digits}-${monthLowercase}-${sunday.getDate()}.md`
+    `weekly/${year}/${year}-week${week2digits}-${monthLowercase}-${day2digits}.md`
 
   if (!existsSync(filename)) {
     const title =
