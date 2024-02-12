@@ -27,7 +27,7 @@ local cmp_mapping = {
   ["<C-f>"] = cmp.mapping.scroll_docs(4),
   ["<C-Space>"] = cmp.mapping.complete(),
   ["<C-e>"] = cmp.mapping.abort(),
-  ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+  ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   -- From https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
   ["<Up>"] = cmp.mapping.select_prev_item(),
   ["<Down>"] = cmp.mapping.select_next_item(),
