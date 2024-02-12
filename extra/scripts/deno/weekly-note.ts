@@ -20,7 +20,6 @@ function main() {
   if (!existsSync(filename)) {
     const title =
       `# Week ${week}, ${sunday.getFullYear()} (${month} ${sunday.getDate()})`
-    console.info(title)
 
     Deno.writeTextFileSync(filename, title)
   }
