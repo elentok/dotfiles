@@ -7,6 +7,8 @@ require("neodev").setup()
 local lspconfig = require("lspconfig")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
+require("lspconfig.ui.windows").default_options.border = "rounded"
+
 -- Add border to hover floats (when pressing K)
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = "rounded",
