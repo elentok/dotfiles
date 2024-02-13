@@ -13,7 +13,10 @@ def main():
 
     remote_only_branches = []
     for branch in remote_branches:
-        _, branch_name = branch.split("/", 1)
+        if "/" in branch:
+            _, branch_name = branch.split("/", 1)
+        else:
+            branch_name = branch
         if not branch_name in local_branches:
             remote_only_branches.append(branch)
 
