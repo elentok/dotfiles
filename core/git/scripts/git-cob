@@ -27,7 +27,7 @@ def main():
 
     branch = (
         os.popen(
-            f"echo \"{branches}\" | fzf-tmux -p --preview 'git log --color=always {{1}} | head -50'"
+            f"echo \"{branches}\" | fzf-tmux -p 80%,80% --preview 'git log --color=always {{1}} | head -50'"
         )
         .read()
         .strip()
