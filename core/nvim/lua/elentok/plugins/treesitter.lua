@@ -6,6 +6,7 @@ local ensure_installed = {
   "cpp",
   "css",
   "dot",
+  "fish",
   "go",
   "graphql",
   "hcl", -- terraform

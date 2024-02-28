@@ -1,4 +1,4 @@
-local is_dev_mode = require('elentok.lib.dev-mode')
+local is_dev_mode = require("elentok.lib.dev-mode")
 
 ---@param name string
 ---@return boolean
@@ -30,6 +30,8 @@ return {
         return formatters.shell({ cmd = { "qmkmd", "format", "%" }, tempfile = "random" })
       end
     end
+
+    local fish_formatter = formatters.shell({ cmd = { "fish_indent" } })
 
     format_on_save.setup({
       exclude_path_patterns = {
@@ -63,6 +65,7 @@ return {
         typescript = typescript_formatter,
         typescriptreact = typescript_formatter,
         yaml = formatters.lsp,
+        fish = fish_formatter,
       }, config.formatter_by_ft),
     })
   end,
