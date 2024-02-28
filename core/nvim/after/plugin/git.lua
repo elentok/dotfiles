@@ -66,7 +66,7 @@ vim.keymap.set(
   { desc = "Jump to files in last commit" }
 )
 vim.keymap.set("n", "<leader>gw", "<cmd>Gwrite<cr>", { desc = "Git write" })
-vim.keymap.set("n", "<leader>gg", "<cmd>G<cr><c-w>H", { desc = "Git status" })
+-- vim.keymap.set("n", "<leader>gg", "<cmd>G<cr><c-w>H", { desc = "Git status" })
 vim.keymap.set("n", "<leader>gba", "<cmd>G blame<cr>", { desc = "Git blame" })
 vim.keymap.set("n", "<leader>gl", "<cmd>G log HEAD...master<cr>", { desc = "Git log" })
 vim.keymap.set("n", "<leader>gy", "<cmd>!git yank -b %<cr>", { desc = "Git yank URL" })
