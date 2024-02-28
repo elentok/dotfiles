@@ -59,7 +59,7 @@ if dotf-is-mac; then
   alias ts='TERM=xterm-256color tig status'
 fi
 alias vz='file="$(edit-zsh-dotfile)" && source $file'
-alias vg='vi -c "G | WinOnly"'
+# alias vg='vi -c "G | WinOnly"'
 alias x=exit
 alias ports='sudo echo && (sudo lsof -i -n -P | fzf --header-lines=1)'
 

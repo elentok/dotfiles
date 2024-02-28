@@ -61,3 +61,5 @@ function vv() {
     echo "$files" | xargs dotf-nvim
   fi
 }
+
+alias vg='vi "+Neogit kind=replace"'

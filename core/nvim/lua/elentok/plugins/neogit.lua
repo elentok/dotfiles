@@ -25,6 +25,7 @@ return {
     "nvim-telescope/telescope.nvim",
   },
   config = true,
+  cmd = { "Neogit" },
   keys = {
     {
       "<leader>gg",
