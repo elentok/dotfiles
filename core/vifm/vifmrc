@@ -7,6 +7,7 @@ set wildstyle=popup
 set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
     \phistory,fhistory,dirstack,registers,bookmarks,bmarks
 
+set viewcolumns=-{name},{size}
 
 " show hidden files and directories
 set dotfiles
