@@ -1,14 +1,46 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework
+source "$DOTF/framework"
 
 function main() {
+  set-fish-as-default-shell
+
   if dotf-command-missing fish; then
     dotf-apt fish
     # $DOTF/extra/fish/build
   fi
 
   dotf-symlink "$DOTF/extra/fish" "$HOME/.config/fish"
+}
+
+function set-fish-as-default-shell() {
+  fish_bin="$(which fish)"
+  if dotf-is-mac; then
+    my_shell=$(echo "$SHELL" | rev | cut -d/ -f1 | rev)
+    if [ "$my_shell" != "fish" ]; then
+      edit-etc-shells
+      dotf-bullet "Changing shell to ${fish_bin}... "
+      chsh -s "$fish_bin"
+    fi
+  else
+    dotf-bullet "Changing user's shell to $fish_bin... "
+    if [[ "$SHELL" =~ /fish ]]; then
+      dotf-info 'already set'
+    else
+      chsh -s "$fish_bin"
+    fi
+  fi
+}
+
+function edit-etc-shells() {
+  fish_bin="$(which fish)"
+  dotf-bullet "Adding fish to /etc/shells..."
+  if grep -q "$fish_bin" /etc/shells > /dev/null; then
+    dotf-info 'already up to date'
+  else
+    sudo bash -c "echo '$fish_bin' >> /etc/shells"
+    dotf-info "added $fish_bin"
+  fi
 }
 
 main "$@"

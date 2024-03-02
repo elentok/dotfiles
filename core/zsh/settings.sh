@@ -5,11 +5,6 @@ if [ -e ~/.config/machine ]; then
   source ~/.config/machine
 fi
 
-# Android {{{1
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/build-tools/23.0.0
-
 # Completions {{{1
 fpath=($HOME/.zsh-complete "$DOTF/core/zsh/vendor/zsh-completions/src" $fpath)
 

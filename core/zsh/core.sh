@@ -195,7 +195,7 @@ function dotf-gen-path() {
 _core_genpath_start=$SECONDS
 new_path="$(dotf-gen-path | tr '\n' ':')"
 # remove last colon
-new_path="${new_path::-1}"
+new_path="${new_path::${#new_path}-1}"
 _core_genpath_elapsed_ms=$(((SECONDS - _core_genpath_start) * 1000))
 
 export PATH="$new_path"
