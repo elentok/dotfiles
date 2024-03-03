@@ -30,8 +30,7 @@ end
 function tm --description tmux
     if test -n "$TMUX"
         echo "Error: already inside a tmux session!"
-        elif [ -n "$(tmux list-sessions 2> /dev/null)" ]
-        then
+    else if test -n "$(tmux list-sessions 2> /dev/null)"
         echo "Attaching to existing tmux session..."
         tmux attach
     else
