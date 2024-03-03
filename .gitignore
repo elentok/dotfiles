@@ -4,7 +4,7 @@ tags
 .DS_Store
 tmp
 node_modules
-plugins/fish/fish_variables
+extra/fish/fish_variables
 .mypy_cache
 
 # Neovim
