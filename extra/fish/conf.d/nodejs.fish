@@ -5,8 +5,10 @@ function yr --description "yarn run"
         yarn run $argv
     else
         set cmd "$(npm-scripts | fzf-tmux -p --ansi --exit-0 | awk '{print $1}')"
-        commandline --replace "yarn run "$cmd""
-        commandline -f execute
+        if test -n "$cmd"
+            commandline --replace "yarn run "$cmd""
+            commandline -f execute
+        end
     end
 end
 
@@ -15,8 +17,10 @@ function yt --description "yarn test"
         yarn test $argv
     else
         set cmd "$(npm-scripts | fzf-tmux -p --ansi --exit-0 | awk '{print $1}')"
-        commandline --replace "yarn test "$cmd""
-        commandline -f execute
+        if test -n "$cmd"
+            commandline --replace "yarn test "$cmd""
+            commandline -f execute
+        end
     end
 end
 
@@ -25,7 +29,9 @@ function npr --description "npm run"
         npm run $argv
     else
         set cmd "$(npm-scripts | fzf-tmux -p --ansi --exit-0 | awk '{print $1}')"
-        commandline --replace "npm run "$cmd""
-        commandline -f execute
+        if test -n "$cmd"
+            commandline --replace "npm run "$cmd""
+            commandline -f execute
+        end
     end
 end
