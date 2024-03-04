@@ -24,6 +24,12 @@ return {
 
     "nvim-telescope/telescope.nvim",
   },
+  opts = {
+    disable_insert_on_commit = true,
+    integration = {
+      telescope = true,
+    },
+  },
   config = true,
   cmd = { "Neogit" },
   keys = {
