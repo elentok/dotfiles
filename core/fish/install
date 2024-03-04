@@ -10,7 +10,7 @@ function main() {
     # $DOTF/extra/fish/build
   fi
 
-  dotf-symlink "$DOTF/extra/fish" "$HOME/.config/fish"
+  dotf-symlink "$DOTF/core/fish" "$HOME/.config/fish"
 }
 
 function set-fish-as-default-shell() {
