@@ -49,6 +49,17 @@ setup("graphql")
 
 require("lspconfig.configs").vtsls = require("vtsls").lspconfig
 
+-- Find the absolute path to the local project's tsserver (to avoid using the
+-- version embedded with vtsls)
+local function find_local_tsserver()
+  local root_dir = lspconfig.util.root_pattern("node_modules/typescript/lib")(vim.loop.cwd())
+  if root_dir == nil then
+    return nil
+  end
+
+  return root_dir .. "/node_modules/typescript/lib"
+end
+
 setup("vtsls", {
   root_dir = lspconfig.util.root_pattern("package.json"),
   single_file_support = false,
@@ -57,6 +68,7 @@ setup("vtsls", {
       autoUseWorkspaceTsdk = true,
     },
     typescript = {
+      tsdk = find_local_tsserver(),
       inlayHints = {
         parameterNames = { enabled = "literals" },
         parameterTypes = { enabled = true },
