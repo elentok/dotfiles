@@ -24,13 +24,24 @@ return {
 
     "nvim-telescope/telescope.nvim",
   },
-  opts = {
-    disable_insert_on_commit = true,
-    integration = {
-      telescope = true,
-    },
-  },
-  config = true,
+  config = function()
+    require("neogit").setup({
+      disable_insert_on_commit = true,
+      integration = {
+        telescope = true,
+      },
+    })
+
+    -- jump to the top of the buffer when opening a commit message
+    vim.api.nvim_create_autocmd({ "FileType" }, {
+      pattern = { "NeogitCommitMessage" },
+      callback = function()
+        vim.defer_fn(function()
+          vim.cmd("normal gg")
+        end, 50)
+      end,
+    })
+  end,
   cmd = { "Neogit" },
   keys = {
     {
