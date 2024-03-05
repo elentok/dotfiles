@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+#
+# Yarn Helper
+#
+# Usage:
+#
+#   yh r|reinstall [package]
+#
+
+set -euo pipefail
+
+function main() {
+  local cmd="${1:-}"
+  shift || true
+
+  case "$cmd" in
+    r | reinstall)
+      reinstall "$@"
+      ;;
+    *)
+      usage "$0"
+      exit 1
+      ;;
+  esac
+}
+
+function reinstall() {
+  cd "$(git-root)"
+
+  local package="${1:-}"
+  if [ -z "$package" ]; then
+    package="$(cd node_modules && command ls -1 | fzf)"
+    if [ -z "$package" ]; then
+      echo "User aborted."
+      exit 1
+    fi
+  fi
+
+  rm -rf "node_modules/${package}"
+  yarn install --check-cache
+}
+
+main "$@"
