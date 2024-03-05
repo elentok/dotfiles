@@ -4,7 +4,7 @@ source "$DOTF/framework"
 
 function main() {
   dotf-symlink "$DOTF/core/ripgrep/rgignore" "$HOME/.rgignore"
-  install-zsh-completion
+  # install-zsh-completion
 }
 
 function install-zsh-completion() {
