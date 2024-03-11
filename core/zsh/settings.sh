@@ -73,10 +73,10 @@ export FZF_CTRL_T_COMMAND='fd --type f'
 [ -n "${NVIM:-}" ] && export FZF_DEFAULT_OPTS='--no-height'
 
 # SSH {{{1
-if ! [[ "$SSH_AUTH_SOCK" =~ "chromoting" ]]; then
-  # export SSH_AUTH_SOCK="$HOME/.ssh/active-agent"
-  dotf-ssh-agent setup > /dev/null
-fi
+# if ! [[ "$SSH_AUTH_SOCK" =~ "chromoting" ]]; then
+#   # export SSH_AUTH_SOCK="$HOME/.ssh/active-agent"
+#   dotf-ssh-agent setup > /dev/null
+# fi
 
 # Terminal Title {{{1
 dotf-term-title
