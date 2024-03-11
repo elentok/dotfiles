@@ -95,8 +95,8 @@ end
 
 ---@param status Status
 local function add_conceal(status)
-  local text = status.text or status.name
-  vim.fn.matchadd("Conceal", "\\[" .. text .. "\\]", 20, -1, { conceal = status.conceal })
+  -- local text = status.text or status.name
+  -- vim.fn.matchadd("Conceal", "\\[" .. text .. "\\]", 20, -1, { conceal = status.conceal })
 end
 
 local function setup_buffer()
