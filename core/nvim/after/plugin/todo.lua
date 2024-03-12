@@ -120,10 +120,10 @@ end
 
 local group_id = vim.api.nvim_create_augroup("Elentok_Markdown", {})
 
-vim.api.nvim_create_autocmd(
-  { "BufRead", "WinNew" },
-  { pattern = "*.md", group = group_id, callback = setup_buffer }
-)
+-- vim.api.nvim_create_autocmd(
+--   { "BufRead", "WinNew" },
+--   { pattern = "*.md", group = group_id, callback = setup_buffer }
+-- )
 
 local has_builtin, builtin = pcall(require, "telescope.builtin")
 if has_builtin then

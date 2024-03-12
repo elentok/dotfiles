@@ -35,28 +35,35 @@ return {
     "nvim-lua/plenary.nvim",
   },
   config = function()
-    local config = require("obsidian.config")
-    local default_config = config.UIOpts.default()
+    local obsidian_config = require("obsidian.config")
+    local default_config = obsidian_config.UIOpts.default()
 
-    ---@diagnostic disable-next-line: missing-fields
+    local ui_config = vim.tbl_deep_extend("force", default_config, {
+      checkboxes = {
+        ["/"] = { char = "◧", hl_group = "ObsidianInProgress" },
+        ["w"] = { char = "⏸", hl_group = "ObsidianWaiting" },
+      },
+      hl_groups = {
+        ObsidianInProgress = { fg = "#EBCB8B" },
+        ObsidianWaiting = { fg = "#C27D00" },
+      },
+    })
+
     require("obsidian").setup({
       workspaces = workspaces,
-      ui = vim.tbl_deep_extend("force", default_config, {
-        checkboxes = {
-          ["/"] = { char = "◧", hl_group = "ObsidianInProgress" },
-          ["w"] = { char = "⏸", hl_group = "ObsidianWaiting" },
-        },
-        hl_groups = {
-          ObsidianInProgress = { fg = "#EBCB8B" },
-          ObsidianWaiting = { fg = "#C27D00" },
-        },
-      }),
+      ui = ui_config,
     })
 
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "markdown",
       callback = function()
         vim.keymap.set("n", "gd", "<Cmd>ObsidianFollowLink<cr>", { buffer = true })
+
+        for char, opts in pairs(ui_config.checkboxes) do
+          if char ~= " " then
+            vim.fn.matchadd(opts.hl_group, "\\[" .. char .. "\\].*$")
+          end
+        end
       end,
     })
   end,
