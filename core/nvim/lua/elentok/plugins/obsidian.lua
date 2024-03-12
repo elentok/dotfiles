@@ -46,6 +46,7 @@ return {
       hl_groups = {
         ObsidianInProgress = { fg = "#EBCB8B" },
         ObsidianWaiting = { fg = "#C27D00" },
+        ObsidianDone = { fg = "#6C7A96", bold = false },
       },
     })
 
