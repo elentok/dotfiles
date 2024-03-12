@@ -18,3 +18,4 @@ end
 
 vim.api.nvim_create_user_command("Messages", messages_buffer, {})
 vim.keymap.set("n", "<c-w>m", messages_buffer)
+vim.keymap.set("n", "<leader>wm", messages_buffer)

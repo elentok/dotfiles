@@ -10,6 +10,11 @@ vim.keymap.set("n", "<leader>qq", "<cmd>q<cr>", { desc = ":q" })
 vim.keymap.set("n", "<leader>qa", "<cmd>qa<cr>", { desc = ":qa" })
 vim.keymap.set("n", "<leader>cq", "<cmd>cq<cr>", { desc = ":cq" })
 
+vim.keymap.set("n", "<leader>wh", "<c-w>h", { desc = "Window left" })
+vim.keymap.set("n", "<leader>wj", "<c-w>j", { desc = "Window down" })
+vim.keymap.set("n", "<leader>wk", "<c-w>k", { desc = "Window up" })
+vim.keymap.set("n", "<leader>wl", "<c-w>l", { desc = "Window right" })
+
 vim.keymap.set("n", "<leader>bd", "<cmd>bd<cr>", { desc = ":bd" })
 
 -- Switch to alternate file
