@@ -69,8 +69,27 @@ vim.keymap.set("n", "<leader>gw", "<cmd>Gwrite<cr>", { desc = "Git write" })
 -- vim.keymap.set("n", "<leader>gg", "<cmd>G<cr><c-w>H", { desc = "Git status" })
 vim.keymap.set("n", "<leader>gba", "<cmd>G blame<cr>", { desc = "Git blame" })
 vim.keymap.set("n", "<leader>gl", "<cmd>G log HEAD...master<cr>", { desc = "Git log" })
-vim.keymap.set("n", "<leader>gy", "<cmd>!git yank -b %<cr>", { desc = "Git yank URL" })
-vim.keymap.set("n", "<leader>go", "<cmd>!git open -b %<cr>", { desc = "Git open URL" })
+
+local function gitUrl(command)
+  local line = vim.fn.line(".")
+  vim.fn.jobstart(
+    "git "
+      .. command
+      .. " -b=main -r=upstream -l="
+      .. line
+      .. " "
+      .. vim.fn.shellescape(vim.fn.expand("%"))
+  )
+end
+
+vim.keymap.set("n", "<leader>gy", function()
+  gitUrl("yank")
+end, { desc = "Git yank URL" })
+vim.keymap.set("n", "<leader>gY", "<cmd>!git yank -b %<cr>", { desc = "Git yank URL" })
+vim.keymap.set("n", "<leader>go", function()
+  gitUrl("open")
+end, { desc = "Git open URL" })
+vim.keymap.set("n", "<leader>gO", "<cmd>!git open -b %<cr>", { desc = "Git open URL" })
 
 vim.keymap.set("n", "<leader>gps", "<cmd>Gps<cr>", { desc = "Git push" })
 vim.keymap.set("n", "<leader>gpl", "<cmd>Gpl<cr>", { desc = "Git pull" })

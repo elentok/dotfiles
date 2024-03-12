@@ -4,18 +4,40 @@ set -euo pipefail
 
 function main() {
   branch="$(git branch --show-current)"
-  if [ "${1:-}" == "-b" ]; then
+  line_suffix=""
+  remote=""
+  while [ $# -gt 1 ]; do
+    if [ "$1" == "-b" ]; then
+      branch="$(git all-branches | fzf-tmux -p --prompt 'Pick branch:')"
+    elif [[ "$1" =~ "-b=" ]]; then
+      branch="${1#-b=}"
+    elif [[ "$1" =~ "-l=" ]]; then
+      line_suffix="#L${1#-l=}"
+    elif [[ "$1" =~ "-r=" ]]; then
+      remote="${1#-r=}"
+    else
+      echo "Error: invalid option $1"
+      exit 1
+    fi
     shift
-    branch="$(git all-branches | fzf-tmux -p --prompt 'Pick branch:')"
-  fi
+  done
 
   file_suffix="$(url-file-suffix "$@")"
 
-  echo "$(repo-base-url)/tree/${branch}${file_suffix}"
+  echo "$(repo-base-url "$remote")/blob/${branch}${file_suffix}${line_suffix}"
 }
 
 function repo-base-url() {
-  remote="$(git-pick-remote)"
+  if [ -n "${1:-}" ]; then
+    remote="$1"
+  else
+    remote="$(git-pick-remote)"
+  fi
+
+  if ! git config --get "remote.$remote.url" > /dev/null; then
+    remote="$(git-pick-remote)"
+  fi
+
   git config --get "remote.$remote.url" \
     | ssh-to-https \
     | sed "s|github.com-[^/]*|github.com|" \
