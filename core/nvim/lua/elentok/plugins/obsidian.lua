@@ -44,7 +44,7 @@ return {
       ui = vim.tbl_deep_extend("force", default_config, {
         checkboxes = {
           ["/"] = { char = "◧", hl_group = "ObsidianInProgress" },
-          ["?"] = { char = "⏸", hl_group = "ObsidianWaiting" },
+          ["w"] = { char = "⏸", hl_group = "ObsidianWaiting" },
         },
         hl_groups = {
           ObsidianInProgress = { fg = "#EBCB8B" },
