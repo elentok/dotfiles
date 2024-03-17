@@ -16,6 +16,7 @@ return {
       "Method",
       "Struct",
       "Constant",
+      "Variable",
     },
     on_attach = function(bufnr)
       vim.keymap.set("n", "<leader>ta", "<cmd>AerialToggle left<cr>", { buffer = bufnr })
