@@ -5,6 +5,7 @@ local config = {
 }
 
 local function open()
+  ---@diagnostic disable-next-line param-type-mismatch
   local bufnr = vim.fn.bufnr(config.scratchpad_file)
 
   if bufnr == -1 then
@@ -26,8 +27,8 @@ local function open()
     col = (ui.width - width) / 2,
     row = (ui.height - height) / 2,
   })
-  vim.cmd.w(config.scratchpad_file)
-  vim.keymap.set("n", "q", ":wq<cr>", { buffer = true })
+  vim.cmd.e(config.scratchpad_file)
+  vim.keymap.set("n", "q", ":w<cr>:bd<cr>", { buffer = true })
 end
 
 vim.keymap.set("n", "<leader>os", open)
