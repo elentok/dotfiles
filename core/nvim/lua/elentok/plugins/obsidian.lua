@@ -53,6 +53,9 @@ return {
     require("obsidian").setup({
       workspaces = workspaces,
       ui = ui_config,
+      follow_url_func = function(url)
+        vim.fn.jobstart({ "dotf-open", url })
+      end,
     })
 
     vim.api.nvim_create_autocmd("FileType", {
