@@ -1,5 +1,4 @@
 return {
-  "numToStr/Comment.nvim",
   "tpope/vim-abolish",
   "tpope/vim-dispatch",
   "tpope/vim-eunuch",
