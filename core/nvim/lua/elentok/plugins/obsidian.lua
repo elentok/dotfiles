@@ -63,11 +63,13 @@ return {
       callback = function()
         vim.keymap.set("n", "gd", "<Cmd>ObsidianFollowLink<cr>", { buffer = true })
 
-        for char, opts in pairs(ui_config.checkboxes) do
-          if char ~= " " then
-            vim.fn.matchadd(opts.hl_group, "\\[" .. char .. "\\].*$")
+        vim.fn.timer_start(0, function()
+          for char, opts in pairs(ui_config.checkboxes) do
+            if char ~= " " then
+              vim.fn.matchadd(opts.hl_group, "\\[" .. char .. "\\].*$")
+            end
           end
-        end
+        end)
       end,
     })
   end,
