@@ -133,6 +133,8 @@ function dotf-gen-path() {
     else
       echo "${DOTF_NVM_DEFAULT_PATH}/bin"
     fi
+  elif is-fnm-providing-node; then
+    echo "$HOME/.local/share/fnm"
   fi
 
   echo "$HOME/.fzf/bin"

@@ -23,13 +23,19 @@ main() {
 }
 
 install_fnm() {
-  # On Mac it's installed with brew
-  if dotf-is-linux; then
-    curl -fsSL https://fnm.vercel.app/install | bash
+  if dotf-command-missing fnm; then
+    # On Mac it's installed with brew
+    if dotf-is-linux; then
+      curl -fsSL https://fnm.vercel.app/install | bash
+    fi
   fi
 
   eval "$(fnm env --use-on-cd)"
-  fnm install "$(dotf-node-version)"
+
+  ver="$(dotf-node-version)"
+  if ! fnm list | grep " v$ver\." > /dev/null; then
+    fnm install "$(dotf-node-version)"
+  fi
 }
 
 install_nvm() {
