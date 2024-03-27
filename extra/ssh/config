@@ -3,6 +3,8 @@
 Include ~/.dotplugins/*/ssh.conf
 Include ~/.ssh/machine.config
 
+AddKeysToAgent yes
+
 # This is causing issues when using the multiple git accounts with custom 
 # ~/.ssh/config hostnames so I'm disabling it for now.
 #
