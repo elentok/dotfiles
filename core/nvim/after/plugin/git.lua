@@ -65,6 +65,7 @@ vim.keymap.set(
   telescope_git_last_commit_files,
   { desc = "Jump to files in last commit" }
 )
+vim.keymap.set("n", "<leader>ga", "<cmd>Gap<cr>", { desc = "Git add (patch)" })
 vim.keymap.set("n", "<leader>gw", "<cmd>Gwrite<cr>", { desc = "Git write" })
 -- vim.keymap.set("n", "<leader>gg", "<cmd>G<cr><c-w>H", { desc = "Git status" })
 vim.keymap.set("n", "<leader>gba", "<cmd>G blame<cr>", { desc = "Git blame" })
