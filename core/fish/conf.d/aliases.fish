@@ -5,6 +5,7 @@ alias vi nvim
 alias vg 'nvim "+Neogit kind=replace"'
 alias g git
 alias dotfi 'cd $DOTF'
+alias dotp 'cd $DOTP && cd "$(command ls -1 | fzf-tmux -p --select-1)"'
 alias o dotf-open
 alias y 'dotf-clipboard copy'
 alias p 'dotf-clipboard paste'
