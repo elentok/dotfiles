@@ -8,6 +8,7 @@ fish_add_path "$DOTF/extra/scripts/deno"
 fish_add_path "$DOTF/extra/scripts"
 fish_add_path "$DOTF/core/git/scripts"
 fish_add_path "$DOTF/core/scripts"
+fish_add_path "$HOME/.deno/bin"
 
 for dir in $DOTP/*/scripts
     fish_add_path $dir
