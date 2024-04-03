@@ -25,3 +25,7 @@ dotf-is-wsl() {
 dotf-is-linux-arm() {
   dotf-is-linux && [ "$(dpkg --print-architecture)" = "armhf" ]
 }
+
+dotf-is-ubuntu() {
+  dotf-is-linux && grep Ubuntu /etc/issue > /dev/null 2>&1
+}

@@ -59,7 +59,15 @@ function install-pkgs() {
 function install-apt-pkgs() {
   if dotf-is-linux; then
     dotf-header h2 '[dotf-pkgs] Installing apt packages...'
-    dotf-apt "$(get-pkgs apt)"
+
+    flavor=debian
+    if dotf-is-ubuntu; then
+      flavor=ubuntu
+    fi
+
+    echo "flavor: $flavor"
+
+    dotf-apt "$(get-pkgs apt)" "$(get-pkgs apt-$flavor)"
 
     #if dotf-has-command X; then
     #  dotf-header h2 '[dotf-pkgs] Installing apt-gui packages...'
