@@ -42,11 +42,25 @@ local function jump_to_script()
   })
 end
 
+local notes_re = vim.regex("^" .. vim.env.HOME .. "/notes")
+
 local function jump_to_note()
-  builtin.find_files({
-    find_command = { "rg", "-t", "md", "--files" },
-    cwd = vim.env.HOME .. "/notes",
+  -- if not inside nodes, set cwd to notes
+  local search_dirs = {}
+  if notes_re and not notes_re:match_str(vim.fn.getcwd()) then
+    search_dirs = { vim.env.HOME .. "/notes" }
+  end
+
+  builtin.grep_string({
+    search = "^# ",
+    use_regex = true,
+    search_dirs = search_dirs,
   })
+
+  -- builtin.find_files({
+  --   find_command = { "rg", "-t", "md", "--files" },
+  --   cwd = cwd,
+  -- })
 end
 
 -- Keys ----------------------------------------------------

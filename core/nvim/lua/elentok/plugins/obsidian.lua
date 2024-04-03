@@ -76,8 +76,9 @@ return {
   keys = {
     {
       "<Leader>jn",
-      "<Cmd>ObsidianSearch<cr>",
+      "<Cmd>ObsidianQuickSwitch<cr>",
       mode = "n",
     },
   },
+  cmd = { "ObsidianQuickSwitch" },
 }
