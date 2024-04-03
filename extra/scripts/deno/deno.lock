@@ -5,7 +5,8 @@
       "npm:chalk": "npm:chalk@5.3.0",
       "npm:chalk@^5.3.0": "npm:chalk@5.3.0",
       "npm:console-table-printer": "npm:console-table-printer@2.11.2",
-      "npm:fast-glob": "npm:fast-glob@3.3.1"
+      "npm:fast-glob": "npm:fast-glob@3.3.1",
+      "npm:uglify-es": "npm:uglify-es@3.3.9"
     },
     "npm": {
       "@nodelib/fs.scandir@2.1.5": {
@@ -34,6 +35,10 @@
       },
       "chalk@5.3.0": {
         "integrity": "sha512-dLitG79d+GV1Nb/VYcCDFivJeK1hiukt9QjRNVOsUtTy1rR1YJsmpGGTZ3qJos+uw7WmWF4wUwBd9jxjocFC2w==",
+        "dependencies": {}
+      },
+      "commander@2.13.0": {
+        "integrity": "sha512-MVuS359B+YzaWqjCL/c+22gfryv+mCBPHAv3zyVI2GN8EY6IRP8VwtasXn8jyyhvvq84R4ImN1OKRtcbIasjYA==",
         "dependencies": {}
       },
       "console-table-printer@2.11.2": {
@@ -117,10 +122,21 @@
         "integrity": "sha512-xMO/8eNREtaROt7tJvWJqHBDTMFN4eiQ5I4JRMuilwfnFcV5W9u7RUkueNkdw0jPqGMX36iCywelS5yilTuOxg==",
         "dependencies": {}
       },
+      "source-map@0.6.1": {
+        "integrity": "sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==",
+        "dependencies": {}
+      },
       "to-regex-range@5.0.1": {
         "integrity": "sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==",
         "dependencies": {
           "is-number": "is-number@7.0.0"
+        }
+      },
+      "uglify-es@3.3.9": {
+        "integrity": "sha512-r+MU0rfv4L/0eeW3xZrd16t4NZfK8Ld4SWVglYBb7ez5uXFWHuVRs6xCTrf1yirs9a4j4Y27nn7SRfO6v67XsQ==",
+        "dependencies": {
+          "commander": "commander@2.13.0",
+          "source-map": "source-map@0.6.1"
         }
       }
     }
