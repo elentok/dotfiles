@@ -1,0 +1,20 @@
+theme = "catppuccin_mocha"
+
+[editor]
+line-number = "relative"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[keys.insert.j]
+k = "normal_mode"
+
+[keys.normal.space]
+e = ["move_prev_long_word_end", "move_next_long_word_end", ":pipe-to dotf-open -"]
+
+# j = { k = "normal_mode" } # Maps `jk` to exit insert mode
+
+# SAAS-1234
+# www.bla.com/hello
