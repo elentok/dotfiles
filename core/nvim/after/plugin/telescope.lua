@@ -46,7 +46,7 @@ telescope.setup({
 local ok_aerial, _ = pcall(require, "aerial")
 if ok_aerial then
   telescope.load_extension("aerial")
-  vim.keymap.set("n", "gs", telescope.extensions.aerial.aerial, { desc = "Goto symbol" })
+  vim.keymap.set("n", "<leader>js", telescope.extensions.aerial.aerial, { desc = "Goto symbol" })
 end
 -- telescope.load_extension("fzf")
 telescope.load_extension("zf-native")

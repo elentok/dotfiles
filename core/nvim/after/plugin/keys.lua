@@ -152,6 +152,13 @@ vim.keymap.set("n", "<leader>wo", "<c-w>o", { desc = "Only window" })
 vim.keymap.set("n", "<leader>ws", "<c-w>s", { desc = "Split window" })
 vim.keymap.set("n", "<leader>wv", "<c-w>v", { desc = "Split window vertically" })
 vim.keymap.set({ "n", "v" }, "<leader>vv", "<c-v>", { desc = "Go into block visual mode" })
+vim.keymap.set("n", "vv", "V", { desc = "Go into visual line mode" })
 
 -- Evaluate the current math expression
 vim.keymap.set("v", "<leader>xx", '"mygvA = <c-r>=<c-r>m<cr>', { desc = "Evaluate" })
+
+-- Inspired by Helix
+vim.keymap.set({ "n", "v" }, "gh", "0", { desc = "Go to beginning of the line" })
+vim.keymap.set({ "n", "v" }, "ge", "G", { desc = "Go to end of the file" })
+vim.keymap.set({ "n", "v" }, "gl", "$", { desc = "Go to end of the line" })
+vim.keymap.set({ "n", "v" }, "gs", "_", { desc = "Go to first non-blank character" })

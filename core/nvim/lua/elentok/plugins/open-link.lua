@@ -1,4 +1,4 @@
-local is_dev_mode = require('elentok.lib.dev-mode')
+local is_dev_mode = require("elentok.lib.dev-mode")
 
 return {
   "elentok/open-link.nvim",
@@ -19,7 +19,7 @@ return {
   cmd = { "OpenLink", "PasteImage" },
   keys = {
     {
-      "ge",
+      "gx",
       "<cmd>OpenLink<cr>",
       desc = "Open the link under the cursor",
     },
