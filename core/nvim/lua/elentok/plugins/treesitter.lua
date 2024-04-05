@@ -20,8 +20,8 @@ local ensure_installed = {
   "lua",
   -- These are causing Neovim to crash in some specific scenarios,
   -- not sure why.
-  -- "markdown",
-  -- "markdown_inline",
+  "markdown",
+  "markdown_inline",
   "python",
   "regex",
   "rst",
