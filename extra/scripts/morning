@@ -38,9 +38,13 @@ note_dirs=(~/notes ~/notes/home ~/notes/work)
 for dir in "${note_dirs[@]}"; do
   if [ -e "$dir/.git" ]; then
     dotf-header h2 "Syncing ${dir}..."
-    (cd "$dir" && dotf-summary run "Sync notes @${dir}" git aytosync)
+    (cd "$dir" && dotf-summary run "Sync notes @${dir}" git autosync)
   fi
 done
+
+if dotf-has-command dotf-autosync; then
+  dotf-summary run "Autosync" dotf-autosync
+fi
 
 dotf-summary stop
 
