@@ -12,6 +12,7 @@ alias p 'dotf-clipboard paste'
 alias ts 'tig status'
 alias psg 'ps -a -x -o user,pid,command | grep'
 alias pth 'echo $PATH | tr " " "\n"'
+alias ls 'ls --color=always -XFhs --group-directories-first --time-style=long-iso'
 
 alias x exit
 
