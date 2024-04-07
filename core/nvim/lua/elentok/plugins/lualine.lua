@@ -15,8 +15,9 @@ return {
       -- lualine_x = {
       --   { navic_get_location, cond = navic_is_available },
       -- },
-      lualine_x = { "filetype" },
+      lualine_x = { "diagnostics", "filetype" },
       lualine_y = { "branch" },
+      lualine_z = { "progress", "location" },
     },
     -- winbar = {
     --   lualine_a = {},
