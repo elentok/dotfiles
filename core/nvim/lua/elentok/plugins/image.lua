@@ -14,6 +14,8 @@ return {
           only_render_image_at_cursor = true,
         },
       },
+      max_width = 100,
+      max_wdith_window_percentage = 90,
     })
   end,
   ft = { "markdown" },
