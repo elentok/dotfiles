@@ -46,7 +46,7 @@ function find-already-installed() {
 }
 
 function all-installed-packages() {
-  brew list -1 | grep -v '==>'
+  brew list -1 --full-name
 }
 
 main "$@"
