@@ -29,7 +29,7 @@ function main() {
   mkdir -p ~/.config
 
   echo "- Upgrading pip3..."
-  pip3 install pip --upgrade --user
+  pip3 install pip --upgrade --user --break-system-packages
 
   echo "- Updating git submodules..."
   git submodule update --init --recursive

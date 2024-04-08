@@ -15,7 +15,7 @@ main() {
   else
     echo
     dotf-bullet "Installing $missing..."
-    pip3 install $missing --user $*
+    pip3 install $missing --break-system-packages --user $*
   fi
 }
 
