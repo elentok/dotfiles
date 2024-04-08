@@ -106,7 +106,7 @@ function upgrade-pkgs() {
 
   dotf-header h3 '[dotf-pkgs] Updating pip packages...'
   # shellcheck disable=SC2046
-  pip3 install --upgrade --user $(get-pkgs pip)
+  pip3 install --upgrade --user --break-system-packages $(get-pkgs pip)
 
   dotf-header h3 '[dotf-pkgs] Updating npm packages...'
   if is-fnm-providing-node; then
