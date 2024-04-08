@@ -12,7 +12,7 @@ dotf-header h1 'Good morning :-)'
 dotf-header h2 'Add ssh key...'
 dotf-summary run 'Add SSH Key' ssh-add
 
-for script in $(dotf-plugin-list-files scripts/morning); do
+for script in $(dotf-plugin-list-files scripts/morning-plugin); do
   "$script"
 done
 
