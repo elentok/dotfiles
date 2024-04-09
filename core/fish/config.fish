@@ -9,3 +9,7 @@ set fish_key_bindings fish_user_key_bindings
 set fish_cursor_default block
 # Set the insert mode cursor to a line
 set fish_cursor_insert line
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
