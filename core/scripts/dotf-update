@@ -25,6 +25,7 @@ function main() {
   update-node
   dotf-summary run 'Update github packages' dotf-github update
   dotf-summary run 'Update packages' dotf-pkgs upgrade
+  dotf-summary run 'Update fisher' fish -c "fisher update"
   update-neovim-stuff
 
   if [ "$MORNING" == 'false' ]; then

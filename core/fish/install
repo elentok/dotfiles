@@ -11,7 +11,7 @@ function main() {
 
   dotf-symlink "$DOTF/core/fish" "$HOME/.config/fish"
 
-  fish "$DOTF/core/fish/install.fish"
+  # fish "$DOTF/core/fish/install.fish"
 }
 
 function set-fish-as-default-shell() {
