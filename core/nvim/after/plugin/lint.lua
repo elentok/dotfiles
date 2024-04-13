@@ -9,7 +9,12 @@ end
 --   return vim.fn.findfile("eslintrc.js", ";.") ~= "" or vim.fn.findfile(".eslintrc", ";.") ~= ""
 -- end
 
-if not deno.isDenoProject() then
+local function has_eslint_module()
+  return vim.fn.finddir("node_modules/eslint", ";.") ~= ""
+end
+
+-- if not deno.isDenoProject() then
+if has_eslint_module() then
   lint.linters_by_ft = {
     typescript = { "eslint_d" },
     typescriptreact = { "eslint_d" },
