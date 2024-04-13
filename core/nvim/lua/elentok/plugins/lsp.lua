@@ -3,12 +3,6 @@ return {
   { "ray-x/lsp_signature.nvim", opts = {} },
   "onsails/lspkind-nvim",
   {
-    "folke/trouble.nvim",
-    opts = {},
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    cmd = { "Trouble" },
-  },
-  {
     "j-hui/fidget.nvim", -- Shows LSP init progress
     tag = "legacy",
     opts = {},
