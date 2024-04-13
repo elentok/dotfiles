@@ -153,6 +153,7 @@ vim.keymap.set("n", "<leader>ws", "<c-w>s", { desc = "Split window" })
 vim.keymap.set("n", "<leader>wv", "<c-w>v", { desc = "Split window vertically" })
 vim.keymap.set({ "n", "v" }, "<leader>vv", "<c-v>", { desc = "Go into block visual mode" })
 vim.keymap.set("n", "vv", "V", { desc = "Go into visual line mode" })
+vim.keymap.set("n", "vc", "<c-v>", { desc = "Go into visual block mode" })
 
 -- Evaluate the current math expression
 vim.keymap.set("v", "<leader>xx", '"mygvA = <c-r>=<c-r>m<cr>', { desc = "Evaluate" })
