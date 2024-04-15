@@ -43,7 +43,6 @@ setup("jsonls")
 setup("html")
 setup("cssls")
 setup("rust_analyzer")
-setup("svelte")
 setup("terraformls")
 setup("graphql")
 
