@@ -39,16 +39,20 @@ return {
     local default_config = obsidian_config.UIOpts.default()
 
     local ui_config = vim.tbl_deep_extend("force", default_config, {
-      checkboxes = {
-        ["/"] = { char = "◧", hl_group = "ObsidianInProgress" },
-        ["w"] = { char = "⏸", hl_group = "ObsidianWaiting" },
-      },
       hl_groups = {
         ObsidianInProgress = { fg = "#EBCB8B" },
         ObsidianWaiting = { fg = "#C27D00" },
         ObsidianDone = { fg = "#6C7A96", bold = false },
       },
     })
+
+    -- Override the default checkboxes (I only want these)
+    ui_config.checkboxes = {
+      [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
+      ["/"] = { char = "◧", hl_group = "ObsidianInProgress" },
+      ["w"] = { char = "⏸", hl_group = "ObsidianWaiting" },
+      ["x"] = { char = "", hl_group = "ObsidianDone" },
+    }
 
     require("obsidian").setup({
       workspaces = workspaces,
