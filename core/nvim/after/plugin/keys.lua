@@ -17,6 +17,14 @@ vim.keymap.set("n", "<leader>wl", "<c-w>l", { desc = "Window right" })
 
 vim.keymap.set("n", "<leader>bd", "<cmd>bd<cr>", { desc = ":bd" })
 
+-- Enter as a secondary leader
+vim.keymap.set("n", "<cr><cr>", ":")
+vim.keymap.set("n", "<cr>x", "<cmd>bd<cr>")
+vim.keymap.set("n", "<cr>w", "<cmd>w<cr>")
+vim.keymap.set("n", "<cr>/", "<cmd>nohls<cr><cr>")
+vim.keymap.set({ "n", "v" }, "<cr>a", "A")
+vim.keymap.set({ "n", "v" }, "<cr>c", "V")
+
 -- Switch to alternate file
 vim.keymap.set("n", "<leader><leader>", "<c-^>")
 
@@ -74,8 +82,8 @@ vim.keymap.set("x", "i<space>", "t oT o", { silent = true })
 vim.keymap.set("n", "<Leader>tm", "<cmd>set modifiable!<cr>:set modifiable?<cr>")
 -- vim.keymap.set("n", "_", "<cmd>Vifm<cr>")
 
-vim.keymap.set("n", "<cr>", "<cmd>nohls<cr><cr>")
-vim.keymap.set("n", "<Leader><Leader>", "<cmd>silent !tput clear<cr>:redraw!<cr>")
+-- vim.keymap.set("n", "<cr>", "<cmd>nohls<cr><cr>")
+-- vim.keymap.set("n", "<Leader><Leader>", "<cmd>silent !tput clear<cr>:redraw!<cr>")
 
 vim.keymap.set("v", "<tab>", ">gv")
 vim.keymap.set("v", "<s-tab>", "<gv")
