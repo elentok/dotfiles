@@ -35,3 +35,15 @@ function npr --description "npm run"
         end
     end
 end
+
+function br --description "bun run"
+    if test (count $argv) -gt 0
+        bun run $argv
+    else
+        set cmd "$(npm-scripts | fzf-tmux -p -w 80% --ansi --exit-0 | awk '{print $1}')"
+        if test -n "$cmd"
+            commandline --replace "bun run "$cmd""
+            commandline -f execute
+        end
+    end
+end
