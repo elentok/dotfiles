@@ -2,6 +2,7 @@ local term = require("elentok/lib/terminal")
 -- vim: foldmethod=marker
 vim.keymap.set("i", "jk", "<esc>")
 vim.keymap.set("n", "<leader>k", ":")
+vim.keymap.set("n", "<leader>;", ":")
 
 vim.keymap.set("n", "<leader>wq", "<cmd>wq<cr>", { desc = ":wq" })
 vim.keymap.set("n", "<leader>ww", "<cmd>w<cr>", { desc = ":w" })
@@ -18,10 +19,9 @@ vim.keymap.set("n", "<leader>wl", "<c-w>l", { desc = "Window right" })
 vim.keymap.set("n", "<leader>bd", "<cmd>bd<cr>", { desc = ":bd" })
 
 -- Enter as a secondary leader
-vim.keymap.set("n", "<cr><cr>", ":")
+vim.keymap.set("n", "<cr><cr>", "<cmd>nohls<cr>")
 vim.keymap.set("n", "<cr>x", "<cmd>bd<cr>")
 vim.keymap.set("n", "<cr>w", "<cmd>w<cr>")
-vim.keymap.set("n", "<cr>/", "<cmd>nohls<cr><cr>")
 vim.keymap.set({ "n", "v" }, "<cr>a", "A")
 vim.keymap.set({ "n", "v" }, "<cr>c", "V")
 
