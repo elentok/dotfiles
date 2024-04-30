@@ -54,9 +54,16 @@ return {
       ["x"] = { char = "", hl_group = "ObsidianDone" },
     }
 
+    local mappings = require("obsidian.mappings")
+
     require("obsidian").setup({
       workspaces = workspaces,
       ui = ui_config,
+      mappings = {
+        ["gf"] = mappings.gf_passthrough(),
+        ["<leader>ch"] = mappings.toggle_checkbox(),
+        ["<cr>x"] = mappings.smart_action(),
+      },
       follow_url_func = function(url)
         vim.fn.jobstart({ "dotf-open", url })
       end,

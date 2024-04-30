@@ -18,12 +18,16 @@ vim.keymap.set("n", "<leader>wl", "<c-w>l", { desc = "Window right" })
 
 vim.keymap.set("n", "<leader>bd", "<cmd>bd<cr>", { desc = ":bd" })
 
+vim.keymap.set("n", ",,", "<cmd>nohls<cr>")
+vim.keymap.set({ "n", "v" }, ",a", "A")
+vim.keymap.set({ "n", "v" }, ",c", "V")
+
 -- Enter as a secondary leader
-vim.keymap.set("n", "<cr><cr>", "<cmd>nohls<cr>")
-vim.keymap.set("n", "<cr>x", "<cmd>bd<cr>")
-vim.keymap.set("n", "<cr>w", "<cmd>w<cr>")
-vim.keymap.set({ "n", "v" }, "<cr>a", "A")
-vim.keymap.set({ "n", "v" }, "<cr>c", "V")
+-- vim.keymap.set("n", "<cr><cr>", "<cmd>nohls<cr>")
+-- vim.keymap.set("n", "<cr>x", "<cmd>bd<cr>")
+-- vim.keymap.set("n", "<cr>w", "<cmd>w<cr>")
+-- vim.keymap.set({ "n", "v" }, "<cr>a", "A")
+-- vim.keymap.set({ "n", "v" }, "<cr>c", "V")
 
 -- Switch to alternate file
 vim.keymap.set("n", "<leader><leader>", "<c-^>")
