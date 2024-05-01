@@ -49,7 +49,7 @@
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "19a91a38b02c1c28c14e0ba468d20ae1423c39b2" },
   "nvim-vtsls": { "branch": "main", "commit": "2a63038478806349daec51cdfb146ac6ff4cc4b2" },
   "nvim-web-devicons": { "branch": "master", "commit": "794bba734ec95eaff9bb82fbd112473be2087283" },
-  "obsidian.nvim": { "branch": "main", "commit": "b1bfc2ad9172f0405bf6c21e1f63cfb73f79b480" },
+  "obsidian.nvim": { "branch": "main", "commit": "754d3410b907b5f5ae3c9f4ccf643ea945021341" },
   "oil.nvim": { "branch": "master", "commit": "78aeb665e2dcbc8ab948b3397581dcc0b7b086f3" },
   "openscad.nvim": { "branch": "main", "commit": "bf99a48bff318ceb28646d27f29f925ba0b10af0" },
   "playground": { "branch": "master", "commit": "ba48c6a62a280eefb7c85725b0915e021a1a0749" },
