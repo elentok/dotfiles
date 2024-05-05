@@ -64,6 +64,7 @@ return {
         ["<leader>ch"] = mappings.toggle_checkbox(),
         ["<cr>x"] = mappings.smart_action(),
       },
+      disable_frontmatter = true,
       follow_url_func = function(url)
         vim.fn.jobstart({ "dotf-open", url })
       end,
