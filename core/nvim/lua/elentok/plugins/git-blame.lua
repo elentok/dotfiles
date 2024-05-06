@@ -1,10 +1,10 @@
 return {
   "FabijanZulj/blame.nvim",
-  cmd = { "ToggleBlame", "EnableBlame" },
+  cmd = { "BlameToggle" },
   keys = {
     {
       "<leader>gbt",
-      "<cmd>ToggleBlame virtual<cr>",
+      "<cmd>BlameToggle<cr>",
       mode = "n",
       desc = "Toggle git blame",
     },
