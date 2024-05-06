@@ -51,6 +51,7 @@ end
 -- telescope.load_extension("fzf")
 telescope.load_extension("zf-native")
 telescope.load_extension("file_browser")
+telescope.load_extension("advanced_git_search")
 
 vim.keymap.set("n", "<c-p>", builtin.find_files)
 vim.keymap.set("n", "<leader>p", builtin.find_files)
