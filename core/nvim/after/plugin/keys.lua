@@ -35,9 +35,6 @@ vim.keymap.set("n", "<leader><leader>", "<c-^>")
 vim.keymap.set("n", "<c-s>", "<cmd>w<cr>")
 vim.keymap.set("i", "<c-s>", "<c-o>:w<cr>")
 
--- Remove whitespace.
-vim.keymap.set("n", "<Leader>rws", "<cmd>%s/\\s\\+$//<cr>")
-
 -- Avoid paste override {{{1
 -- From https://github.com/skwp/dotfiles/blob/master/vim/plugin/settings/stop-visual-paste-insanity.vim:
 -- If you visually select something and hit paste that thing gets yanked into

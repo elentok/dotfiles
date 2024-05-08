@@ -44,3 +44,5 @@ create_cmd("Markserv", function(args)
 end, {})
 
 create_cmd("PreviewSassColors", "!preview_sass_colors % && open preview.html", {})
+
+create_cmd("RemoveWhitespace", ":%s/\\s\\+$//", {})

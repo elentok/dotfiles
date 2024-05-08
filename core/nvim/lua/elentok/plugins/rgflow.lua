@@ -10,6 +10,14 @@ return {
       default_ui_mappings = true,
       -- QuickFix window only mapping
       default_quickfix_mappings = true,
+
+      mappings = {
+        ui = {
+          n = {
+            ["q"] = "close",
+          },
+        },
+      },
     })
   end,
 }
