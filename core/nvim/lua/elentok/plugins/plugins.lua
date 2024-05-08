@@ -23,7 +23,6 @@ return {
   { "junegunn/goyo.vim", cmd = "Goyo" }, -- dark/zen room, no distraction mode
   { "stevearc/dressing.nvim", opts = {} }, -- Make vim.ui.input and vim.ui.select prettier
   { "axieax/urlview.nvim", opts = {} },
-  { "kevinhwang91/nvim-bqf", ft = "qf" },
   { "windwp/nvim-autopairs", opts = {} },
   {
     "kylechui/nvim-surround",
