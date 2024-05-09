@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+#
+# Usage:
+#
+#   jr pick query...
+#   jr open query...
+
+set -euo pipefail
+
+function main() {
+  local cmd="${1:-}"
+  shift || true
+
+  if type "jr-${cmd}" > /dev/null 2>&1; then
+    "jr-${cmd}" "$@"
+  else
+    usage "$0"
+    exit 1
+  fi
+}
+
+function jr-pick() {
+  jira-search "$@" | fzf-tmux -p -w 80% --exit-0
+}
+
+function jr-info() {
+  id="$(jr-pick "$@" | cut -d: -f1)"
+  if [ -n "$id" ]; then
+    jira view "$id"
+  fi
+}
+
+function jr-open() {
+  id="$(jr-pick "$@" | cut -d: -f1)"
+  if [ -n "$id" ]; then
+    dotf-open "https://salto-io.atlassian.net/browse/$id"
+    jira view "$id"
+  fi
+}
+
+function jira-search() {
+  jira list -q "description ~ \"$*\" OR summary ~ \"$*\""
+}
+
+main "$@"
