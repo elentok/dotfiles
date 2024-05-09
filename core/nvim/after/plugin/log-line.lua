@@ -1,5 +1,6 @@
 local navic = require("nvim-navic")
 local util = require("elentok/util")
+local ui = require("elentok.lib.ui")
 
 -- local prefix = "[" .. vim.env.USER .. "]"
 local prefix = "[bazinga]"
@@ -93,11 +94,7 @@ local function get_logger_line()
   end
 end
 
-local function feedkeys(keys)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, false, true), "n", true)
-end
-
 vim.keymap.set("i", "<c-l>", function()
   vim.api.nvim_put({ get_logger_line() }, "c", true, true)
-  feedkeys("<Left>")
+  ui.feedkeys("<Left>")
 end)

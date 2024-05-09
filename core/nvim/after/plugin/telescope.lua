@@ -3,6 +3,7 @@ local lga_actions = require("telescope-live-grep-args.actions")
 local lga_shortcuts = require("telescope-live-grep-args.shortcuts")
 local builtin = require("telescope.builtin")
 local actions = require("telescope/actions")
+local ui = require("elentok.lib.ui")
 
 telescope.setup({
   defaults = {
@@ -12,12 +13,14 @@ telescope.setup({
     mappings = {
       i = {
         ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+        ["<C-f>"] = actions.to_fuzzy_refine,
         ["<C-r>"] = actions.delete_buffer,
         ["<C-d>"] = actions.cycle_history_next,
         ["<C-u>"] = actions.cycle_history_prev,
       },
       n = {
         ["q"] = actions.close,
+        ["f"] = actions.to_fuzzy_refine,
         ["x"] = actions.delete_buffer,
       },
     },
@@ -35,8 +38,15 @@ telescope.setup({
         -- extend mappings
         i = {
           ["<C-k>"] = lga_actions.quote_prompt(),
-          ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
-          ["<C-t>"] = lga_actions.quote_prompt({ postfix = " --t " }),
+          ["<C-i>"] = function()
+            ui.feedkeys(" --iglob **/**<left>", "n")
+          end,
+          ["<C-e>"] = function()
+            ui.feedkeys(" --iglob !**/**<left>", "n")
+          end,
+          ["<C-t>"] = function()
+            ui.feedkeys(" -t", "n")
+          end,
         },
       },
     },
@@ -52,6 +62,7 @@ end
 telescope.load_extension("zf-native")
 telescope.load_extension("file_browser")
 telescope.load_extension("advanced_git_search")
+telescope.load_extension("live_grep_args")
 
 vim.keymap.set("n", "<c-p>", builtin.find_files)
 vim.keymap.set("n", "<leader>p", builtin.find_files)
