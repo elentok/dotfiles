@@ -9,15 +9,18 @@ return {
       section_separators = { left = "", right = "" },
     },
     sections = {
-      lualine_a = { "filename" },
-      lualine_b = { { shortener.dir, icon = "" } },
+      lualine_a = { { "filename", path = 4 } },
+      lualine_b = {},
+      lualine_c = {},
+      -- lualine_b = { { "filename", path = 1, icon = "" } },
+      -- lualine_b = { { shortener.dir, icon = "" } },
       -- lualine_c = { "branch" },
       -- lualine_x = {
       --   { navic_get_location, cond = navic_is_available },
       -- },
       lualine_x = { "diagnostics", "filetype" },
       lualine_y = { "branch" },
-      lualine_z = { "progress", "location" },
+      lualine_z = { "location" },
     },
     -- winbar = {
     --   lualine_a = {},
