@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+#
+# Usage:
+#
+#   dotf-mason <package>...
+#
+
+set -euo pipefail
+source "$DOTF/framework"
+
+PKGS_ROOT="$HOME/.local/share/nvim/mason/packages"
+FORCE=no
+
+main() {
+  if [ $# -eq 0 ]; then
+    usage "$0"
+    exit 1
+  fi
+
+  if [ "$1" == "-f" ]; then
+    FORCE=yes
+    shift
+  fi
+
+  if [ "$FORCE" == "yes" ]; then
+    dotf-bullet "Upgrading mason packages $*... "
+    missing="$*"
+  else
+    dotf-bullet "Installing mason packages $*... "
+    missing=$(find-missing-packages "$@")
+  fi
+
+  if [ -z "$missing" ]; then
+    dotf-info " already installed."
+  else
+    echo
+    dotf-bullet "Installing missing packages: $missing..."
+    echo
+
+    nvim --headless -c "MasonInstall $missing" -c "qall"
+  fi
+}
+
+function find-missing-packages() {
+  for pkg in "$@"; do
+    if [ ! -d "$PKGS_ROOT/$pkg" ]; then
+      echo "$pkg"
+    fi
+  done
+}
+
+main "$@"

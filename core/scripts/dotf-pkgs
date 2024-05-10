@@ -50,6 +50,9 @@ function install-pkgs() {
     cargo)
       install-cargo-pkgs
       ;;
+    mason)
+      install-mason-pkgs
+      ;;
     *)
       install-apt-pkgs && install-pip-pkgs && install-npm-pkgs
       ;;
@@ -101,6 +104,12 @@ function install-cargo-pkgs() {
   dotf-cargo "$(get-pkgs cargo)"
 }
 
+function install-mason-pkgs() {
+  dotf-header h2 '[dotf-pkgs] Installing mason packages...'
+  # shellcheck disable=SC2046
+  dotf-mason $(get-pkgs mason)
+}
+
 function upgrade-pkgs() {
   dotf-header h2 '[dotf-pkgs] Updating packages...'
 
@@ -121,6 +130,9 @@ function upgrade-pkgs() {
   fi
   # shellcheck disable=SC2046
   $npm install -g $(get-pkgs npm)
+
+  # shellcheck disable=SC2046
+  dotf-mason -f $(get-pkgs mason)
 }
 
 function get-pkgs() {
