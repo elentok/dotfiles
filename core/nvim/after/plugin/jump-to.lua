@@ -1,4 +1,3 @@
-local builtin = require("telescope.builtin")
 local util = require("elentok/util")
 
 -- Configuration -------------------------------------------
@@ -27,6 +26,7 @@ end
 -- Functions -----------------------------------------------
 
 local function jump_to_config()
+  local builtin = require("telescope.builtin")
   builtin.find_files({
     find_command = { "rg", "-t", "lua", "-t", "vim", "--files" },
     cwd = vim.env.HOME,
@@ -35,6 +35,7 @@ local function jump_to_config()
 end
 
 local function jump_to_script()
+  local builtin = require("telescope.builtin")
   builtin.find_files({
     find_command = { "rg", "--files" },
     cwd = vim.env.HOME,
@@ -51,6 +52,7 @@ local function jump_to_note()
     search_dirs = { vim.env.HOME .. "/notes" }
   end
 
+  local builtin = require("telescope.builtin")
   builtin.grep_string({
     search = "^# ",
     use_regex = true,

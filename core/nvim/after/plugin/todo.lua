@@ -125,12 +125,9 @@ local group_id = vim.api.nvim_create_augroup("Elentok_Markdown", {})
 --   { pattern = "*.md", group = group_id, callback = setup_buffer }
 -- )
 
-local has_builtin, builtin = pcall(require, "telescope.builtin")
-if has_builtin then
-  vim.keymap.set("n", "<leader>jt", function()
-    builtin.grep_string({ search = "[ ]", search_dirs = { vim.fn.expand("%") } })
-  end, { desc = "Jump to open task" })
-end
+vim.keymap.set("n", "<leader>jt", function()
+  require("telescope.builtin").grep_string({ search = "[ ]", search_dirs = { vim.fn.expand("%") } })
+end, { desc = "Jump to open task" })
 
 local function todo_toggle_done()
   local line = vim.fn.getline(".")

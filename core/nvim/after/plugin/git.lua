@@ -1,6 +1,3 @@
-local conf = require("telescope.config").values
-local finders = require("telescope.finders")
-local pickers = require("telescope.pickers")
 local term = require("elentok.lib.terminal")
 local git = require("elentok.lib.git")
 
@@ -41,30 +38,6 @@ vim.keymap.set({ "n" }, "<leader>mL", "ggVG:diffget LOCAL<cr>")
 vim.keymap.set({ "n" }, "<leader>mR", "ggVG:diffget REMOTE<cr>")
 vim.keymap.set({ "n", "v" }, "<leader>ml", ":diffget LOCAL<cr>")
 vim.keymap.set({ "n", "v" }, "<leader>mr", ":diffget REMOTE<cr>")
-
-local function telescope_git_last_commit_files()
-  pickers
-    .new({}, {
-      finder = finders.new_oneshot_job({
-        "git",
-        "diff-tree",
-        "--no-commit-id",
-        "--name-only",
-        "-r",
-        "HEAD",
-      }, {}),
-      previewer = conf.file_previewer({}),
-    })
-    :find()
-end
-
-vim.api.nvim_create_user_command("Glast", telescope_git_last_commit_files, {})
-vim.keymap.set(
-  "n",
-  "<leader>jl",
-  telescope_git_last_commit_files,
-  { desc = "Jump to files in last commit" }
-)
 vim.keymap.set("n", "<leader>ga", "<cmd>Gap<cr>", { desc = "Git add (patch)" })
 vim.keymap.set("n", "<leader>gw", "<cmd>Gwrite<cr>", { desc = "Git write" })
 -- vim.keymap.set("n", "<leader>gg", "<cmd>G<cr><c-w>H", { desc = "Git status" })
