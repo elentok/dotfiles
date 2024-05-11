@@ -19,4 +19,7 @@ require("lazy").setup("elentok/plugins", {
   ui = {
     border = "rounded",
   },
+  change_detection = {
+    notify = false,
+  },
 })
