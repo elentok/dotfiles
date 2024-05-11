@@ -16,7 +16,8 @@ return {
   version = "*",
   lazy = true,
   dependencies = {
-    { "natecraddock/telescope-zf-native.nvim" },
+    -- { "natecraddock/telescope-zf-native.nvim" },
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     { "nvim-telescope/telescope-live-grep-args.nvim" },
     { "aaronhallaert/advanced-git-search.nvim", cmd = "AdvancedGitSearch" },
   },
@@ -103,12 +104,12 @@ return {
         },
       },
       extensions = {
-        -- fzf = {
-        --   fuzzy = true,
-        --   override_generic_sorter = true,
-        --   override_file_sorter = true,
-        --   case_mode = "smart_case",
-        -- },
+        fzf = {
+          -- fuzzy = true,
+          override_generic_sorter = true,
+          override_file_sorter = true,
+          -- case_mode = "smart_case",
+        },
         live_grep_args = {
           auto_quoting = true,
           mappings = {
@@ -131,7 +132,7 @@ return {
     })
 
     telescope.load_extension("aerial")
-    telescope.load_extension("zf-native")
+    telescope.load_extension("fzf")
     telescope.load_extension("advanced_git_search")
     telescope.load_extension("live_grep_args")
 
