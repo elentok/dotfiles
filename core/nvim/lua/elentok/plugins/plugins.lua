@@ -7,15 +7,23 @@ return {
   { "mbbill/undotree", lazy = true, cmd = { "UndotreeShow", "UndotreeToggle", "UndotreeFocus" } },
   "bogado/file-line", -- Allows running "nvim {filename}:{line-number}".
   "michaeljsmith/vim-indent-object",
-  "bronson/vim-visual-star-search",
+  {
+    "bronson/vim-visual-star-search",
+    lazy = true,
+    keys = { { "*", mode = { "v" } }, { "#", mode = { "v" } } },
+  },
   "christoomey/vim-tmux-navigator",
   "numToStr/FTerm.nvim",
   "nvim-lua/plenary.nvim",
   "AndrewRadev/splitjoin.vim",
   -- "jamessan/vim-gnupg",
-  "davidbeckingsale/writegood.vim",
+  {
+    "davidbeckingsale/writegood.vim",
+    lazy = true,
+    cmd = { "WritegoodToggle", "WritegoodEnable", "WritegoodDisable" },
+  },
   "sotte/presenting.vim", -- Presentation tool
-  "nvim-tree/nvim-web-devicons",
+  { "nvim-tree/nvim-web-devicons", lazy = true },
   "nvim-lualine/lualine.nvim",
   "ojroques/nvim-osc52",
 
