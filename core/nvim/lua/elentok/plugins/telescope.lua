@@ -1,3 +1,5 @@
+local current_text = require("elentok.lib.current-text")
+
 local function telescope_git_last_commit_files()
   require("telescope.builtin").find_files({
     find_command = {
@@ -17,22 +19,26 @@ return {
   lazy = true,
   dependencies = {
     -- { "natecraddock/telescope-zf-native.nvim" },
+    "fdschmidt93/telescope-egrepify.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     { "nvim-telescope/telescope-live-grep-args.nvim" },
     { "aaronhallaert/advanced-git-search.nvim", cmd = "AdvancedGitSearch" },
   },
-  command = { "Telescope", "Maps", "Glast" },
+  cmd = { "Telescope", "Maps", "Glast" },
   keys = {
     {
       "<leader>ff",
-      "<cmd>Telescope live_grep_args<cr>",
+      "<cmd>Telescope egrepify<cr>",
       mode = "n",
-      desc = "Live grep (args)",
+      desc = "Live grep",
     },
     {
       "<leader>fw",
       function()
-        require("telescope-live-grep-args.shortcuts").grep_word_under_cursor()
+        require("telescope").extensions.egrepify.egrepify({
+          default_text = current_text.get_current_text(),
+        })
+        -- require("telescope-live-grep-args.shortcuts").grep_word_under_cursor()
       end,
       { desc = "Grep word under cursor" },
     },
@@ -110,6 +116,13 @@ return {
           override_file_sorter = true,
           -- case_mode = "smart_case",
         },
+        egrepify = {
+          prefixes = {
+            ["!"] = {
+              flag = "invert-match",
+            },
+          },
+        },
         live_grep_args = {
           auto_quoting = true,
           mappings = {
@@ -135,6 +148,7 @@ return {
     telescope.load_extension("fzf")
     telescope.load_extension("advanced_git_search")
     telescope.load_extension("live_grep_args")
+    telescope.load_extension("egrepify")
 
     vim.api.nvim_create_user_command("Maps", builtin.keymaps, {})
     vim.api.nvim_create_user_command("Glast", telescope_git_last_commit_files, {})
