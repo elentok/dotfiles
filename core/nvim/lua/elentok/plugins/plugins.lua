@@ -16,18 +16,11 @@ return {
   "numToStr/FTerm.nvim",
   "nvim-lua/plenary.nvim",
   "AndrewRadev/splitjoin.vim",
-  -- "jamessan/vim-gnupg",
-  {
-    "davidbeckingsale/writegood.vim",
-    lazy = true,
-    cmd = { "WritegoodToggle", "WritegoodEnable", "WritegoodDisable" },
-  },
   "sotte/presenting.vim", -- Presentation tool
   { "nvim-tree/nvim-web-devicons", lazy = true },
   "nvim-lualine/lualine.nvim",
   "ojroques/nvim-osc52",
 
-  { "junegunn/goyo.vim", cmd = "Goyo" }, -- dark/zen room, no distraction mode
   { "axieax/urlview.nvim", opts = {} },
   { "windwp/nvim-autopairs", opts = {} },
   {
@@ -36,15 +29,6 @@ return {
     event = "VeryLazy",
     opts = {},
   },
-
-  -- Color Picker
-  -- {
-  --   "ziontee113/color-picker.nvim",
-  --   opts = {},
-  --   keys = {
-  --     { "<leader>cp", "<cmd>PickColor<cr>", mode = "n", desc = "Color picker" },
-  --   },
-  -- },
 
   {
     "salkin-mada/openscad.nvim",

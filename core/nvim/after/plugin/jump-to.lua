@@ -25,22 +25,28 @@ end
 
 -- Functions -----------------------------------------------
 
-local function jump_to_config()
-  local builtin = require("telescope.builtin")
-  builtin.find_files({
-    find_command = { "rg", "-t", "lua", "-t", "vim", "--files" },
-    cwd = vim.env.HOME,
-    search_dirs = config_dirs,
-  })
-end
+---@class FindFilesOpts
+---@field cwd? string: root dir to search from (default: cwd, use utils.buffer_dir() to search relative to open buffer)
+---@field find_command? function|table: cmd to use for the search. Can be a fn(opts) -> tbl (default: autodetect)
+---@field no_ignore? boolean: show files ignored by .gitignore, .ignore, etc. (default: false)
+---@field no_ignore_parent? boolean: show files ignored by .gitignore, .ignore, etc. in parent dirs. (default: false)
+---@field search_dirs? table: directory/directories/files to search
 
-local function jump_to_script()
-  local builtin = require("telescope.builtin")
-  builtin.find_files({
-    find_command = { "rg", "--files" },
-    cwd = vim.env.HOME,
-    search_dirs = script_dirs,
-  })
+---@param title string
+---@param mapping string
+---@param find_files_opts FindFilesOpts
+local function create_jumper(title, mapping, find_files_opts)
+  vim.keymap.set(
+    "n",
+    mapping,
+    function()
+      require("telescope.builtin").find_files(
+        vim.tbl_extend("force", { prompt_title = "Jump to " .. title }, find_files_opts)
+      )
+    end,
+    -- "<cmd>e ~/.dotfiles/core/nvim/lua/elentok/plugins/plugins.lua<cr>",
+    { desc = "Jump to " .. title }
+  )
 end
 
 local notes_re = vim.regex("^" .. vim.env.HOME .. "/notes")
@@ -58,22 +64,24 @@ local function jump_to_note()
     use_regex = true,
     search_dirs = search_dirs,
   })
-
-  -- builtin.find_files({
-  --   find_command = { "rg", "-t", "md", "--files" },
-  --   cwd = cwd,
-  -- })
 end
 
 -- Keys ----------------------------------------------------
 
+create_jumper("config", "<leader>jc", {
+  find_command = { "rg", "-t", "lua", "-t", "vim", "--files" },
+  cwd = vim.env.HOME,
+  search_dirs = config_dirs,
+})
+
+create_jumper("plugin", "<leader>jp", {
+  cwd = vim.env.HOME .. "/.dotfiles/core/nvim/lua/elentok/plugins/",
+})
+
+create_jumper("script", "<leader>jS", {
+  find_command = { "rg", "--files" },
+  cwd = vim.env.HOME,
+  search_dirs = script_dirs,
+})
+
 vim.keymap.set("n", "<leader>ja", "<c-^>", { desc = "Jump to alternate file" })
--- vim.keymap.set("n", "<leader>js", jump_to_script, { desc = "Jump to script" })
-vim.keymap.set("n", "<leader>jc", jump_to_config, { desc = "Jump to config" })
--- vim.keymap.set("n", "<leader>jn", jump_to_note, { desc = "Jump to note" })
-vim.keymap.set(
-  "n",
-  "<leader>jp",
-  "<cmd>e ~/.dotfiles/core/nvim/lua/elentok/plugins/plugins.lua<cr>",
-  { desc = "Jump to plugins.lua" }
-)
