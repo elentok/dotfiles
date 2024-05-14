@@ -35,7 +35,7 @@ end
 return {
   "tpope/vim-fugitive",
   lazy = true,
-  cmd = "G",
+  cmd = { "G", "Gwrite", "Gread" },
   config = function()
     vim.api.nvim_create_autocmd(
       { "Filetype" },
