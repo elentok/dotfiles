@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+context=7
+
+if [ "${1:-}" == "preview" ]; then
+  line_number="$(echo "$2" | cut -d: -f1)"
+  if [ "$line_number" -lt "$context" ]; then
+    start=1
+    highlight=$line_number
+  else
+    start=$((line_number - context))
+    highlight=$((context + 1))
+  fi
+  end=$((line_number + context))
+  # TODO: find start and end of this block
+  sed -n "${start},${end}p" "$DOTF/docs/help.md" | bat --plain -l markdown --color=always -H "$highlight"
+else
+  line="$(rg --line-number ".*" "$DOTF/docs/help.md" | fzf-tmux -p 80%,80% -- --tac --preview='hlp preview {}')"
+
+  if [ -n "$line" ]; then
+    hlp preview "$line"
+  fi
+fi
