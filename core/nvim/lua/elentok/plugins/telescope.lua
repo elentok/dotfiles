@@ -118,8 +118,35 @@ return {
         },
         egrepify = {
           prefixes = {
+            ["%"] = {
+              flag = "iglob",
+              cb = function(input)
+                return string.format([[!*.{%s}]], input)
+              end,
+            },
+            [">"] = {
+              flag = "iglob",
+              cb = function(input)
+                return string.format([[**/{%s}*/**]], input)
+              end,
+            },
+            ["<"] = {
+              flag = "iglob",
+              cb = function(input)
+                return string.format([[!**/{%s}*/**]], input)
+              end,
+            },
+            ["&"] = {
+              flag = "iglob",
+              cb = function(input)
+                return string.format([[*{%s}*]], input)
+              end,
+            },
             ["!"] = {
-              flag = "invert-match",
+              flag = "iglob",
+              cb = function(input)
+                return string.format([[!*{%s}*]], input)
+              end,
             },
           },
         },
