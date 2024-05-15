@@ -1,4 +1,5 @@
-#!/usr/bin/env -S deno run --allow-env --allow-read
+#!/usr/bin/env -S deno run --allow-env --allow-read --allow-run
+
 import * as path from "node:path"
 import * as fs from "node:fs"
 import chalk from "npm:chalk@^5.3.0"

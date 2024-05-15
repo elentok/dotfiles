@@ -1,4 +1,0 @@
-#!/usr/bin/env node
-
-const { help } = require('./lib/js/help')
-help()

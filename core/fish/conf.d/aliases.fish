@@ -25,6 +25,9 @@ alias cw 'whichx cat'
 alias jw 'cd $(git-wt pick || pwd)'
 alias jp 'cd $(dotf-projects pick || pwd)'
 
+alias h 'help.ts'
+alias mycal 'mycal.ts'
+
 function f --description vifm
     if test (count $argv) -eq 0
         TERM=xterm-256color vifm .
