@@ -32,21 +32,9 @@ end
 ---@field no_ignore_parent? boolean: show files ignored by .gitignore, .ignore, etc. in parent dirs. (default: false)
 ---@field search_dirs? table: directory/directories/files to search
 
----@param title string
----@param mapping string
----@param find_files_opts FindFilesOpts
-local function create_jumper(title, mapping, find_files_opts)
-  vim.keymap.set(
-    "n",
-    mapping,
-    function()
-      require("telescope.builtin").find_files(
-        vim.tbl_extend("force", { prompt_title = "Jump to " .. title }, find_files_opts)
-      )
-    end,
-    -- "<cmd>e ~/.dotfiles/core/nvim/lua/elentok/plugins/plugins.lua<cr>",
-    { desc = "Jump to " .. title }
-  )
+---@param opts FindFilesOpts
+local function find_files(opts)
+  require("telescope.builtin").find_files(opts)
 end
 
 local notes_re = vim.regex("^" .. vim.env.HOME .. "/notes")
@@ -68,20 +56,26 @@ end
 
 -- Keys ----------------------------------------------------
 
-create_jumper("config", "<leader>jc", {
-  find_command = { "rg", "-t", "lua", "-t", "vim", "--files" },
-  cwd = vim.env.HOME,
-  search_dirs = config_dirs,
-})
+vim.keymap.set("n", "<leader>jc", function()
+  find_files({
+    find_command = { "rg", "-t", "lua", "-t", "vim", "--files" },
+    cwd = vim.env.HOME,
+    search_dirs = config_dirs,
+  })
+end, { desc = "Jump to config" })
 
-create_jumper("plugin", "<leader>jp", {
-  cwd = vim.env.HOME .. "/.dotfiles/core/nvim/lua/elentok/plugins/",
-})
+vim.keymap.set("n", "<leader>jp", function()
+  find_files({
+    cwd = vim.env.HOME .. "/.dotfiles/core/nvim/lua/elentok/plugins/",
+  })
+end, { desc = "Jump to plugin" })
 
-create_jumper("script", "<leader>jS", {
-  find_command = { "rg", "--files" },
-  cwd = vim.env.HOME,
-  search_dirs = script_dirs,
-})
+vim.keymap.set("n", "<leader>jS", function()
+  find_files({
+    find_command = { "rg", "--files" },
+    cwd = vim.env.HOME,
+    search_dirs = script_dirs,
+  })
+end, { desc = "Jump to script" })
 
 vim.keymap.set("n", "<leader>ja", "<c-^>", { desc = "Jump to alternate file" })
