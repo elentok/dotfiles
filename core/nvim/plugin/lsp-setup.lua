@@ -65,6 +65,7 @@ setup("vtsls", {
   settings = {
     vtsls = {
       autoUseWorkspaceTsdk = true,
+      inlayHints = true,
     },
     typescript = {
       tsdk = find_local_tsserver(),

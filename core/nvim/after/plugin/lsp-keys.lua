@@ -5,6 +5,16 @@
 --   end
 -- end
 
+local function toggle_inlay_hints()
+  if vim.lsp.inlay_hint.is_enabled() then
+    vim.lsp.inlay_hint.enable(false)
+    print("Inlay hints: disabled")
+  else
+    vim.lsp.inlay_hint.enable(true)
+    print("Inlay hints: enabled")
+  end
+end
+
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("Elentok_LspConfig", {}),
   callback = function(ev)
@@ -25,10 +35,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("n", "<leader>jD", vim.lsp.buf.type_definition, "Jump to type definition")
     map("n", "<leader>ji", vim.lsp.buf.implementation, "Jump to implementation")
 
+    map("n", "<leader>ti", toggle_inlay_hints, "Toggle inlay hints")
+
     map("n", "<leader>rn", vim.lsp.buf.rename, "Rename symbol")
     map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code actions")
 
-    map("n", "K", vim.lsp.buf.hover, "Hover info")
     map("n", "<leader>ik", vim.lsp.buf.signature_help, "Signature help")
 
     -- vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
