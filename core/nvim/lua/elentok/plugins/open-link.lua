@@ -3,7 +3,7 @@ local is_dev_mode = require("elentok.lib.dev-mode")
 return {
   "elentok/open-link.nvim",
   dev = is_dev_mode,
-  lazy = true,
+  lazy = false,
   config = function()
     local expanders = require("open-link.expanders")
     require("open-link").setup({
@@ -17,13 +17,7 @@ return {
   dependencies = {
     "ojroques/nvim-osc52",
   },
-  cmd = { "OpenLink", "PasteImage" },
   keys = {
-    {
-      "gx",
-      "<cmd>OpenLink<cr>",
-      desc = "Open the link under the cursor",
-    },
     {
       "<Leader>ip",
       "<cmd>PasteImage<cr>",
