@@ -9,6 +9,13 @@ return {
         border = "rounded",
       },
     },
+    keys = {
+      {
+        "<leader>om",
+        "<Cmd>Mason<cr>",
+        desc = "Open mason",
+      },
+    },
   },
   {
     "williamboman/mason-lspconfig.nvim",
