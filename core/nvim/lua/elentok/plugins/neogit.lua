@@ -29,6 +29,10 @@ return {
       disable_insert_on_commit = true,
       integration = {
         telescope = true,
+        diffview = true,
+      },
+      popup = {
+        kind = "floating",
       },
     })
 
