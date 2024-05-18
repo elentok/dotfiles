@@ -16,6 +16,8 @@ set dotdirs
 " smart case sensitivity
 set ignorecase
 set smartcase
+" Ignore case during completion
+set caseoptions=p
 
 color gruvbox
 
