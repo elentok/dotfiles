@@ -12,7 +12,7 @@ local ensure_installed = {
   "hcl", -- terraform
   "html",
   "java",
-  -- "javascript",
+  "javascript",
   "jsdoc",
   "json",
   "json5",
@@ -38,11 +38,11 @@ local ensure_installed = {
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    version = "*",
-    build = function()
-      local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
-      ts_update()
-    end,
+    build = ":TSUpdate",
+    -- version = "*",
+    -- build = function()
+    --   require("nvim-treesitter.install").update()
+    -- end,
 
     config = function()
       local treesitter_configs = require("nvim-treesitter.configs")
