@@ -13,5 +13,4 @@ function main {
     -c 'autocmd VimEnter * normal G'
 }
 
-echo "dotf-nvim-pager $*" >> ~/tmp/pager.txt
 main "$@"
