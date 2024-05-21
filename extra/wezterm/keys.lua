@@ -23,6 +23,10 @@ local function setupKeys(config)
     { key = "s", mods = "LEADER", action = act.SplitPane({ direction = "Down" }) },
     { key = "v", mods = "LEADER", action = act.SplitPane({ direction = "Right" }) },
 
+    { key = ",", mods = h.ctrl_or_cmd, action = act.ActivateTabRelative(-1) },
+    { key = ".", mods = h.ctrl_or_cmd, action = act.ActivateTabRelative(1) },
+    { key = "c", mods = "LEADER", action = act.SpawnTab("DefaultDomain") },
+
     -- { key = "r", mods = "LEADER", action = act.ShowLauncher },
     -- { key = "d", mods = "LEADER", action = act.DetachDomain("CurrentPaneDomain") },
 
@@ -30,7 +34,8 @@ local function setupKeys(config)
     -- { key = "a", mods = "LEADER|CTRL", action = act.SendString("\x01") },
 
     -- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
-    { key = "c", mods = "LEADER", action = act.ActivateCopyMode },
+    { key = "d", mods = "LEADER", action = act.ActivateCopyMode },
+    { key = "/", mods = "LEADER", action = act.Search({ CaseInSensitiveString = "" }) },
     -- { key = "/", mods = "LEADER", action = act.Search },
     { key = "p", mods = "LEADER", action = act.ActivateCommandPalette },
     -- { key = "[", mods = "LEADER", action = act.ActivateCopyMode },

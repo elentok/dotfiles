@@ -18,11 +18,19 @@ local config = {
       font = wezterm.font("Operator Mono", { weight = 325, italic = true }),
     },
   },
-  line_height = 1.0,
+  line_height = 1.2,
   cell_width = 1.0,
   font_size = 14.0,
   color_scheme = "MaterialDarker",
   audible_bell = "Disabled",
+
+  tab_bar_at_bottom = true,
+  use_fancy_tab_bar = false,
+  tab_max_width = 30,
+  -- window_frame = {
+  --   font_size = 16,
+  --   font = wezterm.font("ComicShannsMono Nerd Font Mono"),
+  -- },
   -- key_tables = {
   --   copy_mode = {
   --     { key = "u", mods = "CTRL", action = act.CopyMode("PageUp") },
