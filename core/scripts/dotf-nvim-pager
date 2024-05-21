@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+source "$HOME/.dotfiles/core/zsh/core.sh"
+echo "DOTF=$DOTF" >> ~/tmp/pager.txt
+echo "TMP=$TMP" >> ~/tmp/pager.txt
+
+TMP_BUFFER="$TMP/nvim-pager-buffer"
+
+function main {
+  exec nvim --noplugin \
+    -u "$DOTF/core/nvim/init-pager.lua" \
+    -c "silent write! $TMP_BUFFER | te cat $TMP_BUFFER - " \
+    -c 'autocmd VimEnter * normal G'
+}
+
+echo "dotf-nvim-pager $*" >> ~/tmp/pager.txt
+main "$@"
