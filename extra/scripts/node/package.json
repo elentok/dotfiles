@@ -4,7 +4,7 @@
   "description": "elentok's dotfiles",
   "scripts": {
     "format": "prettier --write '**/*.js' '**/*.ts' '**/*.css'",
-    "format:lua": "stylua --glob '**/*.lua' --config-path=$DOTF/core/nvim/stylua.toml .",
+    "format:lua": "stylua --glob '**/*.lua' --config-path=$DOTF/stylua.toml .",
     "vscode:sync": "ts-node plugins/vscode/sync.ts",
     "eslint": "eslint --ext .js,.ts .",
     "ts:build": "tsc",
