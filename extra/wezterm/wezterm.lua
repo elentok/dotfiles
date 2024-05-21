@@ -1,6 +1,7 @@
 local wezterm = require("wezterm")
 local h = require("helpers")
 local setupKeys = require("keys")
+local setupSplitPanes = require("split-panes")
 
 local local_config_dir = os.getenv("HOME") .. "/.dotprivate/wezterm"
 
@@ -39,6 +40,7 @@ local config = {
 }
 
 setupKeys(config)
+setupSplitPanes(config)
 
 for _, file in ipairs(wezterm.glob(local_config_dir .. "/*.lua")) do
   local config_fn = dofile(file)

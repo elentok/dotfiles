@@ -12,7 +12,12 @@ return {
     lazy = true,
     keys = { { "*", mode = { "v" } }, { "#", mode = { "v" } } },
   },
-  "christoomey/vim-tmux-navigator",
+  -- {
+  --   "christoomey/vim-tmux-navigator",
+  --   cond = function()
+  --     return vim.env.TMUX ~= nil
+  --   end,
+  -- },
   "numToStr/FTerm.nvim",
   "nvim-lua/plenary.nvim",
   "AndrewRadev/splitjoin.vim",

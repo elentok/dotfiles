@@ -9,4 +9,10 @@ if is_macos() then
   ctrl_or_cmd = "CMD"
 end
 
-return { is_macos = is_macos, ctrl_or_cmd = ctrl_or_cmd }
+local function extend_array(dest, source)
+  for _, v in ipairs(source) do
+    table.insert(dest, v)
+  end
+end
+
+return { is_macos = is_macos, ctrl_or_cmd = ctrl_or_cmd, extend_array = extend_array }

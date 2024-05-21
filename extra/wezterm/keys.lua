@@ -4,7 +4,9 @@ local act = wezterm.action
 
 local function mapCmdToCtrl(config)
   -- Removed "e" on purpose since Cmd+E is the leader key
-  local keys = "abcdfghijklmnopqrstuvwxyz"
+  -- Removed "v" on purpose since Cmd+V pastes
+  -- Removed "hjkl" since they are used to switch panes
+  local keys = "abcdfgimnopqrstuwxyz"
   for i = 1, #keys do
     local key = string.sub(keys, i, i)
     table.insert(
@@ -18,6 +20,8 @@ local function setupKeys(config)
   config.leader = { key = "e", mods = "CMD" }
   config.keys = {
     { key = "r", mods = "LEADER", action = act.ReloadConfiguration },
+    { key = "s", mods = "LEADER", action = act.SplitPane({ direction = "Down" }) },
+    { key = "v", mods = "LEADER", action = act.SplitPane({ direction = "Right" }) },
 
     -- { key = "r", mods = "LEADER", action = act.ShowLauncher },
     -- { key = "d", mods = "LEADER", action = act.DetachDomain("CurrentPaneDomain") },

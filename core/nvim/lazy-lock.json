@@ -58,6 +58,7 @@
   "presenting.vim": { "branch": "master", "commit": "b5f24477718ee6fb6ae0fa888270c83baa81c9aa" },
   "quickmath.nvim": { "branch": "main", "commit": "7a9a6599018aa931a8fe7ad2e4cb2f36db533d19" },
   "sibling-swap.nvim": { "branch": "main", "commit": "0a96720cea3df545d2b389b73d83f25cdd5957ec" },
+  "smart-splits.nvim": { "branch": "master", "commit": "2179ec0d26aacd4f40c766c79f6ebc83b7001e48" },
   "splitjoin.vim": { "branch": "main", "commit": "9b0c30f61f13ba4800a11107648bdd748ad511ba" },
   "telescope-egrepify.nvim": { "branch": "master", "commit": "728dc1b7f31297876c3a3254fc6108108b6a9e9d" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "9ef21b2e6bb6ebeaf349a0781745549bbb870d27" },
@@ -72,7 +73,6 @@
   "vim-fugitive": { "branch": "master", "commit": "4f59455d2388e113bd510e85b310d15b9228ca0d" },
   "vim-indent-object": { "branch": "master", "commit": "8ab36d5ec2a3a60468437a95e142ce994df598c6" },
   "vim-repeat": { "branch": "master", "commit": "24afe922e6a05891756ecf331f39a1f6743d3d5a" },
-  "vim-tmux-navigator": { "branch": "master", "commit": "c600cf10db1bf933aab9e357158bf9b202ecf99b" },
   "vim-unimpaired": { "branch": "master", "commit": "6d44a6dc2ec34607c41ec78acf81657248580bf1" },
   "vim-visual-star-search": { "branch": "master", "commit": "7c32edb9e3c85d473d9be4dec721a4c9d5d4d69c" },
   "yankbank-nvim": { "branch": "main", "commit": "673e5cfeb67fabd9d8b26193191305de35a4c4bc" }
