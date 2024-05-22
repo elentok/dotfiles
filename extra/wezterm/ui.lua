@@ -1,5 +1,4 @@
 local wezterm = require("wezterm")
-local h = require("helpers")
 
 local function setupFonts(config)
   config.font = wezterm.font("ComicShannsMono Nerd Font Mono")
@@ -25,6 +24,7 @@ local function setupUi(config)
   config.use_fancy_tab_bar = false
   config.tab_max_width = 30
   config.show_new_tab_button_in_tab_bar = false
+  config.hide_tab_bar_if_only_one_tab = true
 
   config.window_padding = {
     left = 2,
