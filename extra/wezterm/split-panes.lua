@@ -19,7 +19,11 @@ local function split_nav(resize_or_move, key)
     key = key,
     mods = resize_or_move == "resize" and "META" or h.ctrl_or_cmd,
     action = w.action_callback(function(win, pane)
-      if is_vim(pane) then
+      if h.is_tmux(pane) then
+        win:perform_action({
+          SendKey = { key = key, mods = "CTRL" },
+        }, pane)
+      elseif is_vim(pane) then
         -- pass the keys through to vim/nvim
         win:perform_action({
           SendKey = { key = key, mods = resize_or_move == "resize" and "META" or "CTRL" },

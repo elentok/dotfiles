@@ -42,9 +42,9 @@ function tm --description tmux
         echo "Error: already inside a tmux session!"
     else if test -n "$(tmux list-sessions 2> /dev/null)"
         echo "Attaching to existing tmux session..."
-        tmux attach
+        dotf-tmux attach
     else
         echo "No existing tmux session found, creating new session..."
-        tmux -u
+        dotf-tmux -u
     end
 end

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+dotf-wezterm-set-var IS_TMUX true
+exec tmux "$@"

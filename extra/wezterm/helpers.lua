@@ -1,5 +1,9 @@
 local wezterm = require("wezterm")
 
+local function is_tmux(pane)
+  return pane:get_user_vars().IS_TMUX ~= nil
+end
+
 local function is_macos()
   return wezterm.target_triple:find("darwin") ~= nil
 end
@@ -15,4 +19,9 @@ local function extend_array(dest, source)
   end
 end
 
-return { is_macos = is_macos, ctrl_or_cmd = ctrl_or_cmd, extend_array = extend_array }
+return {
+  is_macos = is_macos,
+  ctrl_or_cmd = ctrl_or_cmd,
+  extend_array = extend_array,
+  is_tmux = is_tmux,
+}

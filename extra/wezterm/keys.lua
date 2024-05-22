@@ -7,7 +7,7 @@ local function mapCmdToCtrl(config)
   -- Removed "e" on purpose since Cmd+E is the leader key
   -- Removed "v" on purpose since Cmd+V pastes
   -- Removed "hjkl" since they are used to switch panes
-  local keys = "abcdfgimnopqrstuwxyz"
+  local keys = "abcdfgimnopqrstuwxyz[]\\^_0"
   for i = 1, #keys do
     local key = string.sub(keys, i, i)
     table.insert(
@@ -19,10 +19,17 @@ end
 
 local function setupCopyMode(config)
   config.key_tables.copy_mode = wezterm.gui.default_key_tables().copy_mode
+  -- h.extend_array(config.key_tables.copy_mode, {
   h.extend_array(config.key_tables.copy_mode, {
+    -- config.key_tables.copy_mode = {
+    { key = "q", mods = "NONE", action = act({ CopyMode = "Close" }) },
     { key = "/", action = act.Search({ CaseInSensitiveString = "" }) },
-    { key = "p", action = act.CopyMode("PriorMatch") },
     { key = "n", action = act.CopyMode("NextMatch") },
+    { key = "N", mods = "SHIFT", action = act.CopyMode("PriorMatch") },
+    { key = "i", action = act.ScrollByPage(-0.5) },
+    { key = ",", action = act.ScrollByPage(0.5) },
+    { key = "u", mods = h.ctrl_or_cmd, action = act.ScrollByPage(-0.5) },
+    { key = ",", mods = h.ctrl_or_cmd, action = act.ScrollByPage(0.5) },
   })
 end
 
@@ -43,13 +50,55 @@ local function setupKeys(config)
 
     -- Tab actions
     { key = "x", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
-    { key = ",", mods = h.ctrl_or_cmd, action = act.ActivateTabRelative(-1) },
-    { key = ".", mods = h.ctrl_or_cmd, action = act.ActivateTabRelative(1) },
+    {
+      key = ",",
+      mods = h.ctrl_or_cmd,
+      action = wezterm.action_callback(function(win, pane)
+        if h.is_tmux(pane) then
+          win:perform_action({ SendKey = { key = ",", mods = "META" } }, pane)
+        else
+          win:perform_action({ ActivateTabRelative = -1 }, pane)
+        end
+      end),
+    },
+    {
+      key = ".",
+      mods = h.ctrl_or_cmd,
+      action = wezterm.action_callback(function(win, pane)
+        if h.is_tmux(pane) then
+          win:perform_action({ SendKey = { key = ".", mods = "META" } }, pane)
+        else
+          win:perform_action({ ActivateTabRelative = 1 }, pane)
+        end
+      end),
+    },
+    -- { key = ".", mods = h.ctrl_or_cmd, action = act.ActivateTabRelative(1) },
+    { key = ",", mods = "LEADER", action = act.ActivateTabRelative(-1) },
+    { key = ".", mods = "LEADER", action = act.ActivateTabRelative(1) },
     { key = "c", mods = "LEADER", action = act.SpawnTab("DefaultDomain") },
 
+    { key = "l", mods = "LEADER", action = act.ShowDebugOverlay },
     { key = "r", mods = "LEADER", action = act.ShowLauncher },
+    {
+      key = "v",
+      mods = "LEADER",
+      action = wezterm.action_callback(function(win, pane)
+        print("==============================")
+        print("Variables:")
+        print(pane:get_user_vars())
+        win:perform_action(act.ShowDebugOverlay, pane)
+      end),
+    },
 
-    -- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
+    {
+      key = "d",
+      mods = "LEADER|" .. h.ctrl_or_cmd,
+      action = act.Multiple({
+        act.ActivateCopyMode,
+        act.ClearSelection,
+        act.CopyMode("ClearSelectionMode"),
+      }),
+    },
     {
       key = "d",
       mods = "LEADER",

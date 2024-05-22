@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#
+# Usage: dotf-wezterm-set-var <key> <value>
+
+set -euo pipefail
+
+if [ $# -lt 2 ]; then
+  usage "$0"
+fi
+
+key="$1"
+value="$2"
+
+printf "\033]1337;SetUserVar=%s=%s\007" "$key" "$(echo -n "$value" | base64)"
