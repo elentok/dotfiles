@@ -4,3 +4,4 @@ vim.keymap.set("n", "vc", "<c-v>")
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.wildignorecase = true
+vim.opt.clipboard = { "unnamed", "unnamedplus" }

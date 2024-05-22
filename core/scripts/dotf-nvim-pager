@@ -7,10 +7,16 @@ echo "TMP=$TMP" >> ~/tmp/pager.txt
 TMP_BUFFER="$TMP/nvim-pager-buffer"
 
 function main {
-  exec nvim --noplugin \
-    -u "$DOTF/core/nvim/init-pager.lua" \
-    -c "silent write! $TMP_BUFFER | te cat $TMP_BUFFER - " \
-    -c 'autocmd VimEnter * normal G'
+  if [ $# -gt 0 ]; then
+    exec nvim --noplugin \
+      -u "$DOTF/core/nvim/init-pager.lua" \
+      -c 'autocmd VimEnter * normal G' "$@"
+  else
+    exec nvim --noplugin \
+      -u "$DOTF/core/nvim/init-pager.lua" \
+      -c "silent write! $TMP_BUFFER | te cat $TMP_BUFFER - " \
+      -c 'autocmd VimEnter * normal G'
+  fi
 }
 
 main "$@"
