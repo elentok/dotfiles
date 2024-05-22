@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local h = require("helpers")
 
 local function setupFonts(config)
   config.font = wezterm.font("ComicShannsMono Nerd Font Mono")
@@ -10,7 +11,11 @@ local function setupFonts(config)
   }
   config.line_height = 1.2
   config.cell_width = 1.0
-  config.font_size = 14.0
+  if h.is_macos() then
+    config.font_size = 14.0
+  else
+    config.font_size = 12.0
+  end
   config.command_palette_font_size = 16.0
 end
 
