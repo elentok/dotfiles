@@ -9,7 +9,7 @@ main() {
     install-tmux-256color-terminfo
   fi
   install_symlinks
-  install_plugins
+  $DOTF/core/tmux/install-plugins
 }
 
 # This function is based on https://github.com/tmux/tmux/issues/1257#issuecomment-581378716
@@ -45,11 +45,6 @@ install_tmux() {
 
 install_symlinks() {
   dotf-symlink "$DOTF/core/tmux/tmux.conf" ~/.tmux.conf
-}
-
-install_plugins() {
-  mkdir -p ~/.tmux/plugins
-  git_clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 }
 
 main "$@"

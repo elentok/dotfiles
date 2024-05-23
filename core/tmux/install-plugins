@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$(dirname "$0")/../../framework"
+
+PLUGIN_ROOT=~/.tmux/plugins
+
+main() {
+  if [ "${1:-}" == "-f" ]; then
+    rm -rf "$PLUGIN_ROOT"
+  fi
+
+  mkdir -p ~/.tmux/plugins
+  git_clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  ~/.tmux/plugins/tpm/bin/install_plugins
+}
+
+main "$@"
