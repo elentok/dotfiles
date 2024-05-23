@@ -30,6 +30,7 @@ local function setupUi(config)
   config.tab_max_width = 30
   config.show_new_tab_button_in_tab_bar = false
   config.hide_tab_bar_if_only_one_tab = true
+  config.underline_position = -3
 
   config.window_padding = {
     left = 2,
