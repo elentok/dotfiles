@@ -5,6 +5,7 @@
       "npm:chalk": "npm:chalk@5.3.0",
       "npm:chalk@^5.3.0": "npm:chalk@5.3.0",
       "npm:console-table-printer": "npm:console-table-printer@2.11.2",
+      "npm:dayjs": "npm:dayjs@1.11.11",
       "npm:fast-glob": "npm:fast-glob@3.3.1",
       "npm:uglify-es": "npm:uglify-es@3.3.9"
     },
@@ -46,6 +47,10 @@
         "dependencies": {
           "simple-wcswidth": "simple-wcswidth@1.0.1"
         }
+      },
+      "dayjs@1.11.11": {
+        "integrity": "sha512-okzr3f11N6WuqYtZSvm+F776mB41wRZMhKP+hc34YdW+KmtYYK9iqvHSwo2k9FEH3fhGXvOPV6yz2IcSrfRUDg==",
+        "dependencies": {}
       },
       "fast-glob@3.3.1": {
         "integrity": "sha512-kNFPyjhh5cKjrUltxs+wFx+ZkbRaxxmZ+X0ZU31SOsxCEtP9VPgtq2teZw1DebupL5GmDaNQ6yKMMVcM41iqDg==",

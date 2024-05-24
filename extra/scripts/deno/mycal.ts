@@ -1,15 +1,17 @@
 #!/usr/bin/env -S deno run --allow-env --allow-read --allow-run
 
 import chalk from "npm:chalk"
+import dayjs from "npm:dayjs"
 import { center } from "./lib/utils.ts"
-import { addToDate, isSameDay, moveDate } from "./lib/date.ts"
 
 const FRIDAY = 5
 const SATURDAY = 6
 const TODAY = new Date()
 
 function main(): void {
-  const date = Deno.args.length > 0 ? new Date(Date.parse(Deno.args[0])) : new Date()
+  const date = Deno.args.length > 0
+    ? new Date(Date.parse(Deno.args[0]))
+    : new Date()
   const month = new Month(date)
   console.info()
   month.prev().print()
@@ -17,34 +19,22 @@ function main(): void {
   month.next().print()
 }
 
-function startOf(date: Date, unit: "week" | "month") {
-  const newDate = new Date(date)
-
-  switch (unit) {
-    case "week":
-      newDate.setDate(newDate.getDate() - newDate.getDay())
-      break
-
-    case "month":
-      newDate.setDate(1)
-      break
-  }
-
-  return newDate
-}
-
 class Month {
-  private start: Date
+  private start: dayjs.Dayjs
   private weeks: Week[] = []
 
-  constructor(date: Date) {
-    this.start = startOf(date, "month")
+  constructor(date: dayjs.ConfigType) {
+    const d = dayjs(date)
+    this.start = d.startOf("month")
     this.buildWeeks()
   }
 
   public print(): void {
-    const date = new Intl.DateTimeFormat(undefined, { month: "short", year: "numeric" }).format(
-      new Date()
+    const date = new Intl.DateTimeFormat(undefined, {
+      month: "short",
+      year: "numeric",
+    }).format(
+      this.start.toDate(),
     )
     console.info(chalk.green(center(date, 27)))
 
@@ -54,31 +44,31 @@ class Month {
   }
 
   public next(): Month {
-    return new Month(moveDate(this.start, 1, "month"))
+    return new Month(this.start.add(1, "month"))
   }
 
   public prev(): Month {
-    return new Month(moveDate(this.start, -1, "month"))
+    return new Month(this.start.subtract(1, "month"))
   }
 
   private buildWeeks(): void {
     let week = new Week()
-    const date = startOf(this.start, "week")
+    let date = this.start.startOf("week")
 
     while (date < this.start) {
       week.days.push(undefined)
-      addToDate(date, 1, "day")
+      date = date.add(1, "day")
     }
 
-    while (date.getMonth() === this.start.getMonth()) {
+    while (date.isSame(this.start, "month")) {
       week.days.push(new Day(date))
 
-      if (date.getDay() === SATURDAY) {
+      if (date.day() === SATURDAY) {
         this.weeks.push(week)
         week = new Week()
       }
 
-      addToDate(date, 1, "day")
+      date = date.add(1, "day")
     }
 
     if (week.days.length > 0) {
@@ -101,10 +91,10 @@ class Week {
 }
 
 class Day {
-  public date: Date
+  public date: dayjs.Dayjs
 
-  constructor(date: Date) {
-    this.date = new Date(date)
+  constructor(date: dayjs.ConfigType) {
+    this.date = dayjs(date)
   }
 
   public pretty(): string {
@@ -120,15 +110,15 @@ class Day {
   }
 
   public isToday(): boolean {
-    return isSameDay(this.date, TODAY)
+    return this.date.isSame(TODAY, "day")
   }
 
   public isWeekend(): boolean {
-    return this.date.getDay() >= FRIDAY
+    return this.date.day() >= FRIDAY
   }
 
   public text(): string {
-    return this.date.getDate().toString().padStart(3)
+    return this.date.date().toString().padStart(3)
   }
 }
 
