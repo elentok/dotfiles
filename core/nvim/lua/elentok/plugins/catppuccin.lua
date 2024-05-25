@@ -28,6 +28,7 @@ return {
       telescope = true,
       treesitter = true,
       fidget = true,
+      dropbar = true,
     },
     custom_highlights = function(colors)
       return {
