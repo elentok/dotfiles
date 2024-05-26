@@ -1,6 +1,9 @@
-return {
-  "numToStr/Comment.nvim",
-  opts = {
-    ignore = "^$",
-  },
-}
+return {}
+
+-- return {
+--   "numToStr/Comment.nvim",
+--   opts = {
+--     ignore = "^$",
+--   },
+
+-- }
