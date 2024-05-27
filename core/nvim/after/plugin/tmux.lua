@@ -9,7 +9,7 @@ local function set_tmux_title()
   if cwd ~= uv.os_homedir() then
     dir = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
   end
-  vim.fn.system("tmux rename-window " .. dir .. ":", {})
+  vim.fn.system("tmux rename-window '" .. vim.fn.shellescape(dir) .. " '", {})
 end
 
 vim.api.nvim_create_autocmd({ "VimEnter", "DirChanged" }, {
