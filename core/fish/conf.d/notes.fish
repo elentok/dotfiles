@@ -11,10 +11,6 @@ function jnn --description 'jump to notes repo'
 
         cd ~/notes
     else
-        if string match -q "$HOME/notes/*" $PWD
-            return
-        end
-
         cd ~/notes
         set repo "$(command ls -1 | fzf-tmux -p --ansi --exit-0)"
         cd $repo
