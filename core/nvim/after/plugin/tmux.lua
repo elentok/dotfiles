@@ -6,12 +6,11 @@ local function set_tmux_title()
   end
   local cwd = vim.fn.getcwd()
   local dir = "~"
-  local branch = vim.env.GIT_BRANCH
-  if branch ~= nil and #branch > 0 then
-    if branch == "main" then
-      branch = ""
-    else
-      branch = " (" .. branch .. ")"
+  local branch = ""
+  local branchVar = vim.env.GIT_BRANCH
+  if branchVar ~= nil and #branchVar > 0 then
+    if branchVar ~= "main" then
+      branch = " (" .. branchVar .. ")"
     end
   end
   if cwd ~= uv.os_homedir() then
