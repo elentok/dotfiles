@@ -19,8 +19,20 @@ function tmux-set-title
     else
         set dir "$(basename $PWD)"
     end
-    tmux rename-window "$dir$suffix"
+
+    set branch ""
+    if test -n "$GIT_BRANCH"
+        set branch " ($GIT_BRANCH)"
+    end
+
+    tmux rename-window "$dir$branch$suffix"
 end
+
+function change-git-branch-on-dirchange --on-variable PWD
+    set -x -g GIT_BRANCH (git rev-parse --abbrev-ref HEAD 2>/dev/null)
+end
+
+change-git-branch-on-dirchange
 
 function change-tmux-title-on-prompt --on-event fish_prompt
     tmux-set-title
