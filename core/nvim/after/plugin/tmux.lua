@@ -1,9 +1,14 @@
 local uv = vim.loop
 
-vim.api.nvim_create_autocmd({ "VimEnter", "DirChanged", "FocusGained" }, {
+vim.api.nvim_create_autocmd({ "VimEnter", "DirChanged" }, {
   callback = function()
     if vim.env.TMUX then
-      vim.fn.system("tmux rename-window vi:" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t"), {})
+      local cwd = vim.fn.getcwd()
+      local dir = "~"
+      if cwd ~= uv.os_homedir() then
+        dir = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+      end
+      vim.fn.system("tmux rename-window " .. dir .. ":vi", {})
     end
   end,
 })
