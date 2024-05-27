@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd({ "VimEnter", "DirChanged" }, {
       if cwd ~= uv.os_homedir() then
         dir = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
       end
-      vim.fn.system("tmux rename-window " .. dir .. ":vi", {})
+      vim.fn.system("tmux rename-window " .. dir .. ":", {})
     end
   end,
 })
