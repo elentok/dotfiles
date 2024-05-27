@@ -21,7 +21,7 @@ function tmux-set-title
     end
 
     set branch ""
-    if test -n "$GIT_BRANCH"
+    if test -n "$GIT_BRANCH" -a "$GIT_BRANCH" != main
         set branch " ($GIT_BRANCH)"
     end
 
