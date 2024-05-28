@@ -21,8 +21,8 @@ return {
     -- { "natecraddock/telescope-zf-native.nvim" },
     "fdschmidt93/telescope-egrepify.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    { "nvim-telescope/telescope-live-grep-args.nvim" },
     { "aaronhallaert/advanced-git-search.nvim", cmd = "AdvancedGitSearch" },
+    { "debugloop/telescope-undo.nvim" },
   },
   cmd = { "Telescope", "Maps", "Glast" },
   keys = {
@@ -38,17 +38,9 @@ return {
         require("telescope").extensions.egrepify.egrepify({
           default_text = current_text.get_current_text(),
         })
-        -- require("telescope-live-grep-args.shortcuts").grep_word_under_cursor()
       end,
+      mode = { "n", "v" },
       { desc = "Grep word under cursor" },
-    },
-    {
-      "<leader>fw",
-      function()
-        require("telescope-live-grep-args.shortcuts").grep_visual_selection()
-      end,
-      mode = "v",
-      desc = "Grep visual selection",
     },
     { "<c-p>", "<cmd>Telescope find_files<cr>" },
     { "<leader>p", "<cmd>Telescope find_files<cr>" },
@@ -79,11 +71,15 @@ return {
       end,
       desc = "Goto symbol",
     },
+    {
+      "<leader>ju",
+      "<cmd>Telescope undo<cr>",
+      mode = "n",
+      desc = "Undo history",
+    },
   },
   config = function()
     local telescope = require("telescope")
-    local lga_actions = require("telescope-live-grep-args.actions")
-    local lga_shortcuts = require("telescope-live-grep-args.shortcuts")
     local builtin = require("telescope.builtin")
     local actions = require("telescope.actions")
     local ui = require("elentok.lib.ui")
@@ -150,32 +146,14 @@ return {
             },
           },
         },
-        live_grep_args = {
-          auto_quoting = true,
-          mappings = {
-            -- extend mappings
-            i = {
-              ["<C-k>"] = lga_actions.quote_prompt(),
-              ["<C-i>"] = function()
-                ui.feedkeys(" --iglob **/**<left>")
-              end,
-              ["<C-e>"] = function()
-                ui.feedkeys(" --iglob !**/**<left>")
-              end,
-              ["<C-t>"] = function()
-                ui.feedkeys(" -t")
-              end,
-            },
-          },
-        },
       },
     })
 
     telescope.load_extension("aerial")
     telescope.load_extension("fzf")
     telescope.load_extension("advanced_git_search")
-    telescope.load_extension("live_grep_args")
     telescope.load_extension("egrepify")
+    telescope.load_extension("undo")
 
     vim.api.nvim_create_user_command("Maps", builtin.keymaps, {})
     vim.api.nvim_create_user_command("Glast", telescope_git_last_commit_files, {})
