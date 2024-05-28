@@ -9,7 +9,7 @@ local function set_tmux_title()
   local branch = ""
   local branchVar = vim.env.GIT_BRANCH
   if branchVar ~= nil and #branchVar > 0 then
-    if branchVar ~= "main" then
+    if branchVar ~= "main" and branchVar ~= dir then
       branch = " (" .. branchVar .. ")"
     end
   end
