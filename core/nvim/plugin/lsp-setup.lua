@@ -69,6 +69,11 @@ setup("vtsls", {
     },
     typescript = {
       tsdk = find_local_tsserver(),
+      tsserver = {
+        maxTsServerMemory = 12288,
+        useSeparateSyntaxServer = false,
+        useSyntaxServer = "never",
+      },
       inlayHints = {
         parameterNames = { enabled = "literals" },
         parameterTypes = { enabled = true },
