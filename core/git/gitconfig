@@ -118,6 +118,7 @@
   br = rev-parse --abbrev-ref HEAD
   o = open
   al = !git-aliases.ts
+  psmo = psme origin
 
 [format]
   ; TODO: Should I use "%cr" or "%ar" for the date?
