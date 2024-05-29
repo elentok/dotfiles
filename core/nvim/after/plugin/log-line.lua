@@ -72,11 +72,11 @@ local function get_logger_context()
 end
 
 local function get_logger_line()
-  local context = get_logger_context()
-
-  if context == nil then
-    context = "L" .. vim.fn.line(".")
-  end
+  -- local context = get_logger_context()
+  --
+  -- if context == nil then
+  local context = "L" .. vim.fn.line(".")
+  -- end
 
   local filename = vim.fn.expand("%:t")
 
