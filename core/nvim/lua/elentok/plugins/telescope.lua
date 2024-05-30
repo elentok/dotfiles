@@ -35,9 +35,7 @@ return {
     {
       "<leader>fw",
       function()
-        require("telescope").extensions.egrepify.egrepify({
-          default_text = current_text.get_current_text(),
-        })
+        require("telescope.builtin").grep_string()
       end,
       mode = { "n", "v" },
       { desc = "Grep word under cursor" },
