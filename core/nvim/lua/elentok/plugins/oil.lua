@@ -4,9 +4,18 @@ return {
   ft = "oil",
   opts = {
     skip_confirm_for_simple_edits = false,
+    delete_to_trash = true,
+    columns = {
+      "icon",
+      "size",
+    },
     win_options = {
       winbar = "%f",
     },
+    -- git = {
+    --   mv = true,
+    --   rm = true,
+    -- },
     keymaps = {
       ["<C-h>"] = false,
       ["<C-l>"] = false,

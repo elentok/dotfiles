@@ -47,6 +47,9 @@ end
 
 ---@return string|nil
 function M.find_git_root(filepath)
+  if vim.bo.filetype == "oil" then
+    filepath = require("oil").get_current_dir()
+  end
   local path = luv.fs_realpath(filepath)
 
   while path ~= "/" do
