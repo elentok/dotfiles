@@ -4,7 +4,7 @@ return {
   { "tpope/vim-eunuch", lazy = true, cmd = { "Rename", "Mkdir", "Chmod", "SudoWrite" } },
   "tpope/vim-repeat",
   "tpope/vim-unimpaired",
-  { "mbbill/undotree", lazy = true, cmd = { "UndotreeShow", "UndotreeToggle", "UndotreeFocus" } },
+  -- { "mbbill/undotree", lazy = true, cmd = { "UndotreeShow", "UndotreeToggle", "UndotreeFocus" } },
   "bogado/file-line", -- Allows running "nvim {filename}:{line-number}".
   "michaeljsmith/vim-indent-object",
   {

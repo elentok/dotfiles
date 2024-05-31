@@ -21,7 +21,7 @@ return {
     -- { "natecraddock/telescope-zf-native.nvim" },
     "fdschmidt93/telescope-egrepify.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    { "aaronhallaert/advanced-git-search.nvim", cmd = "AdvancedGitSearch" },
+    -- { "aaronhallaert/advanced-git-search.nvim", cmd = "AdvancedGitSearch" },
     { "debugloop/telescope-undo.nvim" },
   },
   cmd = { "Telescope", "Maps", "Glast" },
@@ -149,7 +149,7 @@ return {
 
     telescope.load_extension("aerial")
     telescope.load_extension("fzf")
-    telescope.load_extension("advanced_git_search")
+    -- telescope.load_extension("advanced_git_search")
     telescope.load_extension("egrepify")
     telescope.load_extension("undo")
 
