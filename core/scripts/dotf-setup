@@ -20,11 +20,14 @@ main() {
   dotf-header h2 "[dotf-setup] Updating git submodules..."
   git submodule update --init --recursive
 
+  dotf-header h2 "[dotf-setup] Setting up repositories..."
+  dotf-repos setup
+
   dotf-bullet "Installing pip packages..."
   dotf-pkgs install pip
 
   dotf-header h2 "[dotf-setup] Installing Github packages..."
-  dotf-github install
+  github-pkgs install
 
   dotf-component nodejs
   dotf-pkgs install npm

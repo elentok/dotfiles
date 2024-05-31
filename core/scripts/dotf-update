@@ -23,7 +23,7 @@ function main() {
   "$DOTF/bootstrap.sh"
 
   update-node
-  dotf-summary run 'Update github packages' dotf-github update
+  dotf-summary run 'Update github packages' github-pkgs update
   dotf-summary run 'Update packages' dotf-pkgs upgrade
   dotf-summary run 'Update fisher' fish -c "fisher update"
   update-neovim-stuff
@@ -61,8 +61,7 @@ function update-neovim-stuff() {
   dotf-header h2 'Neovim: Upgrade'
   if dotf-is-mac; then
     dotf-summary run 'Neovim: brew update' brew upgrade neovim
-  else
-    dotf-summary run 'Neovim: github update' dotf-github u nvim
+    # Non-mac uses github-pkgs to update
   fi
   dotf-summary run 'Neovim: Lazy sync' dotf-nvim-lazy-sync
 }

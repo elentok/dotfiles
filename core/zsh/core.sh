@@ -121,6 +121,7 @@ function dotf-gen-path() {
   echo "$DOTF/extra/scripts"
   echo "$DOTF/extra/scripts/deno"
   echo "$DOTF/extra/scripts/node"
+  echo "$HOME/dev/github-pkgs/bin"
   echo "$HOME/dev/git-helpers/bin"
   echo "$HOME/dev/qmkmd/bin"
   dotf-plugin-list-files scripts
