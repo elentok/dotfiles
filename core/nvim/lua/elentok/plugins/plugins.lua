@@ -24,7 +24,6 @@ return {
   "sotte/presenting.vim", -- Presentation tool
   { "nvim-tree/nvim-web-devicons", lazy = true },
   "nvim-lualine/lualine.nvim",
-  "ojroques/nvim-osc52",
 
   { "axieax/urlview.nvim", opts = {} },
   { "windwp/nvim-autopairs", opts = {} },

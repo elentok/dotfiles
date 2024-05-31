@@ -14,9 +14,6 @@ return {
       },
     })
   end,
-  dependencies = {
-    "ojroques/nvim-osc52",
-  },
   keys = {
     {
       "<Leader>ip",
