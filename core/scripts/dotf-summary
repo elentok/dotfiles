@@ -80,6 +80,11 @@ function summary-run() {
 }
 
 function summary-write() {
+  if [ "${1:-}" == "--if-running" ]; then
+    if ! has-started; then
+      return
+    fi
+  fi
   echo "$(date +%s) $*" >> "$SUMMARY_FILE"
 }
 

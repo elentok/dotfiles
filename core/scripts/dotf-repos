@@ -153,15 +153,18 @@ function setup-repo() {
   if [ -e "$dir" ]; then
     if [ -d "$dir" ]; then
       echo "  File exists, pulling"
-      (cd "$dir" && git pull --rebase) | sed 's/^/  /'
+      (
+        cd "$dir"
+        dotf-summary run "Pull $(basename "$dir")" git pull --rebase
+      )
     else
       echo "SKIPPED: File exists in '$dir' and it's not a directory"
     fi
   else
-    echo "Cloing..."
+    echo "Cloning..."
     parent="$(dirname "$dir")"
     mkdir -p "$parent"
-    git clone "$url" "$dir"
+    dotf-summary run "Clone $(basename "$dir")" git clone "$url" "$dir"
   fi
 }
 
