@@ -1,10 +1,7 @@
-local is_dev_mode = require("elentok.lib.dev-mode")
-
 return {
   -- Togglr
   {
     "elentok/togglr.nvim",
-    dev = is_dev_mode,
     opts = {
       key = false,
     },
@@ -22,7 +19,6 @@ return {
   -- Scriptify
   {
     "elentok/scriptify.nvim",
-    dev = is_dev_mode,
     opts = {},
     cmd = { "Scriptify" },
   },
@@ -30,7 +26,6 @@ return {
   -- Encrypt
   {
     "elentok/encrypt.nvim",
-    dev = is_dev_mode,
     opts = {},
   },
 }

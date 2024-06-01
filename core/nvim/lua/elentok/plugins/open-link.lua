@@ -1,8 +1,5 @@
-local is_dev_mode = require("elentok.lib.dev-mode")
-
 return {
   "elentok/open-link.nvim",
-  dev = is_dev_mode,
   lazy = false,
   config = function()
     local expanders = require("open-link.expanders")

@@ -1,5 +1,3 @@
-local is_dev_mode = require("elentok.lib.dev-mode")
-
 ---@param name string
 ---@return boolean
 local function hasLspClient(name)
@@ -10,11 +8,9 @@ end
 
 return {
   "elentok/format-on-save.nvim",
-  dev = is_dev_mode,
   config = function()
     local format_on_save = require("format-on-save")
     local formatters = require("format-on-save.formatters")
-    local message_buffer = require("format-on-save.error-notifiers.message-buffer")
     local config = require("elentok.config")
 
     local function typescript_formatter()

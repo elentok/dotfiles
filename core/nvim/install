@@ -18,6 +18,7 @@ main() {
   dotf-pkgs i mason
   # nvim --headless -c "MasonInstall eslint_d prettierd shfmt zk vtsls" -c "qall"
   dotf-nvim-lazy restore
+  setup-dev-symlinks
   "$DOTF/core/nvim/install-magick-via-luarocks"
   # "$DOTF/core/nvim/install-lua"
 
@@ -31,6 +32,18 @@ install-symlinks() {
   dotf-symlink "$DOTF/core/nvim/pylintrc" ~/.pylintrc
   mkdir -p ~/.config/yamllint
   dotf-symlink "$DOTF/core/nvim/yamllint-config" ~/.config/yamllint/config
+}
+
+PLUGINS=(togglr scriptify format-on-save open-link encrypt)
+
+function setup-dev-symlinks() {
+  mkdir -p ~/dev/nvim
+
+  for plugin in "${PLUGINS[@]}"; do
+    plugin_dir="$HOME/dev/nvim/${plugin}.nvim"
+    dotf-symlink "$HOME/.local/share/nvim/lazy/${plugin}.nvim" "$plugin_dir"
+    (cd "$plugin_dir" && git-https-to-ssh)
+  done
 }
 
 main "$@"

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+origin="$(git config remote.origin.url)"
+if [[ "$origin" =~ ^https:// ]]; then
+  new_origin="${origin/https:\/\/github.com\//git@github.com:}"
+  echo "Changing ${origin} to ${new_origin}"
+  git config remote.origin.url "$new_origin"
+fi
