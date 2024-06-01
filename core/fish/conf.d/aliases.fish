@@ -27,6 +27,7 @@ alias jp 'cd $(dotf-projects pick || pwd)'
 
 alias h 'help.ts'
 alias mycal 'mycal.ts'
+alias dff 'dff.ts'
 
 function f --description vifm
     if test (count $argv) -eq 0
