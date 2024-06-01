@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+note_dirs=(~/notes ~/notes/home ~/notes/work)
+
+for dir in "${note_dirs[@]}"; do
+  if [ -e "$dir/.git" ]; then
+    dotf-header h2 "Syncing ${dir}..."
+    (cd "$dir" && dotf-summary run "Sync notes @${dir}" git autosync)
+  fi
+done

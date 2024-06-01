@@ -6,9 +6,6 @@ dotf-summary start -i
 
 dotf-header h1 'Good morning :-)'
 
-# dotf-header h2 'Setting up ssh agent...'
-# dotf-summary run 'Setup SSH agent' dotf-ssh-agent setup
-
 dotf-header h2 'Add ssh key...'
 dotf-summary run 'Add SSH Key' ssh-add
 
@@ -16,31 +13,10 @@ for script in $(dotf-plugin-list-files scripts/morning-plugin); do
   "$script"
 done
 
-if [ "$(cd "$DOTF" && git my-branch)" != "main" ]; then
-  (cd "$DOTF" && dotf-summary run 'Switch to main branch' git checkout --track -b main origin/main)
-fi
-
-if [ -e ~/.dotlocal ]; then
-  dotf-header h2 'Updating dotlocal...'
-  cd ~/.dotlocal && dotf-summary run 'Pull ~/.dotlocal' git pull
-fi
-
-if [ -e ~/.dotprivate ]; then
-  dotf-header h2 'Updating dotprivate...'
-  cd ~/.dotprivate && dotf-summary run 'Pull ~/.dotprivate' git pull
-fi
-
 dotf-header h2 'Updating dotfiles...'
 dotf update --morning
 
-note_dirs=(~/notes ~/notes/home ~/notes/work)
-
-for dir in "${note_dirs[@]}"; do
-  if [ -e "$dir/.git" ]; then
-    dotf-header h2 "Syncing ${dir}..."
-    (cd "$dir" && dotf-summary run "Sync notes @${dir}" git autosync)
-  fi
-done
+dotf-autosync-notes
 
 if dotf-has-command dotf-autosync; then
   dotf-summary run "Autosync" dotf-autosync
