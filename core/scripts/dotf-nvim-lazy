@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+source "$DOTF/framework.sh"
+
+lazy_cmd="${1:-restore}"
+
+dotf-bullet "Running Lazy! ${lazy_cmd}... "
+nvim --headless "+Lazy! ${lazy_cmd}" +qa
+dotf-success "done"

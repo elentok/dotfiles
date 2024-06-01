@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-source "$DOTF/framework.sh"
-
-dotf-bullet "Running Lazy! restore... "
-nvim --headless "+Lazy! restore" +qa
-dotf-success "done"

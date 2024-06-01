@@ -17,7 +17,7 @@ main() {
   install-symlinks
   dotf-pkgs i mason
   # nvim --headless -c "MasonInstall eslint_d prettierd shfmt zk vtsls" -c "qall"
-  dotf-nvim-lazy-sync
+  dotf-nvim-lazy restore
   "$DOTF/core/nvim/install-magick-via-luarocks"
   # "$DOTF/core/nvim/install-lua"
 

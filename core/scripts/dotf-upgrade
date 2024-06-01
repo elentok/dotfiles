@@ -17,7 +17,7 @@ function main() {
   dotf-summary stop
 }
 
-function update-node() {
+function upgrade-node() {
   if is-n-providing-node; then
     dotf-header h2 'Updating N...'
     (cd "$N_PREFIX" && dotf-summary run 'n: pull' git pull)
@@ -27,13 +27,13 @@ function update-node() {
   fi
 }
 
-function update-neovim-stuff() {
+function upgrade-neovim-stuff() {
   dotf-header h2 'Neovim: Upgrade'
   if dotf-is-mac; then
     dotf-summary run 'Neovim: brew update' brew upgrade neovim
     # Non-mac uses github-pkgs to update
   fi
-  dotf-summary run 'Neovim: Lazy sync' dotf-nvim-lazy-sync
+  dotf-summary run 'Neovim: Lazy sync' dotf-nvim-lazy sync
 }
 
 main "$@"

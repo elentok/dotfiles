@@ -17,7 +17,7 @@ main() {
   case "$cmd" in
     b | bootstrap) "$DOTF/bootstrap.sh" ;;
     i | install) dotf-component "$@" ;;
-    u | update) dotf-update "$@" ;;
+    u | upgrade) dotf-upgrade "$@" ;;
     st | stats) dotf-stats "$@" ;;
     setup) dotf-setup "$@" ;;
     *) usage "$0" ;;
