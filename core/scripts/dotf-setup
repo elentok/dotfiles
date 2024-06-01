@@ -23,9 +23,6 @@ main() {
     fi
   fi
 
-  dotf-header h2 "[dotf-setup] Updating git submodules..."
-  git submodule update --init --recursive
-
   dotf-header h2 "[dotf-setup] Setting up repositories..."
   dotf-repos setup
 

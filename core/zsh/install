@@ -2,6 +2,10 @@
 
 source "$DOTF/framework.sh"
 
+# NOTE: If I ever want to go back to zsh I need to run this on setup:
+# dotf-header h2 "[dotf-setup] Updating git submodules..."
+# git submodule update --init --recursive
+
 function main() {
   set_zsh_as_default_shell
   install_symlinks

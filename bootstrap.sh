@@ -18,9 +18,6 @@ function main() {
 
   mkdir -p ~/.config
 
-  echo "- Updating git submodules..."
-  git submodule update --init --recursive
-
   if dotf-is-mac; then
     setup-mac
   fi
