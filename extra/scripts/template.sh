@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework
+source $DOTF/framework.sh
 
 main() {
   if [ $# -eq 0 ]; then
@@ -11,7 +11,7 @@ main() {
 }
 
 usage() {
-  cat<<EOF
+  cat << EOF
 
 {{script-name}}
 

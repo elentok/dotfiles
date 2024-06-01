@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework
+source $DOTF/framework.sh
 
 main() {
   if [ -n "$1" ]; then
@@ -22,6 +22,5 @@ main() {
   adb-sync --reverse /sdcard/DCIM/Camera "$backup_dir"
   adb-sync --reverse /sdcard/WhatsApp "$backup_dir"
 }
-
 
 main "$@"

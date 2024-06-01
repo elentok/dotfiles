@@ -11,7 +11,7 @@ INTERVAL=10
 LAST_STATE=""
 LAST_PROGRESS=""
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 echo "$PATH"
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 if dotf-confirm 'Merge develop into master (ff-only)' yes; then
   set -e

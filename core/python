@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 function main() {
   install-poetry

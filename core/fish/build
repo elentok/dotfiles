@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework
+source $DOTF/framework.sh
 source $DOTF/core/scripts/lib/build-helper.sh
 
 SHA256='14728ccc6b8e053d01526ebbd0822ca4eb0235e6487e832ec1d0d22f1395430e'

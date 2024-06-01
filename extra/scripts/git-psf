@@ -4,7 +4,7 @@
 
 set -euo pipefail
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 branch="$(git-my-branch)"
 

@@ -6,7 +6,7 @@
 #
 #   git plo <branch>
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 set -euo pipefail
 
 branch="${1:-}"

@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 WIN_USERNAME="$(wsl-get-env USERNAME)"
 WIN_HOME="/mnt/c/Users/$WIN_USERNAME"

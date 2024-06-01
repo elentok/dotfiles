@@ -2,7 +2,7 @@
 
 set -e
 
-source $DOTF/framework
+source $DOTF/framework.sh
 
 main() {
   stop-xfce4-volumed

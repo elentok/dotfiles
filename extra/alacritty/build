@@ -4,7 +4,7 @@ set -euo pipefail
 
 VERSION=0.5.0
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 source "$DOTF/core/scripts/lib/build-helper.sh"
 
 dotf-apt cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev python3

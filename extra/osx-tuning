@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $(dirname $0)/../framework
+source $(dirname $0)/../framework.sh
 
 # These are some of the settings from
 # https://github.com/mathiasbynens/dotfiles/blob/master/.osx

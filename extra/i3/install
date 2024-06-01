@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 CONFIG_ROOT="$HOME/.config"
 CONFIG_DIR="$CONFIG_ROOT/i3"

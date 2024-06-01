@@ -10,7 +10,7 @@
 #
 #   whichx cat my-script
 
-source $DOTF/framework
+source $DOTF/framework.sh
 
 main() {
   if [ $# -lt 2 ]; then

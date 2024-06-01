@@ -6,7 +6,7 @@
 #
 #   unblockus-dns <enable|disable|status>
 
-source $DOTF/framework
+source $DOTF/framework.sh
 
 DNS1='208.122.23.23'
 DNS2='208.122.23.22'
@@ -29,7 +29,6 @@ main() {
       ;;
   esac
 }
-
 
 linux_enable() {
   echo -n 'Enabling... '

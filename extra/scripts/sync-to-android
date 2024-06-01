@@ -2,7 +2,7 @@
 
 set -e
 
-source $DOTF/framework
+source $DOTF/framework.sh
 
 BACKUPS_TO_KEEP=5
 ANDROID_LOG=/sdcard/.sync-to-android.log

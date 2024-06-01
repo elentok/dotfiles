@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 mkdir -p ~/.config/skhd
 dotf-symlink "$DOTF/extra/skhd/skhdrc" ~/.config/skhd/skhdrc

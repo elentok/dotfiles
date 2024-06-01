@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 main() {
   local install_cmd=install

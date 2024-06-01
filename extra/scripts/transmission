@@ -15,7 +15,7 @@
 #   --pass=PASS        the transmission password
 #   --paused           pause the download (default: false)
 
-source $DOTF/framework
+source $DOTF/framework.sh
 
 main() {
   SERVER=localhost

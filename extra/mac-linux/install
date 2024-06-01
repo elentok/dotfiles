@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework
+source $DOTF/framework.sh
 
 LOCAL_TOUCHPAD=$DOTF/extra/mac-linux/30-touchpad.conf
 X11_TOUCHPAD=/etc/X11/xorg.conf.d/30-touchpad.conf

@@ -16,7 +16,7 @@
 
 set -euo pipefail
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 PATTERN=""
 KILL_CMD=(kill -9)

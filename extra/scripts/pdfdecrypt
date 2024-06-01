@@ -6,7 +6,7 @@
 #
 #   pdfdecrypt {input} {output}
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 if [ $# -lt 2 ]; then
   usage "$0"

@@ -11,7 +11,7 @@
 #   pa ls             list sinks
 #
 
-source $DOTF/framework
+source $DOTF/framework.sh
 
 main() {
   local cmd="$1"

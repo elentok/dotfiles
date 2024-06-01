@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework
+source $DOTF/framework.sh
 
 default_branch=master
 if [ -n "$(git all-branches | grep '^develop$')" ]; then

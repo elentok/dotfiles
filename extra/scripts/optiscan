@@ -15,7 +15,7 @@
 #                               (when --resize is specified defaults to 1500x1500,
 #                               otherwise defaults to "no")
 
-source $DOTF/framework
+source $DOTF/framework.sh
 
 main() {
   if [ $# -eq 0 ]; then

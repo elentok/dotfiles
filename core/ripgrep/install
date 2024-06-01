@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 function main() {
   dotf-symlink "$DOTF/core/ripgrep/rgignore" "$HOME/.rgignore"

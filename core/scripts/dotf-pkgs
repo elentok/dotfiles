@@ -11,7 +11,7 @@
 
 set -euo pipefail
 
-source "$(dirname "$0")/../../framework"
+source "$(dirname "$0")/../../framework.sh"
 
 CONFIG_FILE="$DOTF/config/packages.cfg"
 

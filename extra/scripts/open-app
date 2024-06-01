@@ -6,7 +6,7 @@
 #
 #   open-app {window-name} {exec}
 
-source $DOTF/framework
+source $DOTF/framework.sh
 
 main() {
   if dotf-command-missing wmctrl; then

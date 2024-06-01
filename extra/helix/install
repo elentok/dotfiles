@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 dotf-symlink "$DOTF/extra/helix" "$HOME/.config/helix"

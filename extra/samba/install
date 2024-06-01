@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $(dirname $0)/../../framework
+source $(dirname $0)/../../framework.sh
 
 set -e
 

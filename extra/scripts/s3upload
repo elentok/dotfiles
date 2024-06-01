@@ -6,7 +6,7 @@
 #
 #   s3upload <bucket_path> <local_file>...
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 MAX_AGE=${MAX_AGE:-600}
 

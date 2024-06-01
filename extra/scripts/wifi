@@ -6,7 +6,7 @@
 #
 #   wifi (on|off|status|devices|list|connect)
 
-source $DOTF/framework
+source $DOTF/framework.sh
 
 DEVICE=en0
 

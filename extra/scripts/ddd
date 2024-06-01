@@ -5,7 +5,7 @@
 # Usage:
 #   ddd <input> <output>
 
-source $DOTF/framework
+source $DOTF/framework.sh
 
 main() {
   check_pv

@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-source $DOTF/framework
+source $DOTF/framework.sh
 
 ROOT=$(git rev-parse --git-dir)
 

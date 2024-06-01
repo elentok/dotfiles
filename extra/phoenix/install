@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 if [ ! -d /Applications/Phoenix.app ]; then
   brew install --cask phoenix

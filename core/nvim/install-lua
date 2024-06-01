@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 LUA_VERSION=5.3.5
 LUAROCKS_VERSION=3.7.0

@@ -15,7 +15,7 @@
 
 set -euo pipefail
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 CONFIG_DIR=$HOME/.config/dotfiles
 CONFIG_FILE=$CONFIG_DIR/config

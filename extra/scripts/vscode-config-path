@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework
+source $DOTF/framework.sh
 
 if dotf-is-wsl; then
   win_home="$(wsl-path2mnt $(wsl-get-env UserProfile))"

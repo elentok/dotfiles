@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 dotf-brew ncurses
 $BREW_HOME/opt/ncurses/bin/infocmp tmux-256color > /tmp/tmux-256color.info

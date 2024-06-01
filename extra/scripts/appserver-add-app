@@ -6,7 +6,7 @@
 
 set -euo pipefail
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 main() {
   if [ $# -lt 3 ]; then

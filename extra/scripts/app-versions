@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework
+source $DOTF/framework.sh
 
 declare -A version_ranges=(
   ["tig"]=">=2.4.1"

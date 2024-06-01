@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework
+source $DOTF/framework.sh
 
 available-versions() {
   rbenv install --list | grep -v 'Available versions' | sed -E 's/^\s+//'

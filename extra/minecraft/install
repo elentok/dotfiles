@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 SPIGOT_ROOT="/home/minecraft/spigot"
 SPIGOT_REV="$(cat "$DOTF/extra/minecraft/VERSION")"

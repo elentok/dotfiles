@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework
+source $DOTF/framework.sh
 
 main() {
   dotf-bullet "Installing pip3 packages $*... "

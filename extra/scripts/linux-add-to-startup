@@ -6,7 +6,7 @@
 #                      --file="mpd"
 #                      --exec="mpd"
 
-source $DOTF/framework
+source $DOTF/framework.sh
 
 AUTOSTART="$HOME/.config/autostart"
 

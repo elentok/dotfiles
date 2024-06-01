@@ -5,7 +5,7 @@
 
 set -euo pipefail
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 function main() {
   command="${1:-status}"

@@ -7,7 +7,7 @@
 #   telegram send {chat_id} {text}
 #   telegram updates
 
-source $DOTF/framework
+source $DOTF/framework.sh
 
 main() {
   load_bot_token

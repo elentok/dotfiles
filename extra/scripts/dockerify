@@ -6,7 +6,7 @@
 #
 # dockerify
 
-source $DOTF/framework
+source $DOTF/framework.sh
 
 ask "What's the image name?" image_name
 ask "What's the base image name?" base_image_name
@@ -15,14 +15,13 @@ ask "What's the root app path (inside the image)?" root
 echo "FROM $base_image_name" > Dockerfile
 mkdir -p bin/docker
 
-cat > bin/docker/build <<EOF
+cat > bin/docker/build << EOF
 #!/usr/bin/env bash
 
 docker build -t $image_name .
 EOF
 
-
-cat > bin/docker/run <<EOF
+cat > bin/docker/run << EOF
 #!/usr/bin/env bash
 
 docker run \$DOCKER_ARGS \

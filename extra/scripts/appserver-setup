@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 export N_PREFIX=/opt/n
 export PATH=$N_PREFIX/bin:$PATH

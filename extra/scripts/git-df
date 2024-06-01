@@ -8,7 +8,7 @@
 
 set -euo pipefail
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 function main() {
   local worktree="${1:-}"

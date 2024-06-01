@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 dotf-symlink "$DOTF/extra/ssh/rc" ~/.ssh/rc
 dotf-symlink "$DOTF/extra/ssh/config" ~/.ssh/config

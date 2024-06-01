@@ -2,7 +2,7 @@
 
 set -e
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 main() {
   dotf-header h1 'Git Auto Sync'

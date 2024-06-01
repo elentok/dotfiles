@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 if [ -e ~/.config/nvim ]; then
   current_target="$(basename "$(readlink ~/.config/nvim)")"

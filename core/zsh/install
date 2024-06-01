@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$DOTF/framework"
+source "$DOTF/framework.sh"
 
 function main() {
   set_zsh_as_default_shell

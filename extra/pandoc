@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework
+source $DOTF/framework.sh
 source $DOTF/core/scripts/lib/build-helper.sh
 
 MAC_VERSION=2.2.2.1
