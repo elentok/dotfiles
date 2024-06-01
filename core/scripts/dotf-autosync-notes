@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+source "$DOTF/framework.sh"
+
 note_dirs=(~/notes ~/notes/home ~/notes/work)
 
 for dir in "${note_dirs[@]}"; do
