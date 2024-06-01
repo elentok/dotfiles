@@ -16,8 +16,6 @@ done
 dotf-header h2 'Pulling dotfiles...'
 (cd "$DOTF" && dotf-summary run 'Pull dotfiles' git pull)
 
-dotf-summary run 'Setup repositories' dotf-repos setup
-
 "$DOTF/bootstrap.sh"
 
 dotf-autosync-notes

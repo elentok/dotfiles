@@ -8,6 +8,7 @@ function main() {
   dotf-header h1 "Upgrading environment..."
   cd "$DOTF"
 
+  dotf-repos upgrade
   update-node
   dotf-summary run 'Update github packages' github-pkgs update
   dotf-summary run 'Update packages' dotf-pkgs upgrade

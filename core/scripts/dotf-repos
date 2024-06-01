@@ -30,6 +30,8 @@ for file in "$DOTP"/*/config/repos.cfg; do
   CONFIG_FILES+=("$file")
 done
 
+UPGRADE=no
+
 function main() {
   local cmd="${1:-}"
   shift || true
@@ -39,6 +41,10 @@ function main() {
       list-repos
       ;;
     setup)
+      setup-repos
+      ;;
+    upgrade)
+      UPGRADE=yes
       setup-repos
       ;;
     qs | quick-status)
@@ -106,7 +112,11 @@ function has-unpushed-commits() {
 }
 
 function setup-repos() {
-  dotf-header h2 "Done setting up repositories :-)"
+  if [ "$UPGRADE" == "yes" ]; then
+    dotf-header h2 "Upgrading repositories"
+  else
+    dotf-header h2 "Setting up repositories"
+  fi
 
   for config_file in "${CONFIG_FILES[@]}"; do
     if [ -e "$config_file" ]; then
@@ -114,7 +124,11 @@ function setup-repos() {
     fi
   done
 
-  dotf-header h2 "Done setting up repositories :-)"
+  if [ "$UPGRADE" == "yes" ]; then
+    dotf-header h2 "Done upgrading repositories :-)"
+  else
+    dotf-header h2 "Done setting up repositories :-)"
+  fi
 }
 
 function setup-repos-in-config {
@@ -152,11 +166,15 @@ function setup-repo() {
 
   if [ -e "$dir" ]; then
     if [ -d "$dir" ]; then
-      echo "  File exists, pulling"
-      (
-        cd "$dir"
-        dotf-summary run "Pull $(basename "$dir")" git pull --rebase
-      )
+      if [ "$UPGRADE" == "yes" ]; then
+        echo "  File exists, pulling"
+        (
+          cd "$dir"
+          dotf-summary run "Pull $(basename "$dir")" git pull --rebase
+        )
+      else
+        echo "  File exists, skipping"
+      fi
     else
       echo "SKIPPED: File exists in '$dir' and it's not a directory"
     fi
