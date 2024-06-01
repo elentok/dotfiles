@@ -90,6 +90,10 @@ function install-brew-pkgs() {
 }
 
 function install-pip-pkgs() {
+  if dotf-is-linux; then
+    dotf-apt python3 python3-pip
+  fi
+
   dotf-header h2 '[dotf-pkgs] Installing pip packages...'
   dotf-pip "$(get-pkgs pip)"
 }

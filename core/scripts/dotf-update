@@ -7,12 +7,6 @@ source "$DOTF/framework.sh"
 MORNING=false
 
 function main() {
-  if [ "${1:-}" == "--morning" ]; then
-    MORNING=true
-  else
-    dotf-summary start
-  fi
-
   dotf-header h1 "Updating environment..."
   cd "$DOTF"
 
@@ -21,16 +15,6 @@ function main() {
   dotf-summary run 'Setup repositories' dotf-repos setup
 
   "$DOTF/bootstrap.sh"
-
-  update-node
-  dotf-summary run 'Update github packages' github-pkgs update
-  dotf-summary run 'Update packages' dotf-pkgs upgrade
-  dotf-summary run 'Update fisher' fish -c "fisher update"
-  update-neovim-stuff
-
-  if [ "$MORNING" == 'false' ]; then
-    dotf-summary stop
-  fi
 }
 
 function pull-dotfiles() {
@@ -45,25 +29,6 @@ function pull-dotfiles() {
     echo -e "\\nPulled the following changes:"
     git log --pretty=%s "${old_head}..${new_head}" | sed 's/^/- /'
   fi
-}
-
-function update-node() {
-  if is-n-providing-node; then
-    dotf-header h2 'Updating N...'
-    (cd "$N_PREFIX" && dotf-summary run 'n: pull' git pull)
-
-    dotf-header h2 'Updating NodeJS...'
-    dotf-summary run 'n: update' n --preserve "$(dotf-node-version)" # Preserve npm (don't downgrade to lts version)
-  fi
-}
-
-function update-neovim-stuff() {
-  dotf-header h2 'Neovim: Upgrade'
-  if dotf-is-mac; then
-    dotf-summary run 'Neovim: brew update' brew upgrade neovim
-    # Non-mac uses github-pkgs to update
-  fi
-  dotf-summary run 'Neovim: Lazy sync' dotf-nvim-lazy-sync
 }
 
 main "$@"

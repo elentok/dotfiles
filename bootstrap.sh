@@ -16,20 +16,7 @@ function main() {
   echo "Checking requirements are installed..."
   echo
 
-  if dotf-is-linux; then
-    if [ -e /usr/lib/python3.11/EXTERNALLY-MANAGED ]; then
-      sudo mv /usr/lib/python3.11/EXTERNALLY-MANAGED{,.disabled}
-    fi
-  fi
-
-  install-if-missing curl curl
-  install-if-missing python3 python3
-  install-if-missing pip3 python3-pip
-
   mkdir -p ~/.config
-
-  echo "- Upgrading pip3..."
-  pip3 install pip --upgrade --user --break-system-packages
 
   echo "- Updating git submodules..."
   git submodule update --init --recursive
@@ -75,6 +62,7 @@ function setup-deno() {
     if dotf-is-mac; then
       brew install deno
     else
+      dotf-apt curl
       curl -fsSL https://deno.land/x/install/install.sh | sh
     fi
   fi

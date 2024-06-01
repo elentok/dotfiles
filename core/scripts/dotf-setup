@@ -17,6 +17,12 @@ main() {
     dotf-pkgs install apt
   fi
 
+  if dotf-is-linux; then
+    if [ -e /usr/lib/python3.11/EXTERNALLY-MANAGED ]; then
+      sudo mv /usr/lib/python3.11/EXTERNALLY-MANAGED{,.disabled}
+    fi
+  fi
+
   dotf-header h2 "[dotf-setup] Updating git submodules..."
   git submodule update --init --recursive
 

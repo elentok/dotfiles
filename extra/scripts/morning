@@ -13,8 +13,10 @@ for script in $(dotf-plugin-list-files scripts/morning-plugin); do
   "$script"
 done
 
-dotf-header h2 'Updating dotfiles...'
-dotf update --morning
+dotf-header h2 'Pulling dotfiles...'
+(cd "$DOTF" && dotf-summary run 'Pull dotfiles' git pull)
+
+"$DOTF/bootstrap.sh"
 
 dotf-autosync-notes
 
