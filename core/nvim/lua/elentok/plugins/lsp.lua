@@ -11,6 +11,4 @@ return {
   --   "pmizio/typescript-tools.nvim",
   --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
   -- },
-  -- Improve neovim lua development (better completion, help, etc...)
-  "folke/neodev.nvim",
 }

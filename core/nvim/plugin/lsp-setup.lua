@@ -2,7 +2,7 @@
 -- so the LSP servers are already configured when we reach after/plugin/lsp
 
 -- Neodev must be setup before the Lua language server
-require("neodev").setup()
+-- require("neodev").setup()
 
 local lspconfig = require("lspconfig")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")

@@ -72,6 +72,7 @@ cmp.setup({
     { name = "luasnip", keyword_length = 2 },
     { name = "buffer", keyword_length = 3 },
     { name = "path" },
+    { name = "lazydev", group_index = 0 },
     { name = "rg", keyword_length = 4 },
   },
   mapping = cmp_mapping,
