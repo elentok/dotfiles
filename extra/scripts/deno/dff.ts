@@ -81,9 +81,26 @@ function main() {
   table.printTable()
 }
 
+const units = ["K", "M", "G", "T"] as const
+type Unit = typeof units[number]
+
 function prettifyKB(kb: number): string {
-  const gb = (kb / 1024 / 1024).toFixed(1)
-  return `${gb} G`
+  const { value, unit } = normalizeKB(kb)
+  return `${value.toFixed(1)} ${unit}`
+}
+
+function normalizeKB(kb: number): { value: number; unit: Unit } {
+  let value = kb
+
+  for (const unit of units) {
+    if (value < 1024) {
+      return { value, unit }
+    }
+
+    value = value / 1024
+  }
+
+  return { value, unit: units[units.length - 1] }
 }
 
 function parseDisk(line: string): Disk | undefined {
