@@ -3,10 +3,6 @@
 
 source "$DOTF/core/nvim/aliases.sh"
 
-if dotf-is-wsl; then
-  alias code='/mnt/c/Program\ Files/Microsoft\ VS\ Code/code.exe'
-fi
-
 # All Aliases {{{1
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -148,7 +144,7 @@ dr() {
     return $?
   fi
 
-  cmd="$(docker-compose-services | fzf --ansi --exit-0 | awk '{print $1}')"
+  cmd="$(docker-compose-services.ts | fzf --ansi --exit-0 | awk '{print $1}')"
 
   if [ -n "$cmd" ]; then
     print -s "docker-compose run $cmd" \
