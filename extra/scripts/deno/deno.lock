@@ -2,6 +2,8 @@
   "version": "3",
   "packages": {
     "specifiers": {
+      "jsr:@std/assert@^0.225.2": "jsr:@std/assert@0.225.3",
+      "jsr:@std/path": "jsr:@std/path@0.225.1",
       "npm:chalk": "npm:chalk@5.3.0",
       "npm:chalk@^5.3.0": "npm:chalk@5.3.0",
       "npm:console-table-printer": "npm:console-table-printer@2.11.2",
@@ -9,6 +11,17 @@
       "npm:fast-glob": "npm:fast-glob@3.3.1",
       "npm:uglify-es": "npm:uglify-es@3.3.9",
       "npm:yaml": "npm:yaml@2.4.3"
+    },
+    "jsr": {
+      "@std/assert@0.225.3": {
+        "integrity": "b3c2847aecf6955b50644cdb9cf072004ea3d1998dd7579fc0acb99dbb23bd4f"
+      },
+      "@std/path@0.225.1": {
+        "integrity": "8c3220635a73730eb51fe43de9e10b79e2724a5bb8638b9355d35ae012fd9429",
+        "dependencies": [
+          "jsr:@std/assert@^0.225.2"
+        ]
+      }
     },
     "npm": {
       "@nodelib/fs.scandir@2.1.5": {

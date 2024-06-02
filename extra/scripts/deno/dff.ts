@@ -4,13 +4,14 @@ import { Table } from "npm:console-table-printer"
 
 const SPACES_REGEX = /\s+/
 const EXCLUDE_MOUNT_POINTS = /^\/(System\/Volumes|snap)\//
+const MIN_FREE_GB = 4
 
 interface Disk {
   device: string
   used: number
   usedPercentage: number
   size: number
-  available: number
+  availableKB: number
   mount: string
 }
 
@@ -25,11 +26,11 @@ function rowColor({ usedPercentage }: Disk): string {
 }
 
 function diskToRow(disk: Disk): Record<string, string> {
-  const { device, usedPercentage, size, available, mount } = disk
+  const { device, usedPercentage, size, availableKB, mount } = disk
   return {
     mount,
     usage: `${usedPercentage}%`,
-    free: prettifyKB(available),
+    free: prettifyKB(availableKB),
     size: prettifyKB(size),
     device,
   }
@@ -37,6 +38,11 @@ function diskToRow(disk: Disk): Record<string, string> {
 
 function main() {
   const disks = loadDisks()
+
+  if (Deno.args.includes("-w") || Deno.args.includes("--warn")) {
+    warn(disks)
+    return
+  }
 
   const table = new Table({
     columns: [
@@ -83,13 +89,14 @@ function prettifyKB(kb: number): string {
 function parseDisk(line: string): Disk | undefined {
   if (!line.startsWith("/")) return
 
-  const [device, size, used, available, usedPercentage, mount] = line.trim().split(SPACES_REGEX)
+  const [device, size, used, available, usedPercentage, mount] = line.trim()
+    .split(SPACES_REGEX)
   return {
     device,
     used: Number(used),
     usedPercentage: Number(usedPercentage.slice(0, -1)),
     size: Number(size),
-    available: Number(available),
+    availableKB: Number(available),
     mount,
   }
 }
@@ -113,6 +120,19 @@ function loadDisks(): Disk[] {
 
 function isPresent<T>(value: T | null | undefined): value is T {
   return value != null
+}
+
+function warn(disks: Disk[]): void {
+  for (const disk of disks) {
+    const availableGB = disk.availableKB / 1024 / 1024
+    if (availableGB < MIN_FREE_GB) {
+      console.warn(
+        `Disk "${disk.mount}" has low free space (only ${
+          prettifyKB(disk.availableKB)
+        })`,
+      )
+    }
+  }
 }
 
 main()

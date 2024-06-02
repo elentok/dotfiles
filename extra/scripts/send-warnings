@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-warnings="$(warnings)"
+warnings="$(dff.ts --warn)"
 
 if [ -n "$warnings" ]; then
   message="WARNING FROM ${HOSTNAME}:

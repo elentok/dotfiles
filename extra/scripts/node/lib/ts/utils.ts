@@ -54,9 +54,3 @@ export function printProgress(message: string): void {
 export function notUndefined<T>(x: T | undefined): x is T {
   return x !== undefined
 }
-
-export function stringifyDateOnly(date: Date): string {
-  const month = justifyLeft(date.getMonth().toString(), 2, "0")
-  const day = justifyLeft(date.getDate().toString(), 2, "0")
-  return `${date.getFullYear()}-${month}-${day}`
-}
