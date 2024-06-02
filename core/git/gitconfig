@@ -66,7 +66,6 @@
   b = branch
   bd = branch -d
   bD = branch -D
-  bdd = !git destroy `git all-branches | fzf-tmux -p`
   bv = branch -vv
   c = commit
   cm = commit -m
@@ -79,8 +78,7 @@
   di = diff
   f = fetch
   h = help
-  l = !git plog ${1} | less --chop-long-lines --RAW-CONTROL-CHARS --quit-if-one-screen --no-init
-  ll = plog -10
+  l = log
   lg = log --graph
   m = merge
   my-branch = rev-parse --abbrev-ref HEAD
