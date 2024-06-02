@@ -59,25 +59,12 @@ function is-n-providing-node() {
   [ "$DOTF_CONFIG_NODE_PROVIDER" = "n" ]
 }
 
-function is-nvm-providing-node() {
-  [ "$DOTF_CONFIG_NODE_PROVIDER" = "nvm" ]
-}
-
 function is-fnm-providing-node() {
   [ "$DOTF_CONFIG_NODE_PROVIDER" = "fnm" ]
 }
 
 if is-n-providing-node; then
   export N_PREFIX=$HOME/.n
-fi
-
-if is-nvm-providing-node; then
-  export NVM_DIR=$HOME/.nvm
-  [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh" --no-use
-
-  node_version="$(cat "$DOTF/config/node-version")"
-  DOTF_NVM_DEFAULT_PATH="$(find "$NVM_DIR/versions/node" -maxdepth 1 -type d | grep "/v$node_version" | sort -n | head -1)"
-  export DOTF_NVM_DEFAULT_PATH
 fi
 
 # Node-gyp doesn't support Python 3.11
@@ -128,12 +115,6 @@ function dotf-gen-path() {
 
   if is-n-providing-node; then
     echo "$N_PREFIX/bin"
-  elif is-nvm-providing-node; then
-    if [ -n "${NVM_BIN:-}" ] && [ -e "$NVM_BIN" ]; then
-      echo "${NVM_BIN}"
-    else
-      echo "${DOTF_NVM_DEFAULT_PATH}/bin"
-    fi
   elif is-fnm-providing-node; then
     echo "$HOME/.local/share/fnm"
   fi

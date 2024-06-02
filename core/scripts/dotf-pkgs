@@ -127,8 +127,6 @@ function upgrade-pkgs() {
     npm="npm"
   elif is-n-providing-node; then
     npm="npm"
-  elif is-nvm-providing-node; then
-    npm="npm"
   else
     npm="sudo npm"
   fi

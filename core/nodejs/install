@@ -7,8 +7,6 @@ source "$(dirname "$0")/../../framework.sh"
 main() {
   if [ "$DOTF_CONFIG_NODE_PROVIDER" = "fnm" ]; then
     install_fnm
-  elif [ "$DOTF_CONFIG_NODE_PROVIDER" = "nvm" ]; then
-    install_nvm
   elif [ "$DOTF_CONFIG_NODE_PROVIDER" = "n" ]; then
     git_clone https://github.com/tj/n "$N_PREFIX"
     install_node_with_n
@@ -35,20 +33,6 @@ install_fnm() {
   ver="$(dotf-node-version)"
   if ! fnm list | grep " v$ver\." > /dev/null; then
     fnm install "$(dotf-node-version)"
-  fi
-}
-
-install_nvm() {
-  if [ ! -e "$NVM_DIR" ]; then
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-  fi
-  install_node_with_nvm
-}
-
-install_node_with_nvm() {
-  if ! nvm ls node > /dev/null; then
-    nvm install "$(dotf-node-version)"
-    npm install -g npm # Upgrade to the latest npm
   fi
 }
 

@@ -37,9 +37,6 @@ source $DOTF/core/deno/shell-helpers.sh
 if ! dotf-has-command starship; then
   source $DOTF/core/zsh/prompt.zsh
 fi
-if is-nvm-providing-node; then
-  source $DOTF/core/zsh/nvm.zsh
-fi
 if [ -e ~/.fzf.zsh ]; then
   source ~/.fzf.zsh
 fi
