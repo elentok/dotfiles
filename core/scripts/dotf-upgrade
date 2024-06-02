@@ -1,19 +1,21 @@
 #!/usr/bin/env bash
 
+source "$DOTF/framework.sh"
+
 set -euo pipefail
 
 function main() {
-  dotf-summary start
+  dotf-summary start -i
 
   dotf-header h1 "Upgrading environment..."
   cd "$DOTF"
 
   dotf-repos upgrade
-  update-node
+  upgrade-node
   dotf-summary run 'Update github packages' github-pkgs update
   dotf-summary run 'Update packages' dotf-pkgs upgrade
   dotf-summary run 'Update fisher' fish -c "fisher update"
-  update-neovim-stuff
+  upgrade-neovim-stuff
 
   dotf-summary stop
 }
