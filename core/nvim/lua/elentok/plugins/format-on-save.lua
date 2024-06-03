@@ -11,6 +11,7 @@ return {
   config = function()
     local format_on_save = require("format-on-save")
     local formatters = require("format-on-save.formatters")
+    local create = require("format-on-save.formatters.create")
     local config = require("elentok.config")
 
     local function typescript_formatter()
@@ -45,7 +46,9 @@ return {
         java = formatters.lsp,
         javascript = formatters.prettierd,
         json = formatters.lsp,
-        lua = formatters.stylua,
+        lua = create.shell({
+          cmd = { vim.loop.os_homedir() .. "/.dotfiles/core/scripts/dotf-stylua", "%" },
+        }),
         markdown = {
           formatters.prettierd,
           markdown_kb_layout_formatter,

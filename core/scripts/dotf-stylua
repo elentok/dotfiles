@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+~/.local/share/nvim/mason/bin/stylua \
+  --search-parent-directories \
+  --stdin-filepath "$@" -
