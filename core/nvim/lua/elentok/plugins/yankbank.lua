@@ -3,6 +3,7 @@ return {
   config = function()
     require("yankbank").setup()
   end,
+  lazy = false,
   keys = {
     {
       "<leader>yy",
