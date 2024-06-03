@@ -28,6 +28,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.keymap.set(mode, key, callback, { buffer = ev.buf, desc = desc })
     end
 
+    -- map("n", "gr", vim.lsp.buf.references, "Jump to references")
+    -- map("n", "gd", vim.lsp.buf.definition, "Jump to definition")
     map("n", "gr", vim.lsp.buf.references, "Jump to references")
     map("n", "gd", vim.lsp.buf.definition, "Jump to definition")
 

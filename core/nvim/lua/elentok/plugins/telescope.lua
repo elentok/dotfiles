@@ -1,5 +1,3 @@
-local current_text = require("elentok.lib.current-text")
-
 local function telescope_git_last_commit_files()
   require("telescope.builtin").find_files({
     find_command = {
@@ -18,10 +16,8 @@ return {
   version = "*",
   lazy = true,
   dependencies = {
-    -- { "natecraddock/telescope-zf-native.nvim" },
     "fdschmidt93/telescope-egrepify.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    -- { "aaronhallaert/advanced-git-search.nvim", cmd = "AdvancedGitSearch" },
     { "debugloop/telescope-undo.nvim" },
   },
   cmd = { "Telescope", "Maps", "Glast" },
@@ -50,6 +46,7 @@ return {
     { "<leader>jh", "<cmd>Telescope help_tags<cr>", desc = "Jump to help" },
     { "<leader>jl", telescope_git_last_commit_files, desc = "Jump to files in last commit" },
     { "gr", "<cmd>Telescope lsp_references<cr>", desc = "Goto reference (LSP)" },
+    { "gd", "<cmd>Telescope lsp_definitions<cr>", desc = "Goto definition (LSP)" },
     { "``", "<cmd>Telescope resume<cr>", desc = "Resume last telescope search" },
     { "<Leader>gt", "<cmd>Telescope tags<cr>" },
     {
