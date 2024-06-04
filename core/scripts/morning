@@ -20,10 +20,6 @@ dotf-header h2 'Pulling dotfiles...'
 
 dotf-autosync-notes
 
-if dotf-has-command dotf-autosync; then
-  dotf-summary run "Autosync" dotf-autosync
-fi
-
 dotf-summary stop
 
 dotf-header h1 'Have a wonderful day :-)'
