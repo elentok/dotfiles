@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+EXT="png"
+CLASS="«class PNGf»"
+
+function main() {
+  if test $# -ne 1; then
+    echo "Usage: pngpaste-mac <filename>"
+    exit 1
+  fi
+
+  name="${1}"
+  dir="$(prepare-dir "$name")"
+  basename="$(prepare-basename "$name")"
+
+  local fullpath="${dir}/${basename}"
+  if test -e "$fullpath"; then
+    command rm "$fullpath"
+  fi
+
+  osascript -e "tell application \"System Events\" to ¬
+                  write (the clipboard as ${CLASS}) to ¬
+                          (make new file at folder \"${dir}\" with properties ¬
+                                  {name:\"${basename}\"})"
+
+  echo "Wrote ${basename}"
+}
+
+function prepare-dir() {
+  local dir
+  dir="$(dirname "$name")"
+  if test -z "$dir"; then
+    dir="$PWD"
+  fi
+
+  dir="$(realpath "$dir")"
+  if ! mkdir -p "$dir"; then
+    >&2 echo "Error: cannot create dir '$dir'"
+    exit 1
+  fi
+
+  echo "$dir"
+}
+
+function prepare-basename() {
+  name="$(basename "$name")"
+
+  if test -z "${name}"; then
+    name+="some" || return $?
+  fi
+
+  if [[ ! "$name" =~ '\.'${EXT}'$' ]]; then
+    name+=".${EXT}"
+  fi
+
+  echo "$name"
+}
+
+main "$@"
