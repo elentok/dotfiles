@@ -152,6 +152,9 @@ vim.keymap.set(
   { desc = "Delete visual selecting without overwriting register" }
 )
 
+vim.keymap.set("n", "<leader>rel", ":g/^$/d<cr>", { desc = "Remove empty lines" })
+vim.keymap.set("n", "rel", "<c-v>", { desc = "Go into visual block mode" })
+
 vim.keymap.set("n", "<leader>wh", "<c-w>h", { desc = "Go to window to the left" })
 vim.keymap.set("n", "<leader>wj", "<c-w>j", { desc = "Go to window below" })
 vim.keymap.set("n", "<leader>wk", "<c-w>k", { desc = "Go to window above" })

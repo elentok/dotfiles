@@ -44,6 +44,7 @@ return {
     { "<leader>jg", "<cmd>Telescope git_status<cr>", desc = "Jump to git modified" },
     { "<leader>jj", "<cmd>Telescope jumplist<cr>", desc = "Jump to jumplist" },
     { "<leader>jh", "<cmd>Telescope help_tags<cr>", desc = "Jump to help" },
+    { "<leader>jk", "<cmd>Telescope keymaps<cr>", desc = "Jump to keymap" },
     { "<leader>jl", telescope_git_last_commit_files, desc = "Jump to files in last commit" },
     { "gr", "<cmd>Telescope lsp_references<cr>", desc = "Goto reference (LSP)" },
     { "gd", "<cmd>Telescope lsp_definitions<cr>", desc = "Goto definition (LSP)" },
