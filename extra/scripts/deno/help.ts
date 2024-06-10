@@ -1,4 +1,4 @@
-#!/usr/bin/env -S deno run --allow-env --allow-read --allow-run
+#!/usr/bin/env -S deno run --allow-env --allow-read --allow-run --allow-sys
 
 import * as path from "node:path"
 import * as fs from "node:fs"
