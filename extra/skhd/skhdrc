@@ -1,4 +1,4 @@
-cmd - 2 : open /Applications/kitty.app
+cmd - 2 : open /Applications/WezTerm.app
 cmd - 3 : open "/Applications/Google Chrome.app"
 cmd - 4 : open "/Applications/Slack.app"
 cmd - 8 : open "/Applications/Notion.app"
