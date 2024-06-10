@@ -46,6 +46,7 @@ return {
         java = formatters.lsp,
         javascript = formatters.prettierd,
         json = formatters.lsp,
+        jsonc = formatters.lsp,
         lua = create.shell({
           cmd = { vim.loop.os_homedir() .. "/.dotfiles/core/scripts/dotf-stylua", "%" },
         }),
