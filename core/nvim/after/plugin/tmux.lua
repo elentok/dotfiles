@@ -22,7 +22,7 @@ local function set_tmux_title()
   vim.fn.system("tmux rename-window " .. vim.fn.shellescape(title), {})
 end
 
-vim.api.nvim_create_autocmd({ "VimEnter", "DirChanged" }, {
+vim.api.nvim_create_autocmd({ "VimEnter", "DirChanged", "FocusGained" }, {
   callback = function()
     set_tmux_title()
   end,
