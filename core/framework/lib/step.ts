@@ -14,7 +14,7 @@ export interface StepResult {
 }
 
 export interface StepMessage {
-  type: "debug" | "info" | "success" | "silent-sucess" | "error" | "warning"
+  type: "debug" | "info" | "success" | "silent-success" | "error" | "warning"
   message: string
 }
 

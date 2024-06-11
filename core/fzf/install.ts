@@ -21,6 +21,7 @@ async function installFzf(): Promise<StepResult> {
   const cloneResult = await gitClone({
     dir: "~/.fzf",
     origin: "https://github.com/junegunn/fzf.git",
+    update: true,
   })
   items.push(cloneResult)
 
@@ -28,14 +29,17 @@ async function installFzf(): Promise<StepResult> {
     return { step, status: "error", items }
   }
 
-  if (await fileExists("~/.fzf/bin/fzf")) {
+  if (
+    cloneResult.status === "silent-success" &&
+    await fileExists("~/.fzf/bin/fzf")
+  ) {
     return {
       step,
       status: "silent-success",
       items: [
         ...items,
         stepMessage(
-          "silent-sucess",
+          "silent-success",
           "File ~/.fzf/bin/fzf already exists, skipping build",
         ),
       ],

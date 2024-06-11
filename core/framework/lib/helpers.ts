@@ -59,7 +59,7 @@ function printMessage({ type, message }: StepMessage, indentLevel = 0): void {
     case "success":
       print.success(message, indentLevel)
       return
-    case "silent-sucess":
+    case "silent-success":
       print.silentSuccess(message, indentLevel)
       return
     case "warning":
