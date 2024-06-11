@@ -1,3 +1,5 @@
+import { expandPath } from "./helpers.ts"
+
 const decoder = new TextDecoder()
 
 export interface ShellOptions extends Deno.CommandOptions {
@@ -22,6 +24,9 @@ export async function shell(
   options?: ShellOptions,
 ): Promise<ShellResult> {
   options = { ...DEFAULT_OPTIONS, ...options }
+  if (typeof options.cwd === "string") {
+    options.cwd = expandPath(options.cwd)
+  }
   const command = new Deno.Command(cmd, options)
   const { code, success, stdout, stderr } = await command.output()
   const result: ShellResult = {
