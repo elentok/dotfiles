@@ -28,4 +28,8 @@ export const print = {
   bullet(text: string) {
     console.info(`▶ ${text}`)
   },
+
+  debug(text: string) {
+    console.info(chalk.gray(`- ${text}`))
+  },
 }

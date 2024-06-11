@@ -31,7 +31,12 @@ install-component() {
 
   dotf-header h2 "[dotf-component] Setting up: $name..."
   benchmark-start "$name"
-  $filename
+
+  if [[ "$filename" =~ .ts$ ]]; then
+    deno run --allow-env --allow-read --allow-write --allow-run "$filename"
+  else
+    $filename
+  fi
 
   echo
   echo "=> component '$name' installed in $(benchmark-stop "$name")"
@@ -40,8 +45,10 @@ install-component() {
 find-component() {
   local filenames=(
     "$DOTF/$name/install"
+    "$DOTF/core/$name/install.ts"
     "$DOTF/core/$name/install"
     "$DOTF/core/$name"
+    "$DOTF/extra/$name/install.ts"
     "$DOTF/extra/$name/install"
     "$DOTF/extra/$name"
     "$DOTL/plugins/$name/install"
@@ -49,7 +56,7 @@ find-component() {
   )
 
   for filename in "${filenames[@]}"; do
-    if [ -x "$filename" ]; then
+    if [ -e "$filename" ]; then
       echo "$filename"
       return 0
     fi
