@@ -5,9 +5,11 @@ export interface Step {
   description?: string
 }
 
+export type StepStatus = "success" | "silent-success" | "error"
+
 export interface StepResult {
   step: Step
-  isSuccess: boolean
+  status: StepStatus
   items: StepItems
 }
 
@@ -17,17 +19,9 @@ export interface StepMessage {
 }
 
 export function failStep(step: Step, items: StepItems): StepResult {
-  return { step, isSuccess: false, items }
+  return { step, status: "error", items }
 }
 
 export function passStep(step: Step, items: StepItems): StepResult {
-  return { step, isSuccess: true, items }
-}
-
-export function wrapResult(
-  step: Step,
-  childResult: StepResult,
-  items: StepItems,
-): StepResult {
-  return { step, isSuccess: true, items }
+  return { step, status: "success", items }
 }

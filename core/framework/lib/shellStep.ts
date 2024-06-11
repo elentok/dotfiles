@@ -25,7 +25,7 @@ export async function shellStep(
 
   return {
     step,
-    isSuccess: result.success,
+    status: result.success ? "success" : "error",
     ...result,
     items,
   }

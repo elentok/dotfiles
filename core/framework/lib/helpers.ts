@@ -5,16 +5,6 @@ export function expandPath(path: string): string {
   return path.replace(/^~/, Deno.env.get("HOME") ?? "~")
 }
 
-export function extendStep(
-  result: StepResult,
-  { before, after }: { before?: StepMessage[]; after?: StepMessage[] } = {},
-): StepResult {
-  return {
-    isSuccess: result.isSuccess,
-    messages: [...(before ?? []), ...result.messages, ...(after ?? [])],
-  }
-}
-
 export function stepMessage(
   type: StepMessage["type"],
   message: StepMessage["message"],
@@ -39,14 +29,20 @@ export async function fileExists(filepath: string): Promise<boolean> {
 }
 
 export function printResult(result: StepResult, indentLevel = 0): void {
-  const { step, isSuccess, items } = result
+  const { step, status, items } = result
   const { name, description } = step
 
   const title = description ? `${name} (${description})` : name
-  if (isSuccess) {
-    print.success(`${title}`, indentLevel)
-  } else {
-    print.error(`${title}`, indentLevel)
+  switch (status) {
+    case "success":
+      print.success(`${title}`, indentLevel)
+      break
+    case "silent-success":
+      print.silentSuccess(`${title}`, indentLevel)
+      break
+    case "error":
+      print.error(`${title}`, indentLevel)
+      break
   }
 
   for (const item of items) {

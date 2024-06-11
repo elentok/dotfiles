@@ -19,7 +19,7 @@ export async function backup(filename: string): Promise<StepResult> {
     const deleteResult = await deleteFileStep(backupFilename)
     items.push(deleteResult)
 
-    if (!deleteResult.isSuccess) {
+    if (!deleteResult.status) {
       return failStep(step, items)
     }
   }
@@ -28,7 +28,7 @@ export async function backup(filename: string): Promise<StepResult> {
   items.push(renameResult)
   return {
     step,
-    isSuccess: renameResult.isSuccess,
+    status: renameResult.status,
     items,
   }
 }

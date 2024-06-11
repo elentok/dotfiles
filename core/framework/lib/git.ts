@@ -24,7 +24,7 @@ export async function gitClone(opts: GitCloneOptions): Promise<StepResult> {
       const currentOriginResult = await getOriginUrl(dir)
       items.push(currentOriginResult)
 
-      if (!currentOriginResult.isSuccess) {
+      if (!currentOriginResult.status) {
         return failStep(step, items)
       }
 
@@ -36,15 +36,22 @@ export async function gitClone(opts: GitCloneOptions): Promise<StepResult> {
           const pullResult = await git(dir, ["pull"])
           items.push(pullResult)
 
+          let status = pullResult.status
+          if (
+            status === "success" && /Already up to date/.test(pullResult.stdout)
+          ) {
+            status = "silent-success"
+          }
+
+          return { step, status, items }
+        } else {
           return {
             step,
-            isSuccess: pullResult.isSuccess,
-            items,
+            status: "silent-success",
+            items: [
+              stepMessage("silent-sucess", "already cloned"),
+            ],
           }
-        } else {
-          return passStep(step, [
-            stepMessage("silent-sucess", "already cloned"),
-          ])
         }
       }
     }
@@ -52,7 +59,7 @@ export async function gitClone(opts: GitCloneOptions): Promise<StepResult> {
     const backupResult = await backup(dir)
     items.push(backupResult)
 
-    if (!backupResult.isSuccess) {
+    if (!backupResult.status) {
       return failStep(step, items)
     }
   }
@@ -66,7 +73,7 @@ export async function gitClone(opts: GitCloneOptions): Promise<StepResult> {
 
   return {
     step,
-    isSuccess: cloneResult.isSuccess,
+    status: cloneResult.status,
     items,
   }
 }
