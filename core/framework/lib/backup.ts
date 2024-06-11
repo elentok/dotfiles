@@ -1,42 +1,34 @@
-import { failStep } from "./helpers.ts"
-import { passStep } from "./helpers.ts"
+import { deleteFileStep, renameStep } from "./fsSteps.ts"
 import { fileExists, stepMessage } from "./helpers.ts"
-import { StepMessage } from "./types.ts"
+import { failStep, Step, StepItems, StepResult } from "./step.ts"
 
 export async function backup(filename: string): Promise<StepResult> {
   const backupFilename = `${filename}.backup`
-  const messages: StepMessage[] = [
-    stepMessage(
-      "info",
-      `File ${filename} exists, backing up to ${backupFilename}`,
-    ),
-  ]
+
+  const step: Step = {
+    name: "Backup",
+    description: `File ${filename} exists, backing up to ${backupFilename}`,
+  }
+
+  const items: StepItems = []
 
   if (await fileExists(backupFilename)) {
-    messages.push(
+    items.push(
       stepMessage("info", `Backup filename already exists, overwriting`),
     )
-    try {
-      await Deno.remove(backupFilename)
-    } catch (err) {
-      return failStep([
-        ...messages,
-        stepMessage("error", `Failed to remove ${backupFilename}: ${err}`),
-      ])
+    const deleteResult = await deleteFileStep(backupFilename)
+    items.push(deleteResult)
+
+    if (!deleteResult.isSuccess) {
+      return failStep(step, items)
     }
   }
 
-  try {
-    await Deno.rename(filename, backupFilename)
-  } catch (err) {
-    return failStep([
-      ...messages,
-      stepMessage("error", `Failed to rename ${filename}: ${err}`),
-    ])
+  const renameResult = await renameStep(filename, backupFilename)
+  items.push(renameResult)
+  return {
+    step,
+    isSuccess: renameResult.isSuccess,
+    items,
   }
-
-  return passStep([
-    ...messages,
-    stepMessage("info", `Backed up ${filename} to ${backupFilename}`),
-  ])
 }

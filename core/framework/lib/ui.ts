@@ -2,6 +2,10 @@ import chalk from "npm:chalk"
 
 const orange = chalk.rgb(255, 165, 0)
 
+function prefix(indentLevel: number): string {
+  return "  ".repeat(indentLevel)
+}
+
 export const print = {
   header(text: string) {
     console.info()
@@ -9,27 +13,27 @@ export const print = {
     console.info()
   },
 
-  success(text: string) {
-    console.info(chalk.green(`✔ ${text}`))
+  success(text: string, indentLevel = 0) {
+    console.info(chalk.green(`${prefix(indentLevel)}✔ ${text}`))
   },
 
-  silentSuccess(text: string) {
-    console.info(chalk.gray(`✔ ${text}`))
+  silentSuccess(text: string, indentLevel = 0) {
+    console.info(chalk.gray(`${prefix(indentLevel)}✔ ${text}`))
   },
 
-  warning(text: string) {
-    console.info(orange(`⚠ ${text}`))
+  warning(text: string, indentLevel = 0) {
+    console.info(orange(`${prefix(indentLevel)}⚠ ${text}`))
   },
 
-  error(text: string) {
-    console.info(chalk.red(`✘ ${text}`))
+  error(text: string, indentLevel = 0) {
+    console.info(chalk.red(`${prefix(indentLevel)}✘ ${text}`))
   },
 
-  bullet(text: string) {
-    console.info(`▶ ${text}`)
+  bullet(text: string, indentLevel = 0) {
+    console.info(`${prefix(indentLevel)}▶ ${text}`)
   },
 
-  debug(text: string) {
-    console.info(chalk.gray(`- ${text}`))
+  debug(text: string, indentLevel = 0) {
+    console.info(chalk.gray(`${prefix(indentLevel)}- ${text}`))
   },
 }
