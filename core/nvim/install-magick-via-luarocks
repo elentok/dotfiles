@@ -7,7 +7,7 @@ source "$DOTF/core/scripts/lib/os.sh"
 if dotf-is-linux; then
   dotf-apt luarocks libmagickwand-dev
 else
-  dotf-brew luarocks
+  dotf-brew luarocks pkg-config
 fi
 
 if [ ! -e ~/.luarocks/share/lua/5.1/magick ]; then
