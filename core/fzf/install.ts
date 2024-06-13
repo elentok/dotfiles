@@ -1,9 +1,6 @@
 import { gitClone } from "../framework/lib/git.ts"
-import {
-  fileExists,
-  printResult,
-  stepMessage,
-} from "../framework/lib/helpers.ts"
+import { fileExists, stepMessage } from "../framework/lib/helpers.ts"
+import { printResult } from "../framework/lib/printResult.ts"
 import { shellStep } from "../framework/lib/shellStep.ts"
 import { Step, StepItems, StepResult } from "../framework/lib/step.ts"
 

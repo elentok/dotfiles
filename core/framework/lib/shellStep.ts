@@ -6,7 +6,7 @@ export type ShellStepResult = StepResult & Omit<ShellResult, "success">
 
 export async function shellStep(
   cmd: string,
-  options?: ShellOptions,
+  options?: ShellOptions & { isDebug?: boolean },
 ): Promise<ShellStepResult> {
   const fullCmd = [cmd, options?.args?.join(" ")].filter(Boolean).join(" ")
   const step: Step = {
@@ -27,6 +27,7 @@ export async function shellStep(
     step,
     status: result.success ? "success" : "error",
     ...result,
+    isDebug: options?.isDebug ?? true,
     items,
   }
 }

@@ -1,4 +1,5 @@
 import chalk from "npm:chalk"
+import { DEBUG } from "./helpers.ts"
 
 const orange = chalk.rgb(255, 165, 0)
 
@@ -34,6 +35,8 @@ export const print = {
   },
 
   debug(text: string, indentLevel = 0) {
-    console.info(chalk.gray(`${prefix(indentLevel)}- ${text}`))
+    if (DEBUG) {
+      console.info(chalk.gray(`${prefix(indentLevel)}- ${text}`))
+    }
   },
 }

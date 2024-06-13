@@ -11,6 +11,7 @@ export interface StepResult {
   step: Step
   status: StepStatus
   items: StepItems
+  isDebug?: boolean
 }
 
 export interface StepMessage {
