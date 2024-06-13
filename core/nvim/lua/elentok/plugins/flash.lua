@@ -23,5 +23,21 @@ return {
       end,
       desc = "Flash",
     },
+    {
+      "<space>tv",
+      mode = { "n", "x", "o" },
+      function()
+        require("flash").treesitter()
+      end,
+      desc = "Flash",
+    },
+    {
+      "<space>ts",
+      mode = { "n", "x", "o" },
+      function()
+        require("flash").treesitter_search()
+      end,
+      desc = "Flash (treesitter)",
+    },
   },
 }
