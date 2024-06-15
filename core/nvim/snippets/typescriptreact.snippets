@@ -25,3 +25,17 @@ snippet adesc
 snippet screendebug
 	console.log('[SCREEN DEBUG START]')
 	screen.debug(undefined, Infinity)
+snippet zustand
+	export interface $1State {
+	}
+	
+	export interface $1Actions {
+	}
+	
+	export type $1Store = $1State & $1Actions
+	
+	export function use$1Store = create<$1Store>((set, get) => {
+	  return {
+			$2
+	  }
+	})
