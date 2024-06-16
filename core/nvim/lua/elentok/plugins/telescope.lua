@@ -22,51 +22,51 @@ return {
   },
   cmd = { "Telescope", "Maps", "Glast" },
   keys = {
-    {
-      "<leader>ff",
-      "<cmd>Telescope egrepify<cr>",
-      mode = "n",
-      desc = "Live grep",
-    },
-    {
-      "<leader>fw",
-      function()
-        require("telescope.builtin").grep_string()
-      end,
-      mode = { "n", "v" },
-      { desc = "Grep word under cursor" },
-    },
-    { "<c-p>", "<cmd>Telescope find_files<cr>" },
-    { "<leader>p", "<cmd>Telescope find_files<cr>" },
-    { "<leader>.", "<cmd>Telescope find_files<cr>" },
-    { "z=", "<cmd>Telescope spell_suggest<cr>" },
-    { "<leader>jb", "<cmd>Telescope buffers file_ignore_patterns={}<cr>" },
-    { "<leader>jg", "<cmd>Telescope git_status<cr>", desc = "Jump to git modified" },
-    { "<leader>jj", "<cmd>Telescope jumplist<cr>", desc = "Jump to jumplist" },
-    { "<leader>jh", "<cmd>Telescope help_tags<cr>", desc = "Jump to help" },
-    { "<leader>jk", "<cmd>Telescope keymaps<cr>", desc = "Jump to keymap" },
-    { "<leader>jl", telescope_git_last_commit_files, desc = "Jump to files in last commit" },
-    { "gr", "<cmd>Telescope lsp_references<cr>", desc = "Goto reference (LSP)" },
-    { "gd", "<cmd>Telescope lsp_definitions<cr>", desc = "Goto definition (LSP)" },
-    { "``", "<cmd>Telescope resume<cr>", desc = "Resume last telescope search" },
-    { "<Leader>gt", "<cmd>Telescope tags<cr>" },
-    {
-      "<Leader>jm",
-      "<cmd>Telescope oldfiles previewer=false only_cwd=true<cr>",
-      desc = "Jump to MRU (locally)",
-    },
-    {
-      "<Leader>jM",
-      "<cmd>Telescope oldfiles previewer=false<cr>",
-      desc = "Jump to MRU (globally)",
-    },
-    {
-      "<Leader>js",
-      function()
-        require("telescope").extensions.aerial.aerial()
-      end,
-      desc = "Goto symbol",
-    },
+    -- {
+    --   "<leader>ff",
+    --   "<cmd>Telescope egrepify<cr>",
+    --   mode = "n",
+    --   desc = "Live grep",
+    -- },
+    -- {
+    --   "<leader>fw",
+    --   function()
+    --     require("telescope.builtin").grep_string()
+    --   end,
+    --   mode = { "n", "v" },
+    --   { desc = "Grep word under cursor" },
+    -- },
+    -- { "<c-p>", "<cmd>Telescope find_files<cr>" },
+    -- { "<leader>p", "<cmd>Telescope find_files<cr>" },
+    -- { "<leader>.", "<cmd>Telescope find_files<cr>" },
+    -- { "z=", "<cmd>Telescope spell_suggest<cr>" },
+    -- { "<leader>jb", "<cmd>Telescope buffers file_ignore_patterns={}<cr>" },
+    -- { "<leader>jg", "<cmd>Telescope git_status<cr>", desc = "Jump to git modified" },
+    -- { "<leader>jj", "<cmd>Telescope jumplist<cr>", desc = "Jump to jumplist" },
+    -- { "<leader>jh", "<cmd>Telescope help_tags<cr>", desc = "Jump to help" },
+    -- { "<leader>jk", "<cmd>Telescope keymaps<cr>", desc = "Jump to keymap" },
+    -- { "<leader>jl", telescope_git_last_commit_files, desc = "Jump to files in last commit" },
+    -- { "gr", "<cmd>Telescope lsp_references<cr>", desc = "Goto reference (LSP)" },
+    -- { "gd", "<cmd>Telescope lsp_definitions<cr>", desc = "Goto definition (LSP)" },
+    -- { "``", "<cmd>Telescope resume<cr>", desc = "Resume last telescope search" },
+    -- { "<Leader>gt", "<cmd>Telescope tags<cr>" },
+    -- {
+    --   "<Leader>jm",
+    --   "<cmd>Telescope oldfiles previewer=false only_cwd=true<cr>",
+    --   desc = "Jump to MRU (locally)",
+    -- },
+    -- {
+    --   "<Leader>jM",
+    --   "<cmd>Telescope oldfiles previewer=false<cr>",
+    --   desc = "Jump to MRU (globally)",
+    -- },
+    -- {
+    --   "<Leader>js",
+    --   function()
+    --     require("telescope").extensions.aerial.aerial()
+    --   end,
+    --   desc = "Goto symbol",
+    -- },
     {
       "<leader>ju",
       "<cmd>Telescope undo<cr>",

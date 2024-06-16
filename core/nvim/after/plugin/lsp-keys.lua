@@ -30,8 +30,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- map("n", "gr", vim.lsp.buf.references, "Jump to references")
     -- map("n", "gd", vim.lsp.buf.definition, "Jump to definition")
-    map("n", "gr", "<Cmd>Telescope lsp_references<cr>", "Jump to references")
-    map("n", "gd", "<Cmd>Telescope lsp_definitions<cr>", "Jump to definition")
+    map("n", "gr", "<Cmd>FzfLua lsp_references<cr>", "Jump to references")
+    map("n", "gd", "<Cmd>FzfLua lsp_definitions<cr>", "Jump to definition")
+
+    map("n", "<leader>js", "<Cmd>FzfLua lsp_document_symbols<cr>", "Jump to definition")
 
     map("n", "<leader>jd", vim.lsp.buf.declaration, "Jump to declaration")
     map("n", "<leader>jD", vim.lsp.buf.type_definition, "Jump to type definition")
