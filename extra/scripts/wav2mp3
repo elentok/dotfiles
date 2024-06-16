@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+for i in *.wav; do
+  if ! test -f "${i%.wav}.mp3"; then
+    lame -b 320 -h "${i}" "${i%.wav}.mp3"
+  fi
+done
