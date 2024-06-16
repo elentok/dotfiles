@@ -1,3 +1,7 @@
+if true then
+  return {}
+end
+
 local function has_eslint_module()
   return vim.fn.finddir("node_modules/eslint", ";.") ~= ""
 end

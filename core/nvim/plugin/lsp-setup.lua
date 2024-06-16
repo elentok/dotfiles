@@ -45,6 +45,7 @@ setup("cssls")
 setup("rust_analyzer")
 setup("terraformls")
 setup("graphql")
+setup("eslint")
 
 require("lspconfig.configs").vtsls = require("vtsls").lspconfig
 
