@@ -6,8 +6,8 @@ return {
   keys = {
     {
       "<leader>tt",
-      "<cmd>TroubleToggle<cr>",
-      desc = "Toggle Trouble",
+      "<cmd>Trouble diagnostics toggle<cr>",
+      desc = "Diagnostics (Trouble)",
     },
   },
 }
