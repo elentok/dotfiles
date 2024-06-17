@@ -21,17 +21,41 @@ vim.g.neovide_input_use_logo = 1
 vim.keymap.set({ "n", "t", "i", "v" }, "<D-c>", "<c-c>")
 vim.keymap.set("n", "<D-h>", "<c-w>h")
 vim.keymap.set("n", "<D-j>", "<c-w>j")
+vim.keymap.set("n", "<D-k>", "<c-w>k")
 vim.keymap.set("n", "<D-l>", "<c-w>l")
 vim.keymap.set("n", "<D-d>", "<c-d>")
 vim.keymap.set("n", "<D-u>", "<c-u>")
 
 -- terminal
-vim.keymap.set("t", "<D-h>", "<c-\\><c-n><c-w>h")
-vim.keymap.set("t", "<D-j>", "<c-\\><c-n><c-w>j")
-vim.keymap.set("t", "<D-k>", "<c-\\><c-n><c-w>k")
-vim.keymap.set("t", "<D-l>", "<c-\\><c-n><c-w>l")
+vim.keymap.set("t", "<D-,>", "<M-,>")
+vim.keymap.set("t", "<D-.>", "<M-.>")
+-- vim.keymap.set("t", "<D-h>", "<c-\\><c-n><c-w>h")
+-- vim.keymap.set("t", "<D-j>", "<c-\\><c-n><c-w>j")
+-- vim.keymap.set("t", "<D-k>", "<c-\\><c-n><c-w>k")
+-- vim.keymap.set("t", "<D-l>", "<c-\\><c-n><c-w>l")
 
 vim.keymap.set("n", "<D-v>", '"+P') -- Paste normal mode
 vim.keymap.set("v", "<D-v>", '"+P') -- Paste visual mode
 vim.keymap.set("c", "<D-v>", "<C-R>+") -- Paste command mode
 vim.keymap.set("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
+
+local function mapCmdToCtrl()
+  -- Removed "e" on purpose since Cmd+E is the leader key
+  -- Removed "v" on purpose since Cmd+V pastes
+  local keys = "abcdfghijklmnopqrstuwxyz[]\\^_0"
+  for i = 1, #keys do
+    local key = string.sub(keys, i, i)
+    vim.keymap.set(
+      { "t", "n", "i", "v", "x" },
+      "<D-" .. key .. ">",
+      "<c-" .. key .. ">",
+      { remap = true }
+    )
+    -- vim.keymap.set("t", { key = key, mods = "CMD", action = act.SendKey({ key = key, mods = "CTRL" }) }
+    -- )
+  end
+end
+
+if vim.g.neovide then
+  mapCmdToCtrl()
+end
