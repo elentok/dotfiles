@@ -12,6 +12,7 @@ return {
       shade = "dark",
       percentage = 0.15,
     },
+    term_colors = true,
     integrations = {
       barbecue = {
         alt_background = true,

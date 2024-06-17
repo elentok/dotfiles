@@ -7,7 +7,7 @@ vim.o.linespace = 4
 
 -- vim.g.neovide_transparency = 0.95
 -- vim.g.transparency = 0.95
-vim.g.neovide_hide_mouse_when_typing = true
+-- vim.g.neovide_hide_mouse_when_typing = true
 vim.g.neovide_cursor_antialiasing = true
 vim.g.neovide_cursor_animation_length = 0.01
 vim.g.neovide_touch_drag_timeout = 0.15
