@@ -10,6 +10,8 @@ set fish_cursor_default block
 # Set the insert mode cursor to a line
 set fish_cursor_insert line
 
+set fish_greeting ""
+
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
