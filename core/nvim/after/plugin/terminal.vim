@@ -34,10 +34,18 @@ nnoremap <c-a>c :tabe<cr>:Term<cr>
 tnoremap <c-a>a <c-a>
 tnoremap <c-a>c <c-\><c-n>:tabe<cr>:Term<cr>
 
+nnoremap <D-a>c :tabe<cr>:Term<cr>
+tnoremap <D-a>a <c-a>
+tnoremap <D-a>c <c-\><c-n>:tabe<cr>:Term<cr>
+
+nnoremap <D-a>v :TermVertical<cr>
+tnoremap <D-a>v <c-\><c-n>:TermVertical<cr>
 nnoremap <c-a>v :TermVertical<cr>
 tnoremap <c-a>v <c-\><c-n>:TermVertical<cr>
 command! TermVertical wincmd v | wincmd l | Term
 
+nnoremap <D-a>s :TermHorizontal<cr>
+tnoremap <D-a>s <c-\><c-n>:TermHorizontal<cr>
 nnoremap <c-a>s :TermHorizontal<cr>
 tnoremap <c-a>s <c-\><c-n>:TermHorizontal<cr>
 command! TermHorizontal wincmd s | wincmd j | Term
@@ -45,7 +53,7 @@ command! TermHorizontal wincmd s | wincmd j | Term
 " Remain in insert mode {{{1
 augroup Elentok_Terminal
   autocmd!
-  autocmd TermOpen * setlocal nonumber | startinsert
+  autocmd TermOpen * setlocal nonumber | startinsert | set nospell
   autocmd BufWinEnter,WinEnter term://* startinsert
   autocmd BufWinEnter,WinEnter term://* wincmd + | wincmd -
   autocmd BufLeave term://* stopinsert
