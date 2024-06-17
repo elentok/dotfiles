@@ -1,6 +1,6 @@
 return {
   "ibhagwan/fzf-lua",
-  opts = {},
+  opts = { "max-perf" },
   keys = {
     {
       "<leader>ff",
@@ -23,7 +23,7 @@ return {
     { "<leader>p", "<cmd>FzfLua git_files<cr>" },
     { "<leader>fl", ":FzfLua " },
     { "z=", "<cmd>FzfLua spell_suggest<cr>" },
-    { "<leader>jb", "<cmd>FzfLua buffers file_ignore_patterns={}<cr>" },
+    { "<leader>jb", "<cmd>FzfLua buffers<cr>" },
     { "<leader>jg", "<cmd>FzfLua git_status<cr>", desc = "Jump to git modified" },
     { "<leader>jj", "<cmd>FzfLua jumps<cr>", desc = "Jump to jumplist" },
     { "<leader>jh", "<cmd>FzfLua helptags<cr>", desc = "Jump to help" },
@@ -31,7 +31,7 @@ return {
     { "``", "<cmd>FzfLua resume<cr>", desc = "Resume last FzfLua search" },
     {
       "<Leader>jm",
-      "<cmd>FzfLua oldfiles only_cwd=true<cr>",
+      "<cmd>FzfLua oldfiles cwd=$PWD<cr>",
       desc = "Jump to MRU (locally)",
     },
     {
