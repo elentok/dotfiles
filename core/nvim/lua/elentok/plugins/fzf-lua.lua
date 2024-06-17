@@ -1,6 +1,6 @@
 return {
   "ibhagwan/fzf-lua",
-  opts = { "max-perf" },
+  opts = { "max-perf", preview = { flip_columns = 160 } },
   keys = {
     {
       "<leader>ff",
