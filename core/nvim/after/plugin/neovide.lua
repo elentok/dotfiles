@@ -46,7 +46,7 @@ local function mapCmdToCtrl()
   for i = 1, #keys do
     local key = string.sub(keys, i, i)
     vim.keymap.set(
-      { "t", "n", "i", "v", "x" },
+      { "t", "n", "i", "v", "x", "c" },
       "<D-" .. key .. ">",
       "<c-" .. key .. ">",
       { remap = true }
