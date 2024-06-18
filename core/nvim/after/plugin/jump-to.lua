@@ -64,7 +64,7 @@ vim.keymap.set("n", "<leader>jc", function()
   })
 end, { desc = "Jump to config" })
 
-vim.keymap.set("n", "<leader>jp", function()
+vim.keymap.set("n", "<leader>jvp", function()
   find_files({
     cwd = vim.env.HOME .. "/.dotfiles/core/nvim/lua/elentok/plugins/",
   })
@@ -79,3 +79,17 @@ vim.keymap.set("n", "<leader>jS", function()
 end, { desc = "Jump to script" })
 
 vim.keymap.set("n", "<leader>ja", "<c-^>", { desc = "Jump to alternate file" })
+
+vim.keymap.set("n", "<leader>jp", function()
+  require("fzf-lua").fzf_exec("dotf-projects list", {
+    prompt = "Projects> ",
+    actions = {
+      ["default"] = function(selected)
+        vim.fn.chdir(selected[1])
+        vim.defer_fn(function()
+          vim.notify("Changed directory to " .. selected[1])
+        end, 10)
+      end,
+    },
+  })
+end, { desc = "Jump to project" })
