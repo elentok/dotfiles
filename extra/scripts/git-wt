@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+#
+# Usage:
+#
+#   git-wt root
+#   git-wt list
 
 set -euo pipefail
 
@@ -6,7 +11,7 @@ function main() {
   local cmd="${1:-}"
   shift || true
 
-  if type "git-wt-${cmd}" > /dev/null; then
+  if type "git-wt-${cmd}" > /dev/null 2>&1; then
     "git-wt-${cmd}" "$@"
   else
     usage "$0"
@@ -25,7 +30,10 @@ function git-wt-preview() {
 }
 
 function git-wt-list() {
-  cd "$(git-wt-root)/worktrees" && command ls -1
+  wt_dir="$(git-wt-root)/worktrees"
+  if [ -d "$wt_dir" ]; then
+    cd "$wt_dir" && command ls -1
+  fi
 }
 
 function fzf-pick-worktree() {

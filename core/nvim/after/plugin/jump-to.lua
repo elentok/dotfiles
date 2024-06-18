@@ -93,3 +93,18 @@ vim.keymap.set("n", "<leader>jp", function()
     },
   })
 end, { desc = "Jump to project" })
+
+vim.keymap.set("n", "<leader>jwt", function()
+  local root = vim.fn.systemlist("git-wt root")[1]
+  require("fzf-lua").fzf_exec("git-wt list", {
+    prompt = "Worktrees> ",
+    actions = {
+      ["default"] = function(selected)
+        vim.fn.chdir(root .. "/" .. selected[1])
+        vim.defer_fn(function()
+          vim.notify("Changed directory to " .. selected[1])
+        end, 10)
+      end,
+    },
+  })
+end, { desc = "Jump to workspace" })
