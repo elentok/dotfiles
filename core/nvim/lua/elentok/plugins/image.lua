@@ -7,6 +7,10 @@ package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/shar
 return {
   "3rd/image.nvim",
   config = function()
+    if vim.g.neovide then
+      return
+    end
+
     require("image").setup({
       integrations = {
         markdown = {
