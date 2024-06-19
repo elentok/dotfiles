@@ -1,26 +1,25 @@
-local function telescope_git_last_commit_files()
-  require("telescope.builtin").find_files({
-    find_command = {
-      "git",
-      "diff-tree",
-      "--no-commit-id",
-      "--name-only",
-      "-r",
-      "HEAD",
-    },
-  })
-end
+-- local function telescope_git_last_commit_files()
+--   require("telescope.builtin").find_files({
+--     find_command = {
+--       "git",
+--       "diff-tree",
+--       "--no-commit-id",
+--       "--name-only",
+--       "-r",
+--       "HEAD",
+--     },
+--   })
+-- end
 
 return {
   "nvim-telescope/telescope.nvim",
   version = "*",
   lazy = true,
   dependencies = {
-    "fdschmidt93/telescope-egrepify.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     { "debugloop/telescope-undo.nvim" },
   },
-  cmd = { "Telescope", "Maps", "Glast" },
+  cmd = { "Telescope" },
   keys = {
     -- {
     --   "<leader>ff",
@@ -148,10 +147,9 @@ return {
     -- telescope.load_extension("aerial")
     telescope.load_extension("fzf")
     -- telescope.load_extension("advanced_git_search")
-    telescope.load_extension("egrepify")
     telescope.load_extension("undo")
 
-    vim.api.nvim_create_user_command("Maps", builtin.keymaps, {})
-    vim.api.nvim_create_user_command("Glast", telescope_git_last_commit_files, {})
+    -- vim.api.nvim_create_user_command("Maps", builtin.keymaps, {})
+    -- vim.api.nvim_create_user_command("Glast", telescope_git_last_commit_files, {})
   end,
 }
