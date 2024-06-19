@@ -3,7 +3,10 @@
   "packages": {
     "specifiers": {
       "jsr:@std/assert@^0.225.2": "jsr:@std/assert@0.225.3",
+      "jsr:@std/datetime": "jsr:@std/datetime@0.224.1",
+      "jsr:@std/fs": "jsr:@std/fs@0.229.3",
       "jsr:@std/path": "jsr:@std/path@0.225.1",
+      "jsr:@std/path@1.0.0-rc.1": "jsr:@std/path@1.0.0-rc.1",
       "npm:chalk": "npm:chalk@5.3.0",
       "npm:chalk@^5.3.0": "npm:chalk@5.3.0",
       "npm:console-table-printer": "npm:console-table-printer@2.11.2",
@@ -16,11 +19,23 @@
       "@std/assert@0.225.3": {
         "integrity": "b3c2847aecf6955b50644cdb9cf072004ea3d1998dd7579fc0acb99dbb23bd4f"
       },
+      "@std/datetime@0.224.1": {
+        "integrity": "3b4d5062333a3fe2e8f94b343e05e8c34ec8b09e2e8311fe0e879a6773075830"
+      },
+      "@std/fs@0.229.3": {
+        "integrity": "783bca21f24da92e04c3893c9e79653227ab016c48e96b3078377ebd5222e6eb",
+        "dependencies": [
+          "jsr:@std/path@1.0.0-rc.1"
+        ]
+      },
       "@std/path@0.225.1": {
         "integrity": "8c3220635a73730eb51fe43de9e10b79e2724a5bb8638b9355d35ae012fd9429",
         "dependencies": [
           "jsr:@std/assert@^0.225.2"
         ]
+      },
+      "@std/path@1.0.0-rc.1": {
+        "integrity": "b8c00ae2f19106a6bb7cbf1ab9be52aa70de1605daeb2dbdc4f87a7cbaf10ff6"
       }
     },
     "npm": {

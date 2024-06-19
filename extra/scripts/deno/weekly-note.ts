@@ -1,9 +1,11 @@
 #!/usr/bin/env -S deno run --allow-env --allow-read --allow-run --allow-write
 
-import { weekOfYear } from "https://deno.land/std@0.213.0/datetime/mod.ts"
-import { existsSync } from "https://deno.land/std/fs/mod.ts"
+import { weekOfYear } from "jsr:@std/datetime"
+import { existsSync } from "jsr:@std/fs"
 
 function main() {
+  const root = Deno.args.length > 0 ? Deno.args[0] : Deno.cwd()
+
   const sunday = findSundayOfCurrentWeek()
   const week = weekOfYear(sunday) + 1
 
@@ -15,7 +17,7 @@ function main() {
   const week2digits = week.toString().padStart(2, "0")
   const day2digits = sunday.getDate().toString().padStart(2, "0")
   const filename =
-    `weekly/${year}/${year}-week${week2digits}-${monthLowercase}-${day2digits}.md`
+    `${root}/weekly/${year}/${year}-week${week2digits}-${monthLowercase}-${day2digits}.md`
 
   if (!existsSync(filename)) {
     const title =
