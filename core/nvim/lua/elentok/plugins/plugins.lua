@@ -25,7 +25,6 @@ return {
   { "nvim-tree/nvim-web-devicons", lazy = true },
   "nvim-lualine/lualine.nvim",
 
-  { "axieax/urlview.nvim", opts = {} },
   { "windwp/nvim-autopairs", opts = {} },
   {
     "kylechui/nvim-surround",
