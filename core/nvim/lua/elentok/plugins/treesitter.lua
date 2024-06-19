@@ -44,6 +44,8 @@ return {
     --   require("nvim-treesitter.install").update()
     -- end,
 
+    lazy = false,
+
     config = function()
       local treesitter_configs = require("nvim-treesitter.configs")
 
@@ -63,9 +65,9 @@ return {
           enable = true,
           keymaps = {
             init_selection = "gnn",
-            node_incremental = "grn",
-            scope_incremental = "grc",
-            node_decremental = "grm",
+            node_incremental = "<Leader>]",
+            -- scope_incremental = "grc",
+            node_decremental = "<Leader>[",
           },
         },
         -- disable python and typescript indentation until fixed:
