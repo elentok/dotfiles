@@ -31,6 +31,14 @@ alias dff 'dff.ts'
 alias dotff '~/.dotfiles/core/framework/dotf.ts'
 alias q qalc
 
+function nv --description neovide
+    if test -n "$TMUX"
+        echo "Don't run neovide in tmux!"
+    else
+        neohub --opts --fork $argv
+    end
+end
+
 function f --description vifm
     if test (count $argv) -eq 0
         TERM=xterm-256color vifm .
