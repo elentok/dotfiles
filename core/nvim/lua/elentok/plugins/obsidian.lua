@@ -85,12 +85,12 @@ return {
       end,
     })
   end,
-  keys = {
-    {
-      "<Leader>jn",
-      "<Cmd>ObsidianQuickSwitch<cr>",
-      mode = "n",
-    },
-  },
-  cmd = { "ObsidianQuickSwitch" },
+  -- keys = {
+  --   {
+  --     "<Leader>jn",
+  --     "<Cmd>ObsidianQuickSwitch<cr>",
+  --     mode = "n",
+  --   },
+  -- },
+  -- cmd = { "ObsidianQuickSwitch" },
 }

@@ -1,6 +1,15 @@
 return {
   "ibhagwan/fzf-lua",
-  opts = { "max-perf", preview = { flip_columns = 160 } },
+  opts = {
+    "max-perf",
+    winopts = {
+      width = 0.9,
+      preview = {
+        horizontal = "right:50%",
+        flip_columns = 140,
+      },
+    },
+  },
   keys = {
     {
       "<leader>ff",
