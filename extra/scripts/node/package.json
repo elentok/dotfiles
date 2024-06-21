@@ -5,7 +5,6 @@
   "scripts": {
     "format": "prettier --write '**/*.js' '**/*.ts' '**/*.css'",
     "format:lua": "stylua --glob '**/*.lua' --config-path=$DOTF/stylua.toml .",
-    "eslint": "eslint --ext .js,.ts .",
     "ts:build": "tsc",
     "ts:watch": "tsc --watch",
     "start": "npm run ts:watch"
@@ -32,10 +31,7 @@
   "devDependencies": {
     "@types/node": "^18.7.11",
     "@types/serve-static": "^1.15.0",
-    "@types/underscore": "^1.11.4",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
-    "eslint": "^8.44.0"
+    "@types/underscore": "^1.11.4"
   },
   "packageManager": "yarn@3.5.1"
 }
