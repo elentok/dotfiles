@@ -8,7 +8,7 @@ Requires=network.target
 User=david
 Environment=TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
 Environment=TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
-ExecStart=${NODE} ${HOME}/.dotfiles/extra/scripts/node/telegram-proxy
+ExecStart=${NODE} ${HOME}/.dotfiles/extra/scripts/deno/telegram-proxy.ts
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=on-failure
 
