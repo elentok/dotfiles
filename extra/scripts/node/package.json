@@ -18,7 +18,7 @@
   "homepage": "https://github.com/elentok/dotfiles#readme",
   "private": true,
   "dependencies": {
-    "axios": "^1.6.0",
+    "axios": "^1.7.2",
     "chalk": "^4.1.2",
     "commander": "^9.4.0",
     "kdbxweb": "^2.1.1",
