@@ -29,7 +29,7 @@ return {
       disable_insert_on_commit = true,
       console_timeout = 4000,
       integration = {
-        telescope = true,
+        fzf_lua = true,
         diffview = true,
       },
       popup = {
