@@ -22,7 +22,6 @@ return {
       ["<C-l>"] = false,
       ["<C-c>"] = false,
       ["<C-p>"] = false,
-      ["<C-s>"] = "actions.save",
       ["<leader>p"] = "actions.preview",
       ["q"] = "actions.close",
       ["L"] = "actions.select",
