@@ -22,7 +22,7 @@ return {
       ["<C-l>"] = false,
       ["<C-c>"] = false,
       ["<C-p>"] = false,
-      ["<leader>p"] = "actions.preview",
+      ["<leader><leader>"] = "actions.preview",
       ["q"] = "actions.close",
       ["L"] = "actions.select",
       ["J"] = "actions.select",
