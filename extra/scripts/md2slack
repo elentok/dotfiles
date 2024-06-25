@@ -1,15 +1,16 @@
-#!/usr/bin/env bash
+#!/usr/bin/env fish
 
-set -euo pipefail
+if not type -q md2slack-plugin
+    function md2slack-plugin
+        cat
+    end
+end
 
 sed 's/  /    /g' \
-  | sed -E 's/\[([^]]+)\]\(\.\.[^)]*\)/\1/' \
-  | sed -E 's/\[\[.*\|(.*)\]\]/\1/' \
-  | sed -E 's%saas#([0-9]+)%[PR#\1](https://github.com/salto-io/salto_private/pull/\1)%' \
-  | sed -E 's%salto#([0-9]+)%[PR#\1](https://github.com/salto-io/salto/pull/\1)%' \
-  | sed -E 's%SAAS-([0-9]+)%[SAAS-\1](https://salto-io.atlassian.net/browse/\1)%' \
-  | sed -E 's%SALTO-([0-9]+)%[SALTO-\1](https://salto-io.atlassian.net/browse/\1)%' \
-  | sed -E 's/\[ \]( -)?/☐/' \
-  | sed -E 's#\[/\]( -)?#:arrow_forward:#' \
-  | sed -E 's/\[w\]( -)?/:double_vertical_bar:/' \
-  | sed -E 's/\[x\]( -)?/:white_check_mark:/'
+    | sed -E 's/\[([^]]+)\]\(\.\.[^)]*\)/\1/' \
+    | sed -E 's/\[\[.*\|(.*)\]\]/\1/' \
+    | md2slack-plugin \
+    | sed -E 's/\[ \]( -)?/☐/' \
+    | sed -E 's#\[/\]( -)?#:arrow_forward:#' \
+    | sed -E 's/\[w\]( -)?/:double_vertical_bar:/' \
+    | sed -E 's/\[x\]( -)?/:white_check_mark:/'
