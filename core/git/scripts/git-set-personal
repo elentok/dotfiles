@@ -1,13 +1,19 @@
-#!/usr/bin/env bash
-
-set -euo pipefail
+#!/usr/bin/env fish
 
 git config github.user elentok
 git config user.name 'David Elentok'
 git config user.email '3david@gmail.com'
 
-origin="$(git config remote.origin.url)"
-if [[ "$origin" =~ github.com: ]]; then
-  origin="${origin/github.com:/github.com-personal:}"
-  git config remote.origin.url "$origin"
-fi
+set origin (git config remote.origin.url)
+
+if string match -r -q "github.com:" $origin
+    set new_origin (string replace -r "github.com:" "github.com-personal:" $origin)
+else if string match -r -q "^https://github.com/" $origin
+    set new_origin (string replace -r "^https://github.com/" "git@github.com-personal:" $origin)
+else
+    echo "no need to change"
+    exit
+end
+
+echo "changing origin to $new_origin"
+git config remote.origin.url $new_origin
