@@ -45,7 +45,20 @@ setup("cssls")
 setup("rust_analyzer")
 setup("terraformls")
 setup("graphql")
-setup("eslint")
+-- setup("eslint", {
+--   settings = {
+--     run = "onSave",
+--     format = false,
+--     codeAction = {
+--       disableRuleComment = {
+--         enable = false,
+--       },
+--       showDocumentation = {
+--         enable = false,
+--       },
+--     },
+--   },
+-- })
 
 require("lspconfig.configs").vtsls = require("vtsls").lspconfig
 
