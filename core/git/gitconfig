@@ -98,7 +98,7 @@
   rbc = rebase --continue
   rbs = rebase --skip
   rbi = rebase -i
-  rbu = !git remote update && git rebase upstream/main
+  rbu = !git remote update upstream && git rebase upstream/main
   rh = reset HEAD
   rs = restore-file
   s = status
