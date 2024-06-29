@@ -16,6 +16,9 @@ require("lazy").setup("elentok/plugins", {
   dev = {
     path = "~/dev/nvim",
   },
+  rocks = {
+    hererocks = true,
+  },
   ui = {
     border = "rounded",
   },
