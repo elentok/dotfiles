@@ -1,9 +1,25 @@
 local create_cmd = vim.api.nvim_create_user_command
 local util = require("elentok/util")
+local ui = require("elentok.lib.ui")
 local terminal = require("elentok.lib.terminal")
 
 create_cmd("W", ":w", {})
 create_cmd("SudoWrite", ":w !sudo tee %", {})
+
+create_cmd("Delete", function()
+  if not ui.confirm("Delete " .. vim.fn.expand("%:t")) then
+    return
+  end
+
+  local filename = vim.fn.expand("%")
+  local result = vim.system({ "rm", filename }):wait()
+  if result.code ~= 0 then
+    vim.notify("Error deleting " .. filename)
+    return
+  end
+
+  vim.api.nvim_buf_delete(0, { froce = true })
+end, {})
 
 create_cmd("DotReload", function()
   for filename in pairs(package.loaded) do
