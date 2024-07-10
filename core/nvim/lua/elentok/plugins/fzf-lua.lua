@@ -9,6 +9,11 @@ return {
         flip_columns = 140,
       },
     },
+    keymap = {
+      fzf = {
+        ["ctrl-q"] = "select-all+accept",
+      },
+    },
   },
   keys = {
     {
