@@ -14,6 +14,15 @@ return {
         ["ctrl-q"] = "select-all+accept",
       },
     },
+    git = {
+      status = {
+        actions = {
+          -- I keep hitting ctrl-x by mistake and resetting
+          -- (and there's no confirmation)
+          ["ctrl-x"] = false,
+        },
+      },
+    },
   },
   keys = {
     {
