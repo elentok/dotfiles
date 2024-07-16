@@ -1,5 +1,11 @@
 alias jy 'cd $(yarn-pkgs pick || pwd)'
 
+set -gx YARN_ENABLE_COLORS false
+set -gx YARN_ENABLE_TELEMETRY false
+set -gx YARN_PROGRESS_BAR_STYLE patrick
+set -gx YARN_CACHE_FOLDER ~/.cache/yarn
+set -gx TURBO_CACHE_DIR ~/.cache/turbo
+
 function yr --description "yarn run"
     if test (count $argv) -gt 0
         yarn run $argv
