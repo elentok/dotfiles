@@ -21,7 +21,12 @@ function getTitle() {
 
 function getGithubTitle() {
   const ticketAndTitle = document.querySelector(".js-issue-title").innerText
-  const prId = window.location.pathname.split("/").reverse()[0]
+  const prMatch = window.location.pathname.match(/\/pull\/(\d+)/)
+  if (prMatch == null) {
+    return null
+  }
+
+  const prId = prMatch[1]
 
   return `saas#${prId} ${ticketAndTitle}`
 }
