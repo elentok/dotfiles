@@ -22,38 +22,22 @@ return {
   "NeogitOrg/neogit",
   dependencies = {
     "nvim-lua/plenary.nvim", -- required
-    -- "sindrets/diffview.nvim",        -- optional - Diff integration
-
-    -- "nvim-telescope/telescope.nvim",
   },
-  config = function()
-    require("neogit").setup({
-      disable_insert_on_commit = true,
-      console_timeout = 4000,
-      integration = {
-        fzf_lua = true,
-        diffview = true,
+  opts = {
+    console_timeout = 4000,
+    integration = {
+      fzf_lua = true,
+      diffview = true,
+    },
+    popup = {
+      kind = "floating",
+    },
+    mappings = {
+      status = {
+        ["o"] = "GoToFile",
       },
-      popup = {
-        kind = "floating",
-      },
-      mappings = {
-        status = {
-          ["o"] = "GoToFile",
-        },
-      },
-    })
-
-    -- jump to the top of the buffer when opening a commit message
-    vim.api.nvim_create_autocmd({ "FileType" }, {
-      pattern = { "NeogitCommitMessage" },
-      callback = function()
-        vim.defer_fn(function()
-          vim.cmd("normal gg")
-        end, 50)
-      end,
-    })
-  end,
+    },
+  },
   cmd = { "Neogit" },
   keys = {
     {
