@@ -24,7 +24,7 @@ return {
     "nvim-lua/plenary.nvim", -- required
     -- "sindrets/diffview.nvim",        -- optional - Diff integration
 
-    "nvim-telescope/telescope.nvim",
+    -- "nvim-telescope/telescope.nvim",
   },
   config = function()
     require("neogit").setup({
@@ -36,6 +36,11 @@ return {
       },
       popup = {
         kind = "floating",
+      },
+      mappings = {
+        status = {
+          ["o"] = "GoToFile",
+        },
       },
     })
 
