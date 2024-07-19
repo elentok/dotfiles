@@ -29,7 +29,13 @@ return {
       telescope = true,
       treesitter = true,
       fidget = true,
-      dropbar = true,
+      neogit = true,
+      nvim_surround = true,
+      dropbar = {
+        enabled = true,
+        color_mode = true,
+      },
+      indent_blankline = true,
     },
     custom_highlights = function(colors)
       return {
