@@ -18,6 +18,8 @@ function main() {
 
   mkdir -p ~/.config
 
+  setup-homebrew
+
   if dotf-is-mac; then
     setup-mac
   fi
@@ -33,8 +35,6 @@ function main() {
 }
 
 function setup-mac() {
-  setup-homebrew
-
   # Mac comes with an ancient bash version
   if ! has-bash5; then
     brew install bash
@@ -67,7 +67,7 @@ function setup-deno() {
 }
 
 function has-bash5() {
-  bash --version | grep 'GNU bash, version 5\.[0-9]' > /dev/null
+  bash --version | grep 'GNU bash, version 5\.[0-9]' >/dev/null
 }
 
 function install-if-missing() {
@@ -90,14 +90,16 @@ function install-if-missing() {
 }
 
 function install-homebrew() {
-  sudo xcodebuild -license accept
-  sudo xcode-select --install
+  if dotf-is-mac; then
+    sudo xcodebuild -license accept
+    sudo xcode-select --install
+  fi
 
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
 
 function has-command() {
-  type "$1" > /dev/null 2>&1
+  type "$1" >/dev/null 2>&1
 }
 
 main "$@"
