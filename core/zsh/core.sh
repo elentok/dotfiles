@@ -32,25 +32,26 @@ if [[ -t 0 && $- = *i* ]]; then
   stty -ixon
 fi
 
-# Homebrew & ulimit {{{1
+# ulimit {{{1
 if dotf-is-mac; then
   # Increase max file limit
   ulimit -n 4096
+fi
 
-  BREW_HOME=''
-  for dir in /opt/homebrew ~/.linuxbrew ~/.homebrew /usr/local; do
-    if [ -e "$dir/bin/brew" ]; then
-      export BREW_HOME=$dir
-      break
-    fi
-  done
+# Homebrew {{{1
+BREW_HOME=''
+for dir in /opt/homebrew /home/linuxbrew/linuxbrew ~/.linuxbrew ~/.homebrew /usr/local; do
+  if [ -e "$dir/bin/brew" ]; then
+    export BREW_HOME=$dir
+    break
+  fi
+done
 
-  if [ -e "$BREW_HOME" ]; then
-    if [ -e "$BREW_HOME/Homebrew" ]; then
-      export BREW_ROOT="$BREW_HOME/Homebrew"
-    else
-      export BREW_ROOT="$BREW_HOME"
-    fi
+if [ -e "$BREW_HOME" ]; then
+  if [ -e "$BREW_HOME/Homebrew" ]; then
+    export BREW_ROOT="$BREW_HOME/Homebrew"
+  else
+    export BREW_ROOT="$BREW_HOME"
   fi
 fi
 
@@ -234,7 +235,7 @@ export RIPGREP_CONFIG_PATH="$DOTF/core/ripgrep/ripgreprc"
 export SHELLCHECK_OPTS="-e SC1090,SC1091"
 
 if dotf-is-mac; then
-  JAVA_HOME="$(/usr/libexec/java_home 2> /dev/null || true)"
+  JAVA_HOME="$(/usr/libexec/java_home 2>/dev/null || true)"
   if [ -n "$JAVA_HOME" ]; then
     export JAVA_HOME
   fi
