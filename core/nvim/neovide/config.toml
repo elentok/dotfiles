@@ -1,0 +1,7 @@
+[font]
+normal = ["ComicShannsMono Nerd Font Mono"]
+size = 16
+
+[[font.italic]]
+family = "Operator Mono"
+style = "W400"
