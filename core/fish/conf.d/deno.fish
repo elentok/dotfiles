@@ -1,6 +1,6 @@
 function dt --description "deno task"
     if test (count $argv) -gt 0
-        bun run $argv
+        deno task $argv
     else
         set cmd "$(deno-tasks | fzf-tmux -p -w 80% --ansi --exit-0 | awk '{print $1}')"
         if test -n "$cmd"
