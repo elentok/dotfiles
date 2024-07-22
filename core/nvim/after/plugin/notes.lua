@@ -1,5 +1,9 @@
 local function jump_to_weekly()
   local note = vim.fn.system("weekly-note.ts")
+  if note == "" then
+    vim.notify("No weekly directory", vim.log.levels.ERROR)
+    return
+  end
   vim.cmd("edit " .. note)
   vim.cmd("e")
 end

@@ -39,7 +39,7 @@ vim.keymap.set("n", "<leader>jp", function()
   })
 end, { desc = "Jump to project" })
 
-vim.keymap.set("n", "<leader>jwt", function()
+vim.keymap.set("n", "<leader>jW", function()
   local root = vim.fn.systemlist("git-wt root")[1]
   require("fzf-lua").fzf_exec("git-wt list", {
     prompt = "Worktrees> ",

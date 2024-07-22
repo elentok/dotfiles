@@ -16,8 +16,18 @@ function main() {
 
   const week2digits = week.toString().padStart(2, "0")
   const day2digits = sunday.getDate().toString().padStart(2, "0")
+  const weeklyDir = `${root}/weekly`
+  const yearDir = `${weeklyDir}/${year}/`
   const filename =
-    `${root}/weekly/${year}/${year}-week${week2digits}-${monthLowercase}-${day2digits}.md`
+    `${yearDir}/${year}-week${week2digits}-${monthLowercase}-${day2digits}.md`
+
+  if (!existsSync(weeklyDir)) {
+    return
+  }
+
+  if (!existsSync(yearDir)) {
+    Deno.mkdirSync(yearDir, { recursive: true })
+  }
 
   if (!existsSync(filename)) {
     const title =
