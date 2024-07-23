@@ -66,7 +66,7 @@ return {
       "<Leader>jl",
       function()
         require("fzf-lua").files({
-          cmd = "git diff --name-only --relative HEAD~1 HEAD",
+          cmd = "git diff --name-only --relative upstream/main HEAD",
         })
       end,
       desc = "Jump to files in last commit",
