@@ -14,6 +14,9 @@ return {
         ["ctrl-q"] = "select-all+accept",
       },
     },
+    grep = {
+      multiline = 1,
+    },
     git = {
       status = {
         actions = {
