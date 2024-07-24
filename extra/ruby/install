@@ -24,8 +24,7 @@ install_requirements() {
 
 install_rbenv() {
   if dotf-is-mac; then
-    brew_install rbenv
-    brew_install ruby-build
+    dotf-brew rbenv ruby-build
   else
     git_clone "https://github.com/rbenv/rbenv.git" "$HOME/.rbenv" --update
     git_clone "https://github.com/rbenv/ruby-build.git" \

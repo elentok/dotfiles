@@ -34,7 +34,7 @@ store_variable() {
   (
     grep -v "export $key=" "$MACHINE_VARFILE"
     echo "export $key='$(escape_variable "$value")'"
-  ) > tmpfile
+  ) >tmpfile
   mv -f tmpfile "$MACHINE_VARFILE"
   chmod 600 "$MACHINE_VARFILE"
 
@@ -45,146 +45,15 @@ escape_variable() {
   echo -n "$1" | sed "s/'/\\\\'/g"
 }
 
-# Install Brew/Apt package {{{1
-install_package() {
-  APT=''
-  BREW=''
-
-  while extract_flag "${1:-}"; do shift; done
-
-  if dotf-is-mac; then
-    brew_install "${BREW:-$1}"
-  else
-    dotf-apt "${APT:-$1}"
-  fi
-}
-
-install_tgz() {
-  SUDO=no
-  while extract_flag "$1"; do shift; done
-
-  local url="$1"
-  local filename="$(basename "$url")"
-  mkdir -p ~/.self-build
-  cd ~/.self-build
-  wget "$1"
-  tar xzf "$filename"
-
-  local root_dir="$(tar tzf "$filename" | head -1)"
-  cd "$root_dir"
-
-  if [ -x "configure" ]; then
-    ./configure
-  fi
-
-  if [ "$SUDO" == 'yes' ]; then
-    sudo make
-    sudo make install
-  else
-    mkdir -p $HOME/.local
-    make
-    make install --prefix=$HOME/.local
-  fi
-}
-
-# Gems {{{1
-
-gem_install() {
-  for gem in $*; do
-    gem_install_single $gem
-  done
-}
-
-gem_install_single() {
-  dotf-bullet "Installing gem ${1}... [sudo] "
-  if [ "$(gem_cache | grep \"^$1\b\")" != "" ]; then
-    dotf-info "already installed"
-  else
-    sudo /usr/bin/gem install $*
-    rm -f $TMP/gem_cache
-  fi
-}
-
-rm -f $TMP/gem_cache
-
-gem_cache() {
-  if [ ! -e $TMP/gem_cache ]; then
-    /usr/bin/gem list > $TMP/gem_cache
-  fi
-  cat $TMP/gem_cache
-}
-
-# Homebrew {{{1
-brew_install() {
-  dotf-bullet "Installing ${1}... "
-
-  #if [ "`brew ls -1 | grep \"^$1\$\"`" != "" ]; then
-  if has_brew_package "$1"; then
-    dotf-info "already installed"
-  else
-    brew install $*
-  fi
-}
-
-brew_install_url() {
-  name=$1
-  shift
-
-  dotf-bullet "Installing ${name}... "
-  if has_brew_package "$name"; then
-    dotf-info "already installed"
-  else
-    brew install $*
-  fi
-}
-
-has_brew_package() {
-  [ "$(brew ls -1 | grep \"^$1$\")" != "" ]
-}
-
-brew_tap() {
-  repo=$1
-  dotf-bullet "Tapping brew repository ${repo}... "
-  if has_brew_tap "$repo"; then
-    dotf-info "already installed"
-  else
-    brew tap $*
-  fi
-}
-
-has_brew_tap() {
-  brew_list_taps | grep "^$1$" > /dev/null
-}
-
-brew_list_taps() {
-  cd $BREW_ROOT/Library/Taps && /bin/ls -1d */*
-}
-
-# Homebrew Cask {{{1
-
-brew_cask_install() {
-  dotf-bullet "Installing ${1}... "
-
-  if has_brew_cask_package "$1"; then
-    dotf-info "already installed"
-  else
-    brew cask install $*
-  fi
-}
-
-has_brew_cask_package() {
-  [ "$(brew cask list | grep \"^$1$\")" != "" ]
-}
-
 # Git {{{1
 git_clone() {
   origin=$1
   target=$2
   option=${3:-}
   dotf-bullet "Cloning $origin => ${target}..."
-  if [ -d $target ]; then
-    if [ -d $target/.git ]; then
-      current_origin=$(cd $target && git_get_origin)
+  if [ -d "$target" ]; then
+    if [ -d "$target/.git" ]; then
+      current_origin=$(cd "$target" && git_get_origin)
       if [ "$current_origin" == "$origin" ]; then
 
         if [ "$option" == "--update" ]; then
@@ -206,37 +75,6 @@ git_get_origin() {
   git remote -v | grep fetch | awk '{print $2}'
 }
 
-# Go Get {{{1
-go_get() {
-  pkg="$1"
-  dotf-bullet "Installing Go package '$pkg'..."
-  if [ -e "$GOPATH/src/$pkg" ]; then
-    dotf-info " already installed"
-  else
-    dotf-info ""
-    go get -u "$pkg"
-  fi
-}
-
-# Apt: Add Repo {{{1
-apt-fast-add-repo() {
-
-  dotf-bullet "Adding repository ${1}..."
-  sources="/etc/apt/sources.list /etc/apt/sources.list.d/*.list"
-  if [ "$(grep "$1" $sources)" != "" ]; then
-    dotf-info " already installed"
-  else
-    # required for add-apt-repository
-    dotf-bullet "[Add PPA]: Installing prerequisits..."
-    dotf-apt software-properties-common apt-transport-https gnupg wget
-    dotf-bullet "[Add PPA]: Calling add-apt-repository ..."
-    sudo add-apt-repository -y "${1}"
-    dotf-bullet "[Add PPA]: Calling apt-get update..."
-    sudo apt-get update
-    dotf-bullet "[Add PPA]: Done."
-  fi
-}
-
 # Deb packages {{{1
 install_deb() {
   local name="$1"
@@ -244,7 +82,7 @@ install_deb() {
 
   dotf-bullet "Installing ${name}..."
 
-  if apt_cache | grep "^${name}$" > /dev/null; then
+  if apt_cache | grep "^${name}$" >/dev/null; then
     dotf-info " already installed"
   else
     wget "$url" -O $TMP/${name}.deb
@@ -294,7 +132,7 @@ should_sudo_copy() {
     return 0
   fi
 
-  if diff "$1" "$2" > /dev/null; then
+  if diff "$1" "$2" >/dev/null; then
     return 1
   fi
 
@@ -331,7 +169,7 @@ copy_to_dir() {
 
 # user {{{1
 user_exists() {
-  id "$1" > /dev/null 2>&1
+  id "$1" >/dev/null 2>&1
 }
 
 user_has_group() {
@@ -341,7 +179,7 @@ user_has_group() {
     user=$(whoami)
   fi
 
-  groups $user | cut -d: -f2 | grep "\b$group\b" > /dev/null
+  groups $user | cut -d: -f2 | grep "\b$group\b" >/dev/null
 }
 
 add_user_to_group() {
@@ -363,7 +201,7 @@ add_user_to_group() {
 
 # group {{{1
 group_exists() {
-  cat /etc/group | grep "^$1:" > /dev/null 2>&1
+  cat /etc/group | grep "^$1:" >/dev/null 2>&1
 }
 
 create_group() {

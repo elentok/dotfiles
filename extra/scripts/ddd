@@ -8,7 +8,6 @@
 source $DOTF/framework.sh
 
 main() {
-  check_pv
   if [ $# -lt 2 ]; then
     usage "$0"
   else
@@ -17,12 +16,6 @@ main() {
     echo "          to $2"
     echo
     sudo sh -c "dd if='$1' | pv | dd of='$2'"
-  fi
-}
-
-check_pv() {
-  if ! dotf-has-command pv; then
-    install_package --apt=pv --brew=pv --pacman=pv
   fi
 }
 

@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework.sh
+source "$DOTF/framework.sh"
 
 main() {
-  make_dir $HOME/go
+  make_dir "$HOME/go"
   source $DOTF/framework.sh
 
-  brew_install go
+  dotf-brew go
 }
 
 main "$@"

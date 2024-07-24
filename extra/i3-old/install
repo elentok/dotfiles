@@ -12,7 +12,7 @@ main() {
   install_session_file
   install_utils
 
-  install_package compton
+  dotf-apt compton
 
   disable_dunst_ctrl_grave
 
@@ -43,9 +43,9 @@ install_session_file() {
   local targetfile=/usr/share/xsessions/i3-session.desktop
 
   rm -f $tmpfile
-  sed "s#{HOME}#$HOME#" $I3/i3-session.desktop > $tmpfile
+  sed "s#{HOME}#$HOME#" $I3/i3-session.desktop >$tmpfile
 
-  if diff $tmpfile $targetfile > /dev/null; then
+  if diff $tmpfile $targetfile >/dev/null; then
     dotf-info 'already installed'
   else
     sudo mv -f $tmpfile $targetfile
@@ -69,7 +69,7 @@ disable_dunst_ctrl_grave() {
 
   mkdir -p ~/.config/dunst
 
-  cat /etc/xdg/dunst/dunstrc | sed 's/history = ctrl+grave/# &/' > ~/.config/dunst/dunstrc
+  cat /etc/xdg/dunst/dunstrc | sed 's/history = ctrl+grave/# &/' >~/.config/dunst/dunstrc
 }
 
 main "$@"

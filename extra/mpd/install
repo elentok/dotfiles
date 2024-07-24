@@ -27,9 +27,9 @@ setup_vars() {
 }
 
 install_on_mac() {
-  brew_install mpd
-  brew_install mpc
-  brew_install ncmpcpp
+  dotf-brew mpd
+  dotf-brew mpc
+  dotf-brew ncmpcpp
 }
 
 install_on_linux() {
@@ -62,7 +62,7 @@ build_config() {
   if [ -e ~/.mpd/mpd.conf ]; then
     dotf-backup ~/.mpd/mpd.conf
   fi
-  erb $DOTF/extra/mpd/mpd.conf.erb > ~/.mpd/mpd.conf
+  erb $DOTF/extra/mpd/mpd.conf.erb >~/.mpd/mpd.conf
   show_result
 }
 
