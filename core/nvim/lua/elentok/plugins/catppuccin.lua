@@ -31,6 +31,7 @@ return {
       fidget = true,
       neogit = true,
       nvim_surround = true,
+      grug_far = true,
       dropbar = {
         enabled = true,
         color_mode = true,
