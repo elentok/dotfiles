@@ -8,8 +8,16 @@ function fish_user_key_bindings
     # The argument specifies the initial mode (insert, "default" or visual).
     fish_vi_key_bindings --no-erase insert
 
+    bind -M visual -m default y fish_copy_and_cancel
+    bind p fish_clipboard_paste
+
     bind -M insert -m default jk backward-char force-repaint
     # bind -M insert jk "if commandline -P; commandline -f cancel; else; set fish_bind_mode default; commandline -f backward-char force-repaint; end"
+end
+
+function fish_copy_and_cancel
+    fish_clipboard_copy
+    commandline -f end-selection
 end
 
 fzf --fish | source
