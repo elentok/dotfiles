@@ -29,8 +29,8 @@ main() {
   dotf-bullet "Installing pip packages..."
   dotf-pkgs install pip
 
-  dotf-header h2 "[dotf-setup] Installing Github packages..."
-  github-pkgs install
+  # dotf-header h2 "[dotf-setup] Installing Github packages..."
+  # github-pkgs install
 
   dotf-component nodejs
   dotf-pkgs install npm
