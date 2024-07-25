@@ -11,7 +11,7 @@ function main() {
   local cmd="${1:-}"
   shift || true
 
-  if type "git-wt-${cmd}" > /dev/null 2>&1; then
+  if type "git-wt-${cmd}" >/dev/null 2>&1; then
     "git-wt-${cmd}" "$@"
   else
     usage "$0"
@@ -37,7 +37,7 @@ function git-wt-list() {
 }
 
 function fzf-pick-worktree() {
-  fzf-tmux -p 70%,50% \
+  fzf --tmux=95%,80% \
     --ansi \
     --prompt='Pick worktree: ' \
     --preview-window=right:70% \
