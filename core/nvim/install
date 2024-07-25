@@ -34,7 +34,7 @@ install-symlinks() {
   dotf-symlink "$DOTF/core/nvim/yamllint-config" ~/.config/yamllint/config
 }
 
-PLUGINS=(togglr scriptify format-on-save open-link encrypt)
+PLUGINS=(togglr scriptify open-link encrypt)
 
 function setup-dev-symlinks() {
   mkdir -p ~/dev/nvim
