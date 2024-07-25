@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+dotf-brew-tap static-web-server/static-web-server
+dotf-brew static-web-server-bin

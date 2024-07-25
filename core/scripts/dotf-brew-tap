@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+#
+# Usage:
+#
+#   dotf-brew-tap <tap>...
+#
+
+set -euo pipefail
+source "$DOTF/framework.sh"
+
+main() {
+  if [ $# -eq 0 ]; then
+    usage "$0"
+    exit 1
+  fi
+
+  dotf-header h2 "Adding brew taps... "
+
+  for tap in "$@"; do
+    dotf-bullet "$tap... "
+    if is-tapped "$tap"; then
+      dotf-info "alrady installed."
+    else
+      dotf-info "adding..."
+      brew tap "$tap"
+    fi
+  done
+
+  dotf-info "done."
+}
+
+function is-tapped() {
+  local tap="$1"
+  brew tap | grep "^$tap$" >/dev/null 2>&1
+}
+
+main "$@"
