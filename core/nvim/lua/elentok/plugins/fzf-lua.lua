@@ -54,6 +54,8 @@ return {
     { "<leader>jj", "<cmd>FzfLua jumps<cr>", desc = "Jump to jumplist" },
     { "<leader>jh", "<cmd>FzfLua helptags<cr>", desc = "Jump to help" },
     { "<leader>jk", "<cmd>FzfLua keymaps<cr>", desc = "Jump to keymap" },
+    { "<leader>gh", "<cmd>FzfLua git_bcommits<cr>", desc = "Jump to buffer commit history" },
+    { "<leader>ca", "<cmd>FzfLua lsp_code_actions<cr>", desc = "Code actions" },
     { "``", "<cmd>FzfLua resume<cr>", desc = "Resume last FzfLua search" },
     {
       "<Leader>jm",

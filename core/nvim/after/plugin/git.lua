@@ -70,16 +70,16 @@ vim.keymap.set("n", "<leader>gpl", "<cmd>Gpl<cr>", { desc = "Git pull" })
 vim.keymap.set("n", "<leader>gpm", "<cmd>GG psme<cr>", { desc = "Git push me" })
 vim.keymap.set("n", "<leader>gs", "<cmd>Gsync<cr>", { desc = "Git autosync" })
 
-local function git_history()
-  local filename = vim.fn.expand("%")
-  if filename == "" or filename:match("^fugitive:") then
-    term.run({ "tig" })
-  else
-    term.run({ "tig", "--follow", filename })
-  end
-end
+-- local function git_history()
+--   local filename = vim.fn.expand("%")
+--   if filename == "" or filename:match("^fugitive:") then
+--     term.run({ "tig" })
+--   else
+--     term.run({ "tig", "--follow", filename })
+--   end
+-- end
 
-vim.keymap.set("n", "<leader>gh", git_history, { desc = "Git file history" })
+-- vim.keymap.set("n", "<leader>gh", git_history, { desc = "Git file history" })
 vim.keymap.set("n", "<leader>gt", function()
   term.run({ "tig" })
 end, { desc = "Tig" })
