@@ -56,6 +56,7 @@ return {
     { "<leader>jk", "<cmd>FzfLua keymaps<cr>", desc = "Jump to keymap" },
     { "<leader>gh", "<cmd>FzfLua git_bcommits<cr>", desc = "Jump to buffer commit history" },
     { "<leader>ca", "<cmd>FzfLua lsp_code_actions<cr>", desc = "Code actions" },
+    { "qw", "<cmd>FzfLua lines<cr>", desc = "Search buffer lines" },
     { "``", "<cmd>FzfLua resume<cr>", desc = "Resume last FzfLua search" },
     {
       "<Leader>jm",
