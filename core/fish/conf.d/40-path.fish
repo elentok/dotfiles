@@ -1,6 +1,7 @@
 fish_add_path "$HOME/.local/bin"
 fish_add_path "$HOME/.apps/bin"
 fish_add_path "$HOME/.fzf/bin"
+fish_add_path "$HOME/.cargo/bin"
 fish_add_path "$HOME/dev/qmkmd/bin"
 fish_add_path "$HOME/dev/github-pkgs/bin"
 fish_add_path "$HOME/dev/git-helpers/bin"
