@@ -1,0 +1,10 @@
+"use_nerdfont" = false
+"notify" = true
+
+[keybindings]
+
+# "Shift+q" = "quit"
+"q" = "noop"
+" " = "playpause"
+"p" = "playpause"
+"r" = "reload"

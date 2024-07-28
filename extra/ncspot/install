@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTF/framework.sh"
+
+dotf-brew ncspot
+dotf-symlink "$DOTF/extra/ncspot/config.toml" "$HOME/.config/ncspot/config.toml"
