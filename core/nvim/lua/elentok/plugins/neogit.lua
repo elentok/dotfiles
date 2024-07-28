@@ -25,7 +25,7 @@ return {
   },
   opts = {
     console_timeout = 4000,
-    disable_insert_on_commit = "true",
+    disable_insert_on_commit = true,
     integration = {
       fzf_lua = true,
       diffview = true,
