@@ -56,6 +56,9 @@ return {
     { "<leader>jk", "<cmd>FzfLua keymaps<cr>", desc = "Jump to keymap" },
     { "<leader>gh", "<cmd>FzfLua git_bcommits<cr>", desc = "Jump to buffer commit history" },
     { "<leader>ca", "<cmd>FzfLua lsp_code_actions<cr>", desc = "Code actions" },
+    { "<leader>cl", "<cmd>FzfLua complete_line<cr>", desc = "Complete line" },
+    { "<c-f>", "<cmd>FzfLua complete_line<cr>", mode = "i", desc = "Complete line" },
+    { "<c-x><c-f>", "<cmd>FzfLua complete_path<cr>", mode = "i", desc = "Complete path" },
     { "qw", "<cmd>FzfLua lines<cr>", desc = "Search buffer lines" },
     { "``", "<cmd>FzfLua resume<cr>", desc = "Resume last FzfLua search" },
     {

@@ -95,9 +95,9 @@ vim.keymap.set("n", "<leader>st", ":%!todo-sort<cr>", { desc = "Sort (todo)" })
 vim.keymap.set("n", "<leader>ya", ":%y+<cr>", { desc = "Yank entires file" })
 vim.keymap.set("n", "<leader>yf", ':let @+ = expand("%")<cr>', { desc = "Yank current filename" })
 
-vim.keymap.set("n", "<leader>cl", function()
-  term.run("FORCE_COLOR=1 mycal | less", { w = 0.5 })
-end, { desc = "Calendar" })
+-- vim.keymap.set("n", "<leader>cl", function()
+--   term.run("FORCE_COLOR=1 mycal.ts | less", { w = 0.5 })
+-- end, { desc = "Calendar" })
 
 -- vim.keymap.set("n", "<backspace>", "zc")
 
