@@ -40,7 +40,7 @@ fi
 
 # Homebrew {{{1
 BREW_HOME=''
-for dir in /opt/homebrew /home/linuxbrew/linuxbrew ~/.linuxbrew ~/.homebrew /usr/local; do
+for dir in /opt/homebrew /home/linuxbrew/.linuxbrew ~/.linuxbrew ~/.homebrew /usr/local; do
   if [ -e "$dir/bin/brew" ]; then
     export BREW_HOME=$dir
     break
@@ -129,10 +129,13 @@ function dotf-gen-path() {
     echo "$MAIN_GOPATH/bin"
   fi
 
+  if [ -n "$BREW_HOME" ]; then
+    echo "$BREW_HOME/bin"
+    echo "$BREW_HOME/sbin"
+  fi
+
   if dotf-is-mac; then
     if [ -n "$BREW_HOME" ]; then
-      echo "$BREW_HOME/bin"
-      echo "$BREW_HOME/sbin"
       echo "$BREW_HOME/opt/coreutils/libexec/gnubin"
     fi
 
