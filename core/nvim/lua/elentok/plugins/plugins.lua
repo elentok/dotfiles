@@ -21,7 +21,6 @@ return {
   "numToStr/FTerm.nvim",
   "nvim-lua/plenary.nvim",
   "AndrewRadev/splitjoin.vim",
-  "sotte/presenting.vim", -- Presentation tool
   { "nvim-tree/nvim-web-devicons", lazy = true },
   "nvim-lualine/lualine.nvim",
 
