@@ -1,5 +1,6 @@
 local function has_eslint_module()
-  return vim.fn.finddir("node_modules/eslint", ";.") ~= ""
+  return vim.fn.findfile(".eslintrc.js", ";.") ~= ""
+    or vim.fn.finddir("node_modules/eslint", ";.") ~= ""
 end
 
 return {
