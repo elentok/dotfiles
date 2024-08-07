@@ -1,6 +1,6 @@
 function jn --description 'jump to note'
     jnn
-    nvim -c ObsidianQuickSwitch
+    nvim -c FzfLuaNote
 end
 
 function jnn --description 'jump to notes repo'
@@ -12,7 +12,7 @@ function jnn --description 'jump to notes repo'
         cd ~/notes
     else
         cd ~/notes
-        set repo "$(command ls -1 | fzf-tmux -p --ansi --exit-0)"
+        set repo "$(command ls -1 | fzf --tmux --ansi --exit-0 --select-1)"
         cd $repo
     end
 end

@@ -1,6 +1,10 @@
-vim.keymap.set("n", "<leader>jn", function()
+local function jump_to_note()
   require("fzf-lua").grep({ search = "^#", no_esc = true, cwd = "~/notes", rg_opts = "-tmd" })
-end, { desc = "Jump to note" })
+end
+
+vim.keymap.set("n", "<leader>jn", jump_to_note, { desc = "Jump to note" })
+
+vim.api.nvim_create_user_command("FzfLuaNote", jump_to_note, {})
 
 vim.keymap.set("n", "<leader>jc", function()
   require("fzf-lua").files({
