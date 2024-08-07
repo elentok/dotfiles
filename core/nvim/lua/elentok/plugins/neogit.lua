@@ -7,14 +7,14 @@ local function openNeogit()
   if bufname == "" then
     neogit.open({ kind = "replace", cwd = cwd })
   else
-    local w = vim.api.nvim_win_get_width(0)
-    local h = vim.api.nvim_win_get_height(0)
-    local kind = "split"
+    -- local w = vim.api.nvim_win_get_width(0)
+    -- local h = vim.api.nvim_win_get_height(0)
+    -- local kind = "split"
 
-    if w > h * 3 then
-      kind = "vsplit"
-    end
-    neogit.open({ kind = kind, cwd = cwd })
+    -- if w > h * 3 then
+    --   kind = "vsplit"
+    -- end
+    neogit.open({ kind = "tab", cwd = cwd })
   end
 end
 
