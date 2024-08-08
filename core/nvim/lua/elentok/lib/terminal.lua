@@ -1,6 +1,5 @@
 local term = require("toggleterm.terminal")
 local Terminal = term.Terminal
-local mode = term.mode
 
 local M = {}
 
@@ -63,11 +62,6 @@ function M.run(cmd, opts)
     close_on_exit = not opts.wait,
     on_exit = opts.on_exit,
     on_close = opts.on_close,
-    on_open = function()
-      vim.schedule(function()
-        vim.cmd("startinsert!")
-      end)
-    end,
     hidden = false,
     float_opts = {
       width = opts.w,

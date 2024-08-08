@@ -1,5 +1,8 @@
-local function fixup(commit_lines)
-  local commit = commit_lines[1]
+local function fixup(selected)
+  if not selected[1] then
+    return
+  end
+  local commit = selected[1]
   local hash = vim.split(commit, " ")[1]
 
   local ui = require("elentok.lib.ui")
@@ -34,7 +37,11 @@ return {
     git = {
       bcommits = {
         actions = {
-          ["ctrl-f"] = fixup,
+          ["ctrl-f"] = function(selected)
+            vim.defer_fn(function()
+              fixup(selected)
+            end, 100)
+          end,
         },
       },
       status = {
