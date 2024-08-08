@@ -1,4 +1,6 @@
-local FTerm = require("FTerm")
+local term = require("toggleterm.terminal")
+local Terminal = term.Terminal
+local mode = term.mode
 
 local M = {}
 
@@ -24,33 +26,57 @@ local function cmd_to_string(cmd)
   error("cmd_to_string expected string or string[]")
 end
 
+---@class TermRunOptions
+---@field w? number
+---@field h? number
+---@field cwd? string
+---@field echo_cmd? boolean
+---@field wait? boolean
+---@field on_exit? fun(t: Terminal, job: number, exit_code: number, name: string)
+---@field on_close? fun(t: Terminal)
+
 ---@param cmd string|string[]
----@param opts? { w?: number, h?: number, cwd?: string, echo_cmd?: boolean, wait?: boolean }
+---@param opts? TermRunOptions
 function M.run(cmd, opts)
   opts = opts or {}
+
+  if opts.wait == nil then
+    opts.wait = true
+  end
+
   cmd = cmd_to_string(cmd)
 
   if opts.echo_cmd then
     cmd = string.format("echo '> %s' && %s", cmd, cmd)
   end
 
-  if opts.wait then
-    cmd = string.format("%s; echo '\nPress ENTER to close...'; read", cmd)
-  end
+  -- if opts.wait then
+  --   cmd = string.format("%s; echo '\nPress ENTER to close...'; read", cmd)
+  -- end
 
   if opts.cwd ~= nil and #opts.cwd > 0 then
     cmd = string.format("echo '> cd %s' && cd '%s' && %s", opts.cwd, opts.cwd, cmd)
   end
 
-  local t = FTerm:new({
+  local t = Terminal:new({
     cmd = cmd,
-    dimensions = {
-      height = opts.h or 0.9,
-      width = opts.w or 0.9,
+    close_on_exit = not opts.wait,
+    on_exit = opts.on_exit,
+    on_close = opts.on_close,
+    on_open = function()
+      vim.schedule(function()
+        vim.cmd("startinsert!")
+      end)
+    end,
+    hidden = false,
+    float_opts = {
+      width = opts.w,
+      height = opts.h,
     },
   })
 
   t:open()
+  return t
 end
 
 return M

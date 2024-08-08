@@ -1,3 +1,14 @@
+local function fixup(commit_lines)
+  local commit = commit_lines[1]
+  local hash = vim.split(commit, " ")[1]
+
+  local ui = require("elentok.lib.ui")
+  local git = require("elentok.lib.git")
+  if ui.confirm("Fixup " .. commit .. "?") then
+    git.run({ "commit", "--fixup", hash })
+  end
+end
+
 return {
   "ibhagwan/fzf-lua",
   opts = {
@@ -21,6 +32,11 @@ return {
       multiline = 1,
     },
     git = {
+      bcommits = {
+        actions = {
+          ["ctrl-f"] = fixup,
+        },
+      },
       status = {
         actions = {
           -- I keep hitting ctrl-x by mistake and resetting

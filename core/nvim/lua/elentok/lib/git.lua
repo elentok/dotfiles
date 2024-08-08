@@ -86,6 +86,8 @@ local function identify_workdir()
   return M.find_buffer_git_root()
 end
 
+---@param args string[]
+---@param opts? TermRunOptions
 function M.run(args, opts)
   assert(#args > 0, "Expected at least 1 argument to git.run()")
   local cwd = identify_workdir()
