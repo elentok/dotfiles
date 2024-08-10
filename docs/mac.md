@@ -1,34 +1,31 @@
-Mac OSX Tips
-============
+# Mac OSX Tips
 
-Keyboard
---------
+## Keyboard
 
-* Use confirmation dialogs with the keyboard:
-  
-  * enter *Keyboard Settings -> Keyboard Shortcuts*
-  * select *All controls*
-  
-* Control/Escape
+- Use confirmation dialogs with the keyboard:
 
-  * In *System Preferences -> Keyboard -> Modifier Keys* set your *Caps Lock* to an extra *Control*
-  
-  * Using [KeyRemap4MacBook](http://pqrs.org/macosx/keyremap4macbook/):
-    
-    * Enable this:
-    
-      Control\_L to Control\_L
-      (+ when you type Control\_L only, send Escape)
+  - enter _Keyboard Settings -> Keyboard Shortcuts_
+  - select _All controls_
 
-    * Now the Capslock key on the keyboard does the following:
-    
-      * If held down and pressed with another key, it acts like Control.
-      * If pressed and released on its own, it acts like Escape.
-  
-    * Under "Key Repeat" set:
-    
-      * *[Key Overlaid Modifier] Timeout* = 300ms
-      * *[Key Repeat] Initial Wait* = 300ms
-      * *[Key Repeat] Wait* = 23ms
+- Control/Escape
 
-    * This tip was taken from [Steve losh](http://stevelosh.com/blog/2012/10/a-modern-space-cadet/#controlescape)
+  - In _System Preferences -> Keyboard -> Modifier Keys_ set your _Caps Lock_ to an extra _Control_
+  - Using [KeyRemap4MacBook](http://pqrs.org/macosx/keyremap4macbook/):
+
+    - Enable this:
+
+      Control_L to Control_L (+ when you type Control_L only, send Escape)
+
+    - Now the Capslock key on the keyboard does the following:
+
+      - If held down and pressed with another key, it acts like Control.
+      - If pressed and released on its own, it acts like Escape.
+
+    - Under "Key Repeat" set:
+
+      - _[Key Overlaid Modifier] Timeout_ = 300ms
+      - _[Key Repeat] Initial Wait_ = 300ms
+      - _[Key Repeat] Wait_ = 23ms
+
+    - This tip was taken from
+      [Steve losh](http://stevelosh.com/blog/2012/10/a-modern-space-cadet/#controlescape)
