@@ -59,7 +59,8 @@ return {
         sync_install = false,
         auto_install = false,
         ensure_installed = ensure_installed,
-        highlight = { enable = true, disable = { "markdown", "markdown_inline" } },
+        -- highlight = { enable = true, disable = { "markdown", "markdown_inline" } },
+        highlight = { enable = true },
         autopairs = { enable = true },
         incremental_selection = {
           enable = true,
