@@ -93,20 +93,20 @@ local function add_highlight(status)
   vim.api.nvim_set_hl(0, group, status.hl)
 end
 
----@param status Status
-local function add_conceal(status)
-  -- local text = status.text or status.name
-  -- vim.fn.matchadd("Conceal", "\\[" .. text .. "\\]", 20, -1, { conceal = status.conceal })
-end
+-- ---@param status Status
+-- local function add_conceal(status)
+--   -- local text = status.text or status.name
+--   -- vim.fn.matchadd("Conceal", "\\[" .. text .. "\\]", 20, -1, { conceal = status.conceal })
+-- end
 
 local function setup_buffer()
   for _, status in ipairs(config.statuses) do
     if status.hl ~= nil then
       add_highlight(status)
     end
-    if status.conceal ~= nil then
-      add_conceal(status)
-    end
+    -- if status.conceal ~= nil then
+    --   add_conceal(status)
+    -- end
   end
 
   vim.fn.matchadd("TodoContext", "@[^ ]*")
@@ -120,10 +120,10 @@ end
 
 local group_id = vim.api.nvim_create_augroup("Elentok_Markdown", {})
 
--- vim.api.nvim_create_autocmd(
---   { "BufRead", "WinNew" },
---   { pattern = "*.md", group = group_id, callback = setup_buffer }
--- )
+vim.api.nvim_create_autocmd(
+  { "BufRead", "WinNew" },
+  { pattern = "*.md", group = group_id, callback = setup_buffer }
+)
 
 vim.keymap.set("n", "<leader>jt", function()
   require("telescope.builtin").grep_string({ search = "[ ]", search_dirs = { vim.fn.expand("%") } })

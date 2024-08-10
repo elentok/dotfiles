@@ -58,7 +58,10 @@ return {
 
     require("obsidian").setup({
       workspaces = workspaces,
-      ui = ui_config,
+      -- ui = ui_config,
+      ui = {
+        enable = false,
+      },
       mappings = {
         ["gf"] = mappings.gf_passthrough(),
         ["<leader>ch"] = mappings.toggle_checkbox(),

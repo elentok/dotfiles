@@ -37,6 +37,7 @@ return {
         color_mode = true,
       },
       indent_blankline = true,
+      render_markdown = true,
     },
     custom_highlights = function(colors)
       return {
