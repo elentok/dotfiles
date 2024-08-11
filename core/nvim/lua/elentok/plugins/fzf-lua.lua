@@ -12,6 +12,12 @@ local function fixup(selected)
   end
 end
 
+local function deferred_fixup(selected)
+  vim.defer_fn(function()
+    fixup(selected)
+  end, 100)
+end
+
 return {
   "ibhagwan/fzf-lua",
   opts = {
@@ -35,13 +41,14 @@ return {
       multiline = 1,
     },
     git = {
+      commits = {
+        actions = {
+          ["ctrl-f"] = deferred_fixup,
+        },
+      },
       bcommits = {
         actions = {
-          ["ctrl-f"] = function(selected)
-            vim.defer_fn(function()
-              fixup(selected)
-            end, 100)
-          end,
+          ["ctrl-f"] = deferred_fixup,
         },
       },
       status = {
@@ -81,6 +88,7 @@ return {
     { "<leader>jh", "<cmd>FzfLua helptags<cr>", desc = "Jump to help" },
     { "<leader>jk", "<cmd>FzfLua keymaps<cr>", desc = "Jump to keymap" },
     { "<leader>gh", "<cmd>FzfLua git_bcommits<cr>", desc = "Jump to buffer commit history" },
+    { "<leader>gl", "<cmd>FzfLua git_commits<cr>", desc = "Jump to commit history" },
     { "<leader>ca", "<cmd>FzfLua lsp_code_actions<cr>", desc = "Code actions" },
     { "<leader>cl", "<cmd>FzfLua complete_line<cr>", desc = "Complete line" },
     { "<c-f>", "<cmd>FzfLua complete_line<cr>", mode = "i", desc = "Complete line" },
