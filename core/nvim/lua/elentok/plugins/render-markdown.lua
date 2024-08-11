@@ -33,6 +33,10 @@ return {
           rendered = "◧",
           highlight = "RenderMarkdownH5",
         },
+        info = {
+          raw = "[n]",
+          rendered = "󰎚",
+        },
       },
     },
     -- Fix a bug with the callouts where it shows the "]" after the rendered
