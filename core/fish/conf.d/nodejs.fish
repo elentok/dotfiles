@@ -1,4 +1,5 @@
 alias jy 'cd $(yarn-pkgs pick || pwd)'
+alias yrb 'yarn && yarn build'
 
 set -gx YARN_ENABLE_COLORS false
 set -gx YARN_ENABLE_TELEMETRY false
