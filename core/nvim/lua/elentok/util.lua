@@ -135,18 +135,6 @@ function M.shell(cmd, opts)
   end
 end
 
-local function extract_fugitive_path(path)
-  if string.match(path, "^fugitive://") then
-    path = string.gsub(path, "^fugitive://", "")
-
-    if vim.fn.fnamemodify(path, ":t") == ".git" then
-      path = vim.fn.fnamemodify(path, ":h")
-    end
-  end
-
-  return path
-end
-
 function M.tabpage_get_buf_win_number(tabnr, bufnr)
   for _, winhandle in ipairs(api.nvim_tabpage_list_wins(tabnr)) do
     -- winnr = api.nvim_win_get_number(winhandle)
