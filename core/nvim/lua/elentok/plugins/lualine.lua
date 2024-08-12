@@ -1,4 +1,4 @@
-local shortener = require("elentok/lib/shortener")
+-- local shortener = require("elentok/lib/shortener")
 
 return {
   "nvim-lualine/lualine.nvim",
@@ -22,22 +22,24 @@ return {
       lualine_y = { "branch" },
       lualine_z = { "location" },
     },
-    -- winbar = {
-    --   lualine_a = {},
-    --   lualine_b = {},
-    --   lualine_c = {},
-    --   lualine_x = {},
-    --   lualine_y = { { shortener.dir, icon = "" } },
-    --   lualine_z = { "filename" },
-    -- },
-    -- inactive_winbar = {
-    --   lualine_a = {},
-    --   lualine_b = {},
-    --   lualine_c = {},
-    --   lualine_x = {},
-    --   lualine_y = { { shortener.dir, icon = "" } },
-    --   lualine_z = { "filename" },
-    -- },
+    winbar = {
+      lualine_a = {},
+      lualine_b = {},
+      lualine_c = {},
+      lualine_x = {},
+      lualine_y = {},
+      -- lualine_y = { { shortener.dir, icon = "" } },
+      lualine_z = { "filename" },
+    },
+    inactive_winbar = {
+      lualine_a = {},
+      lualine_b = {},
+      lualine_c = {},
+      lualine_x = {},
+      lualine_y = {},
+      -- lualine_y = { { shortener.dir, icon = "" } },
+      lualine_z = { "filename" },
+    },
   },
   init = function()
     vim.o.laststatus = 3

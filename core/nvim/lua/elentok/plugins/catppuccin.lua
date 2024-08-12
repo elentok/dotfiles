@@ -14,9 +14,9 @@ return {
     },
     term_colors = true,
     integrations = {
-      barbecue = {
-        alt_background = true,
-      },
+      -- barbecue = {
+      --   alt_background = true,
+      -- },
       cmp = true,
       gitsigns = true,
       flash = true,
@@ -38,6 +38,7 @@ return {
       },
       indent_blankline = true,
       render_markdown = true,
+      native_lsp = true,
     },
     custom_highlights = function(colors)
       return {
