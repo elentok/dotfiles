@@ -3,7 +3,7 @@ return {
   cmd = { "BlameToggle" },
   keys = {
     {
-      "<leader>gbt",
+      "<leader>tb",
       "<cmd>BlameToggle<cr>",
       mode = "n",
       desc = "Toggle git blame",

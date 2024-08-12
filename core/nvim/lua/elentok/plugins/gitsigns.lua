@@ -16,7 +16,7 @@ return {
 
     { "<leader>gm", ":Gitsigns<cr>", desc = "Git signs menu" },
     {
-      "<leader>gbb",
+      "<leader>gb",
       function()
         require("gitsigns").blame_line({ full = true })
       end,

@@ -26,9 +26,6 @@ end
 vim.keymap.set("n", "<leader>ga", "<cmd>Gap<cr>", { desc = "Git add (patch)" })
 vim.keymap.set("n", "<leader>gw", "<cmd>w<cr>!git add %<cr>", { desc = "Write + Stage" })
 vim.keymap.set("n", "<leader>gr", git_reset_file_changes, { desc = "Reset git changes" })
--- vim.keymap.set("n", "<leader>gg", "<cmd>G<cr><c-w>H", { desc = "Git status" })
--- vim.keymap.set("n", "<leader>gba", "<cmd>G blame<cr>", { desc = "Git blame" })
--- vim.keymap.set("n", "<leader>gl", "<cmd>G log HEAD...master<cr>", { desc = "Git log" })
 
 vim.keymap.set("n", "<leader>gps", "<cmd>Gps<cr>", { desc = "Git push" })
 vim.keymap.set("n", "<leader>gpl", "<cmd>Gpl<cr>", { desc = "Git pull" })
