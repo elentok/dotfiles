@@ -1,14 +1,24 @@
-local function fixup(selected)
+---@param selected string[]
+---@return {hash: string, title: string}|nil
+local function get_first_commit(selected)
   if not selected[1] then
-    return
+    return nil
   end
   local commit = selected[1]
-  local hash = vim.split(commit, " ")[1]
+  return { hash = vim.split(commit, " ")[1], title = commit }
+end
+
+---@param selected string[]
+local function fixup(selected)
+  local commit = get_first_commit(selected)
+  if commit == nil then
+    return
+  end
 
   local ui = require("elentok.lib.ui")
   local git = require("elentok.lib.git")
-  if ui.confirm("Fixup " .. commit .. "?") then
-    git.run({ "commit", "--fixup", hash })
+  if ui.confirm("Fixup " .. commit.title .. "?") then
+    git.run({ "commit", "--fixup", commit.hash })
   end
 end
 
@@ -16,6 +26,16 @@ local function deferred_fixup(selected)
   vim.defer_fn(function()
     fixup(selected)
   end, 100)
+end
+
+---@param selected string[]
+local function open_commit(selected)
+  local commit = get_first_commit(selected)
+  if commit == nil then
+    return
+  end
+
+  require("diffview").open(commit.hash .. "^!")
 end
 
 return {
@@ -44,11 +64,13 @@ return {
       commits = {
         actions = {
           ["ctrl-f"] = deferred_fixup,
+          ["ctrl-d"] = open_commit,
         },
       },
       bcommits = {
         actions = {
           ["ctrl-f"] = deferred_fixup,
+          ["ctrl-d"] = open_commit,
         },
       },
       status = {

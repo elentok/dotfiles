@@ -1,4 +1,13 @@
 return {
   "sindrets/diffview.nvim",
-  opts = {},
+  opts = {
+    keymaps = {
+      view = {
+        ["q"] = "<Cmd>DiffviewClose<cr>",
+      },
+      file_panel = {
+        ["q"] = "<Cmd>DiffviewClose<cr>",
+      },
+    },
+  },
 }

@@ -52,7 +52,7 @@ vim.opt.splitright = true
 
 vim.opt.expandtab = true
 
-vim.o.clipboard = "unnamed,unnamedplus"
+vim.o.clipboard = "unnamedplus"
 
 vim.opt.textwidth = 80
 
