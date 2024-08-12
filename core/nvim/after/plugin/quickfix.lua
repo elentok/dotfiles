@@ -13,7 +13,7 @@ function _G.setup_quickfix()
   vim.keymap.set("n", "<c-s>", ":cgetbuffer<cr>:setlocal nomodified<cr>", { buffer = true })
 
   -- Map 'q' to close the quickfix window
-  vim.keymap.set("n", "q", ":q<cr>", { buffer = true })
+  vim.keymap.set("n", "qq", ":q<cr>", { buffer = true })
 end
 
 util.augroup(
