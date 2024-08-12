@@ -93,7 +93,7 @@ return {
     { "<leader>cl", "<cmd>FzfLua complete_line<cr>", desc = "Complete line" },
     { "<c-f>", "<cmd>FzfLua complete_line<cr>", mode = "i", desc = "Complete line" },
     { "<c-x><c-f>", "<cmd>FzfLua complete_path<cr>", mode = "i", desc = "Complete path" },
-    { "qw", "<cmd>FzfLua lines<cr>", desc = "Search buffer lines" },
+    { "<space>ll", "<cmd>FzfLua lines<cr>", desc = "Search buffer lines" },
     { "``", "<cmd>FzfLua resume<cr>", desc = "Resume last FzfLua search" },
     {
       "<Leader>jm",

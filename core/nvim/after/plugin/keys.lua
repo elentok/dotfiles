@@ -3,7 +3,6 @@ local term = require("elentok/lib/terminal")
 vim.keymap.set("i", "jk", "<esc>")
 vim.keymap.set("n", "<leader>k", ":")
 vim.keymap.set("n", "<leader>;", ":")
-vim.keymap.set("n", "qq", "")
 
 vim.keymap.set("n", "<leader>wq", "<cmd>wq<cr>", { desc = ":wq" })
 vim.keymap.set("n", "<leader>ww", "<cmd>w<cr>", { desc = ":w" })
