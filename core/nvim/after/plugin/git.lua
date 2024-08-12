@@ -1,5 +1,6 @@
 local term = require("elentok.lib.terminal")
 local git = require("elentok.lib.git")
+local ui = require("elentok.lib.ui")
 
 vim.api.nvim_create_user_command("GG", function(opts)
   git.run(opts.fargs)
@@ -33,13 +34,22 @@ end
 vim.keymap.set({ "n", "v" }, "[m", prev_conflict_marker)
 vim.keymap.set({ "n", "v" }, "]m", next_conflict_marker)
 
+local function git_reset_file_changes()
+  if ui.confirm("Reset changes in current file?") then
+    vim.cmd("silent edit!")
+    vim.fn.system("git checkout -- " .. vim.fn.shellescape(vim.fn.expand("%")))
+    vim.cmd("silent edit")
+  end
+end
+
 vim.keymap.set({ "n" }, "<leader>mw", ":noa wqa<cr>")
 vim.keymap.set({ "n" }, "<leader>mL", "ggVG:diffget LOCAL<cr>")
 vim.keymap.set({ "n" }, "<leader>mR", "ggVG:diffget REMOTE<cr>")
 vim.keymap.set({ "n", "v" }, "<leader>ml", ":diffget LOCAL<cr>")
 vim.keymap.set({ "n", "v" }, "<leader>mr", ":diffget REMOTE<cr>")
 vim.keymap.set("n", "<leader>ga", "<cmd>Gap<cr>", { desc = "Git add (patch)" })
-vim.keymap.set("n", "<leader>gw", "<cmd>Gwrite<cr>", { desc = "Git write" })
+vim.keymap.set("n", "<leader>gw", "<cmd>w<cr>!git add %<cr>", { desc = "Write + Stage" })
+vim.keymap.set("n", "<leader>gr", git_reset_file_changes, { desc = "Reset git changes" })
 -- vim.keymap.set("n", "<leader>gg", "<cmd>G<cr><c-w>H", { desc = "Git status" })
 -- vim.keymap.set("n", "<leader>gba", "<cmd>G blame<cr>", { desc = "Git blame" })
 -- vim.keymap.set("n", "<leader>gl", "<cmd>G log HEAD...master<cr>", { desc = "Git log" })
