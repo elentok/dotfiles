@@ -10,9 +10,9 @@ return {
       "icon",
       "size",
     },
-    win_options = {
-      winbar = "%f",
-    },
+    -- win_options = {
+    --   winbar = "%f",
+    -- },
     -- git = {
     --   mv = true,
     --   rm = true,

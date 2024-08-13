@@ -1,5 +1,19 @@
 -- local shortener = require("elentok/lib/shortener")
 
+local function oil_pretty_dir()
+  return vim.fn.fnamemodify(require("oil").get_current_dir(), ":~")
+end
+
+local oil_extension = {
+  sections = {
+    lualine_a = { oil_pretty_dir },
+  },
+  winbar = {
+    lualine_z = { oil_pretty_dir },
+  },
+  filetypes = { "oil" },
+}
+
 return {
   "nvim-lualine/lualine.nvim",
   opts = {
@@ -8,6 +22,7 @@ return {
       theme = "catppuccin",
       section_separators = { left = "", right = "" },
     },
+    extensions = { oil_extension },
     sections = {
       lualine_a = { { "filename", path = 4 } },
       lualine_b = {},
