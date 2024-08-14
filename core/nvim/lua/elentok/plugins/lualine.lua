@@ -22,7 +22,7 @@ return {
       theme = "catppuccin",
       section_separators = { left = "", right = "" },
     },
-    extensions = { oil_extension },
+    extensions = { oil_extension, "fzf" },
     sections = {
       lualine_a = { { "filename", path = 4 } },
       lualine_b = {},
@@ -35,10 +35,11 @@ return {
       -- },
       lualine_x = { "diagnostics", "filetype" },
       lualine_y = { "branch" },
-      lualine_z = { "location" },
+      -- Location with total lines: line/total:char
+      lualine_z = { "%l/%L:%c" },
     },
     winbar = {
-      lualine_a = {},
+      lualine_a = { "navic" },
       lualine_b = {},
       lualine_c = {},
       lualine_x = {},
