@@ -22,8 +22,6 @@ return {
       flash = true,
       mason = true,
       navic = true,
-      aerial = true,
-      harpoon = true,
       markdown = true,
       which_key = true,
       telescope = true,
@@ -32,10 +30,10 @@ return {
       neogit = true,
       nvim_surround = true,
       grug_far = true,
-      dropbar = {
-        enabled = true,
-        color_mode = true,
-      },
+      -- dropbar = {
+      --   enabled = true,
+      --   color_mode = true,
+      -- },
       indent_blankline = true,
       render_markdown = true,
       native_lsp = true,
@@ -44,6 +42,10 @@ return {
       return {
         VertSplit = { fg = colors.surface2 },
         WinSeparator = { fg = colors.surface2 },
+
+        -- for some reason quotes appear in red, this changes them to light gray
+        RenderMarkdownQuote = { fg = colors.subtext0 },
+        ["@markup.quote"] = { fg = colors.subtext0 },
       }
     end,
   },
