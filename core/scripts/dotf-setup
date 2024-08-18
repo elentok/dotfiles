@@ -11,9 +11,8 @@ main() {
 
   dotf-header h1 "Setting up dotfiles..."
 
-  if dotf-is-mac; then
-    dotf-pkgs install brew
-  else
+  dotf-pkgs install brew
+  if ! dotf-is-linux; then
     dotf-pkgs install apt
   fi
 
