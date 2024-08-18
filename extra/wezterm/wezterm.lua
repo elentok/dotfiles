@@ -2,6 +2,7 @@ local wezterm = require("wezterm")
 local setupUi = require("ui")
 local setupKeys = require("keys")
 local setupSplitPanes = require("split-panes")
+require("status")
 
 local local_config_dir = os.getenv("HOME") .. "/.dotprivate/wezterm"
 

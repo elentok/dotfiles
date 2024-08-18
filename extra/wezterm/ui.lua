@@ -25,16 +25,25 @@ local function setupUi(config)
   -- config.color_scheme = "MaterialDarker",
   config.audible_bell = "Disabled"
 
-  config.tab_bar_at_bottom = true
-  config.use_fancy_tab_bar = false
+  config.window_decorations = "RESIZE"
+  config.tab_bar_at_bottom = false
+  config.use_fancy_tab_bar = true
   config.tab_max_width = 30
   config.show_new_tab_button_in_tab_bar = false
-  config.hide_tab_bar_if_only_one_tab = true
+  config.hide_tab_bar_if_only_one_tab = false
   config.underline_position = -3
 
+  config.window_frame = {
+    -- Berkeley Mono for me again, though an idea could be to try a
+    -- serif font here instead of monospace for a nicer look?
+    -- font = wezterm.font("Operator Mono", { weight = 325, italic = true }),
+    font = wezterm.font("ComicShannsMono Nerd Font Mono"),
+    font_size = config.font_size,
+  }
+
   config.window_padding = {
-    left = 2,
-    right = 2,
+    left = 0,
+    right = 0,
     top = 0,
     bottom = 0,
   }
