@@ -20,42 +20,42 @@ function main() {
   shift || true
 
   case "$cmd" in
-    i | install)
-      install-pkgs "$@"
-      ;;
-    u | upgrade)
-      upgrade-pkgs "$@"
-      ;;
-    *)
-      usage "$0"
-      exit 1
-      ;;
+  i | install)
+    install-pkgs "$@"
+    ;;
+  u | upgrade)
+    upgrade-pkgs "$@"
+    ;;
+  *)
+    usage "$0"
+    exit 1
+    ;;
   esac
 }
 
 function install-pkgs() {
   case "${1:-}" in
-    apt)
-      install-apt-pkgs
-      ;;
-    brew)
-      install-brew-pkgs
-      ;;
-    pip)
-      install-pip-pkgs
-      ;;
-    npm)
-      install-npm-pkgs
-      ;;
-    cargo)
-      install-cargo-pkgs
-      ;;
-    mason)
-      install-mason-pkgs
-      ;;
-    *)
-      install-apt-pkgs && install-pip-pkgs && install-npm-pkgs
-      ;;
+  apt)
+    install-apt-pkgs
+    ;;
+  brew)
+    install-brew-pkgs
+    ;;
+  pip)
+    install-pip-pkgs
+    ;;
+  npm)
+    install-npm-pkgs
+    ;;
+  cargo)
+    install-cargo-pkgs
+    ;;
+  mason)
+    install-mason-pkgs
+    ;;
+  *)
+    install-apt-pkgs && install-pip-pkgs && install-npm-pkgs
+    ;;
   esac
 }
 
@@ -87,6 +87,18 @@ function install-apt-pkgs() {
 function install-brew-pkgs() {
   dotf-header h2 '[dotf-pkgs] Installing brew packages...'
   dotf-brew "$(get-pkgs brew)"
+
+  if dotf-is-mac; then
+    if has-pkgs brew-mac; then
+      dotf-header h2 '[dotf-pkgs] Installing brew mac-only packages...'
+      dotf-brew "$(get-pkgs brew-mac)"
+    fi
+  else
+    if has-pkgs brew-linux; then
+      dotf-header h2 '[dotf-pkgs] Installing brew linux-only packages...'
+      dotf-brew "$(get-pkgs brew-linux)"
+    fi
+  fi
 }
 
 function install-pip-pkgs() {
@@ -135,6 +147,11 @@ function upgrade-pkgs() {
 
   # shellcheck disable=SC2046
   dotf-mason -f $(get-pkgs mason)
+}
+
+function has-pkgs() {
+  local prefix="$1"
+  grep "^${prefix}: " "$CONFIG_FILE" >/dev/null 2>&1
 }
 
 function get-pkgs() {
