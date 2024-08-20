@@ -30,6 +30,7 @@ alias mycal 'mycal.ts'
 alias dff 'dff.ts'
 alias dotff '~/.dotfiles/core/framework/dotf.ts'
 alias q qalc
+alias ic 'wezterm imgcat'
 
 function nv --description neovide
     if test -n "$TMUX"
