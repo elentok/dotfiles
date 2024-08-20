@@ -6,7 +6,9 @@ require("status")
 
 local local_config_dir = os.getenv("HOME") .. "/.dotprivate/wezterm"
 
-local config = {}
+local config = {
+  enable_kitty_graphics = true,
+}
 setupUi(config)
 setupKeys(config)
 setupSplitPanes(config)
