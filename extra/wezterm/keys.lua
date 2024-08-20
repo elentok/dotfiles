@@ -107,6 +107,11 @@ local function setupKeys(config)
         act.CopyMode("ClearPattern"),
       }),
     },
+    {
+      key = "q",
+      mods = "LEADER",
+      action = act.QuickSelect,
+    },
     { key = "/", mods = "LEADER", action = act.Search({ CaseInSensitiveString = "" }) },
 
     -- Misc
