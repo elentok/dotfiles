@@ -31,7 +31,7 @@ local function setupUi(config)
   config.audible_bell = "Disabled"
 
   config.window_decorations = "RESIZE"
-  config.tab_bar_at_bottom = false
+  config.tab_bar_at_bottom = true
   config.use_fancy_tab_bar = true
   config.tab_max_width = 30
   config.show_new_tab_button_in_tab_bar = false
@@ -42,7 +42,8 @@ local function setupUi(config)
     -- Berkeley Mono for me again, though an idea could be to try a
     -- serif font here instead of monospace for a nicer look?
     -- font = wezterm.font("Operator Mono", { weight = 325, italic = true }),
-    font = wezterm.font("ComicShannsMono Nerd Font Mono"),
+    -- font = wezterm.font("ComicShannsMono Nerd Font Mono"),
+    font = wezterm.font("ZedMono NF Light"),
     font_size = config.font_size,
   }
 
