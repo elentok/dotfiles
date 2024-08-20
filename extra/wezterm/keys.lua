@@ -26,10 +26,10 @@ local function setupCopyMode(config)
     { key = "/", action = act.Search({ CaseInSensitiveString = "" }) },
     { key = "n", action = act.CopyMode("NextMatch") },
     { key = "N", mods = "SHIFT", action = act.CopyMode("PriorMatch") },
-    { key = "i", action = act.ScrollByPage(-0.5) },
-    { key = ",", action = act.ScrollByPage(0.5) },
+    { key = "u", action = act.ScrollByPage(-0.5) },
+    { key = "d", action = act.ScrollByPage(0.5) },
     { key = "u", mods = h.ctrl_or_cmd, action = act.ScrollByPage(-0.5) },
-    { key = ",", mods = h.ctrl_or_cmd, action = act.ScrollByPage(0.5) },
+    { key = "d", mods = h.ctrl_or_cmd, action = act.ScrollByPage(0.5) },
   })
 end
 
@@ -80,7 +80,7 @@ local function setupKeys(config)
     { key = "l", mods = "LEADER", action = act.ShowDebugOverlay },
     { key = "r", mods = "LEADER", action = act.ShowLauncher },
     {
-      key = "v",
+      key = "?",
       mods = "LEADER",
       action = wezterm.action_callback(function(win, pane)
         print("==============================")

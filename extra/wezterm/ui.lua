@@ -2,21 +2,26 @@ local wezterm = require("wezterm")
 local h = require("helpers")
 
 local function setupFonts(config)
-  config.font = wezterm.font("ComicShannsMono Nerd Font Mono")
+  --[[ config.font = wezterm.font("Hack Nerd Font", { weight = "Regular" }) ]]
+  -- config.font = wezterm.font("MonaspiceKr NF", { weight = "Light" })
+  -- config.font = wezterm.font("MonaspiceKr NF")
+  -- config.font = wezterm.font("ZedMono NF", { weight = "Regular" })
+  config.font = wezterm.font("ZedMono NF Light")
+  -- config.font = wezterm.font("ComicShannsMono Nerd Font Mono")
   config.font_rules = {
     {
       italic = true,
       font = wezterm.font("Operator Mono", { weight = 325, italic = true }),
     },
   }
-  config.line_height = 1.2
-  config.cell_width = 1.0
+  -- config.line_height = 1.1
+  -- config.cell_width = 1.05
   if h.is_macos() then
-    config.font_size = 14.0
+    config.font_size = 14
   else
-    config.font_size = 12.0
+    config.font_size = 12
   end
-  config.command_palette_font_size = 16.0
+  config.command_palette_font_size = 16
 end
 
 local function setupUi(config)

@@ -16,6 +16,8 @@ function main() {
     fi
   fi
 
+  # brew install --cask font-zed-mono-nerd-font
+
   mkdir -p "$CONFIG_DIR"
   dotf-symlink "$DOTF/extra/wezterm" "$CONFIG_DIR"
   # dotf-symlink "$DOTF/extra/wezterm/wezterm.lua" "$CONFIG_DIR/wezterm.lua"
