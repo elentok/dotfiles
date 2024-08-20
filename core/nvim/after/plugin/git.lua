@@ -23,8 +23,19 @@ local function git_reset_file_changes()
   end
 end
 
-vim.keymap.set("n", "<leader>ga", "<cmd>Gap<cr>", { desc = "Git add (patch)" })
-vim.keymap.set("n", "<leader>gw", "<cmd>w<cr>!git add %<cr>", { desc = "Write + Stage" })
+local function add_file_patch()
+  git.run({ "add", "-p", vim.fn.expand("%") })
+end
+
+local function write_and_add_file()
+  vim.cmd("write")
+  vim.system({ "git", "add", vim.fn.expand("%") }):wait()
+  print("Staged file")
+end
+
+-- vim.keymap.set("n", "<leader>ga", "<cmd>Gap<cr>", { desc = "Git add (patch)" })
+vim.keymap.set("n", "<leader>ga", add_file_patch, { desc = "Git add file (patch)" })
+vim.keymap.set("n", "<leader>gw", write_and_add_file, { desc = "Write + Stage" })
 vim.keymap.set("n", "<leader>gr", git_reset_file_changes, { desc = "Reset git changes" })
 
 vim.keymap.set("n", "<leader>gps", "<cmd>Gps<cr>", { desc = "Git push" })
