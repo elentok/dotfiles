@@ -6,9 +6,11 @@ return {
     -- opts = {
     --   key = "<leader>tw",
     -- },
-    -- keys = {
-    --   {
-    --     "<leader>tw",
+    keys = {
+      {
+        "<leader>tw",
+      },
+    },
     --     function()
     --       require("togglr").toggle_word()
     --     end,

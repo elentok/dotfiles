@@ -3,4 +3,8 @@ return {
   opts = {
     ignore = "^$",
   },
+  keys = {
+    { "gcc", mode = "n" },
+    { "gc", mode = "v" },
+  },
 }
