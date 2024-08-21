@@ -125,9 +125,9 @@ vim.api.nvim_create_autocmd(
   { pattern = "*.md", group = group_id, callback = setup_buffer }
 )
 
-vim.keymap.set("n", "<leader>jt", function()
-  require("telescope.builtin").grep_string({ search = "[ ]", search_dirs = { vim.fn.expand("%") } })
-end, { desc = "Jump to open task" })
+-- vim.keymap.set("n", "<leader>jt", function()
+--   require("telescope.builtin").grep_string({ search = "[ ]", search_dirs = { vim.fn.expand("%") } })
+-- end, { desc = "Jump to open task" })
 
 local function todo_toggle_done()
   local line = vim.fn.getline(".")

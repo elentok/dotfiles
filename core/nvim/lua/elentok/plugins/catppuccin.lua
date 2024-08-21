@@ -24,7 +24,7 @@ return {
       navic = true,
       markdown = true,
       which_key = true,
-      telescope = true,
+      telescope = false,
       treesitter = true,
       fidget = true,
       neogit = true,
