@@ -12,17 +12,19 @@ main() {
   cmd="${1:-}"
   shift
   case "$cmd" in
-    c | copy | y | yank) copy ;;
-    p | paste) paste ;;
-    *) usage "$DOTF/core/scripts/dotf-clipboard" ;;
+  c | copy | y | yank) copy ;;
+  p | paste) paste ;;
+  *) usage "$DOTF/core/scripts/dotf-clipboard" ;;
   esac
 }
 
 copy() {
   if dotf-is-wsl; then
     clip.exe
-  else
+  elif [ -n "${TMUX:-}" ]; then
     dotf-yank-osc52 | system-copy
+  else
+    system-copy
   fi
 }
 
