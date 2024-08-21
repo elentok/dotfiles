@@ -56,18 +56,7 @@ if [ -e "$BREW_HOME" ]; then
 fi
 
 # NodeJS {{{1
-function is-n-providing-node() {
-  [ "$DOTF_CONFIG_NODE_PROVIDER" = "n" ]
-}
-
-function is-fnm-providing-node() {
-  [ "$DOTF_CONFIG_NODE_PROVIDER" = "fnm" ]
-}
-
-if is-n-providing-node; then
-  export N_PREFIX=$HOME/.n
-fi
-
+#
 # Node-gyp doesn't support Python 3.11
 if dotf-is-mac; then
   NODE_GYP_FORCE_PYTHON="$(command ls -1 /opt/homebrew/Cellar/python@3.10/*/bin/python3.10 | head)"
@@ -114,12 +103,7 @@ function dotf-gen-path() {
   echo "$HOME/dev/qmkmd/bin"
   dotf-plugin-list-files scripts
 
-  if is-n-providing-node; then
-    echo "$N_PREFIX/bin"
-  elif is-fnm-providing-node; then
-    echo "$HOME/.local/share/fnm"
-  fi
-
+  echo "$HOME/.local/share/fnm"
   echo "$HOME/.fzf/bin"
   echo "$HOME/.apps/bin"
   echo "$HOME/.local/bin"
@@ -188,9 +172,7 @@ _core_genpath_elapsed_ms=$(((SECONDS - _core_genpath_start) * 1000))
 
 export PATH="$new_path"
 
-if is-fnm-providing-node; then
-  eval "$(fnm env --use-on-cd)"
-fi
+eval "$(fnm env --use-on-cd)"
 
 # Rust {{{1
 if [ -e ~/.cargo/env ]; then

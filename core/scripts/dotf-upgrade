@@ -11,23 +11,12 @@ function main() {
   cd "$DOTF"
 
   dotf-repos upgrade
-  upgrade-node
   dotf-summary run 'Update github packages' github-pkgs update
   dotf-summary run 'Update packages' dotf-pkgs upgrade
   dotf-summary run 'Update fisher' fish -c "fisher update"
   upgrade-neovim-stuff
 
   dotf-summary stop
-}
-
-function upgrade-node() {
-  if is-n-providing-node; then
-    dotf-header h2 'Updating N...'
-    (cd "$N_PREFIX" && dotf-summary run 'n: pull' git pull)
-
-    dotf-header h2 'Updating NodeJS...'
-    dotf-summary run 'n: update' n --preserve "$(dotf-node-version)" # Preserve npm (don't downgrade to lts version)
-  fi
 }
 
 function upgrade-neovim-stuff() {

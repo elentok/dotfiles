@@ -6,9 +6,7 @@ LOCAL=no
 NPM=npm
 NPM_ARGS=''
 
-if [ "$DOTF_CONFIG_NODE_PROVIDER" == "fnm" ]; then
-  eval "$(fnm env --use-on-cd)"
-fi
+eval "$(fnm env --use-on-cd)"
 
 while [[ "${1:-}" =~ ^- ]]; do
   if [ "$1" == "--local" ]; then

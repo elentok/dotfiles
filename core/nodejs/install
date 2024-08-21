@@ -5,41 +5,26 @@ set -euo pipefail
 source "$(dirname "$0")/../../framework.sh"
 
 main() {
-  if [ "$DOTF_CONFIG_NODE_PROVIDER" = "fnm" ]; then
-    install_fnm
-  elif [ "$DOTF_CONFIG_NODE_PROVIDER" = "n" ]; then
-    git_clone https://github.com/tj/n "$N_PREFIX"
-    install_node_with_n
-  else
-    dotf-apt nodejs npm
-  fi
+  install_fnm
 
   if dotf-command-missing yarn; then
     npm install -g yarn
   fi
+
   (cd extra/scripts/node && yarn install)
 }
 
 install_fnm() {
   if dotf-command-missing fnm; then
-    # On Mac it's installed with brew
-    if dotf-is-linux; then
-      curl -fsSL https://fnm.vercel.app/install | bash
-    fi
+    dotf-error "fnm is missing, it should have been installed with brew"
+    exit 1
   fi
 
   eval "$(fnm env --use-on-cd)"
 
   ver="$(dotf-node-version)"
-  if ! fnm list | grep " v$ver\." > /dev/null; then
+  if ! fnm list | grep " v$ver\." >/dev/null; then
     fnm install "$(dotf-node-version)"
-  fi
-}
-
-install_node_with_n() {
-  if [ -z "$(n ls)" ]; then
-    n "$(dotf-node-version)"
-    npm install -g npm # Upgrade to the latest npm
   fi
 }
 
