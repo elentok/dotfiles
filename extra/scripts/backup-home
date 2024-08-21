@@ -1,27 +1,64 @@
 #!/usr/bin/env bash
 
-date=`date +%Y%m%d`
-filename="$(pwd)/backup-${HOST}-$date.tar.bz2"
+set -euo pipefail
 
-cd $HOME
-tar cjvf $filename \
+user=$(whoami)
+
+backup_dir="$HOME"
+tar='tar'
+if [ "$#" -gt 0 ]; then
+  user="$1"
+
+  user_home="$(eval echo "~$user")"
+  backup_dir="$user_home"
+  tar='sudo tar'
+fi
+
+date=$(date +%Y%m%d)
+filename="$(pwd)/backup-$(hostname)-${user}-home-$date.tar.bz2"
+
+cd "$backup_dir"
+
+echo "About to backup ${user}'s home directory"
+echo "to ${filename}"
+echo
+echo "Press any key to continue..."
+read -r -n1
+
+$tar cjvf "$filename" \
   --one-file-system \
   --exclude './Downloads' \
+  --exclude './.m2' \
   --exclude './.rvm' \
   --exclude './.wine' \
+  --exclude './.deno' \
+  --exclude './.gradle' \
+  --exclude './snap' \
   --exclude './.thumbnails' \
   --exclude './.cache' \
   --exclude './.n' \
   --exclude './.npm' \
+  --exclude './.yarn' \
+  --exclude './.rustup' \
+  --exclude './.cargo' \
   --exclude './.local/lib' \
   --exclude './.node-gyp' \
   --exclude './.bundle' \
   --exclude './.apps' \
+  --exclude './.lua' \
+  --exclude './.mozilla' \
+  --exclude './.icons' \
   --exclude './bin' \
   --exclude './go' \
   --exclude './.local/share/Trash' \
   --exclude './.local/share/.com.google.*' \
   --exclude './.local/share/Steam' \
+  --exclude './.local/share/virtualenv' \
+  --exclude './.local/share/nvim' \
+  --exclude './.local/share/fnm' \
+  --exclude './.local/share/tracker' \
+  --exclude './.local/share/fish' \
+  --exclude './.local/share/pypoetry' \
   --exclude '*.log' \
   --exclude node_modules \
   .
