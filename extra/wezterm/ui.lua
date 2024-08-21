@@ -22,6 +22,9 @@ local function setupFonts(config)
     config.font_size = 12
   end
   config.command_palette_font_size = 16
+
+  -- Disable ligatures
+  config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 end
 
 local function setupUi(config)
