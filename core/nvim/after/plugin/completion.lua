@@ -57,7 +57,9 @@ local cmp_mapping = {
 
 -- Setup CMP
 cmp.setup({
+  ---@diagnostic disable-next-line:missing-fields
   performance = {
+    max_view_entries = 7,
     debounce = 150,
     async_budget = 30,
   },
@@ -70,8 +72,8 @@ cmp.setup({
     { name = "copilot", group_index = 2 },
     { name = "nvim_lsp" },
     { name = "luasnip", keyword_length = 2 },
-    { name = "buffer", keyword_length = 3 },
-    { name = "path" },
+    { name = "buffer", keyword_length = 4, option = { indexing_interval = 1000 } },
+    { name = "path", keyword_length = 4 },
     { name = "lazydev", group_index = 0 },
     { name = "rg", keyword_length = 4 },
   },
@@ -80,6 +82,7 @@ cmp.setup({
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
+  ---@diagnostic disable-next-line:missing-fields
   formatting = {
     format = lspkind.cmp_format({
       mode = "symbol_text",
