@@ -112,6 +112,7 @@ local function setupKeys(config)
       mods = "LEADER",
       action = act.QuickSelect,
     },
+    { key = "/", mods = h.ctrl_or_cmd, action = act.Search({ CaseInSensitiveString = "" }) },
     { key = "/", mods = "LEADER", action = act.Search({ CaseInSensitiveString = "" }) },
 
     -- Misc
