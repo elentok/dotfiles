@@ -3,9 +3,10 @@
 source "$(dirname "$0")/../../framework.sh"
 
 main() {
-  if dotf-is-linux; then
-    install_tmux
-  elif dotf-is-mac; then
+  # if dotf-is-linux; then
+  #   install_tmux
+  # tmux binary is installed via homebrew
+  if dotf-is-mac; then
     install-tmux-256color-terminfo
   fi
   install_symlinks
@@ -24,7 +25,7 @@ install-tmux-256color-terminfo() {
 }
 
 has-tmux-256color-terminfo() {
-  infocmp tmux-256color > /dev/null 2>&1
+  infocmp tmux-256color >/dev/null 2>&1
 }
 
 install_tmux() {
@@ -32,7 +33,7 @@ install_tmux() {
   if dotf-command-missing tmux; then
     PRIMARY=yes "$DOTF/core/tmux/build" && dotf-success "done."
   else
-    version="$(dotf-trim < "$DOTF/core/tmux/VERSION")"
+    version="$(dotf-trim <"$DOTF/core/tmux/VERSION")"
     current_version="$(tmux -V | head -1 | awk '{print $2}')"
     if [ "$current_version" == "$version" ]; then
       dotf-info "version $version already installed."
