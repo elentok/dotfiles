@@ -18,6 +18,8 @@ function main() {
 
   mkdir -p ~/.config
 
+  install-if-missing curl curl
+
   setup-homebrew
 
   if dotf-is-mac; then
@@ -56,12 +58,12 @@ function setup-deno() {
     echo "  Deno is already installed."
     echo
   else
-    if dotf-is-mac; then
-      brew install deno
-    else
-      dotf-apt curl
-      curl -fsSL https://deno.land/x/install/install.sh | sh
-    fi
+    brew install deno
+#   if dotf-is-mac; then
+#     brew install deno
+#   else
+#     curl -fsSL https://deno.land/x/install/install.sh | sh
+#   fi
   fi
 
 }
@@ -96,6 +98,12 @@ function install-homebrew() {
   fi
 
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  if dotf-is-linux; then
+    PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+  fi
+
+  brew install gcc
 }
 
 function has-command() {

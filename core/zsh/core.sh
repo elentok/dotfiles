@@ -172,7 +172,11 @@ _core_genpath_elapsed_ms=$(((SECONDS - _core_genpath_start) * 1000))
 
 export PATH="$new_path"
 
-eval "$(fnm env --use-on-cd)"
+if dotf-has-command fnm; then
+  eval "$(fnm env --use-on-cd)"
+else
+  echo "WARNING: missing fnm command (this warning is to be expected when bootstraping a new system)"
+fi
 
 # Rust {{{1
 if [ -e ~/.cargo/env ]; then
