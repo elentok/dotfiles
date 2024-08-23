@@ -7,14 +7,28 @@
 // from the command palette.
 [
   {
+    "bindings": {
+      "cmd-n": "menu::SelectNext",
+      "cmd-p": "menu::SelectPrev"
+    }
+  },
+  {
     "context": "Workspace",
     "bindings": {
+      "cmd-k": [
+        "projects::OpenRecent",
+        {
+          "create_new_window": false
+        }
+      ]
       // "shift shift": "file_finder::Toggle"
     }
   },
   {
     "context": "Editor",
     "bindings": {
+      "cmd-d": "vim::ScrollDown",
+      "cmd-u": "vim::ScrollUp"
       // "j k": ["workspace::SendKeystrokes", "escape"]
     }
   },
@@ -25,6 +39,15 @@
       // "-": "project_panel::ToggleFocus"
     }
   },
+  {
+    "context": "ProjectPanel || Dock || Terminal || Editor",
+    "bindings": {
+      "cmd-h": ["workspace::ActivatePaneInDirection", "Left"],
+      "cmd-l": ["workspace::ActivatePaneInDirection", "Right"],
+      "cmd-k": ["workspace::ActivatePaneInDirection", "Up"],
+      "cmd-j": ["workspace::ActivatePaneInDirection", "Down"]
+    }
+  },
   // {
   //   "context": "ProjectPanel && not_editing",
   //   "bindings": {
@@ -32,12 +55,14 @@
   //   }
   // },
   {
+    "context": "TabSwitcher",
+    "bindings": {
+      "cmd-x": "tab_switcher::CloseSelectedItem"
+    }
+  },
+  {
     "context": "VimControl && !menu",
     "bindings": {
-      "cmd-h": ["workspace::ActivatePaneInDirection", "Left"],
-      "cmd-l": ["workspace::ActivatePaneInDirection", "Right"],
-      "cmd-k": ["workspace::ActivatePaneInDirection", "Up"],
-      "cmd-j": ["workspace::ActivatePaneInDirection", "Down"],
       "space q q": "pane::CloseActiveItem",
       "space w w": "workspace::Save",
       "space w s": "pane::SplitDown",
@@ -47,7 +72,9 @@
       "space y f": "editor::CopyRelativePath",
       "space j b": "tab_switcher::Toggle",
       "v v": "vim::ToggleVisualLine",
-      "v c": "vim::ToggleVisualBlock"
+      "v c": "vim::ToggleVisualBlock",
+      "shift-k": "editor::Hover",
+      "space t": "workspace::NewCenterTerminal"
     }
   },
   {

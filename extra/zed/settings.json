@@ -18,5 +18,18 @@
     "mode": "system",
     "light": "One Light",
     "dark": "One Dark"
+  },
+  "cursor_blink": false,
+  "relative_line_numbers": true,
+  // "scrollbar": {
+  //   "show": "never"
+  // },
+  // "vertical_scroll_margin": 0,
+  // "tab_bar": {
+  //   "show": false
+  // },
+  "toolbar": {
+    "breadcrumbs": true,
+    "quick_actions": false
   }
 }
