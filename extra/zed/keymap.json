@@ -1,0 +1,59 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      // "shift shift": "file_finder::Toggle"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      // "j k": ["workspace::SendKeystrokes", "escape"]
+    }
+  },
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      "-": "pane::RevealInProjectPanel"
+      // "-": "project_panel::ToggleFocus"
+    }
+  },
+  // {
+  //   "context": "ProjectPanel && not_editing",
+  //   "bindings": {
+  //     "escape": "project_panel::ToggleFocus"
+  //   }
+  // },
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "cmd-h": ["workspace::ActivatePaneInDirection", "Left"],
+      "cmd-l": ["workspace::ActivatePaneInDirection", "Right"],
+      "cmd-k": ["workspace::ActivatePaneInDirection", "Up"],
+      "cmd-j": ["workspace::ActivatePaneInDirection", "Down"],
+      "space q q": "pane::CloseActiveItem",
+      "space w w": "workspace::Save",
+      "space w s": "pane::SplitDown",
+      "space w v": "pane::SplitRight",
+      "space j o": "pane::AlternateFile",
+      "space p": "file_finder::Toggle",
+      "space y f": "editor::CopyRelativePath",
+      "space j b": "tab_switcher::Toggle",
+      "v v": "vim::ToggleVisualLine",
+      "v c": "vim::ToggleVisualBlock"
+    }
+  },
+  {
+    "context": "vim_mode == insert",
+    "bindings": {
+      "j k": "vim::NormalBefore" // remap jk in insert mode to escape.
+    }
+  }
+]

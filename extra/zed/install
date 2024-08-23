@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTF/framework.sh"
+
+mkdir -p ~/.config/zed
+dotf-symlink "$DOTF/extra/zed/settings.json" ~/.config/zed/settings.json
+dotf-symlink "$DOTF/extra/zed/keymap.json" ~/.config/zed/keymap.json
