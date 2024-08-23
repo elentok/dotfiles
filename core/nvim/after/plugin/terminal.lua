@@ -1,5 +1,8 @@
 -- vim.keymap.set("t", "")
 
+vim.keymap.set("t", "<c-u>", "<c-\\><c-n><c-u>")
+vim.keymap.set("t", "<c-d>", "<c-\\><c-n><c-d>")
+
 -- local function map(mode, lhs, rhs)
 --   vim.keymap.set(mode, lhs, rhs)
 
