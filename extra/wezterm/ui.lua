@@ -47,7 +47,7 @@ local function setupUi(config)
     -- font = wezterm.font("Operator Mono", { weight = 325, italic = true }),
     -- font = wezterm.font("ComicShannsMono Nerd Font Mono"),
     font = wezterm.font("ZedMono NF Light"),
-    font_size = config.font_size,
+    font_size = config.font_size + 2,
   }
 
   config.window_padding = {
