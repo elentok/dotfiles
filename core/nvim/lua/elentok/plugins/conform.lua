@@ -33,7 +33,7 @@ return {
         args = { "format", "$FILENAME" },
         stdin = false,
         condition = function(_, ctx)
-          return vim.fs.basename(ctx.filename) == "layout.md"
+          return vim.endswith(ctx.filename, ".layout.md")
         end,
       },
     },
