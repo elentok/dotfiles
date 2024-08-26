@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTF/framework.sh"
+
+# mkdir -p "$(bat --config-dir)/themes"
+
+if [ ! -e "$DOTF/extra/bat/themes" ]; then
+  mkdir "$DOTF/extra/bat/themes"
+  wget -P "$DOTF/extra/bat/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme
+fi
+
+dotf-symlink "$DOTF/extra/bat" "$(bat --config-dir)"
+bat cache --build
