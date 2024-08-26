@@ -2,7 +2,7 @@ if not vim.g.neovide then
   return
 end
 
--- vim.o.guifont = "ComicShannsMono Nerd Font Mono:h16"
+-- vim.o.guifont = "ZedMono NFP Light:h16"
 vim.o.linespace = 4
 
 -- vim.g.neovide_transparency = 0.95
