@@ -147,6 +147,7 @@
 
 [include]
   path = ~/.dotlocal/gitconfig
+  path = ~/.dotfiles/core/git/delta.gitconfig
 
 [include]
   ; path = ~/.dotprivate/gitconfig
