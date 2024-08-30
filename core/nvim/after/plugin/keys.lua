@@ -179,3 +179,7 @@ vim.keymap.set({ "n", "v" }, "gs", "_", { desc = "Go to first non-blank characte
 -- mappings without [ and ]
 vim.keymap.set({ "n", "v" }, "<leader>p", "[", { remap = true })
 vim.keymap.set({ "n", "v" }, "<leader>n", "]", { remap = true })
+
+-- Similar, but with , and .
+vim.keymap.set({ "n", "v" }, "<leader>,", "[", { remap = true })
+vim.keymap.set({ "n", "v" }, "<leader>.", "]", { remap = true })
