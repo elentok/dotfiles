@@ -101,7 +101,7 @@ return {
       mode = "n",
       desc = "Grep word",
     },
-    { "<leader>p", "<cmd>FzfLua files<cr>" },
+    { "<leader>jf", "<cmd>FzfLua files<cr>" },
     { "<leader>fl", ":FzfLua " },
     { "z=", "<cmd>FzfLua spell_suggest<cr>" },
     { "<leader>jb", "<cmd>FzfLua buffers<cr>" },

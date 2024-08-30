@@ -46,4 +46,4 @@ local function open()
   end, { buffer = true })
 end
 
-vim.keymap.set("n", "<leader>n", open)
+vim.keymap.set("n", "<leader>nn", open)

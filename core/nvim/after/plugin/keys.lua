@@ -174,3 +174,8 @@ vim.keymap.set({ "n", "v" }, "gh", "0", { desc = "Go to beginning of the line" }
 vim.keymap.set({ "n", "v" }, "ge", "G", { desc = "Go to end of the file" })
 vim.keymap.set({ "n", "v" }, "gl", "$", { desc = "Go to end of the line" })
 vim.keymap.set({ "n", "v" }, "gs", "_", { desc = "Go to first non-blank character" })
+
+-- Map <leader>n and <leader>p to [ and ] to make it easier to use unimpaired
+-- mappings without [ and ]
+vim.keymap.set({ "n", "v" }, "<leader>p", "[", { remap = true })
+vim.keymap.set({ "n", "v" }, "<leader>n", "]", { remap = true })
