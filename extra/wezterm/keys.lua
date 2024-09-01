@@ -26,10 +26,10 @@ local function setupCopyMode(config)
     { key = "/", action = act.Search({ CaseInSensitiveString = "" }) },
     { key = "n", action = act.CopyMode("NextMatch") },
     { key = "N", mods = "SHIFT", action = act.CopyMode("PriorMatch") },
-    { key = "u", action = act.ScrollByPage(-0.5) },
-    { key = "d", action = act.ScrollByPage(0.5) },
-    { key = "u", mods = h.ctrl_or_cmd, action = act.ScrollByPage(-0.5) },
-    { key = "d", mods = h.ctrl_or_cmd, action = act.ScrollByPage(0.5) },
+    { key = "u", action = act.CopyMode({ MoveByPage = -0.5 }) },
+    { key = "d", action = act.CopyMode({ MoveByPage = 0.5 }) },
+    { key = "u", mods = h.ctrl_or_cmd, action = act.CopyMode({ MoveByPage = -0.5 }) },
+    { key = "d", mods = h.ctrl_or_cmd, action = act.CopyMode({ MoveByPage = 0.5 }) },
   })
 end
 
@@ -107,6 +107,15 @@ local function setupKeys(config)
         act.CopyMode("ClearPattern"),
       }),
     },
+    {
+      key = "u",
+      mods = "LEADER|" .. h.ctrl_or_cmd,
+      action = act.Multiple({
+        act.ActivateCopyMode,
+        act.ClearSelection,
+      }),
+    },
+    -- { key = "d", action = act.ScrollByPage(0.5) },
     {
       key = "q",
       mods = "LEADER",
