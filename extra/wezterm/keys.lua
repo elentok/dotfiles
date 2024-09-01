@@ -111,8 +111,11 @@ local function setupKeys(config)
       key = "u",
       mods = "LEADER|" .. h.ctrl_or_cmd,
       action = act.Multiple({
-        act.ActivateCopyMode,
         act.ClearSelection,
+        act.ActivateCopyMode,
+        act.CopyMode({ "ClearPattern" }),
+        act.CopyMode({ "ClearSelectionMode" }),
+        act.CopyMode({ MoveByPage = -0.5 }),
       }),
     },
     -- { key = "d", action = act.ScrollByPage(0.5) },
