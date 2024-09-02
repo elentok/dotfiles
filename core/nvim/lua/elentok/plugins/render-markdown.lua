@@ -8,32 +8,41 @@ return {
       icons = { "󰉫 ", "󰉬 ", "󰉭 ", "󰉮 ", "󰉯 ", "󰉰 " },
       sign = false,
     },
+    bullet = {
+      icons = { "󰄯 ", "○ ", "◆", "◇" },
+    },
     code = {
       sign = false,
       style = "normal",
       width = "block",
-      left_pad = 1,
+      left_pad = 0,
       right_pad = 1,
       position = "right",
       border = "thin",
     },
     checkbox = {
       unchecked = {
-        icon = "󰄱",
+        icon = "󱓼",
+        -- icon = "󰄱",
+        -- icon = "󰄰",
       },
       checked = {
-        icon = "",
+        icon = "󰄬",
+        -- icon = "",
+        -- icon = "󰗠",
       },
       custom = {
         waiting = {
           raw = "[w]",
-          rendered = "⏸",
+          -- rendered = "⏸",
+          rendered = "󰏦",
           highlight = "RenderMarkdownError",
         },
         in_progress = {
           raw = "[/]",
-          rendered = "◧",
-          highlight = "RenderMarkdownH5",
+          rendered = "󰪠",
+          -- rendered = "◧",
+          highlight = "RenderMarkdownWarn",
         },
         info = {
           raw = "[n]",
