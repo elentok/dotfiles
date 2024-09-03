@@ -118,6 +118,31 @@ local function setup_buffer()
   -- vim.wo.foldmethod = "indent"
 end
 
+local statuses = {
+  "󱓼 Todo",
+  "󰄬 Done",
+  "󰪠 In progress",
+  "󰏦 Waiting",
+}
+
+local function set_task_status()
+  require("fzf-lua").fzf_exec(statuses, {
+    prompt = "Status> ",
+    winopts = {
+      width = 20,
+      height = #statuses + 2,
+    },
+    actions = {
+      ["default"] = function(selected)
+        local status = selected[1]
+        print(status)
+      end,
+    },
+  })
+end
+
+vim.keymap.set("n", "<cr>x", set_task_status)
+
 local group_id = vim.api.nvim_create_augroup("Elentok_Markdown", {})
 
 vim.api.nvim_create_autocmd(
