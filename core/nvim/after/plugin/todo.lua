@@ -93,31 +93,6 @@ local function add_highlight(status)
   vim.api.nvim_set_hl(0, group, status.hl)
 end
 
--- ---@param status Status
--- local function add_conceal(status)
---   -- local text = status.text or status.name
---   -- vim.fn.matchadd("Conceal", "\\[" .. text .. "\\]", 20, -1, { conceal = status.conceal })
--- end
-
-local function setup_buffer()
-  for _, status in ipairs(config.statuses) do
-    if status.hl ~= nil then
-      add_highlight(status)
-    end
-    -- if status.conceal ~= nil then
-    --   add_conceal(status)
-    -- end
-  end
-
-  vim.fn.matchadd("TodoContext", "@[^ ]*")
-  vim.fn.matchadd("TodoImportant", " !.*$")
-
-  vim.api.nvim_set_hl(0, "TodoContext", { fg = "#88c0d0", italic = true })
-  vim.api.nvim_set_hl(0, "TodoImportant", { fg = "#d57780" })
-
-  -- vim.wo.foldmethod = "indent"
-end
-
 local statuses = {
   "󱓼 Todo",
   "󰄬 Done",
@@ -141,7 +116,32 @@ local function set_task_status()
   })
 end
 
-vim.keymap.set("n", "<cr>x", set_task_status)
+-- ---@param status Status
+-- local function add_conceal(status)
+--   -- local text = status.text or status.name
+--   -- vim.fn.matchadd("Conceal", "\\[" .. text .. "\\]", 20, -1, { conceal = status.conceal })
+-- end
+
+local function setup_buffer()
+  for _, status in ipairs(config.statuses) do
+    if status.hl ~= nil then
+      add_highlight(status)
+    end
+    -- if status.conceal ~= nil then
+    --   add_conceal(status)
+    -- end
+  end
+
+  vim.fn.matchadd("TodoContext", "@[^ ]*")
+  vim.fn.matchadd("TodoImportant", " !.*$")
+
+  vim.api.nvim_set_hl(0, "TodoContext", { fg = "#88c0d0", italic = true })
+  vim.api.nvim_set_hl(0, "TodoImportant", { fg = "#d57780" })
+
+  vim.keymap.set("n", "<cr>s", set_task_status, { buffer = true })
+
+  -- vim.wo.foldmethod = "indent"
+end
 
 local group_id = vim.api.nvim_create_augroup("Elentok_Markdown", {})
 
