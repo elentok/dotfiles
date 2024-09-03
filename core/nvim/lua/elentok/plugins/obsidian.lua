@@ -61,6 +61,12 @@ return {
       -- ui = ui_config,
       ui = {
         enable = false,
+        checkboxes = {
+          [" "] = {},
+          ["/"] = {},
+          ["w"] = {},
+          ["x"] = {},
+        },
       },
       mappings = {
         ["gf"] = mappings.gf_passthrough(),
