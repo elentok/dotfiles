@@ -9,7 +9,10 @@ return {
       sign = false,
     },
     bullet = {
-      icons = { "󰄯 ", "○ ", "◆", "◇" },
+      -- icons = { " ", "○ ", "◆", "◇" },
+      -- icons = { " " },
+      -- icons = { " " },
+      icons = { " " },
     },
     code = {
       sign = false,
