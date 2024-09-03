@@ -47,9 +47,10 @@ return {
           -- rendered = "◧",
           highlight = "RenderMarkdownWarn",
         },
-        info = {
-          raw = "[n]",
-          rendered = "󰎚",
+        code_review = {
+          raw = "[r]",
+          rendered = "",
+          highlight = "TodoCode_review",
         },
       },
     },

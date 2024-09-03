@@ -6,14 +6,15 @@ local DONE_COLOR = "#6C7A96"
 ---@class StatusOptions
 ---@field name string
 ---@field text? string
----@field conceal? string
+---@field icon? string
 ---@field hl? table<string, any>
 
 ---@class Status
 ---@field name string
----@field text string
+---@field title string
+---@field char string
 ---@field index integer
----@field conceal? string
+---@field icon? string
 ---@field hl? table<string, any>
 
 ---@class SetupOptions
@@ -24,38 +25,38 @@ local DONE_COLOR = "#6C7A96"
 
 local default_statuses = {
   {
-    name = "open",
-    text = " ",
-    conceal = "☐",
+    name = "todo",
+    title = "Todo",
+    char = " ",
+    icon = "󱓼",
   },
   {
-    name = "inprogress",
-    -- hl = { bg = "#EBCB8B", fg = "#000000" },
+    name = "in_progress",
+    title = "In progress",
+    char = "/",
+    icon = "󰪠",
     hl = { fg = "#EBCB8B" },
-    -- conceal = "😎",
-    text = "/",
-    conceal = "◧",
   },
   {
     name = "waiting",
+    title = "Waiting",
+    char = "w",
+    icon = "󰏦",
     hl = { fg = "#C27D00" },
-    text = "?",
-    -- conceal = "⌛",
-    -- conceal = "⌚",
-    -- conceal = "⌚",
-    conceal = "⏸",
   },
   {
-    name = "codereview",
+    name = "code_review",
+    title = "Code Review",
+    char = "r",
+    icon = "",
     hl = { fg = "#9369DB" },
-    conceal = "📖",
   },
   {
     name = "done",
-    text = "x",
+    title = "Done",
+    char = "x",
     hl = { fg = DONE_COLOR },
-    -- conceal = "✓",
-    conceal = "",
+    icon = "󰄬",
   },
 }
 
@@ -66,13 +67,7 @@ local function build_statuses(options)
   local statuses = {}
 
   for index, status_options in ipairs(options) do
-    table.insert(statuses, {
-      name = status_options.name,
-      text = status_options.text or status_options.name,
-      hl = status_options.hl,
-      conceal = status_options.conceal,
-      index = index,
-    })
+    table.insert(statuses, vim.tbl_extend("force", { index = index }, status_options))
   end
 
   return statuses
@@ -87,39 +82,48 @@ local config = {
 local function add_highlight(status)
   local capitalized_name = status.name:sub(1, 1):upper() .. status.name:sub(2)
   local group = "Todo" .. capitalized_name
-  local text = status.text or status.name
 
-  vim.fn.matchadd(group, "\\[" .. text .. "\\].*$")
+  vim.fn.matchadd(group, "\\[" .. status.char .. "\\].*$")
   vim.api.nvim_set_hl(0, group, status.hl)
 end
 
-local statuses = {
-  "󱓼 Todo",
-  "󰄬 Done",
-  "󰪠 In progress",
-  "󰏦 Waiting",
-}
+local statuses_with_icons = {}
+for _, status in ipairs(config.statuses) do
+  table.insert(statuses_with_icons, status.icon .. " " .. status.title)
+end
+
+local function replace_in_current_line(pattern, replacement)
+  local line = vim.api.nvim_get_current_line()
+  put(line)
+  local new_line = line:gsub(pattern, replacement)
+  put(new_line)
+  vim.api.nvim_set_current_line(new_line)
+end
 
 local function set_task_status()
-  require("fzf-lua").fzf_exec(statuses, {
+  require("fzf-lua").fzf_exec(statuses_with_icons, {
     prompt = "Status> ",
     winopts = {
       width = 20,
-      height = #statuses + 2,
+      height = #statuses_with_icons + 2,
     },
     actions = {
       ["default"] = function(selected)
-        local status = selected[1]
-        print(status)
+        local status_line = selected[1]
+        local index = vim.fn.index(statuses_with_icons, status_line)
+        local status = config.statuses[index + 1]
+        put(status)
+        -- TODO: fix this
+        replace_in_current_line("\\[?\\]", "[" .. status.char .. "]")
       end,
     },
   })
 end
 
 -- ---@param status Status
--- local function add_conceal(status)
+-- local function add_icon(status)
 --   -- local text = status.text or status.name
---   -- vim.fn.matchadd("Conceal", "\\[" .. text .. "\\]", 20, -1, { conceal = status.conceal })
+--   -- vim.fn.matchadd("Conceal", "\\[" .. text .. "\\]", 20, -1, { conceal = status.icon })
 -- end
 
 local function setup_buffer()
@@ -127,8 +131,8 @@ local function setup_buffer()
     if status.hl ~= nil then
       add_highlight(status)
     end
-    -- if status.conceal ~= nil then
-    --   add_conceal(status)
+    -- if status.icon ~= nil then
+    --   add_icon(status)
     -- end
   end
 
