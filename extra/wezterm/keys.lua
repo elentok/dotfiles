@@ -113,8 +113,8 @@ local function setupKeys(config)
       action = act.Multiple({
         act.ClearSelection,
         act.ActivateCopyMode,
-        act.CopyMode({ "ClearPattern" }),
-        act.CopyMode({ "ClearSelectionMode" }),
+        act.CopyMode("ClearPattern"),
+        act.CopyMode("ClearSelectionMode"),
         act.CopyMode({ MoveByPage = -0.5 }),
       }),
     },
