@@ -95,7 +95,7 @@ end
 local function replace_in_current_line(pattern, replacement)
   local line = vim.api.nvim_get_current_line()
   put(line)
-  local new_line = line:gsub(pattern, replacement)
+  local new_line = string.gsub(line, pattern, replacement)
   put(new_line)
   vim.api.nvim_set_current_line(new_line)
 end
@@ -112,9 +112,7 @@ local function set_task_status()
         local status_line = selected[1]
         local index = vim.fn.index(statuses_with_icons, status_line)
         local status = config.statuses[index + 1]
-        put(status)
-        -- TODO: fix this
-        replace_in_current_line("\\[?\\]", "[" .. status.char .. "]")
+        replace_in_current_line("%[.%]", "[" .. status.char .. "]")
       end,
     },
   })
@@ -153,10 +151,6 @@ vim.api.nvim_create_autocmd(
   { "BufRead", "WinNew" },
   { pattern = "*.md", group = group_id, callback = setup_buffer }
 )
-
--- vim.keymap.set("n", "<leader>jt", function()
---   require("telescope.builtin").grep_string({ search = "[ ]", search_dirs = { vim.fn.expand("%") } })
--- end, { desc = "Jump to open task" })
 
 local function todo_toggle_done()
   local line = vim.fn.getline(".")
