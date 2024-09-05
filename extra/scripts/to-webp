@@ -1,0 +1,26 @@
+#!/usr/bin/env fish
+
+if test (count $argv) -eq 0
+    echo "Usage: to-webp <file>"
+    exit 1
+end
+
+set source $argv[1]
+set target (path change-extension '.webp' $source)
+
+cwebp -q 80 $argv[1] -o $target
+
+function kb
+    math (stat --format=%s $argv[1]) / 1000
+end
+
+kb $source
+
+set source_kbs (kb $source)
+set target_kbs (kb $target)
+set reduction (math "round(($source_kbs - $target_kbs) / $source_kbs * 100)")
+
+# echo
+echo "Original size:  $source_kbs""kb"
+echo "Target size:    $target_kbs""kb"
+echo "Size reduced by $reduction""%"
