@@ -2,18 +2,20 @@
 
 MAX_LENGTH=15
 
-HOSTNAME=`hostname | sed 's/\.local//'`
+hostname=$(hostname | sed -E 's/\.local(domain)?//')
 
-if [[ ${#HOSTNAME} -gt $MAX_LENGTH ]]; then
-  HOSTNAME=`echo $HOSTNAME | sed 's/[-_]//g'`
+# remove dashes and underscores
+if [[ ${#hostname} -gt $MAX_LENGTH ]]; then
+  hostname=${hostname//[-_]/}
 fi
 
-if [[ ${#HOSTNAME} -gt $MAX_LENGTH ]]; then
-  HOSTNAME=`echo $HOSTNAME | sed 's/[iau]//g'`
+# remove i, a and u
+if [[ ${#hostname} -gt $MAX_LENGTH ]]; then
+  hostname=${hostname//[iau]/}
 fi
 
-if [[ ${#HOSTNAME} -gt $MAX_LENGTH ]]; then
-  HOSTNAME=`echo $HOSTNAME | cut -c 1-15`
+if [[ ${#hostname} -gt $MAX_LENGTH ]]; then
+  hostname=$(echo "$hostname" | cut -c 1-15)
 fi
 
-echo $HOSTNAME
+echo "$hostname"
