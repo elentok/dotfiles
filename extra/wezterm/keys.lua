@@ -42,7 +42,7 @@ end
 
 local function setupKeys(config)
   config.key_tables = {}
-  config.leader = { key = "e", mods = "CMD" }
+  config.leader = { key = "e", mods = h.ctrl_or_cmd }
   config.keys = {
     -- Pane actions
     { key = "s", mods = "LEADER", action = act.SplitPane({ direction = "Down" }) },
