@@ -33,7 +33,9 @@ local function setupUi(config)
   -- config.color_scheme = "MaterialDarker",
   config.audible_bell = "Disabled"
 
-  config.window_decorations = "RESIZE"
+  if h.is_macos() then
+    config.window_decorations = "RESIZE"
+  end
   config.tab_bar_at_bottom = true
   config.use_fancy_tab_bar = true
   config.tab_max_width = 30
