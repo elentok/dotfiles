@@ -1,0 +1,26 @@
+#!/usr/bin/env fish
+
+echo
+echo "This script will create wpa_supplicant.conf with the WiFi settings"
+
+read --prompt-str "Enter the country (e.g US): " --local country
+read --prompt-str "Enter the SSID: " --local ssid
+read --prompt-str "Enter the password: " --local password
+
+echo >wpa_supplicant.conf "\
+country=$country
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+network={
+  scan_ssid=1
+  ssid=\"$ssid\"
+  psk=\"$password\"
+}
+"
+
+echo
+echo "Wrote:"
+echo
+
+cat wpa_supplicant.conf
