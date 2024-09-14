@@ -9,7 +9,7 @@ function tmux-set-title
     end
 
     if test -z "$argv[1]"
-        set suffix " "
+        set suffix "  "
     else
         set suffix "$argv[1]"
     end

@@ -17,7 +17,7 @@ local function set_tmux_title()
     end
   end
 
-  local title = dir .. branch .. " "
+  local title = dir .. branch .. "  "
 
   vim.fn.system("tmux rename-window " .. vim.fn.shellescape(title), {})
 end
