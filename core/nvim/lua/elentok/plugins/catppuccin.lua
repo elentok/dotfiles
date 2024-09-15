@@ -37,6 +37,7 @@ return {
       indent_blankline = true,
       render_markdown = true,
       native_lsp = true,
+      diffview = true,
     },
     custom_highlights = function(colors)
       return {
