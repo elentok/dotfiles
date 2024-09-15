@@ -137,6 +137,9 @@
   ; Set the default branch of new repositories to "main"
   defaultBranch = main
 
+[rerere]
+	enabled = true
+
 [include]
   path = ~/.dotlocal/gitconfig
   path = ~/.dotfiles/core/git/delta.gitconfig
