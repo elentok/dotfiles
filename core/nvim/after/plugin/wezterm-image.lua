@@ -10,9 +10,11 @@ local function preview_image_at_cursor()
   local line = vim.api.nvim_get_current_line()
 
   local url = line:match("%((.-)%)")
-  local expanded_url = expand(url):gsub("file://", "")
-  put("expanded", expanded_url)
+  if url == nil then
+    url = vim.fn.expand("<cfile>")
+  end
 
+  local expanded_url = expand(url):gsub("file://", "")
   preview_image(expanded_url)
 end
 
