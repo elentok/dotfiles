@@ -1,0 +1,13 @@
+#!/usr/bin/env fish
+
+set terminal_width (tput cols)
+set terminal_height (tput lines)
+
+# Check the orientation
+if test $terminal_width -gt (math "$terminal_height * 0.6")
+    # Landscape
+    wezterm imgcat --height 90% --hold $argv
+else
+    # Portrait
+    wezterm imgcat --width 90% --hold $argv
+end

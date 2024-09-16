@@ -7,7 +7,6 @@ require("status")
 local local_config_dir = os.getenv("HOME") .. "/.dotprivate/wezterm"
 
 local config = {
-  enable_kitty_graphics = true,
   adjust_window_size_when_changing_font_size = false,
 }
 setupUi(config)
