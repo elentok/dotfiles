@@ -53,10 +53,6 @@ function M.open_window(title, lines)
   return win
 end
 
-function M.current_word()
-  return api.nvim_call_function("expand", { "<cword>" })
-end
-
 function M.global_extend(name, values)
   local array = api.nvim_get_var(name)
   if array == nil then
