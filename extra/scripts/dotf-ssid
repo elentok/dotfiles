@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTF/core/scripts/lib/os.sh"
+
+if dotf-is-linux; then
+  iwgetid -r
+else
+  networksetup -getairportnetwork en0 | sed 's/Current Wi-Fi Network: //'
+fi
