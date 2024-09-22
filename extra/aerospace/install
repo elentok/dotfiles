@@ -4,6 +4,6 @@ set -euo pipefail
 
 source "$DOTF/framework.sh"
 
-# brew install --cask nikitabobko/tap/aerospace
+brew install --cask nikitabobko/tap/aerospace
 
 dotf-symlink "$DOTF/extra/aerospace/config.toml" ~/.aerospace.toml
