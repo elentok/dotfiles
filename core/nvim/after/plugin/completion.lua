@@ -59,7 +59,7 @@ local cmp_mapping = {
 cmp.setup({
   ---@diagnostic disable-next-line:missing-fields
   performance = {
-    max_view_entries = 7,
+    max_view_entries = 12,
     debounce = 150,
     async_budget = 30,
   },
