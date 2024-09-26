@@ -17,6 +17,11 @@ vim.keymap.set("n", "<leader>wj", "<c-w>j", { desc = "Window down" })
 vim.keymap.set("n", "<leader>wk", "<c-w>k", { desc = "Window up" })
 vim.keymap.set("n", "<leader>wl", "<c-w>l", { desc = "Window right" })
 
+vim.keymap.set("n", "<leader>wH", "<c-w>H", { desc = "Move Window left" })
+vim.keymap.set("n", "<leader>wJ", "<c-w>J", { desc = "Move Window down" })
+vim.keymap.set("n", "<leader>wK", "<c-w>K", { desc = "Move Window up" })
+vim.keymap.set("n", "<leader>wL", "<c-w>L", { desc = "Move Window right" })
+
 vim.keymap.set("n", "<leader>bd", "<cmd>bd<cr>", { desc = ":bd" })
 
 vim.keymap.set("n", ",,", "<cmd>nohls<cr>")
