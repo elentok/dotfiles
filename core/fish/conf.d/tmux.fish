@@ -17,15 +17,29 @@ function tmux-set-title
     if test "$PWD" = "$HOME"
         set dir "~"
     else
-        set dir "$(basename $PWD)"
+        set dir (basename $PWD)
+        set dir (string-ellipsis 10 $dir)
     end
 
     set branch ""
     if test -n "$GIT_BRANCH" -a "$GIT_BRANCH" != main -a "$GIT_BRANCH" != "$dir"
-        set branch " ($GIT_BRANCH)"
+        set short_branch (string-ellipsis 10 $GIT_BRANCH)
+        set branch " ($short_branch)"
     end
 
     tmux rename-window "$dir$branch$suffix"
+end
+
+function string-ellipsis
+    set length $argv[1]
+    set text $argv[2]
+
+    if test (string length $text) -gt $length
+        echo (string sub -l $length $text)...
+    else
+        echo $text
+    end
+
 end
 
 function change-git-branch-on-dirchange --on-variable PWD

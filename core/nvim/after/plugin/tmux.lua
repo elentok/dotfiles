@@ -1,5 +1,13 @@
 local uv = vim.loop
 
+local function ellipsis(length, text)
+  if #text > length then
+    return string.sub(text, 0, length) .. "..."
+  else
+    return text
+  end
+end
+
 local function set_tmux_title()
   if not vim.env.TMUX then
     return
@@ -7,13 +15,14 @@ local function set_tmux_title()
   local cwd = vim.fn.getcwd()
   local dir = "~"
   if cwd ~= uv.os_homedir() then
-    dir = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+    dir = ellipsis(10, vim.fn.fnamemodify(vim.fn.getcwd(), ":t"))
   end
+
   local branch = ""
   local branchVar = vim.env.GIT_BRANCH
   if branchVar ~= nil and #branchVar > 0 then
     if branchVar ~= "main" and branchVar ~= dir then
-      branch = " (" .. branchVar .. ")"
+      branch = " (" .. ellipsis(10, branchVar) .. ")"
     end
   end
 
