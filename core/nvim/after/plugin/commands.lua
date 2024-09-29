@@ -18,7 +18,7 @@ create_cmd("Delete", function()
     return
   end
 
-  vim.api.nvim_buf_delete(0, { froce = true })
+  vim.api.nvim_buf_delete(0, { force = true })
 end, {})
 
 create_cmd("DotReload", function()

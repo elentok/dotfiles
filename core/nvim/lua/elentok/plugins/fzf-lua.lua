@@ -52,6 +52,7 @@ return {
     keymap = {
       fzf = {
         ["ctrl-q"] = "select-all+accept",
+        ["ctrl-l"] = "select-all+accept",
         ["ctrl-d"] = "half-page-down",
         ["ctrl-u"] = "half-page-up",
         ["ctrl-w"] = "toggle-preview-wrap",
