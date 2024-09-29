@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-WIDTH='80%'
-HEIGHT='80%'
+WIDTH='90%'
+HEIGHT='90%'
 SESSION_NAME="Floating"
 
 function main() {
