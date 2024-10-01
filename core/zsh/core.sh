@@ -60,7 +60,9 @@ fi
 # Node-gyp doesn't support Python 3.11
 if dotf-is-mac; then
   NODE_GYP_FORCE_PYTHON="$(command ls -1 /opt/homebrew/Cellar/python@3.10/*/bin/python3.10 | head)"
-  export NODE_GYP_FORCE_PYTHON
+  if [ -e "$NODE_GYP_FORCE_PYTHON" ]; then
+    export NODE_GYP_FORCE_PYTHON
+  fi
 fi
 
 # Go {{{1
