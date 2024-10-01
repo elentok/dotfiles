@@ -44,6 +44,10 @@ function setup-mac() {
 }
 
 function setup-homebrew() {
+  if dotf-is-linux; then
+    PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+  fi
+
   if ! has-command brew; then
     install-homebrew
   else
@@ -59,11 +63,6 @@ function setup-deno() {
     echo
   else
     brew install deno
-#   if dotf-is-mac; then
-#     brew install deno
-#   else
-#     curl -fsSL https://deno.land/x/install/install.sh | sh
-#   fi
   fi
 
 }
@@ -98,10 +97,6 @@ function install-homebrew() {
   fi
 
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-  if dotf-is-linux; then
-    PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
-  fi
 
   brew install gcc
 }
