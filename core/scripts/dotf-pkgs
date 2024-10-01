@@ -179,11 +179,16 @@ function homebrew-dep-stats() {
   echo "Dependencies per brew package:"
   pkg-managers | grep '^brew' | grep -v 'brew-extra' | while read -r manager; do
     list-pkgs "$manager" | while read -r pkg; do
-      lines="$(brew deps --tree --installed "$pkg" | wc -l)"
-      count="$((lines - 1))"
-      echo "$(printf %4d $count) $pkg"
+      count="$(homebrew-count-deps "$pkg")"
+      echo "$(printf %4d "$count") $pkg"
     done
   done | sort -n -r
+}
+
+function homebrew-count-deps() {
+  pkg="$1"
+  echo $(($(brew deps --tree --installed "$pkg" | grep -c -v '^\s*$') - 1))
+
 }
 
 function pkg-managers() {
