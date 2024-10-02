@@ -1,5 +1,7 @@
 local uv = vim.loop
 
+vim.opt.title = true
+
 local function ellipsis(length, text)
   if #text > length then
     return string.sub(text, 0, length) .. "..."
@@ -8,10 +10,10 @@ local function ellipsis(length, text)
   end
 end
 
-local function set_tmux_title()
-  if not vim.env.TMUX then
-    return
-  end
+local function set_tab_title()
+  -- if not vim.env.TMUX then
+  --   return
+  -- end
   local cwd = vim.fn.getcwd()
   local dir = "~"
   if cwd ~= uv.os_homedir() then
@@ -28,11 +30,12 @@ local function set_tmux_title()
 
   local title = dir .. branch .. "  "
 
-  vim.fn.system("tmux rename-window " .. vim.fn.shellescape(title), {})
+  vim.opt.titlestring = title
+  -- vim.fn.system("tmux rename-window " .. vim.fn.shellescape(title), {})
 end
 
 vim.api.nvim_create_autocmd({ "VimEnter", "DirChanged", "FocusGained" }, {
   callback = function()
-    set_tmux_title()
+    set_tab_title()
   end,
 })
