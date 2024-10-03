@@ -1,5 +1,21 @@
-local term = require("elentok/lib/terminal")
 -- vim: foldmethod=marker
+
+local ui = require("elentok.lib.ui")
+local term = require("elentok.lib.terminal")
+
+---@param cmd string
+local function confirm_force_if_modified(cmd)
+  if vim.bo.modified then
+    if ui.confirm("Buffer has unsaved changes, use '" .. cmd .. "!'?") then
+      vim.cmd(cmd .. "!")
+    else
+      print("Aborting")
+    end
+  else
+    vim.cmd(cmd)
+  end
+end
+
 vim.keymap.set("i", "jk", "<esc>")
 vim.keymap.set("i", "jl", "<esc>")
 vim.keymap.set("n", "<leader>k", ":")
@@ -22,7 +38,9 @@ vim.keymap.set("n", "<leader>wJ", "<c-w>J", { desc = "Move Window down" })
 vim.keymap.set("n", "<leader>wK", "<c-w>K", { desc = "Move Window up" })
 vim.keymap.set("n", "<leader>wL", "<c-w>L", { desc = "Move Window right" })
 
-vim.keymap.set("n", "<leader>bd", "<cmd>bd<cr>", { desc = ":bd" })
+vim.keymap.set("n", "<leader>bd", function()
+  confirm_force_if_modified("bd")
+end, { desc = ":bd" })
 
 vim.keymap.set("n", ",,", "<cmd>nohls<cr>")
 vim.keymap.set({ "n", "v" }, ",a", "A")
