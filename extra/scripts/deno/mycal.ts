@@ -1,7 +1,11 @@
 #!/usr/bin/env -S deno run --allow-env --allow-read --allow-run
 
 import chalk from "npm:chalk"
-import dayjs from "npm:dayjs"
+import dayjs from "https://esm.sh/dayjs"
+import weekOfYear from "https://esm.sh/dayjs/plugin/weekOfYear"
+
+dayjs.extend(weekOfYear)
+
 import { center } from "./lib/utils.ts"
 
 const FRIDAY = 5
@@ -23,6 +27,7 @@ interface Month {
 }
 
 interface Week {
+  number: number
   days: Array<dayjs.Dayjs | undefined>
 }
 
@@ -44,7 +49,7 @@ function printMonth({ start, weeks }: Month): void {
   )
   console.info(chalk.green(center(date, 27)))
 
-  console.info("Sun Mon Tue Wed Thu Fri Sat")
+  console.info("Wk Sun Mon Tue Wed Thu Fri Sat")
   weeks.forEach(printWeek)
   console.info()
 }
@@ -58,7 +63,7 @@ function prevMonth({ start }: Month): Month {
 }
 
 function buildWeeks(start: dayjs.Dayjs): Week[] {
-  let week: Week = { days: [] }
+  let week: Week = { number: start.week(), days: [] }
   let date = start.startOf("week")
   const weeks: Week[] = []
 
@@ -72,7 +77,7 @@ function buildWeeks(start: dayjs.Dayjs): Week[] {
 
     if (date.day() === SATURDAY) {
       weeks.push(week)
-      week = { days: [] }
+      week = { number: week.number + 1, days: [] }
     }
 
     date = date.add(1, "day")
@@ -85,13 +90,16 @@ function buildWeeks(start: dayjs.Dayjs): Week[] {
   return weeks
 }
 
-function printWeek({ days }: Week): void {
+function printWeek({ number, days }: Week): void {
   console.info(
-    days
-      .map((day) => {
-        if (day == null) return "   "
-        return formatDay(day)
-      })
+    [
+      chalk.gray(number.toString().padStart(2)),
+      ...days
+        .map((day) => {
+          if (day == null) return "   "
+          return formatDay(day)
+        }),
+    ]
       .join(" "),
   )
 }

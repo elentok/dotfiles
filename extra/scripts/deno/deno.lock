@@ -191,7 +191,9 @@
     }
   },
   "redirects": {
-    "https://deno.land/std/fs/mod.ts": "https://deno.land/std@0.213.0/fs/mod.ts"
+    "https://deno.land/std/fs/mod.ts": "https://deno.land/std@0.213.0/fs/mod.ts",
+    "https://esm.sh/dayjs": "https://esm.sh/dayjs@1.11.13",
+    "https://esm.sh/dayjs/plugin/weekOfYear": "https://esm.sh/dayjs@1.11.13/plugin/weekOfYear"
   },
   "remote": {
     "https://deno.land/std@0.213.0/assert/assert.ts": "bec068b2fccdd434c138a555b19a2c2393b71dfaada02b7d568a01541e67cdc5",
@@ -268,6 +270,10 @@
     "https://deno.land/std@0.213.0/path/windows/join_globs.ts": "ee2f4676c5b8a0dfa519da58b8ade4d1c4aa8dd3fe35619edec883ae9df1f8c9",
     "https://deno.land/std@0.213.0/path/windows/normalize.ts": "78126170ab917f0ca355a9af9e65ad6bfa5be14d574c5fb09bb1920f52577780",
     "https://deno.land/std@0.213.0/path/windows/normalize_glob.ts": "179c86ba89f4d3fe283d2addbe0607341f79ee9b1ae663abcfb3439db2e97810",
-    "https://deno.land/std@0.213.0/path/windows/resolve.ts": "75b2e3e1238d840782cee3d8864d82bfaa593c7af8b22f19c6422cf82f330ab3"
+    "https://deno.land/std@0.213.0/path/windows/resolve.ts": "75b2e3e1238d840782cee3d8864d82bfaa593c7af8b22f19c6422cf82f330ab3",
+    "https://esm.sh/dayjs@1.11.13": "9e26962f5cf0e45efb9d4ca5a43fabce85ba5e5027d0a8cfc30d6d10368a86f5",
+    "https://esm.sh/dayjs@1.11.13/plugin/weekOfYear": "268bc07dc37118f6d248f0d0179b5f9ea609d7d572ead69e420820d352da24b3",
+    "https://esm.sh/v135/dayjs@1.11.13/denonext/dayjs.mjs": "1cb45182e325c07c470907e10801bef7ff18b939bd2ed6545048024b3d01cf02",
+    "https://esm.sh/v135/dayjs@1.11.13/denonext/plugin/weekOfYear.js": "aa4e20293f5a4639b916e5d21b883ccddf189c6e2a036de9e418fa6b2a62cebf"
   }
 }
