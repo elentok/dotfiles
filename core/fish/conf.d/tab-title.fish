@@ -7,10 +7,12 @@ function fish_title
     end
 
     if test -z "$argv[1]"
-        set suffix "  "
+        set suffix ""
+        # set suffix "  "
         # set suffix "  "
     else
-        set suffix " > $argv[1]"
+        set cmd (string-ellipsis 10 $argv[1])
+        set suffix " > $cmd"
     end
 
     if test "$PWD" = "$HOME"
