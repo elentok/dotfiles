@@ -63,7 +63,7 @@ function prevMonth({ start }: Month): Month {
 }
 
 function buildWeeks(start: dayjs.Dayjs): Week[] {
-  let week: Week = { number: start.week(), days: [] }
+  let week: Week = { number: start.add(2, "days").week(), days: [] }
   let date = start.startOf("week")
   const weeks: Week[] = []
 
