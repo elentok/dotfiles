@@ -24,6 +24,7 @@ alias cw 'whichx cat'
 
 alias jw 'cd $(git-wt pick || pwd)'
 alias jp 'cd $(dotf-projects pick || pwd)'
+alias jt 'cd $(dotf-tmux-pick-workdir || pwd)'
 
 alias h 'help.ts'
 alias mycal 'mycal.ts'

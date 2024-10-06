@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+function list() {
+  tmux list-windows -a -F "#{window_name}:#{pane_index}:#{pane_current_path}" | cut -d: -f3 | sort -u | sed "s#$HOME#~#"
+}
+
+list | fzf --tmux | sed "s#~#$HOME#"
