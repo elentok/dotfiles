@@ -179,9 +179,10 @@ alt-tab = 'workspace-back-and-forth'
 alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
-alt-shift-semicolon = 'mode service'
+# alt-shift-semicolon = 'mode service'
 
-alt-quote = 'mode service'
+# alt-quote = 'mode service'
+alt-semicolon = 'mode service'
 
 
 # 'service' binding mode declaration.
@@ -190,6 +191,7 @@ alt-quote = 'mode service'
 esc = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main'] # reset layout
 f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
+x = ['fullscreen', 'mode main'] # Toggle between fullscreen
 backspace = ['close-all-windows-but-current', 'mode main']
 
 
