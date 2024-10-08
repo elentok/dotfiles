@@ -21,6 +21,7 @@ function main() {
   install-if-missing curl curl
 
   setup-homebrew
+  setup-fish
 
   if dotf-is-mac; then
     setup-mac
@@ -53,6 +54,20 @@ function setup-homebrew() {
   else
     echo '- Updating brew... '
     brew update
+  fi
+}
+
+function setup-fish() {
+  echo "- Setting up fish..."
+  if has-command fish; then
+    echo "  Fish is already installed."
+    echo
+  else
+    if dotf-is-mac; then
+      brew install fish
+    else
+      sudo apt install -y fish
+    fi
   fi
 }
 
