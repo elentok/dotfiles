@@ -10,3 +10,7 @@ vim.keymap.set(
   "<Cmd>FzfLua blines query='#'<cr>",
   { desc = "Jump to heading", buffer = 0 }
 )
+
+vim.keymap.set("n", "<cr>s", function()
+  require("elentok.todo.set-task-status")()
+end, { desc = "Set task status", buffer = 0 })

@@ -1,3 +1,5 @@
+local checkbox = require("elentok.todo.render-markdown-checkbox-config")()
+
 return {
   "MeanderingProgrammer/render-markdown.nvim",
   version = "*",
@@ -23,37 +25,42 @@ return {
       position = "right",
       border = "thin",
     },
-    checkbox = {
-      unchecked = {
-        icon = "󱓼",
-        -- icon = "󰄱",
-        -- icon = "󰄰",
-      },
-      checked = {
-        icon = "󰄬",
-        -- icon = "",
-        -- icon = "󰗠",
-      },
-      custom = {
-        waiting = {
-          raw = "[w]",
-          -- rendered = "⏸",
-          rendered = "󰏦",
-          highlight = "RenderMarkdownError",
-        },
-        in_progress = {
-          raw = "[/]",
-          rendered = "󰪠",
-          -- rendered = "◧",
-          highlight = "RenderMarkdownWarn",
-        },
-        code_review = {
-          raw = "[r]",
-          rendered = "",
-          highlight = "TodoCode_review",
-        },
-      },
-    },
+    checkbox = checkbox,
+    -- checkbox = {
+    --   unchecked = {
+    --     icon = "󱓼",
+    --     -- icon = "󰄱",
+    --     -- icon = "󰄰",
+    --   },
+    --   checked = {
+    --     icon = "󰄬",
+    --     scope_highlight = "TodoDone",
+    --     -- icon = "",
+    --     -- icon = "󰗠",
+    --   },
+    --   custom = {
+    --     waiting = {
+    --       raw = "[w]",
+    --       -- rendered = "⏸",
+    --       rendered = "󰏦",
+    --       highlight = "RenderMarkdownError",
+    --       scope_highlight = "TodoWaiting",
+    --     },
+    --     in_progress = {
+    --       raw = "[/]",
+    --       rendered = "󰪠",
+    --       -- rendered = "◧",
+    --       highlight = "RenderMarkdownWarn",
+    --       scope_highlight = "TodoIn_progress",
+    --     },
+    --     code_review = {
+    --       raw = "[r]",
+    --       rendered = "",
+    --       highlight = "TodoCode_review",
+    --       scope_highlight = "TodoCode_review",
+    --     },
+    --   },
+    -- },
     -- Fix a bug with the callouts where it shows the "]" after the rendered
     -- text (just added a space at the end)
     callout = {
