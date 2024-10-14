@@ -27,6 +27,10 @@ local function add_file_patch()
   git.run({ "add", "-p", vim.fn.expand("%") })
 end
 
+local function checkout_file_patch()
+  git.run({ "checkout", "-p", vim.fn.expand("%") })
+end
+
 local function write_and_add_file()
   vim.cmd("write")
   vim.system({ "git", "add", vim.fn.expand("%") }):wait()
@@ -35,6 +39,7 @@ end
 
 -- vim.keymap.set("n", "<leader>ga", "<cmd>Gap<cr>", { desc = "Git add (patch)" })
 vim.keymap.set("n", "<leader>ga", add_file_patch, { desc = "Git add file (patch)" })
+vim.keymap.set("n", "<leader>gu", checkout_file_patch, { desc = "Git checkout file (patch)" })
 vim.keymap.set("n", "<leader>gw", write_and_add_file, { desc = "Write + Stage" })
 vim.keymap.set("n", "<leader>gr", git_reset_file_changes, { desc = "Reset git changes" })
 
