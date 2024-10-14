@@ -20,6 +20,9 @@ function main() {
   shift || true
 
   case "$cmd" in
+  l | list)
+    list-pkgs "$@"
+    ;;
   i | install)
     install-pkgs "$@"
     ;;
@@ -136,17 +139,17 @@ function upgrade-pkgs() {
   dotf-header h2 '[dotf-pkgs] Updating packages...'
 
   dotf-header h3 '[dotf-pkgs] Updating pip packages...'
-  # shellcheck disable=SC2046
-  pip3 install --upgrade --user --break-system-packages $(get-pkgs pip)
+  list-pkgs pip | pip3 install --upgrade --user --break-system-packages
 
   dotf-header h3 '[dotf-pkgs] Updating npm packages...'
   eval "$(fnm env --use-on-cd)"
+  list-pkgs npm | xargs npm install -g
 
-  # shellcheck disable=SC2046
-  npm install -g $(get-pkgs npm)
+  dotf-header h3 '[dotf-pkgs] Updating brew packages...'
+  list-pkgs brew | xargs brew upgrade
 
-  # shellcheck disable=SC2046
-  dotf-mason -f $(get-pkgs mason)
+  dotf-header h3 '[dotf-pkgs] Updating mason packages...'
+  list-pkgs mason | xargs dotf-mason -f
 }
 
 function has-pkgs() {
