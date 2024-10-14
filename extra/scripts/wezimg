@@ -1,13 +1,45 @@
 #!/usr/bin/env fish
 
-set terminal_width (tput cols)
-set terminal_height (tput lines)
+function tmux-wezimg
+    set tab_width (tmux display -p '#{window_width}')
+    set tab_height (tmux display -p '#{window_height}')
 
-# Check the orientation
-if test $terminal_width -gt (math "$terminal_height * 0.6")
-    # Landscape
-    wezterm imgcat --height 90% --hold $argv
+    set pane_width (tput cols)
+    set pane_height (tput lines)
+
+    # Check the orientation
+    if test $pane_width -gt (math "$pane_height * 0.5")
+        # Landscape
+        set height (math "round ($pane_height / $tab_height * 90)")
+        wezterm imgcat --height "$height%" --hold $argv
+    else
+        set width (math "round ($pane_width / $tab_width * 90)")
+        # Portrait
+        wezterm imgcat --width "$width%" --hold $argv
+    end
+end
+
+function regular-wezimg
+    set terminal_width (tput cols)
+    set terminal_height (tput lines)
+
+    echo width $terminal_width
+    echo height $terminal_height
+
+    # Check the orientation
+    if test $terminal_width -gt (math "$terminal_height * 0.6")
+        echo landscape
+        # Landscape
+        wezterm imgcat --height 90% --hold $argv
+    else
+        echo portrait
+        # Portrait
+        # wezterm imgcat --width 90% --hold $argv
+    end
+end
+
+if test -n "$TMUX"
+    tmux-wezimg $argv
 else
-    # Portrait
-    wezterm imgcat --width 90% --hold $argv
+    regular-wezimg $argv
 end
