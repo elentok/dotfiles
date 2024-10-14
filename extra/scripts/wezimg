@@ -1,5 +1,13 @@
 #!/usr/bin/env fish
 
+function main
+    if test -n "$TMUX"
+        tmux-wezimg $argv
+    else
+        regular-wezimg $argv
+    end
+end
+
 function tmux-wezimg
     set tab_width (tmux display -p '#{window_width}')
     set tab_height (tmux display -p '#{window_height}')
@@ -7,16 +15,18 @@ function tmux-wezimg
     set pane_width (tput cols)
     set pane_height (tput lines)
 
+    clear
     # Check the orientation
-    if test $pane_width -gt (math "$pane_height * 0.5")
+    if test $pane_width -gt (math "$pane_height * 2")
         # Landscape
         set height (math "round ($pane_height / $tab_height * 90)")
-        wezterm imgcat --height "$height%" --hold $argv
+        wezterm imgcat --height "$height%" --hold --no-move-cursor $argv
     else
-        set width (math "round ($pane_width / $tab_width * 90)")
         # Portrait
-        wezterm imgcat --width "$width%" --hold $argv
+        set width (math "round ($pane_width / $tab_width * 90)")
+        wezterm imgcat --width "$width%" --hold --no-move-cursor $argv
     end
+    clear
 end
 
 function regular-wezimg
@@ -27,19 +37,13 @@ function regular-wezimg
     echo height $terminal_height
 
     # Check the orientation
-    if test $terminal_width -gt (math "$terminal_height * 0.6")
-        echo landscape
+    if test $terminal_width -gt (math "$terminal_height * 2")
         # Landscape
         wezterm imgcat --height 90% --hold $argv
     else
-        echo portrait
         # Portrait
-        # wezterm imgcat --width 90% --hold $argv
+        wezterm imgcat --width 90% --hold $argv
     end
 end
 
-if test -n "$TMUX"
-    tmux-wezimg $argv
-else
-    regular-wezimg $argv
-end
+main $argv
