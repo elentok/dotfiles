@@ -38,6 +38,12 @@ vim.keymap.set("n", "<leader>wJ", "<c-w>J", { desc = "Move Window down" })
 vim.keymap.set("n", "<leader>wK", "<c-w>K", { desc = "Move Window up" })
 vim.keymap.set("n", "<leader>wL", "<c-w>L", { desc = "Move Window right" })
 
+vim.keymap.set("n", "<leader>we", "<c-w>=", { desc = "Window equal size" })
+vim.keymap.set("n", "<leader>w/", "5<c-w>>", { desc = "Window equal size" })
+vim.keymap.set("n", "<leader>w,", "5<c-w><", { desc = "Window equal size" })
+vim.keymap.set("n", "<leader>wi", "5<c-w>+", { desc = "Window equal size" })
+vim.keymap.set("n", "<leader>wu", "5<c-w>-", { desc = "Window equal size" })
+
 vim.keymap.set("n", "<leader>bd", function()
   confirm_force_if_modified("bd")
 end, { desc = ":bd" })
