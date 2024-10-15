@@ -185,6 +185,7 @@ alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 alt-semicolon = 'mode service'
 alt-a = 'mode service'
 alt-e = 'mode service'
+alt-m = 'mode service'
 
 
 # 'service' binding mode declaration.
