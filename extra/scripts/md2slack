@@ -6,14 +6,21 @@ if not type -q md2slack-plugin
     end
 end
 
+set codereview "In coderview:"
+set waiting ":double_vertical_bar:" # :arrow_forward:
+set inprogress "◐" # :arrow_forward:
+set done "✓" #:white_check_mark: 
+
+
 sed 's/  /    /g' \
     | sed -E 's/\[([^]]+)\]\(\.\.[^)]*\)/\1/' \
     | sed -E 's/\[\[.*\|(.*)\]\]/\1/' \
     | md2slack-plugin \
     | sed -E 's/\[ \]( -)?/☐/' \
-    | sed -E 's#\[/\]( -)?#:arrow_forward:#' \
-    | sed -E 's/\[w\]( -)?/:double_vertical_bar:/' \
-    | sed -E 's/\[x\]( -)?/:white_check_mark:/' \
+    | sed -E "s#\[/\]( -)?#$inprogress#" \
+    | sed -E "s/\[w\]( -)?/$waiting/" \
+    | sed -E "s/\[r\]( -)?/$codereview/" \
+    | sed -E "s/\[x\]( -)?/$done/" \
     | sed -E 's/^### (.*)$/*\1*/' \
     | sed -E 's/^## (.*)$/```## \1```/' \
     | sed -E 's/^# (.*)$/```# \1```/' \
