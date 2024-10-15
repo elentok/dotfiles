@@ -73,13 +73,17 @@ function M.find_buffer_git_root()
   return M.find_git_root(path)
 end
 
+local function is_unsaved_buffer()
+  return vim.api.nvim_buf_get_name(0) == ""
+end
+
 -- When in a fugitive buffer, returns the fugitive directory,
 -- When the current buffer is outside the current workdir it returns
 -- the git root for that buffer,
 -- Otherwise, returns nil.
 ---@return string|nil
 local function identify_workdir()
-  if is_buffer_in_cwd() then
+  if is_unsaved_buffer() or is_buffer_in_cwd() then
     return nil
   end
 
