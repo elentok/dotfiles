@@ -1,0 +1,44 @@
+#!/usr/bin/env fish
+
+function main
+    set total 0
+    for file in $argv
+        set -l time (video-time $file)
+        set -l seconds (time-to-seconds $time)
+        set total (math "$total + $seconds")
+        echo "$time $file"
+    end
+
+    echo
+    set total_time (seconds-to-time $total)
+    echo "Total: $total_time"
+end
+
+function video-time
+    ffprobe $argv[1] 2>&1 | grep Duration | awk '{ print $2 }' | cut -d\. -f1
+end
+
+function time-to-seconds
+    set time_str $argv[1]
+    set -l hours (echo $time_str | cut -d: -f1)
+    set -l minutes (echo $time_str | cut -d: -f2)
+    set -l seconds (echo $time_str | cut -d: -f3)
+
+    set -l total_seconds (math "$hours * 3600 + $minutes * 60 + $seconds")
+    echo $total_seconds
+end
+
+function seconds-to-time
+    set -l total_seconds $argv[1]
+
+    # Calculate hours, minutes, and remaining seconds
+    set -l hours (math "floor($total_seconds / 3600)")
+    set -l remaining_seconds (math "$total_seconds - $hours * 3600")
+    set -l minutes (math "floor($remaining_seconds / 60)")
+    set -l seconds (math "$remaining_seconds - $minutes * 60")
+
+    # Format the output as hh:mm:ss with zero-padding
+    printf "%02d:%02d:%02d" $hours $minutes $seconds
+end
+
+main $argv
