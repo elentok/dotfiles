@@ -4,10 +4,10 @@ local act = wezterm.action
 local nvimScrollbackKey = require("nvim-scrollback")
 
 local function mapCmdToCtrl(config)
-  -- Removed "e" on purpose since Cmd+E is the leader key
+  -- Removed "b" on purpose since Cmd+E is the leader key
   -- Removed "v" on purpose since Cmd+V pastes
   -- Removed "hjkl" since they are used to switch panes
-  local keys = "bcdefgimnopqrstuwxyz[]\\^_0;"
+  local keys = "acdefgimnopqrstuwxyz[]\\^_0;"
   for i = 1, #keys do
     local key = string.sub(keys, i, i)
     table.insert(
