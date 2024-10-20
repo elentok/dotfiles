@@ -8,6 +8,16 @@ main() {
   fi
 
   setup_authorized_keys
+
+  echo
+  echo "For extra security:"
+  echo
+  echo "1. Add a public key to ~/.ssh/authorized_keys"
+  echo "2. Disable password auth:"
+  echo
+  echo "      PasswordAuthentication no"
+  echo
+  echo "3. Run 'systemctl restart ssh'"
 }
 
 setup_authorized_keys() {
