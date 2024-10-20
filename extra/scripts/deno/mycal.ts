@@ -1,6 +1,6 @@
 #!/usr/bin/env -S deno run --allow-env --allow-read --allow-run
 
-import { bold, gray, green, red } from "jsr:@std/fmt/colors"
+import { bgBlue, black, bold, gray, green } from "jsr:@std/fmt/colors"
 import dayjs from "https://esm.sh/dayjs@1.11.13"
 import weekOfYear from "https://esm.sh/dayjs@1.11.13/plugin/weekOfYear"
 
@@ -108,7 +108,7 @@ function formatDay(day: dayjs.Dayjs): string {
   const text = day.date().toString().padStart(3)
 
   if (day.isSame(TODAY, "day")) {
-    return red(bold(text))
+    return bgBlue(black(bold(text)))
   }
 
   if (isWeekend(day)) {
