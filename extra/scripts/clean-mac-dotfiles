@@ -1,0 +1,41 @@
+#!/usr/bin/env fish
+
+set exclude ".fseventsd" ".Spotlight-V100" ".Trashes"
+
+function main
+    set -l count 0
+
+    for file in **/.*
+        if should_delete $file
+            echo "- deleting $file"
+            rm $file
+            set -l count (math "$count + 1")
+        else
+            echo "- excluding $file"
+        end
+    end
+
+    echo
+    echo "Deleted $count files"
+end
+
+function should_delete
+    set -l file $argv[1]
+    set -l basename (basename $file)
+
+    if contains $basename $exclude
+        return 1
+    end
+
+    if test $basename = ".DS_Store"
+        return 0
+    end
+
+    if grep 'This resource fork intentionally left blank' $file >/dev/null
+        return 0
+    end
+
+    return 1
+end
+
+main
