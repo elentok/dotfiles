@@ -1,8 +1,7 @@
 #!/usr/bin/env -S deno run --allow-env --allow-read --allow-run --allow-write
 
-import * as path from "node:path"
-import * as fs from "node:fs"
-import UglifyES from "npm:uglify-es"
+import * as path from "jsr:@std/path"
+import { minify } from "https://esm.sh/terser@5.36.0"
 
 const HEADER = `<!DOCTYPE html>
 <html>
@@ -28,23 +27,26 @@ if (Deno.args.length > 0) {
 }
 
 const outputFilename = path.join(dirname, "bookmarklets.html")
-const stream = fs.createWriteStream(outputFilename)
-stream.write(HEADER)
+const contents = [HEADER]
 
-fs.readdirSync(dirname).forEach((file) => {
-  if (!/\.js/.test(file)) return
+for (const file of Deno.readDirSync(dirname)) {
+  if (!/\.js/.test(file.name)) continue
 
-  console.info(`Building ${file}...`)
+  console.info(`Building ${file.name}...`)
 
-  const source = fs.readFileSync(path.join(dirname, file)).toString()
-  const result = UglifyES.minify(source)
+  const source = Deno.readTextFileSync(path.join(dirname, file.name))
+  const result = await minify(source)
   if (result.error != null) {
     console.error("Build failed: ", result.error)
   } else {
-    stream.write(
-      `  <li><a href="javascript:${escape(result.code)}">${file}</a></li>\n`,
+    contents.push(
+      `  <li><a href="javascript:${
+        encodeURIComponent(result.code)
+      }">${file.name}</a></li>`,
     )
   }
-})
+}
 
-stream.end(FOOTER)
+contents.push(FOOTER)
+
+Deno.writeTextFileSync(outputFilename, contents.join("\n"))

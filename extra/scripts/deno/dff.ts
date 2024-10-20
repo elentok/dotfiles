@@ -1,6 +1,6 @@
 #!/usr/bin/env -S deno run --allow-env --allow-read --allow-run
 
-import { Table } from "npm:console-table-printer"
+import { Table } from "https://esm.sh/console-table-printer@2.12.1"
 
 const SPACES_REGEX = /\s+/
 const EXCLUDE_MOUNT_POINTS = /^\/(System\/Volumes|snap)\//

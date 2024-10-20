@@ -1,8 +1,8 @@
 #!/usr/bin/env -S deno run --allow-env --allow-read --allow-run
 
-import chalk from "npm:chalk"
-import dayjs from "https://esm.sh/dayjs"
-import weekOfYear from "https://esm.sh/dayjs/plugin/weekOfYear"
+import { bold, gray, green, red } from "jsr:@std/fmt/colors"
+import dayjs from "https://esm.sh/dayjs@1.11.13"
+import weekOfYear from "https://esm.sh/dayjs@1.11.13/plugin/weekOfYear"
 
 dayjs.extend(weekOfYear)
 
@@ -47,7 +47,7 @@ function printMonth({ start, weeks }: Month): void {
   }).format(
     start.toDate(),
   )
-  console.info(chalk.green(center(date, 27)))
+  console.info(green(center(date, 27)))
 
   console.info("Wk Sun Mon Tue Wed Thu Fri Sat")
   weeks.forEach(printWeek)
@@ -93,7 +93,7 @@ function buildWeeks(start: dayjs.Dayjs): Week[] {
 function printWeek({ number, days }: Week): void {
   console.info(
     [
-      chalk.gray(number.toString().padStart(2)),
+      gray(number.toString().padStart(2)),
       ...days
         .map((day) => {
           if (day == null) return "   "
@@ -108,11 +108,11 @@ function formatDay(day: dayjs.Dayjs): string {
   const text = day.date().toString().padStart(3)
 
   if (day.isSame(TODAY, "day")) {
-    return chalk.red(text)
+    return red(bold(text))
   }
 
   if (isWeekend(day)) {
-    return chalk.gray(text)
+    return gray(text)
   }
 
   return text
