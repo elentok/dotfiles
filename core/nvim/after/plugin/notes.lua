@@ -28,7 +28,7 @@ local function get_weekly_note_filename(root)
 
   if vim.fn.filereadable(filename) == 0 then
     vim.fn.mkdir(dir, "p")
-    local title = os.date("# Week %V, %Y (%B %d)", sunday)
+    local title = "# Week " .. week .. ", " .. os.date("%Y (%B %d)", sunday)
     vim.fn.writefile({ title }, filename)
   end
 
