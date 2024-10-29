@@ -31,7 +31,7 @@ main() {
   # dotf-header h2 "[dotf-setup] Installing Github packages..."
   # github-pkgs install
 
-  dotf-component fish nvim fzf git ripgrep tig bash tmux vifm nodejs python 
+  dotf-component fish nvim fzf git ripgrep tig bat bash tmux vifm nodejs python
   dotf-pkgs install npm
 
   dotf-header h2 "[dotf-setup] Running deno cache..."
