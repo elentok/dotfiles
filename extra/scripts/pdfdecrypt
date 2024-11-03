@@ -1,24 +1,30 @@
-#!/usr/bin/env bash
+#!/usr/bin/env fish
 #
 # Pdf Decrypt
 #
 # Usage:
 #
 #   pdfdecrypt {input} {output}
+#
+# To avoid entering the password each time:
+#
+#   set -x PDF_PASS {password}
+#
 
-source "$DOTF/framework.sh"
+if test (count $argv) -lt 2
+    usage "$0"
+    exit 1
+end
 
-if [ $# -lt 2 ]; then
-  usage "$0"
-  exit 1
-fi
+set pass $PDF_PASS
+if test -z "$pass"
+    set pass (read -P "Enter password: " -s)
+end
 
-ask_password 'Enter pdf password:' pass
-
-if dotf-has-command pdftk; then
-  pdftk "$1" input_pw "$pass" output "$2"
-elif dotf-has-command qpdf; then
-  qpdf --password="$pass" --decrypt "$1" "$2"
+if type -q pdftk
+    pdftk $argv[1] input_pw "$pass" output $argv[2]
+else if type -q qpdf
+    qpdf --password="$pass" --decrypt $argv[1] $argv[2]
 else
-  echo "Please install either pdftk or qpdf"
-fi
+    echo "Please install either pdftk or qpdf"
+end
