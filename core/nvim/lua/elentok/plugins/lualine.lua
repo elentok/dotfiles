@@ -34,7 +34,7 @@ return {
       --   { navic_get_location, cond = navic_is_available },
       -- },
       lualine_x = { "diagnostics", "filetype" },
-      lualine_y = { "branch" },
+      lualine_y = { { "branch", icon = "" } },
       -- Location with total lines: line/total:char
       lualine_z = { "%l/%L:%c" },
     },
