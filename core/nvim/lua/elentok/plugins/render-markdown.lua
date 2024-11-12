@@ -3,8 +3,9 @@ local checkbox = require("elentok.todo.render-markdown-checkbox-config")()
 return {
   "MeanderingProgrammer/render-markdown.nvim",
   version = "*",
-  ft = { "markdown" },
+  ft = { "markdown", "Avante" },
   opts = {
+    file_types = { "markdown", "Avante" },
     heading = {
       -- icons = { "󰬺 ", "󰬻 ", "󰬼 ", "󰬽 ", "󰬾 ", "󰬿 " },
       icons = { "󰉫 ", "󰉬 ", "󰉭 ", "󰉮 ", "󰉯 ", "󰉰 " },
