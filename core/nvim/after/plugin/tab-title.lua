@@ -4,7 +4,7 @@ vim.opt.title = true
 
 local function ellipsis(length, text)
   if #text > length then
-    return string.sub(text, 0, length) .. "..."
+    return string.sub(text, 0, length) .. "… "
   else
     return text
   end
@@ -17,8 +17,10 @@ local function set_tab_title()
   local cwd = vim.fn.getcwd()
   local dir = "~"
   if cwd ~= uv.os_homedir() then
-    dir = ellipsis(10, vim.fn.fnamemodify(vim.fn.getcwd(), ":t"))
+    dir = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
   end
+
+  local short_dir = ellipsis(15, dir)
 
   local branch = ""
   local branchVar = vim.env.GIT_BRANCH
@@ -28,7 +30,7 @@ local function set_tab_title()
     end
   end
 
-  local title = dir .. branch .. "  "
+  local title = short_dir .. branch .. "  "
 
   vim.opt.titlestring = title
   -- vim.fn.system("tmux rename-window " .. vim.fn.shellescape(title), {})

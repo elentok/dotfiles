@@ -21,7 +21,7 @@ function fish_title
         set dir (basename $PWD)
     end
 
-    set short_dir (string-ellipsis 10 $dir)
+    set short_dir (string-ellipsis 15 $dir)
 
     set branch ""
     # If there is a branch and it's not the same as the directory name, add it
@@ -43,7 +43,7 @@ function string-ellipsis
     set text $argv[2]
 
     if test (string length $text) -gt $length
-        echo (string sub -l $length $text)...
+        echo "$(string sub -l $length $text)… "
     else
         echo $text
     end
