@@ -37,9 +37,9 @@ main() {
   dotf-header h2 "[dotf-setup] Running deno cache..."
   (cd extra/scripts/deno && deno cache ./**/*.ts)
 
-  #if dotf-is-mac; then
-  #dotf-component osx-tuning iterm
-  #fi
+  if dotf-is-mac; then
+    dotf-component osx-tuning
+  fi
 
   show-done
 }
