@@ -12,7 +12,7 @@
 #
 
 if test (count $argv) -lt 2
-    usage "$0"
+    usage (status --current-filename)
     exit 1
 end
 
