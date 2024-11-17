@@ -26,7 +26,7 @@ local function set_tab_title()
   local branchVar = vim.env.GIT_BRANCH
   if branchVar ~= nil and #branchVar > 0 then
     if branchVar ~= "main" and branchVar ~= dir then
-      branch = " (" .. ellipsis(10, branchVar) .. ")"
+      branch = " ( " .. ellipsis(10, branchVar) .. ")"
     end
   end
 
