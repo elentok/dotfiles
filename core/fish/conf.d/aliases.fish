@@ -16,6 +16,7 @@ alias pth 'echo $PATH | tr " " "\n"'
 alias l 'eza --classify --group-directories-first --time-style=long-iso --icons'
 alias ls 'eza --classify --group-directories-first --time-style=long-iso --icons'
 alias ll 'eza --long --classify --group-directories-first --time-style=long-iso --icons'
+alias lg lazygit
 
 alias x exit
 
