@@ -150,7 +150,6 @@ end
 vim.keymap.set("n", "zz", move_to_top_third)
 
 vim.keymap.set("v", "<leader>rp", "<cmd>!prettierd %<cr>", { desc = "Run prettier" })
-vim.keymap.set("n", "<leader>lg", "<cmd>LazyGit<cr>")
 
 vim.keymap.set(
   "n",
