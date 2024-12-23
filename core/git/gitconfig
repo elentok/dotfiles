@@ -104,7 +104,7 @@
   alias = config --get-regexp '^alias\\.'
   msg = log -1 --pretty=%B
   ls = log --pretty='%h %s'
-  clog = log --pretty=%B upstream/main..HEAD
+  clog = !git log --pretty=format:'- %w(0,0,2)%B' upstream/main..HEAD --reverse | sed '/^$/d'
   ylog = !git log --pretty=%B upstream/main..HEAD | dotf-clipboard copy
   lasttag = describe --abbrev=0
   br = rev-parse --abbrev-ref HEAD
