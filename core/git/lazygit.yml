@@ -1,11 +1,17 @@
 gui:
   showCommandLog: false
   showIcons: true
+  scrollHeight: 10
+  authorColors:
+    'Dudi Elentok': 'red'
+    # use blue for other authors
+    '*': '#0000ff'
   theme:
     selectedLineBgColor:
       - black
-    selectedRangeBgColor:
-      - black
+    # selectedRangeBgColor:
+    #   - black
 keybinding:
   universal:
     return: "q"
+
