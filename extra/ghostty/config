@@ -1,6 +1,10 @@
+# vim: filetype=config
+
 theme = "catppuccin-mocha"
-font-family = "ZedMono NF Light"
+font-family = "ZedMono NFM Light"
+font-family-bold = "ZedMono NFM"
 font-family-italic = "Operator Mono"
-font-size = 16.0
+font-family-bold-italic = "Operator Mono"
+font-size = 19.0
 
 keybind = cmd+w=text:\x17
