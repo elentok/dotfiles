@@ -44,7 +44,6 @@ return {
       javascript = { "prettierd" },
       html = { "prettierd" },
       markdown = { "prettierd", "qmkmd" },
-      python = { "black" },
       sh = { "shfmt" },
       zsh = { "shfmt" },
       fish = { "fish_indent" },

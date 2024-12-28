@@ -45,6 +45,7 @@ setup("cssls")
 setup("rust_analyzer")
 setup("terraformls")
 setup("graphql")
+setup("ruff")
 -- setup("eslint", {
 --   settings = {
 --     run = "onSave",
