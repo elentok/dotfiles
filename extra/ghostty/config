@@ -1,0 +1,6 @@
+theme = "catppuccin-mocha"
+font-family = "ZedMono NF Light"
+font-family-italic = "Operator Mono"
+font-size = 16.0
+
+keybind = cmd+w=text:\x17
