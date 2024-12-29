@@ -1,17 +1,19 @@
 gui:
   showCommandLog: false
-  showIcons: true
+  nerdFontsVersion: '3'
   scrollHeight: 10
   authorColors:
-    'Dudi Elentok': 'red'
+    'Dudi Elentok': 'blue'
+    'David Elentok': 'blue'
     # use blue for other authors
-    '*': '#0000ff'
+    '*': 'white'
+  branchColors:
+    main: 'blue'
   theme:
     selectedLineBgColor:
       - black
     # selectedRangeBgColor:
     #   - black
-keybinding:
-  universal:
-    return: "q"
-
+# keybinding:
+#   universal:
+#     quit: Q
