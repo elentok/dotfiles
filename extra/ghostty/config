@@ -8,6 +8,12 @@ font-family-bold-italic = "Operator Mono"
 font-size = 19.0
 macos-option-as-alt = true
 
+# Disable font ligatures
+font-feature = "-calt"
+font-feature = "-liga"
+font-feature = "-dlig"
+
+
 # Map Cmd+{key} to Ctrl+{key}
 keybind = cmd+a=text:\x01
 keybind = cmd+b=text:\x02
