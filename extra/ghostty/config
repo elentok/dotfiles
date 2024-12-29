@@ -6,6 +6,7 @@ font-family-bold = "ZedMono NFM"
 font-family-italic = "Operator Mono"
 font-family-bold-italic = "Operator Mono"
 font-size = 19.0
+macos-option-as-alt = true
 
 # Map Cmd+{key} to Ctrl+{key}
 keybind = cmd+a=text:\x01
