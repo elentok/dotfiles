@@ -17,6 +17,7 @@ alias l 'eza --classify --group-directories-first --time-style=long-iso --icons'
 alias ls 'eza --classify --group-directories-first --time-style=long-iso --icons'
 alias ll 'eza --long --classify --group-directories-first --time-style=long-iso --icons'
 alias lg lazygit
+alias ssh 'TERM=xterm-256color command ssh'
 
 alias x exit
 
