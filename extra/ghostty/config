@@ -36,3 +36,12 @@ keybind = cmd+y=text:\x19
 keybind = cmd+z=text:\x1A
 keybind = cmd+[=text:\x1B
 keybind = cmd+]=text:\x1D
+
+# Leader mapping
+keybind = cmd+/>t=new_tab
+keybind = cmd+/>r=reload_config
+keybind = cmd+/>[=previous_tab
+keybind = cmd+/>]=next_tab
+keybind = cmd+/>q=close_surface
+keybind = cmd+/>c=copy_to_clipboard
+keybind = cmd+/>v=paste_from_clipboard
