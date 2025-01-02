@@ -15,7 +15,8 @@
   dark = true
   file-decoration-style = "#cdd6f4"
   file-style = "#cdd6f4"
-  hunk-header-decoration-style = box ul
+  ; hunk-header-decoration-style = box ul
+  hunk-header-decoration-style = ol
   hunk-header-file-style = bold
   hunk-header-line-number-style = bold "#a6adc8"
   hunk-header-style = file line-number syntax
