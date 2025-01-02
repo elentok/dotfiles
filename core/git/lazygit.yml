@@ -6,6 +6,7 @@ gui:
   showCommandLog: false
   nerdFontsVersion: '3'
   scrollHeight: 10
+  commitAuthorLongLength: 7
   windowSize: 'half'
   authorColors:
     'Dudi Elentok': 'blue'
