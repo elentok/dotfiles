@@ -1,11 +1,12 @@
 git:
   paging:
     colorArg: always
-    pager: delta --dark --paging=never
+    pager: delta --dark --paging=never --width={{columnWidth}}
 gui:
   showCommandLog: false
   nerdFontsVersion: '3'
   scrollHeight: 10
+  windowSize: 'half'
   authorColors:
     'Dudi Elentok': 'blue'
     'David Elentok': 'blue'
