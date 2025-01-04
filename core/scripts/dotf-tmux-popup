@@ -1,0 +1,2 @@
+
+tmux popup -E -b rounded -h "90%" -w "90%" $argv
