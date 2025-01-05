@@ -3,9 +3,9 @@ return {
   opts = {},
   cmd = { "GrugFar" },
   keys = {
-    { "<leader>fr", "<Cmd>GrugFar<cr>", desc = "Find and replace" },
+    { "<leader>\\", "<Cmd>GrugFar<cr>", desc = "Find and replace" },
     {
-      "<leader>fs",
+      "<leader>\\",
       function()
         require("grug-far").with_visual_selection()
       end,
@@ -13,7 +13,7 @@ return {
       desc = "Find and replace (selection)",
     },
     {
-      "<leader>fs",
+      "<leader>w\\",
       function()
         require("grug-far").grug_far({ prefills = { search = vim.fn.expand("<cword>") } })
       end,
