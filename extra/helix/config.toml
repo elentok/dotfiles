@@ -13,6 +13,7 @@ esc = ["keep_primary_selection", "collapse_selection"]
 
 [keys.insert.j]
 k = "normal_mode"
+l = "normal_mode"
 
 [keys.normal.space]
 e = ["move_prev_long_word_end", "move_next_long_word_end", ":pipe-to dotf-open -"]
