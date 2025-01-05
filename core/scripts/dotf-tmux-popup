@@ -1,2 +1,5 @@
+#!/usr/bin/env fish
+#
+# -E = close popup automatically when shell-command exits
 
-tmux popup -E -b rounded -h "90%" -w "90%" $argv
+tmux popup -d "#{pane_current_path}" -E -b rounded -h "90%" -w "90%" $argv
