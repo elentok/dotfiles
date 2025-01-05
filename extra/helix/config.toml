@@ -18,7 +18,5 @@ k = "normal_mode"
 e = ["move_prev_long_word_end", "move_next_long_word_end", ":pipe-to dotf-open -"]
 w = { w = ":write" } 
 
-# j = { k = "normal_mode" } # Maps `jk` to exit insert mode
-
-# SAAS-1234
-# www.bla.com/hello
+[keys.normal.space.l]
+g = [":run-shell-command dotf-tmux-popup lazygit"]
