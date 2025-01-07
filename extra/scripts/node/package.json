@@ -33,5 +33,5 @@
     "@types/serve-static": "^1.15.0",
     "@types/underscore": "^1.11.4"
   },
-  "packageManager": "yarn@3.5.1"
+  "packageManager": "npm@11.0.0+sha256.f69aa67502f6fc1fe330e4b454110d625205e95df557aef9779e1e813e0e1289"
 }

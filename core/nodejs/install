@@ -11,7 +11,7 @@ main() {
     npm install -g yarn
   fi
 
-  (cd extra/scripts/node && yarn install)
+  (cd extra/scripts/node && npm install)
 }
 
 install_fnm() {
