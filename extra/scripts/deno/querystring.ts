@@ -1,6 +1,6 @@
 #!/usr/bin/env -S deno run --allow-env --allow-read --allow-run
 
-import { readAllSync } from "jsr:@std/io"
+import { getStdInput } from "./utils.ts"
 
 function main() {
   if (Deno.args.length < 1) {
@@ -19,11 +19,6 @@ function main() {
   } else {
     console.info(params.getAll(key))
   }
-}
-
-function getStdInput(): string {
-  const input = readAllSync(Deno.stdin)
-  return new TextDecoder().decode(input)
 }
 
 function parse(str: string): URLSearchParams {

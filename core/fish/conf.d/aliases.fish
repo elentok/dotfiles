@@ -32,9 +32,9 @@ alias jt 'cd $(dotf-tmux-pick-workdir || pwd)'
 alias h 'help.ts'
 alias mycal 'mycal.ts'
 alias dff 'dff.ts'
+alias sm 'sum.ts'
 alias dotff '~/.dotfiles/core/framework/dotf.ts'
 alias q qalc
-alias ic 'wezterm imgcat'
 
 function nv --description neovide
     if test -n "$TMUX"

@@ -10,8 +10,6 @@ main() {
   if dotf-command-missing yarn; then
     npm install -g yarn
   fi
-
-  (cd extra/scripts/node && npm install)
 }
 
 install_fnm() {
