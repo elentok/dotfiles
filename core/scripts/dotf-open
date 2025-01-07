@@ -6,14 +6,20 @@
 #   o <file-or-directory>
 #
 
-source $DOTF/core/zsh/core.sh
+source "$DOTF/core/zsh/core.sh"
+
+cmd="${1:-}"
+
+if [ "$cmd" == "-" ]; then
+  cmd="$(cat -)"
+fi
 
 if dotf-is-wsl; then
-  explorer.exe "$@"
+  explorer.exe "$cmd"
 elif dotf-is-linux; then
-  xdg-open "$@"
+  xdg-open "$cmd"
 elif dotf-is-mac; then
-  open "$@"
+  open "$cmd"
 else
   echo 'ERROR: no idea how to open this file (not linux, mac or wsl)'
   exit 1
