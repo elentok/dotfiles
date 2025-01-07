@@ -4,7 +4,6 @@
   "description": "elentok's dotfiles",
   "scripts": {
     "format": "prettier --write '**/*.js' '**/*.ts' '**/*.css'",
-    "format:lua": "stylua --glob '**/*.lua' --config-path=$DOTF/stylua.toml .",
     "ts:build": "tsc",
     "ts:watch": "tsc --watch",
     "start": "npm run ts:watch"
@@ -21,17 +20,10 @@
     "axios": "^1.7.4",
     "chalk": "^4.1.2",
     "commander": "^9.4.0",
-    "kdbxweb": "^2.1.1",
     "prettier": "^2.7.1",
     "prompt": "^1.3.0",
     "source-map-support": "^0.5.21",
-    "typescript": "^4.7.4",
-    "underscore": "^1.13.4"
-  },
-  "devDependencies": {
-    "@types/node": "^18.7.11",
-    "@types/serve-static": "^1.15.0",
-    "@types/underscore": "^1.11.4"
+    "typescript": "^4.7.4"
   },
   "packageManager": "npm@11.0.0+sha256.f69aa67502f6fc1fe330e4b454110d625205e95df557aef9779e1e813e0e1289"
 }

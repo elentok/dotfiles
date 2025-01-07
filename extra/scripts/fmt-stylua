@@ -1,0 +1,3 @@
+#!/usr/bin/env fish
+
+stylua --glob '**/*.lua' --config-path=$DOTF/stylua.toml .
