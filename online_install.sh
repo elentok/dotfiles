@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 # This script should be run directly from the online repository like this:
 # curl -L https://github.com/elentok/dotfiles/raw/master/online_install.sh | bash
 #

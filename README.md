@@ -21,10 +21,6 @@ $ curl -L https://github.com/elentok/dotfiles/raw/master/online_install.sh | bas
   using the `h` or `h {query}` commands)
 - [commands.md](docs/commands.md) - a cheatsheet of of my custom shell scripts
 
-## Customization
-
-You can customize the settings by putting the following files in the ~/.dotlocal directory.
-
 ### Git
 
 Use `~/.dotlocal/gitconfig`:
@@ -36,4 +32,3 @@ Use `~/.dotlocal/gitconfig`:
 [github]
   user = your-github-user
 ```
-
