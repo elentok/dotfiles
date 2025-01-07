@@ -11,9 +11,13 @@ echo "  - Extra: $(command ls -1 "$DOTF/extra" | wc -l)"
 # echo "Neovim Plugins:   $(grep -c " use" "$DOTF/core/nvim/lua/elentok/packer-plugins.lua")"
 
 dotf-header h2 'Core Scripts:'
-find "$DOTF/core/scripts" -maxdepth 1 -type f -exec head -1 '{}' \; \
-  | sort | uniq -c | sort -nr
+find "$DOTF/core/scripts" -maxdepth 1 -type f -exec head -1 '{}' \; |
+  sort | uniq -c | sort -nr
 
 dotf-header h2 'Extra Scripts:'
-find "$DOTF/extra/scripts" -maxdepth 1 -type f -exec head -1 '{}' \; \
-  | sort | uniq -c | sort -nr
+find "$DOTF/extra/scripts" -maxdepth 1 -type f -exec head -1 '{}' \; |
+  sort | uniq -c | sort -nr
+
+dotf-header h2 'Deno Scripts:'
+find "$DOTF/extra/scripts/deno" -maxdepth 1 -type f -exec head -1 '{}' \; |
+  grep '#!/usr/bin/env' | sort | uniq -c | sort -nr
