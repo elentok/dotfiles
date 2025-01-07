@@ -37,31 +37,3 @@ Use `~/.dotlocal/gitconfig`:
   user = your-github-user
 ```
 
-### Zsh settings & aliases
-
-You can use the following files to customize your zsh settings:
-
-- `~/.dotlocal/zsh/core.sh` - runs on all sessions (both login and non-login)
-- `~/.dotlocal/zsh/before.zsh` - runs at the beginning of all login sessions (right after core.sh)
-- `~/.dotlocal/zsh/after.zsh` - runs at the end of all of all login sessions
-
-### Vim
-
-- Add custom plugins to `~/.dotlocal/plugs.vim`
-- Add custom settings to `~/.dotlocal/before.vim` or `~/.dotlocal/after.vim`
-
-## Basic Vim Setup
-
-To install my basic vim setup (without any plugins and should work on old versions of vim):
-
-```
-curl https://raw.githubusercontent.com/elentok/dotfiles/master/nvim/basic.vim > ~/.vimrc
-```
-
-## Basic Zsh Setup
-
-To install my basic zsh setup:
-
-```
-curl https://raw.githubusercontent.com/elentok/dotfiles/master/zsh/basic.zsh >> ~/.zshrc
-```
