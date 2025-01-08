@@ -18,6 +18,7 @@ l = "normal_mode"
 [keys.normal.space]
 e = ["move_prev_long_word_start", "move_next_long_word_end", ":pipe-to dotf-open -", "remove_primary_selection"]
 w = { w = ":write" } 
+q = { q = ":quit" }
 
 [keys.normal.space.l]
 g = [":run-shell-command dotf-tmux-popup lazygit"]
