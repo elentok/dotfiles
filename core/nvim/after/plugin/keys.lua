@@ -171,6 +171,10 @@ vim.keymap.set("n", "<leader>ov", function()
   term.run({ "vifm", "--select", vim.fn.expand("%") })
 end, { desc = "Open Vifm" })
 
+vim.keymap.set("n", "<leader>oy", function()
+  term.run({ "yazi", vim.fn.expand("%") }, { wait = false })
+end, { desc = "Open yazi" })
+
 vim.keymap.set("n", "<leader>ol", "<cmd>Lazy<cr>", { desc = "Open Lazy" })
 
 vim.keymap.set("n", "<leader>dd", '"3dd', { desc = "Delete line without overwriting register" })
