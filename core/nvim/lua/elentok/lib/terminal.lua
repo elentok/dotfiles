@@ -15,7 +15,7 @@ end
 ---@param cmd string|string[]
 ---@return string
 local function cmd_to_string(cmd)
-  if type(cmd) == "table" and vim.tbl_islist(cmd) then
+  if type(cmd) == "table" and vim.islist(cmd) then
     expand_filename(cmd)
     return table.concat(cmd, " ")
   elseif type(cmd) == "string" then
@@ -33,6 +33,8 @@ end
 ---@field wait? boolean
 ---@field on_exit? fun(t: Terminal, job: number, exit_code: number, name: string)
 ---@field on_close? fun(t: Terminal)
+---@field on_open? fun(term:Terminal)
+---@field ctrl_z_closes? boolean (defaults to true)
 
 ---@param cmd string|string[]
 ---@param opts? TermRunOptions
@@ -57,11 +59,20 @@ function M.run(cmd, opts)
     cmd = string.format("echo '> cd %s' && cd '%s' && %s", opts.cwd, opts.cwd, cmd)
   end
 
+  local on_open = opts.on_open
+  if opts.ctrl_z_closes ~= false then
+    ---@param trm Terminal
+    on_open = function(trm)
+      vim.keymap.set({ "i", "t", "n" }, "<c-z>", "<cmd>close<cr>", { buffer = trm.bufnr })
+    end
+  end
+
   local t = Terminal:new({
     cmd = cmd,
     close_on_exit = not opts.wait,
     on_exit = opts.on_exit,
     on_close = opts.on_close,
+    on_open = on_open,
     hidden = false,
     float_opts = {
       width = opts.w,

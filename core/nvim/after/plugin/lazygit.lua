@@ -1,9 +1,17 @@
 local term = require("elentok.lib.terminal")
+require("toggleterm.terminal")
+
+--- @type Terminal | nil
+local lazygit = nil
 
 vim.keymap.set("n", "<leader>lg", function()
-  term.run("lazygit", { wait = false })
-end)
+  if lazygit == nil then
+    lazygit = term.run("lazygit", { wait = false })
+  else
+    lazygit:open()
+  end
 
-vim.keymap.set("n", "<leader>ls", function()
-  term.run("lazygit status", { wait = false })
+  vim.defer_fn(function()
+    vim.cmd("startinsert!")
+  end, 0)
 end)
