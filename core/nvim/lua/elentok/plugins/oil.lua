@@ -2,7 +2,7 @@ return {
   "stevearc/oil.nvim",
   version = "*",
   ft = "oil",
-  lazy = false,
+  -- lazy = false,
   opts = {
     skip_confirm_for_simple_edits = false,
     delete_to_trash = true,

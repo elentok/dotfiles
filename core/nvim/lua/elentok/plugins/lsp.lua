@@ -11,5 +11,6 @@ return {
     "j-hui/fidget.nvim", -- Shows LSP init progress
     version = "*",
     opts = {},
+    event = "VeryLazy",
   },
 }
