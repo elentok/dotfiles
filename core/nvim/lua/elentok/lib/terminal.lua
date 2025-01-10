@@ -51,19 +51,17 @@ function M.run(cmd, opts)
     cmd = string.format("echo '> %s' && %s", cmd, cmd)
   end
 
-  -- if opts.wait then
-  --   cmd = string.format("%s; echo '\nPress ENTER to close...'; read", cmd)
-  -- end
-
   if opts.cwd ~= nil and #opts.cwd > 0 then
     cmd = string.format("echo '> cd %s' && cd '%s' && %s", opts.cwd, opts.cwd, cmd)
   end
 
-  local on_open = opts.on_open
-  if opts.ctrl_z_closes ~= false then
-    ---@param trm Terminal
-    on_open = function(trm)
+  ---@param trm Terminal
+  local on_open = function(trm)
+    if opts.ctrl_z_closes ~= false then
       vim.keymap.set({ "i", "t", "n" }, "<c-z>", "<cmd>close<cr>", { buffer = trm.bufnr })
+    end
+    if opts.on_open then
+      opts.on_open(trm)
     end
   end
 

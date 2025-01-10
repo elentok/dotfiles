@@ -10,8 +10,4 @@ vim.keymap.set("n", "<leader>lg", function()
   else
     lazygit:open()
   end
-
-  vim.defer_fn(function()
-    vim.cmd("startinsert!")
-  end, 0)
 end)
