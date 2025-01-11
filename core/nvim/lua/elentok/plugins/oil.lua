@@ -31,8 +31,6 @@ return {
       ["R"] = "actions.refresh",
     },
   },
-  -- Optional dependencies
-  dependencies = { "nvim-tree/nvim-web-devicons" },
   keys = {
     {
       "-",
