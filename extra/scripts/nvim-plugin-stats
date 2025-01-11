@@ -1,0 +1,39 @@
+#!/usr/bin/env fish
+
+cd ~/.local/share/nvim/lazy
+
+function pad
+    printf "%'$argv[1]d" $argv[2]
+end
+
+set total_lua_files 0
+set total_vim_files 0
+set total_loc 0
+
+echo "LUA  VIM  LOC     PLUGIN"
+
+for dir in (find . -maxdepth 1 -type d)
+    if test $dir = "."
+        continue
+    end
+
+    set name (string replace "./" "" $dir)
+
+    cd $name
+    set lua_files (fd '\\.lua$' | wc -l)
+    set vim_files (fd '\\.vim$' | wc -l)
+    set loc (rg -v '^\s*$' -t lua -t vim | wc -l)
+
+    echo (pad 4 $lua_files) (pad 4 $vim_files) (pad 7 $loc) $name
+
+    set total_lua_files (math $total_lua_files + $lua_files)
+    set total_vim_files (math $total_vim_files + $vim_files)
+    set total_loc (math $total_loc + $loc)
+
+    cd ..
+end
+
+echo
+echo TOTAL
+echo "LUA   VIM   LOC"
+echo (pad 5 $total_lua_files) (pad 5 $total_vim_files) (pad 5 $total_loc)
