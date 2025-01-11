@@ -5,7 +5,6 @@
 -- require("neodev").setup()
 
 local lspconfig = require("lspconfig")
-local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 require("lspconfig.ui.windows").default_options.border = "rounded"
 
@@ -15,15 +14,18 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 })
 
 -- Setup capabilities
-local capabilities = vim.tbl_extend(
-  "force",
-  vim.lsp.protocol.make_client_capabilities(),
-  cmp_nvim_lsp.default_capabilities()
-)
+-- local capabilities = vim.tbl_extend(
+--   "force",
+--   vim.lsp.protocol.make_client_capabilities()
+-- cmp_nvim_lsp.default_capabilities()
+-- )
+local capabilities =
+  require("blink.cmp").get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.foldingRange = {
   dynamicRegistration = false,
   lineFoldingOnly = true,
 }
+
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- Setup: simple
