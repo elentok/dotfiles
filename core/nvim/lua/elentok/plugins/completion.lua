@@ -9,13 +9,13 @@ return {
   -- "hrsh7th/cmp-cmdline",
   -- "lukas-reineke/cmp-rg",
   -- "saadparwaiz1/cmp_luasnip",
-  "L3MON4D3/LuaSnip",
+  -- "onsails/lspkind-nvim",
   -- "rafamadriz/friendly-snippets",
 
   {
     "saghen/blink.cmp",
-    -- optional: provides snippets for the snippet source
     dependencies = {
+      "L3MON4D3/LuaSnip",
       "rafamadriz/friendly-snippets",
       "mikavilpas/blink-ripgrep.nvim",
       "giuxtaposition/blink-cmp-copilot",
