@@ -36,7 +36,22 @@ return {
       -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
       -- See the full "keymap" documentation for information on defining your own keymap.
       -- keymap = { preset = "default" },
-      keymap = { preset = "super-tab" },
+      keymap = {
+        preset = "super-tab",
+        -- ["<cr>"] = { "accept", "fallback" },
+        -- ["<Tab>"] = {
+        --   function(cmp)
+        --     if cmp.snippet_active() then
+        --       return cmp.accept()
+        --     else
+        --       return cmp.select_next()
+        --     end
+        --     -- else return cmp.select_and_accept() end
+        --   end,
+        --   "snippet_forward",
+        --   "fallback",
+        -- },
+      },
 
       appearance = {
         -- Sets the fallback highlight groups to nvim-cmp's highlight groups
@@ -61,9 +76,10 @@ return {
           },
         },
 
-        ghost_text = {
-          enabled = true,
-        },
+        -- This is a bit jumpy
+        -- ghost_text = {
+        --   enabled = true,
+        -- },
 
         documentation = {
           auto_show = true,
@@ -74,12 +90,13 @@ return {
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
-        default = { "lsp", "path", "snippets", "buffer", "ripgrep" },
+        -- default = { "lsp", "path", "snippets", "buffer", "ripgrep" },
+        default = { "lsp", "path", "snippets", "buffer", "copilot" },
         providers = {
-          ripgrep = {
-            module = "blink-ripgrep",
-            name = "rg",
-          },
+          -- ripgrep = {
+          --   module = "blink-ripgrep",
+          --   name = "rg",
+          -- },
           lsp = {
             score_offset = 10,
           },
