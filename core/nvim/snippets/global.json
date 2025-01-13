@@ -1,0 +1,16 @@
+{
+  "date": {
+    "prefix": "date",
+    "body": [
+      "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}"
+    ],
+    "description": "Put the date in (Y-m-D) format"
+  },
+  "datetime": {
+    "prefix": "datetime",
+    "body": [
+      "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE} ${CURRENT_HOUR}:${CURRENT_MINUTE}"
+    ],
+    "description": "I give you back the time and date (Y-m-d H:M)"
+  }
+}

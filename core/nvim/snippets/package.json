@@ -3,6 +3,17 @@
   "contributes": {
     "snippets": [
       {
+        "language": [
+          "plaintext",
+          "markdown",
+          "tex",
+          "html",
+          "global",
+          "all"
+        ],
+        "path": "./global.json"
+      },
+      {
         "language": "typescriptreact",
         "path": "./typescriptreact.json"
       }
