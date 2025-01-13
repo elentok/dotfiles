@@ -14,8 +14,18 @@ local oil_extension = {
   filetypes = { "oil" },
 }
 
+---@module "lazy"
+---@type LazySpec
 return {
   "nvim-lualine/lualine.nvim",
+  dependencies = {
+    "SmiteshP/nvim-navic",
+    opts = {
+      lsp = {
+        auto_attach = true,
+      },
+    },
+  },
   opts = {
     options = {
       -- theme = "onedark",
