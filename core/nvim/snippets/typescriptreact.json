@@ -1,0 +1,18 @@
+{
+  "rfc": {
+    "body": [
+      "interface ${1:Component}Props {",
+      "}",
+      "",
+      "export const $1: FC<$1Props> = ({}) => {",
+      "  return <>$3</>",
+      "}"
+    ]
+  },
+  "screendebug": {
+    "body": [
+      "console.log('[SCREEN DEBUG START]')",
+      "screen.debug(undefined, Infinity)"
+    ]
+  }
+}
