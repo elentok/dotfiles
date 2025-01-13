@@ -37,5 +37,6 @@ end
 
 echo
 echo "$plugins TOTAL PLUGINS"
+echo
 echo "LUA   VIM   LOC"
 echo (pad 5 $total_lua_files) (pad 5 $total_vim_files) (pad 5 $total_loc)
