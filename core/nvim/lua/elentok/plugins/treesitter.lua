@@ -108,6 +108,7 @@ return {
     end,
   },
   -- "nvim-treesitter/playground",
+  "nvim-treesitter/nvim-treesitter-textobjects",
   -- {
   --   "nvim-treesitter/nvim-treesitter-textobjects",
   --   -- commit = "19a91a38b02c1c28c14e0ba468d20ae1423c39b2",

@@ -1,11 +1,12 @@
-return {
-  "akinsho/git-conflict.nvim",
-  version = "*",
-  opts = {
-
-    highlights = {
-      incoming = "DiffAdd",
-      current = "DiffText",
-    },
-  },
-}
+return {}
+-- return {
+--   "akinsho/git-conflict.nvim",
+--   version = "*",
+--   opts = {
+--
+--     highlights = {
+--       incoming = "DiffAdd",
+--       current = "DiffText",
+--     },
+--   },
+-- }
