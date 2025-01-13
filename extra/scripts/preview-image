@@ -1,0 +1,4 @@
+#!/usr/bin/env fish
+
+chafa -f kitty $argv[1]
+read --prompt-str "Press any key to continue..." -n 1

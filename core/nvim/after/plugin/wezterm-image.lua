@@ -4,7 +4,7 @@ local expand = require("open-link.expand")
 local function preview_image(path)
   -- vim.system({ "wezterm", "cli", "split-pane", "--right", "wezterm", "imgcat", "--hold", path })
   -- vim.system({ "wezterm", "cli", "split-pane", "--right", "wezimg", path })
-  vim.system({ "tmux", "split-window", "-h", "wezimg", path })
+  vim.system({ "tmux", "split-window", "-h", "preview-image", path })
 end
 
 local function preview_image_at_cursor()
