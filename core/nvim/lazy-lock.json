@@ -1,5 +1,4 @@
 {
-  "LuaSnip": { "branch": "master", "commit": "33b06d72d220aa56a7ce80a0dd6f06c70cd82b9d" },
   "arrow.nvim": { "branch": "master", "commit": "5438c977e729a29d96bd54c8da3103154e80dbd1" },
   "avante.nvim": { "branch": "main", "commit": "81e5f1937f47a7fc855e03a41f2af445f2777de9" },
   "blame.nvim": { "branch": "main", "commit": "39bb4cda9e658d053a43919b10ca52c0a4d738e1" },
@@ -39,7 +38,6 @@
   "nvim-navic": { "branch": "master", "commit": "8649f694d3e76ee10c19255dece6411c29206a54" },
   "nvim-treesitter": { "branch": "master", "commit": "6cb4098d51479f644f967c17d4482bab1ba2640f" },
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "ad8f0a472148c3e0ae9851e26a722ee4e29b1595" },
-  "nvim-ts-autotag": { "branch": "main", "commit": "1cca23c9da708047922d3895a71032bc0449c52d" },
   "nvim-vtsls": { "branch": "main", "commit": "45c6dfea9f83a126e9bfc5dd63430562b3f8af16" },
   "obsidian.nvim": { "branch": "main", "commit": "ae1f76a75c7ce36866e1d9342a8f6f5b9c2caf9b" },
   "oil.nvim": { "branch": "master", "commit": "ba858b662599eab8ef1cba9ab745afded99cb180" },
