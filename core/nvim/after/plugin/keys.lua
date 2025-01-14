@@ -216,3 +216,7 @@ vim.keymap.set({ "n", "v" }, "<leader>n", "]", { remap = true })
 -- Similar, but with , and .
 vim.keymap.set({ "n", "v" }, "<leader>,", "[", { remap = true })
 vim.keymap.set({ "n", "v" }, "<leader>.", "]", { remap = true })
+
+-- When pasting in visual mode do not overwrite the clipboard
+vim.keymap.set("v", "p", '"_dP')
+vim.keymap.set("v", "P", '"_dp')
