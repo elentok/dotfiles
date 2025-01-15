@@ -7,7 +7,8 @@ gui:
   nerdFontsVersion: '3'
   scrollHeight: 10
   commitAuthorLongLength: 7
-  windowSize: 'half'
+  sidePanelWidth: 0.25
+  enlargedSideViewLocation: 'top'
   authorColors:
     'Dudi Elentok': 'blue'
     'David Elentok': 'blue'
