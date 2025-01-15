@@ -107,9 +107,6 @@ return {
           --   module = "blink-ripgrep",
           --   name = "rg",
           -- },
-          snippets = {
-            score_offset = 200,
-          },
           lsp = {
             score_offset = 10,
           },
