@@ -1,0 +1,12 @@
+#!/usr/bin/env fish
+
+if test (count $argv) -lt 3
+    echo "Usage: pdfextract <input> <pages> <output>"
+    exit 1
+end
+
+set input $argv[1]
+set pages $argv[2]
+set output $argv[3]
+
+qpdf $input --pages . $pages -- $output
