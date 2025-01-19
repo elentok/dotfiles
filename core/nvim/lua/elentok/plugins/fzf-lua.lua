@@ -9,6 +9,25 @@ local function get_first_commit(selected)
 end
 
 ---@param selected string[]
+local function stage_patch(selected)
+  local file = selected[1]
+  if file == nil then
+    return
+  end
+
+  put(string.sub(file, 9))
+
+  local git = require("elentok.lib.git")
+  git.run({ "add", "-p", string.sub(file, 9) })
+end
+
+local function deferred_stage_patch(selected)
+  vim.defer_fn(function()
+    stage_patch(selected)
+  end, 100)
+end
+
+---@param selected string[]
 local function fixup(selected)
   local commit = get_first_commit(selected)
   if commit == nil then
@@ -79,6 +98,7 @@ return {
           -- I keep hitting ctrl-x by mistake and resetting
           -- (and there's no confirmation)
           ["ctrl-x"] = false,
+          ["ctrl-s"] = deferred_stage_patch,
         },
       },
     },
