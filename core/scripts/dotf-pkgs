@@ -141,8 +141,8 @@ function upgrade-pkgs() {
   dotf-header h3 '[dotf-pkgs] Updating brew packages...'
   list-pkgs brew | xargs brew upgrade
 
-  dotf-header h3 '[dotf-pkgs] Updating mason packages...'
-  list-pkgs mason | xargs dotf-mason -f
+  # dotf-header h3 '[dotf-pkgs] Updating mason packages...'
+  # list-pkgs mason | xargs dotf-mason -f
 
   dotf-header h3 '[dotf-pkgs] Updating pip packages...'
   list-pkgs pip | xargs pip3 install --upgrade --user --break-system-packages

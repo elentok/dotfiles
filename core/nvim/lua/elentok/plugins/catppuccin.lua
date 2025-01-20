@@ -20,7 +20,7 @@ return {
       cmp = true,
       gitsigns = true,
       flash = true,
-      mason = true,
+      -- mason = true,
       navic = true,
       markdown = true,
       which_key = true,

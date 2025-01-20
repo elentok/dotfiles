@@ -15,7 +15,7 @@ main() {
   fi
 
   install-symlinks
-  dotf-pkgs i mason
+  # dotf-pkgs i mason
   dotf-nvim-lazy restore
   setup-dev-symlinks
   "$DOTF/core/nvim/install-magick-via-luarocks"
