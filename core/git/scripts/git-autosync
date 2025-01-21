@@ -10,8 +10,10 @@ main() {
   check-if-autosync-is-enabled
 
   commit-if-needed
-  pull
-  push
+  if [ "${1:-}" != "--commit-only" ]; then
+    pull
+    push
+  fi
   dotf-success 'done'
 }
 
