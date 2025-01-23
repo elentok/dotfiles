@@ -84,13 +84,13 @@ return {
       commits = {
         actions = {
           ["ctrl-f"] = deferred_fixup,
-          ["ctrl-d"] = open_commit,
+          ["ctrl-o"] = open_commit,
         },
       },
       bcommits = {
         actions = {
           ["ctrl-f"] = deferred_fixup,
-          ["ctrl-d"] = open_commit,
+          ["ctrl-o"] = open_commit,
         },
       },
       status = {
