@@ -1,13 +1,17 @@
+local ai = require("elentok.lib.ai")
+
 return {
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "InsertEnter",
     config = function()
-      require("copilot").setup({
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-      })
+      if ai.allow then
+        require("copilot").setup({
+          suggestion = { enabled = false },
+          panel = { enabled = false },
+        })
+      end
     end,
   },
   -- {
