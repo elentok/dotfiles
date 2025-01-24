@@ -6,5 +6,12 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
   },
-  config = ai.allow,
+  cmd = {
+    "CodeCompanion",
+    "CodeCompanionChat",
+    "CodeCompanionCmd",
+    "CodeCompanionActions",
+  },
+  config = true,
+  cond = ai.allow,
 }

@@ -1,17 +1,32 @@
+local ai = require("elentok.lib.ai")
+
+---@type string[]
+local default_sources = { "lsp", "path", "snippets", "buffer" }
+
+---@type table<string, blink.cmp.SourceProviderConfigPartial>?
+local providers = {
+  lsp = {
+    score_offset = 10,
+  },
+  -- ripgrep = {
+  --   module = "blink-ripgrep",
+  --   name = "rg",
+  -- },
+}
+
+if ai.allow then
+  table.insert(default_sources, "copilot")
+  providers.copilot = {
+    name = "copilot",
+    module = "blink-cmp-copilot",
+    score_offset = 100,
+    async = true,
+  }
+end
+
 ---@module "lazy"
 ---@type LazySpec
 return {
-  -- "hrsh7th/nvim-cmp",
-  -- "hrsh7th/cmp-nvim-lsp",
-  -- "hrsh7th/cmp-buffer",
-  -- "hrsh7th/cmp-path",
-  -- "hrsh7th/cmp-nvim-lua",
-  -- "hrsh7th/cmp-cmdline",
-  -- "lukas-reineke/cmp-rg",
-  -- "saadparwaiz1/cmp_luasnip",
-  -- "onsails/lspkind-nvim",
-  -- "rafamadriz/friendly-snippets",
-
   {
     "saghen/blink.cmp",
     dependencies = {
@@ -27,7 +42,7 @@ return {
       --   end,
       -- },
       -- "rafamadriz/friendly-snippets",
-      "mikavilpas/blink-ripgrep.nvim",
+      -- "mikavilpas/blink-ripgrep.nvim",
       "giuxtaposition/blink-cmp-copilot",
     },
 
@@ -97,31 +112,26 @@ return {
         },
       },
 
-      -- Default list of enabled providers defined so that you can extend it
-      -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
-        -- default = { "lsp", "path", "snippets", "buffer", "ripgrep" },
-        default = { "lsp", "path", "snippets", "buffer", "copilot" },
+        default = default_sources,
         per_filetype = {
           codecompanion = { "codecompanion" },
         },
-        providers = {
-          -- ripgrep = {
-          --   module = "blink-ripgrep",
-          --   name = "rg",
-          -- },
-          lsp = {
-            score_offset = 10,
-          },
-          copilot = {
-            name = "copilot",
-            module = "blink-cmp-copilot",
-            score_offset = 100,
-            async = true,
-          },
-        },
+        providers = providers,
       },
     },
     opts_extend = { "sources.default" },
   },
+
+  -- Old nvim-cmp plugins:
+  -- "hrsh7th/nvim-cmp",
+  -- "hrsh7th/cmp-nvim-lsp",
+  -- "hrsh7th/cmp-buffer",
+  -- "hrsh7th/cmp-path",
+  -- "hrsh7th/cmp-nvim-lua",
+  -- "hrsh7th/cmp-cmdline",
+  -- "lukas-reineke/cmp-rg",
+  -- "saadparwaiz1/cmp_luasnip",
+  -- "onsails/lspkind-nvim",
+  -- "rafamadriz/friendly-snippets",
 }
