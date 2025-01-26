@@ -1,3 +1,6 @@
+# Clear all paths before adding new ones
+set -e fish_user_paths
+
 set -x DOTF "$HOME/.dotfiles"
 set -x DOTP "$HOME/.dotplugins"
 set -x EDITOR nvim

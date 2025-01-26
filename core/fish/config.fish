@@ -24,7 +24,7 @@ set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
 
 # jumper
-jumper shell fish | source
+# jumper shell fish | source
 
 for dir in ~/.dotplugins/*
     if test -e "$dir/fish/config.fish"
