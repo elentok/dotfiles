@@ -53,19 +53,6 @@ function f --description vifm
     end
 end
 
-# If a tmux session exists, attach to it, otherwise create a new one.
-function tm --description tmux
-    if test -n "$TMUX"
-        echo "Error: already inside a tmux session!"
-    else if test -n "$(tmux list-sessions 2> /dev/null)"
-        echo "Attaching to existing tmux session..."
-        dotf-tmux attach
-    else
-        echo "No existing tmux session found, creating new session..."
-        dotf-tmux -u
-    end
-end
-
 function y --description "yazi wrapper"
     set tmp (mktemp -t "yazi-cwd.XXXXXX")
     yazi $argv --cwd-file="$tmp"

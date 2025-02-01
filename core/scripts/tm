@@ -1,0 +1,37 @@
+#!/usr/bin/env fish
+
+function main
+    if test -n "$TMUX"
+        echo "Error: already inside a tmux session!"
+        exit 1
+    end
+
+    if test (count $argv) -eq 0
+        if tmux-has-sessions
+            echo "Attaching to existing tmux session..."
+            tmux attach
+        else
+            echo "Creating new tmux session..."
+            tmux -u
+        end
+    else
+        set session $argv[1]
+        if tmux-has-session "$session"
+            echo "Attaching to existing tmux session '$session'..."
+            tmux attach "$session"
+        else
+            echo "Creating new tmux session '$session'..."
+            tmux new-session -s "$session"
+        end
+    end
+end
+
+function tmux-has-sessions
+    test -n "$(tmux list-sessions 2> /dev/null)"
+end
+
+function tmux-has-session
+    tmux has-session -t $argv[1] 2>/dev/null
+end
+
+main $argv

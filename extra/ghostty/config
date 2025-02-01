@@ -52,3 +52,10 @@ keybind = cmd+/>]=next_tab
 keybind = cmd+/>q=close_surface
 keybind = cmd+/>c=copy_to_clipboard
 keybind = cmd+/>v=paste_from_clipboard
+
+# Quick terminal
+
+keybind = global:cmd+2=toggle_quick_terminal
+quick-terminal-animation-duration = 0
+
+
