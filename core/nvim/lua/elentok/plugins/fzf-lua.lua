@@ -104,24 +104,24 @@ return {
     },
   },
   keys = {
-    {
-      "<leader>/",
-      "<cmd>FzfLua live_grep<cr>",
-      mode = "n",
-      desc = "Live grep",
-    },
-    {
-      "<leader>/",
-      "<cmd>FzfLua grep_visual<cr>",
-      mode = "v",
-      desc = "Grep visual",
-    },
-    {
-      "<leader>w/",
-      "<cmd>FzfLua grep_cword<cr>",
-      mode = "n",
-      desc = "Grep word",
-    },
+    -- {
+    --   "<leader>/",
+    --   "<cmd>FzfLua live_grep<cr>",
+    --   mode = "n",
+    --   desc = "Live grep",
+    -- },
+    -- {
+    --   "<leader>/",
+    --   "<cmd>FzfLua grep_visual<cr>",
+    --   mode = "v",
+    --   desc = "Grep visual",
+    -- },
+    -- {
+    --   "<leader>w/",
+    --   "<cmd>FzfLua grep_cword<cr>",
+    --   mode = "n",
+    --   desc = "Grep word",
+    -- },
     -- { "<leader>f", "<cmd>FzfLua files<cr>" },
     { "z=", "<cmd>FzfLua spell_suggest<cr>" },
     -- { "<leader>jb", "<cmd>FzfLua buffers<cr>" },
