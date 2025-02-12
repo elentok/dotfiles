@@ -1,4 +1,4 @@
----@module 'folke.snacks'
+---@module "snacks"
 
 return {
   "folke/snacks.nvim",
@@ -58,6 +58,41 @@ return {
       desc = "Grep word",
     },
     {
+      "<leader>jh",
+      function()
+        Snacks.picker.help()
+      end,
+      desc = "Jump to help",
+    },
+    {
+      "<leader>ll",
+      function()
+        Snacks.picker.lines()
+      end,
+      desc = "Jump to keymap",
+    },
+    {
+      "z=",
+      function()
+        Snacks.picker.spelling()
+      end,
+      desc = "Jump to keymap",
+    },
+    {
+      "<leader>jj",
+      function()
+        Snacks.picker.jumps()
+      end,
+      desc = "Jump to keymap",
+    },
+    {
+      "<leader>jk",
+      function()
+        Snacks.picker.keymaps()
+      end,
+      desc = "Jump to keymap",
+    },
+    {
       "<leader>jm",
       function()
         Snacks.picker.recent()
@@ -84,6 +119,13 @@ return {
         Snacks.picker.git_log()
       end,
       desc = "Show git log",
+    },
+    {
+      "``",
+      function()
+        Snacks.picker.resume()
+      end,
+      desc = "Resume last picker",
     },
   },
 }

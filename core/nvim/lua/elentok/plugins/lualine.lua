@@ -34,7 +34,7 @@ return {
     },
     extensions = { oil_extension, "fzf" },
     sections = {
-      lualine_a = { { "filename", path = 4 } },
+      lualine_a = { { "filename", path = 4, shorting_target = 60 } },
       lualine_b = {},
       lualine_c = {},
       -- lualine_b = { { "filename", path = 1, icon = "" } },
