@@ -18,7 +18,7 @@ dotf-header h2 'Pulling dotfiles...'
 
 dotf-summary run 'Bootstrap' "$DOTF/bootstrap.sh"
 
-dotf-autosync-notes
+# dotf-autosync-notes
 
 dotf-summary stop
 
