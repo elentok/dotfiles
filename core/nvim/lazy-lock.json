@@ -43,7 +43,7 @@
   "scriptify.nvim": { "branch": "main", "commit": "71ff0eae21fab6b5b7df09eccad135c294a26f97" },
   "sibling-swap.nvim": { "branch": "main", "commit": "4d3b8a9d80a8b3c8d76e74c2bdd13b6e7c4f8258" },
   "smart-splits.nvim": { "branch": "master", "commit": "740a2e2bb3bf525f4e21f9748233480ebb0709a3" },
-  "snacks.nvim": { "branch": "main", "commit": "e5960d8e32ed2771a1d84ce4532bf0e2dc4dc8ca" },
+  "snacks.nvim": { "branch": "main", "commit": "885c1409e898b2f6f806cdb31f6ca9d7d84b4ff3" },
   "sqlite.lua": { "branch": "master", "commit": "b487fcc8937b683942a1f7d9662fcf50ca5acd58" },
   "toggleterm.nvim": { "branch": "main", "commit": "50ea089fc548917cc3cc16b46a8211833b9e3c7c" },
   "togglr.nvim": { "branch": "main", "commit": "10c00b5bb99444a6a0e28155542367aa1c4a66ea" },
