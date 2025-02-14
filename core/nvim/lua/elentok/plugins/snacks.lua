@@ -15,7 +15,17 @@ return {
       enabled = true,
       timeout = 3000,
     },
-    picker = { enabled = true },
+    picker = {
+      enabled = true,
+      win = {
+        input = {
+          keys = {
+            ["@"] = "qflist",
+          },
+        },
+      },
+    },
+    -- picker = { enabled = true, layout = { preset = "dropdown" } },
     quickfile = { enabled = true },
     image = { enabled = true, markdown = { enabled = true } },
     -- scope = { enabled = true },
