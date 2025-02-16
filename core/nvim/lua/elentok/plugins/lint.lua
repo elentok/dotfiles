@@ -20,6 +20,7 @@ return {
     end
 
     lint.linters_by_ft["fish"] = { "fish" }
+    lint.linters_by_ft["markdown"] = { "markdownlint-cli2" }
 
     vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
       group = vim.api.nvim_create_augroup("Elentok_Lint", {}),

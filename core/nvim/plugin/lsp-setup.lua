@@ -63,6 +63,8 @@ setup("ruff")
 --   },
 -- })
 
+setup("marksman")
+
 require("lspconfig.configs").vtsls = require("vtsls").lspconfig
 
 -- Find the absolute path to the local project's tsserver (to avoid using the
