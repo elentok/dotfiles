@@ -1,5 +1,34 @@
 ---@module "snacks"
 
+---@type snacks.picker.Config
+local git_picker_config = {
+  actions = {
+    fixup = function(picker, item)
+      picker:close()
+      require("elentok.lib.git-actions").fixup(item.commit, item.msg)
+    end,
+    open_commit = function(picker, item)
+      picker:close()
+      require("diffview").open(item.commit)
+      -- require("diffview").open(item.commit .. "^!")
+    end,
+    yank_hash = function(_, item)
+      vim.fn.setreg("+", item.commit)
+      Snacks.notifier.notify("Copied " .. item.commit)
+    end,
+  },
+
+  win = {
+    input = {
+      keys = {
+        ["f"] = { "fixup", mode = { "n" } },
+        ["<cr>"] = { "open_commit", mode = { "n", "i" } },
+        ["<leader>y"] = { "yank_hash", mode = { "n", "i" } },
+      },
+    },
+  },
+}
+
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -127,14 +156,14 @@ return {
     {
       "<leader>gh",
       function()
-        Snacks.picker.git_log_file()
+        Snacks.picker.git_log_file(git_picker_config)
       end,
       desc = "Show git history of current file",
     },
     {
       "<leader>gl",
       function()
-        Snacks.picker.git_log()
+        Snacks.picker.git_log(git_picker_config)
       end,
       desc = "Show git log",
     },
