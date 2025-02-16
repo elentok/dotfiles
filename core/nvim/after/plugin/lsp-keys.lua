@@ -51,7 +51,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("n", "<leader>ti", toggle_inlay_hints, "Toggle inlay hints")
 
     map("n", "<leader>rn", vim.lsp.buf.rename, "Rename symbol")
-    -- map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code actions")
+    map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code actions")
 
     map("n", "<leader>ik", vim.lsp.buf.signature_help, "Signature help")
 

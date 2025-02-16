@@ -104,6 +104,13 @@ return {
       desc = "Jump to keymap",
     },
     {
+      "<leader>jr",
+      function()
+        Snacks.picker.recent()
+      end,
+      desc = "Jump to recent file",
+    },
+    {
       "<leader>jm",
       function()
         Snacks.picker.recent()
