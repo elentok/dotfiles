@@ -6,7 +6,7 @@ if not type -q md2slack-plugin
     end
 end
 
-set codereview "In coderview:"
+set codereview "In code review:"
 set waiting ":double_vertical_bar:" # :arrow_forward:
 set inprogress "◐" # :arrow_forward:
 set done "✓" #:white_check_mark: 
