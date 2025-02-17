@@ -6,7 +6,7 @@ local lazygit = nil
 
 local function openLazyGit()
   if lazygit == nil then
-    lazygit = term.run("lazygit", {
+    lazygit = term.run({ "lazygit", "status" }, {
       wait = false,
       ---@param trm Terminal
       on_open = function(trm)
