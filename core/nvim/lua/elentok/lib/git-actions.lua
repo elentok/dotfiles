@@ -15,6 +15,13 @@ local function fixup(commit_hash, commit_title)
   end
 end
 
+---@param file string
+local function stage_patch(file)
+  local git = require("elentok.lib.git")
+  git.run({ "add", "-p", file })
+end
+
 return {
   fixup = fixup,
+  stage_patch = stage_patch,
 }

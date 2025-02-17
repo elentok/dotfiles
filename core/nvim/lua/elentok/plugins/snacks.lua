@@ -1,33 +1,5 @@
+local snacks_git = require("elentok.lib.snacks-git")
 ---@module "snacks"
-
----@type snacks.picker.Config
-local git_picker_config = {
-  actions = {
-    fixup = function(picker, item)
-      picker:close()
-      require("elentok.lib.git-actions").fixup(item.commit, item.msg)
-    end,
-    open_commit = function(picker, item)
-      picker:close()
-      require("diffview").open(item.commit)
-      -- require("diffview").open(item.commit .. "^!")
-    end,
-    yank_hash = function(_, item)
-      vim.fn.setreg("+", item.commit)
-      Snacks.notifier.notify("Copied " .. item.commit)
-    end,
-  },
-
-  win = {
-    input = {
-      keys = {
-        ["f"] = { "fixup", mode = { "n" } },
-        ["<cr>"] = { "open_commit", mode = { "n", "i" } },
-        ["y"] = { "yank_hash", mode = { "n", "i" } },
-      },
-    },
-  },
-}
 
 return {
   "folke/snacks.nvim",
@@ -61,11 +33,11 @@ return {
     -- scroll = { enabled = true },
     -- statuscolumn = { enabled = true },
     -- words = { enabled = true },
-    -- styles = {
-    --   notification = {
-    --     -- wo = { wrap = true } -- Wrap notifications
-    --   },
-    -- },
+  },
+  styles = {
+    notification = {
+      wo = { wrap = true }, -- Wrap notifications
+    },
   },
   keys = {
     {
@@ -73,7 +45,7 @@ return {
       function()
         Snacks.picker.smart()
       end,
-      desc = "Smart Find Files",
+      desc = "Smart find files",
     },
     {
       "<leader>jb",
@@ -109,21 +81,21 @@ return {
       function()
         Snacks.picker.lines()
       end,
-      desc = "Jump to keymap",
+      desc = "Find line",
     },
     {
       "z=",
       function()
         Snacks.picker.spelling()
       end,
-      desc = "Jump to keymap",
+      desc = "Fix spelling",
     },
     {
       "<leader>jj",
       function()
         Snacks.picker.jumps()
       end,
-      desc = "Jump to keymap",
+      desc = "Jump to jump location",
     },
     {
       "<leader>jk",
@@ -149,21 +121,21 @@ return {
     {
       "<leader>jg",
       function()
-        Snacks.picker.git_status()
+        Snacks.picker.git_status(snacks_git.git_status_picker_config)
       end,
       desc = "Show git status",
     },
     {
       "<leader>gh",
       function()
-        Snacks.picker.git_log_file(git_picker_config)
+        Snacks.picker.git_log_file(snacks_git.git_commits_picker_config)
       end,
       desc = "Show git history of current file",
     },
     {
       "<leader>gl",
       function()
-        Snacks.picker.git_log(git_picker_config)
+        Snacks.picker.git_log(snacks_git.git_commits_picker_config)
       end,
       desc = "Show git log",
     },
