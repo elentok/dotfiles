@@ -23,7 +23,7 @@ local git_picker_config = {
       keys = {
         ["f"] = { "fixup", mode = { "n" } },
         ["<cr>"] = { "open_commit", mode = { "n", "i" } },
-        ["<leader>y"] = { "yank_hash", mode = { "n", "i" } },
+        ["y"] = { "yank_hash", mode = { "n", "i" } },
       },
     },
   },
