@@ -112,6 +112,13 @@ return {
       desc = "Jump to recent file",
     },
     {
+      "<leader>jR",
+      function()
+        Snacks.picker.recent({ filter = { cwd = true } })
+      end,
+      desc = "Jump to recent file",
+    },
+    {
       "<leader>jm",
       function()
         Snacks.picker.recent()
