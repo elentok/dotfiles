@@ -1,23 +1,23 @@
-local function jump_to_note()
-  require("fzf-lua").grep({ search = "^#", no_esc = true, cwd = "~/notes", rg_opts = "-tmd" })
-end
+-- local function jump_to_note()
+--   require("fzf-lua").grep({ search = "^#", no_esc = true, cwd = "~/notes", rg_opts = "-tmd" })
+-- end
 
-vim.keymap.set("n", "<leader>jn", jump_to_note, { desc = "Jump to note" })
+-- vim.keymap.set("n", "<leader>jn", jump_to_note, { desc = "Jump to note" })
 
-vim.api.nvim_create_user_command("FzfLuaNote", jump_to_note, {})
+-- vim.api.nvim_create_user_command("FzfLuaNote", jump_to_note, {})
 
-vim.keymap.set("n", "<leader>jc", function()
-  require("fzf-lua").files({
-    cwd = "~",
-    raw_cmd = "rg -tlua -tvim --files .dotfiles/core/nvim .dotplugins/*/nvim",
-  })
-end, { desc = "Jump to config" })
+-- vim.keymap.set("n", "<leader>jc", function()
+--   require("fzf-lua").files({
+--     cwd = "~",
+--     raw_cmd = "rg -tlua -tvim --files .dotfiles/core/nvim .dotplugins/*/nvim",
+--   })
+-- end, { desc = "Jump to config" })
 
-vim.keymap.set("n", "<leader>jvp", function()
-  require("fzf-lua").files({
-    cwd = "~/.dotfiles/core/nvim/lua/elentok/plugins/",
-  })
-end, { desc = "Jump to plugin" })
+-- vim.keymap.set("n", "<leader>jvp", function()
+--   require("fzf-lua").files({
+--     cwd = "~/.dotfiles/core/nvim/lua/elentok/plugins/",
+--   })
+-- end, { desc = "Jump to plugin" })
 
 vim.keymap.set("n", "<leader>jS", function()
   require("fzf-lua").files({

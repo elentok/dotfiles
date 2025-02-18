@@ -147,6 +147,28 @@ return {
       desc = "Show git log",
     },
     {
+      "<leader>jc",
+      function()
+        Snacks.picker.files({
+          dirs = { "~/.dotfiles/core/nvim", "~/.dotplugins/*/nvim" },
+          ft = { "lua", "vim" },
+        })
+      end,
+      desc = "Jump to config",
+    },
+    -- {
+    --   "<leader>jn",
+    --   function()
+    --     Snacks.picker.grep_word({
+    --       dirs = { "~/notes" },
+    --       ft = { "markdown" },
+    --       search = "^#",
+    --       regex = true,
+    --     })
+    --   end,
+    --   desc = "Jump to note",
+    -- },
+    {
       "``",
       function()
         Snacks.picker.resume()
