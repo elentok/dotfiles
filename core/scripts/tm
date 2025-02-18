@@ -18,7 +18,7 @@ function main
         set session $argv[1]
         if tmux-has-session "$session"
             echo "Attaching to existing tmux session '$session'..."
-            tmux attach "$session"
+            tmux attach -t "$session"
         else
             echo "Creating new tmux session '$session'..."
             tmux new-session -s "$session"
