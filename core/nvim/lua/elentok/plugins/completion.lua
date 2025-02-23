@@ -1,12 +1,24 @@
 local ai = require("elentok.lib.ai")
 
 ---@type string[]
-local default_sources = { "lsp", "path", "snippets", "buffer" }
+local default_sources = { "lsp", "path", "snippets", "buffer", "emoji" }
 
 ---@type table<string, blink.cmp.SourceProviderConfigPartial>?
 local providers = {
   lsp = {
     score_offset = 10,
+  },
+  emoji = {
+    name = "emoji",
+    module = "blink.compat.source",
+    -- overwrite kind of suggestion
+    transform_items = function(_, items)
+      local kind = require("blink.cmp.types").CompletionItemKind.Text
+      for i = 1, #items do
+        items[i].kind = kind
+      end
+      return items
+    end,
   },
   -- ripgrep = {
   --   module = "blink-ripgrep",
@@ -44,6 +56,8 @@ return {
       -- "rafamadriz/friendly-snippets",
       -- "mikavilpas/blink-ripgrep.nvim",
       "giuxtaposition/blink-cmp-copilot",
+      "allaman/emoji.nvim",
+      "saghen/blink.compat", -- required for emoji
     },
 
     -- use a release tag to download pre-built binaries
