@@ -10,13 +10,15 @@ set fish_cursor_default block
 # Set the insert mode cursor to a line
 set fish_cursor_insert line
 
-# set fish_greeting ""
-function fish_greeting
-    if type -q pfetch
-        pfetch
-    else
-        echo "==> Can't show greeting, 'pfetch' is missing"
-    end
+if status is-interactive
+    set fish_greeting ""
+    # function fish_greeting
+    #     if type -q pfetch
+    #         pfetch
+    #     else
+    #         echo "==> Can't show greeting, 'pfetch' is missing"
+    #     end
+    # end
 end
 
 # bun
