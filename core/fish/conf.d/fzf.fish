@@ -1,1 +1,1 @@
-fzf_configure_bindings --directory=\ct
+# fzf_configure_bindings --directory=\ct
