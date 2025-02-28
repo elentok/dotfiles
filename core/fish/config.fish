@@ -1,3 +1,12 @@
+set -g fish_start_time (date +%s%N)
+
+function report_fish_startup_time --on-event fish_prompt
+    set -g fish_end_time (date +%s%N)
+    set -g elapsed_time (math "($fish_end_time - $fish_start_time) / 1000000")
+    echo -e "\x1b[38;5;241m $(printf '%.2f' $elapsed_time)ms\033[0m"
+    functions --erase report_fish_startup_time # Remove function after first run
+end
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
     starship init fish | source
