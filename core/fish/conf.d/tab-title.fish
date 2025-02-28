@@ -54,4 +54,4 @@ function change-git-branch-on-dirchange --on-variable PWD
     set -x -g GIT_BRANCH (git rev-parse --abbrev-ref HEAD 2>/dev/null)
 end
 
-change-git-branch-on-dirchange
+# change-git-branch-on-dirchange

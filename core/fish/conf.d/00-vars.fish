@@ -6,6 +6,8 @@ set -x DOTP "$HOME/.dotplugins"
 set -x EDITOR nvim
 
 set -x TMP $HOME/tmp
-mkdir -p "$TMP"
+if ! test -e "$TMP"
+    mkdir -p "$TMP"
+end
 
 set -x FZF_DEFAULT_OPTS "--tiebreak=end"

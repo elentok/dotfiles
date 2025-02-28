@@ -6,6 +6,9 @@ source "$DOTF/framework.sh"
 
 function main() {
   install-poetry
+
+  # Clear the pyver cache (so it's rebuilt on the next shell)
+  rm -f ~/.local/cache/dotfiles/pyver
 }
 
 function install-poetry() {
