@@ -2,5 +2,9 @@
 ---@type LazySpec
 return {
   "aserowy/tmux.nvim",
-  opts = {},
+  opts = {
+    resize = {
+      enable_default_keybindings = true,
+    },
+  },
 }

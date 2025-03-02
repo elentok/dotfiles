@@ -23,4 +23,9 @@ return {
       })
     end,
   },
+  {
+    "echasnovski/mini.move",
+    version = "*",
+    opts = {},
+  },
 }
