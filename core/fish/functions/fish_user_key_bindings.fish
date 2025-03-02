@@ -8,6 +8,9 @@ function fish_user_key_bindings
     # The argument specifies the initial mode (insert, "default" or visual).
     fish_vi_key_bindings --no-erase insert
 
+    bind -M default gl end-of-line
+    bind -M default gs beginning-of-line
+
     bind -M visual -m default y fish_copy_and_cancel
     bind p fish_clipboard_paste
 
