@@ -16,6 +16,9 @@ function main() {
   dotf-summary run 'Update fisher' fish -c "fisher update"
   upgrade-neovim-stuff
 
+  # Clear cached direnv fish setup (regenerated when missing on new shells)
+  rm -f ~/.cache/dotfiles/direnv.fish
+
   dotf-summary stop
 }
 
