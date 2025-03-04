@@ -1,5 +1,4 @@
 local term = require("elentok.lib.terminal")
-require("toggleterm.terminal")
 
 --- @type Terminal | nil
 local lazygit = nil

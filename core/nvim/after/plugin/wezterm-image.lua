@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return
+end
+
 local expand = require("open-link.expand")
 
 ---@param path string

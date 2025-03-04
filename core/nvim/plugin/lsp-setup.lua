@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return
+end
+
 -- This file is under plugin/ instead of after/plugin/
 -- so the LSP servers are already configured when we reach after/plugin/lsp
 

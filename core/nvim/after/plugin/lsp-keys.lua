@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return
+end
+
 -- local function lsp_hover_or_peek_into_fold()
 --   local winid = require("ufo").peekFoldedLinesUnderCursor()
 --   if not winid then

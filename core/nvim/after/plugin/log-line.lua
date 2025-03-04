@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return
+end
+
 local navic = require("nvim-navic")
 local util = require("elentok/util")
 local ui = require("elentok.lib.ui")

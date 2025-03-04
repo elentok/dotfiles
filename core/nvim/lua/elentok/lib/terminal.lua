@@ -1,3 +1,11 @@
+if vim.g.vscode then
+  return {
+    run = function()
+      print("elentok.lib.terminal is not implemented in vscode mode")
+    end,
+  }
+end
+
 local term = require("toggleterm.terminal")
 local Terminal = term.Terminal
 
