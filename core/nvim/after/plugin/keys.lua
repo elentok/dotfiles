@@ -220,3 +220,20 @@ vim.keymap.set({ "n", "v" }, "<leader>.", "]", { remap = true })
 -- When pasting in visual mode do not overwrite the clipboard
 vim.keymap.set("v", "p", '"_dP')
 vim.keymap.set("v", "P", '"_dp')
+
+if vim.g.vscode then
+  local vscode_action = function(cmd)
+    return function()
+      require("vscode").action(cmd)
+    end
+  end
+
+  vim.keymap.set({ "n" }, "<leader>ts", vscode_action("workbench.action.toggleSidebarVisibility"))
+  vim.keymap.set({ "n" }, "<leader><leader>", vscode_action("workbench.action.toggleZenMode"))
+  vim.keymap.set({ "n" }, "<leader>tp", vscode_action("workbench.actions.view.problems"))
+  vim.keymap.set({ "n" }, "gr", vscode_action("editor.action.goToReferences"))
+  vim.keymap.set({ "n" }, "<leader>js", vscode_action("workbench.action.openSettingsJson"))
+  vim.keymap.set({ "n" }, "K", vscode_action("editor.action.showHover"))
+  vim.keymap.set({ "n" }, "<D-u>", "<C-u>")
+  vim.keymap.set({ "n" }, "<D-d>", "<C-d>")
+end
