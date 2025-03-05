@@ -18,7 +18,11 @@ alias ls 'eza --classify --group-directories-first --time-style=long-iso --icons
 alias ll 'eza --long --classify --group-directories-first --time-style=long-iso --icons'
 alias lg lazygit
 alias lgs 'lazygit status'
+alias lgl 'lazygit log'
 alias ssh 'TERM=xterm-256color command ssh'
+
+alias gl 'git log -n 10'
+alias gll 'git log'
 
 alias x exit
 
