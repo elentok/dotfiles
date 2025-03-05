@@ -13,8 +13,8 @@ function yr --description "yarn run"
     else
         set cmd "$(npm-scripts.ts | fzf-tmux -p -w 80% --ansi --exit-0 | awk '{print $1}')"
         if test -n "$cmd"
-            commandline --replace "yarn run "$cmd""
-            commandline -f execute
+            history append "yarn run \"$cmd\""
+            yarn run "$cmd"
         end
     end
 end
@@ -25,8 +25,8 @@ function yt --description "yarn test"
     else
         set cmd "$(npm-scripts.ts | fzf-tmux -p -w 80% --ansi --exit-0 | awk '{print $1}')"
         if test -n "$cmd"
-            commandline --replace "yarn test "$cmd""
-            commandline -f execute
+            history append "yarn test \"$cmd\""
+            yarn test "$cmd"
         end
     end
 end
@@ -37,8 +37,8 @@ function npr --description "npm run"
     else
         set cmd "$(npm-scripts.ts | fzf-tmux -p -w 80% --ansi --exit-0 | awk '{print $1}')"
         if test -n "$cmd"
-            commandline --replace "npm run "$cmd""
-            commandline -f execute
+            history append "npm run \"$cmd\""
+            npm run "$cmd"
         end
     end
 end
@@ -49,8 +49,8 @@ function br --description "bun run"
     else
         set cmd "$(npm-scripts.ts | fzf-tmux -p -w 80% --ansi --exit-0 | awk '{print $1}')"
         if test -n "$cmd"
-            commandline --replace "bun run "$cmd""
-            commandline -f execute
+            history append "bun run \"$cmd\""
+            bun run "$cmd"
         end
     end
 end
