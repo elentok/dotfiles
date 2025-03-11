@@ -22,4 +22,5 @@ function git-nf
     git worktree add -b "$branch_name" "$branch_name"
     cd "$branch_name"
     git reset --hard upstream/main
+    direnv allow
 end
