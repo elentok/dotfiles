@@ -222,9 +222,9 @@ vim.keymap.set("v", "p", '"_dP')
 vim.keymap.set("v", "P", '"_dp')
 
 if vim.g.vscode then
-  local vscode_action = function(cmd)
+  local vscode_action = function(cmd, opts)
     return function()
-      require("vscode").action(cmd)
+      require("vscode").action(cmd, opts)
     end
   end
 
@@ -236,4 +236,21 @@ if vim.g.vscode then
   vim.keymap.set({ "n" }, "K", vscode_action("editor.action.showHover"))
   vim.keymap.set({ "n" }, "<D-u>", "<C-u>")
   vim.keymap.set({ "n" }, "<D-d>", "<C-d>")
+
+  vim.keymap.set("n", "<leader>wh", vscode_action("workbench.action.focusLeftGroupWithoutWrap"))
+  vim.keymap.set("n", "<leader>wj", vscode_action("workbench.action.focusBelowGroupWithoutWrap"))
+  vim.keymap.set("n", "<leader>wk", vscode_action("workbench.action.focusAboveGroupWithoutWrap"))
+  vim.keymap.set("n", "<leader>wl", vscode_action("workbench.action.focusRightGroupWithoutWrap"))
+  vim.keymap.set("n", "<leader>ws", vscode_action("workbench.action.splitEditorDown"))
+  vim.keymap.set("n", "<leader>wv", vscode_action("workbench.action.splitEditorRight"))
+  vim.keymap.set("n", "<leader>qq", vscode_action("workbench.action.closeActiveEditor"))
+
+  vim.keymap.set("n", "<leader>f", vscode_action("workbench.action.quickOpen"))
+  vim.keymap.set("n", "<leader>js", vscode_action("workbench.action.quickOpen", { args = { "@" } }))
+  vim.keymap.set("n", "<leader>/", function()
+    require("vscode").action(
+      "workbench.action.findInFiles",
+      { args = { query = vim.fn.expand("<cword>") } }
+    )
+  end)
 end
