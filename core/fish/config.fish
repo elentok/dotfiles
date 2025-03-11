@@ -42,3 +42,7 @@ for dir in ~/.dotplugins/*
         source "$dir/fish/config.fish"
     end
 end
+
+if test -e ~/.local/machine.fish
+    source ~/.local/machine.fish
+end
