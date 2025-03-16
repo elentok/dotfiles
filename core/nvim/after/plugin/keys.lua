@@ -247,6 +247,7 @@ if vim.g.vscode then
 
   vim.keymap.set("n", "<leader>f", vscode_action("workbench.action.quickOpen"))
   vim.keymap.set("n", "<leader>js", vscode_action("workbench.action.quickOpen", { args = { "@" } }))
+  vim.keymap.set("n", "<leader>jg", vscode_action("workbench.view.scm"))
   vim.keymap.set("n", "<leader>/", function()
     require("vscode").action(
       "workbench.action.findInFiles",
