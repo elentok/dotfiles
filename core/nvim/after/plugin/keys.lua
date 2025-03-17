@@ -21,17 +21,7 @@ vim.keymap.set("i", "jl", "<esc>")
 vim.keymap.set("n", "<leader>k", ":")
 vim.keymap.set("n", "<leader>;", ":")
 
-vim.keymap.set("n", "<leader>wq", "<cmd>wq<cr>", { desc = ":wq" })
 vim.keymap.set("n", "<leader>ww", "<cmd>w<cr>", { desc = ":w" })
-vim.keymap.set("n", "<leader>wa", "<cmd>wa<cr>", { desc = ":wa" })
-vim.keymap.set("n", "<leader>qq", "<cmd>q<cr>", { desc = ":q" })
-vim.keymap.set("n", "<leader>qa", "<cmd>qa<cr>", { desc = ":qa" })
-vim.keymap.set("n", "<leader>cq", "<cmd>cq<cr>", { desc = ":cq" })
-
-vim.keymap.set("n", "<leader>wh", "<c-w>h", { desc = "Window left" })
-vim.keymap.set("n", "<leader>wj", "<c-w>j", { desc = "Window down" })
-vim.keymap.set("n", "<leader>wk", "<c-w>k", { desc = "Window up" })
-vim.keymap.set("n", "<leader>wl", "<c-w>l", { desc = "Window right" })
 
 vim.keymap.set("n", "<leader>wH", "<c-w>H", { desc = "Move Window left" })
 vim.keymap.set("n", "<leader>wJ", "<c-w>J", { desc = "Move Window down" })
@@ -59,19 +49,8 @@ vim.keymap.set({ "n", "v" }, ",c", "V")
 -- vim.keymap.set({ "n", "v" }, "<cr>a", "A")
 -- vim.keymap.set({ "n", "v" }, "<cr>c", "V")
 
--- Switch to alternate file
-vim.keymap.set("n", "<leader><leader>", "<c-^>")
-
 vim.keymap.set("n", "<c-s>", "<cmd>w<cr>")
 vim.keymap.set("i", "<c-s>", "<c-o>:w<cr>")
-
--- Avoid paste override {{{1
--- From https://github.com/skwp/dotfiles/blob/master/vim/plugin/settings/stop-visual-paste-insanity.vim:
--- If you visually select something and hit paste that thing gets yanked into
--- your buffer. This generally is annoying when you're copying one item and
--- repeatedly pasting it. This changes the paste command in visual mode so that
--- it doesn't overwrite whatever is in your paste buffer.
-vim.keymap.set("v", "p", '"_dP')
 
 -- Yank Markdown to HTML {{{1
 vim.keymap.set(
@@ -188,13 +167,6 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>rel", ":g/^$/d<cr>", { desc = "Remove empty lines" })
 vim.keymap.set("n", "rel", "<c-v>", { desc = "Go into visual block mode" })
 
-vim.keymap.set("n", "<leader>wh", "<c-w>h", { desc = "Go to window to the left" })
-vim.keymap.set("n", "<leader>wj", "<c-w>j", { desc = "Go to window below" })
-vim.keymap.set("n", "<leader>wk", "<c-w>k", { desc = "Go to window above" })
-vim.keymap.set("n", "<leader>wl", "<c-w>l", { desc = "Go to window to the right" })
-vim.keymap.set("n", "<leader>wo", "<c-w>o", { desc = "Only window" })
-vim.keymap.set("n", "<leader>ws", "<c-w>s", { desc = "Split window" })
-vim.keymap.set("n", "<leader>wv", "<c-w>v", { desc = "Split window vertically" })
 vim.keymap.set({ "n", "v" }, "<leader>vv", "<c-v>", { desc = "Go into block visual mode" })
 vim.keymap.set("n", "vv", "V", { desc = "Go into visual line mode" })
 vim.keymap.set("n", "vb", "<c-v>", { desc = "Go into visual block mode" })
@@ -220,38 +192,3 @@ vim.keymap.set({ "n", "v" }, "<leader>.", "]", { remap = true })
 -- When pasting in visual mode do not overwrite the clipboard
 vim.keymap.set("v", "p", '"_dP')
 vim.keymap.set("v", "P", '"_dp')
-
-if vim.g.vscode then
-  local vscode_action = function(cmd, opts)
-    return function()
-      require("vscode").action(cmd, opts)
-    end
-  end
-
-  vim.keymap.set({ "n" }, "<leader>ts", vscode_action("workbench.action.toggleSidebarVisibility"))
-  vim.keymap.set({ "n" }, "<leader><leader>", vscode_action("workbench.action.toggleZenMode"))
-  vim.keymap.set({ "n" }, "<leader>tp", vscode_action("workbench.actions.view.problems"))
-  vim.keymap.set({ "n" }, "gr", vscode_action("editor.action.goToReferences"))
-  vim.keymap.set({ "n" }, "<leader>js", vscode_action("workbench.action.openSettingsJson"))
-  vim.keymap.set({ "n" }, "K", vscode_action("editor.action.showHover"))
-  vim.keymap.set({ "n" }, "<D-u>", "<C-u>")
-  vim.keymap.set({ "n" }, "<D-d>", "<C-d>")
-
-  vim.keymap.set("n", "<leader>wh", vscode_action("workbench.action.focusLeftGroupWithoutWrap"))
-  vim.keymap.set("n", "<leader>wj", vscode_action("workbench.action.focusBelowGroupWithoutWrap"))
-  vim.keymap.set("n", "<leader>wk", vscode_action("workbench.action.focusAboveGroupWithoutWrap"))
-  vim.keymap.set("n", "<leader>wl", vscode_action("workbench.action.focusRightGroupWithoutWrap"))
-  vim.keymap.set("n", "<leader>ws", vscode_action("workbench.action.splitEditorDown"))
-  vim.keymap.set("n", "<leader>wv", vscode_action("workbench.action.splitEditorRight"))
-  vim.keymap.set("n", "<leader>qq", vscode_action("workbench.action.closeActiveEditor"))
-
-  vim.keymap.set("n", "<leader>f", vscode_action("workbench.action.quickOpen"))
-  vim.keymap.set("n", "<leader>js", vscode_action("workbench.action.quickOpen", { args = { "@" } }))
-  vim.keymap.set("n", "<leader>jg", vscode_action("workbench.view.scm"))
-  vim.keymap.set("n", "<leader>/", function()
-    require("vscode").action(
-      "workbench.action.findInFiles",
-      { args = { query = vim.fn.expand("<cword>") } }
-    )
-  end)
-end
