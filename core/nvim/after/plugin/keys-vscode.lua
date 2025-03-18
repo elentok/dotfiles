@@ -30,8 +30,9 @@ vim.keymap.set("n", "<leader>rn", vscode_action("editor.action.rename"))
 
 vim.keymap.set("n", "<leader>f", vscode_action("workbench.action.quickOpen"))
 vim.keymap.set("n", "<leader>js", vscode_action("workbench.action.quickOpen", { args = { "@" } }))
+vim.keymap.set("n", "<leader>/", vscode_action("workbench.action.quickOpen", { args = { "%" } }))
 vim.keymap.set("n", "<leader>jg", vscode_action("workbench.view.scm"))
-vim.keymap.set("n", "<leader>/", function()
+vim.keymap.set("n", "<leader>w/", function()
   require("vscode").action(
     "workbench.action.findInFiles",
     { args = { query = vim.fn.expand("<cword>") } }
