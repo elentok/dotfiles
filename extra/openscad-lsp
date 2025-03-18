@@ -1,0 +1,3 @@
+#!/usr/bin/env fish
+
+cargo install --git 'https://github.com/Leathong/openscad-LSP'
