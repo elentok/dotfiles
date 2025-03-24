@@ -1,3 +1,5 @@
+--- @module "toggleterm.terminal"
+
 local term = require("elentok.lib.terminal")
 
 --- @type Terminal | nil
