@@ -27,6 +27,15 @@ local providers = {
 }
 
 if ai.allow then
+  -- if false then
+  table.insert(default_sources, "minuet")
+  providers.minuet = {
+    name = "minuet",
+    module = "minuet.blink",
+    score_offset = 100,
+    async = true,
+  }
+
   table.insert(default_sources, "copilot")
   providers.copilot = {
     name = "copilot",
@@ -57,6 +66,7 @@ return {
       -- "mikavilpas/blink-ripgrep.nvim",
       "giuxtaposition/blink-cmp-copilot",
       "allaman/emoji.nvim",
+      "milanglacier/minuet-ai.nvim",
       "saghen/blink.compat", -- required for emoji
     },
 
@@ -67,85 +77,91 @@ return {
     -- If you use nix, you can build from source using latest nightly rust with:
     -- build = 'nix run .#build-plugin',
 
-    ---@module 'blink.cmp'
-    ---@type blink.cmp.Config
-    opts = {
-      -- 'default' for mappings similar to built-in completion
-      -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
-      -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-      -- See the full "keymap" documentation for information on defining your own keymap.
-      -- keymap = { preset = "default" },
-      keymap = {
-        preset = "super-tab",
-        -- ["<cr>"] = { "accept", "fallback" },
-        -- ["<Tab>"] = {
-        --   function(cmp)
-        --     if cmp.snippet_active() then
-        --       return cmp.accept()
-        --     else
-        --       return cmp.select_next()
-        --     end
-        --     -- else return cmp.select_and_accept() end
-        --   end,
-        --   "snippet_forward",
-        --   "fallback",
-        -- },
-      },
+    config = function()
+      require("blink.cmp").setup({
+        -- 'default' for mappings similar to built-in completion
+        -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
+        -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
+        -- See the full "keymap" documentation for information on defining your own keymap.
+        -- keymap = { preset = "default" },
+        keymap = {
+          preset = "super-tab",
 
-      appearance = {
-        -- Sets the fallback highlight groups to nvim-cmp's highlight groups
-        -- Useful for when your theme doesn't support blink.cmp
-        -- Will be removed in a future release
-        use_nvim_cmp_as_default = false,
-        -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-        -- Adjusts spacing to ensure icons are aligned
-        nerd_font_variant = "mono",
-      },
+          -- Manually invoke minuet completion.
+          ["<A-y>"] = require("minuet").make_blink_map(),
+          -- ["<cr>"] = { "accept", "fallback" },
+          -- ["<Tab>"] = {
+          --   function(cmp)
+          --     if cmp.snippet_active() then
+          --       return cmp.accept()
+          --     else
+          --       return cmp.select_next()
+          --     end
+          --     -- else return cmp.select_and_accept() end
+          --   end,
+          --   "snippet_forward",
+          --   "fallback",
+          -- },
+        },
 
-      completion = {
-        menu = {
-          draw = {
-            columns = {
-              { "kind_icon", gap = 1 },
-              { "label" },
-              -- { "label", "label_description", gap = 1 },
-              -- { "kind_icon", "kind" },
-              { "source_name" },
+        appearance = {
+          -- Sets the fallback highlight groups to nvim-cmp's highlight groups
+          -- Useful for when your theme doesn't support blink.cmp
+          -- Will be removed in a future release
+          use_nvim_cmp_as_default = false,
+          -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+          -- Adjusts spacing to ensure icons are aligned
+          nerd_font_variant = "mono",
+        },
+
+        completion = {
+          -- Recommended to avoid unnecessary request
+          trigger = { prefetch_on_insert = false },
+          menu = {
+            draw = {
+              columns = {
+                { "kind_icon", gap = 1 },
+                { "label" },
+                -- { "label", "label_description", gap = 1 },
+                -- { "kind_icon", "kind" },
+                { "source_name" },
+              },
             },
+          },
+
+          -- This is a bit jumpy
+          -- ghost_text = {
+          --   enabled = true,
+          -- },
+
+          documentation = {
+            auto_show = true,
+            auto_show_delay_ms = 500,
           },
         },
 
-        -- This is a bit jumpy
-        -- ghost_text = {
-        --   enabled = true,
-        -- },
-
-        documentation = {
-          auto_show = true,
-          auto_show_delay_ms = 500,
+        sources = {
+          default = default_sources,
+          per_filetype = {
+            codecompanion = { "codecompanion" },
+          },
+          providers = providers,
         },
-      },
 
-      sources = {
-        default = default_sources,
-        per_filetype = {
-          codecompanion = { "codecompanion" },
-        },
-        providers = providers,
-      },
-    },
-    opts_extend = { "sources.default" },
+        -- opts_extend = { "sources.default" },
+      })
+    end,
+
+    -- Old nvim-cmp plugins:
+    -- "hrsh7th/nvim-cmp",
+    -- "hrsh7th/cmp-nvim-lsp",
+    -- "hrsh7th/cmp-buffer",
+    -- "hrsh7th/cmp-path",
+    -- "hrsh7th/cmp-nvim-lua",
+    -- "hrsh7th/cmp-cmdline",
+    -- "lukas-reineke/cmp-rg",
+    -- "saadparwaiz1/cmp_luasnip",
+    -- "onsails/lspkind-nvim",
+    -- "rafamadriz/friendly-snippets",
   },
-
-  -- Old nvim-cmp plugins:
-  -- "hrsh7th/nvim-cmp",
-  -- "hrsh7th/cmp-nvim-lsp",
-  -- "hrsh7th/cmp-buffer",
-  -- "hrsh7th/cmp-path",
-  -- "hrsh7th/cmp-nvim-lua",
-  -- "hrsh7th/cmp-cmdline",
-  -- "lukas-reineke/cmp-rg",
-  -- "saadparwaiz1/cmp_luasnip",
-  -- "onsails/lspkind-nvim",
-  -- "rafamadriz/friendly-snippets",
 }
