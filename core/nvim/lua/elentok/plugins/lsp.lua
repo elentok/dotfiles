@@ -1,6 +1,4 @@
 return {
-  "neovim/nvim-lspconfig",
-
   -- Shows the function signature while typing
   {
     "ray-x/lsp_signature.nvim",
