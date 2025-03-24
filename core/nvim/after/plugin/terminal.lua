@@ -13,12 +13,6 @@ vim.keymap.set("t", "<c-;>", "<c-\\><c-n>")
 --   end
 -- end
 
----@param direction "h" | "j" | "k" | "l"
--- local function termNavigate(direction)
-
---
--- end
-
 -- tmap("<c-w>", "<c-\\><c-n><c-w>")
 -- vim.keymap.set("t", "<c-h>", "<c-\\><c-n><c-w>h")
 -- vim.keymap.set("t", "<c-j>", "<c-\\><c-n><c-w>j")

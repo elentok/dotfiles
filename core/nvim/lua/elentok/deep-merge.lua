@@ -1,6 +1,6 @@
 local function identify(value)
   if type(value) == "table" then
-    if vim.tbl_islist(value) then
+    if vim.islist(value) then
       return "list"
     else
       return "table"

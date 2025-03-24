@@ -1,6 +1,5 @@
 local M = {}
 local term = require("elentok.lib.terminal")
-local luv = vim.loop
 
 -- Root with a "tilde" for the user's home directory
 function M.tilde_root()
@@ -50,13 +49,13 @@ function M.find_git_root(filepath)
   if vim.bo.filetype == "oil" then
     filepath = require("oil").get_current_dir()
   end
-  local path = luv.fs_realpath(filepath)
+  local path = vim.uv.fs_realpath(filepath)
 
   while path ~= "/" do
-    if luv.fs_stat(path .. "/.git") then
+    if vim.uv.fs_stat(path .. "/.git") then
       return path
     end
-    path = luv.fs_realpath(path .. "/..")
+    path = vim.uv.fs_realpath(path .. "/..")
   end
   return nil
 end

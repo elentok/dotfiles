@@ -1,7 +1,9 @@
----@class FloatOptions
+---@class MyFloatOptions
 ---@field title string
+---@field height? number
+---@field width? number
 
----@param opts FloatOptions
+---@param opts MyFloatOptions
 local function open_float(opts)
   local ui = vim.api.nvim_list_uis()[1]
 
