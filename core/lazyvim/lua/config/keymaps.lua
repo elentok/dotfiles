@@ -28,9 +28,11 @@ vim.keymap.set("n", "<c-h>", function()
 end)
 
 vim.keymap.set("n", "<c-k>", function()
-  require("tmux").move_up()
+  require("tmux").move_top()
 end)
 
 vim.keymap.set("n", "<c-j>", function()
-  require("tmux").move_down()
+  require("tmux").move_bottom()
 end)
+
+vim.keymap.set("n", "<leader>yf", ':let @+ = expand("%:.")<cr>', { desc = "Yank current filename" })
