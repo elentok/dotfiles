@@ -36,3 +36,4 @@ vim.keymap.set("n", "<c-j>", function()
 end)
 
 vim.keymap.set("n", "<leader>yf", ':let @+ = expand("%:.")<cr>', { desc = "Yank current filename" })
+vim.keymap.set("n", "<leader>wa", ":wa<cr>", { desc = ":wa" })
