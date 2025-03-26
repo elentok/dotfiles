@@ -21,7 +21,7 @@ return {
         adapter = "anthropic",
       },
       cmd = {
-        adapter = "copilot",
+        adapter = "anthropic",
       },
     },
   },
