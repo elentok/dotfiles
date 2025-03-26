@@ -1,13 +1,4 @@
 return {
-  -- Togglr
-  {
-    "elentok/togglr.nvim",
-    opts = {},
-    keys = {
-      { "<leader>tw" },
-    },
-  },
-
   -- Scriptify
   {
     "elentok/scriptify.nvim",
