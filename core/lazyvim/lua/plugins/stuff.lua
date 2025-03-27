@@ -10,6 +10,7 @@ return {
       toggle_word = {},
       paste_image = true,
       git = true,
+      notes = true,
       open_link = {
         expanders = {
           expanders.homedir(),
@@ -21,6 +22,7 @@ return {
   end,
   keys = {
     { "<leader>tw" },
+    { "<leader>jw" },
     { "gx" },
     { "<leader>ga" },
     { "<leader>gr" },
