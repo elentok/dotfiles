@@ -3,5 +3,6 @@ require("config.lazy")
 require("elentok.log-line")
 require("elentok.alternate-file")
 require("elentok.git-url")
+require("elentok.dotplugins")
 
 vim.lsp.inlay_hint.enable(false)
