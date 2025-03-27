@@ -11,6 +11,7 @@ return {
       paste_image = true,
       git = true,
       notes = true,
+      alternate_file = true,
       open_link = {
         expanders = {
           expanders.homedir(),
@@ -23,6 +24,7 @@ return {
   keys = {
     { "<leader>tw" },
     { "<leader>jw" },
+    { "<leader>jo" },
     { "gx" },
     { "<leader>ga" },
     { "<leader>gr" },
