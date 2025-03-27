@@ -15,6 +15,7 @@ return {
       ["<C-l>"] = false,
       ["<C-c>"] = false,
       ["<C-p>"] = false,
+      ["<C-s>"] = "<cmd>w<cr>",
       ["<leader><leader>"] = "actions.preview",
       ["q"] = "actions.close",
       ["L"] = "actions.select",
