@@ -30,6 +30,8 @@ return {
     { "<leader>gr" },
     { "<leader>gu" },
     { "<leader>gw" },
+    { "<leader>gy" },
+    { "<leader>go" },
     {
       "<Leader>ip",
       "<cmd>PasteImage<cr>",
