@@ -9,6 +9,7 @@ return {
     require("stuff").setup({
       toggle_word = {},
       paste_image = true,
+      git = true,
       open_link = {
         expanders = {
           expanders.homedir(),
@@ -21,6 +22,10 @@ return {
   keys = {
     { "<leader>tw" },
     { "gx" },
+    { "<leader>ga" },
+    { "<leader>gr" },
+    { "<leader>gu" },
+    { "<leader>gw" },
     {
       "<Leader>ip",
       "<cmd>PasteImage<cr>",
