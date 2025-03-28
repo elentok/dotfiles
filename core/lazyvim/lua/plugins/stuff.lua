@@ -12,6 +12,7 @@ return {
       git = true,
       notes = true,
       alternate_file = true,
+      scriptify = {},
       open_link = {
         expanders = {
           expanders.homedir(),
@@ -32,6 +33,7 @@ return {
     { "<leader>gw" },
     { "<leader>gy" },
     { "<leader>go" },
+    { "<leader>sf" },
     {
       "<Leader>ip",
       "<cmd>PasteImage<cr>",

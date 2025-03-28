@@ -1,13 +1,13 @@
 return {
   -- Scriptify
-  {
-    "elentok/scriptify.nvim",
-    opts = {},
-    cmd = { "Scriptify" },
-    keys = {
-      { "<leader>sf", "<Cmd>Scriptify<cr>", desc = "Scriptify" },
-    },
-  },
+  -- {
+  --   "elentok/scriptify.nvim",
+  --   opts = {},
+  --   cmd = { "Scriptify" },
+  --   keys = {
+  --     { "<leader>sf", "<Cmd>Scriptify<cr>", desc = "Scriptify" },
+  --   },
+  -- },
 
   -- Encrypt
   {
