@@ -13,6 +13,7 @@ return {
       notes = true,
       alternate_file = true,
       scriptify = {},
+      log_line = {},
       open_link = {
         expanders = {
           expanders.homedir(),
@@ -39,5 +40,6 @@ return {
       "<cmd>PasteImage<cr>",
       desc = "Paste image from clipboard",
     },
+    { "<c-l>", mode = "i" },
   },
 }
