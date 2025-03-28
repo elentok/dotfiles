@@ -1,0 +1,31 @@
+{
+  "rfc": {
+    "body": [
+      "interface ${1:Component}Props {",
+      "}",
+      "",
+      "export const $1: FC<$1Props> = ({}) => {",
+      "  return <>$3</>",
+      "}"
+    ]
+  },
+  "rhk": {
+    "body": [
+      "interface Use${1:Hook}Input {",
+      "}",
+      "",
+      "interface Use$1Output {",
+      "}",
+      "",
+      "export const use$1 = ({}: Use$1Input): Use$1Output => {",
+      "",
+      "}"
+    ]
+  },
+  "screendebug": {
+    "body": [
+      "console.log('[SCREEN DEBUG START]')",
+      "screen.debug(undefined, Infinity)"
+    ]
+  }
+}
