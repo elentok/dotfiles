@@ -11,13 +11,7 @@ return {
       function()
         require("emoji").insert()
       end,
-    },
-    {
-      "<c-x>e",
-      function()
-        require("emoji").insert()
-      end,
-      mode = "i",
+      desc = "Insert emoji",
     },
   },
 }
