@@ -1,3 +1,4 @@
+---@module 'lspconfig'
 return {
   {
     "akinsho/bufferline.nvim",
@@ -8,6 +9,11 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       inlay_hints = { enabled = false },
+      servers = {
+        openscad_lsp = {
+          cmd = { "openscad-lsp", "--stdio", "--fmt-style", "Google" },
+        },
+      },
     },
   },
 
