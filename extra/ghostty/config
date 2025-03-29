@@ -1,11 +1,23 @@
 # vim: filetype=config
 
 theme = "catppuccin-mocha"
-font-family = "ZedMono NFM Light"
-font-family-bold = "ZedMono NFM"
+
+# Find fonts names by running `ghostty +list-fonts`
+
+# brew install font-agave-nerd-font
+font-family = "Agave Nerd Font Regular"
+font-family-bold = "Agave Nerd Font Regular"
 font-family-italic = "Operator Mono"
 font-family-bold-italic = "Operator Mono"
-font-size = 19.0
+
+# font-family = "ZedMono NFM Medium"
+# font-family-bold = "ZedMono NFM"
+
+# Increase line height by 5%
+adjust-cell-height = 10%
+adjust-cell-width = -7%
+
+font-size = 16.0
 macos-option-as-alt = true
 
 # Disable font ligatures
