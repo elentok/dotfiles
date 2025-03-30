@@ -10,7 +10,7 @@ function main() {
   dotf-header h1 "Upgrading environment..."
   cd "$DOTF"
 
-  dotf-repos upgrade
+  dotf-repos pull
   dotf-summary run 'Update github packages' github-pkgs update
   dotf-summary run 'Update packages' dotf-pkgs upgrade
   dotf-summary run 'Update fisher' fish -c "fisher update"

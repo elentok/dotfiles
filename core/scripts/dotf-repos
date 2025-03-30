@@ -30,30 +30,30 @@ for file in "$DOTP"/*/config/repos.cfg; do
   CONFIG_FILES+=("$file")
 done
 
-UPGRADE=no
+PULL=no
 
 function main() {
   local cmd="${1:-}"
   shift || true
 
   case "$cmd" in
-    list)
-      list-repos
-      ;;
-    setup)
-      setup-repos
-      ;;
-    upgrade)
-      UPGRADE=yes
-      setup-repos
-      ;;
-    qs | quick-status)
-      quick-status
-      ;;
-    *)
-      usage "$0"
-      exit 1
-      ;;
+  list)
+    list-repos
+    ;;
+  setup)
+    setup-repos
+    ;;
+  pull)
+    PULL=yes
+    setup-repos
+    ;;
+  qs | quick-status)
+    quick-status
+    ;;
+  *)
+    usage "$0"
+    exit 1
+    ;;
   esac
 }
 
@@ -112,8 +112,8 @@ function has-unpushed-commits() {
 }
 
 function setup-repos() {
-  if [ "$UPGRADE" == "yes" ]; then
-    dotf-header h2 "Upgrading repositories"
+  if [ "$PULL" == "yes" ]; then
+    dotf-header h2 "Pulling repositories"
   else
     dotf-header h2 "Setting up repositories"
   fi
@@ -124,8 +124,8 @@ function setup-repos() {
     fi
   done
 
-  if [ "$UPGRADE" == "yes" ]; then
-    dotf-header h2 "Done upgrading repositories :-)"
+  if [ "$PULL" == "yes" ]; then
+    dotf-header h2 "Done pulling repositories :-)"
   else
     dotf-header h2 "Done setting up repositories :-)"
   fi
@@ -166,7 +166,7 @@ function setup-repo() {
 
   if [ -e "$dir" ]; then
     if [ -d "$dir" ]; then
-      if [ "$UPGRADE" == "yes" ]; then
+      if [ "$PULL" == "yes" ]; then
         echo "  File exists, pulling"
         (
           cd "$dir"
