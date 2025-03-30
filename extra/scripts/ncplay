@@ -1,0 +1,5 @@
+#!/usr/bin/env fish
+
+set socket (ncspot info | grep USER_RUNTIME_PATH | awk '{ print $2 }')/ncspot.sock
+
+echo -n playpause | nc -U $socket
