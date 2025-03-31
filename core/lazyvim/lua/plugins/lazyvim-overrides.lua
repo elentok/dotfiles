@@ -32,4 +32,16 @@ return {
       table.insert(opts.extensions, require("elentok.lualine-oil-extension"))
     end,
   },
+
+  {
+    "saghen/blink.cmp",
+    opts = {
+      keymap = {
+        preset = "super-tab",
+      },
+      completion = {
+        accept = { auto_brackets = { enabled = false } },
+      },
+    },
+  },
 }
