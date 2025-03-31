@@ -1,7 +1,9 @@
 return {
   "sotte/presenting.nvim",
   opts = {
-    width = 80,
+    options = {
+      width = 80,
+    },
   },
   cmd = { "Presenting" },
 }
