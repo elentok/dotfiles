@@ -17,6 +17,9 @@ return {
     image = { enabled = true, markdown = { enabled = true } },
   },
   styles = {
+    terminal = {
+      border = "rounded",
+    },
     notification = {
       wo = { wrap = true }, -- Wrap notifications
     },
@@ -47,6 +50,13 @@ return {
       "<leader>gl",
       function()
         Snacks.picker.git_log(require("stuff.snacks.git").git_commits_picker_config)
+      end,
+      desc = "Show git log",
+    },
+    {
+      "<leader>js",
+      function()
+        Snacks.picker.lsp_symbols()
       end,
       desc = "Show git log",
     },
