@@ -19,21 +19,5 @@ vim.keymap.set({ "n", "v" }, "<leader>vv", "<c-v>", { desc = "Go into block visu
 vim.keymap.set("n", "vv", "V", { desc = "Go into visual line mode" })
 vim.keymap.set("n", "vb", "<c-v>", { desc = "Go into visual block mode" })
 
-vim.keymap.set("n", "<c-l>", function()
-  require("tmux").move_right()
-end)
-
-vim.keymap.set("n", "<c-h>", function()
-  require("tmux").move_left()
-end)
-
-vim.keymap.set("n", "<c-k>", function()
-  require("tmux").move_top()
-end)
-
-vim.keymap.set("n", "<c-j>", function()
-  require("tmux").move_bottom()
-end)
-
 vim.keymap.set("n", "<leader>yf", ':let @+ = expand("%:.")<cr>', { desc = "Yank current filename" })
 vim.keymap.set("n", "<leader>wa", ":wa<cr>", { desc = ":wa" })
