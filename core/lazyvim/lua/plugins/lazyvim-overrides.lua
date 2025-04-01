@@ -1,14 +1,3 @@
--- Find the absolute path to the local project's tsserver (to avoid using the
--- version embedded with vtsls)
-local function find_local_tsserver()
-  local root_dir = require("lspconfig.util").root_pattern("node_modules/typescript/lib")(vim.uv.cwd())
-  if root_dir == nil then
-    return nil
-  end
-
-  return root_dir .. "/node_modules/typescript/lib"
-end
-
 ---@module 'lspconfig'
 return {
   {
@@ -27,7 +16,7 @@ return {
         vtsls = {
           settings = {
             typescript = {
-              tsdk = find_local_tsserver(),
+              tsdk = vim.fn.finddir("node_modules/typescript/lib", ".;"),
             },
           },
         },
