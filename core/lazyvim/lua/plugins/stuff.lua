@@ -4,6 +4,7 @@
 return {
   "elentok/stuff.nvim",
   dev = true,
+  lazy = false,
   config = function()
     local expanders = require("stuff.open-link.expanders")
     require("stuff").setup({
@@ -24,22 +25,22 @@ return {
     })
   end,
   keys = {
-    { "<leader>tw" },
-    { "<leader>jw" },
-    { "<leader>jo" },
-    { "gx" },
-    { "<leader>ga" },
-    { "<leader>gr" },
-    { "<leader>gu" },
-    { "<leader>gw" },
-    { "<leader>gy" },
-    { "<leader>go" },
-    { "<leader>sf" },
+    -- { "<leader>tw" },
+    -- { "<leader>jw" },
+    -- { "<leader>jo" },
+    -- { "gx" },
+    -- { "<leader>ga" },
+    -- { "<leader>gr" },
+    -- { "<leader>gu" },
+    -- { "<leader>gw" },
+    -- { "<leader>gy" },
+    -- { "<leader>go" },
+    -- { "<leader>sf" },
     {
       "<Leader>ip",
       "<cmd>PasteImage<cr>",
       desc = "Paste image from clipboard",
     },
-    { "<c-l>", mode = "i" },
+    -- { "<c-l>", mode = "i" },
   },
 }
