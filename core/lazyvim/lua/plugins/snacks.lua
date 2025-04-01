@@ -60,5 +60,12 @@ return {
       end,
       desc = "Show git log",
     },
+    {
+      "<leader><space>",
+      function()
+        Snacks.picker.smart()
+      end,
+      desc = "Smart file picker",
+    },
   },
 }
