@@ -67,5 +67,20 @@ return {
       end,
       desc = "Smart file picker",
     },
+    {
+      "<leader>ii",
+      function()
+        Snacks.picker.icons()
+      end,
+      desc = "Insert icon",
+    },
+    {
+      "<c-x><c-i>",
+      function()
+        Snacks.picker.icons()
+      end,
+      mode = "i",
+      desc = "Insert emoji",
+    },
   },
 }
