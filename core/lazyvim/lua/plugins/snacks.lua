@@ -28,6 +28,21 @@ return {
             preset = "sidebar",
           },
         },
+        git_log = {
+          layout = {
+            preset = "sidebar",
+          },
+        },
+        git_log_line = {
+          layout = {
+            preset = "sidebar",
+          },
+        },
+        git_log_file = {
+          layout = {
+            preset = "sidebar",
+          },
+        },
       },
     },
 
