@@ -1,11 +1,18 @@
 [font]
-# normal = ["ComicShannsMono Nerd Font Mono"]
-normal = ["ZedMono NF Light"]
-size = 16
+size = 18
 
-[font.features]
-"ZedMono NF Light" = ["-calt"]
+[[font.normal]]
+family = "Agave Nerd Font"
 
-[[font.italic]]
-family = "Operator Mono"
-style = "W400"
+# [font]
+# # normal = ["ComicShannsMono Nerd Font Mono"]
+# # normal = ["ZedMono NF Light"]
+# normal = ["Agave Nerd Font"]
+# size = 16
+
+# [font.features]
+# "ZedMono NF Light" = ["-calt"]
+
+# [[font.italic]]
+# family = "Operator Mono"
+# style = "W400"
