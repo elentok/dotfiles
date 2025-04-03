@@ -4,11 +4,28 @@ return {
   "folke/snacks.nvim",
   ---@type snacks.Config
   opts = {
+    layout = {
+      preset = "vscode",
+    },
+
     picker = {
       win = {
         input = {
           keys = {
             ["@"] = "qflist",
+          },
+        },
+      },
+
+      sources = {
+        smart = {
+          layout = {
+            preset = "vscode",
+          },
+        },
+        git_diff = {
+          layout = {
+            preset = "sidebar",
           },
         },
       },
@@ -54,6 +71,13 @@ return {
       desc = "Show git log",
     },
     {
+      "<leader>gL",
+      function()
+        Snacks.picker.git_log_line(require("stuff.snacks.git").git_commits_picker_config)
+      end,
+      desc = "Show git history of current file",
+    },
+    {
       "<leader>js",
       function()
         Snacks.picker.lsp_symbols()
@@ -68,16 +92,17 @@ return {
       desc = "Smart file picker",
     },
     {
-      "<leader>ii",
+      "<c-x><c-n>",
       function()
-        Snacks.picker.icons()
+        Snacks.picker.icons({ icon_sources = { "nerd_fonts" } })
       end,
-      desc = "Insert icon",
+      mode = "i",
+      desc = "Insert nerdfont icon",
     },
     {
-      "<c-x><c-i>",
+      "<c-x>e",
       function()
-        Snacks.picker.icons()
+        Snacks.picker.icons({ icon_sources = { "emoji" } })
       end,
       mode = "i",
       desc = "Insert emoji",
