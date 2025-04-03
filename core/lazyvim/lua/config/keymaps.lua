@@ -21,3 +21,15 @@ vim.keymap.set("n", "vb", "<c-v>", { desc = "Go into visual block mode" })
 
 vim.keymap.set("n", "<leader>yf", ':let @+ = expand("%:.")<cr>', { desc = "Yank current filename" })
 vim.keymap.set("n", "<leader>wa", ":wa<cr>", { desc = ":wa" })
+
+vim.keymap.set("n", "<leader>uv", function()
+  local virtual_lines = not vim.diagnostic.config().virtual_lines
+  vim.diagnostic.config({
+    virtual_lines = virtual_lines,
+  })
+  if virtual_lines then
+    vim.notify("Virtual lines enabled")
+  else
+    vim.notify("Virtual lines disabled")
+  end
+end, { desc = "Toggle virtual_lines diagnostics" })
