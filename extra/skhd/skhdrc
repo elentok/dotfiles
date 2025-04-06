@@ -5,4 +5,4 @@ cmd - 8 : open "/Applications/Notion.app"
 cmd - 9 : open "/Applications/Spotify.app"
 cmd + ctrl + shift - r : skhd --reload && terminal-notifier -message "skhd: reloaded config"
 cmd + alt - p : spot
-cmd + ctrl + shift - i : ncplay
+cmd + ctrl + shift - i : spot
