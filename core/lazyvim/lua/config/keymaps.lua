@@ -33,3 +33,10 @@ vim.keymap.set("n", "<leader>uv", function()
     vim.notify("Virtual lines disabled")
   end
 end, { desc = "Toggle virtual_lines diagnostics" })
+
+-- Do not overwrite the clipboard
+vim.keymap.set("v", "p", '"_dP')
+vim.keymap.set("v", "P", '"_dp')
+vim.keymap.set({ "v", "n" }, "c", '"_c')
+vim.keymap.set({ "v", "n" }, "C", '"_C')
+vim.keymap.set({ "v", "n" }, "<leader>d", '"_d')
