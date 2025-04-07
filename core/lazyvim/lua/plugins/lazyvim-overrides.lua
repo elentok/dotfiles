@@ -1,4 +1,16 @@
 ---@module 'lspconfig'
+---@module 'conform'
+
+local lsp = require("elentok.lsp")
+
+local function typescript_formatter()
+  if lsp.has_lsp_client("denols") then
+    return {} -- fallback to LSP
+  else
+    return { "prettierd" }
+  end
+end
+
 return {
   {
     "akinsho/bufferline.nvim",
@@ -48,6 +60,43 @@ return {
       },
       completion = {
         accept = { auto_brackets = { enabled = false } },
+      },
+    },
+  },
+
+  {
+    "stevearc/conform.nvim",
+    ---@type conform.setupOpts
+    opts = {
+      format_on_save = function(bufnr)
+        local bufname = vim.api.nvim_buf_get_name(bufnr)
+        if bufname:match("/node_modules/") or bufname:match(".local/share/nvim/lazy") then
+          return
+        end
+
+        return {
+          timeout_ms = 500,
+          lsp_format = "fallback",
+        }
+      end,
+
+      formatters = {
+        qmkmd = {
+          command = "qmkmd",
+          args = { "format", "$FILENAME" },
+          stdin = false,
+          condition = function(_, ctx)
+            return vim.endswith(ctx.filename, ".layout.md")
+          end,
+        },
+      },
+
+      formatters_by_ft = {
+        typescript = typescript_formatter,
+        typescriptreact = typescript_formatter,
+        javascript = { "prettierd" },
+        html = { "prettierd" },
+        markdown = { "prettierd", "qmkmd" },
       },
     },
   },
