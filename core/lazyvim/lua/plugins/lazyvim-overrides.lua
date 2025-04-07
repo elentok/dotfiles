@@ -1,15 +1,7 @@
 ---@module 'lspconfig'
 ---@module 'conform'
 
-local lsp = require("elentok.lsp")
-
-local function typescript_formatter()
-  if lsp.has_lsp_client("denols") then
-    return {} -- fallback to LSP
-  else
-    return { "prettierd" }
-  end
-end
+local typescript_env = require("elentok.typescript-env")
 
 return {
   {
@@ -25,7 +17,15 @@ return {
         openscad_lsp = {
           cmd = { "openscad-lsp", "--stdio", "--fmt-style", "Google" },
         },
+        eslint = {
+          enabled = false,
+        },
+        denols = {
+          mason = false,
+          enabled = typescript_env.mode == "deno",
+        },
         vtsls = {
+          enabled = typescript_env.mode == "node",
           settings = {
             typescript = {
               tsdk = vim.fn.finddir("node_modules/typescript/lib", ".;"),
@@ -68,18 +68,6 @@ return {
     "stevearc/conform.nvim",
     ---@type conform.setupOpts
     opts = {
-      format_on_save = function(bufnr)
-        local bufname = vim.api.nvim_buf_get_name(bufnr)
-        if bufname:match("/node_modules/") or bufname:match(".local/share/nvim/lazy") then
-          return
-        end
-
-        return {
-          timeout_ms = 500,
-          lsp_format = "fallback",
-        }
-      end,
-
       formatters = {
         qmkmd = {
           command = "qmkmd",
@@ -92,8 +80,8 @@ return {
       },
 
       formatters_by_ft = {
-        typescript = typescript_formatter,
-        typescriptreact = typescript_formatter,
+        typescript = typescript_env.formatter,
+        typescriptreact = typescript_env.formatter,
         javascript = { "prettierd" },
         html = { "prettierd" },
         markdown = { "prettierd", "qmkmd" },
