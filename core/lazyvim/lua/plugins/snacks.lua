@@ -37,6 +37,8 @@ return {
         input = {
           keys = {
             ["@"] = "qflist",
+            ["<C-n>"] = { "history_forward", mode = { "i", "n" } },
+            ["<C-p>"] = { "history_back", mode = { "i", "n" } },
           },
         },
       },
