@@ -1,5 +1,5 @@
 {
-  "rfc": {
+  "drfc": {
     "body": [
       "interface ${1:Component}Props {",
       "}",
@@ -9,7 +9,7 @@
       "}"
     ]
   },
-  "rhk": {
+  "drhk": {
     "body": [
       "interface Use${1:Hook}Input {",
       "}",
@@ -23,9 +23,6 @@
     ]
   },
   "screendebug": {
-    "body": [
-      "console.log('[SCREEN DEBUG START]')",
-      "screen.debug(undefined, Infinity)"
-    ]
+    "body": ["console.log('[SCREEN DEBUG START]')", "screen.debug(undefined, Infinity)"]
   }
 }
