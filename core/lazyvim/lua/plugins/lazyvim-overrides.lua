@@ -88,4 +88,15 @@ return {
       },
     },
   },
+
+  {
+    "mfussenegger/nvim-lint",
+    opts = {
+      linters_by_ft = {
+        typescript = typescript_env.linters,
+        typescriptreact = typescript_env.linters,
+        markdown = {},
+      },
+    },
+  },
 }
