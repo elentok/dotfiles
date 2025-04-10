@@ -8,7 +8,7 @@ set -g __fish_git_prompt_showupstream git
 set -g __fish_git_prompt_char_upstream_ahead "$(set_color blue) "
 set -g __fish_git_prompt_char_upstream_behind "$(set_color yellow) "
 set -g __fish_git_prompt_char_upstream_diverged "$(set_color red)󰋔 "
-set -g __fish_git_prompt_char_upstream_equal "󰋑 "
+set -g __fish_git_prompt_char_upstream_equal "$(set_color 9399b2)󰋑 "
 set -g __fish_git_prompt_char_dirtystate "$(set_color red)󰪢 "
 set -g __fish_git_prompt_char_stagedstate "$(set_color green)󰗡 "
 
