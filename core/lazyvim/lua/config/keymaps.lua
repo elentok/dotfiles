@@ -40,3 +40,5 @@ vim.keymap.set("v", "P", '"_dp')
 vim.keymap.set({ "v", "n" }, "c", '"_c')
 vim.keymap.set({ "v", "n" }, "C", '"_C')
 vim.keymap.set({ "v", "n" }, "<leader>d", '"_d')
+
+vim.keymap.set("n", "<leader>of", "<cmd>!dotf-open %<cr>", { desc = "Open current file" })
