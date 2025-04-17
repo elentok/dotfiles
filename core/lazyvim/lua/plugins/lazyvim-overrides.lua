@@ -32,6 +32,16 @@ return {
             },
           },
         },
+        harper_ls = {},
+      },
+    },
+  },
+
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "harper-ls",
       },
     },
   },
