@@ -39,8 +39,11 @@ function string-ellipsis
     set length $argv[1]
     set text $argv[2]
 
+    set length_start (math "round($length / 2)")
+    set length_end (math "$length - $length_start")
+
     if test (string length $text) -gt $length
-        echo "$(string sub -l $length $text)… "
+        echo "$(string sub -l $length_start $text)…$(string sub -s -$length_end $text)"
     else
         echo $text
     end
