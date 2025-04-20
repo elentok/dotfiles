@@ -31,7 +31,7 @@ function main() {
       echo "============================================================"
       echo "Pushing branch [$branch] to remote [$remote] with force"
       echo "============================================================"
-      git push -f "$remote" "$branch" "$@"
+      git push -u -f "$remote" "$branch" "$@"
     fi
   fi
 }
