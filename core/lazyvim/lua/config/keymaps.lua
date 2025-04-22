@@ -42,3 +42,28 @@ vim.keymap.set({ "v", "n" }, "C", '"_C')
 vim.keymap.set({ "v", "n" }, "<leader>d", '"_d')
 
 vim.keymap.set("n", "<leader>of", "<cmd>!dotf-open %<cr>", { desc = "Open current file" })
+
+-- Duplicate and Comment
+vim.keymap.set(
+  "n",
+  "<leader>yc",
+  table.concat({
+    '"zyy', -- yank
+    "gcc", -- comment
+    '"zp', -- paste
+  }),
+  { remap = true, desc = "Duplicate and comment" }
+)
+
+vim.keymap.set(
+  "v",
+  "<leader>yc",
+  table.concat({
+    '"zy', -- yank
+    "gv", -- re-select
+    "gc", -- comment
+    "']", -- go to end of block
+    '"zp', -- paste
+  }),
+  { remap = true, desc = "Duplicate and comment" }
+)
