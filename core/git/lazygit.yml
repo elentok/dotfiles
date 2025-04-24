@@ -2,20 +2,21 @@ git:
   paging:
     colorArg: always
     pager: delta --dark --paging=never --width={{columnWidth}}
+  autoFetch: false
 gui:
   showCommandLog: false
-  nerdFontsVersion: '3'
+  nerdFontsVersion: "3"
   scrollHeight: 10
   commitAuthorLongLength: 7
   sidePanelWidth: 0.25
-  enlargedSideViewLocation: 'top'
+  enlargedSideViewLocation: "top"
   authorColors:
-    'Dudi Elentok': 'blue'
-    'David Elentok': 'blue'
+    "Dudi Elentok": "blue"
+    "David Elentok": "blue"
     # use blue for other authors
-    '*': 'white'
+    "*": "white"
   branchColors:
-    main: 'blue'
+    main: "blue"
   theme:
     selectedLineBgColor:
       - black
