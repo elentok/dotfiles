@@ -1,5 +1,6 @@
 ---@module 'lspconfig'
 ---@module 'conform'
+---@module 'blink.cmp'
 
 local typescript_env = require("elentok.typescript-env")
 
@@ -72,10 +73,34 @@ return {
 
   {
     "saghen/blink.cmp",
+    dependencies = {
+      "moyiz/blink-emoji.nvim",
+      "MahanRahmati/blink-nerdfont.nvim",
+    },
+    ---@type blink.cmp.Config
     opts = {
+      sources = {
+        default = {
+          "nerdfont",
+          "emoji",
+        },
+        providers = {
+          nerdfont = {
+            module = "blink-nerdfont",
+            name = "Nerd Fonts",
+          },
+          emoji = {
+            module = "blink-emoji",
+            name = "Emoji",
+          },
+        },
+      },
       keymap = {
         preset = "super-tab",
       },
+      -- appearance = {
+      --   nerd_font_variant = "normal",
+      -- },
       completion = {
         accept = { auto_brackets = { enabled = false } },
       },
