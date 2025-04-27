@@ -32,7 +32,15 @@ return {
             },
           },
         },
-        harper_ls = {},
+        harper_ls = {
+          settings = {
+            ["harper-ls"] = {
+              linters = {
+                SpellCheck = false,
+              },
+            },
+          },
+        },
       },
     },
   },
