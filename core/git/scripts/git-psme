@@ -35,8 +35,17 @@ function main() {
       dotf-color red "Pushing [$pretty_branch] 󰳟 [remote $remote] with force"
       echo
       echo
-      git push -u -f "$remote" "$branch" "$@"
+      if git push -u -f "$remote" "$branch" "$@"; then
+        echo
+        dotf-success "Pushed successfuly"
+      else
+        echo
+        dotf-error "Failed to push"
+      fi
     fi
+  else
+    echo
+    dotf-success "Pushed successfuly"
   fi
 }
 
