@@ -6,8 +6,8 @@ end
 -- (see https://neovide.dev/configuration.html)
 vim.o.guifont = "Agave Nerd Font:h18:#h-none"
 
--- vim.g.neovide_text_contrast = 0.0
--- vim.g.neovide_text_gamma = 1.0
+vim.g.neovide_cursor_animation_length = 0.05
+vim.g.neovide_touch_drag_timeout = 0.15
 
 vim.o.linespace = 6
 
