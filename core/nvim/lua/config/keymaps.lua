@@ -20,3 +20,4 @@ map("n", "<leader>uv", function()
 end, { desc = "Toggle virtual_lines diagnostics" })
 
 map("n", "<leader>of", "<cmd>!dotf-open %<cr>", { desc = "Open current file" })
+map("n", "gw", function() vim.diagnostic.open_float() end, { desc = "Show diagnostic" })
