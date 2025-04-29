@@ -1,6 +1,7 @@
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = { "echasnovski/mini.icons" },
+  event = { "LazyFile" },
   opts = {
     options = {
       theme = "catppuccin",

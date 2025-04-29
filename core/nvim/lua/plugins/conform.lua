@@ -2,6 +2,7 @@ local typescript_env = require("elentok.typescript-env")
 
 return {
   "stevearc/conform.nvim",
+  event = { "BufWritePre" },
   ---@type conform.setupOpts
   opts = {
     format_on_save = function(bufnr)
