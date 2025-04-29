@@ -2,6 +2,13 @@ if not vim.g.neovide then
   return
 end
 
+-- Disable hinting as it's causing the font to look too bold
+-- (see https://neovide.dev/configuration.html)
+vim.o.guifont = "Agave Nerd Font:h18:#h-none"
+
+-- vim.g.neovide_text_contrast = 0.0
+-- vim.g.neovide_text_gamma = 1.0
+
 vim.o.linespace = 6
 
 local function map_cmd_to_ctrl()

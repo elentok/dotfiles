@@ -1,8 +1,9 @@
-[font]
-size = 18
-
-[[font.normal]]
-family = "Agave Nerd Font"
+# [font]
+# size = 18
+#
+# [[font.normal]]
+# family = "Agave Nerd Font"
+# hinting = "normal"
 
 # [font]
 # # normal = ["ComicShannsMono Nerd Font Mono"]
