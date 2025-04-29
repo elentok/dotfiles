@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTF/framework.sh"
+
+mkdir -p ~/.config
+dotf-symlink "$DOTF/core/nvim" ~/.config/nvim
