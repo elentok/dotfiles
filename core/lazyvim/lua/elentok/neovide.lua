@@ -1,7 +1,3 @@
-if not vim.g.neovide then
-  return
-end
-
 -- Disable hinting as it's causing the font to look too bold
 -- (see https://neovide.dev/configuration.html)
 vim.o.guifont = "Agave Nerd Font:h18:#h-none"

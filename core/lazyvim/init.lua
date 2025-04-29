@@ -4,7 +4,6 @@ require("elentok.dotplugins")
 require("elentok.put")
 require("elentok.slack")
 require("elentok.typescript")
-require("elentok.hebrew")
 if vim.g.neovide then
   require("elentok.neovide")
 end
