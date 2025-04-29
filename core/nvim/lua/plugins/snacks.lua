@@ -132,5 +132,11 @@ return {
     { "<leader>gL", git_log_line, desc = "Show git history of current line" },
     { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (hunks)" },
     { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
+
+    -- Actions
+    { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete buffer" },
+
+    -- Notifier
+    { "<leader>nn", function() Snacks.notifier.show_history() end, desc = "Show notifier history" },
   },
 }
