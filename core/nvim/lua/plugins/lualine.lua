@@ -4,6 +4,12 @@ return {
   opts = {
     options = {
       theme = "catppuccin",
+      disabled_filetypes = {
+        statusline = { "snacks_dashboard" },
+      },
+    },
+    sections = {
+      lualine_x = { { "lsp_status" } },
     },
     winbar = { lualine_b = { "filename" } },
     inactive_winbar = { lualine_b = { "filename" } },

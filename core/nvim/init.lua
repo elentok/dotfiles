@@ -1,4 +1,4 @@
 require("config.settings")
 require("config.lazy")
 require("config.keymaps")
-require("config.fish")
+require("config.lsp")
