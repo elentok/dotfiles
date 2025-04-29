@@ -20,7 +20,6 @@ vim.keymap.set("n", "vv", "V", { desc = "Go into visual line mode" })
 vim.keymap.set("n", "vb", "<c-v>", { desc = "Go into visual block mode" })
 
 vim.keymap.set("n", "<leader>yf", ':let @+ = expand("%:.")<cr>', { desc = "Yank current filename" })
-vim.keymap.set("n", "<leader>wa", ":wa<cr>", { desc = ":wa" })
 
 vim.keymap.set("n", "<leader>uv", function()
   local virtual_lines = not vim.diagnostic.config().virtual_lines
@@ -42,28 +41,3 @@ vim.keymap.set({ "v", "n" }, "C", '"_C')
 vim.keymap.set({ "v", "n" }, "<leader>d", '"_d')
 
 vim.keymap.set("n", "<leader>of", "<cmd>!dotf-open %<cr>", { desc = "Open current file" })
-
--- Duplicate and Comment
-vim.keymap.set(
-  "n",
-  "<leader>yc",
-  table.concat({
-    '"zyy', -- yank
-    "gcc", -- comment
-    '"zp', -- paste
-  }),
-  { remap = true, desc = "Duplicate and comment" }
-)
-
-vim.keymap.set(
-  "v",
-  "<leader>yc",
-  table.concat({
-    '"zy', -- yank
-    "gv", -- re-select
-    "gc", -- comment
-    "']", -- go to end of block
-    '"zp', -- paste
-  }),
-  { remap = true, desc = "Duplicate and comment" }
-)

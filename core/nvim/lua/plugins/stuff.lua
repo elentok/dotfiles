@@ -8,13 +8,6 @@ return {
   config = function()
     local expanders = require("stuff.open-link.expanders")
     require("stuff").setup({
-      toggle_word = {},
-      paste_image = true,
-      git = true,
-      notes = true,
-      alternate_file = true,
-      scriptify = {},
-      log_line = {},
       open_link = {
         expanders = {
           expanders.homedir(),
@@ -24,23 +17,4 @@ return {
       },
     })
   end,
-  keys = {
-    -- { "<leader>tw" },
-    -- { "<leader>jw" },
-    -- { "<leader>jo" },
-    -- { "gx" },
-    -- { "<leader>ga" },
-    -- { "<leader>gr" },
-    -- { "<leader>gu" },
-    -- { "<leader>gw" },
-    -- { "<leader>gy" },
-    -- { "<leader>go" },
-    -- { "<leader>sf" },
-    {
-      "<Leader>ip",
-      "<cmd>PasteImage<cr>",
-      desc = "Paste image from clipboard",
-    },
-    -- { "<c-l>", mode = "i" },
-  },
 }

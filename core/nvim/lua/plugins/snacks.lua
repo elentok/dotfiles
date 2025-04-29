@@ -1,5 +1,19 @@
 ---@module "snacks"
 
+local function git_log_file()
+  Snacks.picker.git_log_file(require("stuff.snacks.git").git_commits_picker_config)
+end
+
+local function git_log_line()
+  Snacks.picker.git_log_line(require("stuff.snacks.git").git_commits_picker_config)
+end
+
+local function jump_to_config()
+  Snacks.picker.files({
+    dirs = { "~/.dotfiles/core/nvim", "~/.dotplugins/*/nvim" },
+  })
+end
+
 ---@type snacks.picker.layout.Config
 local vertical2 = {
   layout = {
@@ -76,6 +90,7 @@ return {
     bigfile = { enabled = true },
     input = { enabled = true },
     quickfile = { enabled = true },
+    indent = { enabled = true },
     notifier = {
       enabled = true,
       timeout = 3000,
@@ -90,54 +105,32 @@ return {
     },
   },
   keys = {
-    {
-      "<leader>w/",
-      function()
-        Snacks.picker.grep_word()
-      end,
-      desc = "Grep word",
-    },
-    {
-      "``",
-      function()
-        Snacks.picker.resume()
-      end,
-      desc = "Resume last picker",
-    },
-    -- {
-    --   "<leader>gh",
-    --   function()
-    --     Snacks.picker.git_log_file(require("stuff.snacks.git").git_commits_picker_config)
-    --   end,
-    --   desc = "Show git history of current file",
-    -- },
-    {
-      "<leader>gl",
-      function()
-        Snacks.picker.git_log_file(require("stuff.snacks.git").git_commits_picker_config)
-      end,
-      desc = "Show git log (󰀉 )",
-    },
-    {
-      "<leader>gL",
-      function()
-        Snacks.picker.git_log_line(require("stuff.snacks.git").git_commits_picker_config)
-      end,
-      desc = "Show git history of current line",
-    },
-    {
-      "<leader>js",
-      function()
-        Snacks.picker.lsp_symbols()
-      end,
-      desc = "Show git log",
-    },
-    {
-      "<leader><space>",
-      function()
-        Snacks.picker.smart()
-      end,
-      desc = "Smart file picker",
-    },
+    { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart file picker" },
+    { "``", function() Snacks.picker.resume() end, desc = "Resume last picker" },
+    { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files (cwd)" },
+
+    { "<leader>jb", function() Snacks.picker.buffers() end, desc = "Buffers" },
+    { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
+    { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
+
+    -- Grep
+    { "<leader>/", function() Snacks.picker.grep({ root = false }) end, desc = "Grep word" },
+    { "<leader>w/", function() Snacks.picker.grep_word({ root = false }) end, desc = "Grep word" },
+
+    -- Jump to
+    { "<leader>jc", jump_to_config, desc = "Jump to config" },
+    { "<leader>js", function() Snacks.picker.lsp_symbols() end, desc = "Show git log" },
+    { "<leader>jh", function() Snacks.picker.help() end, desc = "Help Pages" },
+    { "<leader>ju", function() Snacks.picker.undo() end, desc = "Undotree" },
+    { "<leader>jk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
+    { "<leader>jda", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
+    { "<leader>jdb", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diags" },
+    { "<leader>ch", function() Snacks.picker.command_history() end, desc = "Command History" },
+
+    -- Git
+    { "<leader>gl", git_log_file, desc = "Show git log" },
+    { "<leader>gL", git_log_line, desc = "Show git history of current line" },
+    { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (hunks)" },
+    { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
   },
 }
