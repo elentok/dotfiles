@@ -26,4 +26,11 @@ return {
     "dart",
   },
   root_markers = { ".git" },
+  settings = {
+    ["harper-ls"] = {
+      linters = {
+        SpellCheck = false,
+      },
+    },
+  },
 }
