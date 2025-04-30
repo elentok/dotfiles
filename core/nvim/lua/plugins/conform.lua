@@ -1,9 +1,15 @@
-local typescript_env = require("elentok.typescript-env")
+local function typescript_formatter()
+  if vim.fn.findfile("deno.jsonc", ".;") ~= "" or vim.fn.findfile("deno.json", ".;") ~= "" then
+    -- fallback to LSP
+    return {}
+  else
+    return { "prettierd" }
+  end
+end
 
 return {
   "stevearc/conform.nvim",
   event = { "BufWritePre" },
-  ---@type conform.setupOpts
   opts = {
     format_on_save = function(bufnr)
       local bufname = vim.api.nvim_buf_get_name(bufnr)
@@ -26,8 +32,8 @@ return {
 
     formatters_by_ft = {
       lua = { "stylua" },
-      typescript = typescript_env.formatter,
-      typescriptreact = typescript_env.formatter,
+      typescript = typescript_formatter,
+      typescriptreact = typescript_formatter,
       javascript = { "prettierd" },
       html = { "prettierd" },
       markdown = { "prettierd", "qmkmd" },
