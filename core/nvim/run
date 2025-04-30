@@ -1,4 +1,0 @@
-#!/usr/bin/env fish
-
-set -x XDG_CONFIG_HOME "$HOME/.dotfiles/core"
-nvim $argv
