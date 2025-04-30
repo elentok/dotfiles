@@ -16,6 +16,7 @@ return {
     },
     fuzzy = { implementation = "prefer_rust_with_warning" },
     completion = {
+      documentation = { auto_show = true },
       ghost_text = { enabled = true },
     },
     signature = { enabled = true },
