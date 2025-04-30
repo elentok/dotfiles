@@ -91,6 +91,7 @@ return {
     input = { enabled = true },
     quickfile = { enabled = true },
     indent = { enabled = true },
+    lazygit = { enabled = true },
     notifier = {
       enabled = true,
       timeout = 3000,
@@ -132,6 +133,7 @@ return {
     { "<leader>ch", function() Snacks.picker.command_history() end, desc = "Command History" },
 
     -- Git
+    { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
     { "<leader>gl", git_log_file, desc = "Show git log" },
     { "<leader>gL", git_log_line, desc = "Show git history of current line" },
     { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (hunks)" },
