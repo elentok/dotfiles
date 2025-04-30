@@ -2,6 +2,7 @@
 
 return {
   "MeanderingProgrammer/render-markdown.nvim",
+  ft = { "markdown" },
   opts = {
     ---@type render.md.UserConfig
     bullet = {

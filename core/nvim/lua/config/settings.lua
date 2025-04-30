@@ -1,6 +1,8 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
+vim.o.smartcase = true
+vim.o.ignorecase = true
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.laststatus = 3
