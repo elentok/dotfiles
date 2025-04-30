@@ -107,8 +107,9 @@ return {
   keys = {
     { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart file picker" },
     { "``", function() Snacks.picker.resume() end, desc = "Resume last picker" },
-    { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files (cwd)" },
+    { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
 
+    { "<leader>jr", function() Snacks.picker.recent() end, desc = "Find recent files" },
     { "<leader>jb", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
