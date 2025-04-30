@@ -144,5 +144,19 @@ return {
 
     -- Notifier
     { "<leader>nn", function() Snacks.notifier.show_history() end, desc = "Show notifier history" },
+
+    -- Icons
+    {
+      "<c-x>n",
+      function() Snacks.picker.icons({ icon_sources = { "nerd_fonts" } }) end,
+      mode = "i",
+      desc = "Insert nerdfont icon",
+    },
+    {
+      "<c-x>e",
+      function() Snacks.picker.icons({ icon_sources = { "emoji" } }) end,
+      mode = "i",
+      desc = "Insert emoji",
+    },
   },
 }
