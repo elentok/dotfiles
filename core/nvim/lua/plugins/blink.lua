@@ -1,6 +1,29 @@
+local allow_ai = require("elentok.ai").allow
+local sources = {
+  default = { "lsp", "path", "snippets", "buffer" },
+  providers = {},
+}
+
+if allow_ai then
+  vim.list_extend(sources.default, { "copilot" })
+  sources.providers.copilot = {
+    name = "copilot",
+    module = "blink-copilot",
+    score_offset = 100,
+    async = true,
+  }
+end
+
 return {
   "saghen/blink.cmp",
   version = "1.*",
+
+  dependencies = {
+    {
+      "fang2hou/blink-copilot",
+      cond = allow_ai,
+    },
+  },
 
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
@@ -11,13 +34,11 @@ return {
       ["<C-k>"] = { "select_prev", "fallback" },
       ["<C-j>"] = { "select_next", "fallback" },
     },
-    sources = {
-      default = { "lsp", "path", "snippets", "buffer" },
-    },
+    sources = sources,
     fuzzy = { implementation = "prefer_rust_with_warning" },
     completion = {
       documentation = { auto_show = true },
-      ghost_text = { enabled = true },
+      -- ghost_text = { enabled = true },
     },
     signature = { enabled = true },
   },
