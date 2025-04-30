@@ -114,6 +114,9 @@ return {
     { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
 
+    -- LSP
+    { "grr", function() Snacks.picker.lsp_references() end, desc = "LSP references" },
+
     -- Grep
     { "<leader>/", function() Snacks.picker.grep({ root = false }) end, desc = "Grep word" },
     { "<leader>w/", function() Snacks.picker.grep_word({ root = false }) end, desc = "Grep word" },
