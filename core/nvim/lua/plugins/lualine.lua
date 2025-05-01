@@ -1,3 +1,5 @@
+local spinner = { "", "", "", "", "", "" }
+
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = { "echasnovski/mini.icons" },
@@ -9,7 +11,7 @@ return {
       },
     },
     sections = {
-      lualine_x = { { "lsp_status" } },
+      lualine_x = { { "lsp_status", symbols = { spinner = spinner } } },
     },
     winbar = { lualine_b = { "filename" } },
     inactive_winbar = { lualine_b = { "filename" } },
