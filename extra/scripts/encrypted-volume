@@ -1,0 +1,48 @@
+#!/usr/bin/env fish
+
+function usage
+    echo "Usage:"
+    echo
+    echo "  encrypted-volume create <file.img> <name> <size>"
+    echo "  encrypted-volume mount <file.img> <name>"
+    echo "  encrypted-volume unmount <file.img> <name>"
+    echo
+end
+
+if test (count $argv) -lt 3
+    usage
+    exit 1
+end
+
+set filename $argv[2]
+set name $argv[3]
+
+switch $argv[1]
+    case create
+        if test (count $argv) -lt 4
+            usage
+            exit 1
+        end
+        set size $argv[4]
+        echo "Creating volume $filename of size $size MB..."
+        dd if=/dev/urandom of=$filename bs=1M count=$size
+        echo "Encrypting $filename..."
+        sudo cryptsetup open --type luks $filename $name
+        echo "Creating filesystem on $filename..."
+        sudo mkfs.ext4 -L $name /dev/mapper/$name
+        echo "Done."
+    case mount
+        echo "Opening value $filename..."
+        sudo cryptsetup open --type luks $filename $name
+        echo "Creating /mnt/$name..."
+        sudo mkdir -p /mnt/$name
+        echo "Mounting /mnt/$name..."
+        sudo mount /dev/mapper/$name /mnt/$name
+        echo "Done."
+    case unmount
+        echo "Unmounting /mnt/$name..."
+        sudo umount /mnt/$name
+        echo "Closing vault $name..."
+        sudo cryptsetup close $name
+        echo "Done."
+end
