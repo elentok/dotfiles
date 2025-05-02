@@ -37,6 +37,7 @@ return {
       javascript = { "prettierd" },
       html = { "prettierd" },
       markdown = { "prettierd", "qmkmd" },
+      fish = { "fish_indent" },
     },
   },
 }
