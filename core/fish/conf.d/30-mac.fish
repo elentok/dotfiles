@@ -19,6 +19,10 @@ if test -d "$HOME/Library/Python/$pyver/bin"
     fish_add_path "$HOME/Library/Python/$pyver/bin"
 end
 
+if test -d "$BREW_HOME/opt/ruby/bin"
+    fish_add_path "$BREW_HOME/opt/ruby/bin"
+end
+
 # replace bsd binaries with gnu
 for pkg in coreutils findutils gnu-sed
     set gnubin "$BREW_HOME/opt/$pkg/libexec/gnubin"
