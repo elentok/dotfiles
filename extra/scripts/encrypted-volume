@@ -4,9 +4,10 @@ function usage
     echo "Usage:"
     echo
     echo "  encrypted-volume create <file.img> <name> <size>"
-    echo "  encrypted-volume mount <file.img> <name>"
-    echo "  encrypted-volume unmount <file.img> <name>"
+    echo "  encrypted-volume open <file.img> <name>"
+    echo "  encrypted-volume close <file.img> <name>"
     echo
+    echo "NOTE: this required installing 'cryptsetup' from apt"
 end
 
 if test (count $argv) -lt 3
@@ -27,11 +28,13 @@ switch $argv[1]
         echo "Creating volume $filename of size $size MB..."
         dd if=/dev/urandom of=$filename bs=1M count=$size
         echo "Encrypting $filename..."
+        cryptsetup --verify-passphrase luksFormat $filename
+        echo "Opening vault $filename..."
         sudo cryptsetup open --type luks $filename $name
         echo "Creating filesystem on $filename..."
         sudo mkfs.ext4 -L $name /dev/mapper/$name
         echo "Done."
-    case mount
+    case open
         echo "Opening value $filename..."
         sudo cryptsetup open --type luks $filename $name
         echo "Creating /mnt/$name..."
@@ -39,7 +42,7 @@ switch $argv[1]
         echo "Mounting /mnt/$name..."
         sudo mount /dev/mapper/$name /mnt/$name
         echo "Done."
-    case unmount
+    case close
         echo "Unmounting /mnt/$name..."
         sudo umount /mnt/$name
         echo "Closing vault $name..."
