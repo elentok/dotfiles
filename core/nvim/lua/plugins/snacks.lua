@@ -85,7 +85,10 @@ return {
       },
     },
 
-    image = { enabled = true, markdown = { enabled = true } },
+    image = {
+      enabled = true,
+      doc = { inline = false, float = true },
+    },
     dashboard = { enabled = true },
     bigfile = { enabled = true },
     input = { enabled = true },
