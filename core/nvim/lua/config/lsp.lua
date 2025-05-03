@@ -11,4 +11,5 @@ vim.lsp.enable({
   "harper_ls",
   "vtsls",
   "denols",
+  "taplo",
 })
