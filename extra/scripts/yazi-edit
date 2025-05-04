@@ -1,0 +1,3 @@
+#!/usr/bin/env fish
+
+tmux popup -E -b rounded -h "80%" -w "80%" "cd $PWD && nvim '$argv'"
