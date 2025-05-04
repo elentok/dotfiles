@@ -1,5 +1,13 @@
 {
-  "version": "4",
+  "version": "5",
+  "specifiers": {
+    "jsr:@std/fmt@*": "1.0.3"
+  },
+  "jsr": {
+    "@std/fmt@1.0.3": {
+      "integrity": "97765c16aa32245ff4e2204ecf7d8562496a3cb8592340a80e7e554e0bb9149f"
+    }
+  },
   "redirects": {
     "https://esm.sh/simple-wcswidth@^1.0.1?target=denonext": "https://esm.sh/simple-wcswidth@1.0.1?target=denonext"
   },
