@@ -22,5 +22,15 @@ return {
       function() require("gitsigns").toggle_word_diff() end,
       desc = "Git toggle word diff",
     },
+    {
+      "[h",
+      function() require("gitsigns").prev_hunk() end,
+      desc = "Git hunk backward",
+    },
+    {
+      "]h",
+      function() require("gitsigns").next_hunk() end,
+      desc = "Git hunk forward",
+    },
   },
 }
