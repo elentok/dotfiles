@@ -9,6 +9,8 @@ return {
       disabled_filetypes = {
         statusline = { "snacks_dashboard" },
       },
+      section_separators = { left = "", right = "" },
+      component_separators = { left = "", right = "" },
     },
     sections = {
       lualine_x = { { "lsp_status", symbols = { spinner = spinner } } },
