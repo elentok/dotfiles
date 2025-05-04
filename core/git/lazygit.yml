@@ -22,6 +22,9 @@ gui:
       - black
     # selectedRangeBgColor:
     #   - black
-# keybinding:
+keybinding:
+  commits:
+    moveDownCommit: J
+    moveUpCommit: K
 #   universal:
 #     quit: Q
