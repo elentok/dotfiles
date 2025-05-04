@@ -22,3 +22,9 @@ end, { desc = "Toggle virtual_lines diagnostics" })
 map("n", "<leader>of", "<cmd>!dotf-open %<cr>", { desc = "Open current file" })
 map("n", "gw", function() vim.diagnostic.open_float() end, { desc = "Show diagnostic" })
 map("n", "<leader>ca", function() vim.lsp.buf.code_action() end, { desc = "Code actions" })
+
+vim.api.nvim_create_autocmd("CmdwinEnter", {
+  callback = function(args)
+    vim.keymap.set("n", "q", ":q<cr>", { desc = "Close command window", buffer = args.buf })
+  end,
+})
