@@ -36,6 +36,10 @@ return {
     },
     sources = sources,
     fuzzy = { implementation = "prefer_rust_with_warning" },
+    cmdline = {
+      keymap = { preset = "inherit" },
+      completion = { menu = { auto_show = true } },
+    },
     completion = {
       documentation = { auto_show = true },
       -- ghost_text = { enabled = true },
