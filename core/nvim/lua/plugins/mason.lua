@@ -18,6 +18,7 @@ return {
       "stylua",
       "vtsls",
       "yaml-language-server",
+      "gopls",
     },
   },
 }

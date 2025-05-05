@@ -12,4 +12,5 @@ vim.lsp.enable({
   "vtsls",
   "denols",
   "taplo",
+  "gopls",
 })
