@@ -64,6 +64,9 @@ return {
             preset = "vscode",
           },
         },
+        grep = {
+          layout = vertical2,
+        },
         git_diff = {
           layout = vertical2,
         },
