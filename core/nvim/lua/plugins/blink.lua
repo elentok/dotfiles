@@ -23,6 +23,7 @@ return {
       "fang2hou/blink-copilot",
       cond = allow_ai,
     },
+    "elentok/stuff.nvim",
   },
 
   ---@module 'blink.cmp'
@@ -38,15 +39,31 @@ return {
     fuzzy = { implementation = "prefer_rust_with_warning" },
     cmdline = {
       keymap = {
-        ["<C-k>"] = { "select_prev", "fallback" },
-        ["<C-j>"] = { "select_next", "fallback" },
+        preset = "inherit",
+        -- Inheriting the preset causes <c-p> and <c-n> to stop going through history,
+        -- this restores that behavior.
+        ["<C-p>"] = {
+          function() require("stuff.util").sendkeys("<up>") end,
+        },
+        ["<C-n>"] = {
+          function() require("stuff.util").sendkeys("<down>") end,
+        },
+      },
+      completion = {
+        menu = {
+          auto_show = true,
+        },
       },
     },
     completion = {
-      documentation = { auto_show = true, auto_show_delay_ms = 500 },
+      documentation = {
+        auto_show = true,
+        auto_show_delay_ms = 500,
+        window = { border = "rounded" },
+      },
       -- ghost_text = { enabled = true },
     },
-    signature = { enabled = true },
+    signature = { enabled = true, window = { border = "rounded" } },
   },
   opts_extend = { "sources.default" },
 }
