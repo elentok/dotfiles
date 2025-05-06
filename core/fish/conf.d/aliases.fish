@@ -1,48 +1,75 @@
-alias ... 'cd ../..'
-alias .... 'cd ../../..'
-alias v nvim
-alias vi nvim
-alias vg 'nvim "+Neogit kind=replace"'
-alias g git
-alias dotfi 'cd $DOTF'
-alias dotp 'cd $DOTP && cd "$(command ls -1 | fzf-tmux -p --select-1)"'
-alias o dotf-open
-alias y 'dotf-clipboard copy'
-alias p 'dotf-clipboard paste'
-alias ts 'tig status'
-alias psg 'ps -a -x -o user,pid,command | grep'
-alias pth 'echo $PATH | tr " " "\n"'
+abbr --add ... 'cd ../..'
+abbr --add .... 'cd ../../..'
+abbr --add v nvim
+abbr --add vi nvim
+abbr --add vg 'nvim "+Neogit kind=replace"'
+abbr --add g git
+abbr --add o dotf-open
+abbr --add y 'dotf-clipboard copy'
+abbr --add p 'dotf-clipboard paste'
+abbr --add ts 'tig status'
+abbr --add psg 'ps -a -x -o user,pid,command | grep'
+
+function dotfi
+    cd $DOTF
+end
+
+function dotp
+    cd $DOTP && cd "$(command ls -1 | fzf-tmux -p --select-1)"
+end
+
+function pth --description "Pretty print PATH"
+    echo $PATH | tr " " "\n"
+end
+
 # alias ls 'ls --color=always -XFhs --group-directories-first --time-style=long-iso'
-alias l 'eza --classify --group-directories-first --time-style=long-iso --icons'
-alias ls 'eza --classify --group-directories-first --time-style=long-iso --icons'
-alias ll 'ls --long'
-alias lla 'll --all'
-alias llt 'll --tree'
-alias lg lazygit
-alias lgs 'lazygit status'
-alias lgl 'lazygit log'
-alias ssh 'TERM=xterm-256color command ssh'
+function ls
+    eza --classify --group-directories-first --time-style=long-iso --icons $argv
+end
 
-alias gl 'git log -n 10'
-alias gll 'git log'
+abbr --add l ls
+abbr --add ll ls --long
+abbr --add lla ls --all
+abbr --add llt ls --tree
 
-alias x exit
+abbr --add lg lazygit
+abbr --add lgs 'lazygit status'
+abbr --add lgl 'lazygit log'
 
-alias ew 'whichx $EDITOR'
-alias cw 'whichx cat'
+function ssh
+    TERM=xterm-256color command ssh $argv
+end
 
-alias jw 'cd $(git-wt pick || pwd)'
-alias jp 'cd $(dotf-projects pick || pwd)'
-alias jt 'cd $(dotf-tmux-pick-workdir || pwd)'
-alias jn 'cd ~/notes'
+abbr --add gs 'git status'
+abbr --add gl 'git log -n 10'
+abbr --add gll 'git log'
 
-alias h 'help.ts'
-alias mycal 'mycal.ts'
-alias dff 'dff.ts'
-alias sm 'sum.ts'
-alias dotff '~/.dotfiles/core/framework/dotf.ts'
-alias q qalc
-alias ic 'chafa -f kitty'
+abbr --add x exit
+
+# alias ew 'whichx $EDITOR'
+# alias cw 'whichx cat'
+
+function jw
+    cd $(git-wt pick || pwd)
+end
+
+function jp
+    cd $(dotf-projects pick || pwd)
+end
+
+function jt
+    cd $(dotf-tmux-pick-workdir || pwd)
+end
+
+abbr --add jn 'cd ~/notes'
+
+abbr --add h 'help.ts'
+abbr --add mycal 'mycal.ts'
+abbr --add dff 'dff.ts'
+abbr --add sm 'sum.ts'
+abbr --add dotff '~/.dotfiles/core/framework/dotf.ts'
+abbr --add q qalc
+abbr --add ic 'chafa -f kitty'
 
 function nv --description neovide
     if test -n "$TMUX"
