@@ -43,6 +43,7 @@ return {
     },
 
     picker = {
+      layout = vertical2,
       formatters = {
         file = {
           truncate = 50,
@@ -63,27 +64,6 @@ return {
           layout = {
             preset = "vscode",
           },
-        },
-        grep = {
-          layout = vertical2,
-        },
-        git_diff = {
-          layout = vertical2,
-        },
-        git_log = {
-          layout = vertical2,
-        },
-        git_log_line = {
-          layout = vertical2,
-        },
-        git_log_file = {
-          layout = vertical2,
-        },
-        lsp_references = {
-          layout = vertical2,
-        },
-        lsp_definitions = {
-          layout = vertical2,
         },
       },
     },
