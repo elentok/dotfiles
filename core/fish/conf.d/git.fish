@@ -1,3 +1,11 @@
+abbr --add g git
+abbr --add gs 'git status'
+abbr --add gl 'git log -n 10'
+abbr --add gll 'git log'
+abbr --add lg lazygit
+abbr --add lgs 'lazygit status'
+abbr --add lgl 'lazygit log'
+
 function git-nf
     if test (count $argv) -eq 0
         echo "Usage: git-nf <new-branch-name>"
