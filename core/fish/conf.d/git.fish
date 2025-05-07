@@ -5,6 +5,7 @@ abbr --add gll 'git log'
 abbr --add lg lazygit
 abbr --add lgs 'lazygit status'
 abbr --add lgl 'lazygit log'
+abbr --add grst 'git restore --source=HEAD --'
 
 function git-nf
     if test (count $argv) -eq 0
