@@ -11,7 +11,6 @@ abbr --add o dotf-open
 abbr --add y 'dotf-clipboard copy'
 abbr --add p 'dotf-clipboard paste'
 abbr --add ts 'tig status'
-abbr --add psg 'ps -a -x -o user,pid,command | grep'
 abbr --add jn 'cd ~/notes'
 abbr --add h 'help.ts'
 abbr --add mycal 'mycal.ts'

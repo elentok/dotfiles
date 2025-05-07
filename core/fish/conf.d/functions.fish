@@ -57,3 +57,7 @@ function y --description "yazi wrapper"
     end
     rm -f -- "$tmp"
 end
+
+function psg --description "ps grep"
+    ps -a -x -o user,pid,command | grep $argv
+end
