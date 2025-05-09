@@ -33,6 +33,7 @@ local vertical2 = {
   },
 }
 
+---@type LazySpec
 return {
   "folke/snacks.nvim",
   lazy = false,
@@ -145,4 +146,5 @@ return {
       desc = "Insert emoji",
     },
   },
+  init = function() vim.cmd("highlight SnacksIndent guifg=#303030") end,
 }
