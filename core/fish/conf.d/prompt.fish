@@ -5,12 +5,12 @@ end
 set -g __fish_git_prompt_showdirtystate yes
 set -g __fish_git_prompt_showcolorhints no
 set -g __fish_git_prompt_showupstream git
-set -g __fish_git_prompt_char_upstream_ahead "$(set_color blue) "
-set -g __fish_git_prompt_char_upstream_behind "$(set_color yellow) "
-set -g __fish_git_prompt_char_upstream_diverged "$(set_color red)󰋔 "
+set -g __fish_git_prompt_char_upstream_ahead "$(set_color $fish_color_command) "
+set -g __fish_git_prompt_char_upstream_behind "$(set_color $fish_color_cwd) "
+set -g __fish_git_prompt_char_upstream_diverged "$(set_color $fish_color_error)󰋔 "
 set -g __fish_git_prompt_char_upstream_equal "$(set_color 9399b2)󰋑 "
-set -g __fish_git_prompt_char_dirtystate "$(set_color red)󰪢 "
-set -g __fish_git_prompt_char_stagedstate "$(set_color green)󰗡 "
+set -g __fish_git_prompt_char_dirtystate "$(set_color $fish_color_error)󰪢 "
+set -g __fish_git_prompt_char_stagedstate "$(set_color $fish_color_option)󰗡 "
 
 set __prompt_bgs 2b2b3c 181825 2b2b3c 3e5767
 set __prompt_fgs 9399b2 9399b2 9399b2 9399b2

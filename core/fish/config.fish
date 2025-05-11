@@ -20,6 +20,7 @@ set fish_cursor_default block
 set fish_cursor_insert line
 
 if status is-interactive
+    source ~/.config/fish/themes/catppuccin-mocha.fish
     set fish_greeting ""
     # function fish_greeting
     #     if type -q pfetch
