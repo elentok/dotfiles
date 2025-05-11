@@ -13,6 +13,9 @@ return {
   root_markers = { "package.json" },
   workspace_required = true,
   settings = {
+    vtsls = {
+      autoUseWorkspaceTsdk = true,
+    },
     typescript = {
       tsdk = vim.g.ts_root,
     },
