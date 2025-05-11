@@ -111,7 +111,13 @@ return {
 
     -- Jump to
     { "<leader>jc", jump_to_config, desc = "Jump to config" },
-    { "<leader>js", function() Snacks.picker.lsp_symbols() end, desc = "Show git log" },
+    {
+      "<leader>js",
+      function()
+        Snacks.picker.lsp_symbols({ filter = { typescript = true, typescriptreact = true } })
+      end,
+      desc = "Jump to LSP symbol",
+    },
     { "<leader>jh", function() Snacks.picker.help() end, desc = "Help Pages" },
     { "<leader>ju", function() Snacks.picker.undo() end, desc = "Undotree" },
     { "<leader>jk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
