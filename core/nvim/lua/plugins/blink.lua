@@ -61,6 +61,9 @@ return {
         auto_show_delay_ms = 500,
         window = { border = "rounded" },
       },
+      accept = {
+        auto_brackets = { enabled = false },
+      },
       -- ghost_text = { enabled = true },
     },
     signature = { enabled = true, window = { border = "rounded" } },
