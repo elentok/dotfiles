@@ -1,0 +1,5 @@
+#!/usr/bin/env fish
+
+set created (tmux display-message -p '#{session_created}')
+set elapsed (math (date +%s) - $created)
+date -ud "@$elapsed" +"%d days, %H hours"
