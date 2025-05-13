@@ -108,6 +108,12 @@ return {
     -- Grep
     { "<leader>/", function() Snacks.picker.grep({ root = false }) end, desc = "Grep word" },
     { "<leader>w/", function() Snacks.picker.grep_word({ root = false }) end, desc = "Grep word" },
+    {
+      "<leader>/",
+      function() Snacks.picker.grep_word({ root = false }) end,
+      mode = "v",
+      desc = "Grep selection",
+    },
 
     -- Jump to
     { "<leader>jc", jump_to_config, desc = "Jump to config" },
