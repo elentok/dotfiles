@@ -9,7 +9,9 @@ local function setupFonts(config)
   -- config.font = wezterm.font("ZedMono NF Light")
   -- config.font = wezterm.font("Agave Nerd Font")
   -- config.font = wezterm.font("IosevkaTerm Nerd Font", { weight = "Regular" }) -- freetype_load_flags = "NO_HINTING"
-  config.font = wezterm.font("Inconsolata Nerd Font", { weight = "Regular" }) -- freetype_load_flags = "NO_HINTING"
+  -- config.font = wezterm.font("Inconsolata Nerd Font", { weight = "Regular" }) -- freetype_load_flags = "NO_HINTING"
+  config.font = wezterm.font("CaskaydiaCove Nerd Font", { weight = "Regular" }) -- freetype_load_flags = "NO_HINTING"
+  -- config.font = wezterm.font_with_fallback({ "Agave Nerd Font" })
 
   -- freetype_load_flags = "NO_HINTING"
   --   freetype_load_flags = "NO_HINTING"
@@ -17,6 +19,12 @@ local function setupFonts(config)
   config.line_height = 1.2
   -- config.freetype_load_flags = "NO_HINTING"
   -- config.font = wezterm.font("ComicShannsMono Nerd Font Mono", { weight = "Regular" })
+  -- config.font = wezterm.font("CaskaydiaMono Nerd Font Mono", { weight = "Light" })
+  -- config.font = wezterm.font_with_fallback({
+  --   { family = "CaskaydiaCove Nerd Font", weight = "Regular" },
+  --   "Symbols Nerd Font Mono",
+  -- })
+  -- config.font = wezterm.font("CaskaydiaMono Nerd Font Mono", { weight = "Regular" })
   config.freetype_load_target = "Normal"
   -- config.freetype_render_target = "HorizontalLcd"
   config.font_rules = {
@@ -28,7 +36,7 @@ local function setupFonts(config)
   -- config.line_height = 1.1
   -- config.cell_width = 1.05
   if h.is_macos() then
-    config.font_size = 18
+    config.font_size = 16
   else
     config.font_size = 12
   end
@@ -60,7 +68,7 @@ local function setupUi(config)
     -- font = wezterm.font("ComicShannsMono Nerd Font Mono"),
     -- font = wezterm.font("Agave Nerd Font Regular"),
     -- font = wezterm.font("ZedMono NF Light"),
-    font_size = config.font_size - 4,
+    font_size = 14,
   }
 
   config.window_padding = {
