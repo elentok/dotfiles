@@ -21,13 +21,13 @@ function fish_title
         set dir (basename $PWD)
     end
 
-    set short_dir (string-ellipsis 15 $dir)
+    set short_dir (string-ellipsis 25 $dir)
 
     set branch ""
     # If there is a branch and it's not the same as the directory name, add it
     # to the tab title
     if test -n "$GIT_BRANCH" -a "$GIT_BRANCH" != main -a "$GIT_BRANCH" != "$dir"
-        set short_branch (string-ellipsis 10 $GIT_BRANCH)
+        set short_branch (string-ellipsis 20 $GIT_BRANCH)
         set branch " ( $short_branch)"
     end
 
