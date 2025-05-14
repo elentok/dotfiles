@@ -20,9 +20,7 @@ local vertical2 = {
     relative = "editor",
     backdrop = false,
     width = 0.8,
-    min_width = 80,
     height = 0.8,
-    min_height = 30,
     box = "vertical",
     border = "rounded",
     title = "{title} {live} {flags}",
@@ -97,7 +95,12 @@ return {
     { "``", function() Snacks.picker.resume() end, desc = "Resume last picker" },
     { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
 
-    { "<leader>jr", function() Snacks.picker.recent() end, desc = "Find recent files" },
+    {
+      "<leader>jr",
+      function() Snacks.picker.recent({ filter = { cwd = true } }) end,
+      desc = "Find recent files",
+    },
+    { "<leader>jR", function() Snacks.picker.recent() end, desc = "Find recent files" },
     { "<leader>jb", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
