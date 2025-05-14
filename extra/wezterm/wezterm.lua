@@ -6,9 +6,10 @@ require("status")
 
 local local_config_dir = os.getenv("HOME") .. "/.dotprivate/wezterm"
 
-local config = {
-  adjust_window_size_when_changing_font_size = false,
-}
+local config = wezterm.config_builder()
+config:set_strict_mode(true)
+
+config.adjust_window_size_when_changing_font_size = false
 setupUi(config)
 setupKeys(config)
 setupSplitPanes(config)

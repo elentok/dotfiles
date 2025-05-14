@@ -7,7 +7,7 @@ local function mapCmdToCtrl(config)
   -- Removed "b" on purpose since Cmd+E is the leader key
   -- Removed "v" on purpose since Cmd+V pastes
   -- Removed "hjkl" since they are used to switch panes
-  local keys = "acdefgimnopqrstuwxyz[]\\^_0;"
+  local keys = "acdfgimnopqrstuwxyz[]\\^_0;"
   for i = 1, #keys do
     local key = string.sub(keys, i, i)
     table.insert(
@@ -22,7 +22,14 @@ local function setupCopyMode(config)
   -- h.extend_array(config.key_tables.copy_mode, {
   h.extend_array(config.key_tables.copy_mode, {
     -- config.key_tables.copy_mode = {
-    { key = "q", mods = "NONE", action = act({ CopyMode = "Close" }) },
+    {
+      key = "q",
+      mods = "NONE",
+      action = act.Multiple({
+        act({ CopyMode = "Close" }),
+        act.ScrollToBottom,
+      }),
+    },
     { key = "/", action = act.Search({ CaseInSensitiveString = "" }) },
     { key = "n", action = act.CopyMode("NextMatch") },
     { key = "N", mods = "SHIFT", action = act.CopyMode("PriorMatch") },
@@ -42,7 +49,7 @@ end
 
 local function setupKeys(config)
   config.key_tables = {}
-  config.leader = { key = "b", mods = h.ctrl_or_cmd }
+  config.leader = { key = "e", mods = h.ctrl_or_cmd }
   config.keys = {
     -- Pane actions
     { key = "s", mods = "LEADER", action = act.SplitPane({ direction = "Down" }) },
@@ -76,6 +83,7 @@ local function setupKeys(config)
     { key = ",", mods = "LEADER", action = act.ActivateTabRelative(-1) },
     { key = ".", mods = "LEADER", action = act.ActivateTabRelative(1) },
     { key = "c", mods = "LEADER", action = act.SpawnTab("DefaultDomain") },
+    { key = "m", mods = "LEADER", action = act.ActivateCopyMode },
 
     { key = "l", mods = "LEADER", action = act.ShowDebugOverlay },
     { key = "r", mods = "LEADER", action = act.ShowLauncher },
@@ -111,13 +119,17 @@ local function setupKeys(config)
       key = "u",
       mods = "LEADER|" .. h.ctrl_or_cmd,
       action = act.Multiple({
-        act.ClearSelection,
+        -- act.ClearSelection,
+        -- act.CopyMode("ClearPattern"),
+        -- act.CopyMode("ClearSelectionMode"),
+        -- act.Search("CurrentSelectionOrEmptyString"),
+        -- act.ActivateCopyMode,
+        -- act.CopyMode({ MoveByPage = -0.5 }),
+        act.ScrollByPage(-0.5),
         act.ActivateCopyMode,
-        act.CopyMode("ClearPattern"),
-        act.CopyMode("ClearSelectionMode"),
-        act.CopyMode({ MoveByPage = -0.5 }),
       }),
     },
+
     -- { key = "d", action = act.ScrollByPage(0.5) },
     {
       key = "q",
@@ -133,9 +145,7 @@ local function setupKeys(config)
     nvimScrollbackKey,
   }
 
-  if h.is_macos() then
-    mapCmdToCtrl(config)
-  end
+  if h.is_macos() then mapCmdToCtrl(config) end
 
   setupCopyMode(config)
   setupSearchMode(config)
