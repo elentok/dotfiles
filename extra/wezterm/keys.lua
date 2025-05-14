@@ -82,6 +82,8 @@ local function setupKeys(config)
     -- { key = ".", mods = h.ctrl_or_cmd, action = act.ActivateTabRelative(1) },
     { key = ",", mods = "LEADER", action = act.ActivateTabRelative(-1) },
     { key = ".", mods = "LEADER", action = act.ActivateTabRelative(1) },
+    { key = ",", mods = "LEADER|" .. h.ctrl_or_cmd, action = act.MoveTabRelative(-1) },
+    { key = ".", mods = "LEADER|" .. h.ctrl_or_cmd, action = act.MoveTabRelative(1) },
     { key = "c", mods = "LEADER", action = act.SpawnTab("DefaultDomain") },
     { key = "m", mods = "LEADER", action = act.ActivateCopyMode },
 
@@ -96,6 +98,18 @@ local function setupKeys(config)
         print(pane:get_user_vars())
         win:perform_action(act.ShowDebugOverlay, pane)
       end),
+    },
+
+    { key = "1", mods = "LEADER", action = act.ActivateTab(0) },
+    { key = "2", mods = "LEADER", action = act.ActivateTab(1) },
+    { key = "3", mods = "LEADER", action = act.ActivateTab(2) },
+    { key = "4", mods = "LEADER", action = act.ActivateTab(3) },
+    { key = "5", mods = "LEADER", action = act.ActivateTab(4) },
+
+    {
+      key = "e",
+      mods = "LEADER|" .. h.ctrl_or_cmd,
+      action = act.ActivateLastTab,
     },
 
     {
