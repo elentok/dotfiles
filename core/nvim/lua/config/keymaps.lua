@@ -28,3 +28,8 @@ vim.api.nvim_create_autocmd("CmdwinEnter", {
     vim.keymap.set("n", "q", ":q<cr>", { desc = "Close command window", buffer = args.buf })
   end,
 })
+
+vim.keymap.set("i", "<D-h>", "<C-h>", { remap = true })
+vim.keymap.set("i", "<D-j>", "<C-j>", { remap = true })
+vim.keymap.set("i", "<D-k>", "<C-k>", { remap = true })
+vim.keymap.set("i", "<D-l>", "<C-l>", { remap = true })
