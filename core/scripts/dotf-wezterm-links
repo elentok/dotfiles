@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+if test $# -lt 2; then
+  echo "Usage: dotf-wezterm-links <open|close> <filename>"
+  exit 1
+fi
+
+cmd="$1"
+file="$2"
+
+function pick-url() {
+  dotf-find-links "$file" | fzf --prompt 'Choose URL: '
+}
+
+case "$cmd" in
+open)
+  url="$(pick-url)"
+  if [ -n "$url" ]; then
+    dotf-open "$url"
+  fi
+  ;;
+copy)
+  url="$(pick-url)"
+  if [ -n "$url" ]; then
+    echo -n "$url" | dotf-clipboard copy
+  fi
+  ;;
+esac

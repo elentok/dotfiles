@@ -1,7 +1,6 @@
 local wezterm = require("wezterm")
 local h = require("helpers")
 local action = wezterm.action
-local nvimScrollbackKey = require("nvim-scrollback")
 
 ---@param key string
 ---@param the_action string
@@ -113,8 +112,9 @@ local function setupKeys(config)
     mapLeader("/", action.Search({ CaseInSensitiveString = "" })),
     mapLeader("p", action.ActivateCommandPalette),
     mapLeader("r", action.ReloadConfiguration),
-    nvimScrollbackKey,
   }
+
+  h.extend_array(config.keys, require("scrollback"))
 
   if h.is_macos() then mapCmdToCtrl(config) end
 

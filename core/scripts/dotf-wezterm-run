@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+source ~/.dotfiles/core/zsh/core.sh
+
+exec "$@"
