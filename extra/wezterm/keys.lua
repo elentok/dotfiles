@@ -57,6 +57,7 @@ local function setupSearchMode(config)
   config.key_tables.search_mode = wezterm.gui.default_key_tables().search_mode
   h.extend_array(config.key_tables.search_mode, {
     { key = "Enter", action = action.ActivateCopyMode },
+    { key = "d", mods = h.ctrl_or_cmd, action = action.CopyMode("ClearPattern") },
   })
 end
 
