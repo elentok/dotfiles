@@ -57,13 +57,17 @@ keybind = cmd+[=text:\x1B
 keybind = cmd+]=text:\x1D
 
 # Leader mapping
-keybind = cmd+/>t=new_tab
+keybind = cmd+/>c=new_tab
 keybind = cmd+/>r=reload_config
 keybind = cmd+/>[=previous_tab
 keybind = cmd+/>]=next_tab
 keybind = cmd+/>q=close_surface
-keybind = cmd+/>c=copy_to_clipboard
-keybind = cmd+/>v=paste_from_clipboard
+keybind = cmd+/>y=copy_to_clipboard
+# keybind = cmd+/>v=paste_from_clipboard
+keybind = cmd+/>v=new_split:right
+keybind = cmd+/>s=new_split:down
+
+keybind = cmd+/>e=write_scrollback_file:open
 
 # Quick terminal
 
