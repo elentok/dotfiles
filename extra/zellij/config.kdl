@@ -15,6 +15,7 @@ keybinds clear-defaults=true {
         bind "j" { MoveFocus "down"; }
         bind "k" { MoveFocus "up"; }
         bind "l" { MoveFocus "right"; }
+        bind "x" { CloseFocus; SwitchToMode "normal"; }
 
         // Tabs
         bind "t" { NewTab; }
