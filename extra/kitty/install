@@ -11,6 +11,9 @@ function main() {
     fi
   fi
 
+  brew install --cask font-agave
+  brew install --cask font-symbols-only-nerd-font
+
   install-desktop-file
 
   # make_dir ~/.config/kitty
