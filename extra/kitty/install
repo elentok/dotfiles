@@ -9,12 +9,11 @@ function main() {
     if [ ! -e ~/.local/kitty.app ] || [ "${1:-}" == "--upgrade" ]; then
       curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
     fi
+    install-desktop-file
   fi
 
   brew install --cask font-agave
   brew install --cask font-symbols-only-nerd-font
-
-  install-desktop-file
 
   # make_dir ~/.config/kitty
   # dotf-symlink "$DOTF/extra/kitty/kitty.conf" ~/.config/kitty/kitty.conf
