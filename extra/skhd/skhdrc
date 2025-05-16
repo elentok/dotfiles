@@ -1,8 +1,6 @@
 cmd - 2 : kitten quick-access-terminal
-# cmd - 2 : open /Applications/WezTerm.app
 cmd - 3 : open "/Applications/Google Chrome.app"
 cmd - 4 : open "/Applications/Slack.app"
-cmd - 8 : open "/Applications/Notion.app"
 cmd - 9 : open "/Applications/Spotify.app"
 cmd + ctrl + shift - r : skhd --reload && terminal-notifier -message "skhd: reloaded config"
 cmd + alt - p : spot
