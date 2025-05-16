@@ -1,0 +1,5 @@
+#!/usr/bin/env fish
+
+set flavor mocha-blue
+rm theme.toml
+curl -o theme.toml https://raw.githubusercontent.com/catppuccin/yazi/refs/heads/main/themes/mocha/catppuccin-$flavor.toml
