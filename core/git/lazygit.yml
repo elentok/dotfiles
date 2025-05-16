@@ -3,6 +3,8 @@ git:
     colorArg: always
     pager: delta --dark --paging=never --width={{columnWidth}}
   autoFetch: false
+  log:
+    order: default
 gui:
   showCommandLog: false
   nerdFontsVersion: "3"
