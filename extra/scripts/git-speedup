@@ -1,0 +1,20 @@
+#!/usr/bin/env fish
+
+echo
+echo "This will set the following git configs to speed up the project:"
+echo
+echo "  - core.fsmonitor"
+echo "  - core.untrackedcache"
+echo
+echo "See https://github.blog/engineering/improve-git-monorepo-performance-with-a-file-system-monitor/ for more details"
+echo
+echo "Do you want to continue? (y/n)"
+read -l response
+
+if test "$response" != y
+    echo "Aborting. Have a nice day :)"
+    exit 1
+end
+
+git config core.fsmonitor true
+git config core.untrackedcache true
