@@ -11,7 +11,19 @@ return {
     end,
   },
   { "echasnovski/mini.bracketed", event = { "LazyFile" }, version = "*", opts = {} },
-  { "echasnovski/mini.surround", event = { "LazyFile" }, version = "*", opts = {} },
+  {
+    "echasnovski/mini.surround",
+    event = { "LazyFile" },
+    version = "*",
+    opts = {
+      custom_surroundings = {
+        s = {
+          input = { "%*%*().-()%*%*" },
+          output = { left = "**", right = "**" },
+        },
+      },
+    },
+  },
   { "echasnovski/mini.pairs", event = { "InsertEnter" }, version = "*", opts = {} },
   {
     "echasnovski/mini.move",
