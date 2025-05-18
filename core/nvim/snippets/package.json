@@ -1,0 +1,15 @@
+{
+  "name": "personal-snippets",
+  "contributes": {
+    "snippets": [
+      {
+        "language": "typescriptreact",
+        "path": "./typescriptreact.json"
+      },
+      {
+        "language": "openscad",
+        "path": "./openscad.json"
+      }
+    ]
+  }
+}
