@@ -1,0 +1,42 @@
+{
+  "Insert Note": {
+    "prefix": [
+      "note",
+      "n"
+    ],
+    "body": "> [!NOTE]\n>\n> ",
+    "description": "Insert Note"
+  },
+  "Insert Tip": {
+    "prefix": [
+      "tip",
+      "t"
+    ],
+    "body": "> [!TIP]\n>\n> ",
+    "description": "Insert Tip"
+  },
+  "Insert Important": {
+    "prefix": [
+      "important",
+      "imp"
+    ],
+    "body": "> [!IMPORTANT]\n>\n> ",
+    "description": "Insert Important"
+  },
+  "Insert Warning": {
+    "prefix": [
+      "warning",
+      "w"
+    ],
+    "body": "> [!WARNING]\n>\n> ",
+    "description": "Insert Warning"
+  },
+  "Insert Caution": {
+    "prefix": [
+      "caution",
+      "c"
+    ],
+    "body": "> [!CAUTION]\n>\n> ",
+    "description": "Insert Caution"
+  }
+}
