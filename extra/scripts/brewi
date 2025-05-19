@@ -1,0 +1,59 @@
+#!/usr/bin/env fish
+#
+# Brew interactive installer (using FZF)
+#
+# Usage: brewi
+
+function main
+    if test "$argv[1]" = --preview
+        preview $argv[2]
+    else
+        install
+    end
+end
+
+function preview
+    set pkg $argv[1]
+    if is-cask $pkg
+        set cask_name (get-cask-name $pkg)
+        echo "CASK: $cask_name"
+        echo
+        HOMEBREW_COLOR=1 brew info --cask $cask_name
+    else
+        echo "FORMULA: $pkg"
+        echo
+        HOMEBREW_COLOR=1 brew info --formula $pkg
+    end
+end
+
+function install
+    set pkg (list-packages | fzf --preview='brewi --preview {}')
+
+    if test -n "$pkg"
+        if is-cask $pkg
+            set cask_name (get-cask-name $pkg)
+            echo "Installing cask: $cask_name"
+            brew install --cask $cask_name
+        else
+            echo "Installing formula: $pkg"
+            brew install $pkg
+        end
+    else
+        echo "No package selected."
+    end
+end
+
+function is-cask
+    string match -q 'cask/*' -- $argv[1]
+end
+
+function get-cask-name
+    string replace -r '^cask/' '' -- $argv[1]
+end
+
+function list-packages
+    brew formulae
+    brew casks | sed 's#^#cask/#'
+end
+
+main $argv
