@@ -1,4 +1,4 @@
-cmd - 2 : kitten quick-access-terminal
+cmd - 2 : kitten quick-access-terminal --instance-group quick
 cmd - 3 : open "/Applications/Google Chrome.app"
 cmd - 4 : open "/Applications/Slack.app"
 cmd - 9 : open "/Applications/Spotify.app"
