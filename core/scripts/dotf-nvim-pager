@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-source "$HOME/.dotfiles/core/zsh/core.sh"
-echo "DOTF=$DOTF" >> ~/tmp/pager.txt
-echo "TMP=$TMP" >> ~/tmp/pager.txt
+source ~/.dotfiles/core/bash/core.sh
 
 TMP_BUFFER="$TMP/nvim-pager-buffer"
 

@@ -6,7 +6,7 @@
 #   o <file-or-directory>
 #
 
-source "$DOTF/core/zsh/core.sh"
+source ~/.dotfiles/core/bash/core.sh
 
 cmd="${1:-}"
 

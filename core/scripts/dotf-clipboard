@@ -6,7 +6,7 @@
 #   dotf-clipboard paste
 #
 
-source "$DOTF/core/zsh/core.sh"
+source ~/.dotfiles/core/bash/core.sh
 
 main() {
   cmd="${1:-}"

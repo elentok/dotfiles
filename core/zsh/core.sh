@@ -187,15 +187,7 @@ fi
 
 # EDITOR {{{1
 
-# TODO: figure this out
-if [ -n "${NVIM:-}" ]; then
-  EDITOR='nvr -cc split --remote-wait'
-elif dotf-has-command nvim; then
-  EDITOR=$(which nvim)
-else
-  EDITOR=vim
-fi
-
+EDITOR=nvim
 export EDITOR
 export VISUAL=$EDITOR
 export GIT_EDITOR=$EDITOR
@@ -240,7 +232,7 @@ done
 # Timing checks {{{1
 _core_elapsed_ms=$(((SECONDS - _core_start) * 1000))
 if [[ $_core_elapsed_ms -gt 25 ]]; then
-  echo "Warning: core.sh took $(printf '%.2f' $_core_elapsed_ms)ms to load"
+  echo "Warning: zsh/core.sh took $(printf '%.2f' $_core_elapsed_ms)ms to load"
 fi
 
 if [[ $_core_genpath_elapsed_ms -gt 5 ]]; then

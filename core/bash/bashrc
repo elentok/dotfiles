@@ -1,0 +1,14 @@
+# vim: filetype=sh
+
+# shellcheck source=./core.sh
+source ~/.dotfiles/core/bash/core.sh
+
+# shellcheck source=./prompt.sh
+source ~/.dotfiles/core/bash/prompt.sh
+
+if [ -e ~/.fzf.bash ]; then
+  source ~/.fzf.bash
+fi
+
+# Enable ** glob
+shopt -s globstar

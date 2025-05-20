@@ -9,7 +9,7 @@ DOTF="$(dirname "${BASH_SOURCE[0]-$0}")"
 DOTF="$(cd "$DOTF" && pwd)"
 export DOTF
 
-source "$DOTF/core/zsh/core.sh"
+source "$DOTF/core/bash/core.sh"
 source "$DOTF/core/scripts/lib/helpers.sh"
 source "$DOTF/core/scripts/lib/ui.sh"
 source "$DOTF/core/scripts/lib/fs.sh"

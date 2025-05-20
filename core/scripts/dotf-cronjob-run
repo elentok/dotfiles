@@ -7,7 +7,7 @@
 set -euo pipefail
 
 # This script is run from cronjob, so doesn't have the DOTF environment variable
-source ~/.dotfiles/core/zsh/core.sh
+source ~/.dotfiles/core/bash/core.sh
 
 LOGS_DIR=~/.local/share/dotfiles/cron
 
@@ -26,13 +26,13 @@ function main() {
 
   log runner "Running $job_name: $*"
 
-  bash -c "$@" >> "$LOGS_DIR/$job_name.log" 2>&1
+  bash -c "$@" >>"$LOGS_DIR/$job_name.log" 2>&1
 }
 
 function log() {
   local name="$1"
   shift
-  echo "$(timestamp) $*" >> "$LOGS_DIR/$name.log"
+  echo "$(timestamp) $*" >>"$LOGS_DIR/$name.log"
 }
 
 function timestamp() {

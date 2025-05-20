@@ -1,13 +1,4 @@
 # vim: filetype=sh
 
-source ~/.dotfiles/core/zsh/core.sh
-source ~/.dotfiles/core/zsh/settings.sh
-source ~/.dotfiles/core/zsh/aliases.sh
-source ~/.dotfiles/core/zsh/fzf-git.sh
-source ~/.dotfiles/core/bash/prompt.sh
-if [ -e ~/.fzf.bash ]; then
-  source ~/.fzf.bash
-fi
-
-# Enable ** glob
-shopt -s globstar
+# shellcheck source=./bashrc
+source ~/.bashrc
