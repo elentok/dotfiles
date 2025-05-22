@@ -1,4 +1,4 @@
-local transparent = true
+local transparent = not vim.g.neovide
 
 local dim_inactive = {
   enabled = true,
