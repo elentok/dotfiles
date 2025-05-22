@@ -8,6 +8,7 @@ return {
   opts = {
     ensure_installed = {
       "bash-language-server",
+      "css-lsp",
       "eslint_d",
       "harper-ls",
       "json-lsp",
