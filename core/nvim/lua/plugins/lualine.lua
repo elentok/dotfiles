@@ -28,7 +28,7 @@ return {
     },
     sections = {
       lualine_c = { long_filename_block },
-      lualine_x = { { "lsp_status", symbols = { spinner = spinner } } },
+      lualine_x = { { "lsp_status", symbols = { spinner = spinner } }, "filetype" },
     },
     winbar = { lualine_b = { filename } },
     inactive_winbar = { lualine_b = { filename } },
