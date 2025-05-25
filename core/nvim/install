@@ -6,3 +6,5 @@ source "$DOTF/framework.sh"
 
 mkdir -p ~/.config
 dotf-symlink "$DOTF/core/nvim" ~/.config/nvim
+
+nvim --headless "+lua require('elentok.treesitter-parsers')" +qa

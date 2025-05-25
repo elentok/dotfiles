@@ -1,34 +1,24 @@
----@type string[]
-local parsers = {
+local filetypes = {
   "bash",
-  "c",
-  "comment",
   "css",
   "diff",
+  "dockerfile",
   "fish",
+  "gitconfig",
+  "gitcommit",
   "go",
   "gomod",
   "graphql",
   "html",
   "javascript",
-  "jsdoc",
   "json",
   "jsonc",
   "lua",
-  "luadoc",
-  "luap",
   "markdown",
-  "markdown_inline",
-  "printf",
   "python",
-  "query",
-  "regex",
   "toml",
-  "tsx",
-  "tsx",
   "typescript",
-  "vim",
-  "vimdoc",
+  "typescriptreact",
   "xml",
   "yaml",
 }
@@ -39,37 +29,11 @@ return {
     branch = "main",
     build = ":TSUpdate",
     lazy = false,
-    init = function() require("nvim-treesitter").install(parsers) end,
-    ---@type TSConfig
-    ---@diagnostic disable-next-line: missing-fields
-    opts = {
-      highlight = { enable = true },
-      indent = { enable = true },
-      textobjects = {
-        move = {
-          enable = true,
-          goto_next_start = {
-            ["]f"] = "@function.outer",
-            ["]c"] = "@class.outer",
-            ["]a"] = "@parameter.inner",
-          },
-          goto_next_end = {
-            ["]F"] = "@function.outer",
-            ["]C"] = "@class.outer",
-            ["]A"] = "@parameter.inner",
-          },
-          goto_previous_start = {
-            ["[f"] = "@function.outer",
-            ["[c"] = "@class.outer",
-            ["[a"] = "@parameter.inner",
-          },
-          goto_previous_end = {
-            ["[F"] = "@function.outer",
-            ["[C"] = "@class.outer",
-            ["[A"] = "@parameter.inner",
-          },
-        },
-      },
-    },
+    init = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = filetypes,
+        callback = function() vim.treesitter.start() end,
+      })
+    end,
   },
 }
