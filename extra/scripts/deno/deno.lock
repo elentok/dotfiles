@@ -14,7 +14,11 @@
   "remote": {
     "https://esm.sh/console-table-printer@2.12.1": "a3970c02df494611b353b10fc5314947560f47b430f2bd0917244deb4ea4640d",
     "https://esm.sh/console-table-printer@2.12.1/denonext/console-table-printer.mjs": "65eeec38c45460e4cc22f318c61917df5724f90b396a47449900e9e2301b398e",
+    "https://esm.sh/dayjs@1.11.13": "9e26962f5cf0e45efb9d4ca5a43fabce85ba5e5027d0a8cfc30d6d10368a86f5",
+    "https://esm.sh/dayjs@1.11.13/plugin/weekOfYear": "268bc07dc37118f6d248f0d0179b5f9ea609d7d572ead69e420820d352da24b3",
     "https://esm.sh/simple-wcswidth@1.0.1/denonext/simple-wcswidth.mjs": "23adc2481b54cd856e0162d67a9f591aae4056f3d90f0ff6f36369f06cf5cda9",
-    "https://esm.sh/simple-wcswidth@1.0.1?target=denonext": "6c0cf29c275cb983106addcce11e423f3fc2f2e0f4f0a4dd861a663819717c17"
+    "https://esm.sh/simple-wcswidth@1.0.1?target=denonext": "6c0cf29c275cb983106addcce11e423f3fc2f2e0f4f0a4dd861a663819717c17",
+    "https://esm.sh/v135/dayjs@1.11.13/denonext/dayjs.mjs": "1cb45182e325c07c470907e10801bef7ff18b939bd2ed6545048024b3d01cf02",
+    "https://esm.sh/v135/dayjs@1.11.13/denonext/plugin/weekOfYear.js": "aa4e20293f5a4639b916e5d21b883ccddf189c6e2a036de9e418fa6b2a62cebf"
   }
 }
