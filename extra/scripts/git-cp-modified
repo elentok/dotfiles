@@ -1,0 +1,17 @@
+#!/usr/bin/env fish
+#
+# Copies the modified git files to another directory
+#
+
+set target $argv[1]
+
+git status --short | grep '^ [AM]' | cut -c 4- | while read file
+    if test -f "$file"
+        set target_file "$target/$file"
+        mkdir -p "$(dirname $target_file)"
+        cp "$file" "$target/$file"
+        echo "Copied $file to $target_file"
+    else
+        echo "File $file does not exist or is not a regular file."
+    end
+end
