@@ -15,6 +15,10 @@
         "path": "./markdown.json"
       },
       {
+        "language": "html",
+        "path": "./html.json"
+      },
+      {
         "language": "all",
         "path": "./all.json"
       }
