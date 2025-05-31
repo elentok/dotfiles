@@ -1,5 +1,5 @@
 return {
-  cmd = { "openscad-lsp", "--stdio", "--fmt-style", "Google" },
+  cmd = { "openscad-lsp", "--stdio" },
   filetypes = { "openscad" },
   root_markers = { ".git" },
 }
