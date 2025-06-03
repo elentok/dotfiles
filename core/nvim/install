@@ -7,4 +7,5 @@ source "$DOTF/framework.sh"
 mkdir -p ~/.config
 dotf-symlink "$DOTF/core/nvim" ~/.config/nvim
 
+nvim --headless "+Lazy! restore" +qa
 nvim --headless "+lua require('elentok.treesitter-parsers')" +qa
