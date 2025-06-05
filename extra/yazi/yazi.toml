@@ -1,4 +1,4 @@
-[manager]
+[mgr]
 linemode = "size"
 
 # These values are too high and causing slowness
