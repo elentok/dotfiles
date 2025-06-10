@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTF/core/bash/core.sh"
+
+echo "Node version: $(node --version)"
+echo "Node path: $(which node)"
+echo
+echo "Path:"
+echo "$PATH" | tr : "\n" | sed "s/^/- /"

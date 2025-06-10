@@ -65,6 +65,10 @@ path=$path:$HOME/.local/share/fnm
 path=$path:$HOME/.fzf/bin
 path=$path:$HOME/.local/bin
 
+if [ -n "${FNM_MULTISHELL_PATH:-}" ]; then
+  path="$path:$FNM_MULTISHELL_PATH/bin"
+fi
+
 if [ -n "$BREW_HOME" ]; then
   path=$path:$BREW_HOME/bin
   path=$path:$BREW_HOME/sbin
@@ -80,8 +84,6 @@ if dotf-is-mac; then
   path=$path:$BREW_HOME/opt/coreutils/libexec/gnubin
   path=$path:$BREW_HOME/opt/findutils/libexec/gnubin
   path=$path:$BREW_HOME/opt/gnu-sed/libexec/gnubin
-
-  path="$path:$HOME/Library/Application Support/fnm/aliases/default"
 fi
 
 path=$path:$HOME/.cargo/bin

@@ -11,5 +11,4 @@ fish_add_path "$HOME/.local/bin" \
     "$DOTF/core/scripts" \
     "$HOME/.deno/bin" \
     "$HOME/.apps/bin" \
-    "$HOME/Library/Application Support/fnm/aliases/default" \
     $DOTP/*/scripts
