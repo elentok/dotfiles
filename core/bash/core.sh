@@ -80,6 +80,8 @@ if dotf-is-mac; then
   path=$path:$BREW_HOME/opt/coreutils/libexec/gnubin
   path=$path:$BREW_HOME/opt/findutils/libexec/gnubin
   path=$path:$BREW_HOME/opt/gnu-sed/libexec/gnubin
+
+  path="$path:$HOME/Library/Application Support/fnm/aliases/default"
 fi
 
 path=$path:$HOME/.cargo/bin
