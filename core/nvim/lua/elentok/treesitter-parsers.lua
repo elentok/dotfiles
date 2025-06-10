@@ -34,4 +34,5 @@ local parsers = {
   "yaml",
 }
 
+require("nvim-treesitter").uninstall("all"):wait(300000)
 require("nvim-treesitter").install(parsers):wait(300000)
