@@ -21,5 +21,6 @@ return {
     return vim.fn.findfile("eslint.config.js", ";.") ~= ""
       or vim.fn.findfile(".eslintrc.js", ";.") ~= ""
       or vim.fn.findfile("eslintrc.js", ";.") ~= ""
+      or vim.fn.findfile(".eslintrc.json", ";.") ~= ""
   end,
 }
