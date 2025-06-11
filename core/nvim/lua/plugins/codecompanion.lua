@@ -11,6 +11,7 @@ return {
       "<leader>cc",
       function() require("codecompanion").actions() end,
       desc = "Code Companion",
+      mode = { "n", "v" },
     },
   },
 }
