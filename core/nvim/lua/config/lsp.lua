@@ -13,4 +13,5 @@ vim.lsp.enable({
   "denols",
   "taplo",
   "gopls",
+  "biome",
 })
