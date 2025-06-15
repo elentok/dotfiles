@@ -61,3 +61,7 @@ end
 function psg --description "ps grep"
     ps -a -x -o user,pid,command | grep $argv
 end
+
+function vc --description "neovim with clipboard contents"
+    nvim '+normal [p'
+end
