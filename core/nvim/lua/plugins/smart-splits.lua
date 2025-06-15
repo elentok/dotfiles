@@ -1,6 +1,12 @@
+---@module 'smart-splits'
+
 return {
   "mrjones2014/smart-splits.nvim",
-  opts = {},
+  ---@type SmartSplitsConfig
+  ---@diagnostic disable-next-line: missing-fields
+  opts = {
+    at_edge = "stop",
+  },
   lazy = false,
   keys = {
     {
