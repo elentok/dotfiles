@@ -4,4 +4,4 @@ set -euo pipefail
 
 source "$DOTF/framework.sh"
 
-dotf-symlink "$DOTF/extra/yazi" ~/.config/yazi
+dotf-symlink "$DOTF/core/yazi" ~/.config/yazi
