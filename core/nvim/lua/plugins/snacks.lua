@@ -14,6 +14,17 @@ local function jump_to_config()
   })
 end
 
+local header = [[
+                                                                     
+       ████ ██████           █████      ██                     
+      ███████████             █████                             
+      █████████ ███████████████████ ███   ███████████   
+     █████████  ███    █████████████ █████ ██████████████   
+    █████████ ██████████ █████████ █████ █████ ████ █████   
+  ███████████ ███    ███ █████████ █████ █████ ████ █████  
+ ██████  █████████████████████ ████ █████ █████ ████ ██████ 
+ ]]
+
 ---@type snacks.picker.layout.Config
 local vertical2 = {
   layout = {
@@ -71,7 +82,9 @@ return {
       enabled = true,
       doc = { inline = false, float = true },
     },
-    dashboard = { enabled = true },
+    dashboard = { enabled = true, preset = {
+      header = header,
+    } },
     bigfile = { enabled = true },
     input = { enabled = true },
     quickfile = { enabled = true },
