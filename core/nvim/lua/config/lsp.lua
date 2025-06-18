@@ -14,4 +14,5 @@ vim.lsp.enable({
   "taplo",
   "gopls",
   "biome",
+  "dprint",
 })

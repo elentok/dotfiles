@@ -1,11 +1,26 @@
+local utils = require("elentok.utils")
+
 local function typescript_formatter()
-  if vim.fn.findfile("deno.jsonc", ".;") ~= "" or vim.fn.findfile("deno.json", ".;") ~= "" then
-    -- fallback to LSP
+  if utils.hasfile({ "deno.json", "deno.jsonc" }) then
+    -- fallback deno LSP
     return {}
   else
     return { "prettierd" }
   end
 end
+
+local function markdown_formatter()
+  if utils.hasfile({ "dprint.json", "dprint.jsonc", ".dprint.json", ".dprint.jsonc" }) then
+    -- fallback to dprint LSP
+    return { "qmkmd", lsp_format = "first" }
+  else
+    return { "prettierd", "qmkmd" }
+  end
+end
+
+-- for debugging purposes
+_G.typescript_formatter = typescript_formatter
+_G.markdown_formatter = markdown_formatter
 
 return {
   "stevearc/conform.nvim",
@@ -36,7 +51,7 @@ return {
       typescriptreact = typescript_formatter,
       javascript = { "prettierd" },
       html = { "prettierd" },
-      markdown = { "prettierd", "qmkmd" },
+      markdown = markdown_formatter,
       fish = { "fish_indent" },
     },
   },
