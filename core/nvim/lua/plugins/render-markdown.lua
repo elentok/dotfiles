@@ -39,5 +39,8 @@ return {
         },
       },
     },
+    code = {
+      border = "thin",
+    },
   },
 }
