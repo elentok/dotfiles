@@ -20,6 +20,7 @@ return {
       "vtsls",
       "yaml-language-server",
       "gopls",
+      "dprint",
     },
   },
 }
