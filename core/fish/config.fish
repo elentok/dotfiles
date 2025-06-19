@@ -8,6 +8,7 @@ function report_fish_startup_time --on-event fish_prompt
 end
 
 if status is-interactive
+    source "$DOTF/extra/television/shell/integration.fish"
     # Commands to run in interactive sessions can go here
     # starship init fish | source
 end

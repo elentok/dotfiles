@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+tvroot="$DOTF/extra/television"
+
+source "$DOTF/framework.sh"
+
+dotf-symlink "$tvroot/" ~/.config/television
+
+# Update shell integrations
+mkdir -p "$tvroot/shell"
+tv init fish |
+  sed "s/^bind /bind -M insert /" >"$tvroot/shell/integration.fish"
