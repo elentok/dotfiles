@@ -12,3 +12,7 @@ preview_command = "git-wt preview {0}"
 name = "channels"
 source_command = "tv list-channels | grep '^\t' | sed 's/^\t//'"
 preview_command = "rg --no-filename 'name = \"{0}\"' -A3 ~/.config/television/*channels.toml | rg '^[a-z]'"
+
+[[cable_channel]]
+name = "projects"
+source_command = "dotf-projects list"
