@@ -21,10 +21,6 @@ end
 # alias ew 'whichx $EDITOR'
 # alias cw 'whichx cat'
 
-function jw
-    cd $(git-wt pick || pwd)
-end
-
 function jp
     cd $(dotf-projects pick || pwd)
 end

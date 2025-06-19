@@ -1,0 +1,14 @@
+[[cable_channel]]
+name = "npm-scripts"
+source_command = "NO_COLOR=true npm-scripts.ts"
+# preview_command = "git diff --color=always {0}"
+
+[[cable_channel]]
+name = "git-worktree"
+source_command = "git-wt list"
+preview_command = "git-wt preview {0}"
+
+[[cable_channel]]
+name = "channels"
+source_command = "tv list-channels | grep '^\t' | sed 's/^\t//'"
+preview_command = "rg --no-filename 'name = \"{0}\"' -A3 ~/.config/television/*channels.toml | rg '^[a-z]'"

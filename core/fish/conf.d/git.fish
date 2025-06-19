@@ -33,3 +33,11 @@ function git-nf
     git reset --hard upstream/main
     direnv allow
 end
+
+function jw
+    # cd $(git-wt pick || pwd)
+    set wt (tv git-worktree)
+    if test -n "$wt"
+        cd "$(git-wt root)/$wt"
+    end
+end
