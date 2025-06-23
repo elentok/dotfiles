@@ -6,6 +6,7 @@ local parsers = {
   "css",
   "diff",
   "fish",
+  "git_config",
   "gitcommit",
   "go",
   "gomod",
