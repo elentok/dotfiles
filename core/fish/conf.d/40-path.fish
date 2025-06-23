@@ -9,6 +9,8 @@ fish_add_path "$HOME/.local/bin" \
     "$DOTF/extra/scripts" \
     "$DOTF/core/git/scripts" \
     "$DOTF/core/scripts" \
+    "$DOTF/extra/bin" \
     "$HOME/.deno/bin" \
     "$HOME/.apps/bin" \
+    "$HOME/go/bin" \
     $DOTP/*/scripts
