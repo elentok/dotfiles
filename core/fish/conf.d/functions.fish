@@ -65,3 +65,12 @@ end
 function vc --description "neovim with clipboard contents"
     nvim '+normal [p'
 end
+
+function cdr --description "change directory to the git root"
+    set root (git rev-parse --show-toplevel)
+    if test -n "$root"
+        cd "$root"
+    else
+        echo "Not inside a git repo"
+    end
+end
