@@ -21,6 +21,10 @@ return {
           input = { "%*%*().-()%*%*" },
           output = { left = "**", right = "**" },
         },
+        c = {
+          input = { "```\n().-()\n```" },
+          output = { left = "```\n", right = "```" },
+        },
       },
     },
   },
