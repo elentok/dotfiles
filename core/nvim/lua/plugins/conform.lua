@@ -1,7 +1,7 @@
 local utils = require("elentok.utils")
 
 local function typescript_formatter()
-  if utils.hasfile({ "deno.json", "deno.jsonc" }) then
+  if utils.hasfile({ "deno.json", "deno.jsonc", ".format-with-biome" }) then
     -- fallback deno LSP
     return {}
   else
