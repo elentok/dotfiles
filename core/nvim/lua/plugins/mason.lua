@@ -21,6 +21,8 @@ return {
       "yaml-language-server",
       "gopls",
       "dprint",
+      "biome",
+      "taplo",
     },
   },
 }
