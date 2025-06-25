@@ -38,5 +38,18 @@
     ],
     "body": "> [!CAUTION]\n>\n> ",
     "description": "Insert Caution"
+  },
+  "pr": {
+    "body": [
+      "## TL;DR",
+      "",
+      "$1",
+      "",
+      "## Changes 📜",
+      "",
+      "",
+      "## Screenshots 📷"
+    ],
+    "description": "PR template"
   }
 }
