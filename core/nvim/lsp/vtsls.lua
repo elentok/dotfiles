@@ -18,6 +18,9 @@ return {
     },
     typescript = {
       tsdk = vim.g.ts_root,
+      updateImportsOnFileMove = {
+        enabled = "always",
+      },
     },
   },
 }
