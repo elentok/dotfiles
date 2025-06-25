@@ -12,6 +12,7 @@ return {
   },
   root_markers = { "package.json" },
   workspace_required = true,
+  -- See schema at https://github.com/yioneko/vtsls/blob/main/packages/service/configuration.schema.json
   settings = {
     vtsls = {
       autoUseWorkspaceTsdk = true,
@@ -20,6 +21,9 @@ return {
       tsdk = vim.g.ts_root,
       updateImportsOnFileMove = {
         enabled = "always",
+      },
+      format = {
+        semicolons = "remove",
       },
     },
   },
