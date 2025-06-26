@@ -8,6 +8,10 @@
 // command palette
 {
   "agent": {
+    "default_model": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-latest"
+    },
     "model_parameters": [],
     "inline_assistant_model": {
       "provider": "anthropic",
@@ -39,5 +43,8 @@
   "toolbar": {
     "breadcrumbs": true,
     "quick_actions": false
+  },
+  "terminal": {
+    "font_family": "Agave Nerd Font"
   }
 }

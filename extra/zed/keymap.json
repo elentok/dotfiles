@@ -28,8 +28,9 @@
     "context": "Editor",
     "bindings": {
       "cmd-d": "vim::ScrollDown",
-      "cmd-u": "vim::ScrollUp"
-      // "j k": ["workspace::SendKeystrokes", "escape"]
+      "cmd-u": "vim::ScrollUp",
+      "alt-k": "editor::MoveLineUp",
+      "alt-j": "editor::MoveLineDown"
     }
   },
   {
@@ -42,10 +43,10 @@
   {
     "context": "ProjectPanel || Dock || Terminal || Editor",
     "bindings": {
-      "cmd-h": ["workspace::ActivatePaneInDirection", "Left"],
-      "cmd-l": ["workspace::ActivatePaneInDirection", "Right"],
-      "cmd-k": ["workspace::ActivatePaneInDirection", "Up"],
-      "cmd-j": ["workspace::ActivatePaneInDirection", "Down"]
+      "cmd-h": "workspace::ActivatePaneLeft",
+      "cmd-l": "workspace::ActivatePaneRight",
+      "cmd-k": "workspace::ActivatePaneUp",
+      "cmd-j": "workspace::ActivatePaneDown"
     }
   },
   // {
@@ -67,14 +68,20 @@
       "space w w": "workspace::Save",
       "space w s": "pane::SplitDown",
       "space w v": "pane::SplitRight",
+      "space w o": "workspace::CloseInactiveTabsAndPanes",
       "space j o": "pane::AlternateFile",
       "space p": "file_finder::Toggle",
       "space y f": "workspace::CopyRelativePath",
-      "space j b": "tab_switcher::Toggle",
+      "space j b": "tab_switcher::ToggleAll",
+      "space j s": "outline::Toggle",
+      "space space": "file_finder::Toggle",
       "v v": "vim::ToggleVisualLine",
       "v c": "vim::ToggleVisualBlock",
       "shift-k": "editor::Hover",
-      "space t": "workspace::NewCenterTerminal"
+      "space t t": "workspace::NewCenterTerminal",
+      "space t l": "workspace::ToggleLeftDock",
+      "space t r": "workspace::ToggleRightDock",
+      "space t b": "workspace::ToggleBottomDock"
     }
   },
   {
