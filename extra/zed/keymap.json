@@ -9,7 +9,7 @@
   {
     "bindings": {
       "cmd-n": "menu::SelectNext",
-      "cmd-p": "menu::SelectPrev"
+      "cmd-p": "menu::SelectPrevious"
     }
   },
   {
@@ -38,6 +38,12 @@
     "bindings": {
       "-": "pane::RevealInProjectPanel"
       // "-": "project_panel::ToggleFocus"
+    }
+  },
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "o": "project_panel::NewFile"
     }
   },
   {
@@ -74,6 +80,8 @@
       "space y f": "workspace::CopyRelativePath",
       "space j b": "tab_switcher::ToggleAll",
       "space j s": "outline::Toggle",
+      "space g d": "git::Diff",
+      "space g s": "git::OpenModifiedFiles",
       "space space": "file_finder::Toggle",
       "v v": "vim::ToggleVisualLine",
       "v c": "vim::ToggleVisualBlock",
@@ -81,7 +89,12 @@
       "space t t": "workspace::NewCenterTerminal",
       "space t l": "workspace::ToggleLeftDock",
       "space t r": "workspace::ToggleRightDock",
-      "space t b": "workspace::ToggleBottomDock"
+      "space t b": "workspace::ToggleBottomDock",
+      "space c a": "editor::ToggleCodeActions",
+      "g l": "vim::EndOfLine",
+      "space c o": "editor::OrganizeImports",
+      "cmd-o": "pane::GoBack",
+      "cmd-i": "pane::GoForward"
     }
   },
   {
