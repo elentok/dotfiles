@@ -41,6 +41,10 @@ return {
     },
     code = {
       border = "thin",
+      sign = false,
+    },
+    heading = {
+      sign = false,
     },
   },
 }
