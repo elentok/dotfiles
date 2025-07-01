@@ -38,9 +38,11 @@ if dotf-is-mac; then
   ulimit -n 4096
 
   # Node-gyp doesn't support Python 3.11
-  NODE_GYP_FORCE_PYTHON="$(command ls -1 $BREW_HOME/Cellar/python@3.10/*/bin/python3.10 | head)"
-  if [ -e "$NODE_GYP_FORCE_PYTHON" ]; then
-    export NODE_GYP_FORCE_PYTHON
+  if [ -e "$BREW_HOME/Cellar/python@3.10" ]; then
+    NODE_GYP_FORCE_PYTHON="$(command ls -1 $BREW_HOME/Cellar/python@3.10/*/bin/python3.10 | head)"
+    if [ -e "$NODE_GYP_FORCE_PYTHON" ]; then
+      export NODE_GYP_FORCE_PYTHON
+    fi
   fi
 fi
 
@@ -75,9 +77,11 @@ if [ -n "$BREW_HOME" ]; then
 fi
 
 if dotf-is-mac; then
-  pyver="$(command ls ~/Library/Python | sort -V | tail -1)"
-  if [ -d "$HOME/Library/Python/$pyver/bin" ]; then
-    path=$path:$HOME/Library/Python/$pyver/bin
+  if [ -e ~/Library/Python ]; then
+    pyver="$(command ls ~/Library/Python | sort -V | tail -1)"
+    if [ -d "$HOME/Library/Python/$pyver/bin" ]; then
+      path=$path:$HOME/Library/Python/$pyver/bin
+    fi
   fi
 
   # replace bsd binaries with gnu

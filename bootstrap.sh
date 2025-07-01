@@ -106,10 +106,10 @@ function install-if-missing() {
 }
 
 function install-homebrew() {
-  if dotf-is-mac; then
-    sudo xcodebuild -license accept
-    sudo xcode-select --install
-  fi
+  #if dotf-is-mac; then
+    #sudo xcodebuild -license accept
+    #sudo xcode-select --install
+  #fi
 
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
