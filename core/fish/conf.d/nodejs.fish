@@ -2,10 +2,6 @@ function jy
     cd $(yarn-pkgs pick || pwd)
 end
 
-function yrb
-    yarn && yarn build
-end
-
 set -gx YARN_ENABLE_COLORS false
 set -gx YARN_ENABLE_TELEMETRY false
 set -gx YARN_PROGRESS_BAR_STYLE patrick
