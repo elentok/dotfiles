@@ -21,15 +21,37 @@
     }
   },
   "redirects": {
+    "https://esm.sh/@jridgewell/gen-mapping@^0.3.5?target=denonext": "https://esm.sh/@jridgewell/gen-mapping@0.3.11?target=denonext",
+    "https://esm.sh/@jridgewell/resolve-uri@^3.1.0?target=denonext": "https://esm.sh/@jridgewell/resolve-uri@3.1.2?target=denonext",
+    "https://esm.sh/@jridgewell/source-map@^0.3.3?target=denonext": "https://esm.sh/@jridgewell/source-map@0.3.9?target=denonext",
+    "https://esm.sh/@jridgewell/sourcemap-codec@^1.4.14?target=denonext": "https://esm.sh/@jridgewell/sourcemap-codec@1.5.3?target=denonext",
+    "https://esm.sh/@jridgewell/sourcemap-codec@^1.5.0?target=denonext": "https://esm.sh/@jridgewell/sourcemap-codec@1.5.3?target=denonext",
+    "https://esm.sh/@jridgewell/trace-mapping@^0.3.24?target=denonext": "https://esm.sh/@jridgewell/trace-mapping@0.3.28?target=denonext",
+    "https://esm.sh/@jridgewell/trace-mapping@^0.3.25?target=denonext": "https://esm.sh/@jridgewell/trace-mapping@0.3.28?target=denonext",
+    "https://esm.sh/acorn@^8.8.2?target=denonext": "https://esm.sh/acorn@8.15.0?target=denonext",
     "https://esm.sh/simple-wcswidth@^1.0.1?target=denonext": "https://esm.sh/simple-wcswidth@1.0.1?target=denonext"
   },
   "remote": {
+    "https://esm.sh/@jridgewell/gen-mapping@0.3.11/denonext/gen-mapping.mjs": "a5ef1c90515e0c8eeb540ec093f51c6c1fd930ed54054ef6e5e3047f709d292f",
+    "https://esm.sh/@jridgewell/gen-mapping@0.3.11?target=denonext": "58af050912b2d838fd8a69fbb621b937e627e427bb600069b95449f3834dd2b4",
+    "https://esm.sh/@jridgewell/resolve-uri@3.1.2/denonext/resolve-uri.mjs": "2da147ad4f55ddeff542640347c789ff19db8db4ead77cce27a0c171f5f5c349",
+    "https://esm.sh/@jridgewell/resolve-uri@3.1.2?target=denonext": "9f734a6f626960d09b0ddb1965c08a7d5960fec667f891b4a0a55d23d0bfac51",
+    "https://esm.sh/@jridgewell/source-map@0.3.9/denonext/source-map.mjs": "71e989d7718723beb5750028e35b170c1ef608310449dd7a802c10d274d2f41e",
+    "https://esm.sh/@jridgewell/source-map@0.3.9?target=denonext": "f7ee437d8081f063f6acbc7c3bbfe6313bd0cf539aad5bb0d0e447c41d36eeb8",
+    "https://esm.sh/@jridgewell/sourcemap-codec@1.5.3/denonext/sourcemap-codec.mjs": "df0cc39b1ecd616c69892deef77a1f985365270084f9d6b446b038ec998dc355",
+    "https://esm.sh/@jridgewell/sourcemap-codec@1.5.3?target=denonext": "7d146e782d2bc94f677c768e8f506505763bdfdf981860beede77dc6928d01c4",
+    "https://esm.sh/@jridgewell/trace-mapping@0.3.28/denonext/trace-mapping.mjs": "3f869124fe5164b9f56fb5e54d09a0b703b4e3440cdb63a1a9c16d1096d198ed",
+    "https://esm.sh/@jridgewell/trace-mapping@0.3.28?target=denonext": "ff32111e5bc340f3175df0bc717f2ac0c9749e90bc7b587fb73f853fd668b6f5",
+    "https://esm.sh/acorn@8.15.0/denonext/acorn.mjs": "68715a35fa30643c369733050ca5686e0914039628f1adf7d73b99b820010ff4",
+    "https://esm.sh/acorn@8.15.0?target=denonext": "c30234853b8302669fbde3340ab69cd11e1934d44283677acad3a5a1db1d5573",
     "https://esm.sh/console-table-printer@2.12.1": "a3970c02df494611b353b10fc5314947560f47b430f2bd0917244deb4ea4640d",
     "https://esm.sh/console-table-printer@2.12.1/denonext/console-table-printer.mjs": "65eeec38c45460e4cc22f318c61917df5724f90b396a47449900e9e2301b398e",
     "https://esm.sh/dayjs@1.11.13": "9e26962f5cf0e45efb9d4ca5a43fabce85ba5e5027d0a8cfc30d6d10368a86f5",
     "https://esm.sh/dayjs@1.11.13/plugin/weekOfYear": "268bc07dc37118f6d248f0d0179b5f9ea609d7d572ead69e420820d352da24b3",
     "https://esm.sh/simple-wcswidth@1.0.1/denonext/simple-wcswidth.mjs": "23adc2481b54cd856e0162d67a9f591aae4056f3d90f0ff6f36369f06cf5cda9",
     "https://esm.sh/simple-wcswidth@1.0.1?target=denonext": "6c0cf29c275cb983106addcce11e423f3fc2f2e0f4f0a4dd861a663819717c17",
+    "https://esm.sh/terser@5.36.0": "db128efc527d5d879f5ed6dad02071784efb761b71aa5aa2c1a4f6e54697c5bc",
+    "https://esm.sh/terser@5.36.0/denonext/terser.mjs": "45dd616b51bd9ccdcb12b167fb4d239d7b5dbdbb066350f8055d4032e6692835",
     "https://esm.sh/v135/dayjs@1.11.13/denonext/dayjs.mjs": "1cb45182e325c07c470907e10801bef7ff18b939bd2ed6545048024b3d01cf02",
     "https://esm.sh/v135/dayjs@1.11.13/denonext/plugin/weekOfYear.js": "aa4e20293f5a4639b916e5d21b883ccddf189c6e2a036de9e418fa6b2a62cebf"
   }
