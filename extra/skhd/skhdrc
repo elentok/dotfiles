@@ -2,6 +2,6 @@ cmd - 2 : kitten quick-access-terminal --instance-group quick
 cmd - 3 : open "/Applications/Google Chrome.app"
 cmd - 4 : open "/Applications/Slack.app"
 cmd - 9 : open "/Applications/Spotify.app"
-cmd + ctrl + shift - r : skhd --reload && terminal-notifier -message "skhd: reloaded config"
+cmd + ctrl + shift - r : skhd --reload && terminal-notifier -title "skhd" -message "reloaded config"
 cmd + alt - p : spot
 cmd + ctrl + shift - i : spot
