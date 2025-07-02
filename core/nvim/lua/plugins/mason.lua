@@ -23,6 +23,8 @@ return {
       "dprint",
       "biome",
       "taplo",
+      "pyright",
+      "rust-analyzer",
     },
   },
 }
