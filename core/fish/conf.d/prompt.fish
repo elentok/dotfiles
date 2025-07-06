@@ -24,6 +24,7 @@ function fish_prompt
 
     string join '' -- \
         (__prompt_block ' 󰉖 ' (prompt_pwd --full-length-dirs 5)) \
+        (__prompt_node_block) \
         (__prompt_vcs_block) \
         (__prompt_host_block) \
         (__prompt_separator --final)
@@ -47,6 +48,13 @@ end
 function __prompt_host_block
     if test -n "$SSH_CONNECTION"
         __prompt_block '   ' (hostname)
+    end
+end
+
+function __prompt_node_block
+    set node_ver (fnm current)
+    if test -n "$node_ver"
+        __prompt_block '  ' $node_ver
     end
 end
 
