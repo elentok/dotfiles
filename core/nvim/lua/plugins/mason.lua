@@ -4,7 +4,7 @@ return {
     "mason-org/mason.nvim",
     opts = {},
   },
-
+  lazy = false,
   opts = {
     ensure_installed = {
       "bash-language-server",
@@ -27,6 +27,13 @@ return {
       "html-lsp",
       "vtsls",
       "yaml-language-server",
+    },
+  },
+  keys = {
+    {
+      "<leader>om",
+      ":Mason<cr>",
+      desc = "Open Mason",
     },
   },
 }
