@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTF/framework.sh"
+
+if dotf-command-missing claude; then
+  npm install -g @anthropic-ai/claude-code
+fi
+
+mkdir -p ~/.claude
+dotf-symlink "$DOTF/extra/claude/settings.json" ~/.claude/settings.json

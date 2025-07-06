@@ -48,5 +48,3 @@ end
 if test -e ~/.local/machine.fish
     source ~/.local/machine.fish
 end
-
-alias claude="$HOME/.claude/local/claude"
