@@ -67,9 +67,7 @@ path=$path:$HOME/.local/share/fnm
 path=$path:$HOME/.fzf/bin
 path=$path:$HOME/.local/bin
 
-if [ -n "${FNM_MULTISHELL_PATH:-}" ]; then
-  path="$path:$FNM_MULTISHELL_PATH/bin"
-fi
+eval "$(fnm env --use-on-cd --version-file-strategy recursive --shell bash)"
 
 if [ -n "$BREW_HOME" ]; then
   path=$path:$BREW_HOME/bin
