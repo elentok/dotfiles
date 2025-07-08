@@ -1,4 +1,4 @@
-fnm env --use-on-cd --version-file-strategy recursive --shell fish | source
+fnm env --use-on-cd --version-file-strategy recursive --shell fish --log-level quiet | source
 
 # By default fnm adds it's path at the end so the Node that comes with homebrew
 # takes precedence. To avoid that I'm prepending it afterwards.

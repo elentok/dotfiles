@@ -5,6 +5,6 @@ reset="\[\e[m\]"
 
 workdir="$blue\w$reset"
 
-export PS1="\n${yellow}[BASH] \u at \h (\t)$reset
+export PS1="\n${yellow}[BASH] \u at \h (\t)   \$(fnm current)$reset
 $workdir$reset
 › "
