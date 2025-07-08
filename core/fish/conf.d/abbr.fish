@@ -19,3 +19,4 @@ abbr --add sm 'sum.ts'
 abbr --add dotff '~/.dotfiles/core/framework/dotf.ts'
 abbr --add q qalc
 abbr --add ic 'chafa -f kitty'
+abbr --add jc 'jira issue create'
