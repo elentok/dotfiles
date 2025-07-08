@@ -29,6 +29,27 @@ if (Deno.args.length > 0) {
 const outputFilename = path.join(dirname, "bookmarklets.html")
 const contents = [HEADER]
 
+function prettifyFilename(filename: string): string {
+  const baseName = filename.replace(/\.[^/.]+$/, "") // Remove extension
+  const words = baseName.split("-").map((word) => word.toLowerCase())
+  if (words.length === 0) return ""
+  words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1)
+  return words.join(" ")
+}
+
+function getTitle(source: string, filename: string): string {
+  // Check if the first line matches the title pattern
+  const firstLine = source.split("\n")[0].trim()
+  const titleMatch = firstLine.match(/^\/\/\s*title:\s*(.+)$/i)
+
+  if (titleMatch) {
+    return titleMatch[1].trim()
+  }
+
+  // Prettify the filename if no title was found
+  return prettifyFilename(filename)
+}
+
 for (const file of Deno.readDirSync(dirname)) {
   if (!/\.js/.test(file.name)) continue
 
@@ -40,9 +61,9 @@ for (const file of Deno.readDirSync(dirname)) {
     console.error("Build failed: ", result.error)
   } else {
     contents.push(
-      `  <li><a href="javascript:${
-        encodeURIComponent(result.code)
-      }">${file.name}</a></li>`,
+      `  <li><a href="javascript:${encodeURIComponent(result.code)}">${
+        getTitle(source, file.name)
+      }</a></li>`,
     )
   }
 }
