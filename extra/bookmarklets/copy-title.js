@@ -28,16 +28,16 @@ function getGithubTitle() {
 
   const prId = prMatch[1]
 
-  return `saas#${prId} ${ticketAndTitle}`
+  return `tulip#${prId} ${ticketAndTitle}`
 }
 
 function getJiraTitle() {
   const name = document.querySelector(
-    '[data-testid="issue.views.issue-base.foundation.summary.heading"]'
+    '[data-testid="issue.views.issue-base.foundation.summary.heading"]',
   ).innerText
 
   const id = document.querySelector(
-    '[data-testid="issue.views.issue-base.foundation.breadcrumbs.current-issue.item"]'
+    '[data-testid="issue.views.issue-base.foundation.breadcrumbs.current-issue.item"]',
   ).innerText
 
   return `${id}: ${name}`
