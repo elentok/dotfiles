@@ -1,0 +1,9 @@
+[metadata]
+name = "git-worktree"
+requirements = ["git-wt"]
+
+[source]
+command = "git-wt list"
+
+[preview]
+command = "git-wt preview {0}"

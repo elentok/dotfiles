@@ -1,0 +1,6 @@
+[metadata]
+name = "npm-scripts"
+
+[source]
+command = "NO_COLOR=true npm-scripts.ts"
+output = "{split: :0}"

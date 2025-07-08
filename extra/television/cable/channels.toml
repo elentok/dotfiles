@@ -1,0 +1,8 @@
+[metadata]
+name = "channels"
+
+[source]
+command = "tv list-channels"
+
+[preview]
+command = "bat -n --color=always ~/.config/television/cable/{0}.toml"
