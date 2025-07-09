@@ -32,3 +32,10 @@ vim.diagnostic.config({
     border = "rounded",
   },
 })
+
+-- Backup dir
+local backupdir = vim.fn.stdpath("state") .. "/backup"
+vim.opt.backup = true
+vim.opt.writebackup = true
+vim.opt.backupdir = backupdir
+if not vim.fn.isdirectory(backupdir) then vim.fn.mkdir(backupdir, "p") end
