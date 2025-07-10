@@ -11,6 +11,8 @@ return {
   ---@type obsidian.config.ClientOpts
   opts = {
     new_notes_location = "current_dir",
+    ---@diagnostic disable-next-line: assign-type-mismatch
+    wiki_link_func = "prepend_note_path",
     completion = {
       blink = true,
     },
