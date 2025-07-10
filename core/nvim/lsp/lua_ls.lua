@@ -4,10 +4,12 @@ return {
   settings = {
     Lua = {
       workspace = {
-        library = vim.list_extend(
-          { "${3rd}/luv/library", "${3rd}/busted/library" },
-          vim.api.nvim_get_runtime_file("", true)
-        ),
+        library = vim.list_extend({
+          "${3rd}/luv/library",
+          "${3rd}/busted/library",
+          -- TODO: maybe add everything inside the lazy dir?
+          vim.fn.stdpath("data") .. "/lazy/obsidian.nvim/lua",
+        }, vim.api.nvim_get_runtime_file("", true)),
       },
     },
   },
