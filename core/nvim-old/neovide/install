@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-source "$DOTF/framework.sh"
-
-mkdir -p ~/.config/neovide
-dotf-symlink "$DOTF/core/nvim/neovide/config.toml" ~/.config/neovide/config.toml
