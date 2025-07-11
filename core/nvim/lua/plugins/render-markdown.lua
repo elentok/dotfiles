@@ -45,6 +45,7 @@ return {
     },
     heading = {
       sign = false,
+      icons = { "󰎤 ", "󰎧 ", "󰎪 ", "󰎭 ", "󰎱 " },
     },
   },
 }
