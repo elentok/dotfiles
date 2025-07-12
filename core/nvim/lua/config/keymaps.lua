@@ -19,6 +19,7 @@ map("n", "<leader>uv", function()
   end
 end, { desc = "Toggle virtual_lines diagnostics" })
 
+map("n", "<leader>ol", "<cmd>Lazy<cr>", { desc = "Open Lazy" })
 map("n", "<leader>of", "<cmd>!dotf-open %<cr>", { desc = "Open current file" })
 map("n", "gw", function() vim.diagnostic.open_float() end, { desc = "Show diagnostic" })
 map("n", "<leader>ca", function() vim.lsp.buf.code_action() end, { desc = "Code actions" })
