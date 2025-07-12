@@ -3,8 +3,8 @@
 return {
   "MeanderingProgrammer/render-markdown.nvim",
   ft = { "markdown" },
+  ---@type render.md.UserConfig
   opts = {
-    ---@type render.md.UserConfig
     bullet = {
       icons = { " " },
     },
