@@ -9,7 +9,7 @@ set -gx YARN_CACHE_FOLDER ~/.cache/yarn
 set -gx TURBO_CACHE_DIR ~/.cache/turbo
 
 # Node-gyp doesn't support Python 3.11
-for file in $BREW_HOME/Cellar/python@3.10/*/bin/python3.10 do
+for file in $BREW_HOME/Cellar/python@3.10/*/bin/python3.10
     set -gx NODE_GYP_FORCE_PYTHON "$file"
     break
 end
