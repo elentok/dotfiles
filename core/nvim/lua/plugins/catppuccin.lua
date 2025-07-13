@@ -11,6 +11,8 @@ if transparent then dim_inactive = nil end
 return {
   "catppuccin/nvim",
   name = "catppuccin",
+  ---@module 'catppuccin'
+  ---@type CatppuccinOptions
   opts = {
     transparent_background = transparent,
     flavour = "mocha",

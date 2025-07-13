@@ -1,5 +1,8 @@
 ---@module 'render-markdown'
 
+vim.api.nvim_set_hl(0, "TaskDone", { fg = "#84b782", italic = true })
+vim.api.nvim_set_hl(0, "TaskWaiting", { fg = "#aa6069", italic = true })
+
 return {
   "MeanderingProgrammer/render-markdown.nvim",
   ft = { "markdown" },
@@ -15,8 +18,8 @@ return {
       },
       checked = {
         icon = "󰄬",
-        highlight = "NonText",
-        scope_highlight = "NonText",
+        highlight = "TaskDone",
+        scope_highlight = "TaskDone",
       },
       custom = {
         in_progress = {
@@ -28,8 +31,8 @@ return {
         waiting = {
           raw = "[w]",
           rendered = "󰏦",
-          highlight = "MiniIconsOrange",
-          scope_highlight = "MiniIconsOrange",
+          highlight = "TaskWaiting",
+          scope_highlight = "TaskWaiting",
         },
         code_review = {
           raw = "[r]",
