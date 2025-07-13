@@ -152,7 +152,7 @@ return {
     { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
     { "<leader>gl", git_log_file, desc = "Show git log" },
     { "<leader>gL", git_log_line, desc = "Show git history of current line" },
-    { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (hunks)" },
+    { "<leader>gD", function() Snacks.picker.git_diff() end, desc = "Git Diff (hunks)" },
     { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
 
     -- Actions
