@@ -12,5 +12,6 @@ fish_add_path "$HOME/.local/bin" \
     "$DOTF/extra/bin" \
     "$HOME/.deno/bin" \
     "$HOME/.apps/bin" \
+    "$BUN_INSTALL/bin" \
     "$HOME/go/bin" \
     $DOTP/*/scripts

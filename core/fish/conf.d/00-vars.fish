@@ -11,3 +11,4 @@ if ! test -e "$TMP"
 end
 
 set -x FZF_DEFAULT_OPTS "--tiebreak=end"
+set -x BUN_INSTALL "$HOME/.bin"
