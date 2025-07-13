@@ -27,6 +27,8 @@
   "sibling-swap.nvim": { "branch": "main", "commit": "75e696c340429769aa34d0bbae1511c8d9660c0b" },
   "smart-splits.nvim": { "branch": "master", "commit": "039b1c280b849cc23190e94285083af9c2020596" },
   "snacks.nvim": { "branch": "main", "commit": "bc0630e43be5699bb94dadc302c0d21615421d93" },
+  "sqlite.lua": { "branch": "master", "commit": "50092d60feb242602d7578398c6eb53b4a8ffe7b" },
   "store.nvim": { "branch": "main", "commit": "8be846e09ed4a857f13b9e6b7f4ed5354ae38056" },
-  "which-key.nvim": { "branch": "main", "commit": "370ec46f710e058c9c1646273e6b225acf47cbed" }
+  "which-key.nvim": { "branch": "main", "commit": "370ec46f710e058c9c1646273e6b225acf47cbed" },
+  "yankbank-nvim": { "branch": "main", "commit": "cc94fbeabe8bb2f57ee096f7e23a5d2396799340" }
 }
