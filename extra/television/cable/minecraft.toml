@@ -1,0 +1,6 @@
+[metadata]
+name = "minecraft"
+
+[source]
+command = "cd \"$HOME/Library/Application Support/PrismLauncher/instances\" && for dir in */; echo $dir; end"
+output = "Library/Application Support/PrismLauncher/instances/{1}"

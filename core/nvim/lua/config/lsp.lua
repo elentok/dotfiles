@@ -13,6 +13,7 @@ vim.lsp.enable({
   "marksman",
   "openscad_lsp",
   "pyright",
+  "spyglassmc_language_server",
   "taplo",
   "vtsls",
   "yamlls",

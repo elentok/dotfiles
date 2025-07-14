@@ -29,6 +29,7 @@
   "snacks.nvim": { "branch": "main", "commit": "bc0630e43be5699bb94dadc302c0d21615421d93" },
   "sqlite.lua": { "branch": "master", "commit": "50092d60feb242602d7578398c6eb53b4a8ffe7b" },
   "store.nvim": { "branch": "main", "commit": "8be846e09ed4a857f13b9e6b7f4ed5354ae38056" },
+  "vim-mcfunction": { "branch": "master", "commit": "f8ad1bfccb97f8f8e7ee0c52024eac3a8e491a85" },
   "which-key.nvim": { "branch": "main", "commit": "370ec46f710e058c9c1646273e6b225acf47cbed" },
   "yankbank-nvim": { "branch": "main", "commit": "cc94fbeabe8bb2f57ee096f7e23a5d2396799340" }
 }

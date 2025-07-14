@@ -74,3 +74,10 @@ function cdr --description "change directory to the git root"
         echo "Not inside a git repo"
     end
 end
+
+function gmc --description "jump to minecraft instance"
+    set dir $(tv minecraft)
+    if test -n "$dir"
+        cd ~/$dir
+    end
+end
