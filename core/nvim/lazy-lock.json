@@ -25,7 +25,7 @@
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
   "render-markdown.nvim": { "branch": "main", "commit": "b977c94b32afdcadb8e53ba33d5934d1937d4eab" },
   "sibling-swap.nvim": { "branch": "main", "commit": "75e696c340429769aa34d0bbae1511c8d9660c0b" },
-  "smart-splits.nvim": { "branch": "master", "commit": "30d645ed1eab77df9a5d9e98515316165b7d9ab9" },
+  "smart-splits.nvim": { "branch": "master", "commit": "c410262064ea8b420f77beabf493e56575100391" },
   "snacks.nvim": { "branch": "main", "commit": "bc0630e43be5699bb94dadc302c0d21615421d93" },
   "sqlite.lua": { "branch": "master", "commit": "50092d60feb242602d7578398c6eb53b4a8ffe7b" },
   "store.nvim": { "branch": "main", "commit": "8be846e09ed4a857f13b9e6b7f4ed5354ae38056" },
