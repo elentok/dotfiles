@@ -7,6 +7,8 @@
 # - https://stackoverflow.com/questions/58263216/how-to-change-commit-author-for-multiple-commits-using-filter-branch
 # - https://git-scm.com/docs/gitmailmap#_examples
 
+source "$DOTF/core/scripts/lib/core-helpers.sh"
+
 set -euo pipefail
 
 if [ $# -lt 2 ]; then
@@ -18,12 +20,16 @@ name="$1"
 new_author_email="$2"
 old_author_email="$3"
 
-dotf-pip git-filter-repo
+shift 3
+
+if dotf-command-missing git-filter-repo; then
+  dotf-brew git-filter-repo
+fi
 
 rm -rf "$TMP/mailmap"
-echo "$name <$new_author_email> <$old_author_email>" > "$TMP/mailmap"
+echo "$name <$new_author_email> <$old_author_email>" >"$TMP/mailmap"
 
-git-filter-repo --mailmap "$TMP/mailmap"
+git-filter-repo --mailmap "$TMP/mailmap" "$@"
 
 # git filter-branch --env-filter "
 #   if [ \"\$GIT_AUTHOR_EMAIL\" = \"$old_author_email\" ]; then
