@@ -12,7 +12,8 @@ return {
   opts = {
     new_notes_location = "current_dir",
     ---@diagnostic disable-next-line: assign-type-mismatch
-    wiki_link_func = "prepend_note_path",
+    -- wiki_link_func = "prepend_note_path",
+    preferred_link_style = "markdown",
     completion = {
       blink = true,
     },
