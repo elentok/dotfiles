@@ -1,0 +1,17 @@
+#!/usr/bin/env fish
+
+set dir ~/tmp/md
+
+if test ! -e $dir
+    mkdir -p $dir
+end
+
+if test -n "$argv"
+    set suffix "-$argv"
+else
+    set suffix ""
+end
+
+set file $dir/$(date +%Y-%m-%d-%H%M%S)$suffix.md
+
+nvim $file
