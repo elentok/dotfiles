@@ -63,7 +63,7 @@ for plugin_dir1 in ~/.dotplugins/*; do
   fi
 done
 
-path=$path:$HOME/.local/share/fnm
+path=$path:$HOME/.local/share/fnm/aliases/default/bin
 path=$path:$HOME/.fzf/bin
 path=$path:$HOME/.local/bin
 
