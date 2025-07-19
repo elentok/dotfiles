@@ -14,15 +14,19 @@ output_mkv_file_path="${input_file_path}-x265.mkv"
 
 set -x
 
-ffmpeg \
-  -hide_banner \
-  -i "${input_file_path}" \
-  -codec:v libx265 \
-  -crf 26 \
-  -preset medium \
-  -pix_fmt yuv420p10le \
-  -x265-params bframes=8:psy-rd=1:aq-mode=3:aq-strength=0.8:deblock=1,1 \
-  -codec:a copy \
-  -codec:s copy \
-  -n "${output_mkv_file_path}" \
-  "$@"
+# ffmpeg \
+#   -hide_banner \
+#   -i "${input_file_path}" \
+#   -codec:v libx265 \
+#   -crf 26 \
+#   -preset medium \
+#   -pix_fmt yuv420p10le \
+#   -x265-params bframes=8:psy-rd=1:aq-mode=3:aq-strength=0.8:deblock=1,1 \
+#   -codec:a copy \
+#   -codec:s copy \
+#   -n "${output_mkv_file_path}" \
+#   "$@"
+
+# ffmpeg -hwaccel qsv -i "${input_file_path}" -c:v hevc_qsv -preset medium -b:v 2500k -c:a aac -b:a 128k "$output_mkv_file_path" "$@"
+# ffmpeg -i "${input_file_path}" -c:v hevc_qsv -preset fast -c:a aac -b:a 128k "${output_mkv_file_path}" "$@"
+ffmpeg -i "${input_file_path}" -c:v libx265 -preset veryfast -crf 28 -c:a aac -b:a 128k "${output_mkv_file_path}" "$@"
