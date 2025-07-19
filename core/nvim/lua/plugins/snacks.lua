@@ -82,9 +82,9 @@ return {
       enabled = true,
       doc = { inline = false, float = true },
     },
-    dashboard = { enabled = true, preset = {
-      header = header,
-    } },
+    -- dashboard = { enabled = true, preset = {
+    --   header = header,
+    -- } },
     bigfile = { enabled = true },
     input = { enabled = true },
     quickfile = { enabled = true },
