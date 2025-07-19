@@ -9,10 +9,10 @@ FROM debian:testing
 
 WORKDIR /root/.dotfiles
 
+RUN apt-get update && apt-get -y install sudo git
+
 COPY . .
 
-RUN whoami
-
-# RUN scripts/dotf install
+RUN ./bootstrap.sh
 
 # CMD /usr/sbin/zsh
