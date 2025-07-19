@@ -6,6 +6,7 @@ source "$DOTF/framework.sh"
 
 if dotf-command-missing claude; then
   npm install -g @anthropic-ai/claude-code
+  claude migrate-installer
 fi
 
 mkdir -p ~/.claude

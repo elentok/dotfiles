@@ -81,3 +81,7 @@ function gmc --description "jump to minecraft instance"
         cd ~/$dir
     end
 end
+
+function claude
+    ~/.claude/local/claude $argv
+end
