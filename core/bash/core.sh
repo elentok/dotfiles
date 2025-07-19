@@ -44,6 +44,11 @@ if dotf-is-mac; then
       export NODE_GYP_FORCE_PYTHON
     fi
   fi
+
+  export COLIMA_HOME="$HOME/.colima"
+  if [ -e "$COLIMA_HOME" ]; then
+    export DOCKER_HOST="unix://${COLIMA_HOME}/default/docker.sock"
+  fi
 fi
 
 # PATH {{{1

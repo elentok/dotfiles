@@ -2,6 +2,7 @@
 
 Include ~/.dotplugins/*/ssh.conf
 Include ~/.ssh/machine.config
+Include ~/.colima/ssh_config
 
 AddKeysToAgent yes
 

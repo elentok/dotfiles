@@ -26,3 +26,8 @@ for pkg in coreutils findutils gnu-sed
         fish_add_path "$gnubin"
     end
 end
+
+set -gx COLIMA_HOME "$HOME/.colima"
+if test -e "$COLIMA_HOME"
+    set -gx DOCKER_HOST "unix://$COLIMA_HOME/default/docker.sock"
+end

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTF/framework.sh"
+
+if dotf-is-linux; then
+  echo "See install-on-linux"
+  exit 1
+fi
+
+dotf-brew colima docker
+colima start
+
+# test that docker works
+docker run hello-world
