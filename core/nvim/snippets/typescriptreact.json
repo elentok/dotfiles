@@ -23,6 +23,24 @@
     ]
   },
   "screendebug": {
-    "body": ["console.log('[SCREEN DEBUG START]')", "screen.debug(undefined, Infinity)"]
+    "body": [
+      "console.log('[SCREEN DEBUG START]')",
+      "screen.debug(undefined, Infinity)"
+    ]
+  },
+  "iff": {
+    "body": [
+      "if ($1) {",
+      "  $2",
+      "}"
+    ]
+  },
+  "usequery": {
+    "body": [
+      "export const use${1}Query = (",
+      "  variables: ${1}QueryVariables,",
+      "  options: UseQueryOptions<${1}Query> = {},",
+      "): QueryResult<${1}Query> => useQuery<${1}Query>(${2}_QUERY, { variables, ...options })"
+    ]
   }
 }
