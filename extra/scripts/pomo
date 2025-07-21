@@ -1,0 +1,35 @@
+#!/usr/bin/env fish
+
+function main
+    set action $argv[1]
+    if test -z "$action"
+        set action (echo -e "work\nrest" | tv --inline)
+    end
+
+    if test -z "$action"
+        echo "User aborted."
+        exit 1
+    end
+
+    if test "$action" = work
+        work
+    else if test "$action" = rest
+        rest
+    else
+        echo "Usage: pomo <work|rest>"
+    end
+end
+
+function work
+    countdown 24m &&
+        say "one minute remaining" &&
+        countdown -say 1m &&
+        say "take a break"
+end
+
+function rest
+    countdown 5m &&
+        say "get back to work"
+end
+
+main $argv
