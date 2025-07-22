@@ -21,7 +21,8 @@ function main
 end
 
 function work
-    countdown 24m &&
+    say "pomodoro session started" &&
+        countdown 24m &&
         say "one minute remaining" &&
         countdown -say 1m &&
         say "take a break"
