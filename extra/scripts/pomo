@@ -12,24 +12,33 @@ function main
     end
 
     if test "$action" = work
-        work
+        work $argv[2]
     else if test "$action" = rest
-        rest
+        rest $argv[2]
     else
         echo "Usage: pomo <work|rest>"
     end
 end
 
 function work
+    set length 24m
+    if test -n "$argv[1]"
+        set length $argv[1]
+    end
     say "pomodoro session started" &&
-        countdown 24m &&
+        countdown $length &&
         say "one minute remaining" &&
         countdown -say 1m &&
         say "take a break"
 end
 
 function rest
-    countdown 5m &&
+    set length 5m
+    if test -n "$argv[1]"
+        set length $argv[1]
+    end
+    say rest &&
+        countdown $length &&
         say "get back to work"
 end
 
