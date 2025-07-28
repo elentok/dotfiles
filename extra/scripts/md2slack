@@ -1,6 +1,7 @@
 #!/usr/bin/env fish
 
 if not type -q md2slack-plugin
+    # @fish-lsp-disable-next-line 4004
     function md2slack-plugin
         cat
     end
@@ -11,7 +12,8 @@ set waiting ":double_vertical_bar:" # :arrow_forward:
 set inprogress "◐" # :arrow_forward:
 set done "✓" #:white_check_mark: 
 
-sed 's/  /    /g' \
+dprint fmt --config ~/.dotfiles/extra/scripts/md2slack-dprint.json --stdin file.md \
+    | sed 's/  /    /g' \
     | sed -E 's/\[([^]]+)\]\(\.\.[^)]*\)/\1/' \
     | sed -E 's/\[\[.*\|(.*)\]\]/\1/' \
     | md2slack-plugin \
