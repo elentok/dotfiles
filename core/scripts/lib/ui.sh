@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # vim: foldmethod=marker
 
-if type dotf-color &> /dev/null; then
+if type dotf-color &>/dev/null; then
   return
 fi
 
@@ -27,16 +27,16 @@ function dotf-color() {
   shift
 
   case "$color" in
-    black) echo -ne "\\033[30m" ;;
-    gray) echo -ne "\x1b[38;5;241m" ;;
-    red) echo -ne "\\033[31m" ;;
-    green) echo -ne "\\033[32m" ;;
-    yellow) echo -ne "\\033[33m" ;;
-    blue) echo -ne "\\033[34m" ;;
-    purple) echo -ne "\\033[35m" ;;
-    cyan) echo -ne "\\033[36m" ;;
-    underline) echo -ne "\\033[4m" ;;
-    reset) echo -ne "\\033[0m" ;;
+  black) echo -ne "\\033[30m" ;;
+  gray) echo -ne "\x1b[38;5;241m" ;;
+  red) echo -ne "\\033[31m" ;;
+  green) echo -ne "\\033[32m" ;;
+  yellow) echo -ne "\\033[33m" ;;
+  blue) echo -ne "\\033[34m" ;;
+  purple) echo -ne "\\033[35m" ;;
+  cyan) echo -ne "\\033[36m" ;;
+  underline) echo -ne "\\033[4m" ;;
+  reset) echo -ne "\\033[0m" ;;
   esac
 
   if [ $# -gt 0 ]; then
@@ -96,18 +96,18 @@ function dotf-header() {
 
   echo
   case "$level" in
-    h1) dotf-border padded yellow "   $*   " ;;
-    h2) dotf-border normal blue "  $*  " ;;
-    h3) dotf-border normal purple "$@" ;;
-    demo)
-      dotf-header h1 "Header 1"
-      dotf-header h2 "Header 2"
-      dotf-header h3 "Header 3"
-      ;;
-    *)
-      echo "ERROR: Invalid header argument '$level' for dotf-header"
-      return 1
-      ;;
+  h1) dotf-border padded yellow "   $*   " ;;
+  h2) dotf-border normal blue "  $*  " ;;
+  h3) dotf-border normal purple "$@" ;;
+  demo)
+    dotf-header h1 "Header 1"
+    dotf-header h2 "Header 2"
+    dotf-header h3 "Header 3"
+    ;;
+  *)
+    echo "ERROR: Invalid header argument '$level' for dotf-header"
+    return 1
+    ;;
   esac
 }
 
@@ -197,4 +197,46 @@ pause() {
   local text=${1:-Press any key to continue... }
   echo -ne "$text"
   read -n 1
+}
+
+function dotf-colorize() {
+  local fg="$1"
+  local bg="$2"
+  local text="$3"
+  local esc="\033["
+  local reset="${esc}0m"
+  local code=""
+
+  # Foreground color
+  if [[ "$fg" != "none" ]]; then
+    code+="38;5;${fg}"
+  fi
+
+  # Background color
+  if [[ "$bg" != "none" ]]; then
+    [[ -n "$code" ]] && code+=";"
+    code+="48;5;${bg}"
+  fi
+
+  # If there's at least one color, prepare the escape sequence
+  if [[ -n "$code" ]]; then
+    code="${esc}${code}m"
+  fi
+
+  # Print output
+  if [[ -n "$text" ]]; then
+    echo -ne "${code}${text}${reset}"
+  else
+    echo -ne "${code}"
+  fi
+}
+
+function dotf-bubble() {
+  local fg="$1"
+  local bg="$2"
+  local text="$3"
+
+  dotf-colorize "$bg" none ""
+  dotf-colorize "$fg" "$bg" "$text"
+  dotf-colorize "$bg" none ""
 }

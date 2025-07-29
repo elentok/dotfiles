@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source ~/.dotfiles/core/scripts/lib/ui.sh
+
+for value in $(seq 1 255); do
+  text=$(printf "%3d" "$value")
+  dotf-bubble $((255 - value)) "$value" "$text"
+  if test $((value % 10)) = 0; then
+    echo
+  fi
+done

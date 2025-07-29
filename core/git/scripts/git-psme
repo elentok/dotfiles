@@ -23,16 +23,17 @@ function main() {
 
   branch="$(git rev-parse --abbrev-ref HEAD)"
 
-  pretty_branch=" $branch"
+  branch_bubble=$(dotf-bubble 255 25 " $branch")
+  remote_bubble=$(dotf-bubble 255 25 "remote $remote")
 
   echo
-  dotf-color blue "Pushing [$pretty_branch] 󰳟 [remote $remote]"
+  dotf-color blue "Pushing $branch_bubble to $remote_bubble"
   echo
   echo
   if ! git push -u "$remote" "$branch" "$@"; then
     if dotf-confirm "$(dotf-color red "Push failed, use force?")"; then
       echo
-      dotf-color red "Pushing [$pretty_branch] 󰳟 [remote $remote] with force"
+      dotf-color red "Pushing $branch_bubble to $remote_bubble with force"
       echo
       echo
       if git push -u -f "$remote" "$branch" "$@"; then
