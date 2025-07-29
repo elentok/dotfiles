@@ -3,6 +3,12 @@ return {
   filetypes = { "lua" },
   settings = {
     Lua = {
+      runtime = {
+        version = "LuaJIT",
+      },
+      telemetry = {
+        enable = false,
+      },
       workspace = {
         library = vim.list_extend({
           "${3rd}/luv/library",
