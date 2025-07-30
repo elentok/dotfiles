@@ -144,8 +144,8 @@ return {
     { "<leader>jh", function() Snacks.picker.help() end, desc = "Help Pages" },
     { "<leader>ju", function() Snacks.picker.undo() end, desc = "Undotree" },
     { "<leader>jk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
-    { "<leader>jda", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
-    { "<leader>jdb", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diags" },
+    { "<leader>da", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
+    { "<leader>dm", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diags" },
     { "<leader>ch", function() Snacks.picker.command_history() end, desc = "Command History" },
 
     -- Git
