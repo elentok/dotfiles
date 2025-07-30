@@ -5,3 +5,11 @@ linemode = "size"
 # [preview]
 # max_width = 1000
 # max_height = 2000
+
+[opener]
+
+tabiew = [{ run = 'tw "$@"', block = true, desc = "Tabiew" }]
+
+[open]
+
+prepend_rules = [{ name = "*.csv", use = "tabiew" }]
