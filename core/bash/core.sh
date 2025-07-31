@@ -58,7 +58,6 @@ path=$path:$DOTF/core/git/scripts
 path=$path:$DOTF/extra/scripts
 path=$path:$DOTF/extra/scripts/deno
 path=$path:$DOTF/extra/scripts/node
-path=$path:$HOME/dev/github-pkgs/bin
 path=$path:$HOME/dev/git-helpers/bin
 path=$path:$HOME/dev/qmkmd/bin
 

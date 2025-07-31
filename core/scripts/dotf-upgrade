@@ -11,7 +11,6 @@ function main() {
   cd "$DOTF"
 
   dotf-repos pull
-  dotf-summary run 'Update github packages' github-pkgs update
   dotf-summary run 'Update packages' dotf-pkgs upgrade
   upgrade-neovim-stuff
 
@@ -23,10 +22,7 @@ function main() {
 
 function upgrade-neovim-stuff() {
   dotf-header h2 'Neovim: Upgrade'
-  if dotf-is-mac; then
-    dotf-summary run 'Neovim: brew update' brew upgrade neovim
-    # Non-mac uses github-pkgs to update
-  fi
+  dotf-summary run 'Neovim: brew update' brew upgrade neovim
   dotf-summary run 'Neovim: Lazy update' nvim --headless "+Lazy! update" +qa
   dotf-summary run 'Neovim: Reinstall treesitter' nvim --headless "+lua require('elentok.treesitter-parsers')" +qa
 }
