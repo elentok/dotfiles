@@ -13,7 +13,6 @@ function main() {
   dotf-repos pull
   dotf-summary run 'Update github packages' github-pkgs update
   dotf-summary run 'Update packages' dotf-pkgs upgrade
-  dotf-summary run 'Update fisher' fish -c "fisher update"
   upgrade-neovim-stuff
 
   # Clear cached direnv fish setup (regenerated when missing on new shells)
@@ -28,7 +27,8 @@ function upgrade-neovim-stuff() {
     dotf-summary run 'Neovim: brew update' brew upgrade neovim
     # Non-mac uses github-pkgs to update
   fi
-  dotf-summary run 'Neovim: Lazy sync' dotf-nvim-lazy sync
+  dotf-summary run 'Neovim: Lazy update' nvim --headless "+Lazy! update" +qa
+  dotf-summary run 'Neovim: Reinstall treesitter' nvim --headless "+lua require('elentok.treesitter-parsers')" +qa
 }
 
 main "$@"
