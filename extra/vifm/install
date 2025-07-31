@@ -4,22 +4,6 @@ source "$DOTF/framework.sh"
 
 version="$(dotf-trim <"$DOTF/extra/vifm/VERSION")"
 
-# dotf-bullet "Installing vifm..."
-
-# if dotf-is-linux; then
-#   if dotf-command-missing vifm; then
-#     PRIMARY=yes "$DOTF/core/vifm/build" && dotf-success "done."
-#   else
-#     current_version="$(vifm --version | head -1 | cut -d: -f2 | dotf-trim)"
-#     if [ "$current_version" == "$version" ]; then
-#       dotf-info "version $version already installed."
-#     else
-#       dotf-info "found $current_version, upgrading to $version..."
-#       PRIMARY=yes "$DOTF/core/vifm/build" && dotf-success "done."
-#     fi
-#   fi
-# fi
-
 mkdir -p ~/.vifm/colors
 dotf-symlink "$DOTF/extra/vifm/vifmrc" "$HOME/.vifm/vifmrc"
 dotf-symlink "$DOTF/extra/vifm/gruvbox.vifm" "$HOME/.vifm/colors/gruvbox.vifm"
