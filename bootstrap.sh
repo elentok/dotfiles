@@ -21,6 +21,7 @@ function main() {
   install-if-missing curl curl
 
   setup-homebrew
+  setup-gum
   setup-fish
 
   if dotf-is-mac; then
@@ -54,6 +55,16 @@ function setup-homebrew() {
   else
     echo '- Updating brew... '
     brew update
+  fi
+}
+
+function setup-gum() {
+  echo "- Installing gum..."
+  if has-command gum; then
+    echo " already installed."
+    echo
+  else
+    brew install gum
   fi
 }
 
@@ -107,8 +118,8 @@ function install-if-missing() {
 
 function install-homebrew() {
   #if dotf-is-mac; then
-    #sudo xcodebuild -license accept
-    #sudo xcode-select --install
+  #sudo xcodebuild -license accept
+  #sudo xcode-select --install
   #fi
 
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"

@@ -31,7 +31,7 @@ function main() {
   echo
   echo
   if ! git push -u "$remote" "$branch" "$@"; then
-    if dotf-confirm "$(dotf-color red "Push failed, use force?")"; then
+    if gum confirm --prompt.foreground=9 "Push failed, use force? 💪"; then
       echo
       dotf-color red "Pushing $branch_bubble to $remote_bubble with force"
       echo
