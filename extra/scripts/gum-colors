@@ -1,0 +1,9 @@
+#!/usr/bin/env fish
+
+for i in (seq 0 9)
+    echo "--foreground=$i" | gum style --foreground $i --padding "0 1"
+end
+
+for i in (seq 0 9)
+    echo "--background=$i" | gum style --background $i --padding "0 1"
+end

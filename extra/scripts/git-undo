@@ -5,26 +5,30 @@ source $DOTF/framework.sh
 main() {
   if confirm-undo; then
     git reset --soft HEAD\^
+  else
+    echo "User aborted."
   fi
 }
 
 confirm-undo() {
-  echo -e $GREEN
-  echo This will undo the last commit by:
-  echo
-  echo 1. moving the changes into the index
-  echo 2. removing the last commit
-  echo
-  echo "(so you won't lose your changes)"
+  echo "HOW DOES THIS WORK?" | gum style --background=4 --foreground=0 --padding="0 2"
 
-  echo -e "$YELLOW"
-  echo '----------------------------------------------------------------------'
-  git-last-commit
-  echo '----------------------------------------------------------------------'
-  echo -e "$RESET"
-  echo
+  (
+    echo It will undo the last commit by:
+    echo
+    echo 1. moving the changes into the index
+    echo 2. removing the last commit
+    echo
+    echo "(so you won't lose your changes)"
+  ) | gum style --padding="1 1"
 
-  dotf-confirm 'Shall we begin?'
+  echo "LAST COMMIT" | gum style --background=3 --foreground=8 --padding="0 2"
+
+  (
+    git-last-commit
+  ) | gum style --trim --border=rounded --foreground=3 --border-foreground=3 --padding="1 2" --margin="1 1"
+
+  gum confirm 'Shall we begin?'
 }
 
 git-last-commit() {

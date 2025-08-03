@@ -21,7 +21,7 @@ fix-commit() {
   rev="$1"
   title=$(commit-title $rev)
 
-  if dotf-confirm "Fixup $BLUE'$title'$RESET" yes; then
+  if dotf-confirm "Fixup '$title'" yes; then
 
     dotf-bullet "Creating fixup commit... "
     git commit --fixup $rev

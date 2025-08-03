@@ -44,9 +44,11 @@ main() {
 }
 
 show-done() {
-  echo -e "$GREEN=========================="
+  dotf-color green
+  echo -e "=========================="
   echo "Done ($(benchmark-stop))"
-  echo -e "==========================$RESET"
+  echo -e "=========================="
+  dotf-color reset
 }
 
 main "$@"

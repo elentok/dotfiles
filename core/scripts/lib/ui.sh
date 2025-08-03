@@ -6,16 +6,6 @@ if type dotf-color &>/dev/null; then
 fi
 
 # Colors {{{1
-export BLACK="\\033[30m"
-export GRAY="\x1b[38;5;241m"
-export RED="\\033[31m"
-export GREEN="\\033[32m"
-export YELLOW="\\033[33m"
-export BLUE="\\033[34m"
-export CYAN="\\033[36m"
-export UNDERLINE="\\033[4m"
-export RESET="\\033[0m"
-export CLEAR_LINE="\\r\\033[K"
 
 function dotf-color() {
   if [ $# -lt 1 ]; then
@@ -131,7 +121,7 @@ dotf-error() {
 }
 
 clear_line() {
-  echo -e -n "$CLEAR_LINE"
+  echo -e -n "\\r\\033[K"
 }
 
 show_result() {

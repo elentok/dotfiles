@@ -30,7 +30,7 @@ main() {
 
 resolve-all() {
   describe-conflicts
-  echo -e "${GREEN}Starting to resolve...$RESET\n"
+  dotf-color green "$Starting to resolve...\n"
   while [ "$REMAINING" != "0" ]; do
     resolve-first
     REMAINING=$(git-conflicts-count)
@@ -40,7 +40,7 @@ resolve-all() {
 resolve-first() {
   local first=$(git-conflicts | head -1)
 
-  dotf-bullet "Resolving ${YELLOW}$first${RESET}... "
+  dotf-bullet "Resolving $(dotf-color yellow "$first")... "
 
   if has-conflicts "$first"; then
     conflicts=$(file-conflict-markers-count "$first")
@@ -76,7 +76,7 @@ describe-conflicts() {
   echo
   echo '======================================================================'
   echo
-  echo -e "${BLUE}${UNDERLINE}$REMAINING conflict(s) remaining$RESET"
+  dotf-color blue "$REMAINING conflict(s) remaining"
   echo
   git-conflicts | sed 's/^/  * /'
   echo
