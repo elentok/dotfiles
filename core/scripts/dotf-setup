@@ -36,6 +36,7 @@ main() {
   (cd extra/scripts/deno && deno cache ./**/*.ts)
 
   if dotf-is-mac; then
+    dotf-symlink ~/Library/Mobile\ Documents/com~apple~CloudDocs ~/iCloud
     dotf-component osx-tuning
   fi
 
