@@ -14,7 +14,7 @@ vim.lsp.enable({
   "fish_lsp",
   "gopls",
   "graphql",
-  "harper_ls",
+  -- "harper_ls",
   "html",
   "jsonls",
   "lua_ls",
