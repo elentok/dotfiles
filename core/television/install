@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-tvroot="$DOTF/extra/television"
+tvroot="$DOTF/core/television"
 
 source "$DOTF/framework.sh"
 
