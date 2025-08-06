@@ -1,0 +1,10 @@
+#!/usr/bin/env fish
+
+cd /Applications/kitty.app/Contents/Resources
+
+mv kitty.icns kitty.original.icns
+curl -L -o kitty.icns https://github.com/DinkDonk/kitty-icon/raw/refs/heads/main/kitty-light.icns
+
+touch /Applications/kitty.app
+rm /var/folders/*/*/*/com.apple.dock.iconcache
+killall Dock
