@@ -1,6 +1,6 @@
 # The .zshenv file is loaded by ALL shells (including non-login shells)
 
-source ~/.dotfiles/core/zsh/core.sh
+source ~/.dotfiles/extra/zsh/core.sh
 
 # Fix $TERM problem with remote servers
 alias ssh='TERM=xterm ssh'

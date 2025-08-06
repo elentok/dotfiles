@@ -17,25 +17,25 @@ typeset -F SECONDS=0
 export START_TIME=$SECONDS
 
 if [ -e ~/.profiling ]; then
-  source $DOTF/core/zsh/profiling.zsh
+  source $DOTF/extra/zsh/profiling.zsh
 fi
 
-source $DOTF/core/zsh/core.sh
+source $DOTF/extra/zsh/core.sh
 for script in $(dotf-plugin-list-files zsh/before.zsh); do
   source "$script"
 done
-source $DOTF/core/zsh/zsh.zsh
-source $DOTF/core/zsh/settings.sh
-source $DOTF/core/zsh/dircolors/dircolors.sh
-source $DOTF/core/zsh/widgets.zsh
-source $DOTF/core/zsh/aliases.sh
-source $DOTF/core/zsh/completion.zsh
-source $DOTF/core/zsh/keybindings.zsh
-source $DOTF/core/zsh/fzf-git.sh
-source $DOTF/core/zsh/vendor/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $DOTF/extra/zsh/zsh.zsh
+source $DOTF/extra/zsh/settings.sh
+source $DOTF/extra/zsh/dircolors/dircolors.sh
+source $DOTF/extra/zsh/widgets.zsh
+source $DOTF/extra/zsh/aliases.sh
+source $DOTF/extra/zsh/completion.zsh
+source $DOTF/extra/zsh/keybindings.zsh
+source $DOTF/extra/zsh/fzf-git.sh
+source $DOTF/extra/zsh/vendor/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $DOTF/core/deno/shell-helpers.sh
 if ! dotf-has-command starship; then
-  source $DOTF/core/zsh/prompt.zsh
+  source $DOTF/extra/zsh/prompt.zsh
 fi
 if [ -e ~/.fzf.zsh ]; then
   source ~/.fzf.zsh

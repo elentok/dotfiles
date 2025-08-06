@@ -14,7 +14,7 @@ source "$DOTF/core/scripts/lib/core-helpers.sh"
 # }
 
 # Load Configuration {{{1
-source "$DOTF/core/zsh/config.sh"
+source "$DOTF/extra/zsh/config.sh"
 for configfile in $(dotf-plugin-list-files zsh/config.sh); do
   source "$configfile"
 done

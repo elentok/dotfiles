@@ -14,7 +14,7 @@ function main() {
   reset_completion_cache
 
   # fix premissions issue
-  chmod -R g-w "$DOTF/core/zsh/vendor/zsh-completions"
+  chmod -R g-w "$DOTF/extra/zsh/vendor/zsh-completions"
 }
 
 function set_zsh_as_default_shell() {
@@ -37,10 +37,10 @@ function set_zsh_as_default_shell() {
 }
 
 function install_symlinks() {
-  dotf-symlink "$DOTF/core/zsh" ~/.zsh
-  dotf-symlink "$DOTF/core/zsh/zshrc" ~/.zshrc
-  dotf-symlink "$DOTF/core/zsh/zshenv" ~/.zshenv
-  dotf-symlink "$DOTF/core/zsh/zprofile" ~/.zprofile
+  dotf-symlink "$DOTF/extra/zsh" ~/.zsh
+  dotf-symlink "$DOTF/extra/zsh/zshrc" ~/.zshrc
+  dotf-symlink "$DOTF/extra/zsh/zshenv" ~/.zshenv
+  dotf-symlink "$DOTF/extra/zsh/zprofile" ~/.zprofile
 }
 
 function install_starship() {
@@ -52,7 +52,7 @@ function install_starship() {
   fi
 
   mkdir -p ~/.config
-  dotf-symlink "$DOTF/core/zsh/starship.toml" ~/.config/starship.toml
+  dotf-symlink "$DOTF/extra/zsh/starship.toml" ~/.config/starship.toml
 }
 
 function install_fzf() {

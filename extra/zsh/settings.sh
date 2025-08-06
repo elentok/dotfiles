@@ -6,7 +6,7 @@ if [ -e ~/.config/machine ]; then
 fi
 
 # Completions {{{1
-fpath=($HOME/.zsh-complete "$DOTF/core/zsh/vendor/zsh-completions/src" $fpath)
+fpath=($HOME/.zsh-complete "$DOTF/extra/zsh/vendor/zsh-completions/src" $fpath)
 
 # Functions {{{1
 

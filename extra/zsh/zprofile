@@ -2,4 +2,4 @@
 # (whereas the .zshrc file is loaded only by interactive shells)
 
 # echo "ZPROFILE"
-# source ~/.dotfiles/core/zsh/core.sh
+# source ~/.dotfiles/extra/zsh/core.sh
