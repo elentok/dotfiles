@@ -102,14 +102,14 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl prev
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec dotf-terminal
+bindsym $mod+Return exec ~/.dotfiles/extra/scripts/dotf-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
-bindsym $mod+d exec "rofi -show run"
+bindsym $mod+d exec "rofi -show drun"
 bindsym $mod+g exec "rofi -show window"
 bindsym $mod+b exec "rofi -show workspace"
 
