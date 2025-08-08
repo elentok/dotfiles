@@ -1,0 +1,237 @@
+* {
+  font-family: Symbols Nerd Font, Noto Sans;
+  font-weight: 600;
+  font-size: 13pt;
+}
+
+window#waybar {
+  background-color: rgba(0, 0, 0, 0.6);
+  border: none;
+  color: #ffffff;
+  transition-property: background-color;
+  transition-duration: .5s;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+window#waybar.empty {
+  background-color: transparent;
+}
+
+button {
+  /* Use box-shadow instead of border so the text isn't offset */
+  box-shadow: inset 0 -3px transparent;
+  /* Avoid rounded borders under each button name */
+  border: none;
+  border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+  background: inherit;
+  box-shadow: inset 0 -3px #ffffff;
+}
+
+#workspaces button {
+  padding: 0 5px;
+  background-color: transparent;
+  color: #b0b0b0;
+}
+
+#workspaces button:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+#workspaces button.focused {
+  color: #ffffff;
+  box-shadow: inset 0 -3px #e0e0e0;
+}
+
+#workspaces button.urgent {
+  color: #eb4d4b;
+}
+
+#clock,
+#mode,
+#scratchpad,
+#idle_inhibitor,
+#cpu,
+#memory,
+#temperature,
+#disk,
+#pulseaudio,
+#wireplumber,
+#network,
+#bluetooth,
+#keyboard-state,
+#language,
+#backlight,
+#battery,
+#tray {
+  padding: 0 3px;
+  color: #ffffff;
+}
+
+#mode {
+  color: #64727D;
+  box-shadow: inset 0 -3px #ffffff;
+}
+
+#idle_inhibitor {
+  color: #2d3436;
+}
+
+#idle_inhibitor.activated {
+  color: #ecf0f1;
+}
+
+#window {
+  color: #d8d8d8;
+}
+
+#window,
+#workspaces {
+  margin: 0 4px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left>widget:first-child>#workspaces {
+  margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right>widget:last-child>#workspaces {
+  margin-right: 0;
+}
+
+#battery.charging,
+#battery.plugged {
+  color: #70ff00;
+}
+
+#battery.warning:not(.charging) {
+  color: #e0e000;
+}
+
+#battery.critical:not(.charging) {
+  color: #ee4b2b;
+}
+
+label:focus {
+  background-color: #000000;
+}
+
+#cpu {
+  color: #20ffff;
+}
+
+#memory {
+  color: #90ee80;
+}
+
+#temperature {
+  color: #f0d0d0;
+}
+
+#temperature.critical {
+  color: #eb4d4b;
+}
+
+#bluetooth {
+  color: #20bfff;
+}
+
+#network {
+  color: #ffffff;
+}
+
+#network.disconnected {
+  color: #f53c3c;
+}
+
+#pulseaudio,
+#wireplumber,
+#custom-volume_status {
+  color: #20f0ff;
+}
+
+#cpu.warning,
+#memory.warning,
+#pulseaudio.warning,
+#custom-volume_status.warning {
+  color: #e0e000;
+}
+
+#cpu.critical,
+#memory.critical,
+#pulseaudio.critical,
+#custom-volume_status.critical {
+  color: #f81050;
+}
+
+#pulseaudio.muted,
+#wireplumber.muted,
+#custom-volume_status.muted {
+  color: #90b1b1;
+}
+
+#tray>.passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+  -gtk-icon-effect: highlight;
+  color: #eb4d4b;
+}
+
+#language {
+  color: #a0ff90;
+  min-width: 48px;
+}
+
+#keyboard-state {
+  color: #97e1ad;
+}
+
+#keyboard-state>label {
+  padding: 0 3px;
+}
+
+#keyboard-state>label.locked {
+  color: #D0A040;
+}
+
+#backlight {
+  color: #90b1b1;
+}
+
+#scratchpad {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+#privacy {
+  padding: 0;
+}
+
+#privacy-item {
+  padding: 0 4px;
+  color: white;
+}
+
+#privacy-item.screenshare {
+  color: #cf5700;
+}
+
+#privacy-item.audio-in {
+  color: #1ca000;
+}
+
+#privacy-item.audio-out {
+  color: #0069d4;
+}
+
+#custom-power {
+  padding: 0 4px;
+}

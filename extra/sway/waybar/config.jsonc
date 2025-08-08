@@ -1,0 +1,258 @@
+// -*- mode: jsonc -*
+{
+  "layer": "top",
+  "position": "top",
+  "height": 28,
+  "mode": "dock",
+  "start_hidden": true,
+  "exclusive": true,
+  "reload_style_on_change": true,
+  "ipc": true,
+  "spacing": 4,
+  "modules-left": [
+    "sway/workspaces",
+    "sway/mode",
+    "sway/scratchpad",
+    "idle_inhibitor",
+    "privacy",
+    "sway/window"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "cpu",
+    "memory",
+    "temperature",
+    "pulseaudio",
+    "wireplumber",
+    "custom/volume_status#usb_mic",
+    "custom/volume_status#aux_mic",
+    "network",
+    "bluetooth",
+    "keyboard-state",
+    "sway/language",
+    "battery",
+    "tray",
+    "custom/notifications",
+    "custom/power"
+  ],
+  "sway/workspaces": {
+    "warp-on-scroll": false
+  },
+  "sway/mode": {
+    "format": "<span style=\"italic\">{}</span>"
+  },
+  "sway/scratchpad": {
+    "format": "{icon} {count}",
+    "show-empty": false,
+    "format-icons": [
+      "",
+      ""
+    ],
+    "tooltip": true,
+    "tooltip-format": "{app}: {title}"
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    }
+  },
+  "sway/window": {
+    "icon": true
+  },
+
+  "clock": {
+    "interval": 5,
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>",
+    "format": "{:%A %d %B %Y %H:%M}",
+    "format-alt": "{:%A %Y-%m-%d %H:%M:%S}",
+    "calendar": {
+      "weeks-pos": "right",
+      "mode-mon-col": 3,
+      "format": {
+        "months": "<span color='#60f0ff'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#0080ff'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span background='#d03000' color='#f0f0f0'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+
+  "cpu": {
+    "format": " {usage}%",
+    "tooltip": true,
+    "states": {
+      "critical": 80,
+      "warning": 50
+    }
+  },
+  "memory": {
+    "format": " {percentage}%",
+    "states": {
+      "critical": 80,
+      "warning": 50
+    }
+  },
+  "temperature": {
+    "thermal-zone": 3,
+    "critical-threshold": 70,
+    "format": "{icon} {temperatureC}°C",
+    "format-icons": [
+      "",
+      "",
+      ""
+    ]
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}% {format_source}",
+    "format-muted": "󰖁 {format_source}",
+    "format-bluetooth": "{icon}  {volume}% {format_source}",
+    "format-bluetooth-muted": "󰖁  {format_source}",
+    "format-source": " {volume}%",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "󱡒",
+      "headset": "󱡏",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "states": {
+      "warning": 20,
+      "critical": 1
+    },
+    "scroll-step": 2,
+    "max-volume": 100,
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    "on-click-middle": "pavucontrol"
+  },
+  "wireplumber": {
+    "format": "{node_name}",
+    "format-muted": "{node_name}",
+    "scroll-step": 0
+  },
+  "custom/volume_status#usb_mic": {
+    "return-type": "json",
+    "format": "{icon} {text}",
+    "format-icons": {
+      "muted": "",
+      "default": ""
+    },
+    "exec": "$HOME/.dotfiles/dotfiles/waybar/volume_status.py alsa_input.usb-Jieli_Technology_UACDemoV1.0_FFFFFFFFFFFFFFFF-00.mono-fallback source 5 40 ",
+    "on-click": "pactl set-source-mute alsa_input.usb-Jieli_Technology_UACDemoV1.0_FFFFFFFFFFFFFFFF-00.mono-fallback toggle",
+    "on-scroll-up": "pactl set-source-volume alsa_input.usb-Jieli_Technology_UACDemoV1.0_FFFFFFFFFFFFFFFF-00.mono-fallback +1%",
+    "on-scroll-down": "pactl set-source-volume alsa_input.usb-Jieli_Technology_UACDemoV1.0_FFFFFFFFFFFFFFFF-00.mono-fallback -1%"
+  },
+  "custom/volume_status#aux_mic": {
+    "return-type": "json",
+    "format": "{icon} {text}",
+    "format-icons": {
+      "muted": "",
+      "default": ""
+    },
+    "exec": "$HOME/.dotfiles/dotfiles/waybar/volume_status.py alsa_input.pci-0000_00_1f.3.analog-stereo source 1 6 ",
+    "on-click": "pactl set-source-mute alsa_input.pci-0000_00_1f.3.analog-stereo toggle",
+    "on-scroll-up": "pactl set-source-volume alsa_input.pci-0000_00_1f.3.analog-stereo +1%",
+    "on-scroll-down": "pactl set-source-volume alsa_input.pci-0000_00_1f.3.analog-stereo -1%"
+  },
+  "network": {
+    "format-wifi": "󰖩 {essid} ({signalStrength}%)",
+    "format-ethernet": " ",
+    "tooltip-format": "{ifname} {ipaddr}/{cidr} gw {gwaddr}",
+    "format-linked": "{ifname} (No IP)",
+    "format-disconnected": "󰈀 ",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}"
+  },
+  "bluetooth": {
+    "format": "󰂯 {status}",
+    "format-connected": "󰂯 {device_alias}",
+    "format-connected-battery": "󰂯 {device_alias} 󰥉 {device_battery_percentage}%",
+    "tooltip-format": "{controller_alias}\t{controller_address}\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n{num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t󰥉 {device_battery_percentage}%"
+  },
+  "keyboard-state": {
+    "numlock": true,
+    "capslock": true,
+    "format": "{icon} {name}",
+    "format-icons": {
+      "locked": "",
+      "unlocked": ""
+    }
+  },
+  "sway/language": {
+    "format": "{flag} {short}",
+    "on-click": "swaymsg input type:keyboard xkb_switch_layout next"
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 10
+    },
+    "format": "{capacity}% {icon}",
+    "format-full": "{capacity}% {icon}",
+    "format-charging": "{capacity}% 󰂄",
+    "format-plugged": "{capacity}% ",
+    "format-alt": "{time} {icon}",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "tray": {
+    "icon-size": 24,
+    "show-passive-items": true,
+    "spacing": 10
+  },
+  "custom/notifications": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+  "custom/power": {
+    "format": "⏻",
+    "tooltip": true,
+    "menu": "on-click",
+    "menu-file": "$HOME/.dotfiles/dotfiles/waybar/power_menu.xml",
+    "menu-actions": {
+      "shutdown": "shutdown",
+      "reboot": "reboot",
+      "suspend": "systemctl suspend",
+      "hibernate": "systemctl hibernate"
+    }
+  }
+}

@@ -7,6 +7,7 @@ SWAY="$DOTF/extra/sway"
 main() {
   dotf-apt sway waybar swaylock swayidle sway-notification-center
   dotf-symlink "$SWAY" "$HOME/.config/sway"
+  dotf-symlink "$SWAY/waybar" "$HOME/.config/waybar"
 
   # install_session_file
 }
@@ -17,9 +18,9 @@ install_session_file() {
   local targetfile=/usr/share/wayland-sessions/sway-custom.desktop
 
   rm -f $tmpfile
-  sed "s#{ROOT}#$SWAY#" $SWAY/sway-custom.desktop > $tmpfile
+  sed "s#{ROOT}#$SWAY#" $SWAY/sway-custom.desktop >$tmpfile
 
-  if diff $tmpfile $targetfile > /dev/null 2>&1; then
+  if diff $tmpfile $targetfile >/dev/null 2>&1; then
     dotf-info 'already installed'
   else
     sudo mv -f $tmpfile $targetfile
