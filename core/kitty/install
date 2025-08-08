@@ -5,6 +5,8 @@ set -euo pipefail
 source "$DOTF/framework.sh"
 
 function main() {
+  dotf-symlink "$DOTF/core/kitty" ~/.config/kitty
+
   if dotf-is-linux; then
     if [ ! -e ~/.local/kitty.app ] || [ "${1:-}" == "--upgrade" ]; then
       curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
@@ -15,7 +17,6 @@ function main() {
   brew install --cask font-agave
   brew install --cask font-symbols-only-nerd-font
 
-  dotf-symlink "$DOTF/core/kitty" ~/.config/kitty
 }
 
 function install-desktop-file() {
