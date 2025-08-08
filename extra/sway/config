@@ -13,14 +13,14 @@ exec systemctl --user import-environment DISPLAY SWAYSOCK WAYLAND_DISPLAY XDG_CU
 exec dbus-update-activation-environment --systemd DISPLAY SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 # swaymsg -t get_inputs
-input "9610:12:HAILUCK_CO.,LTD_USB_KEYBOARD" {
-  xkb_options ctrl:nocaps
-}
+# input "9610:12:HAILUCK_CO.,LTD_USB_KEYBOARD" {
+#   xkb_options ctrl:nocaps
+# }
 
 # Keyboard
 input type:keyboard {
   xkb_layout "us,il"
-  xkb_options "grp:alt_shift_toggle"
+  xkb_options "grp:alt_shift_toggle,ctrl:nocaps"
 }
 
 # Rotate GPD screen 90 degrees and scale 150%
