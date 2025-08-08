@@ -1,7 +1,7 @@
 * {
   font-family: Symbols Nerd Font, Noto Sans;
   font-weight: 600;
-  font-size: 13pt;
+  font-size: 10pt;
 }
 
 window#waybar {
@@ -70,7 +70,7 @@ button:hover {
 #backlight,
 #battery,
 #tray {
-  padding: 0 3px;
+  padding: 0 10px;
   color: #ffffff;
 }
 

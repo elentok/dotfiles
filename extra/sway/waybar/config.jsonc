@@ -1,39 +1,31 @@
-// -*- mode: jsonc -*
 {
-  "layer": "top",
-  "position": "top",
-  "height": 28,
-  "mode": "dock",
-  "start_hidden": true,
-  "exclusive": true,
   "reload_style_on_change": true,
-  "ipc": true,
-  "spacing": 4,
+  "height": 30,
   "modules-left": [
     "sway/workspaces",
     "sway/mode",
     "sway/scratchpad",
     "idle_inhibitor",
-    "privacy",
+    // "privacy",
     "sway/window"
   ],
-  "modules-center": [
-    "clock"
-  ],
+  // "modules-center": [
+  // ],
   "modules-right": [
     "cpu",
-    "memory",
+    // "memory",
     "temperature",
     "pulseaudio",
-    "wireplumber",
-    "custom/volume_status#usb_mic",
-    "custom/volume_status#aux_mic",
+    // "wireplumber",
+    // "custom/volume_status#usb_mic",
+    // "custom/volume_status#aux_mic",
     "network",
     "bluetooth",
     "keyboard-state",
     "sway/language",
     "battery",
     "tray",
+    "clock",
     "custom/notifications",
     "custom/power"
   ],
@@ -63,11 +55,10 @@
   "sway/window": {
     "icon": true
   },
-
   "clock": {
     "interval": 5,
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>",
-    "format": "{:%A %d %B %Y %H:%M}",
+    "format": "{:%a %d %b %H:%M}",
     "format-alt": "{:%A %Y-%m-%d %H:%M:%S}",
     "calendar": {
       "weeks-pos": "right",
@@ -86,7 +77,6 @@
       "on-scroll-down": "shift_down"
     }
   },
-
   "cpu": {
     "format": " {usage}%",
     "tooltip": true,
@@ -113,11 +103,12 @@
     ]
   },
   "pulseaudio": {
+    // "format": "{icon} {volume}%",
     "format": "{icon} {volume}% {format_source}",
-    "format-muted": "󰖁 {format_source}",
-    "format-bluetooth": "{icon}  {volume}% {format_source}",
-    "format-bluetooth-muted": "󰖁  {format_source}",
-    "format-source": " {volume}%",
+    // "format-muted": "󰖁 {format_source}",
+    // "format-bluetooth": "{icon}  {volume}% {format_source}",
+    // "format-bluetooth-muted": "󰖁  {format_source}",
+    // "format-source": " {volume}%",
     "format-source-muted": "",
     "format-icons": {
       "headphone": "",
@@ -147,34 +138,10 @@
     "format-muted": "{node_name}",
     "scroll-step": 0
   },
-  "custom/volume_status#usb_mic": {
-    "return-type": "json",
-    "format": "{icon} {text}",
-    "format-icons": {
-      "muted": "",
-      "default": ""
-    },
-    "exec": "$HOME/.dotfiles/dotfiles/waybar/volume_status.py alsa_input.usb-Jieli_Technology_UACDemoV1.0_FFFFFFFFFFFFFFFF-00.mono-fallback source 5 40 ",
-    "on-click": "pactl set-source-mute alsa_input.usb-Jieli_Technology_UACDemoV1.0_FFFFFFFFFFFFFFFF-00.mono-fallback toggle",
-    "on-scroll-up": "pactl set-source-volume alsa_input.usb-Jieli_Technology_UACDemoV1.0_FFFFFFFFFFFFFFFF-00.mono-fallback +1%",
-    "on-scroll-down": "pactl set-source-volume alsa_input.usb-Jieli_Technology_UACDemoV1.0_FFFFFFFFFFFFFFFF-00.mono-fallback -1%"
-  },
-  "custom/volume_status#aux_mic": {
-    "return-type": "json",
-    "format": "{icon} {text}",
-    "format-icons": {
-      "muted": "",
-      "default": ""
-    },
-    "exec": "$HOME/.dotfiles/dotfiles/waybar/volume_status.py alsa_input.pci-0000_00_1f.3.analog-stereo source 1 6 ",
-    "on-click": "pactl set-source-mute alsa_input.pci-0000_00_1f.3.analog-stereo toggle",
-    "on-scroll-up": "pactl set-source-volume alsa_input.pci-0000_00_1f.3.analog-stereo +1%",
-    "on-scroll-down": "pactl set-source-volume alsa_input.pci-0000_00_1f.3.analog-stereo -1%"
-  },
   "network": {
-    "format-wifi": "󰖩 {essid} ({signalStrength}%)",
+    "format-wifi": "󰖩  ({signalStrength}%)",
     "format-ethernet": " ",
-    "tooltip-format": "{ifname} {ipaddr}/{cidr} gw {gwaddr}",
+    "tooltip-format": "{essid} {ifname} {ipaddr}/{cidr} gw {gwaddr}",
     "format-linked": "{ifname} (No IP)",
     "format-disconnected": "󰈀 ",
     "format-alt": "{ifname}: {ipaddr}/{cidr}"
@@ -220,7 +187,7 @@
     ]
   },
   "tray": {
-    "icon-size": 24,
+    "icon-size": 20,
     "show-passive-items": true,
     "spacing": 10
   },
@@ -247,7 +214,7 @@
     "format": "⏻",
     "tooltip": true,
     "menu": "on-click",
-    "menu-file": "$HOME/.dotfiles/dotfiles/waybar/power_menu.xml",
+    "menu-file": "$HOME/.dotfiles/extra/sway/waybar/power_menu.xml",
     "menu-actions": {
       "shutdown": "shutdown",
       "reboot": "reboot",
