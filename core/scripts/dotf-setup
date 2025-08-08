@@ -11,6 +11,7 @@ main() {
 
   dotf-header h1 "Setting up dotfiles..."
 
+  dotf-brew-tap elentok/stuff
   dotf-pkgs install brew
   if ! dotf-is-linux; then
     dotf-pkgs install apt
