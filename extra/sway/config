@@ -195,8 +195,8 @@ bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut.
 
 ### Keys: Apps {{{1
 
-bindsym $mod+Shift+s exec "grim && notify-send -t 250 Screenshot"
-bindsym Print        exec "grim && notify-send -t 250 Screenshot"
+bindsym $mod+Shift+s exec "grim && notify-send -t 2000 'Took Screenshot'"
+bindsym Print        exec "grim && notify-send -t 2000 'Took Screenshot'"
 
 ### Workspaces {{{1
 

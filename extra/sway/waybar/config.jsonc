@@ -4,7 +4,7 @@
   "modules-left": [
     "sway/workspaces",
     "sway/mode",
-    "sway/scratchpad",
+    // "sway/scratchpad",
     "idle_inhibitor",
     // "privacy",
     "sway/window"
@@ -106,8 +106,7 @@
     // "format": "{icon} {volume}%",
     "format": "{icon} {volume}% {format_source}",
     // "format-muted": "󰖁 {format_source}",
-    // "format-bluetooth": "{icon}  {volume}% {format_source}",
-    // "format-bluetooth-muted": "󰖁  {format_source}",
+    // "format-bluetooth": "{icon}  {volume}% {format_source}", // "format-bluetooth-muted": "󰖁  {format_source}",
     // "format-source": " {volume}%",
     "format-source-muted": "",
     "format-icons": {
