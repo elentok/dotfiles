@@ -3,16 +3,24 @@
 set $mod Mod4
 
 default_border pixel 1
+font pango:Open Sans 12
 hide_edge_borders smart
 focus_follows_mouse no
 
-
-
-font pango:Open Sans 12
+# Setup environment variables 
+exec systemctl --user set-environment XDG_CURRENT_DESKTOP=sway
+exec systemctl --user import-environment DISPLAY SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec dbus-update-activation-environment --systemd DISPLAY SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 # swaymsg -t get_inputs
 input "9610:12:HAILUCK_CO.,LTD_USB_KEYBOARD" {
   xkb_options ctrl:nocaps
+}
+
+# Keyboard
+input type:keyboard {
+  xkb_layout "us,il"
+  xkb_options "grp:alt_shift_toggle"
 }
 
 # Rotate GPD screen 90 degrees and scale 150%
@@ -47,17 +55,30 @@ exec --no-startup-id nm-applet
 # Compton compositer (provides vsync)
 # exec --no-startup-id compton
 
+# Notifications {{{1
+exec_always systemctl --user start swaync && systemctl --user reload swaync.service
+bindsym $mod+p exec swaync-client -t
 
 ### Screen lock {{{1
-set $lock swaylock -f -c 000000
-bindsym Control+Mod1+L exec $lock
+set $swaylock_options -e -k -l \
+  --font "Noto Sans Bold" --font-size 16 -c 000000 \
+  --indicator-radius 100 --indicator-thickness 12
+bindsym Control+Mod1+L exec swaylock $swaylock_options
+bindsym $mod+Control+l exec swaylock $swaylock_options
+ 
 # exec --no-startup-id dotf-autolock
 
-exec swayidle \
-  timeout 300 'exec $lock' \
-  timeout 600 'swaymsg "output * power off"' \
-  after-resume 'swaymsg "output * dpms on"' \
-  before-sleep 'exec $lock'
+# exec swayidle \
+#   timeout 300 'exec $lock' \
+#   timeout 600 'swaymsg "output * power off"' \
+#   after-resume 'swaymsg "output * dpms on"' \
+#   before-sleep 'exec $lock'
+
+exec_always swayidle -w \
+  timeout 300 'swaymsg "output * power off"' \
+    resume 'swaymsg "output * power on"' \
+  before-sleep 'swaylock -f $swaylock_options' \
+  timeout 600 'swaylock -f $swaylock_options'
 
 bindswitch --reload --locked lid:on exec $lock
 
@@ -163,18 +184,19 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+bindsym $mod+Insert           bar mode toggle
 # reload the configuration file
 bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+# restart sway inplace (preserves your layout/session, can be used to upgrade sway)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# exit sway (logs you out)
+bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will log you out.' -B 'Yes, exit' 'swaymsg exit'"
 
 
 ### Keys: Apps {{{1
 
-bindsym $mod+Shift+s exec "flameshot gui"
-bindsym Print exec "flameshot gui"
+bindsym $mod+Shift+s exec "grim && notify-send -t 250 Screenshot"
+bindsym Print        exec "grim && notify-send -t 250 Screenshot"
 
 ### Workspaces {{{1
 
@@ -182,8 +204,8 @@ workspace 1 output primary
 workspace 2 output primary
 workspace 3 output primary
 workspace 4 output primary
-workspace 5 output secondary
-workspace $ws10 output secondary
+# workspace 5 output secondary
+# workspace $ws10 output secondary
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
