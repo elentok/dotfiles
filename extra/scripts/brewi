@@ -27,7 +27,7 @@ function preview
 end
 
 function install
-    set pkg (list-packages | fzf --preview='brewi --preview {}')
+    set pkg (list-packages | tv --cache-preview --preview-command='brewi --preview {}')
 
     if test -n "$pkg"
         if is-cask $pkg

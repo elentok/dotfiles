@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-pkgname="$(apt-cache pkgnames | sort | fzf)"
+pkgname="$(apt-cache pkgnames | sort | tv)"
 
 if [ "${1:-}" == "-i" ]; then
   apt info "$pkgname"

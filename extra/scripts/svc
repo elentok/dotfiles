@@ -12,11 +12,11 @@ main() {
 }
 
 service-menu() {
-  local service="$(list-services | fzf --height=50%)"
+  local service="$(list-services | tv)"
 
   echo "Status: $(systemctl is-enabled $service)"
 
-  local action="$(echo -e "start\nstop\nreload\nrestart\nenable\ndisable" | fzf --height=10)"
+  local action="$(echo -e "start\nstop\nreload\nrestart\nenable\ndisable" | gum choose)"
 
   echo "Running 'systemctl $action $service'..."
   sudo systemctl $action $service
