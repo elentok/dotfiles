@@ -12,6 +12,7 @@ function main() {
       curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
     fi
     install-desktop-file
+    dotf-apt agave-font
   fi
 
   brew install --cask font-agave

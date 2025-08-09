@@ -124,7 +124,8 @@ function install-homebrew() {
 
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-  brew install gcc
+  # The brew version of curl is required by brew in order to install casks
+  brew install gcc curl
 }
 
 function has-command() {

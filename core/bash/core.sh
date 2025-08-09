@@ -71,8 +71,6 @@ path=$path:$HOME/.local/share/fnm/aliases/default/bin
 path=$path:$HOME/.fzf/bin
 path=$path:$HOME/.local/bin
 
-eval "$(fnm env --use-on-cd --version-file-strategy recursive --shell bash --log-level quiet)"
-
 if [ -n "$BREW_HOME" ]; then
   path=$path:$BREW_HOME/bin
   path=$path:$BREW_HOME/sbin
@@ -102,6 +100,10 @@ path=$path:/usr/sbin
 path=$path:/sbin
 
 export PATH=$path
+
+# FNM {{{1
+
+eval "$(fnm env --use-on-cd --version-file-strategy recursive --shell bash --log-level quiet)"
 
 # EDITOR {{{1
 
