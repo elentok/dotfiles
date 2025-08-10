@@ -19,10 +19,20 @@ config.bind("<Cmd-u>", "scroll-page 0 -2.0")
 config.unbind('d')
 config.bind('d', 'cmd-set-text :tab-close')
 
-config.bind('tt', 'open -t about:blank ;; home')
+config.bind('td', 'open -t about:blank ;; home')
+config.bind('tt', 'open -t about:blank ;; cmd-set-text --space :open')
+config.bind('tb', 'open -t about:blank ;; cmd-set-text --space :bookmark-load')
+
+config.bind('<Cmd-e>r', 'config-source ;; message-info "Reloaded config"')
 
 config.bind("<Cmd-,>", "tab-prev")
 config.bind("<Cmd-.>", "tab-next")
+
+for m in ['command', 'prompt']:
+    config.bind('<Cmd-n>', 'completion-item-focus next', mode=m)
+    config.bind('<Cmd-p>', 'completion-item-focus prev', mode=m)
+    config.bind('<Ctrl-n>', 'completion-item-focus next', mode=m)
+    config.bind('<Ctrl-p>', 'completion-item-focus prev', mode=m)
 
 # Theme
 import catppuccin
