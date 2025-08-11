@@ -4,6 +4,7 @@
 #
 #   jr pick query...
 #   jr open query...
+#   jr title ticket-or-url      prints a pretty title and copies to clipboard
 
 set -euo pipefail
 
@@ -11,7 +12,7 @@ function main() {
   local cmd="${1:-}"
   shift || true
 
-  if type "jr-${cmd}" > /dev/null 2>&1; then
+  if type "jr-${cmd}" >/dev/null 2>&1; then
     "jr-${cmd}" "$@"
   else
     usage "$0"
@@ -20,7 +21,7 @@ function main() {
 }
 
 function jr-pick() {
-  jira-search "$@" | fzf-tmux -p -w 80% --exit-0
+  jira-search "$@" | tv
 }
 
 function jr-info() {
@@ -40,6 +41,30 @@ function jr-open() {
 
 function jira-search() {
   jira list -q "description ~ \"$*\" OR summary ~ \"$*\""
+}
+
+function jr-title() {
+  id="$(extract-ticket "${1:-}")"
+
+  summary="$(jira issue view --raw "$id" | fx .fields.summary)"
+
+  pretty="$id: $summary"
+  echo "$pretty" | dotf-clipboard copy
+  echo "$pretty"
+}
+
+function extract-ticket() {
+  id="${1:-}"
+  if [ -z "${1:-}" ]; then
+    id="$(dotf-clipboard paste)"
+  fi
+
+  if [[ "$id" == http* ]]; then
+    clean_url=$(echo "$id" | cut -d? -f1)
+    basename "$clean_url"
+  else
+    echo "$id"
+  fi
 }
 
 main "$@"
