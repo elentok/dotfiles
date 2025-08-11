@@ -12,3 +12,4 @@ fi
 mkdir -p $config_dir
 dotf-symlink "$DOTF/extra/qutebrowser/config.py" $config_dir/config.py
 dotf-symlink "$DOTF/extra/qutebrowser/catppuccin.py" $config_dir/catppuccin.py
+dotf-symlink ~/notes/qutemarks $config_dir/bookmarks
