@@ -4,6 +4,7 @@ return {
   ---@module 'fzf-lua'
   ---@type fzf-lua.Config
   opts = {
+    "border-fused",
     ---@diagnostic disable-next-line: missing-fields
     grep = {
       multiline = 1,
