@@ -105,55 +105,55 @@ return {
     },
   },
   keys = {
-    { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart file picker" },
-    { "``", function() Snacks.picker.resume() end, desc = "Resume last picker" },
-    { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
+    -- { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart file picker" },
+    -- { "``", function() Snacks.picker.resume() end, desc = "Resume last picker" },
+    -- { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
 
-    {
-      "<leader>jr",
-      function() Snacks.picker.recent({ filter = { cwd = true } }) end,
-      desc = "Find recent files",
-    },
-    { "<leader>jR", function() Snacks.picker.recent() end, desc = "Find recent files" },
-    { "<leader>jb", function() Snacks.picker.buffers() end, desc = "Buffers" },
-    { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
-    { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
+    -- {
+    --   "<leader>jr",
+    --   function() Snacks.picker.recent({ filter = { cwd = true } }) end,
+    --   desc = "Find recent files",
+    -- },
+    -- { "<leader>jR", function() Snacks.picker.recent() end, desc = "Find recent files" },
+    -- { "<leader>jb", function() Snacks.picker.buffers() end, desc = "Buffers" },
+    -- { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
+    -- { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
 
     -- LSP
-    { "grr", function() Snacks.picker.lsp_references() end, desc = "LSP references" },
+    -- { "grr", function() Snacks.picker.lsp_references() end, desc = "LSP references" },
 
     -- Grep
-    { "<leader>/", function() Snacks.picker.grep({ root = false }) end, desc = "Grep word" },
-    { "<leader>w/", function() Snacks.picker.grep_word({ root = false }) end, desc = "Grep word" },
-    {
-      "<leader>/",
-      function() Snacks.picker.grep_word({ root = false }) end,
-      mode = "v",
-      desc = "Grep selection",
-    },
+    -- { "<leader>/", function() Snacks.picker.grep({ root = false }) end, desc = "Grep word" },
+    -- { "<leader>w/", function() Snacks.picker.grep_word({ root = false }) end, desc = "Grep word" },
+    -- {
+    --   "<leader>/",
+    --   function() Snacks.picker.grep_word({ root = false }) end,
+    --   mode = "v",
+    --   desc = "Grep selection",
+    -- },
 
     -- Jump to
     { "<leader>jc", jump_to_config, desc = "Jump to config" },
-    {
-      "<leader>js",
-      function()
-        Snacks.picker.lsp_symbols({ filter = { typescript = true, typescriptreact = true } })
-      end,
-      desc = "Jump to LSP symbol",
-    },
-    { "<leader>jh", function() Snacks.picker.help() end, desc = "Help Pages" },
-    { "<leader>ju", function() Snacks.picker.undo() end, desc = "Undotree" },
-    { "<leader>jk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
-    { "gre", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
-    { "grd", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diags" },
-    { "<leader>ch", function() Snacks.picker.command_history() end, desc = "Command History" },
+    -- {
+    --   "<leader>js",
+    --   function()
+    --     Snacks.picker.lsp_symbols({ filter = { typescript = true, typescriptreact = true } })
+    --   end,
+    --   desc = "Jump to LSP symbol",
+    -- },
+    -- { "<leader>jh", function() Snacks.picker.help() end, desc = "Help Pages" },
+    -- { "<leader>ju", function() Snacks.picker.undo() end, desc = "Undotree" },
+    -- { "<leader>jk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
+    -- { "gre", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
+    -- { "grd", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diags" },
+    -- { "<leader>ch", function() Snacks.picker.command_history() end, desc = "Command History" },
 
     -- Git
     { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
-    { "<leader>gl", git_log_file, desc = "Show git log" },
-    { "<leader>gL", git_log_line, desc = "Show git history of current line" },
-    { "<leader>gD", function() Snacks.picker.git_diff() end, desc = "Git Diff (hunks)" },
-    { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
+    -- { "<leader>gl", git_log_file, desc = "Show git log" },
+    -- { "<leader>gL", git_log_line, desc = "Show git history of current line" },
+    -- { "<leader>gD", function() Snacks.picker.git_diff() end, desc = "Git Diff (hunks)" },
+    -- { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
 
     -- Actions
     { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete buffer" },
