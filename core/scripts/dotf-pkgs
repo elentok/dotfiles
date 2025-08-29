@@ -50,8 +50,8 @@ function install-pkgs() {
   brew)
     install-brew-pkgs
     ;;
-  pip)
-    install-pip-pkgs
+  pipx)
+    install-pipx-pkgs
     ;;
   npm)
     install-npm-pkgs
@@ -63,7 +63,7 @@ function install-pkgs() {
     install-mason-pkgs
     ;;
   *)
-    install-apt-pkgs && install-pip-pkgs && install-npm-pkgs
+    install-apt-pkgs && install-pipx-pkgs && install-npm-pkgs
     ;;
   esac
 }
@@ -110,13 +110,9 @@ function install-brew-pkgs() {
   fi
 }
 
-function install-pip-pkgs() {
-  if dotf-is-linux; then
-    dotf-apt python3 python3-pip
-  fi
-
-  dotf-header h2 '[dotf-pkgs] Installing pip packages...'
-  dotf-pip "$(get-pkgs pip)"
+function install-pipx-pkgs() {
+  dotf-header h2 '[dotf-pkgs] Installing pipx packages...'
+  dotf-pipx "$(get-pkgs pipx)"
 }
 
 function install-npm-pkgs() {

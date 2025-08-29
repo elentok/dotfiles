@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTF/framework.sh"
+
+main() {
+  dotf-bullet "Installing pipx packages $*... "
+
+  die-if-pipx-missing
+  INSTALLED="$(pipx list --short | awk '{ print $1 }')"
+
+  local missing
+  missing=$(find-missing-packages "$@")
+
+  if [ -z "$missing" ]; then
+    dotf-info " already installed."
+  else
+    echo
+    dotf-bullet "Installing $missing..."
+    pipx install $missing
+  fi
+}
+
+function die-if-pipx-missing() {
+  if ! dotf-has-command pipx; then
+    dotf-error "pipx is not installed, skipping"
+    exit 1
+  fi
+}
+
+function find-missing-packages() {
+  for pkg in "$@"; do
+    if ! has-package "$pkg"; then
+      echo -n "$pkg "
+    fi
+  done
+}
+
+function has-package() {
+  echo "$INSTALLED" | grep "^$1\b" >/dev/null
+}
+
+main "$@"
