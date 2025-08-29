@@ -1,6 +1,6 @@
 return {
   {
-    "echasnovski/mini.icons",
+    "nvim-mini/mini.icons",
     lazy = true,
     init = function()
       ---@diagnostic disable-next-line: duplicate-set-field
@@ -10,9 +10,9 @@ return {
       end
     end,
   },
-  { "echasnovski/mini.bracketed", event = { "LazyFile" }, version = "*", opts = {} },
+  { "nvim-mini/mini.bracketed", event = { "LazyFile" }, version = "*", opts = {} },
   {
-    "echasnovski/mini.surround",
+    "nvim-mini/mini.surround",
     event = { "LazyFile" },
     version = "*",
     opts = {
@@ -28,9 +28,9 @@ return {
       },
     },
   },
-  { "echasnovski/mini.pairs", event = { "InsertEnter" }, version = "*", opts = {} },
+  { "nvim-mini/mini.pairs", event = { "InsertEnter" }, version = "*", opts = {} },
   {
-    "echasnovski/mini.move",
+    "nvim-mini/mini.move",
     event = { "LazyFile" },
     version = "*",
     opts = {},
