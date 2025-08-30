@@ -1,7 +1,14 @@
+---@module "fzf-lua"
+
+local function jump_to_config()
+  FzfLua.files({
+    cmd = "~/.dotfiles/core/nvim/list-scripts",
+  })
+end
+
 return {
   "ibhagwan/fzf-lua",
   dependencies = { "nvim-mini/mini.icons" },
-  ---@module 'fzf-lua'
   ---@type fzf-lua.Config
   opts = {
     "border-fused",
@@ -39,5 +46,7 @@ return {
     { "<leader>gL", ":FzfLua git_blame<cr>", desc = "Show git history of current line" },
     { "<leader>gD", ":FzfLua git_diff<cr>", desc = "Git Diff (hunks)" },
     { "<leader>gs", ":FzfLua git_status<cr>", desc = "Git Status" },
+
+    { "<leader>jc", jump_to_config, desc = "Jump to config" },
   },
 }

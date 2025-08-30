@@ -8,11 +8,11 @@ local function git_log_line()
   Snacks.picker.git_log_line(require("stuff.snacks.git").git_commits_picker_config)
 end
 
-local function jump_to_config()
-  Snacks.picker.files({
-    dirs = { "~/.dotfiles/core/nvim", "~/.dotplugins/*/nvim" },
-  })
-end
+-- local function jump_to_config()
+--   Snacks.picker.files({
+--     dirs = { "~/.dotfiles/core/nvim", "~/.dotplugins/*/nvim" },
+--   })
+-- end
 
 local header = [[
                                                                      
@@ -133,7 +133,7 @@ return {
     -- },
 
     -- Jump to
-    { "<leader>jc", jump_to_config, desc = "Jump to config" },
+    -- { "<leader>jc", jump_to_config, desc = "Jump to config" },
     -- {
     --   "<leader>js",
     --   function()

@@ -1,0 +1,5 @@
+#!/usr/bin/env fish
+
+set plugins ~/.dotplugins/*/nvim
+
+rg -t lua --files ~/.dotfiles/core/nvim $plugins
