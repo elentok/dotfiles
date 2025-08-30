@@ -34,7 +34,6 @@ main() {
   dotf-pkgs install pip
 
   dotf-component fish nvim git ripgrep tig bat bash tmux yazi nodejs python
-  # fzf
   dotf-pkgs install npm
 
   dotf-header h2 "[dotf-setup] Running deno cache..."
