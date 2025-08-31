@@ -37,7 +37,7 @@ return {
       name = "fzf-lua",
     },
     checkbox = {
-      order = { " ", "/", "w", "r", "x" },
+      order = { " ", "x", "/", "w", "r" },
     },
   },
   cmd = {
