@@ -3,7 +3,7 @@
   "blink.cmp": { "branch": "main", "commit": "bae4bae0eedd1fa55f34b685862e94a222d5c6f8" },
   "catppuccin": { "branch": "main", "commit": "30fa4d122d9b22ad8b2e0ab1b533c8c26c4dde86" },
   "ccc.nvim": { "branch": "main", "commit": "9d1a256e006decc574789dfc7d628ca11644d4c2" },
-  "codecompanion.nvim": { "branch": "main", "commit": "626b1b07e96e19324e5bb3279ab3b525a6ea759d" },
+  "codecompanion.nvim": { "branch": "main", "commit": "dfd894a3888a87725eb6285b97bb69f7d8e07824" },
   "conform.nvim": { "branch": "master", "commit": "b4aab989db276993ea5dcb78872be494ce546521" },
   "copilot.lua": { "branch": "master", "commit": "e73fe7c43c68aeb84fbeed12ee6cc60a29e78fbb" },
   "encrypt.nvim": { "branch": "main", "commit": "363e1d924c6235ae4e9170b1e2ebab50a2e26c07" },
