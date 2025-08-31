@@ -105,7 +105,6 @@ function dotf-gen-path() {
   dotf-plugin-list-files scripts
 
   echo "$HOME/.local/share/fnm"
-  echo "$HOME/.fzf/bin"
   echo "$HOME/.apps/bin"
   echo "$HOME/.local/bin"
 
