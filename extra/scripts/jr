@@ -60,7 +60,7 @@ function extract-ticket() {
   fi
 
   if [[ "$id" == http* ]]; then
-    clean_url=$(echo "$id" | cut -d? -f1)
+    clean_url=$(echo "$id" | cut -d? -f1 | cut -d# -f1)
     basename "$clean_url"
   else
     echo "$id"
