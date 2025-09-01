@@ -8,6 +8,7 @@ return {
   config = function()
     local expanders = require("stuff.open-link.expanders")
     require("stuff").setup({
+      terminal = false,
       open_link = {
         expanders = {
           expanders.homedir(),

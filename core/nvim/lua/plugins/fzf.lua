@@ -15,6 +15,11 @@ return {
     grep = {
       multiline = 1,
     },
+    keymap = {
+      fzf = {
+        ["ctrl-q"] = "select-all+accept",
+      },
+    },
   },
   cmd = "FzfLua",
   keys = {
