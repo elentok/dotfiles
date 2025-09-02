@@ -50,5 +50,8 @@ return {
       sign = false,
       icons = { "󰎤 ", "󰎧 ", "󰎪 ", "󰎭 ", "󰎱 " },
     },
+    pipe_table = {
+      preset = "round",
+    },
   },
 }

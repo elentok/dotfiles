@@ -29,6 +29,7 @@ return {
     },
     completion = {
       blink = true,
+      create_new = false,
     },
     -- wiki_link_func = "prepend*note_id",
     wiki_link_func = function(opts) return require("obsidian.util").wiki_link_id_prefix(opts) end,
@@ -39,6 +40,18 @@ return {
     checkbox = {
       order = { " ", "x", "/", "w", "r" },
     },
+    new_notes_location = "current_dir",
+    note_id_func = function(title)
+      local clean_title = nil
+      if title ~= nil then
+        -- If title is given, transform it into valid file name.
+        clean_title = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+      end
+
+      if clean_title == nil then return tostring(os.time()) end
+
+      return clean_title
+    end,
   },
   cmd = {
     "Obsidian",
