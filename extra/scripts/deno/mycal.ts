@@ -1,8 +1,8 @@
 #!/usr/bin/env -S deno run --allow-env --allow-read --allow-run
 
 import { bgBlue, black, bold, gray, green } from "jsr:@std/fmt/colors"
-import dayjs from "https://esm.sh/dayjs@1.11.13"
-import weekOfYear from "https://esm.sh/dayjs@1.11.13/plugin/weekOfYear"
+import dayjs from "https://esm.sh/dayjs@1.11.18"
+import weekOfYear from "https://esm.sh/dayjs@1.11.18/plugin/weekOfYear"
 
 dayjs.extend(weekOfYear)
 
