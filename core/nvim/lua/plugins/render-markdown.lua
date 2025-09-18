@@ -21,6 +21,7 @@ return {
         highlight = "TaskDone",
         scope_highlight = "TaskDone",
       },
+      cancelled = {},
       custom = {
         in_progress = {
           raw = "[/]",
@@ -39,6 +40,12 @@ return {
           rendered = "",
           highlight = "MiniIconsPurple",
           scope_highlight = "MiniIconsPurple",
+        },
+        cancelled = {
+          raw = "[-]",
+          rendered = "󰜺",
+          highlight = "Comment",
+          scope_highlight = "Comment",
         },
       },
     },
