@@ -1,0 +1,6 @@
+#!/usr/bin/env fish
+
+for file in $argv
+    set basename (basename $file)
+    echo "- [$basename](./$file)"
+end
