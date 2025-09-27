@@ -6,7 +6,8 @@
     "jsr:@std/fs@*": "1.0.5",
     "jsr:@std/io@*": "0.225.2",
     "jsr:@std/path@*": "1.0.7",
-    "jsr:@std/path@^1.0.7": "1.0.7"
+    "jsr:@std/path@^1.0.7": "1.0.7",
+    "npm:dayjs@1.11.18": "1.11.18"
   },
   "jsr": {
     "@std/bytes@1.0.6": {
@@ -29,6 +30,11 @@
     },
     "@std/path@1.0.7": {
       "integrity": "76a689e07f0e15dcc6002ec39d0866797e7156629212b28f27179b8a5c3b33a1"
+    }
+  },
+  "npm": {
+    "dayjs@1.11.18": {
+      "integrity": "sha512-zFBQ7WFRvVRhKcWoUh+ZA1g2HVgUbsZm9sbddh8EC5iv93sui8DVVz1Npvz+r6meo9VKfa8NyLWBsQK1VvIKPA=="
     }
   },
   "redirects": {
