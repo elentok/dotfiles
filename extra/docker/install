@@ -9,7 +9,7 @@ if dotf-is-linux; then
   exit 1
 fi
 
-dotf-brew colima docker
+dotf-brew colima docker docker-compose
 colima start
 
 # test that docker works
