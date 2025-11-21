@@ -27,7 +27,9 @@ return {
       folder = "daily",
       date_format = "%Y/%m/%Y-%m-%d",
     },
-    disable_frontmatter = true,
+    frontmatter = {
+      enabled = false,
+    },
     completion = {
       blink = true,
       create_new = false,
