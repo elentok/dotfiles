@@ -1,7 +1,7 @@
 git:
-  paging:
-    colorArg: always
-    pager: delta --dark --paging=never --width={{columnWidth}}
+  pagers:
+    - colorArg: always
+      pager: delta --dark --paging=never --width={{columnWidth}}
   autoFetch: false
   log:
     order: default
@@ -22,8 +22,8 @@ gui:
   theme:
     selectedLineBgColor:
       - black
-    # selectedRangeBgColor:
-    #   - black
+      # selectedRangeBgColor:
+      #   - black
 keybinding:
   commits:
     moveDownCommit: J
