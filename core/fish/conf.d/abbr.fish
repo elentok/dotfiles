@@ -21,3 +21,4 @@ abbr --add q qalc
 abbr --add ic 'chafa -f kitty'
 abbr --add rgt 'rg -g \'!**/*.test*\''
 abbr --add kk 'tv kitty-keys'
+abbr --add btw 'bun test --watch'

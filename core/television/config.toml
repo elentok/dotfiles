@@ -108,6 +108,7 @@ fallback_channel = "files"
 "docker-images" = ["docker run"]
 "git-repos" = ["git clone"]
 "channels" = ["tv"]
+"testfiles" = ["bun run test", "bun test"]
 "npm-scripts" = ["bun run", "npm run"]
 "text" = ["rg", "grep"]
 
