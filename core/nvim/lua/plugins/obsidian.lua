@@ -43,7 +43,9 @@ return {
     checkbox = {
       order = { " ", "x", "/", "w", "r" },
     },
-    disable_frontmatter = true,
+    frontmatter = {
+      enabled = false,
+    },
     new_notes_location = "current_dir",
     note_id_func = function(title)
       local clean_title = nil
