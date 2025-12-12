@@ -27,6 +27,7 @@ return {
       "rust-analyzer",
       "stylua",
       "taplo",
+      "ty",
       "vtsls",
       "yaml-language-server",
     },

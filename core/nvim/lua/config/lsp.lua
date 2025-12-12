@@ -23,6 +23,7 @@ vim.lsp.enable({
   "pyright",
   "spyglassmc_language_server",
   "taplo",
+  "ty",
   "vtsls",
   "yamlls",
 })
