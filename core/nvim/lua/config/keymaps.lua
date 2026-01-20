@@ -2,6 +2,8 @@ local map = vim.keymap.set
 
 map({ "i" }, "jk", "<esc>")
 
+map({ "n" }, "U", "<c-r>")
+
 -- Map <leader>n and <leader>p to [ and ] to make it easier to use unimpaired
 -- mappings without "[" and "]"
 map({ "n", "v" }, "<leader>p", "[", { remap = true })
