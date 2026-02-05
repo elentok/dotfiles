@@ -46,6 +46,8 @@ return {
     },
 
     formatters_by_ft = {
+      css = { "prettierd" },
+      scss = { "prettierd" },
       lua = { "stylua" },
       typescript = typescript_formatter,
       typescriptreact = typescript_formatter,

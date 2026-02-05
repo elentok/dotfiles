@@ -10,6 +10,7 @@ return {
       "bash-language-server",
       "biome",
       "css-lsp",
+      "cssmodules-language-server",
       "docker-compose-language-service",
       "dockerfile-language-server",
       "dprint",

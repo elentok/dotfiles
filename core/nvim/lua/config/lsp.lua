@@ -7,6 +7,8 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 vim.lsp.enable({
   "bashls",
   "biome",
+  "cssls",
+  "cssmodules_ls",
   "denols",
   "docker_compose_language_service",
   "dockerls",

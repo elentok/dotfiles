@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+fish --profile-startup /tmp/fish-startup.log -i -c exit
+
+nvim /tmp/fish-startup.log

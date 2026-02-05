@@ -1,6 +1,6 @@
 # vim: filetype=config
 
-theme = "catppuccin-mocha"
+theme = "Catppuccin Mocha"
 
 # Find fonts names by running `ghostty +list-fonts`
 

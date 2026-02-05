@@ -15,17 +15,10 @@ else
     echo "$pyver" >$pyver_cache
 end
 
-if test -d "$HOME/Library/Python/$pyver/bin"
-    fish_add_path "$HOME/Library/Python/$pyver/bin"
-end
-
-# replace bsd binaries with gnu
-for pkg in coreutils findutils gnu-sed
-    set gnubin "$BREW_HOME/opt/$pkg/libexec/gnubin"
-    if test -e "$gnubin"
-        fish_add_path "$gnubin"
-    end
-end
+fish_add_path "$HOME/Library/Python/$pyver/bin" \
+    "$BREW_HOME/opt/coreutils/libexec/gnubin" \
+    "$BREW_HOME/opt/findutils/libexec/gnubin" \
+    "$BREW_HOME/opt/gnu-sed/libexec/gnubin"
 
 set -gx COLIMA_HOME "$HOME/.colima"
 if test -e "$COLIMA_HOME"
