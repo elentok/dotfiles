@@ -31,7 +31,7 @@ return {
       lualine_x = { { "lsp_status", symbols = { spinner = spinner } }, "filetype" },
     },
     winbar = { lualine_b = { filename }, lualine_c = { "navic" } },
-    inactive_winbar = { lualine_b = { filename } },
+    inactive_winbar = { lualine_b = { filename }, lualine_c = { "navic" } },
     extensions = { require("elentok.lualine-oil-extension") },
   },
 }
