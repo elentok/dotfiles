@@ -21,7 +21,6 @@ return {
         highlight = "TaskDone",
         scope_highlight = "TaskDone",
       },
-      cancelled = {},
       custom = {
         in_progress = {
           raw = "[/]",

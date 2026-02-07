@@ -43,9 +43,6 @@ return {
     checkbox = {
       order = { " ", "x", "/", "w", "r" },
     },
-    frontmatter = {
-      enabled = false,
-    },
     footer = {
       enabled = false,
     },
