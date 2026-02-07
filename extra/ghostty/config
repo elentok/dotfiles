@@ -79,4 +79,4 @@ keybind = cmd+/>e=write_scrollback_file:open
 keybind = global:cmd+2=toggle_quick_terminal
 quick-terminal-animation-duration = 0
 
-
+custom-shader = ~/.dotfiles/extra/ghostty/cursor_blaze.glsl
