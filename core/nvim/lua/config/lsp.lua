@@ -28,6 +28,8 @@ local server_names = {
   "ty",
   "vtsls",
   "yamlls",
+  --
+  "eslint",
 }
 
 local function on_attach(client, bufnr)

@@ -30,6 +30,7 @@ vim.diagnostic.config({
   },
   float = {
     border = "rounded",
+    source = true,
   },
   signs = {
     text = {

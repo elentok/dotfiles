@@ -17,10 +17,11 @@ return {
     vim.api.nvim_create_user_command("Lint", function() lint.try_lint() end, {})
   end,
 
-  cond = function()
-    return vim.fn.findfile("eslint.config.js", ";.") ~= ""
-      or vim.fn.findfile(".eslintrc.js", ";.") ~= ""
-      or vim.fn.findfile("eslintrc.js", ";.") ~= ""
-      or vim.fn.findfile(".eslintrc.json", ";.") ~= ""
-  end,
+  cond = false,
+  -- cond = function()
+  --   return vim.fn.findfile("eslint.config.js", ";.") ~= ""
+  --     or vim.fn.findfile(".eslintrc.js", ";.") ~= ""
+  --     or vim.fn.findfile("eslintrc.js", ";.") ~= ""
+  --     or vim.fn.findfile(".eslintrc.json", ";.") ~= ""
+  -- end,
 }
