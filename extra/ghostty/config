@@ -56,6 +56,11 @@ keybind = cmd+z=text:\x1A
 keybind = cmd+[=text:\x1B
 keybind = cmd+]=text:\x1D
 
+# <c-e>h
+keybind = cmd+,=text:\x05h
+# <c-e>l
+keybind = cmd+.=text:\x05l
+
 # Leader mapping
 keybind = cmd+/>c=new_tab
 keybind = cmd+/>r=reload_config
