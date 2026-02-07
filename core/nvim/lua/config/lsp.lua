@@ -4,7 +4,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   callback = function() vim.bo.filetype = "yaml.docker-compose" end,
 })
 
-vim.lsp.enable({
+local server_names = {
   "bashls",
   "biome",
   "cssls",
@@ -28,4 +28,16 @@ vim.lsp.enable({
   "ty",
   "vtsls",
   "yamlls",
-})
+}
+
+local function on_attach(client, bufnr)
+  if client.server_capabilities.documentSymbolProvider then
+    require("nvim-navic").attach(client, bufnr)
+  end
+end
+
+for _, server_name in ipairs(server_names) do
+  vim.lsp.config(server_name, { on_attach = on_attach })
+end
+
+vim.lsp.enable(server_names)

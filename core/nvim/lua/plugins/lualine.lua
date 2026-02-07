@@ -15,7 +15,7 @@ local long_filename_block = vim.tbl_extend("force", filename, {
 
 return {
   "nvim-lualine/lualine.nvim",
-  dependencies = { "echasnovski/mini.icons" },
+  dependencies = { "echasnovski/mini.icons", "SmiteshP/nvim-navic" },
   opts = {
     options = {
       theme = "catppuccin",
@@ -30,7 +30,7 @@ return {
       lualine_c = { long_filename_block },
       lualine_x = { { "lsp_status", symbols = { spinner = spinner } }, "filetype" },
     },
-    winbar = { lualine_b = { filename } },
+    winbar = { lualine_b = { filename }, lualine_c = { "navic" } },
     inactive_winbar = { lualine_b = { filename } },
     extensions = { require("elentok.lualine-oil-extension") },
   },
