@@ -12,7 +12,13 @@ function fish_title
         # set suffix "  "
     else
         set cmd (string-ellipsis 10 $argv[1])
-        set suffix " > $cmd"
+        if test "$cmd" = nvim
+            set suffix "  "
+        else if string match -q "lazyg*" "$cmd"
+            set suffix "  "
+        else
+            set suffix " > $cmd"
+        end
     end
 
     if test "$PWD" = "$HOME"
