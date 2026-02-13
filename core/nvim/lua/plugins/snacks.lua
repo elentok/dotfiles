@@ -105,7 +105,11 @@ return {
     },
   },
   keys = {
-    { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart file picker" },
+    {
+      "<leader><space>",
+      function() Snacks.picker.smart({ filter = { cwd = true } }) end,
+      desc = "Smart file picker",
+    },
     { "``", function() Snacks.picker.resume() end, desc = "Resume last picker" },
     { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
 
