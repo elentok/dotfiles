@@ -21,7 +21,6 @@ echo
 echo "Press any key to continue..."
 read -r -n1
 
-git remote update upstream
+git remote update origin
 git worktree add -b "$branch_name" "$branch_name"
 cd "$branch_name"
-git reset --hard upstream/main
