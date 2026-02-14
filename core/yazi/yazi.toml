@@ -1,5 +1,6 @@
 [mgr]
 linemode = "size"
+title_format = "{cwd}  "
 
 # These values are too high and causing slowness
 # [preview]
