@@ -1,3 +1,14 @@
+function _cmd_to_suffix
+    if string match -q "nvim*" $argv[1]
+        echo "  "
+    else if string match -q "lazyg*" $argv[1]
+        echo "  "
+    else
+        set short_cmd (string-ellipsis 10 $argv[1])
+        echo " > $short_cmd"
+    end
+end
+
 function fish_title
     # set -q argv[1]; or set argv fish
 
@@ -11,14 +22,7 @@ function fish_title
         # set suffix "  "
         # set suffix "  "
     else
-        set cmd (string-ellipsis 10 $argv[1])
-        if test "$cmd" = nvim
-            set suffix "  "
-        else if string match -q "lazyg*" "$cmd"
-            set suffix "  "
-        else
-            set suffix " > $cmd"
-        end
+        set suffix (_cmd_to_suffix "$argv[1]")
     end
 
     if test "$PWD" = "$HOME"
