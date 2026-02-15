@@ -21,6 +21,16 @@ map("n", "<leader>uv", function()
   end
 end, { desc = "Toggle virtual_lines diagnostics" })
 
+map("n", "<leader>ts", function()
+  if vim.o.spell then
+    vim.o.spell = false
+    vim.notify(" Disabled spell checker")
+  else
+    vim.o.spell = true
+    vim.notify("  Enabled spell checker")
+  end
+end, { desc = "Toggle spell checker" })
+
 map("n", "<leader>ol", "<cmd>Lazy<cr>", { desc = "Open Lazy" })
 map(
   "n",
