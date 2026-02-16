@@ -1,3 +1,19 @@
+local function get_library_paths()
+  local paths = {}
+  local lazy_root = vim.fn.stdpath("data") .. "/lazy"
+  for name, type in vim.fs.dir(lazy_root) do
+    local lua_path = string.format("%s/%s/lua", lazy_root, name)
+    if type == "directory" then table.insert(paths, lua_path) end
+  end
+
+  vim.list_extend(paths, {
+    vim.env.VIMRUNTIME,
+    "${3rd}/luv/library",
+  })
+
+  return paths
+end
+
 vim.lsp.config("lua_ls", {
   on_attach = require("elentok.lsp-utils").on_attach,
   on_init = function(client)
@@ -26,26 +42,7 @@ vim.lsp.config("lua_ls", {
       -- Make the server aware of Neovim runtime files
       workspace = {
         checkThirdParty = false,
-        -- library = {
-        --   vim.env.VIMRUNTIME,
-        --   -- Depending on the usage, you might want to add additional paths
-        --   -- here.
-        --   "${3rd}/luv/library",
-        --   "${3rd}/busted/library",
-        --   -- Add specific plugins
-        --   -- vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua",
-        --   -- vim.fn.stdpath("data") .. "/lazy/snacks.nvim/lua",
-        --   -- vim.fn.stdpath("data") .. "/lazy/obsidian.nvim/lua",
-        --   -- vim.fn.stdpath("data") .. "/lazy/render-markdown.nvim/lua",
-        -- },
-        -- Or pull in all of 'runtimepath'.
-        -- NOTE: this is a lot slower and will cause issues when working on
-        -- your own configuration.
-        -- See https://github.com/neovim/nvim-lspconfig/issues/3189
-        library = vim.list_extend(
-          { "${3rd}/luv/library" },
-          vim.api.nvim_get_runtime_file("", true)
-        ),
+        library = get_library_paths(),
       },
     })
   end,
