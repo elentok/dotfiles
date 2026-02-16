@@ -1,11 +1,10 @@
----@module 'render-markdown'
-
 vim.api.nvim_set_hl(0, "TaskDone", { fg = "#84b782", italic = true })
 vim.api.nvim_set_hl(0, "TaskWaiting", { fg = "#aa6069", italic = true })
 
 return {
   "MeanderingProgrammer/render-markdown.nvim",
   ft = { "markdown" },
+  ---@module 'render-markdown'
   ---@type render.md.UserConfig
   opts = {
     bullet = {
@@ -40,7 +39,9 @@ return {
           highlight = "MiniIconsPurple",
           scope_highlight = "MiniIconsPurple",
         },
-        cancelled = {
+        -- the built-in config has an item called "todo" with raw = "[-]"
+        -- so I can't call it "cancelled".
+        todo = {
           raw = "[-]",
           rendered = "󰜺",
           highlight = "Comment",
