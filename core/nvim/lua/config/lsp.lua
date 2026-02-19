@@ -6,7 +6,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 
 -- Set the filetype of "*.mdc" files to "markdown"
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = "*m.mdc",
+  pattern = "*.mdc",
   callback = function() vim.bo.filetype = "markdown" end,
 })
 
