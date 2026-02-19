@@ -55,7 +55,7 @@ function git-wt-dup() {
   fi
 
   local current_commit
-  current_commit=$(git rev-parse HEAD)
+  current_commit="$(git rev-parse HEAD)"
 
   local worktree_root
   worktree_root="$(git-wt-root)"
@@ -88,7 +88,6 @@ function git-wt-pull() {
   worktree_root="$(git-wt-root)"
 
   local worktree_path="${worktree_root}/${worktree_name}"
-  
   if [ ! -d "$worktree_path" ]; then
     echo "Error: worktree '${worktree_name}' not found at ${worktree_path}." >&2
     exit 1
