@@ -27,11 +27,12 @@ function git-nf
 
     echo creating
 
-    git remote update upstream
+    git remote update origin
     git worktree add -b "$branch_name" "$branch_name"
     cd "$branch_name"
-    git reset --hard upstream/main
-    direnv allow
+    if test -e .env
+        direnv allow
+    end
 end
 
 function jw

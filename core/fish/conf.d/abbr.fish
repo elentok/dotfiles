@@ -23,3 +23,5 @@ abbr --add rgt 'rg -g \'!**/*.test*\''
 abbr --add kk 'tv kitty-keys'
 abbr --add btw 'bun test --watch'
 abbr --add vit 'npx vitest'
+abbr --add ca cursor-agent
+abbr --add nps 'npm run start'

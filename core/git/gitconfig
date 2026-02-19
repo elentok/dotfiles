@@ -92,6 +92,8 @@
   rbi = rebase -i
   rbu = !git remote update upstream && git rebase upstream/main
   rbus = !git stash push && git rbu && git stash pop
+  rbm = !git remote update origin && git rebase master
+  rbms = !git stash push && git rbm && git stash pop
   rh = reset HEAD
   rs = restore-file
   s = status

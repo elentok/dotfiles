@@ -4,6 +4,8 @@
 #
 #   git-wt root
 #   git-wt list
+#   git-wt dup <name>
+#   git-wt pull <worktree-name>
 
 set -euo pipefail
 
@@ -42,6 +44,59 @@ function fzf-pick-worktree() {
     --prompt='Pick worktree: ' \
     --preview-window=right:70% \
     --preview='git-wt preview {}'
+}
+
+function git-wt-dup() {
+  local new_name="${1:-}"
+
+  if [ -z "$new_name" ]; then
+    echo "Usage: git-wt dup <new-worktree-name>" >&2
+    exit 1
+  fi
+
+  local current_commit
+  current_commit=$(git rev-parse HEAD)
+
+  local worktree_root
+  worktree_root="$(git-wt-root)"
+
+  if [ -z "$worktree_root" ]; then
+    echo "Error: could not find bare worktree root." >&2
+    exit 1
+  fi
+
+  local new_path="${worktree_root}/${new_name}"
+
+  if [ -e "$new_path" ]; then
+    echo "Error: '${new_path}' already exists." >&2
+    exit 1
+  fi
+
+  git worktree add -b "$new_name" "$new_path" "$current_commit"
+  echo "Created worktree at ${new_path} on branch ${new_name}"
+}
+
+function git-wt-pull() {
+  local worktree_name="${1:-}"
+
+  if [ -z "$worktree_name" ]; then
+    echo "Usage: git-wt pull <worktree-name>" >&2
+    exit 1
+  fi
+
+  local worktree_root
+  worktree_root="$(git-wt-root)"
+
+  local worktree_path="${worktree_root}/${worktree_name}"
+  
+  if [ ! -d "$worktree_path" ]; then
+    echo "Error: worktree '${worktree_name}' not found at ${worktree_path}." >&2
+    exit 1
+  fi
+
+  cd "$worktree_path"
+  echo "Pulling in worktree '${worktree_name}'..."
+  git pull
 }
 
 function git-wt-pick() {

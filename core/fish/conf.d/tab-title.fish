@@ -3,6 +3,12 @@ function _cmd_to_suffix
         echo "  "
     else if string match -q "lazyg*" $argv[1]
         echo "  "
+    else if string match -q "npm run*" $argv[1]
+        string-ellipsis 10 (string replace "npm run " "  " $argv[1])
+    else if string match -q "npx vitest*" $argv[1]
+        string-ellipsis 10 (string replace "npx vitest " "  " $argv[1])
+    else if string match -q "npm run test*" $argv[1]
+        echo "  "
     else
         set short_cmd (string-ellipsis 10 $argv[1])
         echo " > $short_cmd"

@@ -66,6 +66,13 @@ function vc --description "neovim with clipboard contents"
     nvim '+normal [p'
 end
 
+function c --description "choose and cd into a subdirectory"
+    set dir (command ls -1d */ 2>/dev/null | string replace -r '/$' '' | tv)
+    if test -n "$dir"
+        cd "$dir"
+    end
+end
+
 function cdr --description "change directory to the git root"
     set root (git rev-parse --show-toplevel)
     if test -n "$root"
