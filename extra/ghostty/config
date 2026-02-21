@@ -74,6 +74,9 @@ keybind = cmd+/>s=new_split:down
 
 keybind = cmd+/>e=write_scrollback_file:open
 
+# make shift+enter work inside tmux (for claude code)
+keybind = shift+enter=text:\x1b\r
+
 # Quick terminal
 
 keybind = global:cmd+2=toggle_quick_terminal
