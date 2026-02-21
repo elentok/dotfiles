@@ -9,6 +9,7 @@ local function get_library_paths()
   vim.list_extend(paths, {
     vim.env.VIMRUNTIME,
     "${3rd}/luv/library",
+    "${3rd}/busted/library",
   })
 
   return paths
