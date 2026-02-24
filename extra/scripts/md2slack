@@ -20,9 +20,9 @@ dprint fmt --config ~/.dotfiles/extra/scripts/md2slack-dprint.json --stdin file.
     | sed -E "s#\[/\]( -)?#$inprogress#" \
     | sed -E "s/\[w\]( -)?/$waiting/" \
     | sed -E "s/\[r\]( -)?/$codereview/" \
-    | sed -E "s/\[x\]( -)?/$done/"
-# | sed -E 's/\[ \]( -)?/☐/' \
-# | sed -E 's/^### (.*)$/*\1*/' \
-# | sed -E 's/^## (.*)$/```## \1```/' \
-# | sed -E 's/^# (.*)$/```# \1```/' \
-# | sed -E 's/\*\*([^\*]+)\*\*/*\1*/g'
+    | sed -E "s/\[x\]( -)?/$done/" \
+    | sed -E 's/\[ \]( -)?/☐/' \
+    | sed -E 's/^### (.*)$/*\1*/' \
+    | sed -E 's/^## (.*)$/```## \1```/' \
+    | sed -E 's/^# (.*)$/```# \1```/' \
+    | sed -E 's/\*\*([^\*]+)\*\*/*\1*/g'
