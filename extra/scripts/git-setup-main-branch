@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+if [ $# -lt 1 ]; then
+  echo "Usage: git-setup-main-branch <main|master>"
+  exit 1
+fi
+
+if ! git symbolic-ref refs/remotes/origin/HEAD >/dev/null 2>&1; then
+  echo "HEAD's symbolic ref is not set, setting to $1"
+  git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/$1
+else
+  echo "HEAD's symbolic ref is already set to $(git symbolic-ref refs/remotes/origin/HEAD)"
+fi
+

@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ $# -eq 0 ]]; then
+  echo "Usage: git-safe {command...}" >&2
+  exit 1
+fi
+
+if ! git diff --quiet || ! git diff --cached --quiet; then
+  dirty=1
+  echo " Stashing changes..." | gum style --background=4 --foreground=0 --padding="0 1"
+  git stash push
+  echo
+else
+  dirty=0
+fi
+
+  echo "󱐋 Running $*..." | gum style --background=4 --foreground=0 --padding="0 1"
+if git "$@"; then
+  success=1
+else
+  success=0
+fi
+
+if [[ $dirty -eq 1 && $success -eq 1 ]]; then
+  echo
+  echo " Unstashing changes..." | gum style --background=4 --foreground=0 --padding="0 1"
+  git stash pop
+fi
+
+exit $((1 - success))

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+git symbolic-ref refs/remotes/origin/HEAD | sed 's|refs/remotes/origin/||'

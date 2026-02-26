@@ -78,7 +78,6 @@
   mffo = merge --ff-only
   pl = pull
   plr = pull --rebase
-  spl = !git stash push && git pull && git stash pop
   ps = push
   pst = push --tags
   pullff = pull --ff-only
@@ -93,7 +92,8 @@
   rbu = !git remote update upstream && git rebase upstream/main
   rbus = !git stash push && git rbu && git stash pop
   rbm = !git remote update origin && git rebase master
-  rbms = !git stash push && git rbm && git stash pop
+  spl = !git-safe pull
+  srb = !git-safe rebase $(git-main-branch)
   rh = reset HEAD
   rs = restore-file
   s = status
