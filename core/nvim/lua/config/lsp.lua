@@ -1,15 +1,3 @@
--- Set the filetype of "*docker-compose.yml" files to "yaml.docker-compose"
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = "*docker-compose.yml",
-  callback = function() vim.bo.filetype = "yaml.docker-compose" end,
-})
-
--- Set the filetype of "*.mdc" files to "markdown"
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = "*.mdc",
-  callback = function() vim.bo.filetype = "markdown" end,
-})
-
 local server_names = {
   "bashls",
   "biome",
