@@ -11,6 +11,7 @@ local parsers = {
   "go",
   "gomod",
   "graphql",
+  "groovy",
   "html",
   "javascript",
   "jsdoc",

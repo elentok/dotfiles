@@ -9,6 +9,7 @@ local filetypes = {
   "go",
   "gomod",
   "graphql",
+  "groovy",
   "html",
   "javascript",
   "json",
