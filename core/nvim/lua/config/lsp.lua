@@ -1,3 +1,5 @@
+local utils = require("elentok.utils")
+
 local server_names = {
   "bashls",
   "biome",
@@ -12,7 +14,7 @@ local server_names = {
   "graphql",
   -- "harper_ls",
   "html",
-  "jsonls",
+  -- "jsonls",
   -- "lua_ls",
   "marksman",
   "openscad_lsp",
@@ -31,6 +33,19 @@ local lsp_utils = require("elentok.lsp-utils")
 for _, server_name in ipairs(server_names) do
   vim.lsp.config(server_name, { on_attach = lsp_utils.on_attach })
 end
+
+vim.lsp.config("jsonls", {
+  on_attach = function(client, bufnr)
+    -- When biome is used, disable jsonls's formatting
+    if utils.hasfile({ "biome.json", "biome.jsonc" }) then
+      client.server_capabilities.documentFormattingProvider = false
+      client.server_capabilities.documentRangeFormattingProvider = false
+    end
+
+    lsp_utils.on_attach(client, bufnr)
+  end,
+})
+vim.lsp.enable("jsonls")
 
 vim.lsp.enable(server_names)
 
