@@ -48,6 +48,7 @@ return {
         ["<C-n>"] = {
           function() require("stuff.util").sendkeys("<down>") end,
         },
+        ["<Tab>"] = { "show", "accept" },
       },
       completion = {
         menu = {
