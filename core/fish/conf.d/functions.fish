@@ -66,8 +66,8 @@ function vc --description "neovim with clipboard contents"
     nvim '+normal [p'
 end
 
-function c --description "choose and cd into a subdirectory"
-    set dir (command ls -1d */ 2>/dev/null | string replace -r '/$' '' | tv)
+function d --description "choose and cd into a subdirectory"
+    set dir (path filter -d -- * | fzf --exit-0 --select-1)
     if test -n "$dir"
         cd "$dir"
     end
