@@ -38,7 +38,7 @@ function list-projects() {
 }
 
 function dotf-projects-pick() {
-  dotf-projects-list | fzf-tmux -p | sed "s#~#$HOME#"
+  dotf-projects-list | fzf | sed "s#~#$HOME#"
 }
 
 main "$@"

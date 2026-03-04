@@ -22,8 +22,8 @@ end
 # alias cw 'whichx cat'
 
 function jp
-    # cd $(dotf-projects pick || pwd)
-    set project (tv projects)
+    set project (dotf-projects pick)
+    # set project (tv projects)
     if test -n "$project"
         cd (string replace "~" "$HOME" $project)
     end
