@@ -42,10 +42,10 @@ function fish_title
     set branch ""
     # If there is a branch and it's not the same as the directory name, add it
     # to the tab title
-    if test -n "$GIT_BRANCH" -a "$GIT_BRANCH" != main -a "$GIT_BRANCH" != "$dir"
-        set short_branch (string-ellipsis 20 $GIT_BRANCH)
-        set branch " ( $short_branch)"
-    end
+    # if test -n "$GIT_BRANCH" -a "$GIT_BRANCH" != main -a "$GIT_BRANCH" != "$dir"
+    #     set short_branch (string-ellipsis 20 $GIT_BRANCH)
+    #     set branch " ( $short_branch)"
+    # end
 
     # set cmd (string split ' ' $argv[1])[1]
     echo "$short_dir$branch$suffix"
@@ -66,8 +66,8 @@ function string-ellipsis
 
 end
 
-function change-git-branch-on-dirchange --on-variable PWD
-    set -x -g GIT_BRANCH (git rev-parse --abbrev-ref HEAD 2>/dev/null)
-end
-
-change-git-branch-on-dirchange
+# function change-git-branch-on-dirchange --on-variable PWD
+#     set -x -g GIT_BRANCH (git rev-parse --abbrev-ref HEAD 2>/dev/null)
+# end
+#
+# change-git-branch-on-dirchange
