@@ -36,9 +36,8 @@ function git-nf
 end
 
 function jw
-    # cd $(git-wt pick || pwd)
-    set wt (tv git-worktree)
+    set wt (gx wt list | fzf --exit-0 --select-1 --header="Pick worktree" --preview="git log --color=always {}" --preview-window=right:70% ) #--tmux=center,30,20 )
     if test -n "$wt"
-        cd "$(git-wt root)/$wt"
+        cd (gx wt abs-path $wt)
     end
 end
