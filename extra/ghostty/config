@@ -29,7 +29,13 @@ font-feature = "-dlig"
 # Map Cmd+{key} to Ctrl+{key}
 keybind = cmd+a=text:\x01
 keybind = cmd+b=text:\x02
+
+# Cmd+c will send <ctrl-c> when there's no selection
 keybind = cmd+c=text:\x03
+# Cmd+C will copy only when there's a selection
+keybind = performable:cmd+c=copy_to_clipboard
+
+
 keybind = cmd+d=text:\x04
 keybind = cmd+e=text:\x05
 keybind = cmd+f=text:\x06
