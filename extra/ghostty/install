@@ -9,3 +9,4 @@ if dotf-command-missing ghostty; then
 fi
 
 dotf-symlink "$DOTF/extra/ghostty" ~/.config/ghostty
+dotf-symlink "$DOTF/extra/ghostty" "$HOME/Library/Application Support/com.mitchellh.ghostty"

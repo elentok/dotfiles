@@ -79,7 +79,10 @@ keybind = shift+enter=text:\x1b\r
 
 # Quick terminal
 
-keybind = global:cmd+2=toggle_quick_terminal
+# keybind = global:cmd+shift+space=toggle_quick_terminal
+keybind = global:opt+enter=toggle_quick_terminal
 quick-terminal-animation-duration = 0
+quick-terminal-position = left
+quick-terminal-size = 30%
 
 custom-shader = ~/.dotfiles/extra/ghostty/cursor_blaze.glsl

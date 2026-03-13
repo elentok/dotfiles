@@ -1,4 +1,4 @@
-cmd - 2 : kitten quick-access-terminal --instance-group quick
+# cmd - 2 : kitten quick-access-terminal --instance-group quick
 cmd - 3 : open "/Applications/Ghostty.app"
 cmd + shift - 2 : open "/Applications/Google Chrome.app"
 cmd - 4 : open "/Applications/Slack.app"
