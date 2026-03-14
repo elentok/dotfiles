@@ -9,3 +9,20 @@ dotf-symlink "$DOTF/core/nvim" ~/.config/nvim
 
 nvim --headless "+Lazy! restore" +qa
 nvim --headless "+lua require('elentok.treesitter-parsers')" +qa
+
+function build-blink-fuzzy() {
+  echo
+  echo
+  dotf-bullet "Checking blink's fuzzy library..."
+  cd ~/.local/share/nvim/lazy/blink.cmp
+  if [ ! -e target/release/libblink_cmp_fuzzy.dylib ]; then
+    echo "not found, building..."
+    cargo build --release
+    dotf-success "Built blink's fuzzy library"
+  else
+    dotf-info "already present"
+  fi
+}
+
+
+build-blink-fuzzy
