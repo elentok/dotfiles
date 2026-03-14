@@ -18,7 +18,7 @@ return {
   dependencies = { "echasnovski/mini.icons", "SmiteshP/nvim-navic" },
   opts = {
     options = {
-      theme = "catppuccin",
+      theme = "auto",
       disabled_filetypes = {
         statusline = { "snacks_dashboard" },
         winbar = { "snacks_dashboard" },
