@@ -89,6 +89,6 @@ keybind = shift+enter=text:\x1b\r
 keybind = global:opt+enter=toggle_quick_terminal
 quick-terminal-animation-duration = 0
 quick-terminal-position = left
-quick-terminal-size = 30%
+quick-terminal-size = 500px
 
 custom-shader = ~/.dotfiles/extra/ghostty/cursor_blaze.glsl
