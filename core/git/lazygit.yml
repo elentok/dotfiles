@@ -30,3 +30,9 @@ keybinding:
     moveUpCommit: K
 #   universal:
 #     quit: Q
+customCommands:
+  - key: "n"
+    context: "files"
+    command: "git add -p {{.SelectedFile.Name}}"
+    description: "git add -p (patch stage)"
+    output: terminal
