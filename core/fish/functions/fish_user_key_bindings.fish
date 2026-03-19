@@ -11,6 +11,10 @@ function fish_user_key_bindings
     bind -M default gl end-of-line
     bind -M default gs beginning-of-line
 
+    # Keep Ctrl-P/Ctrl-N as history navigation in insert mode.
+    bind -M insert \cp up-or-search
+    bind -M insert \cn down-or-search
+
     bind -M visual -m default y fish_copy_and_cancel
     bind p fish_clipboard_paste
 
