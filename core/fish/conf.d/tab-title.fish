@@ -1,3 +1,7 @@
+if ! status is-interactive
+    return
+end
+
 function _cmd_to_suffix
     if string match -q "nvim*" $argv[1]
         echo "  "
@@ -15,7 +19,7 @@ function _cmd_to_suffix
     end
 end
 
-function fish_title
+function _tab_title
     # set -q argv[1]; or set argv fish
 
     # Prevent processes running from inside Neovim from changing the title
@@ -49,6 +53,32 @@ function fish_title
 
     # set cmd (string split ' ' $argv[1])[1]
     echo "$short_dir$branch$suffix"
+end
+
+function _set_tmux_pane_title
+    set -q TMUX; or return
+
+    set -l title (_tab_title "$argv[1]")
+    test -n "$title"; or return
+
+    tmux select-pane -T "$title" >/dev/null 2>/dev/null
+end
+
+function fish_title
+    if test -n "$TMUX"
+        _set_tmux_pane_title "$argv[1]"
+        return
+    end
+
+    _tab_title "$argv[1]"
+end
+
+function _set_tmux_pane_title_on_prompt --on-event fish_prompt
+    _set_tmux_pane_title
+end
+
+function _set_tmux_pane_title_on_preexec --on-event fish_preexec
+    _set_tmux_pane_title "$argv[1]"
 end
 
 function string-ellipsis
