@@ -14,6 +14,12 @@ main() {
   mkdir -p ~/.tmux/plugins
   git_clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   ~/.tmux/plugins/tpm/bin/install_plugins
+
+  # catppuccin
+  if [ ! -e ~/.tmux/plugins/catppuccin ]; then
+    mkdir -p ~/.tmux/plugins/catppuccin
+    git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/.tmux/plugins/catppuccin/tmux
+  fi
 }
 
 main "$@"
