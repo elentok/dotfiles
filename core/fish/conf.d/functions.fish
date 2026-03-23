@@ -88,3 +88,12 @@ function gmc --description "jump to minecraft instance"
         cd ~/$dir
     end
 end
+
+function ca --description "run cursor-agent"
+    set stuff_root ~/dev/nvim/stuff.nvim/
+    if ! test -d $stuff_root
+        set stuff_root ~/.local/share/nvim/lazy/stuff.nvim
+    end
+
+    $stuff_root/scripts/stuff-set-tmux-agent.sh --agent cursor-agent -- cursor-agent "$argv"
+end
