@@ -2,12 +2,19 @@
 
 [core]
   delta = true
+  pager = delta
+
+[merge]
+  conflictStyle = zdiff3
+
+[interactive]
+  diffFilter = delta --color-only
 
 [delta]
   features = catppuccin-mocha
   navigate = true  # use n and N to move between diff sections
   # disabled side-by-side because it takes too much space
-  # side-by-side = true
+  side-by-side = true
 
 [delta "catppuccin-mocha"]
   blame-palette = "#1e1e2e #181825 #11111b #313244 #45475a"
