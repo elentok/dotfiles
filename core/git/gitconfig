@@ -15,13 +15,6 @@
   # Always use linux line endings
   autocrlf = false
 
-[interactive]
-  diffFilter = delta --color-only
-
-[merge]
-  ; for delta:
-  conflictStyle = zdiff3
-
 [mergetool "kdiff3"]
   path = kdiff3
 
