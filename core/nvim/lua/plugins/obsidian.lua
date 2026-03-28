@@ -34,8 +34,9 @@ return {
       blink = true,
       create_new = false,
     },
-    -- wiki_link_func = "prepend*note_id",
-    wiki_link_func = function(opts) return require("obsidian.util").wiki_link_id_prefix(opts) end,
+    link = {
+      style = function(opts) return require("obsidian.util").wiki_link_id_prefix(opts) end,
+    },
     picker = {
       name = "snacks.pick",
       -- name = "fzf-lua",
