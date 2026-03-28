@@ -42,6 +42,24 @@ local vertical2 = {
   },
 }
 
+local vertical_no_preview = {
+  hidden = { "preview" },
+  layout = {
+    relative = "editor",
+    backdrop = false,
+    width = 0.5,
+    min_width = 80,
+    height = 0.4,
+    min_height = 2,
+    box = "vertical",
+    border = "rounded",
+    title = "{title} {live} {flags}",
+    title_pos = "center",
+    { win = "input", height = 1, border = "bottom" },
+    { win = "list", border = "none" },
+  },
+}
+
 ---@type LazySpec
 return {
   "folke/snacks.nvim",
@@ -70,6 +88,9 @@ return {
       },
 
       sources = {
+        select = {
+          layout = vertical_no_preview,
+        },
         smart = {
           layout = {
             preset = "vscode",
