@@ -11,23 +11,23 @@ return {
     end,
   },
   { "nvim-mini/mini.bracketed", event = { "LazyFile" }, version = "*", opts = {} },
-  {
-    "nvim-mini/mini.surround",
-    event = { "LazyFile" },
-    version = "*",
-    opts = {
-      custom_surroundings = {
-        s = {
-          input = { "%*%*().-()%*%*" },
-          output = { left = "**", right = "**" },
-        },
-        c = {
-          input = { "```\n().-()\n```" },
-          output = { left = "```\n", right = "```" },
-        },
-      },
-    },
-  },
+  -- {
+  --   "nvim-mini/mini.surround",
+  --   event = { "LazyFile" },
+  --   version = "*",
+  --   opts = {
+  --     custom_surroundings = {
+  --       s = {
+  --         input = { "%*%*().-()%*%*" },
+  --         output = { left = "**", right = "**" },
+  --       },
+  --       c = {
+  --         input = { "```\n().-()\n```" },
+  --         output = { left = "```\n", right = "```" },
+  --       },
+  --     },
+  --   },
+  -- },
   { "nvim-mini/mini.pairs", event = { "InsertEnter" }, version = "*", opts = {} },
   {
     "nvim-mini/mini.move",
