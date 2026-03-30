@@ -174,7 +174,7 @@ return {
     { "<leader>ch", function() Snacks.picker.command_history() end, desc = "Command History" },
 
     -- Git
-    { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
+    { "<leader>gg", function() Snacks.terminal({ "gx", "stage" }) end, desc = "gx stage" },
     { "<leader>gl", git_log_file, desc = "Show git log" },
     { "<leader>gL", git_log_line, desc = "Show git history of current line" },
     { "<leader>gD", function() Snacks.picker.git_diff() end, desc = "Git Diff (hunks)" },
