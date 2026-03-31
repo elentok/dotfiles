@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTF/framework.sh"
+
+if command-missing opencode; then
+  brew install anomalyco/tap/opencode
+fi
+
+dotf-symlink "$DOTF/extra/opencode/opencode.jsonc" "$HOME/.config/opencode/opencode.jsonc"
+dotf-symlink "$DOTF/extra/opencode/tui.jsonc" "$HOME/.config/opencode/tui.jsonc"
