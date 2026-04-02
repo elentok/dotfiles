@@ -2,10 +2,23 @@
 
 ## Format
 
+```
+{subject}
+
+{body}
+```
+
+## Subject
+
 - Use a single-line subject only.
 - Use lowercase style (no leading capitalized verb).
 - Prefer scoped subjects: `<area>: <message>`.
 - Keep it concise and specific (about 50-72 chars when possible).
+
+### Scope
+
+- Use a top-level scope for primary area changes, e.g. `nvim`, `git`, ...
+- Nested scopes are allowed when they improve clarity, e.g. `nvim: gitsigns: ...`
 
 ## Style
 
@@ -16,22 +29,17 @@
   - `stage: clarify section headers in fullscreen diff view`
   - `worktrees: yank: fix space key not toggling`
 
-## Scope Guidance
-
-- Use a top-level scope for primary area changes
-- Nested scopes are allowed when they improve clarity
-
-## Content Rules
+## Body
 
 - Mention the behavior change directly.
 - Avoid vague subjects like `misc fixes` or `updates`.
-- Do not include ticket numbers unless requested.
 - Do not include trailing punctuation.
-- Prefer bullets to long lines.
+- Avoid long paragraphs (4 lines max), prefer bullets.
 
 ## Quick Checklist
 
 - Is the subject scoped?
 - Is the verb imperative?
+- Is there a paragraph longer than 4 lines?
 - Is the change intent clear in one line?
 - Does it match recent commit tone/style?

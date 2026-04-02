@@ -6,7 +6,7 @@ dotf_root="${DOTF:-$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)}"
 project_root="${1:-$(pwd)}"
 
 mkdir -p "$project_root/.ai"
-cp -R "$dotf_root/ai"/. "$project_root/.ai"
+cp -R "$dotf_root/.ai"/. "$project_root/.ai"
 echo "See .ai/index.md" > "$project_root/AGENTS.md"
 echo "See .ai/index.md" > "$project_root/CLAUDE.md"
 

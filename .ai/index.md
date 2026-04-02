@@ -1,4 +1,6 @@
 # AI Rules
 
 - See ./workflow.md
-- For writing commit messages see ./commit-message.md
+- Before creating any commit:
+  - Read ./commit-message.md even if you think you already know the format.
+  - Explicitly mention that you checked it
