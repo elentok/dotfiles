@@ -105,3 +105,7 @@ end
 function codex --description "run codex"
     $stuff_root/scripts/stuff-set-tmux-agent.sh --agent codex -- command codex $argv
 end
+
+function pn --description "new prompt"
+    nvim "+lua require('stuff.prompts').new_for_current_line()"
+end
