@@ -15,8 +15,8 @@ for file in $BREW_HOME/Cellar/python@3.10/*/bin/python3.10
 end
 
 function _pick_npm_script
-    # npm-scripts.ts | fzf-tmux -p -w 80% --ansi --exit-0
-    tv npm-scripts
+    blf npm-scripts | fzf-tmux -p -w 80% --ansi --exit-0
+    # tv npm-scripts
 end
 
 function yr --description "yarn run"
