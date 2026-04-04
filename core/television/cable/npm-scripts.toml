@@ -2,5 +2,6 @@
 name = "npm-scripts"
 
 [source]
-command = "NO_COLOR=true npm-scripts.ts"
-output = "{split: :0}"
+ansi = true
+command = "blf npm-scripts"
+output = "{strip_ansi|split: :0}"
