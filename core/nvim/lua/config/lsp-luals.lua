@@ -1,9 +1,21 @@
 local function get_library_paths()
   local paths = {}
-  local lazy_root = vim.fn.stdpath("data") .. "/lazy"
-  for name, type in vim.fs.dir(lazy_root) do
-    local lua_path = string.format("%s/%s/lua", lazy_root, name)
-    if type == "directory" then table.insert(paths, lua_path) end
+
+  local function add_pack_libraries(pack_root)
+    if not vim.uv.fs_stat(pack_root) then return end
+
+    for name, type in vim.fs.dir(pack_root) do
+      local lua_path = string.format("%s/%s/lua", pack_root, name)
+      if type == "directory" and vim.uv.fs_stat(lua_path) then table.insert(paths, lua_path) end
+    end
+  end
+
+  add_pack_libraries(vim.fn.stdpath("data") .. "/site/pack/core/opt")
+  add_pack_libraries(vim.fn.stdpath("config") .. "/pack/local/opt")
+
+  local local_stuff_lua = vim.fn.expand("~/dev/nvim/stuff.nvim/lua")
+  if vim.uv.fs_stat(local_stuff_lua) then
+    table.insert(paths, local_stuff_lua)
   end
 
   vim.list_extend(paths, {

@@ -24,17 +24,7 @@ local filetypes = {
   "yaml",
 }
 
-return {
-  {
-    "nvim-treesitter/nvim-treesitter",
-    branch = "main",
-    build = ":TSUpdate",
-    lazy = false,
-    init = function()
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = filetypes,
-        callback = function() vim.treesitter.start() end,
-      })
-    end,
-  },
-}
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = filetypes,
+  callback = function() vim.treesitter.start() end,
+})
