@@ -1,4 +1,19 @@
+local M = {}
+
 local gh = function(repo) return "https://github.com/" .. repo end
+
+M.specs = {
+  mason = gh("mason-org/mason.nvim"),
+  mason_tool_installer = gh("WhoIsSethDaniel/mason-tool-installer.nvim"),
+  obsidian = gh("obsidian-nvim/obsidian.nvim"),
+  render_markdown = gh("MeanderingProgrammer/render-markdown.nvim"),
+  smart_splits = gh("mrjones2014/smart-splits.nvim"),
+}
+
+function M.add(specs, opts)
+  opts = vim.tbl_extend("force", { confirm = false }, opts or {})
+  return vim.pack.add(specs, opts)
+end
 
 local stuff_path = vim.fn.expand("~/dev/nvim/stuff.nvim")
 local has_local_stuff = vim.uv.fs_stat(stuff_path) ~= nil
@@ -34,11 +49,9 @@ local pack_specs = {
   gh("SmiteshP/nvim-navic"),
   { src = gh("nvim-treesitter/nvim-treesitter"), version = "main" },
   gh("kkharji/sqlite.lua"),
-  gh("mason-org/mason.nvim"),
 
   { src = gh("catppuccin/nvim"), name = "catppuccin" },
   { src = gh("saghen/blink.cmp"), version = vim.version.range("1.*") },
-  gh("uga-rosa/ccc.nvim"),
   gh("stevearc/conform.nvim"),
   gh("elentok/encrypt.nvim"),
   gh("folke/flash.nvim"),
@@ -46,16 +59,12 @@ local pack_specs = {
   gh("MagicDuck/grug-far.nvim"),
   gh("neovim/nvim-lspconfig"),
   gh("nvim-lualine/lualine.nvim"),
-  gh("WhoIsSethDaniel/mason-tool-installer.nvim"),
   gh("rubixninja314/vim-mcfunction"),
   gh("nvim-mini/mini.bracketed"),
   gh("nvim-mini/mini.pairs"),
   gh("nvim-mini/mini.move"),
-  gh("obsidian-nvim/obsidian.nvim"),
   gh("stevearc/oil.nvim"),
-  gh("MeanderingProgrammer/render-markdown.nvim"),
   gh("Wansmer/sibling-swap.nvim"),
-  gh("mrjones2014/smart-splits.nvim"),
   gh("folke/snacks.nvim"),
   { src = gh("kylechui/nvim-surround"), version = vim.version.range("^4.0.0") },
   gh("folke/which-key.nvim"),
@@ -64,4 +73,6 @@ local pack_specs = {
 
 if not has_local_stuff then table.insert(pack_specs, gh("elentok/stuff.nvim")) end
 
-vim.pack.add(pack_specs, { confirm = false })
+M.add(pack_specs)
+
+return M

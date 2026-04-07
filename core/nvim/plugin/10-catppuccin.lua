@@ -15,7 +15,6 @@ require("catppuccin").setup({
   transparent_background = transparent,
   flavour = "mocha",
   dim_inactive = dim_inactive,
-  auto_integrations = true,
   custom_highlights = function(colors)
     return {
       VertSplit = { fg = colors.surface2 },
