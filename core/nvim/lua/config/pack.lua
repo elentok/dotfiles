@@ -40,7 +40,8 @@ local pack_specs = {
   gh("MagicDuck/grug-far.nvim"),
   gh("neovim/nvim-lspconfig"),
   gh("nvim-lualine/lualine.nvim"),
-  gh("rubixninja314/vim-mcfunction"),
+  -- minecraft datapack functions
+  -- gh("rubixninja314/vim-mcfunction"),
   gh("nvim-mini/mini.bracketed"),
   gh("nvim-mini/mini.pairs"),
   gh("nvim-mini/mini.move"),
