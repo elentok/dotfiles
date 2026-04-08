@@ -1,3 +1,4 @@
+vim.loader.enable()
 require("config.settings")
 require("config.pack")
 require("config.keymaps")
