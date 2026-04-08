@@ -7,9 +7,6 @@ local function load_render_markdown()
   if loaded then return end
   loaded = true
 
-  local pack = require("config.pack")
-  pack.add({ pack.specs.render_markdown })
-
   ---@module 'render-markdown'
   ---@type render.md.UserConfig
   require("render-markdown").setup({

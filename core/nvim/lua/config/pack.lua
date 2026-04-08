@@ -2,11 +2,6 @@ local M = {}
 
 local gh = function(repo) return "https://github.com/" .. repo end
 
-M.specs = {
-  obsidian = gh("obsidian-nvim/obsidian.nvim"),
-  render_markdown = gh("MeanderingProgrammer/render-markdown.nvim"),
-}
-
 function M.add(specs, opts)
   opts = vim.tbl_extend("force", { confirm = false }, opts or {})
   return vim.pack.add(specs, opts)
@@ -29,17 +24,6 @@ if has_local_stuff then
 
   vim.cmd(vim.v.vim_did_init == 0 and "packadd! stuff.nvim" or "packadd stuff.nvim")
 end
-
-vim.api.nvim_create_autocmd("PackChanged", {
-  callback = function(ev)
-    local name = ev.data.spec.name
-    local kind = ev.data.kind
-    if name == "nvim-treesitter" and (kind == "install" or kind == "update") then
-      if not ev.data.active then vim.cmd.packadd("nvim-treesitter") end
-      vim.cmd("TSUpdate")
-    end
-  end,
-})
 
 local pack_specs = {
   gh("nvim-mini/mini.icons"),
@@ -69,6 +53,8 @@ local pack_specs = {
   gh("mrjones2014/smart-splits.nvim"),
   gh("mason-org/mason.nvim"),
   gh("WhoIsSethDaniel/mason-tool-installer.nvim"),
+  gh("obsidian-nvim/obsidian.nvim"),
+  gh("MeanderingProgrammer/render-markdown.nvim"),
 }
 
 if not has_local_stuff then table.insert(pack_specs, gh("elentok/stuff.nvim")) end

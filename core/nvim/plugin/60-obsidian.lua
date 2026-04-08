@@ -4,9 +4,6 @@ local function load_obsidian()
   if loaded then return end
   loaded = true
 
-  local pack = require("config.pack")
-  pack.add({ pack.specs.obsidian })
-
   require("obsidian").setup({
     ---@diagnostic disable-next-line: missing-fields
     ui = {
