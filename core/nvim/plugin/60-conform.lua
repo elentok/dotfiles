@@ -25,10 +25,7 @@ _G.markdown_formatter = markdown_formatter
 require("conform").setup({
   format_on_save = function(bufnr)
     local bufname = vim.api.nvim_buf_get_name(bufnr)
-    if
-      bufname:match("/node_modules/")
-      or bufname:match(".local/share/nvim/site/pack/core/opt")
-    then
+    if bufname:match("/node_modules/") or bufname:match(".local/share/nvim/site/pack/core/opt") then
       return
     end
 

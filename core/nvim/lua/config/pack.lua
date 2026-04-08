@@ -3,11 +3,8 @@ local M = {}
 local gh = function(repo) return "https://github.com/" .. repo end
 
 M.specs = {
-  mason = gh("mason-org/mason.nvim"),
-  mason_tool_installer = gh("WhoIsSethDaniel/mason-tool-installer.nvim"),
   obsidian = gh("obsidian-nvim/obsidian.nvim"),
   render_markdown = gh("MeanderingProgrammer/render-markdown.nvim"),
-  smart_splits = gh("mrjones2014/smart-splits.nvim"),
 }
 
 function M.add(specs, opts)
@@ -69,6 +66,9 @@ local pack_specs = {
   { src = gh("kylechui/nvim-surround"), version = vim.version.range("^4.0.0") },
   gh("folke/which-key.nvim"),
   gh("ptdewey/yankbank-nvim"),
+  gh("mrjones2014/smart-splits.nvim"),
+  gh("mason-org/mason.nvim"),
+  gh("WhoIsSethDaniel/mason-tool-installer.nvim"),
 }
 
 if not has_local_stuff then table.insert(pack_specs, gh("elentok/stuff.nvim")) end
