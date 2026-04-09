@@ -54,5 +54,6 @@ require("conform").setup({
     html = { "prettierd" },
     markdown = markdown_formatter,
     fish = { "fish_indent" },
+    groovy = { "npm-groovy-lint" },
   },
 })

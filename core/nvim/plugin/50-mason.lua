@@ -18,6 +18,7 @@ require("mason-tool-installer").setup({
     "json-lsp",
     "lua-language-server",
     "marksman",
+    "npm-groovy-lint",
     "openscad-lsp",
     "prettierd",
     "pyright",
