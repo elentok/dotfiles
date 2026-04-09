@@ -45,6 +45,7 @@ require("conform").setup({
   },
 
   formatters_by_ft = {
+    sh = { "shfmt" },
     css = { "prettierd" },
     scss = { "prettierd" },
     lua = { "stylua" },

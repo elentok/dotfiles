@@ -22,6 +22,7 @@ require("mason-tool-installer").setup({
     "openscad-lsp",
     "prettierd",
     "pyright",
+    "shfmt",
     "rust-analyzer",
     "stylua",
     "taplo",
