@@ -38,7 +38,7 @@ require("conform").setup({
   formatters = {
     qmkmd = {
       command = "qmkmd",
-      args = { "format", "$FILENAME" },
+      args = { "format", "$FILENAME", "--write" },
       stdin = false,
       condition = function(_, ctx) return vim.endswith(ctx.filename, ".layout.md") end,
     },
