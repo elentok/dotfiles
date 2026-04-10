@@ -12,13 +12,14 @@ function main() {
 }
 
 function install-poetry() {
-  dotf-bullet "Installing poetry... "
-  if dotf-command-missing poetry; then
-    curl -sSL https://install.python-poetry.org | python3 -
-    dotf-success "done"
-  else
-    dotf-info "already installed."
+  dfl step start "Installing poetry... "
 
+  # dotf-bullet "Installing poetry... "
+  if ! dfl has-command poetry; then
+    curl -sSL https://install.python-poetry.org | python3 -
+    dfl step success
+  else
+    dfl step skip "already installed."
   fi
 }
 

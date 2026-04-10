@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 
-source $(dirname $0)/../framework.sh
-
 # These are some of the settings from
 # https://github.com/mathiasbynens/dotfiles/blob/master/.osx
 
-dotf-bullet 'Fine-tuning OSX... '
+dfl step start 'Fine-tuning OSX... '
 
 # # Trackpad: enable tap to click for this user and for the login screen
 # defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
@@ -136,9 +134,9 @@ chflags nohidden ~/Library
 #   OpenWith -bool true \
 #   Privileges -bool true
 
-dotf-success 'done'
+dfl step success
 
-dotf-bullet 'Killing apps'
+dfl step start 'Reloading Dock and Finder'
 killall Dock >/dev/null 2>&1
 killall Finder >/dev/null 2>&1
-dotf-success 'done'
+dfl step success

@@ -1,70 +1,67 @@
 #!/usr/bin/env bash
 
-source "$DOTF/framework.sh"
-
 GITCONFIG="$HOME/.gitconfig"
 
 main() {
-  install_gitconfig
+  install-gitconfig
   setup_git_user
   setup_lazygit
 }
 
-install_gitconfig() {
-  dotf-bullet "Installing $GITCONFIG... "
+install-gitconfig() {
+  dfl step start "Installing $GITCONFIG... "
   if [ -e "$GITCONFIG" ] || [ -h "$GITCONFIG" ]; then
-    fix_existing_gitconfig
+    fix-existing-gitconfig
   else
-    write_to_gitconfig
-    dotf-success 'done'
+    write-to-gitconfig && dfl step success || dfl step error
   fi
 }
 
-fix_existing_gitconfig() {
+fix-existing-gitconfig() {
+  dfl step start "Fixing existing $GITCONFIG... "
+  # -h == is symbolic link
   if [ -h "$GITCONFIG" ]; then
-    dotf-backup "$GITCONFIG"
-    write_to_gitconfig
-    dotf-success 'done'
+    dfl backup "$GITCONFIG"
+    write-to-gitconfig && dfl step success || dfl step error
   else
     if [ -n "$(grep "path = $DOTF/core/git/gitconfig" "$GITCONFIG")" ]; then
-      dotf-info 'already installed'
+      dfl step skip 'already fixed'
     else
-      echo >> "$GITCONFIG"
-      write_to_gitconfig
-      dotf-success 'done'
+      echo >>"$GITCONFIG"
+      write-to-gitconfig && dfl step success || dfl step error
     fi
   fi
 }
 
-write_to_gitconfig() {
+write-to-gitconfig() {
   if [ ! -e "$GITCONFIG" ]; then
     touch "$GITCONFIG"
   fi
-  echo "[include]" >> "$GITCONFIG"
-  echo "  path = $DOTF/core/git/gitconfig" >> "$GITCONFIG"
+  echo "[include]" >>"$GITCONFIG"
+  echo "  path = $DOTF/core/git/gitconfig" >>"$GITCONFIG"
 }
 
 setup_git_user() {
   if [ -z "$(git config --global --includes user.name)" ]; then
-    ask 'Git username?' git_username 'David Elentok'
+    git_username="$(dfl ask 'Git username?' 'David Elentok')"
     git config --global user.name "$git_username"
   fi
 
   if [ -z "$(git config --global --includes user.email)" ]; then
-    ask 'Git email?' git_email '3david@gmail.com'
+    git_email="$(ask 'Git email?' '3david@gmail.com')"
     git config --global user.email "$git_email"
   fi
 }
 
 function setup_lazygit() {
   local config_path="$HOME/.config/lazygit/config.yml"
-  if dotf-is-mac; then
+  if dfl os is-mac; then
     config_path="$HOME/Library/Application Support/lazygit/config.yml"
   fi
 
-  mkdir -p "$(dirname "$config_path")"
+  dfl mkdir "$(dirname "$config_path")"
 
-  dotf-symlink "$DOTF/core/git/lazygit.yml" "$config_path"
+  dfl symlink "$DOTF/core/git/lazygit.yml" "$config_path"
 }
 
 main "$@"

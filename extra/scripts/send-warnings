@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-warnings="$(dff.ts --warn)"
-
-if [ -n "$warnings" ]; then
-  message="WARNING FROM ${HOSTNAME}:
-$warnings"
-  curl --data-urlencode "message=$message" http://localhost:10000/send
-fi

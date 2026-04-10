@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+function main() {
+  if ! command -v dfl >/dev/null 2>&1; then
+    source install-dfl.sh
+  fi
+
+  dfl mkdir ~/.config
+
+  install-homebrew
+  install-homebrew-pkgs
+  install-apt-pkgs
+  install-pipx-pkgs
+
+  dfl install fish nvim git ripgrep tig bat bash tmux yazi nodejs python
+
+  if dfl os is-mac; then
+    dfl symlink ~/Library/Mobile\ Documents/com~apple~CloudDocs ~/iCloud
+    dfl install osx-tuning
+  fi
+}
+
+function install-homebrew() {
+  if dfl os is-mac; then
+    export PATH="/opt/homebrew/bin:$PATH"
+  else
+    export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+  fi
+
+  if dfl has-command brew; then
+    return
+  fi
+
+  # Install curl on Linux
+  dfl os is-linux && dfl pkg apt install curl
+
+  # Install homebrew
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+}
+
+function install-homebrew-pkgs() {
+  dfl pkg brew install gcc curl gum bat bottom coreutils curl fzf git-delta \
+    eza git glow gron htop ncdu ripgrep tig tmux wget gh jless chafa poppler \
+    countdown tabiew toilet tree-sitter tree-sitter-cli go pipx
+
+  if dfl os is-mac; then
+    dfl pkg brew install bash fish findutils gnu-sed grep terminal-notifier
+    dfl pkg brew install --cask keepassxc freecad openscad@snapshot obsidian \
+      telegram ghostty spotify chatgpt prusaslicer
+  fi
+
+  dfl pkg brew install --tap elentok/stuff --cask dff gx colr blf dfl
+
+  # After installing dfl via homebrew remove the one in ~/.local/bin to avoid duplication
+  if [ -e ~/.local/bin/dfl ]; then
+    rm ~/.local/bin/dfl
+    hash -r
+  fi
+
+}
+
+function install-apt-pkgs() {
+  if dfl os is-linux; then
+    dfl pkg apt install build-essential cmake libreadline-dev cifs-utils curl git htop ncdu plantuml \
+      unzip wget qalc ffmpeg pv fish xclip toilet
+  fi
+}
+
+function install-pipx-pkgs() {
+  dfl pkg pipx install httpie ipython git-fame neovim-remote
+  if dfl os is-linux; then
+    dfl pkg pipx install pulsemixer
+  fi
+}
+
+main "$@"

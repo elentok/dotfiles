@@ -1,46 +1,44 @@
 #!/usr/bin/env bash
 
-source "$DOTF/framework.sh"
-
 function main() {
   set-fish-as-default-shell
 
-  if dotf-command-missing fish; then
-    dotf-apt fish
-  fi
-
-  dotf-symlink "$DOTF/core/fish" "$HOME/.config/fish"
+  dfl symlink "$DOTF/core/fish" "$HOME/.config/fish"
 
   # fish "$DOTF/core/fish/install.fish"
 }
 
 function set-fish-as-default-shell() {
+  dfl step start "Setting fish as the default shell..."
+
   fish_bin="$(which fish)"
-  if dotf-is-mac; then
+  if dfl os is-mac; then
     my_shell=$(echo "$SHELL" | rev | cut -d/ -f1 | rev)
-    if [ "$my_shell" != "fish" ]; then
+    if [ "$my_shell" == "fish" ]; then
+      dfl step skip "already set"
+    else
       edit-etc-shells
-      dotf-bullet "Changing shell to ${fish_bin}... "
-      chsh -s "$fish_bin"
+      echo "  Changing shell to ${fish_bin}... "
+      chsh -s "$fish_bin" && dfl step success || dfl step error
     fi
   else
-    dotf-bullet "Changing user's shell to $fish_bin... "
+    echo "  Changing user's shell to $fish_bin... "
     if [[ "$SHELL" =~ /fish ]]; then
-      dotf-info 'already set'
+      dfl step skip "already set"
     else
-      chsh -s "$fish_bin"
+      chsh -s "$fish_bin" && dfl step success || dfl step error
     fi
   fi
 }
 
 function edit-etc-shells() {
   fish_bin="$(which fish)"
-  dotf-bullet "Adding fish to /etc/shells..."
-  if grep -q "$fish_bin" /etc/shells > /dev/null; then
-    dotf-info 'already up to date'
+  dfl step start "Adding fish to /etc/shells..."
+  if grep -q "$fish_bin" /etc/shells >/dev/null; then
+    dotf step skip 'already up to date'
   else
     sudo bash -c "echo '$fish_bin' >> /etc/shells"
-    dotf-info "added $fish_bin"
+    dotf step success "added $fish_bin"
   fi
 }
 

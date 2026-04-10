@@ -13,7 +13,6 @@ source "$DOTF/core/bash/core.sh"
 source "$DOTF/core/scripts/lib/helpers.sh"
 source "$DOTF/core/scripts/lib/ui.sh"
 source "$DOTF/core/scripts/lib/fs.sh"
-source "$DOTF/core/scripts/lib/node.sh"
 source "$DOTF/core/scripts/lib/git.sh"
 source "$DOTF/core/scripts/lib/benchmark.sh"
 

@@ -60,6 +60,7 @@ path=$path:$DOTF/extra/scripts/deno
 path=$path:$DOTF/extra/scripts/node
 path=$path:$HOME/dev/git-helpers/bin
 path=$path:$HOME/dev/qmkmd/bin
+path=$path:$HOME/go/bin
 
 for plugin_dir1 in ~/.dotplugins/*; do
   if [ -e "$plugin_dir1" ]; then

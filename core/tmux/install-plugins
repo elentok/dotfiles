@@ -2,24 +2,20 @@
 
 set -euo pipefail
 
-source "$(dirname "$0")/../../framework.sh"
-
 PLUGIN_ROOT=~/.tmux/plugins
 
-main() {
-  if [ "${1:-}" == "-f" ]; then
-    rm -rf "$PLUGIN_ROOT"
-  fi
+if [ "${1:-}" == "-f" ]; then
+  rm -rf "$PLUGIN_ROOT"
+fi
 
-  mkdir -p ~/.tmux/plugins
-  git_clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-  ~/.tmux/plugins/tpm/bin/install_plugins
+dfl mkdir ~/.tmux/plugins
+dfl git-clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-  # catppuccin
-  if [ ! -e ~/.tmux/plugins/catppuccin ]; then
-    mkdir -p ~/.tmux/plugins/catppuccin
-    git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/.tmux/plugins/catppuccin/tmux
-  fi
-}
+dfl step start "Installing tpm plugins..."
+~/.tmux/plugins/tpm/bin/install_plugins && dfl step success || dfl step error
 
-main "$@"
+# catppuccin
+if [ ! -e ~/.tmux/plugins/catppuccin ]; then
+  dfl mkdir ~/.tmux/plugins/catppuccin
+  dfl git-clone -b v2.3.0 https://github.com/catppuccin/tmux.git ~/.tmux/plugins/catppuccin/tmux
+fi

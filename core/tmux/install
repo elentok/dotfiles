@@ -1,51 +1,34 @@
 #!/usr/bin/env bash
 
-source "$(dirname "$0")/../../framework.sh"
-
 main() {
-  # if dotf-is-linux; then
-  #   install_tmux
-  # tmux binary is installed via homebrew
-  if dotf-is-mac; then
+  if dfl os is-mac; then
     install-tmux-256color-terminfo
   fi
-  install_symlinks
+  dfl symlink "$DOTF/core/tmux/tmux.conf" ~/.tmux.conf
+
   $DOTF/core/tmux/install-plugins
 }
 
 # This function is based on https://github.com/tmux/tmux/issues/1257#issuecomment-581378716
 install-tmux-256color-terminfo() {
-  dotf-bullet "Setting up tmux-256color terminfo... "
+  dfl step start "Setting up tmux-256color terminfo... "
 
   if has-tmux-256color-terminfo; then
-    dotf-info "already set up, skipping."
-  else
-    "$DOTF/core/tmux/install-tmux-256color"
+    dfl step skip "already set up, skipping."
+    return
   fi
+
+  dfl pkgs brew install ncurses
+  $BREW_HOME/opt/ncurses/bin/infocmp tmux-256color >/tmp/tmux-256color.info
+
+  # This creates a complied entry in ~/.terminfo
+  tic -xe tmux-256color /tmp/tmux-256color.info
+
+  infocmp tmux-256color >/dev/null 2>&1 && dfl step success || dfl step error
 }
 
 has-tmux-256color-terminfo() {
   infocmp tmux-256color >/dev/null 2>&1
-}
-
-install_tmux() {
-  dotf-bullet "Installing tmux... "
-  if dotf-command-missing tmux; then
-    PRIMARY=yes "$DOTF/core/tmux/build" && dotf-success "done."
-  else
-    version="$(dotf-trim <"$DOTF/core/tmux/VERSION")"
-    current_version="$(tmux -V | head -1 | awk '{print $2}')"
-    if [ "$current_version" == "$version" ]; then
-      dotf-info "version $version already installed."
-    else
-      dotf-info "found $current_version, upgrading to $version..."
-      PRIMARY=yes "$DOTF/core/tmux/build" && dotf-success "done."
-    fi
-  fi
-}
-
-install_symlinks() {
-  dotf-symlink "$DOTF/core/tmux/tmux.conf" ~/.tmux.conf
 }
 
 main "$@"

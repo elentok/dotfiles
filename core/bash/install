@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-source "$DOTF/framework.sh"
-
-dotf-symlink "$DOTF/core/bash/bash_profile" ~/.bash_profile
-dotf-symlink "$DOTF/core/bash/inputrc" ~/.inputrc
-dotf-symlink "$DOTF/core/bash/bashrc" ~/.bashrc
+dfl symlink "$DOTF/core/bash/bash_profile" ~/.bash_profile
+dfl symlink "$DOTF/core/bash/inputrc" ~/.inputrc
+dfl symlink "$DOTF/core/bash/bashrc" ~/.bashrc

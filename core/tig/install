@@ -1,5 +1,3 @@
 #!/usr/bin/env bash
 
-source "$DOTF/framework.sh"
-
-dotf-symlink "$DOTF/core/tig/tigrc" ~/.tigrc
+dfl symlink "$DOTF/core/tig/tigrc" ~/.tigrc
