@@ -41,17 +41,8 @@ function install-homebrew() {
 }
 
 function install-homebrew-pkgs() {
-  dfl pkg brew install gcc curl gum bat bottom coreutils curl fzf git-delta \
-    eza git glow gron htop ncdu ripgrep tig tmux wget gh jless chafa poppler \
-    countdown tabiew toilet tree-sitter tree-sitter-cli go pipx
-
-  if dfl os is-mac; then
-    dfl pkg brew install bash fish findutils gnu-sed grep terminal-notifier
-    dfl pkg brew install --cask keepassxc freecad openscad@snapshot obsidian \
-      telegram ghostty spotify chatgpt prusaslicer
-  fi
-
-  dfl pkg brew install --tap elentok/stuff --cask dff gx colr blf dfl
+  dfl pkg step start "Installing homebrew package..."
+  brew bundle check || brew bundle install
 
   # After installing dfl via homebrew remove the one in ~/.local/bin to avoid duplication
   if [ -e ~/.local/bin/dfl ]; then
