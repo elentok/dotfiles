@@ -4,24 +4,32 @@ set -euo pipefail
 
 NODE_VER=24
 
-dfl step start "Installing node..."
-if ! dfl has-command fnm; then
-  dfl step error "fnm is missing, it should have been installed with brew"
-  return
-fi
-
-eval "$(fnm env --use-on-cd)"
-
 function has-version() {
-  fnm list | grep " v${1}\." >/dev/null
+  fnm list | grep " v${1}\\." >/dev/null
 }
 
-if has-version $NODE_VER; then
-  dfl step skip "Node $NODE_VER already installed"
-else
-  fnm install "$NODE_VER" &&
-    dfl step success "Installed Node $NODE_VER" ||
-    dfl step error "Failed to install Node $NODE_VER"
-fi
+function main() {
+  dfl step start "Installing node..."
+  if ! dfl has-command fnm; then
+    dfl step error "fnm is missing, it should have been installed with brew"
+    exit 1
+  fi
 
-dfl pkg npm install cloc fx json live-server yarn markserv neovim
+  eval "$(fnm env --use-on-cd --shell bash --log-level quiet)"
+
+  if has-version "$NODE_VER"; then
+    dfl step skip "Node $NODE_VER already installed"
+  else
+    if ! fnm install "$NODE_VER"; then
+      dfl step error "Failed to install Node $NODE_VER"
+      exit 1
+    fi
+
+    dfl step success "Installed Node $NODE_VER"
+  fi
+
+  fnm use "$NODE_VER" >/dev/null
+  dfl pkg npm install cloc fx json live-server yarn markserv neovim
+}
+
+main "$@"

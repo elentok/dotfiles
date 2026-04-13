@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+DOTF="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+INSTALL_DFL_URL="https://raw.githubusercontent.com/elentok/dfl/main/install-dfl.sh"
+
+download-and-install-dfl() {
+  if command -v curl >/dev/null 2>&1; then
+    curl -fsSL "$INSTALL_DFL_URL" | sh
+    return
+  fi
+
+  if command -v wget >/dev/null 2>&1; then
+    wget -qO- "$INSTALL_DFL_URL" | sh
+    return
+  fi
+
+  echo "curl or wget is required to install dfl" >&2
+  exit 1
+}
+
+main() {
+  if ! command -v dfl >/dev/null 2>&1; then
+    download-and-install-dfl
+    export PATH="$HOME/.local/bin:$PATH"
+    hash -r
+  fi
+
+  export DFL_ROOT="$DOTF"
+  exec dfl setup "$@"
+}
+
+main "$@"

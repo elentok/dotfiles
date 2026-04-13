@@ -3,19 +3,11 @@
 set -euo pipefail
 
 function main() {
-  if ! command -v dfl >/dev/null 2>&1; then
-    source install-dfl.sh
-  fi
-
   dfl mkdir ~/.config
 
   install-homebrew
 
-  dfl step start "Installing homebrew package..."
-  brew bundle check || brew bundle install
-  dfl step success
-
-  remove-temporary-dfl
+  dfl shell "Installing Homebrew bundle" -- brew bundle install
 
   install-apt-pkgs
 
@@ -38,21 +30,11 @@ function install-homebrew() {
     return
   fi
 
-  # Install curl on Linux
-  dfl os is-linux && dfl pkg apt install curl
-
-  # Install homebrew
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-}
-
-function remove-temporary-dfl() {
-  # After installing dfl via homebrew remove the one in ~/.local/bin to avoid duplication
-  if [ -e ~/.local/bin/dfl ]; then
-    dfl pkg step start "Removing temporary dfl binary..."
-    rm ~/.local/bin/dfl
-    hash -r
-    dfl pkg step success
+  if dfl os is-linux; then
+    dfl pkg apt install curl
   fi
+
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
 
 function install-apt-pkgs() {
