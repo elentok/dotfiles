@@ -19,7 +19,7 @@ function main() {
 
   install-apt-pkgs
 
-  dfl install fish nvim git ripgrep tig bat bash tmux yazi nodejs python
+  dfl install fish nvim git ripgrep tig bat bash tmux yazi nodejs python ai
 
   if dfl os is-mac; then
     dfl symlink ~/Library/Mobile\ Documents/com~apple~CloudDocs ~/iCloud
