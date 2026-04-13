@@ -3,3 +3,4 @@
 set -euo pipefail
 
 dfl symlink "$DOTF/core/ai/skills" ~/.claude/skills/
+dfl symlink "$DOTF/core/ai/skills" ~/.codex/skills/
