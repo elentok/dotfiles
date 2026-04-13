@@ -8,5 +8,6 @@
       "Bash(grep:*)"
     ]
   },
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "advisorModel": "opus"
 }
