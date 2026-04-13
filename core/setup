@@ -7,11 +7,25 @@ function main() {
 
   install-homebrew
 
-  dfl shell "Installing Homebrew bundle" -- brew bundle install
+  dfl shell "Installing Homebrew bundle" -- brew bundle --file "$DFL_ROOT/Brewfile" install
 
   install-apt-pkgs
 
-  dfl install fish nvim git ripgrep tig bat bash tmux yazi nodejs python ai
+  local components=(
+    fish
+    nvim
+    git
+    ripgrep
+    tig
+    bat
+    bash
+    tmux
+    yazi
+    nodejs
+    python
+    ai
+  )
+  dfl install "${components[@]}"
 
   if dfl os is-mac; then
     dfl symlink ~/Library/Mobile\ Documents/com~apple~CloudDocs ~/iCloud
@@ -39,8 +53,26 @@ function install-homebrew() {
 
 function install-apt-pkgs() {
   if dfl os is-linux; then
-    dfl pkg apt install build-essential cmake libreadline-dev cifs-utils curl git htop ncdu plantuml \
-      unzip wget qalc ffmpeg pv fish xclip toilet
+    local packages=(
+      build-essential
+      cmake
+      libreadline-dev
+      cifs-utils
+      curl
+      git
+      htop
+      ncdu
+      plantuml
+      unzip
+      wget
+      qalc
+      ffmpeg
+      pv
+      fish
+      xclip
+      toilet
+    )
+    dfl pkg apt install "${packages[@]}"
   fi
 }
 

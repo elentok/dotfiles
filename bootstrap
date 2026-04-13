@@ -23,12 +23,11 @@ download-and-install-dfl() {
 main() {
   if ! command -v dfl >/dev/null 2>&1; then
     download-and-install-dfl
-    export PATH="$HOME/.local/bin:$PATH"
     hash -r
   fi
 
   export DFL_ROOT="$DOTF"
-  exec dfl setup "$@"
+  PATH="$HOME/.local/bin:$PATH" exec dfl setup "$@"
 }
 
 main "$@"
