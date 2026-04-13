@@ -4,12 +4,12 @@ set -euo pipefail
 
 source "$DOTF/framework.sh"
 
-if dotf-is-linux; then
+if dfl os is-linux; then
   echo "See install-on-linux"
   exit 1
 fi
 
-dotf-brew colima docker docker-compose
+brew install colima docker docker-compose
 colima start
 
 # test that docker works

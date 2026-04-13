@@ -11,7 +11,7 @@ function main() {
   cd "$DOTF"
 
   dotf-repos pull
-  dotf-summary run 'Update packages' dotf-pkgs upgrade
+  # dotf-summary run 'Update packages' dotf-pkgs upgrade
   upgrade-neovim-stuff
 
   # Clear cached direnv fish setup (regenerated when missing on new shells)

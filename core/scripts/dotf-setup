@@ -11,48 +11,9 @@ main() {
 
   dotf-header h1 "Setting up dotfiles..."
 
-  dotf-brew-tap elentok/stuff
-  if dotf-command-missing dff; then
-    brew install --cask dff
-  fi
-
-  dotf-pkgs install brew
-  if ! dotf-is-linux; then
-    dotf-pkgs install apt
-  fi
-
-  if dotf-is-linux; then
-    if [ -e /usr/lib/python3.11/EXTERNALLY-MANAGED ]; then
-      sudo mv /usr/lib/python3.11/EXTERNALLY-MANAGED{,.disabled}
-    fi
-  fi
-
   dotf-header h2 "[dotf-setup] Setting up repositories..."
   dotf-repos setup
 
-  dotf-bullet "Installing pip packages..."
-  dotf-pkgs install pip
-
-  dotf-component fish nvim git ripgrep tig bat bash tmux yazi nodejs python
-  dotf-pkgs install npm
-
-  dotf-header h2 "[dotf-setup] Running deno cache..."
-  (cd extra/scripts/deno && deno cache ./**/*.ts)
-
-  if dotf-is-mac; then
-    dotf-symlink ~/Library/Mobile\ Documents/com~apple~CloudDocs ~/iCloud
-    dotf-component osx-tuning
-  fi
-
-  show-done
-}
-
-show-done() {
-  dotf-color green
-  echo -e "=========================="
-  echo "Done ($(benchmark-stop))"
-  echo -e "=========================="
-  dotf-color reset
 }
 
 main "$@"

@@ -1,0 +1,2 @@
+tap "static-web-server/static-web-server-bin"
+brew "static-web-server/static-web-server-bin/static-web-server-bin"

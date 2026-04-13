@@ -23,7 +23,7 @@ old_author_email="$3"
 shift 3
 
 if dotf-command-missing git-filter-repo; then
-  dotf-brew git-filter-repo
+  brew install git-filter-repo
 fi
 
 rm -rf "$TMP/mailmap"

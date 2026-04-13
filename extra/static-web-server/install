@@ -2,5 +2,4 @@
 
 set -euo pipefail
 
-dotf-brew-tap static-web-server/static-web-server
-dotf-brew static-web-server-bin
+brew bundle install --file "$DOTF/extra/static-web-server/Brewfile"

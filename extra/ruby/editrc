@@ -1,5 +1,0 @@
-# bind -v
-bind "^R" em-inc-search-prev
-# bind \\t rl_complete
-# bind "^;" vi-command-mode
-# alias x exit()
