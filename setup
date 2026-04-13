@@ -10,9 +10,14 @@ function main() {
   dfl mkdir ~/.config
 
   install-homebrew
-  install-homebrew-pkgs
+
+  dfl step start "Installing homebrew package..."
+  brew bundle check || brew bundle install
+  dfl step success
+
+  remove-temporary-dfl
+
   install-apt-pkgs
-  install-pipx-pkgs
 
   dfl install fish nvim git ripgrep tig bat bash tmux yazi nodejs python
 
@@ -40,29 +45,20 @@ function install-homebrew() {
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
 
-function install-homebrew-pkgs() {
-  dfl pkg step start "Installing homebrew package..."
-  brew bundle check || brew bundle install
-
+function remove-temporary-dfl() {
   # After installing dfl via homebrew remove the one in ~/.local/bin to avoid duplication
   if [ -e ~/.local/bin/dfl ]; then
+    dfl pkg step start "Removing temporary dfl binary..."
     rm ~/.local/bin/dfl
     hash -r
+    dfl pkg step success
   fi
-
 }
 
 function install-apt-pkgs() {
   if dfl os is-linux; then
     dfl pkg apt install build-essential cmake libreadline-dev cifs-utils curl git htop ncdu plantuml \
       unzip wget qalc ffmpeg pv fish xclip toilet
-  fi
-}
-
-function install-pipx-pkgs() {
-  dfl pkg pipx install httpie ipython git-fame neovim-remote
-  if dfl os is-linux; then
-    dfl pkg pipx install pulsemixer
   fi
 }
 

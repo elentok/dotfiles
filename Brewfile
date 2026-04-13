@@ -27,7 +27,10 @@ brew "toilet"
 brew "tree-sitter"
 brew "tree-sitter-cli"
 brew "go"
-brew "pipx"
+brew "uv"
+
+uv "git-fame"
+uv "neovim-remote"
 
 if OS.mac?
   brew "bash"
