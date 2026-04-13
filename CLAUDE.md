@@ -1,1 +1,1 @@
-See .ai/index.md
+@.ai/index.md
