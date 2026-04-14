@@ -11,7 +11,7 @@ if ! test -e "$TMP"
     mkdir -p "$TMP"
 end
 
-set -x FZF_DEFAULT_OPTS "--tiebreak=end"
+set -x FZF_DEFAULT_OPTS "--tiebreak=end --popup=85%,70% --wrap-sign='󰞘 ' --wrap=word"
 set -x BUN_INSTALL "$HOME/.bin"
 
 set -x MANPAGER "nvim +Man!"

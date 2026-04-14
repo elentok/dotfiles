@@ -15,7 +15,7 @@ for file in $BREW_HOME/Cellar/python@3.10/*/bin/python3.10
 end
 
 function _pick_npm_script
-    blf npm-scripts | fzf-tmux -p -w 80% --ansi --exit-0
+    blf npm-scripts | fzf --popup=center,60%,50% --ansi --exit-0
     # tv npm-scripts
 end
 

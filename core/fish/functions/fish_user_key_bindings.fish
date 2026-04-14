@@ -27,6 +27,3 @@ function fish_copy_and_cancel
     fish_clipboard_copy
     commandline -f end-selection
 end
-
-set -gx FZF_DEFAULT_OPTS "--tmux=center,85%,70%"
-# fzf --fish | source

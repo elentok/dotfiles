@@ -41,14 +41,6 @@ function nv --description neovide
     end
 end
 
-function f --description vifm
-    if test (count $argv) -eq 0
-        TERM=xterm-256color vifm .
-    else
-        TERM=xterm-256color vifm $argv
-    end
-end
-
 function y --description "yazi wrapper"
     set tmp (mktemp -t "yazi-cwd.XXXXXX")
     yazi $argv --cwd-file="$tmp"

@@ -10,7 +10,7 @@ function main() {
   local cmd="${1:-}"
   shift || true
 
-  if type "dotf-projects-${cmd}" > /dev/null 2>&1; then
+  if type "dotf-projects-${cmd}" >/dev/null 2>&1; then
     "dotf-projects-${cmd}" "$@"
   else
     usage "$0"
@@ -38,7 +38,7 @@ function list-projects() {
 }
 
 function dotf-projects-pick() {
-  dotf-projects-list | fzf | sed "s#~#$HOME#"
+  dotf-projects-list | fzf --popup=center,60,60% | sed "s#~#$HOME#"
 }
 
 main "$@"
