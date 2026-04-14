@@ -1,3 +1,12 @@
+set -l dotp_script_paths
+if test -d "$DOTP"
+    for dir in $DOTP/*/scripts
+        if test -d "$dir"
+            set dotp_script_paths $dotp_script_paths "$dir"
+        end
+    end
+end
+
 fish_add_path "$HOME/.local/bin" \
     "$HOME/.cargo/bin" \
     "$HOME/dev/qmkmd/bin" \
@@ -12,4 +21,4 @@ fish_add_path "$HOME/.local/bin" \
     "$HOME/.apps/bin" \
     "$BUN_INSTALL/bin" \
     "$HOME/go/bin" \
-    $DOTP/*/scripts
+    $dotp_script_paths
