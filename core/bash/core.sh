@@ -77,13 +77,6 @@ if [ -n "$BREW_HOME" ]; then
 fi
 
 if dotf-is-mac; then
-  if [ -e ~/Library/Python ]; then
-    pyver="$(command ls ~/Library/Python | sort -V | tail -1)"
-    if [ -d "$HOME/Library/Python/$pyver/bin" ]; then
-      path=$path:$HOME/Library/Python/$pyver/bin
-    fi
-  fi
-
   # replace bsd binaries with gnu
   path=$path:$BREW_HOME/opt/coreutils/libexec/gnubin
   path=$path:$BREW_HOME/opt/findutils/libexec/gnubin

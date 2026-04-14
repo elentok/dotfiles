@@ -123,12 +123,6 @@ function dotf-gen-path() {
       echo "$BREW_HOME/opt/coreutils/libexec/gnubin"
     fi
 
-    local pyver
-    pyver="$(command ls ~/Library/Python | sort -V | tail -1)"
-    if [ -d "$HOME/Library/Python/$pyver/bin" ]; then
-      echo "$HOME/Library/Python/$pyver/bin"
-    fi
-
     # replace bsd binaries with gnu
     for pkg in coreutils findutils gnu-sed; do
       gnubin="$BREW_HOME/opt/$pkg/libexec/gnubin"
