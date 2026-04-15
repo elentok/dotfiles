@@ -5,9 +5,8 @@ set -euo pipefail
 dotf_root="${DOTF:-$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)}"
 project_root="${1:-$(pwd)}"
 
-mkdir -p "$project_root/.ai"
-if "$dotf_root" != "$project_root"; then
-  cp -R "$dotf_root/.ai" "$project_root/.ai"
-fi
-ln -s "$project_root/.ai/index.md" "$project_root/AGENTS.md"
-ln -s "$project_root/.ai/index.md" "$project_root/CLAUDE.md"
+mkdir -p .ai
+cp $dotf_root/.ai/* .ai/
+
+ln -sf .ai/index.md AGENTS.md
+ln -sf .ai/index.md CLAUDE.md
