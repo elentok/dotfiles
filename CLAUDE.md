@@ -1,1 +1,1 @@
-@.ai/index.md
+/Users/david/.dotfiles/.ai/index.md

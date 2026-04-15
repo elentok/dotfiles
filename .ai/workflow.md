@@ -1,5 +1,7 @@
 # AI Agent Workflow
 
+When reading this file please explicitly mention that you did.
+
 ## Plan mode
 
 - Enter plan mode for ANY non-trivial task (3+ steps or architectural decisions)

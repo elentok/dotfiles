@@ -1,5 +1,7 @@
 # Commit Message Rules
 
+When reading this file please explicitly mention that you did.
+
 ## Format
 
 ```
