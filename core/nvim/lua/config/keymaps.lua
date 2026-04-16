@@ -53,3 +53,12 @@ vim.keymap.set("i", "<D-h>", "<C-h>", { remap = true })
 vim.keymap.set("i", "<D-j>", "<C-j>", { remap = true })
 vim.keymap.set("i", "<D-k>", "<C-k>", { remap = true })
 vim.keymap.set("i", "<D-l>", "<C-l>", { remap = true })
+
+vim.keymap.set("n", "<leader>gg", function()
+  local kitty = require("stuff.util.kitty")
+  if kitty.is_inside_kitty() then
+    kitty.new_tab({ "gx", "status" })
+  else
+    Snacks.terminal({ "gx", "status" })
+  end
+end, { desc = "gx status" })

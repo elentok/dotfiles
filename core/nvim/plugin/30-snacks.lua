@@ -191,12 +191,7 @@ vim.keymap.set(
   function() Snacks.picker.command_history() end,
   { desc = "Command History" }
 )
-vim.keymap.set(
-  "n",
-  "<leader>gg",
-  function() Snacks.terminal({ "gx", "status" }) end,
-  { desc = "gx status" }
-)
+
 vim.keymap.set("n", "<leader>gl", git_log_file, { desc = "Show git log" })
 vim.keymap.set("n", "<leader>gL", git_log_line, { desc = "Show git history of current line" })
 vim.keymap.set(
