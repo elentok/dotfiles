@@ -45,6 +45,7 @@ local pack_specs = {
   gh("nvim-mini/mini.bracketed"),
   gh("nvim-mini/mini.pairs"),
   gh("nvim-mini/mini.move"),
+  gh("nvim-mini/mini.files"),
   gh("stevearc/oil.nvim"),
   gh("Wansmer/sibling-swap.nvim"),
   gh("folke/snacks.nvim"),
