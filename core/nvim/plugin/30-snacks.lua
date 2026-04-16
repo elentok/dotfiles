@@ -14,6 +14,12 @@ local function jump_to_config()
   })
 end
 
+local function insert_file_path()
+  Snacks.picker.files({
+    confirm = { action = "put", field = "file" },
+  })
+end
+
 ---@type snacks.picker.layout.Config
 local vertical2 = {
   layout = {
@@ -225,3 +231,4 @@ vim.keymap.set(
   function() Snacks.picker.icons({ icon_sources = { "emoji" } }) end,
   { desc = "Insert emoji" }
 )
+vim.keymap.set("n", "<leader>if", insert_file_path, { desc = "Insert file path" })
