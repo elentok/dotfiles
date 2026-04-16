@@ -16,7 +16,7 @@ local server_names = {
   "html",
   -- "jsonls",
   -- "lua_ls",
-  "marksman",
+  "markdown-oxide",
   "openscad_lsp",
   "pyright",
   "spyglassmc_language_server",
