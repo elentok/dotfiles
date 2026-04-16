@@ -39,6 +39,11 @@ function _tab_title
         set dir "~"
     else
         set dir (basename $PWD)
+
+        if contains -- $dir main master
+            set parent_dir (basename (dirname $PWD))
+            set dir "$parent_dir/$dir"
+        end
     end
 
     set short_dir (string-ellipsis 25 $dir)
