@@ -81,13 +81,13 @@ function install-personal-cli-tools() {
   # Install these personal tools the same way on macOS and Linux instead of
   # relying on Homebrew casks, which are macOS-only.
   local packages=(
-    github.com/elentok/dff@latest
-    github.com/elentok/gx@latest
-    github.com/elentok/colr@latest
-    github.com/elentok/blf@latest
-    github.com/elentok/qmkmd@latest
+    elentok/dff
+    elentok/gx
+    elentok/colr
+    elentok/blf
+    elentok/qmkmd
   )
-  dfl shell "Installing personal Go CLIs" -- go install "${packages[@]}"
+  dfl pkg github install "${packages[@]}"
 }
 
 main "$@"
