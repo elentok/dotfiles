@@ -85,6 +85,7 @@ function install-personal-cli-tools() {
     github.com/elentok/gx@latest
     github.com/elentok/colr@latest
     github.com/elentok/blf@latest
+    github.com/elentok/qmkmd@latest
   )
   dfl shell "Installing personal Go CLIs" -- go install "${packages[@]}"
 }
