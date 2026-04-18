@@ -10,6 +10,7 @@ function main() {
   dfl shell "Installing Homebrew bundle" -- brew bundle --file "$DFL_ROOT/Brewfile" install
 
   install-apt-pkgs
+  install-personal-cli-tools
 
   local components=(
     fish
@@ -74,6 +75,18 @@ function install-apt-pkgs() {
     )
     dfl pkg apt install "${packages[@]}"
   fi
+}
+
+function install-personal-cli-tools() {
+  # Install these personal tools the same way on macOS and Linux instead of
+  # relying on Homebrew casks, which are macOS-only.
+  local packages=(
+    github.com/elentok/dff@latest
+    github.com/elentok/gx@latest
+    github.com/elentok/colr@latest
+    github.com/elentok/blf@latest
+  )
+  dfl shell "Installing personal Go CLIs" -- go install "${packages[@]}"
 }
 
 main "$@"

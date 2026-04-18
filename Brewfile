@@ -50,9 +50,3 @@ if OS.mac?
   cask "chatgpt"
   cask "prusaslicer"
 end
-
-tap "elentok/stuff"
-cask "elentok/stuff/dff"
-cask "elentok/stuff/gx"
-cask "elentok/stuff/colr"
-cask "elentok/stuff/blf"
