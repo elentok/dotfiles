@@ -9,6 +9,8 @@ map({ "n" }, "U", "<c-r>")
 map({ "n", "v" }, "<leader>p", "[", { remap = true })
 map({ "n", "v" }, "<leader>n", "]", { remap = true })
 
+map("n", "<leader>up", function() vim.pack.update() end, { desc = "Update plugins" })
+
 map("n", "<leader>uv", function()
   local virtual_lines = not vim.diagnostic.config().virtual_lines
   vim.diagnostic.config({
