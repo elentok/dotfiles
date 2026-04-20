@@ -12,6 +12,8 @@ function main() {
   install-apt-pkgs
   install-personal-cli-tools
 
+  dfl git-clone --update elentok/stuff.nvim ~/dev/nvim/stuff.nvim
+
   local components=(
     fish
     nvim
