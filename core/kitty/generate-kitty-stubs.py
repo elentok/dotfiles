@@ -4,11 +4,13 @@ from __future__ import annotations
 
 import argparse
 import json
+import shutil
 import subprocess
 from pathlib import Path
 
 
 DEFAULT_STUB_BASE = Path(__file__).resolve().parent / ".stubs"
+DEFAULT_KITTY_BINARY = "kitty"
 EXCLUDED_EXPORTS = {
     "Any",
     "Callable",
@@ -153,7 +155,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--kitty-binary",
-        default="kitty",
+        default=DEFAULT_KITTY_BINARY,
         help="Path to the Kitty executable to use for `+runpy` introspection.",
     )
     parser.add_argument(
@@ -172,7 +174,11 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    payload = inspect_kitty(args.kitty_binary)
+    try:
+        payload = inspect_kitty(args.kitty_binary)
+    except FileNotFoundError as exc:
+        raise SystemExit(str(exc)) from exc
+
     stub_root = args.stub_base / "kitty"
 
     files = {
@@ -197,13 +203,46 @@ def main() -> int:
 
 
 def inspect_kitty(kitty_binary: str) -> dict[str, object]:
+    resolved_kitty_binary = resolve_kitty_binary(kitty_binary)
     result = subprocess.run(
-        [kitty_binary, "+runpy", RUNPY_CODE],
+        [str(resolved_kitty_binary), "+runpy", RUNPY_CODE],
         check=True,
         capture_output=True,
         text=True,
     )
     return json.loads(result.stdout)
+
+
+def resolve_kitty_binary(kitty_binary: str) -> Path:
+    candidate = Path(kitty_binary).expanduser()
+
+    if candidate.is_absolute() or "/" in kitty_binary or "\\" in kitty_binary:
+        if candidate.is_file():
+            return candidate
+        raise FileNotFoundError(f"Kitty binary not found: {candidate}")
+
+    which_result = shutil.which(kitty_binary)
+    if which_result:
+        return Path(which_result)
+
+    if kitty_binary != DEFAULT_KITTY_BINARY:
+        raise FileNotFoundError(
+            f"Kitty binary `{kitty_binary}` was not found on PATH. "
+            "Pass `--kitty-binary /path/to/kitty` to use a specific executable."
+        )
+
+    fallback_candidates = [
+        Path.home() / ".local/kitty.app/bin/kitty",
+    ]
+    for fallback in fallback_candidates:
+        if fallback.is_file():
+            return fallback
+
+    checked = ", ".join(str(path) for path in fallback_candidates)
+    raise FileNotFoundError(
+        "Could not find the Kitty binary. Checked PATH for `kitty` and these fallback paths: "
+        f"{checked}. Pass `--kitty-binary /path/to/kitty` to use a specific executable."
+    )
 
 
 def render_init_stub() -> str:
