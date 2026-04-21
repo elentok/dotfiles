@@ -45,7 +45,7 @@ if OS.mac?
   cask "openscad@snapshot"
   cask "obsidian"
   cask "telegram"
-  cask "ghostty"
+  cask "kitty@nightly"
   cask "spotify"
   cask "chatgpt"
   cask "prusaslicer"

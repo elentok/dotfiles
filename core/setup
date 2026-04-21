@@ -27,6 +27,7 @@ function main() {
     nodejs
     python
     ai
+    kitty
   )
   dfl install "${components[@]}"
 
