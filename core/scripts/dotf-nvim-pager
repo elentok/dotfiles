@@ -2,17 +2,17 @@
 
 source ~/.dotfiles/core/bash/core.sh
 
-TMP_BUFFER="$TMP/nvim-pager-buffer"
-
 function main {
   if [ $# -gt 0 ]; then
     exec nvim --noplugin \
       -u "$DOTF/core/nvim/init-pager.lua" \
       -c 'autocmd VimEnter * normal G' "$@"
   else
+    local tmp_buffer
+    tmp_buffer="$(mktemp "$TMP/nvim-pager-buffer.XXXXXX")"
     exec nvim --noplugin \
       -u "$DOTF/core/nvim/init-pager.lua" \
-      -c "silent write! $TMP_BUFFER | te cat $TMP_BUFFER - " \
+      -c "silent write! $tmp_buffer | te cat $tmp_buffer - " \
       -c 'autocmd VimEnter * normal G'
   fi
 }
