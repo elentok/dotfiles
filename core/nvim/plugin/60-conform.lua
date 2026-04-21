@@ -56,5 +56,6 @@ require("conform").setup({
     markdown = markdown_formatter,
     fish = { "fish_indent" },
     groovy = { "npm-groovy-lint" },
+    python = { "ruff_format" },
   },
 })

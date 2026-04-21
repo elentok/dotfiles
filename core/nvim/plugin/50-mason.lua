@@ -24,6 +24,7 @@ require("mason-tool-installer").setup({
     "pyright",
     "shfmt",
     "rust-analyzer",
+    "ruff", -- python formatter
     "stylua",
     "taplo",
     "ty",
