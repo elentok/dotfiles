@@ -15,9 +15,9 @@ function main() {
     dotf-apt fonts-agave
   fi
 
-  brew install --cask font-agave
-  brew install --cask font-symbols-only-nerd-font
+  dfl pkg brew install --cask font-agave font-symbols-only-nerd-font
 
+  dfl shell "Generating kitty stubs..." -- python3 "$DOTF/core/kitty/generate-kitty-stubs.py"
 }
 
 function install-desktop-file() {
