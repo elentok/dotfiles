@@ -18,7 +18,7 @@ local server_names = {
   -- "lua_ls",
   "markdown-oxide",
   "openscad_lsp",
-  "pyright",
+  -- "pyright",
   "spyglassmc_language_server",
   "taplo",
   "ty",
