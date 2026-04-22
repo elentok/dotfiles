@@ -10,6 +10,10 @@ prepend_keymap = [
     "x",
   ], run = "open", desc = "Open selected files" },
   { on = [
+    "g",
+    "p",
+  ], run = "shell --block 'bash -c \"chafa $@ && read -n 1 > /dev/null\"'", desc = "Preview selected images" },
+  { on = [
     "c",
     "w",
   ], run = "rename --cursor=before_ext", desc = "Rename selected file(s)" },
