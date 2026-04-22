@@ -3,8 +3,6 @@
 source ~/.dotfiles/core/bash/core.sh
 
 function main {
-  echo "$@" >>~/pager.txt
-
   export INPUT_LINE_NUMBER="${1:-}"
   export CURSOR_LINE="${2:-}"
   export CURSOR_COLUMN="${3:-}"
