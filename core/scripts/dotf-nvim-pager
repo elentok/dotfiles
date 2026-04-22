@@ -3,18 +3,18 @@
 source ~/.dotfiles/core/bash/core.sh
 
 function main {
-  if [ $# -gt 0 ]; then
-    exec nvim --noplugin \
-      -u "$DOTF/core/nvim/init-pager.lua" \
-      -c 'autocmd VimEnter * normal G' "$@"
-  else
-    local tmp_buffer
-    tmp_buffer="$(mktemp "$TMP/nvim-pager-buffer.XXXXXX")"
-    exec nvim --noplugin \
-      -u "$DOTF/core/nvim/init-pager.lua" \
-      -c "silent write! $tmp_buffer | te cat $tmp_buffer - " \
-      -c 'autocmd VimEnter * normal G'
-  fi
+  echo "$@" >>~/pager.txt
+
+  export INPUT_LINE_NUMBER="${1:-}"
+  export CURSOR_LINE="${2:-}"
+  export CURSOR_COLUMN="${3:-}"
+
+  local tmp_buffer
+  tmp_buffer="$(mktemp "$TMP/nvim-pager-buffer.XXXXXX")"
+  exec nvim --noplugin \
+    -u "$DOTF/core/nvim/init-pager.lua" \
+    -c "silent write! $tmp_buffer | te cat $tmp_buffer - "
+  -c 'autocmd VimEnter * normal G'
 }
 
 main "$@"
