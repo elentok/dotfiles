@@ -7,20 +7,14 @@ source "$DOTF/framework.sh"
 dfl mkdir ~/.config
 dfl symlink "$DOTF/core/nvim" ~/.config/nvim
 
-dfl step start "Installing plugins..."
-nvim --headless "+lua vim.pack.update(nil, { target = 'lockfile'})" +qa &&
-  dfl step success ||
-  dfl step error
+dfl shell "Installing plugins..." -- \
+  nvim --headless "+lua vim.pack.update(nil, { target = 'lockfile'})" +qa
 
-dfl step start "Installing treesitter parsers..."
-nvim --headless "+lua require('elentok.treesitter-parsers')" +qa &&
-  dfl step success ||
-  dfl step error
+dfl shell "Installing treesitter parsers..." -- \
+  nvim --headless "+lua require('elentok.treesitter-parsers')" +qa
 
-dfl step start "Installing Mason tools..."
-nvim --headless "+lua require('config.mason').install_sync()" +qa &&
-  dfl step success ||
-  dfl step error
+dfl shell "Installing Mason tools..." -- \
+  nvim --headless "+lua require('config.mason').install_sync()" +qa
 
 function build-blink-fuzzy() {
   echo
