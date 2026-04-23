@@ -1,8 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
-require("config.mason").setup_path()
-
 vim.o.smartcase = true
 vim.o.ignorecase = true
 vim.o.number = true

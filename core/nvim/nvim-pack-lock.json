@@ -33,10 +33,6 @@
       "rev": "a905eeebc4e63fdc48b5135d3bf8aea5618fb21c",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
-    "mason-tool-installer.nvim": {
-      "rev": "443f1ef8b5e6bf47045cb2217b6f748a223cf7dc",
-      "src": "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim"
-    },
     "mason.nvim": {
       "rev": "b03fb0f20bc1d43daf558cda981a2be22e73ac42",
       "src": "https://github.com/mason-org/mason.nvim"

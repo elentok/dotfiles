@@ -1,12 +1,5 @@
 local M = {}
 
-local function gh(repo) return "https://github.com/" .. repo end
-
-local specs = {
-  gh("mason-org/mason.nvim"),
-  gh("WhoIsSethDaniel/mason-tool-installer.nvim"),
-}
-
 local ensure_installed = {
   "bash-language-server",
   "biome",
@@ -38,40 +31,41 @@ local ensure_installed = {
   "yaml-language-server",
 }
 
-local loaded = false
-local bin_path = vim.fn.stdpath("data") .. "/mason/bin"
-
-function M.setup_path()
-  vim.env.MASON = vim.fn.stdpath("data") .. "/mason"
-
-  local path = vim.env.PATH or ""
-  if not vim.list_contains(vim.split(path, ":", { plain = true }), bin_path) then
-    vim.env.PATH = bin_path .. ":" .. path
-  end
-end
-
-function M.load()
-  if loaded then return end
-
-  M.setup_path()
-  require("config.pack").add(specs, { load = false })
-  require("mason").setup({})
-  require("mason-tool-installer").setup({
-    ensure_installed = ensure_installed,
-    run_on_start = false,
-  })
-
-  loaded = true
-end
-
 function M.install_sync()
-  M.load()
-  require("mason-tool-installer").check_install(false, true)
-end
+  local mason = require("mason")
+  if not mason.has_setup then mason.setup({}) end
 
-function M.open()
-  M.load()
-  vim.cmd.Mason()
+  local registry = require("mason-registry")
+  registry.refresh()
+
+  local pending = 0
+  local failed = {}
+
+  print("Ensuring " .. #ensure_installed .. " packages are installed...\n")
+
+  for _, name in ipairs(ensure_installed) do
+    local pkg = registry.get_package(name)
+    if pkg:is_installed() then
+      print(("- Already installed: %s"):format(name))
+    else
+      pending = pending + 1
+      print(("- Installing Mason package: %s"):format(name))
+      pkg:install({}, function(success, result)
+        pending = pending - 1
+        if not success then
+          table.insert(failed, ("%s: %s"):format(name, result))
+        else
+          print(("- Installed Mason package: %s"):format(name))
+        end
+      end)
+    end
+  end
+
+  vim.wait(3600000, function() return pending == 0 end, 100)
+
+  if #failed > 0 then error("Failed to install Mason packages:\n" .. table.concat(failed, "\n")) end
+
+  print("\nMason tools are installed.\n")
 end
 
 return M

@@ -53,6 +53,7 @@ local pack_specs = {
   gh("folke/which-key.nvim"),
   gh("ptdewey/yankbank-nvim"),
   gh("mrjones2014/smart-splits.nvim"),
+  gh("mason-org/mason.nvim"),
   gh("obsidian-nvim/obsidian.nvim"),
   gh("MeanderingProgrammer/render-markdown.nvim"),
   gh("mfussenegger/nvim-lint"),

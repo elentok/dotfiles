@@ -1,3 +1,5 @@
+require("mason").setup({})
+
 vim.keymap.set("n", "<leader>om", function()
-  require("config.mason").open()
+  vim.cmd.Mason()
 end, { desc = "Open Mason" })
