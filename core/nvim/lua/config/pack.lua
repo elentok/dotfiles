@@ -32,7 +32,6 @@ local pack_specs = {
   gh("kkharji/sqlite.lua"),
 
   { src = gh("catppuccin/nvim"), name = "catppuccin" },
-  { src = gh("saghen/blink.cmp"), version = vim.version.range("1.*") },
   gh("stevearc/conform.nvim"),
   gh("elentok/encrypt.nvim"),
   gh("folke/flash.nvim"),
@@ -61,6 +60,7 @@ local pack_specs = {
 
 if not has_local_stuff then table.insert(pack_specs, gh("elentok/stuff.nvim")) end
 
+M.add({ { src = gh("saghen/blink.cmp"), version = vim.version.range("1.*") } }, { load = function() end })
 M.add(pack_specs)
 
 return M
