@@ -42,6 +42,7 @@ local servers = {
   graphql = { "graphql", "typescriptreact", "javascriptreact" },
   html = { "html", "templ" },
   jsonls = { "json", "jsonc" },
+  lua_ls = { "lua" },
   ["markdown-oxide"] = { "markdown" },
   openscad_lsp = { "openscad" },
   spyglassmc_language_server = { "mcfunction" },
@@ -59,29 +60,22 @@ local servers = {
 }
 
 local configured = {}
+local defaults_configured = false
+
+local function configure_defaults()
+  if defaults_configured then return end
+  defaults_configured = true
+
+  vim.lsp.config("*", {
+    on_attach = require("elentok.lsp-utils").on_attach,
+  })
+end
 
 local function configure_server(server_name)
   if configured[server_name] then return end
   configured[server_name] = true
 
-  local lsp_utils = require("elentok.lsp-utils")
-
-  if server_name == "jsonls" then
-    vim.lsp.config("jsonls", {
-      on_attach = function(client, bufnr)
-        -- When biome is used, disable jsonls's formatting
-        if require("elentok.utils").hasfile({ "biome.json", "biome.jsonc" }) then
-          client.server_capabilities.documentFormattingProvider = false
-          client.server_capabilities.documentRangeFormattingProvider = false
-        end
-
-        lsp_utils.on_attach(client, bufnr)
-      end,
-    })
-  else
-    vim.lsp.config(server_name, { on_attach = lsp_utils.on_attach })
-  end
-
+  configure_defaults()
   vim.lsp.enable(server_name)
 end
 
@@ -98,6 +92,5 @@ vim.api.nvim_create_autocmd("FileType", {
     for _, server_name in ipairs(servers_by_filetype[ev.match] or {}) do
       configure_server(server_name)
     end
-    if ev.match == "lua" then require("config.lsp-luals") end
   end,
 })

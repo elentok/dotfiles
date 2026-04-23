@@ -14,9 +14,7 @@ local function get_library_paths()
   add_pack_libraries(vim.fn.stdpath("config") .. "/pack/local/opt")
 
   local local_stuff_lua = vim.fn.expand("~/dev/nvim/stuff.nvim/lua")
-  if vim.uv.fs_stat(local_stuff_lua) then
-    table.insert(paths, local_stuff_lua)
-  end
+  if vim.uv.fs_stat(local_stuff_lua) then table.insert(paths, local_stuff_lua) end
 
   vim.list_extend(paths, {
     vim.env.VIMRUNTIME,
@@ -27,8 +25,7 @@ local function get_library_paths()
   return paths
 end
 
-vim.lsp.config("lua_ls", {
-  on_attach = require("elentok.lsp-utils").on_attach,
+return {
   on_init = function(client)
     if client.workspace_folders then
       local path = client.workspace_folders[1].name
@@ -42,17 +39,13 @@ vim.lsp.config("lua_ls", {
 
     client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
       runtime = {
-        -- Tell the language server which version of Lua you're using (most
-        -- likely LuaJIT in the case of Neovim)
+        -- Tell the language server which version of Lua you're using.
         version = "LuaJIT",
-        -- Tell the language server how to find Lua modules same way as Neovim
-        -- (see `:h lua-module-load`)
         path = {
           "lua/?.lua",
           "lua/?/init.lua",
         },
       },
-      -- Make the server aware of Neovim runtime files
       workspace = {
         checkThirdParty = false,
         library = get_library_paths(),
@@ -62,5 +55,4 @@ vim.lsp.config("lua_ls", {
   settings = {
     Lua = {},
   },
-})
-vim.lsp.enable("lua_ls")
+}
