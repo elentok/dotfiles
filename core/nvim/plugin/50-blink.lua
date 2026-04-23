@@ -9,8 +9,6 @@ local function load_blink()
     providers = {},
   }
 
-  vim.cmd.packadd("blink.cmp")
-
   require("blink.cmp").setup({
     keymap = {
       preset = "super-tab",
