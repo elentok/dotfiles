@@ -1,36 +1,3 @@
-require("mason").setup({})
-
-require("mason-tool-installer").setup({
-  ensure_installed = {
-    "bash-language-server",
-    "biome",
-    "css-lsp",
-    "cssmodules-language-server",
-    "docker-compose-language-service",
-    "dockerfile-language-server",
-    "dprint",
-    "eslint-lsp",
-    -- "eslint_d",
-    "fish-lsp",
-    "gopls",
-    "harper-ls",
-    "html-lsp",
-    "json-lsp",
-    "lua-language-server",
-    "markdown-oxide",
-    "npm-groovy-lint",
-    "openscad-lsp",
-    "prettierd",
-    "pyright",
-    "shfmt",
-    "rust-analyzer",
-    "ruff", -- python formatter
-    "stylua",
-    "taplo",
-    "ty",
-    "vtsls",
-    "yaml-language-server",
-  },
-})
-
-vim.keymap.set("n", "<leader>om", ":Mason<cr>", { desc = "Open Mason" })
+vim.keymap.set("n", "<leader>om", function()
+  require("config.mason").open()
+end, { desc = "Open Mason" })

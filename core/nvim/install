@@ -17,6 +17,11 @@ nvim --headless "+lua require('elentok.treesitter-parsers')" +qa &&
   dfl step success ||
   dfl step error
 
+dfl step start "Installing Mason tools..."
+nvim --headless "+lua require('config.mason').install_sync()" +qa &&
+  dfl step success ||
+  dfl step error
+
 function build-blink-fuzzy() {
   echo
   echo
