@@ -42,7 +42,7 @@
       "src": "https://github.com/nvim-mini/mini.bracketed"
     },
     "mini.files": {
-      "rev": "e8db416c9f5dbce70f5501da28263d45c0a4df6b",
+      "rev": "3e247eb12ca8c05622ceb8745f9004f761b22ef8",
       "src": "https://github.com/nvim-mini/mini.files"
     },
     "mini.icons": {
@@ -62,7 +62,7 @@
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "e146efacbafed3789ac568abcc5a981c5decaa58",
+      "rev": "8fde495949782bb61c2605174e231d145a048d8c",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-navic": {
@@ -96,7 +96,7 @@
       "src": "https://github.com/Wansmer/sibling-swap.nvim"
     },
     "smart-splits.nvim": {
-      "rev": "78b9d3bd21fe479690ae5e08a1bf3602698466d8",
+      "rev": "033a1ff747652dfa27bfbe90e0844b5cb59a741f",
       "src": "https://github.com/mrjones2014/smart-splits.nvim"
     },
     "snacks.nvim": {
