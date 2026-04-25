@@ -52,7 +52,7 @@ end
 
 function __prompt_host_block
     if test -n "$SSH_CONNECTION"
-        __prompt_block ' ' (hostname)
+        __prompt_block '  ' (hostname)
     end
 end
 
