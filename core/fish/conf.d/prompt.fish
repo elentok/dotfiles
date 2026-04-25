@@ -12,8 +12,8 @@ set -g __fish_git_prompt_char_upstream_equal "$(set_color 9399b2)󰋑 "
 set -g __fish_git_prompt_char_dirtystate "$(set_color $fish_color_error)󰪢 "
 set -g __fish_git_prompt_char_stagedstate "$(set_color $fish_color_option)󰗡 "
 
-set __prompt_bgs 2b2b3c 181825 2b2b3c 3e5767
-set __prompt_fgs 9399b2 9399b2 9399b2 9399b2
+set __prompt_bgs 2b2b3c 181825 2b2b3c 181825 3e5767
+set __prompt_fgs 9399b2 9399b2 9399b2 9399b2 9399b2
 set __prompt_block_index 0
 
 function fish_prompt
@@ -26,6 +26,7 @@ function fish_prompt
         (__prompt_block ' 󰉖 ' (prompt_pwd --full-length-dirs 5)) \
         (__prompt_node_block) \
         (__prompt_vcs_block) \
+        (__prompt_user_block) \
         (__prompt_host_block) \
         (__prompt_separator --final)
 
@@ -45,9 +46,13 @@ function __prompt_vcs_block
     end
 end
 
+function __prompt_user_block
+    __prompt_block ' ' (whoami)
+end
+
 function __prompt_host_block
     if test -n "$SSH_CONNECTION"
-        __prompt_block '   ' (hostname)
+        __prompt_block ' ' (hostname)
     end
 end
 
