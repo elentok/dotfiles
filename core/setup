@@ -1,15 +1,27 @@
 #!/usr/bin/env bash
+#
+# Supported ENV variables:
+#
+# - CAN_SUDO (defaults to "yes", set to "no" to skip sudo calls)
+# - SETUP_BREW (defaults to "yes", set to "no" to skip homebrew setup)
 
 set -euo pipefail
+
+export CAN_SUDO="${CAN_SUDO:-yes}"
+export SETUP_BREW="${SETUP_BREW:-yes}"
 
 function main() {
   dfl mkdir ~/.config
 
-  install-homebrew
+  if [ "$SETUP_BREW" != "no" ]; then
+    install-homebrew
+    dfl shell "Installing Homebrew bundle" -- brew bundle --file "$DFL_ROOT/Brewfile" install
+  fi
 
-  dfl shell "Installing Homebrew bundle" -- brew bundle --file "$DFL_ROOT/Brewfile" install
+  if [ "$CAN_SUDO" != "no" ]; then
+    install-apt-pkgs
+  fi
 
-  install-apt-pkgs
   install-personal-cli-tools
 
   dfl git-clone --update elentok/stuff.nvim ~/dev/nvim/stuff.nvim
