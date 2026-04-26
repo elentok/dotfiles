@@ -42,7 +42,7 @@ if OS.mac?
 
   cask "kitty@nightly"
 
-  if ENV["DOTF_SKIP_MAC_GUI_APPS"] != "true"
+  if !File.exist?(File.expand_path("~/.config/dotfiles/skip-gui-apps"))
     cask "keepassxc"
     cask "freecad"
     cask "openscad@snapshot"
