@@ -40,13 +40,16 @@ if OS.mac?
   brew "grep"
   brew "terminal-notifier"
 
-  cask "keepassxc"
-  cask "freecad"
-  cask "openscad@snapshot"
-  cask "obsidian"
-  cask "telegram"
   cask "kitty@nightly"
-  cask "spotify"
-  cask "chatgpt"
-  cask "prusaslicer"
+
+  if ENV["DOTF_SKIP_MAC_GUI_APPS"] != "true"
+    cask "keepassxc"
+    cask "freecad"
+    cask "openscad@snapshot"
+    cask "obsidian"
+    cask "telegram"
+    cask "spotify"
+    cask "chatgpt"
+    cask "prusaslicer"
+  end
 end
