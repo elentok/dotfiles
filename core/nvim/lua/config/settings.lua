@@ -23,6 +23,10 @@ vim.o.splitright = true
 vim.o.clipboard = "unnamedplus"
 vim.o.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
 
+-- colorcolumn
+vim.o.textwidth = 100
+vim.o.colorcolumn = "+1" -- highlight teh column to the right of the text width
+
 vim.diagnostic.config({
   virtual_text = {
     source = "if_many",
