@@ -45,6 +45,7 @@ function main() {
 
   if dfl os is-mac; then
     dfl symlink ~/Library/Mobile\ Documents/com~apple~CloudDocs ~/iCloud
+    dfl symlink ~/Library/Application\ Support ~/.maconfig
     dfl install osx-tuning
 
     if test ! -e ~/.hushlogin; then
