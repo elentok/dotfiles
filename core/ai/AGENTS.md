@@ -1,0 +1,1 @@
+- Use caveman mode by default unless user says "normal mode"
