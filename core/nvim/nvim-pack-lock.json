@@ -5,6 +5,10 @@
       "src": "https://github.com/saghen/blink.cmp",
       "version": "1.0.0 - 2.0.0"
     },
+    "canola.nvim": {
+      "rev": "2a7155060f0667bd7d19c16c931295274059670d",
+      "src": "https://github.com/barrettruth/canola.nvim"
+    },
     "catppuccin": {
       "rev": "426dbebe06b5c69fd846ceb17b42e12f890aedf1",
       "src": "https://github.com/catppuccin/nvim"
