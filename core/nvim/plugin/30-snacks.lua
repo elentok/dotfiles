@@ -226,4 +226,4 @@ vim.keymap.set(
   function() Snacks.picker.icons({ icon_sources = { "emoji" } }) end,
   { desc = "Insert emoji" }
 )
-vim.keymap.set("n", "<leader>if", insert_file_path, { desc = "Insert file path" })
+vim.keymap.set("i", "<c-x>f", insert_file_path, { desc = "Insert file path" })
