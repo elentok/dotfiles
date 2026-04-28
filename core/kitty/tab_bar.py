@@ -70,7 +70,11 @@ def draw_tab(
         fg = active_tab_fg
         bg = active_tab_bg
 
-    _draw_bubble(screen, f"{index} {tab.title}", fg, bg)
+    sessionless = ""
+    if tab.session_name == "":
+        sessionless = " "
+
+    _draw_bubble(screen, f"{index} {sessionless}{tab.title}", fg, bg)
     _draw(screen, " ", 0, 0)
 
     return screen.cursor.x
