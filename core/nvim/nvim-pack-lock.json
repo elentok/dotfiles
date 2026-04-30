@@ -33,6 +33,10 @@
       "rev": "21604255d0e8f9968322f61f2b6c09e5efe1285a",
       "src": "https://github.com/MagicDuck/grug-far.nvim"
     },
+    "lazydiff.nvim": {
+      "rev": "5104084cb18ed4fc5f9e4a086dfab67e88c4dd47",
+      "src": "https://github.com/rashedInt32/lazydiff.nvim"
+    },
     "lualine.nvim": {
       "rev": "a905eeebc4e63fdc48b5135d3bf8aea5618fb21c",
       "src": "https://github.com/nvim-lualine/lualine.nvim"

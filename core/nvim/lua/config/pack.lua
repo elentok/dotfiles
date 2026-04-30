@@ -58,6 +58,7 @@ local pack_specs = {
   gh("obsidian-nvim/obsidian.nvim"),
   gh("MeanderingProgrammer/render-markdown.nvim"),
   gh("mfussenegger/nvim-lint"),
+  gh("rashedInt32/lazydiff.nvim"),
 }
 
 if not has_local_stuff then table.insert(pack_specs, gh("elentok/stuff.nvim")) end
