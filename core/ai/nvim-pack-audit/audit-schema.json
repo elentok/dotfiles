@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Neovim Pack Audit Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "workflow_version",
+    "mode",
+    "overall_verdict",
+    "summary",
+    "plugins",
+    "commit"
+  ],
+  "properties": {
+    "workflow_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["changed_only", "baseline"]
+    },
+    "overall_verdict": {
+      "type": "string",
+      "enum": ["approve", "manual_review", "block"]
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "plugins_changed",
+        "plugins_approved",
+        "plugins_manual_review",
+        "plugins_blocked"
+      ],
+      "properties": {
+        "plugins_changed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "plugins_approved": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "plugins_manual_review": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "plugins_blocked": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "plugins": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "plugin_name",
+          "old_rev",
+          "new_rev",
+          "lines_added",
+          "lines_removed",
+          "verdict",
+          "risk_level",
+          "findings",
+          "change_summary"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "plugin_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "old_rev": {
+            "type": "string",
+            "minLength": 1
+          },
+          "new_rev": {
+            "type": "string",
+            "minLength": 1
+          },
+          "lines_added": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "lines_removed": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "verdict": {
+            "type": "string",
+            "enum": ["approve", "manual_review", "block"]
+          },
+          "risk_level": {
+            "type": "string",
+            "enum": ["low", "medium", "high"]
+          },
+          "findings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["severity", "title", "details", "files"],
+              "properties": {
+                "severity": {
+                  "type": "string",
+                  "enum": ["low", "medium", "high"]
+                },
+                "title": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "details": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "files": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          },
+          "change_summary": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "commit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subject", "body_markdown"],
+      "properties": {
+        "subject": {
+          "type": "string",
+          "const": "nvim: update pack lockfile"
+        },
+        "body_markdown": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
