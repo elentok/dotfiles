@@ -1,7 +1,9 @@
 # cmd - 2 : kitten quick-access-terminal --instance-group quick
-cmd - 2 : open "/Applications/kitty.app"
-cmd - 3 : open "/Applications/Google Chrome.app"
+cmd - 2 : open "/Applications/Google Chrome.app"
+cmd - 3 : open "/Applications/kitty.app"
 cmd - 4 : open "/Applications/Slack.app"
+cmd - 5 : open "/Applications/Prisma Access Browser.app"
+cmd - 8 : open "/Applications/Prisma Access Browser.app"
 cmd - 9 : open "/Applications/Spotify.app"
 cmd + ctrl + shift - r : skhd --reload && terminal-notifier -title "skhd" -message "reloaded config"
 cmd + alt - p : spot
