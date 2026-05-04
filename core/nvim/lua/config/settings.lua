@@ -58,3 +58,10 @@ vim.opt.backup = true
 vim.opt.writebackup = true
 vim.opt.backupdir = backupdir
 if not vim.fn.isdirectory(backupdir) then vim.fn.mkdir(backupdir, "p") end
+
+-- Custom filetypes
+vim.filetype.add({
+  extension = {
+    sh = "bash",
+  },
+})
