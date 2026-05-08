@@ -3,10 +3,6 @@
 require("oil").setup({
   skip_confirm_for_simple_edits = false,
   delete_to_trash = true,
-  columns = {
-    "icon",
-    "size",
-  },
   keymaps = {
     ["<C-h>"] = false,
     ["<C-l>"] = false,
