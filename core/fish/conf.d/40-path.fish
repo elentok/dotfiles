@@ -9,6 +9,7 @@ end
 
 fish_add_path "$HOME/.local/bin" \
     "$HOME/.cargo/bin" \
+    "$HOME/.local/share/nvim/mason/bin" \
     "$HOME/dev/qmkmd/bin" \
     "$HOME/dev/git-helpers/bin" \
     "$HOME/dev/rename/bin" \

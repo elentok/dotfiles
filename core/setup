@@ -106,6 +106,7 @@ function install-personal-cli-tools() {
     elentok/colr
     elentok/blf
     elentok/qmkmd
+    xieyuschen/gopls-mcp
   )
   dfl pkg github install "${packages[@]}"
 }
