@@ -41,6 +41,7 @@ When reading this file please explicitly mention that you did.
    - `final_body:` body text
    - `checklist:` pass/fail per checklist item
 6. Review the worker output, edit if needed, then run `git commit`.
+7. Follow the "Token Tracking" section
 
 ## Commit Message Rules
 
