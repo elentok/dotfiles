@@ -36,11 +36,16 @@
   # 25% red 75% base
   minus-emph-style = bold syntax "#53394c"
   # 10% red 90% base
-  minus-style = syntax "#34293a"
+
+  # minus-style = syntax "#34293a"
+  minus-style = syntax "#3e2537"
+
   # 25% green 75% base
   plus-emph-style = bold syntax "#404f4a"
   # 10% green 90% base
-  plus-style = syntax "#2c3239"
+
+  # plus-style = syntax "#2c3239"
+  plus-style = syntax "#25383c"
   map-styles = \
     bold purple => syntax "#494060", \
     bold blue => syntax "#384361", \
