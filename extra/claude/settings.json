@@ -8,6 +8,24 @@
       "Bash(grep:*)"
     ]
   },
+  "enabledPlugins": {
+    "gopls-lsp@claude-plugins-official": true
+  },
   "alwaysThinkingEnabled": true,
-  "advisorModel": "opus"
+  "effortLevel": "medium",
+  "advisorModel": "opus",
+  "editorMode": "vim",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "rtk hook claude"
+          }
+        ]
+      }
+    ]
+  }
 }

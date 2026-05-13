@@ -15,3 +15,6 @@ set -x FZF_DEFAULT_OPTS "--tiebreak=end --popup=85%,70% --wrap-sign='󰞘 ' --wr
 set -x BUN_INSTALL "$HOME/.bin"
 
 set -x MANPAGER "nvim +Man!"
+
+# https://github.com/rtk-ai/rtk/blob/develop/docs/TELEMETRY.md
+set -x RTK_TELEMETRY_DISABLED 1

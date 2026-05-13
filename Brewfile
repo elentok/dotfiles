@@ -28,6 +28,7 @@ brew "tree-sitter"
 brew "tree-sitter-cli"
 brew "go"
 brew "uv"
+brew "rtk" # High-performance CLI proxy that reduces LLM token consumption
 
 uv "git-fame"
 uv "neovim-remote"

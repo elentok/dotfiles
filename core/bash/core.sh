@@ -117,3 +117,6 @@ _core_elapsed_ms=$(((SECONDS - _core_start) * 1000))
 if [[ $_core_elapsed_ms -gt 25 ]]; then
   echo "Warning: core.sh took $(printf '%.2f' $_core_elapsed_ms)ms to load"
 fi
+
+# https://github.com/rtk-ai/rtk/blob/develop/docs/TELEMETRY.md
+export RTK_TELEMETRY_DISABLED=1
