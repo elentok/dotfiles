@@ -1,7 +1,11 @@
 @~/.dotfiles/core/ai/RTK.md
 
-# Planning
+## Planning
 
 - Write plans to docs/plans/{plan-name}.md
 - Use markdown checkboxes (`- [ ] task 1`) for the tasks
 - Everytime you complete a task, mark it as complete (`- [x] task 1`)
+
+## Notes
+
+- I'm using GNU sed on Mac, so use GNU sed arguments, not Mac arguments.
