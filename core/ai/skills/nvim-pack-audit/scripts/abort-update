@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -ne 1 ]]; then
+	echo "Usage: core/ai/skills/nvim-pack-audit/scripts/abort-update <state-json>" >&2
+	exit 1
+fi
+state_json="$1"
+if [[ ! -f "$state_json" ]]; then
+	echo "missing state file: $state_json" >&2
+	exit 1
+fi
+
+tmp_root=$(jq -r '.tmp_root' "$state_json")
+echo "aborted by user"
+echo "artifacts kept in $tmp_root"
+echo "cleanup manually with: rm -rf -- $tmp_root"

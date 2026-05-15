@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -ne 1 ]]; then
+	echo "Usage: core/ai/skills/nvim-pack-audit/scripts/cleanup <state-json>" >&2
+	exit 1
+fi
+tmp_root=$(jq -r '.tmp_root' "$1")
+rm -rf -- "$tmp_root"
+echo "cleaned $tmp_root"

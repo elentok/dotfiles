@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+	cat <<'USAGE'
+Usage: core/ai/skills/nvim-pack-audit/scripts/approve-update <state-json> [--commit-message-file <path>]
+USAGE
+}
+die() {
+	echo "$*" >&2
+	exit 1
+}
+
+if [[ ${1:-} == "-h" || ${1:-} == "--help" ]]; then
+	usage
+	exit 0
+fi
+if [[ $# -lt 1 ]]; then
+	usage >&2
+	exit 1
+fi
+state_json="$1"
+shift
+commit_msg_override=""
+
+while [[ $# -gt 0 ]]; do
+	case "$1" in
+	--commit-message-file)
+		if [[ $# -lt 2 ]]; then
+			die "missing value for --commit-message-file"
+		fi
+		commit_msg_override="$2"
+		shift 2
+		;;
+	-h | --help)
+		usage
+		exit 0
+		;;
+	*) die "unknown argument: $1" ;;
+	esac
+done
+
+if [[ ! -f "$state_json" ]]; then
+	die "missing state file: $state_json"
+fi
+repo_root=$(jq -r '.repo_root' "$state_json")
+lockfile_rel=$(jq -r '.lockfile_rel' "$state_json")
+lockfile_path=$(jq -r '.lockfile_path' "$state_json")
+staged_lockfile=$(jq -r '.staged_lockfile' "$state_json")
+audit_json=$(jq -r '.audit_json' "$state_json")
+tmp_root=$(jq -r '.tmp_root' "$state_json")
+
+if [[ ! -f "$staged_lockfile" ]]; then
+	die "missing staged lockfile: $staged_lockfile"
+fi
+if [[ ! -f "$audit_json" ]]; then
+	die "missing audit json: $audit_json"
+fi
+if jq -e '.overall_verdict == "block"' "$audit_json" >/dev/null; then
+	die "promotion refused: audit verdict is block"
+fi
+
+cp "$staged_lockfile" "$lockfile_path"
+
+commit_msg_file="$tmp_root/artifacts/commit-message.txt"
+if [[ -n "$commit_msg_override" ]]; then
+	if [[ ! -f "$commit_msg_override" ]]; then
+		die "missing commit message file: $commit_msg_override"
+	fi
+	cp "$commit_msg_override" "$commit_msg_file"
+else
+	{
+		jq -r '.commit.subject' "$audit_json"
+		echo
+		jq -r '.commit.body_markdown' "$audit_json"
+	} >"$commit_msg_file"
+fi
+
+git -C "$repo_root" add -- "$lockfile_rel"
+git -C "$repo_root" commit -F "$commit_msg_file" -- "$lockfile_rel"
+rm -rf -- "$tmp_root"
+echo "promoted, committed, and cleaned artifacts"

@@ -1,0 +1,167 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+repo_root=$(git -C "$script_dir" rev-parse --show-toplevel)
+
+lockfile_rel="core/nvim/nvim-pack-lock.json"
+lockfile_path="$repo_root/$lockfile_rel"
+audit_base="$repo_root/core/ai/nvim-pack-audit"
+schema_path="$audit_base/audit-schema.json"
+prompt_path="$audit_base/security-audit-prompt.md"
+
+usage() {
+	cat <<'USAGE'
+Usage: core/ai/skills/nvim-pack-audit/scripts/start-audit
+USAGE
+}
+
+die() {
+	echo "$*" >&2
+	exit 1
+}
+
+if [[ $# -gt 0 ]]; then
+	case "${1:-}" in
+	-h | --help)
+		usage
+		exit 0
+		;;
+	*)
+		usage >&2
+		exit 1
+		;;
+	esac
+fi
+
+for cmd in git jq nvim codex; do
+	command -v "$cmd" >/dev/null 2>&1 || die "missing required command: $cmd"
+done
+
+if [[ ! -f "$lockfile_path" ]]; then
+	die "missing lockfile: $lockfile_path"
+fi
+if [[ ! -f "$schema_path" ]]; then
+	die "missing schema: $schema_path"
+fi
+if [[ ! -f "$prompt_path" ]]; then
+	die "missing prompt: $prompt_path"
+fi
+
+if git -C "$repo_root" ls-files -u -- "$lockfile_rel" | grep -q .; then
+	die "lockfile has unmerged changes: $lockfile_rel"
+fi
+if grep -nE '^(<<<<<<<|=======|>>>>>>>)' "$lockfile_path" >/dev/null 2>&1; then
+	die "lockfile appears to contain merge conflict markers: $lockfile_rel"
+fi
+
+tmp_root=$(mktemp -d "${TMPDIR:-/private/tmp}/nvim-pack-audit-XXXXXX")
+staging_repo="$tmp_root/repo"
+xdg_root="$tmp_root/xdg"
+xdg_config="$xdg_root/config"
+xdg_data="$xdg_root/data"
+xdg_state="$xdg_root/state"
+xdg_cache="$xdg_root/cache"
+artifacts_dir="$tmp_root/artifacts"
+old_lockfile="$artifacts_dir/old-lockfile.json"
+audit_json="$artifacts_dir/audit.json"
+audit_md="$artifacts_dir/audit.md"
+summary_txt="$artifacts_dir/summary.txt"
+state_json="$artifacts_dir/state.json"
+
+mkdir -p "$xdg_config" "$xdg_data" "$xdg_state" "$xdg_cache" "$artifacts_dir"
+
+git clone --depth=1 "file://$repo_root" "$staging_repo" >/dev/null
+cp "$lockfile_path" "$old_lockfile"
+ln -s "$staging_repo/core/nvim" "$xdg_config/nvim"
+
+echo
+echo "staged Neovim instructions:"
+echo "1. vim.pack.update() will run automatically"
+echo "2. Review the confirmation buffer"
+echo "3. Use :write to apply updates or :quit to cancel"
+echo "4. Exit Neovim"
+echo
+
+(
+	export XDG_CONFIG_HOME="$xdg_config"
+	export XDG_DATA_HOME="$xdg_data"
+	export XDG_STATE_HOME="$xdg_state"
+	export XDG_CACHE_HOME="$xdg_cache"
+	cd "$staging_repo"
+	nvim "+lua vim.pack.update()" "$staging_repo/core/nvim/nvim-pack-lock.json"
+)
+
+staged_lockfile="$staging_repo/$lockfile_rel"
+if cmp -s "$old_lockfile" "$staged_lockfile"; then
+	echo "no plugin updates applied"
+	rm -rf -- "$tmp_root"
+	exit 10
+fi
+
+plugin_root="$xdg_data/nvim/site/pack/core/opt"
+cat "$prompt_path" - <<EOF_PROMPT | codex exec \
+	--sandbox workspace-write \
+	--ephemeral \
+	--skip-git-repo-check \
+	--output-schema "$schema_path" \
+	-o "$audit_json" \
+	-C "$tmp_root" \
+	-
+
+## Runtime Context
+
+- mode: changed_only
+- old_lockfile_path: $old_lockfile
+- new_lockfile_path: $staged_lockfile
+- plugin_root: $plugin_root
+- audit_md_path: $audit_md
+EOF_PROMPT
+
+if [[ ! -f "$audit_json" ]]; then
+	die "Codex did not produce $audit_json"
+fi
+if [[ ! -f "$audit_md" ]]; then
+	die "Codex did not write $audit_md"
+fi
+
+jq -r --arg audit_md "$audit_md" '
+  def plugin_line:
+    "- \(.plugin_name): \(.old_rev[0:12]) -> \(.new_rev[0:12]) [\(.verdict)] (+\(.lines_added)/-\(.lines_removed))";
+  def finding_line:
+    "  * \(.plugin_name): \(.findings[0].severity) - \(.findings[0].title)";
+
+  [
+    "Changed plugins: \(.summary.plugins_changed)",
+    (.plugins[] | plugin_line),
+    "",
+    "Top findings:",
+    ([ .plugins[] | select(.findings | length > 0) | finding_line ] | if length == 0 then "  * none" else .[] end),
+    "",
+    "Overall verdict: \(.overall_verdict)",
+    "Promotion allowed: \(if .overall_verdict == \"block\" then \"no\" else \"yes\" end)",
+    "Audit report: \($audit_md)"
+  ] | .[]
+' "$audit_json" | tee "$summary_txt"
+
+jq -n \
+	--arg repo_root "$repo_root" \
+	--arg tmp_root "$tmp_root" \
+	--arg staged_lockfile "$staged_lockfile" \
+	--arg lockfile_path "$lockfile_path" \
+	--arg lockfile_rel "$lockfile_rel" \
+	--arg audit_json "$audit_json" \
+	--arg audit_md "$audit_md" \
+	--arg summary_txt "$summary_txt" \
+	--arg verdict "$(jq -r '.overall_verdict' "$audit_json")" \
+	'{repo_root:$repo_root,tmp_root:$tmp_root,lockfile_rel:$lockfile_rel,lockfile_path:$lockfile_path,staged_lockfile:$staged_lockfile,audit_json:$audit_json,audit_md:$audit_md,summary_txt:$summary_txt,verdict:$verdict}' >"$state_json"
+
+echo
+echo "review state saved: $state_json"
+if jq -e '.overall_verdict == "block"' "$audit_json" >/dev/null; then
+	echo "promotion refused: audit verdict is block"
+	echo "artifacts kept in $tmp_root"
+	exit 20
+fi
+echo "ready for review loop and approval"
+echo "artifacts kept in $tmp_root"

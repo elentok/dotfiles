@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -ne 1 ]]; then
+	echo "Usage: core/ai/skills/nvim-pack-audit/scripts/show-summary <state-json>" >&2
+	exit 1
+fi
+summary_txt=$(jq -r '.summary_txt' "$1")
+if [[ ! -f "$summary_txt" ]]; then
+	echo "missing summary file: $summary_txt" >&2
+	exit 1
+fi
+cat "$summary_txt"

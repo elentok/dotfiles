@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -ne 2 ]]; then
+	echo "Usage: core/ai/skills/nvim-pack-audit/scripts/show-plugin <state-json> <plugin-name>" >&2
+	exit 1
+fi
+audit_json=$(jq -r '.audit_json' "$1")
+plugin_name="$2"
+if [[ ! -f "$audit_json" ]]; then
+	echo "missing audit json: $audit_json" >&2
+	exit 1
+fi
+
+jq --arg name "$plugin_name" -r '
+  .plugins[] | select(.plugin_name == $name) |
+  [
+    "plugin: \(.plugin_name)",
+    "revision: \(.old_rev[0:12]) -> \(.new_rev[0:12])",
+    "verdict: \(.verdict)",
+    "diffstat: +\(.lines_added) / -\(.lines_removed)",
+    "findings:",
+    (if (.findings | length) == 0 then "- none" else (.findings[] | "- [\(.severity)] \(.title): \(.details)") end)
+  ] | .[]
+' "$audit_json"

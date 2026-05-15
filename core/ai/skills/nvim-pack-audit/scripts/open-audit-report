@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -ne 1 ]]; then
+	echo "Usage: core/ai/skills/nvim-pack-audit/scripts/open-audit-report <state-json>" >&2
+	exit 1
+fi
+audit_md=$(jq -r '.audit_md' "$1")
+if [[ ! -f "$audit_md" ]]; then
+	echo "missing audit report: $audit_md" >&2
+	exit 1
+fi
+echo "audit report: $audit_md"
+echo
+head -n 80 "$audit_md"
