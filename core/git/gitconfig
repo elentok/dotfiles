@@ -1,3 +1,4 @@
+# vim: filetype=gitconfig
 # Add these lines (with your details) to ~/.dotlocal/gitconfig
 # [user]
 #   name = David Elentok
@@ -14,16 +15,6 @@
 
   # Always use linux line endings
   autocrlf = false
-
-[mergetool "kdiff3"]
-  path = kdiff3
-
-[mergetool "nvimdiff"]
-  cmd = nvim -d \"$LOCAL\" \"$MERGED\" \"$REMOTE\" -c \"wincmd l\" -c \"norm ]n\" -c \":UfoDisable\"
-  ; cmd = nvim -d \"$LOCAL\" \"$MERGED\" \"$BASE\" \"$REMOTE\" -c \"wincmd w\" -c \"wincmd J\"
-  ; git config mergetool.nvim.cmd 'nvim -d -c "wincmd l" -c "norm ]c" "$LOCAL" "$MERGED" "$REMOTE"'
-
-
 
 [diff]
   colorMoved = default
@@ -85,7 +76,6 @@
   ss = confirm stash save --patch
   smu = submodule update --init --recursive
   t = tag
-  semtag = !git tag -a $(semver tag) -m \"tagging $(semver tag)\"
   g = grep --break --heading --line-number
   alias = config --get-regexp '^alias\\.'
   msg = log -1 --pretty=%B
@@ -135,3 +125,5 @@
 [include]
   ; path = ~/.dotprivate/gitconfig
 
+[fetch]
+	prune = true
