@@ -64,10 +64,10 @@ When reading this file please explicitly mention that you did.
 ### Scope
 
 - Nested scopes are allowed when they improve clarity (`{top-scope}: {child-scope}: {message}`)
-- Get existing scopes (add new if missing):
+- To existing scopes (add new if missing) run:
 
   ```bash
-  bash "$(dirname "$SKILL_FILE")/scripts/commit-scopes.sh"
+  ~/.dotfiles/core/ai/skills/commit/scripts/commit-scopes.sh
   ```
 
 ### Body
