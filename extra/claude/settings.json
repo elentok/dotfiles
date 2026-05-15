@@ -5,7 +5,10 @@
     "allow": [
       "Bash(find:*)",
       "Bash(rg:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(go *)",
+      "Bash(rtk *)",
+      "Bash(wait)"
     ]
   },
   "enabledPlugins": {
@@ -15,6 +18,10 @@
   "effortLevel": "medium",
   "advisorModel": "opus",
   "editorMode": "vim",
+  "statusLine": {
+    "type": "command",
+    "command": "sh ~/.dotfiles/extra/claude/statusline.sh"
+  },
   "hooks": {
     "PreToolUse": [
       {
