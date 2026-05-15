@@ -1,0 +1,16 @@
+:root {
+  --colorBase: #1e1e2e;
+  --colorDeepBg: #11111a;
+  --colorText: #cdd6f4;
+  --colorSubtle: #a6adc8;
+  --colorOverlay: #6c7086;
+  --colorBlue: #89b4fa;
+  --colorGreen: #a6e3a1;
+  --colorYellow: #f9e2af;
+  --colorRed: #f38ba8;
+  --colorOrange: #fab387;
+  --colorMauve: #cba6f7;
+  --colorTeal: #94e2d5;
+  --colorSurface: #313244;
+  --colorSurface1: #45475a;
+}
