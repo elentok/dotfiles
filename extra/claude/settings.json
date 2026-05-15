@@ -8,7 +8,12 @@
       "Bash(grep:*)",
       "Bash(go *)",
       "Bash(rtk *)",
-      "Bash(wait)"
+      "Bash(bd *)",
+      "Bash(wait)",
+      "Skill(beads)",
+      "Skill(commit)",
+      "WebSearch",
+      "Bash(~/.dotfiles/core/ai/skills/commit/scripts/commit-scopes.sh *)"
     ]
   },
   "enabledPlugins": {
