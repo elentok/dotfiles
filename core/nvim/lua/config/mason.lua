@@ -21,6 +21,7 @@ local ensure_installed = {
   "openscad-lsp",
   "prettierd",
   "pyright",
+  "shellcheck",
   "shfmt",
   "rust-analyzer",
   "ruff", -- python formatter
