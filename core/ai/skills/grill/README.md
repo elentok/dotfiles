@@ -2,4 +2,4 @@
 
 See https://github.com/mattpocock/skills/tree/main/skills/engineering/grill-with-docs.
 
-Inlined in my dotfiles for ease-of-deployment.
+Inlined in my dotfiles for ease-of-deployment and renamed to `grill` to make it easier to run.
