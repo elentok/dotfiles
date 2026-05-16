@@ -4,5 +4,5 @@ set -euo pipefail
 
 dfl symlink "$DOTF/core/ai/skills" ~/.claude/skills/
 dfl symlink "$DOTF/core/ai/skills" ~/.codex/skills/
-dfl inject "$DOTF/core/ai/AGENTS.md" ~/.codex/AGENTS.md
-dfl inject "$DOTF/core/ai/AGENTS.md" ~/.claude/CLAUDE.md
+dfl inject --link "$DOTF/core/ai/AGENTS.md" ~/.codex/AGENTS.md
+dfl inject --link "$DOTF/core/ai/AGENTS.md" ~/.claude/CLAUDE.md
