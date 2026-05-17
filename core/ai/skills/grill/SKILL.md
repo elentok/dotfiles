@@ -1,5 +1,5 @@
 ---
-name: grill-with-docs
+name: grill
 description:
   Grilling session that challenges your plan against the existing domain model, sharpens
   terminology, and updates documentation (CONTEXT.md, ADRs) inline as decisions crystallise. Use
