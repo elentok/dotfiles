@@ -7,7 +7,8 @@ if test -d "$DOTP"
     end
 end
 
-fish_add_path "$HOME/.local/bin" \
+fish_add_path "$HOME/go/bin" \
+    "$HOME/.local/bin" \
     "$HOME/.cargo/bin" \
     "$HOME/.local/share/nvim/mason/bin" \
     "$HOME/dev/qmkmd/bin" \
@@ -21,5 +22,4 @@ fish_add_path "$HOME/.local/bin" \
     "$HOME/.deno/bin" \
     "$HOME/.apps/bin" \
     "$BUN_INSTALL/bin" \
-    "$HOME/go/bin" \
     $dotp_script_paths
