@@ -25,7 +25,7 @@
   "editorMode": "vim",
   "statusLine": {
     "type": "command",
-    "command": "sh ~/.dotfiles/extra/claude/statusline.sh"
+    "command": "blf claude-statusline"
   },
   "hooks": {
     "PreToolUse": [
