@@ -46,6 +46,8 @@ local pack_specs = {
   gh("nvim-mini/mini.pairs"),
   gh("nvim-mini/mini.move"),
   gh("nvim-mini/mini.files"),
+  gh("nvim-mini/mini.pick"),
+  gh("nvim-mini/mini.extra"),
   -- gh("stevearc/oil.nvim"),
   gh("barrettruth/canola.nvim"),
   gh("Wansmer/sibling-swap.nvim"),

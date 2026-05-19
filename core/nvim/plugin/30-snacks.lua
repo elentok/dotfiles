@@ -122,14 +122,14 @@ vim.keymap.set(
   function() Snacks.picker.smart({ filter = { cwd = true } }) end,
   { desc = "Smart file picker" }
 )
-vim.keymap.set("n", "``", function() Snacks.picker.resume() end, { desc = "Resume last picker" })
-vim.keymap.set("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "Find Files" })
-vim.keymap.set(
-  "n",
-  "<leader>jr",
-  function() Snacks.picker.recent({ filter = { cwd = true } }) end,
-  { desc = "Find recent files" }
-)
+-- vim.keymap.set("n", "``", function() Snacks.picker.resume() end, { desc = "Resume last picker" })
+-- vim.keymap.set("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "Find Files" })
+-- vim.keymap.set(
+--   "n",
+--   "<leader>jr",
+--   function() Snacks.picker.recent({ filter = { cwd = true } }) end,
+--   { desc = "Find recent files" }
+-- )
 vim.keymap.set(
   "n",
   "<leader>jR",
