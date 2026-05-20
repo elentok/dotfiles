@@ -25,6 +25,10 @@
       "rev": "fcea7ff883235d9024dc41e638f164a450c14ca2",
       "src": "https://github.com/folke/flash.nvim"
     },
+    "fzf-lua": {
+      "rev": "3ff77862f6c62f7b850668435ae43aa026de8758",
+      "src": "https://github.com/ibhagwan/fzf-lua"
+    },
     "gitsigns.nvim": {
       "rev": "dd3f588bacbeb041be6facf1742e42097f62165d",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
@@ -49,10 +53,6 @@
       "rev": "d94d51dcee625723aaaf8d38174b48522eaf9131",
       "src": "https://github.com/nvim-mini/mini.bracketed"
     },
-    "mini.extra": {
-      "rev": "cf027da13fd217cfe3af6ef978d0e947c7ee0f7a",
-      "src": "https://github.com/nvim-mini/mini.extra"
-    },
     "mini.files": {
       "rev": "5e0f0d264166e71d37ca35d84c54b1887ea76b40",
       "src": "https://github.com/nvim-mini/mini.files"
@@ -68,10 +68,6 @@
     "mini.pairs": {
       "rev": "30cf2f01c4aaa2033db67376b9924fa2442c05d6",
       "src": "https://github.com/nvim-mini/mini.pairs"
-    },
-    "mini.pick": {
-      "rev": "0e25916ec4b0f3ad81329e529db55ef350ac9901",
-      "src": "https://github.com/nvim-mini/mini.pick"
     },
     "nvim-lint": {
       "rev": "665525810630701b84181e4d9eefd24b49845b29",

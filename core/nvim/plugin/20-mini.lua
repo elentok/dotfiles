@@ -7,14 +7,6 @@ end
 require("mini.bracketed").setup({})
 require("mini.pairs").setup({})
 require("mini.move").setup({})
-require("mini.pick").setup({
-  window = {
-    config = {
-      border = "rounded",
-    },
-  },
-})
-require("mini.extra").setup({})
 -- require("mini.files").setup({
 --   windows = {
 --     max_number = 2,
@@ -79,8 +71,3 @@ require("mini.extra").setup({})
 --   local filepath = vim.api.nvim_buf_get_name(0)
 --   MiniFiles.open(filepath)
 -- end, { desc = "Open parent directory" })
-
-vim.keymap.set("n", "``", function() Snacks.picker.resume() end, { desc = "Resume last picker" })
-vim.keymap.set("n", "<leader>ff", ":Pick files<cr>", { desc = "Find Files" })
-vim.keymap.set("n", "<leader>jr", ":Pick oldfiles current_dir=true<cr>", { desc = "Find Files" })
-vim.keymap.set("n", "<leader>jb", ":Pick buffers<cr>", { desc = "Find Files" })

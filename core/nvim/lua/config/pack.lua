@@ -46,8 +46,6 @@ local pack_specs = {
   gh("nvim-mini/mini.pairs"),
   gh("nvim-mini/mini.move"),
   gh("nvim-mini/mini.files"),
-  gh("nvim-mini/mini.pick"),
-  gh("nvim-mini/mini.extra"),
   -- gh("stevearc/oil.nvim"),
   gh("barrettruth/canola.nvim"),
   gh("Wansmer/sibling-swap.nvim"),
@@ -61,6 +59,7 @@ local pack_specs = {
   gh("MeanderingProgrammer/render-markdown.nvim"),
   gh("mfussenegger/nvim-lint"),
   gh("rashedInt32/lazydiff.nvim"),
+  gh("ibhagwan/fzf-lua"),
 }
 
 if not has_local_stuff then table.insert(pack_specs, gh("elentok/stuff.nvim")) end
