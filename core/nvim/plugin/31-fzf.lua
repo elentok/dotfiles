@@ -1,6 +1,7 @@
 require("fzf-lua").setup({
   winopts = {
     border = "rounded",
+    ---@diagnostic disable-next-line: missing-fields
     preview = {
       layout = "vertical",
     },
@@ -16,15 +17,58 @@ require("fzf-lua").setup({
 
 local set = vim.keymap.set
 
-set("n", "<leader><space>", ":FzfLua files<cr>", { desc = "Smart file picker" })
-set("n", "<leader>jb", ":FzfLua buffers<cr>", { desc = "Buffers" })
-set("n", "<leader>jh", ":FzfLua helptags<cr>", { desc = "Help tags" })
-set("n", "<leader>gs", ":FzfLua git_status<cr>", { desc = "Git status" })
-set("n", "<leader>/", ":FzfLua live_grep multiline=true<cr>", { desc = "Grep word" })
-set("n", "<leader>jr", ":FzfLua oldfiles cwd_only=true<cr>", { desc = "Jump to recent file" })
+set("n", "<leader><space>", function() FzfLua.files() end, { desc = "Smart file picker" })
+set("n", "<leader>jb", function() FzfLua.buffers() end, { desc = "Buffers" })
+set("n", "<leader>jh", function() FzfLua.helptags() end, { desc = "Help tags" })
+set("n", "<leader>js", function() FzfLua.lsp_document_symbols() end, { desc = "Help tags" })
+set("n", "<leader>gs", function() FzfLua.git_status() end, { desc = "Git status" })
+set("n", "<leader>gl", function() FzfLua.git_bcommits() end, { desc = "Commits of current buffer" })
+set("n", "<leader>/", function() FzfLua.live_grep({ multiline = true }) end, { desc = "Grep word" })
+set(
+  "n",
+  "<leader>w/",
+  function() FzfLua.grep_cword({ multiline = true }) end,
+  { desc = "Grep word" }
+)
+set(
+  "n",
+  "<leader>jr",
+  function() FzfLua.oldfiles({ cwd_only = true }) end,
+  { desc = "Jump to recent file" }
+)
+set(
+  "n",
+  "<leader>jc",
+  function() FzfLua.files({ cwd = "~/.dotfiles/core/nvim" }) end,
+  { desc = "Jump to config" }
+)
 
-set("n", "``", ":FzfLua resume<cr>", { desc = "Resume last picker" })
-set("n", "<leader>ff", ":FzfLua files<cr>", { desc = "Find Files" })
+set("n", "<leader>ch", function() FzfLua.command_history() end, { desc = "Jump to config" })
+set("n", "z=", function() FzfLua.spell_suggest() end, { desc = "Jump to config" })
 
-set("n", "grr", ":FzfLua lsp_references multiline=true<cr>", { desc = "LSP references" })
-set("n", "gd", ":FzfLua lsp_defintions<cr>", { desc = "LSP definition" })
+-- FzfLua.files({ cmd = "fd --type f . ~/.dotfiles/core/nvim ~/.dotplugins/*/nvim" })
+
+set("n", "``", function() FzfLua.resume() end, { desc = "Resume last picker" })
+set("n", "<leader>ff", function() FzfLua.files() end, { desc = "Find Files" })
+
+set(
+  "n",
+  "grr",
+  function() FzfLua.lsp_references({ multiline = true }) end,
+  { desc = "LSP references" }
+)
+
+set("n", "gre", function() FzfLua.diagnostics_workspace() end, { desc = "Workspace diagnostics" })
+set("n", "grd", function() FzfLua.diagnostics_document() end, { desc = "Buffer diagnostics" })
+
+set(
+  "n",
+  "gd",
+  function() FzfLua.lsp_definitions({ multiline = true }) end,
+  { desc = "LSP definition" }
+)
+
+set("i", "<c-x>l", function() FzfLua.complete_line() end, { desc = "Complete line" })
+set("i", "<c-x><c-l>", function() FzfLua.complete_line() end, { desc = "Complete line" })
+set("i", "<c-x>p", function() FzfLua.complete_path() end, { desc = "Complete path" })
+set("i", "<c-x><c-p>", function() FzfLua.complete_path() end, { desc = "Complete path" })
