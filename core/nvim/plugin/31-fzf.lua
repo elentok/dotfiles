@@ -1,4 +1,14 @@
 require("fzf-lua").setup({
+  formatter = "path.filename_first",
+  files = {
+    formatter = "path.filename_first",
+  },
+  buffers = {
+    formatter = "path.filename_first",
+  },
+  oldfiles = {
+    formatter = "path.filename_first",
+  },
   winopts = {
     border = "rounded",
     ---@diagnostic disable-next-line: missing-fields
