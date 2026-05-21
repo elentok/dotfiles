@@ -42,7 +42,7 @@ if OS.mac?
   brew "grep"
   brew "terminal-notifier"
 
-  cask "kitty@nightly"
+  cask "kitty"
 
   if !File.exist?(File.expand_path("~/.config/dotfiles/skip-gui-apps"))
     cask "keepassxc"

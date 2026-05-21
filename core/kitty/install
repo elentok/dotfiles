@@ -10,10 +10,10 @@ function main() {
   if dotf-is-linux; then
     if [ ! -e ~/.local/kitty.app ] || [ "${1:-}" == "--upgrade" ]; then
       # stable release:
-      # curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+      curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
       # nightly:
-      curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin installer=nightly
+      # curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin installer=nightly
     fi
     install-desktop-file
     dotf-apt fonts-agave
