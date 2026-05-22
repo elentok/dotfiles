@@ -1,5 +1,5 @@
 ---
-name: to-prd
+name: taskify
 description:
   Turn the current conversation context into a PRD and publish it to beads as an epic with subtasks.
   Use when user wants to create a PRD from the current context.
@@ -26,7 +26,8 @@ they want tests written for.
 3. Write the PRD using the template below, then publish it to beads as an epic with the
    `ready-for-agent` label (use `bd create --type epic --labels ready-for-agent`).
 
-4. Break into sub-tasks and create the relevant tasks in beads under the epic
+4. Break into sub-tasks and create the relevant tasks in beads under the epic (limit the amount of
+   tokens needed for each task to about 100k).
 
 <prd-template>
 
