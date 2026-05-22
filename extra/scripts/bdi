@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+#
+# Usage: bdi <close>
+
+set -euo pipefail
+
+source "$DOTF/framework.sh"
+
+function main() {
+  local cmd
+  cmd="${1:-}"
+  shift || true
+
+  case "$cmd" in
+  close)
+    bdi-close
+    ;;
+  show)
+    bd show "$(bdi-pick)"
+    ;;
+  pick)
+    bdi-pick
+    ;;
+  *)
+    usage "$0"
+    ;;
+  esac
+}
+
+function bdi-close() {
+  local id
+  id="$(bdi-pick)"
+
+  bd show "$id"
+
+  if dotf-confirm "Close?"; then
+    bd close "$id" --reason=Completed
+  fi
+}
+
+function extract-id() {
+  if [[ "$*" =~ ^├ ]]; then
+    echo "$@" | awk '{print $3}'
+  else
+    echo "$@" | awk '{print $2}'
+  fi
+}
+
+function bdi-pick() {
+  line="$(bd list | fzf --layout=reverse)"
+  if [ -z "$line" ]; then
+    echo "user aborted"
+    exit 1
+  fi
+  extract-id "$line"
+}
+
+main "$@"
