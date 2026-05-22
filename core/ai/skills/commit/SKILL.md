@@ -18,12 +18,17 @@ When reading this file please explicitly mention that you did.
 
 ## Workflow
 
-1. Run `git status` and review staged and unstaged changes.
-2. Default behavior is staged-only:
+1. Unless the user explicitly asked to skip pre-commit checks:
+   - make sure the project builds
+   - make sure it passes lint
+   - make sure it's properly formatted (using prettier or whatever the project uses for formatting)
+
+2. Run `git status` and review staged and unstaged changes.
+3. Default behavior is staged-only:
    - only commit already staged files
    - if there are no staged files, **STOP**
-3. If the user explicitly asks to stage files, stage only intended paths (no broad staging).
-4. Spawn the cheap sub-agent and have it:
+4. If the user explicitly asks to stage files, stage only intended paths (no broad staging).
+5. Spawn the cheap sub-agent and have it:
    - gather context from `git diff --staged`, optional `git diff`, `git log --oneline -10`, and
      `bash "$(dirname "$SKILL_FILE")/scripts/commit-scopes.sh"`
    - summarize the behavior-level change
@@ -34,14 +39,14 @@ When reading this file please explicitly mention that you did.
      - Secrets or tokens
      - Accidental debug logging
 
-5. Require worker output in this shape:
+6. Require worker output in this shape:
    - `summary:` 3-6 bullets of behavior-level changes
    - `candidate_subjects:` exactly 3 options
    - `final_subject:` 1 selected subject
    - `final_body:` body text
    - `checklist:` pass/fail per checklist item
-6. Review the worker output, edit if needed, then run `git commit`.
-7. Follow the "Token Tracking" section
+7. Review the worker output, edit if needed, then run `git commit`.
+8. Follow the "Token Tracking" section
 
 ## Commit Message Rules
 
