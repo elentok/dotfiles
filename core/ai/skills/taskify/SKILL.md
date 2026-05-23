@@ -23,11 +23,14 @@ simple, testable interface which rarely changes.
 Check with the user that these modules match their expectations. Check with the user which modules
 they want tests written for.
 
-3. Write the PRD using the template below, then publish it to beads as an epic with the
-   `ready-for-agent` label (use `bd create --type epic --labels ready-for-agent`).
+3. Write the PRD using the template below to `docs/prds/{title-of-prd}.md`, then publish it to beads
+   as an epic with the `ready-for-agent` label (use
+   `bd create --type epic --labels ready-for-agent`).
 
 4. Break into sub-tasks and create the relevant tasks in beads under the epic (limit the amount of
    tokens needed for each task to about 100k).
+   - Each sub-task description should include the context needed for performing the task, including
+     a short explanation of what was done before (if it's not the first one)
 
 <prd-template>
 
