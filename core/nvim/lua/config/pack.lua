@@ -29,6 +29,7 @@ local pack_specs = {
   gh("nvim-mini/mini.icons"),
   gh("SmiteshP/nvim-navic"),
   { src = gh("nvim-treesitter/nvim-treesitter"), version = "main" },
+  gh("nvim-treesitter/nvim-treesitter-textobjects"),
   gh("kkharji/sqlite.lua"),
 
   { src = gh("catppuccin/nvim"), name = "catppuccin" },

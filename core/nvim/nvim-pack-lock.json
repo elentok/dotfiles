@@ -91,6 +91,10 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
+    "nvim-treesitter-textobjects": {
+      "rev": "851e865342e5a4cb1ae23d31caf6e991e1c99f1e",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
+    },
     "obsidian.nvim": {
       "rev": "08c2b8c126193139b73a193ea90f97105d2e1059",
       "src": "https://github.com/obsidian-nvim/obsidian.nvim"
