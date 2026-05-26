@@ -29,8 +29,9 @@ they want tests written for.
 
 4. Break into sub-tasks and create the relevant tasks in beads under the epic (limit the amount of
    tokens needed for each task to about 100k).
-   - Each sub-task description should include the context needed for performing the task, including
-     a short explanation of what was done before (if it's not the first one)
+   - Each sub-task will be run by a new agent with blank context, so the description should include
+     the context needed for performing the task, including a short explanation of what was done
+     before (if it's not the first one)
 
 <prd-template>
 
