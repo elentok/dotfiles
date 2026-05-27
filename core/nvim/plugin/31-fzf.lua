@@ -1,13 +1,13 @@
 require("fzf-lua").setup({
-  formatter = "path.filename_first",
+  formatter = "path.dirname_first",
   files = {
-    formatter = "path.filename_first",
+    formatter = "path.dirname_first",
   },
   buffers = {
-    formatter = "path.filename_first",
+    formatter = "path.dirname_first",
   },
   oldfiles = {
-    formatter = "path.filename_first",
+    formatter = "path.dirname_first",
   },
   winopts = {
     border = "rounded",
