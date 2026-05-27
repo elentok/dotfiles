@@ -13,4 +13,4 @@ tabiew = [{ run = 'tw "$@"', block = true, desc = "Tabiew" }]
 
 [open]
 
-prepend_rules = [{ name = "*.csv", use = "tabiew" }]
+prepend_rules = [{ name = "*.csv", use = "tabiew", mime = "text/csv" }]
