@@ -1,3 +1,10 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "mcp-go": {
+      "type": "local",
+      "command": ["/Users/david/go/bin/mcp-go"],
+      "enabled": true
+    }
+  }
 }
