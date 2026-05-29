@@ -9,6 +9,9 @@ require("fzf-lua").setup({
   oldfiles = {
     formatter = "path.dirname_first",
   },
+  grep = {
+    formatter = "path.dirname_first",
+  },
   winopts = {
     border = "rounded",
     ---@diagnostic disable-next-line: missing-fields

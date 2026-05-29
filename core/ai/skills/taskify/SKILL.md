@@ -32,6 +32,9 @@ they want tests written for.
    - Each sub-task will be run by a new agent with blank context, so the description should include
      the context needed for performing the task, including a short explanation of what was done
      before (if it's not the first one)
+   - Prefer splitting **vertically** so we can get feedback after each task
+   - If the epic itself is small enough (estimated at less than 100k tokens) then there's no need to
+     split into sub-tasks.
 
 <prd-template>
 
