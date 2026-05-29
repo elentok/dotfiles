@@ -10,7 +10,11 @@ title_format = "{cwd}  "
 [opener]
 
 tabiew = [{ run = 'tw "$@"', block = true, desc = "Tabiew" }]
+vlc = [{ run = 'vlc "$@"', block = true, desc = "VLC" }]
 
 [open]
 
-prepend_rules = [{ name = "*.csv", use = "tabiew", mime = "text/csv" }]
+prepend_rules = [
+  { name = "*.csv", use = "tabiew", mime = "text/csv" },
+  { name = "*.mp4", use = "vlc", mime = "video/mp4" },
+]
