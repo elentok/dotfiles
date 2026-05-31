@@ -28,7 +28,7 @@ Follow the "Resolving an issue" instructions
 ### 2. No arguments (`/beads`)
 
 1. Run `bd ready` and ask the user which one to start with (recommend which one we should start
-   with)
+   with) - use Claude's question UI to pick
 2. Run the first workflow ("With issue ID")
 
 ### 3. Add (`/beads add ...`)

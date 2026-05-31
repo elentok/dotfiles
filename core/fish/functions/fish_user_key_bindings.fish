@@ -1,4 +1,8 @@
 function fish_user_key_bindings
+    if test "$TERM_PROGRAM" = WarpTerminal
+        return
+    end
+
     # Execute this once per mode that emacs bindings should be used in
     fish_default_key_bindings -M insert
 
