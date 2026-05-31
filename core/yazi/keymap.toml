@@ -14,6 +14,14 @@ prepend_keymap = [
     "p",
   ], run = "shell --block 'bash -c \"chafa $@ && read -n 1 > /dev/null\"'", desc = "Preview selected images" },
   { on = [
+    "g",
+    "y",
+  ], run = "shell --confirm 'blf copy-ref \"$@\"' --block", desc = "Copy selected files" },
+  { on = [
+    "g",
+    "s",
+  ], run = "shell --block -- blf copy-ref %s", desc = "Copy tagged files" },
+  { on = [
     "c",
     "w",
   ], run = "rename --cursor=before_ext", desc = "Rename selected file(s)" },
