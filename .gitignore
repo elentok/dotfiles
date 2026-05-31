@@ -28,3 +28,4 @@ core/kitty/.stubs/
 .dolt/
 *.db
 .beads-credential-key
+.beads/
