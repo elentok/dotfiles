@@ -1,29 +1,28 @@
 require("fzf-lua").setup({
+  fzf_colors = true,
   formatter = "path.dirname_first",
-  files = {
-    formatter = "path.dirname_first",
-  },
-  buffers = {
-    formatter = "path.dirname_first",
-  },
-  oldfiles = {
-    formatter = "path.dirname_first",
-  },
-  grep = {
-    formatter = "path.dirname_first",
-  },
+  files = { formatter = "path.dirname_first" },
+  buffers = { formatter = "path.dirname_first" },
+  oldfiles = { formatter = "path.dirname_first" },
+  grep = { formatter = "path.dirname_first" },
+  lsp = { formatter = "path.dirname_first" },
   winopts = {
     border = "rounded",
     ---@diagnostic disable-next-line: missing-fields
     preview = {
       layout = "vertical",
+      hidden = true,
     },
   },
 
   keymap = {
+    builtin = {
+      ["<c-o>"] = "toggle-preview",
+    },
     fzf = {
       -- sends everything to the quickfix list
       ["ctrl-q"] = "select-all+accept",
+      ["ctrl-o"] = "toggle-preview",
     },
   },
 })
