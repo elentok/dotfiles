@@ -19,10 +19,7 @@
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true
   },
-  "alwaysThinkingEnabled": true,
-  "effortLevel": "medium",
   "advisorModel": "opus",
-  "editorMode": "vim",
   "statusLine": {
     "type": "command",
     "command": "blf claude-statusline"

@@ -10,4 +10,8 @@ if dotf-command-missing claude; then
 fi
 
 mkdir -p ~/.claude
-dotf-symlink "$DOTF/extra/claude/settings.json" ~/.claude/settings.json
+
+# Managed, version-controlled config lives in settings.local.json, which has
+# higher precedence and which Claude never rewrites at runtime. settings.json is
+# left as Claude's runtime scratchpad (model, effort, etc.) and stays untracked.
+dotf-symlink "$DOTF/extra/claude/settings.local.json" ~/.claude/settings.local.json
