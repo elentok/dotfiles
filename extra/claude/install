@@ -4,24 +4,10 @@ set -euo pipefail
 
 source "$DOTF/framework.sh"
 
-if dotf-command-missing claude; then
+if dfl has-command claude; then
   npm install -g @anthropic-ai/claude-code
   claude migrate-installer
 fi
 
-mkdir -p ~/.claude
-
-# Claude owns ~/.claude/settings.json at runtime (it writes model, effortLevel,
-# editorMode, alwaysThinkingEnabled there when you change them in the UI), so we
-# can't symlink it without that churn landing in the repo. Instead our managed,
-# stable config lives in the tracked settings.base.json, and we merge it into the
-# live file here. Base keys win for managed settings; Claude's runtime keys are
-# preserved and never enter the repo. Re-run this install to push config changes.
-claude_settings=~/.claude/settings.json
-claude_base="$DOTF/extra/claude/settings.base.json"
-if [[ ! -f "$claude_settings" ]]; then
-  echo '{}' >"$claude_settings"
-fi
-claude_merged="$(mktemp)"
-jq -s '.[0] * .[1]' "$claude_settings" "$claude_base" >"$claude_merged"
-mv "$claude_merged" "$claude_settings"
+dfl mkdir ~/.claude
+dfl merge-json ~/.claude/settings.json settings.base.json ~/.claude/settings.json

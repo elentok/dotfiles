@@ -40,6 +40,7 @@ function main() {
     python
     ai
     kitty
+    claude
   )
   dfl install "${components[@]}"
 
