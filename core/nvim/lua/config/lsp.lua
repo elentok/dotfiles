@@ -1,4 +1,5 @@
 local servers = {
+  basedpyright = { "python" },
   bashls = { "bash", "sh" },
   biome = {
     "astro",

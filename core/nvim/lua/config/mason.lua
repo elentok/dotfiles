@@ -20,7 +20,7 @@ local ensure_installed = {
   "npm-groovy-lint",
   "openscad-lsp",
   "prettierd",
-  "pyright",
+  "basedpyright",
   "shellcheck",
   "shfmt",
   "rust-analyzer",
