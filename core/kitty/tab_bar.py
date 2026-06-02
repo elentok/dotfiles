@@ -29,6 +29,8 @@ color_base = as_rgb(0x1E1E2E)
 color_mantle = as_rgb(0x181825)
 color_crust = as_rgb(0x11111B)
 
+SESSION_NAME_MAX_LEN = 15
+
 attention_tab_bg = color_red
 attention_tab_fg = color_base
 active_tab_bg = color_blue
@@ -51,8 +53,11 @@ def draw_tab(
 
     if index == 1:
         screen.cursor.italic = True
+        session_name = tab.session_name
+        if len(session_name) > SESSION_NAME_MAX_LEN:
+            session_name = session_name[:SESSION_NAME_MAX_LEN] + "…"
         _draw_bubble(
-            screen, f"   {tab.session_name} ", color_base, color_peach, left=False
+            screen, f"   {session_name} ", color_base, color_peach, left=False
         )
         _draw(screen, " ", 0, 0)
         screen.cursor.italic = False
