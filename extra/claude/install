@@ -4,7 +4,7 @@ set -euo pipefail
 
 source "$DOTF/framework.sh"
 
-if dfl has-command claude; then
+if ! dfl has-command claude; then
   npm install -g @anthropic-ai/claude-code
   claude migrate-installer
 fi
