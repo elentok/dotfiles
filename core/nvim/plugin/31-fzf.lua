@@ -34,7 +34,7 @@ set("n", "<leader>jb", function() FzfLua.buffers() end, { desc = "Buffers" })
 set("n", "<leader>jh", function() FzfLua.helptags() end, { desc = "Help tags" })
 set("n", "<leader>js", function() FzfLua.lsp_document_symbols() end, { desc = "Help tags" })
 set("n", "<leader>gs", function() FzfLua.git_status() end, { desc = "Git status" })
-set("n", "<leader>gl", function() FzfLua.git_bcommits() end, { desc = "Commits of current buffer" })
+-- set("n", "<leader>gl", function() FzfLua.git_bcommits() end, { desc = "Commits of current buffer" })
 set("n", "<leader>/", function() FzfLua.live_grep({ multiline = true }) end, { desc = "Grep word" })
 set(
   "n",

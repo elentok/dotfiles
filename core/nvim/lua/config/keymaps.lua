@@ -65,3 +65,10 @@ vim.keymap.set("n", "<leader>gg", function()
     Snacks.terminal({ "gx", "status", current_file })
   end
 end, { desc = "gx status" })
+
+vim.keymap.set(
+  "n",
+  "<leader>gl",
+  ":silent !gx term --tab gx log -f %<cr>",
+  { desc = "Show git history of current file" }
+)
