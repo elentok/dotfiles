@@ -1,6 +1,5 @@
 from kitty.fast_data_types import Screen
-
-from kitty.tab_bar import DrawData, ExtraData, TabBarData, as_rgb, draw_title
+from kitty.tab_bar import DrawData, ExtraData, TabBarData, as_rgb
 
 # Cattpuccin:
 color_rosewater = as_rgb(0xF5E0DC)
@@ -39,14 +38,14 @@ inactive_tab_fg = color_subtext0
 
 
 def draw_tab(
-    draw_data: DrawData,
+    _draw_data: DrawData,
     screen: Screen,
     tab: TabBarData,
-    before: int,
-    max_tab_length: int,
+    _before: int,
+    _max_tab_length: int,
     index: int,
-    is_last: bool,
-    extra_data: ExtraData,
+    _is_last: bool,
+    _extra_data: ExtraData,
 ) -> int:
     screen.cursor.bold = False
 
@@ -80,7 +79,9 @@ def draw_tab(
     return screen.cursor.x
 
 
-def _draw_bubble(screen: Screen, text: str, fg: int, bg: int, left=True, right=True):
+def _draw_bubble(
+    screen: Screen, text: str, fg: int, bg: int, left: bool = True, right: bool = True
+):
     if left:
         _draw(screen, "", bg, color_base)
 
