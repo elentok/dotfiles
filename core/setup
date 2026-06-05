@@ -109,6 +109,11 @@ function install-personal-cli-tools() {
     elentok/qmkmd
   )
   dfl pkg github install "${packages[@]}"
+
+  dfl step start "Installing shell completions..." -- \
+    fish -c 'dfl completion fish >~/.config/fish/completions/dfl.fish'
+  dfl shell "Installing gx fish completions..." -- \
+    fish -c 'gx completion fish >~/.config/fish/completions/gx.fish'
 }
 
 main "$@"
