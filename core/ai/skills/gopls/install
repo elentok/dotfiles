@@ -2,6 +2,9 @@
 
 set -euo pipefail
 
+dfl shell "Installing gopls..." -- \
+  go install github.com/xieyuschen/gopls-mcp@latest
+
 dfl shell "Installing mcp-go..." -- \
   go install github.com/inja-online/golang-mcp/cmd/mcp-go@latest
 
