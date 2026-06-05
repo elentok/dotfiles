@@ -115,6 +115,7 @@ require("snacks").setup({
 })
 
 vim.cmd("highlight SnacksIndent guifg=#303030")
+vim.cmd("highlight SnacksIndentScope guifg=#505050")
 
 vim.keymap.set(
   "n",
