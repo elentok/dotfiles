@@ -30,6 +30,7 @@ brew "go"
 brew "uv"
 brew "rtk" # High-performance CLI proxy that reduces LLM token consumption
 brew "beads" # Task manager for AI agents
+cask "claude-code"
 
 uv "git-fame"
 uv "neovim-remote"
