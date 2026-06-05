@@ -5,6 +5,7 @@ tags
 tmp
 extra/scripts/node/node_modules
 core/fish/fish_variables
+core/fish/completions
 .mypy_cache
 
 # Neovim

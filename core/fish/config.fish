@@ -9,7 +9,6 @@ end
 
 if status is-interactive
     fzf --fish | source
-    gx completion fish | source
     # source "$DOTF/core/television/shell/integration.fish"
     # Commands to run in interactive sessions can go here
     # starship init fish | source
