@@ -103,3 +103,4 @@ shared project state.
 - Prefer `--json` when parsing `bd` output programmatically.
 - **DO NOT** inject `bd prime`, it forces a commit & push workflow which I don't want.
 - Do not auto-close or mutate tasks unless the work is actually complete.
+- When all of the sub-tasks of an epic are closed please close the epic.
