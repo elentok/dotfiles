@@ -65,6 +65,13 @@ function d --description "choose and cd into a subdirectory"
     end
 end
 
+function c --description "choose (recursive) and cd into a subdirectory"
+    set dir (fd --type d | fzf --exit-0 --select-1)
+    if test -n "$dir"
+        cd "$dir"
+    end
+end
+
 function cdr --description "change directory to the git root"
     set root (git rev-parse --show-toplevel)
     if test -n "$root"
