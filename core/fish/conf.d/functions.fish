@@ -23,7 +23,6 @@ end
 
 function jp
     set project (dotf-projects pick)
-    # set project (tv projects)
     if test -n "$project"
         cd (string replace "~" "$HOME" $project)
     end
@@ -66,7 +65,7 @@ function d --description "choose and cd into a subdirectory"
 end
 
 function c --description "choose (recursive) and cd into a subdirectory"
-    set dir (fd --type d | fzf --exit-0 --select-1)
+    set dir (fd --type d | blf dim-path | fzf --ansi --exit-0 --select-1)
     if test -n "$dir"
         cd "$dir"
     end
@@ -78,13 +77,6 @@ function cdr --description "change directory to the git root"
         cd "$root"
     else
         echo "Not inside a git repo"
-    end
-end
-
-function gmc --description "jump to minecraft instance"
-    set dir $(tv minecraft)
-    if test -n "$dir"
-        cd ~/$dir
     end
 end
 
@@ -107,4 +99,8 @@ end
 
 function pn --description "new prompt"
     nvim "+lua require('stuff.prompts').new_for_current_line()"
+end
+
+function kk --description "kitty keys"
+    cat ~/.dotfiles/core/kitty/config/keys.conf | grep -v '^#' | grep map | fzf
 end
