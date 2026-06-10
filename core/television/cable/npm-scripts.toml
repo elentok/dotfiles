@@ -1,7 +1,0 @@
-[metadata]
-name = "npm-scripts"
-
-[source]
-ansi = true
-command = "blf npm-scripts"
-output = "{strip_ansi|split: :0}"

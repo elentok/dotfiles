@@ -1,5 +1,0 @@
-[metadata]
-name = "projects"
-
-[source]
-command = "dotf-projects list"

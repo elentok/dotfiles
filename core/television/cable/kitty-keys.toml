@@ -1,5 +1,0 @@
-[metadata]
-name = "kitty-keys"
-
-[source]
-command = "cat ~/.dotfiles/core/kitty/config/keys.conf | grep map"

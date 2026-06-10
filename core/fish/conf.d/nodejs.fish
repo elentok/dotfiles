@@ -16,7 +16,6 @@ end
 
 function _pick_npm_script
     blf npm-scripts | fzf --popup=center,60%,50% --ansi --exit-0
-    # tv npm-scripts
 end
 
 function yr --description "yarn run"

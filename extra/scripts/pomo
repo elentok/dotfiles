@@ -3,7 +3,7 @@
 function main
     set action $argv[1]
     if test -z "$action"
-        set action (echo -e "work\nrest" | tv --inline)
+        set action (echo -e "work\nrest" | fzf --height=4)
     end
 
     if test -z "$action"

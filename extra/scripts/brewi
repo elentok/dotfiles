@@ -14,20 +14,21 @@ end
 
 function preview
     set pkg $argv[1]
+    set -lx HOMEBREW_COLOR 1
     if is-cask $pkg
         set cask_name (get-cask-name $pkg)
         echo "CASK: $cask_name"
         echo
-        HOMEBREW_COLOR=1 brew info --cask $cask_name
+        brew info --cask $cask_name
     else
         echo "FORMULA: $pkg"
         echo
-        HOMEBREW_COLOR=1 brew info --formula $pkg
+        brew info --formula $pkg
     end
 end
 
 function install
-    set pkg (list-packages | tv --cache-preview --preview-command='brewi --preview {}')
+    set pkg (list-packages |  fzf --preview='sleep 0.2; brewi --preview {}')
 
     if test -n "$pkg"
         if is-cask $pkg
