@@ -104,3 +104,11 @@ end
 function kk --description "kitty keys"
     cat ~/.dotfiles/core/kitty/config/keys.conf | grep -v '^#' | grep map | fzf
 end
+
+function yf --description "yank filename"
+    for file in $argv
+        path resolve "$PWD/$file"
+    end | pbcopy
+
+    echo "Copied $(count $argv) filepaths to clipboard."
+end
