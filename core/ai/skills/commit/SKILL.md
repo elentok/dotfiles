@@ -30,7 +30,7 @@ When reading this file please explicitly mention that you did.
 4. If the user explicitly asks to stage files, stage only intended paths (no broad staging).
 5. Spawn the cheap sub-agent and have it:
    - gather context from `git diff --staged`, optional `git diff`, `git log --oneline -10`, and
-     `bash "$(dirname "$SKILL_FILE")/scripts/commit-scopes.sh"`
+     `bash "<directory-of-the-skill-file>/scripts/commit-scopes.sh"`
    - summarize the behavior-level change
    - propose 3 candidate subjects
    - draft the final subject and body
@@ -81,22 +81,6 @@ When reading this file please explicitly mention that you did.
 - Avoid vague subjects like `misc fixes` or `updates`
 - 2 line paragraphs max
 - Prefer bullets
-
-## Token Tracking
-
-This helps estimate savings from cheap-model offloading.
-
-1. For each commit run, capture:
-   - `D`: tokens used by the cheap worker analysis/prep step
-   - `T`: total tokens for the full commit task
-2. Append one line to `docs/commit-token-tracking.csv`:
-   - `date,branch,commit_subject,d_tokens,t_tokens,d_over_t`
-3. Compute `d_over_t = D / T` per run.
-4. After 10 runs, report:
-   - average `D/T`
-   - estimated savings using `estimated_savings = (D/T) * (1 - C_cheap/C_main)`
-5. If exact token counters are unavailable, record a best-effort estimate and mark the row as
-   estimated in `commit_subject` suffix: ` [est]`.
 
 ## Quick Checklist
 
