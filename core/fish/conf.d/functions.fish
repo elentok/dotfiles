@@ -108,7 +108,7 @@ end
 function yf --description "yank filename"
     for file in $argv
         path resolve "$PWD/$file"
-    end | pbcopy
+    end | blf copy -
 
     echo "Copied $(count $argv) filepaths to clipboard."
 end
