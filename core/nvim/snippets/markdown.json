@@ -59,5 +59,14 @@
       "```"
     ],
     "description": "Code block"
+  },
+  "skill": {
+    "body": [
+      "---",
+      "name: $1",
+      "description: $2",
+      "---"
+    ],
+    "description": "AI skill frontmatter"
   }
 }
