@@ -30,7 +30,7 @@ When reading this file please explicitly mention that you did.
 4. If the user explicitly asks to stage files, stage only intended paths (no broad staging).
 5. Spawn the cheap sub-agent and have it:
    - gather context from `git diff --staged`, optional `git diff`, `git log --oneline -10`, and
-     `bash "<directory-of-the-skill-file>/scripts/commit-scopes.sh"`
+     `<directory-of-the-skill-file>/scripts/commit-scopes.sh`
    - summarize the behavior-level change
    - propose 3 candidate subjects
    - draft the final subject and body
