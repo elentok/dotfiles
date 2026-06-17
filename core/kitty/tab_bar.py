@@ -30,6 +30,7 @@ color_mantle = as_rgb(0x181825)
 color_crust = as_rgb(0x11111B)
 
 SESSION_NAME_MAX_LEN = 15
+TAB_TITLE_MAX_LEN = 20
 
 attention_tab_bg = color_red
 attention_tab_fg = color_base
@@ -78,7 +79,11 @@ def draw_tab(
     if tab.session_name == "":
         sessionless = " "
 
-    _draw_bubble(screen, f"{index} {sessionless}{tab.title}", fg, bg)
+    title = tab.title
+    if len(title) > TAB_TITLE_MAX_LEN:
+        title = title[:TAB_TITLE_MAX_LEN] + "…"
+
+    _draw_bubble(screen, f"{index} {sessionless}{title}", fg, bg)
     _draw(screen, " ", 0, 0)
 
     return screen.cursor.x
