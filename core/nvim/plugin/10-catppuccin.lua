@@ -1,3 +1,4 @@
+if true then return end
 -- local transparent = not vim.g.neovide
 local transparent = false
 

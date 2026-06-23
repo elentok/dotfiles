@@ -32,7 +32,7 @@ local pack_specs = {
   gh("nvim-treesitter/nvim-treesitter-textobjects"),
   gh("kkharji/sqlite.lua"),
 
-  { src = gh("catppuccin/nvim"), name = "catppuccin" },
+  -- { src = gh("catppuccin/nvim"), name = "catppuccin" },
   { src = gh("saghen/blink.cmp"), version = vim.version.range("1.*") },
   gh("stevearc/conform.nvim"),
   gh("elentok/encrypt.nvim"),

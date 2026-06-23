@@ -3,6 +3,7 @@ require("config.settings")
 require("config.pack")
 require("config.keymaps")
 require("config.lsp")
+require("config.colors")
 
 require("elentok.dotplugins")
 require("elentok.slack")
