@@ -2,20 +2,24 @@ if ! status is-interactive
     return
 end
 
-function _cmd_to_suffix
+set _invisible_space "⠀"
+
+function _pretty_cmd
     if string match -q "nvim*" $argv[1]
-        echo "  "
+        echo " "
     else if string match -q "lazyg*" $argv[1]
-        echo "  "
+        echo " "
+    else if string match -q "gx*" $argv[1]
+        echo " "
     else if string match -q "npm run*" $argv[1]
-        string-ellipsis 10 (string replace "npm run " "  " $argv[1])
+        string-ellipsis 10 (string replace "npm run " " " $argv[1])
     else if string match -q "npx vitest*" $argv[1]
-        string-ellipsis 10 (string replace "npx vitest " "  " $argv[1])
+        string-ellipsis 10 (string replace "npx vitest " " " $argv[1])
     else if string match -q "npm run test*" $argv[1]
-        echo "  "
+        echo " "
     else
         set short_cmd (string-ellipsis 10 $argv[1])
-        echo " > $short_cmd"
+        echo "$short_cmd:"
     end
 end
 
@@ -28,11 +32,12 @@ function _tab_title
     end
 
     if test -z "$argv[1]"
-        set suffix ""
-        # set suffix "  "
-        # set suffix "  "
+        set pretty_cmd ""
+        # set pretty_cmd "  "
+        # set pretty_cmd "  "
     else
-        set suffix (_cmd_to_suffix "$argv[1]")
+        set pretty_cmd (_pretty_cmd "$argv[1]")
+        set pretty_cmd "$pretty_cmd$_invisible_space"
     end
 
     if test "$PWD" = "$HOME"
@@ -57,7 +62,7 @@ function _tab_title
     # end
 
     # set cmd (string split ' ' $argv[1])[1]
-    echo "$short_dir$branch$suffix"
+    echo "$pretty_cmd$short_dir$branch"
 end
 
 function _set_tmux_pane_title
