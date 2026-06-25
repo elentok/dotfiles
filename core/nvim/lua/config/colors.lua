@@ -34,5 +34,9 @@ update("Comment", { italic = true, fg = color_overlay })
 update("@lsp.typemod.variable.declaration.typescript", { link = "Function" })
 -- update("@lsp.typemod.function.declaration.typescript", { fg = color_orange })
 
-link("FzfLuaBorder", "ElDim")
+link("WinSeparator", "ElDim")
+link("FzfLuaBorder", "NormalFloat")
+link("FzfLuaNormal", "NormalFloat")
+update("FzfLuaBorder", { fg = color_surface })
+
 link("@markup.link.label.markdown_inline", "ElLink")
