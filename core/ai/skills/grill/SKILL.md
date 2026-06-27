@@ -14,6 +14,8 @@ each question, provide your recommended answer.
 
 Ask the questions one at a time, waiting for feedback on each question before continuing.
 
+Phrase the questions in away that if I agree with them I can just write "yes" or "agree."
+
 If a question can be answered by exploring the codebase, explore the codebase instead.
 
 </what-to-do>
