@@ -116,6 +116,8 @@ function install-personal-cli-tools() {
     fish -c 'gx completion fish >~/.config/fish/completions/gx.fish'
   dfl shell "Installing blf fish completions..." -- \
     fish -c 'blf completion fish >~/.config/fish/completions/blf.fish'
+  dfl shell "Installing blf claude hooks..." -- \
+    blf kitty setup-claude
 }
 
 main "$@"
