@@ -38,11 +38,22 @@ attention_tab_bg = color_red
 attention_tab_fg = color_base
 active_tab_bg = color_blue
 active_tab_fg = color_base
+# Agent status is shown via the bubble's text color (the inactive background is
+# kept, so it never competes with the blue active bubble).
+waiting_tab_fg = color_red
+working_tab_fg = color_green
 inactive_tab_bg = color_surface1
 inactive_tab_fg = color_subtext0
 
 marker_fg = color_overlay0
 marker_bg = color_base
+
+# Per-window user var written by `blf kitty set-agent-state` (see blf ADR 0004).
+# Values: working | waiting | idle. A tab's status is the most-urgent value across
+# its windows; higher rank wins.
+AGENT_STATE_VAR = "AGENT_STATE"
+_STATUS_RANK = {"waiting": 3, "working": 2, "idle": 1}
+WAITING_ICON = ""
 
 # Sliding-window start index, persisted across renders, keyed by os_window_id.
 # The window only scrolls when the active tab would fall off an edge.
@@ -62,6 +73,7 @@ class _Plan:
         hidden_left: int,
         hidden_right: int,
         header_session: str,
+        statuses: "dict[int, str | None]",
     ):
         self.positions = positions  # tab_id -> index in the shown-tabs list
         self.start = start
@@ -69,6 +81,7 @@ class _Plan:
         self.hidden_left = hidden_left
         self.hidden_right = hidden_right
         self.header_session = header_session
+        self.statuses = statuses  # tab_id -> agent status (waiting/working/idle/None)
 
 
 def _truncate(text: str, max_len: int) -> str:
@@ -77,9 +90,25 @@ def _truncate(text: str, max_len: int) -> str:
     return text
 
 
-def _tab_text(index: int, session_name: str, title: str) -> str:
+def _tab_text(
+    index: int, session_name: str, title: str, status: "str | None" = None
+) -> str:
     sessionless = " " if session_name == "" else ""
-    return f"{index} {sessionless}{_truncate(title, TAB_TITLE_MAX_LEN)}"
+    bell = f"{WAITING_ICON} " if status == "waiting" else ""
+    return f"{bell}{index} {sessionless}{_truncate(title, TAB_TITLE_MAX_LEN)}"
+
+
+def _tab_agent_status(tab) -> "str | None":
+    # Most-urgent AGENT_STATE across the tab's windows (waiting > working > idle).
+    best = None
+    best_rank = 0
+    for window in tab.windows:
+        state = getattr(window, "user_vars", {}).get(AGENT_STATE_VAR)
+        rank = _STATUS_RANK.get(state, 0)
+        if rank > best_rank:
+            best_rank = rank
+            best = state
+    return best
 
 
 def _header_text(session_name: str) -> str:
@@ -135,22 +164,25 @@ def _compute_plan(os_window_id: int, columns: int) -> "_Plan | None":
     positions = {t.id: i for i, t in enumerate(tabs)}
     active = 0
     widths: list[int] = []
+    statuses: "dict[int, str | None]" = {}
     header_session = ""
     for i, t in enumerate(tabs):
         title = t.name or t.title or appname
         session_name = t.created_in_session_name
+        status = _tab_agent_status(t)
+        statuses[t.id] = status
         if i == 0:
             header_session = session_name
         if t is active_tab:
             active = i
-        widths.append(_tab_width(_tab_text(i + 1, session_name, title)))
+        widths.append(_tab_width(_tab_text(i + 1, session_name, title, status)))
 
     budget = columns - _header_width(_header_text(header_session))
 
     if sum(widths) <= budget:
         # Everything fits: behave like the original, no markers.
         _window_start[os_window_id] = 0
-        return _Plan(positions, 0, n - 1, 0, 0, header_session)
+        return _Plan(positions, 0, n - 1, 0, 0, header_session, statuses)
 
     # Overflowing: conservatively reserve space for both markers plus one cell
     # of slack (so we never fill the last column and trigger kitty's own red
@@ -176,7 +208,7 @@ def _compute_plan(os_window_id: int, columns: int) -> "_Plan | None":
         end = _fit_end(widths, start, budget)
 
     _window_start[os_window_id] = start
-    return _Plan(positions, start, end, start, n - 1 - end, header_session)
+    return _Plan(positions, start, end, start, n - 1 - end, header_session, statuses)
 
 
 def draw_tab(
@@ -216,7 +248,7 @@ def draw_tab(
         _draw_marker(screen, _left_marker_text(plan.hidden_left))
 
     if plan.start <= pos <= plan.end:
-        _draw_tab_bubble(screen, tab, index)
+        _draw_tab_bubble(screen, tab, index, plan.statuses.get(tab.tab_id))
     # Otherwise the tab is outside the window: draw nothing so the cursor does
     # not advance (this also keeps its measured length ~0 during the layout
     # pass, so kitty never injects its own overflow indicator).
@@ -228,24 +260,35 @@ def draw_tab(
     return screen.cursor.x
 
 
-def _draw_tab_bubble(screen: Screen, tab: TabBarData, index: int) -> int:
+def _draw_tab_bubble(
+    screen: Screen, tab: TabBarData, index: int, status: "str | None" = None
+) -> int:
     screen.cursor.bold = False
     screen.cursor.italic = False
 
     fg = inactive_tab_fg
     bg = inactive_tab_bg
-    if tab.needs_attention:
-        screen.cursor.bold = True
-        fg = attention_tab_fg
-        bg = attention_tab_bg
-    elif tab.is_active:
+    if tab.is_active:
+        # The active tab is always blue, even when its agent is waiting/working;
+        # the bell below still flags a waiting active tab.
         screen.cursor.bold = True
         fg = active_tab_fg
         bg = active_tab_bg
+    elif status == "waiting":
+        # Keep the inactive background; only the text (and bell) turns red.
+        screen.cursor.bold = True
+        fg = waiting_tab_fg
+    elif tab.needs_attention:
+        screen.cursor.bold = True
+        fg = attention_tab_fg
+        bg = attention_tab_bg
+    elif status == "working":
+        fg = working_tab_fg
 
     sessionless = " " if tab.session_name == "" else ""
     title = _truncate(tab.title, TAB_TITLE_MAX_LEN)
-    _draw_bubble(screen, f"{index} {sessionless}{title}", fg, bg)
+    bell = f"{WAITING_ICON} " if status == "waiting" else ""
+    _draw_bubble(screen, f"{bell}{index} {sessionless}{title}", fg, bg)
     _draw(screen, " ", 0, 0)
 
     return screen.cursor.x
