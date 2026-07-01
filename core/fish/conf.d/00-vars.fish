@@ -5,6 +5,7 @@ set -x DOTF "$HOME/.dotfiles"
 set -x DOTP "$HOME/.dotplugins"
 set -x EDITOR nvim
 set -x GIT_EDITOR nvim -c startinsert
+set -x CLAUDE_CODE_ENABLE_AUTO_MODE 1
 
 set -x TMP $HOME/tmp
 if ! test -e "$TMP"

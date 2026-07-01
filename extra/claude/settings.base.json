@@ -14,7 +14,12 @@
       "Skill(beads)",
       "Skill(commit)",
       "WebSearch",
-      "Bash(~/.dotfiles/core/ai/skills/commit/scripts/commit-scopes.sh *)"
+      "Read(~/.dotfiles/core/ai/skills/commit/scripts/commit-scopes.sh)",
+      "Bash(~/.dotfiles/core/ai/skills/commit/scripts/commit-scopes.sh *)",
+      "Read(/Users/david/.dotfiles/core/ai/skills/commit/scripts/commit-scopes.sh)",
+      "Bash(/Users/david/.dotfiles/core/ai/skills/commit/scripts/commit-scopes.sh *)",
+      "Bash(gofmt -l *)",
+      "Bash(kitty @ ls*)"
     ]
   },
   "enabledPlugins": {
