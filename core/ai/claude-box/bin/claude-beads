@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+# claude-beads: autonomously drain a beads epic in bypass mode inside the
+# claude-box container. Resolves run context + docker run-args via
+# lib/common.sh (same as claude-box), then execs the beads loop engine
+# (lib/beads_loop.sh) inside the container. See docs/prds/claude-box.md and
+# docs/adr/0001-bypass-in-container-vs-auto-mode.md.
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CLAUDE_BOX_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+IMAGE_NAME="${CLAUDE_BOX_IMAGE:-claude-box:latest}"
+
+# shellcheck source=../lib/common.sh
+source "${CLAUDE_BOX_ROOT}/lib/common.sh"
+
+usage() {
+	cat <<'EOF'
+Usage: claude-beads <epic-id> [--add-dir DIR]...
+
+Autonomously drains a beads epic: claims the next ready task, implements it
+with a fresh `claude -p` in bypass mode, verifies (commit-landed, plus
+CLAUDE_BEADS_VERIFY_CMD if set), repairs on failure (CLAUDE_BEADS_MAX_REPAIRS,
+default 2), and marks exhausted tasks blocked. Halts after 3 consecutive
+blocked tasks, or after CLAUDE_BEADS_MAX_ITER tasks if set. Runs inside the
+same sandboxed container as claude-box; the container is the safety boundary.
+EOF
+}
+
+epic=""
+extra_dirs=()
+while [[ $# -gt 0 ]]; do
+	case "$1" in
+	--add-dir)
+		extra_dirs+=("${2:?--add-dir requires a directory}")
+		shift 2
+		;;
+	-h | --help)
+		usage
+		exit 0
+		;;
+	*)
+		if [[ -n "$epic" ]]; then
+			echo "claude-beads: unexpected argument '$1'" >&2
+			usage >&2
+			exit 1
+		fi
+		epic="$1"
+		shift
+		;;
+	esac
+done
+
+if [[ -z "$epic" ]]; then
+	echo "claude-beads: missing required <epic-id>" >&2
+	usage >&2
+	exit 1
+fi
+
+extra_dirs_joined=""
+if [[ "${#extra_dirs[@]}" -gt 0 ]]; then
+	extra_dirs_joined="$(
+		IFS=':'
+		echo "${extra_dirs[*]}"
+	)"
+fi
+
+if ! docker image inspect "$IMAGE_NAME" >/dev/null 2>&1; then
+	echo "claude-beads: building image ${IMAGE_NAME} (first run only)..." >&2
+	docker build -t "$IMAGE_NAME" "$CLAUDE_BOX_ROOT"
+fi
+
+resolve_run_context "$PWD" "$extra_dirs_joined"
+resolve_credentials
+build_run_args
+
+# Single-quoted: this expands inside the container's `bash -c`, not here.
+# shellcheck disable=SC2016
+loop_cmd='source "$HOME/.dotfiles/core/ai/claude-box/lib/beads_loop.sh"; run_beads_loop "$1"; echo "claude-beads: stopped (${BEADS_LOOP_STOP_REASON}, ${BEADS_LOOP_ITER} task(s) attempted)" >&2'
+
+exec docker run "${CLAUDE_BOX_RUN_ARGS[@]}" "$IMAGE_NAME" bash -c "$loop_cmd" -- "$epic"
