@@ -1,4 +1,5 @@
 brew "bat"
+brew "bats-core" # Bash test framework, used by core/ai/claude-box
 brew "beads" # Task manager for AI agents
 brew "bottom"
 brew "chafa"
