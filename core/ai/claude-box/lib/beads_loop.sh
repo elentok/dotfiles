@@ -79,22 +79,27 @@ bl_attempt_task() {
 		before_sha="$(git rev-parse HEAD 2>/dev/null || true)"
 
 		if [[ "$attempt" -eq 0 ]]; then
-			claude_output="$(bl_run_claude_implement "$task_id" 2>&1)" || true
+			echo "claude-beads: [${task_id}] implementing..." >&2
+			claude_output="$(bl_run_claude_implement "$task_id" 2>&1 | tee /dev/stderr)" || true
 		else
-			claude_output="$(bl_run_claude_repair "$task_id" "$seed" 2>&1)" || true
+			echo "claude-beads: [${task_id}] repair attempt ${attempt}/${max_repairs}..." >&2
+			claude_output="$(bl_run_claude_repair "$task_id" "$seed" 2>&1 | tee /dev/stderr)" || true
 		fi
 
 		after_sha="$(git rev-parse HEAD 2>/dev/null || true)"
 
 		if [[ -n "$after_sha" && "$before_sha" != "$after_sha" ]]; then
 			if bl_run_verify; then
+				echo "claude-beads: [${task_id}] verified" >&2
 				return 0
 			fi
+			echo "claude-beads: [${task_id}] verify failed, will repair" >&2
 			seed="$(git diff "$before_sha" "$after_sha" 2>/dev/null)
 
 verify output:
 ${BL_VERIFY_OUTPUT}"
 		else
+			echo "claude-beads: [${task_id}] no commit landed, will repair" >&2
 			seed="No commit landed. claude output:
 ${claude_output}"
 		fi
@@ -134,13 +139,16 @@ run_beads_loop() {
 		fi
 
 		iter=$((iter + 1))
+		echo "claude-beads: [${task_id}] claimed (task ${iter})" >&2
 
 		if bl_attempt_task "$task_id"; then
 			bd close "$task_id" --reason="claude-beads: verified and closed by loop" >/dev/null
+			echo "claude-beads: [${task_id}] closed" >&2
 			consecutive_blocked=0
 		else
 			bd update "$task_id" --status=blocked >/dev/null 2>&1 || true
 			bd note "$task_id" "claude-beads: exhausted ${CLAUDE_BEADS_MAX_REPAIRS:-2} repair attempt(s); marked blocked" >/dev/null 2>&1 || true
+			echo "claude-beads: [${task_id}] blocked" >&2
 			consecutive_blocked=$((consecutive_blocked + 1))
 
 			if [[ "$consecutive_blocked" -ge 3 ]]; then
