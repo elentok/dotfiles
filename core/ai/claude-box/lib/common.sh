@@ -111,7 +111,10 @@ build_run_args() {
 		done
 		;;
 	subscription | *)
-		CLAUDE_BOX_RUN_ARGS+=(-v "${CLAUDE_BOX_CRED_VOLUME:-claude-box-home}:/home/dev/.claude")
+		CLAUDE_BOX_RUN_ARGS+=(
+			-v "${CLAUDE_BOX_CRED_VOLUME:-claude-box-home}:/home/dev/.claude"
+			-e "CLAUDE_CODE_ENABLE_AUTO_MODE=1"
+		)
 		;;
 	esac
 

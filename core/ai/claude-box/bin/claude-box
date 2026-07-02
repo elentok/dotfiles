@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+# claude-box: launch an interactive, isolated Claude Code session.
+#
+# Resolves run context + docker run-args via lib/common.sh, then drops into an
+# interactive shell in the container with `claude` ready in AUTO mode
+# (Shift+Tab reaches bypass inside). See docs/prds/claude-box.md and
+# docs/adr/0001-bypass-in-container-vs-auto-mode.md.
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CLAUDE_BOX_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+IMAGE_NAME="${CLAUDE_BOX_IMAGE:-claude-box:latest}"
+
+# shellcheck source=../lib/common.sh
+source "${CLAUDE_BOX_ROOT}/lib/common.sh"
+
+usage() {
+	cat <<'EOF'
+Usage: claude-box [--add-dir DIR]... [-- CMD...]
+
+Launches an isolated, interactive Claude Code session in a container.
+Only the current directory is mounted read-write, plus any --add-dir
+directories. With no CMD, drops into an interactive shell; pass a CMD
+(after --) to run something else instead, e.g. `claude-box -- claude`.
+EOF
+}
+
+extra_dirs=()
+while [[ $# -gt 0 ]]; do
+	case "$1" in
+	--add-dir)
+		extra_dirs+=("${2:?--add-dir requires a directory}")
+		shift 2
+		;;
+	-h | --help)
+		usage
+		exit 0
+		;;
+	--)
+		shift
+		break
+		;;
+	*)
+		break
+		;;
+	esac
+done
+
+extra_dirs_joined=""
+if [[ "${#extra_dirs[@]}" -gt 0 ]]; then
+	extra_dirs_joined="$(
+		IFS=':'
+		echo "${extra_dirs[*]}"
+	)"
+fi
+
+if ! docker image inspect "$IMAGE_NAME" >/dev/null 2>&1; then
+	echo "claude-box: building image ${IMAGE_NAME} (first run only)..." >&2
+	docker build -t "$IMAGE_NAME" "$CLAUDE_BOX_ROOT"
+fi
+
+resolve_run_context "$PWD" "$extra_dirs_joined"
+resolve_credentials
+build_run_args
+
+exec docker run "${CLAUDE_BOX_RUN_ARGS[@]}" "$IMAGE_NAME" "$@"

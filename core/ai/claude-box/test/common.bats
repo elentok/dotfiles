@@ -157,6 +157,15 @@ EOF
 	[[ "$joined" != *"-e AWS_"* ]]
 }
 
+@test "build_run_args: subscription provider enables auto mode" {
+	resolve_run_context "$REPO_DIR"
+	resolve_credentials
+	build_run_args
+
+	local joined="${CLAUDE_BOX_RUN_ARGS[*]}"
+	[[ "$joined" == *"CLAUDE_CODE_ENABLE_AUTO_MODE=1"* ]]
+}
+
 @test "build_run_args: bedrock provider injects env vars instead of the home volume" {
 	fake_aws_success
 	export CLAUDE_BOX_PROVIDER="bedrock"
