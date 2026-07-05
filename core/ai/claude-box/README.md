@@ -24,6 +24,12 @@ and [`docs/adr/0001-bypass-in-container-vs-auto-mode.md`](../../../docs/adr/0001
   `init-firewall.sh`); extend with `EXTRA_ALLOWED_DOMAINS`.
 - `~/.claude` inside the container is an isolated named Docker volume — never
   the host's `~/.claude`.
+- The host's configured MCP servers (`mcpServers` from `~/.claude.json`) are
+  synced into the container's `~/.claude.json` fresh on every launch — only
+  that key, never the rest of the host file (OAuth tokens, project history,
+  etc.). If a server's config carries a secret in its `env` block, that
+  secret enters the box the same way Bedrock credentials and the
+  subscription OAuth token already do — treat it with the same care.
 - No git push credentials and no commit signing key are ever placed in the
   container; commits use the host repo's `user.name`/`user.email`, injected
   via `GIT_AUTHOR_*`/`GIT_COMMITTER_*`.
@@ -121,6 +127,25 @@ task) or after `CLAUDE_BEADS_MAX_ITER` tasks if set (unset/`0` = unbounded).
 | `CLAUDE_BEADS_MAX_REPAIRS` | `claude-beads` | `2` | Repair passes allowed beyond the first attempt |
 | `CLAUDE_BEADS_MAX_ITER` | `claude-beads` | `0` (unbounded) | Hard cap on tasks attempted per run |
 | `--add-dir DIR` | both (CLI flag) | — | Additional host directory to mount read-write, at the same path |
+
+MCP servers configured in the host's `~/.claude.json` (`mcpServers`) sync
+into the container automatically — no separate variable or flag. A server's
+config syncs even if its binary isn't installed in the image; it just won't
+start until the binary is added (the image currently bundles `gopls-mcp`
+and Playwright/Chromium for the `playwright-cli` skill, to match the two
+tools actually referenced by mounted skills).
+
+**Known limitation — `playwright-cli` page navigation:** the browser
+launches successfully inside the container, but `playwright-cli goto`
+currently hangs/times out even against firewall-allowlisted domains, while
+plain `curl` to the same hosts succeeds. Neither a `--no-sandbox` Chromium
+launch arg nor `--cap-add=SYS_ADMIN` fixed it, so it isn't a container
+sandbox-capability issue. Leading unconfirmed theory: `init-firewall.sh`
+resolves each allowlisted domain to specific IPs once at container startup;
+if a domain round-robins across multiple IPs, Chromium's own DNS lookup at
+request time can land on an IP the firewall never allowlisted. Not yet
+root-caused — flagged here rather than worked around with a broader
+capability grant.
 
 ## Testing
 

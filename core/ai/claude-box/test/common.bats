@@ -142,11 +142,44 @@ EOF
 	[[ "$output" == *"aws sso login"* ]]
 }
 
+# --- mcp config sync ---
+
+@test "resolve_mcp_config: extracts mcpServers from the source file" {
+	local source_file="${TEST_TMPDIR}/claude.json"
+	cat >"$source_file" <<'EOF'
+{"mcpServers": {"gopls-mcp": {"type": "stdio", "command": "gopls-mcp"}}, "oauthAccount": {"secret": "should-not-leak"}}
+EOF
+
+	resolve_mcp_config "$source_file"
+
+	local content
+	content="$(cat "$CLAUDE_BOX_MCP_CONFIG_FILE")"
+	[[ "$content" == *"gopls-mcp"* ]]
+	[[ "$content" != *"should-not-leak"* ]]
+	[[ "$content" != *"oauthAccount"* ]]
+}
+
+@test "resolve_mcp_config: source file missing mcpServers key yields an empty object" {
+	local source_file="${TEST_TMPDIR}/claude.json"
+	echo '{"someOtherKey": true}' >"$source_file"
+
+	resolve_mcp_config "$source_file"
+
+	[ "$(jq -c '.mcpServers' "$CLAUDE_BOX_MCP_CONFIG_FILE")" = "{}" ]
+}
+
+@test "resolve_mcp_config: missing source file yields an empty mcpServers object" {
+	resolve_mcp_config "${TEST_TMPDIR}/does-not-exist.json"
+
+	[ "$(jq -c '.mcpServers' "$CLAUDE_BOX_MCP_CONFIG_FILE")" = "{}" ]
+}
+
 # --- docker run-args builder ---
 
 @test "build_run_args: subscription provider mounts the claude-box-home volume" {
 	resolve_run_context "$REPO_DIR"
 	resolve_credentials
+	resolve_mcp_config
 	build_run_args
 
 	local joined="${CLAUDE_BOX_RUN_ARGS[*]}"
@@ -157,9 +190,20 @@ EOF
 	[[ "$joined" != *"-e AWS_"* ]]
 }
 
+@test "build_run_args: mounts the resolved mcp config file at ~/.claude.json" {
+	resolve_run_context "$REPO_DIR"
+	resolve_credentials
+	resolve_mcp_config
+	build_run_args
+
+	local joined="${CLAUDE_BOX_RUN_ARGS[*]}"
+	[[ "$joined" == *"${CLAUDE_BOX_MCP_CONFIG_FILE}:/home/dev/.claude.json"* ]]
+}
+
 @test "build_run_args: subscription provider enables auto mode" {
 	resolve_run_context "$REPO_DIR"
 	resolve_credentials
+	resolve_mcp_config
 	build_run_args
 
 	local joined="${CLAUDE_BOX_RUN_ARGS[*]}"
@@ -171,6 +215,7 @@ EOF
 	export CLAUDE_BOX_PROVIDER="bedrock"
 	resolve_run_context "$REPO_DIR"
 	resolve_credentials
+	resolve_mcp_config
 
 	build_run_args
 
@@ -182,6 +227,7 @@ EOF
 @test "build_run_args: no extra dirs means no extra -v mounts beyond the base set" {
 	resolve_run_context "$REPO_DIR"
 	resolve_credentials
+	resolve_mcp_config
 	build_run_args
 
 	local count=0
@@ -189,13 +235,14 @@ EOF
 	for arg in "${CLAUDE_BOX_RUN_ARGS[@]}"; do
 		[[ "$arg" == "-v" ]] && count=$((count + 1))
 	done
-	# workspace, dotfiles core/ai (ro), claude-box-home
-	[ "$count" -eq 3 ]
+	# workspace, dotfiles core/ai (ro), mcp config json, claude-box-home
+	[ "$count" -eq 4 ]
 }
 
 @test "build_run_args: --add-dir opts an extra directory into the mounts" {
 	resolve_run_context "$REPO_DIR" "/extra/dir"
 	resolve_credentials
+	resolve_mcp_config
 	build_run_args
 
 	local joined="${CLAUDE_BOX_RUN_ARGS[*]}"
@@ -205,6 +252,7 @@ EOF
 @test "build_run_args: multiple --add-dir directories are all mounted" {
 	resolve_run_context "$REPO_DIR" "/extra/one:/extra/two"
 	resolve_credentials
+	resolve_mcp_config
 	build_run_args
 
 	local joined="${CLAUDE_BOX_RUN_ARGS[*]}"
@@ -218,6 +266,7 @@ EOF
 
 	resolve_run_context "$REPO_DIR"
 	resolve_credentials
+	resolve_mcp_config
 	build_run_args
 
 	local joined="${CLAUDE_BOX_RUN_ARGS[*]}"

@@ -7,6 +7,7 @@ ARG NODE_MAJOR=24
 ARG GO_VERSION=1.26.4
 ARG GOSU_VERSION=1.17
 ARG CLAUDE_CODE_VERSION=latest
+ARG GOPLS_MCP_VERSION=1.0.7
 
 ENV DEBIAN_FRONTEND=noninteractive \
     DISABLE_AUTOUPDATER=1 \
@@ -55,6 +56,23 @@ RUN curl -fsSL "https://deb.nodesource.com/setup_${NODE_MAJOR}.x" | bash - \
 
 RUN npm install -g "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}"
 
+# Playwright CLI + a headless Chromium, for the playwright-cli skill. Browser
+# system deps (libgtk, libnss, ...) need apt, hence --with-deps while still
+# root; chromium only, not firefox/webkit, to keep the image lean.
+# @playwright/cli bundles its own playwright-core with its own browser-distro
+# naming ("chrome-for-testing"), so install via `playwright-cli
+# install-browser`, not `npx playwright install`, which targets a different
+# npm package's naming ("chromium") and leaves the cli unable to find it.
+# PLAYWRIGHT_BROWSERS_PATH pins the browser install to a shared location
+# instead of root's per-user cache — the container actually runs as the
+# non-root 'dev' user, whose own cache would be empty. World-writable (not
+# just readable) because playwright-cli writes a lockfile under this path at
+# runtime.
+ENV PLAYWRIGHT_BROWSERS_PATH=/opt/ms-playwright
+RUN npm install -g @playwright/cli \
+    && playwright-cli install-browser chrome-for-testing --with-deps \
+    && chmod -R a+rwX /opt/ms-playwright
+
 # Non-root user. Claude Code refuses --dangerously-skip-permissions as root.
 RUN useradd --create-home --shell /bin/bash --uid 1000 dev \
     && echo "dev ALL=(root) NOPASSWD: /usr/sbin/iptables" >/etc/sudoers.d/dev-iptables \
@@ -72,6 +90,18 @@ WORKDIR /home/dev
 RUN NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ENV PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
 RUN brew install beads rtk
+
+# gopls-mcp: the MCP server currently configured on the host (see
+# ~/.claude.json). Config sync alone (lib/common.sh: resolve_mcp_config)
+# doesn't provision binaries, so it's installed explicitly here. Fetched as a
+# prebuilt release binary, not `go install` — its go.mod has a local
+# replace directive that go install can't resolve.
+RUN arch="$(dpkg --print-architecture)" \
+    && mkdir -p /home/dev/go/bin \
+    && curl -fsSL "https://github.com/xieyuschen/gopls-mcp/releases/download/v${GOPLS_MCP_VERSION}/gopls-mcp_${GOPLS_MCP_VERSION}_linux_${arch}.tar.gz" \
+       -o /tmp/gopls-mcp.tar.gz \
+    && tar -xzf /tmp/gopls-mcp.tar.gz -C /home/dev/go/bin gopls-mcp \
+    && rm /tmp/gopls-mcp.tar.gz
 
 # Bake the skills symlink and CLAUDE.md pointer. core/ai is mounted read-only
 # at runtime at $HOME/.dotfiles/core/ai, so these resolve once the container

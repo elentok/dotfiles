@@ -71,6 +71,7 @@ fi
 
 resolve_run_context "$PWD" "$extra_dirs_joined"
 resolve_credentials
+resolve_mcp_config
 build_run_args
 
 # Single-quoted: this expands inside the container's `bash -c`, not here.

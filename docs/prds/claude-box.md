@@ -62,6 +62,10 @@ both machines.
 31. As a developer, I want `bd` available in the box, so that the beads loop and beads skill operate on the project's `.beads/` directory.
 32. As a developer, I want the same import in my CLAUDE.md to resolve on both macOS and Linux, so that no per-platform path juggling is needed.
 33. As a maintainer, I want the core logic (loop engine, run-args, resolvers, firewall allowlist) testable without Docker or network, so that I can trust changes without a full end-to-end run.
+34. As a developer, I want my host's configured MCP servers available inside the box, so that tools like `gopls-mcp` work the same as they do outside the sandbox.
+35. As a developer, I want only the `mcpServers` key copied out of `~/.claude.json`, so that the rest of my host's Claude config (OAuth tokens, project history, machine id) never enters the box.
+36. As a developer, I want the MCP server list re-synced on every launch, so that adding or removing a server on the host takes effect on the next run without a rebuild.
+37. As a developer, I want `playwright-cli` and a headless Chromium available in the box, so that the `playwright-cli` skill works for sandboxed browser automation.
 
 ## Implementation Decisions
 
@@ -79,6 +83,7 @@ both machines.
 - **Mounts:** cwd → `/workspace` (rw); `--add-dir`-style opt-in for extra dirs; read-only host `~/.dotfiles/core/ai` → `$HOME/.dotfiles/core/ai`; isolated named volume at `~/.claude`; baked `~/.claude/skills` symlink → `$HOME/.dotfiles/core/ai/skills`.
 - **Git identity:** injected via `GIT_AUTHOR_*`/`GIT_COMMITTER_*` from `git -C <cwd> config --get user.{name,email}` (repo-local override wins). No `~/.gitconfig` mount, no push creds, signing off.
 - **Beads data** rides in via the `/workspace` mount (per-project `.beads/`); `bd` runs in-container; embeddeddolt backend must run headless.
+- **MCP server sync:** `resolve_mcp_config` (`lib/common.sh`) extracts just the `mcpServers` key from the host's `~/.claude.json` (default `{}` if absent) into a temp file on every launch, mounted **read-write** at the container's `/home/dev/.claude.json` — read-write because that file already gets rebuilt fresh each run (it sits outside the `claude-box-home` named volume) and Claude Code writes to it continuously. The file is created under `$HOME/.cache/claude-box/` (pruned on each call), not the system temp dir — Docker Desktop on macOS did not reliably bind-mount `mktemp`'s default `$TMPDIR` location (`/var/folders/...`) or even `/private/tmp` paths in testing, silently mounting an empty directory instead of the file despite both being in Docker Desktop's documented default share list; only `$HOME` paths mounted reliably. Config sync is generic and doesn't provision binaries per server; `gopls-mcp` (the one server in active use) and `playwright-cli` + headless Chromium (for the `playwright-cli` skill) are installed explicitly in the Dockerfile. A remote/HTTP-type MCP server's domain would need `EXTRA_ALLOWED_DOMAINS` like any other new host — no special-casing.
 - **Loop failure ladder:** implement → repair×K (default 2, `CLAUDE_BEADS_MAX_REPAIRS`) → mark blocked + note → halt after 3 consecutive blocked. Optional `CLAUDE_BEADS_MAX_ITER` hard cap. Wrapper owns beads state; the task prompt instructs Claude not to change bead status.
 - **Dotfiles prerequisite:** change `~/.claude/CLAUDE.md` import from absolute `/Users/david/...` to home-relative `@~/.dotfiles/core/ai/AGENTS.md` (`~` expands to `$HOME` on both platforms; officially supported).
 - **Layout:** `core/ai/claude-box/{Dockerfile,init-firewall.sh,entrypoint.sh,bin/{claude-box,claude-beads},lib/common.sh}`.

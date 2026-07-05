@@ -88,11 +88,42 @@ resolve_credentials() {
 	esac
 }
 
+# resolve_mcp_config [source_file] - extract the "mcpServers" key from the
+# host's Claude config (default ~/.claude.json, override for tests) into a
+# temp file as {"mcpServers": {...}}, defaulting to an empty object if the
+# key or the source file is absent. Sets CLAUDE_BOX_MCP_CONFIG_FILE. Only the
+# mcpServers key is copied — the rest of ~/.claude.json (OAuth tokens,
+# project history, machine id, ...) never enters the box.
+#
+# The file is created under $HOME rather than the system temp dir (mktemp's
+# default, $TMPDIR/var/folders on macOS): Docker Desktop's file-sharing on
+# macOS did not reliably bind-mount /var/folders or even /private/tmp paths
+# in testing (silently bind-mounting an empty directory instead of the file,
+# with no error), despite them being in Docker Desktop's documented default
+# share list — only paths under $HOME mounted reliably. Old files are pruned
+# on each call since this location isn't swept by normal OS temp-dir hygiene.
+resolve_mcp_config() {
+	local source_file="${1:-$HOME/.claude.json}"
+	local cache_dir="$HOME/.cache/claude-box"
+
+	mkdir -p "$cache_dir"
+	find "$cache_dir" -maxdepth 1 -name 'mcp-config.*' -mtime +1 -delete 2>/dev/null || true
+	CLAUDE_BOX_MCP_CONFIG_FILE="$(mktemp "${cache_dir}/mcp-config.XXXXXX.json")"
+
+	if [[ -f "$source_file" ]]; then
+		jq '{mcpServers: (.mcpServers // {})}' "$source_file" >"$CLAUDE_BOX_MCP_CONFIG_FILE"
+	else
+		printf '{"mcpServers":{}}' >"$CLAUDE_BOX_MCP_CONFIG_FILE"
+	fi
+}
+
 # build_run_args - assemble CLAUDE_BOX_RUN_ARGS (an array of `docker run`
-# flags) from the context resolved by resolve_run_context/resolve_credentials.
-# Pure: only reads already-resolved variables, never touches docker itself.
+# flags) from the context resolved by
+# resolve_run_context/resolve_credentials/resolve_mcp_config. Pure: only
+# reads already-resolved variables, never touches docker itself.
 build_run_args() {
 	local cwd="${CLAUDE_BOX_CWD:?build_run_args requires resolve_run_context to run first}"
+	local mcp_config_file="${CLAUDE_BOX_MCP_CONFIG_FILE:?build_run_args requires resolve_mcp_config to run first}"
 	local provider="${CLAUDE_BOX_PROVIDER:-subscription}"
 
 	CLAUDE_BOX_RUN_ARGS=(
@@ -101,6 +132,7 @@ build_run_args() {
 		-v "${cwd}:/workspace"
 		-w /workspace
 		-v "${HOME}/.dotfiles/core/ai:/home/dev/.dotfiles/core/ai:ro"
+		-v "${mcp_config_file}:/home/dev/.claude.json"
 	)
 
 	case "$provider" in
