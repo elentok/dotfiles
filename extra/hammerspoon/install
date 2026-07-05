@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+dfl symlink init.lua ~/.hammerspoon/init.lua
+brew install --cask hammerspoon
