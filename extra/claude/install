@@ -4,3 +4,8 @@ set -euo pipefail
 
 dfl mkdir ~/.claude
 dfl merge-json ~/.claude/settings.json settings.base.json ~/.claude/settings.json
+
+if ! dfl has-command claude; then
+  dfl shell "Installing Claude Code..." -- \
+    fish -c "curl -fsSL https://claude.ai/install.sh | bash"
+fi

@@ -18,15 +18,16 @@ function set-fish-as-default-shell() {
       dfl step skip "already set"
     else
       edit-etc-shells
-      echo "  Changing shell to ${fish_bin}... "
-      chsh -s "$fish_bin" && dfl step success || dfl step error
+      dfl shell "Changing shell to ${fish_bin} (chsh -s $fish_bin)..." -- \
+        chsh -s "$fish_bin"
     fi
   else
     echo "  Changing user's shell to $fish_bin... "
     if [[ "$SHELL" =~ /fish ]]; then
       dfl step skip "already set"
     else
-      chsh -s "$fish_bin" && dfl step success || dfl step error
+      dfl shell "Changing shell to ${fish_bin} (chsh -s $fish_bin)..." -- \
+        chsh -s "$fish_bin"
     fi
   fi
 }
@@ -35,10 +36,10 @@ function edit-etc-shells() {
   fish_bin="$(which fish)"
   dfl step start "Adding fish to /etc/shells..."
   if grep -q "$fish_bin" /etc/shells >/dev/null; then
-    dotf step skip 'already up to date'
+    dfl step skip 'already up to date'
   else
     sudo bash -c "echo '$fish_bin' >> /etc/shells"
-    dotf step success "added $fish_bin"
+    dfl step success "added $fish_bin"
   fi
 }
 

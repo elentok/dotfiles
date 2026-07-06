@@ -20,7 +20,6 @@ abbr --add dotff '~/.dotfiles/core/framework/dotf.ts'
 abbr --add q qalc
 abbr --add ic 'chafa -f kitty'
 abbr --add rgt 'rg -g \'!**/*.test*\''
-abbr --add btw 'bun test --watch'
 abbr --add vit 'npx vitest'
 abbr --add wit 'npx vitest -w'
 abbr --add nps 'npm run start'
