@@ -15,6 +15,9 @@ function main() {
 
   if [ "$SETUP_BREW" != "no" ]; then
     install-homebrew
+
+    # avoid requiring sudo for brew install --cask
+    export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
     dfl shell "Installing Homebrew bundle" -- brew bundle --file "$DFL_ROOT/Brewfile" install
   fi
 

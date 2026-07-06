@@ -7,6 +7,9 @@ set -x EDITOR nvim
 set -x GIT_EDITOR nvim -c startinsert
 set -x CLAUDE_CODE_ENABLE_AUTO_MODE 1
 
+# avoid requiring sudo for brew install --cask
+set -x HOMEBREW_CASK_OPTS "--appdir=~/Applications"
+
 set -x TMP $HOME/tmp
 if ! test -e "$TMP"
     mkdir -p "$TMP"
