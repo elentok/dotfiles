@@ -1,16 +1,16 @@
 # Clear all paths before adding new ones
 set -e fish_user_paths
 
-set -x DOTF "$HOME/.dotfiles"
-set -x DOTP "$HOME/.dotplugins"
-set -x EDITOR nvim
-set -x GIT_EDITOR nvim -c startinsert
-set -x CLAUDE_CODE_ENABLE_AUTO_MODE 1
+set -gx DOTF "$HOME/.dotfiles"
+set -gx DOTP "$HOME/.dotplugins"
+set -gx EDITOR nvim
+set -gx GIT_EDITOR nvim -c startinsert
+set -gx CLAUDE_CODE_ENABLE_AUTO_MODE 1
 
 # avoid requiring sudo for brew install --cask
-set -x HOMEBREW_CASK_OPTS "--appdir=~/Applications"
+set -gx HOMEBREW_CASK_OPTS "--appdir=~/Applications"
 
-set -x TMP $HOME/tmp
+set -gx TMP $HOME/tmp
 if ! test -e "$TMP"
     mkdir -p "$TMP"
 end
@@ -25,9 +25,9 @@ set -Ux FZF_DEFAULT_OPTS "\
 --color=selected-bg:#45475A \
 --color=border:#6C7086,label:#CDD6F4"
 
-set -x BUN_INSTALL "$HOME/.bin"
+set -gx BUN_INSTALL "$HOME/.bin"
 
-set -x MANPAGER "nvim +Man!"
+set -gx MANPAGER "nvim +Man!"
 
 # https://github.com/rtk-ai/rtk/blob/develop/docs/TELEMETRY.md
-set -x RTK_TELEMETRY_DISABLED 1
+set -gx RTK_TELEMETRY_DISABLED 1
