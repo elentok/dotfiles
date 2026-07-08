@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+# rebuild-image: rebuild the claude-box image and report the baked-in bd
+# (beads) version. Defaults to --no-cache so brew re-resolves formulae like
+# beads/rtk (a cached `brew install` layer silently pins an old version, which
+# is what caused claude-beads' claim to fail against a newer host DB schema).
+# See docs/prds/claude-box.md.
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CLAUDE_BOX_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+IMAGE_NAME="${CLAUDE_BOX_IMAGE:-claude-box:latest}"
+
+usage() {
+	cat <<'EOF'
+Usage: rebuild-image [--cache] [-- DOCKER_BUILD_ARGS...]
+
+Rebuilds the claude-box image (tag from CLAUDE_BOX_IMAGE, default
+claude-box:latest). Uses --no-cache by default so Homebrew formulae (bd,
+rtk) are re-resolved to current versions; pass --cache to reuse layers.
+Extra docker build args can be passed after --.
+EOF
+}
+
+no_cache="--no-cache"
+build_args=()
+while [[ $# -gt 0 ]]; do
+	case "$1" in
+	--cache)
+		no_cache=""
+		shift
+		;;
+	--no-cache)
+		no_cache="--no-cache"
+		shift
+		;;
+	-h | --help)
+		usage
+		exit 0
+		;;
+	--)
+		shift
+		build_args=("$@")
+		break
+		;;
+	*)
+		echo "rebuild-image: unexpected argument '$1'" >&2
+		usage >&2
+		exit 1
+		;;
+	esac
+done
+
+report_bd_version() {
+	echo "rebuild-image: baked-in bd version:" >&2
+	docker run --rm --entrypoint bash -u dev "$IMAGE_NAME" -c 'bd --version' >&2
+}
+
+echo "rebuild-image: building ${IMAGE_NAME}${no_cache:+ (--no-cache)}..." >&2
+docker build ${no_cache:+"$no_cache"} "${build_args[@]}" -t "$IMAGE_NAME" "$CLAUDE_BOX_ROOT"
+report_bd_version

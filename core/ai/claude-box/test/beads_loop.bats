@@ -38,7 +38,7 @@ setup() {
 	PATH="${BIN_DIR}:${PATH}"
 	cd "$REPO_DIR"
 
-	unset CLAUDE_BEADS_MAX_REPAIRS CLAUDE_BEADS_MAX_ITER CLAUDE_BEADS_VERIFY_CMD || true
+	unset CLAUDE_BEADS_MAX_REPAIRS CLAUDE_BEADS_MAX_ITER CLAUDE_BEADS_VERIFY_CMD CLAUDE_BEADS_MODEL CLAUDE_BEADS_STREAM CLAUDE_BEADS_LOG_DIR CLAUDE_BEADS_WAIT_ON_LIMIT CLAUDE_BEADS_MAX_WAIT CLAUDE_BEADS_REQUIRE_ACTIVITY || true
 }
 
 teardown() {
@@ -59,6 +59,12 @@ if [[ "$1" == "ready" ]]; then
 	if [[ -s "$FAKE_BD_READY_QUEUE" ]]; then
 		id="$(head -n1 "$FAKE_BD_READY_QUEUE")"
 		tail -n +2 "$FAKE_BD_READY_QUEUE" >"${FAKE_BD_READY_QUEUE}.tmp" && mv "${FAKE_BD_READY_QUEUE}.tmp" "$FAKE_BD_READY_QUEUE"
+		# A queue entry "__ERROR__<msg>" makes the claim fail like a real bd
+		# claim error: error JSON on stdout plus a non-zero exit.
+		if [[ "$id" == __ERROR__* ]]; then
+			printf '{"error":"%s"}\n' "${id#__ERROR__}"
+			exit 1
+		fi
 		printf '{"id":"%s"}\n' "$id"
 	else
 		printf '[]\n'
@@ -85,8 +91,27 @@ if [[ -s "$FAKE_CLAUDE_QUEUE" ]]; then
 	tail -n +2 "$FAKE_CLAUDE_QUEUE" >"${FAKE_CLAUDE_QUEUE}.tmp" && mv "${FAKE_CLAUDE_QUEUE}.tmp" "$FAKE_CLAUDE_QUEUE"
 fi
 
+# "limit" simulates claude bailing on a session limit: it prints the CLI's
+# limit line (optionally landing a commit too, to prove the loop still refuses
+# to close the task) and exits.
+if [[ "$action" == limit* ]]; then
+	echo "You've hit your session limit · resets 10:10am (UTC)"
+	if [[ "$action" == "limit-commit" ]]; then
+		git commit -q --allow-empty -m "half-done work"
+	fi
+	exit 0
+fi
+
+# "commit" simulates real work: emit a stream-json tool_use event (so
+# bl_format_stream renders a "[tool: ...]" line the activity guard can see) and
+# land a commit. "commit-notool" lands a commit WITHOUT any tool_use event, to
+# exercise the guard that refuses to close a commit claude didn't actually
+# produce. The tool_use JSON is one line so `jq -R` parses it.
 if [[ "$action" == "commit" ]]; then
+	echo '{"type":"assistant","message":{"content":[{"type":"tool_use","name":"Bash","input":{"command":"git commit"}}]}}'
 	git commit -q --allow-empty -m "fake work"
+elif [[ "$action" == "commit-notool" ]]; then
+	git commit -q --allow-empty -m "commit without tool activity"
 fi
 exit 0
 FAKE
@@ -174,6 +199,198 @@ FAKE
 	[ "$BEADS_LOOP_ITER" -eq 1 ]
 	grep -q "close task-1" "$FAKE_BD_LOG"
 	! grep -q "task-2" "$FAKE_BD_LOG"
+}
+
+@test "run_beads_loop: implement runs claude with the default Sonnet model" {
+	echo "task-1" >>"$FAKE_BD_READY_QUEUE"
+	echo "commit" >>"$FAKE_CLAUDE_QUEUE"
+
+	run_beads_loop "epic-1"
+
+	grep -q -- "--model sonnet" "$FAKE_CLAUDE_LOG"
+}
+
+@test "run_beads_loop: CLAUDE_BEADS_MODEL overrides the model passed to claude" {
+	echo "task-1" >>"$FAKE_BD_READY_QUEUE"
+	echo "commit" >>"$FAKE_CLAUDE_QUEUE"
+	export CLAUDE_BEADS_MODEL="opus"
+
+	run_beads_loop "epic-1"
+
+	grep -q -- "--model opus" "$FAKE_CLAUDE_LOG"
+	! grep -q -- "--model sonnet" "$FAKE_CLAUDE_LOG"
+}
+
+@test "run_beads_loop: empty CLAUDE_BEADS_MODEL falls back to no --model flag" {
+	echo "task-1" >>"$FAKE_BD_READY_QUEUE"
+	echo "commit" >>"$FAKE_CLAUDE_QUEUE"
+	export CLAUDE_BEADS_MODEL=""
+
+	run_beads_loop "epic-1"
+
+	! grep -q -- "--model" "$FAKE_CLAUDE_LOG"
+}
+
+@test "run_beads_loop: streams claude output as stream-json by default" {
+	echo "task-1" >>"$FAKE_BD_READY_QUEUE"
+	echo "commit" >>"$FAKE_CLAUDE_QUEUE"
+
+	run_beads_loop "epic-1"
+
+	grep -q -- "--output-format stream-json" "$FAKE_CLAUDE_LOG"
+	grep -q -- "--verbose" "$FAKE_CLAUDE_LOG"
+}
+
+@test "run_beads_loop: CLAUDE_BEADS_STREAM=0 disables stream-json" {
+	echo "task-1" >>"$FAKE_BD_READY_QUEUE"
+	echo "commit" >>"$FAKE_CLAUDE_QUEUE"
+	export CLAUDE_BEADS_STREAM=0
+
+	run_beads_loop "epic-1"
+
+	! grep -q -- "--output-format stream-json" "$FAKE_CLAUDE_LOG"
+}
+
+@test "run_beads_loop: writes a per-run log capturing status lines" {
+	echo "task-1" >>"$FAKE_BD_READY_QUEUE"
+	echo "commit" >>"$FAKE_CLAUDE_QUEUE"
+
+	run_beads_loop "epic-1"
+
+	local log
+	log="$(ls "${REPO_DIR}"/.claude-beads/logs/*.log)"
+	[ -f "$log" ]
+	grep -q "claimed (task 1)" "$log"
+	grep -q "\[task-1\] closed" "$log"
+	# the log dir self-ignores so transcripts never get committed
+	grep -qx '*' "${REPO_DIR}/.claude-beads/.gitignore"
+}
+
+@test "run_beads_loop: CLAUDE_BEADS_LOG_DIR relocates the run log" {
+	echo "task-1" >>"$FAKE_BD_READY_QUEUE"
+	echo "commit" >>"$FAKE_CLAUDE_QUEUE"
+	export CLAUDE_BEADS_LOG_DIR="${TEST_TMPDIR}/custom-logs"
+
+	run_beads_loop "epic-1"
+
+	local log
+	log="$(ls "${TEST_TMPDIR}"/custom-logs/logs/*.log)"
+	[ -f "$log" ]
+	grep -q "claimed (task 1)" "$log"
+}
+
+@test "run_beads_loop: a claim error stops the loop distinctly from an empty queue" {
+	echo "__ERROR__schema boom" >>"$FAKE_BD_READY_QUEUE"
+
+	run_beads_loop "epic-1"
+
+	[ "$BEADS_LOOP_STOP_REASON" = "claim_error" ]
+	[ "$BEADS_LOOP_ITER" -eq 0 ]
+	! grep -q "close" "$FAKE_BD_LOG"
+}
+
+@test "run_beads_loop: a commit with no tool activity is not trusted as done" {
+	echo "task-1" >>"$FAKE_BD_READY_QUEUE"
+	export CLAUDE_BEADS_MAX_REPAIRS=0
+	echo "commit-notool" >>"$FAKE_CLAUDE_QUEUE"
+
+	run_beads_loop "epic-1"
+
+	# a landed commit with zero tool calls is not real work: never closed,
+	# blocked once repairs are exhausted
+	! grep -q "close task-1" "$FAKE_BD_LOG"
+	grep -q "update task-1 --status=blocked" "$FAKE_BD_LOG"
+}
+
+@test "run_beads_loop: CLAUDE_BEADS_REQUIRE_ACTIVITY=0 disables the activity guard" {
+	echo "task-1" >>"$FAKE_BD_READY_QUEUE"
+	echo "commit-notool" >>"$FAKE_CLAUDE_QUEUE"
+	export CLAUDE_BEADS_REQUIRE_ACTIVITY=0
+
+	run_beads_loop "epic-1"
+
+	grep -q "close task-1" "$FAKE_BD_LOG"
+}
+
+@test "run_beads_loop: activity guard is inactive when streaming is off" {
+	echo "task-1" >>"$FAKE_BD_READY_QUEUE"
+	echo "commit-notool" >>"$FAKE_CLAUDE_QUEUE"
+	export CLAUDE_BEADS_STREAM=0
+
+	run_beads_loop "epic-1"
+
+	# with no stream we can't see tool calls, so a commit alone still closes
+	grep -q "close task-1" "$FAKE_BD_LOG"
+}
+
+@test "bl_had_activity: true only when a tool-call marker is present" {
+	run bl_had_activity "[tool: Bash] {\"command\":\"git commit\"}"
+	[ "$status" -eq 0 ]
+
+	run bl_had_activity "I have finished the task and committed everything."
+	[ "$status" -ne 0 ]
+}
+
+@test "bl_detect_session_limit: matches the CLI limit line, not incidental mentions" {
+	run bl_detect_session_limit "You've hit your session limit · resets 10:10am (UTC)"
+	[ "$status" -eq 0 ]
+
+	run bl_detect_session_limit "Claude usage limit reached"
+	[ "$status" -eq 0 ]
+
+	# a task's own output merely discussing a limit must not trip it
+	run bl_detect_session_limit "Added a rate limit of 100 requests per minute"
+	[ "$status" -ne 0 ]
+}
+
+@test "bl_reset_time_token: extracts the reset clock time" {
+	run bl_reset_time_token "You've hit your session limit · resets 10:10am (UTC)"
+	[ "$output" = "10:10am" ]
+}
+
+@test "run_beads_loop: a session limit pauses the run without closing the task" {
+	echo "task-1" >>"$FAKE_BD_READY_QUEUE"
+	echo "limit" >>"$FAKE_CLAUDE_QUEUE"
+	export CLAUDE_BEADS_WAIT_ON_LIMIT=0
+
+	run_beads_loop "epic-1"
+
+	[ "$BEADS_LOOP_STOP_REASON" = "session_limit" ]
+	[ "$BEADS_LOOP_ITER" -eq 0 ]
+	# the task is neither closed nor blocked...
+	! grep -q "close task-1" "$FAKE_BD_LOG"
+	! grep -q "update task-1 --status=blocked" "$FAKE_BD_LOG"
+	# ...it is handed back to the ready pool for a later run
+	grep -q "update task-1 --status=open --assignee=" "$FAKE_BD_LOG"
+}
+
+@test "run_beads_loop: a session limit does not close even if a commit landed" {
+	echo "task-1" >>"$FAKE_BD_READY_QUEUE"
+	echo "limit-commit" >>"$FAKE_CLAUDE_QUEUE"
+	export CLAUDE_BEADS_WAIT_ON_LIMIT=0
+
+	run_beads_loop "epic-1"
+
+	[ "$BEADS_LOOP_STOP_REASON" = "session_limit" ]
+	! grep -q "close task-1" "$FAKE_BD_LOG"
+}
+
+@test "run_beads_loop: session limit stops before draining the rest of the queue" {
+	printf 'task-1\ntask-2\n' >"$FAKE_BD_READY_QUEUE"
+	echo "limit" >>"$FAKE_CLAUDE_QUEUE"
+	export CLAUDE_BEADS_WAIT_ON_LIMIT=0
+
+	run_beads_loop "epic-1"
+
+	[ "$BEADS_LOOP_STOP_REASON" = "session_limit" ]
+	# task-2 is never claimed — the run paused on the limit
+	! grep -q "task-2" "$FAKE_BD_LOG"
+}
+
+@test "bl_release_task: hands a claimed task back to the ready pool" {
+	bl_release_task "task-9"
+
+	grep -q "update task-9 --status=open --assignee=" "$FAKE_BD_LOG"
 }
 
 @test "run_beads_loop: stops immediately when there is no ready work" {

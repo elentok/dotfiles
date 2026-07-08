@@ -106,6 +106,11 @@ tells the model not to touch bead status.
 `CLAUDE_BEADS_VERIFY_CMD` is set, that command exits 0. With no verify command
 configured, a landed commit alone is accepted (a commit-landed-only gate) —
 set `CLAUDE_BEADS_VERIFY_CMD` to something like `npm test` for a real gate.
+As a safety net against no-op closes, a task is also never closed if claude
+made **zero tool calls** that attempt (a session limit, a refusal, or an empty
+response), since real work always makes tool calls — the commit would have to
+be stale or pre-existing. This guard needs streaming on and can be turned off
+with `CLAUDE_BEADS_REQUIRE_ACTIVITY=0`.
 
 **Failure ladder:** implement → up to `CLAUDE_BEADS_MAX_REPAIRS` (default `2`)
 repair passes, each a fresh `claude -p` seeded with the previous diff and
@@ -113,6 +118,27 @@ verify output → mark blocked with a note on exhaustion. The loop halts after
 3 consecutive blocked tasks (circuit breaker — a systemic problem like a
 broken build or expired creds should stop the run, not thrash task after
 task) or after `CLAUDE_BEADS_MAX_ITER` tasks if set (unset/`0` = unbounded).
+
+**Output & logs:** each `claude -p` runs in `stream-json` mode, formatted into
+readable lines (assistant text plus a one-liner per tool call) so a running
+task shows progress live instead of going silent until the turn ends (the
+default buffered `text` output prints only at the very end). The same stream is
+written to a per-run transcript at `.claude-beads/logs/<timestamp>-<epic>.log`
+— because `$PWD` is bind-mounted into the container, you can `tail -f` it from
+the host while the loop runs. The `.claude-beads/` dir is self-gitignored.
+Relocate with `CLAUDE_BEADS_LOG_DIR`; set `CLAUDE_BEADS_STREAM=0` to revert to
+plain buffered output.
+
+**Session/usage limits:** when `claude -p` bails with "You've hit your session
+limit · resets ...", the loop detects it and refuses to close or block that
+task — the work never actually happened, so it's handed back to the ready pool
+untouched (this also avoids the failure mode where a stale or coincidental
+commit made a limited task read as `verified`). By default
+(`CLAUDE_BEADS_WAIT_ON_LIMIT=1`) the loop then sleeps until the reported reset
+time (capped by `CLAUDE_BEADS_MAX_WAIT`, default 6h) and resumes on the same
+task; set it to `0` to stop instead and just re-run later — the released task
+is picked up again from where it left off. The stop reason `session_limit` is
+reported when it stops rather than waits.
 
 ## Environment variables
 
@@ -126,6 +152,12 @@ task) or after `CLAUDE_BEADS_MAX_ITER` tasks if set (unset/`0` = unbounded).
 | `CLAUDE_BEADS_VERIFY_CMD` | `claude-beads` | — | Shell command run to verify a task; non-zero fails the task |
 | `CLAUDE_BEADS_MAX_REPAIRS` | `claude-beads` | `2` | Repair passes allowed beyond the first attempt |
 | `CLAUDE_BEADS_MAX_ITER` | `claude-beads` | `0` (unbounded) | Hard cap on tasks attempted per run |
+| `CLAUDE_BEADS_MODEL` | `claude-beads` | `sonnet` | Model passed to `claude -p` for implement/repair; empty = account default |
+| `CLAUDE_BEADS_STREAM` | `claude-beads` | `1` | Stream `claude -p` output live (stream-json); `0` reverts to buffered text |
+| `CLAUDE_BEADS_LOG_DIR` | `claude-beads` | `.claude-beads` | Directory for per-run transcripts (`<dir>/logs/`, self-gitignored) |
+| `CLAUDE_BEADS_WAIT_ON_LIMIT` | `claude-beads` | `1` | On a session/usage limit, sleep until the reported reset and resume; `0` stops instead |
+| `CLAUDE_BEADS_MAX_WAIT` | `claude-beads` | `21600` (6h) | Max seconds to sleep waiting for a limit reset before giving up and stopping |
+| `CLAUDE_BEADS_REQUIRE_ACTIVITY` | `claude-beads` | `1` | Refuse to close a task if claude made zero tool calls (no real work); `0` disables. Needs streaming on |
 | `--add-dir DIR` | both (CLI flag) | — | Additional host directory to mount read-write, at the same path |
 
 MCP servers configured in the host's `~/.claude.json` (`mcpServers`) sync

@@ -19,11 +19,42 @@ Usage: claude-beads <epic-id> [--add-dir DIR]...
 
 Autonomously drains a beads epic: claims the next ready task, implements it
 with a fresh `claude -p` in bypass mode, verifies (commit-landed, plus
-CLAUDE_BEADS_VERIFY_CMD if set), repairs on failure (CLAUDE_BEADS_MAX_REPAIRS,
+CLAUDE_BEADS_VERIFY_CMD if set; never closes a task claude made no tool calls
+on), repairs on failure (CLAUDE_BEADS_MAX_REPAIRS,
 default 2), and marks exhausted tasks blocked. Halts after 3 consecutive
-blocked tasks, or after CLAUDE_BEADS_MAX_ITER tasks if set. Runs inside the
-same sandboxed container as claude-box; the container is the safety boundary.
+blocked tasks, or after CLAUDE_BEADS_MAX_ITER tasks if set. Implements with
+CLAUDE_BEADS_MODEL (default: sonnet; set empty to use the account default).
+Streams claude's output live and writes a per-run transcript under
+.claude-beads/logs/ (CLAUDE_BEADS_LOG_DIR to relocate; tail -f to follow).
+On a session/usage limit it hands the current task back untouched (no false
+close) and, by default, sleeps until the reset and resumes; set
+CLAUDE_BEADS_WAIT_ON_LIMIT=0 to stop and re-run later instead.
+Runs inside the same sandboxed container as claude-box; the container is the
+safety boundary.
 EOF
+}
+
+# require_beads_db <dir> - fail fast if no .beads database is discoverable at
+# or above <dir>. claude-beads mounts the current directory into the
+# container as /workspace, so run from outside the target repo bd finds no db
+# and the loop only reports no_ready_tasks after a wasted container round-trip.
+require_beads_db() {
+	local dir="${1:?require_beads_db requires a directory}"
+
+	while [[ "$dir" != "/" ]]; do
+		if [[ -d "${dir}/.beads" ]]; then
+			return 0
+		fi
+		dir="$(dirname "$dir")"
+	done
+
+	if [[ -d "/.beads" ]]; then
+		return 0
+	fi
+
+	echo "claude-beads: no .beads database found at or above ${PWD}." >&2
+	echo "claude-beads: cd into the repo that owns epic '${epic}' and re-run." >&2
+	exit 1
 }
 
 epic=""
@@ -63,6 +94,8 @@ if [[ "${#extra_dirs[@]}" -gt 0 ]]; then
 		echo "${extra_dirs[*]}"
 	)"
 fi
+
+require_beads_db "$PWD"
 
 if ! docker image inspect "$IMAGE_NAME" >/dev/null 2>&1; then
 	echo "claude-beads: building image ${IMAGE_NAME} (first run only)..." >&2
