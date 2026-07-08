@@ -1,7 +1,6 @@
 # nvim-pack-audit
 
-Skill-first workflow for staged `vim.pack.update()` with a security review
-before promotion.
+Skill-first workflow for staged `vim.pack.update()` with a security review before promotion.
 
 ## Primary Interface
 
@@ -30,8 +29,8 @@ Use the `nvim-pack-audit` skill from Codex.
 
 ## Artifact Policy
 
-Artifacts are retained through the review loop and only removed after successful
-promotion+commit completion.
+Artifacts are retained through the review loop and only removed after successful promotion+commit
+completion.
 
 ## Promotion Gate
 

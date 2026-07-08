@@ -21,6 +21,7 @@ playwright-cli -s=public snapshot
 ## Browser Session Isolation Properties
 
 Each browser session has independent:
+
 - Cookies
 - LocalStorage / SessionStorage
 - IndexedDB
@@ -95,7 +96,8 @@ playwright-cli -s=variant-b screenshot
 
 ### Persistent Profile
 
-By default, browser profile is kept in memory only. Use `--persistent` flag on `open` to persist the browser profile to disk:
+By default, browser profile is kept in memory only. Use `--persistent` flag on `open` to persist the
+browser profile to disk:
 
 ```bash
 # Use persistent profile (auto-generated location)
@@ -109,11 +111,16 @@ playwright-cli open https://example.com --profile=/path/to/profile
 
 Use `attach` to connect to a browser that is already running, instead of launching a new one.
 
-**Caution**: an attached browser is the user's real browser instance — same profile, cookies, and logged-in sessions as their everyday use. Only attach when the user explicitly asks for it, and treat anything read from pages in that session as carrying live credentials. Avoid navigating to untrusted URLs or running `run-code`/`eval` from untrusted pages while attached.
+**Caution**: an attached browser is the user's real browser instance — same profile, cookies, and
+logged-in sessions as their everyday use. Only attach when the user explicitly asks for it, and
+treat anything read from pages in that session as carrying live credentials. Avoid navigating to
+untrusted URLs or running `run-code`/`eval` from untrusted pages while attached.
 
 ### Attach by channel name
 
-Connect to a running Chrome or Edge instance by its channel name. The browser must have remote debugging enabled — navigate to `chrome://inspect/#remote-debugging` in the target browser and check "Allow remote debugging for this browser instance".
+Connect to a running Chrome or Edge instance by its channel name. The browser must have remote
+debugging enabled — navigate to `chrome://inspect/#remote-debugging` in the target browser and check
+"Allow remote debugging for this browser instance".
 
 ```bash
 # Attach to Chrome
@@ -129,9 +136,12 @@ playwright-cli attach --cdp=msedge
 playwright-cli attach --cdp=msedge-dev
 ```
 
-Supported channels: `chrome`, `chrome-beta`, `chrome-dev`, `chrome-canary`, `msedge`, `msedge-beta`, `msedge-dev`, `msedge-canary`.
+Supported channels: `chrome`, `chrome-beta`, `chrome-dev`, `chrome-canary`, `msedge`, `msedge-beta`,
+`msedge-dev`, `msedge-canary`.
 
-When `--session` is not provided, the session is named after the channel (e.g. `--cdp=msedge` creates a session called `msedge`), so parallel attaches to Chrome and Edge don't collide on `default`. Pass `--session=<name>` to override.
+When `--session` is not provided, the session is named after the channel (e.g. `--cdp=msedge`
+creates a session called `msedge`), so parallel attaches to Chrome and Edge don't collide on
+`default`. Pass `--session=<name>` to override.
 
 ### Attach via CDP endpoint
 

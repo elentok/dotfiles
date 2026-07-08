@@ -38,6 +38,10 @@ REPOS = [
         "https://github.com/mattpocock/skills",
         [
             SkillSpec("skills/engineering/domain-modeling"),
+            SkillSpec(
+                "skills/engineering/setup-matt-pocock-skills",
+                dest_name="setup-elentok-skills",
+            ),
             SkillSpec("skills/engineering/grill-with-docs"),
             SkillSpec("skills/engineering/improve-codebase-architecture"),
             SkillSpec("skills/engineering/resolving-merge-conflicts"),
@@ -92,6 +96,26 @@ def write_readme(dest_dir: Path, repo_url: str, skill: SkillSpec) -> None:
     (dest_dir / "README.md").write_text("\n".join(lines) + "\n")
 
 
+PERSONALIZATIONS = {
+    "matt-pocock": "elentok",
+    "Matt Pocock": "David Elentok",
+}
+
+
+def personalize_skill(dest: Path) -> None:
+    for path in dest.rglob("*"):
+        if not path.is_file() or path == dest / "README.md":
+            continue
+
+        text = path.read_text()
+        new_text = text
+        for old, new in PERSONALIZATIONS.items():
+            new_text = new_text.replace(old, new)
+
+        if new_text != text:
+            path.write_text(new_text)
+
+
 def copy_skill(clone_dir: Path, repo_url: str, skill: SkillSpec) -> None:
     dest_name = skill.resolved_dest_name
     src = clone_dir / skill.source_path
@@ -103,8 +127,18 @@ def copy_skill(clone_dir: Path, repo_url: str, skill: SkillSpec) -> None:
 
     shutil.rmtree(dest, ignore_errors=True)
     shutil.copytree(src, dest)
+    personalize_skill(dest)
     write_readme(dest, repo_url, skill)
     print(f"Updated {dest_name}")
+
+
+def run_prettier() -> None:
+    subprocess.run(
+        ["npx", "--yes", "prettier", "--write", "**/*.md"],
+        cwd=SCRIPT_DIR,
+        check=True,
+        stderr=sys.stderr,
+    )
 
 
 def main() -> None:
@@ -112,6 +146,8 @@ def main() -> None:
         clone_dir = clone_repo(repo.url)
         for skill in repo.skills:
             copy_skill(clone_dir, repo.url, skill)
+
+    run_prettier()
 
 
 if __name__ == "__main__":

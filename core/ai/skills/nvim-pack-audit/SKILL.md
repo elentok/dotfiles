@@ -1,7 +1,8 @@
 ---
 name: nvim-pack-audit
 description:
-  Run interactive staged vim.pack.update() + security audit, then review findings before explicit approve/abort.
+  Run interactive staged vim.pack.update() + security audit, then review findings before explicit
+  approve/abort.
 ---
 
 Use this skill when the user asks to update and audit Neovim `vim.pack` plugins.
@@ -36,7 +37,8 @@ Free-form follow-up questions are expected in this state.
 ## Decision Actions
 
 - `approve`
-  - Run: `core/ai/skills/nvim-pack-audit/scripts/approve-update <state-json> [--commit-message-file <path>]`
+  - Run:
+    `core/ai/skills/nvim-pack-audit/scripts/approve-update <state-json> [--commit-message-file <path>]`
 - `abort`
   - Run: `core/ai/skills/nvim-pack-audit/scripts/abort-update <state-json>`
 
