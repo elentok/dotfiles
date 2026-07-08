@@ -1,5 +1,3 @@
-# Matt Pocock's tdd skill
+# Tdd
 
-See https://github.com/mattpocock/skills/tree/main/skills/engineering/skill
-
-Inlined in my dotfiles for ease-of-deployment.
+Inlined from https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md for security and ease-of-deployment.

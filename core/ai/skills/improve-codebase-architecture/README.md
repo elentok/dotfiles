@@ -1,5 +1,3 @@
-# Matt Pocock's improve-codebase-architecture skill
+# Improve Codebase Architecture
 
-See https://github.com/mattpocock/skills/tree/main/skills/engineering/improve-codebase-architecture
-
-Inlined in my dotfiles for ease-of-deployment.
+Inlined from https://github.com/mattpocock/skills/blob/main/skills/engineering/improve-codebase-architecture/SKILL.md for security and ease-of-deployment.
