@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+#
+# Compress/extract directories to/from .tar.zst archives, with progress via pv.
+#
+# Usage:
+#
+#   tarzst create|c  <archive.tar.zst> <source-dir> [-- <extra tar args>]
+#   tarzst extract|x <archive.tar.zst> <dest-dir>   [-- <extra tar args>]
+
+set -euo pipefail
+
+usage() {
+	echo "Usage:" >&2
+	echo "  $(basename "$0") create|c  <archive.tar.zst> <source-dir> [-- <extra tar args>]" >&2
+	echo "  $(basename "$0") extract|x <archive.tar.zst> <dest-dir>   [-- <extra tar args>]" >&2
+	exit 1
+}
+
+create() {
+	local archive="$1"
+	local source_dir="$2"
+	shift 2
+	if [[ "${1:-}" == "--" ]]; then
+		shift
+	fi
+	local tar_args=("$@")
+
+	if [[ -e "$archive" ]]; then
+		echo "Error: archive already exists: $archive" >&2
+		exit 1
+	fi
+
+	local parent_dir base_name size
+	parent_dir="$(dirname "$source_dir")"
+	base_name="$(basename "$source_dir")"
+	size="$(du -sb "$source_dir" | cut -f1)"
+
+	tar -C "$parent_dir" -cf - "${tar_args[@]}" "$base_name" |
+		pv -s "$size" |
+		zstd -T0 -3 -o "$archive"
+}
+
+extract() {
+	local archive="$1"
+	local dest_dir="$2"
+	shift 2
+	if [[ "${1:-}" == "--" ]]; then
+		shift
+	fi
+	local tar_args=("$@")
+
+	if [[ ! -e "$archive" ]]; then
+		echo "Error: archive does not exist: $archive" >&2
+		exit 1
+	fi
+
+	if [[ ! -d "$dest_dir" ]]; then
+		echo "Error: destination directory does not exist: $dest_dir" >&2
+		exit 1
+	fi
+
+	pv "$archive" |
+		zstd -d |
+		tar -C "$dest_dir" -xf - "${tar_args[@]}"
+}
+
+main() {
+	if [[ $# -lt 3 ]]; then
+		usage
+	fi
+
+	local mode="$1"
+	shift
+
+	case "$mode" in
+	create | c) create "$@" ;;
+	extract | x) extract "$@" ;;
+	*) usage ;;
+	esac
+}
+
+main "$@"
