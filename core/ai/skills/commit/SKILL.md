@@ -1,91 +1,75 @@
 ---
 name: commit
 description:
-  Create a git commit following project conventions. Use when asked to commit, create a commit, or
-  finalize changes.
+  Commit staged git changes, or include current changes only when the user explicitly says
+  /commit all or $commit all. Use when asked to commit, create a commit, or finalize changes.
 ---
 
 Create a git commit following the rules below.
 
 When reading this file please explicitly mention that you did.
 
-## Model Strategy
-
-- Use a cheap sub-agent for commit analysis and draft preparation.
-- Use `gpt-5.4-mini` in Codex or `haiku` in Claude.
-- The sub-agent gathers commit context, proposes the message, and runs checklist validation.
-- The main agent keeps authority over staging decisions, final message edits, and `git commit`.
-
 ## Workflow
 
-1. Unless the user explicitly asked to skip pre-commit checks:
-   - make sure the project builds
-   - make sure it passes lint
-   - make sure it's properly formatted (using prettier or whatever the project uses for formatting)
-
-2. Run `git status` and review staged and unstaged changes.
-3. Default behavior is staged-only:
-   - only commit already staged files
-   - if there are no staged files, **STOP**
-4. If the user explicitly asks to stage files, stage only intended paths (no broad staging).
-5. Spawn the cheap sub-agent and have it:
-   - gather context from `git diff --staged`, optional `git diff`, `git log --oneline -10`, and
-     `<directory-of-the-skill-file>/scripts/commit-scopes.sh`
-   - summarize the behavior-level change
-   - propose 3 candidate subjects
-   - draft the final subject and body
-   - validate the result against the checklist
-   - review staged changes for:
-     - Secrets or tokens
-     - Accidental debug logging
-
-6. Require worker output in this shape:
-   - `summary:` 3-6 bullets of behavior-level changes
-   - `candidate_subjects:` exactly 3 options
-   - `final_subject:` 1 selected subject
-   - `final_body:` body text
-   - `checklist:` pass/fail per checklist item
-7. Review the worker output, edit if needed, then run `git commit`.
-8. Follow the "Token Tracking" section
+1. Run `git status`.
+2. Unless the user explicitly says `/commit all` or `$commit all`:
+   - work only from staged changes
+   - if there are no staged files, **STOP** and tell the user to say `/commit all` or `$commit all`
+     to include current changes, or to name paths to stage
+   - if unstaged changes exist, warn the user but do not inspect them
+   - invoke `verify` in `staged` mode unless the user says `skip checks`
+3. If the user explicitly says `/commit all` or `$commit all`:
+   - inspect both staged and unstaged changes
+   - stage only the intended paths
+   - invoke `verify` in `commit-all` mode unless the user says `skip checks`
+4. After `verify`, inspect the final staged snapshot with `git diff --cached`.
+5. Unless the user says `skip secret scan`:
+   - check availability with `command -v gitleaks`
+   - if `gitleaks` is installed, run `gitleaks protect --staged`
+   - if `gitleaks` is not installed, report that secret scanning was skipped
+6. Infer the subject scope from the final staged paths:
+   - if all paths are under one `core/ai/skills/<skill-name>/` directory, use `<skill-name>`
+   - if paths span multiple `core/ai/skills/<skill-name>/` directories, use `skills`
+   - otherwise, use the shared top-level directory
+   - if there is no shared top-level directory, use `repo`
+7. Draft the commit message directly.
+8. Run a quick checklist, then run `git commit`.
 
 ## Commit Message Rules
 
 ### Format
 
-```
-{subject}
-
-{body}
-```
+- Always write a subject
+- Add a body only when at least one is true:
+  - the change contains multiple distinct behaviors
+  - the rationale is not obvious from the diff
+  - the behavior change is risky or user-visible
+  - the user explicitly asks for a body
 
 ### Subject
 
 - Single-line
-- Lowercase (no leading capitalized verb).
-- `{scope}: {message}`.
-- Concise (50~72 chars).
-- Imperative (add, fix, ...)
+- Lowercase (no leading capitalized verb)
+- `{scope}: {message}`
+- Concise (50~72 chars)
+- Imperative (add, fix, remove, update, ...)
 
 ### Scope
 
+- Infer it from the changed paths, not commit history
 - Nested scopes are allowed when they improve clarity (`{top-scope}: {child-scope}: {message}`)
-- To existing scopes (add new if missing) run:
-
-  ```bash
-  ~/.dotfiles/core/ai/skills/commit/scripts/commit-scopes.sh
-  ```
 
 ### Body
 
-- What/why, not implementation diary
-- Avoid vague subjects like `misc fixes` or `updates`
-- 2 line paragraphs max
-- Prefer bullets
+- Explain what changed and why
+- Do not write an implementation diary
+- Prefer short paragraphs or bullets
+- Keep paragraphs to 2 lines max
 
 ## Quick Checklist
 
 - Is the subject scoped?
 - Is the verb imperative?
-- Is there a paragraph longer than 4 lines?
 - Is the change intent clear in one line?
-- Does it match recent commit tone/style?
+- Does the body exist only when it adds value?
+- Is there any paragraph longer than 2 lines?
