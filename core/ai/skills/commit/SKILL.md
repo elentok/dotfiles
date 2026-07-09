@@ -7,8 +7,6 @@ description:
 
 Create a git commit following the rules below.
 
-When reading this file please explicitly mention that you did.
-
 ## Workflow
 
 1. Run `git status`.
