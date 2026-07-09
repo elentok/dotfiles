@@ -6,9 +6,9 @@ repo_root=$(git -C "$script_dir" rev-parse --show-toplevel)
 
 lockfile_rel="core/nvim/nvim-pack-lock.json"
 lockfile_path="$repo_root/$lockfile_rel"
-audit_base="$repo_root/core/ai/nvim-pack-audit"
-schema_path="$audit_base/audit-schema.json"
-prompt_path="$audit_base/security-audit-prompt.md"
+skill_root="$repo_root/core/ai/skills/nvim-pack-audit"
+schema_path="$skill_root/audit-schema.json"
+prompt_path="$skill_root/security-audit-prompt.md"
 
 usage() {
 	cat <<'USAGE'
@@ -34,7 +34,7 @@ if [[ $# -gt 0 ]]; then
 	esac
 fi
 
-for cmd in git jq nvim codex; do
+for cmd in git jq nvim; do
 	command -v "$cmd" >/dev/null 2>&1 || die "missing required command: $cmd"
 done
 
@@ -67,6 +67,7 @@ old_lockfile="$artifacts_dir/old-lockfile.json"
 audit_json="$artifacts_dir/audit.json"
 audit_md="$artifacts_dir/audit.md"
 summary_txt="$artifacts_dir/summary.txt"
+commit_msg_file="$artifacts_dir/commit-message.txt"
 state_json="$artifacts_dir/state.json"
 
 mkdir -p "$xdg_config" "$xdg_data" "$xdg_state" "$xdg_cache" "$artifacts_dir"
@@ -100,49 +101,6 @@ if cmp -s "$old_lockfile" "$staged_lockfile"; then
 fi
 
 plugin_root="$xdg_data/nvim/site/pack/core/opt"
-cat "$prompt_path" - <<EOF_PROMPT | codex exec \
-	--sandbox workspace-write \
-	--ephemeral \
-	--skip-git-repo-check \
-	--output-schema "$schema_path" \
-	-o "$audit_json" \
-	-C "$tmp_root" \
-	-
-
-## Runtime Context
-
-- mode: changed_only
-- old_lockfile_path: $old_lockfile
-- new_lockfile_path: $staged_lockfile
-- plugin_root: $plugin_root
-- audit_md_path: $audit_md
-EOF_PROMPT
-
-if [[ ! -f "$audit_json" ]]; then
-	die "Codex did not produce $audit_json"
-fi
-if [[ ! -f "$audit_md" ]]; then
-	die "Codex did not write $audit_md"
-fi
-
-jq -r --arg audit_md "$audit_md" '
-  def plugin_line:
-    "- \(.plugin_name): \(.old_rev[0:12]) -> \(.new_rev[0:12]) [\(.verdict)] (+\(.lines_added)/-\(.lines_removed))";
-  def finding_line:
-    "  * \(.plugin_name): \(.findings[0].severity) - \(.findings[0].title)";
-
-  [
-    "Changed plugins: \(.summary.plugins_changed)",
-    (.plugins[] | plugin_line),
-    "",
-    "Top findings:",
-    ([ .plugins[] | select(.findings | length > 0) | finding_line ] | if length == 0 then "  * none" else .[] end),
-    "",
-    "Overall verdict: \(.overall_verdict)",
-    "Promotion allowed: \(if .overall_verdict == \"block\" then \"no\" else \"yes\" end)",
-    "Audit report: \($audit_md)"
-  ] | .[]
-' "$audit_json" | tee "$summary_txt"
 
 jq -n \
 	--arg repo_root "$repo_root" \
@@ -150,18 +108,17 @@ jq -n \
 	--arg staged_lockfile "$staged_lockfile" \
 	--arg lockfile_path "$lockfile_path" \
 	--arg lockfile_rel "$lockfile_rel" \
+	--arg old_lockfile "$old_lockfile" \
 	--arg audit_json "$audit_json" \
 	--arg audit_md "$audit_md" \
 	--arg summary_txt "$summary_txt" \
-	--arg verdict "$(jq -r '.overall_verdict' "$audit_json")" \
-	'{repo_root:$repo_root,tmp_root:$tmp_root,lockfile_rel:$lockfile_rel,lockfile_path:$lockfile_path,staged_lockfile:$staged_lockfile,audit_json:$audit_json,audit_md:$audit_md,summary_txt:$summary_txt,verdict:$verdict}' >"$state_json"
+	--arg commit_msg_file "$commit_msg_file" \
+	--arg schema_path "$schema_path" \
+	--arg audit_prompt_path "$prompt_path" \
+	--arg plugin_root "$plugin_root" \
+	'{repo_root:$repo_root,tmp_root:$tmp_root,lockfile_rel:$lockfile_rel,lockfile_path:$lockfile_path,staged_lockfile:$staged_lockfile,old_lockfile:$old_lockfile,audit_json:$audit_json,audit_md:$audit_md,summary_txt:$summary_txt,commit_msg_file:$commit_msg_file,schema_path:$schema_path,audit_prompt_path:$audit_prompt_path,plugin_root:$plugin_root}' >"$state_json"
 
 echo
-echo "review state saved: $state_json"
-if jq -e '.overall_verdict == "block"' "$audit_json" >/dev/null; then
-	echo "promotion refused: audit verdict is block"
-	echo "artifacts kept in $tmp_root"
-	exit 20
-fi
-echo "ready for review loop and approval"
+echo "staging ready: $state_json"
 echo "artifacts kept in $tmp_root"
+echo "next: run the Run Audit step in SKILL.md"

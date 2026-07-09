@@ -27,8 +27,6 @@ This is a supply-chain and trust-boundary audit. Prioritize:
 - widened autocmd or user-command trust boundaries
 - repository/source anomalies
 
-Do not spend time on style, formatting, or generic refactoring advice.
-
 ## Inputs
 
 The caller will append a `## Runtime Context` section containing:
@@ -180,7 +178,6 @@ Include line counts in both outputs:
 
 ## Constraints
 
-- Be concrete.
 - Cite exact files when you identify a finding.
 - Do not invent evidence you cannot inspect locally.
 - If you must infer, say so in the finding details.

@@ -5,15 +5,11 @@ if [[ $# -ne 2 ]]; then
 	echo "Usage: core/ai/skills/nvim-pack-audit/scripts/edit-commit-message <state-json> <output-file>" >&2
 	exit 1
 fi
-audit_json=$(jq -r '.audit_json' "$1")
+commit_msg_file=$(jq -r '.commit_msg_file' "$1")
 out_file="$2"
-if [[ ! -f "$audit_json" ]]; then
-	echo "missing audit json: $audit_json" >&2
+if [[ ! -f "$commit_msg_file" ]]; then
+	echo "missing commit message: $commit_msg_file" >&2
 	exit 1
 fi
-{
-	jq -r '.commit.subject' "$audit_json"
-	echo
-	jq -r '.commit.body_markdown' "$audit_json"
-} >"$out_file"
+cp "$commit_msg_file" "$out_file"
 echo "wrote commit message template to $out_file"

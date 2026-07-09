@@ -1,0 +1,124 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = ["jsonschema"]
+# ///
+"""Validate a sub-agent's audit.json against audit-schema.json and write
+summary.txt and commit-message.txt deterministically.
+
+Usage: core/ai/skills/nvim-pack-audit/scripts/record-audit <state-json>
+"""
+
+import json
+import sys
+
+import jsonschema
+
+
+def die(msg: str) -> None:
+    print(msg, file=sys.stderr)
+    sys.exit(1)
+
+
+def short(rev: str) -> str:
+    return rev[:12]
+
+
+def plugin_change_lines(plugin: dict, indent: str = "  ") -> list[str]:
+    lines = [f"{indent}* {b}" for b in plugin.get("change_summary", [])]
+    return lines or [f"{indent}* (no change summary provided)"]
+
+
+def build_summary(audit: dict, audit_md: str) -> str:
+    lines: list[str] = [f"Changed plugins: {audit['summary']['plugins_changed']}"]
+    for plugin in audit["plugins"]:
+        lines.append(
+            f"- {plugin['plugin_name']}: {short(plugin['old_rev'])} -> "
+            f"{short(plugin['new_rev'])} [{plugin['verdict']}] "
+            f"(+{plugin['lines_added']}/-{plugin['lines_removed']})"
+        )
+        lines.extend(plugin_change_lines(plugin))
+    lines.append("")
+    lines.append("Top findings:")
+    finding_lines = [
+        f"  * {p['plugin_name']}: {p['findings'][0]['severity']} - {p['findings'][0]['title']}"
+        for p in audit["plugins"]
+        if p["findings"]
+    ]
+    lines.extend(finding_lines or ["  * none"])
+    lines.append("")
+    lines.append(f"Overall verdict: {audit['overall_verdict']}")
+    promotion_allowed = "no" if audit["overall_verdict"] == "block" else "yes"
+    lines.append(f"Promotion allowed: {promotion_allowed}")
+    lines.append(f"Audit report: {audit_md}")
+    return "\n".join(lines) + "\n"
+
+
+def build_commit_message(audit: dict) -> str:
+    parts = [audit["commit"]["subject"], "", audit["commit"]["body_markdown"]]
+    if audit["plugins"]:
+        parts.append("")
+        parts.append("Per-plugin changes:")
+        for plugin in audit["plugins"]:
+            parts.append(
+                f"- {plugin['plugin_name']} ({short(plugin['old_rev'])} -> "
+                f"{short(plugin['new_rev'])}, +{plugin['lines_added']}/"
+                f"-{plugin['lines_removed']}):"
+            )
+            parts.extend(plugin_change_lines(plugin, indent="  "))
+    return "\n".join(parts) + "\n"
+
+
+def main() -> None:
+    if len(sys.argv) != 2:
+        die("Usage: core/ai/skills/nvim-pack-audit/scripts/record-audit <state-json>")
+    state_path = sys.argv[1]
+
+    with open(state_path) as f:
+        state = json.load(f)
+
+    audit_json_path = state["audit_json"]
+    audit_md_path = state["audit_md"]
+    schema_path = state["schema_path"]
+
+    try:
+        with open(audit_json_path) as f:
+            audit = json.load(f)
+    except FileNotFoundError:
+        die(f"missing audit json: {audit_json_path}")
+
+    try:
+        with open(audit_md_path):
+            pass
+    except FileNotFoundError:
+        die(f"missing audit report: {audit_md_path}")
+
+    with open(schema_path) as f:
+        schema = json.load(f)
+
+    try:
+        jsonschema.validate(audit, schema)
+    except jsonschema.ValidationError as e:
+        die(f"audit.json failed schema validation: {e.message} (at {'/'.join(str(p) for p in e.path)})")
+
+    summary = build_summary(audit, audit_md_path)
+    with open(state["summary_txt"], "w") as f:
+        f.write(summary)
+    print(summary, end="")
+
+    commit_message = build_commit_message(audit)
+    with open(state["commit_msg_file"], "w") as f:
+        f.write(commit_message)
+
+    print()
+    print(f"summary written: {state['summary_txt']}")
+    print(f"commit message written: {state['commit_msg_file']}")
+
+    if audit["overall_verdict"] == "block":
+        print("promotion refused: audit verdict is block")
+        sys.exit(20)
+    print("ready for review loop and approval")
+
+
+if __name__ == "__main__":
+    main()

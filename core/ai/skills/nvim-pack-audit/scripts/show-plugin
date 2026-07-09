@@ -19,6 +19,8 @@ jq --arg name "$plugin_name" -r '
     "revision: \(.old_rev[0:12]) -> \(.new_rev[0:12])",
     "verdict: \(.verdict)",
     "diffstat: +\(.lines_added) / -\(.lines_removed)",
+    "change summary:",
+    (.change_summary[] | "- \(.)"),
     "findings:",
     (if (.findings | length) == 0 then "- none" else (.findings[] | "- [\(.severity)] \(.title): \(.details)") end)
   ] | .[]

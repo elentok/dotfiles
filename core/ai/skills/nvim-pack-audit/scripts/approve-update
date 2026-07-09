@@ -49,6 +49,7 @@ lockfile_path=$(jq -r '.lockfile_path' "$state_json")
 staged_lockfile=$(jq -r '.staged_lockfile' "$state_json")
 audit_json=$(jq -r '.audit_json' "$state_json")
 tmp_root=$(jq -r '.tmp_root' "$state_json")
+commit_msg_file=$(jq -r '.commit_msg_file' "$state_json")
 
 if [[ ! -f "$staged_lockfile" ]]; then
 	die "missing staged lockfile: $staged_lockfile"
@@ -62,18 +63,13 @@ fi
 
 cp "$staged_lockfile" "$lockfile_path"
 
-commit_msg_file="$tmp_root/artifacts/commit-message.txt"
 if [[ -n "$commit_msg_override" ]]; then
 	if [[ ! -f "$commit_msg_override" ]]; then
 		die "missing commit message file: $commit_msg_override"
 	fi
 	cp "$commit_msg_override" "$commit_msg_file"
-else
-	{
-		jq -r '.commit.subject' "$audit_json"
-		echo
-		jq -r '.commit.body_markdown' "$audit_json"
-	} >"$commit_msg_file"
+elif [[ ! -f "$commit_msg_file" ]]; then
+	die "missing commit message: $commit_msg_file"
 fi
 
 git -C "$repo_root" add -- "$lockfile_rel"
