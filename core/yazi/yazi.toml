@@ -18,3 +18,11 @@ prepend_rules = [
   { name = "*.csv", use = "tabiew", mime = "text/csv" },
   { name = "*.mp4", use = "vlc", mime = "video/mp4" },
 ]
+
+[[plugin.prepend_previewers]]
+url = "*.stl"
+run = "mesh-preview"
+
+[[plugin.prepend_previewers]]
+url = "*.3mf"
+run = "mesh-preview"

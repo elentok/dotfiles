@@ -1,0 +1,12 @@
+#!/usr/bin/env fish
+
+set mesh (path resolve $argv[1])
+set png $argv[2]
+set imgsize $argv[3]
+if test -z "$imgsize"
+    set imgsize 400,400
+end
+set tmp (mktemp --suffix=.scad)
+echo "import(\"$mesh\");" >$tmp
+openscad -o $png --export-format=png --autocenter --viewall --imgsize=$imgsize --colorscheme=Tomorrow $tmp
+rm $tmp
