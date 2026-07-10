@@ -77,11 +77,7 @@ cp "$lockfile_path" "$old_lockfile"
 ln -s "$staging_repo/core/nvim" "$xdg_config/nvim"
 
 echo
-echo "staged Neovim instructions:"
-echo "1. vim.pack.update() will run automatically"
-echo "2. Review the confirmation buffer"
-echo "3. Use :write to apply updates or :quit to cancel"
-echo "4. Exit Neovim"
+echo "running vim.pack.update() headlessly in the staging clone (force=true, no confirmation buffer)..."
 echo
 
 (
@@ -90,7 +86,7 @@ echo
 	export XDG_STATE_HOME="$xdg_state"
 	export XDG_CACHE_HOME="$xdg_cache"
 	cd "$staging_repo"
-	nvim "+lua vim.pack.update()" "$staging_repo/core/nvim/nvim-pack-lock.json"
+	nvim --headless "+lua vim.pack.update(nil, { force = true })" +qa
 )
 
 staged_lockfile="$staging_repo/$lockfile_rel"

@@ -22,7 +22,7 @@ Use the `nvim-pack-audit` skill from Claude Code or Codex.
 
 1. Validate lockfile conflict state and prerequisites.
 2. Create temporary staging clone and isolated XDG dirs.
-3. Run `vim.pack.update()` in staged Neovim.
+3. Run `vim.pack.update()` headlessly (`force = true`) in staged Neovim.
 4. Spawn a sub-agent to audit changed revisions, then record its verdict.
 5. Enter interactive review loop for follow-up questions.
 6. On `approve`, promote lockfile and commit.
