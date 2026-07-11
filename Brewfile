@@ -52,6 +52,11 @@ if OS.mac?
   cask "kitty"
   cask "hammerspoon"
 
+  cask "font-agave"
+  cask "font-monaspace"
+  cask "font-comic-mono"
+  cask "font-liga-comic-mono"
+
   if !File.exist?(File.expand_path("~/.config/dotfiles/skip-gui-apps"))
     cask "chatgpt"
     cask "freecad"
