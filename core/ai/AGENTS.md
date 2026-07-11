@@ -2,7 +2,7 @@
 
 ## VERY IMPORTANT
 
-- I'm using **GNU sed** on Mac, so use GNU sed arguments, **NOT Mac arguments**.
+- I'm using **GNU sed/find/grep** on Mac, so use GNU arguments, **NOT Mac arguments**.
 - When changing the terminal title add "[Codex]" or "[Claude]" prefix
 
 ## Planning
