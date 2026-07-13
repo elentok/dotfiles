@@ -16,3 +16,5 @@ If a _fact_ can be found by exploring the codebase, look it up rather than askin
 _decisions_, though, are mine — put each one to me and wait for my answer.
 
 Do not enact the plan until I confirm we have reached a shared understanding.
+
+Phrase your questions so if I agree your recommendation I can just write "agree".

@@ -11,7 +11,7 @@ function pth --description "Pretty print PATH"
 end
 
 function ls
-    eza --classify --group-directories-first --time-style=long-iso --icons $argv
+    eza --classify --group-directories-first --time-style=long-iso --icons auto $argv
 end
 
 function ssh
