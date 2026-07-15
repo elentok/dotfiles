@@ -25,8 +25,7 @@ Run cheap, targeted verification for changed files.
 4. Run formatters before analyzers or tests.
 5. If a formatter changes files:
    - in `staged` mode, run `git add` on the formatted files that were already staged
-   - in `commit-all` mode, run `git add` on the formatted files that are part of the intended
-     commit
+   - in `commit-all` mode, run `git add` on the formatted files that are part of the intended commit
    - in `working-changes` mode, do not stage files; report that formatting changed the working tree
 6. Report exactly one result:
    - `pass`: at least one check ran and every command passed

@@ -81,9 +81,9 @@ For each finding:
 4. Let the consultant accept it or make one focused challenge.
 5. Grill any challenge and record the settled disposition.
 
-A settled finding reopens only when new evidence appears or another resolution changes its
-premises. If the consultant reported `no material concerns`, ask whether to accept the clean review
-or investigate a specific area more deeply.
+A settled finding reopens only when new evidence appears or another resolution changes its premises.
+If the consultant reported `no material concerns`, ask whether to accept the clean review or
+investigate a specific area more deeply.
 
 Continue until every finding has a settled disposition.
 
@@ -95,8 +95,8 @@ loop.
 
 Finalize only after every concern has a disposition and the user explicitly finalizes. Then show a
 resolution ledger containing each disposition, the user's rationale, the consultant's final
-response, the required change, and remaining risk. Fold accepted decisions into the proposed
-course of action and ask the user to confirm before resuming execution.
+response, the required change, and remaining risk. Fold accepted decisions into the proposed course
+of action and ask the user to confirm before resuming execution.
 
 If the user aborts, stop the consultant, leave the original activity unchanged, and show the
 findings and unresolved ledger. Keep the consultation in conversation state by default; write

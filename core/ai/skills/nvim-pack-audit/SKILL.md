@@ -21,21 +21,20 @@ Save the emitted `state.json` path from output (`staging ready: ...`).
 
 ## Run Audit
 
-1. Read `audit_prompt_path`, `schema_path`, `old_lockfile`, `staged_lockfile`,
-   `plugin_root`, `audit_json`, and `audit_md` from `state.json`.
-2. Spawn a fresh sub-agent — isolated from this conversation's context — and
-   give it the contents of `audit_prompt_path` as its task, followed by a
-   `## Runtime Context` section with `mode: changed_only`,
-   `old_lockfile_path: <old_lockfile>`, `new_lockfile_path: <staged_lockfile>`,
-   `plugin_root: <plugin_root>`, and `audit_md_path: <audit_md>`. The sub-agent
-   must have read/write access to the repo and write its JSON verdict to
-   `audit_json` and its Markdown report to `audit_md`.
+1. Read `audit_prompt_path`, `schema_path`, `old_lockfile`, `staged_lockfile`, `plugin_root`,
+   `audit_json`, and `audit_md` from `state.json`.
+2. Spawn a fresh sub-agent — isolated from this conversation's context — and give it the contents of
+   `audit_prompt_path` as its task, followed by a `## Runtime Context` section with
+   `mode: changed_only`, `old_lockfile_path: <old_lockfile>`,
+   `new_lockfile_path: <staged_lockfile>`, `plugin_root: <plugin_root>`, and
+   `audit_md_path: <audit_md>`. The sub-agent must have read/write access to the repo and write its
+   JSON verdict to `audit_json` and its Markdown report to `audit_md`.
 3. Once the sub-agent finishes, run:
    ```bash
    core/ai/skills/nvim-pack-audit/scripts/record-audit <state-json>
    ```
-   This validates `audit.json` against the schema and writes `summary.txt`
-   and `commit-message.txt`. If validation fails, re-run the sub-agent.
+   This validates `audit.json` against the schema and writes `summary.txt` and `commit-message.txt`.
+   If validation fails, re-run the sub-agent.
 
 ## Review Loop
 

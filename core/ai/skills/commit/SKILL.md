@@ -1,8 +1,8 @@
 ---
 name: commit
 description:
-  Commit staged git changes, or include current changes only when the user explicitly says
-  /commit all or $commit all. Use when asked to commit, create a commit, or finalize changes.
+  Commit staged git changes, or include current changes only when the user explicitly says /commit
+  all or $commit all. Use when asked to commit, create a commit, or finalize changes.
 ---
 
 Create a git commit following the rules below.

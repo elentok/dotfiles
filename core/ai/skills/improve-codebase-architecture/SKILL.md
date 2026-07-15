@@ -25,6 +25,16 @@ This command is _informed_ by the project's domain model and built on a shared d
 
 ### 1. Explore
 
+**Scope before you scan — YAGNI.** Deepening a module pays off by making future changes to it
+easier, so put extra weight on the parts of the codebase that have recently changed. Decide _where_
+to look before you look:
+
+- If the user named a direction — a module, a subsystem, a pain point — take it, and skip the
+  inference below.
+- Otherwise, walk back a good stretch of the commit history (`git log --oneline`) to find the
+  codebase's hot spots — the files and areas that keep coming up — and let those paths pull your
+  attention first. If the changes are scattered with no clear hot spot, widen the net.
+
 Read the project's domain glossary (`CONTEXT.md`) and any ADRs in the area you're touching first.
 
 Then use the Agent tool with `subagent_type=Explore` to walk the codebase. Don't follow rigid
@@ -85,7 +95,7 @@ like to explore?"
 
 ### 3. Grilling loop
 
-Once the user picks a candidate, run the `/grilling` skill to walk the design tree with them —
+Once the user picks a candidate, run the `/grilling` skill to walk the decision tree with them —
 constraints, dependencies, the shape of the deepened module, what sits behind the seam, what tests
 survive.
 

@@ -4,14 +4,14 @@ You are auditing a staged `vim.pack.update()` result for a Neovim config.
 
 ## Goal
 
-Review only the plugins whose locked revisions changed between the old and new
-lockfiles, then produce:
+Review only the plugins whose locked revisions changed between the old and new lockfiles, then
+produce:
 
 1. a machine-readable final JSON object matching the provided schema;
 2. a human-readable Markdown report written to the `audit_md_path`.
 
-The workflow promotes the staged lockfile unless any plugin verdict is
-`block`, so use `block` only for concrete high-risk findings.
+The workflow promotes the staged lockfile unless any plugin verdict is `block`, so use `block` only
+for concrete high-risk findings.
 
 ## Focus
 
@@ -41,8 +41,8 @@ Use only those paths. Do not assume different locations.
 
 ## Lockfile Format
 
-The lockfiles are JSON with a top-level `plugins` object keyed by plugin name.
-Each plugin entry includes at least:
+The lockfiles are JSON with a top-level `plugins` object keyed by plugin name. Each plugin entry
+includes at least:
 
 - `rev`
 - `src`
@@ -90,8 +90,8 @@ Examples of relevant searches:
 - `autocmd`
 - `vim.api.nvim_create_user_command`
 
-Treat plain `require(...)` usage as normal Lua behavior unless it is combined
-with dynamic user-controlled module names or code loading.
+Treat plain `require(...)` usage as normal Lua behavior unless it is combined with dynamic
+user-controlled module names or code loading.
 
 ## Verdict Rules
 
@@ -104,8 +104,7 @@ Use exactly one of:
 Use `approve` when:
 
 - no concrete risky behavior was introduced; or
-- risky behavior exists but remains bounded and non-exploitable based on the
-  inspected diff.
+- risky behavior exists but remains bounded and non-exploitable based on the inspected diff.
 
 Use `manual_review` when:
 
@@ -148,16 +147,16 @@ Requirements:
   - else `manual_review` if any plugin is `manual_review`
   - else `approve`
 - `commit.subject` must be exactly `nvim: update pack lockfile`
-- `commit.body_markdown` must be a condensed commit body derived from the audit
-  suitable for `git commit`, not the full Markdown report
+- `commit.body_markdown` must be a condensed commit body derived from the audit suitable for
+  `git commit`, not the full Markdown report
 
 For each plugin:
 
 - `name` should be the repo source if available, otherwise plugin name
 - `plugin_name` should be the lockfile key
 - `old_rev` and `new_rev` should be the full revisions from the lockfile
-- `lines_added` and `lines_removed` should be integer totals for the diff from
-  `old_rev` to `new_rev`
+- `lines_added` and `lines_removed` should be integer totals for the diff from `old_rev` to
+  `new_rev`
 - `findings` should be ordered by severity, highest first
 - `change_summary` should be 2-4 short bullets
 
@@ -166,15 +165,13 @@ If there are zero changed plugins:
 - return empty `plugins`
 - set all summary counters to `0`
 - set `overall_verdict` to `approve`
-- make `commit.body_markdown` explain there were no staged plugin revision
-  changes
+- make `commit.body_markdown` explain there were no staged plugin revision changes
 
 Include line counts in both outputs:
 
-- `audit.md` should mention per-plugin line totals in the changed plugin
-  summary
-- `commit.body_markdown` should include per-plugin `+added/-removed` totals
-  when there are changed plugins
+- `audit.md` should mention per-plugin line totals in the changed plugin summary
+- `commit.body_markdown` should include per-plugin `+added/-removed` totals when there are changed
+  plugins
 
 ## Constraints
 
