@@ -37,12 +37,14 @@ REPOS = [
     Repo(
         "https://github.com/mattpocock/skills",
         [
-            SkillSpec("skills/engineering/domain-modeling"),
             SkillSpec(
                 "skills/engineering/setup-matt-pocock-skills",
                 dest_name="setup-elentok-skills",
             ),
+            SkillSpec("skills/engineering/code-review"),
+            SkillSpec("skills/engineering/domain-modeling"),
             SkillSpec("skills/engineering/grill-with-docs"),
+            SkillSpec("skills/engineering/implement"),
             SkillSpec("skills/engineering/improve-codebase-architecture"),
             SkillSpec("skills/engineering/resolving-merge-conflicts"),
             SkillSpec("skills/engineering/tdd"),
