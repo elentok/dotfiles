@@ -50,6 +50,7 @@ REPOS = [
             SkillSpec("skills/engineering/tdd"),
             SkillSpec("skills/engineering/to-spec"),
             SkillSpec("skills/engineering/to-tickets"),
+            SkillSpec("skills/engineering/triage"),
             SkillSpec("skills/engineering/wayfinder"),
             SkillSpec("skills/productivity/grill-me"),
             SkillSpec("skills/productivity/grilling"),
