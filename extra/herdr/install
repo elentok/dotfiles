@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+dfl symlink config.toml ~/.config/herdr/config.toml
+
+herdr integration install claude
+herdr integration install codex

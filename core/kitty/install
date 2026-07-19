@@ -5,7 +5,7 @@ set -euo pipefail
 source "$DOTF/framework.sh"
 
 function main() {
-  dotf-symlink "$DOTF/core/kitty" ~/.config/kitty
+  dfl symlink "$DOTF/core/kitty" ~/.config/kitty
 
   if dotf-is-linux; then
     if [ ! -e ~/.local/kitty.app ] || [ "${1:-}" == "--upgrade" ]; then
