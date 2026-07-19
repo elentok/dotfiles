@@ -42,6 +42,8 @@ uv "git-fame"
 uv "neovim-remote"
 
 if OS.mac?
+  cask_args appdir: '~/Applications' # avoid requiring sudo
+
   brew "bash"
   brew "findutils"
   brew "fish"
