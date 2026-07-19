@@ -77,10 +77,10 @@ prefix = "ctrl+e"
 # remove_worktree = ""  # optional, unset by default; opens confirmation
 # rename_workspace = "prefix+shift+w"
 # close_workspace = "prefix+shift+d"
-# previous_workspace = "" # optional, unset by default
-# next_workspace = ""     # optional, unset by default
-# previous_agent = ""     # optional, unset by default
-# next_agent = ""         # optional, unset by default
+previous_workspace = "prefix+," # optional, unset by default
+next_workspace = "prefix+."     # optional, unset by default
+previous_agent = "prefix+k"     # optional, unset by default
+next_agent = "prefix+j"         # optional, unset by default
 # focus_agent = ""        # optional indexed binding, e.g. "prefix+alt+1..9"
 # remote_image_paste = "ctrl+v" # only active in herdr --remote; empty disables raw-key image paste
 # new_tab = "prefix+c"
@@ -305,7 +305,7 @@ delivery = "herdr"
 # allow_nested = false
 # Experimental local Kitty graphics rendering for attached clients.
 # Requires a Kitty graphics-compatible outer terminal.
-# kitty_graphics = false
+kitty_graphics = true
 # Save recent pane screen history across full server restarts.
 pane_history = true
 # While prefix mode is active, temporarily switch the macOS host input
