@@ -1,5 +1,9 @@
 ---@module 'smart-splits'
 
+-- Under Herdr, herdr-splits.nvim (40-herdr-splits.lua) takes over nav; avoid
+-- double-binding ctrl/cmd-hjkl.
+if vim.env.HERDR_ENV == "1" then return end
+
 ---@type SmartSplitsConfig
 ---@diagnostic disable-next-line: missing-fields
 require("smart-splits").setup({

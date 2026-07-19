@@ -6,3 +6,7 @@ dfl symlink config.toml ~/.config/herdr/config.toml
 
 herdr integration install claude
 herdr integration install codex
+
+# Pinned to a specific commit since the repo has no tagged releases yet.
+# Bump this sha deliberately when picking up upstream changes.
+herdr plugin install lmilojevicc/herdr-splits.nvim --ref 19b9782c8d1941449bdb3376379adaa2444166a9 --yes
