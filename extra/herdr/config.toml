@@ -1,3 +1,4 @@
+onboarding = false
 # herdr configuration
 # Place this file at ~/.config/herdr/config.toml
 
@@ -19,7 +20,14 @@
 
 # Override individual color tokens on top of the base theme.
 # Accepts: hex (#rrggbb), named colors, rgb(r,g,b), or panel_bg = "reset"
-# [theme.custom]
+
+[theme.custom]
+# the surface_dim key is used for the background of the active agent/space
+# and for the separator lines
+# surface_dim = "#000000"
+surface_dim = "#3a3a52"
+# mauve = "#fab387"
+# accent = "#fab387" # catppuccin mocha "peach" (orange)
 # panel_bg = "reset"
 # accent = "#f5c2e7"
 # red = "#ff6188"
@@ -81,6 +89,7 @@ previous_workspace = "prefix+," # optional, unset by default
 next_workspace = "prefix+."     # optional, unset by default
 previous_agent = "prefix+k"     # optional, unset by default
 next_agent = "prefix+j"         # optional, unset by default
+
 # focus_agent = ""        # optional indexed binding, e.g. "prefix+alt+1..9"
 # remote_image_paste = "ctrl+v" # only active in herdr --remote; empty disables raw-key image paste
 # new_tab = "prefix+c"
