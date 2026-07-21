@@ -44,6 +44,7 @@ function main() {
     ai
     kitty
     claude
+    herdr
   )
   dfl install "${components[@]}"
 
