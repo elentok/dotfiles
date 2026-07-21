@@ -71,6 +71,9 @@ surface_dim = "#3a3a52"
 # prefix = "ctrl+b"
 prefix = "ctrl+e"
 
+navigate_workspace_up = ["up", "k"]
+navigate_workspace_down = ["down", "j"]
+
 # Prefix-mode actions
 # help = "prefix+?"
 # settings = "prefix+s"
