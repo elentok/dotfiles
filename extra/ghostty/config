@@ -5,8 +5,22 @@ theme = "Catppuccin Mocha"
 # Find fonts names by running `ghostty +list-fonts`
 
 # brew install font-agave-nerd-font
-font-family = "Agave Nerd Font Regular"
-font-family-bold = "Agave Nerd Font Regular"
+# font-family = "Agave Nerd Font Regular"
+# font-family-bold = "Agave Nerd Font Regular"
+# adjust-cell-height = 10%
+# adjust-cell-width = -7%
+# font-size = 16.0
+
+# brew install font-liga-comic-mono
+font-family = "Liga Comic Mono"
+font-family-bold = "Liga Comic Mono"
+font-synthetic-style = false # don't try to synthesize bold/italic styles
+adjust-cell-height = 20%
+adjust-cell-width = 3%
+adjust-font-baseline = -3
+font-size = 15.0
+
+
 font-family-italic = "Operator Mono"
 font-family-bold-italic = "Operator Mono"
 
@@ -14,16 +28,13 @@ font-family-bold-italic = "Operator Mono"
 # font-family-bold = "ZedMono NFM"
 
 # Increase line height by 5%
-adjust-cell-height = 10%
-adjust-cell-width = -7%
 
-font-size = 16.0
 macos-option-as-alt = true
 
 # Disable font ligatures
-font-feature = "-calt"
-font-feature = "-liga"
-font-feature = "-dlig"
+# font-feature = "-calt"
+# font-feature = "-liga"
+# font-feature = "-dlig"
 
 
 # Map Cmd+{key} to Ctrl+{key}
