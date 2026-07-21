@@ -14,7 +14,8 @@ theme = "Catppuccin Mocha"
 # brew install font-liga-comic-mono
 font-family = "Liga Comic Mono"
 font-family-bold = "Liga Comic Mono"
-font-synthetic-style = false # don't try to synthesize bold/italic styles
+ # don't try to synthesize bold/italic styles
+font-synthetic-style = false
 adjust-cell-height = 20%
 adjust-cell-width = 3%
 adjust-font-baseline = -3
