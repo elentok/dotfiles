@@ -53,8 +53,11 @@ local function load_render_markdown()
       },
     },
     code = {
-      border = "thin",
+      border = "none",
       sign = false,
+      inline = false,
+      conceal_delimiters = false,
+      language = false,
     },
     heading = {
       sign = false,
