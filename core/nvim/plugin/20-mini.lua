@@ -5,7 +5,6 @@ package.preload["nvim-web-devicons"] = function()
 end
 
 require("mini.bracketed").setup({})
-require("mini.pairs").setup({})
 require("mini.move").setup({})
 -- require("mini.files").setup({
 --   windows = {

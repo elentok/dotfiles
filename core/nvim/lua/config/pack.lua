@@ -44,7 +44,7 @@ local pack_specs = {
   -- minecraft datapack functions
   -- gh("rubixninja314/vim-mcfunction"),
   gh("nvim-mini/mini.bracketed"),
-  gh("nvim-mini/mini.pairs"),
+  gh("windwp/nvim-autopairs"),
   gh("nvim-mini/mini.move"),
   gh("nvim-mini/mini.files"),
   -- gh("stevearc/oil.nvim"),
