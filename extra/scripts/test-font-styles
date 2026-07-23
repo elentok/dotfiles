@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+echo -e "regular:      normal text"
+echo -e "bold:         \e[1mbold text\e[22m"
+echo -e "dim:          \e[2mdim text\e[22m"
+echo -e "italic:       \e[3mitalic text\e[23m"
+echo -e "bold-italic:  \e[1m\e[3mbold italic text\e[0m"
+echo -e "underline:    \e[4munderline text\e[24m"
+echo -e "squiggly:     \e[4:3msquiggly underline text\e[4:0m"

@@ -17,11 +17,8 @@ font-family-bold = "Liga Comic Mono Bold"
 adjust-cell-height = 20%
 adjust-cell-width = 2%
 adjust-font-baseline = -2
+adjust-underline-position = 3
 font-size = 15.0
-
-# don't try to synthesize bold/italic styles
-font-synthetic-style = false
-font-style-bold = Bold
 
 font-family-italic = "Operator Mono"
 font-family-bold-italic = "Operator Mono"
