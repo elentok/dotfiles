@@ -17,6 +17,7 @@ local color_red = "#f38ba8"
 -- local color_surface1 = "#45475a"
 -- local color_yellow = "#f9e2af"
 -- local color_teal = "#94e2d5"
+-- local color_mauve = "#cba6f7"
 local color_orange = "#fab387"
 
 update("ElDim", { fg = color_surface })
@@ -35,6 +36,7 @@ update("DiagnosticUnderlineWarn", { fg = color_orange, undercurl = true })
 update("DiagnosticError", { fg = color_red })
 update("DiagnosticWarn", { fg = color_orange })
 update("Comment", { italic = true, fg = color_overlay })
+update("@markup.strong", { fg = color_blue, bold = true })
 
 update("@lsp.typemod.variable.declaration.typescript", { link = "Function" })
 -- update("@lsp.typemod.function.declaration.typescript", { fg = color_orange })
