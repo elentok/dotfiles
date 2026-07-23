@@ -57,6 +57,7 @@ REPOS = [
             SkillSpec("skills/productivity/handoff"),
             SkillSpec("skills/productivity/teach"),
             SkillSpec("skills/productivity/writing-great-skills"),
+            SkillSpec("skills/in-progress/batch-grill-me"),
         ],
     ),
     Repo(
