@@ -1,0 +1,43 @@
+/* teach-epub: EPUB-only overrides, layered on top of the workspace's own
+   assets/style.css during the EPUB build only (map decision:
+   issues/04-css-fix-location.md — the web stylesheet stays untouched).
+
+   Flattens the type scale to two sizes (heading / body — issues/11) and
+   styles the two markdown-native fallbacks that only need CSS to read as
+   the "stacked card" look: definition lists for wide tables (issues/10)
+   and the quiz answer key (issues/06). */
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 1.3em;
+}
+
+body, p, li, dt, dd, table, caption, .quiz-static {
+  font-size: 1em;
+}
+
+dl {
+  background: #f4f4f4;
+  border-radius: 4px;
+  padding: 1em 1.2em;
+  margin: 1.4em 0;
+}
+
+dt {
+  font-weight: bold;
+}
+
+dd {
+  margin: 0 0 0.6em 0;
+}
+
+.quiz-static {
+  background: #f4f4f4;
+  border-radius: 4px;
+  padding: 1em 1.2em;
+  margin: 1.4em 0;
+}
+
+.quiz-static ol {
+  margin: 0.6em 0;
+  padding-left: 1.4em;
+}

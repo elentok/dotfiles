@@ -1,0 +1,25 @@
+<script>
+document.querySelectorAll('.quiz').forEach(function (quiz) {
+  var answer = quiz.getAttribute('data-answer');
+  var right = quiz.getAttribute('data-feedback-correct');
+  var wrong = quiz.getAttribute('data-feedback-incorrect');
+  var feedback = quiz.querySelector('.feedback');
+  quiz.querySelectorAll('button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var choice = btn.getAttribute('data-choice');
+      quiz.querySelectorAll('button').forEach(function (b) {
+        b.classList.remove('correct', 'incorrect');
+      });
+      if (choice === answer) {
+        btn.classList.add('correct');
+        feedback.textContent = right || 'Correct.';
+      } else {
+        btn.classList.add('incorrect');
+        quiz.querySelector('[data-choice="' + answer + '"]').classList.add('correct');
+        feedback.textContent = wrong || 'Not quite — see the correct answer highlighted above.';
+      }
+      feedback.classList.add('shown');
+    });
+  });
+});
+</script>
