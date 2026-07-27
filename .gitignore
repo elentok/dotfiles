@@ -30,3 +30,4 @@ core/kitty/.stubs/
 *.db
 .beads-credential-key
 .beads/
+.scratch/
