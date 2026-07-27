@@ -12,16 +12,14 @@ theme = "Catppuccin Mocha"
 # font-size = 16.0
 
 # brew install font-liga-comic-mono
-font-family = "Liga Comic Mono"
-font-family-bold = "Liga Comic Mono Bold"
-adjust-cell-height = 20%
-adjust-cell-width = 2%
-adjust-font-baseline = -2
+font-family = Lilex
+adjust-cell-height = 15%
+adjust-font-baseline = 0
 adjust-underline-position = 3
 font-size = 15.0
 
-font-family-italic = "Operator Mono"
-font-family-bold-italic = "Operator Mono"
+# font-family-italic = "Operator Mono"
+# font-family-bold-italic = "Operator Mono"
 
 # font-family = "ZedMono NFM Medium"
 # font-family-bold = "ZedMono NFM"
@@ -35,6 +33,8 @@ macos-option-as-alt = true
 # font-feature = "-liga"
 # font-feature = "-dlig"
 
+# lilex
+font-feature = "cv15"
 
 # Map Cmd+{key} to Ctrl+{key}
 keybind = cmd+a=text:\x01
@@ -87,6 +87,7 @@ keybind = cmd+/>y=copy_to_clipboard
 # keybind = cmd+/>v=paste_from_clipboard
 keybind = cmd+/>v=new_split:right
 keybind = cmd+/>s=new_split:down
+keybind = cmd+/>f=toggle_maximize
 
 keybind = cmd+/>e=write_scrollback_file:open
 
@@ -96,9 +97,11 @@ keybind = shift+enter=text:\x1b\r
 # Quick terminal
 
 # keybind = global:cmd+shift+space=toggle_quick_terminal
-keybind = global:opt+enter=toggle_quick_terminal
+# keybind = global:cmd+enter=toggle_quick_terminal
+# keybind = global:opt+cmd+enter=toggle_quick_terminal
 quick-terminal-animation-duration = 0
-quick-terminal-position = left
-quick-terminal-size = 500px
+quick-terminal-position = center
+quick-terminal-size = 500px,400px
+quick-terminal-autohide = false
 
 custom-shader = ~/.dotfiles/extra/ghostty/cursor_blaze.glsl

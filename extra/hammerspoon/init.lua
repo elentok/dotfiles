@@ -2,10 +2,24 @@ local function run(cmd) hs.task.new("/opt/homebrew/bin/fish", nil, { "-lc", cmd 
 
 local function openApp(path) run('open "' .. path .. '"') end
 
+local function toggleGhosttyQuickTerminal()
+  hs.osascript.applescript(
+    'tell application "Ghostty" to perform action "toggle_quick_terminal" on focused terminal of selected tab of front window'
+  )
+end
+
 hs.hotkey.bind(
   { "cmd" },
   "space",
-  function() run("kitten quick-access-terminal --instance-group quick") end
+  -- function() run("kitten quick-access-terminal --instance-group quick") end
+  function()
+    if hs.application.get("Ghostty") then
+      toggleGhosttyQuickTerminal()
+    else
+      openApp("/Applications/Ghostty.app")
+      hs.timer.doAfter(1, toggleGhosttyQuickTerminal)
+    end
+  end
 )
 
 hs.hotkey.bind({ "cmd" }, "2", function() openApp("/Applications/Google Chrome.app") end)
