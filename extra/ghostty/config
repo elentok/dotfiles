@@ -12,13 +12,17 @@ theme = "Catppuccin Mocha"
 # font-size = 16.0
 
 # brew install font-liga-comic-mono
-font-family = Lilex
+font-family = "Maple Mono"
 adjust-cell-height = 15%
+adjust-cell-width = -5%
 adjust-font-baseline = 0
 adjust-underline-position = 3
 font-size = 15.0
 
-# font-family-italic = "Operator Mono"
+# Ligatures exmaple:
+# => hello >= <=bob
+
+font-family-italic = "Operator Mono"
 # font-family-bold-italic = "Operator Mono"
 
 # font-family = "ZedMono NFM Medium"
@@ -34,7 +38,11 @@ macos-option-as-alt = true
 # font-feature = "-dlig"
 
 # lilex
-font-feature = "cv15"
+# font-feature = "cv15"
+
+# maple mono
+# alternate "l"
+# font-feature = "cv35"
 
 # Map Cmd+{key} to Ctrl+{key}
 keybind = cmd+a=text:\x01
