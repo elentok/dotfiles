@@ -9,6 +9,7 @@ end
 
 if status is-interactive
     fzf --fish | source
+    zoxide init fish | source
     # source "$DOTF/core/television/shell/integration.fish"
     # Commands to run in interactive sessions can go here
     # starship init fish | source

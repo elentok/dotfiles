@@ -39,6 +39,7 @@ brew "tree-sitter-cli"
 brew "uv"
 brew "wget"
 brew "yazi"
+brew "zoxide"
 
 uv "git-fame"
 uv "neovim-remote"
