@@ -60,8 +60,8 @@ referencing:
 
 The EPUB build resolves this correctly as-is (it runs with the workspace root as its working
 directory). The site build rewrites it per output file's depth via `--metadata imgprefix=...` and
-`scripts/images-site.lua` — don't hand-author a `../`-prefixed path, it would only be correct for one
-target's directory depth.
+`scripts/images-site.lua` — don't hand-author a `../`-prefixed path, it would only be correct for
+one target's directory depth.
 
 ### Wide or data-heavy tables
 
@@ -77,13 +77,13 @@ Half-life
 ```
 
 Renders identically on both targets from the same source; only the EPUB build adds the stacked
-key-value card styling (`assets/epub-overrides.css`), so no dual-authoring is needed. Small tables (a
-couple of short cells) can stay as ordinary pipe tables — they degrade fine.
+key-value card styling (`assets/epub-overrides.css`), so no dual-authoring is needed. Small tables
+(a couple of short cells) can stay as ordinary pipe tables — they degrade fine.
 
 ### Quizzes
 
-Authored once, rendered twice — an interactive click-to-answer widget on the web, a static answer key
-in the EPUB — as a fenced div:
+Authored once, rendered twice — an interactive click-to-answer widget on the web, a static answer
+key in the EPUB — as a fenced div:
 
 ```
 ::: quiz
