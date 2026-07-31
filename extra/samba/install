@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
-source $(dirname $0)/../../framework.sh
+source "$(dirname "$0")/../../core/scripts/lib/user-group.sh"
 
 set -e
 
 main() {
-  if ! dotf-is-linux; then
+  if ! dfl os is-linux; then
     echo 'Only supported on linux'
     exit 1
   fi
 
-  dotf-header h2 "Samba sharing"
+  echo "Samba sharing"
 
-  dotf-apt samba
+  dfl pkg apt install samba
 
   init_samba_username
   create_group sambashare
@@ -28,32 +28,32 @@ init_samba_username() {
 }
 
 create_system_user() {
-  dotf-bullet 'Creating system user... '
+  dfl step start 'Creating system user...'
   if user_exists $SAMBA_USERNAME; then
-    dotf-info 'already exists.'
+    dfl step skip 'already exists.'
     return
   else
-    sudo useradd $SAMBA_USERNAME -g sambashare && dotf-success 'done'
+    sudo useradd $SAMBA_USERNAME -g sambashare && dfl step success 'done'
   fi
 }
 
 create_samba_user() {
-  dotf-bullet 'Creating samba user... '
+  dfl step start 'Creating samba user...'
   if smb_user_exists $SAMBA_USERNAME; then
-    dotf-info 'already exists.'
+    dfl step skip 'already exists.'
   else
-    sudo smbpasswd -a $SAMBA_USERNAME && dotf-success 'done'
+    sudo smbpasswd -a $SAMBA_USERNAME && dfl step success 'done'
   fi
 }
 
 add_to_smbusers() {
-  dotf-bullet 'Adding user to /etc/samba/smbusers... '
+  dfl step start 'Adding user to /etc/samba/smbusers...'
   if is_in_smbusers; then
-    dotf-info 'already exists.'
+    dfl step skip 'already exists.'
   else
     line="$SAMBA_USERNAME = $SAMBA_USERNAME"
     sudo sh -c "echo '$line' >> /etc/samba/smbusers" &
-    dotf-success 'done'
+    dfl step success 'done'
   fi
 }
 
@@ -62,7 +62,7 @@ is_in_smbusers() {
     return 1
   fi
 
-  cat /etc/samba/smbusers | grep "^$SAMBA_USERNAME\s*=" > /dev/null
+  cat /etc/samba/smbusers | grep "^$SAMBA_USERNAME\s*=" >/dev/null
 }
 
 list_smb_users() {
@@ -74,7 +74,7 @@ list_smb_usernames() {
 }
 
 smb_user_exists() {
-  list_smb_usernames | grep "^$1$" > /dev/null
+  list_smb_usernames | grep "^$1$" >/dev/null
 }
 
 main "$@"

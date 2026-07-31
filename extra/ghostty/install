@@ -2,11 +2,9 @@
 
 set -euo pipefail
 
-source "$DOTF/framework.sh"
-
-if dotf-command-missing ghostty; then
+if ! dfl has-command ghostty; then
   brew install --cask ghostty
 fi
 
-dotf-symlink "$DOTF/extra/ghostty" ~/.config/ghostty
-dotf-symlink "$DOTF/extra/ghostty" "$HOME/Library/Application Support/com.mitchellh.ghostty"
+dfl symlink "$DOTF/extra/ghostty" ~/.config/ghostty
+dfl symlink "$DOTF/extra/ghostty" "$HOME/Library/Application Support/com.mitchellh.ghostty"

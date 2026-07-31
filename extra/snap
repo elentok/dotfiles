@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework.sh
-
-dotf-apt snapd
+dfl pkg apt install snapd
 systemctl enable snapd
 systemctl start snapd

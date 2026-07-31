@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 
-source "$DOTF/framework.sh"
-
 function main() {
   install-rust
 
-  if dotf-command-missing cargo-binstall; then
+  if ! dfl has-command cargo-binstall; then
     cargo install cargo-binstall
   fi
 
@@ -15,9 +13,9 @@ function main() {
 }
 
 function install-rust() {
-  dotf-bullet 'Installing rust...'
-  if dotf-has-command rustc; then
-    dotf-info 'already installed.'
+  dfl step start 'Installing rust...'
+  if dfl has-command rustc; then
+    dfl step skip 'already installed.'
   else
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o /tmp/rustup-init
     sh /tmp/rustup-init --no-modify-path -y

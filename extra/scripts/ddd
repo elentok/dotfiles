@@ -5,8 +5,6 @@
 # Usage:
 #   ddd <input> <output>
 
-source $DOTF/framework.sh
-
 main() {
   if [ $# -lt 2 ]; then
     usage "$0"

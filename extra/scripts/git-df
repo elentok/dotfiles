@@ -8,8 +8,6 @@
 
 set -euo pipefail
 
-source "$DOTF/framework.sh"
-
 function main() {
   local worktree="${1:-}"
   if [ -z "$worktree" ]; then
@@ -20,14 +18,14 @@ function main() {
     exit 1
   fi
 
-  if ! dotf-confirm "Delete '$worktree'?" yes; then
+  if ! dfl confirm "Delete '$worktree'?" yes; then
     echo "User aborted"
     return
   fi
 
   echo "- Removing worktree $worktree..."
   if ! git worktree remove "$worktree"; then
-    if dotf-confirm "Failed to remove the worktree, use force?" yes; then
+    if dfl confirm "Failed to remove the worktree, use force?" yes; then
       echo "- Removing worktree '$worktree' (with force)..."
       if git worktree remove -f "$worktree"; then
         echo 'Success!'

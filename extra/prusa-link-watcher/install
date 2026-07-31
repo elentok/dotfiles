@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-source "$DOTF/framework.sh"
-
 SERVICE=prusa-link-watcher
 
 dotconfig verify prusa_host

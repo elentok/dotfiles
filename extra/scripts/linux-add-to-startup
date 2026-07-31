@@ -6,9 +6,26 @@
 #                      --file="mpd"
 #                      --exec="mpd"
 
-source $DOTF/framework.sh
-
 AUTOSTART="$HOME/.config/autostart"
+
+extract_flag() {
+  if [[ "$1" =~ ^-- ]]; then
+    local flag_name="${1/--/}"
+    local value='yes'
+
+    if [[ "$flag_name" =~ "=" ]]; then
+      value="$(echo "$flag_name" | cut -d= -f2)"
+      flag_name="$(echo "$flag_name" | cut -d= -f1)"
+    fi
+
+    flag_name="${flag_name^^}"
+
+    eval "$flag_name=\"$value\""
+    return 0
+  fi
+
+  return 1
+}
 
 main() {
   FILE=''
@@ -25,17 +42,17 @@ main() {
     exit 1
   fi
 
-  make_dir "$AUTOSTART"
+  mkdir -p "$AUTOSTART"
 
   local filename="$AUTOSTART/${FILE}.desktop"
 
-  dotf-bullet "Creating ${filename}..."
+  dfl step start "Creating ${filename}..."
   if [ -e "$filename" ]; then
-    dotf-info 'already exists'
+    dfl step skip 'already exists'
     exit 0
   fi
 
-  cat > "${filename}" << EOF
+  cat >"${filename}" <<EOF
 [Desktop Entry]
 Encoding=UTF-8
 Type=Application
@@ -47,7 +64,7 @@ Hidden=false
 X-GNOME-Autostart-enabled=false
 EOF
 
-  show_result
+  dfl step success 'created'
 }
 
 main "$@"

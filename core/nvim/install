@@ -2,8 +2,6 @@
 
 set -euo pipefail
 
-source "$DOTF/framework.sh"
-
 dfl mkdir ~/.config
 dfl symlink "$DOTF/core/nvim" ~/.config/nvim
 

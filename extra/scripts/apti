@@ -7,5 +7,5 @@ pkgname="$(apt-cache pkgnames | sort | tv)"
 if [ "${1:-}" == "-i" ]; then
   apt info "$pkgname"
 else
-  dotf-apt "$pkgname"
+  dfl pkg apt install "$pkgname"
 fi

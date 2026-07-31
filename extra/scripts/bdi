@@ -4,26 +4,24 @@
 
 set -euo pipefail
 
-source "$DOTF/framework.sh"
-
 function main() {
   local cmd
   cmd="${1:-}"
   shift || true
 
   case "$cmd" in
-  close)
-    bdi-close
-    ;;
-  show)
-    bd show "$(bdi-pick)"
-    ;;
-  pick)
-    bdi-pick
-    ;;
-  *)
-    usage "$0"
-    ;;
+    close)
+      bdi-close
+      ;;
+    show)
+      bd show "$(bdi-pick)"
+      ;;
+    pick)
+      bdi-pick
+      ;;
+    *)
+      usage "$0"
+      ;;
   esac
 }
 
@@ -33,7 +31,7 @@ function bdi-close() {
 
   bd show "$id"
 
-  if dotf-confirm "Close?"; then
+  if dfl confirm "Close?"; then
     bd close "$id" --reason=Completed
   fi
 }

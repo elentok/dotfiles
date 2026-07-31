@@ -1,19 +1,17 @@
 #!/usr/bin/env bash
 
-source "$DOTF/framework.sh"
-
 SWAY="$DOTF/extra/sway"
 
 main() {
-  dotf-apt sway waybar swaylock swayidle sway-notification-center
-  dotf-symlink "$SWAY" "$HOME/.config/sway"
-  dotf-symlink "$SWAY/waybar" "$HOME/.config/waybar"
+  dfl pkg apt install sway waybar swaylock swayidle sway-notification-center
+  dfl symlink "$SWAY" "$HOME/.config/sway"
+  dfl symlink "$SWAY/waybar" "$HOME/.config/waybar"
 
   # install_session_file
 }
 
 install_session_file() {
-  dotf-bullet "Installing sway-custom.desktop... "
+  dfl step start "Installing sway-custom.desktop..."
   local tmpfile=/tmp/sway-custom.desktop
   local targetfile=/usr/share/wayland-sessions/sway-custom.desktop
 
@@ -21,10 +19,10 @@ install_session_file() {
   sed "s#{ROOT}#$SWAY#" $SWAY/sway-custom.desktop >$tmpfile
 
   if diff $tmpfile $targetfile >/dev/null 2>&1; then
-    dotf-info 'already installed'
+    dfl step skip 'already installed'
   else
-    sudo mv -f $tmpfile $targetfile
-    show_result die_on_error
+    sudo mv -f $tmpfile $targetfile || exit 1
+    dfl step success 'done'
   fi
 
   update-desktop-database -q

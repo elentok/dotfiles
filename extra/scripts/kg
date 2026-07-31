@@ -16,8 +16,6 @@
 
 set -euo pipefail
 
-source "$DOTF/framework.sh"
-
 PATTERN=""
 KILL_CMD=(kill -9)
 EXCLUDE=""
@@ -58,16 +56,16 @@ function main() {
     exit 1
   fi
 
-  dotf-header h2 "Processes:"
+  echo "Processes:"
   echo "$PROCS"
 
   count="$(echo "$PROCS" | wc -l)"
 
   echo
-  if dotf-confirm "Kill ${count} processes?"; then
+  if dfl confirm "Kill ${count} processes?"; then
     echo "Killing..."
     echo "$PROCS" | awk '{print $1}' | xargs "${KILL_CMD[@]}"
-    dotf-success "done."
+    dfl step success "done."
   fi
 }
 

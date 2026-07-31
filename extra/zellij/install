@@ -2,6 +2,4 @@
 
 set -euo pipefail
 
-source "$DOTF/framework.sh"
-
-dotf-symlink "$DOTF/extra/zellij" "$HOME/.config/zellij"
+dfl symlink "$DOTF/extra/zellij" "$HOME/.config/zellij"

@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-source "$DOTF/framework.sh"
-
-if dotf-is-mac; then
+if dfl os is-mac; then
   font_dir="$HOME/Library/Fonts"
 else
   font_dir="$HOME/.fonts"
@@ -10,9 +8,9 @@ else
 fi
 
 function copy-fonts() {
-  find "$1" -name '*.[o,t]tf' -type f \
-    | while read -r file; do
-      copy_to_dir "$file" "$font_dir"
+  find "$1" -name '*.[o,t]tf' -type f |
+    while read -r file; do
+      dfl copy "$file" "$font_dir/$(basename "$file")"
     done
 }
 
@@ -26,7 +24,7 @@ done
 # fi
 
 # For linux
-if dotf-is-linux; then
-  dotf-bullet "Updating font cache"
+if dfl os is-linux; then
+  dfl step start "Updating font cache"
   fc-cache -v -f "$font_dir"
 fi

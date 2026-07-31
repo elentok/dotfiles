@@ -11,8 +11,6 @@
 
 set -euo pipefail
 
-source "$DOTF/core/scripts/lib/ui.sh"
-
 function main() {
   if [ $# -gt 0 ]; then
     remote="${1}"
@@ -23,30 +21,27 @@ function main() {
 
   branch="$(git rev-parse --abbrev-ref HEAD)"
 
-  branch_bubble=$(dotf-bubble 255 25 " $branch")
-  remote_bubble=$(dotf-bubble 255 25 "remote $remote")
-
   echo
-  dotf-color blue "Pushing $branch_bubble to $remote_bubble"
+  echo "Pushing $branch to remote $remote"
   echo
   echo
   if ! git push -u "$remote" "$branch" "$@"; then
     if gum confirm --prompt.foreground=9 "Push failed, use force? 💪"; then
       echo
-      dotf-color red "Pushing $branch_bubble to $remote_bubble with force"
+      echo "Pushing $branch to remote $remote with force"
       echo
       echo
       if git push -u -f "$remote" "$branch" "$@"; then
         echo
-        dotf-success "Pushed successfuly"
+        dfl step success "Pushed successfuly"
       else
         echo
-        dotf-error "Failed to push"
+        dfl step error "Failed to push"
       fi
     fi
   else
     echo
-    dotf-success "Pushed successfuly"
+    dfl step success "Pushed successfuly"
   fi
 }
 

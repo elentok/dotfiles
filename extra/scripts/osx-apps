@@ -6,8 +6,6 @@
 #   osx-apps list
 #   osx-apps id [app-title]
 
-source $DOTF/framework.sh
-
 main() {
   cmd="$1"
   shift
@@ -30,7 +28,7 @@ list() {
 }
 
 list_osascript() {
-  cat << EOF
+  cat <<EOF
 tell application "System Events"
   name of every process where background only is false
 end tell

@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
 
-source "$DOTF/core/scripts/lib/ui.sh"
-
-dotf-color blue
 echo "========================================"
 echo "Running: [$*]"
 echo "========================================"
-dotf-color reset
 echo
 
 "$@"
@@ -15,9 +11,9 @@ exitcode="$?"
 echo
 echo "========================================"
 if [ "$exitcode" == "0" ]; then
-  dotf-success "Exited with exitcode $exitcode"
+  dfl step success "Exited with exitcode $exitcode"
 else
-  dotf-error "Exited with exitcode $exitcode"
+  dfl step error "Exited with exitcode $exitcode"
 fi
 echo "========================================"
 echo

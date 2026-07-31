@@ -1,8 +1,26 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework.sh
+verify-perms() {
+  local expected="$1"
+  local file="$2"
 
-cd
+  printf "* Verifying '%s' has permissions '%s'... " "$file" "$expected"
+  if [ ! -e "$file" ]; then
+    echo 'skipping, file is missing'
+    return
+  fi
+
+  local actual
+  actual="$(stat --format=%a "$file")"
+  if [ "$actual" == "$expected" ]; then
+    echo 'ok'
+  else
+    chmod "$expected" "$file"
+    echo 'fixed'
+  fi
+}
+
+cd || exit
 verify-perms 700 .ssh
 verify-perms 600 .ssh/config
 verify-perms 600 .ssh/authorized_keys

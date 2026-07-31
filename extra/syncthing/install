@@ -2,11 +2,9 @@
 
 set -euo pipefail
 
-source "$DOTF/framework.sh"
-
 function main() {
-  if dotf-command-missing syncthing; then
-    if dotf-is-linux; then
+  if ! dfl has-command syncthing; then
+    if dfl os is-linux; then
       install-on-linux
     fi
   fi

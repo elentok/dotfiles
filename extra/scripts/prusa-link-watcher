@@ -11,8 +11,6 @@ INTERVAL=10
 LAST_STATE=""
 LAST_PROGRESS=""
 
-source "$DOTF/framework.sh"
-
 echo "$PATH"
 
 PRUSA_HOST="$(dotconfig get-or-die prusa_host)"

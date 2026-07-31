@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
-source "$DOTF/framework.sh"
-
-ip addr \
-  | grep -E '(^[0-9]|inet |inet6 )' \
-  | sed -E "s/^([0-9]: [^:]*).*/$(dotf-color blue)\\1$(dotf-color reset)/" \
-  | sed -E "s/(inet [^ ]+).*/$(dotf-color green)\\1$(dotf-color reset)/" \
-  | sed -E 's/(inet6 [^ ]+).*/\1/'
+ip addr |
+  grep -E '(^[0-9]|inet |inet6 )' |
+  sed -E $'s/^([0-9]: [^:]*).*/\\033[34m\\1\\033[0m/' |
+  sed -E $'s/(inet [^ ]+).*/\\033[32m\\1\\033[0m/' |
+  sed -E 's/(inet6 [^ ]+).*/\1/'

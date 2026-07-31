@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-source "$DOTF/framework.sh"
+source "$DOTF/core/scripts/lib/user-group.sh"
 
 SPIGOT_ROOT="/home/minecraft/spigot"
 SPIGOT_REV="$(cat "$DOTF/extra/minecraft/VERSION")"
@@ -39,12 +39,12 @@ main() {
 }
 
 create-minecraft-user() {
-  dotf-bullet 'Creating minecraft user... '
+  dfl step start 'Creating minecraft user...'
   if user_exists minecraft; then
-    dotf-info 'already exists.'
+    dfl step skip 'already exists.'
     return
   else
-    sudo useradd minecraft --create-home -g minecraft && dotf-success 'done'
+    sudo useradd minecraft --create-home -g minecraft && dfl step success 'done'
   fi
 }
 
@@ -55,7 +55,7 @@ is-spigot-server-installed() {
 install-spigot-server() {
   build-spigot-server
 
-  dotf-bullet 'Installing spigot server...'
+  dfl step start 'Installing spigot server...'
   as-minecraft mkdir -p "$SPIGOT_ROOT"
   sudo cp "${SPIGOT_TMP}/${SPIGOT_JAR_FILENAME}" "$SPIGOT_ROOT/"
   sudo cp "$DOTF/extra/minecraft/VERSION" "$SPIGOT_ROOT/VERSION"
@@ -73,7 +73,7 @@ is-bedrock-server-installed() {
 }
 
 install-bedrock-server() {
-  dotf-bullet 'Installing bedrock server...'
+  dfl step start 'Installing bedrock server...'
   as-minecraft mkdir -p "$BEDROCK_ROOT"
   cd "${BEDROCK_ROOT}"
   sudo wget "${BEDROCK_SERVER_ZIP_URL}" -O "${BEDROCK_VERSION}.zip"
@@ -84,7 +84,7 @@ install-bedrock-server() {
 }
 
 update-spigot() {
-  dotf-bullet 'Updating spigot server...'
+  dfl step start 'Updating spigot server...'
   rm -rf "${SPIGOT_TMP}"
   build-spigot-server
   sudo cp "${SPIGOT_TMP}/${SPIGOT_JAR_FILENAME}" "$SPIGOT_ROOT/"
@@ -92,7 +92,7 @@ update-spigot() {
 }
 
 build-spigot-server() {
-  dotf-bullet 'Building spigot server...'
+  dfl step start 'Building spigot server...'
 
   # Build it
   mkdir -p "${SPIGOT_TMP}"
@@ -106,7 +106,7 @@ build-spigot-server() {
     java -jar BuildTools.jar --rev "${SPIGOT_REV}"
   fi
 
-  dotf-success 'done.'
+  dfl step success 'done.'
 }
 
 install-server() {

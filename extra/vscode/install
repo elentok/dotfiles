@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework.sh
-
 ROOT=$DOTF/extra/vscode
 
-if dotf-is-wsl; then
-  dotf-symlink \
+if dfl os is-wsl; then
+  dfl symlink \
     $(wslpath $(wsl-get-env USERPROFILE))/AppData/Roaming/Code \
     $HOME/.config/Code
 fi

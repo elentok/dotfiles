@@ -1,5 +1,3 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework.sh
-
-dotf-symlink $DOTF/extra/mercurial/hgrc $HOME/.hgrc
+dfl symlink $DOTF/extra/mercurial/hgrc $HOME/.hgrc

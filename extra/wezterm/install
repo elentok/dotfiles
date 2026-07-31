@@ -2,13 +2,11 @@
 
 set -euo pipefail
 
-source "$DOTF/framework.sh"
-
 CONFIG_DIR="$HOME/.config/wezterm"
 
 function main() {
-  if dotf-command-missing wezterm; then
-    if dotf-is-mac; then
+  if ! dfl has-command wezterm; then
+    if dfl os is-mac; then
       brew install wezterm
     else
       echo 'Not supported!'
@@ -20,8 +18,7 @@ function main() {
   brew install --cask font-caskaydia-cove-nerd-font
 
   mkdir -p "$CONFIG_DIR"
-  dotf-symlink "$DOTF/extra/wezterm" "$CONFIG_DIR"
-  # dotf-symlink "$DOTF/extra/wezterm/wezterm.lua" "$CONFIG_DIR/wezterm.lua"
+  dfl symlink "$DOTF/extra/wezterm" "$CONFIG_DIR"
 }
 
 main "$@"

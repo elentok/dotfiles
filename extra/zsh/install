@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
-source "$DOTF/framework.sh"
-
 # NOTE: If I ever want to go back to zsh I need to run this on setup:
-# dotf-header h2 "[dotf-setup] Updating git submodules..."
 # git submodule update --init --recursive
 
 function main() {
@@ -18,18 +15,18 @@ function main() {
 }
 
 function set_zsh_as_default_shell() {
-  if dotf-is-mac; then
+  if dfl os is-mac; then
     my_shell=$(echo "$SHELL" | rev | cut -d/ -f1 | rev)
     if [ "$my_shell" != "zsh" ]; then
       zsh_bin="$(which zsh)"
-      dotf-bullet "Changing shell to ${zsh_bin}... "
+      dfl step start "Changing shell to ${zsh_bin}..."
       chsh -s "$zsh_bin"
     fi
   else
     zsh_bin="$(which zsh)"
-    dotf-bullet "Changing user's shell to $zsh_bin... "
+    dfl step start "Changing user's shell to $zsh_bin..."
     if [[ "$SHELL" =~ /zsh ]]; then
-      dotf-info 'already set'
+      dfl step skip 'already set'
     else
       chsh -s "$zsh_bin"
     fi
@@ -37,36 +34,36 @@ function set_zsh_as_default_shell() {
 }
 
 function install_symlinks() {
-  dotf-symlink "$DOTF/extra/zsh" ~/.zsh
-  dotf-symlink "$DOTF/extra/zsh/zshrc" ~/.zshrc
-  dotf-symlink "$DOTF/extra/zsh/zshenv" ~/.zshenv
-  dotf-symlink "$DOTF/extra/zsh/zprofile" ~/.zprofile
+  dfl symlink "$DOTF/extra/zsh" ~/.zsh
+  dfl symlink "$DOTF/extra/zsh/zshrc" ~/.zshrc
+  dfl symlink "$DOTF/extra/zsh/zshenv" ~/.zshenv
+  dfl symlink "$DOTF/extra/zsh/zprofile" ~/.zprofile
 }
 
 function install_starship() {
   # On Mac starship is installed via Homebrew
-  if dotf-command-missing starship; then
-    if dotf-is-linux; then
+  if ! dfl has-command starship; then
+    if dfl os is-linux; then
       curl -sS https://starship.rs/install.sh | sh
     fi
   fi
 
   mkdir -p ~/.config
-  dotf-symlink "$DOTF/extra/zsh/starship.toml" ~/.config/starship.toml
+  dfl symlink "$DOTF/extra/zsh/starship.toml" ~/.config/starship.toml
 }
 
 function install_fzf() {
-  dotf-bullet 'Installing FZF... '
+  dfl step start 'Installing FZF...'
   if [ -e ~/.fzf ]; then
-    dotf-info 'already installed.'
+    dfl step skip 'already installed.'
   else
-    git_clone https://github.com/junegunn/fzf.git ~/.fzf --depth 1
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     ~/.fzf/install --completion --key-bindings --no-update-rc
   fi
 }
 
 reset_completion_cache() {
-  dotf-bullet 'Resetting completion cache...'
+  dfl step start 'Resetting completion cache...'
   rm -rf ~/.zcompcache
   rm -rf ~/.local/share/zcompcache
   rm -f ~/.zcompdump

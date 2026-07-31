@@ -2,8 +2,6 @@
 
 set -euo pipefail
 
-source "$DOTF/framework.sh"
-
 function main() {
   install-poetry
 
@@ -14,7 +12,6 @@ function main() {
 function install-poetry() {
   dfl step start "Installing poetry... "
 
-  # dotf-bullet "Installing poetry... "
   if ! dfl has-command poetry; then
     curl -sSL https://install.python-poetry.org | python3 -
     dfl step success

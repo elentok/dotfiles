@@ -2,8 +2,6 @@
 
 set -euo pipefail
 
-source "$DOTF/core/scripts/lib/ui.sh"
-
 function main() {
   if [ $# -ne 1 ]; then
     echo
@@ -26,7 +24,7 @@ function main() {
   latest_version="$(echo "$refs" | tail -1 | awk '{print $1}')"
 
   local resolved_version
-  ask "Set resolution to?" resolved_version "$latest_version"
+  resolved_version="$(dfl ask "Set resolution to?" "$latest_version")"
 
   if [ -n "$resolved_version" ]; then
     set-resolution "$pkg" "$resolved_version" "$refs"

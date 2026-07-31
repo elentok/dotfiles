@@ -1,19 +1,17 @@
 #!/usr/bin/env bash
 
-source "$DOTF/framework.sh"
-
 main() {
-  if ! dotf-is-mac; then
-    if dotf-command-missing alacritty; then
-      dotf-apt cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev python3 libxkbcommon-dev
+  if ! dfl os is-mac; then
+    if ! dfl has-command alacritty; then
+      dfl pkg apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev python3 libxkbcommon-dev
       cargo install alacritty
     fi
   fi
 
   mkdir -p ~/.config/alacritty
-  dotf-symlink "$DOTF/extra/alacritty/alacritty.yml" ~/.config/alacritty/alacritty.yml
+  dfl symlink "$DOTF/extra/alacritty/alacritty.yml" ~/.config/alacritty/alacritty.yml
 
-  if dotf-is-linux; then
+  if dfl os is-linux; then
     add-desktop-entry alacritty Alacritty "$(command -v alacritty)"
   fi
 }

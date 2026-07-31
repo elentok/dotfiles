@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
-source "$DOTF/framework.sh"
-
-dotf-symlink "$DOTF/extra/ssh/rc" ~/.ssh/rc
-dotf-symlink "$DOTF/extra/ssh/config" ~/.ssh/config
+dfl symlink "$DOTF/extra/ssh/rc" ~/.ssh/rc
+dfl symlink "$DOTF/extra/ssh/config" ~/.ssh/config
 
 if [ ! -e ~/.ssh/machine.config ]; then
-  echo "# vim: syntax=sshconfig" > ~/.ssh/machine.config
+  echo "# vim: syntax=sshconfig" >~/.ssh/machine.config
 fi

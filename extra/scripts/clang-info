@@ -1,5 +1,3 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework.sh
-
 clang -x c -v -E /dev/null "$@"

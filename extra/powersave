@@ -2,5 +2,5 @@
 
 set -euo pipefail
 
-dotf-apt linux-tools-generic
+dfl pkg apt install linux-tools-generic
 sudo cpupower frequency-set -g powersave

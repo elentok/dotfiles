@@ -1,5 +1,3 @@
 #!/usr/bin/env bash
 
-source "$DOTF/framework.sh"
-
-dotf-symlink "$DOTF/extra/helix" "$HOME/.config/helix"
+dfl symlink "$DOTF/extra/helix" "$HOME/.config/helix"

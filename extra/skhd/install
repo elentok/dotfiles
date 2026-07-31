@@ -2,12 +2,10 @@
 
 set -euo pipefail
 
-source "$DOTF/framework.sh"
-
 mkdir -p ~/.config/skhd
-dotf-symlink "$DOTF/extra/skhd/skhdrc" ~/.config/skhd/skhdrc
+dfl symlink "$DOTF/extra/skhd/skhdrc" ~/.config/skhd/skhdrc
 
-if ! dotf-has-command skhd; then
+if ! dfl has-command skhd; then
   brew install koekeishiya/formulae/skhd
   skhd --start-service
 fi

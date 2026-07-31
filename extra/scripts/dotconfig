@@ -15,8 +15,6 @@
 
 set -euo pipefail
 
-source "$DOTF/framework.sh"
-
 CONFIG_DIR=$HOME/.config/dotfiles
 CONFIG_FILE=$CONFIG_DIR/config
 
@@ -25,7 +23,7 @@ if [ ! -e "$CONFIG_FILE" ]; then touch "$CONFIG_FILE"; fi
 
 main() {
   cmd=dotconfig-${1:-}
-  if dotf-has-command "$cmd"; then
+  if type "$cmd" &>/dev/null; then
     shift
     $cmd "$@"
   else
@@ -39,7 +37,7 @@ dotconfig-exists() {
     usage "$0"
     exit 1
   fi
-  grep "^$1=" "$CONFIG_FILE" > /dev/null 2>&1
+  grep "^$1=" "$CONFIG_FILE" >/dev/null 2>&1
 }
 
 dotconfig-get() {
@@ -73,8 +71,9 @@ dotconfig-verify() {
   question="${2:-Enter value for "$key":}"
 
   if [ -z "$(dotconfig-get "$key")" ]; then
-    while [ -z "${value:-}" ]; do
-      ask "$question" value
+    value=""
+    while [ -z "$value" ]; do
+      value="$(dfl ask "$question")"
     done
     dotconfig-set "$1" "$value"
   fi
@@ -89,7 +88,7 @@ dotconfig-set() {
   value="$2"
 
   dotconfig-remove "$key"
-  echo "$key=$value" >> "$CONFIG_FILE"
+  echo "$key=$value" >>"$CONFIG_FILE"
 }
 
 dotconfig-remove() {

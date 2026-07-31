@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-source "$DOTF/framework.sh"
-
 install-service "$DOTF/extra/web-diff-monitor/web-diff-monitor.service" system
 
 systemctl daemon-reload

@@ -1,23 +1,22 @@
 #!/usr/bin/env bash
 
-source "$DOTF/framework.sh"
+echo 'Dotfiles Stats'
+echo
 
-dotf-header h1 'Dotfiles Stats'
-
-dotf-header h2 'General'
+dfl step start 'General'
 echo "Dotfiles Plugins:"
 echo "  - Core:  $(command ls -1 "$DOTF/core" | wc -l)"
 echo "  - Extra: $(command ls -1 "$DOTF/extra" | wc -l)"
 # echo "Neovim Plugins:   $(grep -c " use" "$DOTF/core/nvim/lua/elentok/packer-plugins.lua")"
 
-dotf-header h2 'Core Scripts:'
+dfl step start 'Core Scripts:'
 find "$DOTF/core/scripts" -maxdepth 1 -type f -exec head -1 '{}' \; |
   sort | uniq -c | sort -nr
 
-dotf-header h2 'Extra Scripts:'
+dfl step start 'Extra Scripts:'
 find "$DOTF/extra/scripts" -maxdepth 1 -type f -exec head -1 '{}' \; |
   sort | uniq -c | sort -nr
 
-dotf-header h2 'Deno Scripts:'
+dfl step start 'Deno Scripts:'
 find "$DOTF/extra/scripts/deno" -maxdepth 1 -type f -exec head -1 '{}' \; |
   grep '#!/usr/bin/env' | sort | uniq -c | sort -nr

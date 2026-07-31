@@ -7,8 +7,6 @@
 # git fix <revision>
 #
 
-source $DOTF/framework.sh
-
 main() {
   if [ $# -eq 0 ]; then
     usage "$0"
@@ -21,16 +19,16 @@ fix-commit() {
   rev="$1"
   title=$(commit-title $rev)
 
-  if dotf-confirm "Fixup '$title'" yes; then
+  if dfl confirm "Fixup '$title'" yes; then
 
-    dotf-bullet "Creating fixup commit... "
+    dfl step start "Creating fixup commit..."
     git commit --fixup $rev
-    dotf-info "done."
+    dfl step success "done."
 
-    if dotf-confirm "Autosquash" yes; then
-      dotf-bullet "Autosquashing... "
+    if dfl confirm "Autosquash" yes; then
+      dfl step start "Autosquashing..."
       git rebase -i --autosquash $rev~1
-      dotf-info "done."
+      dfl step success "done."
     fi
   fi
 }

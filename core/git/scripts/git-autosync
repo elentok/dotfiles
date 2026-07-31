@@ -2,10 +2,8 @@
 
 set -e
 
-source "$DOTF/framework.sh"
-
 main() {
-  dotf-header h1 'Git Auto Sync'
+  echo 'Git Auto Sync'
 
   check-if-autosync-is-enabled
 
@@ -14,7 +12,7 @@ main() {
     pull
     push
   fi
-  dotf-success 'done'
+  dfl step success 'done'
 }
 
 check-if-autosync-is-enabled() {
@@ -22,7 +20,7 @@ check-if-autosync-is-enabled() {
     return
   fi
 
-  if dotf-confirm "Autosync is not enabled for this repo, enable?"; then
+  if dfl confirm "Autosync is not enabled for this repo, enable?"; then
     git config --local --add elentok.autosync true
     return
   fi
@@ -31,32 +29,29 @@ check-if-autosync-is-enabled() {
 }
 
 commit-if-needed() {
-  dotf-bullet 'Checking for changes... '
+  dfl step start 'Checking for changes...'
   if [ -n "$(git status --porcelain)" ]; then
-    echo
     commit
   else
-    dotf-info 'no changes'
+    dfl step skip 'no changes'
   fi
 }
 
 commit() {
-  dotf-bullet "Commiting changes..."
-  echo
+  dfl step start "Commiting changes..."
   date=$(date +%Y-%m-%d\ %H:%M)
   host=$(short-hostname)
   git add --all
   git commit -m "Update $date ($host)"
-  echo
 }
 
 pull() {
-  dotf-bullet "Pulling changes... "
+  dfl step start "Pulling changes..."
   git pull --rebase
 }
 
 push() {
-  dotf-bullet "Pushing changes... "
+  dfl step start "Pushing changes..."
   git push
 }
 

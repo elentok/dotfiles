@@ -2,8 +2,6 @@
 
 set -euo pipefail
 
-source "$DOTF/core/scripts/lib/ui.sh"
-
 cmd="rm -f /tmp/tmux-nvim-exitcode; nvim $*; echo \$? > /tmp/tmux-nvim-exitcode; tmux wait -S tmux-nvim-wait"
 
 dotf-tmux-smart-split "$cmd"
@@ -19,7 +17,7 @@ exitcode="$(cat /tmp/tmux-nvim-exitcode)"
 rm -f /tmp/tmux-nvim-exitcode
 
 if [ "$exitcode" != "0" ]; then
-  dotf-error "Neovim exited with code $exitcode"
+  dfl step error "Neovim exited with code $exitcode"
 fi
 
 exit "$exitcode"

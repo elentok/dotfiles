@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
-source "$DOTF/framework.sh"
-
-version="$(dotf-trim <"$DOTF/extra/vifm/VERSION")"
+version="$(sed -E 's/(^\s+|\s+$)//g' <"$DOTF/extra/vifm/VERSION")"
 
 mkdir -p ~/.vifm/colors
-dotf-symlink "$DOTF/extra/vifm/vifmrc" "$HOME/.vifm/vifmrc"
-dotf-symlink "$DOTF/extra/vifm/gruvbox.vifm" "$HOME/.vifm/colors/gruvbox.vifm"
+dfl symlink "$DOTF/extra/vifm/vifmrc" "$HOME/.vifm/vifmrc"
+dfl symlink "$DOTF/extra/vifm/gruvbox.vifm" "$HOME/.vifm/colors/gruvbox.vifm"

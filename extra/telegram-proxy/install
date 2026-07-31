@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-source "$DOTF/framework.sh"
-
 dotconfig verify telegram_bot_token 'Telegram bot token?'
 dotconfig verify telegram_chat_id 'Telegram chat id?'
 

@@ -2,14 +2,12 @@
 
 set -euo pipefail
 
-source "$DOTF/framework.sh"
-
 config_dir=~/.qutebrowser
-if dotf-is-linux; then
+if dfl os is-linux; then
   config_dir=~/.config/qutebrowser
 fi
 
 mkdir -p $config_dir
-dotf-symlink "$DOTF/extra/qutebrowser/config.py" $config_dir/config.py
-dotf-symlink "$DOTF/extra/qutebrowser/catppuccin.py" $config_dir/catppuccin.py
-dotf-symlink ~/notes/qutemarks $config_dir/bookmarks
+dfl symlink "$DOTF/extra/qutebrowser/config.py" $config_dir/config.py
+dfl symlink "$DOTF/extra/qutebrowser/catppuccin.py" $config_dir/catppuccin.py
+dfl symlink ~/notes/qutemarks $config_dir/bookmarks

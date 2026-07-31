@@ -1,21 +1,28 @@
 #!/usr/bin/env bash
 
-source $DOTF/framework.sh
+if dfl os is-mac; then
+  OS=mac
+else
+  OS=linux
+fi
 
 main() {
-  local disk="$(list-mounts | fzf)"
+  local disk
+  disk="$(list-mounts | fzf)"
 
   if [ -z "$disk" ]; then
     exit 1
   fi
 
-  local device="$(echo $disk | awk '{print $2}')"
-  local mountpoint="$(echo $disk | awk '{print $1}')"
+  local device
+  device="$(echo "$disk" | awk '{print $2}')"
+  local mountpoint
+  mountpoint="$(echo "$disk" | awk '{print $1}')"
 
-  if dotf-confirm "Eject $device (mounted at $mountpoint)?" yes; then
-    dotf-bullet "Ejecting..."
-    eject-$OS "$mountpoint"
-    show_result
+  if dfl confirm "Eject $device (mounted at $mountpoint)?" yes; then
+    dfl step start "Ejecting..."
+    "eject-$OS" "$mountpoint"
+    dfl step success 'done'
   fi
 }
 
