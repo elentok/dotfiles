@@ -1,7 +1,11 @@
-#!/usr/bin/env -S deno run --allow-env --allow-write --allow-read --allow-run
+#!/usr/bin/env node
+
+import * as fs from "node:fs"
+
+const args = process.argv.slice(2)
 
 function main() {
-  const noop = !Deno.args.includes("-r")
+  const noop = !args.includes("-r")
 
   if (noop) {
     console.info()
@@ -9,13 +13,13 @@ function main() {
     console.info()
   }
 
-  for (const filename of Deno.readDirSync(".")) {
-    const newName = snakize(filename.name)
-    if (newName === filename.name) continue
+  for (const filename of fs.readdirSync(".")) {
+    const newName = snakize(filename)
+    if (newName === filename) continue
 
-    console.info(`Renaming "${filename.name}" to "${newName}"`)
+    console.info(`Renaming "${filename}" to "${newName}"`)
     if (!noop) {
-      Deno.renameSync(filename.name, newName)
+      fs.renameSync(filename, newName)
     }
   }
 }

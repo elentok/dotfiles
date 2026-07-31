@@ -1,8 +1,10 @@
-#!/usr/bin/env -S deno run --allow-env --allow-read --allow-run
+#!/usr/bin/env node
 
-import dayjs from "npm:dayjs@1.11.18"
+import dayjs from "dayjs"
 
-const start = dayjs(Deno.args[0]).startOf("month")
+const args = process.argv.slice(2)
+
+const start = dayjs(args[0]).startOf("month")
 
 console.info(start.format("# MMMM YYYY"))
 console.info()

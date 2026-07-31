@@ -1,6 +1,8 @@
-#!/usr/bin/env -S deno run --allow-env --allow-read --allow-run
+#!/usr/bin/env node
 
 import { getStdInput } from "./utils.ts"
+
+const args = process.argv.slice(2)
 
 function main() {
   const input = getStdInput().trim()
@@ -10,7 +12,7 @@ function main() {
     0,
   )
 
-  if (Deno.args.includes("-e") || Deno.args.includes("--echo")) {
+  if (args.includes("-e") || args.includes("--echo")) {
     console.info(`${input}\n`)
   }
 

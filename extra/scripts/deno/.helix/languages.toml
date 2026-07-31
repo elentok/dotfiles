@@ -1,3 +1,0 @@
-[[language]]
-name = "typescript"
-language-servers = ["deno-lsp"]

@@ -1,6 +1,6 @@
-#!/usr/bin/env -S deno run --allow-env --allow-read --allow-run
+#!/usr/bin/env node
 
-import { Table } from "https://esm.sh/console-table-printer@2.12.1"
+import { Table } from "console-table-printer"
 import { execSync } from "./lib/utils.ts"
 
 interface Alias {
@@ -25,7 +25,7 @@ function main() {
 }
 
 function getAliases(): Alias[] {
-  return execSync("git", { args: ["alias"] })
+  return execSync("git", ["alias"])
     .trim()
     .split("\n")
     .map(parseAlias)

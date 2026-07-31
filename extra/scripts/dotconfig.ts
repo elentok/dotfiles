@@ -1,7 +1,8 @@
-import * as path from "jsr:@std/path"
+import * as fs from "node:fs"
+import * as path from "node:path"
 
 export const CONFIG_DIR = path.join(
-  Deno.env.get("HOME")!,
+  process.env.HOME!,
   ".config",
   "dotfiles",
 )
@@ -17,13 +18,11 @@ type ConfigLine = string | ConfigItem
 let configLines: ConfigLine[] = []
 
 function initialize(): void {
-  try {
-    Deno.statSync(CONFIG_FILE)
-  } catch {
+  if (!fs.existsSync(CONFIG_FILE)) {
     return
   }
 
-  configLines = Deno.readTextFileSync(CONFIG_FILE).toString().trim().split("\n")
+  configLines = fs.readFileSync(CONFIG_FILE, "utf8").trim().split("\n")
     .map(parseLine)
 }
 
@@ -62,7 +61,7 @@ export function getConfigOrDie(key: string): string | never {
   console.error(
     `Missing config "${key}", please set a value:\n\n  dotconfig set ${key} {value}`,
   )
-  Deno.exit(1)
+  process.exit(1)
 }
 
 export function getConfig(key: string): string | undefined {
@@ -81,14 +80,27 @@ export function setConfig(key: string, value: string): void {
 }
 
 function save(): void {
-  Deno.mkdirSync(CONFIG_DIR, { recursive: true })
+  fs.mkdirSync(CONFIG_DIR, { recursive: true })
 
   const body = configLines
     .map((
       line,
     ) => (typeof line === "object" ? `${line.key}=${line.value}` : line))
     .join("\n")
-  Deno.writeTextFileSync(CONFIG_FILE, body)
+  fs.writeFileSync(CONFIG_FILE, body)
+}
+
+function prompt(question: string): string | null {
+  process.stdout.write(`${question} `)
+  const buf = Buffer.alloc(1024)
+  let input = ""
+  while (!input.includes("\n")) {
+    const bytesRead = fs.readSync(0, buf, 0, buf.length, null)
+    if (bytesRead === 0) break
+    input += buf.toString("utf8", 0, bytesRead)
+  }
+  const line = input.split("\n")[0].trim()
+  return line.length === 0 ? null : line
 }
 
 export function getConfigOrAsk(

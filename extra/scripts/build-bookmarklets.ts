@@ -1,7 +1,8 @@
-#!/usr/bin/env -S deno run --allow-env --allow-read --allow-run --allow-write
+#!/usr/bin/env node
 
-import * as path from "jsr:@std/path"
-import { minify } from "https://esm.sh/terser@5.36.0"
+import * as fs from "node:fs"
+import * as path from "node:path"
+import { minify } from "terser"
 
 const HEADER = `<!DOCTYPE html>
 <html>
@@ -14,16 +15,17 @@ const HEADER = `<!DOCTYPE html>
   </style>
 </head>
 <body>
-<ul> 
+<ul>
 `
 
 const FOOTER = `</ul></body>
 </html>
 `
 
-let dirname = Deno.cwd()
-if (Deno.args.length > 0) {
-  dirname = Deno.args[0]
+const args = process.argv.slice(2)
+let dirname = process.cwd()
+if (args.length > 0) {
+  dirname = args[0]
 }
 
 const outputFilename = path.join(dirname, "bookmarklets.html")
@@ -50,19 +52,19 @@ function getTitle(source: string, filename: string): string {
   return prettifyFilename(filename)
 }
 
-for (const file of Deno.readDirSync(dirname)) {
-  if (!/\.js/.test(file.name)) continue
+for (const file of fs.readdirSync(dirname)) {
+  if (!/\.js/.test(file)) continue
 
-  console.info(`Building ${file.name}...`)
+  console.info(`Building ${file}...`)
 
-  const source = Deno.readTextFileSync(path.join(dirname, file.name))
+  const source = fs.readFileSync(path.join(dirname, file), "utf8")
   const result = await minify(source)
-  if (result.error != null) {
-    console.error("Build failed: ", result.error)
+  if (result.code == null) {
+    console.error("Build failed: ", result)
   } else {
     contents.push(
       `  <li><a href="javascript:${encodeURIComponent(result.code)}">${
-        getTitle(source, file.name)
+        getTitle(source, file)
       }</a></li>`,
     )
   }
@@ -70,4 +72,4 @@ for (const file of Deno.readDirSync(dirname)) {
 
 contents.push(FOOTER)
 
-Deno.writeTextFileSync(outputFilename, contents.join("\n"))
+fs.writeFileSync(outputFilename, contents.join("\n"))

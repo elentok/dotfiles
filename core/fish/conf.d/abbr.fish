@@ -13,7 +13,6 @@ abbr --add o dotf-open
 abbr --add ts 'tig status'
 abbr --add jn 'cd ~/notes'
 abbr --add h 'help.ts'
-abbr --add mycal 'mycal.ts'
 # abbr --add dff 'dff.ts'
 abbr --add sm 'sum.ts'
 abbr --add q qalc

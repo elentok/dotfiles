@@ -1,14 +1,17 @@
-#!/usr/bin/env -S deno run --allow-env --allow-read --allow-run
+#!/usr/bin/env node
 
-import dayjs from "npm:dayjs@1.11.18"
+import * as fs from "node:fs"
+import dayjs from "dayjs"
+
+const args = process.argv.slice(2)
 
 function main() {
-  if (Deno.args.length < 1) {
+  if (args.length < 1) {
     console.info("Usage: habits-create <habits-list.md> [date]")
   }
 
-  const habits = loadHabits(Deno.args[0])
-  const start = dayjs(Deno.args[1]).startOf("month")
+  const habits = loadHabits(args[0])
+  const start = dayjs(args[1]).startOf("month")
 
   console.info(`# ${start.format("MMMM YYYY")} Habits`)
   console.info()
@@ -30,8 +33,6 @@ function writeTables(habits: string[], start: dayjs.Dayjs) {
     }
 
     columns.push(date.format("DD ddd"))
-
-    // console.info(`- [[${date.format("YYYY-MM-DD|DD ddd")}]]`)
 
     date = date.add(1, "day")
   }
@@ -56,13 +57,11 @@ function writeTable(habits: string[], columns: string[]) {
 }
 
 function loadHabits(filename: string) {
-  const lines = Deno.readTextFileSync(filename).split("\n")
+  const lines = fs.readFileSync(filename, "utf8").split("\n")
 
   return lines.filter((line) => line.startsWith("- ")).map((line) =>
     line.substring(2)
   )
 }
-
-// const start = dayjs(Deno.args[0]).startOf("month")
 
 main()

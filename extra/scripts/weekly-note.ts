@@ -1,10 +1,20 @@
-#!/usr/bin/env -S deno run --allow-env --allow-read --allow-run --allow-write
+#!/usr/bin/env node
 
-import { weekOfYear } from "jsr:@std/datetime"
-import { existsSync } from "jsr:@std/fs"
+import * as fs from "node:fs"
+
+const args = process.argv.slice(2)
+
+function weekOfYear(date: Date): number {
+  const target = new Date(date.getTime())
+  const dayNumber = (date.getDay() + 6) % 7
+  target.setDate(target.getDate() - dayNumber + 3)
+  const firstThursday = new Date(target.getFullYear(), 0, 4)
+  const diff = target.getTime() - firstThursday.getTime()
+  return 1 + Math.round(diff / (7 * 24 * 60 * 60 * 1000))
+}
 
 function main() {
-  const root = Deno.args.length > 0 ? Deno.args[0] : Deno.cwd()
+  const root = args.length > 0 ? args[0] : process.cwd()
 
   const sunday = findSundayOfCurrentWeek()
   const week = weekOfYear(sunday) + 1
@@ -21,19 +31,19 @@ function main() {
   const filename =
     `${yearDir}/${year}-week${week2digits}-${monthLowercase}-${day2digits}.md`
 
-  if (!existsSync(weeklyDir)) {
+  if (!fs.existsSync(weeklyDir)) {
     return
   }
 
-  if (!existsSync(yearDir)) {
-    Deno.mkdirSync(yearDir, { recursive: true })
+  if (!fs.existsSync(yearDir)) {
+    fs.mkdirSync(yearDir, { recursive: true })
   }
 
-  if (!existsSync(filename)) {
+  if (!fs.existsSync(filename)) {
     const title =
       `# Week ${week}, ${sunday.getFullYear()} (${month} ${sunday.getDate()})`
 
-    Deno.writeTextFileSync(filename, title)
+    fs.writeFileSync(filename, title)
   }
 
   console.info(filename)
