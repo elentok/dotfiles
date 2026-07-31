@@ -197,10 +197,9 @@ Based on [Vercel Agent Skills](https://github.com/vercel-labs/agent-skills)
 
 ## Part 3: Coding style
 
-- Only use font sizes, font weights, border radiuses, gaps and from styles.ts, if you need to add
-  new ones please ask me first.
+- No hardcoded colors, font sizes, radii, or spacing — theme tokens only. See the `chakra` skill's
+  Design System Discipline section for the token structure and enforcement.
 - Prefer Chakra's `<Flex>` over `<Box display="flex">`
-- Prefer Chakra's `<Button>` ov
-- Only use colors from the Chakra theme, if you're adding new colors, add them to the theme
+- Prefer Chakra's `<Button>` over `<Box as="button">` or raw `<button>`
 - Avoid large components, if the component is over 150 lines try to break it to smaller components.
 - Avoid default exports (it makes it more difficult to do refactors)

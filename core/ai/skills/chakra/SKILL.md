@@ -160,6 +160,63 @@ export const system = createSystem(defaultConfig, config)
 
 Prefer `brand.subtle` / `brand.fg` over raw `brand.500` for dark-mode compatibility.
 
+## Design System Discipline
+
+No color, font size, spacing, or radius literal lives in component code — every visual value is a
+token, referenced by name. This isn't a style preference; untokenized values are how a codebase ends
+up with 60+ one-off `rgba()`s and 8 near-identical border-radii that nobody can safely change. One
+`theme/` module (or `theme.ts`) is the single source of truth.
+
+**Two token layers, never collapsed:**
+
+- **Primitive** — raw values (`gray.50…900`, an accent ramp, a spacing scale, named font sizes).
+  Primitives are referenced only by semantic tokens and recipes, never by components.
+- **Semantic** — role names (`bg.canvas`, `fg.muted`, `accent.solid`, `danger`) mapped onto
+  primitives via `defineSemanticTokens`. **Components reference semantic tokens only.** This is what
+  makes re-skinning or adding a light mode a one-file edit to the mapping, not a component rewrite.
+  For a mode-aware app, map each semantic token per mode in one place:
+  ```ts
+  const dual = (light: string, dark: string) => ({
+    value: { _light: `{colors.primitive.${light}}`, _dark: `{colors.primitive.${dark}}` },
+  })
+  ```
+
+**Domain semantic tokens** capture app-specific UI states so special cases don't get hardcoded
+either — e.g. `cell.wrong.bg` / `cell.solved.bg` for a puzzle grid, `rarity.epic` for a loot system.
+Name them for the role they play, not the color they happen to be.
+
+**Recipes, not inline conditionals**, for any component with visual state variants
+(default/active/disabled/error) — `defineRecipe` for single-element, `defineSlotRecipe` for
+multi-part. A component's look lives in the theme; the component itself just picks a variant.
+
+**Dark-mode-only is a legitimate v1** — don't build a light mode you don't need yet — but keep colors
+in the semantic-token layer regardless, so adding one later is a mapping change, not a rewrite.
+
+**Enforce it, don't just document it.** A lint rule that flags literal hex/rgb/hsl outside the theme
+directory catches drift that code review misses. A Biome + [grit](https://github.com/getgrit/gritql)
+plugin does this in a few lines:
+
+```
+// biome/no-color-literals.grit
+language js
+
+JsStringLiteralExpression() as $x where {
+  not $filename <: r".*/src/theme/.*",
+  or {
+    $x <: r".*#[0-9a-fA-F]{3,8}.*",
+    $x <: r".*rgb\(.*", $x <: r".*rgba\(.*", $x <: r".*hsl\(.*", $x <: r".*hsla\(.*"
+  },
+  register_diagnostic(span=$x, message="no literal colors — add a token to src/theme/ and reference it by name.")
+}
+```
+
+Register it in `biome.json`'s `"plugins"` array. Raw px values are harder to lint without false
+positives (legitimate one-offs exist); rely on the spacing scale plus review for those.
+
+If a color, size, or radius doesn't exist yet, add it to the theme — don't inline it, and don't ask
+permission for values that clearly belong to an existing semantic role (e.g. another shade in an
+already-established accent ramp). Ask first only when it's a genuinely new role or hue.
+
 ## Recipes (Component Variants)
 
 ```ts
