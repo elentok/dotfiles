@@ -185,6 +185,13 @@ Based on [Vercel Agent Skills](https://github.com/vercel-labs/agent-skills)
 - **No more `forwardRef`** — `ref` is a regular prop in React 19.
 - **`use()` replaces `useContext()`** — and can be called conditionally.
 
+### Verification
+
+- For any UI change, drive it yourself in a real browser via the `playwright-cli` skill before
+  calling the work done — snapshot the page, click through the golden path and edge cases, check
+  `console` for errors. Type checks and unit tests verify code correctness, not that the feature
+  actually works.
+
 ### Core Principles Summary
 
 1. **Composition > Configuration** — enable consumers to compose rather than adding config props
