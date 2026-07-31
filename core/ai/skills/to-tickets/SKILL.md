@@ -15,6 +15,9 @@ declaring the tickets that **block** it.
 The issue tracker and triage label vocabulary should have been provided to you — run
 `/setup-elentok-skills` if not.
 
+Estimate the amount of tokens that will be needed for the implemetnation of each ticket, if a ticket
+will need more than 130K tokens - split it.
+
 ## Process
 
 ### 1. Gather context
