@@ -67,7 +67,9 @@ When either trigger fires:
    narrows what's left, so it's self-limiting. Move any not-yet-finished acceptance criteria off
    the original ticket onto the new one(s). Do this **autonomously** — no pause for user approval;
    this exists to keep the outer loop unattended.
-4. **Close the original** as done, with a `Split: 03b, 03c` note.
+4. **Close the original** as done, with a `Split: 03b, 03c` note and the token count from the last
+   budget check (e.g. `Tokens used: ~102K`) — so it can be matched against the ticket's `Budget:`
+   line later.
 
 ## Comments: fewer, and no numbers in them
 
