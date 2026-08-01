@@ -83,6 +83,9 @@ Each smell reads _what it is_ → _how to fix_; match it against the diff:
   target direct.
 - **Refused Bequest** — a subclass or implementer that ignores or overrides most of what it
   inherits. → drop the inheritance, use composition.
+- **Number in a comment** - a comment stating a measured value (contrast ratio, rimeout, ...) is a
+  duplicate. Duplicates drift, and a stale one reads as verified -> move the number into a test.
+  **Also verify the stated number** - the one baseline smell worth checking, not just flagging.
 
 ### 4. Spawn both sub-agents in parallel
 
@@ -97,7 +100,9 @@ Send a single message with two `Agent` tool calls. Use the `general-purpose` sub
   standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and
   quote the hunk. Distinguish hard violations from judgement calls — documented-standard breaches
   can be hard, but baseline smells are always judgement calls, and a documented repo standard
-  overrides the baseline. Skip anything tooling enforces. Under 400 words."
+  overrides the baseline. Skip anything tooling enforces. Under 400 words.". **Cite `file:line` and
+  quote only the offending lines** - a finding without a line number costs the aggregator a full
+  read.
 
 **Spec sub-agent prompt** — include:
 
@@ -105,7 +110,11 @@ Send a single message with two `Agent` tool calls. Use the `general-purpose` sub
 - The path or fetched contents of the spec.
 - The brief: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour
   in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where
-  the implementation looks wrong. Quote the spec line for each finding. Under 400 words."
+  the implementation looks wrong. Quote the spec line for each finding, and cite `file:line` in the
+  diff for each. Under 400 words."
+
+Do **not** re-read the diff or the spec yourself before spawning - that's the sub-agents' job, and
+doing it here is how a review outcosts the implementation.
 
 If the spec is missing, skip the Spec sub-agent and note this in the final report.
 
@@ -117,6 +126,16 @@ Present the two reports under `## Standards` and `## Spec` headings, verbatim or
 End with a one-line summary: total findings per axis, and the worst issue _within each axis_ (if
 any). Don't pick a single winner across axes — that's the reranking the separation exists to
 prevent.
+
+### 6. If you are also fixing the findings
+
+Group them by file, apply **one pass per file**, then a single typecheck-and-test (or just test if
+types are irrelevant) cycle at the end. One-at-a-time fixes re-read the same files repeatedly.
+
+Findings you judge to be wrong: say so once, with the reason, and do not act.
+
+Never fix a stale number in a comment by correcting it - move it to a test that fails when it stops
+being true.
 
 ## Why two axes
 
