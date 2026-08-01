@@ -127,6 +127,13 @@ top to bottom.
 
 Do NOT close or modify any parent issue.
 
+Tickets can also be split off **mid-flight**, by `/implement` or `/code-review`, when a ticket
+outgrows its budget while in progress — same template, same publishing mechanics, just triggered
+from inside a running session instead of upfront here. It reuses this skill's numbering and
+blocking conventions: a flat sibling number off the root ticket (`03` → `03b`, `03c`, ...), the new
+ticket's "Blocked by" includes the original, and anything blocked-by the original also gets the new
+ticket added as a blocker. The new ticket carries a `Following-up: <original>` line.
+
 <local-ticket-template>
 
 # <NN> — <Ticket title>
@@ -136,6 +143,9 @@ not a layer-by-layer implementation list.
 
 **Blocked by:** the numbers/titles of the tickets that gate this one, or "None — can start
 immediately".
+
+**Following-up:** (optional) the ticket this continues, if it exists because a prior ticket
+outgrew its budget mid-flight.
 
 **Status:** ready-for-agent
 
@@ -164,6 +174,11 @@ implementation.
 ## Blocked by
 
 - A reference to each blocking ticket, or "None — can start immediately".
+
+## Following-up
+
+(optional) the ticket this continues, if it exists because a prior ticket outgrew its budget
+mid-flight.
 
 </issue-template>
 

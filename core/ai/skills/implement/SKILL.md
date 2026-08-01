@@ -39,6 +39,36 @@ Then, while working:
 - **Delegate any survey wider than ~3 files** to an `Explore` subagent - you keep the conclusion,
   not the file dumps.
 
+## Splitting when the ticket outgrows budget
+
+Check the live budget at every natural checkpoint — after an Explore-agent returns, after each file
+read above, before starting a new seam, and (see `/code-review`) between each file's fix pass during
+review. To check: tail the current session's transcript JSONL
+(`~/.claude/projects/<encoded-cwd>/<session-id>.jsonl`) and sum the last assistant line's
+`input_tokens + cache_creation_input_tokens + cache_read_input_tokens`. Trigger a split at **100K**
+— that leaves headroom under the 130K smart-zone budget for growth the check can't see (mid-turn,
+between checkpoints). If the check itself fails (format drift, file missing), treat that as
+over-budget — fail toward splitting, not past it.
+
+Also split, independent of token count, on a **kind-mismatch**: if mid-implementation you discover
+the ticket actually needs new plumbing/infra the original ticket didn't scope for (not just an
+extension of existing logic), that's to-tickets' plumbing/feature split showing up late, not a
+budget problem — split it the same way regardless of how much budget is left.
+
+When either trigger fires:
+
+1. **Finish the current thread to green.** Get to the nearest point where tests pass and the code
+   compiles/typechecks — don't split off a broken half-edit. If nothing's been coded yet (the
+   trigger fired during exploration/design), there's nothing to make green; skip to step 2 and
+   carry the design reasoning forward as notes instead of a diff.
+2. **Commit.**
+3. **Create the follow-up ticket(s)**, using to-tickets' mid-flight-split conventions (numbering,
+   blocking edges, `Following-up`) and its estimation method. This chain is uncapped — each split
+   narrows what's left, so it's self-limiting. Move any not-yet-finished acceptance criteria off
+   the original ticket onto the new one(s). Do this **autonomously** — no pause for user approval;
+   this exists to keep the outer loop unattended.
+4. **Close the original** as done, with a `Split: 03b, 03c` note.
+
 ## Comments: fewer, and no numbers in them
 
 A comment quoting a measured value duplicates it, and dupliates drift - stale figures ship.
@@ -57,6 +87,9 @@ Run typechecking regularly, single test files regularly, and the full test suite
 
 Once starting, mark the ticket as "claimed".
 
-Once done, use /code-review to review the work, then mark the ticket done.
+Once done, invoke `/code-review`, passing the ticket ID and noting it's running inside implement's
+flow (see code-review's step 6). Then mark the ticket done with a
+`Code-review fixes: none/inline/sub-agent/ticket <id>` note reflecting what code-review had to do
+to land its findings.
 
 Commit your work to the current branch.
