@@ -30,11 +30,22 @@ lines can still blow the budget once you add:
   large file the ticket touches.
 - **TDD iteration.** If the ticket will be built test-first, budget for multiple test-run cycles, not
   a single build+test at the end.
+- **Variant fan-out.** Count how many independent states/variants the acceptance criteria describe
+  (e.g. three distinct row badges, or a list-view change plus a separate preview-pane change). Each
+  variant typically needs its own wiring and its own test assertion — treat N independent variants
+  the same as threading a large file N times, and split by variant group if N is more than a couple.
 
-If a ticket's target behavior requires threading changes through one large pre-existing file, prefer
-splitting it so each split touches that file once (e.g. "add the data/plumbing" ticket vs. "add the
-user-facing command" ticket) rather than one ticket that both wires infra through the big file and
-builds a new feature on top of it.
+Separate "the capability doesn't exist yet" from "something consumes a capability that now exists"
+into different tickets — a plumbing/infra ticket vs. a feature-on-top ticket. This applies whenever a
+ticket both builds a new capability and builds the thing that uses it, not only when a large
+pre-existing file is threaded twice (e.g. "add the data/plumbing" ticket vs. "add the user-facing
+command" ticket; or "add a new backend control path" vs. "add the UI that calls it").
+
+If tickets earlier in the same epic are already implemented, check their actual cost (handoff notes,
+session logs, run duration) before finalizing later estimates. A cold estimate is a guess; an earlier
+sibling ticket's actual is real data about how this epic's tickets run in practice, and should
+recalibrate the rest of the split — including retroactively splitting a not-yet-started ticket that
+now looks oversized in light of it.
 
 ## Process
 
