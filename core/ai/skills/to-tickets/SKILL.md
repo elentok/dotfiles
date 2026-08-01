@@ -18,6 +18,24 @@ The issue tracker and triage label vocabulary should have been provided to you â
 Estimate the amount of tokens that will be needed for the implemetnation of each ticket, if a ticket
 will need more than 130K tokens - split it.
 
+When estimating, budget for the whole session, not just the diff size. A ticket that only adds ~150
+lines can still blow the budget once you add:
+
+- **Full reads of existing files it touches.** If a ticket requires wiring new behavior through an
+  existing file over ~300-400 lines (e.g. a central loop/dispatcher), count that file's size against
+  the budget every time it's likely to be read (before editing, after review fixes, verification) â€”
+  not once.
+- **The verify/code-review pass.** `/code-review` and `/verify` add their own findings + fix + re-run
+  cycles on top of the implementation itself; budget for at least one extra read+edit pass over any
+  large file the ticket touches.
+- **TDD iteration.** If the ticket will be built test-first, budget for multiple test-run cycles, not
+  a single build+test at the end.
+
+If a ticket's target behavior requires threading changes through one large pre-existing file, prefer
+splitting it so each split touches that file once (e.g. "add the data/plumbing" ticket vs. "add the
+user-facing command" ticket) rather than one ticket that both wires infra through the big file and
+builds a new feature on top of it.
+
 ## Process
 
 ### 1. Gather context
