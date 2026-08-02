@@ -113,13 +113,13 @@ Publish the approved tickets. **How** depends on the tracker `/setup-elentok-ski
 the tickets are the same either way, only the shape of the blocking edges changes:
 
 - **Local files** → write one file per ticket under `.scratch/<feature-slug>/issues/<NN>-<slug>.md`,
-  numbered from `01` in dependency order (blockers first). Each file's "Blocked by" lists the
-  numbers/titles it depends on. Use the per-ticket file template below — one ticket per file, never
+  numbered from `01` in dependency order (blockers first). Each file's `blocked_by` lists the
+  ticket IDs it depends on. Use the per-ticket file template below — one ticket per file, never
   a single combined file.
 - **A real issue tracker (GitHub, Linear, …)** → publish one issue per ticket in dependency order
   (blockers first) so each ticket's blocking edges can reference real identifiers. Use the
   platform's native blocking / sub-issue relationship where it has one; otherwise set each ticket's
-  "Blocked by" to the blocking issues. Apply the `ready-for-agent` triage label unless instructed
+  `blocked_by` to the blocking issues. Apply the `ready-for-agent` triage label unless instructed
   otherwise — the tickets are agent-grabbable by construction.
 
 Work the **frontier**: any ticket whose blockers are all done. For a purely linear chain that means
@@ -127,27 +127,31 @@ top to bottom.
 
 Do NOT close or modify any parent issue.
 
+Before considering any ticket published, run `gx tickets validate <path>` on it. Fix any reported
+error and re-validate until it passes — do not publish a ticket that fails validation.
+
 Tickets can also be split off **mid-flight**, by `/implement` or `/code-review`, when a ticket
 outgrows its budget while in progress — same template, same publishing mechanics, just triggered
 from inside a running session instead of upfront here. It reuses this skill's numbering and
 blocking conventions: a flat sibling number off the root ticket (`03` → `03b`, `03c`, ...), the new
-ticket's "Blocked by" includes the original, and anything blocked-by the original also gets the new
-ticket added as a blocker. The new ticket carries a `Following-up: <original>` line.
+ticket's `blocked_by` includes the original, and anything blocked-by the original also gets the new
+ticket added as a blocker. The new ticket's `split_from` frontmatter field names the original, and
+the original's `split` field lists the new ticket(s).
 
 <local-ticket-template>
 
+---
+id: "<NN>"
+status: ready-for-agent
+blocked_by: []
+split: []
+type: task
+expected_context_window: 20000
+---
 # <NN> — <Ticket title>
 
 **What to build:** the end-to-end behaviour this ticket makes work, from the user's perspective —
 not a layer-by-layer implementation list.
-
-**Blocked by:** the numbers/titles of the tickets that gate this one, or "None — can start
-immediately".
-
-**Following-up:** (optional) the ticket this continues, if it exists because a prior ticket
-outgrew its budget mid-flight.
-
-**Status:** ready-for-agent
 
 - [ ] Acceptance criterion 1
 - [ ] Acceptance criterion 2
@@ -155,6 +159,15 @@ outgrew its budget mid-flight.
 </local-ticket-template>
 
 <issue-template>
+
+---
+id: "<NN>"
+status: ready-for-agent
+blocked_by: []
+split: []
+type: task
+expected_context_window: 20000
+---
 
 ## Parent
 
@@ -171,18 +184,24 @@ implementation.
 - [ ] Criterion 1
 - [ ] Criterion 2
 
-## Blocked by
-
-- A reference to each blocking ticket, or "None — can start immediately".
-
-## Following-up
-
-(optional) the ticket this continues, if it exists because a prior ticket outgrew its budget
-mid-flight.
-
 </issue-template>
 
-In either form, avoid specific file paths or code snippets — they go stale fast. Exception: if a
+### Frontmatter fields
+
+- **`id`**: the ticket number/slug, e.g. `"04b"`.
+- **`status`**: one of `open | needs-triage | ready-for-agent | ready-for-human | claimed |
+  needs-info | needs-attention | done | superseded`. New tickets are published as
+  `ready-for-agent` unless instructed otherwise.
+- **`blocked_by`**: list of ticket IDs that gate this one, `[]` if none — the ticket can start
+  immediately.
+- **`split`**: list of ticket IDs this ticket was split into, `[]` if it hasn't been split.
+- **`split_from`**: the ticket ID this one was split from, only set on a mid-flight split child —
+  omit entirely on a normally-authored ticket.
+- **`type`**: one of `research | grilling | prototype | task`.
+- **`expected_context_window`**: the estimated tokens (see the estimation guidance above) the
+  implementation will occupy, checked against the 130K smart-zone budget in `implement/SKILL.md`.
+
+Avoid specific file paths or code snippets in the body — they go stale fast. Exception: if a
 prototype produced a snippet that encodes a decision more precisely than prose can (state machine,
 reducer, schema, type shape), inline it and note briefly that it came from a prototype. Trim to the
 decision-rich parts — not a working demo, just the important bits.

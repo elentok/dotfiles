@@ -8,9 +8,13 @@ The issue tracker and triage label vocabulary should have been provided to you �
 `/setup-elentok-skills` if not.
 
 If given a directory of tickets rather than a single ticket, work the **frontier**: the
-lowest-numbered ticket that is unblocked (every ticket in its "Blocked by" is done) and unclaimed.
+lowest-numbered ticket that is unblocked (every ticket in its `blocked_by` is `done`) and unclaimed.
 Implement exactly that one ticket, then stop — do not continue on to the next ticket in the same
 run, even if it's now unblocked.
+
+Before starting work on the ticket you're about to claim, run `gx tickets validate <path>` on it.
+If it fails, stop and fix the ticket's frontmatter (or hand it back) before doing anything else —
+do not begin implementation against a ticket that fails validation.
 
 ## Plan the reading before you read
 
@@ -25,9 +29,10 @@ Before the first edit:
    turns a plan into a sequence of rediscoveries.
 3. Read exactly those files, once each.
 
-If the ticket has a **Budget:** line, check your file list against it before editing - budgets come
-from the ticket's prose and routinely undercount (one 40K/two-file estimate became 19 files, ~500K).
-If your list is materially larger, **say so in one line and carry on**; the user may prefer a split.
+If the ticket has an `expected_context_window` field, check your file list against it before
+editing - budgets come from the ticket's prose and routinely undercount (one 40K/two-file estimate
+became 19 files, ~500K). If your list is materially larger, **say so in one line and carry on**;
+the user may prefer a split.
 
 Then, while working:
 
@@ -63,13 +68,14 @@ When either trigger fires:
    carry the design reasoning forward as notes instead of a diff.
 2. **Commit.**
 3. **Create the follow-up ticket(s)**, using to-tickets' mid-flight-split conventions (numbering,
-   blocking edges, `Following-up`) and its estimation method. This chain is uncapped — each split
+   blocking edges, `split_from`) and its estimation method. This chain is uncapped — each split
    narrows what's left, so it's self-limiting. Move any not-yet-finished acceptance criteria off
    the original ticket onto the new one(s). Do this **autonomously** — no pause for user approval;
    this exists to keep the outer loop unattended.
-4. **Close the original** as done, with a `Split: 03b, 03c` note and the token count from the last
-   budget check (e.g. `Tokens used: ~102K`) — so it can be matched against the ticket's `Budget:`
-   line later.
+4. **Close the original** as done, with its `split` frontmatter field listing the new ticket IDs
+   (e.g. `["03b", "03c"]`) and a body note of the token count from the last budget check (e.g.
+   `Tokens used: ~102K`) — so it can be matched against the ticket's `expected_context_window`
+   later. (`actual_context_window` itself is gx-written at cherry-pick time, not by the agent.)
 
 ## Comments: fewer, and no numbers in them
 
@@ -87,11 +93,10 @@ Use /tdd where possible, at pre-agreed seams.
 
 Run typechecking regularly, single test files regularly, and the full test suite once at the end.
 
-Once starting, mark the ticket as "claimed".
+Once starting, set the ticket's `status` frontmatter field to `claimed`.
 
 Once done, invoke `/code-review`, passing the ticket ID and noting it's running inside implement's
-flow (see code-review's step 6). Then mark the ticket done with a
-`Code-review fixes: none/inline/sub-agent/ticket <id>` note reflecting what code-review had to do
-to land its findings.
+flow (see code-review's step 6). Then set `status` to `done` and `code_review_fixes` to
+`none`/`inline`/`ticket:<id>` reflecting what code-review had to do to land its findings.
 
 Commit your work to the current branch.
