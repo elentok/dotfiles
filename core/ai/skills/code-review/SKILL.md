@@ -51,6 +51,10 @@ If the ticket under review carries a `Following-up: <id>` note, it's a mid-fligh
 original scope — walk the chain back to the root ticket and use *its* spec/acceptance-criteria as
 the real target, not just this ticket's own truncated slice.
 
+Steps 2 and 3 are independent lookups (issue-tracker fetch, spec-file search, standards-file
+search) — fire them as parallel tool calls, not one after another. This only saves wall-clock time,
+not tokens, so there's no reason to serialize it.
+
 ### 3. Identify the standards sources
 
 Anything in the repo that documents how code should be written, such as `CODING_STANDARDS.md` or
@@ -103,7 +107,9 @@ Send a single message with two `Agent` tool calls. Use the `general-purpose` sub
 
 - The full diff command and commit list.
 - The list of standards-source files you found in step 3, **plus the smell baseline from step 3**
-  pasted in full — the sub-agent has no other access to it.
+  — but only the name and "what it is" clause for each smell, **drop the "→ fix" clause**. The
+  sub-agent is detecting, not fixing; the fix text is dead weight in its prompt since the fixer
+  (this session, step 6) already has the full baseline from having read this file.
 - The brief: "Report — per file/hunk where relevant — (a) every place the diff violates a documented
   standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and
   quote the hunk. Distinguish hard violations from judgement calls — documented-standard breaches

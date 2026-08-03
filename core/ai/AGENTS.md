@@ -5,6 +5,9 @@
 - I'm using **GNU sed/find/grep** on Mac, so use GNU arguments, **NOT Mac arguments**.
 - When reporting information to me, be extremely concise and sacrifice grammer for the sake of
   concision.
+- **ALWAYS PREFER** `fd` over `find`
+- **ALWAYS PREFER** `ripgrep` over `grep`
+- **DO NOT RUN find/grep/fd on /** (it's super slow)
 
 ## Issue tracker
 
