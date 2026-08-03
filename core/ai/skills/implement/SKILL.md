@@ -47,8 +47,7 @@ Then, while working:
 ## Splitting when the ticket outgrows budget
 
 Check the live budget at every natural checkpoint — after an Explore-agent returns, after each file
-read above, before starting a new seam, and (see `/code-review`) between each file's fix pass during
-review. To check: tail the current session's transcript JSONL
+read above, and before starting a new seam. To check: tail the current session's transcript JSONL
 (`~/.claude/projects/<encoded-cwd>/<session-id>.jsonl`) and sum the last assistant line's
 `input_tokens + cache_creation_input_tokens + cache_read_input_tokens`. Trigger a split at **100K**
 — that leaves headroom under the 130K smart-zone budget for growth the check can't see (mid-turn,
@@ -95,8 +94,7 @@ Run typechecking regularly, single test files regularly, and the full test suite
 
 Once starting, set the ticket's `status` frontmatter field to `claimed`.
 
-Once done, invoke `/code-review`, passing the ticket ID and noting it's running inside implement's
-flow (see code-review's step 6). Then set `status` to `done` and `code_review_fixes` to
-`none`/`inline`/`ticket:<id>` reflecting what code-review had to do to land its findings.
+Once done, set `status` to `done`. Code review runs separately, batched across the epic, not
+per-ticket — do not invoke `/code-review` from here.
 
 Commit your work to the current branch.

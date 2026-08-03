@@ -19,10 +19,6 @@ aggregates their findings.
 The issue tracker should have been provided to you — run `/setup-elentok-skills` if
 `docs/agents/issue-tracker.md` is missing.
 
-When `/implement` invokes this skill it states the ticket ID and that it's running **in implement
-flow** — that context is what step 6 checks to decide whether its budget-aware fix-splitting
-applies.
-
 ## Process
 
 ### 1. Pin the fixed point
@@ -143,33 +139,9 @@ prevent.
 
 ### 6. If you are also fixing the findings
 
-Group them by file. If **not** in implement flow, apply every finding **one pass per file**, then a
-single typecheck-and-test (or just test if types are irrelevant) cycle at the end. One-at-a-time
-fixes re-read the same files repeatedly.
-
-If **in implement flow**, classify each finding first:
-
-- **Inline** — fixing it only touches files already read this session. Apply it in the normal
-  one-pass-per-file loop.
-- **Considerable** — fixing it needs a file not yet read this session, or the live budget check
-  (implement's "Splitting when the ticket outgrows budget") reads over 100K when you check it
-  between file passes. Bundle these findings together instead of fixing them inline.
-
-Apply the inline findings first, one pass per file. Then resolve the considerable bundle:
-
-1. Pre-estimate the bundle with to-tickets' own method (files to touch, variant fan-out).
-2. Ticket-sized or smaller → spawn a sub-agent with the bundled findings and the relevant file
-   list; it edits and commits directly. Verify tests/typecheck after — don't re-read the files it
-   touched.
-3. Too big for a sub-agent (feature/plumbing-sized) → create a follow-up ticket instead, per
-   implement's "Splitting when the ticket outgrows budget".
-4. Too big for one ticket → split into multiple, same as any to-tickets split.
-5. **Cap of 1**: if a follow-up ticket created this way ALSO can't fit its own fixes in its own
-   code-review, force a sub-agent that time regardless of the estimate — don't create another
-   ticket.
-
-The punted bundle only fixes the findings already identified here — don't re-run the Standards/Spec
-review on it.
+Group them by file. Apply every finding **one pass per file**, then a single typecheck-and-test (or
+just test if types are irrelevant) cycle at the end. One-at-a-time fixes re-read the same files
+repeatedly.
 
 Findings you judge to be wrong: say so once, with the reason, and do not act.
 
