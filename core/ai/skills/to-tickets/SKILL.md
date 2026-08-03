@@ -135,8 +135,11 @@ outgrows its budget while in progress — same template, same publishing mechani
 from inside a running session instead of upfront here. It reuses this skill's numbering and
 blocking conventions: a flat sibling number off the root ticket (`03` → `03b`, `03c`, ...), the new
 ticket's `blocked_by` includes the original, and anything blocked-by the original also gets the new
-ticket added as a blocker. The new ticket's `split_from` frontmatter field names the original, and
-the original's `split` field lists the new ticket(s).
+ticket added as a blocker via `gx tickets set <path> --blocked-by <ids>` (existing published
+tickets, edited in place — not filled in from the template). The new ticket's `split_from`
+frontmatter field names the original (set at creation, from the template), and the original's
+`split` field is set via `gx tickets set <path> --split <new-ticket-ids>` to list the new
+ticket(s).
 
 <local-ticket-template>
 

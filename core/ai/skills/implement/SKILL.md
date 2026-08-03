@@ -12,9 +12,9 @@ lowest-numbered ticket that is unblocked (every ticket in its `blocked_by` is `d
 Implement exactly that one ticket, then stop — do not continue on to the next ticket in the same
 run, even if it's now unblocked.
 
-Before starting work on the ticket you're about to claim, run `gx tickets validate <path>` on it.
-If it fails, stop and fix the ticket's frontmatter (or hand it back) before doing anything else —
-do not begin implementation against a ticket that fails validation.
+Before starting work on the ticket you're about to claim, run `gx tickets validate <path>` on it. If
+it fails, stop and fix the ticket's frontmatter (or hand it back) before doing anything else — do
+not begin implementation against a ticket that fails validation.
 
 ## Plan the reading before you read
 
@@ -31,8 +31,8 @@ Before the first edit:
 
 If the ticket has an `expected_context_window` field, check your file list against it before
 editing - budgets come from the ticket's prose and routinely undercount (one 40K/two-file estimate
-became 19 files, ~500K). If your list is materially larger, **say so in one line and carry on**;
-the user may prefer a split.
+became 19 files, ~500K). If your list is materially larger, **say so in one line and carry on**; the
+user may prefer a split.
 
 Then, while working:
 
@@ -63,16 +63,16 @@ When either trigger fires:
 
 1. **Finish the current thread to green.** Get to the nearest point where tests pass and the code
    compiles/typechecks — don't split off a broken half-edit. If nothing's been coded yet (the
-   trigger fired during exploration/design), there's nothing to make green; skip to step 2 and
-   carry the design reasoning forward as notes instead of a diff.
+   trigger fired during exploration/design), there's nothing to make green; skip to step 2 and carry
+   the design reasoning forward as notes instead of a diff.
 2. **Commit.**
 3. **Create the follow-up ticket(s)**, using to-tickets' mid-flight-split conventions (numbering,
    blocking edges, `split_from`) and its estimation method. This chain is uncapped — each split
-   narrows what's left, so it's self-limiting. Move any not-yet-finished acceptance criteria off
-   the original ticket onto the new one(s). Do this **autonomously** — no pause for user approval;
-   this exists to keep the outer loop unattended.
-4. **Close the original** as done, with its `split` frontmatter field listing the new ticket IDs
-   (e.g. `["03b", "03c"]`) and a body note of the token count from the last budget check (e.g.
+   narrows what's left, so it's self-limiting. Move any not-yet-finished acceptance criteria off the
+   original ticket onto the new one(s). Do this **autonomously** — no pause for user approval; this
+   exists to keep the outer loop unattended.
+4. **Close the original** as done, with `gx tickets set <path> --split 03b,03c` (comma-separated new
+   ticket IDs) and a body note of the token count from the last budget check (e.g.
    `Tokens used: ~102K`) — so it can be matched against the ticket's `expected_context_window`
    later. (`actual_context_window` itself is gx-written at cherry-pick time, not by the agent.)
 
@@ -92,9 +92,9 @@ Use /tdd where possible, at pre-agreed seams.
 
 Run typechecking regularly, single test files regularly, and the full test suite once at the end.
 
-Once starting, set the ticket's `status` frontmatter field to `claimed`.
+Once starting, run `gx tickets set <path> --status claimed`.
 
-Once done, set `status` to `done`. Code review runs separately, batched across the epic, not
-per-ticket — do not invoke `/code-review` from here.
+Once done, run `gx tickets set <path> --status done`. Code review runs separately, batched across
+the epic, not per-ticket — do not invoke `/code-review` from here.
 
 Commit your work to the current branch.
