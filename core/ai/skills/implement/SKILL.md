@@ -97,4 +97,6 @@ Once starting, run `gx tickets set <path> --status claimed`.
 Once done, run `gx tickets set <path> --status done`. Code review runs separately, batched across
 the epic, not per-ticket — do not invoke `/code-review` from here.
 
-Commit your work to the current branch.
+Commit your work to the current branch. Start every commit subject with
+`{epic}/{ticket id}: `, substituting the epic directory name and the ticket's frontmatter `id`
+(for example, `ralph-loop/03: Add smart-zone observability`).
