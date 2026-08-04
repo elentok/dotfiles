@@ -97,6 +97,13 @@ Once starting, run `gx tickets set <path> --status claimed`.
 Once done, run `gx tickets set <path> --status done`. Code review runs separately, batched across
 the epic, not per-ticket — do not invoke `/code-review` from here.
 
+If you conclude this ticket needs **no commit** — e.g. exploration shows the behavior already
+exists, or the ticket only needed a split with no code changes of its own — do not leave `Status:
+claimed`. Set a terminal status plus `commitless: true` in one call, e.g.
+`gx tickets set <path> --status done --commitless true`, explaining why in the ticket body. Without
+`commitless: true`, ralph-loop treats a zero-commit finish as a stalled agent and flags the ticket
+`needs-info` for a human to check.
+
 Commit your work to the current branch. Start every commit subject with
 `{epic}/{ticket id}: `, substituting the epic directory name and the ticket's frontmatter `id`
 (for example, `ralph-loop/03: Add smart-zone observability`).
