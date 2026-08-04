@@ -74,7 +74,10 @@ When either trigger fires:
 4. **Close the original** as done, with `gx tickets set <path> --split 03b,03c` (comma-separated new
    ticket IDs) and a body note of the token count from the last budget check (e.g.
    `Tokens used: ~102K`) — so it can be matched against the ticket's `expected_context_window`
-   later. (`actual_context_window` itself is gx-written at cherry-pick time, not by the agent.)
+   later. (`actual_context_window` itself is gx-written at cherry-pick time, not by the agent.) If
+   step 1 had nothing to commit (design/exploration only, no diff), also pass `--commitless true`:
+   `gx tickets set <path> --split 03b,03c --commitless true`. Without it, ralph-loop's stalled-agent
+   detection flags the split original `needs-info` instead of leaving it `done`.
 
 ## Comments: fewer, and no numbers in them
 
