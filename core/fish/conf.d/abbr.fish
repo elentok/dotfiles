@@ -22,3 +22,7 @@ abbr --add vit 'npx vitest'
 abbr --add wit 'npx vitest -w'
 abbr --add nps 'npm run start'
 abbr --add st 'gx status'
+
+abbr --add cl 'claude --permission-mode auto'
+abbr --add ca 'cursor-agent --permission-mode auto'
+abbr --add cx 'codex --ask-for-approval on-request'

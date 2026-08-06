@@ -85,18 +85,6 @@ if ! test -d $stuff_root
     set stuff_root ~/.local/share/nvim/lazy/stuff.nvim
 end
 
-function ca --description "run cursor-agent"
-    $stuff_root/scripts/stuff-set-tmux-agent.sh --agent cursor-agent -- cursor-agent $argv
-end
-
-function claude --description "run claude"
-    $stuff_root/scripts/stuff-set-tmux-agent.sh --agent claude -- command claude $argv
-end
-
-function codex --description "run codex"
-    $stuff_root/scripts/stuff-set-tmux-agent.sh --agent codex -- command codex $argv
-end
-
 function pn --description "new prompt"
     nvim "+lua require('stuff.prompts').new_for_current_line()"
 end
