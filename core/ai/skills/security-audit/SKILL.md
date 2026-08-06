@@ -1,9 +1,9 @@
 ---
 name: security-audit
 description:
-  Audit a git-hosted dependency — CLI tool, editor/IDE plugin, or library — for security risk
-  before installing or updating it — clone the repo, check it against a supply-chain checklist and
-  a code-vulnerability checklist, and report findings with a verdict.
+  Audit a git-hosted dependency — CLI tool, editor/IDE plugin, or library — for security risk before
+  installing or updating it — clone the repo, check it against a supply-chain checklist and a
+  code-vulnerability checklist, and report findings with a verdict.
 disable-model-invocation: true
 ---
 
@@ -13,10 +13,10 @@ you a git link (GitHub or otherwise) and, optionally, one or two refs (tag/commi
 
 Two threat classes, both in scope:
 
-- **Supply chain** — code an attacker *planted*: it crosses a **trust boundary** by running,
-  phoning home, or touching credentials without the user asking, right now or the moment the tool
-  is installed/updated. The maintainer didn't write it on purpose.
-- **Code vulnerabilities** — bugs the *maintainer* wrote by accident that a malicious input or
+- **Supply chain** — code an attacker _planted_: it crosses a **trust boundary** by running, phoning
+  home, or touching credentials without the user asking, right now or the moment the tool is
+  installed/updated. The maintainer didn't write it on purpose.
+- **Code vulnerabilities** — bugs the _maintainer_ wrote by accident that a malicious input or
   environment can exploit: injection, unsafe deserialization, weak crypto, race conditions. No
   attacker touched the repo; the danger is latent in ordinary code.
 
@@ -37,10 +37,10 @@ fetch just those two refs' history, not the full log.
 1. **Clone and orient.** Clone the repo (both refs, if diff mode). Identify language(s), package
    manager(s), build system, and whether it ships prebuilt binaries. Done when you can name what
    kind of project this is and what its install/build entrypoint is.
-2. **Establish the scan set.** Snapshot mode: the whole tree at the ref, minus vendored
-   dependencies you don't control (note them, don't skip noting them). Diff mode: the changed files
-   between the two refs, plus any file the diff touches that runs at install/build time even if the
-   change looks small. Done when you have a concrete file list, not "the repo."
+2. **Establish the scan set.** Snapshot mode: the whole tree at the ref, minus vendored dependencies
+   you don't control (note them, don't skip noting them). Diff mode: the changed files between the
+   two refs, plus any file the diff touches that runs at install/build time even if the change looks
+   small. Done when you have a concrete file list, not "the repo."
 3. **Walk both checklists** (below) over the scan set, citing exact files and line ranges for every
    hit. A category with nothing found is a line saying so, not silence.
 4. **Write the report** (below) and give it a verdict.
@@ -57,25 +57,25 @@ effort — the cheapest win, the least trusted input — and work down from ther
   compromises) because it needs zero action from the user beyond installing.
 - **Build-system tampering** — logic hidden in build scripts, autotools macros, or test fixtures
   rather than application code, especially binary blobs disguised as test data that get linked into
-  the build (the xz/liblzma backdoor's exact shape). Anywhere a build step decides *what* to compile
+  the build (the xz/liblzma backdoor's exact shape). Anywhere a build step decides _what_ to compile
   based on environment checks is worth a second look.
 - **CI/workflow tampering** — `.github/workflows/*` (or equivalent) using a third-party action
   pinned to a mutable tag instead of a commit SHA, `pull_request_target` combined with checking out
-  and running PR code, secrets referenced in a job triggered by external PRs. This is how an attacker
-  compromises the *next* release without touching the code a human reviews (tj-actions/reviewdog,
-  March 2025).
+  and running PR code, secrets referenced in a job triggered by external PRs. This is how an
+  attacker compromises the _next_ release without touching the code a human reviews
+  (tj-actions/reviewdog, March 2025).
 - **Vendored or prebuilt binaries** — compiled blobs, `.so`/`.dll`/`.node`/`.wasm` files, or
   "vendor" directories with no matching source or build recipe in the repo. Can't be diffed at the
   source level, so flag for `manual_review` rather than trying to reverse-engineer it.
 - **Obfuscation** — minified/packed JS with no matching source map, base64 or hex strings decoded
   and then `eval`'d/`exec`'d, string concatenation that assembles an API call or URL piece by piece.
-  Legitimate build output (a `dist/` bundle with a source map and matching build config) is not this;
-  obfuscation with nothing to justify it is.
+  Legitimate build output (a `dist/` bundle with a source map and matching build config) is not
+  this; obfuscation with nothing to justify it is.
 - **Network and exfiltration** — outbound HTTP/DNS to hosts not documented as the tool's own
-  infrastructure, especially paired in the same code path with reads of env vars, `~/.ssh`, `~/.aws`,
-  browser cookie stores, cloud-metadata endpoints (`169.254.169.254`), or GPG/SSH keys. Reading a
-  secret and calling the network are each fine alone; together in one path is the pattern that
-  matters.
+  infrastructure, especially paired in the same code path with reads of env vars, `~/.ssh`,
+  `~/.aws`, browser cookie stores, cloud-metadata endpoints (`169.254.169.254`), or GPG/SSH keys.
+  Reading a secret and calling the network are each fine alone; together in one path is the pattern
+  that matters.
 - **New or renamed dependencies** — a diff that adds a dependency, especially one with a
   typosquat-shaped name (one edit-distance from a popular package) or a very recent first-publish
   date relative to its claimed popularity.
@@ -96,8 +96,8 @@ effort — the cheapest win, the least trusted input — and work down from ther
   `loadstring`/`load(`/`dofile` on dynamic or downloaded content, and any `autocmd` or
   `nvim_create_user_command` that widens what runs automatically or what a command accepts.
 - **Insecure deserialization** — `pickle.load`/`yaml.load` (not `safe_load`) on untrusted input,
-  `Marshal.load`, Java `ObjectInputStream`, or any format whose parser can execute code on load,
-  fed by a file, network response, or config the tool doesn't fully control.
+  `Marshal.load`, Java `ObjectInputStream`, or any format whose parser can execute code on load, fed
+  by a file, network response, or config the tool doesn't fully control.
 - **Hardcoded secrets** — API keys, private keys, or credentials committed in source, config, or
   test fixtures — not a supply-chain plant, just carelessness, but still handed to anyone who clones
   the repo.
@@ -122,8 +122,8 @@ One of three:
   telemetry call with no credential access nearby, or a vulnerability with no reachable input path).
 - **manual_review** — a real trust-boundary change or vulnerability with no clear exploit path,
   insufficient history/context to rule one out, or a vendored binary that can't be source-reviewed.
-- **block** — any checklist item confirmed with a concrete, reachable exploit path: an attacker
-  (or the next installer) can actually trigger it, not just hypothetically reach it.
+- **block** — any checklist item confirmed with a concrete, reachable exploit path: an attacker (or
+  the next installer) can actually trigger it, not just hypothetically reach it.
 
 ## Report
 
@@ -131,19 +131,25 @@ Write a Markdown report (scratchpad, or wherever the user asks) with:
 
 ```markdown
 # Overview
+
 <repo, ref(s), mode, what kind of project it is>
 
 # Scan Set
+
 <what was actually reviewed, and what was explicitly out of reach (vendored binaries, etc.)>
 
 # Findings
+
 ## Supply chain
+
 <one entry per checklist category with a hit — file, line range, why it matters, severity>
 
 ## Code vulnerabilities
+
 <same, for the code-vulnerability checklist>
 
 # Verdict
+
 <approve / manual_review / block, one line of justification>
 ```
 

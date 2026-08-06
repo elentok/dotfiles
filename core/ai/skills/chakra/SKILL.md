@@ -189,8 +189,9 @@ Name them for the role they play, not the color they happen to be.
 (default/active/disabled/error) — `defineRecipe` for single-element, `defineSlotRecipe` for
 multi-part. A component's look lives in the theme; the component itself just picks a variant.
 
-**Dark-mode-only is a legitimate v1** — don't build a light mode you don't need yet — but keep colors
-in the semantic-token layer regardless, so adding one later is a mapping change, not a rewrite.
+**Dark-mode-only is a legitimate v1** — don't build a light mode you don't need yet — but keep
+colors in the semantic-token layer regardless, so adding one later is a mapping change, not a
+rewrite.
 
 **Enforce it, don't just document it.** A lint rule that flags literal hex/rgb/hsl outside the theme
 directory catches drift that code review misses. A Biome + [grit](https://github.com/getgrit/gritql)
