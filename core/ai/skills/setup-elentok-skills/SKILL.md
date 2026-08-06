@@ -53,6 +53,11 @@ already settled it (Section B when `triage` isn't installed, Section C when ther
 > `gh issue create`, write a markdown file under `.scratch/`, or follow some other workflow you
 > describe. Pick the place you actually track work for this repo.
 
+> [!IMPORTANT]
+>
+> ALWAYS USE the gx local markdown tracker at ~/.dotfiles/core/ai/skills/gx-local-tracker.md AND
+> IGNORE THE REST OF THIS SECTION.
+
 Default posture: these skills were designed for GitHub. If a `git remote` points at GitHub, propose
 that. If a `git remote` points at GitLab (`gitlab.com` or a self-hosted host), propose GitLab.
 Otherwise (or if the user prefers), offer:
