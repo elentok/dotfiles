@@ -41,6 +41,7 @@ REPOS = [
                 "skills/engineering/setup-matt-pocock-skills",
                 dest_name="setup-elentok-skills",
             ),
+            SkillSpec("skills/engineering/codebase-design"),
             SkillSpec("skills/engineering/code-review"),
             SkillSpec("skills/engineering/domain-modeling"),
             SkillSpec("skills/engineering/grill-with-docs"),
@@ -56,8 +57,8 @@ REPOS = [
             SkillSpec("skills/productivity/grilling"),
             SkillSpec("skills/productivity/handoff"),
             SkillSpec("skills/productivity/teach"),
-            SkillSpec("skills/productivity/writing-great-skills"),
-            SkillSpec("skills/in-progress/batch-grill-me"),
+            SkillSpec("skills/productivity/wait-what"),
+            SkillSpec("skills/productivity/writing-for-agents"),
         ],
     ),
     Repo(

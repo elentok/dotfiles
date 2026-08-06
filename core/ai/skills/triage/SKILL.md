@@ -103,8 +103,8 @@ Show counts and a one-line summary per item. Let the maintainer pick.
    stronger agent brief.
 
 4. **Grill (if needed).** If the request needs fleshing out, run the `/grilling` and
-   `/domain-modeling` skills together — grill it into shape one question at a time, sharpening
-   domain terms and updating `CONTEXT.md`/ADRs inline as decisions land.
+   `/domain-modeling` skills together — grill it into shape a round of questions at a time,
+   sharpening domain terms and updating `CONTEXT.md`/ADRs inline as decisions land.
 
 5. **Apply the outcome:**
    - `ready-for-agent` — post an agent brief comment ([AGENT-BRIEF.md](AGENT-BRIEF.md)).
