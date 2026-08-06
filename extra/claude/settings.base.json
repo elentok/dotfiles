@@ -26,10 +26,6 @@
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true
   },
-  "statusLine": {
-    "type": "command",
-    "command": "blf claude-statusline"
-  },
   "hooks": {
     "PreToolUse": [
       {
