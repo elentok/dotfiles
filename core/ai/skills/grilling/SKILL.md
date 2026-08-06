@@ -35,3 +35,8 @@ of the frontier now. The _decisions_ are the user's — put each to them and wai
 The session is done when the frontier is empty: every branch of the design tree visited, nothing
 left silently assumed. Do not act on it until the user confirms you have reached a shared
 understanding.
+
+> [!NOTE]
+>
+> elentok@'s note: when possible try to phrase your questions so if I agree with your recommendation
+> I can't just say "agree"
