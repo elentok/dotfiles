@@ -47,6 +47,13 @@ tracker-specific.** The issue tracker should have been provided to you — run `
 if not. Consult the tracker doc's "Wayfinding operations" section for how _this_ repo expresses
 them. If no tracker has been provided, default to the local-markdown tracker.
 
+> [!IMPORTANT]
+>
+> ALWAYS USE the gx local markdown tracker at ~/.dotfiles/core/ai/skills/gx-local-tracker.md and use
+> the `gx-to-tickets` skill to create new tickets.
+>
+> IGNORE THE REST OF THIS SECTION.
+
 ### The map body
 
 The whole map at low resolution, loaded once per session. Open tickets are **not** listed — they are

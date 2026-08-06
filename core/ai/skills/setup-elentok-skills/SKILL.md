@@ -55,7 +55,9 @@ already settled it (Section B when `triage` isn't installed, Section C when ther
 
 > [!IMPORTANT]
 >
-> ALWAYS USE the gx local markdown tracker at ~/.dotfiles/core/ai/skills/gx-local-tracker.md AND
+> ALWAYS USE the gx local markdown tracker at ~/.dotfiles/core/ai/skills/gx-local-tracker.md and use
+> the `gx-to-tickets` skill to create new tickets.
+>
 > IGNORE THE REST OF THIS SECTION.
 
 Default posture: these skills were designed for GitHub. If a `git remote` points at GitHub, propose
