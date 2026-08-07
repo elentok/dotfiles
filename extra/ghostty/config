@@ -31,6 +31,7 @@ font-family-italic = "Operator Mono"
 # Increase line height by 5%
 
 macos-option-as-alt = true
+copy-on-select = clipboard
 
 # Disable font ligatures
 # font-feature = "-calt"
