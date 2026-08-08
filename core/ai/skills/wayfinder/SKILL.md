@@ -49,7 +49,7 @@ them. If no tracker has been provided, default to the local-markdown tracker.
 
 > [!IMPORTANT]
 >
-> ALWAYS USE the gx local markdown tracker at ~/.dotfiles/core/ai/skills/gx-local-tracker.md and use
+> ALWAYS USE the gx local markdown tracker at ~/.claude/skills/gx-local-tracker.md and use
 > the `gx-to-tickets` skill to create new tickets.
 >
 > IGNORE THE REST OF THIS SECTION.
