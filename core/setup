@@ -126,6 +126,9 @@ function install-personal-cli-tools() {
 
   dfl shell "Installing gx claude statusline..." -- \
     fish -c 'gx claude statusline --install'
+
+  dfl shell "Installing gx skills..." -- \
+    fish -c 'gx skills install'
 }
 
 main "$@"
