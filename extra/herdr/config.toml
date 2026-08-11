@@ -275,7 +275,7 @@ show_agent_labels_on_pane_borders = true
 # delivery = "off"
 # delay_seconds = 1
 
-delivery = "herdr"
+delivery = "system"
 [ui.toast.herdr]
 # position = "bottom-right"
 
