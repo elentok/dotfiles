@@ -39,4 +39,4 @@ understanding.
 > [!NOTE]
 >
 > elentok@'s note: when possible try to phrase your questions so if I agree with your recommendation
-> I can't just say "agree"
+> I can just say "agree"
