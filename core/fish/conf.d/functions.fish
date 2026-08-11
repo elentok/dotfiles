@@ -95,8 +95,15 @@ end
 
 function yf --description "yank filename"
     for file in $argv
-        path resolve "$PWD/$file"
+        path resolve -- "$file"
     end | blf copy -
 
     echo "Copied $(count $argv) filepaths to clipboard."
+end
+
+function je --description "jump to epic"
+    set epic (gx tickets epics | fzf --prompt 'Pick epic: ')
+    if test -n "$epic"
+        cd (gx tickets root)/$epic
+    end
 end
