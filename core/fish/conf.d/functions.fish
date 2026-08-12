@@ -107,3 +107,10 @@ function je --description "jump to epic"
         cd (gx tickets root)/$epic
     end
 end
+
+function wayfinder --description "runs claude with /wayfinder {epic}"
+    set map (gx tickets epics --maps | fzf --prompt 'Pick map: ')
+    if test -n "$map"
+        claude --permission-mode auto "/wayfinder $map"
+    end
+end
