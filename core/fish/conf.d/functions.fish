@@ -109,8 +109,13 @@ function je --description "jump to epic"
 end
 
 function wayfinder --description "runs claude with /wayfinder {epic}"
-    set map (gx tickets epics --maps | fzf --prompt 'Pick map: ')
-    if test -n "$map"
-        claude --permission-mode auto "/wayfinder $map"
+    if test (count $argv) -gt 0
+        claude --permission-mode auto "/wayfinder $argv"
+    else
+        set map (gx tickets epics --maps | fzf --prompt 'Pick map: ')
+        if test -n "$map"
+            history append "wayfinder $map"
+            claude --permission-mode auto "/wayfinder $map"
+        end
     end
 end
