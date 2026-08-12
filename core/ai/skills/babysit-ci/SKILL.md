@@ -1,6 +1,6 @@
 ---
 name: babysit-ci
-description:
+description: >-
   Loop unattended until GitHub Actions CI is green on the current branch: check the failing run, fix
   it, get a lightweight second opinion, commit, push, and wait for the next result. Use when the
   user explicitly asks to babysit, watch, or keep fixing CI until it passes.
