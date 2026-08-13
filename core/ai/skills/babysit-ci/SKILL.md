@@ -51,9 +51,12 @@ Repeat from step 1, tracking the iteration count.
 6. **Stop condition reached.** Exactly one of: CI passed, an unfixable failure was found, or the
    iteration cap was hit.
 
-7. **Notify.** Always end with exactly one `gx notify`:
-   - success: `gx notify "👍 CI passes"`
-   - unfixable: `gx notify "👎 babysit-ci stuck: <one-line reason from step 2>"`
-   - cap hit: `gx notify "👎 babysit-ci gave up after 5 iterations, still failing"`
+7. **Notify.** Track a one-line summary of each fix made in step 3 as the loop runs. Always end with
+   exactly one `gx notify`, and always include the accumulated fix summary (omit only when no fix
+   was ever made, i.e. an unfixable bail on iteration 1):
+   - success: `gx notify "👍 CI passes: <summary of fixes across all iterations>"`
+   - unfixable: `gx notify "👎 babysit-ci stuck: <one-line reason from step 2>[; already fixed: <summary of prior iterations' fixes>]"`
+   - cap hit: `gx notify "👎 babysit-ci gave up after 5 iterations, still failing: <summary of fixes across all iterations>"`
    - each failed attempt inside the loop (step 5's fail branch) also gets its own
-     `gx notify "👎 babysit-ci attempt <n> failed: <one-line reason>"` before looping back
+     `gx notify "👎 babysit-ci attempt <n> failed: <one-line reason>; fixed this attempt: <summary of this iteration's fix>"`
+     before looping back
