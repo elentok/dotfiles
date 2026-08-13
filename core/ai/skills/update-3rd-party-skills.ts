@@ -64,6 +64,12 @@ const REPOS: Repo[] = [
       { sourcePath: "cursor-team-kit/skills/thermo-nuclear-code-quality-review" },
     ],
   },
+  {
+    url: "https://github.com/herdrdev/herdr",
+    skills: [
+      { sourcePath: "skills/herdr" },
+    ],
+  },
 ]
 
 function run(command: string, args: string[], options: { cwd?: string } = {}): void {
