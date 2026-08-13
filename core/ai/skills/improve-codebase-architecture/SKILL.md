@@ -37,8 +37,8 @@ to look before you look:
 
 Read the project's domain glossary (`CONTEXT.md`) and any ADRs in the area you're touching first.
 
-Then use the Agent tool with `subagent_type=Explore` to walk the codebase. Don't follow rigid
-heuristics — explore organically and note where you experience friction:
+Then spawn a sub-agent to walk the codebase. Don't follow rigid heuristics — explore organically and
+note where you experience friction:
 
 - Where does understanding one concept require bouncing between many small modules?
 - Where are modules **shallow** — interface nearly as complex as the implementation?

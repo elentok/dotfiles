@@ -25,8 +25,8 @@ sub-agents work in parallel.
 
 ### 2. Spawn sub-agents
 
-Spawn 3+ sub-agents in parallel using the Agent tool. Each must produce a **radically different**
-interface for the deepened module.
+Spawn 3+ sub-agents in parallel. Each must produce a **radically different** interface for the
+deepened module.
 
 Prompt each sub-agent with a separate technical brief (file paths, coupling details, dependency
 category from [DEEPENING.md](DEEPENING.md), what sits behind the seam). The brief is independent of

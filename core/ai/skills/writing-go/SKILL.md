@@ -8,8 +8,8 @@ description: Go coding conventions. Use when writing, editing, or reviewing Go c
 ## Goroutines and channels
 
 - **Every goroutine's blocking channel send or receive must be paired with a `select` on a
-  `done`/`ctx.Done()` case.** A bare `ch <- v` or `<-ch` with no shutdown escape hatch deadlocks
-  the moment nothing is left to read/write the other end — and in `go test`, that surfaces as a
+  `done`/`ctx.Done()` case.** A bare `ch <- v` or `<-ch` with no shutdown escape hatch deadlocks the
+  moment nothing is left to read/write the other end — and in `go test`, that surfaces as a
   10-minute package timeout, not a fast, obvious failure. Applies to worker loops, event
   senders/receivers, and any goroutine started with `go func() { ... }()`.
 - **Any new persistent/long-lived goroutine needs an explicit shutdown-under-timeout test**: send
