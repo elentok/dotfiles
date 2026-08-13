@@ -3,7 +3,7 @@
 tags
 .DS_Store
 tmp
-extra/scripts/node_modules
+node_modules
 core/fish/fish_variables
 core/fish/completions
 .mypy_cache
