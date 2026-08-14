@@ -75,4 +75,8 @@ fi
 git -C "$repo_root" add -- "$lockfile_rel"
 git -C "$repo_root" commit -F "$commit_msg_file" -- "$lockfile_rel"
 rm -rf -- "$tmp_root"
-echo "promoted, committed, and cleaned artifacts"
+
+echo "syncing installed plugins to lockfile..."
+nvim --headless "+lua vim.pack.update(nil, { target = 'lockfile' })" +qa
+
+echo "promoted, committed, synced installed plugins, and cleaned artifacts"

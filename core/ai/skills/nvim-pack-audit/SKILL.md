@@ -56,6 +56,9 @@ Free-form follow-up questions are expected in this state.
 - `approve`
   - Run:
     `core/ai/skills/nvim-pack-audit/scripts/approve-update <state-json> [--commit-message-file <path>]`
+  - This commits the lockfile, then syncs the user's installed plugins to it headlessly via
+    `nvim --headless "+lua vim.pack.update(nil, { target = 'lockfile' })" +qa` (same pattern as
+    `core/nvim/install`).
 - `abort`
   - Run: `core/ai/skills/nvim-pack-audit/scripts/abort-update <state-json>`
 
