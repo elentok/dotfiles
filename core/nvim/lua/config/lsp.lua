@@ -1,5 +1,5 @@
 local servers = {
-  basedpyright = { "python" },
+  -- basedpyright = { "python" },
   bashls = { "bash", "sh" },
   biome = {
     "astro",
@@ -48,7 +48,8 @@ local servers = {
   openscad_lsp = { "openscad" },
   spyglassmc_language_server = { "mcfunction" },
   taplo = { "toml" },
-  ty = { "python" },
+  pyrefly = { "python" },
+  -- ty = { "python" },
   vtsls = {
     "javascript",
     "javascriptreact",

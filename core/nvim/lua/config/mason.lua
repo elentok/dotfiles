@@ -21,6 +21,7 @@ local ensure_installed = {
   "openscad-lsp",
   "prettierd",
   "basedpyright",
+  "pyrefly",
   "shellcheck",
   "shfmt",
   "rust-analyzer",
