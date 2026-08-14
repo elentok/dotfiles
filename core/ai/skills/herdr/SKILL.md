@@ -250,3 +250,10 @@ fallback; do not request file output in the initial prompt.
 - Never kill the main Herdr process. Use named test sessions for experiments that need an isolated
   server.
 - CLI server errors are JSON on stderr with exit status 1. CLI syntax errors exit with status 2.
+
+## @elentok: investigating herder's code
+
+You should have access to herdr's code in ~/dev/herdr (make sure you have the correct version
+checked out).
+
+If ~/dev/herdr doesn't exist run `git clone https://github.com/herdrdev/herdr`
