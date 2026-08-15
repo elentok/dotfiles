@@ -5,6 +5,9 @@ description: Go coding conventions. Use when writing, editing, or reviewing Go c
 
 # Writing Go
 
+See also `idle-cost-audit` for the invariants around timers/polls/subprocesses that keep a
+long-running process out of deep idle.
+
 ## Goroutines and channels
 
 - **Every goroutine's blocking channel send or receive must be paired with a `select` on a
