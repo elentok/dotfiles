@@ -54,8 +54,8 @@ function main() {
   fnm use "$node_ver" >/dev/null
   dfl pkg npm install cloc fx json live-server yarn markserv neovim
 
-  dfl shell "Installing extra/scripts npm deps..." -- \
-    npm --prefix "$DFL_ROOT/extra/scripts" install
+  dfl shell "Installing deps..." -- \
+    npm --prefix "$DFL_ROOT" install
 }
 
 main "$@"
