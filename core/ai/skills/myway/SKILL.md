@@ -15,19 +15,26 @@ design-reviewed, grilled) → **implement** (tickets published, `/myway`'s job i
 invocation inspects on-disk state and runs exactly the next step — there is no separate phase field
 anywhere, so detection is the state machine below.
 
+`wayfinder` and `to-spec` are both user-invoked only (`disable-model-invocation: true`) — no other
+skill can reach them through the Skill tool. Wherever a step below says "follow wayfinder's..." or
+"follow to-spec's...", `Read` that skill's `SKILL.md` directly and execute its instructions inline
+(or hand a subagent that same instruction) — never call the Skill tool for them. `gx-to-tickets` is
+model-invocable, so it can be reached normally.
+
 ## Detecting the next step
 
 Evaluate in order; run the first branch that matches.
 
-1. **No `<root>/<epic>/map.md`** → run wayfinder's "Chart the map" mode for `{epic}` (includes its
-   own Destination-grilling).
+1. **No `<root>/<epic>/map.md`** → follow wayfinder's "Chart the map" mode for `{epic}` (includes
+   its own Destination-grilling).
 2. **Map charted, not yet "the way is clear"** (open tickets remain, or `## Not yet specified` is
-   non-empty) → run wayfinder's "Work through the map" mode, resolving exactly **one** ticket (never
-   more per invocation — matches wayfinder's own rule, and keeps HITL ticket types genuinely
+   non-empty) → follow wayfinder's "Work through the map" mode, resolving exactly **one** ticket
+   (never more per invocation — matches wayfinder's own rule, and keeps HITL ticket types genuinely
    interactive rather than faked in a subagent).
-3. **The way is clear, no `docs/specs/<epic>.md`** → run [to-spec](../to-spec/SKILL.md) in a
-   subagent. Seed it with the map body (Destination + Decisions so far) plus each closed ticket's
-   title and resolution gist — not full ticket bodies; the map is already the index.
+3. **The way is clear, no `docs/specs/<epic>.md`** → dispatch a subagent, telling it to read
+   [to-spec](../to-spec/SKILL.md) and follow it. Seed it with the map body (Destination + Decisions
+   so far) plus each closed ticket's title and resolution gist — not full ticket bodies; the map is
+   already the index.
 4. **Spec exists, no `.scratch/<epic>/review-findings.md`** → run a design-review subagent against
    the spec (rubric below), writing its findings to `.scratch/<epic>/review-findings.md` as a
    markdown checklist. Uncommitted — same tier as `map.md`, not the durable artifact.
