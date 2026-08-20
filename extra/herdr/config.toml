@@ -269,6 +269,7 @@ prompt_new_workspace_name = true
 
 # Background notification popup delivery
 show_agent_labels_on_pane_borders = true
+status_indicators = "symbols"
 [ui.toast]
 # off = disable pop-up notifications
 # herdr = show in-app toasts
@@ -277,7 +278,7 @@ show_agent_labels_on_pane_borders = true
 # delivery = "off"
 # delay_seconds = 1
 
-delivery = "system"
+delivery = "herdr"
 [ui.toast.herdr]
 # position = "bottom-right"
 
