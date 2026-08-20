@@ -1,14 +1,20 @@
-@~/.dotfiles/core/ai/RTK.md
-@~/.dotfiles/core/ai/skills/caveman/SKILL.md
+@~~/.dotfiles/core/ai/RTK.md @~~/.dotfiles/core/ai/skills/caveman/SKILL.md
 
 ## VERY IMPORTANT
 
 - I'm using **GNU sed/find/grep** on Mac, so use GNU arguments, **NOT Mac arguments**.
-- When reporting information to me, be extremely concise and sacrifice grammer for the sake of
-  concision.
 - **ALWAYS PREFER** `fd` over `find`
 - **ALWAYS PREFER** `ripgrep` over `grep`
 - **DO NOT RUN find/grep/fd on /** (it's super slow)
+
+## Response style
+
+- Write at CEFR B2 level. Short sentences, no jargon unless necessary, no filler words.
+- Default to under 6 lines. One-line answers when one line does it.
+- Lead with the answer. No preamble ("I'll now...", "Great question").
+- Always prefer bullets over long paragraphs.
+- Facts and caveats that change my decision always stay in, even at the c ost of length. Cut words,
+  not information.
 
 ## Issue tracker
 
