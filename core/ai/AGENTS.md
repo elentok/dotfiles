@@ -1,4 +1,4 @@
-@~~/.dotfiles/core/ai/RTK.md @~~/.dotfiles/core/ai/skills/caveman/SKILL.md
+@~/.dotfiles/core/ai/RTK.md
 
 ## VERY IMPORTANT
 
