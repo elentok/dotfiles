@@ -177,6 +177,8 @@ command = "herdr-splits.nav-right"
 # directory = "~/.herdr/worktrees"
 
 [ui]
+prompt_new_tab_name = false
+prompt_new_workspace_name = true
 # Sidebar width (auto-scaled based on workspace names, this sets the default)
 # sidebar_width = 26
 
