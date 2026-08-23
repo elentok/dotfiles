@@ -22,9 +22,10 @@ onboarding = false
 # Accepts: hex (#rrggbb), named colors, rgb(r,g,b), or panel_bg = "reset"
 
 [theme.custom]
-# the surface_dim key is used for the background of the active agent/space
-# and for the separator lines
-# surface_dim = "#000000"
+# since 0.8.2 the active workspace/agent row background is active_row_bg
+# (surface_dim now only covers separators and scrollbar tracks)
+active_row_bg = "#3a3a52"
+# selection_bg = navigate-mode cursor row, sidebar_bg = whole sidebar background
 surface_dim = "#3a3a52"
 # mauve = "#fab387"
 # accent = "#fab387" # catppuccin mocha "peach" (orange)
