@@ -36,7 +36,18 @@ The session is done when the frontier is empty: every branch of the design tree 
 left silently assumed. Do not act on it until the user confirms you have reached a shared
 understanding.
 
-> [!NOTE]
+> [!IMPORTANT]
 >
 > elentok@'s note: when possible try to phrase your questions so if I agree with your recommendation
 > I can just say "agree"
+>
+> Write questions and recommendations at CEFR B2 level:
+>
+> - Short sentences. No jargon unless necessary. No filler words.
+> - One line when one line does it.
+> - Prefer bullets over long paragraphs.
+> - Keep every fact or caveat that changes my decision, even at the cost of length. Cut words, not
+>   information.
+>
+> When you reference an earlier question or section by number, I won't remember what it was — add a
+> short inline reminder (e.g. "Q3 (storage backend)").
