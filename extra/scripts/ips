@@ -1,7 +1,39 @@
 #!/usr/bin/env bash
 
-ip addr |
-  grep -E '(^[0-9]|inet |inet6 )' |
-  sed -E $'s/^([0-9]: [^:]*).*/\\033[34m\\1\\033[0m/' |
-  sed -E $'s/(inet [^ ]+).*/\\033[32m\\1\\033[0m/' |
-  sed -E 's/(inet6 [^ ]+).*/\1/'
+blue=$'\033[34m'
+green=$'\033[32m'
+reset=$'\033[0m'
+
+# Prints only interfaces that have an IPv4 address.
+filter() {
+  awk -v blue="$blue" -v green="$green" -v reset="$reset" '
+    function flush() {
+      if (has_v4) {
+        printf "%s%s%s\n", blue, name, reset
+        for (i = 1; i <= n; i++) print "  " lines[i]
+      }
+      name = ""; has_v4 = 0; n = 0
+    }
+    /^[^[:space:]]/ {
+      flush()
+      name = $0
+      sub(/^[0-9]+: /, "", name)     # ip addr
+      sub(/:.*/, "", name)           # ifconfig / ip addr
+      next
+    }
+    /^[[:space:]]*inet / {
+      addr = $2
+      lines[++n] = green "inet " addr reset
+      has_v4 = 1
+      next
+    }
+    /^[[:space:]]*inet6 / { lines[++n] = "inet6 " $2 }
+    END { flush() }
+  '
+}
+
+if command -v ip >/dev/null 2>&1; then
+  ip addr | filter
+else
+  ifconfig | filter
+fi
