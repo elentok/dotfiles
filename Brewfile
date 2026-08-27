@@ -59,6 +59,18 @@ if OS.mac?
 
   cask "font-maple-mono"
 
+  cask "font-freckle-face"
+  cask "font-ranchers"
+  cask "font-luckiest-guy"
+  cask "font-gveret-levin"
+  cask "font-fredoka"
+  cask "font-huninn"
+  cask "font-playpen-sans-hebrew"
+  cask "font-suez-one"
+  cask "font-open-sans-hebrew-condensed"
+  cask "font-open-sans-hebrew"
+  cask "font-open-sans"
+
   if !File.exist?(File.expand_path("~/.config/dotfiles/skip-gui-apps"))
     cask "chatgpt"
     cask "freecad"
