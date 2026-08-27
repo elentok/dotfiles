@@ -29,6 +29,19 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function() vim.treesitter.start() end,
 })
 
+-- Keep inline code backticks visible (nvim-treesitter's markdown_inline
+-- highlights query conceals `code_span_delimiter` unconditionally, and
+-- that can't be undone via an `; extends` override since the base query
+-- is resolved before any override file in 'runtimepath').
+do
+  local files = vim.treesitter.query.get_files("markdown_inline", "highlights")
+  if files[1] then
+    local base = table.concat(vim.fn.readfile(files[1]), "\n")
+    local patched = base:gsub("%(code_span_delimiter%)%s*\n", "")
+    vim.treesitter.query.set("markdown_inline", "highlights", patched)
+  end
+end
+
 -- Run TSUpdate when the treesitter package updates
 vim.api.nvim_create_autocmd("PackChanged", {
   callback = function(ev)
