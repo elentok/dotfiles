@@ -18,7 +18,7 @@
       "src": "https://github.com/elentok/encrypt.nvim"
     },
     "flash.nvim": {
-      "rev": "b6346946d10d07998efee029fb0f7a593806d0cd",
+      "rev": "5f0f270fdc7c5b0c21d903ee85b9cb06f2ac636a",
       "src": "https://github.com/folke/flash.nvim"
     },
     "fzf-lua": {
@@ -34,7 +34,7 @@
       "src": "https://github.com/MagicDuck/grug-far.nvim"
     },
     "herdr-splits.nvim": {
-      "rev": "c58bfdf01520845583e0033c11c56fc9d21a5424",
+      "rev": "94f30cf4e9ac76ddf185a3acd0977be728fa4106",
       "src": "https://github.com/lmilojevicc/herdr-splits.nvim"
     },
     "lazydiff.nvim": {
@@ -66,19 +66,19 @@
       "src": "https://github.com/nvim-mini/mini.move"
     },
     "nvim-autopairs": {
-      "rev": "7b9923abad60b903ece7c52940e1321d39eccc79",
+      "rev": "430522f95fe4fb7c511ec64f8c1a90cc6a66c05c",
       "src": "https://github.com/windwp/nvim-autopairs"
     },
     "nvim-lint": {
-      "rev": "9b99aad869102ac01775187abd8d49017b148612",
+      "rev": "3d55c8f67c6ae5c15e1042571e107c7a3d5c5f4e",
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "51dbf5359da86721662c87ca10eb73add973737b",
+      "rev": "84252f9832fb5b9024fe9f7258e7c2aff915e6fb",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-navic": {
-      "rev": "f5eba192f39b453675d115351808bd51276d9de5",
+      "rev": "455808fd0fae06e6d70fadfd61432275db8f34ce",
       "src": "https://github.com/SmiteshP/nvim-navic"
     },
     "nvim-surround": {
@@ -87,16 +87,16 @@
       "version": "4.0.0 - 5.0.0"
     },
     "nvim-treesitter": {
-      "rev": "a1bcffc8095c142ad1f7a9671a4ae180333f9209",
+      "rev": "427e9222363d07c32d6db6169e4049c28d58d141",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "898ee307df58f854d11cd7edd06472574d48014e",
+      "rev": "5c7b0263797dfd1bd6202f2b219f3b53a80b2187",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
     "obsidian.nvim": {
-      "rev": "07f94ef04a417555ee56a5895ddeb740f2de0033",
+      "rev": "f98e2be8923467194d8965d9cc342345fe634b02",
       "src": "https://github.com/obsidian-nvim/obsidian.nvim"
     },
     "oil.nvim": {
@@ -112,7 +112,7 @@
       "src": "https://github.com/Wansmer/sibling-swap.nvim"
     },
     "smart-splits.nvim": {
-      "rev": "0fe3bbd99d48458ad188c4c262c31049fa9b018c",
+      "rev": "0ab2e4928dc867dfea3ff1da186e69f289d8a532",
       "src": "https://github.com/mrjones2014/smart-splits.nvim"
     },
     "snacks.nvim": {
@@ -128,7 +128,7 @@
       "src": "https://github.com/folke/which-key.nvim"
     },
     "yankbank-nvim": {
-      "rev": "a0706a44103c189f090a6ae1f029117d02b647a6",
+      "rev": "634cde1c2cd0b278cbff995d97ddb112f00c7fbd",
       "src": "https://github.com/ptdewey/yankbank-nvim"
     }
   }
