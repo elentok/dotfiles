@@ -63,6 +63,7 @@ require("snacks").setup({
 
   picker = {
     layout = vertical2,
+    ui_select = false,
     formatters = {
       file = {
         truncate = 50,

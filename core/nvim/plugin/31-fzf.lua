@@ -1,6 +1,7 @@
 require("fzf-lua").setup({
   fzf_colors = true,
   formatter = "path.dirname_first",
+  ui_select = {},
   files = { formatter = "path.dirname_first" },
   buffers = { formatter = "path.dirname_first" },
   oldfiles = { formatter = "path.dirname_first" },
