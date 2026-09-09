@@ -4,6 +4,7 @@ local ensure_installed = {
   "bash-language-server",
   "biome",
   "css-lsp",
+  "css-variables-language-server",
   "cssmodules-language-server",
   "docker-compose-language-service",
   "dockerfile-language-server",

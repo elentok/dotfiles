@@ -15,7 +15,8 @@ local servers = {
     "typescriptreact",
     "vue",
   },
-  cssls = { "css", "scss", "less" },
+  cssls = { "css", "scss" },
+  css_variables = { "css", "scss" },
   cssmodules_ls = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
   denols = {
     "javascript",
