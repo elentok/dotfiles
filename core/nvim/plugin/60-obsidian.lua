@@ -24,14 +24,13 @@ local function load_obsidian()
       enabled = false,
     },
     completion = {
-      blink = true,
       create_new = false,
     },
     link = {
       style = function(opts) return require("obsidian.util").wiki_link_id_prefix(opts) end,
     },
     picker = {
-      name = "snacks.pick",
+      name = "fzf-lua",
     },
     checkbox = {
       order = { " ", "x", "/", "w", "r" },
