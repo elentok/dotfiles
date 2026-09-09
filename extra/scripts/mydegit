@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if test $# -lt 2; then
+  echo "Usage: mydegit [original-repo] [new-repo-name]"
+fi
+
+original="$1"
+new_repo_name="$2"
+
+# shallow clone
+git clone --depth 1 "file://$(realpath "$original")" \
+  "$new_repo_name"
+
+# remove .git
+cd "$new_repo_name"
+rm -rf .git
+
+# init new git repo
+git init
+
+# initial commit
+git add -A
+git commit -m 'initial commit'
