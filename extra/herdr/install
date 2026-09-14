@@ -7,4 +7,4 @@ dfl symlink config.toml ~/.config/herdr/config.toml
 herdr integration install claude
 herdr integration install codex
 
-herdr plugin install lmilojevicc/herdr-splits.nvim --ref v0.5.1 --yes
+herdr plugin link ~/.local/share/nvim/site/pack/core/opt/smart-splits.nvim

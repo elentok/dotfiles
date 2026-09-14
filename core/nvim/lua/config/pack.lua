@@ -53,12 +53,7 @@ local pack_specs = {
   { src = gh("kylechui/nvim-surround"), version = vim.version.range("^4.0.0") },
   gh("folke/which-key.nvim"),
   gh("ptdewey/yankbank-nvim"),
-  -- Mutually exclusive: smart-splits.nvim's plugin/ bootstrap unconditionally
-  -- runs multiplexer detection/startup on load (not just on setup()), which
-  -- would misfire under Herdr if it also detects a kitty/tmux env var (e.g.
-  -- Herdr nested inside kitty). Only ever packadd the one that's active.
-  vim.env.HERDR_ENV == "1" and gh("lmilojevicc/herdr-splits.nvim")
-    or gh("smart-splits-nvim/smart-splits.nvim"),
+  gh("smart-splits-nvim/smart-splits.nvim"),
   gh("mason-org/mason.nvim"),
   gh("obsidian-nvim/obsidian.nvim"),
   gh("MeanderingProgrammer/render-markdown.nvim"),

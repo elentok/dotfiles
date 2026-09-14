@@ -33,10 +33,6 @@
       "rev": "11595bf747edc270bce2069d1020502ad4ae56cf",
       "src": "https://github.com/MagicDuck/grug-far.nvim"
     },
-    "herdr-splits.nvim": {
-      "rev": "94f30cf4e9ac76ddf185a3acd0977be728fa4106",
-      "src": "https://github.com/lmilojevicc/herdr-splits.nvim"
-    },
     "lazydiff.nvim": {
       "rev": "3c52008b05366b484ea7a39f8a730d5e559cdbc2",
       "src": "https://github.com/rashedInt32/lazydiff.nvim"

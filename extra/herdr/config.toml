@@ -111,7 +111,7 @@ next_tab = "prefix+l"
 # focus_pane_down = "prefix+j"
 # focus_pane_up = "prefix+k"
 # focus_pane_right = "prefix+l"
-# ctrl+h/j/k/l are bound below via herdr-splits.nvim's plugin_action commands
+# ctrl+h/j/k/l are bound below via smart-splits.nvim's plugin_action commands
 # instead of focus_pane_*, so they seamlessly cross into/out of Neovim splits.
 # cycle_pane_next = "prefix+tab"
 # cycle_pane_previous = "prefix+shift+tab"
@@ -146,27 +146,30 @@ split_horizontal = "prefix+s"
 # width = "80%"
 # height = "80%"
 
-# herdr-splits.nvim: seamless nav between Herdr panes and Neovim splits.
+# smart-splits.nvim: seamless nav between Herdr panes and Neovim splits.
 [[keys.command]]
 key = "ctrl+h"
 type = "plugin_action"
-command = "herdr-splits.nav-left"
+command = "smart-splits.nvim.left"
+description = "navigate left (vim/herdr)"
 
 [[keys.command]]
 key = "ctrl+j"
 type = "plugin_action"
-command = "herdr-splits.nav-down"
+command = "smart-splits.nvim.down"
+description = "navigate down (vim/herdr)"
 
 [[keys.command]]
 key = "ctrl+k"
 type = "plugin_action"
-command = "herdr-splits.nav-up"
+command = "smart-splits.nvim.up"
+description = "navigate up (vim/herdr)"
 
 [[keys.command]]
 key = "ctrl+l"
 type = "plugin_action"
-command = "herdr-splits.nav-right"
-
+command = "smart-splits.nvim.right"
+description = "navigate right (vim/herdr)"
 # Legacy indexed shortcut config is still parsed for compatibility.
 # Prefer switch_tab, switch_workspace, and focus_agent for new configs.
 # [keys.indexed]
