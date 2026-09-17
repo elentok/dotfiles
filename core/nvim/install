@@ -6,7 +6,7 @@ dfl mkdir ~/.config
 dfl symlink "$DOTF/core/nvim" ~/.config/nvim
 
 dfl shell "Installing plugins..." -- \
-  nvim --headless "+lua vim.pack.update(nil, { target = 'lockfile'})" +qa
+  nvim --headless "+lua vim.pack.update(nil, { target = 'lockfile', force = true })" +qa
 
 dfl shell "Installing treesitter parsers..." -- \
   nvim --headless "+lua require('elentok.treesitter-parsers')" +qa
