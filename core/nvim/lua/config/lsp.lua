@@ -1,3 +1,5 @@
+local typescript = require("config.lsp-typescript")
+
 local configured = {}
 local defaults_configured = false
 
@@ -31,15 +33,6 @@ local function add_server(name, filetypes, config)
   })
 end
 
-local js_ts_filetypes = {
-  "javascript",
-  "javascriptreact",
-  "javascript.jsx",
-  "typescript",
-  "typescriptreact",
-  "typescript.tsx",
-}
-
 add_server("bashls", { "bash", "sh" })
 add_server("biome", {
   "astro",
@@ -58,7 +51,7 @@ add_server("biome", {
 add_server("cssls", { "css", "scss" })
 add_server("css_variables", { "css", "scss" })
 add_server("cssmodules_ls", { "javascript", "javascriptreact", "typescript", "typescriptreact" })
-add_server("denols", js_ts_filetypes)
+add_server("denols", typescript.filetypes)
 add_server("docker_compose_language_service", { "yaml.docker-compose" })
 add_server("dockerls", { "dockerfile" })
 add_server("dprint", { "markdown" })
@@ -83,5 +76,28 @@ add_server("openscad_lsp", { "openscad" })
 add_server("pyrefly", { "python" })
 add_server("spyglassmc_language_server", { "mcfunction" })
 add_server("taplo", { "toml" })
-add_server("vtsls", js_ts_filetypes)
+add_server("vtsls", typescript.filetypes, {
+  root_dir = function(bufnr, on_dir)
+    local root = typescript.root(bufnr)
+    if not root then return end
+
+    local major = typescript.major(root)
+    if major and major < 7 then on_dir(root) end
+  end,
+
+  settings = {
+    vtsls = {
+      autoUseWorkspaceTsdk = true,
+    },
+  },
+})
+add_server("tsc", typescript.filetypes, {
+  root_dir = function(bufnr, on_dir)
+    local root = typescript.root(bufnr)
+    if not root then return end
+
+    local major = typescript.major(root)
+    if major and major >= 7 then on_dir(root) end
+  end,
+})
 add_server("yamlls", { "yaml", "yaml.docker-compose", "yaml.gitlab" })
