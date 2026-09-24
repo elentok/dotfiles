@@ -7,7 +7,7 @@
     },
     "canola.nvim": {
       "rev": "8173bc716f29797ce0ad94359565a20e17a0b88c",
-      "src": "https://github.com/barrettruth/canola.nvim"
+      "src": "https://forge.barrettruth.com/barrettruth/canola.nvim"
     },
     "conform.nvim": {
       "rev": "016802de402556da54c36bd7359b441266b01cdd",
