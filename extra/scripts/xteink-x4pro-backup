@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# find by running `ls /dev/cu.*`
+SERIAL_PORT=/dev/cu.usbmodem31301
+
+BAUD=115200
+
+sudo esptool --chip esp32s3 \
+  --port $SERIAL_PORT \
+  --baud $BAUD \
+  read-flash 0 ALL x4pro-factory-backup.bin
