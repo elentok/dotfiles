@@ -13,8 +13,8 @@ conventions already used across `~/dev/openscad`.
 ## 1. Reuse before writing
 
 Check the project's `lib/` directory (e.g. `~/dev/openscad/lib/`) for existing modules — screw
-sizes, rounded cubes, masks, etc. — before writing new geometry from scratch. `use <../../lib/x.scad>`
-to pull one in.
+sizes, rounded cubes, masks, etc. — before writing new geometry from scratch.
+`use <../../lib/x.scad>` to pull one in.
 
 If you find a bug in an existing `lib/` module while building something, fix it — don't work around
 it.
@@ -63,7 +63,7 @@ dotf-openscad-format < path/to/file.scad > /tmp/formatted.scad && mv /tmp/format
 
 ## 5. Verify
 
-A model isn't done until it renders cleanly *and* looks right:
+A model isn't done until it renders cleanly _and_ looks right:
 
 1. Render headlessly and check for errors — see [cli.md](cli.md) for the exact command and flags.
 2. Read the rendered PNG (via the Read tool) and visually confirm the geometry is what was intended
@@ -71,9 +71,9 @@ A model isn't done until it renders cleanly *and* looks right:
 
 ## 6. Export
 
-Only export an STL when the user explicitly asks to export or finalize — don't export on every
-edit, it just litters the repo with stale STLs mid-iteration. Export next to the source file,
-matching the existing STL-next-to-scad convention. Command in [cli.md](cli.md).
+Only export an STL when the user explicitly asks to export or finalize — don't export on every edit,
+it just litters the repo with stale STLs mid-iteration. Export next to the source file, matching the
+existing STL-next-to-scad convention. Command in [cli.md](cli.md).
 
 ## Reference
 

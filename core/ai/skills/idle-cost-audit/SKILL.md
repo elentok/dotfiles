@@ -1,9 +1,9 @@
 ---
 name: idle-cost-audit
 description:
-  Audit a TUI/CLI app for battery/CPU cost while idle. Use when asked why an app is burning
-  battery or CPU while sitting untouched, or when reviewing code that adds a periodic tick,
-  poll, or subprocess call.
+  Audit a TUI/CLI app for battery/CPU cost while idle. Use when asked why an app is burning battery
+  or CPU while sitting untouched, or when reviewing code that adds a periodic tick, poll, or
+  subprocess call.
 ---
 
 # Idle Cost Audit
@@ -57,12 +57,13 @@ The procedure that found all seven issues in the reference audit, in order:
    value at the start and end of a fixed window (30–90s), and report the delta over the window as a
    percentage. This is the load-bearing measurement: **instantaneous CPU readouts hide a periodic
    cost that fires every couple of seconds** — the process is at 0% between ticks and briefly spikes
-   on each one, and a `top` snapshot has a good chance of landing in the gap and reporting nothing is
-   happening. Accumulated time over a window can't miss a periodic cost no matter when you sample.
+   on each one, and a `top` snapshot has a good chance of landing in the gap and reporting nothing
+   is happening. Accumulated time over a window can't miss a periodic cost no matter when you
+   sample.
 
-3. **Take stacks with `sample <pid>`** (macOS; `perf record`/`py-spy`/equivalent elsewhere) while the
-   process is idle, to see what's actually running during the wakeups the CPU delta implies. Idle
-   sleep shows up as `__psynch_cvwait`/`kevent`/`select` at the top of the stack; anything else
+3. **Take stacks with `sample <pid>`** (macOS; `perf record`/`py-spy`/equivalent elsewhere) while
+   the process is idle, to see what's actually running during the wakeups the CPU delta implies.
+   Idle sleep shows up as `__psynch_cvwait`/`kevent`/`select` at the top of the stack; anything else
    (render/parse/format calls, `fork`/`os.StartProcess` frames) is real work happening while nothing
    should be.
 
@@ -70,7 +71,8 @@ The procedure that found all seven issues in the reference audit, in order:
    pid as parent**, at a rate faster than the suspected interval (e.g. every 150ms against a
    suspected 2s poll), for the full measurement window, then dedup by pid. A subprocess that lives
    for tens of milliseconds is invisible to a single `ps` snapshot but will always be caught by one
-   of several polls across its lifetime — and if it appears more than once, that's a repeating spawn.
+   of several polls across its lifetime — and if it appears more than once, that's a repeating
+   spawn.
 
 5. **A/B a suspected cause with a variant binary, re-measured identically.** Don't reason about
    whether a change will help — build it and compare. Worked example from the reference audit:
@@ -103,12 +105,12 @@ The procedure that found all seven issues in the reference audit, in order:
 
 ## Reference numbers (gx `idle-cost` epic)
 
-| Case | before | after |
-| --- | --- | --- |
-| Worktrees tab, idle | 0.57% | 0.12% |
-| Status tab, idle | 0.47% | 0.08% |
-| Tickets tab, idle | 1.03% | 0.58% (missed 0.15% target — busy scratch tree + self-attached toast) |
-| Queue tab, epic present, idle | — | 0.45% (same target miss) |
+| Case                          | before | after                                                                 |
+| ----------------------------- | ------ | --------------------------------------------------------------------- |
+| Worktrees tab, idle           | 0.57%  | 0.12%                                                                 |
+| Status tab, idle              | 0.47%  | 0.08%                                                                 |
+| Tickets tab, idle             | 1.03%  | 0.58% (missed 0.15% target — busy scratch tree + self-attached toast) |
+| Queue tab, epic present, idle | —      | 0.45% (same target miss)                                              |
 
 Findings from that audit, generalized as the invariants above: an unconditional 2s poll that shelled
 out to 5 subprocesses per tick (subprocess-on-a-timer); a render ticker at the framework's 60 Hz

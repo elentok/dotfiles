@@ -40,14 +40,13 @@ Evaluate in order; run the first branch that matches.
    markdown checklist. Uncommitted — same tier as `map.md`, not the durable artifact.
 5. **Findings file has unresolved items** → run a `/grilling` session on the open findings, staying
    resident in this same invocation (grilling is a live multi-round conversation; don't `/clear`
-   between rounds — that's only for step 2's per-ticket isolation). Amend `docs/specs/<epic>.md`
-   in place immediately as each finding resolves, and check it off in the findings file. Once every
+   between rounds — that's only for step 2's per-ticket isolation). Amend `docs/specs/<epic>.md` in
+   place immediately as each finding resolves, and check it off in the findings file. Once every
    finding is resolved, fall through to step 6 in the same invocation.
-6. **All findings resolved, no `<epic>-impl` epic** → run
-   [gx-to-tickets](../gx-to-tickets/SKILL.md) against the amended spec, publishing into the new
-   `<epic>-impl` epic (never into `{epic}`'s own `issues/` — a map's tickets are hand-resolved
-   decisions, implementation tickets are ralph-loop-owned; see
-   [gx-local-tracker.md](../gx-local-tracker.md)).
+6. **All findings resolved, no `<epic>-impl` epic** → run [gx-to-tickets](../gx-to-tickets/SKILL.md)
+   against the amended spec, publishing into the new `<epic>-impl` epic (never into `{epic}`'s own
+   `issues/` — a map's tickets are hand-resolved decisions, implementation tickets are
+   ralph-loop-owned; see [gx-local-tracker.md](../gx-local-tracker.md)).
 7. **`<epic>-impl` exists** → report its slug and stop. Nothing left for `/myway` — launch it via
    gx's ralph-loop orchestrator from the TUI Queue tab.
 

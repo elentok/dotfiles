@@ -1,8 +1,8 @@
 # BOSL2 attachables: anchor, spin, orient, attach
 
 BOSL2's core differentiator from vanilla OpenSCAD. Every BOSL2 primitive (`cube()`, `cyl()`,
-`prismoid()`, ...) and any module wrapped in `attachable()` carries a bounding geometry that lets you
-position and orient it declaratively instead of hand-computing `translate()`/`rotate()` math.
+`prismoid()`, ...) and any module wrapped in `attachable()` carries a bounding geometry that lets
+you position and orient it declaratively instead of hand-computing `translate()`/`rotate()` math.
 
 ## Anchor
 
@@ -50,8 +50,8 @@ to hand-translate the cut to match).
 
 `tag("name")` labels a piece of geometry; `diff("neg_tag", "keep_tag")` (called on the parent)
 subtracts everything tagged `neg_tag` from everything tagged `keep_tag` (default: everything
-untagged), while positioning the negative shapes via `attach()`/`position()` against the parent's own
-anchors:
+untagged), while positioning the negative shapes via `attach()`/`position()` against the parent's
+own anchors:
 
 ```openscad
 // Hole positioned relative to the block's own TOP face, not by hand-computed coordinates.
@@ -61,8 +61,8 @@ cuboid([40, 30, 10])
         tag("hole") cyl(d = 6, h = 12);
 ```
 
-Without `diff()`/`tag()`, the same cut would need the hole's absolute position recomputed by hand any
-time the cuboid's size or the hole's face changes. With it, the hole tracks the anchor.
+Without `diff()`/`tag()`, the same cut would need the hole's absolute position recomputed by hand
+any time the cuboid's size or the hole's face changes. With it, the hole tracks the anchor.
 
 ## Further reading
 
