@@ -8,3 +8,5 @@ herdr integration install claude
 herdr integration install codex
 
 herdr plugin link ~/.local/share/nvim/site/pack/core/opt/smart-splits.nvim
+
+blf herdr install-plugin

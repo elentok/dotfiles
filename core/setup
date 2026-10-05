@@ -126,6 +126,8 @@ function install-personal-cli-tools() {
     fish -c 'gx completion fish >~/.config/fish/completions/gx.fish'
   dfl shell "Installing blf fish completions..." -- \
     fish -c 'blf completion fish >~/.config/fish/completions/blf.fish'
+  dfl shell "Installing blf herdr plugin..." -- \
+    blf herdr install-plugin
 
   dfl shell "Installing gx claude statusline..." -- \
     fish -c 'gx claude statusline --install'
