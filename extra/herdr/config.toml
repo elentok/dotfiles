@@ -150,7 +150,7 @@ split_horizontal = "prefix+s"
 [[keys.command]]
 key = "prefix+n"
 type = "shell"
-command = "herdr-goto-workspace notes"
+command = "blf herdr goto-workspace notes"
 description = "goto notes workspace"
 
 # smart-splits.nvim: seamless nav between Herdr panes and Neovim splits.
