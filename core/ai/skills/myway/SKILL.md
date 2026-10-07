@@ -25,8 +25,9 @@ model-invocable, so it can be reached normally.
 
 Evaluate in order; run the first branch that matches.
 
-1. **No `<root>/<epic>/map.md`** → follow wayfinder's "Chart the map" mode for `{epic}` (includes
-   its own Destination-grilling).
+1. **No map epic `{epic}`** (no `<root>/<epic>/ticket.md` with `kind: map` in its frontmatter;
+   `gx tickets epics --maps` lists the map epics) → follow wayfinder's "Chart the map" mode for
+   `{epic}` (includes its own Destination-grilling).
 2. **Map charted, not yet "the way is clear"** (open tickets remain, or `## Not yet specified` is
    non-empty) → follow wayfinder's "Work through the map" mode, resolving exactly **one** ticket
    (never more per invocation — matches wayfinder's own rule, and keeps HITL ticket types genuinely
@@ -37,7 +38,7 @@ Evaluate in order; run the first branch that matches.
    already the index.
 4. **Spec exists, no `.scratch/<epic>/review-findings.md`** → run a design-review subagent against
    the spec (rubric below), writing its findings to `.scratch/<epic>/review-findings.md` as a
-   markdown checklist. Uncommitted — same tier as `map.md`, not the durable artifact.
+   markdown checklist. Uncommitted — same tier as the map, not the durable artifact.
 5. **Findings file has unresolved items** → run a `/grilling` session on the open findings, staying
    resident in this same invocation (grilling is a live multi-round conversation; don't `/clear`
    between rounds — that's only for step 2's per-ticket isolation). Amend `docs/specs/<epic>.md` in
