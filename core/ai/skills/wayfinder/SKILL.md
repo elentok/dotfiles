@@ -89,7 +89,8 @@ question, sized to one 100K token agent session:
 ```
 
 Each ticket carries a `wayfinder:<type>` label, one of `research`, `prototype`, `grilling`, `task`
-(see [Ticket Types](#ticket-types)).
+(see [Ticket Types](#ticket-types)). `wayfinder:` labels are the only labels a map and its tickets
+carry, never a triage label like `ready-for-agent`: they are decisions, not implementation work.
 
 A session **claims** a ticket by assigning it to the dev driving the map, **first**, before any
 work, so concurrent sessions skip it. That assignee _is_ the claim: an open, unassigned ticket is
@@ -191,12 +192,14 @@ User invokes with a loose idea.
 3. **Create the map** (label `wayfinder:map`): Destination and Notes filled in, Decisions-so-far
    empty, the fog sketched into **Not yet specified**.
 4. **Create the tickets you can specify now** as child issues of the map, then wire blocking edges
-   in a **second pass** (issues need ids before they can reference each other). Wiring sorts them
-   into the frontier and the blocked; everything you can't yet specify stays in the fog: the **Not
-   yet specified** section.
+   in a **second pass** (issues need ids before they can reference each other). Write
+   cross-references in that pass too, with real ids: a placeholder `#<n>` auto-links to an unrelated
+   issue. Wiring sorts them into the frontier and the blocked; everything you can't yet specify
+   stays in the fog: the **Not yet specified** section.
 5. **Fire the research subagents.** For each `research` ticket you just created, spin up a subagent
    that calls the Skill tool with "research" to resolve it in parallel, capturing its findings on a
-   throwaway `research/<name>` branch with a context pointer from the ticket.
+   throwaway `research/<name>` branch with a context pointer from the ticket. Push the branch but
+   open no PR: it is never merged.
 6. Stop: charting is one session's work; it hand-resolves nothing.
 
 ### Work through the map
@@ -207,9 +210,11 @@ decision, not the user.
 1. Load the **map**: the low-res view, not every ticket body.
 2. Choose the ticket. If the user named one, use it. Otherwise take the first frontier ticket in
    order. **Claim it**: assign it to yourself before any work.
-3. Resolve it. **Zoom as needed**: fetch the full body of any related or closed ticket on demand;
-   call the Skill tool for whichever skills the `## Notes` block names. If in doubt, call the Skill
-   tool twice, for "grilling" and "domain-modeling".
+3. Resolve it as the type its `wayfinder:<type>` label names (see [Ticket Types](#ticket-types)).
+   Read the label, not just the body: the body never states the type. **Zoom as needed**: fetch the
+   full body of any related or closed ticket on demand; call the Skill tool for whichever skills the
+   `## Notes` block names. If in doubt, call the Skill tool twice, for "grilling" and
+   "domain-modeling".
 4. Record the resolution: post the answer as a **resolution comment**, **close** the issue, and
    **append a context pointer** to the map's Decisions-so-far.
 5. Add newly-surfaced tickets (create-then-wire); graduate any fog the answer has made specifiable,

@@ -27,6 +27,8 @@ Format a round like so:
 ➡️ <your recommended answer>
 ```
 
+Word each question so "yes" accepts your recommended answer.
+
 Each round the user answers reshapes the tree: settled decisions push the frontier outward and
 unblock questions that depended on them. Recompute the frontier and ask the next round. A question
 whose answer depends on another question still open in this round belongs to a _later_ round, not
@@ -44,8 +46,7 @@ understanding.
 
 > [!IMPORTANT]
 >
-> elentok@'s note: when possible try to phrase your questions so if I agree with your recommendation
-> I can just say "agree"
+> elentok@'s notes:
 >
 > Write questions and recommendations at CEFR B2 level:
 >

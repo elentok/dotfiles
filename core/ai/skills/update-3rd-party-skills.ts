@@ -45,7 +45,8 @@ const REPOS: Repo[] = [
       { sourcePath: "skills/engineering/grill-with-docs" },
       { sourcePath: "skills/engineering/implement" },
       { sourcePath: "skills/engineering/improve-codebase-architecture" },
-      { sourcePath: "skills/engineering/resolving-merge-conflicts" },
+      { sourcePath: "skills/engineering/prototype" },
+      { sourcePath: "skills/engineering/research" },
       { sourcePath: "skills/engineering/tdd" },
       { sourcePath: "skills/engineering/to-spec" },
       { sourcePath: "skills/engineering/triage" },
@@ -60,15 +61,11 @@ const REPOS: Repo[] = [
   },
   {
     url: "https://github.com/cursor/plugins",
-    skills: [
-      { sourcePath: "cursor-team-kit/skills/thermo-nuclear-code-quality-review" },
-    ],
+    skills: [{ sourcePath: "cursor-team-kit/skills/thermo-nuclear-code-quality-review" }],
   },
   {
     url: "https://github.com/herdrdev/herdr",
-    skills: [
-      { sourcePath: "skills/herdr" },
-    ],
+    skills: [{ sourcePath: "skills/herdr" }],
   },
 ]
 

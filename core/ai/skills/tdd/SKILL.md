@@ -33,7 +33,8 @@ confirm them with the user. No test is written at an unconfirmed seam. You can't
 agreeing the seams up front is how testing effort lands on the critical paths and complex logic
 instead of every edge case.
 
-Ask: "What's the public interface, and which seams should we test?"
+Ask: "What's the public interface, and which seams should we test?" Give each proposed seam a
+one-line note on what it catches and what it misses.
 
 When the shape of that interface is itself in question (how deep the module is, where the seam
 belongs, what the interface should expose), call the Skill tool with "codebase-design" for the

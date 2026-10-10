@@ -16,8 +16,8 @@ Two-axis review of the diff between `HEAD` and a fixed point the user supplies:
 Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill
 aggregates their findings.
 
-The issue tracker should have been provided to you. If `docs/agents/issue-tracker.md` is missing,
-tell the user to run `/setup-elentok-skills`.
+The issue tracker should have been provided to you. If not, tell the user to run
+`/setup-elentok-skills`.
 
 ## Process
 
@@ -37,7 +37,7 @@ is non-empty. A bad ref or empty diff should fail here, not inside two parallel 
 Look for the originating spec, in this order:
 
 1. Issue references in the commit messages (`#123`, `Closes #45`, GitLab `!67`, etc.), fetched via
-   the workflow in `docs/agents/issue-tracker.md`.
+   the workflow in the tracker doc.
 2. A path the user passed as an argument.
 3. A spec file under `docs/`, `specs/`, or `.scratch/` matching the branch name or feature.
 4. If nothing is found, ask the user where the spec is. If they say there isn't one, the **Spec**
@@ -45,8 +45,8 @@ Look for the originating spec, in this order:
 
 ### 3. Identify the standards sources
 
-Anything in the repo that documents how code should be written, such as `CODING_STANDARDS.md` or
-`CONTRIBUTING.md`.
+Search the repo for every file that documents how code should be written. When `CODING_STANDARDS.md`
+or `CONTRIBUTING.md` exists, it must be on the list.
 
 On top of whatever the repo documents, the Standards axis always carries the **smell baseline**
 below: a fixed set of Fowler code smells (_Refactoring_, ch.3) that applies even when a repo
@@ -85,6 +85,8 @@ Each smell reads _what it is_ → _how to fix_; match it against the diff:
   → drop the inheritance, use composition.
 
 ### 4. Spawn both sub-agents in parallel
+
+Issue both sub-agent calls together, in the foreground, and aggregate the reports they return.
 
 **Standards sub-agent prompt** should include:
 
