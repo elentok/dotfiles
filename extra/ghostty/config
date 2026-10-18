@@ -82,23 +82,25 @@ keybind = cmd+[=text:\x1B
 keybind = cmd+]=text:\x1D
 
 # <c-e>h
-keybind = cmd+,=text:\x05h
+# keybind = cmd+,=text:\x05h
+keybind = cmd+,=previous_tab
 # <c-e>l
-keybind = cmd+.=text:\x05l
+# keybind = cmd+.=text:\x05l
+keybind = cmd+.=next_tab
 
 # Leader mapping
-keybind = cmd+/>c=new_tab
-keybind = cmd+/>r=reload_config
-keybind = cmd+/>[=previous_tab
-keybind = cmd+/>]=next_tab
-keybind = cmd+/>q=close_surface
-keybind = cmd+/>y=copy_to_clipboard
-# keybind = cmd+/>v=paste_from_clipboard
-keybind = cmd+/>v=new_split:right
-keybind = cmd+/>s=new_split:down
-keybind = cmd+/>f=toggle_maximize
+keybind = cmd+e>c=new_tab
+keybind = cmd+e>r=reload_config
+keybind = cmd+e>[=previous_tab
+keybind = cmd+e>]=next_tab
+keybind = cmd+e>q=close_surface
+keybind = cmd+e>y=copy_to_clipboard
+# keybind = cmd+e>v=paste_from_clipboard
+keybind = cmd+e>v=new_split:right
+keybind = cmd+e>s=new_split:down
+keybind = cmd+e>f=toggle_maximize
 
-keybind = cmd+/>e=write_scrollback_file:open
+keybind = cmd+e>e=write_scrollback_file:open
 
 # make shift+enter work inside tmux (for claude code)
 keybind = shift+enter=text:\x1b\r
