@@ -27,6 +27,10 @@ Format a round like so:
 ➡️ <your recommended answer>
 ```
 
+After printing a round, run `gx agent actionable "Grilling: waiting for your answers"` so a gx
+session shows as Actionable until the user replies. It does nothing outside gx, so call it
+unconditionally.
+
 Word each question so "yes" accepts your recommended answer.
 
 Each round the user answers reshapes the tree: settled decisions push the frontier outward and
