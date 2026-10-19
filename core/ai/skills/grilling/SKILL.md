@@ -48,6 +48,8 @@ understanding.
 >
 > elentok@'s notes:
 >
+> Before asking each question, invoke the `unslop` skill.
+>
 > Write questions and recommendations at CEFR B2 level:
 >
 > - Short sentences. No jargon unless necessary. No filler words.
