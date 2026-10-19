@@ -2,6 +2,7 @@
 
 ## VERY IMPORTANT
 
+- Before writing prose, invoke the `unslop` skill
 - I'm using **GNU sed/find/grep** on Mac, so use GNU arguments, **NOT Mac arguments**.
 - **ALWAYS PREFER** `fd` over `find`
 - **ALWAYS PREFER** `ripgrep` over `grep`

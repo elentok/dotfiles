@@ -67,6 +67,10 @@ const REPOS: Repo[] = [
     url: "https://github.com/herdrdev/herdr",
     skills: [{ sourcePath: "skills/herdr" }],
   },
+  {
+    url: "https://github.com/cursor/plugins",
+    skills: [{ sourcePath: "pstack/skills/unslop" }],
+  },
 ]
 
 function run(command: string, args: string[], options: { cwd?: string } = {}): void {
