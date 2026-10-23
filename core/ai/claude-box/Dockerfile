@@ -85,11 +85,11 @@ RUN mkdir -p /home/linuxbrew/.linuxbrew && chown -R dev:dev /home/linuxbrew
 USER dev
 WORKDIR /home/dev
 
-# bd (beads) and rtk aren't packaged for apt; install via Homebrew (Linuxbrew),
+# bd (beads) isn't packaged for apt; install via Homebrew (Linuxbrew),
 # which Homebrew requires to run as a non-root user anyway.
 RUN NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ENV PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
-RUN brew install beads rtk
+RUN brew install beads
 
 # gopls-mcp: the MCP server currently configured on the host (see
 # ~/.claude.json). Config sync alone (lib/common.sh: resolve_mcp_config)

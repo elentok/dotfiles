@@ -9,7 +9,6 @@
       "Bash(rg:*)",
       "Bash(grep:*)",
       "Bash(go *)",
-      "Bash(rtk *)",
       "Bash(bd *)",
       "Bash(wait)",
       "Skill(beads)",
@@ -25,18 +24,5 @@
   },
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true
-  },
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "rtk hook claude"
-          }
-        ]
-      }
-    ]
   }
 }

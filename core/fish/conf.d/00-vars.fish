@@ -29,5 +29,3 @@ set -gx BUN_INSTALL "$HOME/.bin"
 
 set -gx MANPAGER "nvim +Man!"
 
-# https://github.com/rtk-ai/rtk/blob/develop/docs/TELEMETRY.md
-set -gx RTK_TELEMETRY_DISABLED 1

@@ -209,7 +209,7 @@ and, for some checks, real credentials):
    run.
 5. **Mounted skills + `CLAUDE.md` resolve in-container.** `~/.claude/CLAUDE.md`
    imports `@~/.dotfiles/core/ai/AGENTS.md`; `~/.claude/skills` symlinks to
-   the live (host-editable) skills directory; `rtk`, `bd`, `claude`, `fd`,
+   the live (host-editable) skills directory; `bd`, `claude`, `fd`,
    `rg`, `jq` are all on `PATH`.
 
 ### Results (2026-07-02, home machine, subscription provider)
@@ -236,7 +236,7 @@ and, for some checks, real credentials):
   suite already gives with fakes); those paths are covered by
   `test/beads_loop.bats`.
 - **(5) Skills + `CLAUDE.md`:** pass, see command output captured during this
-  verification pass — symlink resolves, `rtk`/`bd`/`claude`/`fd`/`rg`/`jq` all
+  verification pass — symlink resolves, `bd`/`claude`/`fd`/`rg`/`jq` all
   present.
 - **Gotcha found:** a project mounted from a path outside Docker Desktop's
   shared paths (e.g. under `/private/tmp/...` on this machine) bind-mounts as

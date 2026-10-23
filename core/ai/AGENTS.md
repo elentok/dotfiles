@@ -1,5 +1,3 @@
-@~/.dotfiles/core/ai/RTK.md
-
 ## VERY IMPORTANT
 
 - Before writing prose, invoke the `unslop` skill

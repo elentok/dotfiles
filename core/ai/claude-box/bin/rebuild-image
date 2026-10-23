@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # rebuild-image: rebuild the claude-box image and report the baked-in bd
 # (beads) version. Defaults to --no-cache so brew re-resolves formulae like
-# beads/rtk (a cached `brew install` layer silently pins an old version, which
+# beads (a cached `brew install` layer silently pins an old version, which
 # is what caused claude-beads' claim to fail against a newer host DB schema).
 # See docs/prds/claude-box.md.
 set -euo pipefail
@@ -15,8 +15,8 @@ usage() {
 Usage: rebuild-image [--cache] [-- DOCKER_BUILD_ARGS...]
 
 Rebuilds the claude-box image (tag from CLAUDE_BOX_IMAGE, default
-claude-box:latest). Uses --no-cache by default so Homebrew formulae (bd,
-rtk) are re-resolved to current versions; pass --cache to reuse layers.
+claude-box:latest). Uses --no-cache by default so Homebrew formulae (bd)
+are re-resolved to current versions; pass --cache to reuse layers.
 Extra docker build args can be passed after --.
 EOF
 }

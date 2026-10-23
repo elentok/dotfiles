@@ -31,7 +31,6 @@ brew "pnpm"
 brew "poppler"
 brew "python"
 brew "ripgrep"
-brew "rtk" # High-performance CLI proxy that reduces LLM token consumption
 brew "tabiew"
 brew "tig"
 brew "tmux"
