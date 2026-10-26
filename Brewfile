@@ -57,6 +57,7 @@ if OS.mac?
 
   cask "kitty"
   cask "hammerspoon"
+  cask "keepingyouawake" # UI for caffeinate
 
   cask "font-maple-mono"
 
