@@ -8,6 +8,7 @@ if test -d "$DOTP"
 end
 
 fish_add_path "$HOME/go/bin" \
+    "$HOME/.local/share/fnm/aliases/default/bin" \
     "$HOME/.local/bin" \
     "$HOME/.cargo/bin" \
     "$HOME/.local/share/nvim/mason/bin" \
