@@ -1,0 +1,5 @@
+{
+  "typecheck": {
+    "full": "npm run typecheck"
+  }
+}
