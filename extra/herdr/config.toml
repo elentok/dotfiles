@@ -70,7 +70,7 @@ surface_dim = "#3a3a52"
 # Most reliable direct bindings are ctrl+letter, function keys, and explicit modified chords.
 # alt+..., cmd/super, and punctuation-with-modifiers may depend on your terminal/tmux setup.
 # prefix = "ctrl+b"
-prefix = "ctrl+e"
+prefix = "ctrl+a"
 
 navigate_workspace_up = ["up", "k"]
 navigate_workspace_down = ["down", "j"]
