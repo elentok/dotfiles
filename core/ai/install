@@ -6,3 +6,9 @@ dfl symlink "$DOTF/core/ai/skills" ~/.claude/skills/
 dfl symlink "$DOTF/core/ai/skills" ~/.codex/skills/
 dfl inject --link "$DOTF/core/ai/AGENTS.md" ~/.codex/AGENTS.md
 dfl inject --link "$DOTF/core/ai/AGENTS.md" ~/.claude/CLAUDE.md
+
+if dfl has-command codex; then
+  codex --strict-config \
+    -c 'tui.keymap.global.submit="ctrl-enter"' \
+    -c 'tui.keymap.editor.insert_newline="enter"'
+fi
