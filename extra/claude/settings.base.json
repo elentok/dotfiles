@@ -4,6 +4,10 @@
   "tui": "fullscreen",
   "feedbackSurveyRate": 0,
   "permissions": {
+    "deny": [
+      "Workflow",
+      "SendFeedback"
+    ],
     "allow": [
       "Bash(find:*)",
       "Bash(rg:*)",
