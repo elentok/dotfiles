@@ -187,7 +187,7 @@ Based on [Vercel Agent Skills](https://github.com/vercel-labs/agent-skills)
 
 ### Verification
 
-- For any UI change, drive it yourself in a real browser via the `playwright-cli` skill before
+- For any UI change, drive it yourself in a real browser via the `gx-playwright-cli` skill before
   calling the work done — snapshot the page, click through the golden path and edge cases, check
   `console` for errors. Type checks and unit tests verify code correctness, not that the feature
   actually works.
