@@ -10,6 +10,3 @@ dfl shell "Installing mcp-go..." -- \
 
 dfl shell "Installing GOPLS on Codex..." -- \
   codex mcp add gopls-mcp -- gopls-mcp
-
-dfl shell "Installing GOPLS on Claude..." -- \
-  claude mcp add --scope user gopls-mcp -- gopls-mcp
