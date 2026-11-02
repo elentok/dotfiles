@@ -3,10 +3,10 @@
 set -euo pipefail
 
 dfl shell "Installing gopls..." -- \
-  go install github.com/xieyuschen/gopls-mcp@latest
+  go install golang.org/x/tools/gopls@latest
+
+dfl shell "Installing the gopls LSP plugin on Claude..." -- \
+  claude plugin install gopls-lsp@claude-plugins-official
 
 dfl shell "Installing mcp-go..." -- \
   go install github.com/inja-online/golang-mcp/cmd/mcp-go@latest
-
-dfl shell "Installing GOPLS on Codex..." -- \
-  codex mcp add gopls-mcp -- gopls-mcp
