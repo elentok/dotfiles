@@ -15,12 +15,12 @@ Create a git commit following the rules below.
    - if there are no staged files, **STOP** and tell the user to say `/commit all` or `$commit all`
      to include current changes, or to name paths to stage
    - if unstaged changes exist, warn the user but do not inspect them
-   - invoke `verify` in `staged` mode unless the user says `skip checks`
+   - invoke `gx-verify` in `staged` mode unless the user says `skip checks`
 3. If the user explicitly says `/commit all` or `$commit all`:
    - inspect both staged and unstaged changes
    - stage only the intended paths
-   - invoke `verify` in `commit-all` mode unless the user says `skip checks`
-4. After `verify`, inspect the final staged snapshot with `git diff --cached`.
+   - invoke `gx-verify` in `commit-all` mode unless the user says `skip checks`
+4. After `gx-verify`, inspect the final staged snapshot with `git diff --cached`.
 5. Unless the user says `skip secret scan`:
    - check availability with `command -v gitleaks`
    - if `gitleaks` is installed, run `gitleaks protect --staged`
