@@ -1,0 +1,4 @@
+#!/usr/bin/env fish
+
+echo "Counting open files (by process)..."
+sudo lsof | awk '{print $1}' | sort | uniq -c | sort -rn | head -n 15
