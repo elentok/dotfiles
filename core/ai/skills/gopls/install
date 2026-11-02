@@ -7,6 +7,3 @@ dfl shell "Installing gopls..." -- \
 
 dfl shell "Installing the gopls LSP plugin on Claude..." -- \
   claude plugin install gopls-lsp@claude-plugins-official
-
-dfl shell "Installing mcp-go..." -- \
-  go install github.com/inja-online/golang-mcp/cmd/mcp-go@latest
