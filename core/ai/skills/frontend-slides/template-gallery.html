@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Frontend Slides template gallery</title>
+  <style>
+    :root { color-scheme: light; --ink: #171714; --paper: #f2efe7; --accent: #ff4f00; --line: #cbc6b9; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    header { position: sticky; z-index: 10; top: 0; padding: 24px clamp(20px, 4vw, 64px); background: color-mix(in srgb, var(--paper) 94%, transparent); border-bottom: 1px solid var(--line); backdrop-filter: blur(12px); }
+    .eyebrow, .slug { margin: 0 0 8px; color: var(--accent); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { margin: 0; font-family: Georgia, serif; font-size: clamp(32px, 5vw, 72px); font-weight: 500; letter-spacing: -.04em; }
+    header p { max-width: 780px; line-height: 1.6; }
+    .controls { display: grid; grid-template-columns: minmax(220px, 1fr) auto auto; gap: 10px; margin-top: 20px; }
+    input[type="search"], select, button { min-height: 44px; border: 1px solid var(--ink); border-radius: 0; background: #fff; color: var(--ink); font: inherit; }
+    input[type="search"], select { padding: 0 14px; }
+    button { padding: 0 18px; background: var(--ink); color: #fff; cursor: pointer; }
+    #selection { min-height: 24px; margin: 14px 0 0; color: #514e47; font-size: 13px; }
+    main { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 390px), 1fr)); gap: 22px; padding: 32px clamp(20px, 4vw, 64px) 80px; }
+    .card { overflow: hidden; background: #fff; border: 1px solid var(--line); box-shadow: 8px 8px 0 #ded9cd; }
+    .card[hidden] { display: none; }
+    .screenshots { display: grid; grid-template-columns: repeat(3, 1fr); aspect-ratio: 16 / 5.35; background: #222; }
+    .screenshots img { width: 100%; height: 100%; object-fit: cover; border-right: 1px solid #fff5; }
+    .card-body { position: relative; padding: 22px; }
+    .pick { position: absolute; top: 20px; right: 20px; display: flex; gap: 7px; align-items: center; font-size: 13px; }
+    h2 { margin: 0 90px 8px 0; font-family: Georgia, serif; font-size: 30px; font-weight: 500; }
+    .tagline { min-height: 44px; line-height: 1.5; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 18px 0; }
+    .tags span { padding: 5px 8px; border: 1px solid var(--line); font-size: 11px; }
+    dl { margin: 0; font-family: system-ui, sans-serif; font-size: 13px; line-height: 1.5; }
+    dl div + div { margin-top: 12px; }
+    dt { font-weight: 700; }
+    dd { margin: 3px 0 0; color: #59564f; }
+    @media (max-width: 680px) { .controls { grid-template-columns: 1fr; } header { position: static; } }
+  </style>
+</head>
+<body>
+  <header>
+    <p class="eyebrow">34 upstream themes · 8 imported</p>
+    <h1>Choose the keepers.</h1>
+    <p>Search, filter, and adjust the themes worth vendoring. The previews load from the creator's public screenshot repository; checked themes are included in our skill.</p>
+    <div class="controls">
+      <input id="search" type="search" placeholder="Search mood, use case, or theme name" aria-label="Search themes">
+      <select id="scheme" aria-label="Filter by color scheme"><option value="">All schemes</option><option value="light">Light</option><option value="dark">Dark</option><option value="mixed">Mixed</option></select>
+      <button id="copy" type="button">Copy selected slugs</button>
+    </div>
+    <p id="selection" aria-live="polite">Select themes to build your import list.</p>
+  </header>
+  <main>
+        <article class="card" data-search="8-bit orbit 8-bit-orbit pixel-art neon arcade aesthetic on a deep navy void. anything that should feel like a crt screen at 2am: cyberpunk, gaming, web3, indie dev tools, hackathon demos. just as good for a tech talk that wants to lean into nostalgic-digital craft, a synthwave brand deck, or a creative review that wants to feel like a console. retro-tech playful cyberpunk energetic geeky neon rebellious sci-fi" data-scheme="dark">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/8-bit-orbit-1.png" alt="8-Bit Orbit preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/8-bit-orbit-6.png" alt="8-Bit Orbit preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/8-bit-orbit-5.png" alt="8-Bit Orbit preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="8-bit-orbit"> Select</label>
+            <p class="slug">8-bit-orbit</p>
+            <h2>8-Bit Orbit</h2>
+            <p class="tagline">Pixel-art neon arcade aesthetic on a deep navy void.</p>
+            <div class="tags"><span>retro-tech</span><span>playful</span><span>cyberpunk</span><span>energetic</span><span>geeky</span><span>neon</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel like a CRT screen at 2am: cyberpunk, gaming, web3, indie dev tools, hackathon demos. Just as good for a tech talk that wants to lean into nostalgic-digital craft, a synthwave brand deck, or a creative review that wants to feel like a console.</dd></div><div><dt>Avoid for</dt><dd>Contexts where the dark neon palette would actively work against the message — quiet institutional finance disclosures, healthcare patient-facing materials, traditional luxury.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="biennale yellow biennale-yellow solar yellow on warm parchment with deep indigo serif and atmospheric sun-glow gradients. anything that should feel like an art-biennale poster or a museum&#39;s annual programme: exhibition decks, arts-institution announcements, design conference brochures, curatorial pitches, literary publications, studio retrospectives. equally good for any deck wanting dutch-editorial atmosphere with an unmistakable single-color signature. editorial atmospheric warm cultural-institution poster-like literary considered contemplative warm-modern dutch-editorial" data-scheme="light">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/biennale-yellow-1.png" alt="Biennale Yellow preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/biennale-yellow-5.png" alt="Biennale Yellow preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/biennale-yellow-8.png" alt="Biennale Yellow preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="biennale-yellow"> Select</label>
+            <p class="slug">biennale-yellow</p>
+            <h2>Biennale Yellow</h2>
+            <p class="tagline">Solar yellow on warm parchment with deep indigo serif and atmospheric sun-glow gradients.</p>
+            <div class="tags"><span>editorial</span><span>atmospheric</span><span>warm</span><span>cultural-institution</span><span>poster-like</span><span>literary</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel like an art-biennale poster or a museum&#39;s annual programme: exhibition decks, arts-institution announcements, design conference brochures, curatorial pitches, literary publications, studio retrospectives. Equally good for any deck wanting Dutch-editorial atmosphere with an unmistakable single-color signature.</dd></div><div><dt>Avoid for</dt><dd>Decks that need visual punch or saturated multi-color energy — the warm-paper canvas and one-yellow palette are intentionally quiet and atmospheric.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="blockframe block-frame neobrutalist deck with pastel-neon color blocks and chunky black borders. anything that should feel pop-graphic and design-led: indie saas launches, agency credentials, creative reviews, brand redesigns. also a strong unexpected pick for tech, finance, or research when the speaker wants to land as confident and contemporary rather than buttoned-up. bold playful graphic fresh confident graphic pop design-led" data-scheme="light">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/block-frame-1.png" alt="BlockFrame preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/block-frame-4.png" alt="BlockFrame preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/block-frame-8.png" alt="BlockFrame preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="block-frame" checked> Select</label>
+            <p class="slug">block-frame</p>
+            <h2>BlockFrame</h2>
+            <p class="tagline">Neobrutalist deck with pastel-neon color blocks and chunky black borders.</p>
+            <div class="tags"><span>bold</span><span>playful</span><span>graphic</span><span>fresh</span><span>confident</span><span>graphic</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel pop-graphic and design-led: indie SaaS launches, agency credentials, creative reviews, brand redesigns. Also a strong unexpected pick for tech, finance, or research when the speaker wants to land as confident and contemporary rather than buttoned-up.</dd></div><div><dt>Avoid for</dt><dd>Contexts that require quiet institutional restraint or traditional weight (regulated disclosures, formal legal briefs).</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="blue professional blue-professional cream paper background with electric cobalt blue accents; clean modern professional. anything that should feel modern-considered and lightly authoritative: b2b saas pitches, consulting deliverables, advisory updates, investor reports. also a clean, tasteful choice whenever you want to read as professional without going stiff — research synthesis, internal reviews, brand work for service businesses. professional modern calm trustworthy clean considered polished neutral" data-scheme="light">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/blue-professional-1.png" alt="Blue Professional preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/blue-professional-6.png" alt="Blue Professional preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/blue-professional-8.png" alt="Blue Professional preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="blue-professional" checked> Select</label>
+            <p class="slug">blue-professional</p>
+            <h2>Blue Professional</h2>
+            <p class="tagline">Cream paper background with electric cobalt blue accents; clean modern professional.</p>
+            <div class="tags"><span>professional</span><span>modern</span><span>calm</span><span>trustworthy</span><span>clean</span><span>considered</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel modern-considered and lightly authoritative: B2B SaaS pitches, consulting deliverables, advisory updates, investor reports. Also a clean, tasteful choice whenever you want to read as professional without going stiff — research synthesis, internal reviews, brand work for service businesses.</dd></div><div><dt>Avoid for</dt><dd>Contexts where the deck should feel hot, playful, or intentionally informal — the cool electric-blue restraint will read as overly polished.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="bold poster bold-poster editorial poster aesthetic with massive shrikhand display and a single fire-engine red accent. anything that should land like a magazine cover: brand manifestos, founder vision decks, editorial / cultural pitches, creative reviews. excellent any time you want a few words to feel like a poster — including unexpected fits like a tech keynote or a finance manifesto that wants to be quotable. bold editorial loud confident dramatic graphic sharp intentional" data-scheme="light">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/bold-poster-1.png" alt="Bold Poster preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/bold-poster-4.png" alt="Bold Poster preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/bold-poster-8.png" alt="Bold Poster preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="bold-poster"> Select</label>
+            <p class="slug">bold-poster</p>
+            <h2>Bold Poster</h2>
+            <p class="tagline">Editorial poster aesthetic with massive Shrikhand display and a single fire-engine red accent.</p>
+            <div class="tags"><span>bold</span><span>editorial</span><span>loud</span><span>confident</span><span>dramatic</span><span>graphic</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should land like a magazine cover: brand manifestos, founder vision decks, editorial / cultural pitches, creative reviews. Excellent any time you want a few words to feel like a poster — including unexpected fits like a tech keynote or a finance manifesto that wants to be quotable.</dd></div><div><dt>Avoid for</dt><dd>Decks that need to communicate dense information per slide — the layout is built around a few large statements, not paragraphs of detail.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="broadside broadside dark editorial canvas with a single fire orange accent and bilingual latin/chinese type stack. anything that should land like a broadside newspaper headline: brand manifestos, magazine and cultural pitches, design talks, bilingual en/cn decks, founder vision statements. also a striking pick for tech, research, or business decks that want a dramatic single-accent editorial feel. editorial dramatic loud newspaper graphic punchy literary considered" data-scheme="dark">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/broadside-1.png" alt="Broadside preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/broadside-4.png" alt="Broadside preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/broadside-13.png" alt="Broadside preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="broadside"> Select</label>
+            <p class="slug">broadside</p>
+            <h2>Broadside</h2>
+            <p class="tagline">Dark editorial canvas with a single fire orange accent and bilingual Latin/Chinese type stack.</p>
+            <div class="tags"><span>editorial</span><span>dramatic</span><span>loud</span><span>newspaper</span><span>graphic</span><span>punchy</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should land like a broadside newspaper headline: brand manifestos, magazine and cultural pitches, design talks, bilingual EN/CN decks, founder vision statements. Also a striking pick for tech, research, or business decks that want a dramatic single-accent editorial feel.</dd></div><div><dt>Avoid for</dt><dd>Decks that need to feel quiet, warm, or institutionally traditional — the dark canvas with fire-orange accent commits to drama.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="capsule capsule modular pill-shaped cards on warm bone with a full pastel-pop palette. anything that should feel modular, modern, and a little y2k: lifestyle brands, creator portfolios, dtc launches, beauty / wellness, agency credentials. also fun for a playful tech demo or a research deck that wants pop-art clarity instead of gravitas. playful modern warm fresh fun upbeat graphic approachable cool" data-scheme="light">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/capsule-1.png" alt="Capsule preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/capsule-4.png" alt="Capsule preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/capsule-8.png" alt="Capsule preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="capsule"> Select</label>
+            <p class="slug">capsule</p>
+            <h2>Capsule</h2>
+            <p class="tagline">Modular pill-shaped cards on warm bone with a full pastel-pop palette.</p>
+            <div class="tags"><span>playful</span><span>modern</span><span>warm</span><span>fresh</span><span>fun</span><span>upbeat</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel modular, modern, and a little Y2K: lifestyle brands, creator portfolios, DTC launches, beauty / wellness, agency credentials. Also fun for a playful tech demo or a research deck that wants pop-art clarity instead of gravitas.</dd></div><div><dt>Avoid for</dt><dd>Contexts that require traditional institutional weight — the capsule shapes and pastel pops actively soften authority.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="cartesian cartesian quiet warm-neutral palette with classical playfair serifs; tasteful and unhurried. anything that should feel quiet, considered, and grown-up: investment theses, white papers, advisory work, longform research, gallery / cultural decks. also a strong choice for editorial features, founder reflections, or any deck where restraint is the message — including across tech and finance. quiet considered elegant warm-minimal classical literary restrained confident-quiet" data-scheme="light">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/cartesian-1.png" alt="Cartesian preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/cartesian-4.png" alt="Cartesian preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/cartesian-8.png" alt="Cartesian preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="cartesian"> Select</label>
+            <p class="slug">cartesian</p>
+            <h2>Cartesian</h2>
+            <p class="tagline">Quiet warm-neutral palette with classical Playfair serifs; tasteful and unhurried.</p>
+            <div class="tags"><span>quiet</span><span>considered</span><span>elegant</span><span>warm-minimal</span><span>classical</span><span>literary</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel quiet, considered, and grown-up: investment theses, white papers, advisory work, longform research, gallery / cultural decks. Also a strong choice for editorial features, founder reflections, or any deck where restraint is the message — including across tech and finance.</dd></div><div><dt>Avoid for</dt><dd>Decks that need visual heat, multiple accents, or a sense of urgency — the warm-neutral palette is intentionally low-energy.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="cobalt grid cobalt-grid electric cobalt serifs on a graph-paper canvas, anchored by stair-stepped pixel-glitch decorations and slim hairline rules. anything that should feel like a quietly serious design / research bulletin, art publication, or curated trend report. strong for studio annuals, agency capabilities decks, design-research publications, architecture / art / academic decks, and any deck wanting one strict accent colour and a printed-ledger calmness rather than corporate polish. editorial design-research studious modernist tech-print monochrome considered literary studious quietly-modern editorial" data-scheme="light">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/cobalt-grid-1.png" alt="Cobalt Grid preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/cobalt-grid-3.png" alt="Cobalt Grid preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/cobalt-grid-5.png" alt="Cobalt Grid preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="cobalt-grid"> Select</label>
+            <p class="slug">cobalt-grid</p>
+            <h2>Cobalt Grid</h2>
+            <p class="tagline">Electric cobalt serifs on a graph-paper canvas, anchored by stair-stepped pixel-glitch decorations and slim hairline rules.</p>
+            <div class="tags"><span>editorial</span><span>design-research</span><span>studious</span><span>modernist</span><span>tech-print</span><span>monochrome</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel like a quietly serious design / research bulletin, art publication, or curated trend report. Strong for studio annuals, agency capabilities decks, design-research publications, architecture / art / academic decks, and any deck wanting one strict accent colour and a printed-ledger calmness rather than corporate polish.</dd></div><div><dt>Avoid for</dt><dd>Decks that need warmth, multi-colour energy, or a casual / playful voice — the strict cobalt + cream + grid palette is intentionally austere.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="coral coral cream and coral on near-black, set in oversized bebas neue. anything that should feel warm-graphic and editorial: fashion, beauty, fitness, f&amp;b, lifestyle brands, agency credentials. just as strong for a creator portfolio, a manifesto, or a tech / research deck that wants warmth and a single bold accent instead of corporate cool. bold warm modern confident graphic punchy magazine" data-scheme="mixed">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/coral-1.png" alt="Coral preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/coral-4.png" alt="Coral preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/coral-8.png" alt="Coral preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="coral"> Select</label>
+            <p class="slug">coral</p>
+            <h2>Coral</h2>
+            <p class="tagline">Cream and coral on near-black, set in oversized Bebas Neue.</p>
+            <div class="tags"><span>bold</span><span>warm</span><span>modern</span><span>confident</span><span>graphic</span><span>punchy</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel warm-graphic and editorial: fashion, beauty, fitness, F&amp;B, lifestyle brands, agency credentials. Just as strong for a creator portfolio, a manifesto, or a tech / research deck that wants warmth and a single bold accent instead of corporate cool.</dd></div><div><dt>Avoid for</dt><dd>Contexts that should feel quiet or institutional — the coral accent and oversized Bebas Neue commit hard to a confident magazine voice.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="creative mode creative-mode cream paper canvas with confident multi-color (green, pink, orange, yellow) accents and archivo black display. anything that should feel design-led and confident: creative agency pitches, design studio decks, ad shop credentials, brand creative reviews, art-direction reviews. also a great unexpected pick for a tech talk, research findings, or finance review when the speaker wants to lead with taste rather than convention. creative confident playful design-led graphic expressive modern" data-scheme="light">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/creative-mode-1.png" alt="Creative Mode preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/creative-mode-4.png" alt="Creative Mode preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/creative-mode-6.png" alt="Creative Mode preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="creative-mode"> Select</label>
+            <p class="slug">creative-mode</p>
+            <h2>Creative Mode</h2>
+            <p class="tagline">Cream paper canvas with confident multi-color (green, pink, orange, yellow) accents and Archivo Black display.</p>
+            <div class="tags"><span>creative</span><span>confident</span><span>playful</span><span>design-led</span><span>graphic</span><span>expressive</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel design-led and confident: creative agency pitches, design studio decks, ad shop credentials, brand creative reviews, art-direction reviews. Also a great unexpected pick for a tech talk, research findings, or finance review when the speaker wants to lead with taste rather than convention.</dd></div><div><dt>Avoid for</dt><dd>Contexts that demand institutional restraint and a quiet authority — the saturated multi-accent palette will read as expressive, not formal.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="daisy days daisy-days cheerful pastel deck with hand-drawn daisies, stars, and rainbows. friendly, soft, and warm. anything that should feel friendly, soft, and joyful: educational content, kids and family, wellness programs, community workshops, creator portfolios for craft / illustration. also lovely for an unexpected playful internal kickoff, a wedding planning deck, or any moment where warmth is the message — including across tech or business contexts. cheerful playful warm sunny wholesome friendly soft encouraging approachable lighthearted" data-scheme="light">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/daisy-days-1.png" alt="Daisy Days preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/daisy-days-4.png" alt="Daisy Days preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/daisy-days-8.png" alt="Daisy Days preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="daisy-days"> Select</label>
+            <p class="slug">daisy-days</p>
+            <h2>Daisy Days</h2>
+            <p class="tagline">Cheerful pastel deck with hand-drawn daisies, stars, and rainbows. Friendly, soft, and warm.</p>
+            <div class="tags"><span>cheerful</span><span>playful</span><span>warm</span><span>sunny</span><span>wholesome</span><span>friendly</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel friendly, soft, and joyful: educational content, kids and family, wellness programs, community workshops, creator portfolios for craft / illustration. Also lovely for an unexpected playful internal kickoff, a wedding planning deck, or any moment where warmth is the message — including across tech or business contexts.</dd></div><div><dt>Avoid for</dt><dd>Contexts where the audience explicitly expects authority and precision — the hand-drawn pastel SVG decorations are the opposite of buttoned-up.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="editorial forest editorial-forest forest green, dusty pink, and warm cream meet source serif 4 in a quiet, intentional quarterly-review deck. anything that should feel like a considered editorial — quarterly reviews, internal readouts, studio updates, creative-agency presentations. equally good for any deck that wants to feel warm and unhurried rather than corporate, including research recaps, book or program announcements, and team retrospectives. editorial quiet considered warm intentional literary thoughtful warm low-pressure" data-scheme="mixed">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/editorial-forest-1.png" alt="Editorial Forest preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/editorial-forest-2.png" alt="Editorial Forest preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/editorial-forest-5.png" alt="Editorial Forest preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="editorial-forest"> Select</label>
+            <p class="slug">editorial-forest</p>
+            <h2>Editorial Forest</h2>
+            <p class="tagline">Forest green, dusty pink, and warm cream meet Source Serif 4 in a quiet, intentional quarterly-review deck.</p>
+            <div class="tags"><span>editorial</span><span>quiet</span><span>considered</span><span>warm</span><span>intentional</span><span>literary</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel like a considered editorial — quarterly reviews, internal readouts, studio updates, creative-agency presentations. Equally good for any deck that wants to feel warm and unhurried rather than corporate, including research recaps, book or program announcements, and team retrospectives.</dd></div><div><dt>Avoid for</dt><dd>Contexts that need to feel urgent, punchy, or sales-driven — the palette and rhythm are intentionally quiet.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="editorial tri-tone editorial-tri-tone three-color editorial system: dusty pink, mustard cream, and deep burgundy, set in bricolage + instrument serif. anything that should feel like a fashion-magazine spread: editorial pitches, fashion brand decks, lifestyle media, art direction reviews. equally good for any deck — including tech, research, or business — that wants tri-tone discipline and serif/sans contrast instead of the usual neutrals. editorial warm intentional moody literary warm considered stylish" data-scheme="mixed">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/editorial-tri-tone-1.png" alt="Editorial Tri-Tone preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/editorial-tri-tone-4.png" alt="Editorial Tri-Tone preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/editorial-tri-tone-3.png" alt="Editorial Tri-Tone preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="editorial-tri-tone"> Select</label>
+            <p class="slug">editorial-tri-tone</p>
+            <h2>Editorial Tri-Tone</h2>
+            <p class="tagline">Three-color editorial system: dusty pink, mustard cream, and deep burgundy, set in Bricolage + Instrument Serif.</p>
+            <div class="tags"><span>editorial</span><span>warm</span><span>intentional</span><span>moody</span><span>literary</span><span>warm</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel like a fashion-magazine spread: editorial pitches, fashion brand decks, lifestyle media, art direction reviews. Equally good for any deck — including tech, research, or business — that wants tri-tone discipline and serif/sans contrast instead of the usual neutrals.</dd></div><div><dt>Avoid for</dt><dd>Decks that need to read as soft or comforting — the burgundy/pink/cream tri-tone is intentionally high-contrast and styled.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="emerald editorial emerald-editorial a magazine-cover business deck: emerald + navy + paper, double-rule masthead ornaments, and a bold bodoni-style display serif. anything that should feel like the front of a serious magazine, including but not limited to leadership readouts, planning-office reviews, and strategy briefings. the double-rule masthead ornament gives it editorial gravitas without making it stiff — also a great unexpected pick for product launches or research recaps that want to feel considered rather than corporate. editorial considered confident magazine-cover literary authoritative warm designed" data-scheme="mixed">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/emerald-editorial-1.png" alt="Emerald Editorial preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/emerald-editorial-3.png" alt="Emerald Editorial preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/emerald-editorial-6.png" alt="Emerald Editorial preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="emerald-editorial"> Select</label>
+            <p class="slug">emerald-editorial</p>
+            <h2>Emerald Editorial</h2>
+            <p class="tagline">A magazine-cover business deck: emerald + navy + paper, double-rule masthead ornaments, and a bold Bodoni-style display serif.</p>
+            <div class="tags"><span>editorial</span><span>considered</span><span>confident</span><span>magazine-cover</span><span>literary</span><span>authoritative</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel like the front of a serious magazine, including but not limited to leadership readouts, planning-office reviews, and strategy briefings. The double-rule masthead ornament gives it editorial gravitas without making it stiff — also a great unexpected pick for product launches or research recaps that want to feel considered rather than corporate.</dd></div><div><dt>Avoid for</dt><dd>Contexts that need to read as quiet, neutral, or institutionally restrained — the emerald field is too saturated to disappear into the background.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="grove grove forest-green canvas with cream type, classical playfair serifs, and a single rust accent. anything that should feel organic, considered, and grown-up: sustainability and wellness brands, outdoor / nature products, wineries and restaurants, literary or arts decks, advisory deliverables, bilingual en/cn reports. also a calm, distinctive choice for tech, research, or business decks that want patience over urgency. organic considered warm literary natural classical warm considered patient" data-scheme="mixed">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/grove-1.png" alt="Grove preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/grove-4.png" alt="Grove preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/grove-8.png" alt="Grove preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="grove"> Select</label>
+            <p class="slug">grove</p>
+            <h2>Grove</h2>
+            <p class="tagline">Forest-green canvas with cream type, classical Playfair serifs, and a single rust accent.</p>
+            <div class="tags"><span>organic</span><span>considered</span><span>warm</span><span>literary</span><span>natural</span><span>classical</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel organic, considered, and grown-up: sustainability and wellness brands, outdoor / nature products, wineries and restaurants, literary or arts decks, advisory deliverables, bilingual EN/CN reports. Also a calm, distinctive choice for tech, research, or business decks that want patience over urgency.</dd></div><div><dt>Avoid for</dt><dd>Decks that need neon energy or rapid-fire pop — the forest-green canvas and Playfair serif commit to a slow, classical voice.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="long table long-table warm cream and rust-red supper-club aesthetic with bold uppercase grotesk headlines, fraunces serifs, and pill-shaped outlined buttons. anything that should feel like a warm, intimate, modern hospitality / community brand: supper clubs, dinner series, small restaurants, creative-studio events, membership pitches, lifestyle and wine brands. equally good for any deck wanting a single warm accent colour, mixed-weight typography, and a social-media-aware modern-editorial voice. warm intimate modern friendly small-batch social hospitality warm playful considered social magazine-friendly modern-editorial" data-scheme="light">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/long-table-1.png" alt="Long Table preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/long-table-3.png" alt="Long Table preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/long-table-7.png" alt="Long Table preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="long-table"> Select</label>
+            <p class="slug">long-table</p>
+            <h2>Long Table</h2>
+            <p class="tagline">Warm cream and rust-red supper-club aesthetic with bold uppercase grotesk headlines, Fraunces serifs, and pill-shaped outlined buttons.</p>
+            <div class="tags"><span>warm</span><span>intimate</span><span>modern</span><span>friendly</span><span>small-batch</span><span>social</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel like a warm, intimate, modern hospitality / community brand: supper clubs, dinner series, small restaurants, creative-studio events, membership pitches, lifestyle and wine brands. Equally good for any deck wanting a single warm accent colour, mixed-weight typography, and a social-media-aware modern-editorial voice.</dd></div><div><dt>Avoid for</dt><dd>Decks that need corporate polish, technical density, or a cold / minimalist register — the rust-red palette and bold serif mix are intentionally warm and people-facing.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="mat mat dark sage canvas with bone paper and burnt-orange accent; mid-century modern with wood undertones. anything that should feel mid-century, tactile, and intentional: design studio credentials, architecture / interior brands, ceramics / craft / furniture, advisory decks. also a warm, distinctive choice for tech, research, or business decks that want a considered analog feel instead of digital-cool. warm-modern considered tactile mid-century warm design-led intentional considered" data-scheme="mixed">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/mat-1.png" alt="Mat preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/mat-4.png" alt="Mat preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/mat-8.png" alt="Mat preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="mat" checked> Select</label>
+            <p class="slug">mat</p>
+            <h2>Mat</h2>
+            <p class="tagline">Dark sage canvas with bone paper and burnt-orange accent; mid-century modern with wood undertones.</p>
+            <div class="tags"><span>warm-modern</span><span>considered</span><span>tactile</span><span>mid-century</span><span>warm</span><span>design-led</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel mid-century, tactile, and intentional: design studio credentials, architecture / interior brands, ceramics / craft / furniture, advisory decks. Also a warm, distinctive choice for tech, research, or business decks that want a considered analog feel instead of digital-cool.</dd></div><div><dt>Avoid for</dt><dd>Contexts that need fast tech energy or institutional restraint — the muted sage and burnt-orange palette is intentionally warm and slow.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="monochrome monochrome ivory ledger paper with all-black type; lora serif headlines, jost body, no color at all. anything that should feel like a hand-typeset ledger: user research synthesis, white papers, longform reports, academic and policy briefs, advisory deliverables, bilingual en/cn reports. equally good for tech, design, or brand decks that want their words to be the only thing on the page. restrained literary archival ledger literary considered neutral honest" data-scheme="light">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/monochrome-1.png" alt="Monochrome preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/monochrome-4.png" alt="Monochrome preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/monochrome-12.png" alt="Monochrome preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="monochrome"> Select</label>
+            <p class="slug">monochrome</p>
+            <h2>Monochrome</h2>
+            <p class="tagline">Ivory ledger paper with all-black type; Lora serif headlines, Jost body, no color at all.</p>
+            <div class="tags"><span>restrained</span><span>literary</span><span>archival</span><span>ledger</span><span>literary</span><span>considered</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel like a hand-typeset ledger: user research synthesis, white papers, longform reports, academic and policy briefs, advisory deliverables, bilingual EN/CN reports. Equally good for tech, design, or brand decks that want their words to be the only thing on the page.</dd></div><div><dt>Avoid for</dt><dd>Decks that need visual personality or color-led storytelling — the all-ink palette is intentionally austere.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="neo-grid bold neo-grid-bold editorial neo-brutalism with a single neon yellow accent on off-white paper. anything that should feel confident and editorial-graphic: design-led pitches, brand work, founder talks, conference keynotes. excellent for stat-heavy slides, comparisons, and process flows. just as strong for tech, research, or finance when the speaker wants to read as design-led rather than corporate. confident punchy editorial modern bold minimal design-led graphic" data-scheme="light">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/neo-grid-bold-1.png" alt="Neo-Grid Bold preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/neo-grid-bold-3.png" alt="Neo-Grid Bold preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/neo-grid-bold-8.png" alt="Neo-Grid Bold preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="neo-grid-bold"> Select</label>
+            <p class="slug">neo-grid-bold</p>
+            <h2>Neo-Grid Bold</h2>
+            <p class="tagline">Editorial neo-brutalism with a single neon yellow accent on off-white paper.</p>
+            <div class="tags"><span>confident</span><span>punchy</span><span>editorial</span><span>modern</span><span>bold</span><span>minimal</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel confident and editorial-graphic: design-led pitches, brand work, founder talks, conference keynotes. Excellent for stat-heavy slides, comparisons, and process flows. Just as strong for tech, research, or finance when the speaker wants to read as design-led rather than corporate.</dd></div><div><dt>Avoid for</dt><dd>Contexts that need to feel quiet, traditional, or warm — the neon-yellow accent and uppercase display commit to a confident editorial voice.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="people&#39;s platform (block &amp; bold) peoples-platform activist poster energy: blue, orange, red on cream, with alfa slab + caveat brush. anything that should feel honest, loud, and graphic: cultural commentary, manifestos, civic and community decks, design talks, campaign pitches. excellent for founder-vision moments, mission statements, or any deck — including across industries — that wants protest-poster energy instead of corporate polish. activist loud graphic honest punchy direct expressive warm-bold" data-scheme="light">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/peoples-platform-1.png" alt="People&#39;s Platform (Block &amp; Bold) preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/peoples-platform-4.png" alt="People&#39;s Platform (Block &amp; Bold) preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/peoples-platform-8.png" alt="People&#39;s Platform (Block &amp; Bold) preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="peoples-platform"> Select</label>
+            <p class="slug">peoples-platform</p>
+            <h2>People&#39;s Platform (Block &amp; Bold)</h2>
+            <p class="tagline">Activist poster energy: blue, orange, red on cream, with Alfa Slab + Caveat Brush.</p>
+            <div class="tags"><span>activist</span><span>loud</span><span>graphic</span><span>honest</span><span>punchy</span><span>direct</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel honest, loud, and graphic: cultural commentary, manifestos, civic and community decks, design talks, campaign pitches. Excellent for founder-vision moments, mission statements, or any deck — including across industries — that wants protest-poster energy instead of corporate polish.</dd></div><div><dt>Avoid for</dt><dd>Contexts where institutional restraint is the actual goal — the saturated political-poster palette commits hard to expressive energy.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="pin &amp; paper pin-and-paper yellow paper with safety-pin illustrations, ink-blue handwritten caveat, paper-grain texture. anything that should feel hand-crafted, warm, and literary: qualitative research findings, founder reflections, longform brand stories, workshop debriefs. the signature safety-pin illustrations and paper-grain texture make it especially good for any deck — including tech or business — that wants personality and warmth over polish. crafted handmade warm thoughtful literary literary intimate warm grounded" data-scheme="light">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/pin-and-paper-1.png" alt="Pin &amp; Paper preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/pin-and-paper-11.png" alt="Pin &amp; Paper preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/pin-and-paper-3.png" alt="Pin &amp; Paper preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="pin-and-paper"> Select</label>
+            <p class="slug">pin-and-paper</p>
+            <h2>Pin &amp; Paper</h2>
+            <p class="tagline">Yellow paper with safety-pin illustrations, ink-blue handwritten Caveat, paper-grain texture.</p>
+            <div class="tags"><span>crafted</span><span>handmade</span><span>warm</span><span>thoughtful</span><span>literary</span><span>literary</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel hand-crafted, warm, and literary: qualitative research findings, founder reflections, longform brand stories, workshop debriefs. The signature safety-pin illustrations and paper-grain texture make it especially good for any deck — including tech or business — that wants personality and warmth over polish.</dd></div><div><dt>Avoid for</dt><dd>Decks that need to feel digital-native polished or rigorously data-driven — handwritten Caveat is intentionally informal.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="pink script — after hours pink-script black canvas, hot pink accent, pearl-cream paper, instrument serif headlines: late-night editorial luxury. anything that should feel nocturnal, intentional, and a little luxe: fashion brand decks, creator personal brands, after-hours / nightlife / spirits launches, luxury product reveals, editorial features. also a striking unexpected pick for a tech keynote, research synthesis, or business pitch that wants to land with magnetic confidence. nocturnal moody intentional luxe expressive literary sultry considered magazine" data-scheme="dark">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/pink-script-1.png" alt="Pink Script — After Hours preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/pink-script-4.png" alt="Pink Script — After Hours preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/pink-script-8.png" alt="Pink Script — After Hours preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="pink-script" checked> Select</label>
+            <p class="slug">pink-script</p>
+            <h2>Pink Script — After Hours</h2>
+            <p class="tagline">Black canvas, hot pink accent, pearl-cream paper, Instrument Serif headlines: late-night editorial luxury.</p>
+            <div class="tags"><span>nocturnal</span><span>moody</span><span>intentional</span><span>luxe</span><span>expressive</span><span>literary</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel nocturnal, intentional, and a little luxe: fashion brand decks, creator personal brands, after-hours / nightlife / spirits launches, luxury product reveals, editorial features. Also a striking unexpected pick for a tech keynote, research synthesis, or business pitch that wants to land with magnetic confidence.</dd></div><div><dt>Avoid for</dt><dd>Daytime corporate-professional and traditional B2B contexts where the dark canvas with hot-pink accent reads as too styled or too expressive.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="playful playful sun-warm peach background with syne display: a friendly indie launch deck. anything that should feel warm, indie, and approachable: creator portfolios, indie product launches, lifestyle brands, small-business pitches, newsletter / community decks. also welcoming for any deck — including tech or research — that wants to feel friendly and human rather than corporate. warm approachable indie friendly upbeat informal welcoming" data-scheme="light">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/playful-1.png" alt="Playful preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/playful-6.png" alt="Playful preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/playful-8.png" alt="Playful preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="playful" checked> Select</label>
+            <p class="slug">playful</p>
+            <h2>Playful</h2>
+            <p class="tagline">Sun-warm peach background with Syne display: a friendly indie launch deck.</p>
+            <div class="tags"><span>warm</span><span>approachable</span><span>indie</span><span>friendly</span><span>upbeat</span><span>informal</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel warm, indie, and approachable: creator portfolios, indie product launches, lifestyle brands, small-business pitches, newsletter / community decks. Also welcoming for any deck — including tech or research — that wants to feel friendly and human rather than corporate.</dd></div><div><dt>Avoid for</dt><dd>Contexts where institutional credibility matters more than warmth — the peach palette is intentionally informal.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="raw grid raw-grid neo-brutalist deck with thick borders, offset shadows, and a pink/sage/ink palette. anything that should feel direct and graphic-confident: founder pitches, accelerator demos, brand decks, indie launches, creator portfolios. strong for stat slides, comparison tables, and process flows. equally good for tech, research, or finance when the speaker wants the deck to feel scrappy-confident rather than buttoned-up. raw punchy energetic confident direct modern no-nonsense graphic" data-scheme="light">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/raw-grid-1.png" alt="Raw Grid preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/raw-grid-4.png" alt="Raw Grid preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/raw-grid-8.png" alt="Raw Grid preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="raw-grid"> Select</label>
+            <p class="slug">raw-grid</p>
+            <h2>Raw Grid</h2>
+            <p class="tagline">Neo-brutalist deck with thick borders, offset shadows, and a pink/sage/ink palette.</p>
+            <div class="tags"><span>raw</span><span>punchy</span><span>energetic</span><span>confident</span><span>direct</span><span>modern</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel direct and graphic-confident: founder pitches, accelerator demos, brand decks, indie launches, creator portfolios. Strong for stat slides, comparison tables, and process flows. Equally good for tech, research, or finance when the speaker wants the deck to feel scrappy-confident rather than buttoned-up.</dd></div><div><dt>Avoid for</dt><dd>Contexts that need to feel soft, warm, or intentionally quiet — the brutalist borders and offset shadows commit to a graphic voice.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="retro windows retro-windows windows 95 chrome: gray title bars, ms sans serif, pixel typography, full nostalgia. anything that should feel knowingly nostalgic: retro gaming, y2k-aesthetic brands, creator portfolios with a 90s vibe, tech-history talks, deliberately tongue-in-cheek decks. a great choice anywhere a playful retro reference is the entire point. nostalgic retro geeky playful winking nostalgic geeky fun" data-scheme="light">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/retro-windows-1.png" alt="Retro Windows preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/retro-windows-4.png" alt="Retro Windows preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/retro-windows-8.png" alt="Retro Windows preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="retro-windows"> Select</label>
+            <p class="slug">retro-windows</p>
+            <h2>Retro Windows</h2>
+            <p class="tagline">Windows 95 chrome: gray title bars, MS Sans Serif, pixel typography, full nostalgia.</p>
+            <div class="tags"><span>nostalgic</span><span>retro</span><span>geeky</span><span>playful</span><span>winking</span><span>nostalgic</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel knowingly nostalgic: retro gaming, Y2K-aesthetic brands, creator portfolios with a 90s vibe, tech-history talks, deliberately tongue-in-cheek decks. A great choice anywhere a playful retro reference is the entire point.</dd></div><div><dt>Avoid for</dt><dd>Decks that need to read as modern, elegant, or institutionally credible — the Win95 chrome will always read as a costume.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="retro zine retro-zine beige paper with green accent and bebas neue + caveat: a riso-printed zine in html form. anything that should feel printed, lo-fi, and crafted: indie zines and publications, music / arts brands, creator portfolios, small-batch craft launches, community decks. also a great underdog choice for tech, research, or business decks that want a riso-print warmth instead of digital polish. crafted lo-fi underground warm-retro scrappy warm intentional diy" data-scheme="light">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/retro-zine-1.png" alt="Retro Zine preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/retro-zine-4.png" alt="Retro Zine preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/retro-zine-8.png" alt="Retro Zine preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="retro-zine"> Select</label>
+            <p class="slug">retro-zine</p>
+            <h2>Retro Zine</h2>
+            <p class="tagline">Beige paper with green accent and Bebas Neue + Caveat: a riso-printed zine in HTML form.</p>
+            <div class="tags"><span>crafted</span><span>lo-fi</span><span>underground</span><span>warm-retro</span><span>scrappy</span><span>warm</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel printed, lo-fi, and crafted: indie zines and publications, music / arts brands, creator portfolios, small-batch craft launches, community decks. Also a great underdog choice for tech, research, or business decks that want a riso-print warmth instead of digital polish.</dd></div><div><dt>Avoid for</dt><dd>Contexts that demand digital-native polish or fast modern-tech energy — the layered zine aesthetic intentionally feels handmade.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="sakura chroma sakura-chroma vintage japanese cassette-package aesthetic: cream paper, diagonal rainbow ribbons, condensed bold type, jis-style spec checkboxes. anything that should feel like a vintage japanese cassette package or a tdk / sony / sakura color product catalogue: indie hardware brand decks, music-label release schedules, analog studio retrospectives, zine and magazine pitches, kawaii-tech product launches, creative-studio annual reports. equally good for any deck wanting bold colour, condensed display type, and a tactile printed-product personality. retro playful kawaii-tech warm tactile product-catalogue playful confident warm tactile 80s-japanese-tech" data-scheme="light">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/sakura-chroma-1.png" alt="Sakura Chroma preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/sakura-chroma-3.png" alt="Sakura Chroma preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/sakura-chroma-4.png" alt="Sakura Chroma preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="sakura-chroma"> Select</label>
+            <p class="slug">sakura-chroma</p>
+            <h2>Sakura Chroma</h2>
+            <p class="tagline">Vintage Japanese cassette-package aesthetic: cream paper, diagonal rainbow ribbons, condensed bold type, JIS-style spec checkboxes.</p>
+            <div class="tags"><span>retro</span><span>playful</span><span>kawaii-tech</span><span>warm</span><span>tactile</span><span>product-catalogue</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel like a vintage Japanese cassette package or a TDK / Sony / Sakura Color product catalogue: indie hardware brand decks, music-label release schedules, analog studio retrospectives, zine and magazine pitches, kawaii-tech product launches, creative-studio annual reports. Equally good for any deck wanting bold colour, condensed display type, and a tactile printed-product personality.</dd></div><div><dt>Avoid for</dt><dd>Decks that need restrained, corporate, or quiet typography — the bold condensed lockups, ribbon stripes, and primary-colour palette are intentionally loud and product-page-y.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="scatterbrain scatterbrain post-it inspired: pastel sticky notes, caveat handwriting, shrikhand and zilla slab type stack. anything that should feel like a designer&#39;s whiteboard: brainstorms, workshops, creative-agency credentials, design-thinking sessions, ideation pitches, art-direction reviews. equally fun for any deck — including tech, research, or business — that wants to read as in-progress thinking rather than polished conclusions. playful creative warm messy-on-purpose workshop informal warm expressive human" data-scheme="light">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/scatterbrain-1.png" alt="Scatterbrain preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/scatterbrain-4.png" alt="Scatterbrain preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/scatterbrain-8.png" alt="Scatterbrain preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="scatterbrain" checked> Select</label>
+            <p class="slug">scatterbrain</p>
+            <h2>Scatterbrain</h2>
+            <p class="tagline">Post-it inspired: pastel sticky notes, Caveat handwriting, Shrikhand and Zilla Slab type stack.</p>
+            <div class="tags"><span>playful</span><span>creative</span><span>warm</span><span>messy-on-purpose</span><span>workshop</span><span>informal</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel like a designer&#39;s whiteboard: brainstorms, workshops, creative-agency credentials, design-thinking sessions, ideation pitches, art-direction reviews. Equally fun for any deck — including tech, research, or business — that wants to read as in-progress thinking rather than polished conclusions.</dd></div><div><dt>Avoid for</dt><dd>Contexts that demand precision and institutional weight — the post-it sticky-note aesthetic intentionally reads as warm and unfinished.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="signal signal deep navy canvas with bone paper and a single muted-gold accent; institutional with quiet weight. anything that should feel weighty, considered, and credibly institutional: investor decks, board presentations, consulting deliverables, legal / policy briefs, advisory pitches. also a strong choice for tech, research, or brand work that wants to read as quietly authoritative rather than loud. institutional trustworthy considered weighty sober polished established literary" data-scheme="mixed">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/signal-1.png" alt="Signal preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/signal-18.png" alt="Signal preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/signal-8.png" alt="Signal preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="signal" checked> Select</label>
+            <p class="slug">signal</p>
+            <h2>Signal</h2>
+            <p class="tagline">Deep navy canvas with bone paper and a single muted-gold accent; institutional with quiet weight.</p>
+            <div class="tags"><span>institutional</span><span>trustworthy</span><span>considered</span><span>weighty</span><span>sober</span><span>polished</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel weighty, considered, and credibly institutional: investor decks, board presentations, consulting deliverables, legal / policy briefs, advisory pitches. Also a strong choice for tech, research, or brand work that wants to read as quietly authoritative rather than loud.</dd></div><div><dt>Avoid for</dt><dd>Contexts that should feel hot, fast, or intentionally playful — the navy + gold restraint commits to a sober voice.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="soft editorial soft-editorial cormorant garamond serif on warm paper with sage, blush, and lemon accents. anything that should feel literary, elegant, and unhurried: editorial features, longform brand stories, gallery / museum decks, advisory deliverables, wedding / lifestyle media, founder essays. equally good for tech, research, or business decks that want a sunday-supplement warmth instead of corporate polish. literary elegant quiet warm-classical literary considered warm magazine" data-scheme="light">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/soft-editorial-4.png" alt="Soft Editorial preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/soft-editorial-6.png" alt="Soft Editorial preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/soft-editorial-10.png" alt="Soft Editorial preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="soft-editorial"> Select</label>
+            <p class="slug">soft-editorial</p>
+            <h2>Soft Editorial</h2>
+            <p class="tagline">Cormorant Garamond serif on warm paper with sage, blush, and lemon accents.</p>
+            <div class="tags"><span>literary</span><span>elegant</span><span>quiet</span><span>warm-classical</span><span>literary</span><span>considered</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel literary, elegant, and unhurried: editorial features, longform brand stories, gallery / museum decks, advisory deliverables, wedding / lifestyle media, founder essays. Equally good for tech, research, or business decks that want a Sunday-supplement warmth instead of corporate polish.</dd></div><div><dt>Avoid for</dt><dd>Decks that need visual heat or punch — the warm-paper palette and Cormorant serif are intentionally quiet.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="stencil &amp; tablet stencil-tablet bone paper with stencil-cut headlines and a six-color earth palette: archaeology meets brand. anything that should feel archival, tactile, and weighty-graphic: museum and cultural-institution decks, art / architecture brands, longform research, heritage and craft brands, manifestos. a great choice anytime — including across tech and business — when you want the deck to feel like a field manual rather than a slide deck. archival earthy tactile considered graphic weighty considered tactile literary" data-scheme="light">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/stencil-tablet-1.png" alt="Stencil &amp; Tablet preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/stencil-tablet-3.png" alt="Stencil &amp; Tablet preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/stencil-tablet-8.png" alt="Stencil &amp; Tablet preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="stencil-tablet"> Select</label>
+            <p class="slug">stencil-tablet</p>
+            <h2>Stencil &amp; Tablet</h2>
+            <p class="tagline">Bone paper with stencil-cut headlines and a six-color earth palette: archaeology meets brand.</p>
+            <div class="tags"><span>archival</span><span>earthy</span><span>tactile</span><span>considered</span><span>graphic</span><span>weighty</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel archival, tactile, and weighty-graphic: museum and cultural-institution decks, art / architecture brands, longform research, heritage and craft brands, manifestos. A great choice anytime — including across tech and business — when you want the deck to feel like a field manual rather than a slide deck.</dd></div><div><dt>Avoid for</dt><dd>Contexts that demand digital-native polish or playful pop — the stencil-cut display and earth-tone palette commit to a deliberate analog feel.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="studio studio black canvas with electric-yellow type; high-voltage design studio aesthetic. anything that should feel electric and design-led: studio credentials, creative agency pitches, brand showcases, art-direction reviews, fashion / sneaker brand work. also a striking unexpected choice for tech, research, or business decks where the speaker wants the deck to *be* a brand statement. electric bold graphic design-led high-contrast graphic loud modern intentional" data-scheme="dark">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/studio-1.png" alt="Studio preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/studio-4.png" alt="Studio preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/studio-8.png" alt="Studio preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="studio"> Select</label>
+            <p class="slug">studio</p>
+            <h2>Studio</h2>
+            <p class="tagline">Black canvas with electric-yellow type; high-voltage design studio aesthetic.</p>
+            <div class="tags"><span>electric</span><span>bold</span><span>graphic</span><span>design-led</span><span>high-contrast</span><span>graphic</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel electric and design-led: studio credentials, creative agency pitches, brand showcases, art-direction reviews, fashion / sneaker brand work. Also a striking unexpected choice for tech, research, or business decks where the speaker wants the deck to *be* a brand statement.</dd></div><div><dt>Avoid for</dt><dd>Contexts that should feel quiet or institutional — the black-and-electric-yellow palette is the loudest in the library.</dd></div></dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="vellum vellum deep navy canvas with warm-yellow cormorant serifs and a single dusty teal accent. a quiet, scholarly aesthetic. anything that should feel scholarly, literary, and quietly intelligent: research synthesis, white papers, academic and policy briefs, advisory deliverables, longform editorial pieces, founder reflections. equally strong for any deck — including tech, business, or creator work — that wants a calm, considered atmosphere instead of energetic visuals. scholarly literary considered quiet intellectual literary considered patient intelligent" data-scheme="dark">
+          <div class="screenshots"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/vellum-1.png" alt="Vellum preview 1" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/vellum-4.png" alt="Vellum preview 2" loading="lazy"><img src="https://raw.githubusercontent.com/zarazhangrui/beautiful-html-templates/main/screenshots/vellum-8.png" alt="Vellum preview 3" loading="lazy"></div>
+          <div class="card-body">
+            <label class="pick"><input type="checkbox" value="vellum" checked> Select</label>
+            <p class="slug">vellum</p>
+            <h2>Vellum</h2>
+            <p class="tagline">Deep navy canvas with warm-yellow Cormorant serifs and a single dusty teal accent. A quiet, scholarly aesthetic.</p>
+            <div class="tags"><span>scholarly</span><span>literary</span><span>considered</span><span>quiet</span><span>intellectual</span><span>literary</span></div>
+            <dl><div><dt>Best for</dt><dd>Anything that should feel scholarly, literary, and quietly intelligent: research synthesis, white papers, academic and policy briefs, advisory deliverables, longform editorial pieces, founder reflections. Equally strong for any deck — including tech, business, or creator work — that wants a calm, considered atmosphere instead of energetic visuals.</dd></div><div><dt>Avoid for</dt><dd>Contexts that need visual heat or pop — the navy + warm-yellow Cormorant aesthetic is intentionally low-tempo.</dd></div></dl>
+          </div>
+        </article></main>
+  <script>
+    const cards = [...document.querySelectorAll('.card')];
+    const search = document.querySelector('#search');
+    const scheme = document.querySelector('#scheme');
+    const selection = document.querySelector('#selection');
+    const selected = () => [...document.querySelectorAll('input[type="checkbox"]:checked')].map(input => input.value);
+    function updateSelection() {
+      const values = selected();
+      selection.textContent = values.length ? values.join(', ') : 'Select themes to build your import list.';
+    }
+    function filter() {
+      const query = search.value.trim().toLowerCase();
+      cards.forEach(card => { card.hidden = !card.dataset.search.includes(query) || (scheme.value && card.dataset.scheme !== scheme.value); });
+    }
+    search.addEventListener('input', filter);
+    scheme.addEventListener('change', filter);
+    document.addEventListener('change', event => { if (event.target.matches('input[type="checkbox"]')) updateSelection(); });
+    document.querySelector('#copy').addEventListener('click', async () => {
+      const text = selected().join(', ');
+      if (!text) return;
+      await navigator.clipboard.writeText(text);
+      selection.textContent = 'Copied: ' + text;
+    });
+    updateSelection();
+  </script>
+</body>
+</html>

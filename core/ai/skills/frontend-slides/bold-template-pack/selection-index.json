@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "pack_name": "Beautiful HTML Templates - Bold Design Pack",
+  "source_repo": "zarazhangrui/beautiful-html-templates",
+  "template_count": 8,
+  "usage": {
+    "selection": "Read this compact index first to shortlist bold templates from metadata.",
+    "previews": "For title-slide previews, read only the preview_md files for the shortlisted bold candidates.",
+    "final_generation": "After the user chooses a bold template, read exactly that template design_md before generating the full deck.",
+    "never": "Do not bulk-read templates/*/design.md and do not read template.html unless the selected design.md is missing a critical implementation detail."
+  },
+  "frontend_slides_policy": {
+    "layout_model": "fixed-stage",
+    "canvas_width": 1920,
+    "canvas_height": 1080,
+    "scaling": "scale-stage-to-viewport",
+    "mobile_behavior": "preserve 16:9 stage; letterbox or pillarbox instead of reflowing slide content"
+  },
+  "templates": [
+    {
+      "slug": "block-frame",
+      "name": "BlockFrame",
+      "tagline": "Neobrutalist deck with pastel-neon color blocks and chunky black borders.",
+      "mood": [
+        "bold",
+        "playful",
+        "graphic",
+        "fresh"
+      ],
+      "tone": [
+        "confident",
+        "graphic",
+        "pop",
+        "design-led"
+      ],
+      "formality": "medium-low",
+      "density": "high",
+      "scheme": "light",
+      "best_for": "Anything that should feel pop-graphic and design-led: indie SaaS launches, agency credentials, creative reviews, brand redesigns. Also a strong unexpected pick for tech, finance, or research when the speaker wants to land as confident and contemporary rather than buttoned-up.",
+      "avoid_for": "Contexts that require quiet institutional restraint or traditional weight (regulated disclosures, formal legal briefs).",
+      "preview_md": "bold-template-pack/templates/block-frame/preview.md",
+      "design_md": "bold-template-pack/templates/block-frame/design.md"
+    },
+    {
+      "slug": "blue-professional",
+      "name": "Blue Professional",
+      "tagline": "Cream paper background with electric cobalt blue accents; clean modern professional.",
+      "mood": [
+        "professional",
+        "modern",
+        "calm",
+        "trustworthy"
+      ],
+      "tone": [
+        "clean",
+        "considered",
+        "polished",
+        "neutral"
+      ],
+      "formality": "medium-high",
+      "density": "medium",
+      "scheme": "light",
+      "best_for": "Anything that should feel modern-considered and lightly authoritative: B2B SaaS pitches, consulting deliverables, advisory updates, investor reports. Also a clean, tasteful choice whenever you want to read as professional without going stiff — research synthesis, internal reviews, brand work for service businesses.",
+      "avoid_for": "Contexts where the deck should feel hot, playful, or intentionally informal — the cool electric-blue restraint will read as overly polished.",
+      "preview_md": "bold-template-pack/templates/blue-professional/preview.md",
+      "design_md": "bold-template-pack/templates/blue-professional/design.md"
+    },
+    {
+      "slug": "mat",
+      "name": "Mat",
+      "tagline": "Dark sage canvas with bone paper and burnt-orange accent; mid-century modern with wood undertones.",
+      "mood": [
+        "warm-modern",
+        "considered",
+        "tactile",
+        "mid-century"
+      ],
+      "tone": [
+        "warm",
+        "design-led",
+        "intentional",
+        "considered"
+      ],
+      "formality": "medium",
+      "density": "medium",
+      "scheme": "mixed",
+      "best_for": "Anything that should feel mid-century, tactile, and intentional: design studio credentials, architecture / interior brands, ceramics / craft / furniture, advisory decks. Also a warm, distinctive choice for tech, research, or business decks that want a considered analog feel instead of digital-cool.",
+      "avoid_for": "Contexts that need fast tech energy or institutional restraint — the muted sage and burnt-orange palette is intentionally warm and slow.",
+      "preview_md": "bold-template-pack/templates/mat/preview.md",
+      "design_md": "bold-template-pack/templates/mat/design.md"
+    },
+    {
+      "slug": "pink-script",
+      "name": "Pink Script — After Hours",
+      "tagline": "Black canvas, hot pink accent, pearl-cream paper, Instrument Serif headlines: late-night editorial luxury.",
+      "mood": [
+        "nocturnal",
+        "moody",
+        "intentional",
+        "luxe",
+        "expressive"
+      ],
+      "tone": [
+        "literary",
+        "sultry",
+        "considered",
+        "magazine"
+      ],
+      "formality": "medium-high",
+      "density": "low",
+      "scheme": "dark",
+      "best_for": "Anything that should feel nocturnal, intentional, and a little luxe: fashion brand decks, creator personal brands, after-hours / nightlife / spirits launches, luxury product reveals, editorial features. Also a striking unexpected pick for a tech keynote, research synthesis, or business pitch that wants to land with magnetic confidence.",
+      "avoid_for": "Daytime corporate-professional and traditional B2B contexts where the dark canvas with hot-pink accent reads as too styled or too expressive.",
+      "preview_md": "bold-template-pack/templates/pink-script/preview.md",
+      "design_md": "bold-template-pack/templates/pink-script/design.md"
+    },
+    {
+      "slug": "playful",
+      "name": "Playful",
+      "tagline": "Sun-warm peach background with Syne display: a friendly indie launch deck.",
+      "mood": [
+        "warm",
+        "approachable",
+        "indie",
+        "friendly"
+      ],
+      "tone": [
+        "upbeat",
+        "informal",
+        "welcoming"
+      ],
+      "formality": "low",
+      "density": "medium",
+      "scheme": "light",
+      "best_for": "Anything that should feel warm, indie, and approachable: creator portfolios, indie product launches, lifestyle brands, small-business pitches, newsletter / community decks. Also welcoming for any deck — including tech or research — that wants to feel friendly and human rather than corporate.",
+      "avoid_for": "Contexts where institutional credibility matters more than warmth — the peach palette is intentionally informal.",
+      "preview_md": "bold-template-pack/templates/playful/preview.md",
+      "design_md": "bold-template-pack/templates/playful/design.md"
+    },
+    {
+      "slug": "scatterbrain",
+      "name": "Scatterbrain",
+      "tagline": "Post-it inspired: pastel sticky notes, Caveat handwriting, Shrikhand and Zilla Slab type stack.",
+      "mood": [
+        "playful",
+        "creative",
+        "warm",
+        "messy-on-purpose",
+        "workshop"
+      ],
+      "tone": [
+        "informal",
+        "warm",
+        "expressive",
+        "human"
+      ],
+      "formality": "low",
+      "density": "high",
+      "scheme": "light",
+      "best_for": "Anything that should feel like a designer's whiteboard: brainstorms, workshops, creative-agency credentials, design-thinking sessions, ideation pitches, art-direction reviews. Equally fun for any deck — including tech, research, or business — that wants to read as in-progress thinking rather than polished conclusions.",
+      "avoid_for": "Contexts that demand precision and institutional weight — the post-it sticky-note aesthetic intentionally reads as warm and unfinished.",
+      "preview_md": "bold-template-pack/templates/scatterbrain/preview.md",
+      "design_md": "bold-template-pack/templates/scatterbrain/design.md"
+    },
+    {
+      "slug": "signal",
+      "name": "Signal",
+      "tagline": "Deep navy canvas with bone paper and a single muted-gold accent; institutional with quiet weight.",
+      "mood": [
+        "institutional",
+        "trustworthy",
+        "considered",
+        "weighty"
+      ],
+      "tone": [
+        "sober",
+        "polished",
+        "established",
+        "literary"
+      ],
+      "formality": "high",
+      "density": "high",
+      "scheme": "mixed",
+      "best_for": "Anything that should feel weighty, considered, and credibly institutional: investor decks, board presentations, consulting deliverables, legal / policy briefs, advisory pitches. Also a strong choice for tech, research, or brand work that wants to read as quietly authoritative rather than loud.",
+      "avoid_for": "Contexts that should feel hot, fast, or intentionally playful — the navy + gold restraint commits to a sober voice.",
+      "preview_md": "bold-template-pack/templates/signal/preview.md",
+      "design_md": "bold-template-pack/templates/signal/design.md"
+    },
+    {
+      "slug": "vellum",
+      "name": "Vellum",
+      "tagline": "Deep navy canvas with warm-yellow Cormorant serifs and a single dusty teal accent. A quiet, scholarly aesthetic.",
+      "mood": [
+        "scholarly",
+        "literary",
+        "considered",
+        "quiet",
+        "intellectual"
+      ],
+      "tone": [
+        "literary",
+        "considered",
+        "patient",
+        "intelligent"
+      ],
+      "formality": "high",
+      "density": "low",
+      "scheme": "dark",
+      "best_for": "Anything that should feel scholarly, literary, and quietly intelligent: research synthesis, white papers, academic and policy briefs, advisory deliverables, longform editorial pieces, founder reflections. Equally strong for any deck — including tech, business, or creator work — that wants a calm, considered atmosphere instead of energetic visuals.",
+      "avoid_for": "Contexts that need visual heat or pop — the navy + warm-yellow Cormorant aesthetic is intentionally low-tempo.",
+      "preview_md": "bold-template-pack/templates/vellum/preview.md",
+      "design_md": "bold-template-pack/templates/vellum/design.md"
+    }
+  ]
+}
