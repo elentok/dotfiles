@@ -59,6 +59,7 @@ if OS.mac?
   cask "keepingyouawake" # UI for caffeinate
 
   cask "font-maple-mono"
+  cask "font-monaspace"
 
   cask "font-freckle-face"
   cask "font-ranchers"
