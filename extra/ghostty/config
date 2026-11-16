@@ -100,6 +100,8 @@ keybind = cmd+e>v=new_split:right
 keybind = cmd+e>s=new_split:down
 keybind = cmd+e>f=toggle_maximize
 
+keybind = cmd+e>/=start_search
+
 keybind = cmd+e>e=write_scrollback_file:open
 
 # make shift+enter work inside tmux (for claude code)
