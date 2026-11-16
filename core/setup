@@ -134,6 +134,8 @@ function install-personal-cli-tools() {
 
   dfl shell "Installing gx skills..." -- \
     fish -c 'gx skills install'
+  dfl shell "Installing dotfiles skills..." -- \
+    fish -c 'gx skills install ~/.dotfiles/core/ai/skills'
 }
 
 main "$@"
