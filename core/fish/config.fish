@@ -8,14 +8,18 @@ function report_fish_startup_time --on-event fish_prompt
 end
 
 if status is-interactive
-    fzf --fish | source
+    if test "$TERM_PROGRAM" != WarpTerminal
+        fzf --fish | source
+    end
     zoxide init fish | source
     # source "$DOTF/core/television/shell/integration.fish"
     # Commands to run in interactive sessions can go here
     # starship init fish | source
 end
 
-set fish_key_bindings fish_user_key_bindings
+if test "$TERM_PROGRAM" != WarpTerminal
+    set fish_key_bindings fish_user_key_bindings
+end
 # Emulates vim's cursor shape behavior
 # Set the normal and visual mode cursors to a block
 set fish_cursor_default block
