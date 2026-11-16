@@ -1,7 +1,7 @@
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --side-by-side --dark --paging=never
+      command: delta --side-by-side --dark --paging=never
   autoFetch: false
   log:
     order: default

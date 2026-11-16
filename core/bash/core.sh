@@ -112,9 +112,12 @@ for plugin_dir2 in ~/.dotplugins/*; do
   fi
 done
 
+if [ -e ~/.local/machine.bash ]; then
+  source ~/.local/machine.bash
+fi
+
 # Timing checks {{{1
 _core_elapsed_ms=$(((SECONDS - _core_start) * 1000))
 if [[ $_core_elapsed_ms -gt 25 ]]; then
   echo "Warning: core.sh took $(printf '%.2f' $_core_elapsed_ms)ms to load"
 fi
-
