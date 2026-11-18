@@ -11,15 +11,15 @@ end
 hs.hotkey.bind(
   { "cmd" },
   "space",
-  -- function() run("kitten quick-access-terminal --instance-group quick") end
-  function()
-    if hs.application.get("Ghostty") then
-      toggleGhosttyQuickTerminal()
-    else
-      openApp("/Applications/Ghostty.app")
-      hs.timer.doAfter(1, toggleGhosttyQuickTerminal)
-    end
-  end
+  function() run("kitten quick-access-terminal --instance-group quick") end
+  -- function()
+  --   if hs.application.get("Ghostty") then
+  --     toggleGhosttyQuickTerminal()
+  --   else
+  --     openApp("/Applications/Ghostty.app")
+  --     hs.timer.doAfter(1, toggleGhosttyQuickTerminal)
+  --   end
+  -- end
 )
 
 hs.hotkey.bind({ "cmd" }, "2", function() openApp("/Applications/Google Chrome.app") end)

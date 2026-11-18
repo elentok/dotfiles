@@ -72,6 +72,7 @@ path=$path:$HOME/.local/share/fnm/aliases/default/bin
 path=$path:$HOME/.local/bin
 
 if [ -n "$BREW_HOME" ]; then
+  path=$path:$BREW_HOME/opt/ffmpeg-full/bin
   path=$path:$BREW_HOME/bin
   path=$path:$BREW_HOME/sbin
 fi

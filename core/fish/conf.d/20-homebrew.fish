@@ -13,7 +13,9 @@ if test -e "$BREW_HOME"
         set -x BREW_ROOT "$BREW_HOME"
     end
 
-    fish_add_path "$BREW_HOME/opt/coreutils/libexec/gnubin" \
+    fish_add_path \
+        "$BREW_HOME/opt/ffmpeg-full/bin" \
+        "$BREW_HOME/opt/coreutils/libexec/gnubin" \
         "$BREW_HOME/sbin" \
         "$BREW_HOME/bin"
 end
