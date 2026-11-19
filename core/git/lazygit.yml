@@ -12,18 +12,18 @@ gui:
   commitAuthorLongLength: 7
   sidePanelWidth: 0.25
   enlargedSideViewLocation: "top"
-  authorColors:
-    "Dudi Elentok": "blue"
-    "David Elentok": "blue"
-    # use blue for other authors
-    "*": "white"
-  branchColors:
-    main: "blue"
   theme:
     selectedLineBgColor:
       - black
       # selectedRangeBgColor:
       #   - black
+    authorColors:
+      "Dudi Elentok": "blue"
+      "David Elentok": "blue"
+      # use blue for other authors
+      "*": "white"
+    branchColorPatterns:
+      ^main(/|$): "blue"
 keybinding:
   commits:
     moveDownCommit: J

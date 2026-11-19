@@ -48,7 +48,7 @@ setup_git_user() {
   fi
 
   if [ -z "$(git config --global --includes user.email)" ]; then
-    git_email="$(ask 'Git email?' '3david@gmail.com')"
+    git_email="$(dfl ask 'Git email?' '3david@gmail.com')"
     git config --global user.email "$git_email"
   fi
 }
