@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Prints the socket path of the running local ssh-agent.
+# Usage (in ~/.local/machine.bash): export SSH_AUTH_SOCK="$(find-ssh-agent-sock)"
+
+lsof -a -U -c ssh-agent | awk '/Listeners/ {print $NF; exit}'
