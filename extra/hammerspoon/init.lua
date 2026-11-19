@@ -2,6 +2,23 @@ local function run(cmd) hs.task.new("/opt/homebrew/bin/fish", nil, { "-lc", cmd 
 
 local function openApp(path) run('open "' .. path .. '"') end
 
+local appDirs = { "/Applications", os.getenv("HOME") .. "/Applications" }
+
+-- Returns the full path of "<name>.app" in /Applications or ~/Applications, or nil.
+local function findApp(name)
+  for _, dir in ipairs(appDirs) do
+    local path = dir .. "/" .. name .. ".app"
+    if hs.fs.attributes(path) then return path end
+  end
+  return nil
+end
+
+-- Binds the key only if the app is installed.
+local function bindApp(mods, key, name)
+  local path = findApp(name)
+  if path then hs.hotkey.bind(mods, key, function() openApp(path) end) end
+end
+
 local function toggleGhosttyQuickTerminal()
   hs.osascript.applescript(
     'tell application "Ghostty" to perform action "toggle_quick_terminal" on focused terminal of selected tab of front window'
@@ -22,17 +39,17 @@ hs.hotkey.bind(
   -- end
 )
 
-hs.hotkey.bind({ "cmd" }, "2", function() openApp("/Applications/Google Chrome.app") end)
+bindApp({ "cmd" }, "2", "Google Chrome")
 
-hs.hotkey.bind({ "cmd" }, "3", function() openApp("/Applications/kitty.app") end)
+bindApp({ "cmd" }, "3", "kitty")
 
-hs.hotkey.bind({ "cmd" }, "4", function() openApp("/Applications/Slack.app") end)
+bindApp({ "cmd" }, "4", "Slack")
 
-hs.hotkey.bind({ "cmd" }, "5", function() openApp("/Applications/Prisma Access Browser.app") end)
+bindApp({ "cmd" }, "5", "Prisma Access Browser")
 
-hs.hotkey.bind({ "cmd" }, "8", function() openApp("/Applications/Prisma Access Browser.app") end)
+bindApp({ "cmd" }, "8", "Prisma Access Browser")
 
-hs.hotkey.bind({ "cmd" }, "9", function() openApp("/Applications/Spotify.app") end)
+bindApp({ "cmd" }, "9", "Spotify")
 
 hs.hotkey.bind({ "cmd", "ctrl", "alt" }, "r", function()
   hs.reload()
