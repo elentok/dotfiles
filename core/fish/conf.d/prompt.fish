@@ -12,13 +12,17 @@ set -g __fish_git_prompt_char_upstream_equal "$(set_color 9399b2)󰋑 "
 set -g __fish_git_prompt_char_dirtystate "$(set_color $fish_color_error)󰪢 "
 set -g __fish_git_prompt_char_stagedstate "$(set_color $fish_color_option)󰗡 "
 
-set __prompt_bgs 2b2b3c 181825 2b2b3c 181825 3e5767
-set __prompt_fgs 9399b2 9399b2 9399b2 9399b2 9399b2
+set __prompt_default_bgs 2b2b3c 181825 2b2b3c 181825 3e5767
+set __prompt_default_fgs 9399b2 9399b2 9399b2 9399b2 9399b2
+set __prompt_bgs $__prompt_default_bgs
+set __prompt_fgs $__prompt_default_fgs
 set __prompt_block_index 0
 
 function fish_prompt
     set -l last_status $status
     set __prompt_block_index 0
+    set __prompt_bgs $__prompt_default_bgs
+    set __prompt_fgs $__prompt_default_fgs
 
     echo
 
@@ -52,6 +56,9 @@ end
 
 function __prompt_host_block
     if test -n "$SSH_CONNECTION"
+        # loud colors so remote sessions stand out
+        set -g __prompt_next_bg fab387
+        set -g __prompt_next_fg 11111b
         __prompt_block '  ' (hostname)
     end
 end
@@ -71,9 +78,18 @@ function __prompt_block
     set __prompt_block_index (math $__prompt_block_index + 1)
     set bgcolor $__prompt_bgs[$__prompt_block_index]
     set fgcolor $__prompt_fgs[$__prompt_block_index]
+    set -l bold
+    if set -q __prompt_next_bg
+        set bgcolor $__prompt_next_bg
+        set fgcolor $__prompt_next_fg
+        set __prompt_bgs[$__prompt_block_index] $bgcolor
+        set bold -o
+        set -e __prompt_next_bg
+        set -e __prompt_next_fg
+    end
 
     string join '' -- \
-        (set_color -b $bgcolor $fgcolor) \
+        (set_color $bold -b $bgcolor $fgcolor) \
         $argv \
         ' ' \
         (set_color normal)
@@ -82,6 +98,9 @@ end
 function __prompt_separator
     set bgcolor $__prompt_bgs[(math $__prompt_block_index + 1)]
     set fgcolor $__prompt_bgs[(math $__prompt_block_index)]
+    if set -q __prompt_next_bg
+        set bgcolor $__prompt_next_bg
+    end
     if test "$argv[1]" = --final
         set bgcolor normal
     end
