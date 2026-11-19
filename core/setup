@@ -76,7 +76,7 @@ function install-homebrew() {
     dfl pkg apt install curl
   fi
 
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" < /dev/tty
 }
 
 function install-apt-pkgs() {
