@@ -1,5 +1,22 @@
 {
+  "$schema": "https://raw.githubusercontent.com/elentok/gx/main/docs/checks-schema.json",
+  "format": {
+    "changed": "for file in {files}; do [ -f \"$file\" ] || continue; case \"$file\" in */zsh/*|*.bats) ;; *.fish) fish_indent -w \"$file\" ;; *.lua) stylua \"$file\" ;; *.sh|*.bash) shfmt -w \"$file\" ;; *) if head -n 1 \"$file\" | rg -q '^#!.*(?:/| )(?:ba)?sh(?: |$)'; then shfmt -w \"$file\"; fi ;; esac; done",
+    "full": "for file in {files}; do [ -f \"$file\" ] || continue; case \"$file\" in */zsh/*|*.bats) ;; *.fish) fish_indent -w \"$file\" ;; *.lua) stylua \"$file\" ;; *.sh|*.bash) shfmt -w \"$file\" ;; *) if head -n 1 \"$file\" | rg -q '^#!.*(?:/| )(?:ba)?sh(?: |$)'; then shfmt -w \"$file\"; fi ;; esac; done"
+  },
+  "lint": {
+    "changed": "status=0; for file in {files}; do [ -f \"$file\" ] || continue; case \"$file\" in */zsh/*|*.bats) ;; *.fish) fish -n \"$file\" || status=$? ;; .gx/checks.json|package.json|package-lock.json|tsconfig.json|pyrightconfig.json) jq empty \"$file\" || status=$? ;; *.sh|*.bash) if head -n 1 \"$file\" | rg -q '^#!'; then shellcheck -S error \"$file\" || status=$?; else shellcheck -S error -s bash \"$file\" || status=$?; fi ;; *) if head -n 1 \"$file\" | rg -q '^#!.*(?:/| )(?:ba)?sh(?: |$)'; then shellcheck -S error \"$file\" || status=$?; fi ;; esac; done; exit \"$status\"",
+    "full": "status=0; for file in {files}; do [ -f \"$file\" ] || continue; case \"$file\" in */zsh/*|*.bats) ;; *.fish) fish -n \"$file\" || status=$? ;; .gx/checks.json|package.json|package-lock.json|tsconfig.json|pyrightconfig.json) jq empty \"$file\" || status=$? ;; *.sh|*.bash) if head -n 1 \"$file\" | rg -q '^#!'; then shellcheck -S error \"$file\" || status=$?; else shellcheck -S error -s bash \"$file\" || status=$?; fi ;; *) if head -n 1 \"$file\" | rg -q '^#!.*(?:/| )(?:ba)?sh(?: |$)'; then shellcheck -S error \"$file\" || status=$?; fi ;; esac; done; exit \"$status\""
+  },
   "typecheck": {
+    "changed": "run=false; for file in {files}; do case \"$file\" in *.ts|*.tsx|package.json|package-lock.json|tsconfig.json) run=true ;; esac; done; if $run; then npm run typecheck; fi",
     "full": "npm run typecheck"
+  },
+  "test": {
+    "changed": "run_node=false; run_bats=false; for file in {files}; do case \"$file\" in *.ts|*.tsx|package.json|package-lock.json|tsconfig.json) run_node=true ;; core/ai/claude-box/*|Brewfile) run_bats=true ;; esac; done; status=0; if $run_node; then node --test extra/scripts/*.test.ts || status=$?; fi; if $run_bats; then PATH=/opt/homebrew/bin:$PATH core/ai/claude-box/test/run.sh || status=$?; fi; exit \"$status\"",
+    "full": "node --test extra/scripts/*.test.ts && PATH=/opt/homebrew/bin:$PATH core/ai/claude-box/test/run.sh",
+    "limits": {
+      "suite": "1m"
+    }
   }
 }
