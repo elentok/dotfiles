@@ -4,6 +4,7 @@
 - I'm using **GNU sed/find/grep** on Mac, so use GNU arguments, **NOT Mac arguments**.
 - **ALWAYS PREFER** `fd` over `find`
 - **ALWAYS PREFER** `ripgrep` over `grep`
+- **NEVER use `npx`**. Check package.json scripts first, then use `pnpm run <script>` or `pnpm exec <bin>`
 - **DO NOT RUN find/grep/fd on /** (it's super slow)
 
 ## Response style
